@@ -1,0 +1,8 @@
+case_id,case_description,execution_stage,official_rules_citation,engine_behavior,restriction_consumed,cost_retained,verification_status
+CASE_A,"Negation / Prohibition Before Activation","Stage 0 (Pre-Activation Legality Check)","Rule Manual 17.0 Sec 8-1-2","Declaration blocked; aborts immediately","NO","YES (Unpaid)","OFFICIALLY_VERIFIED"
+CASE_B,"Activation Declared, Cost In-Flight","Stage 1 (Declaration)","Rule Manual 17.0 Sec 8-1-3-1","Provisional state; awaiting cost fulfillment","NO","IN_FLIGHT","OFFICIALLY_VERIFIED"
+CASE_C,"Cost Payment Fails","Stage 2 (Cost Payment Failure)","Rule Manual 17.0 Sec 8-1-3-2","Illegal activation rewinds to pre-declaration","NO","YES (Rewound)","OFFICIALLY_VERIFIED"
+CASE_D,"Activation and Cost Completed","Stage 4 (Atomic Commit)","Rule Manual 17.0 Sec 8-1-3-4 & 8-1-6","Counter incremented atomically before execution","YES","NO (Deducted)","OFFICIALLY_VERIFIED"
+CASE_E,"Negated in Resolution After Activation","Stage 5 (Resolution Negation)","Rule Manual 17.0 Sec 8-1-6 & Official Q&A","Operations skipped; counter remains consumed","YES","NO (No Refund)","OFFICIALLY_VERIFIED"
+CASE_F,"Effect Resolves with Zero Targets","Stage 5 (Resolution Fizzle)","Rule Manual 17.0 Sec 8-1-6","Operations complete with 0 affected; counter remains","YES","NO (No Refund)","OFFICIALLY_VERIFIED"
+CASE_G,"Interrupted During Resolution","Stage 5 (Resolution Interruption)","Rule Manual 17.0 Sec 8-1-6","Remaining ops aborted; counter remains consumed","YES","NO (No Refund)","OFFICIALLY_VERIFIED"

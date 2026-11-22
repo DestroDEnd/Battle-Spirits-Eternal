@@ -91,38 +91,48 @@ CROSSOVER_MAP = {
     'The Wonderland Trump Pentans': 'BS42-054',
 }
 
-def resolve_card_number(name, img_f, img_u):
+CANONICAL_SET_PREFIX_RE = re.compile(r'^(?:BS|SD|BSC|CB|PB|PC|LM|EX|SJ|PX|P|X|KF|CP|18|26R[A-Z]+)\d*$', re.I)
+
+def is_canonical_card_number(val):
+    if not val or '-' not in val:
+        return False
+    prefix = val.split('-', 1)[0].strip()
+    return bool(CANONICAL_SET_PREFIX_RE.match(prefix)) and not val.upper().startswith('BATTLE-SPIRITS')
+
+def resolve_card_number(name, img_f, img_u, raw_card_no=None):
     if name in CROSSOVER_MAP:
         return CROSSOVER_MAP[name]
-        
-    # Check img_f
+
+    if raw_card_no and is_canonical_card_number(raw_card_no.strip().upper()):
+        return raw_card_no.strip().upper()
+
+    # Check img_f (filename only)
     if img_f:
         m = card_num_re1.search(img_f)
-        if m:
+        if m and is_canonical_card_number(m.group(1).upper()):
             return m.group(1).upper()
-            
-    # Check unquoted img_u
+
+    # Check unquoted img_u basename ONLY (never match "battle-spirits" in the Wikia domain)
     if img_u:
-        clean_u = urllib.parse.unquote(img_u)
+        clean_u = urllib.parse.unquote(img_u).split('/revision/')[0].rsplit('/', 1)[-1]
         m = card_num_re1.search(clean_u)
-        if m:
+        if m and is_canonical_card_number(m.group(1).upper()):
             return m.group(1).upper()
-            
-    # Check underscore pattern
-    for target in [img_f, img_u]:
+
+    # Check underscore pattern in filename only
+    for target in [img_f, (urllib.parse.unquote(img_u).split('/revision/')[0].rsplit('/', 1)[-1] if img_u else None)]:
         if target:
-            clean_t = urllib.parse.unquote(target)
-            m = card_num_re2.search(clean_t)
+            m = card_num_re2.search(target)
             if m:
                 s, c = m.group(1).upper(), m.group(2).upper()
-                if not s.startswith('CARD') and not s.endswith('PX') and len(s) >= 2:
+                if not s.startswith('CARD') and not s.endswith('PX') and len(s) >= 2 and CANONICAL_SET_PREFIX_RE.match(s):
                     return f"{s}-{c}"
-                    
-    # Check name for parenthesized code
+
+    # Check name for parenthesized canonical code
     m = card_num_re1.search(name)
-    if m:
+    if m and is_canonical_card_number(m.group(1).upper()):
         return m.group(1).upper()
-        
+
     return None
 
 def parse_levels_dict(levels_str):
@@ -321,7 +331,7 @@ for r in rows:
     rarity, flavor, img_f, img_u, local_path, colors_json, fams_json, sets_json, raw_card_no = r
     
     # 1. Resolve canonical card number
-    card_no = resolve_card_number(name, img_f, img_u)
+    card_no = resolve_card_number(name, img_f, img_u, raw_card_no)
     if not card_no and raw_card_no:
         card_no = raw_card_no.strip().upper()
     if not card_no:
@@ -500,14 +510,15 @@ cursor.execute("CREATE INDEX IF NOT EXISTS idx_cards_v2_type ON cards_v2(type)")
 cursor.execute("CREATE INDEX IF NOT EXISTS idx_cards_v2_color ON cards_v2(color)")
 cursor.execute("CREATE INDEX IF NOT EXISTS idx_cards_v2_cost ON cards_v2(cost)")
 
-# Update original cards table to sync card_number and valid type
-cursor.execute("SELECT card_number, type, id FROM cards_v2")
-v2_rows = cursor.fetchall()
-for cn, ct, cid in v2_rows:
-    cursor.execute("UPDATE cards SET card_number = ?, type = ? WHERE id = ?", (cn, ct, cid))
+if '--write-db' in sys.argv:
+    # Update original cards table to sync card_number and valid type
+    cursor.execute("SELECT card_number, type, id FROM cards_v2")
+    v2_rows = cursor.fetchall()
+    for cn, ct, cid in v2_rows:
+        cursor.execute("UPDATE cards SET card_number = ?, type = ? WHERE id = ?", (cn, ct, cid))
+    print("Updated canonical card_number and type in main 'cards' table.")
 
 conn.commit()
 conn.close()
 
 print("\nDatabase cards_v2 rebuilt and indexed successfully!")
-print("Updated canonical card_number and type in main 'cards' table.")

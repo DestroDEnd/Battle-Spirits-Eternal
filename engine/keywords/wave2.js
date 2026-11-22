@@ -24,6 +24,16 @@ export const AccelKeyword = {
     }
     // After resolution, card moves face-up to Removed/Open Zone (Eternal Rule 3.5)
     await moveCard(state, card, 'removed', playerSide, { cause: 'accel' }, events);
+    card.faceUp = true;
+    card.isAccelRemoved = true;
+    card.fromAccel = true;
+    card.canSummonFromRemoved = true;
+    card.accelUsed = true;
+    const p = state.players[playerSide];
+    if (p) {
+      if (!Array.isArray(p.openCards)) p.openCards = [];
+      if (!p.openCards.some(c => c.id === card.id)) p.openCards.push(card);
+    }
     return { success: true, zone: 'removed' };
   }
 };
@@ -428,4 +438,47 @@ export function registerWave2Keywords(registry) {
   registry.register({ ...CatalyzeKeyword, id: 'True Catalyze' });
   registry.register({ ...CatalyzeKeyword, id: 'War Catalyze' });
   registry.register({ ...CatalyzeKeyword, id: 'Twinkle Catalyze' });
+
+  // Batch E / Modern Wave 2 additions
+  registry.register({ ...UnleashKeyword, id: 'Creator Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Minor Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Primordial Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Infinite Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Martial Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Shining Heaven Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Solar Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Soul Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Corpse Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Curse Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Devil Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Slayer Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Cycle Force Unleash' });
+
+  registry.register({ ...SealKeyword, id: 'High Speed Seal' });
+  registry.register({ ...SealKeyword, id: 'Mystery Seal' });
+  registry.register({ ...SealKeyword, id: 'Sound Speed Seal' });
+  registry.register({ ...SealKeyword, id: 'Imaginate Seal' });
+
+  registry.register({ ...AdventKeyword, id: 'Tenma Advent' });
+  registry.register({ ...AdventKeyword, id: 'Ultra Advent' });
+  registry.register({ ...AdventKeyword, id: 'Ultra Thunder Advent' });
+
+  registry.register({ id: 'Manifest', name: 'Manifest', wave: 2, hooks: {} });
+  registry.register({ id: 'Seal Manifest', name: 'Seal Manifest', wave: 2, hooks: {} });
+  registry.register({ id: 'Ultra Manifest', name: 'Ultra Manifest', wave: 2, hooks: {} });
+  registry.register({ id: 'Terra Manifest', name: 'Terra Manifest', wave: 2, hooks: {} });
+
+  registry.register({ ...HighSpeedKeyword, id: 'High Speed - Mystery' });
+  registry.register({ ...HighSpeedKeyword, id: 'Soul Swift - Love' });
+
+  registry.register({ id: 'Count Break', name: 'Count Break', wave: 2, hooks: {} });
+  registry.register({ id: 'Chrono-Count Break', name: 'Chrono-Count Break', wave: 2, hooks: {} });
+  registry.register({ id: 'Dark Esoterica', name: 'Dark Esoterica', wave: 2, hooks: {} });
+  registry.register({ id: 'Pyroxene Esoterica', name: 'Pyroxene Esoterica', wave: 2, hooks: {} });
+  registry.register({ id: 'Return to Prime', name: 'Return to Prime', wave: 2, hooks: {} });
+  registry.register({ id: 'Twinkle Dragonpulse', name: 'Twinkle Dragonpulse', wave: 2, hooks: {} });
+  registry.register({ id: 'Twinkle Trace', name: 'Twinkle Trace', wave: 2, hooks: {} });
+  registry.register({ id: 'Great Twinkle Navigation', name: 'Great Twinkle Navigation', wave: 2, hooks: {} });
+  registry.register({ id: 'Astromulet', name: 'Astromulet', wave: 2, hooks: {} });
+  registry.register({ id: 'Horoscoping', name: 'Horoscoping', wave: 2, hooks: {} });
 }

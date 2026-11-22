@@ -1,0 +1,49 @@
+{
+  "metadata": {
+    "generatedAt": "2026-11-21T10:28:52.140Z",
+    "purpose": "Audit reconciliation across development phases"
+  },
+  "trend": [
+    {
+      "phase": "Phase 3F (Baseline)",
+      "date": "2026-11-15",
+      "methodology": "Handler-Presence Heuristic (Over-optimistic classification allowing partial cards to be marked FULL)",
+      "breakdown": {
+        "FULLY_SUPPORTED": 4139,
+        "PARTIALLY_SUPPORTED": 6996,
+        "VANILLA": 374,
+        "UNSUPPORTED": 3100
+      },
+      "playableRate": "30.89%"
+    },
+    {
+      "phase": "Phase 4D (Interim)",
+      "date": "2026-11-20",
+      "methodology": "Inherited Phase 3F matrix with static opcode regex matching",
+      "breakdown": {
+        "FULLY_SUPPORTED": 4139,
+        "PARTIALLY_SUPPORTED": 6996,
+        "VANILLA": 374,
+        "UNSUPPORTED": 3100
+      },
+      "playableRate": "30.89%"
+    },
+    {
+      "phase": "Phase 4D.1 (Evidence-Driven Baseline)",
+      "date": "2026-11-21",
+      "methodology": "Strict Mathematical Audit: FULLY_SUPPORTED requires unsupportedAbCount === 0 across all clauses. 810 cards with unhandled secondary abilities reclassified from FULL to PARTIAL.",
+      "breakdown": {
+        "FULLY_SUPPORTED": 3329,
+        "PARTIALLY_SUPPORTED": 7797,
+        "VANILLA": 374,
+        "UNSUPPORTED": 3109
+      },
+      "playableRate": "25.35%"
+    }
+  ],
+  "reconciliationAuditNotes": {
+    "auditFindingDResolved": true,
+    "reclassifiedCardsCount": 810,
+    "explanation": "In Phase 4D, 810 cards were classified as FULLY_SUPPORTED even when one of their secondary abilities contained unimplemented opcodes (e.g. CP14-X14R had 3 abilities with only 2 supported). Phase 4D.1 strictly enforces that 100% of a card abilities must be supported for FULLY_SUPPORTED status."
+  }
+}

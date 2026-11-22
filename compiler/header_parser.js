@@ -11,11 +11,17 @@ export function parseAbilityHeaders(blockText) {
     levelExplicit: false,
     prefixes: [],
     timing: 'PASSIVE',
+    timings: [],
     timingLabel: '',
     timingStep: 'ANY',
+    timingCause: null,
+    timingOwner: null,
+    timingTriggers: [],
+    activationRestrictions: [],
     limit: null,
     cantStack: false,
     keyword: null,
+    keywords: [],
     burstCondition: null,
     isFlash: false,
     isMain: false,
@@ -23,6 +29,30 @@ export function parseAbilityHeaders(blockText) {
   };
 
   let body = blockText.trim();
+
+  // Handle nested typos like [Mirage: Cost 2 ([Blue Core]]} -> [Mirage: Cost 2 (Blue Core)]
+  body = body.replace(/\[Mirage:\s*Cost\s*(\d+)\s*\(\[([^\]]+)\]\](?:\}|\])?/gi, '[Mirage: Cost $1 ($2)]');
+
+  // Preserve full multi-bracket Brave Conditions ([Brave Condition: [Right] ... [Left] ...])
+  let extractedBraveConditionHeader = null;
+  const nestedBraveCondMatch = body.match(/^\[(Brave\s+Condition:\s*(?:\[[^\]]*\]|[^\]])+)\]\s*/i);
+  if (nestedBraveCondMatch) {
+    extractedBraveConditionHeader = nestedBraveCondMatch[1]
+      .replace(/<br\s*\/?>/gi, ' / ')
+      .replace(/\s+/g, ' ')
+      .trim();
+    result.keyword = extractedBraveConditionHeader;
+    body = body.slice(nestedBraveCondMatch[0].length).trim();
+  }
+
+  // Handle unclosed [Summon Condition: ... without trailing ']'
+  const unclosedSummonCondMatch = body.match(/^\[(Summon\s+Condition:\s*[^\]]+)$/i);
+  if (unclosedSummonCondMatch) {
+    const cleanSummonCond = unclosedSummonCondMatch[1].replace(/\s+/g, ' ').trim();
+    result.prefixes.push(cleanSummonCond);
+    result.keyword = cleanSummonCond;
+    body = '';
+  }
 
   // Strip wiki cosmetic boxes & badges: [utb], [heb], [qutb], [cntb], [+1], [-3], [team: ...], (), (Max. ...)
   body = body
@@ -42,7 +72,7 @@ export function parseAbilityHeaders(blockText) {
     .replace(/(?:^|[\r\n]|\s+)(\d+(?:\/\d+)*)\s+(\[LV\d+\])/gi, ' [Grand Skill: $1] $2')
     .replace(/^\/\s*/, '')
     .replace(/\/\s*(\[(?:Nexus|Spirit|LV\d+|Contract\s+Field)\]|\([A-Za-z0-9\s]+\))/gi, '$1')
-    .replace(/(?:^|\s+)\d+\s+(?=\()/g, ' ')
+    .replace(/(?:^|(?<!Cost)\s+)\d+\s+(?=\()/gi, ' ')
     .replace(/(?:^|\s+)(\d+)\s+(?=\[LV\d+(?:-\d+)?\])/g, ' [Grand Skill: $1] ')
     .trim();
 
@@ -69,6 +99,18 @@ export function parseAbilityHeaders(blockText) {
              .replace(/\[LV(\d+)\[LV(\d+)\]/gi, '[LV$1][LV$2]')
              .replace(/\[LV(\d+)\s+\[/gi, '[LV$1] [')
              .replace(/\[V(\d+)\]/gi, '[LV$1]')
+             .replace(/\[LV1-2-3\]/gi, '[LV1][LV2][LV3]')
+             .replace(/\[LV(\d+)-LV?(\d+)-LV?(\d+)\]/gi, '[LV$1][LV$2][LV$3]')
+             .replace(/\[LV(\d+)-LV?(\d+)\]/gi, (match, p1, p2) => {
+               const start = parseInt(p1, 10);
+               const end = parseInt(p2, 10);
+               if (start <= end && end - start <= 5) {
+                 let res = '';
+                 for (let i = start; i <= end; i++) res += `[LV${i}]`;
+                 return res;
+               }
+               return match;
+             })
              .replace(/(?<!\[)LV(\d+)\]/gi, '[LV$1]')
              .replace(/^\[\s*(?=\()/gi, '')
              .replace(/\]\[\s*(?=\()/gi, '] ')
@@ -258,8 +300,7 @@ export function parseAbilityHeaders(blockText) {
       }
       const innerTimingMatch = lvMatchIter[1].match(/\(([^)]+)\)/);
       if (innerTimingMatch) {
-        result.timingLabel = innerTimingMatch[1].trim();
-        result.timing = mapTimingLabelToType(result.timingLabel, result.timing);
+        assignTimingFromLabel(result, innerTimingMatch[1].trim());
       }
       if (lvNums.length > 0) {
         result.levels = Array.from(new Set(lvNums)).sort((a, b) => a - b);
@@ -280,6 +321,7 @@ export function parseAbilityHeaders(blockText) {
     if (/^Flash(?:\s*[-–]|\s*\d+\b|\s*\n|\s+(?=(?!Timing\s+doesn't)[A-Z\[\(])|\s*$)/i.test(body) || /^\[Flash\]/i.test(body) || /^\(Flash\)/i.test(body)) {
       result.isFlash = true;
       result.timing = 'FLASH';
+      if (!result.timings.includes('FLASH')) result.timings.push('FLASH');
       result.timingLabel = 'Flash';
       body = body.replace(/^Flash(?:\s*[-–]|\s*\d+\b|\s*\n|\s+(?=(?!Timing\s+doesn't)[A-Z\[\(])|\s*)\s*/i, '').replace(/^\[Flash\]\s*/i, '').replace(/^\(Flash\)\s*/i, '');
       changed = true;
@@ -287,18 +329,17 @@ export function parseAbilityHeaders(blockText) {
     if (/^Main(?:\s*[-–]|\s*\d+\b|\s*\n|\s+(?=[A-Z\[\(])|\s*$)/i.test(body) || /^\[Main\]/i.test(body) || /^\(Main\)/i.test(body)) {
       result.isMain = true;
       result.timing = 'MAIN';
+      if (!result.timings.includes('MAIN')) result.timings.push('MAIN');
       result.timingLabel = 'Main';
       body = body.replace(/^Main(?:\s*[-–]|\s*\d+\b|\s*\n|\s+(?=[A-Z\[\(])|\s*)\s*/i, '').replace(/^\[Main\]\s*/i, '').replace(/^\(Main\)\s*/i, '');
       changed = true;
     }
 
     // Check Timing Labels: (When Attacks), (When Advents), ((Either Attack Step)), (Your Attack Step), etc.
-    const timingLabelRegex = /^\(+((?:When\s+(?:this\s+(?:Spirit|Ultimate|Spirit\/Ultimate)\s+)?(?:Summoned|Attacks?|Blocks|Advents?|Destroyed|Deployed|Reborn|Manifests?|Battles?)(?:\/(?:Summoned|Attacks?|Blocks|Advents?|Destroyed|Deployed|Reborn|Manifests?|Battles?))*|When\s+Destroyed(?:\s+by\s+(?:an?\s+opposing\s+[a-z]+\s+effect|(?:the\s+)?Opponent))?|When\s+Depleted(?:\s+by\s+(?:the\s+)?Opponent)?|When\s+Depleted\/Destroyed(?:\s+by\s+(?:the\s+)?Opponent)?|When\s+Brave\s+Attacks?|When\s+Set|During\s+Set|During\s+Attack|During\s+Ultimate,?\s*(?:\()?(?:Either|Your|Opposing)\s+Attack(?:s)?\s+Step(?:\))?|(?:Accel,?\s*)?(?:\()?(?:Either|Your|Opposing)\s+Attack(?:s)?\s+Step(?:\))?|When\s+Leaves\s+the\s+Field|When\s+Exhausted|At\s+the\s+End\s+of\s+Battle|(?:At\s+the\s+)?End\s+of\s+(?:the\s+Step|Your\s+Turn|Opposing\s+Turn|Your\s+Main\s+Step|(?:Either|Your|Opposing)\s+(?:Attack\s+)?Step)|After\s+Your\s+Burst\s+Activates|Start\s+of\s+(?:Your|Opposing|Opponent's|Either)\s+(?:Attack|Main)\s+Step|(?:Your|Opposing|Opponent's|Either)\s+(?:Attack|Attacks|Main|Draw|Refresh|Start|Core|End)\s+(?:Step|Phase)|Flash\s+Step|Flash\s+Timing|During\s+(?:Your\s+)?Battle\s+Phase|(?:Your|Opposing|Opponent's|Either|Every)\s+Turn))\)+\s*\]*\s*/i;
+    const timingLabelRegex = /^\(+((?:When\s+(?:your\s+Spirit\s+is\s+|this\s+(?:Spirit|Ultimate|Spirit\/Ultimate)\s+)?(?:Summoned(?:\s+by\s+paying\s+the\s+original\s+cost)?|Attacks?|Blocks|Advents?|Destroyed|Deployed|Reborn|Manifests?|Battles?|Depleted)(?:\/(?:Summoned|Attacks?|Blocks?|Destroyed|Deployed|Reborn|Manifests?|Battles?|Depleted))*(?:\s+by\s+(?:an?\s+opposing\s+[a-z]+\s+effect|(?:the\s+)?Opponent))?|When\s+Brave\s+Attacks?|When\s+Set|During\s+Set|During\s+Attack|During\s+Ultimate,?\s*(?:\()?(?:Either|Your|Opposing)\s+Attack(?:s)?\s+Step(?:\))?|(?:Accel,?\s*)?(?:\()?(?:Either|Your|Opposing)\s+Attack(?:s)?\s+Step(?:\))?|When\s+Leaves\s+the\s+Field|When\s+Exhausted|At\s+the\s+End\s+of\s+Battle|(?:At\s+the\s+)?End\s+of\s+(?:the\s+Step|Your\s+Turn|Opposing\s+Turn|Your\s+Main\s+Step|(?:Either|Your|Opposing)\s+(?:Attack\s+)?Step)|After\s+Your\s+Burst\s+Activates|Start\s+of\s+(?:Your|Opposing|Opponent's|Either)\s+(?:Attack|Main)\s+Step|(?:Your|Opposing|Opponent's|Either)\s+(?:Attack|Attacks|Main|Draw|Refresh|Start|Core|End)\s+(?:Step|Phase)|Flash\s+Step|Flash\s+Timing|During\s+(?:Your\s+)?Battle\s+Phase|(?:Your|Opposing|Opponent's|Either|Every)\s+Turn))\)+\s*\]*\s*/i;
     const tMatch = body.match(timingLabelRegex);
     if (tMatch) {
-      const rawLabel = tMatch[1].trim();
-      result.timingLabel = rawLabel;
-      result.timing = mapTimingLabelToType(rawLabel, result.timing);
+      assignTimingFromLabel(result, tMatch[1].trim());
       body = body.slice(tMatch[0].length).trim();
       changed = true;
     }
@@ -312,11 +353,9 @@ export function parseAbilityHeaders(blockText) {
     }
 
     // Check unparenthesized legacy timings e.g. "When Summoned", "When Attacks", "When Destroyed"
-    const unparenMatch = body.match(/^(When\s+(?:Summoned(?:\s+by\s+[^,]+)?|Attacks?(?:\/(?:Summoned|Attacks?|Blocks?|Destroyed))?|Blocks?|Destroyed(?:\s+by\s+[^,]+)?|Deployed|Advents?(?:\/(?:Attacks?|Blocks?))?|Reborn|Manifests?)|During\s+(?:Attacks?(?:\/Blocks?)?|Blocks?)|(?:Start\s+of\s+)?(?:Your|Opposing|Opponent's|Either)\s+(?:Attack\s+Step|Main\s+Step|End\s+Step)|(?:Your|Opposing|Opponent's|Either)\s+(?:Attack|Main|End)\s+Step|(?:Your|Opposing|Opponent's|Either)\s+Turn)\b\s*,?\s*/i);
+    const unparenMatch = body.match(/^(When\s+(?:Summoned(?:\s+by\s+[^,\r\n]+)?|Attacks?(?:\/(?:Summoned|Attacks?|Blocks?|Destroyed))?|Blocks?|Destroyed(?:\s+by\s+[^,\r\n]+)?|Deployed|Advents?(?:\/(?:Attacks?|Blocks?))?|Reborn|Manifests?)|During\s+(?:(?:Your\s+)?Battle\s+Phase|Attacks?(?:\/Blocks?)?|Blocks?)|(?:Start\s+of\s+)?(?:Your|Opposing|Opponent's|Either)\s+(?:Attack\s+Step|Main\s+Step|End\s+Step)|(?:Your|Opposing|Opponent's|Either)\s+(?:Attack|Main|End)\s+Step|(?:Your|Opposing|Opponent's|Either)\s+Turn)\b\s*,?\s*/i);
     if (unparenMatch) {
-      const rawLabel = unparenMatch[1].trim();
-      result.timingLabel = rawLabel;
-      result.timing = mapTimingLabelToType(rawLabel, result.timing);
+      assignTimingFromLabel(result, unparenMatch[1].trim());
       body = body.slice(unparenMatch[0].length).trim();
       changed = true;
     }
@@ -335,11 +374,23 @@ export function parseAbilityHeaders(blockText) {
       changed = true;
     }
 
-    // Check bracketed Named Keywords (e.g. [Twinkle Awaken], [Advent: Cost 6 or more], [High Speed], [Clash], [G.A.T. Field])
-    const kwMatch = body.match(/^\[([A-Za-z0-9_\-\.\s]+(?::\s*[^\]]+)?)\]\s*/);
+    // Check bracketed Named Keywords (e.g. [Twinkle Awaken], [Advent: Cost 6 or more], [High Speed], [Clash], [G.A.T. Field], [Type: Driver], [F Change: "Gaim" & Cost 6])
+    const kwMatch = body.match(/^\[([^\]]+)\]\s*/);
     if (kwMatch && !kwMatch[1].toUpperCase().startsWith('LV')) {
-      result.keyword = kwMatch[1].trim();
+      const kwVal = kwMatch[1].trim();
+      result.keyword = kwVal;
+      if (!result.keywords.includes(kwVal)) result.keywords.push(kwVal);
       body = body.slice(kwMatch[0].length).trim();
+      changed = true;
+    }
+
+    // Check unbracketed Armor
+    const unbracketedArmorMatch = body.match(/^(Heavy Armor|Ultra Heavy Armor|Ultra Armor|Armor):\s*([A-Za-z\/]+)\b/i);
+    if (unbracketedArmorMatch) {
+      const armKw = unbracketedArmorMatch[0].trim();
+      result.keyword = armKw;
+      if (!result.keywords.includes(armKw)) result.keywords.push(armKw);
+      body = body.slice(unbracketedArmorMatch[0].length).trim();
       changed = true;
     }
 
@@ -375,8 +426,48 @@ export function parseAbilityHeaders(blockText) {
     }
   }
 
+  // 8. Finalize structured V3 timing semantics (K.1.5)
+  finalizeTimingSemantics(result);
+
   result.cleanBody = body.replace(/^[\]\)\s]+/, '').replace(/[\[\(\s]+$/, '').trim();
   return result;
+}
+
+function finalizeTimingSemantics(result) {
+  const lbl = String(result.timingLabel || '').trim();
+  const low = lbl.toLowerCase();
+  if (!result.timingOwner) {
+    if (/\beither\b/i.test(low)) result.timingOwner = 'EITHER';
+    else if (/\bopposing\b|\bopponent'?s\b/i.test(low) && !/\bby (?:the )?opponent\b|\bby an opposing\b/i.test(low)) result.timingOwner = 'OPPONENT';
+    else if (/\byour\b|\byour spirit\b/i.test(low)) result.timingOwner = 'SELF';
+    else result.timingOwner = 'ANY';
+  }
+  if (!result.timingCause) {
+    if (/by an opposing spirit effect/i.test(low)) result.timingCause = 'OPPOSING_SPIRIT_EFFECT';
+    else if (/by (?:the )?opponent|by an opposing/i.test(low)) result.timingCause = 'OPPONENT';
+    else result.timingCause = 'ANY';
+  }
+  if (result.timingTriggers.length === 0) {
+    if (Array.isArray(result.timings) && result.timings.length > 0) {
+      result.timingTriggers = [...new Set(result.timings)];
+    } else if (result.timing && result.timing !== 'PASSIVE') {
+      result.timingTriggers = [result.timing];
+    }
+  } else {
+    result.timingTriggers = [...new Set(result.timingTriggers)].sort();
+  }
+  const restSet = new Set(result.activationRestrictions || []);
+  if (result.limit) restSet.add(result.limit);
+  if (result.cantStack) restSet.add('CANT_STACK');
+  for (const p of (result.prefixes || [])) {
+    if (/during\s+set/i.test(p)) restSet.add('DURING_SET');
+    if (/during\s+brave|when\s+braved/i.test(p)) restSet.add('WHILE_BRAVED');
+    if (/soul\s+state/i.test(p)) restSet.add('SOUL_STATE');
+  }
+  if (result.keyword && /when\s+braved|during\s+brave/i.test(result.keyword)) {
+    restSet.add('WHILE_BRAVED');
+  }
+  result.activationRestrictions = [...restSet].sort();
 }
 
 function normalizeBurstCondition(condStr) {
@@ -399,6 +490,85 @@ function normalizeBurstCondition(condStr) {
   return 'AFTER_TRIGGER_CONDITION';
 }
 
+function assignTimingFromLabel(result, rawLabel) {
+  const parts = String(rawLabel || '').split(/\r?\n/);
+  const firstLineLabel = parts[0].trim();
+  if (parts.length > 1) {
+    const leaked = parts.slice(1).join('\n').trim();
+    if (leaked) result.embeddedConditionText = leaked;
+  }
+  result.timingLabel = firstLineLabel;
+  result.timing = mapTimingLabelToType(firstLineLabel, result.timing);
+  const allTimings = mapTimingLabelToTypes(firstLineLabel, result.timing);
+  for (const t of allTimings) {
+    if (!result.timings.includes(t)) result.timings.push(t);
+  }
+  const l = firstLineLabel.toLowerCase();
+  if (/by an opposing spirit effect/i.test(l)) result.timingCause = 'OPPOSING_SPIRIT_EFFECT';
+  else if (/by (?:the )?opponent|by an opposing/i.test(l)) result.timingCause = 'OPPONENT';
+
+  if (/\byour spirit\b|\bduring your battle phase\b|\byour (?:attack|main|start|core|draw|refresh|end)\b/i.test(l)) {
+    result.timingOwner = 'SELF';
+  } else if (/\b(?:opposing|opponent's)\s+(?:attack|main|start|core|draw|refresh|end|turn)\b/i.test(l)) {
+    result.timingOwner = 'OPPONENT';
+  } else if (/\beither\b/i.test(l)) {
+    result.timingOwner = 'EITHER';
+  }
+
+  if (/paying the original cost/i.test(l) && !result.activationRestrictions.includes('PAID_ORIGINAL_COST')) {
+    result.activationRestrictions.push('PAID_ORIGINAL_COST');
+  }
+  if (/depleted\s*\/\s*destroyed/i.test(l)) {
+    for (const tr of ['WHEN_DEPLETED', 'WHEN_DESTROYED']) {
+      if (!result.timingTriggers.includes(tr)) result.timingTriggers.push(tr);
+    }
+  } else if (/\bwhen\b.*\bdepleted\b/i.test(l) && !result.timingTriggers.includes('WHEN_DEPLETED')) {
+    result.timingTriggers.push('WHEN_DEPLETED');
+  }
+  for (const t of allTimings) {
+    if (!result.timingTriggers.includes(t)) result.timingTriggers.push(t);
+  }
+}
+
+function mapTimingLabelToTypes(label, defaultTiming) {
+  const results = [];
+  const add = t => { if (t && !results.includes(t)) results.push(t); };
+  const primary = mapTimingLabelToType(label, defaultTiming);
+
+  if (label.includes('/')) {
+    const clean = label.replace(/\s+by\s+.+$/i, '').trim();
+    const leadMatch = clean.match(/^(When\s+(?:this\s+(?:Spirit|Ultimate|Spirit\/Ultimate)\s+)?|During\s+)/i);
+    const lead = leadMatch ? leadMatch[1] : 'When ';
+    const parts = clean.split('/').map(p => p.trim()).filter(Boolean);
+    for (let i = 0; i < parts.length; i++) {
+      let seg = parts[i];
+      if (i > 0 && !/^(?:When|During)\b/i.test(seg)) {
+        seg = `${lead}${seg}`;
+      }
+      const mapped = mapSingleTimingLabelToType(seg, null);
+      if (mapped) add(mapped);
+    }
+  }
+
+  if (results.length === 0 && primary) add(primary);
+  return results;
+}
+
+function mapSingleTimingLabelToType(label, defaultTiming) {
+  const l = label.toLowerCase();
+  if (l.includes('when attacks') || /\bwhen\b.*\battack\b/.test(l) || /^during attack\b/.test(l)) return 'WHEN_ATTACKS';
+  if (l.includes('when summoned') || /\bwhen\b.*\bsummoned\b/.test(l)) return 'WHEN_SUMMONED';
+  if (l.includes('when blocks') || /\bwhen\b.*\bblocks?\b/.test(l)) return 'WHEN_BLOCKS';
+  if (l.includes('when destroyed') || /\bwhen\b.*\bdestroyed\b/.test(l)) return 'WHEN_DESTROYED';
+  if (l.includes('when depleted') || /\bwhen\b.*\bdepleted\b/.test(l)) return 'WHEN_DESTROYED';
+  if (l.includes('when advents') || /\bwhen\b.*\badvents?\b/.test(l)) return 'WHEN_ADVENTS';
+  if (l.includes('when deployed') || /\bwhen\b.*\bdeployed\b/.test(l)) return 'WHEN_DEPLOYED';
+  if (l.includes('when reborn') || /\bwhen\b.*\breborn\b/.test(l)) return 'WHEN_REBORN';
+  if (l.includes('when manifests') || /\bwhen\b.*\bmanifests?\b/.test(l)) return 'WHEN_MANIFESTS';
+  if (l.includes('battles')) return 'WHEN_BATTLES';
+  return mapTimingLabelToType(label, defaultTiming);
+}
+
 function mapTimingLabelToType(label, defaultTiming) {
   const l = label.toLowerCase();
   if (l.includes('when attacks') && l.includes('blocks')) return 'WHEN_ATTACKS_OR_BLOCKS';
@@ -411,6 +581,7 @@ function mapTimingLabelToType(label, defaultTiming) {
   if (l.includes('when summoned')) return 'WHEN_SUMMONED';
   if (l.includes('when blocks')) return 'WHEN_BLOCKS';
   if (l.includes('when destroyed')) return 'WHEN_DESTROYED';
+  if (l.includes('when depleted')) return 'WHEN_DESTROYED';
   if (l.includes('when advents')) return 'WHEN_ADVENTS';
   if (l.includes('when deployed')) return 'WHEN_DEPLOYED';
   if (l.includes('when reborn')) return 'WHEN_REBORN';

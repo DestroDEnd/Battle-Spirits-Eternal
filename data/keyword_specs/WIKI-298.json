@@ -1,0 +1,53 @@
+{
+  "canonical_id": "WIKI-298",
+  "canonical_name": "Love Me Zone",
+  "aliases": [
+    "ラブミーゾーン"
+  ],
+  "wiki_url": "https://battle-spirits.fandom.com/wiki/Love_Me_Zone",
+  "official_definition": "Love Me Zone - (When Attacks/Blocks) \"Kamishiro Karen\"/\"Asuka Mirai\" cards you control are unaffected by opposing effects. Also, once per turn, you can refresh an \"Asuka Mirai\" you control.",
+  "ownership_rules": {
+    "native_syntax": "Ability block header contains [Love Me Zone] or [Love Me Zone: Param]",
+    "prose_exclusion": "Mentions inside body clauses (\"with [Love Me Zone]\", \"give [Love Me Zone]\") classified as REFERENCES or GRANTED, never NATIVE."
+  },
+  "activation_conditions": {
+    "timing": "WHEN_ATTACKS",
+    "timing_step": "ANY",
+    "required_zone": "FIELD",
+    "soul_core_required": false
+  },
+  "timing": "WHEN_ATTACKS",
+  "costs": {
+    "description": "None (Standard ability activation)",
+    "payment_destination": "NONE"
+  },
+  "targets": {
+    "eligibility": "OPPOSING_FIELD",
+    "selection_type": "AUTOMATIC_RULES"
+  },
+  "player_decisions": "DETERMINISTIC_RULES_RESOLUTION",
+  "restrictions": {
+    "once_per_turn": true,
+    "cant_stack": false,
+    "same_name": false
+  },
+  "resolution": {
+    "description": "Transitions state from EXHAUSTED to REFRESHED.",
+    "destination_zone": "FIELD"
+  },
+  "interactions": {
+    "armor_immunity_applicable": true,
+    "replacement_effect": false
+  },
+  "variants": [],
+  "official_examples": [
+    "BSC35-A015",
+    "BSC35-A016"
+  ],
+  "unresolved_rules": [],
+  "implementation_status": "CORPUS_REPRESENTED",
+  "evidence_references": [
+    "WIKI: https://battle-spirits.fandom.com/wiki/Love_Me_Zone",
+    "CORPUS_NATIVE_COUNT: 2"
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "metadata": {
+    "generatedAt": "2026-11-21T09:52:49.500Z",
+    "auditStandard": "Phase 4D.1 - Canonical Population Audit",
+    "totalShardsAudited": 514,
+    "shardLoadErrorsCount": 0
+  },
+  "counts": {
+    "canonicalDetailedCards": 14443,
+    "canonicalIndexCards": 14443,
+    "sqliteCardsTable": 14443,
+    "sqliteCardsV2Table": 14611,
+    "shardUniqueCards": 14609,
+    "shardTotalInstances": 15398,
+    "exactIntersection": 14421,
+    "detailedOnly": 22,
+    "shardsOnly": 188,
+    "reprintDuplicates": 789,
+    "cardsV2CompositeExtras": 2,
+    "totalCompiledAbilities": 36422,
+    "totalCompiledClauses": 51734
+  },
+  "formulas": {
+    "shardUniqueVerification": {
+      "formula": "shardUniqueCards = canonicalDetailedCards - detailedOnly + shardsOnly",
+      "evaluation": "14443 - 22 + 188 = 14609",
+      "matches": true
+    },
+    "shardInstancesVerification": {
+      "formula": "shardTotalInstances = shardUniqueCards + reprintDuplicates",
+      "evaluation": "14609 + 789 = 15398",
+      "matches": true
+    },
+    "sqliteCardsV2Verification": {
+      "formula": "sqliteCardsV2 = shardUniqueCards + cardsV2CompositeExtras",
+      "evaluation": "14609 + 2 = 14611",
+      "matches": true
+    }
+  },
+  "discrepantCards": {
+    "cardsV2CompositeExtras": [
+      "BATTLE-SPIRITS-A13741",
+      "BATTLE-SPIRITS-A13799"
+    ],
+    "detailedOnlySample": [
+      "BATTLE-SPIRITS-A13741",
+      "BATTLE-SPIRITS-A13799",
+      "BS53-TCP01-A7054-B16057",
+      "BS53-TCP02-A7057-B16058",
+      "BS53-TCP03-A7066-B16059",
+      "BATTLE-SPIRITS-A9528-B16060",
+      "CB16-023-B16061",
+      "CB18-013-B16062",
+      "CB18-012-B16063",
+      "BS52-025-A13639-B16064",
+      "BS52-046-B16065",
+      "BATTLE-SPIRITS-A8953-B16066",
+      "BS53-031-B16067",
+      "BS55-063-A13130-B16068",
+      "BS56-003-A11319-B16069",
+      "BS53-TX02-A11873-B16070",
+      "BS53-038-B16071",
+      "BS55-062-A13462-B16072",
+      "CB18-001-A13560-B16073",
+      "BS53-TX04-A13711-B16074",
+      "PB09-004-A15072-B16075",
+      "SD57-006-A"
+    ],
+    "shardsOnlySample": [
+      "26RCB02-X10",
+      "313002-045",
+      "313002-018",
+      "313002-006",
+      "408993-965",
+      "BSCO-021",
+      "BSCO-022",
+      "BSCO-001",
+      "BSCO-002",
+      "BSCO-003",
+      "BSCO-004",
+      "BSCO-023",
+      "BSCO-005",
+      "BSCO-006",
+      "BSCO-007",
+      "BSCO-024",
+      "BSCO-008",
+      "HA-KUSAI",
+      "BSCO-009",
+      "BSCO-010",
+      "BSCO-012",
+      "BSCO-011",
+      "BSCO-013",
+      "BSCO-014",
+      "BSCO-015"
+    ]
+  },
+  "corpusHashes": {
+    "cardsDetailedJsonSha256": "9a991fe182a3b20457a7cbb51b2444cfd2cc9cf3d65f3cbecee20e6f9cc41ace",
+    "cardsIndexJsonSha256": "9abd6a3168e60edd37130a560fce4aee6c6f7ee04e0660403a2bdf58f1b5a3b9"
+  }
+}

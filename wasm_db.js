@@ -152,7 +152,13 @@
 
       if (cardType && cardType !== 'all') {
         const t = (c.type || '').toLowerCase();
-        if (!t.includes(cardType)) return false;
+        if (cardType === 'grandwalker') {
+          const f = (c.family || '').toLowerCase();
+          const fams = (c.families || []).map(x => (x || '').toLowerCase());
+          if (!t.includes('grandwalker') && !f.includes('grandwalker') && !fams.some(x => x.includes('grandwalker'))) return false;
+        } else if (!t.includes(cardType)) {
+          return false;
+        }
       }
 
       if (rarity && rarity !== 'all') {
@@ -568,11 +574,13 @@
 
   const WasmDB = {
     isReady: () => isReady,
+    isJsonReady: () => isJsonReady,
+    isJsonLoaded: () => isJsonReady,
     getSagas: () => SAGA_DEFINITIONS,
     getSagaById: (id) => resolveSaga(id),
 
     onReady(callback) {
-      if (isReady) callback();
+      if (isReady || isJsonReady) callback();
       else readyCallbacks.push(callback);
     },
 

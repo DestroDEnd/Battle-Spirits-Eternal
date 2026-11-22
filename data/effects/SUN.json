@@ -359,10 +359,29 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A12891",
       "name": "The SunCount Rubicante",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 5000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 6,
+          "bp": 8000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] (When Summoned)\nReturn a \"Sun\"-named Spirit card from your Trash to the Hand.\n\n[When Braved] [LV2][LV3] (When Destroyed)\nDestroy an opposing Brave Spirit. Then, the brave of this Spirit remains, and the Spirit alone returns to the Hand.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A12891#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -373,8 +392,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -383,28 +411,54 @@
             "isMain": false,
             "cleanBody": "Return a \"Sun\"-named Spirit card from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nReturn a \"Sun\"-named Spirit card from your Trash to the Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Return a \"Sun\"-named Spirit card from your Trash to the Hand.",
+              "originalClauseText": "Return a \"Sun\"-named Spirit card from your Trash to the Hand.",
               "cleanText": "Return a \"Sun\"-named Spirit card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "Sun"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A12891#a0",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A12891#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_7ff27cf440d5afb8293870ac918e6909312d3e83b4a7c3e2c395d3719a1c62df_63461c725f28b48f4f48fbbad707cd44",
+          "physicalId": "BATTLE-SPIRITS-A12891#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_7ff27cf440d5afb8293870ac918e6909312d3e83b4a7c3e2c395d3719a1c62df_63461c725f28b48f4f48fbbad707cd44",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_7ff27cf440d5afb8293870ac918e6909312d3e83b4a7c3e2c395d3719a1c62df_63461c725f28b48f4f48fbbad707cd44",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_e6fd742be814f83be139544a4a558f4984d00cb0754086b7d7c0511a753de42f_9fde20576bfad98961b7cf709989baf9",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A12891#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -416,8 +470,19 @@
               "When Braved"
             ],
             "timing": "WHEN_DESTROYED",
+            "timings": [
+              "WHEN_DESTROYED"
+            ],
             "timingLabel": "When Destroyed",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [
+              "WHILE_BRAVED"
+            ],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -426,10 +491,14 @@
             "isMain": false,
             "cleanBody": "Destroy an opposing Brave Spirit. Then, the brave of this Spirit remains, and the Spirit alone returns to the Hand."
           },
+          "originalAbilityText": "[When Braved] [LV2][LV3] (When Destroyed)\nDestroy an opposing Brave Spirit. Then, the brave of this Spirit remains, and the Spirit alone returns to the Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Destroy an opposing Brave Spirit.",
+              "originalClauseText": "Destroy an opposing Brave Spirit.",
               "cleanText": "Destroy an opposing Brave Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -448,7 +517,9 @@
             },
             {
               "rawText": "the brave of this Spirit remains, and the Spirit alone returns to the Hand.",
+              "originalClauseText": "the brave of this Spirit remains, and the Spirit alone returns to the Hand.",
               "cleanText": "the brave of this Spirit remains, and the Spirit alone returns to the Hand",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -463,7 +534,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A12891#a1",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A12891#AB_WHEN_DESTROYED_NONE_LV2_LV3_e193c45c40ed56e085e8f4028aa4568dd6b40fb47e8f52ab5e1759a465ea9da9_3d09f50200700f7b2d8fb1392f2bd59d",
+          "physicalId": "BATTLE-SPIRITS-A12891#AB_WHEN_DESTROYED_NONE_LV2_LV3_e193c45c40ed56e085e8f4028aa4568dd6b40fb47e8f52ab5e1759a465ea9da9_3d09f50200700f7b2d8fb1392f2bd59d",
+          "semanticId": "SEM#AB_WHEN_DESTROYED_NONE_LV2_LV3_e193c45c40ed56e085e8f4028aa4568dd6b40fb47e8f52ab5e1759a465ea9da9_3d09f50200700f7b2d8fb1392f2bd59d",
+          "semanticIdV3": "SEM3#AB_WHEN_DESTROYED_NONE_LV2_LV3_cc991499cd9d292217965d0bde20431b74628f15bfbcbeaf0ee667520f4bc91b_fb1a29b0304e9645871ebfa4ebff0727",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [
+              "WHILE_BRAVED"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,

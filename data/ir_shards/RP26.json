@@ -1,1 +1,592 @@
-{"RP26-02":{"cardNumber":"RP26-02","name":"Proplematis","keywords":[],"abilities":[{"id":"RP26-02#a0","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"STEP_RESTRICTED","timingLabel":"During Attack","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When only the opposing Spirit is destroyed via BP comparison, this Spirit can refresh."},"clauses":[{"rawText":"When only the opposing Spirit is destroyed via BP comparison, this Spirit can refresh.","cleanText":"When only the opposing Spirit is destroyed via BP comparison, this Spirit can refresh","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":"self"}}],"unsupported":[]}],"compiledClausesCount":1,"unsupportedClausesCount":0,"isFullySupported":true},"RP26-03":{"cardNumber":"RP26-03","name":"The FlamingThunder Voldic","keywords":[],"abilities":[{"id":"RP26-03#a0","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":["True Release"],"timing":"STEP_RESTRICTED","timingLabel":"During Attack","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When blocked, you can target an opposing Spirit. During this turn, give it -4000 BP. Then, if it has 0 BP, destroy it."},"clauses":[{"rawText":"When blocked, you can target an opposing Spirit.","cleanText":"When blocked, you can target an opposing Spirit","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"TARGET","target":{"side":"opp","types":["Spirit"]}}},{"rawText":"During this turn, give it -4000 BP.","cleanText":"give it -4000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"BP_DEBUFF","amount":4000,"target":"PREVIOUS_TARGET","duration":"DURING_THIS_TURN"}},{"rawText":"if it has 0 BP, destroy it.","cleanText":"destroy it","link":"then","isOptional":false,"isCost":false,"condition":"if it has 0 BP","duration":null,"op":{"op":"DESTROY","target":"PREVIOUS_TARGET"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"RP26-05":{"cardNumber":"RP26-05","name":"The PhosphorusBird Gorma-Ragle","keywords":[],"abilities":[{"id":"RP26-05#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"STEP_RESTRICTED","timingLabel":"During Attack","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"If there is [Soul Core] in your Trash, this Spirit gains +3000 BP."},"clauses":[{"rawText":"If there is [Soul Core] in your Trash, this Spirit gains +3000 BP.","cleanText":"this Spirit gains +3000 BP","link":null,"isOptional":false,"isCost":false,"condition":"If there is [Soul Core] in your Trash","duration":null,"op":{"op":"BP_BUFF","amount":3000,"target":"target","duration":"THIS_TURN"}}],"unsupported":[]},{"id":"RP26-05#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":["True Release"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Target an opposing 1000 BP or less Spirit. Destroy it. Besides this Spirit, for each \"Purgatory Wings\" family Spirit you control, the targeting BP gets +2000."},"clauses":[{"rawText":"Target an opposing 1000 BP or less Spirit.","cleanText":"Target an opposing 1000 BP or less Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TARGET_CARD"}},{"rawText":"Destroy it.","cleanText":"Destroy it","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","target":"PREVIOUS_TARGET"}},{"rawText":"Besides this Spirit, for each \"Purgatory Wings\" family Spirit you control, the targeting BP gets +2000.","cleanText":"Besides this Spirit, for each \"Purgatory Wings\" family Spirit you control, the targeting BP gets +2000","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BP_BUFF","amount":2000,"target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"RP26-06":{"cardNumber":"RP26-06","name":"The RoaringFlame Ignigeyer","keywords":[{"name":"Clash","parameter":null,"wave":1,"hook":"clash","bracketed":true,"index":15}],"abilities":[{"id":"RP26-06#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"STEP_RESTRICTED","timingLabel":"During Attack","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Clash","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Opposing Spirits must block if possible."},"clauses":[{"rawText":"Opposing Spirits must block if possible.","cleanText":"Opposing Spirits must block if possible","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"FORCE_BLOCK","side":"opp"}}],"unsupported":[]},{"id":"RP26-06#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":["True Release"],"timing":"STEP_RESTRICTED","timingLabel":"During Attack","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"At the end of a blocked battle, target an opposing 4000 BP or less Spirit, or an opposing 6000 BP or less exhausted Spirit. Destroy it."},"clauses":[{"rawText":"At the end of a blocked battle, target an opposing 4000 BP or less Spirit, or an opposing 6000 BP or less exhausted Spirit.","cleanText":"At the end of a blocked battle, target an opposing 4000 BP or less Spirit, or an opposing 6000 BP or less exhausted Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","target":{"side":"either"}}},{"rawText":"Destroy it.","cleanText":"Destroy it","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","target":"PREVIOUS_TARGET"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"RP26-01":{"cardNumber":"RP26-01","name":"The ThunderEmperorDragon Siegwurm (RP26-01)","keywords":[{"name":"Clash","parameter":null,"wave":1,"hook":"clash","bracketed":true,"index":8},{"name":"Clash","parameter":null,"wave":1,"hook":"clash","bracketed":true,"index":134}],"abilities":[{"id":"RP26-01#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"STEP_RESTRICTED","timingLabel":"During Attack","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Clash","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Opposing Spirits must block if possible."},"clauses":[{"rawText":"Opposing Spirits must block if possible.","cleanText":"Opposing Spirits must block if possible","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"FORCE_BLOCK","side":"opp"}}],"unsupported":[]},{"id":"RP26-01#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Give all your \"Red Cloud\" family Spirits [Clash]."},"clauses":[{"rawText":"Give all your \"Red Cloud\" family Spirits [Clash].","cleanText":"Give all your \"Red Cloud\" family Spirits [Clash]","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"RP26-04":{"cardNumber":"RP26-04","name":"White Chimera","keywords":[],"abilities":[{"id":"RP26-04#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_BLOCKS","timingLabel":"When Blocks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Target an opposing non-attacking 3000 BP or less Spirit. Return it to the Hand."},"clauses":[{"rawText":"Target an opposing non-attacking 3000 BP or less Spirit.","cleanText":"Target an opposing non-attacking 3000 BP or less Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TARGET_CARD"}},{"rawText":"Return it to the Hand.","cleanText":"Return it to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","target":"PREVIOUS_TARGET","destination":"HAND"}}],"unsupported":[]},{"id":"RP26-04#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":["True Release"],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"For each exhausted Spirit you control, this Spirit gains +1000 BP."},"clauses":[{"rawText":"For each exhausted Spirit you control, this Spirit gains +1000 BP.","cleanText":"For each exhausted Spirit you control, this Spirit gains +1000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BP_BUFF","amount":1000,"target":"target","duration":"THIS_TURN"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "RP26-02": {
+    "cardNumber": "RP26-02",
+    "name": "Proplematis",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "RP26-02#AB_STEP_RESTRICTED_NONE_LV2_c61aaa594f109bfc2fb005c38636721cb02777970a3f3a4c1e96a6cae24e7304_df9d0b47745a8fdc275f7574fea1e723",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "STEP_RESTRICTED",
+          "timingLabel": "During Attack",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When only the opposing Spirit is destroyed via BP comparison, this Spirit can refresh."
+        },
+        "clauses": [
+          {
+            "rawText": "When only the opposing Spirit is destroyed via BP comparison, this Spirit can refresh.",
+            "cleanText": "When only the opposing Spirit is destroyed via BP comparison, this Spirit can refresh",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "RP26-02#a0",
+        "physicalId": "RP26-02#AB_STEP_RESTRICTED_NONE_LV2_c61aaa594f109bfc2fb005c38636721cb02777970a3f3a4c1e96a6cae24e7304_df9d0b47745a8fdc275f7574fea1e723",
+        "semanticId": "SEM#AB_STEP_RESTRICTED_NONE_LV2_c61aaa594f109bfc2fb005c38636721cb02777970a3f3a4c1e96a6cae24e7304_df9d0b47745a8fdc275f7574fea1e723"
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "RP26-03": {
+    "cardNumber": "RP26-03",
+    "name": "The FlamingThunder Voldic",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "RP26-03#AB_STEP_RESTRICTED_NONE_LV2_6f7b2a63127a2753e40af46002d5b6d70967cd25021a7ae14c8b2fd9fc1c8a0a_14c9a96c3655a91e2036614563b6d7f0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "True Release"
+          ],
+          "timing": "STEP_RESTRICTED",
+          "timingLabel": "During Attack",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When blocked, you can target an opposing Spirit. During this turn, give it -4000 BP. Then, if it has 0 BP, destroy it."
+        },
+        "clauses": [
+          {
+            "rawText": "When blocked, you can target an opposing Spirit.",
+            "cleanText": "When blocked, you can target an opposing Spirit",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TARGET",
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "During this turn, give it -4000 BP.",
+            "cleanText": "give it -4000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 4000,
+              "target": "PREVIOUS_TARGET",
+              "duration": "DURING_THIS_TURN"
+            }
+          },
+          {
+            "rawText": "if it has 0 BP, destroy it.",
+            "cleanText": "destroy it",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": "if it has 0 BP",
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "target": "PREVIOUS_TARGET"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "RP26-03#a0",
+        "physicalId": "RP26-03#AB_STEP_RESTRICTED_NONE_LV2_6f7b2a63127a2753e40af46002d5b6d70967cd25021a7ae14c8b2fd9fc1c8a0a_14c9a96c3655a91e2036614563b6d7f0",
+        "semanticId": "SEM#AB_STEP_RESTRICTED_NONE_LV2_6f7b2a63127a2753e40af46002d5b6d70967cd25021a7ae14c8b2fd9fc1c8a0a_14c9a96c3655a91e2036614563b6d7f0"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "RP26-05": {
+    "cardNumber": "RP26-05",
+    "name": "The PhosphorusBird Gorma-Ragle",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "RP26-05#AB_STEP_RESTRICTED_NONE_LV1_LV2_724738d1a06fd8e36374a2cb72c7ece08b7771c421eac3a3bc5fdcb0e0b1a24c_aca1eb73ec57db69055831b6b0527507",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "STEP_RESTRICTED",
+          "timingLabel": "During Attack",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "If there is [Soul Core] in your Trash, this Spirit gains +3000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "If there is [Soul Core] in your Trash, this Spirit gains +3000 BP.",
+            "cleanText": "this Spirit gains +3000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If there is [Soul Core] in your Trash",
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 3000,
+              "target": "target",
+              "duration": "THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "RP26-05#a0",
+        "physicalId": "RP26-05#AB_STEP_RESTRICTED_NONE_LV1_LV2_724738d1a06fd8e36374a2cb72c7ece08b7771c421eac3a3bc5fdcb0e0b1a24c_aca1eb73ec57db69055831b6b0527507",
+        "semanticId": "SEM#AB_STEP_RESTRICTED_NONE_LV1_LV2_724738d1a06fd8e36374a2cb72c7ece08b7771c421eac3a3bc5fdcb0e0b1a24c_aca1eb73ec57db69055831b6b0527507"
+      },
+      {
+        "id": "RP26-05#AB_WHEN_ATTACKS_NONE_LV2_35fadc29b99bdfe67a76d92c705a0bebd1926ddc2d08cc740f79585fa2e84aa2_2979f5eac298d2d010f71dfa7732798f",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "True Release"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Target an opposing 1000 BP or less Spirit. Destroy it. Besides this Spirit, for each \"Purgatory Wings\" family Spirit you control, the targeting BP gets +2000."
+        },
+        "clauses": [
+          {
+            "rawText": "Target an opposing 1000 BP or less Spirit.",
+            "cleanText": "Target an opposing 1000 BP or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TARGET_CARD"
+            }
+          },
+          {
+            "rawText": "Destroy it.",
+            "cleanText": "Destroy it",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "target": "PREVIOUS_TARGET"
+            }
+          },
+          {
+            "rawText": "Besides this Spirit, for each \"Purgatory Wings\" family Spirit you control, the targeting BP gets +2000.",
+            "cleanText": "Besides this Spirit, for each \"Purgatory Wings\" family Spirit you control, the targeting BP gets +2000",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 2000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "RP26-05#a1",
+        "physicalId": "RP26-05#AB_WHEN_ATTACKS_NONE_LV2_35fadc29b99bdfe67a76d92c705a0bebd1926ddc2d08cc740f79585fa2e84aa2_2979f5eac298d2d010f71dfa7732798f",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_35fadc29b99bdfe67a76d92c705a0bebd1926ddc2d08cc740f79585fa2e84aa2_2979f5eac298d2d010f71dfa7732798f"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "RP26-06": {
+    "cardNumber": "RP26-06",
+    "name": "The RoaringFlame Ignigeyer",
+    "keywords": [
+      {
+        "name": "Clash",
+        "parameter": null,
+        "wave": 1,
+        "hook": "clash",
+        "bracketed": true,
+        "index": 15
+      }
+    ],
+    "abilities": [
+      {
+        "id": "RP26-06#AB_STEP_RESTRICTED_NONE_LV1_LV2_fcad30cb876a8cf94bc702066728dd654503affa7a1d0c1333259dc26415afbf_b4f2f230d3bfd4d106a571ce28a5bb9b",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "STEP_RESTRICTED",
+          "timingLabel": "During Attack",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Clash",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Opposing Spirits must block if possible."
+        },
+        "clauses": [
+          {
+            "rawText": "Opposing Spirits must block if possible.",
+            "cleanText": "Opposing Spirits must block if possible",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "FORCE_BLOCK",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "RP26-06#a0",
+        "physicalId": "RP26-06#AB_STEP_RESTRICTED_NONE_LV1_LV2_fcad30cb876a8cf94bc702066728dd654503affa7a1d0c1333259dc26415afbf_b4f2f230d3bfd4d106a571ce28a5bb9b",
+        "semanticId": "SEM#AB_STEP_RESTRICTED_NONE_LV1_LV2_fcad30cb876a8cf94bc702066728dd654503affa7a1d0c1333259dc26415afbf_b4f2f230d3bfd4d106a571ce28a5bb9b"
+      },
+      {
+        "id": "RP26-06#AB_STEP_RESTRICTED_NONE_LV2_98f11922d18382eed23f86e3a5f61c175cae4015ee78dc96813f0457924039fe_6a2dab371a3415bbab50aca35729a59c",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "True Release"
+          ],
+          "timing": "STEP_RESTRICTED",
+          "timingLabel": "During Attack",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "At the end of a blocked battle, target an opposing 4000 BP or less Spirit, or an opposing 6000 BP or less exhausted Spirit. Destroy it."
+        },
+        "clauses": [
+          {
+            "rawText": "At the end of a blocked battle, target an opposing 4000 BP or less Spirit, or an opposing 6000 BP or less exhausted Spirit.",
+            "cleanText": "At the end of a blocked battle, target an opposing 4000 BP or less Spirit, or an opposing 6000 BP or less exhausted Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "Destroy it.",
+            "cleanText": "Destroy it",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "target": "PREVIOUS_TARGET"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "RP26-06#a1",
+        "physicalId": "RP26-06#AB_STEP_RESTRICTED_NONE_LV2_98f11922d18382eed23f86e3a5f61c175cae4015ee78dc96813f0457924039fe_6a2dab371a3415bbab50aca35729a59c",
+        "semanticId": "SEM#AB_STEP_RESTRICTED_NONE_LV2_98f11922d18382eed23f86e3a5f61c175cae4015ee78dc96813f0457924039fe_6a2dab371a3415bbab50aca35729a59c"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "RP26-01": {
+    "cardNumber": "RP26-01",
+    "name": "The ThunderEmperorDragon Siegwurm (RP26-01)",
+    "keywords": [
+      {
+        "name": "Clash",
+        "parameter": null,
+        "wave": 1,
+        "hook": "clash",
+        "bracketed": true,
+        "index": 8
+      },
+      {
+        "name": "Clash",
+        "parameter": null,
+        "wave": 1,
+        "hook": "clash",
+        "bracketed": true,
+        "index": 134
+      }
+    ],
+    "abilities": [
+      {
+        "id": "RP26-01#AB_STEP_RESTRICTED_NONE_LV1_LV2_fcad30cb876a8cf94bc702066728dd654503affa7a1d0c1333259dc26415afbf_b4f2f230d3bfd4d106a571ce28a5bb9b",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "STEP_RESTRICTED",
+          "timingLabel": "During Attack",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Clash",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Opposing Spirits must block if possible."
+        },
+        "clauses": [
+          {
+            "rawText": "Opposing Spirits must block if possible.",
+            "cleanText": "Opposing Spirits must block if possible",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "FORCE_BLOCK",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "RP26-01#a0",
+        "physicalId": "RP26-01#AB_STEP_RESTRICTED_NONE_LV1_LV2_fcad30cb876a8cf94bc702066728dd654503affa7a1d0c1333259dc26415afbf_b4f2f230d3bfd4d106a571ce28a5bb9b",
+        "semanticId": "SEM#AB_STEP_RESTRICTED_NONE_LV1_LV2_fcad30cb876a8cf94bc702066728dd654503affa7a1d0c1333259dc26415afbf_b4f2f230d3bfd4d106a571ce28a5bb9b"
+      },
+      {
+        "id": "RP26-01#AB_ATTACK_STEP_NONE_LV2_1912e9c1ba79d99e761664f0b822d6a723791b8f17c68752ed2d86758d1bf19c_d78c6241396a415b6db66bef09e6faff",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Give all your \"Red Cloud\" family Spirits [Clash]."
+        },
+        "clauses": [
+          {
+            "rawText": "Give all your \"Red Cloud\" family Spirits [Clash].",
+            "cleanText": "Give all your \"Red Cloud\" family Spirits [Clash]",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "RP26-01#a1",
+        "physicalId": "RP26-01#AB_ATTACK_STEP_NONE_LV2_1912e9c1ba79d99e761664f0b822d6a723791b8f17c68752ed2d86758d1bf19c_d78c6241396a415b6db66bef09e6faff",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_1912e9c1ba79d99e761664f0b822d6a723791b8f17c68752ed2d86758d1bf19c_d78c6241396a415b6db66bef09e6faff"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "RP26-04": {
+    "cardNumber": "RP26-04",
+    "name": "White Chimera",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "RP26-04#AB_WHEN_BLOCKS_NONE_LV1_LV2_493a40a74e13c2d510bb77e0951d52e434073946d141909da7c0ec5a679ca9a7_17f9ad099b3260286396d4d9fc09a244",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_BLOCKS",
+          "timingLabel": "When Blocks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Target an opposing non-attacking 3000 BP or less Spirit. Return it to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "Target an opposing non-attacking 3000 BP or less Spirit.",
+            "cleanText": "Target an opposing non-attacking 3000 BP or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TARGET_CARD"
+            }
+          },
+          {
+            "rawText": "Return it to the Hand.",
+            "cleanText": "Return it to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "target": "PREVIOUS_TARGET",
+              "destination": "HAND"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "RP26-04#a0",
+        "physicalId": "RP26-04#AB_WHEN_BLOCKS_NONE_LV1_LV2_493a40a74e13c2d510bb77e0951d52e434073946d141909da7c0ec5a679ca9a7_17f9ad099b3260286396d4d9fc09a244",
+        "semanticId": "SEM#AB_WHEN_BLOCKS_NONE_LV1_LV2_493a40a74e13c2d510bb77e0951d52e434073946d141909da7c0ec5a679ca9a7_17f9ad099b3260286396d4d9fc09a244"
+      },
+      {
+        "id": "RP26-04#AB_ATTACK_STEP_NONE_LV2_8f94047948983eec39d75aa18aaae36aaa5f36978e25ac361f618762da25474d_46d77c0399d7bc8aba1cf9a31ed0ddb6",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "True Release"
+          ],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "For each exhausted Spirit you control, this Spirit gains +1000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "For each exhausted Spirit you control, this Spirit gains +1000 BP.",
+            "cleanText": "For each exhausted Spirit you control, this Spirit gains +1000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 1000,
+              "target": "target",
+              "duration": "THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "RP26-04#a1",
+        "physicalId": "RP26-04#AB_ATTACK_STEP_NONE_LV2_8f94047948983eec39d75aa18aaae36aaa5f36978e25ac361f618762da25474d_46d77c0399d7bc8aba1cf9a31ed0ddb6",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_8f94047948983eec39d75aa18aaae36aaa5f36978e25ac361f618762da25474d_46d77c0399d7bc8aba1cf9a31ed0ddb6"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

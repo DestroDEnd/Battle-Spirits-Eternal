@@ -164,6 +164,26 @@
     "compiledIr": {
       "cardNumber": "PB33-007",
       "name": "The FineWeatherCharisma Super Agressive Churupa",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 8000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 11000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 15000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit.\n\n[During Advent] [LV1][LV2][LV3]\nThis Spirit can't be destroyed via BP comparison. Also, while there is any six-colored Spirit card among this Spirit's pre-advent cards, this Spirit is unaffected by opposing Spirit/Magic effects.\n\n[LV2][LV3] Flash - (Either Attacks Step)\nOnce per turn, either draw a card, or put a core from the Void to this Spirit. Then, if it's the opposing Attack Step, refresh this Spirit.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -171,12 +191,32 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "PB33-007#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_bce1765e51fde565c2e7181f98b0699fb879178a072979767fab5d30f0d54f87_a8b342cee60437cca99546e4556424ab",
+          "cardNumber": "PB33-007",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PB33-007#a0"
         }
       ],
       "abilities": [
         {
-          "id": "PB33-007#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -187,8 +227,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: Cost 5 or more",
@@ -197,10 +246,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -222,7 +275,9 @@
             },
             {
               "rawText": "stack this from your Hand onto your target Spirit.",
+              "originalClauseText": "stack this from your Hand onto your target Spirit.",
               "cleanText": "stack this from your Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -240,10 +295,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB33-007#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "Cost 5 or more",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB33-007#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_bce1765e51fde565c2e7181f98b0699fb879178a072979767fab5d30f0d54f87_a8b342cee60437cca99546e4556424ab",
+              "cardNumber": "PB33-007",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PB33-007#a0"
+            }
+          ],
+          "id": "PB33-007#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_bce1765e51fde565c2e7181f98b0699fb879178a072979767fab5d30f0d54f87_a8b342cee60437cca99546e4556424ab",
+          "physicalId": "PB33-007#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_bce1765e51fde565c2e7181f98b0699fb879178a072979767fab5d30f0d54f87_a8b342cee60437cca99546e4556424ab",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_bce1765e51fde565c2e7181f98b0699fb879178a072979767fab5d30f0d54f87_a8b342cee60437cca99546e4556424ab",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_d156ac502d26f731f613cac84d0123a2aabafe004ce8ee7a821e8d8c0eae06a5_f9a9a376e902a52591204148eb5accc3",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB33-007#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -256,8 +355,13 @@
               "During Advent"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -266,22 +370,32 @@
             "isMain": false,
             "cleanBody": "This Spirit can't be destroyed via BP comparison. Also, while there is any six-colored Spirit card among this Spirit's pre-advent cards, this Spirit is unaffected by opposing Spirit/Magic effects."
           },
+          "originalAbilityText": "[During Advent] [LV1][LV2][LV3]\nThis Spirit can't be destroyed via BP comparison. Also, while there is any six-colored Spirit card among this Spirit's pre-advent cards, this Spirit is unaffected by opposing Spirit/Magic effects.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "This Spirit can't be destroyed via BP comparison.",
+              "originalClauseText": "This Spirit can't be destroyed via BP comparison.",
               "cleanText": "This Spirit can't be destroyed via BP comparison",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "INDESTRUCTIBLE"
+                "op": "INDESTRUCTIBLE",
+                "by": [
+                  "BP_COMPARISON"
+                ],
+                "target": "self"
               }
             },
             {
               "rawText": "while there is any six-colored Spirit card among this Spirit's pre-advent cards, this Spirit is unaffected by opposing Spirit/Magic effects.",
+              "originalClauseText": "while there is any six-colored Spirit card among this Spirit's pre-advent cards, this Spirit is unaffected by opposing Spirit/Magic effects.",
               "cleanText": "this Spirit is unaffected by opposing Spirit/Magic effects",
+              "clauseIndex": 1,
               "link": "also",
               "isOptional": false,
               "isCost": false,
@@ -293,10 +407,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB33-007#a1",
+          "keywords": [],
+          "id": "PB33-007#AB_PASSIVE_NONE_LV1_LV2_LV3_4c887c794eb0bab3703d541b9398b900d333c046f828768088452faaa8638484_da2a88a74431e126ad0d4701df4ad221",
+          "physicalId": "PB33-007#AB_PASSIVE_NONE_LV1_LV2_LV3_4c887c794eb0bab3703d541b9398b900d333c046f828768088452faaa8638484_da2a88a74431e126ad0d4701df4ad221",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_4c887c794eb0bab3703d541b9398b900d333c046f828768088452faaa8638484_da2a88a74431e126ad0d4701df4ad221",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_a189069897c0c50f08388a26e344733a3d551062b801ceb6881ce24f9023225b_8182dbe8c262cc383efb31d23fd56d23",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB33-007#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -306,8 +432,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attacks Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -316,10 +453,14 @@
             "isMain": false,
             "cleanBody": "either draw a card, or put a core from the Void to this Spirit. Then, if it's the opposing Attack Step, refresh this Spirit."
           },
+          "originalAbilityText": "[LV2][LV3] Flash - (Either Attacks Step)\nOnce per turn, either draw a card, or put a core from the Void to this Spirit. Then, if it's the opposing Attack Step, refresh this Spirit.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "either draw a card, or put a core from the Void to this Spirit.",
+              "originalClauseText": "either draw a card, or put a core from the Void to this Spirit.",
               "cleanText": "either draw a card, or put a core from the Void to this Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -334,7 +475,9 @@
             },
             {
               "rawText": "if it's the opposing Attack Step, refresh this Spirit.",
+              "originalClauseText": "if it's the opposing Attack Step, refresh this Spirit.",
               "cleanText": "refresh this Spirit",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -346,7 +489,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB33-007#a2",
+          "keywords": [],
+          "id": "PB33-007#AB_ATTACK_STEP_NONE_LV2_LV3_f8cd7a282cb2c266945e5391c8bb3d90220e7c8fd4b15532e3044c55e7323b57_b246a292df2f1b71f8392df27a43f91f",
+          "physicalId": "PB33-007#AB_ATTACK_STEP_NONE_LV2_LV3_f8cd7a282cb2c266945e5391c8bb3d90220e7c8fd4b15532e3044c55e7323b57_b246a292df2f1b71f8392df27a43f91f",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_f8cd7a282cb2c266945e5391c8bb3d90220e7c8fd4b15532e3044c55e7323b57_b246a292df2f1b71f8392df27a43f91f",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_LV3_32adb5daf3f42fa8f1437b43e7751da943e53a1918b2ed8adbdb9432b7b491b9_a503e7d9b34eaab4357f331657731dbb",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
@@ -363,10 +523,13 @@
     "compiledIr": {
       "cardNumber": "PB33-002",
       "name": "Karmagia",
+      "type": "Magic",
+      "levels": {},
+      "originalEffectText": "When your Purple Spirit is depleted/destroyed by the opponent, you can use this card from the Hand, without paying the cost.\n\n[Flash]\n(Once per Turn: Same Name) You can summon a \"Vassal\"/ \"Lord\"/ \"Ten Crown\"/ \"God-King\"/ \"Worldswalker\"/ \"Celeste\"/ \"Avatar\"/ \"Pastwalker\"/ \"Primal\"/ \"Proximate\"/ \"Astroblazer\"/ \"Blood Crystal\" family Purple-only Spirit card that is Cost 4 or less, or Cost 6 from your Hand/Trash, treating all reduction symbols as fulfilled.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "PB33-002#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -377,8 +540,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -387,24 +555,41 @@
             "isMain": false,
             "cleanBody": "When your Purple Spirit is depleted/destroyed by the opponent, you can use this card from the Hand, without paying the cost."
           },
+          "originalAbilityText": "When your Purple Spirit is depleted/destroyed by the opponent, you can use this card from the Hand, without paying the cost.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When your Purple Spirit is depleted/destroyed by the opponent, you can use this card from the Hand, without paying the cost.",
+              "originalClauseText": "When your Purple Spirit is depleted/destroyed by the opponent, you can use this card from the Hand, without paying the cost.",
               "cleanText": "When your Purple Spirit is depleted/destroyed by the opponent, you can use this card from the Hand, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "COST_MODIFIER"
+                "op": "COST_MODIFIER",
+                "free": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB33-002#a0",
+          "keywords": [],
+          "id": "PB33-002#AB_PASSIVE_NONE_LV1_LV2_LV3_496b919d3a5f7d5808184bd332b2ac66517f4b2ab3583fd0d1ffb874449e63a9_97d52459d3a3c457df43f4f954d99e91",
+          "physicalId": "PB33-002#AB_PASSIVE_NONE_LV1_LV2_LV3_496b919d3a5f7d5808184bd332b2ac66517f4b2ab3583fd0d1ffb874449e63a9_97d52459d3a3c457df43f4f954d99e91",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_496b919d3a5f7d5808184bd332b2ac66517f4b2ab3583fd0d1ffb874449e63a9_97d52459d3a3c457df43f4f954d99e91",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_53e4d32fd5eae2fcc7c806fc04863b8cc7e6dc604f1420cd75f90a7f7d7169d8_6a36eb29ac576256da7f53aef616552f",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB33-002#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -415,8 +600,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
             "limit": "ONCE_PER_TURN_SAME_NAME",
             "cantStack": false,
             "keyword": null,
@@ -425,10 +619,14 @@
             "isMain": false,
             "cleanBody": "You can summon a \"Vassal\"/ \"Lord\"/ \"Ten Crown\"/ \"God-King\"/ \"Worldswalker\"/ \"Celeste\"/ \"Avatar\"/ \"Pastwalker\"/ \"Primal\"/ \"Proximate\"/ \"Astroblazer\"/ \"Blood Crystal\" family Purple-only Spirit card that is Cost 4 or less, or Cost 6 from your Hand/Trash, treating all reduction symbols as fulfilled."
           },
+          "originalAbilityText": "[Flash]\n(Once per Turn: Same Name) You can summon a \"Vassal\"/ \"Lord\"/ \"Ten Crown\"/ \"God-King\"/ \"Worldswalker\"/ \"Celeste\"/ \"Avatar\"/ \"Pastwalker\"/ \"Primal\"/ \"Proximate\"/ \"Astroblazer\"/ \"Blood Crystal\" family Purple-only Spirit card that is Cost 4 or less, or Cost 6 from your Hand/Trash, treating all reduction symbols as fulfilled.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can summon a \"Vassal\"/ \"Lord\"/ \"Ten Crown\"/ \"God-King\"/ \"Worldswalker\"/ \"Celeste\"/ \"Avatar\"/ \"Pastwalker\"/ \"Primal\"/ \"Proximate\"/ \"Astroblazer\"/ \"Blood Crystal\" family Purple-only Spirit card that is Cost 4 or less, or Cost 6 from your Hand/Trash, treating all reduction symbols as fulfilled.",
+              "originalClauseText": "You can summon a \"Vassal\"/ \"Lord\"/ \"Ten Crown\"/ \"God-King\"/ \"Worldswalker\"/ \"Celeste\"/ \"Avatar\"/ \"Pastwalker\"/ \"Primal\"/ \"Proximate\"/ \"Astroblazer\"/ \"Blood Crystal\" family Purple-only Spirit card that is Cost 4 or less, or Cost 6 from your Hand/Trash, treating all reduction symbols as fulfilled.",
               "cleanText": "You can summon a \"Vassal\"/ \"Lord\"/ \"Ten Crown\"/ \"God-King\"/ \"Worldswalker\"/ \"Celeste\"/ \"Avatar\"/ \"Pastwalker\"/ \"Primal\"/ \"Proximate\"/ \"Astroblazer\"/ \"Blood Crystal\" family Purple-only Spirit card that is Cost 4 or less, or Cost 6 from your Hand/Trash, treating all reduction symbols as fulfilled",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -436,11 +634,55 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand_or_trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "costLte": 4,
+                  "nameIncludes": "Vassal",
+                  "nameIncludesAny": [
+                    "Vassal",
+                    "Lord",
+                    "Ten Crown",
+                    "God-King",
+                    "Worldswalker",
+                    "Celeste",
+                    "Avatar",
+                    "Pastwalker",
+                    "Primal",
+                    "Proximate",
+                    "Astroblazer"
+                  ],
+                  "family": "Blood Crystal",
+                  "color": "Purple"
+                },
+                "free": false,
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB33-002#a1",
+          "keywords": [],
+          "id": "PB33-002#AB_FLASH_NONE_LV1_LV2_LV3_437d1c81629a187d48f869e41650cfb2a6827468f351c33067f3fd4a4eb1e395_c9872e5ebfe172141ad166c47cfc7c95",
+          "physicalId": "PB33-002#AB_FLASH_NONE_LV1_LV2_LV3_437d1c81629a187d48f869e41650cfb2a6827468f351c33067f3fd4a4eb1e395_c9872e5ebfe172141ad166c47cfc7c95",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_437d1c81629a187d48f869e41650cfb2a6827468f351c33067f3fd4a4eb1e395_c9872e5ebfe172141ad166c47cfc7c95",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_f6846c2fbaadb1234dae26b2e0e3c2f47b6ebaa7d946ca5ac6671589635f2857_64f98ba9d73475712b902bc96b777230",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -774,10 +1016,13 @@
     "compiledIr": {
       "cardNumber": "PB33-004",
       "name": "The Land of Rabbits",
+      "type": "Nexus",
+      "levels": {},
+      "originalEffectText": "When this card is revealed from deck, or sent to the Trash from deck by your Yellow-only effect, you can deploy it.\n\n[LV1][LV2] (When Destroyed by the Opponent)\nDraw two cards. Then, during this turn, give an opposing Spirit -12000 BP. Then, return every opposing 0 BP Spirit to the deckbottom.\n\n[LV2]\nEvery opposing Spirit gets -1000 BP. For each “The Land of Rabbits” in your Trash, this “BP- effect” reduces 3000 further.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "PB33-004#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -788,8 +1033,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -798,10 +1048,14 @@
             "isMain": false,
             "cleanBody": "When this card is revealed from deck, or sent to the Trash from deck by your Yellow-only effect, you can deploy it."
           },
+          "originalAbilityText": "When this card is revealed from deck, or sent to the Trash from deck by your Yellow-only effect, you can deploy it.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When this card is revealed from deck, or sent to the Trash from deck by your Yellow-only effect, you can deploy it.",
+              "originalClauseText": "When this card is revealed from deck, or sent to the Trash from deck by your Yellow-only effect, you can deploy it.",
               "cleanText": "When this card is revealed from deck, or sent to the Trash from deck by your Yellow-only effect, you can deploy it",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -813,10 +1067,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB33-004#a0",
+          "keywords": [],
+          "id": "PB33-004#AB_PASSIVE_NONE_LV1_LV2_LV3_7105c2178c8b61b5a9dd6a4c2623cd80d7b0808c75d596cbfb48061599ab650c_d5b44b3865d6b6b77f590d3e90639aee",
+          "physicalId": "PB33-004#AB_PASSIVE_NONE_LV1_LV2_LV3_7105c2178c8b61b5a9dd6a4c2623cd80d7b0808c75d596cbfb48061599ab650c_d5b44b3865d6b6b77f590d3e90639aee",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_7105c2178c8b61b5a9dd6a4c2623cd80d7b0808c75d596cbfb48061599ab650c_d5b44b3865d6b6b77f590d3e90639aee",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_2b1e039ad2511c54ae5caa26eca5b4c7bbc23b384b17af09aaa6a7fedb7732f1_d59828e29930b7b1ffcd076e87c6fd0d",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB33-004#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -826,8 +1092,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_DESTROYED",
+            "timings": [
+              "WHEN_DESTROYED"
+            ],
             "timingLabel": "When Destroyed by the Opponent",
             "timingStep": "ANY",
+            "timingCause": "OPPONENT",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -836,10 +1111,14 @@
             "isMain": false,
             "cleanBody": "Draw two cards. Then, during this turn, give an opposing Spirit -12000 BP. Then, return every opposing 0 BP Spirit to the deckbottom."
           },
+          "originalAbilityText": "[LV1][LV2] (When Destroyed by the Opponent)\nDraw two cards. Then, during this turn, give an opposing Spirit -12000 BP. Then, return every opposing 0 BP Spirit to the deckbottom.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Draw two cards.",
+              "originalClauseText": "Draw two cards.",
               "cleanText": "Draw two cards",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -854,7 +1133,9 @@
             },
             {
               "rawText": "during this turn, give an opposing Spirit -12000 BP.",
+              "originalClauseText": "during this turn, give an opposing Spirit -12000 BP.",
               "cleanText": "give an opposing Spirit -12000 BP",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -863,13 +1144,20 @@
               "op": {
                 "op": "BP_DEBUFF",
                 "amount": 12000,
-                "target": "PREVIOUS_TARGET",
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
                 "duration": "DURING_THIS_TURN"
               }
             },
             {
               "rawText": "return every opposing 0 BP Spirit to the deckbottom.",
+              "originalClauseText": "return every opposing 0 BP Spirit to the deckbottom.",
               "cleanText": "return every opposing 0 BP Spirit to the deckbottom",
+              "clauseIndex": 2,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -884,10 +1172,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB33-004#a1",
+          "keywords": [],
+          "id": "PB33-004#AB_WHEN_DESTROYED_NONE_LV1_LV2_9dbbedece109f1b2f7aa42e55576dc87822c89db620c68ed18ddd3d5ad69e0d0_1f66365481c4abf2444f74e2f2504a9c",
+          "physicalId": "PB33-004#AB_WHEN_DESTROYED_NONE_LV1_LV2_9dbbedece109f1b2f7aa42e55576dc87822c89db620c68ed18ddd3d5ad69e0d0_1f66365481c4abf2444f74e2f2504a9c",
+          "semanticId": "SEM#AB_WHEN_DESTROYED_NONE_LV1_LV2_9dbbedece109f1b2f7aa42e55576dc87822c89db620c68ed18ddd3d5ad69e0d0_1f66365481c4abf2444f74e2f2504a9c",
+          "semanticIdV3": "SEM3#AB_WHEN_DESTROYED_NONE_LV1_LV2_6f5ab18eae4177b1655347d39b31b5282d4f6160085d087553afbd702768b771_c9d4a7a823d9da775ff87cb18f2e8b12",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "OPPONENT",
+            "timingTriggers": [
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB33-004#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -896,8 +1198,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -906,10 +1213,14 @@
             "isMain": false,
             "cleanBody": "Every opposing Spirit gets -1000 BP. For each “The Land of Rabbits” in your Trash, this “BP- effect” reduces 3000 further."
           },
+          "originalAbilityText": "[LV2]\nEvery opposing Spirit gets -1000 BP. For each “The Land of Rabbits” in your Trash, this “BP- effect” reduces 3000 further.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Every opposing Spirit gets -1000 BP.",
+              "originalClauseText": "Every opposing Spirit gets -1000 BP.",
               "cleanText": "Every opposing Spirit gets -1000 BP",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -918,13 +1229,20 @@
               "op": {
                 "op": "BP_DEBUFF",
                 "amount": 1000,
-                "target": "PREVIOUS_TARGET",
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
                 "duration": "THIS_TURN"
               }
             },
             {
               "rawText": "For each \"The Land of Rabbits\" in your Trash, this \"BP- effect\" reduces 3000 further.",
+              "originalClauseText": "For each \"The Land of Rabbits\" in your Trash, this \"BP- effect\" reduces 3000 further.",
               "cleanText": "For each \"The Land of Rabbits\" in your Trash, this \"BP- effect\" reduces 3000 further",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -939,7 +1257,20 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB33-004#a2",
+          "keywords": [],
+          "id": "PB33-004#AB_PASSIVE_NONE_LV2_7ab36137189b4eb3ced3758f14fbf83cdb3ba7a839d3ac33af85afd7a9f17925_00251ddcc0460ddc12eed78c3690e620",
+          "physicalId": "PB33-004#AB_PASSIVE_NONE_LV2_7ab36137189b4eb3ced3758f14fbf83cdb3ba7a839d3ac33af85afd7a9f17925_00251ddcc0460ddc12eed78c3690e620",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV2_7ab36137189b4eb3ced3758f14fbf83cdb3ba7a839d3ac33af85afd7a9f17925_00251ddcc0460ddc12eed78c3690e620",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV2_fee55dae35f623007bcb744819e9f374c7c957abb6cd6136269dff6eaa667da4_aaa2c19e1d7539ce69f0d366a37366ef",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
@@ -1161,10 +1492,13 @@
     "compiledIr": {
       "cardNumber": "PB33-003",
       "name": "［The One and Only］Place to Return",
+      "type": "Nexus",
+      "levels": {},
+      "originalEffectText": "When this card in Hand would be discarded by your Green-only effect or an opposing Green-only effect, instead of sending it to the Trash, you can put it onto the Removed Zone.\n\n[LV1][LV2] (When Deployed)\nYou can banish two cards from the opposing Trash. Or, you can put a core from the Void to any of your Spirit/Nexus.\n\n[LV2]\n(Once per Turn: Same Name) Including those that are in Soul State/pre-advent condition, while you control any Green Contract Spirit, when the opponent would summon any Spirit card via an effect, by heavy exhausting this refreshed Nexus, it is summoned in exhausted state.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "PB33-003#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1175,8 +1509,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1185,24 +1524,47 @@
             "isMain": false,
             "cleanBody": "When this card in Hand would be discarded by your Green-only effect or an opposing Green-only effect, instead of sending it to the Trash, you can put it onto the Removed Zone."
           },
+          "originalAbilityText": "When this card in Hand would be discarded by your Green-only effect or an opposing Green-only effect, instead of sending it to the Trash, you can put it onto the Removed Zone.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When this card in Hand would be discarded by your Green-only effect or an opposing Green-only effect, instead of sending it to the Trash, you can put it onto the Removed Zone.",
+              "originalClauseText": "When this card in Hand would be discarded by your Green-only effect or an opposing Green-only effect, instead of sending it to the Trash, you can put it onto the Removed Zone.",
               "cleanText": "When this card in Hand would be discarded by your Green-only effect or an opposing Green-only effect, instead of sending it to the Trash, you can put it onto the Removed Zone",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "DECK_OR_HAND_ACTION"
+                "op": "DECK_OR_HAND_ACTION",
+                "action": "banish",
+                "from": "hand",
+                "to": "grave",
+                "side": "opp",
+                "filter": {
+                  "color": "Green"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB33-003#a0",
+          "keywords": [],
+          "id": "PB33-003#AB_PASSIVE_NONE_LV1_LV2_LV3_d6dcf205bb28bd66948aabe18132504bc19c9efecedcc87637cebbedd02fbc46_4b6bf8ed67cf853c6b60011107cd5f08",
+          "physicalId": "PB33-003#AB_PASSIVE_NONE_LV1_LV2_LV3_d6dcf205bb28bd66948aabe18132504bc19c9efecedcc87637cebbedd02fbc46_4b6bf8ed67cf853c6b60011107cd5f08",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_d6dcf205bb28bd66948aabe18132504bc19c9efecedcc87637cebbedd02fbc46_4b6bf8ed67cf853c6b60011107cd5f08",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_2da7435dc3a9d1a967842bbfadb952e6101baf149d211a3d87ec50166afeb6e7_98fedae1fe3c50e3018a774a7816548b",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB33-003#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1212,8 +1574,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_DEPLOYED",
+            "timings": [
+              "WHEN_DEPLOYED"
+            ],
             "timingLabel": "When Deployed",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_DEPLOYED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1222,10 +1593,14 @@
             "isMain": false,
             "cleanBody": "You can banish two cards from the opposing Trash. Or, you can put a core from the Void to any of your Spirit/Nexus."
           },
+          "originalAbilityText": "[LV1][LV2] (When Deployed)\nYou can banish two cards from the opposing Trash. Or, you can put a core from the Void to any of your Spirit/Nexus.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can banish two cards from the opposing Trash.",
+              "originalClauseText": "You can banish two cards from the opposing Trash.",
               "cleanText": "You can banish two cards from the opposing Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1237,7 +1612,9 @@
             },
             {
               "rawText": "you can put a core from the Void to any of your Spirit/Nexus.",
+              "originalClauseText": "you can put a core from the Void to any of your Spirit/Nexus.",
               "cleanText": "you can put a core from the Void to any of your Spirit/Nexus",
+              "clauseIndex": 1,
               "link": "or",
               "isOptional": true,
               "isCost": false,
@@ -1245,14 +1622,31 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB33-003#a1",
+          "keywords": [],
+          "id": "PB33-003#AB_WHEN_DEPLOYED_NONE_LV1_LV2_416d56733ecdfa0b7b46423e6325937dd38f30e7bdbc9adf72f67768f11c7384_9b7d3f7616f929b900f657ac4981ece2",
+          "physicalId": "PB33-003#AB_WHEN_DEPLOYED_NONE_LV1_LV2_416d56733ecdfa0b7b46423e6325937dd38f30e7bdbc9adf72f67768f11c7384_9b7d3f7616f929b900f657ac4981ece2",
+          "semanticId": "SEM#AB_WHEN_DEPLOYED_NONE_LV1_LV2_416d56733ecdfa0b7b46423e6325937dd38f30e7bdbc9adf72f67768f11c7384_9b7d3f7616f929b900f657ac4981ece2",
+          "semanticIdV3": "SEM3#AB_WHEN_DEPLOYED_NONE_LV1_LV2_b3f2573f5d3a3fa2ba3d56ea879d9f24dd24282303395d2e1dc9f6c5abb8a0cc_194035c54e338754bce3b4ef4333d257",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_DEPLOYED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB33-003#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1261,8 +1655,15 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
             "limit": "ONCE_PER_TURN_SAME_NAME",
             "cantStack": false,
             "keyword": null,
@@ -1271,10 +1672,14 @@
             "isMain": false,
             "cleanBody": "Including those that are in Soul State/pre-advent condition, while you control any Green Contract Spirit, when the opponent would summon any Spirit card via an effect, by heavy exhausting this refreshed Nexus, it is summoned in exhausted state."
           },
+          "originalAbilityText": "[LV2]\n(Once per Turn: Same Name) Including those that are in Soul State/pre-advent condition, while you control any Green Contract Spirit, when the opponent would summon any Spirit card via an effect, by heavy exhausting this refreshed Nexus, it is summoned in exhausted state.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Including those that are in Soul State/pre-advent condition, while you control any Green Contract Spirit, when the opponent would summon any Spirit card via an effect, by heavy exhausting this refreshed Nexus, it is summoned in exhausted state.",
+              "originalClauseText": "Including those that are in Soul State/pre-advent condition, while you control any Green Contract Spirit, when the opponent would summon any Spirit card via an effect, by heavy exhausting this refreshed Nexus, it is summoned in exhausted state.",
               "cleanText": "Including those that are in Soul State/pre-advent condition, while you control any Green Contract Spirit, when the opponent would summon any Spirit card via an effect, by heavy exhausting this refreshed Nexus, it is summoned in exhausted state",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1282,11 +1687,39 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit",
+                    "Nexus"
+                  ],
+                  "color": "Green"
+                },
+                "free": false,
+                "exhausted": true,
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB33-003#a2",
+          "keywords": [],
+          "id": "PB33-003#AB_PASSIVE_NONE_LV2_c29842a97cf257567590501838374656a799acf8c65afd38b3e5489c30c186ee_0844c6aa0627bbd14f42405811a52ad6",
+          "physicalId": "PB33-003#AB_PASSIVE_NONE_LV2_c29842a97cf257567590501838374656a799acf8c65afd38b3e5489c30c186ee_0844c6aa0627bbd14f42405811a52ad6",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV2_c29842a97cf257567590501838374656a799acf8c65afd38b3e5489c30c186ee_0844c6aa0627bbd14f42405811a52ad6",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV2_e5064fa4520a309591c355bcfcecc56da1768ef1fcc10668a058b549e108d36d_f467021ac826d2cb9b3148bf776bf6a8",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,

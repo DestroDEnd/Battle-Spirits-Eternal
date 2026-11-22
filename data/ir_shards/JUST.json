@@ -1,1 +1,318 @@
-{"JUST-REMEMBERING":{"cardNumber":"JUST-REMEMBERING","name":"Mei Merryhadda (Card)","keywords":[{"name":"Core Charge","parameter":"(Machine Beast/Ten Crown/God-King & Cost 3 or more)","wave":3,"hook":"core_charge","bracketed":true,"index":284},{"name":"Grand Skill","parameter":"3","wave":3,"hook":"grand_skill","bracketed":true,"index":666},{"name":"Grand Skill","parameter":"5","wave":3,"hook":"grand_skill","bracketed":true,"index":966}],"abilities":[{"id":"JUST-REMEMBERING#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Grandwalker Nexus"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses."},"clauses":[{"rawText":"This Nexus can only be affected by effects that target Grandwalker Nexuses.","cleanText":"This Nexus can only be affected by effects that target Grandwalker Nexuses","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"GRANDWALKER_PROTECTION"}},{"rawText":"Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.","cleanText":"Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"GRANDWALKER_CORE_RULE"}}],"unsupported":[]},{"id":"JUST-REMEMBERING#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Core Charge: (Machine Beast/Ten Crown/God-King & Cost 3 or more)","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"clauses":[],"unsupported":[]},{"id":"JUST-REMEMBERING#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"◆When you summon/advent a target Spirit, put one core from the Void onto this Nexus."},"clauses":[{"rawText":"◆When you summon/advent a target Spirit, put one core from the Void onto this Nexus.","cleanText":"When you summon/advent a target Spirit, put one core from the Void onto this Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]},{"id":"JUST-REMEMBERING#a3","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put a core from the Void onto this Nexus."},"clauses":[{"rawText":"◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.","cleanText":"When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"CORE_CHARGE_TRIGGER","millCount":3}},{"rawText":"For each target card among them, put a core from the Void onto this Nexus.","cleanText":"For each target card among them, put a core from the Void onto this Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"source":"VOID","destination":"THIS_NEXUS","forEach":"TARGET_CARDS_COUNT"}}],"unsupported":[]},{"id":"JUST-REMEMBERING#a4","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":["Grand Skill: 3"],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"(Once per turn, send three cores from this Nexus to the Void) Refresh a \"Machine Beast\" family Spirit you control. Also, when that's a \"Ten Crown\"/\"God-King\" family Spirit, during this turn, it is unaffected by opposing Spirit/Nexus effects."},"clauses":[{"rawText":"(Once per turn, send three cores from this Nexus to the Void) Refresh a \"Machine Beast\" family Spirit you control.","cleanText":"(Once per turn, send three cores from this Nexus to the Void) Refresh a \"Machine Beast\" family Spirit you control","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"when that's a \"Ten Crown\"/\"God-King\" family Spirit, during this turn, it is unaffected by opposing Spirit/Nexus effects.","cleanText":"when that's a \"Ten Crown\"/\"God-King\" family Spirit, during this turn, it is unaffected by opposing Spirit/Nexus effects","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"IMMUNITY","immuneTo":"OPPOSING_EFFECTS"}}],"unsupported":[]},{"id":"JUST-REMEMBERING#a5","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":["Grand Skill: 5"],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"(Send five core from this Nexus to the Void) Return an opposing Spirit/Ultimate to the deckbottom."},"clauses":[{"rawText":"(Send five core from this Nexus to the Void) Return an opposing Spirit/Ultimate to the deckbottom.","cleanText":"(Send five core from this Nexus to the Void) Return an opposing Spirit/Ultimate to the deckbottom","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":8,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "JUST-REMEMBERING": {
+    "cardNumber": "JUST-REMEMBERING",
+    "name": "Mei Merryhadda (Card)",
+    "keywords": [
+      {
+        "name": "Core Charge",
+        "parameter": "(Machine Beast/Ten Crown/God-King & Cost 3 or more)",
+        "wave": 3,
+        "hook": "core_charge",
+        "bracketed": true,
+        "index": 284
+      },
+      {
+        "name": "Grand Skill",
+        "parameter": "3",
+        "wave": 3,
+        "hook": "grand_skill",
+        "bracketed": true,
+        "index": 666
+      },
+      {
+        "name": "Grand Skill",
+        "parameter": "5",
+        "wave": 3,
+        "hook": "grand_skill",
+        "bracketed": true,
+        "index": 966
+      }
+    ],
+    "abilities": [
+      {
+        "id": "JUST-REMEMBERING#AB_PASSIVE_NONE_LV1_LV2_LV3_942d11e6205bb2a4b67e50627106ae1cfc6bc84946419fa2fa1ebb7898a10897_210a76468ae036766b69e1bbc98cd961",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Grandwalker Nexus"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses."
+        },
+        "clauses": [
+          {
+            "rawText": "This Nexus can only be affected by effects that target Grandwalker Nexuses.",
+            "cleanText": "This Nexus can only be affected by effects that target Grandwalker Nexuses",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GRANDWALKER_PROTECTION"
+            }
+          },
+          {
+            "rawText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.",
+            "cleanText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GRANDWALKER_CORE_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "JUST-REMEMBERING#a0",
+        "physicalId": "JUST-REMEMBERING#AB_PASSIVE_NONE_LV1_LV2_LV3_942d11e6205bb2a4b67e50627106ae1cfc6bc84946419fa2fa1ebb7898a10897_210a76468ae036766b69e1bbc98cd961",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_942d11e6205bb2a4b67e50627106ae1cfc6bc84946419fa2fa1ebb7898a10897_210a76468ae036766b69e1bbc98cd961"
+      },
+      {
+        "id": "JUST-REMEMBERING#AB_PASSIVE_NONE_LV1_LV2_LV3_18431f9b6ffbae89208b2338842f832104eda6c42d5c91d6e53458701037854a_4031a3144e04b64c741c38fc19aa251a",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Core Charge: (Machine Beast/Ten Crown/God-King & Cost 3 or more)",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "JUST-REMEMBERING#a1",
+        "physicalId": "JUST-REMEMBERING#AB_PASSIVE_NONE_LV1_LV2_LV3_18431f9b6ffbae89208b2338842f832104eda6c42d5c91d6e53458701037854a_4031a3144e04b64c741c38fc19aa251a",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_18431f9b6ffbae89208b2338842f832104eda6c42d5c91d6e53458701037854a_4031a3144e04b64c741c38fc19aa251a"
+      },
+      {
+        "id": "JUST-REMEMBERING#AB_PASSIVE_NONE_LV1_LV2_LV3_23e50c4c7de6f1eef5a88712a3ea44e144cdafec52456b8bb76472402d6b5deb_98b5ce8090bf57d326eb402bdf01a1c6",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆When you summon/advent a target Spirit, put one core from the Void onto this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆When you summon/advent a target Spirit, put one core from the Void onto this Nexus.",
+            "cleanText": "When you summon/advent a target Spirit, put one core from the Void onto this Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "JUST-REMEMBERING#a2",
+        "physicalId": "JUST-REMEMBERING#AB_PASSIVE_NONE_LV1_LV2_LV3_23e50c4c7de6f1eef5a88712a3ea44e144cdafec52456b8bb76472402d6b5deb_98b5ce8090bf57d326eb402bdf01a1c6",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_23e50c4c7de6f1eef5a88712a3ea44e144cdafec52456b8bb76472402d6b5deb_98b5ce8090bf57d326eb402bdf01a1c6"
+      },
+      {
+        "id": "JUST-REMEMBERING#AB_PASSIVE_NONE_LV1_LV2_LV3_566e251b0e0c413a656f63d39331d5d09f2f4858d10a5b1c2cb6f8802d4af1d9_be4d0a0d59f6c9dfa123572bd3489564",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put a core from the Void onto this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.",
+            "cleanText": "When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CORE_CHARGE_TRIGGER",
+              "millCount": 3
+            }
+          },
+          {
+            "rawText": "For each target card among them, put a core from the Void onto this Nexus.",
+            "cleanText": "For each target card among them, put a core from the Void onto this Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "source": "VOID",
+              "destination": "THIS_NEXUS",
+              "forEach": "TARGET_CARDS_COUNT"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "JUST-REMEMBERING#a3",
+        "physicalId": "JUST-REMEMBERING#AB_PASSIVE_NONE_LV1_LV2_LV3_566e251b0e0c413a656f63d39331d5d09f2f4858d10a5b1c2cb6f8802d4af1d9_be4d0a0d59f6c9dfa123572bd3489564",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_566e251b0e0c413a656f63d39331d5d09f2f4858d10a5b1c2cb6f8802d4af1d9_be4d0a0d59f6c9dfa123572bd3489564"
+      },
+      {
+        "id": "JUST-REMEMBERING#AB_ATTACK_STEP_NONE_LV1_LV2_d1af83efa295307f97892471b4c8016d09eacac3ff6032e60b737abf9f351acd_dec4c68beff35d382d201288fe0c04fe",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Grand Skill: 3"
+          ],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "(Once per turn, send three cores from this Nexus to the Void) Refresh a \"Machine Beast\" family Spirit you control. Also, when that's a \"Ten Crown\"/\"God-King\" family Spirit, during this turn, it is unaffected by opposing Spirit/Nexus effects."
+        },
+        "clauses": [
+          {
+            "rawText": "(Once per turn, send three cores from this Nexus to the Void) Refresh a \"Machine Beast\" family Spirit you control.",
+            "cleanText": "(Once per turn, send three cores from this Nexus to the Void) Refresh a \"Machine Beast\" family Spirit you control",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "when that's a \"Ten Crown\"/\"God-King\" family Spirit, during this turn, it is unaffected by opposing Spirit/Nexus effects.",
+            "cleanText": "when that's a \"Ten Crown\"/\"God-King\" family Spirit, during this turn, it is unaffected by opposing Spirit/Nexus effects",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "IMMUNITY",
+              "immuneTo": "OPPOSING_EFFECTS"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "JUST-REMEMBERING#a4",
+        "physicalId": "JUST-REMEMBERING#AB_ATTACK_STEP_NONE_LV1_LV2_d1af83efa295307f97892471b4c8016d09eacac3ff6032e60b737abf9f351acd_dec4c68beff35d382d201288fe0c04fe",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_d1af83efa295307f97892471b4c8016d09eacac3ff6032e60b737abf9f351acd_dec4c68beff35d382d201288fe0c04fe"
+      },
+      {
+        "id": "JUST-REMEMBERING#AB_ATTACK_STEP_NONE_LV2_f2661962e3b476ef5aea2c10a205ec7fe53537798ad26b8a0c973af604ebd5c8_5a961c946ba49eefaf63843939430f8e",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Grand Skill: 5"
+          ],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "(Send five core from this Nexus to the Void) Return an opposing Spirit/Ultimate to the deckbottom."
+        },
+        "clauses": [
+          {
+            "rawText": "(Send five core from this Nexus to the Void) Return an opposing Spirit/Ultimate to the deckbottom.",
+            "cleanText": "(Send five core from this Nexus to the Void) Return an opposing Spirit/Ultimate to the deckbottom",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "JUST-REMEMBERING#a5",
+        "physicalId": "JUST-REMEMBERING#AB_ATTACK_STEP_NONE_LV2_f2661962e3b476ef5aea2c10a205ec7fe53537798ad26b8a0c973af604ebd5c8_5a961c946ba49eefaf63843939430f8e",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_f2661962e3b476ef5aea2c10a205ec7fe53537798ad26b8a0c973af604ebd5c8_5a961c946ba49eefaf63843939430f8e"
+      }
+    ],
+    "compiledClausesCount": 8,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

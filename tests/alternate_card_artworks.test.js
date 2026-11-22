@@ -189,7 +189,7 @@ describe('Alternate Card Artworks Suite', () => {
     assert.equal(fakeDoc.modalDeckBtn.className, 'btn-modal-locked');
     assert.equal(fakeDoc.modalDeckBtn.disabled, true);
     assert.equal(fakeDoc.modalDeckBtn.innerHTML, '🔒 Locked');
-    assert.ok(fakeDoc.modalArtIndicator.textContent.includes('活動異圖'));
+    assert.ok(fakeDoc.modalArtIndicator.textContent.includes('Alternate Art'));
 
     // Navigate to next artwork: Alternate art 2
     mgr.navigateArtwork(1);

@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=6.1">
+  <link rel="stylesheet" href="./styles.css?v=7.3">
 </head>
 <body>
 
@@ -239,6 +239,7 @@
         <button class="btn-modal-outline btn-modal-remove-card" id="modalRemoveDeckBtn" onclick="removeModalCardFromDeck()" style="display:none;">- Remove from Deck</button>
         <button class="btn-modal-outline btn-modal-nav-btn" id="modalSubPrevBtn" onclick="navigateCardModal(-1)" title="Previous Card" style="display:none;">‹ Prev</button>
         <button class="btn-modal-outline btn-modal-nav-btn" id="modalSubNextBtn" onclick="navigateCardModal(1)" title="Next Card" style="display:none;">Next ›</button>
+        <button class="btn-modal-outline btn-modal-rebirth" id="modalRebirthBtn" onclick="flipModalRebirthCard()" style="display:none;" title="Flip / Rebirth form">🔄 Rebirth Form</button>
         <a class="btn-modal-outline" id="modalDownload" href="#" target="_blank">⬇️ Save Art</a>
         <a class="btn-modal-outline" id="modalWikiLink" href="#" target="_blank">Wiki ↗</a>
       </div>
@@ -248,6 +249,7 @@
         <div class="modal-jpname" id="modalJpName"></div>
         <h2 class="modal-title" id="modalTitle"></h2>
       </div>
+      <div class="modal-rebirth-tag" id="modalRebirthTag" style="display:none;"></div>
       <div class="badges" id="modalBadges"></div>
       <div class="info-box">
         <div class="info-box-label">Levels & Battle Points</div>
@@ -378,7 +380,7 @@
 
   <!-- WebAssembly SQLite Engine (sql.js) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/sql-wasm.js"></script>
-  <script src="./wasm_db.js?v=6.1"></script>
+  <script src="./wasm_db.js?v=7.3"></script>
 
   <!-- Firebase Client SDK (Compat CDN for GitHub Pages) -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -386,8 +388,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
-  <script src="./firebase_service.js?v=6.1"></script>
-  <script src="./app.js?v=6.1"></script>
+  <script src="./firebase_service.js?v=7.3"></script>
+  <script src="./app.js?v=7.3"></script>
 <script>
 // Cache for card data objects
 const deckCardCache = {};
@@ -831,9 +833,24 @@ async function fetchCardsBatch(names) {
   const missing = names.filter(n => !deckCardCache[n]);
   if (!missing.length) return;
   try {
-    const res = await fetch('/api/cards-batch?names=' + encodeURIComponent(missing.join('|')));
-    if (res.ok) {
-      const data = await res.json();
+    let data = null;
+    try {
+      const res = await fetch('/api/cards-batch?names=' + encodeURIComponent(missing.join('|')));
+      const ct = (res.headers && res.headers.get('content-type')) || '';
+      if (res.ok && !ct.includes('text/html')) {
+        data = await res.json();
+      }
+    } catch (e) {}
+
+    if (!data && typeof WasmDB !== 'undefined' && typeof WasmDB.getCardsBatch === 'function') {
+      const list = WasmDB.getCardsBatch(missing);
+      data = {};
+      for (const c of (list || [])) {
+        if (c && c.name) data[c.name] = c;
+      }
+    }
+
+    if (data) {
       Object.assign(deckCardCache, data);
     }
   } catch (err) {

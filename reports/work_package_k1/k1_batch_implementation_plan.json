@@ -1,0 +1,105 @@
+{
+  "generatedAt": "2026-11-19T15:52:28.155Z",
+  "batches": [
+    {
+      "batchId": "K1-BATCH-01",
+      "priority": 1,
+      "title": "Core Verified Single-Op & Draw/Destroy/Buff/Bounce/Core Patterns",
+      "mechanicFamilies": [
+        "DRAW",
+        "BP_BUFF",
+        "BP_DEBUFF",
+        "DESTROY",
+        "BOUNCE",
+        "EXHAUST",
+        "REFRESH",
+        "MOVE_CORE"
+      ],
+      "estimatedAbilityCoverage": 30509,
+      "dependencies": [
+        "AsyncResolver",
+        "TargetingSystem",
+        "ZoneManager"
+      ],
+      "risk": "LOW",
+      "reason": "Highest frequency across all 514 shards with verified runtime handlers; delivers immediate high-volume card coverage."
+    },
+    {
+      "batchId": "K1-BATCH-02",
+      "priority": 2,
+      "title": "Condition Evaluator Expansion (Top Parse-Failure Patterns: Braved-To, Counters, Life, Named-Control)",
+      "mechanicFamilies": [
+        "BRAVE_STACK_STATE",
+        "COUNTER_THRESHOLD",
+        "LIFE_THRESHOLD",
+        "CONTROL_CARD"
+      ],
+      "estimatedAbilityCoverage": 134,
+      "dependencies": [
+        "ConditionEvaluator",
+        "K1-BATCH-01"
+      ],
+      "risk": "LOW_MEDIUM",
+      "reason": "Unlocks hundreds of conditional abilities blocked on condition parse failures."
+    },
+    {
+      "batchId": "K1-BATCH-03",
+      "priority": 3,
+      "title": "High-Frequency Keyword Mechanics (Burst, Accel, Advent, Contract Advent, Rebirth, Mirage)",
+      "mechanicFamilies": [
+        "Burst",
+        "Accel",
+        "Advent",
+        "Contract Advent",
+        "Rebirth",
+        "Mirage"
+      ],
+      "estimatedAbilityCoverage": 17,
+      "dependencies": [
+        "KeywordRegistry",
+        "TriggerQueueManager",
+        "TimingWindowManager"
+      ],
+      "risk": "MEDIUM",
+      "reason": "Core Battle Spirits mechanics spanning Main Boosters, SDs, and Collabs."
+    },
+    {
+      "batchId": "K1-BATCH-04",
+      "priority": 4,
+      "title": "Incomplete-Parameter Closure & Bare-Stub Operations (582 Clauses)",
+      "mechanicFamilies": [
+        "DECK_OR_HAND_ACTION",
+        "MODIFY_EFFECT",
+        "COUNT_OPERATION",
+        "DECK_ACTION",
+        "TOKEN_DEPLOYMENT"
+      ],
+      "estimatedAbilityCoverage": 582,
+      "dependencies": [
+        "Compiler",
+        "OperationHandlers"
+      ],
+      "risk": "MEDIUM",
+      "reason": "Closes remaining 582 parameter-incomplete clauses without guesswork."
+    },
+    {
+      "batchId": "K1-BATCH-05",
+      "priority": 5,
+      "title": "Replacement, Prevention, Unverified/Unsupported Variants (118 + 17) & Complex Multi-Clause Cards",
+      "mechanicFamilies": [
+        "REPLACEMENT_EFFECT",
+        "IMMUNITY",
+        "TRIGGERED_WATCHER",
+        "COPY_EFFECT"
+      ],
+      "estimatedAbilityCoverage": 2732,
+      "dependencies": [
+        "ZoneManager",
+        "EventBus",
+        "K1-BATCH-01..04"
+      ],
+      "risk": "HIGH",
+      "reason": "Handles rare/complex interactions (including 26RBS02-083, 26RDB01-024, 26RSD07-001) after foundational batches."
+    }
+  ]
+}

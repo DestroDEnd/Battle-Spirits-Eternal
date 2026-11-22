@@ -1,0 +1,28 @@
+{
+  "metadata": {
+    "generatedAt": "2026-11-21T04:10:41.288Z",
+    "testSuite": "tests/playable_engine_complete_match.test.js"
+  },
+  "tests": [
+    {
+      "testId": "COMPLETE-MATCH-01",
+      "description": "Multi-turn match through production APIs with valid 40-card decks (strictRules: true) without test bypasses.",
+      "rulesEnforced": [
+        "Deck validation (min 40, max 3 copies)",
+        "Turn 1 skips",
+        "Core payment",
+        "Combat BP resolution",
+        "Direct hit life reduction",
+        "Core conservation"
+      ],
+      "status": "VERIFIED_PASS"
+    },
+    {
+      "testId": "COMPLETE-MATCH-02",
+      "description": "End-to-end multi-turn match playing through combat until legitimate LIFE_0 victory condition.",
+      "outcome": "WINNER_DETERMINED",
+      "winReason": "LIFE_0",
+      "status": "VERIFIED_PASS"
+    }
+  ]
+}

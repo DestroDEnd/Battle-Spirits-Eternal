@@ -1,0 +1,394 @@
+[
+  {
+    "id": "26RBS02-023",
+    "storedAbilities": [
+      {
+        "clauses": [
+          {
+            "rawText": "You can target a Cost 4 or less \"Dark Puce\" family Spirit card in your Trash.",
+            "cleanText": "You can target a Cost 4 or less \"Dark Puce\" family Spirit card in your Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          },
+          {
+            "rawText": "Summon it.",
+            "cleanText": "Summon it",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "You can activate this Spirit's [Shamanism].",
+            "cleanText": "You can activate this Spirit's [Shamanism]",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ACTIVATE_EFFECT_ACTION",
+              "keyword": "Shamanism",
+              "side": "self"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "BATTLE-SPIRITS-A8297",
+    "storedAbilities": [
+      {
+        "clauses": [
+          {
+            "rawText": "During your Attack Step, when the opponent uses a Magic card, before that effect activates, you can use the following [Accel] of this card from your Hand.",
+            "cleanText": "During your Attack Step, when the opponent uses a Magic card, before that effect activates, you can use the following [Accel] of this card from your Hand",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "watchEvent": "USE_MAGIC",
+              "side": "opp",
+              "op": "TRIGGERED_WATCHER"
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "Immediately negate that Magic effect.",
+            "cleanText": "Immediately negate that Magic effect",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "NEGATE_EFFECT"
+            }
+          },
+          {
+            "rawText": "put this card face-up onto the Removed Zone.",
+            "cleanText": "put this card face-up onto the Removed Zone",
+            "link": "afterResolves",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "OPEN_ZONE"
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "Exhaust two opposing Spirits/Ultimates.",
+            "cleanText": "Exhaust two opposing Spirits/Ultimates",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "isHeavy": false,
+              "count": 2,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "BS28-020",
+    "storedAbilities": [
+      {
+        "clauses": [
+          {
+            "rawText": "You can put any number of [The FourShellSky Kamejuuji] in deck.",
+            "cleanText": "You can put any number of [The FourShellSky Kamejuuji] in deck",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "maxCopies": "UNLIMITED",
+              "rule": "UNLIMITED_COPIES",
+              "op": "DECK_BUILDING_RULE"
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "Put a core from the Void to this Spirit.",
+            "cleanText": "Put a core from the Void to this Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "field",
+                "target": "self"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "BS40-023",
+    "storedAbilities": [
+      {
+        "clauses": [
+          {
+            "rawText": "You can put any number of copies of [Carebara Antman] in Deck.",
+            "cleanText": "You can put any number of copies of [Carebara Antman] in Deck",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "maxCopies": "UNLIMITED",
+              "rule": "UNLIMITED_COPIES",
+              "op": "DECK_BUILDING_RULE"
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "You can summon a [Carebara Antman] from your Hand, without paying the cost.",
+            "cleanText": "You can summon a [Carebara Antman] from your Hand, without paying the cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "This Spirit's color and symbols are also treated as Red.",
+            "cleanText": "This Spirit's color and symbols are also treated as Red",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "BATTLE-SPIRITS-A7749",
+    "storedAbilities": [
+      {
+        "clauses": [
+          {
+            "rawText": "When this card is revealed from the Deck by your Blue effect, it can be added to your Hand.",
+            "cleanText": "When this card is revealed from the Deck by your Blue effect, it can be added to your Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "Both players can only [Advent] onto Spirits with exactly the same colors, and can't [Advent] during the Main Step.",
+            "cleanText": "Both players can only [Advent] onto Spirits with exactly the same colors, and can't [Advent] during the Main Step",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "when": "WHEN_ELIGIBLE",
+              "fromZone": "hand",
+              "adventType": "ADVENT",
+              "op": "ADVENT_RULE"
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "The number of cores sent to the Void by the [Grand Skill] of all your exactly-named \"Grandwalker Set\" gets -1.",
+            "cleanText": "The number of cores sent to the Void by the [Grand Skill] of all your exactly-named \"Grandwalker Set\" gets -1",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GRANDWALKER_ACTION"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "BATTLE-SPIRITS-A9610",
+    "storedAbilities": [
+      {
+        "rawText": "[Summon Condition: Your Life is at six or less]",
+        "clauses": []
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "Draw two cards from the deckbottom.",
+            "cleanText": "Draw two cards from the deckbottom",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 2,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "You can [Advent] Yellow Spirit cards onto this Ultimate.",
+            "cleanText": "You can [Advent] Yellow Spirit cards onto this Ultimate",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "when": "WHEN_ELIGIBLE",
+              "fromZone": "hand",
+              "adventType": "ADVENT",
+              "op": "ADVENT_RULE"
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "you can put a core from the Void to your Life.",
+            "cleanText": "you can put a core from the Void to your Life",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "RECOVER_LIFE",
+              "count": 1
+            }
+          },
+          {
+            "rawText": "refresh this Ultimate.",
+            "cleanText": "refresh this Ultimate",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "BSC16-031",
+    "storedAbilities": [
+      {
+        "rawText": "[Brave Condition: Cost 4 or more]",
+        "clauses": []
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "Give this Spirit [Shiny Hearts] and [Absolutes].",
+            "cleanText": "Give this Spirit [Shiny Hearts] and [Absolutes]",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_FAMILY",
+              "families": [
+                "Shiny Hearts",
+                "Absolutes"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

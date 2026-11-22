@@ -1,0 +1,54 @@
+{
+  "canonical_id": "WIKI-278",
+  "canonical_name": "Duet Part",
+  "aliases": [
+    "デュエットパート"
+  ],
+  "wiki_url": "https://battle-spirits.fandom.com/wiki/Duet_Part",
+  "official_definition": "[LV2][LV3] Duet Part - While Soul Core is on this Spirit, your \"[NAME 1]\" and \"[NAME 2]\" Spirits can't be destroyed by opposing effects.",
+  "ownership_rules": {
+    "native_syntax": "Ability block header contains [Duet Part] or [Duet Part: Param]",
+    "prose_exclusion": "Mentions inside body clauses (\"with [Duet Part]\", \"give [Duet Part]\") classified as REFERENCES or GRANTED, never NATIVE."
+  },
+  "activation_conditions": {
+    "timing": "PASSIVE",
+    "timing_step": "ANY",
+    "required_zone": "FIELD",
+    "soul_core_required": true
+  },
+  "timing": "PASSIVE",
+  "costs": {
+    "description": "None (Standard ability activation)",
+    "payment_destination": "NONE"
+  },
+  "targets": {
+    "eligibility": "OPPOSING_FIELD",
+    "selection_type": "AUTOMATIC_RULES"
+  },
+  "player_decisions": "DETERMINISTIC_RULES_RESOLUTION",
+  "restrictions": {
+    "once_per_turn": false,
+    "cant_stack": false,
+    "same_name": false
+  },
+  "resolution": {
+    "description": "Mutates game state as specified by official effect text.",
+    "destination_zone": "FIELD"
+  },
+  "interactions": {
+    "armor_immunity_applicable": true,
+    "replacement_effect": false
+  },
+  "variants": [],
+  "official_examples": [
+    "BATTLE-SPIRITS-A15259",
+    "BATTLE-SPIRITS-A15266",
+    "BSC35-010"
+  ],
+  "unresolved_rules": [],
+  "implementation_status": "CORPUS_REPRESENTED",
+  "evidence_references": [
+    "WIKI: https://battle-spirits.fandom.com/wiki/Duet_Part",
+    "CORPUS_NATIVE_COUNT: 3"
+  ]
+}

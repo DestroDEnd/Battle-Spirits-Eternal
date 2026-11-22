@@ -1012,7 +1012,10 @@ export const BS19_OVERRIDES = {
             "op": {
               "op": "BP_DEBUFF",
               "amount": 3000,
-              "target": "PREVIOUS_TARGET",
+              "target": {
+                "side": "opp",
+                "types": ["Spirit"]
+              },
               "duration": "DURING_THIS_TURN"
             }
           }
@@ -1924,7 +1927,10 @@ export const BS19_OVERRIDES = {
             "op": {
               "op": "BP_DEBUFF",
               "amount": 2000,
-              "target": "PREVIOUS_TARGET",
+              "target": {
+                "side": "opp",
+                "types": ["Spirit"]
+              },
               "duration": "DURING_THIS_TURN"
             }
           }
@@ -4676,7 +4682,10 @@ export const BS19_OVERRIDES = {
             "op": {
               "op": "BP_DEBUFF",
               "amount": 2000,
-              "target": "PREVIOUS_TARGET",
+              "target": {
+                "side": "opp",
+                "types": ["Spirit"]
+              },
               "duration": "DURING_THIS_TURN"
             }
           }
@@ -4727,7 +4736,15 @@ export const BS19_OVERRIDES = {
             "duration": "DURING_THIS_TURN",
             "op": {
               "op": "BP_DEBUFF",
-              "amount": 3000
+              "amount": 3000,
+              "count": 2,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              },
+              "duration": "DURING_THIS_TURN"
             }
           }
         ],
@@ -4803,11 +4820,12 @@ export const BS19_OVERRIDES = {
             "condition": null,
             "duration": null,
             "op": {
-              "op": "BP_BUFF",
-              "amount": 1000,
-              "target": {
-                "side": "either"
-              }
+              "op": "TREAT_RULE",
+              "treatAs": "UNBLOCKED",
+              "filter": {
+                "family": "Divine Spirit"
+              },
+              "maxBlockerBp": 3000
             }
           }
         ],
@@ -7999,7 +8017,10 @@ export const BS19_OVERRIDES = {
             "op": {
               "op": "BP_DEBUFF",
               "amount": 2000,
-              "target": "PREVIOUS_TARGET",
+              "target": {
+                "side": "opp",
+                "types": ["Spirit"]
+              },
               "duration": "DURING_THIS_TURN"
             }
           }
@@ -8916,7 +8937,10 @@ export const BS19_OVERRIDES = {
             "op": {
               "op": "BP_DEBUFF",
               "amount": 2000,
-              "target": "PREVIOUS_TARGET",
+              "target": {
+                "side": "opp",
+                "types": ["Spirit"]
+              },
               "duration": "DURING_THIS_TURN"
             }
           }

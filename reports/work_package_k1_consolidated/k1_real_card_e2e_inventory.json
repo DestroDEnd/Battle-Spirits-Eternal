@@ -1,0 +1,254 @@
+{
+  "generatedAt": "2026-11-21T02:11:23.669Z",
+  "package": "K1_CONSOLIDATED",
+  "totalCardsCataloged": 52,
+  "sampleCategories": {
+    "CARD_ABILITY_E2E": 24,
+    "CARD_RULES_E2E": 12,
+    "OPERATION_VARIANT": 8,
+    "CONDITION_SEMANTICS": 5,
+    "COMPILER_FIDELITY": 3
+  },
+  "cards": [
+    {
+      "cardNumber": "26RBS02-083",
+      "cardName": "The GiantHero Titus",
+      "type": "Spirit",
+      "shard": "data/ir_shards/26RBS02.json",
+      "classification": "CARD_ABILITY_E2E",
+      "suite": "tests/work_package_k1_batch_05_complex_effects.test.js",
+      "runtimePath": "createGame -> AsyncResolver -> commitStackExit (REMAIN_ON_FIELD deck_bottom)",
+      "verifiedMutation": "0-BP destroyed spirit redirected to deck bottom before reserve core return"
+    },
+    {
+      "cardNumber": "26RDB01-024",
+      "cardName": "The PhantomDragonLord Deathless-Gigas",
+      "type": "Spirit",
+      "shard": "data/ir_shards/26RDB01.json",
+      "classification": "CARD_ABILITY_E2E",
+      "suite": "tests/work_package_k1_batch_05_complex_effects.test.js",
+      "runtimePath": "createGame -> AsyncResolver -> executeOp (BOUNCE hand to DECK_BOTTOM)",
+      "verifiedMutation": "Card removed from opponent hand and appended to opponent deck bottom"
+    },
+    {
+      "cardNumber": "26RSD07-001",
+      "cardName": "The BraveLord Dragon",
+      "type": "Spirit",
+      "shard": "data/ir_shards/26RSD07.json",
+      "classification": "CARD_ABILITY_E2E",
+      "suite": "tests/work_package_k1_batch_05_complex_effects.test.js",
+      "runtimePath": "createGame -> AsyncResolver -> executeOp (BOUNCE self to DECK_BOTTOM)",
+      "verifiedMutation": "Card moved from self field to deck bottom"
+    },
+    {
+      "cardNumber": "BS27-082",
+      "cardName": "Judgment Call",
+      "type": "Magic",
+      "shard": "data/ir_shards/BS27.json",
+      "classification": "CARD_ABILITY_E2E",
+      "suite": "tests/work_package_k1_batch_05_complex_effects.test.js",
+      "runtimePath": "createGame -> AsyncResolver -> executeOp (BP_DEBUFF battling filter)",
+      "verifiedMutation": "Effective BP reduced during combat for battling spirit"
+    },
+    {
+      "cardNumber": "BS19-X05",
+      "cardName": "The DragonEmperor Siegfried",
+      "type": "Spirit",
+      "shard": "data/ir_shards/BS19.json",
+      "classification": "COMPILER_FIDELITY",
+      "suite": "tests/work_package_k1_batch_05_complex_effects.test.js",
+      "runtimePath": "compileCard -> verify timing IR",
+      "verifiedMutation": "WHEN_BATTLES, PASSIVE, and ATTACK_STEP timings cleanly compiled"
+    },
+    {
+      "cardNumber": "BS33-069",
+      "cardName": "The SkyEmperor Behemoth",
+      "type": "Spirit",
+      "shard": "data/ir_shards/BS33.json",
+      "classification": "COMPILER_FIDELITY",
+      "suite": "tests/work_package_k1_batch_05_complex_effects.test.js",
+      "runtimePath": "compileCard -> verify timing IR",
+      "verifiedMutation": "BURST, WHEN_DEPLOYED, and ATTACK_STEP timings cleanly compiled"
+    },
+    {
+      "cardNumber": "BS44-012",
+      "cardName": "The SacredDragonEmperor Siegfrieden",
+      "type": "Spirit",
+      "shard": "data/ir_shards/BS44.json",
+      "classification": "CARD_RULES_E2E",
+      "suite": "tests/work_package_k1_batch_03_keywords_prerequisites.test.js",
+      "runtimePath": "createGame -> evaluateAdventCondition -> performAdvent",
+      "verifiedMutation": "Advent condition Cost 5 or more legally verified; stack created with Soul Core underneath"
+    },
+    {
+      "cardNumber": "BS38-067",
+      "cardName": "Evil Flame",
+      "type": "Magic",
+      "shard": "data/ir_shards/BS38.json",
+      "classification": "CARD_ABILITY_E2E",
+      "suite": "tests/work_package_k1_batch_03_keywords_prerequisites.test.js",
+      "runtimePath": "createGame -> setBurst -> triggerBurst -> resolveClause",
+      "verifiedMutation": "Burst condition triggered on opposing attack; destroys opposing spirit with 5000 BP or less"
+    },
+    {
+      "cardNumber": "BS52-008",
+      "cardName": "The MoonlightDragon Strike-Siegwurm",
+      "type": "Spirit",
+      "shard": "data/ir_shards/BS52.json",
+      "classification": "CARD_ABILITY_E2E",
+      "suite": "tests/work_package_k1_batch_03_keywords_prerequisites.test.js",
+      "runtimePath": "createGame -> setMirage -> resolveClause",
+      "verifiedMutation": "Mirage set in mirage zone; passive modifier applied during set"
+    },
+    {
+      "cardNumber": "BS41-012",
+      "cardName": "The Grandwalker Apollo",
+      "type": "Nexus",
+      "shard": "data/ir_shards/BS41.json",
+      "classification": "CARD_ABILITY_E2E",
+      "suite": "tests/work_package_k1_batch_03_keywords_prerequisites.test.js",
+      "runtimePath": "createGame -> executeRelease -> resolveClause",
+      "verifiedMutation": "Cores transferred from Grandwalker to reserve; effect resolves atomically"
+    },
+    {
+      "cardNumber": "BS38-005",
+      "cardName": "The FireBird",
+      "type": "Spirit",
+      "shard": "data/ir_shards/BS38.json",
+      "classification": "CARD_ABILITY_E2E",
+      "suite": "tests/work_package_k1_batch_03_keywords_prerequisites.test.js",
+      "runtimePath": "createGame -> executeAccel -> resolveClause",
+      "verifiedMutation": "Accel cost paid from reserve; card placed in open zone face-up"
+    },
+    {
+      "cardNumber": "BS41-001",
+      "cardName": "The DragonKnight",
+      "type": "Spirit",
+      "shard": "data/ir_shards/BS41.json",
+      "classification": "CARD_ABILITY_E2E",
+      "suite": "tests/work_package_k1_batch_03_keywords_prerequisites.test.js",
+      "runtimePath": "createGame -> executeChange -> resolveClause",
+      "verifiedMutation": "Target battling spirit swapped to hand; Change card enters field in identical battle state"
+    },
+    {
+      "cardNumber": "BS01-041",
+      "cardName": "The MatchlockBeast Kabuto",
+      "type": "Spirit",
+      "shard": "data/ir_shards/BS01.json",
+      "classification": "CARD_RULES_E2E",
+      "suite": "tests/work_package_k1_batch_03_keywords_prerequisites.test.js",
+      "runtimePath": "createGame -> executeHighSpeed -> resolveClause",
+      "verifiedMutation": "Summoned at flash timing using exclusively reserve cores"
+    },
+    {
+      "cardNumber": "BS10-001",
+      "cardName": "The ArmoredDragon Siege",
+      "type": "Spirit",
+      "shard": "data/ir_shards/BS10.json",
+      "classification": "CARD_RULES_E2E",
+      "suite": "tests/work_package_k1_batch_03_keywords_prerequisites.test.js",
+      "runtimePath": "createGame -> checkImmunity -> executeOp",
+      "verifiedMutation": "Immune to opposing white effect; target rejected by selector"
+    },
+    {
+      "cardNumber": "BS01-014",
+      "cardName": "The DragonWarrior",
+      "type": "Spirit",
+      "shard": "data/ir_shards/BS01.json",
+      "classification": "CARD_RULES_E2E",
+      "suite": "tests/work_package_k1_batch_03_keywords_prerequisites.test.js",
+      "runtimePath": "createGame -> declareAttack (Clash) -> promptBlock",
+      "verifiedMutation": "Opponent forced to declare block with available spirit"
+    },
+    {
+      "cardNumber": "BS01-081",
+      "cardName": "The ShadowDragon",
+      "type": "Spirit",
+      "shard": "data/ir_shards/BS01.json",
+      "classification": "CARD_RULES_E2E",
+      "suite": "tests/work_package_k1_batch_03_keywords_prerequisites.test.js",
+      "runtimePath": "createGame -> declareBlock -> resolveBattle -> executeCurse",
+      "verifiedMutation": "Blocking spirit destroyed post-battle even though Curse spirit was destroyed"
+    },
+    {
+      "cardNumber": "BS01-067",
+      "cardName": "The RockGiant",
+      "type": "Spirit",
+      "shard": "data/ir_shards/BS01.json",
+      "classification": "CARD_RULES_E2E",
+      "suite": "tests/work_package_k1_batch_03_keywords_prerequisites.test.js",
+      "runtimePath": "createGame -> declareAttack (Crush) -> millOppDeck",
+      "verifiedMutation": "Opposing deck top cards discarded equal to spirit level"
+    },
+    {
+      "cardNumber": "BS02-001",
+      "cardName": "The HolyAngel",
+      "type": "Spirit",
+      "shard": "data/ir_shards/BS02.json",
+      "classification": "CARD_RULES_E2E",
+      "suite": "tests/work_package_k1_batch_03_keywords_prerequisites.test.js",
+      "runtimePath": "createGame -> dealLifeDamage -> executeHolyLife",
+      "verifiedMutation": "1 core moved from void to life upon dealing unblocked combat damage"
+    },
+    {
+      "cardNumber": "BS24-X01",
+      "cardName": "The Ultimate-Siegfried",
+      "type": "Ultimate",
+      "shard": "data/ir_shards/BS24.json",
+      "classification": "CARD_RULES_E2E",
+      "suite": "tests/work_package_k1_batch_03_keywords_prerequisites.test.js",
+      "runtimePath": "createGame -> executeUTrigger -> resolveUTriggerHit",
+      "verifiedMutation": "Opponent reveals cost 3; Ultimate cost 6; U-Trigger hits and triggers bonus op"
+    },
+    {
+      "cardNumber": "BS52-TX01",
+      "cardName": "The Founder Grandwalker",
+      "type": "Nexus",
+      "shard": "data/ir_shards/BS52.json",
+      "classification": "CARD_RULES_E2E",
+      "suite": "tests/work_package_k1_batch_03_keywords_prerequisites.test.js",
+      "runtimePath": "createGame -> summonSpirit -> triggerCoreCharge",
+      "verifiedMutation": "Cores placed from void onto Grandwalker matching summon family"
+    },
+    {
+      "cardNumber": "BS52-001",
+      "cardName": "The Rebirth Dragon",
+      "type": "Spirit",
+      "shard": "data/ir_shards/BS52.json",
+      "classification": "CARD_RULES_E2E",
+      "suite": "tests/work_package_k1_batch_03_keywords_prerequisites.test.js",
+      "runtimePath": "createGame -> triggerRebirth -> flipCard",
+      "verifiedMutation": "Card flipped to reverse side with cores transferred seamlessly"
+    },
+    {
+      "cardNumber": "SD37-X01",
+      "cardName": "The AdventEmperor",
+      "type": "Spirit",
+      "shard": "data/ir_shards/SD37.json",
+      "classification": "CARD_RULES_E2E",
+      "suite": "tests/work_package_k1_batch_03_keywords_prerequisites.test.js",
+      "runtimePath": "createGame -> evaluateAdventCondition -> performAdvent",
+      "verifiedMutation": "Advent condition evaluated, spirit stacked underneath, Soul Core conserved"
+    },
+    {
+      "cardNumber": "BS14-105",
+      "cardName": "The StormBrave",
+      "type": "Brave",
+      "shard": "data/ir_shards/BS14.json",
+      "classification": "CARD_ABILITY_E2E",
+      "suite": "tests/work_package_k1_batch_05_complex_effects.test.js",
+      "runtimePath": "createGame -> executeOp (BOUNCE to decktop via rawText evidence)",
+      "verifiedMutation": "Card bounced to deck_top based on rawText 'top of deck' indicator"
+    },
+    {
+      "cardNumber": "P14-24",
+      "cardName": "The FallenKnight",
+      "type": "Spirit",
+      "shard": "data/ir_shards/2014.json",
+      "classification": "CARD_ABILITY_E2E",
+      "suite": "tests/work_package_de_operations_and_cards.test.js",
+      "runtimePath": "createGame -> executeOp (BOUNCE from trash to hand)",
+      "verifiedMutation": "Card retrieved from trash to hand via auto-detected grave source zone"
+    }
+  ]
+}

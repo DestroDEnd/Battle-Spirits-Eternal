@@ -1,0 +1,22 @@
+testId,section,testName,executionStatus,duration_ms,notes
+1.1,Section 1: Compiler Scope,Compiler correctly parses BP comparison destruction immunity into by: ["BP_COMPARISON"],PASSED,36.0,Verified by array
+1.2,Section 1: Compiler Scope,Compiler preserves duration and target on Flash/Spell BP comparison immunity,PASSED,9.5,Duration THIS_TURN preserved
+1.3,Section 1: Compiler Scope,Compiler correctly parses opposing-effect destruction immunity into by: ["OPPOSING_EFFECTS"],PASSED,1.7,Opposing effects parsed
+1.4,Section 1: Compiler Scope,Compiler extracts specific card type destruction sources (Spirit/Nexus/Magic),PASSED,1.4,Multi-type source array parsed
+1.5,Section 1: Compiler Scope,Compiler distinguishes general effects immunity (by: ["EFFECTS"]) from opposing effects,PASSED,1.4,General effects isolated
+1.6,Section 1: Compiler Scope,Compiler preserves genuinely unconditional destruction immunity as by: ["ALL"],PASSED,0.9,Unconditional ALL preserved
+1.7,Section 1: Compiler Scope,Compiler emits UNSUPPORTED for unhandled/ambiguous destruction causes rather than broad immunity,PASSED,0.8,Emits UNSUPPORTED on unknown cause
+2.1,Section 2: Engine Resolution,BP-specific immunity blocks destruction in battle BP comparison,PASSED,4.1,Blocked in combat flow & moveCard
+2.2,Section 2: Engine Resolution,BP-specific immunity does NOT block destruction by opposing card effects,PASSED,0.8,Effect destruction successfully resolved
+2.3,Section 2: Engine Resolution,Opposing-effect immunity blocks opposing destroy effect,PASSED,0.3,isImmune true & moveCard blocked
+2.4,Section 2: Engine Resolution,Opposing-effect immunity does NOT block BP battle destruction,PASSED,1.0,Destroyed by higher BP in combat
+2.5,Section 2: Engine Resolution,Opposing-effect immunity does NOT block friendly sacrifice/destruction,PASSED,0.3,Friendly destruction allowed
+2.6,Section 2: Engine Resolution,Unconditional immunity (by: ["ALL"]) blocks both battle and effect destruction,PASSED,0.2,Both paths blocked
+2.7,Section 2: Engine Resolution,Indestructible cards are still depleted to grave when cores reach 0,PASSED,0.1,Depletion bypasses indestructible
+2.8,Section 2: Engine Resolution,Dynamic activated INDESTRUCTIBLE modifier in engine/ops/index.js works as expected,PASSED,6.0,Active modifier enforced in state
+3.1,Section 3: Representative Cards,26RBS02-X13 (The Puppeteer Marinel) compiles with BP_COMPARISON immunity,PASSED,1.0,Real card verified
+3.2,Section 3: Representative Cards,26RBS03-036 (The ShieldBearer Lasslake) compiles with BP_COMPARISON in battle,PASSED,0.7,Real card verified
+3.3,Section 3: Representative Cards,BS25-028 (The Survivor Ullr-Defender) compiles with OPPOSING_EFFECTS immunity,PASSED,0.5,Real card verified
+3.4,Section 3: Representative Cards,BS25-037 (The SurvivorAngelia Mael) compiles with OPPOSING_EFFECTS immunity,PASSED,0.4,Real card verified
+3.5,Section 3: Representative Cards,BS25-020 (The Survivor Fugue) compiles with OPPOSING_EFFECTS immunity,PASSED,0.4,Real card verified
+4.1,Section 4: 73 Abilities Batch,All 73 affected abilities from Phase 4B.4B.1 compile with precise conditional scope,PASSED,54.0,73/73 abilities verified 100% conditional non-ALL

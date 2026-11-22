@@ -1,0 +1,105 @@
+{
+  "package": "K.1.5",
+  "generatedAt": "2026-11-20T11:22:58.454Z",
+  "priorK14AnomalyExplained": {
+    "k14TotalBatch1Abilities": 6610,
+    "k14Batch1Counts": {
+      "DRAW": 1614,
+      "BP_BUFF": 0,
+      "BP_DEBUFF": 0,
+      "DESTROY": 1718,
+      "BOUNCE": 911,
+      "EXHAUST": 0,
+      "REFRESH": 0,
+      "MOVE_CORE": 3062
+    },
+    "rootCause": "scripts/evidence_registry.mjs cited shorthand synthetic/loop test IDs (REAL-CARD-11/39/25/13) rejected by strict discover_executable_tests.mjs validation; K.1.4 still reported them SEMANTICALLY_VERIFIED manually.",
+    "k15Fix": "Added explicit OPERATION_CONTRACTS and mapped default variants in scripts/evidence_registry.mjs to verified top-level passing tests (REAL-CARD-04, WPFG-INT, WPDE-D3) plus genuine real-card createGame E2E execution in K1.5-E1."
+  },
+  "liveBatch1AbilitiesCount": 10269,
+  "liveBatch1OperationCounts": {
+    "DRAW": 1718,
+    "BP_BUFF": 1493,
+    "BP_DEBUFF": 236,
+    "DESTROY": 2001,
+    "BOUNCE": 1020,
+    "EXHAUST": 888,
+    "REFRESH": 1188,
+    "MOVE_CORE": 3389
+  },
+  "zeroCountOperationsRemainingInBatch1": 0,
+  "realCardEndToEndEvidence": [
+    {
+      "op": "DRAW",
+      "cardNumber": "SD01-034",
+      "shard": "SD01.json",
+      "runtimePath": "game.playCard (MAIN Magic)",
+      "testId": "K1.5-E1",
+      "verifiedClauses": 2981,
+      "totalClauses": 2981
+    },
+    {
+      "op": "BP_BUFF",
+      "cardNumber": "BS01-077",
+      "shard": "BS01.json",
+      "runtimePath": "game.declareBlock (WHEN_BLOCKS)",
+      "testId": "K1.5-E1",
+      "verifiedClauses": 1909,
+      "totalClauses": 1955
+    },
+    {
+      "op": "BP_DEBUFF",
+      "cardNumber": "BS19-109",
+      "shard": "BS19.json",
+      "runtimePath": "game.playCard (FLASH Magic)",
+      "testId": "K1.5-E1",
+      "verifiedClauses": 491,
+      "totalClauses": 491
+    },
+    {
+      "op": "DESTROY",
+      "cardNumber": "BS38-008",
+      "shard": "BS38.json",
+      "runtimePath": "game.declareAttack (WHEN_ATTACKS)",
+      "testId": "K1.5-E1",
+      "verifiedClauses": 3714,
+      "totalClauses": 4294
+    },
+    {
+      "op": "BOUNCE",
+      "cardNumber": "BATTLE-SPIRITS-A244",
+      "shard": "BS01.json",
+      "runtimePath": "game.playCard (FLASH Magic)",
+      "testId": "K1.5-E1",
+      "verifiedClauses": 2205,
+      "totalClauses": 3721
+    },
+    {
+      "op": "EXHAUST",
+      "cardNumber": "BS02-066",
+      "shard": "BS02.json",
+      "runtimePath": "game.playCard (WHEN_SUMMONED)",
+      "testId": "K1.5-E1",
+      "verifiedClauses": 1531,
+      "totalClauses": 1950
+    },
+    {
+      "op": "REFRESH",
+      "cardNumber": "BS01-059",
+      "shard": "BS01.json",
+      "runtimePath": "game.activateAbility (PASSIVE real shard ability)",
+      "testId": "K1.5-E1",
+      "verifiedClauses": 1958,
+      "totalClauses": 2089
+    },
+    {
+      "op": "MOVE_CORE",
+      "cardNumber": "BS01-061",
+      "shard": "BS01.json",
+      "runtimePath": "game.playCard (WHEN_SUMMONED)",
+      "testId": "K1.5-E1",
+      "verifiedClauses": 6917,
+      "totalClauses": 6917
+    }
+  ]
+}

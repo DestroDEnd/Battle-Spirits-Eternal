@@ -222,19 +222,58 @@
     "compiledIr": {
       "cardNumber": "BS27-055",
       "name": "The BattleMaiden Valkyrie",
+      "type": "Ultimate",
+      "levels": {
+        "LV3": {
+          "level": 3,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV4": {
+          "level": 4,
+          "cost": 2,
+          "bp": 8000
+        },
+        "LV5": {
+          "level": 5,
+          "cost": 3,
+          "bp": 11000
+        }
+      },
+      "originalEffectText": "[Summon Condition: You control one or more Cost 1 or higher Spirits]\n\n[LV3][LV4][LV5] (Either Attack Step)\nWhen your Ultimate Trigger is guarded, return a Cost 3 or less White Spirit card from your Trash to the Hand.\n\n[Ultimate Trigger: [LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, during this turn, all your \"Next Generation\" family Ultimates can't be blocked by opposing Spirits.\n[utb]",
+      "teams": [],
       "keywords": [
         {
           "name": "Ultimate Trigger",
-          "parameter": "[LV4",
+          "parameter": null,
           "wave": 3,
           "hook": "ultimate_trigger",
           "bracketed": true,
-          "index": 218
+          "index": 0,
+          "abilityId": "BS27-055#AB_WHEN_ATTACKS_NONE_LV4_LV5_89809a956e0ac784cf56a533902e7b7d61053548f65ae804e44f5f4167d23c71_6764351308d328f637f240ba88ac442d",
+          "cardNumber": "BS27-055",
+          "levels": [
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BS27-055#a2"
         }
       ],
       "abilities": [
         {
-          "id": "BS27-055#a0",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -247,8 +286,13 @@
               "Summon Condition: You control one or more Cost 1 or higher Spirits"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -258,11 +302,31 @@
             "cleanBody": ""
           },
           "rawText": "[Summon Condition: You control one or more Cost 1 or higher Spirits]",
+          "originalAbilityText": "[Summon Condition: You control one or more Cost 1 or higher Spirits]",
+          "abilityIndex": 0,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "SUMMON_CONDITION",
+            "expression": "You control one or more Cost 1 or higher Spirits",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-055#a0",
+          "keywords": [],
+          "id": "BS27-055#AB_PASSIVE_NONE_LV1_LV2_LV3_e13164a9a5fb15aaa3b0bec94ab59df56a958cb493d4776fb40ad82f71f13cec_70aff4946c34a037f744192cb878aa7f",
+          "physicalId": "BS27-055#AB_PASSIVE_NONE_LV1_LV2_LV3_e13164a9a5fb15aaa3b0bec94ab59df56a958cb493d4776fb40ad82f71f13cec_70aff4946c34a037f744192cb878aa7f",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_e13164a9a5fb15aaa3b0bec94ab59df56a958cb493d4776fb40ad82f71f13cec_70aff4946c34a037f744192cb878aa7f",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_c8b2f972cd3b3257a955dd811e375ff483763ca67dfc2aea01bc29a8f1f4c6e2_0115219db36a12482c46df95de813a88",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS27-055#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -273,8 +337,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -283,28 +356,56 @@
             "isMain": false,
             "cleanBody": "When your Ultimate Trigger is guarded, return a Cost 3 or less White Spirit card from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV3][LV4][LV5] (Either Attack Step)\nWhen your Ultimate Trigger is guarded, return a Cost 3 or less White Spirit card from your Trash to the Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When your Ultimate Trigger is guarded, return a Cost 3 or less White Spirit card from your Trash to the Hand.",
+              "originalClauseText": "When your Ultimate Trigger is guarded, return a Cost 3 or less White Spirit card from your Trash to the Hand.",
               "cleanText": "When your Ultimate Trigger is guarded, return a Cost 3 or less White Spirit card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit",
+                    "Ultimate"
+                  ],
+                  "costLte": 3,
+                  "color": "White"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-055#a1",
+          "keywords": [],
+          "id": "BS27-055#AB_ATTACK_STEP_NONE_LV3_LV4_LV5_ea8b7d37d558088fe457b3fb047c2a8c8de194878663e9f4bb1122042ee6b320_f8174a742e2d9af415aeb5faa7375884",
+          "physicalId": "BS27-055#AB_ATTACK_STEP_NONE_LV3_LV4_LV5_ea8b7d37d558088fe457b3fb047c2a8c8de194878663e9f4bb1122042ee6b320_f8174a742e2d9af415aeb5faa7375884",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV3_LV4_LV5_ea8b7d37d558088fe457b3fb047c2a8c8de194878663e9f4bb1122042ee6b320_f8174a742e2d9af415aeb5faa7375884",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV3_LV4_LV5_1e59ee50d22aeadcd4c1a0d6e20479d1376aebd6a854b45d1c9777dc76135195_b21bb4b2f881f29e8676514275ea2979",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS27-055#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -314,8 +415,15 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Ultimate Trigger",
@@ -324,21 +432,69 @@
             "isMain": false,
             "cleanBody": "When Ultimate Trigger hits, during this turn, all your \"Next Generation\" family Ultimates can't be blocked by opposing Spirits."
           },
+          "originalAbilityText": "[Ultimate Trigger: [LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, during this turn, all your \"Next Generation\" family Ultimates can't be blocked by opposing Spirits.\n[utb]",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When Ultimate Trigger hits, during this turn, all your \"Next Generation\" family Ultimates can't be blocked by opposing Spirits.",
+              "originalClauseText": "When Ultimate Trigger hits, during this turn, all your \"Next Generation\" family Ultimates can't be blocked by opposing Spirits.",
               "cleanText": "When Ultimate Trigger hits, during this turn, all your \"Next Generation\" family Ultimates can't be blocked by opposing Spirits",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": "DURING_THIS_TURN",
               "op": {
-                "op": "UNBLOCKABLE"
+                "op": "COMBAT_RESTRICTION"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-055#a2",
+          "keywords": [
+            {
+              "name": "Ultimate Trigger",
+              "parameter": null,
+              "wave": 3,
+              "hook": "ultimate_trigger",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BS27-055#AB_WHEN_ATTACKS_NONE_LV4_LV5_89809a956e0ac784cf56a533902e7b7d61053548f65ae804e44f5f4167d23c71_6764351308d328f637f240ba88ac442d",
+              "cardNumber": "BS27-055",
+              "levels": [
+                4,
+                5
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BS27-055#a2"
+            }
+          ],
+          "id": "BS27-055#AB_WHEN_ATTACKS_NONE_LV4_LV5_89809a956e0ac784cf56a533902e7b7d61053548f65ae804e44f5f4167d23c71_6764351308d328f637f240ba88ac442d",
+          "physicalId": "BS27-055#AB_WHEN_ATTACKS_NONE_LV4_LV5_89809a956e0ac784cf56a533902e7b7d61053548f65ae804e44f5f4167d23c71_6764351308d328f637f240ba88ac442d",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV4_LV5_89809a956e0ac784cf56a533902e7b7d61053548f65ae804e44f5f4167d23c71_6764351308d328f637f240ba88ac442d",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV4_LV5_d2563d5a62cd8f9c1bd55d1842a544ca48823c02483928a4d490b03413ce19f0_1773e2191799a8c677e0ba5c2ae43e03",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -1454,19 +1610,13 @@
     "compiledIr": {
       "cardNumber": "BS27-081",
       "name": "Dream Bomb",
-      "keywords": [
-        {
-          "name": "Burst",
-          "parameter": "After your Life is reduced",
-          "wave": 2,
-          "hook": "burst",
-          "bracketed": true,
-          "index": 0
-        }
-      ],
+      "type": "Magic",
+      "levels": {},
+      "originalEffectText": "[Burst: After your Life is reduced]\nRefresh three Spirits you control. Also, if your Life is at two or less, put a core from your Trash to your Life. Then, by paying the cost, activate this card's Flash effect.\n\n[Flash]\nReturn an opposing Ultimate to their Hand.",
+      "teams": [],
+      "keywords": [],
       "abilities": [
         {
-          "id": "BS27-081#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1477,8 +1627,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "BURST",
+            "timings": [],
             "timingLabel": "Burst",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1487,10 +1644,14 @@
             "isMain": false,
             "cleanBody": "Refresh three Spirits you control. Also, if your Life is at two or less, put a core from your Trash to your Life. Then, by paying the cost, activate this card's Flash effect."
           },
+          "originalAbilityText": "[Burst: After your Life is reduced]\nRefresh three Spirits you control. Also, if your Life is at two or less, put a core from your Trash to your Life. Then, by paying the cost, activate this card's Flash effect.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Refresh three Spirits you control.",
+              "originalClauseText": "Refresh three Spirits you control.",
               "cleanText": "Refresh three Spirits you control",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1498,27 +1659,43 @@
               "duration": null,
               "op": {
                 "op": "REFRESH",
+                "count": 3,
                 "target": {
-                  "side": "either"
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
                 }
               }
             },
             {
               "rawText": "if your Life is at two or less, put a core from your Trash to your Life.",
+              "originalClauseText": "if your Life is at two or less, put a core from your Trash to your Life.",
               "cleanText": "put a core from your Trash to your Life",
+              "clauseIndex": 1,
               "link": "also",
               "isOptional": false,
               "isCost": false,
               "condition": "if your Life is at two or less",
               "duration": null,
               "op": {
-                "op": "BOOST_LIFE",
-                "count": 1
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "trash",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "life",
+                  "side": "self"
+                }
               }
             },
             {
               "rawText": "by paying the cost, activate this card's Flash effect.",
+              "originalClauseText": "by paying the cost, activate this card's Flash effect.",
               "cleanText": "by paying the cost, activate this card's Flash effect",
+              "clauseIndex": 2,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -1529,10 +1706,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-081#a0",
+          "keywords": [],
+          "id": "BS27-081#AB_BURST_NONE_LV1_LV2_LV3_6edd60f5cdfc56de328ef5c27f001d96fdee83c727167394fa05783e5f9bb3c8_5802918ae47c9141914c90eec042ed30",
+          "physicalId": "BS27-081#AB_BURST_NONE_LV1_LV2_LV3_6edd60f5cdfc56de328ef5c27f001d96fdee83c727167394fa05783e5f9bb3c8_5802918ae47c9141914c90eec042ed30",
+          "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_6edd60f5cdfc56de328ef5c27f001d96fdee83c727167394fa05783e5f9bb3c8_5802918ae47c9141914c90eec042ed30",
+          "semanticIdV3": "SEM3#AB_BURST_NONE_LV1_LV2_LV3_05ca1bfd954f9a2602c9846610d2f3b6d97fb316bfc5bbd079befb6ccbd0e20b_fc07bf5056638f9b1f6187228ed12deb",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS27-081#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1543,8 +1734,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1553,10 +1751,14 @@
             "isMain": false,
             "cleanBody": "Return an opposing Ultimate to their Hand."
           },
+          "originalAbilityText": "[Flash]\nReturn an opposing Ultimate to their Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Return an opposing Ultimate to their Hand.",
+              "originalClauseText": "Return an opposing Ultimate to their Hand.",
               "cleanText": "Return an opposing Ultimate to their Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1571,7 +1773,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-081#a1",
+          "keywords": [],
+          "id": "BS27-081#AB_FLASH_NONE_LV1_LV2_LV3_b09dba91b5abfc3d401e000db034af418ff9fa72a7b8537c17b93bab4e24202b_eaffcdf148f66ce29de76ccbe2e910a7",
+          "physicalId": "BS27-081#AB_FLASH_NONE_LV1_LV2_LV3_b09dba91b5abfc3d401e000db034af418ff9fa72a7b8537c17b93bab4e24202b_eaffcdf148f66ce29de76ccbe2e910a7",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_b09dba91b5abfc3d401e000db034af418ff9fa72a7b8537c17b93bab4e24202b_eaffcdf148f66ce29de76ccbe2e910a7",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_d4a027b339f60859a10b6757d59ddd010d3963c67f2c0504704a829a4a2ed188_ce5d53af0e3894ea9996943539fa63d5",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -2260,10 +2477,29 @@
     "compiledIr": {
       "cardNumber": "BS27-003",
       "name": "Ryuuman-Landaxe",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 2000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 4000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 3,
+          "bp": 5000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] (When Summoned)\nReturn a \"Dragon\" family Spirit card from your Trash to your Hand.\n\n[LV3]\nWhile you control only \"Tri-Dragon Deity\" family Ultimates as Ultimates, treat all your Ultimates as being on their highest levels.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BS27-003#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2274,8 +2510,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2284,28 +2529,54 @@
             "isMain": false,
             "cleanBody": "Return a \"Dragon\" family Spirit card from your Trash to your Hand."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nReturn a \"Dragon\" family Spirit card from your Trash to your Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Return a \"Dragon\" family Spirit card from your Trash to your Hand.",
+              "originalClauseText": "Return a \"Dragon\" family Spirit card from your Trash to your Hand.",
               "cleanText": "Return a \"Dragon\" family Spirit card from your Trash to your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "family": "Dragon"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-003#a0",
+          "keywords": [],
+          "id": "BS27-003#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_21694ea2f90450c1029774c8db1bf9c8f3a41103a9d5303afdaccb3a523ea270_8593cf132f97f9f1fcdc63382c9eb1e2",
+          "physicalId": "BS27-003#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_21694ea2f90450c1029774c8db1bf9c8f3a41103a9d5303afdaccb3a523ea270_8593cf132f97f9f1fcdc63382c9eb1e2",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_21694ea2f90450c1029774c8db1bf9c8f3a41103a9d5303afdaccb3a523ea270_8593cf132f97f9f1fcdc63382c9eb1e2",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_c063a77bba2015bd92233f77bad4ac2864115815fe68c9e7a249f2805a5d8033_4885c9ee837b6a04470d77d2600d9498",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS27-003#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2314,8 +2585,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2324,21 +2600,40 @@
             "isMain": false,
             "cleanBody": "While you control only \"Tri-Dragon Deity\" family Ultimates as Ultimates, treat all your Ultimates as being on their highest levels."
           },
+          "originalAbilityText": "[LV3]\nWhile you control only \"Tri-Dragon Deity\" family Ultimates as Ultimates, treat all your Ultimates as being on their highest levels.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "While you control only \"Tri-Dragon Deity\" family Ultimates as Ultimates, treat all your Ultimates as being on their highest levels.",
+              "originalClauseText": "While you control only \"Tri-Dragon Deity\" family Ultimates as Ultimates, treat all your Ultimates as being on their highest levels.",
               "cleanText": "treat all your Ultimates as being on their highest levels",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": "While you control only \"Tri-Dragon Deity\" family Ultimates as Ultimates",
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "TREAT_RULE",
+                "treatAs": "LEVEL",
+                "level": "HIGHEST"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-003#a1",
+          "keywords": [],
+          "id": "BS27-003#AB_PASSIVE_NONE_LV3_ea5401eb9e14ca3f857f7c34dd96e14258042212cff88bd304d7bfe4d7a58b93_ce7f373db2a59a2567b20407acc57f46",
+          "physicalId": "BS27-003#AB_PASSIVE_NONE_LV3_ea5401eb9e14ca3f857f7c34dd96e14258042212cff88bd304d7bfe4d7a58b93_ce7f373db2a59a2567b20407acc57f46",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV3_ea5401eb9e14ca3f857f7c34dd96e14258042212cff88bd304d7bfe4d7a58b93_ce7f373db2a59a2567b20407acc57f46",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV3_d370cc5a180aaefdd4897579b9ec01d91d2c57dea60d21b650260b46283de5af_f0e12d9aa84002c2a5c55840976f78cc",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -2371,19 +2666,58 @@
     "compiledIr": {
       "cardNumber": "BS27-053",
       "name": "Schwarian-Husky",
+      "type": "Ultimate",
+      "levels": {
+        "LV3": {
+          "level": 3,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV4": {
+          "level": 4,
+          "cost": 2,
+          "bp": 8000
+        },
+        "LV5": {
+          "level": 5,
+          "cost": 5,
+          "bp": 12000
+        }
+      },
+      "originalEffectText": "[Summon Condition: You control one or more Cost 1 or higher Spirits]\n\n[LV3][LV4][LV5] (Your Attack Step)\nWhen your Ultimate Trigger is guarded, return a Cost 3 or less Green Spirit card from your Trash to the Hand.\n\n[Ultimate Trigger: [LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, put two cores from the Void to this Ultimate.\n[utb]",
+      "teams": [],
       "keywords": [
         {
           "name": "Ultimate Trigger",
-          "parameter": "[LV4",
+          "parameter": null,
           "wave": 3,
           "hook": "ultimate_trigger",
           "bracketed": true,
-          "index": 216
+          "index": 0,
+          "abilityId": "BS27-053#AB_WHEN_ATTACKS_NONE_LV4_LV5_527526c43f2815f86dd3e248c7c873981bc403dca7229f0a0b2ba283f74c8a14_f8ad0fa59c65c1c74f828ee9f56e7da4",
+          "cardNumber": "BS27-053",
+          "levels": [
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BS27-053#a2"
         }
       ],
       "abilities": [
         {
-          "id": "BS27-053#a0",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -2396,8 +2730,13 @@
               "Summon Condition: You control one or more Cost 1 or higher Spirits"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2407,11 +2746,31 @@
             "cleanBody": ""
           },
           "rawText": "[Summon Condition: You control one or more Cost 1 or higher Spirits]",
+          "originalAbilityText": "[Summon Condition: You control one or more Cost 1 or higher Spirits]",
+          "abilityIndex": 0,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "SUMMON_CONDITION",
+            "expression": "You control one or more Cost 1 or higher Spirits",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-053#a0",
+          "keywords": [],
+          "id": "BS27-053#AB_PASSIVE_NONE_LV1_LV2_LV3_e13164a9a5fb15aaa3b0bec94ab59df56a958cb493d4776fb40ad82f71f13cec_70aff4946c34a037f744192cb878aa7f",
+          "physicalId": "BS27-053#AB_PASSIVE_NONE_LV1_LV2_LV3_e13164a9a5fb15aaa3b0bec94ab59df56a958cb493d4776fb40ad82f71f13cec_70aff4946c34a037f744192cb878aa7f",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_e13164a9a5fb15aaa3b0bec94ab59df56a958cb493d4776fb40ad82f71f13cec_70aff4946c34a037f744192cb878aa7f",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_c8b2f972cd3b3257a955dd811e375ff483763ca67dfc2aea01bc29a8f1f4c6e2_0115219db36a12482c46df95de813a88",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS27-053#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2422,8 +2781,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2432,28 +2800,56 @@
             "isMain": false,
             "cleanBody": "When your Ultimate Trigger is guarded, return a Cost 3 or less Green Spirit card from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV3][LV4][LV5] (Your Attack Step)\nWhen your Ultimate Trigger is guarded, return a Cost 3 or less Green Spirit card from your Trash to the Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When your Ultimate Trigger is guarded, return a Cost 3 or less Green Spirit card from your Trash to the Hand.",
+              "originalClauseText": "When your Ultimate Trigger is guarded, return a Cost 3 or less Green Spirit card from your Trash to the Hand.",
               "cleanText": "When your Ultimate Trigger is guarded, return a Cost 3 or less Green Spirit card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit",
+                    "Ultimate"
+                  ],
+                  "costLte": 3,
+                  "color": "Green"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-053#a1",
+          "keywords": [],
+          "id": "BS27-053#AB_ATTACK_STEP_NONE_LV3_LV4_LV5_80b915e4c40c9dd33b4c025093553233c259ee8385e450ec5a63eaeca895a2b3_41ff8713ad78ec95d5033481fc816df8",
+          "physicalId": "BS27-053#AB_ATTACK_STEP_NONE_LV3_LV4_LV5_80b915e4c40c9dd33b4c025093553233c259ee8385e450ec5a63eaeca895a2b3_41ff8713ad78ec95d5033481fc816df8",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV3_LV4_LV5_80b915e4c40c9dd33b4c025093553233c259ee8385e450ec5a63eaeca895a2b3_41ff8713ad78ec95d5033481fc816df8",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV3_LV4_LV5_2b9914aa7b454786e535d895b8c807d9b36b8fd2a3d3c10b422a9aacb72b0448_c012bf92f548b0d634b9a51fff4c1b8c",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS27-053#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2463,8 +2859,15 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Ultimate Trigger",
@@ -2473,10 +2876,14 @@
             "isMain": false,
             "cleanBody": "When Ultimate Trigger hits, put two cores from the Void to this Ultimate."
           },
+          "originalAbilityText": "[Ultimate Trigger: [LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, put two cores from the Void to this Ultimate.\n[utb]",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When Ultimate Trigger hits, put two cores from the Void to this Ultimate.",
+              "originalClauseText": "When Ultimate Trigger hits, put two cores from the Void to this Ultimate.",
               "cleanText": "When Ultimate Trigger hits, put two cores from the Void to this Ultimate",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2495,7 +2902,51 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-053#a2",
+          "keywords": [
+            {
+              "name": "Ultimate Trigger",
+              "parameter": null,
+              "wave": 3,
+              "hook": "ultimate_trigger",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BS27-053#AB_WHEN_ATTACKS_NONE_LV4_LV5_527526c43f2815f86dd3e248c7c873981bc403dca7229f0a0b2ba283f74c8a14_f8ad0fa59c65c1c74f828ee9f56e7da4",
+              "cardNumber": "BS27-053",
+              "levels": [
+                4,
+                5
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BS27-053#a2"
+            }
+          ],
+          "id": "BS27-053#AB_WHEN_ATTACKS_NONE_LV4_LV5_527526c43f2815f86dd3e248c7c873981bc403dca7229f0a0b2ba283f74c8a14_f8ad0fa59c65c1c74f828ee9f56e7da4",
+          "physicalId": "BS27-053#AB_WHEN_ATTACKS_NONE_LV4_LV5_527526c43f2815f86dd3e248c7c873981bc403dca7229f0a0b2ba283f74c8a14_f8ad0fa59c65c1c74f828ee9f56e7da4",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV4_LV5_527526c43f2815f86dd3e248c7c873981bc403dca7229f0a0b2ba283f74c8a14_f8ad0fa59c65c1c74f828ee9f56e7da4",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV4_LV5_cdfb43c2bff9a864cdb0958af8e9765411a6fd283e82a9552ef2bd9225eade99_f2a6d555e360378d6c60eb317b2e5413",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -3077,19 +3528,52 @@
     "compiledIr": {
       "cardNumber": "BS27-059",
       "name": "The BeastGeneral Cheedas",
+      "type": "Ultimate",
+      "levels": {
+        "LV3": {
+          "level": 3,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV4": {
+          "level": 4,
+          "cost": 3,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "[Summon Condition: You control one or more Cost 1 or higher Spirits]\n\n[LV3][LV4] (Your Attack Step)\nWhen your Ultimate Trigger is guarded, return a Cost 3 or less Blue Spirit card from your Trash to the Hand.\n\n[Ultimate Trigger: [LV4] (When Attacks)]\nWhen Ultimate Trigger hits, give one of your \"Next Generation\" family Ultimates that would attack next +2 cost.\n[utb]",
+      "teams": [],
       "keywords": [
         {
           "name": "Ultimate Trigger",
-          "parameter": "[LV4",
+          "parameter": null,
           "wave": 3,
           "hook": "ultimate_trigger",
           "bracketed": true,
-          "index": 210
+          "index": 0,
+          "abilityId": "BS27-059#AB_WHEN_ATTACKS_NONE_LV4_eefbf9262bab75b49be5b287a550a8f687cb6ee1277d11bcac64869ad54ea6c2_b368a72769a59f8030195cd86c3c9bb2",
+          "cardNumber": "BS27-059",
+          "levels": [
+            4
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BS27-059#a2"
         }
       ],
       "abilities": [
         {
-          "id": "BS27-059#a0",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -3102,8 +3586,13 @@
               "Summon Condition: You control one or more Cost 1 or higher Spirits"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3113,11 +3602,31 @@
             "cleanBody": ""
           },
           "rawText": "[Summon Condition: You control one or more Cost 1 or higher Spirits]",
+          "originalAbilityText": "[Summon Condition: You control one or more Cost 1 or higher Spirits]",
+          "abilityIndex": 0,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "SUMMON_CONDITION",
+            "expression": "You control one or more Cost 1 or higher Spirits",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-059#a0",
+          "keywords": [],
+          "id": "BS27-059#AB_PASSIVE_NONE_LV1_LV2_LV3_e13164a9a5fb15aaa3b0bec94ab59df56a958cb493d4776fb40ad82f71f13cec_70aff4946c34a037f744192cb878aa7f",
+          "physicalId": "BS27-059#AB_PASSIVE_NONE_LV1_LV2_LV3_e13164a9a5fb15aaa3b0bec94ab59df56a958cb493d4776fb40ad82f71f13cec_70aff4946c34a037f744192cb878aa7f",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_e13164a9a5fb15aaa3b0bec94ab59df56a958cb493d4776fb40ad82f71f13cec_70aff4946c34a037f744192cb878aa7f",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_c8b2f972cd3b3257a955dd811e375ff483763ca67dfc2aea01bc29a8f1f4c6e2_0115219db36a12482c46df95de813a88",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS27-059#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3127,8 +3636,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3137,28 +3655,56 @@
             "isMain": false,
             "cleanBody": "When your Ultimate Trigger is guarded, return a Cost 3 or less Blue Spirit card from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV3][LV4] (Your Attack Step)\nWhen your Ultimate Trigger is guarded, return a Cost 3 or less Blue Spirit card from your Trash to the Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When your Ultimate Trigger is guarded, return a Cost 3 or less Blue Spirit card from your Trash to the Hand.",
+              "originalClauseText": "When your Ultimate Trigger is guarded, return a Cost 3 or less Blue Spirit card from your Trash to the Hand.",
               "cleanText": "When your Ultimate Trigger is guarded, return a Cost 3 or less Blue Spirit card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit",
+                    "Ultimate"
+                  ],
+                  "costLte": 3,
+                  "color": "Blue"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-059#a1",
+          "keywords": [],
+          "id": "BS27-059#AB_ATTACK_STEP_NONE_LV3_LV4_78f6ef4e062755e645d08a1d0175d66a875d0c39b0103d3886edbaf9e49c7d3e_c9e8c06968b71d90babd2930849d5f1e",
+          "physicalId": "BS27-059#AB_ATTACK_STEP_NONE_LV3_LV4_78f6ef4e062755e645d08a1d0175d66a875d0c39b0103d3886edbaf9e49c7d3e_c9e8c06968b71d90babd2930849d5f1e",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV3_LV4_78f6ef4e062755e645d08a1d0175d66a875d0c39b0103d3886edbaf9e49c7d3e_c9e8c06968b71d90babd2930849d5f1e",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV3_LV4_2aa646a804214581a306c0eea32c021eeb56efaace2696fb676f22a194653510_92fd9b23b520e7dd1c59d0c855e54d0f",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS27-059#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3167,8 +3713,15 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Ultimate Trigger",
@@ -3177,21 +3730,70 @@
             "isMain": false,
             "cleanBody": "When Ultimate Trigger hits, give one of your \"Next Generation\" family Ultimates that would attack next +2 cost."
           },
+          "originalAbilityText": "[Ultimate Trigger: [LV4] (When Attacks)]\nWhen Ultimate Trigger hits, give one of your \"Next Generation\" family Ultimates that would attack next +2 cost.\n[utb]",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When Ultimate Trigger hits, give one of your \"Next Generation\" family Ultimates that would attack next +2 cost.",
+              "originalClauseText": "When Ultimate Trigger hits, give one of your \"Next Generation\" family Ultimates that would attack next +2 cost.",
               "cleanText": "When Ultimate Trigger hits, give one of your \"Next Generation\" family Ultimates that would attack next +2 cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "COST_MODIFIER"
+                "op": "GRANT_FAMILY",
+                "family": "Next Generation",
+                "side": "self"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-059#a2",
+          "keywords": [
+            {
+              "name": "Ultimate Trigger",
+              "parameter": null,
+              "wave": 3,
+              "hook": "ultimate_trigger",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BS27-059#AB_WHEN_ATTACKS_NONE_LV4_eefbf9262bab75b49be5b287a550a8f687cb6ee1277d11bcac64869ad54ea6c2_b368a72769a59f8030195cd86c3c9bb2",
+              "cardNumber": "BS27-059",
+              "levels": [
+                4
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BS27-059#a2"
+            }
+          ],
+          "id": "BS27-059#AB_WHEN_ATTACKS_NONE_LV4_eefbf9262bab75b49be5b287a550a8f687cb6ee1277d11bcac64869ad54ea6c2_b368a72769a59f8030195cd86c3c9bb2",
+          "physicalId": "BS27-059#AB_WHEN_ATTACKS_NONE_LV4_eefbf9262bab75b49be5b287a550a8f687cb6ee1277d11bcac64869ad54ea6c2_b368a72769a59f8030195cd86c3c9bb2",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV4_eefbf9262bab75b49be5b287a550a8f687cb6ee1277d11bcac64869ad54ea6c2_b368a72769a59f8030195cd86c3c9bb2",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV4_9560ed8d17d0b75af720f79f9214a608c93ad2adf8165aa9336c32ae3363e07a_a49a244e13136de1d3c163752486f387",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -3579,14 +4181,74 @@
     "compiledIr": {
       "cardNumber": "BS27-066",
       "name": "The BraveAstralArmored Leo-Minor",
+      "type": "Brave",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 2000
+        }
+      },
+      "originalEffectText": "[Brave Condition: Astral Guardian/Astral Soul/Armed Machine]\n\n[Trigger Counter]\nWhen the opposing Ultimate Trigger hits, you can summon this Brave card from your Hand before the \"When hits\" effect activates. Activate the following effect after being summoned.\n\n█ Send a core from your Trash to your Life. Also, if the Hit card is a White card, treat it as a Guard.\n\n[When Braved] (When Blocks)\nOnce per turn, refresh this Spirit.",
+      "teams": [],
       "keywords": [
+        {
+          "name": "Brave Condition",
+          "parameter": "Astral Guardian/Astral Soul/Armed Machine",
+          "wave": 1,
+          "hook": "brave_condition",
+          "bracketed": true,
+          "index": 0,
+          "abilityId": "BS27-066#AB_PASSIVE_NONE_LV1_LV2_LV3_88c0fe7ba5c11100f31ce61b1dc2e42332b32b241fe705e0d0bf4791823a2c53_4dcdf390cbebe6d6494239f223a2f40a",
+          "cardNumber": "BS27-066",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BS27-066#a0"
+        },
         {
           "name": "Brave",
           "parameter": "Astral Guardian/Astral Soul/Armed Machine",
           "wave": 3,
           "hook": "brave",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "BS27-066#AB_PASSIVE_NONE_LV1_LV2_LV3_88c0fe7ba5c11100f31ce61b1dc2e42332b32b241fe705e0d0bf4791823a2c53_4dcdf390cbebe6d6494239f223a2f40a",
+          "cardNumber": "BS27-066",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BS27-066#a0"
         },
         {
           "name": "Trigger Counter",
@@ -3594,12 +4256,32 @@
           "wave": 3,
           "hook": "trigger_counter",
           "bracketed": true,
-          "index": 62
+          "index": 0,
+          "abilityId": "BS27-066#AB_PASSIVE_NONE_LV1_LV2_LV3_2286c8eaa1e69b4ed80d2da393aa84a2bf42160a9b548ebb85dfc48198db5427_eb9461ed416ac06c47579f73065981f0",
+          "cardNumber": "BS27-066",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BS27-066#a1"
         }
       ],
       "abilities": [
         {
-          "id": "BS27-066#a0",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -3610,8 +4292,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Brave Condition: Astral Guardian/Astral Soul/Armed Machine",
@@ -3621,11 +4308,90 @@
             "cleanBody": ""
           },
           "rawText": "[Brave Condition: Astral Guardian/Astral Soul/Armed Machine]",
+          "originalAbilityText": "[Brave Condition: Astral Guardian/Astral Soul/Armed Machine]",
+          "abilityIndex": 0,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "BRAVE_CONDITION",
+            "expression": "Astral Guardian/Astral Soul/Armed Machine",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-066#a0",
+          "keywords": [
+            {
+              "name": "Brave Condition",
+              "parameter": "Astral Guardian/Astral Soul/Armed Machine",
+              "wave": 1,
+              "hook": "brave_condition",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BS27-066#AB_PASSIVE_NONE_LV1_LV2_LV3_88c0fe7ba5c11100f31ce61b1dc2e42332b32b241fe705e0d0bf4791823a2c53_4dcdf390cbebe6d6494239f223a2f40a",
+              "cardNumber": "BS27-066",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BS27-066#a0"
+            },
+            {
+              "name": "Brave",
+              "parameter": "Astral Guardian/Astral Soul/Armed Machine",
+              "wave": 3,
+              "hook": "brave",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BS27-066#AB_PASSIVE_NONE_LV1_LV2_LV3_88c0fe7ba5c11100f31ce61b1dc2e42332b32b241fe705e0d0bf4791823a2c53_4dcdf390cbebe6d6494239f223a2f40a",
+              "cardNumber": "BS27-066",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BS27-066#a0"
+            }
+          ],
+          "id": "BS27-066#AB_PASSIVE_NONE_LV1_LV2_LV3_88c0fe7ba5c11100f31ce61b1dc2e42332b32b241fe705e0d0bf4791823a2c53_4dcdf390cbebe6d6494239f223a2f40a",
+          "physicalId": "BS27-066#AB_PASSIVE_NONE_LV1_LV2_LV3_88c0fe7ba5c11100f31ce61b1dc2e42332b32b241fe705e0d0bf4791823a2c53_4dcdf390cbebe6d6494239f223a2f40a",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_88c0fe7ba5c11100f31ce61b1dc2e42332b32b241fe705e0d0bf4791823a2c53_4dcdf390cbebe6d6494239f223a2f40a",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_f11a6e45da2bb56ad94e1aa45b011da1e13571aa45df8330d8639b22fb5db9e1_5f0051f52ce4c6cb0236febf515ea8f7",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS27-066#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3636,8 +4402,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Trigger Counter",
@@ -3646,10 +4417,14 @@
             "isMain": false,
             "cleanBody": "When the opposing Ultimate Trigger hits, you can summon this Brave card from your Hand before the \"When hits\" effect activates. Activate the following effect after being summoned."
           },
+          "originalAbilityText": "[Trigger Counter]\nWhen the opposing Ultimate Trigger hits, you can summon this Brave card from your Hand before the \"When hits\" effect activates. Activate the following effect after being summoned.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When the opposing Ultimate Trigger hits, you can summon this Brave card from your Hand before the \"When hits\" effect activates.",
+              "originalClauseText": "When the opposing Ultimate Trigger hits, you can summon this Brave card from your Hand before the \"When hits\" effect activates.",
               "cleanText": "When the opposing Ultimate Trigger hits, you can summon this Brave card from your Hand before the \"When hits\" effect activates",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -3657,26 +4432,72 @@
               "duration": null,
               "op": {
                 "op": "SUMMON_THIS_CARD",
-                "from": "HAND_OR_BURST"
+                "from": "HAND"
               }
             },
             {
               "rawText": "Activate the following effect after being summoned.",
+              "originalClauseText": "Activate the following effect after being summoned.",
               "cleanText": "Activate the following effect after being summoned",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
+                "watchEvent": "ON_SUMMON",
+                "side": "self",
                 "op": "TRIGGERED_WATCHER"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-066#a1",
+          "keywords": [
+            {
+              "name": "Trigger Counter",
+              "parameter": null,
+              "wave": 3,
+              "hook": "trigger_counter",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BS27-066#AB_PASSIVE_NONE_LV1_LV2_LV3_2286c8eaa1e69b4ed80d2da393aa84a2bf42160a9b548ebb85dfc48198db5427_eb9461ed416ac06c47579f73065981f0",
+              "cardNumber": "BS27-066",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BS27-066#a1"
+            }
+          ],
+          "id": "BS27-066#AB_PASSIVE_NONE_LV1_LV2_LV3_2286c8eaa1e69b4ed80d2da393aa84a2bf42160a9b548ebb85dfc48198db5427_eb9461ed416ac06c47579f73065981f0",
+          "physicalId": "BS27-066#AB_PASSIVE_NONE_LV1_LV2_LV3_2286c8eaa1e69b4ed80d2da393aa84a2bf42160a9b548ebb85dfc48198db5427_eb9461ed416ac06c47579f73065981f0",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_2286c8eaa1e69b4ed80d2da393aa84a2bf42160a9b548ebb85dfc48198db5427_eb9461ed416ac06c47579f73065981f0",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_b9211c73c3a9e128efe0550341041a2ddb2bc8e57526329dcdd703a282b6fdc2_c343bf4a41dc69e56b6edb69bf6b6d4a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS27-066#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3687,8 +4508,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3697,10 +4523,14 @@
             "isMain": false,
             "cleanBody": "█ Send a core from your Trash to your Life. Also, if the Hit card is a White card, treat it as a Guard."
           },
+          "originalAbilityText": "█ Send a core from your Trash to your Life. Also, if the Hit card is a White card, treat it as a Guard.",
+          "abilityIndex": 2,
           "clauses": [
             {
-              "rawText": "█ Send a core from your Trash to your Life.",
+              "rawText": "Send a core from your Trash to your Life.",
+              "originalClauseText": "Send a core from your Trash to your Life.",
               "cleanText": "Send a core from your Trash to your Life",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -3708,26 +4538,48 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "trash",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "life",
+                  "side": "self"
+                }
               }
             },
             {
               "rawText": "if the Hit card is a White card, treat it as a Guard.",
+              "originalClauseText": "if the Hit card is a White card, treat it as a Guard.",
               "cleanText": "treat it as a Guard",
+              "clauseIndex": 1,
               "link": "also",
               "isOptional": false,
               "isCost": false,
               "condition": "if the Hit card is a White card",
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "TRIGGER_GUARD_MODIFIER"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-066#a2",
+          "keywords": [],
+          "id": "BS27-066#AB_PASSIVE_NONE_LV1_LV2_LV3_579e227bebbfd7c71e903c87e25501b7fb22e11abc20959cea2851ac1e480268_173497bbaa42cec41b8143094bf8353e",
+          "physicalId": "BS27-066#AB_PASSIVE_NONE_LV1_LV2_LV3_579e227bebbfd7c71e903c87e25501b7fb22e11abc20959cea2851ac1e480268_173497bbaa42cec41b8143094bf8353e",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_579e227bebbfd7c71e903c87e25501b7fb22e11abc20959cea2851ac1e480268_173497bbaa42cec41b8143094bf8353e",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_23d9ddbdaff082826244c2312a07f75b7141ee56d9d99de01ba7b2d542dc2f44_b0dffc018411dd43fa27f27255d9192c",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS27-066#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3740,8 +4592,20 @@
               "When Braved"
             ],
             "timing": "WHEN_BLOCKS",
+            "timings": [
+              "WHEN_BLOCKS"
+            ],
             "timingLabel": "When Blocks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN",
+              "WHILE_BRAVED"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -3750,10 +4614,14 @@
             "isMain": false,
             "cleanBody": "refresh this Spirit."
           },
+          "originalAbilityText": "[When Braved] (When Blocks)\nOnce per turn, refresh this Spirit.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "refresh this Spirit.",
+              "originalClauseText": "refresh this Spirit.",
               "cleanText": "refresh this Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -3765,7 +4633,25 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-066#a3",
+          "keywords": [],
+          "id": "BS27-066#AB_WHEN_BLOCKS_NONE_LV1_LV2_LV3_ad07c1ec301381d3b7dbe43d69a21353debeb01441cf4d0d2efc99e78770844d_33a29d1ae598a105bfbd7a2775f82ced",
+          "physicalId": "BS27-066#AB_WHEN_BLOCKS_NONE_LV1_LV2_LV3_ad07c1ec301381d3b7dbe43d69a21353debeb01441cf4d0d2efc99e78770844d_33a29d1ae598a105bfbd7a2775f82ced",
+          "semanticId": "SEM#AB_WHEN_BLOCKS_NONE_LV1_LV2_LV3_ad07c1ec301381d3b7dbe43d69a21353debeb01441cf4d0d2efc99e78770844d_33a29d1ae598a105bfbd7a2775f82ced",
+          "semanticIdV3": "SEM3#AB_WHEN_BLOCKS_NONE_LV1_LV2_LV3_c20eb0c905a69b699808631a022fd04c2f60dd9ad2ed4f3cd38179a8df4476a5_98edc5eb39188a1df360acfc3f72eda4",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN",
+              "WHILE_BRAVED"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -4069,19 +4955,58 @@
     "compiledIr": {
       "cardNumber": "BS27-051",
       "name": "The DemonPrincess Bizak",
+      "type": "Ultimate",
+      "levels": {
+        "LV3": {
+          "level": 3,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV4": {
+          "level": 4,
+          "cost": 2,
+          "bp": 7000
+        },
+        "LV5": {
+          "level": 5,
+          "cost": 3,
+          "bp": 9000
+        }
+      },
+      "originalEffectText": "[Summon Condition: You control one or more Cost 1 or higher Spirits]\n\n[LV3][LV4][LV5] (Your Attack Step)\nWhen your Ultimate Trigger is guarded, return a Cost 3 or less Purple Spirit card from your Trash to the Hand.\n\n[Ultimate Trigger: [LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, return a Purple Spirit card/Ultimate card from your Trash to the Hand.\n[utb]",
+      "teams": [],
       "keywords": [
         {
           "name": "Ultimate Trigger",
-          "parameter": "[LV4",
+          "parameter": null,
           "wave": 3,
           "hook": "ultimate_trigger",
           "bracketed": true,
-          "index": 217
+          "index": 0,
+          "abilityId": "BS27-051#AB_WHEN_ATTACKS_NONE_LV4_LV5_4949d769bb64709a64546ef02c0c5c5752541cd2375a20f121bc0e49e2f464c1_c5f696e3877ce8570748dbd6ad5c9b76",
+          "cardNumber": "BS27-051",
+          "levels": [
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BS27-051#a2"
         }
       ],
       "abilities": [
         {
-          "id": "BS27-051#a0",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -4094,8 +5019,13 @@
               "Summon Condition: You control one or more Cost 1 or higher Spirits"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4105,11 +5035,31 @@
             "cleanBody": ""
           },
           "rawText": "[Summon Condition: You control one or more Cost 1 or higher Spirits]",
+          "originalAbilityText": "[Summon Condition: You control one or more Cost 1 or higher Spirits]",
+          "abilityIndex": 0,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "SUMMON_CONDITION",
+            "expression": "You control one or more Cost 1 or higher Spirits",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-051#a0",
+          "keywords": [],
+          "id": "BS27-051#AB_PASSIVE_NONE_LV1_LV2_LV3_e13164a9a5fb15aaa3b0bec94ab59df56a958cb493d4776fb40ad82f71f13cec_70aff4946c34a037f744192cb878aa7f",
+          "physicalId": "BS27-051#AB_PASSIVE_NONE_LV1_LV2_LV3_e13164a9a5fb15aaa3b0bec94ab59df56a958cb493d4776fb40ad82f71f13cec_70aff4946c34a037f744192cb878aa7f",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_e13164a9a5fb15aaa3b0bec94ab59df56a958cb493d4776fb40ad82f71f13cec_70aff4946c34a037f744192cb878aa7f",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_c8b2f972cd3b3257a955dd811e375ff483763ca67dfc2aea01bc29a8f1f4c6e2_0115219db36a12482c46df95de813a88",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS27-051#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4120,8 +5070,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4130,28 +5089,56 @@
             "isMain": false,
             "cleanBody": "When your Ultimate Trigger is guarded, return a Cost 3 or less Purple Spirit card from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV3][LV4][LV5] (Your Attack Step)\nWhen your Ultimate Trigger is guarded, return a Cost 3 or less Purple Spirit card from your Trash to the Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When your Ultimate Trigger is guarded, return a Cost 3 or less Purple Spirit card from your Trash to the Hand.",
+              "originalClauseText": "When your Ultimate Trigger is guarded, return a Cost 3 or less Purple Spirit card from your Trash to the Hand.",
               "cleanText": "When your Ultimate Trigger is guarded, return a Cost 3 or less Purple Spirit card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit",
+                    "Ultimate"
+                  ],
+                  "costLte": 3,
+                  "color": "Purple"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-051#a1",
+          "keywords": [],
+          "id": "BS27-051#AB_ATTACK_STEP_NONE_LV3_LV4_LV5_8be75b93c447f5be2e94eeec821a51989aa17a90e5ac2153696d7683d20787f5_971deb2edc5eea0d60bf5ee2763f5ce4",
+          "physicalId": "BS27-051#AB_ATTACK_STEP_NONE_LV3_LV4_LV5_8be75b93c447f5be2e94eeec821a51989aa17a90e5ac2153696d7683d20787f5_971deb2edc5eea0d60bf5ee2763f5ce4",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV3_LV4_LV5_8be75b93c447f5be2e94eeec821a51989aa17a90e5ac2153696d7683d20787f5_971deb2edc5eea0d60bf5ee2763f5ce4",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV3_LV4_LV5_e46c9fbd1e7fc6be005c51dd0fe528f9f08391b72edf04e902a93cc3b715f91d_ddd5f0970b0bfecf224154a5561db637",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS27-051#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4161,8 +5148,15 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Ultimate Trigger",
@@ -4171,25 +5165,82 @@
             "isMain": false,
             "cleanBody": "When Ultimate Trigger hits, return a Purple Spirit card/Ultimate card from your Trash to the Hand."
           },
+          "originalAbilityText": "[Ultimate Trigger: [LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, return a Purple Spirit card/Ultimate card from your Trash to the Hand.\n[utb]",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When Ultimate Trigger hits, return a Purple Spirit card/Ultimate card from your Trash to the Hand.",
+              "originalClauseText": "When Ultimate Trigger hits, return a Purple Spirit card/Ultimate card from your Trash to the Hand.",
               "cleanText": "When Ultimate Trigger hits, return a Purple Spirit card/Ultimate card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit",
+                    "Ultimate"
+                  ],
+                  "color": "Purple"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-051#a2",
+          "keywords": [
+            {
+              "name": "Ultimate Trigger",
+              "parameter": null,
+              "wave": 3,
+              "hook": "ultimate_trigger",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BS27-051#AB_WHEN_ATTACKS_NONE_LV4_LV5_4949d769bb64709a64546ef02c0c5c5752541cd2375a20f121bc0e49e2f464c1_c5f696e3877ce8570748dbd6ad5c9b76",
+              "cardNumber": "BS27-051",
+              "levels": [
+                4,
+                5
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BS27-051#a2"
+            }
+          ],
+          "id": "BS27-051#AB_WHEN_ATTACKS_NONE_LV4_LV5_4949d769bb64709a64546ef02c0c5c5752541cd2375a20f121bc0e49e2f464c1_c5f696e3877ce8570748dbd6ad5c9b76",
+          "physicalId": "BS27-051#AB_WHEN_ATTACKS_NONE_LV4_LV5_4949d769bb64709a64546ef02c0c5c5752541cd2375a20f121bc0e49e2f464c1_c5f696e3877ce8570748dbd6ad5c9b76",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV4_LV5_4949d769bb64709a64546ef02c0c5c5752541cd2375a20f121bc0e49e2f464c1_c5f696e3877ce8570748dbd6ad5c9b76",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV4_LV5_a84a04f462455a22bdda5c06dfe85b8cc1d4a58a4b2033706a1176490ff32c22_4f2129db6eb2e78f15dfcb658aa9cbdf",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -4895,10 +5946,29 @@
     "compiledIr": {
       "cardNumber": "BS27-013",
       "name": "The FallenKnight Arioch",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 4000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 6000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3]\nThis Spirit can't be destroyed or returned to the Hand by opposing effects.\n\n[LV2][LV3] (Either Attack Step)\nOpposing Spirits/Ultimates with cards under them can't attack/block unless the opponent sends a core from those Spirits/Ultimates to their Trash.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BS27-013#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4909,8 +5979,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4919,10 +5994,14 @@
             "isMain": false,
             "cleanBody": "This Spirit can't be destroyed or returned to the Hand by opposing effects."
           },
+          "originalAbilityText": "[LV1][LV2][LV3]\nThis Spirit can't be destroyed or returned to the Hand by opposing effects.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "This Spirit can't be destroyed or returned to the Hand by opposing effects.",
+              "originalClauseText": "This Spirit can't be destroyed or returned to the Hand by opposing effects.",
               "cleanText": "This Spirit can't be destroyed or returned to the Hand by opposing effects",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -4937,10 +6016,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-013#a0",
+          "keywords": [],
+          "id": "BS27-013#AB_PASSIVE_NONE_LV1_LV2_LV3_2c9c89d21fd4e58a6a55f0d6b674d817c7e30b1e1f822f3ef29a874c708393b0_b3e1e9cd447af3366a4f00a1b44d5446",
+          "physicalId": "BS27-013#AB_PASSIVE_NONE_LV1_LV2_LV3_2c9c89d21fd4e58a6a55f0d6b674d817c7e30b1e1f822f3ef29a874c708393b0_b3e1e9cd447af3366a4f00a1b44d5446",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_2c9c89d21fd4e58a6a55f0d6b674d817c7e30b1e1f822f3ef29a874c708393b0_b3e1e9cd447af3366a4f00a1b44d5446",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_7e497f0db1a90d775c892748804660fe2335375d42783da74b6d2009cbb58270_30c65d4082536c66d9b2e4589bfb445b",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS27-013#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4950,8 +6041,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4960,10 +6060,14 @@
             "isMain": false,
             "cleanBody": "Opposing Spirits/Ultimates with cards under them can't attack/block unless the opponent sends a core from those Spirits/Ultimates to their Trash."
           },
+          "originalAbilityText": "[LV2][LV3] (Either Attack Step)\nOpposing Spirits/Ultimates with cards under them can't attack/block unless the opponent sends a core from those Spirits/Ultimates to their Trash.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Opposing Spirits/Ultimates with cards under them can't attack/block unless the opponent sends a core from those Spirits/Ultimates to their Trash.",
+              "originalClauseText": "Opposing Spirits/Ultimates with cards under them can't attack/block unless the opponent sends a core from those Spirits/Ultimates to their Trash.",
               "cleanText": "Opposing Spirits/Ultimates with cards under them can't attack/block unless the opponent sends a core from those Spirits/Ultimates to their Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -4971,11 +6075,30 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "to": {
+                  "zone": "trash",
+                  "side": "opp"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-013#a1",
+          "keywords": [],
+          "id": "BS27-013#AB_ATTACK_STEP_NONE_LV2_LV3_97dc499a1a52a58769ef19c7f94859065bc030b25dc6759ca68031d0a98904e1_d71ed35328064dc00d9cc16568458a47",
+          "physicalId": "BS27-013#AB_ATTACK_STEP_NONE_LV2_LV3_97dc499a1a52a58769ef19c7f94859065bc030b25dc6759ca68031d0a98904e1_d71ed35328064dc00d9cc16568458a47",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_97dc499a1a52a58769ef19c7f94859065bc030b25dc6759ca68031d0a98904e1_d71ed35328064dc00d9cc16568458a47",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_LV3_552d2917210c0523a20ab0dc71d3e8f106440eb2c4a6d5544da8b0a4071139d0_02ccb089d61ec0d1dd4694a5430f038e",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -6515,19 +7638,78 @@
     "compiledIr": {
       "cardNumber": "BS27-X08",
       "name": "The LibraAstralArmored BraveLibra",
+      "type": "Brave",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        }
+      },
+      "originalEffectText": "[Brave Condition: Cost 5 or more]\n\n[LV1] (When Summoned)\nYou can deploy a Nexus card from your Hand/Trash, without paying its cost.\n\n[During Brave] (When Attacks)\nDiscard a card from the opposing decktop. When this effect discards any Spirit card/Ultimate card, refresh this Spirit.",
+      "teams": [],
       "keywords": [
+        {
+          "name": "Brave Condition",
+          "parameter": "Cost 5 or more",
+          "wave": 1,
+          "hook": "brave_condition",
+          "bracketed": true,
+          "index": 0,
+          "abilityId": "BS27-X08#AB_PASSIVE_NONE_LV1_LV2_LV3_80f3124d1a7701793dcdd02ad9d3954d330c9079f3903e27a5a3d315601ba727_97eaf36aa2c51d494a6f43fb4596d9b4",
+          "cardNumber": "BS27-X08",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BS27-X08#a0"
+        },
         {
           "name": "Brave",
           "parameter": "Cost 5 or more",
           "wave": 3,
           "hook": "brave",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "BS27-X08#AB_PASSIVE_NONE_LV1_LV2_LV3_80f3124d1a7701793dcdd02ad9d3954d330c9079f3903e27a5a3d315601ba727_97eaf36aa2c51d494a6f43fb4596d9b4",
+          "cardNumber": "BS27-X08",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BS27-X08#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BS27-X08#a0",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -6538,8 +7720,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Brave Condition: Cost 5 or more",
@@ -6549,11 +7736,90 @@
             "cleanBody": ""
           },
           "rawText": "[Brave Condition: Cost 5 or more]",
+          "originalAbilityText": "[Brave Condition: Cost 5 or more]",
+          "abilityIndex": 0,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "BRAVE_CONDITION",
+            "expression": "Cost 5 or more",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-X08#a0",
+          "keywords": [
+            {
+              "name": "Brave Condition",
+              "parameter": "Cost 5 or more",
+              "wave": 1,
+              "hook": "brave_condition",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BS27-X08#AB_PASSIVE_NONE_LV1_LV2_LV3_80f3124d1a7701793dcdd02ad9d3954d330c9079f3903e27a5a3d315601ba727_97eaf36aa2c51d494a6f43fb4596d9b4",
+              "cardNumber": "BS27-X08",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BS27-X08#a0"
+            },
+            {
+              "name": "Brave",
+              "parameter": "Cost 5 or more",
+              "wave": 3,
+              "hook": "brave",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BS27-X08#AB_PASSIVE_NONE_LV1_LV2_LV3_80f3124d1a7701793dcdd02ad9d3954d330c9079f3903e27a5a3d315601ba727_97eaf36aa2c51d494a6f43fb4596d9b4",
+              "cardNumber": "BS27-X08",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BS27-X08#a0"
+            }
+          ],
+          "id": "BS27-X08#AB_PASSIVE_NONE_LV1_LV2_LV3_80f3124d1a7701793dcdd02ad9d3954d330c9079f3903e27a5a3d315601ba727_97eaf36aa2c51d494a6f43fb4596d9b4",
+          "physicalId": "BS27-X08#AB_PASSIVE_NONE_LV1_LV2_LV3_80f3124d1a7701793dcdd02ad9d3954d330c9079f3903e27a5a3d315601ba727_97eaf36aa2c51d494a6f43fb4596d9b4",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_80f3124d1a7701793dcdd02ad9d3954d330c9079f3903e27a5a3d315601ba727_97eaf36aa2c51d494a6f43fb4596d9b4",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_ded42053e10624ec8ee9533f80346fa6171340cf73d7cf0abca6663d1bd5ed66_3d3614c995f585602458be3df0bc6aa7",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS27-X08#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -6562,8 +7828,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -6572,10 +7847,14 @@
             "isMain": false,
             "cleanBody": "You can deploy a Nexus card from your Hand/Trash, without paying its cost."
           },
+          "originalAbilityText": "[LV1] (When Summoned)\nYou can deploy a Nexus card from your Hand/Trash, without paying its cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can deploy a Nexus card from your Hand/Trash, without paying its cost.",
+              "originalClauseText": "You can deploy a Nexus card from your Hand/Trash, without paying its cost.",
               "cleanText": "You can deploy a Nexus card from your Hand/Trash, without paying its cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -6587,10 +7866,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-X08#a1",
+          "keywords": [],
+          "id": "BS27-X08#AB_WHEN_SUMMONED_NONE_LV1_972bc641d56aea1843d2207c574f15571cef98358902690cf80869140bb85e48_0cb0df58e42d6a623060bd5b612d4521",
+          "physicalId": "BS27-X08#AB_WHEN_SUMMONED_NONE_LV1_972bc641d56aea1843d2207c574f15571cef98358902690cf80869140bb85e48_0cb0df58e42d6a623060bd5b612d4521",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_972bc641d56aea1843d2207c574f15571cef98358902690cf80869140bb85e48_0cb0df58e42d6a623060bd5b612d4521",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_3c87bd13a458481972b1aad7fc43d4990937e5fce79baf9f8b400a3455bae315_34f37552ec7763ebb5d8f019c1088374",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS27-X08#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -6603,8 +7896,19 @@
               "During Brave"
             ],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [
+              "WHILE_BRAVED"
+            ],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -6613,10 +7917,14 @@
             "isMain": false,
             "cleanBody": "Discard a card from the opposing decktop. When this effect discards any Spirit card/Ultimate card, refresh this Spirit."
           },
+          "originalAbilityText": "[During Brave] (When Attacks)\nDiscard a card from the opposing decktop. When this effect discards any Spirit card/Ultimate card, refresh this Spirit.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Discard a card from the opposing decktop.",
+              "originalClauseText": "Discard a card from the opposing decktop.",
               "cleanText": "Discard a card from the opposing decktop",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -6629,7 +7937,9 @@
             },
             {
               "rawText": "When this effect discards any Spirit card/Ultimate card, refresh this Spirit.",
+              "originalClauseText": "When this effect discards any Spirit card/Ultimate card, refresh this Spirit.",
               "cleanText": "When this effect discards any Spirit card/Ultimate card, refresh this Spirit",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -6641,7 +7951,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-X08#a2",
+          "keywords": [],
+          "id": "BS27-X08#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_c5713690359ea229ba1cab211d7ce229845efd5535a7e484e0b3989b36c1229f_a2c107cd0e8920fbf456322f66cbd6d3",
+          "physicalId": "BS27-X08#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_c5713690359ea229ba1cab211d7ce229845efd5535a7e484e0b3989b36c1229f_a2c107cd0e8920fbf456322f66cbd6d3",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_c5713690359ea229ba1cab211d7ce229845efd5535a7e484e0b3989b36c1229f_a2c107cd0e8920fbf456322f66cbd6d3",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_f29e0bb4f00aeb1e1567c6cd9f00b2e11356b9411939f930723f29a6435feb76_2d647323a290583312479c9baff86281",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [
+              "WHILE_BRAVED"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -6776,10 +8103,13 @@
     "compiledIr": {
       "cardNumber": "BS27-075",
       "name": "The Military Port City Ostia",
+      "type": "Nexus",
+      "levels": {},
+      "originalEffectText": "[LV1][LV2]\nThe (When Summoned) effects of Spirits/Braves, and (When Deployed) effects of Nexuses can't activate.\n\n[LV2] Flash - (Your Attack Step)\nBy sending a core from this Nexus to your Trash, once per turn, refresh this Nexus.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BS27-075#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -6789,8 +8119,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -6799,10 +8138,14 @@
             "isMain": false,
             "cleanBody": "effects of Spirits/Braves, and (When Deployed) effects of Nexuses can't activate."
           },
+          "originalAbilityText": "[LV1][LV2]\nThe (When Summoned) effects of Spirits/Braves, and (When Deployed) effects of Nexuses can't activate.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "effects of Spirits/Braves, and (When Deployed) effects of Nexuses can't activate.",
+              "originalClauseText": "effects of Spirits/Braves, and (When Deployed) effects of Nexuses can't activate.",
               "cleanText": "effects of Spirits/Braves, and (When Deployed) effects of Nexuses can't activate",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -6814,10 +8157,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-075#a0",
+          "keywords": [],
+          "id": "BS27-075#AB_WHEN_SUMMONED_NONE_LV1_LV2_38d80abc9b5490fb3cc7b2f69b9fc548b6f45b685e8971958d971b5b92fddedf_746dc8ccf5f4fdd53cf4c1f870c7d62f",
+          "physicalId": "BS27-075#AB_WHEN_SUMMONED_NONE_LV1_LV2_38d80abc9b5490fb3cc7b2f69b9fc548b6f45b685e8971958d971b5b92fddedf_746dc8ccf5f4fdd53cf4c1f870c7d62f",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_38d80abc9b5490fb3cc7b2f69b9fc548b6f45b685e8971958d971b5b92fddedf_746dc8ccf5f4fdd53cf4c1f870c7d62f",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_d12c9340d0131ed6542b48ee2e21e0f51b1cba38680f81e884fe7fb6a758ccb1_ef88debe1abae69152fe9632c462e317",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS27-075#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -6826,8 +8183,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -6836,10 +8202,14 @@
             "isMain": false,
             "cleanBody": "By sending a core from this Nexus to your Trash, once per turn, refresh this Nexus."
           },
+          "originalAbilityText": "[LV2] Flash - (Your Attack Step)\nBy sending a core from this Nexus to your Trash, once per turn, refresh this Nexus.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "By sending a core from this Nexus to your Trash",
+              "originalClauseText": "By sending a core from this Nexus to your Trash",
               "cleanText": "By sending a core from this Nexus to your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -6847,12 +8217,23 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             },
             {
               "rawText": "once per turn, refresh this Nexus.",
+              "originalClauseText": "once per turn, refresh this Nexus.",
               "cleanText": "once per turn, refresh this Nexus",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -6860,13 +8241,32 @@
               "duration": null,
               "op": {
                 "op": "REFRESH",
+                "count": 1,
                 "target": {
-                  "side": "either"
+                  "side": "self",
+                  "types": [
+                    "Nexus"
+                  ]
                 }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-075#a1",
+          "keywords": [],
+          "id": "BS27-075#AB_ATTACK_STEP_NONE_LV2_b9b7521da66ceff45f8d78ef090580209c3fe7c1ba8edecbd9d9a4e254564653_38c3f382fb8484c3b75908460ea0f0aa",
+          "physicalId": "BS27-075#AB_ATTACK_STEP_NONE_LV2_b9b7521da66ceff45f8d78ef090580209c3fe7c1ba8edecbd9d9a4e254564653_38c3f382fb8484c3b75908460ea0f0aa",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_b9b7521da66ceff45f8d78ef090580209c3fe7c1ba8edecbd9d9a4e254564653_38c3f382fb8484c3b75908460ea0f0aa",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_c8982312e5dbfe6ce86cad9ad1c9e37f87241911b033cc7f869ba62ea1f6f45a_1ef77547e0925263fb0a22367a9cc10e",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -6899,6 +8299,26 @@
     "compiledIr": {
       "cardNumber": "BS27-045",
       "name": "The RubyBeardGiant Barbaros",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 5000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 3,
+          "bp": 7000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] (Either Attack Step)\nYou can summon Spirit cards from your Trash via your Spirits' [Summon Bolt]. This effect can only be used once per turn.\n\n[LV2][LV3]\nWhen this Spirit is destroyed by opposing effects, this Spirit remains on the Field, exhausted.",
+      "teams": [],
       "keywords": [
         {
           "name": "Summon Bolt",
@@ -6906,12 +8326,32 @@
           "wave": 4,
           "hook": "summon_bolt",
           "bracketed": true,
-          "index": 99
+          "index": 62,
+          "abilityId": "BS27-045#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_ecf81cf56482eff7f03b4052f62e959f877c1d7714ed6bca2fe35bedbd29dda4_7010021de9c40b282729ac708ea47007",
+          "cardNumber": "BS27-045",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": "ONCE_PER_TURN",
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BS27-045#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BS27-045#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -6922,8 +8362,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -6932,10 +8383,14 @@
             "isMain": false,
             "cleanBody": "You can summon Spirit cards from your Trash via your Spirits' [Summon Bolt]."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (Either Attack Step)\nYou can summon Spirit cards from your Trash via your Spirits' [Summon Bolt]. This effect can only be used once per turn.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "You can summon Spirit cards from your Trash via your Spirits' [Summon Bolt].",
+              "originalClauseText": "You can summon Spirit cards from your Trash via your Spirits' [Summon Bolt].",
               "cleanText": "You can summon Spirit cards from your Trash via your Spirits' [Summon Bolt]",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -6943,14 +8398,70 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "free": false,
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-045#a0",
+          "keywords": [
+            {
+              "name": "Summon Bolt",
+              "parameter": null,
+              "wave": 4,
+              "hook": "summon_bolt",
+              "bracketed": true,
+              "index": 62,
+              "abilityId": "BS27-045#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_ecf81cf56482eff7f03b4052f62e959f877c1d7714ed6bca2fe35bedbd29dda4_7010021de9c40b282729ac708ea47007",
+              "cardNumber": "BS27-045",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": "ONCE_PER_TURN",
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BS27-045#a0"
+            }
+          ],
+          "id": "BS27-045#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_ecf81cf56482eff7f03b4052f62e959f877c1d7714ed6bca2fe35bedbd29dda4_7010021de9c40b282729ac708ea47007",
+          "physicalId": "BS27-045#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_ecf81cf56482eff7f03b4052f62e959f877c1d7714ed6bca2fe35bedbd29dda4_7010021de9c40b282729ac708ea47007",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_ecf81cf56482eff7f03b4052f62e959f877c1d7714ed6bca2fe35bedbd29dda4_7010021de9c40b282729ac708ea47007",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_844397c1f55e193e1a55d264ab979ad35dafd17628990625569de0c15fb96cc2_39c7163a0a705eaf89621bb1b17a94af",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS27-045#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -6960,8 +8471,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -6970,24 +8486,38 @@
             "isMain": false,
             "cleanBody": "When this Spirit is destroyed by opposing effects, this Spirit remains on the Field, exhausted."
           },
+          "originalAbilityText": "[LV2][LV3]\nWhen this Spirit is destroyed by opposing effects, this Spirit remains on the Field, exhausted.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When this Spirit is destroyed by opposing effects, this Spirit remains on the Field, exhausted.",
+              "originalClauseText": "When this Spirit is destroyed by opposing effects, this Spirit remains on the Field, exhausted.",
               "cleanText": "When this Spirit is destroyed by opposing effects, this Spirit remains on the Field, exhausted",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "EXHAUST",
-                "target": {
-                  "side": "either"
-                }
+                "op": "RESURRECT"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-045#a1",
+          "keywords": [],
+          "id": "BS27-045#AB_PASSIVE_NONE_LV2_LV3_9f215b0cda562c7ba3fbc32a77e1eeed22a72e40ac967cfaaa5df279714d98c7_2704666568cb235e5413662d9b584447",
+          "physicalId": "BS27-045#AB_PASSIVE_NONE_LV2_LV3_9f215b0cda562c7ba3fbc32a77e1eeed22a72e40ac967cfaaa5df279714d98c7_2704666568cb235e5413662d9b584447",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV2_LV3_9f215b0cda562c7ba3fbc32a77e1eeed22a72e40ac967cfaaa5df279714d98c7_2704666568cb235e5413662d9b584447",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV2_LV3_f84d43d794fc8dfac299aa9f5b2fb520dc111f52599f314c3d40b0aecb1f2cd4_28132e19cfa75326023ecd51c383d6c8",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -8133,19 +9663,58 @@
     "compiledIr": {
       "cardNumber": "BS27-057",
       "name": "The UltraAngelia Puffel",
+      "type": "Ultimate",
+      "levels": {
+        "LV3": {
+          "level": 3,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV4": {
+          "level": 4,
+          "cost": 2,
+          "bp": 7000
+        },
+        "LV5": {
+          "level": 5,
+          "cost": 3,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "[Summon Condition: You control one or more Cost 1 or higher Spirits]\n\n[LV3][LV4][LV5] (Your Attack Step)\nWhen your Ultimate Trigger is guarded, return a Cost 3 or less Yellow Spirit card from your Trash to the Hand.\n\n[Ultimate Trigger: [LV4][LV5] (When Blocks)]\nWhen Ultimate Trigger hits, draw a card, and put a core from the Void to your Reserve.\n[utb]",
+      "teams": [],
       "keywords": [
         {
           "name": "Ultimate Trigger",
-          "parameter": "[LV4",
+          "parameter": null,
           "wave": 3,
           "hook": "ultimate_trigger",
           "bracketed": true,
-          "index": 217
+          "index": 0,
+          "abilityId": "BS27-057#AB_WHEN_BLOCKS_NONE_LV4_LV5_2af191c7a3e90b281ee157157b29c664ee45c379695343094f91eda7f7316c65_09b3e8afa726c2e59a29a0c88be034b6",
+          "cardNumber": "BS27-057",
+          "levels": [
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_BLOCKS",
+          "timingLabel": "When Blocks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BS27-057#a2"
         }
       ],
       "abilities": [
         {
-          "id": "BS27-057#a0",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -8158,8 +9727,13 @@
               "Summon Condition: You control one or more Cost 1 or higher Spirits"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -8169,11 +9743,31 @@
             "cleanBody": ""
           },
           "rawText": "[Summon Condition: You control one or more Cost 1 or higher Spirits]",
+          "originalAbilityText": "[Summon Condition: You control one or more Cost 1 or higher Spirits]",
+          "abilityIndex": 0,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "SUMMON_CONDITION",
+            "expression": "You control one or more Cost 1 or higher Spirits",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-057#a0",
+          "keywords": [],
+          "id": "BS27-057#AB_PASSIVE_NONE_LV1_LV2_LV3_e13164a9a5fb15aaa3b0bec94ab59df56a958cb493d4776fb40ad82f71f13cec_70aff4946c34a037f744192cb878aa7f",
+          "physicalId": "BS27-057#AB_PASSIVE_NONE_LV1_LV2_LV3_e13164a9a5fb15aaa3b0bec94ab59df56a958cb493d4776fb40ad82f71f13cec_70aff4946c34a037f744192cb878aa7f",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_e13164a9a5fb15aaa3b0bec94ab59df56a958cb493d4776fb40ad82f71f13cec_70aff4946c34a037f744192cb878aa7f",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_c8b2f972cd3b3257a955dd811e375ff483763ca67dfc2aea01bc29a8f1f4c6e2_0115219db36a12482c46df95de813a88",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS27-057#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -8184,8 +9778,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -8194,28 +9797,56 @@
             "isMain": false,
             "cleanBody": "When your Ultimate Trigger is guarded, return a Cost 3 or less Yellow Spirit card from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV3][LV4][LV5] (Your Attack Step)\nWhen your Ultimate Trigger is guarded, return a Cost 3 or less Yellow Spirit card from your Trash to the Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When your Ultimate Trigger is guarded, return a Cost 3 or less Yellow Spirit card from your Trash to the Hand.",
+              "originalClauseText": "When your Ultimate Trigger is guarded, return a Cost 3 or less Yellow Spirit card from your Trash to the Hand.",
               "cleanText": "When your Ultimate Trigger is guarded, return a Cost 3 or less Yellow Spirit card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit",
+                    "Ultimate"
+                  ],
+                  "costLte": 3,
+                  "color": "Yellow"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-057#a1",
+          "keywords": [],
+          "id": "BS27-057#AB_ATTACK_STEP_NONE_LV3_LV4_LV5_9fa6bd813fc59368dc43b9b2253ee0f5a687dc7a23ad246ba128166de218d4da_f3f54db55d22ba8170d8c8d1bfef7692",
+          "physicalId": "BS27-057#AB_ATTACK_STEP_NONE_LV3_LV4_LV5_9fa6bd813fc59368dc43b9b2253ee0f5a687dc7a23ad246ba128166de218d4da_f3f54db55d22ba8170d8c8d1bfef7692",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV3_LV4_LV5_9fa6bd813fc59368dc43b9b2253ee0f5a687dc7a23ad246ba128166de218d4da_f3f54db55d22ba8170d8c8d1bfef7692",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV3_LV4_LV5_6d43881bd2bf3b1a282b4cac9f3d6474a34d4a332e9e61e8a39afae8aa3798dc_e40a380e24d66212edeb3675945dd651",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS27-057#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -8225,8 +9856,15 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_BLOCKS",
+            "timings": [],
             "timingLabel": "When Blocks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Ultimate Trigger",
@@ -8235,10 +9873,14 @@
             "isMain": false,
             "cleanBody": "When Ultimate Trigger hits, draw a card, and put a core from the Void to your Reserve."
           },
+          "originalAbilityText": "[Ultimate Trigger: [LV4][LV5] (When Blocks)]\nWhen Ultimate Trigger hits, draw a card, and put a core from the Void to your Reserve.\n[utb]",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When Ultimate Trigger hits, draw a card",
+              "originalClauseText": "When Ultimate Trigger hits, draw a card",
               "cleanText": "When Ultimate Trigger hits, draw a card",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -8253,7 +9895,9 @@
             },
             {
               "rawText": "put a core from the Void to your Reserve.",
+              "originalClauseText": "put a core from the Void to your Reserve.",
               "cleanText": "put a core from the Void to your Reserve",
+              "clauseIndex": 1,
               "link": "also",
               "isOptional": false,
               "isCost": false,
@@ -8272,7 +9916,51 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-057#a2",
+          "keywords": [
+            {
+              "name": "Ultimate Trigger",
+              "parameter": null,
+              "wave": 3,
+              "hook": "ultimate_trigger",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BS27-057#AB_WHEN_BLOCKS_NONE_LV4_LV5_2af191c7a3e90b281ee157157b29c664ee45c379695343094f91eda7f7316c65_09b3e8afa726c2e59a29a0c88be034b6",
+              "cardNumber": "BS27-057",
+              "levels": [
+                4,
+                5
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_BLOCKS",
+              "timingLabel": "When Blocks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BS27-057#a2"
+            }
+          ],
+          "id": "BS27-057#AB_WHEN_BLOCKS_NONE_LV4_LV5_2af191c7a3e90b281ee157157b29c664ee45c379695343094f91eda7f7316c65_09b3e8afa726c2e59a29a0c88be034b6",
+          "physicalId": "BS27-057#AB_WHEN_BLOCKS_NONE_LV4_LV5_2af191c7a3e90b281ee157157b29c664ee45c379695343094f91eda7f7316c65_09b3e8afa726c2e59a29a0c88be034b6",
+          "semanticId": "SEM#AB_WHEN_BLOCKS_NONE_LV4_LV5_2af191c7a3e90b281ee157157b29c664ee45c379695343094f91eda7f7316c65_09b3e8afa726c2e59a29a0c88be034b6",
+          "semanticIdV3": "SEM3#AB_WHEN_BLOCKS_NONE_LV4_LV5_361894e3b3e0fa0b8d07f0ce1a224530297daddb1acbfc6a6c4401128649b0b7_2c9759988f371ce7ebe18f7f95207583",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -10044,19 +11732,58 @@
     "compiledIr": {
       "cardNumber": "BS27-058",
       "name": "Ultimate-Sphin Cross",
+      "type": "Ultimate",
+      "levels": {
+        "LV3": {
+          "level": 3,
+          "cost": 1,
+          "bp": 13000
+        },
+        "LV4": {
+          "level": 4,
+          "cost": 2,
+          "bp": 19000
+        },
+        "LV5": {
+          "level": 5,
+          "cost": 3,
+          "bp": 25000
+        }
+      },
+      "originalEffectText": "[Summon Condition: You control one or more Yellow Spirits]\n\n[LV3][LV4][LV5] (When Summoned)\nYou can summon a \"Vanity Deity\"/\"Imaginary Beast\" family Spirit card/Ultimate card from your Hand, without paying the cost.\n\n[Ultimate Trigger: [LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, return a Yellow card from your Trash to the Hand.\n[utb]",
+      "teams": [],
       "keywords": [
         {
           "name": "Ultimate Trigger",
-          "parameter": "[LV4",
+          "parameter": null,
           "wave": 3,
           "hook": "ultimate_trigger",
           "bracketed": true,
-          "index": 217
+          "index": 0,
+          "abilityId": "BS27-058#AB_WHEN_ATTACKS_NONE_LV4_LV5_6765347e4f49f9fc6dff97c99fb2f8f67b849fa8fa281f111de57c6fb918e36b_a3831324ea5761ddd2bac70c5465970d",
+          "cardNumber": "BS27-058",
+          "levels": [
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BS27-058#a2"
         }
       ],
       "abilities": [
         {
-          "id": "BS27-058#a0",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -10069,8 +11796,13 @@
               "Summon Condition: You control one or more Yellow Spirits"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -10080,11 +11812,31 @@
             "cleanBody": ""
           },
           "rawText": "[Summon Condition: You control one or more Yellow Spirits]",
+          "originalAbilityText": "[Summon Condition: You control one or more Yellow Spirits]",
+          "abilityIndex": 0,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "SUMMON_CONDITION",
+            "expression": "You control one or more Yellow Spirits",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-058#a0",
+          "keywords": [],
+          "id": "BS27-058#AB_PASSIVE_NONE_LV1_LV2_LV3_ac337b3899c23dd74b9b90d33fb2b365c599c21705005cce18b1fabb5d656ec8_a3d32c7803772d6125f18224e47117d6",
+          "physicalId": "BS27-058#AB_PASSIVE_NONE_LV1_LV2_LV3_ac337b3899c23dd74b9b90d33fb2b365c599c21705005cce18b1fabb5d656ec8_a3d32c7803772d6125f18224e47117d6",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_ac337b3899c23dd74b9b90d33fb2b365c599c21705005cce18b1fabb5d656ec8_a3d32c7803772d6125f18224e47117d6",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_909046efc697336eb7e09f744deafe5ca4093962d4ca94650bfec5b4151b75e2_9aa57ae07b3b92b241a71ac1086ff437",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS27-058#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -10095,8 +11847,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -10105,10 +11866,14 @@
             "isMain": false,
             "cleanBody": "You can summon a \"Vanity Deity\"/\"Imaginary Beast\" family Spirit card/Ultimate card from your Hand, without paying the cost."
           },
+          "originalAbilityText": "[LV3][LV4][LV5] (When Summoned)\nYou can summon a \"Vanity Deity\"/\"Imaginary Beast\" family Spirit card/Ultimate card from your Hand, without paying the cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can summon a \"Vanity Deity\"/\"Imaginary Beast\" family Spirit card/Ultimate card from your Hand, without paying the cost.",
+              "originalClauseText": "You can summon a \"Vanity Deity\"/\"Imaginary Beast\" family Spirit card/Ultimate card from your Hand, without paying the cost.",
               "cleanText": "You can summon a \"Vanity Deity\"/\"Imaginary Beast\" family Spirit card/Ultimate card from your Hand, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -10116,14 +11881,41 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit",
+                    "Ultimate"
+                  ],
+                  "nameIncludes": "Vanity Deity",
+                  "family": "Imaginary Beast"
+                },
+                "free": true,
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-058#a1",
+          "keywords": [],
+          "id": "BS27-058#AB_WHEN_SUMMONED_NONE_LV3_LV4_LV5_8c124bf68cf5b1f7b5ebe3845351cccddba09e98b91a1c97e8b7cb589f9cbc82_4e196d1c79f82bdeeb4b232de0d78208",
+          "physicalId": "BS27-058#AB_WHEN_SUMMONED_NONE_LV3_LV4_LV5_8c124bf68cf5b1f7b5ebe3845351cccddba09e98b91a1c97e8b7cb589f9cbc82_4e196d1c79f82bdeeb4b232de0d78208",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV3_LV4_LV5_8c124bf68cf5b1f7b5ebe3845351cccddba09e98b91a1c97e8b7cb589f9cbc82_4e196d1c79f82bdeeb4b232de0d78208",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV3_LV4_LV5_5b3a270bd3ac966a21475066356ab4758e6fffed8f3132b1938bf5782072a4e0_e0ca50e9098cd50c9836e887fc1030d9",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS27-058#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -10133,8 +11925,15 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Ultimate Trigger",
@@ -10143,25 +11942,81 @@
             "isMain": false,
             "cleanBody": "When Ultimate Trigger hits, return a Yellow card from your Trash to the Hand."
           },
+          "originalAbilityText": "[Ultimate Trigger: [LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, return a Yellow card from your Trash to the Hand.\n[utb]",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When Ultimate Trigger hits, return a Yellow card from your Trash to the Hand.",
+              "originalClauseText": "When Ultimate Trigger hits, return a Yellow card from your Trash to the Hand.",
               "cleanText": "When Ultimate Trigger hits, return a Yellow card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Ultimate"
+                  ],
+                  "color": "Yellow"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS27-058#a2",
+          "keywords": [
+            {
+              "name": "Ultimate Trigger",
+              "parameter": null,
+              "wave": 3,
+              "hook": "ultimate_trigger",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BS27-058#AB_WHEN_ATTACKS_NONE_LV4_LV5_6765347e4f49f9fc6dff97c99fb2f8f67b849fa8fa281f111de57c6fb918e36b_a3831324ea5761ddd2bac70c5465970d",
+              "cardNumber": "BS27-058",
+              "levels": [
+                4,
+                5
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BS27-058#a2"
+            }
+          ],
+          "id": "BS27-058#AB_WHEN_ATTACKS_NONE_LV4_LV5_6765347e4f49f9fc6dff97c99fb2f8f67b849fa8fa281f111de57c6fb918e36b_a3831324ea5761ddd2bac70c5465970d",
+          "physicalId": "BS27-058#AB_WHEN_ATTACKS_NONE_LV4_LV5_6765347e4f49f9fc6dff97c99fb2f8f67b849fa8fa281f111de57c6fb918e36b_a3831324ea5761ddd2bac70c5465970d",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV4_LV5_6765347e4f49f9fc6dff97c99fb2f8f67b849fa8fa281f111de57c6fb918e36b_a3831324ea5761ddd2bac70c5465970d",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV4_LV5_f59cfc7cf02e9dab3116b9fcf46d43d77447ece4b245a4ce44a1a6b0ea53bbab_a1f1e4b403f86625879a17a8d7e45f6b",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,

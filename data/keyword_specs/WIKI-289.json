@@ -1,0 +1,52 @@
+{
+  "canonical_id": "WIKI-289",
+  "canonical_name": "Solo Stage",
+  "aliases": [
+    "ソロステージ"
+  ],
+  "wiki_url": "https://battle-spirits.fandom.com/wiki/Solo_Stage",
+  "official_definition": "Solo Stage - If Soul Core is on this Spirit, \"[NAME]\"-named cards you control can't be destroyed or returned to Hand/Deck from Field by opposing effects.",
+  "ownership_rules": {
+    "native_syntax": "Ability block header contains [Solo Stage] or [Solo Stage: Param]",
+    "prose_exclusion": "Mentions inside body clauses (\"with [Solo Stage]\", \"give [Solo Stage]\") classified as REFERENCES or GRANTED, never NATIVE."
+  },
+  "activation_conditions": {
+    "timing": "PASSIVE",
+    "timing_step": "ANY",
+    "required_zone": "FIELD",
+    "soul_core_required": true
+  },
+  "timing": "PASSIVE",
+  "costs": {
+    "description": "None (Standard ability activation)",
+    "payment_destination": "NONE"
+  },
+  "targets": {
+    "eligibility": "OPPOSING_FIELD",
+    "selection_type": "AUTOMATIC_RULES"
+  },
+  "player_decisions": "DETERMINISTIC_RULES_RESOLUTION",
+  "restrictions": {
+    "once_per_turn": false,
+    "cant_stack": false,
+    "same_name": false
+  },
+  "resolution": {
+    "description": "Mutates game state as specified by official effect text.",
+    "destination_zone": "FIELD"
+  },
+  "interactions": {
+    "armor_immunity_applicable": true,
+    "replacement_effect": false
+  },
+  "variants": [],
+  "official_examples": [
+    "BATTLE-SPIRITS-A15265"
+  ],
+  "unresolved_rules": [],
+  "implementation_status": "CORPUS_REPRESENTED",
+  "evidence_references": [
+    "WIKI: https://battle-spirits.fandom.com/wiki/Solo_Stage",
+    "CORPUS_NATIVE_COUNT: 1"
+  ]
+}

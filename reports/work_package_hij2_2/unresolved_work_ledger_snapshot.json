@@ -1,0 +1,223 @@
+{
+  "snapshotCreatedAt": "2026-11-19T14:41:47.614Z",
+  "sourceCanonicalLedger": "reports/work_package_hij2_1/unresolved_work_ledger.json",
+  "identicalToHij2Copy": true,
+  "generatedAt": "2026-11-19T14:22:10.087Z",
+  "package": "Work Package J.2.1",
+  "totalsCheck": {
+    "blockedCards": 4,
+    "compilerDriftCards": 2,
+    "incompleteParameters": 582,
+    "conditionParseFailures": 1115,
+    "unverifiedOperationVariants": 118,
+    "unsupportedOperationVariants": 17,
+    "manualReviewCards": 11794,
+    "manualReviewAbilities": 17393
+  },
+  "items": [
+    {
+      "stableId": "UNRES-BLK-26RBS02-083",
+      "category": "BLOCKED_CARD",
+      "cardOrOpRef": {
+        "cardNumber": "26RBS02-083",
+        "op": "BOUNCE",
+        "shard": "26RBS02.json",
+        "abIdx": 0
+      },
+      "originalJ2Classification": "REMAINS_BLOCKED_RUNTIME_OR_SOURCE",
+      "distinctionType": "NOT_PARSED",
+      "reason": "Printed ability is a replacement effect (\"All opposing Cost 5 or less Spirits that are destroyed at 0 BP are returned to the deckbottom instead of being sent to the Trash\"), currently miscompiled as BOUNCE { side: \"either\" }.",
+      "evidenceRef": "reports/work_package_hij2/twenty_two_card_disposition.json",
+      "impactScope": "RUNTIME_CORRECTNESS",
+      "recommendedNextAction": "Author replacement-effect IR and runtime hook for BOUNCE-instead-of-Trash on 0-BP destruction in Package K.",
+      "status": "BLOCKED",
+      "count": 1
+    },
+    {
+      "stableId": "UNRES-BLK-26RDB01-024",
+      "category": "BLOCKED_CARD",
+      "cardOrOpRef": {
+        "cardNumber": "26RDB01-024",
+        "op": "BOUNCE",
+        "shard": "26RDB01.json",
+        "abIdx": 2
+      },
+      "originalJ2Classification": "REMAINS_BLOCKED_RUNTIME_OR_SOURCE",
+      "distinctionType": "NOT_PARSED",
+      "reason": "Printed ability is opponent hand-to-deckbottom with optional 2-cost payment (\"if you pay two costs, the opponent returns a card from their Hand to the deckbottom\"), currently miscompiled as BOUNCE { side: \"either\" }.",
+      "evidenceRef": "reports/work_package_hij2/twenty_two_card_disposition.json",
+      "impactScope": "RUNTIME_CORRECTNESS",
+      "recommendedNextAction": "Split conditional cost + hand-zone target selection into structured IR in Package K.",
+      "status": "BLOCKED",
+      "count": 1
+    },
+    {
+      "stableId": "UNRES-BLK-26RSD07-001",
+      "category": "BLOCKED_CARD",
+      "cardOrOpRef": {
+        "cardNumber": "26RSD07-001",
+        "op": "BOUNCE",
+        "shard": "26RSD07.json",
+        "abIdx": 0
+      },
+      "originalJ2Classification": "REMAINS_BLOCKED_RUNTIME_OR_SOURCE",
+      "distinctionType": "NOT_PARSED",
+      "reason": "Printed ability is a compound cost-to-deploy clause (\"Return this Spirit to the deckbottom ▶ You can deploy a \"CODE Zeroider\" from your Hand, without paying the cost\"), currently compiled as single BOUNCE { side: \"either\" }.",
+      "evidenceRef": "reports/work_package_hij2/twenty_two_card_disposition.json",
+      "impactScope": "RUNTIME_CORRECTNESS",
+      "recommendedNextAction": "Separate self-deckbottom cost clause and free deploy clause in Package K.",
+      "status": "BLOCKED",
+      "count": 1
+    },
+    {
+      "stableId": "UNRES-BLK-BS27-082",
+      "category": "BLOCKED_CARD",
+      "cardOrOpRef": {
+        "cardNumber": "BS27-082",
+        "op": "BP_DEBUFF",
+        "shard": "BS27.json",
+        "abIdx": 0
+      },
+      "originalJ2Classification": "REMAINS_BLOCKED_RUNTIME_OR_SOURCE",
+      "distinctionType": "RUNTIME_BLOCKED_BY_MISSING_CONTEXT",
+      "reason": "IR specifies target { side: \"opp\", types: [\"Ultimate\"], state: \"BATTLING\" }; generic non-battle E2E helper does not initialize active state.battle.",
+      "evidenceRef": "reports/work_package_hij2/twenty_two_card_disposition.json",
+      "impactScope": "CONFIDENCE_ONLY",
+      "recommendedNextAction": "Add battle-context E2E scenario in Package K / dedicated battle-window test.",
+      "status": "READY_FOR_FOLLOWUP",
+      "count": 1
+    },
+    {
+      "stableId": "UNRES-DRIFT-BS19-X05",
+      "category": "COMPILER_DRIFT_CARD",
+      "cardOrOpRef": {
+        "cardNumber": "BS19-X05",
+        "op": "BP_DEBUFF",
+        "shard": "BS19.json",
+        "abIdx": 0
+      },
+      "originalJ2Classification": "RESOLVED_IR_PASS_COMPILER_DRIFT",
+      "distinctionType": "COMPILER_DRIFT",
+      "reason": "Stored IR has full target/count for \"give two opposing Spirits -3000 BP\" and passes runtime E2E, while fresh compileCard() falls back to bare BP_DEBUFF without target.",
+      "evidenceRef": "reports/work_package_hij2/twenty_two_card_disposition.json",
+      "impactScope": "COMPILER_COVERAGE",
+      "recommendedNextAction": "Align compiler BP_DEBUFF pattern precedence with stored IR.",
+      "status": "READY_FOR_FOLLOWUP",
+      "count": 1
+    },
+    {
+      "stableId": "UNRES-DRIFT-BS33-069",
+      "category": "COMPILER_DRIFT_CARD",
+      "cardOrOpRef": {
+        "cardNumber": "BS33-069",
+        "op": "BP_DEBUFF",
+        "shard": "BS33.json",
+        "abIdx": 0
+      },
+      "originalJ2Classification": "RESOLVED_IR_PASS_COMPILER_DRIFT",
+      "distinctionType": "COMPILER_DRIFT",
+      "reason": "Stored IR includes duration while fresh compileCard() omits duration on \"All battling opposing Spirits get -3000 BP\"; runtime E2E passes.",
+      "evidenceRef": "reports/work_package_hij2/twenty_two_card_disposition.json",
+      "impactScope": "COMPILER_COVERAGE",
+      "recommendedNextAction": "Add default battle-duration extraction for \"battling ... get -N BP\" in compiler.",
+      "status": "READY_FOR_FOLLOWUP",
+      "count": 1
+    },
+    {
+      "stableId": "UNRES-AGG-INCOMPLETE-PARAMS-582",
+      "category": "INCOMPLETE_PARAMETERS",
+      "cardOrOpRef": {
+        "scope": "corpus_clauses",
+        "totalClauses": 51734
+      },
+      "originalJ2Classification": "PARAMETERS_INCOMPLETE",
+      "distinctionType": "NOT_PARSED",
+      "reason": "582 operation clauses remain bare stubs or missing required parameters (e.g. DECK_OR_HAND_ACTION, MODIFY_EFFECT, COUNT_OPERATION, REPLACEMENT_EFFECT) because source wording requires semantic/Package K authoring and must not be fabricated.",
+      "evidenceRef": "reports/work_package_hij2/incomplete_parameter_disposition.json",
+      "impactScope": "COMPILER_COVERAGE",
+      "recommendedNextAction": "Author deterministic parameter extraction or Package K per-card overrides for the remaining 582 clauses.",
+      "status": "OPEN",
+      "count": 582
+    },
+    {
+      "stableId": "UNRES-AGG-CONDITION-PARSE-FAILURES-1115",
+      "category": "CONDITION_PARSE_FAILURE",
+      "cardOrOpRef": {
+        "scope": "corpus_conditions",
+        "totalConditions": 4940
+      },
+      "originalJ2Classification": "PARSE_FAILURE",
+      "distinctionType": "NOT_PARSED",
+      "reason": "1,115 condition strings across 4,940 reconciled condition instances fail structured parsing and fail closed to UNSUPPORTED at runtime.",
+      "evidenceRef": "reports/work_package_hij2/condition_audit_hij2.json",
+      "impactScope": "COMPILER_COVERAGE",
+      "recommendedNextAction": "Expand deterministic condition parser patterns in engine/conditions.js in follow-up package.",
+      "status": "OPEN",
+      "count": 1115
+    },
+    {
+      "stableId": "UNRES-AGG-OP-VARIANTS-UNVERIFIED-118",
+      "category": "OPERATION_VARIANT_UNVERIFIED",
+      "cardOrOpRef": {
+        "scope": "operation_variants",
+        "totalVariants": 338
+      },
+      "originalJ2Classification": "HANDLER_PRESENT_UNVERIFIED",
+      "distinctionType": "PARSED_NOT_VERIFIED",
+      "reason": "118 parameterized operation variants have handlers implemented in engine/ops/index.js but lack dedicated semantic evidence tests.",
+      "evidenceRef": "reports/work_package_fg/shard_audit_summary.json",
+      "impactScope": "CONFIDENCE_ONLY",
+      "recommendedNextAction": "Add production semantic tests and register exact variant evidence in scripts/evidence_registry.mjs.",
+      "status": "OPEN",
+      "count": 118
+    },
+    {
+      "stableId": "UNRES-AGG-OP-VARIANTS-UNSUPPORTED-17",
+      "category": "OPERATION_VARIANT_UNSUPPORTED",
+      "cardOrOpRef": {
+        "scope": "operation_variants",
+        "totalVariants": 338
+      },
+      "originalJ2Classification": "PARTIALLY_SUPPORTED",
+      "distinctionType": "NOT_IMPLEMENTED",
+      "reason": "17 parameterized operation variants are explicitly marked unsupported/partial and fail closed until implemented.",
+      "evidenceRef": "reports/work_package_fg/shard_audit_summary.json",
+      "impactScope": "RUNTIME_CORRECTNESS",
+      "recommendedNextAction": "Implement missing variant branches in engine/ops/index.js and verify with negative + positive tests.",
+      "status": "OPEN",
+      "count": 17
+    },
+    {
+      "stableId": "UNRES-AGG-MANUAL-REVIEW-CARDS-11794",
+      "category": "MANUAL_REVIEW_CARDS",
+      "cardOrOpRef": {
+        "scope": "corpus_cards",
+        "totalCards": 15398
+      },
+      "originalJ2Classification": "NEEDS_MANUAL_REVIEW",
+      "distinctionType": "MANUAL_REVIEW_REQUIRED",
+      "reason": "11,794 cards contain at least one ability with unverified timing, unverified target semantics, missing semantic test evidence, incomplete parameters, or unsupported variant.",
+      "evidenceRef": "reports/work_package_fg/shard_audit_summary.json",
+      "impactScope": "COMPILER_COVERAGE",
+      "recommendedNextAction": "Resolve per-card semantics and verification in Package K.",
+      "status": "OPEN",
+      "count": 11794
+    },
+    {
+      "stableId": "UNRES-AGG-MANUAL-REVIEW-ABILITIES-17393",
+      "category": "MANUAL_REVIEW_ABILITIES",
+      "cardOrOpRef": {
+        "scope": "corpus_abilities",
+        "totalAbilities": 36422
+      },
+      "originalJ2Classification": "NEEDS_MANUAL_REVIEW",
+      "distinctionType": "MANUAL_REVIEW_REQUIRED",
+      "reason": "17,393 abilities require manual review across missing semantic test evidence (12,192), unverified trigger timing (2,642), unverified target semantics (2,003), incomplete params (419), unsupported variant (136), and replacement interaction (1).",
+      "evidenceRef": "reports/work_package_fg/shard_audit_summary.json",
+      "impactScope": "COMPILER_COVERAGE",
+      "recommendedNextAction": "Address systematically in Package K card implementation and evidence expansion.",
+      "status": "OPEN",
+      "count": 17393
+    }
+  ]
+}

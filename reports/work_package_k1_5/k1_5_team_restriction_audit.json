@@ -1,0 +1,29 @@
+{
+  "package": "K.1.5",
+  "generatedAt": "2026-11-20T11:22:47.728Z",
+  "reconciliation691Vs748Vs750": {
+    "k133Count": 691,
+    "k133Reason": "Anchored regex /^\\[team/ on line 1 matched only cards starting directly with [team:/[teams:",
+    "k134Count": 748,
+    "k134Reason": "Scanned full text and included 57 cards starting with \"Legacy\\n\\n[team: ...\" (691 + 57 = 748)",
+    "k134CandidatePoolCount": 750,
+    "remaining2Records": {
+      "count": 2,
+      "ids": [
+        "BSC28.json::CADEMY-TRICKSTER#a0",
+        "CADEMY.json::CADEMY-TRICKSTER#a0"
+      ],
+      "reason": "Missing from data/cards_detailed.json (cannot confirm team tag without source text; kept explicitly unresolved)"
+    },
+    "liveDetailedScanMatchedCount": 763,
+    "startsAtLine1Observed": 691,
+    "legacyPrefixObserved": 17
+  },
+  "runtimeConsumersVerified": {
+    "compilerExtraction": "compileCard in compiler/index.js populates card.teams via parseTeamTags",
+    "prerequisiteHelpers": "hasTeam & extractCardTeams in engine/prerequisites.js (reads static teams + GAIN_TEAM/TEAM_RULE modifiers)",
+    "selectorEnforcement": "queryCandidates & matchesFilter in engine/selectors.js enforce filters.team & filters.teams across field/nexus/hand/grave/revealed/removed",
+    "conditionEnforcement": "TEAM_PRESENCE & FIELD_COMPOSITION & cardMatchesFilterSpec in engine/conditions.js evaluate all-team and distinct-team count rules",
+    "behavioralTest": "K1.5-C1 (tests/work_package_k1_5_foundation_closure.test.js)"
+  }
+}

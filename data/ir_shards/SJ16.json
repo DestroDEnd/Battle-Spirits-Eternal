@@ -1,1 +1,2369 @@
-{"SJ16-08":{"cardNumber":"SJ16-08","name":"The RedKnight ChickenKnight","keywords":[],"abilities":[{"id":"SJ16-08#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit's color and symbol are also treated as Green."},"clauses":[{"rawText":"This Spirit's color and symbol are also treated as Green.","cleanText":"This Spirit's color and symbol are also treated as Green","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TREAT_COLOR_SYMBOL","color":"Green"}}],"unsupported":[]},{"id":"SJ16-08#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"MAIN_STEP","timingLabel":"Your Main Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When summoning [The ScarletPhoenix Gale-Phoenix-Igna] from your Hand, its cost gets -1."},"clauses":[{"rawText":"When summoning [The ScarletPhoenix Gale-Phoenix-Igna] from your Hand, its cost gets -1.","cleanText":"When summoning [The ScarletPhoenix Gale-Phoenix-Igna] from your Hand, its cost gets -1","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"SJ16-03":{"cardNumber":"SJ16-03","name":"Bird Beast Demon-God","keywords":[{"name":"Brave","parameter":"[Right","wave":3,"hook":"brave","bracketed":true,"index":0}],"abilities":[{"id":"SJ16-03#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Brave Condition: [Right","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Cost 4 or more<br>[Left] Cost 4 or more]"},"rawText":"[Brave Condition: [Right] Cost 4 or more<br>[Left] Cost 4 or more]","clauses":[],"unsupported":[]},{"id":"SJ16-03#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Brave doesn't exhaust, and while in Spirit condition, can't attack or block."},"clauses":[{"rawText":"This Brave doesn't exhaust, and while in Spirit condition, can't attack or block.","cleanText":"This Brave doesn't exhaust, and while in Spirit condition, can't attack or block","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SET_RESTRICTION","restriction":"CANNOT_ATTACK_OR_BLOCK"}}],"unsupported":[]},{"id":"SJ16-03#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"When Brave on the Right","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"For each core on this Spirit, destroy an opposing 5000 BP or less Spirit."},"clauses":[{"rawText":"For each core on this Spirit, destroy an opposing 5000 BP or less Spirit.","cleanText":"For each core on this Spirit, destroy an opposing 5000 BP or less Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"bpLte":5000}}}}],"unsupported":[]},{"id":"SJ16-03#a3","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"When Brave on the Left","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Put a core from the Void to any of your Brave Spirits, and exhaust an opposing Spirit."},"clauses":[{"rawText":"Put a core from the Void to any of your Brave Spirits","cleanText":"Put a core from the Void to any of your Brave Spirits","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"exhaust an opposing Spirit.","cleanText":"exhaust an opposing Spirit","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","isHeavy":false,"count":1,"target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"SJ16-02":{"cardNumber":"SJ16-02","name":"Gale-Phoenix-Peacock","keywords":[{"name":"Seal","parameter":"Seal","wave":2,"hook":"seal","bracketed":true,"index":91},{"name":"Seal","parameter":"When Sealed","wave":2,"hook":"seal","bracketed":true,"index":187}],"abilities":[{"id":"SJ16-02#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Put two cores from the Void to any of your Spirits."},"clauses":[{"rawText":"Put two cores from the Void to any of your Spirits.","cleanText":"Put two cores from the Void to any of your Spirits","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]},{"id":"SJ16-02#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":["Seal: Seal"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can send [Soul Core](Soul Core) from this Spirit to your Life."},"clauses":[{"rawText":"You can send [Soul Core] from this Spirit to your Life.","cleanText":"You can send [Soul Core] from this Spirit to your Life","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_SOUL_CORE"}}],"unsupported":[]},{"id":"SJ16-02#a2","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":["Seal: When Sealed"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"At the end of the battle, once per turn, this Spirit refreshes."},"clauses":[{"rawText":"At the end of the battle, once per turn, this Spirit refreshes.","cleanText":"At the end of the battle, once per turn, this Spirit refreshes","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":"self"}}],"unsupported":[]},{"id":"SJ16-02#a3","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"The opponent can't activate Bursts."},"clauses":[{"rawText":"The opponent can't activate Bursts.","cleanText":"The opponent can't activate Bursts","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"SJ16-04":{"cardNumber":"SJ16-04","name":"Gale Lord Wind","keywords":[],"abilities":[{"id":"SJ16-04#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"Exhaust an opposing Spirit."},"clauses":[{"rawText":"Exhaust an opposing Spirit.","cleanText":"Exhaust an opposing Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","isHeavy":false,"count":1,"target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]},{"id":"SJ16-04#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["During Seal"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Then, return an opposing exhausted Spirit to the Hand."},"clauses":[{"rawText":"return an opposing exhausted Spirit to the Hand.","cleanText":"return an opposing exhausted Spirit to the Hand","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"SJ16-11":{"cardNumber":"SJ16-11","name":"Omni Demon-God","keywords":[{"name":"Brave","parameter":"[Right","wave":3,"hook":"brave","bracketed":true,"index":0}],"abilities":[{"id":"SJ16-11#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Brave Condition: [Right","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Cost 3 or more<br>[Left] Cost 3 or more]"},"rawText":"[Brave Condition: [Right] Cost 3 or more<br>[Left] Cost 3 or more]","clauses":[],"unsupported":[]},{"id":"SJ16-11#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Brave doesn't exhaust, can't attack or block while in Spirit condition, and can't be summoned without paying at least one cost."},"clauses":[{"rawText":"This Brave doesn't exhaust, can't attack or block while in Spirit condition, and can't be summoned without paying at least one cost.","cleanText":"This Brave doesn't exhaust, can't attack or block while in Spirit condition, and can't be summoned without paying at least one cost","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SET_RESTRICTION","restriction":"CANNOT_ATTACK_OR_BLOCK"}}],"unsupported":[]},{"id":"SJ16-11#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"When Braved on the Right","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can discard a card from the opposing decktop. When this effect discards any Spirit card, this Spirit can't be blocked."},"clauses":[{"rawText":"You can discard a card from the opposing decktop.","cleanText":"You can discard a card from the opposing decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MILL_DECK","side":"opp"}},{"rawText":"When this effect discards any Spirit card, this Spirit can't be blocked.","cleanText":"When this effect discards any Spirit card, this Spirit can't be blocked","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNBLOCKABLE","target":"self"}}],"unsupported":[]},{"id":"SJ16-11#a3","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"When Braved on the Left","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"By returning an opposing 5000 BP or less Spirit to the decktop, draw a card."},"clauses":[{"rawText":"By returning an opposing 5000 BP or less Spirit to the decktop","cleanText":"By returning an opposing 5000 BP or less Spirit to the decktop","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}},{"rawText":"draw a card.","cleanText":"draw a card","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"SJ16-01":{"cardNumber":"SJ16-01","name":"The CrimsonSacredHorse Execeed-Red","keywords":[{"name":"Seal","parameter":"Seal","wave":2,"hook":"seal","bracketed":true,"index":16},{"name":"Seal","parameter":"When Sealed","wave":2,"hook":"seal","bracketed":true,"index":117}],"abilities":[{"id":"SJ16-01#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":["Seal: Seal"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can send the [Soul Core] (Soul Core) from this Spirit to your Life."},"clauses":[{"rawText":"You can send the [Soul Core] (Soul Core) from this Spirit to your Life.","cleanText":"You can send the [Soul Core] (Soul Core) from this Spirit to your Life","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_SOUL_CORE"}}],"unsupported":[]},{"id":"SJ16-01#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":["Seal: When Sealed"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can target and attack an opposing Spirit/Ultimate. At the end of a blocked battle, send an opposing Life to their Reserve, and draw a card."},"clauses":[{"rawText":"You can target and attack an opposing Spirit/Ultimate.","cleanText":"You can target and attack an opposing Spirit/Ultimate","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"TARGET_ATTACK","target":{"side":"opp","types":["Spirit"]}}},{"rawText":"At the end of a blocked battle, send an opposing Life to their Reserve","cleanText":"At the end of a blocked battle, send an opposing Life to their Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"life","side":"opp"},"to":{"zone":"reserve","side":"opp"}}},{"rawText":"draw a card.","cleanText":"draw a card","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]},{"id":"SJ16-01#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit gains +10000 BP."},"clauses":[{"rawText":"This Spirit gains +10000 BP.","cleanText":"This Spirit gains +10000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BP_BUFF","amount":10000,"target":"target","duration":"THIS_TURN"}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"SJ16-10":{"cardNumber":"SJ16-10","name":"The GreenBeastWarrior Koleon","keywords":[],"abilities":[{"id":"SJ16-10#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit's color and symbol are also treated as Red."},"clauses":[{"rawText":"This Spirit's color and symbol are also treated as Red.","cleanText":"This Spirit's color and symbol are also treated as Red","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TREAT_COLOR_SYMBOL","color":"Red"}}],"unsupported":[]},{"id":"SJ16-10#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"MAIN_STEP","timingLabel":"Your Main Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When summoning [The VerdantSacredHorse Execeed-Green] from your Hand, its cost gets -1."},"clauses":[{"rawText":"When summoning [The VerdantSacredHorse Execeed-Green] from your Hand, its cost gets -1.","cleanText":"When summoning [The VerdantSacredHorse Execeed-Green] from your Hand, its cost gets -1","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"SJ16-06":{"cardNumber":"SJ16-06","name":"The Kappa Kawatarou","keywords":[],"abilities":[{"id":"SJ16-06#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"you can send the [Soul Core] (Soul Core) from a Spirit you control to another Spirit you control. When you've done so, refresh the Spirit you control with [Soul Core] (Soul Core) being sent to it."},"clauses":[{"rawText":"you can send the [Soul Core] (Soul Core) from a Spirit you control to another Spirit you control.","cleanText":"you can send the [Soul Core] (Soul Core) from a Spirit you control to another Spirit you control","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_SOUL_CORE"}},{"rawText":"refresh the Spirit you control with [Soul Core] (Soul Core) being sent to it.","cleanText":"refresh the Spirit you control with [Soul Core] (Soul Core) being sent to it","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"SJ16-16":{"cardNumber":"SJ16-16","name":"The NinthHorseEmperor Exeseburn","keywords":[],"abilities":[{"id":"SJ16-16#a0","type":"ABILITY","header":{"levels":[1,2,3,4],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"During this turn, this Spirit is treated as being on its highest level."},"clauses":[{"rawText":"During this turn, this Spirit is treated as being on its highest level.","cleanText":"this Spirit is treated as being on its highest level","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"TREAT_RULE"}}],"unsupported":[]},{"id":"SJ16-16#a1","type":"ABILITY","header":{"levels":[1,2,3,4],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can target and attack an opposing Spirit/Ultimate."},"clauses":[{"rawText":"You can target and attack an opposing Spirit/Ultimate.","cleanText":"You can target and attack an opposing Spirit/Ultimate","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"TARGET_ATTACK","target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]},{"id":"SJ16-16#a2","type":"ABILITY","header":{"levels":[2,3,4],"levelExplicit":true,"prefixes":["During Seal"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"By destroying an opposing Spirit/Ultimate with BP equal or inferior to this Spirit's, send an opposing Life to their Reserve."},"clauses":[{"rawText":"By destroying an opposing Spirit/Ultimate with BP equal or inferior to this Spirit's","cleanText":"By destroying an opposing Spirit/Ultimate with BP equal or inferior to this Spirit's","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}},{"rawText":"send an opposing Life to their Reserve.","cleanText":"send an opposing Life to their Reserve","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"life","side":"opp"},"to":{"zone":"reserve","side":"opp"}}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"SJ16-07":{"cardNumber":"SJ16-07","name":"The ScarletPhoenix Gale-Phoenix-Igna","keywords":[{"name":"Seal","parameter":"Seal","wave":2,"hook":"seal","bracketed":true,"index":11},{"name":"Seal","parameter":"When Sealed","wave":2,"hook":"seal","bracketed":true,"index":107}],"abilities":[{"id":"SJ16-07#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":["Seal: Seal"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can send [Soul Core](Soul Core) from this Spirit to your Life."},"clauses":[{"rawText":"You can send [Soul Core] from this Spirit to your Life.","cleanText":"You can send [Soul Core] from this Spirit to your Life","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_SOUL_CORE"}}],"unsupported":[]},{"id":"SJ16-07#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":["Seal: When Sealed"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"refresh one of your \"God-King\"/\"Ten Crown\" family Spirits."},"clauses":[{"rawText":"refresh one of your \"God-King\"/\"Ten Crown\" family Spirits.","cleanText":"refresh one of your \"God-King\"/\"Ten Crown\" family Spirits","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":{"side":"either"}}}],"unsupported":[]},{"id":"SJ16-07#a2","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your \"God-King\"/\"Ten Crown\" family Spirit attacks, draw a card."},"clauses":[{"rawText":"When your \"God-King\"/\"Ten Crown\" family Spirit attacks, draw a card.","cleanText":"When your \"God-King\"/\"Ten Crown\" family Spirit attacks, draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"SJ16-05":{"cardNumber":"SJ16-05","name":"The StrongestBossMonkey Arashi","keywords":[],"abilities":[{"id":"SJ16-05#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit gains +10000 BP."},"clauses":[{"rawText":"This Spirit gains +10000 BP.","cleanText":"This Spirit gains +10000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BP_BUFF","amount":10000,"target":"target","duration":"THIS_TURN"}}],"unsupported":[]},{"id":"SJ16-05#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit can't be destroyed."},"clauses":[{"rawText":"This Spirit can't be destroyed.","cleanText":"This Spirit can't be destroyed","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"INDESTRUCTIBLE"}}],"unsupported":[]},{"id":"SJ16-05#a2","type":"ABILITY","header":{"levels":[3],"levelExplicit":true,"prefixes":["During Seal"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can destroy an opposing 20000 BP or less Spirit."},"clauses":[{"rawText":"You can destroy an opposing 20000 BP or less Spirit.","cleanText":"You can destroy an opposing 20000 BP or less Spirit","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"bpLte":20000}}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"SJ16-09":{"cardNumber":"SJ16-09","name":"The VerdantSacredHorse Execeed-Green","keywords":[{"name":"Seal","parameter":"Seal","wave":2,"hook":"seal","bracketed":true,"index":16},{"name":"Seal","parameter":"When Sealed","wave":2,"hook":"seal","bracketed":true,"index":116}],"abilities":[{"id":"SJ16-09#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":["Seal: Seal"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can send the [Soul Core](Soul Core) from this Spirit to your Life."},"clauses":[{"rawText":"You can send the [Soul Core] from this Spirit to your Life.","cleanText":"You can send the [Soul Core] from this Spirit to your Life","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_SOUL_CORE"}}],"unsupported":[]},{"id":"SJ16-09#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":["Seal: When Sealed"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"While your \"God-King\"/\"Ten Crown\" family Spirit is attacking, the opponent can't activate Bursts."},"clauses":[{"rawText":"While your \"God-King\"/\"Ten Crown\" family Spirit is attacking, the opponent can't activate Bursts.","cleanText":"the opponent can't activate Bursts","link":null,"isOptional":false,"isCost":false,"condition":"While your \"God-King\"/\"Ten Crown\" family Spirit is attacking","duration":null,"op":{"op":"KEYWORD_RULE"}}],"unsupported":[]},{"id":"SJ16-09#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When only the opposing Spirit is destroyed by BP comparison, this Spirit refreshes."},"clauses":[{"rawText":"When only the opposing Spirit is destroyed by BP comparison, this Spirit refreshes.","cleanText":"When only the opposing Spirit is destroyed by BP comparison, this Spirit refreshes","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":"self"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"SJ16-14":{"cardNumber":"SJ16-14","name":"Ultimate-Dragonic-Taurus","keywords":[{"name":"Double Ultimate Trigger","parameter":"[LV3","wave":3,"hook":"ultimate_trigger","bracketed":true,"index":57},{"name":"Double Hit","parameter":null,"wave":3,"hook":"double_hit","bracketed":true,"index":187}],"abilities":[{"id":"SJ16-14#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Summon Condition: You control one or more Red Spirits"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Summon Condition: You control one or more Red Spirits]","clauses":[],"unsupported":[]},{"id":"SJ16-14#a1","type":"ABILITY","header":{"levels":[3,4,5],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Double Ultimate Trigger","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"For each Ultimate Trigger hit, this Ultimate gains an extra Red Symbol. [Double Hit] When it hits twice, also, you can target and attack an opposing Spirit. Compare the number of symbols with the opposing blocking Spirit, and for each symbol this Ultimate has more than the blocking Spirit, send an opposing Life to their Reserve."},"clauses":[{"rawText":"For each Ultimate Trigger hit, this Ultimate gains an extra Red Symbol.","cleanText":"For each Ultimate Trigger hit, this Ultimate gains an extra Red Symbol","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_SYMBOL"}},{"rawText":"[Double Hit] When it hits twice, also, you can target and attack an opposing Spirit.","cleanText":"[Double Hit] When it hits twice, also, you can target and attack an opposing Spirit","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"TARGET_ATTACK","target":{"side":"opp","types":["Spirit"]}}},{"rawText":"Compare the number of symbols with the opposing blocking Spirit, and for each symbol this Ultimate has more than the blocking Spirit, send an opposing Life to their Reserve.","cleanText":"Compare the number of symbols with the opposing blocking Spirit, and for each symbol this Ultimate has more than the blocking Spirit, send an opposing Life to their Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"life","side":"opp"},"to":{"zone":"reserve","side":"opp"}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"SJ16-15":{"cardNumber":"SJ16-15","name":"Ultimate-Cancerd","keywords":[{"name":"Ultimate Trigger","parameter":"[LV3","wave":3,"hook":"ultimate_trigger","bracketed":true,"index":59},{"name":"Critical Hit","parameter":null,"wave":3,"hook":"critical_hit","bracketed":true,"index":280}],"abilities":[{"id":"SJ16-15#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Summon Condition: You control one or more Green Spirits"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Summon Condition: You control one or more Green Spirits]","clauses":[],"unsupported":[]},{"id":"SJ16-15#a1","type":"ABILITY","header":{"levels":[3,4],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Ultimate Trigger","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When Ultimate Trigger hits, the opponent can't block unless they block with two Spirits or two Ultimates. When this Ultimate is blocked, choose one of them to battle against. [Critical Hit] If the hit card is a Spirit card, also, when this Ultimate's attack reduces the opposing Life, send two opposing Lives to their Reserve."},"clauses":[{"rawText":"When Ultimate Trigger hits, the opponent can't block unless they block with two Spirits or two Ultimates.","cleanText":"When Ultimate Trigger hits, the opponent can't block unless they block with two Spirits or two Ultimates","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"COMBAT_RESTRICTION"}},{"rawText":"When this Ultimate is blocked, choose one of them to battle against.","cleanText":"When this Ultimate is blocked, choose one of them to battle against","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"CHOOSE_BLOCKER"}},{"rawText":"[Critical Hit] If the hit card is a Spirit card, also, when this Ultimate's attack reduces the opposing Life, send two opposing Lives to their Reserve.","cleanText":"[Critical Hit] If the hit card is a Spirit card, also, when this Ultimate's attack reduces the opposing Life, send two opposing Lives to their Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"SJ16-12":{"cardNumber":"SJ16-12","name":"Two-Headed Demon-God","keywords":[{"name":"Brave","parameter":"[Right","wave":3,"hook":"brave","bracketed":true,"index":0},{"name":"Assault","parameter":"1","wave":1,"hook":"assault","bracketed":true,"index":174}],"abilities":[{"id":"SJ16-12#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Brave Condition: [Right","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Cost 5 or more<br>[Left] Cost 5 or more]"},"rawText":"[Brave Condition: [Right] Cost 5 or more<br>[Left] Cost 5 or more]","clauses":[],"unsupported":[]},{"id":"SJ16-12#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Brave doesn't exhaust, and while in Spirit condition, can't attack or block."},"clauses":[{"rawText":"This Brave doesn't exhaust, and while in Spirit condition, can't attack or block.","cleanText":"This Brave doesn't exhaust, and while in Spirit condition, can't attack or block","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SET_RESTRICTION","restriction":"CANNOT_ATTACK_OR_BLOCK"}}],"unsupported":[]},{"id":"SJ16-12#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Assault: 1","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit can, once per turn, be refreshed by exhausting one of your Nexuses."},"clauses":[{"rawText":"This Spirit can, once per turn, be refreshed by exhausting one of your Nexuses.","cleanText":"This Spirit can, once per turn, be refreshed by exhausting one of your Nexuses","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH_BY_EXHAUSTING_NEXUS","target":"self"}}],"unsupported":[]},{"id":"SJ16-12#a3","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"When Braved on Left","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"By sending a core from any opposing Spirits to their Reserve, you can deploy a Nexus card from your Trash, without paying the cost."},"clauses":[{"rawText":"By sending a core from any opposing Spirits to their Reserve","cleanText":"By sending a core from any opposing Spirits to their Reserve","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"you can deploy a Nexus card from your Trash, without paying the cost.","cleanText":"you can deploy a Nexus card from your Trash, without paying the cost","link":"byDoing","isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DEPLOY_NEXUS","from":"trash","free":true}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"SJ16-13":{"cardNumber":"SJ16-13","name":"Ultimate-Strikewurm-Leo","keywords":[{"name":"Ultimate Trigger","parameter":"[LV3","wave":3,"hook":"ultimate_trigger","bracketed":true,"index":59},{"name":"Cross Ultimate Trigger","parameter":null,"wave":3,"hook":"cross_ultimate_trigger","bracketed":true,"index":325}],"abilities":[{"id":"SJ16-13#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Summon Condition: You control one or more White Spirits"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Summon Condition: You control one or more White Spirits]","clauses":[],"unsupported":[]},{"id":"SJ16-13#a1","type":"ABILITY","header":{"levels":[3,4,5],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS_OR_BLOCKS","timingLabel":"When Attacks/Blocks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Ultimate Trigger","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When Ultimate Trigger hits, during this turn, make the Ultimate symbols of one of your Ultimates become two. After Ultimate Trigger, if your Life is at three or less, also, proceed to Cross Ultimate-Trigger.\n[Cross Ultimate Trigger] When Cross Ultimate Trigger hits, once per turn, refresh one of your Ultimates."},"clauses":[{"rawText":"When Ultimate Trigger hits, during this turn, make the Ultimate symbols of one of your Ultimates become two.","cleanText":"When Ultimate Trigger hits, during this turn, make the Ultimate symbols of one of your Ultimates become two","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"ADD_SYMBOL"}},{"rawText":"After Ultimate Trigger, if your Life is at three or less, also, proceed to Cross Ultimate-Trigger.","cleanText":"After Ultimate Trigger, if your Life is at three or less, also, proceed to Cross Ultimate-Trigger","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ACTIVATE_EFFECT_ACTION"}},{"rawText":"[Cross Ultimate Trigger] When Cross Ultimate Trigger hits, once per turn, refresh one of your Ultimates.","cleanText":"[Cross Ultimate Trigger] When Cross Ultimate Trigger hits, once per turn, refresh one of your Ultimates","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","count":1,"target":{"side":"self","types":["Ultimate"]}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "SJ16-08": {
+    "cardNumber": "SJ16-08",
+    "name": "The RedKnight ChickenKnight",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SJ16-08#AB_PASSIVE_NONE_LV1_LV2_LV3_1329795db1ca9efea4226d89dae24f490d1d8cdbaf7820eb7cdfb1508fe54090_7425329763cf2574a73831e3b9f14327",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit's color and symbol are also treated as Green."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit's color and symbol are also treated as Green.",
+            "cleanText": "This Spirit's color and symbol are also treated as Green",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_COLOR_SYMBOL",
+              "color": "Green"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-08#a0",
+        "physicalId": "SJ16-08#AB_PASSIVE_NONE_LV1_LV2_LV3_1329795db1ca9efea4226d89dae24f490d1d8cdbaf7820eb7cdfb1508fe54090_7425329763cf2574a73831e3b9f14327",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_1329795db1ca9efea4226d89dae24f490d1d8cdbaf7820eb7cdfb1508fe54090_7425329763cf2574a73831e3b9f14327"
+      },
+      {
+        "id": "SJ16-08#AB_MAIN_STEP_NONE_LV1_LV2_LV3_582e632d72a85ee2f6221868f3d9d256f9f1213eab6641e59ff22d610259747f_b87edd3d20433c75f457f1fd03634f85",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "MAIN_STEP",
+          "timingLabel": "Your Main Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When summoning [The ScarletPhoenix Gale-Phoenix-Igna] from your Hand, its cost gets -1."
+        },
+        "clauses": [
+          {
+            "rawText": "When summoning [The ScarletPhoenix Gale-Phoenix-Igna] from your Hand, its cost gets -1.",
+            "cleanText": "When summoning [The ScarletPhoenix Gale-Phoenix-Igna] from your Hand, its cost gets -1",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-08#a1",
+        "physicalId": "SJ16-08#AB_MAIN_STEP_NONE_LV1_LV2_LV3_582e632d72a85ee2f6221868f3d9d256f9f1213eab6641e59ff22d610259747f_b87edd3d20433c75f457f1fd03634f85",
+        "semanticId": "SEM#AB_MAIN_STEP_NONE_LV1_LV2_LV3_582e632d72a85ee2f6221868f3d9d256f9f1213eab6641e59ff22d610259747f_b87edd3d20433c75f457f1fd03634f85"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ16-03": {
+    "cardNumber": "SJ16-03",
+    "name": "Bird Beast Demon-God",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "[Right",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SJ16-03#AB_PASSIVE_NONE_LV1_LV2_LV3_8f65126294a5d8ac8a055d7edf2860e6df7ba5dfb776b5abc0be136e7ef2e30a_0138a604bbf08225e71f2fed44b5d69e",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: [Right",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Cost 4 or more<br>[Left] Cost 4 or more]"
+        },
+        "rawText": "[Brave Condition: [Right] Cost 4 or more<br>[Left] Cost 4 or more]",
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "SJ16-03#a0",
+        "physicalId": "SJ16-03#AB_PASSIVE_NONE_LV1_LV2_LV3_8f65126294a5d8ac8a055d7edf2860e6df7ba5dfb776b5abc0be136e7ef2e30a_0138a604bbf08225e71f2fed44b5d69e",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_8f65126294a5d8ac8a055d7edf2860e6df7ba5dfb776b5abc0be136e7ef2e30a_0138a604bbf08225e71f2fed44b5d69e"
+      },
+      {
+        "id": "SJ16-03#AB_PASSIVE_NONE_LV1_LV2_LV3_9932e7f921bb189a907556534c858998b0e5511fa989a3eae3e90b3f78a37f23_8d479918254da7f3f8ea8ec09f0a6002",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Brave doesn't exhaust, and while in Spirit condition, can't attack or block."
+        },
+        "clauses": [
+          {
+            "rawText": "This Brave doesn't exhaust, and while in Spirit condition, can't attack or block.",
+            "cleanText": "This Brave doesn't exhaust, and while in Spirit condition, can't attack or block",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SET_RESTRICTION",
+              "restriction": "CANNOT_ATTACK_OR_BLOCK"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-03#a1",
+        "physicalId": "SJ16-03#AB_PASSIVE_NONE_LV1_LV2_LV3_9932e7f921bb189a907556534c858998b0e5511fa989a3eae3e90b3f78a37f23_8d479918254da7f3f8ea8ec09f0a6002",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_9932e7f921bb189a907556534c858998b0e5511fa989a3eae3e90b3f78a37f23_8d479918254da7f3f8ea8ec09f0a6002"
+      },
+      {
+        "id": "SJ16-03#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_94a4270bbfc23518b5d87da8cfad8721532d69ccb81b860a8e766ba1c79c8e59_ff578d49485d8db6f0f4189c572c46b4",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "When Brave on the Right",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "For each core on this Spirit, destroy an opposing 5000 BP or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "For each core on this Spirit, destroy an opposing 5000 BP or less Spirit.",
+            "cleanText": "For each core on this Spirit, destroy an opposing 5000 BP or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 5000
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-03#a2",
+        "physicalId": "SJ16-03#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_94a4270bbfc23518b5d87da8cfad8721532d69ccb81b860a8e766ba1c79c8e59_ff578d49485d8db6f0f4189c572c46b4",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_94a4270bbfc23518b5d87da8cfad8721532d69ccb81b860a8e766ba1c79c8e59_ff578d49485d8db6f0f4189c572c46b4"
+      },
+      {
+        "id": "SJ16-03#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_03f48cc3492edadfd3680dfad19d95a6fbc93bc7282eac0adc7efb1b4881d053_06007b5adee7f24b4b0840382524e179",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "When Brave on the Left",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Put a core from the Void to any of your Brave Spirits, and exhaust an opposing Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Put a core from the Void to any of your Brave Spirits",
+            "cleanText": "Put a core from the Void to any of your Brave Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "exhaust an opposing Spirit.",
+            "cleanText": "exhaust an opposing Spirit",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "isHeavy": false,
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-03#a3",
+        "physicalId": "SJ16-03#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_03f48cc3492edadfd3680dfad19d95a6fbc93bc7282eac0adc7efb1b4881d053_06007b5adee7f24b4b0840382524e179",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_03f48cc3492edadfd3680dfad19d95a6fbc93bc7282eac0adc7efb1b4881d053_06007b5adee7f24b4b0840382524e179"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ16-02": {
+    "cardNumber": "SJ16-02",
+    "name": "Gale-Phoenix-Peacock",
+    "keywords": [
+      {
+        "name": "Seal",
+        "parameter": "Seal",
+        "wave": 2,
+        "hook": "seal",
+        "bracketed": true,
+        "index": 91
+      },
+      {
+        "name": "Seal",
+        "parameter": "When Sealed",
+        "wave": 2,
+        "hook": "seal",
+        "bracketed": true,
+        "index": 187
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SJ16-02#AB_WHEN_SUMMONED_NONE_LV1_LV2_fe5825c99994f07ae1e0de5a6632f69854e63e61ccd6ae5fad68ed862cae460e_22b8de3da351b048c8c0b383dafa70af",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Put two cores from the Void to any of your Spirits."
+        },
+        "clauses": [
+          {
+            "rawText": "Put two cores from the Void to any of your Spirits.",
+            "cleanText": "Put two cores from the Void to any of your Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-02#a0",
+        "physicalId": "SJ16-02#AB_WHEN_SUMMONED_NONE_LV1_LV2_fe5825c99994f07ae1e0de5a6632f69854e63e61ccd6ae5fad68ed862cae460e_22b8de3da351b048c8c0b383dafa70af",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_fe5825c99994f07ae1e0de5a6632f69854e63e61ccd6ae5fad68ed862cae460e_22b8de3da351b048c8c0b383dafa70af"
+      },
+      {
+        "id": "SJ16-02#AB_WHEN_ATTACKS_NONE_LV1_LV2_b1c082abc5392f842590d99e92fd84f91f1a6ff9bb94ff1b89b48a64b05a40d4_f512f47fb2e59eb74e4944663d49ffe7",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Seal: Seal"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can send [Soul Core](Soul Core) from this Spirit to your Life."
+        },
+        "clauses": [
+          {
+            "rawText": "You can send [Soul Core] from this Spirit to your Life.",
+            "cleanText": "You can send [Soul Core] from this Spirit to your Life",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_SOUL_CORE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-02#a1",
+        "physicalId": "SJ16-02#AB_WHEN_ATTACKS_NONE_LV1_LV2_b1c082abc5392f842590d99e92fd84f91f1a6ff9bb94ff1b89b48a64b05a40d4_f512f47fb2e59eb74e4944663d49ffe7",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_b1c082abc5392f842590d99e92fd84f91f1a6ff9bb94ff1b89b48a64b05a40d4_f512f47fb2e59eb74e4944663d49ffe7"
+      },
+      {
+        "id": "SJ16-02#AB_WHEN_ATTACKS_NONE_LV1_LV2_5805feea1f74a2a456327c28e3107fa3ffa28e1cf45ebef45ff5b13d0c53e008_e8d6011db52bbcbd1d957b75ad19f54f",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Seal: When Sealed"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "At the end of the battle, once per turn, this Spirit refreshes."
+        },
+        "clauses": [
+          {
+            "rawText": "At the end of the battle, once per turn, this Spirit refreshes.",
+            "cleanText": "At the end of the battle, once per turn, this Spirit refreshes",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-02#a2",
+        "physicalId": "SJ16-02#AB_WHEN_ATTACKS_NONE_LV1_LV2_5805feea1f74a2a456327c28e3107fa3ffa28e1cf45ebef45ff5b13d0c53e008_e8d6011db52bbcbd1d957b75ad19f54f",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_5805feea1f74a2a456327c28e3107fa3ffa28e1cf45ebef45ff5b13d0c53e008_e8d6011db52bbcbd1d957b75ad19f54f"
+      },
+      {
+        "id": "SJ16-02#AB_WHEN_ATTACKS_NONE_LV2_ab62b65837c7381d3d39c8a43d5c3eaae76f52c6b374cf43779612cf87e6f031_7cd1868d5706c3fdf4877968bd7bb800",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "The opponent can't activate Bursts."
+        },
+        "clauses": [
+          {
+            "rawText": "The opponent can't activate Bursts.",
+            "cleanText": "The opponent can't activate Bursts",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-02#a3",
+        "physicalId": "SJ16-02#AB_WHEN_ATTACKS_NONE_LV2_ab62b65837c7381d3d39c8a43d5c3eaae76f52c6b374cf43779612cf87e6f031_7cd1868d5706c3fdf4877968bd7bb800",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_ab62b65837c7381d3d39c8a43d5c3eaae76f52c6b374cf43779612cf87e6f031_7cd1868d5706c3fdf4877968bd7bb800"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ16-04": {
+    "cardNumber": "SJ16-04",
+    "name": "Gale Lord Wind",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SJ16-04#AB_FLASH_NONE_LV1_LV2_LV3_c478f49a0d53972d309370ee754093c9b516088db937613911960b06f4a8d415_1a47e90ef61cb5ee129841d90388be69",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Exhaust an opposing Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Exhaust an opposing Spirit.",
+            "cleanText": "Exhaust an opposing Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "isHeavy": false,
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-04#a0",
+        "physicalId": "SJ16-04#AB_FLASH_NONE_LV1_LV2_LV3_c478f49a0d53972d309370ee754093c9b516088db937613911960b06f4a8d415_1a47e90ef61cb5ee129841d90388be69",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_c478f49a0d53972d309370ee754093c9b516088db937613911960b06f4a8d415_1a47e90ef61cb5ee129841d90388be69"
+      },
+      {
+        "id": "SJ16-04#AB_PASSIVE_NONE_LV1_LV2_LV3_43002d50d6cba85bffcbce9ea1ab3d363c195c0a343c0c9e5b379ffee32fd6f1_f504ab8ac1202de02e9a90fb050afbea",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "During Seal"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Then, return an opposing exhausted Spirit to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "return an opposing exhausted Spirit to the Hand.",
+            "cleanText": "return an opposing exhausted Spirit to the Hand",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-04#a1",
+        "physicalId": "SJ16-04#AB_PASSIVE_NONE_LV1_LV2_LV3_43002d50d6cba85bffcbce9ea1ab3d363c195c0a343c0c9e5b379ffee32fd6f1_f504ab8ac1202de02e9a90fb050afbea",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_43002d50d6cba85bffcbce9ea1ab3d363c195c0a343c0c9e5b379ffee32fd6f1_f504ab8ac1202de02e9a90fb050afbea"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ16-11": {
+    "cardNumber": "SJ16-11",
+    "name": "Omni Demon-God",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "[Right",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SJ16-11#AB_PASSIVE_NONE_LV1_LV2_LV3_8f65126294a5d8ac8a055d7edf2860e6df7ba5dfb776b5abc0be136e7ef2e30a_0138a604bbf08225e71f2fed44b5d69e",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: [Right",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Cost 3 or more<br>[Left] Cost 3 or more]"
+        },
+        "rawText": "[Brave Condition: [Right] Cost 3 or more<br>[Left] Cost 3 or more]",
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "SJ16-11#a0",
+        "physicalId": "SJ16-11#AB_PASSIVE_NONE_LV1_LV2_LV3_8f65126294a5d8ac8a055d7edf2860e6df7ba5dfb776b5abc0be136e7ef2e30a_0138a604bbf08225e71f2fed44b5d69e",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_8f65126294a5d8ac8a055d7edf2860e6df7ba5dfb776b5abc0be136e7ef2e30a_0138a604bbf08225e71f2fed44b5d69e"
+      },
+      {
+        "id": "SJ16-11#AB_PASSIVE_NONE_LV1_LV2_LV3_9932e7f921bb189a907556534c858998b0e5511fa989a3eae3e90b3f78a37f23_8d479918254da7f3f8ea8ec09f0a6002",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Brave doesn't exhaust, can't attack or block while in Spirit condition, and can't be summoned without paying at least one cost."
+        },
+        "clauses": [
+          {
+            "rawText": "This Brave doesn't exhaust, can't attack or block while in Spirit condition, and can't be summoned without paying at least one cost.",
+            "cleanText": "This Brave doesn't exhaust, can't attack or block while in Spirit condition, and can't be summoned without paying at least one cost",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SET_RESTRICTION",
+              "restriction": "CANNOT_ATTACK_OR_BLOCK"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-11#a1",
+        "physicalId": "SJ16-11#AB_PASSIVE_NONE_LV1_LV2_LV3_9932e7f921bb189a907556534c858998b0e5511fa989a3eae3e90b3f78a37f23_8d479918254da7f3f8ea8ec09f0a6002",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_9932e7f921bb189a907556534c858998b0e5511fa989a3eae3e90b3f78a37f23_8d479918254da7f3f8ea8ec09f0a6002"
+      },
+      {
+        "id": "SJ16-11#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_687cf56e8bb8b43a2d49af56f11b06e2342816b6e24c93f6ce6301217dcac2d0_30b67fdc9f8e48f6a791bd7c607a5a11",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "When Braved on the Right",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can discard a card from the opposing decktop. When this effect discards any Spirit card, this Spirit can't be blocked."
+        },
+        "clauses": [
+          {
+            "rawText": "You can discard a card from the opposing decktop.",
+            "cleanText": "You can discard a card from the opposing decktop",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "side": "opp"
+            }
+          },
+          {
+            "rawText": "When this effect discards any Spirit card, this Spirit can't be blocked.",
+            "cleanText": "When this effect discards any Spirit card, this Spirit can't be blocked",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "UNBLOCKABLE",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-11#a2",
+        "physicalId": "SJ16-11#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_687cf56e8bb8b43a2d49af56f11b06e2342816b6e24c93f6ce6301217dcac2d0_30b67fdc9f8e48f6a791bd7c607a5a11",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_687cf56e8bb8b43a2d49af56f11b06e2342816b6e24c93f6ce6301217dcac2d0_30b67fdc9f8e48f6a791bd7c607a5a11"
+      },
+      {
+        "id": "SJ16-11#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_bececc6ddcc9b3457202c126f38e6bf2d679671e2843e4138132ec2af9319c44_0a4421d25a8954015988a0630928e196",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "When Braved on the Left",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By returning an opposing 5000 BP or less Spirit to the decktop, draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "By returning an opposing 5000 BP or less Spirit to the decktop",
+            "cleanText": "By returning an opposing 5000 BP or less Spirit to the decktop",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "draw a card.",
+            "cleanText": "draw a card",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-11#a3",
+        "physicalId": "SJ16-11#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_bececc6ddcc9b3457202c126f38e6bf2d679671e2843e4138132ec2af9319c44_0a4421d25a8954015988a0630928e196",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_bececc6ddcc9b3457202c126f38e6bf2d679671e2843e4138132ec2af9319c44_0a4421d25a8954015988a0630928e196"
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ16-01": {
+    "cardNumber": "SJ16-01",
+    "name": "The CrimsonSacredHorse Execeed-Red",
+    "keywords": [
+      {
+        "name": "Seal",
+        "parameter": "Seal",
+        "wave": 2,
+        "hook": "seal",
+        "bracketed": true,
+        "index": 16
+      },
+      {
+        "name": "Seal",
+        "parameter": "When Sealed",
+        "wave": 2,
+        "hook": "seal",
+        "bracketed": true,
+        "index": 117
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SJ16-01#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_7210ca17aa86a75ef70a06ac2cc33da51e56e21f33d5db5924b69a7c7ef78f80_ccdf14dd74e4fa19a8635419f9dc6727",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Seal: Seal"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can send the [Soul Core] (Soul Core) from this Spirit to your Life."
+        },
+        "clauses": [
+          {
+            "rawText": "You can send the [Soul Core] (Soul Core) from this Spirit to your Life.",
+            "cleanText": "You can send the [Soul Core] (Soul Core) from this Spirit to your Life",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_SOUL_CORE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-01#a0",
+        "physicalId": "SJ16-01#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_7210ca17aa86a75ef70a06ac2cc33da51e56e21f33d5db5924b69a7c7ef78f80_ccdf14dd74e4fa19a8635419f9dc6727",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_7210ca17aa86a75ef70a06ac2cc33da51e56e21f33d5db5924b69a7c7ef78f80_ccdf14dd74e4fa19a8635419f9dc6727"
+      },
+      {
+        "id": "SJ16-01#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_68caa4f79f750fde1f031c41e336e293e63f6d6d700968d0b49b233ba5a4ddb2_f5797836d93d29feb4250687c861042e",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Seal: When Sealed"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can target and attack an opposing Spirit/Ultimate. At the end of a blocked battle, send an opposing Life to their Reserve, and draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "You can target and attack an opposing Spirit/Ultimate.",
+            "cleanText": "You can target and attack an opposing Spirit/Ultimate",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TARGET_ATTACK",
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "At the end of a blocked battle, send an opposing Life to their Reserve",
+            "cleanText": "At the end of a blocked battle, send an opposing Life to their Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "life",
+                "side": "opp"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "opp"
+              }
+            }
+          },
+          {
+            "rawText": "draw a card.",
+            "cleanText": "draw a card",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-01#a1",
+        "physicalId": "SJ16-01#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_68caa4f79f750fde1f031c41e336e293e63f6d6d700968d0b49b233ba5a4ddb2_f5797836d93d29feb4250687c861042e",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_68caa4f79f750fde1f031c41e336e293e63f6d6d700968d0b49b233ba5a4ddb2_f5797836d93d29feb4250687c861042e"
+      },
+      {
+        "id": "SJ16-01#AB_WHEN_ATTACKS_NONE_LV2_LV3_ab80e1dd0d0969031016f40c578433343106faef57720d2daf4bf77f8b97f0bb_70127910cac5763d92d9fdd400810939",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit gains +10000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit gains +10000 BP.",
+            "cleanText": "This Spirit gains +10000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 10000,
+              "target": "target",
+              "duration": "THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-01#a2",
+        "physicalId": "SJ16-01#AB_WHEN_ATTACKS_NONE_LV2_LV3_ab80e1dd0d0969031016f40c578433343106faef57720d2daf4bf77f8b97f0bb_70127910cac5763d92d9fdd400810939",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_ab80e1dd0d0969031016f40c578433343106faef57720d2daf4bf77f8b97f0bb_70127910cac5763d92d9fdd400810939"
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ16-10": {
+    "cardNumber": "SJ16-10",
+    "name": "The GreenBeastWarrior Koleon",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SJ16-10#AB_PASSIVE_NONE_LV1_LV2_06229ae054a38d3cc7011464b6371240f868fdbe0984858fba5a139bc400ca96_002fea332e066e9e2734417b0f26add6",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit's color and symbol are also treated as Red."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit's color and symbol are also treated as Red.",
+            "cleanText": "This Spirit's color and symbol are also treated as Red",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_COLOR_SYMBOL",
+              "color": "Red"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-10#a0",
+        "physicalId": "SJ16-10#AB_PASSIVE_NONE_LV1_LV2_06229ae054a38d3cc7011464b6371240f868fdbe0984858fba5a139bc400ca96_002fea332e066e9e2734417b0f26add6",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_06229ae054a38d3cc7011464b6371240f868fdbe0984858fba5a139bc400ca96_002fea332e066e9e2734417b0f26add6"
+      },
+      {
+        "id": "SJ16-10#AB_MAIN_STEP_NONE_LV1_LV2_61e82f5f5df46cd64a7c14e59f7205cf6c4582778f5f8590537a010d67b1f220_6018447ed3f407eac5272fd8f902f290",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "MAIN_STEP",
+          "timingLabel": "Your Main Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When summoning [The VerdantSacredHorse Execeed-Green] from your Hand, its cost gets -1."
+        },
+        "clauses": [
+          {
+            "rawText": "When summoning [The VerdantSacredHorse Execeed-Green] from your Hand, its cost gets -1.",
+            "cleanText": "When summoning [The VerdantSacredHorse Execeed-Green] from your Hand, its cost gets -1",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-10#a1",
+        "physicalId": "SJ16-10#AB_MAIN_STEP_NONE_LV1_LV2_61e82f5f5df46cd64a7c14e59f7205cf6c4582778f5f8590537a010d67b1f220_6018447ed3f407eac5272fd8f902f290",
+        "semanticId": "SEM#AB_MAIN_STEP_NONE_LV1_LV2_61e82f5f5df46cd64a7c14e59f7205cf6c4582778f5f8590537a010d67b1f220_6018447ed3f407eac5272fd8f902f290"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ16-06": {
+    "cardNumber": "SJ16-06",
+    "name": "The Kappa Kawatarou",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SJ16-06#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_1557e219d9c730aff7faee824b80442b9c030897a8af4471e415216f62ceff7b_2f8501b84e12afaabf73d9226f35add0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "you can send the [Soul Core] (Soul Core) from a Spirit you control to another Spirit you control. When you've done so, refresh the Spirit you control with [Soul Core] (Soul Core) being sent to it."
+        },
+        "clauses": [
+          {
+            "rawText": "you can send the [Soul Core] (Soul Core) from a Spirit you control to another Spirit you control.",
+            "cleanText": "you can send the [Soul Core] (Soul Core) from a Spirit you control to another Spirit you control",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_SOUL_CORE"
+            }
+          },
+          {
+            "rawText": "refresh the Spirit you control with [Soul Core] (Soul Core) being sent to it.",
+            "cleanText": "refresh the Spirit you control with [Soul Core] (Soul Core) being sent to it",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-06#a0",
+        "physicalId": "SJ16-06#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_1557e219d9c730aff7faee824b80442b9c030897a8af4471e415216f62ceff7b_2f8501b84e12afaabf73d9226f35add0",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_1557e219d9c730aff7faee824b80442b9c030897a8af4471e415216f62ceff7b_2f8501b84e12afaabf73d9226f35add0"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ16-16": {
+    "cardNumber": "SJ16-16",
+    "name": "The NinthHorseEmperor Exeseburn",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SJ16-16#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_LV4_8820c52d7c4ffe7d2b3170c5977f55f886bc9baaaebad0e3bd06b354c1ee050d_68a362495547ffa7da9ba5ffcc0ece1a",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "During this turn, this Spirit is treated as being on its highest level."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, this Spirit is treated as being on its highest level.",
+            "cleanText": "this Spirit is treated as being on its highest level",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-16#a0",
+        "physicalId": "SJ16-16#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_LV4_8820c52d7c4ffe7d2b3170c5977f55f886bc9baaaebad0e3bd06b354c1ee050d_68a362495547ffa7da9ba5ffcc0ece1a",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_LV4_8820c52d7c4ffe7d2b3170c5977f55f886bc9baaaebad0e3bd06b354c1ee050d_68a362495547ffa7da9ba5ffcc0ece1a"
+      },
+      {
+        "id": "SJ16-16#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_LV4_f357da22bf3fbab9393bc1c44c0548f2dab44b68375832e5b02b62f08e4e0539_4a02dea538a350e5a77dfacb282a35a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can target and attack an opposing Spirit/Ultimate."
+        },
+        "clauses": [
+          {
+            "rawText": "You can target and attack an opposing Spirit/Ultimate.",
+            "cleanText": "You can target and attack an opposing Spirit/Ultimate",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TARGET_ATTACK",
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-16#a1",
+        "physicalId": "SJ16-16#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_LV4_f357da22bf3fbab9393bc1c44c0548f2dab44b68375832e5b02b62f08e4e0539_4a02dea538a350e5a77dfacb282a35a1",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_LV4_f357da22bf3fbab9393bc1c44c0548f2dab44b68375832e5b02b62f08e4e0539_4a02dea538a350e5a77dfacb282a35a1"
+      },
+      {
+        "id": "SJ16-16#AB_WHEN_ATTACKS_NONE_LV2_LV3_LV4_7f0697a49074cf4983400da0e6269262e6e4af5ed076aa5670cdb754d1bbf453_dfcd4674372247d7524bfc8a4a2d7387",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3,
+            4
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "During Seal"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By destroying an opposing Spirit/Ultimate with BP equal or inferior to this Spirit's, send an opposing Life to their Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "By destroying an opposing Spirit/Ultimate with BP equal or inferior to this Spirit's",
+            "cleanText": "By destroying an opposing Spirit/Ultimate with BP equal or inferior to this Spirit's",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "send an opposing Life to their Reserve.",
+            "cleanText": "send an opposing Life to their Reserve",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "life",
+                "side": "opp"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "opp"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-16#a2",
+        "physicalId": "SJ16-16#AB_WHEN_ATTACKS_NONE_LV2_LV3_LV4_7f0697a49074cf4983400da0e6269262e6e4af5ed076aa5670cdb754d1bbf453_dfcd4674372247d7524bfc8a4a2d7387",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_LV4_7f0697a49074cf4983400da0e6269262e6e4af5ed076aa5670cdb754d1bbf453_dfcd4674372247d7524bfc8a4a2d7387"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ16-07": {
+    "cardNumber": "SJ16-07",
+    "name": "The ScarletPhoenix Gale-Phoenix-Igna",
+    "keywords": [
+      {
+        "name": "Seal",
+        "parameter": "Seal",
+        "wave": 2,
+        "hook": "seal",
+        "bracketed": true,
+        "index": 11
+      },
+      {
+        "name": "Seal",
+        "parameter": "When Sealed",
+        "wave": 2,
+        "hook": "seal",
+        "bracketed": true,
+        "index": 107
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SJ16-07#AB_WHEN_ATTACKS_NONE_LV1_LV2_b1c082abc5392f842590d99e92fd84f91f1a6ff9bb94ff1b89b48a64b05a40d4_f512f47fb2e59eb74e4944663d49ffe7",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Seal: Seal"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can send [Soul Core](Soul Core) from this Spirit to your Life."
+        },
+        "clauses": [
+          {
+            "rawText": "You can send [Soul Core] from this Spirit to your Life.",
+            "cleanText": "You can send [Soul Core] from this Spirit to your Life",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_SOUL_CORE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-07#a0",
+        "physicalId": "SJ16-07#AB_WHEN_ATTACKS_NONE_LV1_LV2_b1c082abc5392f842590d99e92fd84f91f1a6ff9bb94ff1b89b48a64b05a40d4_f512f47fb2e59eb74e4944663d49ffe7",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_b1c082abc5392f842590d99e92fd84f91f1a6ff9bb94ff1b89b48a64b05a40d4_f512f47fb2e59eb74e4944663d49ffe7"
+      },
+      {
+        "id": "SJ16-07#AB_WHEN_ATTACKS_NONE_LV1_LV2_1001f22ed01baeb20891eae255533aa44408e7b3d416919bee033d63f1d080e2_cf7a13b954f9224a1b1dda8b6d3a32d1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Seal: When Sealed"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "refresh one of your \"God-King\"/\"Ten Crown\" family Spirits."
+        },
+        "clauses": [
+          {
+            "rawText": "refresh one of your \"God-King\"/\"Ten Crown\" family Spirits.",
+            "cleanText": "refresh one of your \"God-King\"/\"Ten Crown\" family Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-07#a1",
+        "physicalId": "SJ16-07#AB_WHEN_ATTACKS_NONE_LV1_LV2_1001f22ed01baeb20891eae255533aa44408e7b3d416919bee033d63f1d080e2_cf7a13b954f9224a1b1dda8b6d3a32d1",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_1001f22ed01baeb20891eae255533aa44408e7b3d416919bee033d63f1d080e2_cf7a13b954f9224a1b1dda8b6d3a32d1"
+      },
+      {
+        "id": "SJ16-07#AB_ATTACK_STEP_NONE_LV2_8a32acce2bf4059246d8b9a2a90a423af379df80520c2063fe62b3fa90b1b637_67f9707c4b4edff64d94834cc8ff7c14",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your \"God-King\"/\"Ten Crown\" family Spirit attacks, draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "When your \"God-King\"/\"Ten Crown\" family Spirit attacks, draw a card.",
+            "cleanText": "When your \"God-King\"/\"Ten Crown\" family Spirit attacks, draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-07#a2",
+        "physicalId": "SJ16-07#AB_ATTACK_STEP_NONE_LV2_8a32acce2bf4059246d8b9a2a90a423af379df80520c2063fe62b3fa90b1b637_67f9707c4b4edff64d94834cc8ff7c14",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_8a32acce2bf4059246d8b9a2a90a423af379df80520c2063fe62b3fa90b1b637_67f9707c4b4edff64d94834cc8ff7c14"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ16-05": {
+    "cardNumber": "SJ16-05",
+    "name": "The StrongestBossMonkey Arashi",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SJ16-05#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_b125b51b981eeeeb667ed2eef09201254afe466f5fd442623314b5f7a84f5ea1_c61a9f7d2438cc7baa4d86cbd677f010",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit gains +10000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit gains +10000 BP.",
+            "cleanText": "This Spirit gains +10000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 10000,
+              "target": "target",
+              "duration": "THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-05#a0",
+        "physicalId": "SJ16-05#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_b125b51b981eeeeb667ed2eef09201254afe466f5fd442623314b5f7a84f5ea1_c61a9f7d2438cc7baa4d86cbd677f010",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_b125b51b981eeeeb667ed2eef09201254afe466f5fd442623314b5f7a84f5ea1_c61a9f7d2438cc7baa4d86cbd677f010"
+      },
+      {
+        "id": "SJ16-05#AB_PASSIVE_NONE_LV2_LV3_75dee34c946664ce6298fa0f80181115caca25e863f6e98e6a28693b760f0247_7df765f8bf7b5aa828232ca1dd71d9a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit can't be destroyed."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit can't be destroyed.",
+            "cleanText": "This Spirit can't be destroyed",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "INDESTRUCTIBLE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-05#a1",
+        "physicalId": "SJ16-05#AB_PASSIVE_NONE_LV2_LV3_75dee34c946664ce6298fa0f80181115caca25e863f6e98e6a28693b760f0247_7df765f8bf7b5aa828232ca1dd71d9a2",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV2_LV3_75dee34c946664ce6298fa0f80181115caca25e863f6e98e6a28693b760f0247_7df765f8bf7b5aa828232ca1dd71d9a2"
+      },
+      {
+        "id": "SJ16-05#AB_WHEN_ATTACKS_NONE_LV3_125d54939480c8cc0492436991e0a1c709f2f422345ff17ce3dc132c50c23e70_7d89c7b120868c9c74ca95652d9158a3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "During Seal"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can destroy an opposing 20000 BP or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "You can destroy an opposing 20000 BP or less Spirit.",
+            "cleanText": "You can destroy an opposing 20000 BP or less Spirit",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 20000
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-05#a2",
+        "physicalId": "SJ16-05#AB_WHEN_ATTACKS_NONE_LV3_125d54939480c8cc0492436991e0a1c709f2f422345ff17ce3dc132c50c23e70_7d89c7b120868c9c74ca95652d9158a3",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV3_125d54939480c8cc0492436991e0a1c709f2f422345ff17ce3dc132c50c23e70_7d89c7b120868c9c74ca95652d9158a3"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ16-09": {
+    "cardNumber": "SJ16-09",
+    "name": "The VerdantSacredHorse Execeed-Green",
+    "keywords": [
+      {
+        "name": "Seal",
+        "parameter": "Seal",
+        "wave": 2,
+        "hook": "seal",
+        "bracketed": true,
+        "index": 16
+      },
+      {
+        "name": "Seal",
+        "parameter": "When Sealed",
+        "wave": 2,
+        "hook": "seal",
+        "bracketed": true,
+        "index": 116
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SJ16-09#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_7210ca17aa86a75ef70a06ac2cc33da51e56e21f33d5db5924b69a7c7ef78f80_ccdf14dd74e4fa19a8635419f9dc6727",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Seal: Seal"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can send the [Soul Core](Soul Core) from this Spirit to your Life."
+        },
+        "clauses": [
+          {
+            "rawText": "You can send the [Soul Core] from this Spirit to your Life.",
+            "cleanText": "You can send the [Soul Core] from this Spirit to your Life",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_SOUL_CORE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-09#a0",
+        "physicalId": "SJ16-09#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_7210ca17aa86a75ef70a06ac2cc33da51e56e21f33d5db5924b69a7c7ef78f80_ccdf14dd74e4fa19a8635419f9dc6727",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_7210ca17aa86a75ef70a06ac2cc33da51e56e21f33d5db5924b69a7c7ef78f80_ccdf14dd74e4fa19a8635419f9dc6727"
+      },
+      {
+        "id": "SJ16-09#AB_PASSIVE_NONE_LV1_LV2_LV3_058fa656505c60d0a11ad88bee0d3c9e63c3d445ea1fa0dbed1537e6c392ceff_cd50edb356ee5311a123d8dc66c8e189",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Seal: When Sealed"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While your \"God-King\"/\"Ten Crown\" family Spirit is attacking, the opponent can't activate Bursts."
+        },
+        "clauses": [
+          {
+            "rawText": "While your \"God-King\"/\"Ten Crown\" family Spirit is attacking, the opponent can't activate Bursts.",
+            "cleanText": "the opponent can't activate Bursts",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While your \"God-King\"/\"Ten Crown\" family Spirit is attacking",
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-09#a1",
+        "physicalId": "SJ16-09#AB_PASSIVE_NONE_LV1_LV2_LV3_058fa656505c60d0a11ad88bee0d3c9e63c3d445ea1fa0dbed1537e6c392ceff_cd50edb356ee5311a123d8dc66c8e189",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_058fa656505c60d0a11ad88bee0d3c9e63c3d445ea1fa0dbed1537e6c392ceff_cd50edb356ee5311a123d8dc66c8e189"
+      },
+      {
+        "id": "SJ16-09#AB_WHEN_ATTACKS_NONE_LV2_LV3_6519a6349682347bbaeccf620019b48f262d07ab7bb93c73065e88866684e249_ea36fb40d55efa220067dd45c9d14644",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When only the opposing Spirit is destroyed by BP comparison, this Spirit refreshes."
+        },
+        "clauses": [
+          {
+            "rawText": "When only the opposing Spirit is destroyed by BP comparison, this Spirit refreshes.",
+            "cleanText": "When only the opposing Spirit is destroyed by BP comparison, this Spirit refreshes",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-09#a2",
+        "physicalId": "SJ16-09#AB_WHEN_ATTACKS_NONE_LV2_LV3_6519a6349682347bbaeccf620019b48f262d07ab7bb93c73065e88866684e249_ea36fb40d55efa220067dd45c9d14644",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_6519a6349682347bbaeccf620019b48f262d07ab7bb93c73065e88866684e249_ea36fb40d55efa220067dd45c9d14644"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ16-14": {
+    "cardNumber": "SJ16-14",
+    "name": "Ultimate-Dragonic-Taurus",
+    "keywords": [
+      {
+        "name": "Double Ultimate Trigger",
+        "parameter": "[LV3",
+        "wave": 3,
+        "hook": "ultimate_trigger",
+        "bracketed": true,
+        "index": 57
+      },
+      {
+        "name": "Double Hit",
+        "parameter": null,
+        "wave": 3,
+        "hook": "double_hit",
+        "bracketed": true,
+        "index": 187
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SJ16-14#AB_PASSIVE_NONE_LV1_LV2_LV3_bca9244a806bfe3257f6e18dbb01fb7d8c5205b31d03441feb26ebf58744ca72_d6e3e6dd29826e8e3f3e698687272c4c",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Summon Condition: You control one or more Red Spirits"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Summon Condition: You control one or more Red Spirits]",
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "SJ16-14#a0",
+        "physicalId": "SJ16-14#AB_PASSIVE_NONE_LV1_LV2_LV3_bca9244a806bfe3257f6e18dbb01fb7d8c5205b31d03441feb26ebf58744ca72_d6e3e6dd29826e8e3f3e698687272c4c",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_bca9244a806bfe3257f6e18dbb01fb7d8c5205b31d03441feb26ebf58744ca72_d6e3e6dd29826e8e3f3e698687272c4c"
+      },
+      {
+        "id": "SJ16-14#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_6cb00e66b50c59247bc3d1e02008bfa19ee777431f31ff46b20065b5fcdfc205_2ca8c2b5adc47876f2b1af4fdb8632e1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3,
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Double Ultimate Trigger",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "For each Ultimate Trigger hit, this Ultimate gains an extra Red Symbol. [Double Hit] When it hits twice, also, you can target and attack an opposing Spirit. Compare the number of symbols with the opposing blocking Spirit, and for each symbol this Ultimate has more than the blocking Spirit, send an opposing Life to their Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "For each Ultimate Trigger hit, this Ultimate gains an extra Red Symbol.",
+            "cleanText": "For each Ultimate Trigger hit, this Ultimate gains an extra Red Symbol",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_SYMBOL"
+            }
+          },
+          {
+            "rawText": "[Double Hit] When it hits twice, also, you can target and attack an opposing Spirit.",
+            "cleanText": "[Double Hit] When it hits twice, also, you can target and attack an opposing Spirit",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TARGET_ATTACK",
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "Compare the number of symbols with the opposing blocking Spirit, and for each symbol this Ultimate has more than the blocking Spirit, send an opposing Life to their Reserve.",
+            "cleanText": "Compare the number of symbols with the opposing blocking Spirit, and for each symbol this Ultimate has more than the blocking Spirit, send an opposing Life to their Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "life",
+                "side": "opp"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "opp"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-14#a1",
+        "physicalId": "SJ16-14#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_6cb00e66b50c59247bc3d1e02008bfa19ee777431f31ff46b20065b5fcdfc205_2ca8c2b5adc47876f2b1af4fdb8632e1",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_6cb00e66b50c59247bc3d1e02008bfa19ee777431f31ff46b20065b5fcdfc205_2ca8c2b5adc47876f2b1af4fdb8632e1"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ16-15": {
+    "cardNumber": "SJ16-15",
+    "name": "Ultimate-Cancerd",
+    "keywords": [
+      {
+        "name": "Ultimate Trigger",
+        "parameter": "[LV3",
+        "wave": 3,
+        "hook": "ultimate_trigger",
+        "bracketed": true,
+        "index": 59
+      },
+      {
+        "name": "Critical Hit",
+        "parameter": null,
+        "wave": 3,
+        "hook": "critical_hit",
+        "bracketed": true,
+        "index": 280
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SJ16-15#AB_PASSIVE_NONE_LV1_LV2_LV3_b34a259828c425657c8d23a2919b2c49e31c0632e06478481624f33acd599e0a_59d23d1a29b9fbcd7cc83f29c8e3b0ae",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Summon Condition: You control one or more Green Spirits"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Summon Condition: You control one or more Green Spirits]",
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "SJ16-15#a0",
+        "physicalId": "SJ16-15#AB_PASSIVE_NONE_LV1_LV2_LV3_b34a259828c425657c8d23a2919b2c49e31c0632e06478481624f33acd599e0a_59d23d1a29b9fbcd7cc83f29c8e3b0ae",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_b34a259828c425657c8d23a2919b2c49e31c0632e06478481624f33acd599e0a_59d23d1a29b9fbcd7cc83f29c8e3b0ae"
+      },
+      {
+        "id": "SJ16-15#AB_WHEN_ATTACKS_NONE_LV3_LV4_0954a7339f442a960260c8a6e4e0192ace317972a857bb319a740bb71753a46d_0cb2c523b597062299559beae25f25b5",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3,
+            4
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Ultimate Trigger",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When Ultimate Trigger hits, the opponent can't block unless they block with two Spirits or two Ultimates. When this Ultimate is blocked, choose one of them to battle against. [Critical Hit] If the hit card is a Spirit card, also, when this Ultimate's attack reduces the opposing Life, send two opposing Lives to their Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "When Ultimate Trigger hits, the opponent can't block unless they block with two Spirits or two Ultimates.",
+            "cleanText": "When Ultimate Trigger hits, the opponent can't block unless they block with two Spirits or two Ultimates",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COMBAT_RESTRICTION"
+            }
+          },
+          {
+            "rawText": "When this Ultimate is blocked, choose one of them to battle against.",
+            "cleanText": "When this Ultimate is blocked, choose one of them to battle against",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CHOOSE_BLOCKER"
+            }
+          },
+          {
+            "rawText": "[Critical Hit] If the hit card is a Spirit card, also, when this Ultimate's attack reduces the opposing Life, send two opposing Lives to their Reserve.",
+            "cleanText": "[Critical Hit] If the hit card is a Spirit card, also, when this Ultimate's attack reduces the opposing Life, send two opposing Lives to their Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-15#a1",
+        "physicalId": "SJ16-15#AB_WHEN_ATTACKS_NONE_LV3_LV4_0954a7339f442a960260c8a6e4e0192ace317972a857bb319a740bb71753a46d_0cb2c523b597062299559beae25f25b5",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV3_LV4_0954a7339f442a960260c8a6e4e0192ace317972a857bb319a740bb71753a46d_0cb2c523b597062299559beae25f25b5"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ16-12": {
+    "cardNumber": "SJ16-12",
+    "name": "Two-Headed Demon-God",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "[Right",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      },
+      {
+        "name": "Assault",
+        "parameter": "1",
+        "wave": 1,
+        "hook": "assault",
+        "bracketed": true,
+        "index": 174
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SJ16-12#AB_PASSIVE_NONE_LV1_LV2_LV3_8f65126294a5d8ac8a055d7edf2860e6df7ba5dfb776b5abc0be136e7ef2e30a_0138a604bbf08225e71f2fed44b5d69e",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: [Right",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Cost 5 or more<br>[Left] Cost 5 or more]"
+        },
+        "rawText": "[Brave Condition: [Right] Cost 5 or more<br>[Left] Cost 5 or more]",
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "SJ16-12#a0",
+        "physicalId": "SJ16-12#AB_PASSIVE_NONE_LV1_LV2_LV3_8f65126294a5d8ac8a055d7edf2860e6df7ba5dfb776b5abc0be136e7ef2e30a_0138a604bbf08225e71f2fed44b5d69e",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_8f65126294a5d8ac8a055d7edf2860e6df7ba5dfb776b5abc0be136e7ef2e30a_0138a604bbf08225e71f2fed44b5d69e"
+      },
+      {
+        "id": "SJ16-12#AB_PASSIVE_NONE_LV1_LV2_LV3_9932e7f921bb189a907556534c858998b0e5511fa989a3eae3e90b3f78a37f23_8d479918254da7f3f8ea8ec09f0a6002",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Brave doesn't exhaust, and while in Spirit condition, can't attack or block."
+        },
+        "clauses": [
+          {
+            "rawText": "This Brave doesn't exhaust, and while in Spirit condition, can't attack or block.",
+            "cleanText": "This Brave doesn't exhaust, and while in Spirit condition, can't attack or block",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SET_RESTRICTION",
+              "restriction": "CANNOT_ATTACK_OR_BLOCK"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-12#a1",
+        "physicalId": "SJ16-12#AB_PASSIVE_NONE_LV1_LV2_LV3_9932e7f921bb189a907556534c858998b0e5511fa989a3eae3e90b3f78a37f23_8d479918254da7f3f8ea8ec09f0a6002",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_9932e7f921bb189a907556534c858998b0e5511fa989a3eae3e90b3f78a37f23_8d479918254da7f3f8ea8ec09f0a6002"
+      },
+      {
+        "id": "SJ16-12#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_d745e2ebba76db8d4c07d2492aad901f205bcf4fcb48bd7768794aceff27eebf_bea89b7e041f729fa2dfaa5f37b39e92",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Assault: 1",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit can, once per turn, be refreshed by exhausting one of your Nexuses."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit can, once per turn, be refreshed by exhausting one of your Nexuses.",
+            "cleanText": "This Spirit can, once per turn, be refreshed by exhausting one of your Nexuses",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH_BY_EXHAUSTING_NEXUS",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-12#a2",
+        "physicalId": "SJ16-12#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_d745e2ebba76db8d4c07d2492aad901f205bcf4fcb48bd7768794aceff27eebf_bea89b7e041f729fa2dfaa5f37b39e92",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_d745e2ebba76db8d4c07d2492aad901f205bcf4fcb48bd7768794aceff27eebf_bea89b7e041f729fa2dfaa5f37b39e92"
+      },
+      {
+        "id": "SJ16-12#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_c9156c6e1a189999f5d82cbb3a4400395ba2e32fa3b32688f16ac476979e2234_c5f3c38e3ba26688b016c29997afecfa",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "When Braved on Left",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By sending a core from any opposing Spirits to their Reserve, you can deploy a Nexus card from your Trash, without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending a core from any opposing Spirits to their Reserve",
+            "cleanText": "By sending a core from any opposing Spirits to their Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "you can deploy a Nexus card from your Trash, without paying the cost.",
+            "cleanText": "you can deploy a Nexus card from your Trash, without paying the cost",
+            "link": "byDoing",
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DEPLOY_NEXUS",
+              "from": "trash",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-12#a3",
+        "physicalId": "SJ16-12#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_c9156c6e1a189999f5d82cbb3a4400395ba2e32fa3b32688f16ac476979e2234_c5f3c38e3ba26688b016c29997afecfa",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_c9156c6e1a189999f5d82cbb3a4400395ba2e32fa3b32688f16ac476979e2234_c5f3c38e3ba26688b016c29997afecfa"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ16-13": {
+    "cardNumber": "SJ16-13",
+    "name": "Ultimate-Strikewurm-Leo",
+    "keywords": [
+      {
+        "name": "Ultimate Trigger",
+        "parameter": "[LV3",
+        "wave": 3,
+        "hook": "ultimate_trigger",
+        "bracketed": true,
+        "index": 59
+      },
+      {
+        "name": "Cross Ultimate Trigger",
+        "parameter": null,
+        "wave": 3,
+        "hook": "cross_ultimate_trigger",
+        "bracketed": true,
+        "index": 325
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SJ16-13#AB_PASSIVE_NONE_LV1_LV2_LV3_72eae2490f929faf043bc83fe8361b986ff23dce97f69b11499db3f953337870_1a3c61edd6ab3adc7f55fb852e63e5e2",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Summon Condition: You control one or more White Spirits"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Summon Condition: You control one or more White Spirits]",
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "SJ16-13#a0",
+        "physicalId": "SJ16-13#AB_PASSIVE_NONE_LV1_LV2_LV3_72eae2490f929faf043bc83fe8361b986ff23dce97f69b11499db3f953337870_1a3c61edd6ab3adc7f55fb852e63e5e2",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_72eae2490f929faf043bc83fe8361b986ff23dce97f69b11499db3f953337870_1a3c61edd6ab3adc7f55fb852e63e5e2"
+      },
+      {
+        "id": "SJ16-13#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV3_LV4_LV5_48b25e7038b51340729d01c63de1a1bd4d0b5581e5495133a2c788e3281dd676_378f72ed34f974929d86a39b89f5d647",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3,
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS_OR_BLOCKS",
+          "timingLabel": "When Attacks/Blocks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Ultimate Trigger",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When Ultimate Trigger hits, during this turn, make the Ultimate symbols of one of your Ultimates become two. After Ultimate Trigger, if your Life is at three or less, also, proceed to Cross Ultimate-Trigger.\n[Cross Ultimate Trigger] When Cross Ultimate Trigger hits, once per turn, refresh one of your Ultimates."
+        },
+        "clauses": [
+          {
+            "rawText": "When Ultimate Trigger hits, during this turn, make the Ultimate symbols of one of your Ultimates become two.",
+            "cleanText": "When Ultimate Trigger hits, during this turn, make the Ultimate symbols of one of your Ultimates become two",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "ADD_SYMBOL"
+            }
+          },
+          {
+            "rawText": "After Ultimate Trigger, if your Life is at three or less, also, proceed to Cross Ultimate-Trigger.",
+            "cleanText": "After Ultimate Trigger, if your Life is at three or less, also, proceed to Cross Ultimate-Trigger",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ACTIVATE_EFFECT_ACTION"
+            }
+          },
+          {
+            "rawText": "[Cross Ultimate Trigger] When Cross Ultimate Trigger hits, once per turn, refresh one of your Ultimates.",
+            "cleanText": "[Cross Ultimate Trigger] When Cross Ultimate Trigger hits, once per turn, refresh one of your Ultimates",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "count": 1,
+              "target": {
+                "side": "self",
+                "types": [
+                  "Ultimate"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ16-13#a1",
+        "physicalId": "SJ16-13#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV3_LV4_LV5_48b25e7038b51340729d01c63de1a1bd4d0b5581e5495133a2c788e3281dd676_378f72ed34f974929d86a39b89f5d647",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV3_LV4_LV5_48b25e7038b51340729d01c63de1a1bd4d0b5581e5495133a2c788e3281dd676_378f72ed34f974929d86a39b89f5d647"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

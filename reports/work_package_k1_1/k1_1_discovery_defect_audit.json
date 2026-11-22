@@ -1,0 +1,61 @@
+{
+  "generatedAt": "2026-11-19T16:08:44.618Z",
+  "defects": [
+    {
+      "id": "K1-DEF-01",
+      "title": "Incomplete semantic signatures merged distinct parameter values",
+      "rootCause": "K.1 only hashed timing+op+link+targetSide",
+      "affectedRecords": 36422,
+      "correction": "Implemented separate STR- (structural) and SEM- (full RFC8785-style canonical AST) hashes."
+    },
+    {
+      "id": "K1-DEF-02",
+      "title": "Truncated pattern catalogue (slice(0, 100))",
+      "rootCause": "k1_semantic_pattern_catalog.json only exported top 100",
+      "affectedRecords": 18395,
+      "correction": "Exported 100% of structural & semantic patterns in partitioned files with SHA-256 manifests."
+    },
+    {
+      "id": "K1-DEF-03",
+      "title": "Missing complete Card->Ability->Clause->Pattern traceability",
+      "rootCause": "No full mapping exported in K.1",
+      "affectedRecords": 15398,
+      "correction": "Exported complete partitioned k1_1_card_ability_clause_mapping/ dataset."
+    },
+    {
+      "id": "K1-DEF-04",
+      "title": "Conflated handler presence with semantic verification",
+      "rootCause": "K.1 used implementedOps && OPERATION_EVIDENCE_REGISTRY[op] as fullyVerifiedOps",
+      "affectedRecords": 51734,
+      "correction": "Separated 6 independent dimensions using strict variant-level classifyOperation()."
+    },
+    {
+      "id": "K1-DEF-05",
+      "title": "Truncated manual-review queue (500 sample cap)",
+      "rootCause": "manualReviewAbilities.length < 500 cap in discover_k1_mechanics.mjs",
+      "affectedRecords": 18600,
+      "correction": "Exported complete partitioned manual-review inventory with zero truncation."
+    },
+    {
+      "id": "K1-DEF-06",
+      "title": "Overstated K1-BATCH-01 coverage (30,509)",
+      "rootCause": "Counted handler presence as verified without variant/condition checks",
+      "affectedRecords": 6382,
+      "correction": "Recalculated disjoint unique ability/card sets strictly from verified records."
+    },
+    {
+      "id": "K1-DEF-07",
+      "title": "Keyword extraction ignored KEYWORD_RULE op clauses",
+      "rootCause": "Only iterated ab.keywords",
+      "affectedRecords": 13,
+      "correction": "Extracted both ab.keywords and KEYWORD_RULE clause keywords."
+    },
+    {
+      "id": "K1-DEF-08",
+      "title": "Release family breakdown counted shard files instead of cards/abilities",
+      "rootCause": "Incremented byReleaseFamily per shard",
+      "affectedRecords": 15398,
+      "correction": "Counted both cards and abilities per release family."
+    }
+  ]
+}

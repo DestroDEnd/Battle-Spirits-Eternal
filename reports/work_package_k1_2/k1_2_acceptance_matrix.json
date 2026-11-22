@@ -1,0 +1,48 @@
+﻿{
+    "package":  "K.1.2",
+    "status":  "COMPLETE_PENDING_APPROVAL_FOR_K1_BATCH_01",
+    "criteria":  [
+                     {
+                         "id":  "K1.2-AC-01",
+                         "requirement":  "100% ability-level batch reconciliation (36,422 / 36,422, 0 missing, 0 duplicates)",
+                         "status":  "PASS",
+                         "evidence":  "batch_reconciliation_report.json"
+                     },
+                     {
+                         "id":  "K1.2-AC-02",
+                         "requirement":  "All 3 condition locations (header.condition, clause.condition, clause.op.condition) audited and propagated",
+                         "status":  "PASS",
+                         "evidence":  "condition_location_audit.json"
+                     },
+                     {
+                         "id":  "K1.2-AC-03",
+                         "requirement":  "100% header property inventory and semantic signature v2 completeness",
+                         "status":  "PASS",
+                         "evidence":  "semantic_header_completeness_audit.json"
+                     },
+                     {
+                         "id":  "K1.2-AC-04",
+                         "requirement":  "Explicit exclusion inventory with written justifications",
+                         "status":  "PASS",
+                         "evidence":  "explicit_exclusion_inventory.json"
+                     },
+                     {
+                         "id":  "K1.2-AC-05",
+                         "requirement":  "Determinism and partitioned SHA-256 manifest verification",
+                         "status":  "PASS",
+                         "evidence":  "k1_2_determinism_report.json"
+                     },
+                     {
+                         "id":  "K1.2-AC-06",
+                         "requirement":  "Full regression, verified suites, data audit, and 514-shard validation pass",
+                         "status":  "PASS",
+                         "evidence":  "k1_2_regression_results.json"
+                     },
+                     {
+                         "id":  "K1.2-AC-07",
+                         "requirement":  "Engine, compiler, IR shards, and K.1.1 artifacts preserved untouched",
+                         "status":  "PASS",
+                         "evidence":  "k1_2_git_change_audit.json"
+                     }
+                 ]
+}

@@ -24,6 +24,26 @@
     "compiledIr": {
       "cardNumber": "PC10-002",
       "name": "BARNABY BROOKS Jr. ［3］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 6000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 8000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: \"Barnaby\"/\"BARNABY BROOKS Jr.\", (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nDraw two cards.\n\n[LV2][LV3] (When Attacks)\nYou can destroy an opposing Spirit/Nexus with one symbol or less. After this effect resolves, you can [Contract Advent] from your Hand a \"WILD TIGER\" next to this Spirit, or to any others besides this Spirit, treating your [Soul Core] as being sent to the Trash.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -31,7 +51,28 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "PC10-002#AB_FLASH_NONE_LV1_LV2_LV3_8df67a2f3688a0dc40790719f771beda8ca628b4be5f86dac75dfc3b2c83658f_c36b6cbb0fbc3a0bc3bf1bed9829bb00",
+          "cardNumber": "PC10-002",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PC10-002#a0"
         },
         {
           "name": "Contract Advent",
@@ -39,12 +80,31 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 340
+          "index": 102,
+          "abilityId": "PC10-002#AB_WHEN_ATTACKS_NONE_LV2_LV3_d61bb2da1c8e2213968de9995046adbb2034184d23d00f5a06f43e8ef7829807_c505f47d8cc00ab82b2a890d1e105d1c",
+          "cardNumber": "PC10-002",
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PC10-002#a2"
         }
       ],
       "abilities": [
         {
-          "id": "PC10-002#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -55,8 +115,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: \"Barnaby\"/\"BARNABY BROOKS Jr.\", (Your Turn)",
@@ -65,10 +132,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: \"Barnaby\"/\"BARNABY BROOKS Jr.\", (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -90,7 +161,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -108,10 +181,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC10-002#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "\"Barnaby\"/\"BARNABY BROOKS Jr.\", (Your Turn)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PC10-002#AB_FLASH_NONE_LV1_LV2_LV3_8df67a2f3688a0dc40790719f771beda8ca628b4be5f86dac75dfc3b2c83658f_c36b6cbb0fbc3a0bc3bf1bed9829bb00",
+              "cardNumber": "PC10-002",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PC10-002#a0"
+            }
+          ],
+          "id": "PC10-002#AB_FLASH_NONE_LV1_LV2_LV3_8df67a2f3688a0dc40790719f771beda8ca628b4be5f86dac75dfc3b2c83658f_c36b6cbb0fbc3a0bc3bf1bed9829bb00",
+          "physicalId": "PC10-002#AB_FLASH_NONE_LV1_LV2_LV3_8df67a2f3688a0dc40790719f771beda8ca628b4be5f86dac75dfc3b2c83658f_c36b6cbb0fbc3a0bc3bf1bed9829bb00",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_8df67a2f3688a0dc40790719f771beda8ca628b4be5f86dac75dfc3b2c83658f_c36b6cbb0fbc3a0bc3bf1bed9829bb00",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_b12a55bf4b5739857c355987343f296c2c3daf86802903118b2646d13624dd1c_814672ccc018238b3295577083f2f30e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC10-002#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -122,8 +239,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS"
+            ],
             "timingLabel": "When Advents",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -132,10 +258,14 @@
             "isMain": false,
             "cleanBody": "Draw two cards."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Advents)\nDraw two cards.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Draw two cards.",
+              "originalClauseText": "Draw two cards.",
               "cleanText": "Draw two cards",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -149,10 +279,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC10-002#a1",
+          "keywords": [],
+          "id": "PC10-002#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_4cf24cf53e693a224a870e789bab37174ffd9d634e24ec0b58d9eaa788c77e94_98cd3327f111b70dff8fdc03dd403af7",
+          "physicalId": "PC10-002#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_4cf24cf53e693a224a870e789bab37174ffd9d634e24ec0b58d9eaa788c77e94_98cd3327f111b70dff8fdc03dd403af7",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_4cf24cf53e693a224a870e789bab37174ffd9d634e24ec0b58d9eaa788c77e94_98cd3327f111b70dff8fdc03dd403af7",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_9b9fae0f679463c44b79d01c70abbee68cf20be4ce35a1a3e50cf81413bd96a2_3c40288750e42723c630e65f8b097417",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC10-002#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -162,8 +306,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -172,10 +325,14 @@
             "isMain": false,
             "cleanBody": "You can destroy an opposing Spirit/Nexus with one symbol or less. After this effect resolves, you can [Contract Advent] from your Hand a \"WILD TIGER\" next to this Spirit, or to any others besides this Spirit, treating your [Soul Core] as being sent to the Trash."
           },
+          "originalAbilityText": "[LV2][LV3] (When Attacks)\nYou can destroy an opposing Spirit/Nexus with one symbol or less. After this effect resolves, you can [Contract Advent] from your Hand a \"WILD TIGER\" next to this Spirit, or to any others besides this Spirit, treating your [Soul Core] as being sent to the Trash.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "You can destroy an opposing Spirit/Nexus with one symbol or less.",
+              "originalClauseText": "You can destroy an opposing Spirit/Nexus with one symbol or less.",
               "cleanText": "You can destroy an opposing Spirit/Nexus with one symbol or less",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -194,18 +351,65 @@
             },
             {
               "rawText": "you can [Contract Advent] from your Hand a \"WILD TIGER\" next to this Spirit, or to any others besides this Spirit, treating your [Soul Core] as being sent to the Trash.",
+              "originalClauseText": "you can [Contract Advent] from your Hand a \"WILD TIGER\" next to this Spirit, or to any others besides this Spirit, treating your [Soul Core] as being sent to the Trash.",
               "cleanText": "you can [Contract Advent] from your Hand a \"WILD TIGER\" next to this Spirit, or to any others besides this Spirit, treating your [Soul Core] as being sent to the Trash",
+              "clauseIndex": 1,
               "link": "afterResolves",
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Contract Advent"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC10-002#a2",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": null,
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 102,
+              "abilityId": "PC10-002#AB_WHEN_ATTACKS_NONE_LV2_LV3_d61bb2da1c8e2213968de9995046adbb2034184d23d00f5a06f43e8ef7829807_c505f47d8cc00ab82b2a890d1e105d1c",
+              "cardNumber": "PC10-002",
+              "levels": [
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PC10-002#a2"
+            }
+          ],
+          "id": "PC10-002#AB_WHEN_ATTACKS_NONE_LV2_LV3_d61bb2da1c8e2213968de9995046adbb2034184d23d00f5a06f43e8ef7829807_c505f47d8cc00ab82b2a890d1e105d1c",
+          "physicalId": "PC10-002#AB_WHEN_ATTACKS_NONE_LV2_LV3_d61bb2da1c8e2213968de9995046adbb2034184d23d00f5a06f43e8ef7829807_c505f47d8cc00ab82b2a890d1e105d1c",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_d61bb2da1c8e2213968de9995046adbb2034184d23d00f5a06f43e8ef7829807_c505f47d8cc00ab82b2a890d1e105d1c",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_61f2a87d9617440336d6ad96fc63be8a072157946bf5ffe761d829809c61dba0_6384da6edd0cb7b24166f7cc9d76f4d4",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -499,10 +703,24 @@
     "compiledIr": {
       "cardNumber": "PC10-003",
       "name": "L.L. Audun",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 10000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 4,
+          "bp": 20000
+        }
+      },
+      "originalEffectText": "When summoning this card from the Hand, if there is a total of 17 or more cards in your Trash and the opposing Trash, this card becomes Cost 5.\n\n[LV1][LV2][LV3]\nThis heavily exhausted Spirit gains +10000 BP, and can't be destroyed, or be returned to the Hand/Deck by opposing effects.\n\n[LV1][LV2][LV3] (When Attacks/Blocks)\nBy heavily exhausting this Spirit, this Spirit is fixed as having two Purple symbols.\n\n[LV2][LV3] (Start of Your Attack Step)\nThis Spirit can refresh.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "PC10-003#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -513,8 +731,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -523,10 +746,14 @@
             "isMain": false,
             "cleanBody": "When summoning this card from the Hand, if there is a total of 17 or more cards in your Trash and the opposing Trash, this card becomes Cost 5."
           },
+          "originalAbilityText": "When summoning this card from the Hand, if there is a total of 17 or more cards in your Trash and the opposing Trash, this card becomes Cost 5.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When summoning this card from the Hand, if there is a total of 17 or more cards in your Trash and the opposing Trash, this card becomes Cost 5.",
+              "originalClauseText": "When summoning this card from the Hand, if there is a total of 17 or more cards in your Trash and the opposing Trash, this card becomes Cost 5.",
               "cleanText": "When summoning this card from the Hand, if there is a total of 17 or more cards in your Trash and the opposing Trash, this card becomes Cost 5",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -534,14 +761,37 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "opp",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "costExact": 5
+                },
+                "free": false,
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC10-003#a0",
+          "keywords": [],
+          "id": "PC10-003#AB_PASSIVE_NONE_LV1_LV2_LV3_7bdec66c2f33d4642eb6af4d93fe672d47fdab26ab2ea7119108d6a6e423ec8a_5b6d009bb116a7b7dbd0909289c377db",
+          "physicalId": "PC10-003#AB_PASSIVE_NONE_LV1_LV2_LV3_7bdec66c2f33d4642eb6af4d93fe672d47fdab26ab2ea7119108d6a6e423ec8a_5b6d009bb116a7b7dbd0909289c377db",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_7bdec66c2f33d4642eb6af4d93fe672d47fdab26ab2ea7119108d6a6e423ec8a_5b6d009bb116a7b7dbd0909289c377db",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_b90b9a4abd1c7092f8f6ec49267cf73059724a9e9bcbbf079f3d62bd766383d7_410b01d57f0cbcccc8308e00d26fb7b4",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC10-003#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -552,8 +802,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -562,10 +817,14 @@
             "isMain": false,
             "cleanBody": "This heavily exhausted Spirit gains +10000 BP, and can't be destroyed, or be returned to the Hand/Deck by opposing effects."
           },
+          "originalAbilityText": "[LV1][LV2][LV3]\nThis heavily exhausted Spirit gains +10000 BP, and can't be destroyed, or be returned to the Hand/Deck by opposing effects.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "This heavily exhausted Spirit gains +10000 BP, and can't be destroyed, or be returned to the Hand/Deck by opposing effects.",
+              "originalClauseText": "This heavily exhausted Spirit gains +10000 BP, and can't be destroyed, or be returned to the Hand/Deck by opposing effects.",
               "cleanText": "This heavily exhausted Spirit gains +10000 BP, and can't be destroyed, or be returned to the Hand/Deck by opposing effects",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -580,10 +839,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC10-003#a1",
+          "keywords": [],
+          "id": "PC10-003#AB_PASSIVE_NONE_LV1_LV2_LV3_771e222295cb284fadf00ed38ec4df1753cdefffabe4e76f414966670167235a_895d6f9d0835626452c7b2eb199176dd",
+          "physicalId": "PC10-003#AB_PASSIVE_NONE_LV1_LV2_LV3_771e222295cb284fadf00ed38ec4df1753cdefffabe4e76f414966670167235a_895d6f9d0835626452c7b2eb199176dd",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_771e222295cb284fadf00ed38ec4df1753cdefffabe4e76f414966670167235a_895d6f9d0835626452c7b2eb199176dd",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_17ff037ac7976874b8aeb3171fa02ce872835069648916fd90bcec36d0ec1ca0_21ba3635de2d2126014850d1b115edae",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC10-003#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -594,8 +865,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timings": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
             "timingLabel": "When Attacks/Blocks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -604,10 +886,14 @@
             "isMain": false,
             "cleanBody": "By heavily exhausting this Spirit, this Spirit is fixed as having two Purple symbols."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Attacks/Blocks)\nBy heavily exhausting this Spirit, this Spirit is fixed as having two Purple symbols.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "By heavily exhausting this Spirit",
+              "originalClauseText": "By heavily exhausting this Spirit",
               "cleanText": "By heavily exhausting this Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -615,28 +901,53 @@
               "duration": null,
               "op": {
                 "op": "EXHAUST",
+                "count": 1,
                 "target": {
-                  "side": "either"
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "card": "SELF"
                 }
               }
             },
             {
               "rawText": "this Spirit is fixed as having two Purple symbols.",
+              "originalClauseText": "this Spirit is fixed as having two Purple symbols.",
               "cleanText": "this Spirit is fixed as having two Purple symbols",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "ADD_SYMBOL"
+                "op": "SET_SYMBOL",
+                "count": 2,
+                "color": "Purple",
+                "side": "self"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC10-003#a2",
+          "keywords": [],
+          "id": "PC10-003#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_42c8937d32cefa91463dbb95ddae958bdffae078ba39f9e74850dd64083c864a_d8f73b9c09da5d4d6a607a77c016dc9b",
+          "physicalId": "PC10-003#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_42c8937d32cefa91463dbb95ddae958bdffae078ba39f9e74850dd64083c864a_d8f73b9c09da5d4d6a607a77c016dc9b",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_42c8937d32cefa91463dbb95ddae958bdffae078ba39f9e74850dd64083c864a_d8f73b9c09da5d4d6a607a77c016dc9b",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_3a724ce4d939be7c0e5c3fa0dd0e9e4e7863090d199d73ed51a038cc96fb385e_337db932d650d247cc3b3a2350e7af59",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC10-003#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -646,8 +957,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "START_OF_ATTACK_STEP",
+            "timings": [
+              "START_OF_ATTACK_STEP"
+            ],
             "timingLabel": "Start of Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "START_OF_ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -656,10 +976,14 @@
             "isMain": false,
             "cleanBody": "This Spirit can refresh."
           },
+          "originalAbilityText": "[LV2][LV3] (Start of Your Attack Step)\nThis Spirit can refresh.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "This Spirit can refresh.",
+              "originalClauseText": "This Spirit can refresh.",
               "cleanText": "This Spirit can refresh",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -671,7 +995,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC10-003#a3",
+          "keywords": [],
+          "id": "PC10-003#AB_START_OF_ATTACK_STEP_NONE_LV2_LV3_9cedbc8a02261175130111c5d9c9cf2e1758c06949e100c75b97e39478d80e5f_3ccc9b9a743911d5fecd5f12d606ac43",
+          "physicalId": "PC10-003#AB_START_OF_ATTACK_STEP_NONE_LV2_LV3_9cedbc8a02261175130111c5d9c9cf2e1758c06949e100c75b97e39478d80e5f_3ccc9b9a743911d5fecd5f12d606ac43",
+          "semanticId": "SEM#AB_START_OF_ATTACK_STEP_NONE_LV2_LV3_9cedbc8a02261175130111c5d9c9cf2e1758c06949e100c75b97e39478d80e5f_3ccc9b9a743911d5fecd5f12d606ac43",
+          "semanticIdV3": "SEM3#AB_START_OF_ATTACK_STEP_NONE_LV2_LV3_dd97f3d806ecc6da98caa294a8b9d5980262d336f3f836be074339e4d57ff8b1_cbb092cde0fdfc315fd7eb6a289ef7b3",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "START_OF_ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -1192,6 +1531,26 @@
     "compiledIr": {
       "cardNumber": "PC10-001",
       "name": "WILD TIGER ［3］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 4,
+          "bp": 9000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 5,
+          "bp": 13000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: \"Kotetsu\"/\"WILD TIGER\", (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n(Once per Turn: Same Name) If it's the opposing Attack Step, you can [Contract Advent] this card from the Hand, treating your [Soul Core] as being sent to the Trash.\n\n[LV1][LV2][LV3] (When Summoned/Advents)\nYou can heavy exhaust an opposing Spirit. For each Red symbol you control, this \"Exhaustion effect\" exhausts +1 bodies. (Max. +2)\n\n[During Advent] [LV2][LV3] (Your Attack Step)\nWhen your \"NEXT\" family Spirit's attack reduces the opposing Life, send an opposing Life to the Reserve.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -1199,7 +1558,28 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "PC10-001#AB_FLASH_NONE_LV1_LV2_LV3_3f9542bf810f451afc415f0e600e5c2c635251ae92633d9166058251bb8a06be_a9b4f5b100625c2daa6ef241f588b369",
+          "cardNumber": "PC10-001",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PC10-001#a0"
         },
         {
           "name": "Contract Advent",
@@ -1207,12 +1587,32 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 234
+          "index": 42,
+          "abilityId": "PC10-001#AB_PASSIVE_NONE_LV1_LV2_LV3_a8cb5d9237dbbbd210fdc30bb3c012eda07ad42c6e486ff0ce0443dd2e7ee940_5b81fe2a29e0b83e439f1d6d6f131899",
+          "cardNumber": "PC10-001",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PC10-001#a1"
         }
       ],
       "abilities": [
         {
-          "id": "PC10-001#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1223,8 +1623,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: \"Kotetsu\"/\"WILD TIGER\", (Either Attack Step)",
@@ -1233,10 +1640,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: \"Kotetsu\"/\"WILD TIGER\", (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1258,7 +1669,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1276,10 +1689,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC10-001#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "\"Kotetsu\"/\"WILD TIGER\", (Either Attack Step)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PC10-001#AB_FLASH_NONE_LV1_LV2_LV3_3f9542bf810f451afc415f0e600e5c2c635251ae92633d9166058251bb8a06be_a9b4f5b100625c2daa6ef241f588b369",
+              "cardNumber": "PC10-001",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PC10-001#a0"
+            }
+          ],
+          "id": "PC10-001#AB_FLASH_NONE_LV1_LV2_LV3_3f9542bf810f451afc415f0e600e5c2c635251ae92633d9166058251bb8a06be_a9b4f5b100625c2daa6ef241f588b369",
+          "physicalId": "PC10-001#AB_FLASH_NONE_LV1_LV2_LV3_3f9542bf810f451afc415f0e600e5c2c635251ae92633d9166058251bb8a06be_a9b4f5b100625c2daa6ef241f588b369",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_3f9542bf810f451afc415f0e600e5c2c635251ae92633d9166058251bb8a06be_a9b4f5b100625c2daa6ef241f588b369",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_3edbd858e92593ac7c004dcbd078f244c3fa2a61232abb11a315b0a0345cf10a_af4eb73efca8abfdf558d92838923b73",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC10-001#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1290,8 +1747,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
             "limit": "ONCE_PER_TURN_SAME_NAME",
             "cantStack": false,
             "keyword": null,
@@ -1300,24 +1764,73 @@
             "isMain": false,
             "cleanBody": "If it's the opposing Attack Step, you can [Contract Advent] this card from the Hand, treating your [Soul Core] as being sent to the Trash."
           },
+          "originalAbilityText": "(Once per Turn: Same Name) If it's the opposing Attack Step, you can [Contract Advent] this card from the Hand, treating your [Soul Core] as being sent to the Trash.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "If it's the opposing Attack Step, you can [Contract Advent] this card from the Hand, treating your [Soul Core] as being sent to the Trash.",
+              "originalClauseText": "If it's the opposing Attack Step, you can [Contract Advent] this card from the Hand, treating your [Soul Core] as being sent to the Trash.",
               "cleanText": "you can [Contract Advent] this card from the Hand, treating your [Soul Core] as being sent to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": "If it's the opposing Attack Step",
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Contract Advent"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC10-001#a1",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": null,
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 42,
+              "abilityId": "PC10-001#AB_PASSIVE_NONE_LV1_LV2_LV3_a8cb5d9237dbbbd210fdc30bb3c012eda07ad42c6e486ff0ce0443dd2e7ee940_5b81fe2a29e0b83e439f1d6d6f131899",
+              "cardNumber": "PC10-001",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": "ONCE_PER_TURN_SAME_NAME",
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PC10-001#a1"
+            }
+          ],
+          "id": "PC10-001#AB_PASSIVE_NONE_LV1_LV2_LV3_a8cb5d9237dbbbd210fdc30bb3c012eda07ad42c6e486ff0ce0443dd2e7ee940_5b81fe2a29e0b83e439f1d6d6f131899",
+          "physicalId": "PC10-001#AB_PASSIVE_NONE_LV1_LV2_LV3_a8cb5d9237dbbbd210fdc30bb3c012eda07ad42c6e486ff0ce0443dd2e7ee940_5b81fe2a29e0b83e439f1d6d6f131899",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_a8cb5d9237dbbbd210fdc30bb3c012eda07ad42c6e486ff0ce0443dd2e7ee940_5b81fe2a29e0b83e439f1d6d6f131899",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_53135d3dc42033bcc419a51e666af6f95db209ada804efb4fea653a4cbb7042f_b10184d1677504c8beabcf43e607c3ae",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC10-001#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1327,21 +1840,45 @@
             ],
             "levelExplicit": true,
             "prefixes": [],
-            "timing": "WHEN_SUMMONED",
-            "timingLabel": "When Summoned/Advents",
+            "timing": "PASSIVE",
+            "timings": [],
+            "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
             "burstCondition": null,
             "isFlash": false,
             "isMain": false,
-            "cleanBody": "You can heavy exhaust an opposing Spirit. For each Red symbol you control, this \"Exhaustion effect\" exhausts +1 bodies."
+            "cleanBody": "(When Summoned/Advents)\nYou can heavy exhaust an opposing Spirit. For each Red symbol you control, this \"Exhaustion effect\" exhausts +1 bodies."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned/Advents)\nYou can heavy exhaust an opposing Spirit. For each Red symbol you control, this \"Exhaustion effect\" exhausts +1 bodies. (Max. +2)",
+          "abilityIndex": 2,
           "clauses": [
             {
+              "rawText": "(When Summoned/Advents)",
+              "originalClauseText": "(When Summoned/Advents)",
+              "cleanText": "(When Summoned/Advents)",
+              "clauseIndex": 0,
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "UNSUPPORTED",
+                "rawText": "(When Summoned/Advents)"
+              }
+            },
+            {
               "rawText": "You can heavy exhaust an opposing Spirit.",
+              "originalClauseText": "You can heavy exhaust an opposing Spirit.",
               "cleanText": "You can heavy exhaust an opposing Spirit",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1361,7 +1898,9 @@
             },
             {
               "rawText": "For each Red symbol you control, this \"Exhaustion effect\" exhausts +1 bodies.",
+              "originalClauseText": "For each Red symbol you control, this \"Exhaustion effect\" exhausts +1 bodies.",
               "cleanText": "For each Red symbol you control, this \"Exhaustion effect\" exhausts +1 bodies",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1369,16 +1908,34 @@
               "duration": null,
               "op": {
                 "op": "EXHAUST",
+                "count": 1,
                 "target": {
-                  "side": "either"
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
                 }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "(When Summoned/Advents)"
+          ],
+          "legacyId": "PC10-001#a2",
+          "keywords": [],
+          "id": "PC10-001#AB_PASSIVE_NONE_LV1_LV2_LV3_71cf285efbd2e1bc2f62e3baf4654bf0cb5cc5ac157f2487f920cf59436b683b_bdb0bc8b8e25578a84e03c8d27e46c6a",
+          "physicalId": "PC10-001#AB_PASSIVE_NONE_LV1_LV2_LV3_71cf285efbd2e1bc2f62e3baf4654bf0cb5cc5ac157f2487f920cf59436b683b_bdb0bc8b8e25578a84e03c8d27e46c6a",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_71cf285efbd2e1bc2f62e3baf4654bf0cb5cc5ac157f2487f920cf59436b683b_bdb0bc8b8e25578a84e03c8d27e46c6a",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_2d777cea0826c100d0078643e067fd09476a56aa29483677ff3c33267cc258bf_507e08fcd5120958a702f908a8ccfd9a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC10-001#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1390,8 +1947,17 @@
               "During Advent"
             ],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1400,10 +1966,14 @@
             "isMain": false,
             "cleanBody": "When your \"NEXT\" family Spirit's attack reduces the opposing Life, send an opposing Life to the Reserve."
           },
+          "originalAbilityText": "[During Advent] [LV2][LV3] (Your Attack Step)\nWhen your \"NEXT\" family Spirit's attack reduces the opposing Life, send an opposing Life to the Reserve.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "When your \"NEXT\" family Spirit's attack reduces the opposing Life, send an opposing Life to the Reserve.",
+              "originalClauseText": "When your \"NEXT\" family Spirit's attack reduces the opposing Life, send an opposing Life to the Reserve.",
               "cleanText": "When your \"NEXT\" family Spirit's attack reduces the opposing Life, send an opposing Life to the Reserve",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1411,16 +1981,39 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC10-001#a3",
+          "keywords": [],
+          "id": "PC10-001#AB_ATTACK_STEP_NONE_LV2_LV3_1dd6224a5808bdfbd278d2119c74c974018ff4833e1ff4474568efb2f8dc8199_1b7833983fe7e3396ad405757dec78aa",
+          "physicalId": "PC10-001#AB_ATTACK_STEP_NONE_LV2_LV3_1dd6224a5808bdfbd278d2119c74c974018ff4833e1ff4474568efb2f8dc8199_1b7833983fe7e3396ad405757dec78aa",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_1dd6224a5808bdfbd278d2119c74c974018ff4833e1ff4474568efb2f8dc8199_1b7833983fe7e3396ad405757dec78aa",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_LV3_bff9471bba9952c81f3834174fed1935464ac3089e84b13d190143a6fdf0d992_3c0ba768503e9745194d1f2463c74557",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
-      "unsupportedClausesCount": 0,
-      "isFullySupported": true
+      "unsupportedClausesCount": 1,
+      "isFullySupported": false
     }
   }
 }

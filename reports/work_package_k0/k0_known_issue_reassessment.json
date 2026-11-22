@@ -1,0 +1,40 @@
+{
+  "generatedAt": "2026-11-19T15:13:10.252Z",
+  "risks": [
+    {
+      "id": "RISK-01",
+      "title": "Automatic triggers bypassing activation limits",
+      "status": "NOT_PRESENT_VERIFIED",
+      "evidence": "TriggerQueueManager.resolvePendingQueue() calls reserveRestriction() before RESOLVING (engine/triggers.js:247), and AsyncResolver.resolveAbility() calls reserveRestriction() before any clause executes (engine/resolver.js:465), so both queued triggers and direct EventBus triggers enforce OPT/OPG/SAME_NAME limits.",
+      "testRef": "K0-TRIG-01"
+    },
+    {
+      "id": "RISK-02",
+      "title": "Same-name effect tracking sufficiency",
+      "status": "NOT_PRESENT_VERIFIED",
+      "evidence": "buildRestrictionKey() keys ONCE_PER_TURN_SAME_NAME on turnNumber:player:same_name:cardName:semanticId and ONCE_PER_GAME_SAME_NAME on game:player:same_name:cardName:semanticId (engine/restrictions.js:556-593), cleanly distinguishing players, abilities, and shared-name copies.",
+      "testRef": "K0-RESTRICT-01"
+    },
+    {
+      "id": "RISK-03",
+      "title": "Once-per-game tracking keys & reset isolation",
+      "status": "NOT_PRESENT_VERIFIED",
+      "evidence": "OPG keys use game:player:card:cardId:physicalId (scope GAME); resetRestrictions(state, \"TURN\") only resets TURN/STEP/BATTLE/ATTACK scopes and never resets GAME scope (engine/restrictions.js:1594).",
+      "testRef": "K0-RESTRICT-01"
+    },
+    {
+      "id": "RISK-04",
+      "title": "Effect consumption and failed resolution",
+      "status": "NOT_PRESENT_VERIFIED",
+      "evidence": "Cost clauses commit only after costPaid === true (engine/resolver.js:289-303). Targeting clauses commit only after targeting succeeds and is not declined (lines 314-327). Failed costs abort immediately and release reservation in finally (lines 621, 666).",
+      "testRef": "K0-RESOLVER-01"
+    },
+    {
+      "id": "RISK-05",
+      "title": "Lifecycle resets & battle context cleanup",
+      "status": "DEFECT_FOUND_AND_FIXED",
+      "evidence": "FlowController.advanceStep() resets TURN/STEP/BATTLE/ATTACK scopes atomically and clears state.combat on leaving ATTACK/END. However, selectors/conditions checked state.battle while declareAttack/declareBlock set state.combat (K0-DEF-01 & K0-DEF-02), now fixed.",
+      "testRef": "K0-TURN-01, K0-BATTLE-01, K0-DEF-01, K0-DEF-02"
+    }
+  ]
+}

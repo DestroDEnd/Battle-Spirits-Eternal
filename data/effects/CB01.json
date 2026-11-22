@@ -616,6 +616,10 @@
     "compiledIr": {
       "cardNumber": "CB01-060",
       "name": "Heat Blaster",
+      "type": "Magic",
+      "levels": {},
+      "originalEffectText": "When your \"Baltan Seijin\"-named Spirit is summoned, return an exactly-named \"Heat Blaster\" from your Trash to the Hand. This effect can only be used once per turn.\n\n[Flash]\nSend a core from any opposing Spirits to their Reserve. If a Spirit wasn't depleted by this effect, exhaust it. Then, if [Soul Core] was used to pay the cost, you can activate the [Bunshin] of one of your Spirits.",
+      "teams": [],
       "keywords": [
         {
           "name": "Bunshin",
@@ -623,12 +627,32 @@
           "wave": 4,
           "hook": "bunshin",
           "bracketed": true,
-          "index": 353
+          "index": 180,
+          "abilityId": "CB01-060#AB_FLASH_NONE_LV1_LV2_LV3_db58c6e9fd4a63ff0e7337b72a315fe2d0ab4f185976befcc587f4824ae8f222_a6248c910ed18e570197e90467f00188",
+          "cardNumber": "CB01-060",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "CB01-060#a1"
         }
       ],
       "abilities": [
         {
-          "id": "CB01-060#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -639,8 +663,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -649,28 +680,58 @@
             "isMain": false,
             "cleanBody": "When your \"Baltan Seijin\"-named Spirit is summoned, return an exactly-named \"Heat Blaster\" from your Trash to the Hand."
           },
+          "originalAbilityText": "When your \"Baltan Seijin\"-named Spirit is summoned, return an exactly-named \"Heat Blaster\" from your Trash to the Hand. This effect can only be used once per turn.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When your \"Baltan Seijin\"-named Spirit is summoned, return an exactly-named \"Heat Blaster\" from your Trash to the Hand.",
+              "originalClauseText": "When your \"Baltan Seijin\"-named Spirit is summoned, return an exactly-named \"Heat Blaster\" from your Trash to the Hand.",
               "cleanText": "When your \"Baltan Seijin\"-named Spirit is summoned, return an exactly-named \"Heat Blaster\" from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "Baltan Seijin",
+                  "nameIncludesAny": [
+                    "Baltan Seijin",
+                    "Heat Blaster"
+                  ]
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-060#a0",
+          "keywords": [],
+          "id": "CB01-060#AB_PASSIVE_NONE_LV1_LV2_LV3_c9dd1738f9942c8e0091f026f63b5e624843e1d84f14c8591c1db64af77856d8_2b2119a88171355b03a7e62c97782f09",
+          "physicalId": "CB01-060#AB_PASSIVE_NONE_LV1_LV2_LV3_c9dd1738f9942c8e0091f026f63b5e624843e1d84f14c8591c1db64af77856d8_2b2119a88171355b03a7e62c97782f09",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_c9dd1738f9942c8e0091f026f63b5e624843e1d84f14c8591c1db64af77856d8_2b2119a88171355b03a7e62c97782f09",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_80d519427de79b9ad22e684a755bbe130068deed15dc9e0c969214b5928d4739_ca53c090b2ae7ec2ec4981d98940b194",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB01-060#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -681,8 +742,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -691,10 +759,14 @@
             "isMain": false,
             "cleanBody": "Send a core from any opposing Spirits to their Reserve. If a Spirit wasn't depleted by this effect, exhaust it. Then, if [Soul Core] was used to pay the cost, you can activate the [Bunshin] of one of your Spirits."
           },
+          "originalAbilityText": "[Flash]\nSend a core from any opposing Spirits to their Reserve. If a Spirit wasn't depleted by this effect, exhaust it. Then, if [Soul Core] was used to pay the cost, you can activate the [Bunshin] of one of your Spirits.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Send a core from any opposing Spirits to their Reserve.",
+              "originalClauseText": "Send a core from any opposing Spirits to their Reserve.",
               "cleanText": "Send a core from any opposing Spirits to their Reserve",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -719,7 +791,9 @@
             },
             {
               "rawText": "If a Spirit wasn't depleted by this effect, exhaust it.",
+              "originalClauseText": "If a Spirit wasn't depleted by this effect, exhaust it.",
               "cleanText": "exhaust it",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -732,18 +806,66 @@
             },
             {
               "rawText": "if [Soul Core] was used to pay the cost, you can activate the [Bunshin] of one of your Spirits.",
+              "originalClauseText": "if [Soul Core] was used to pay the cost, you can activate the [Bunshin] of one of your Spirits.",
               "cleanText": "you can activate the [Bunshin] of one of your Spirits",
+              "clauseIndex": 2,
               "link": "then",
               "isOptional": true,
               "isCost": false,
               "condition": "if [Soul Core] was used to pay the cost",
               "duration": null,
               "op": {
-                "op": "ACTIVATE_TRIGGER"
+                "op": "KEYWORD_RULE",
+                "keyword": "Bunshin"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-060#a1",
+          "keywords": [
+            {
+              "name": "Bunshin",
+              "parameter": null,
+              "wave": 4,
+              "hook": "bunshin",
+              "bracketed": true,
+              "index": 180,
+              "abilityId": "CB01-060#AB_FLASH_NONE_LV1_LV2_LV3_db58c6e9fd4a63ff0e7337b72a315fe2d0ab4f185976befcc587f4824ae8f222_a6248c910ed18e570197e90467f00188",
+              "cardNumber": "CB01-060",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "CB01-060#a1"
+            }
+          ],
+          "id": "CB01-060#AB_FLASH_NONE_LV1_LV2_LV3_db58c6e9fd4a63ff0e7337b72a315fe2d0ab4f185976befcc587f4824ae8f222_a6248c910ed18e570197e90467f00188",
+          "physicalId": "CB01-060#AB_FLASH_NONE_LV1_LV2_LV3_db58c6e9fd4a63ff0e7337b72a315fe2d0ab4f185976befcc587f4824ae8f222_a6248c910ed18e570197e90467f00188",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_db58c6e9fd4a63ff0e7337b72a315fe2d0ab4f185976befcc587f4824ae8f222_a6248c910ed18e570197e90467f00188",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_0c18e6e67c63d60e1f16150cef790f709a4d1e727be8f79df30140d8ff3ed010_c985168b20991f08c6adf28839454397",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -850,10 +972,13 @@
     "compiledIr": {
       "cardNumber": "CB01-058",
       "name": "Magata-Thunderbolt",
+      "type": "Magic",
+      "levels": {},
+      "originalEffectText": "[Main]\nDraw two cards. Also, if [Soul Core] was used to pay the cost, return a \"KingDemonBeast\"-named Spirit card from your Trash to the Hand.\n\n[Flash]\nDuring this turn, give a Spirit +2000 BP.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "CB01-058#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -864,8 +989,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "MAIN",
+            "timings": [],
             "timingLabel": "Main",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "MAIN"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -874,10 +1006,14 @@
             "isMain": true,
             "cleanBody": "Draw two cards. Also, if [Soul Core] was used to pay the cost, return a \"KingDemonBeast\"-named Spirit card from your Trash to the Hand."
           },
+          "originalAbilityText": "[Main]\nDraw two cards. Also, if [Soul Core] was used to pay the cost, return a \"KingDemonBeast\"-named Spirit card from your Trash to the Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Draw two cards.",
+              "originalClauseText": "Draw two cards.",
               "cleanText": "Draw two cards",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -892,25 +1028,49 @@
             },
             {
               "rawText": "if [Soul Core] was used to pay the cost, return a \"KingDemonBeast\"-named Spirit card from your Trash to the Hand.",
+              "originalClauseText": "if [Soul Core] was used to pay the cost, return a \"KingDemonBeast\"-named Spirit card from your Trash to the Hand.",
               "cleanText": "return a \"KingDemonBeast\"-named Spirit card from your Trash to the Hand",
+              "clauseIndex": 1,
               "link": "also",
               "isOptional": false,
               "isCost": false,
               "condition": "if [Soul Core] was used to pay the cost",
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "KingDemonBeast"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-058#a0",
+          "keywords": [],
+          "id": "CB01-058#AB_MAIN_NONE_LV1_LV2_LV3_d2f64ee26637c654a9318ad732c11577a105e22546166e62b4d3b5a358e23fff_8b4fc7b349a8638dfe91e057eaf9acbe",
+          "physicalId": "CB01-058#AB_MAIN_NONE_LV1_LV2_LV3_d2f64ee26637c654a9318ad732c11577a105e22546166e62b4d3b5a358e23fff_8b4fc7b349a8638dfe91e057eaf9acbe",
+          "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_d2f64ee26637c654a9318ad732c11577a105e22546166e62b4d3b5a358e23fff_8b4fc7b349a8638dfe91e057eaf9acbe",
+          "semanticIdV3": "SEM3#AB_MAIN_NONE_LV1_LV2_LV3_5e8ba345f0ab3769464df4319427690d46de2947ec3a323a5859c36dbaf11801_448cc082f3834dbfaae1907bc9910a59",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "MAIN"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB01-058#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -921,8 +1081,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -931,10 +1098,14 @@
             "isMain": false,
             "cleanBody": "During this turn, give a Spirit +2000 BP."
           },
+          "originalAbilityText": "[Flash]\nDuring this turn, give a Spirit +2000 BP.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "During this turn, give a Spirit +2000 BP.",
+              "originalClauseText": "During this turn, give a Spirit +2000 BP.",
               "cleanText": "give a Spirit +2000 BP",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -948,7 +1119,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-058#a1",
+          "keywords": [],
+          "id": "CB01-058#AB_FLASH_NONE_LV1_LV2_LV3_312728364e0dd1278a91ade4941e9c76a1cfee4a99ba6683f601bdea052419f7_26ec665af8b01b221c31ec2814e6f925",
+          "physicalId": "CB01-058#AB_FLASH_NONE_LV1_LV2_LV3_312728364e0dd1278a91ade4941e9c76a1cfee4a99ba6683f601bdea052419f7_26ec665af8b01b221c31ec2814e6f925",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_312728364e0dd1278a91ade4941e9c76a1cfee4a99ba6683f601bdea052419f7_26ec665af8b01b221c31ec2814e6f925",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_6737cfeaaf9e8ce12b0b5f595f625251f115ed6e8fedf7da8833df359b8e78a8_20d093cafe8778e8775972e748506883",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -1116,10 +1302,24 @@
     "compiledIr": {
       "cardNumber": "CB01-020",
       "name": "The AntennaAlien Bat Seijin",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 6000
+        }
+      },
+      "originalEffectText": "[LV1][LV2] (When Summoned/Destroyed)\nYou can return a \"Zetton\"-named Spirit card from your Trash to the Hand. Destroy an opposing exhausted Spirit with a cost equal or inferior to the cost of the Spirit card returned by this effect.\n\n[LV1][LV2]\nThis Spirit's color and symbols are also treated as Red.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "CB01-020#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1129,8 +1329,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED_OR_DESTROYED",
+            "timings": [
+              "WHEN_SUMMONED",
+              "WHEN_DESTROYED"
+            ],
             "timingLabel": "When Summoned/Destroyed",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_DESTROYED",
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1139,26 +1350,40 @@
             "isMain": false,
             "cleanBody": "You can return a \"Zetton\"-named Spirit card from your Trash to the Hand. Destroy an opposing exhausted Spirit with a cost equal or inferior to the cost of the Spirit card returned by this effect."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned/Destroyed)\nYou can return a \"Zetton\"-named Spirit card from your Trash to the Hand. Destroy an opposing exhausted Spirit with a cost equal or inferior to the cost of the Spirit card returned by this effect.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "You can return a \"Zetton\"-named Spirit card from your Trash to the Hand.",
+              "originalClauseText": "You can return a \"Zetton\"-named Spirit card from your Trash to the Hand.",
               "cleanText": "You can return a \"Zetton\"-named Spirit card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "Zetton"
+                },
+                "isOptional": true
               }
             },
             {
               "rawText": "Destroy an opposing exhausted Spirit with a cost equal or inferior to the cost of the Spirit card returned by this effect.",
+              "originalClauseText": "Destroy an opposing exhausted Spirit with a cost equal or inferior to the cost of the Spirit card returned by this effect.",
               "cleanText": "Destroy an opposing exhausted Spirit with a cost equal or inferior to the cost of the Spirit card returned by this effect",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1179,10 +1404,25 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-020#a0",
+          "keywords": [],
+          "id": "CB01-020#AB_WHEN_SUMMONED_OR_DESTROYED_NONE_LV1_LV2_10001ad09a33c8333e9a8f5af04093aead14d18b2ce0760113e24ae8775efed4_54484353619ceffda4d5e161da25621c",
+          "physicalId": "CB01-020#AB_WHEN_SUMMONED_OR_DESTROYED_NONE_LV1_LV2_10001ad09a33c8333e9a8f5af04093aead14d18b2ce0760113e24ae8775efed4_54484353619ceffda4d5e161da25621c",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_OR_DESTROYED_NONE_LV1_LV2_10001ad09a33c8333e9a8f5af04093aead14d18b2ce0760113e24ae8775efed4_54484353619ceffda4d5e161da25621c",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_OR_DESTROYED_NONE_LV1_LV2_86e7b3d74a3e68264ac6bf8dfbe99a2aeca39a27defd0d7a72b78a5901d8a3cb_a9f81a8aca8a07b1aa6a97a186666132",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_DESTROYED",
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB01-020#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1192,8 +1432,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1202,21 +1447,40 @@
             "isMain": false,
             "cleanBody": "This Spirit's color and symbols are also treated as Red."
           },
+          "originalAbilityText": "[LV1][LV2]\nThis Spirit's color and symbols are also treated as Red.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "This Spirit's color and symbols are also treated as Red.",
+              "originalClauseText": "This Spirit's color and symbols are also treated as Red.",
               "cleanText": "This Spirit's color and symbols are also treated as Red",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "TREAT_RULE",
+                "treatAs": "COLOR",
+                "color": "Red"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-020#a1",
+          "keywords": [],
+          "id": "CB01-020#AB_PASSIVE_NONE_LV1_LV2_f6aa517d3819341d7a0d22a4720c23107c9f7af91fb79a912d42bcb7f633773d_7da551518550318032c43ecb9b5e5f1f",
+          "physicalId": "CB01-020#AB_PASSIVE_NONE_LV1_LV2_f6aa517d3819341d7a0d22a4720c23107c9f7af91fb79a912d42bcb7f633773d_7da551518550318032c43ecb9b5e5f1f",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_f6aa517d3819341d7a0d22a4720c23107c9f7af91fb79a912d42bcb7f633773d_7da551518550318032c43ecb9b5e5f1f",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_b90f6d5acc5cec8615b1186a4bc146a33fa46b5fbf41a1d8ac41d21a176dd883_a13ac004595641f2d945a1ba213e1ca5",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -1485,10 +1749,24 @@
     "compiledIr": {
       "cardNumber": "CB01-016",
       "name": "The CloneAlien Guts Seijin Doppel",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 1000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 3000
+        }
+      },
+      "originalEffectText": "[LV1][LV2] (When Summoned)\nYou can summon all \"Guts Seijin\"-named Spirit cards from your Trash. However, (When Summoned) effects of those Spirits can't activate.\n\n[LV1][LV2] (Your Main Step)\nThe cost of every exactly-named \"The OddMachineKaiju Diabolic\" in your Hand gets -1.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "CB01-016#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1498,8 +1776,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1508,10 +1795,14 @@
             "isMain": false,
             "cleanBody": "You can summon all \"Guts Seijin\"-named Spirit cards from your Trash. However, (When Summoned) effects of those Spirits can't activate."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned)\nYou can summon all \"Guts Seijin\"-named Spirit cards from your Trash. However, (When Summoned) effects of those Spirits can't activate.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "You can summon all \"Guts Seijin\"-named Spirit cards from your Trash.",
+              "originalClauseText": "You can summon all \"Guts Seijin\"-named Spirit cards from your Trash.",
               "cleanText": "You can summon all \"Guts Seijin\"-named Spirit cards from your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1519,12 +1810,25 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "Guts Seijin"
+                },
+                "free": false,
+                "isOptional": true
               }
             },
             {
               "rawText": "(When Summoned) effects of those Spirits can't activate.",
+              "originalClauseText": "(When Summoned) effects of those Spirits can't activate.",
               "cleanText": "(When Summoned) effects of those Spirits can't activate",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1535,10 +1839,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-016#a0",
+          "keywords": [],
+          "id": "CB01-016#AB_WHEN_SUMMONED_NONE_LV1_LV2_48f53aeaa1003b05ec1e337a716e5d7e1f8cfcff8419d43b68affd0eed3702d6_ea4fb311138b4d16ad5fc623a3199ede",
+          "physicalId": "CB01-016#AB_WHEN_SUMMONED_NONE_LV1_LV2_48f53aeaa1003b05ec1e337a716e5d7e1f8cfcff8419d43b68affd0eed3702d6_ea4fb311138b4d16ad5fc623a3199ede",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_48f53aeaa1003b05ec1e337a716e5d7e1f8cfcff8419d43b68affd0eed3702d6_ea4fb311138b4d16ad5fc623a3199ede",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_478fb35ec9fe1c5e2f4514d6e6c0bf9efbc380c12dc0c780998084f5e6a9539c_d78a72ebdead8ef6462e9367255bdafc",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB01-016#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1548,8 +1866,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "MAIN_STEP",
+            "timings": [
+              "MAIN_STEP"
+            ],
             "timingLabel": "Your Main Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "MAIN_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1558,21 +1885,41 @@
             "isMain": false,
             "cleanBody": "The cost of every exactly-named \"The OddMachineKaiju Diabolic\" in your Hand gets -1."
           },
+          "originalAbilityText": "[LV1][LV2] (Your Main Step)\nThe cost of every exactly-named \"The OddMachineKaiju Diabolic\" in your Hand gets -1.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "The cost of every exactly-named \"The OddMachineKaiju Diabolic\" in your Hand gets -1.",
+              "originalClauseText": "The cost of every exactly-named \"The OddMachineKaiju Diabolic\" in your Hand gets -1.",
               "cleanText": "The cost of every exactly-named \"The OddMachineKaiju Diabolic\" in your Hand gets -1",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "COST_MODIFIER"
+                "op": "COST_MODIFIER",
+                "delta": -1
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-016#a1",
+          "keywords": [],
+          "id": "CB01-016#AB_MAIN_STEP_NONE_LV1_LV2_2847c607d164723eb073c83ddcee1aa04b35a3725bddbe35dad074f8fe9256df_6e5213d41fdf7be40b8da4719a728954",
+          "physicalId": "CB01-016#AB_MAIN_STEP_NONE_LV1_LV2_2847c607d164723eb073c83ddcee1aa04b35a3725bddbe35dad074f8fe9256df_6e5213d41fdf7be40b8da4719a728954",
+          "semanticId": "SEM#AB_MAIN_STEP_NONE_LV1_LV2_2847c607d164723eb073c83ddcee1aa04b35a3725bddbe35dad074f8fe9256df_6e5213d41fdf7be40b8da4719a728954",
+          "semanticIdV3": "SEM3#AB_MAIN_STEP_NONE_LV1_LV2_1e1a88d6aa275ac3959a5236917b2db68f69046e5e488c5f1c27b075300b457b_65e9f7825e15703a01ae0e4b4ea2ab4d",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "MAIN_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -1940,10 +2287,29 @@
     "compiledIr": {
       "cardNumber": "CB01-025",
       "name": "The Devil Beast Zaigorg",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 10000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 6,
+          "bp": 15000
+        }
+      },
+      "originalEffectText": "This Spirit/Spirit card is also treated as being exactly-named \"The DevilBeast Zaigorg.\"\n\n[LV1][LV2][LV3] (When Summoned)\nDiscard five cards from your decktop. For each \"DevilBeast\"/\"DevilAlterEgo\"-named card discarded by this effect, send one core each from every opposing Spirit to their Reserve.\n\n[LV2][LV3] (When Attacks)\nYou can summon a Cost 6 or less \"DevilBeast\"/\"DevilAlterEgo\"-named Spirit card from your Trash, without paying the cost.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "CB01-025#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1954,8 +2320,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1964,24 +2335,42 @@
             "isMain": false,
             "cleanBody": "This Spirit/Spirit card is also treated as being exactly-named \"The DevilBeast Zaigorg.\""
           },
+          "originalAbilityText": "This Spirit/Spirit card is also treated as being exactly-named \"The DevilBeast Zaigorg.\"",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "This Spirit/Spirit card is also treated as being exactly-named \"The DevilBeast Zaigorg.\"",
+              "originalClauseText": "This Spirit/Spirit card is also treated as being exactly-named \"The DevilBeast Zaigorg.\"",
               "cleanText": "This Spirit/Spirit card is also treated as being exactly-named \"The DevilBeast Zaigorg.\"",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "TREAT_RULE",
+                "treatAs": "NAME",
+                "name": "The DevilBeast Zaigorg."
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-025#a0",
+          "keywords": [],
+          "id": "CB01-025#AB_PASSIVE_NONE_LV1_LV2_LV3_d359d9e9395a5fc7dc8895d9b9a00e2cfb1091263592b953b84d1a132a31abef_47ff22f286a2461d9482040685fd7bab",
+          "physicalId": "CB01-025#AB_PASSIVE_NONE_LV1_LV2_LV3_d359d9e9395a5fc7dc8895d9b9a00e2cfb1091263592b953b84d1a132a31abef_47ff22f286a2461d9482040685fd7bab",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_d359d9e9395a5fc7dc8895d9b9a00e2cfb1091263592b953b84d1a132a31abef_47ff22f286a2461d9482040685fd7bab",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_033926b7ae8a67bb443d66d3d56a9b557a04f3889c368585758d5dc1930997d5_82b0e59c4179e6fcb0b22e052ff86e19",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB01-025#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1992,8 +2381,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2002,10 +2400,14 @@
             "isMain": false,
             "cleanBody": "Discard five cards from your decktop. For each \"DevilBeast\"/\"DevilAlterEgo\"-named card discarded by this effect, send one core each from every opposing Spirit to their Reserve."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nDiscard five cards from your decktop. For each \"DevilBeast\"/\"DevilAlterEgo\"-named card discarded by this effect, send one core each from every opposing Spirit to their Reserve.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Discard five cards from your decktop.",
+              "originalClauseText": "Discard five cards from your decktop.",
               "cleanText": "Discard five cards from your decktop",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2018,7 +2420,9 @@
             },
             {
               "rawText": "For each \"DevilBeast\"/\"DevilAlterEgo\"-named card discarded by this effect, send one core each from every opposing Spirit to their Reserve.",
+              "originalClauseText": "For each \"DevilBeast\"/\"DevilAlterEgo\"-named card discarded by this effect, send one core each from every opposing Spirit to their Reserve.",
               "cleanText": "For each \"DevilBeast\"/\"DevilAlterEgo\"-named card discarded by this effect, send one core each from every opposing Spirit to their Reserve",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2026,14 +2430,36 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-025#a1",
+          "keywords": [],
+          "id": "CB01-025#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_704c67026d26fac38022c391bb8ad66c36ca98d5b5563bda5e21a4550ca3e783_a821699d3b0c929a9e8574feec42f874",
+          "physicalId": "CB01-025#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_704c67026d26fac38022c391bb8ad66c36ca98d5b5563bda5e21a4550ca3e783_a821699d3b0c929a9e8574feec42f874",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_704c67026d26fac38022c391bb8ad66c36ca98d5b5563bda5e21a4550ca3e783_a821699d3b0c929a9e8574feec42f874",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_9c3979181b0b014552548fdcc8fca4894ba596dbc6b971445361bac9f85db682_6c3c4d232d07084d66b564ef27829cbf",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB01-025#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2043,8 +2469,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2053,10 +2488,14 @@
             "isMain": false,
             "cleanBody": "You can summon a Cost 6 or less \"DevilBeast\"/\"DevilAlterEgo\"-named Spirit card from your Trash, without paying the cost."
           },
+          "originalAbilityText": "[LV2][LV3] (When Attacks)\nYou can summon a Cost 6 or less \"DevilBeast\"/\"DevilAlterEgo\"-named Spirit card from your Trash, without paying the cost.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "You can summon a Cost 6 or less \"DevilBeast\"/\"DevilAlterEgo\"-named Spirit card from your Trash, without paying the cost.",
+              "originalClauseText": "You can summon a Cost 6 or less \"DevilBeast\"/\"DevilAlterEgo\"-named Spirit card from your Trash, without paying the cost.",
               "cleanText": "You can summon a Cost 6 or less \"DevilBeast\"/\"DevilAlterEgo\"-named Spirit card from your Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -2064,11 +2503,42 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "costLte": 6,
+                  "nameIncludes": "DevilBeast",
+                  "nameIncludesAny": [
+                    "DevilBeast",
+                    "DevilAlterEgo"
+                  ]
+                },
+                "free": true,
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-025#a2",
+          "keywords": [],
+          "id": "CB01-025#AB_WHEN_ATTACKS_NONE_LV2_LV3_e48d48fb74c34c53a694574db44b5f977afcb6f2d00045f44f66e8848ee5d2ac_0fe5ee6dbf23e582d4bc6b0e2d463809",
+          "physicalId": "CB01-025#AB_WHEN_ATTACKS_NONE_LV2_LV3_e48d48fb74c34c53a694574db44b5f977afcb6f2d00045f44f66e8848ee5d2ac_0fe5ee6dbf23e582d4bc6b0e2d463809",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_e48d48fb74c34c53a694574db44b5f977afcb6f2d00045f44f66e8848ee5d2ac_0fe5ee6dbf23e582d4bc6b0e2d463809",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_b2e6cbdf58ba555b19a4ffbce3db3c5eb6ccd29db464b5ac71a1509a9b1de331_c112500f8eeb790b80aa525d2b3877b9",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -2287,10 +2757,29 @@
     "compiledIr": {
       "cardNumber": "CB01-X02",
       "name": "The Evil God of Destruction Hyper Zetton (Imago)",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 15000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 20000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 6,
+          "bp": 30000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] (When Summoned)\nDestroy three opposing 20000 BP or less Spirits/Ultimates. For each Spirit/Ultimate destroyed by this effect, send two cores from your Trash to this Spirit.\n\n[LV2][LV3] (When Attacks)\nDestroy an opposing Spirit, an opposing Ultimate, an opposing braved Brave and an opposing Nexus.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "CB01-X02#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2301,8 +2790,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2311,10 +2809,14 @@
             "isMain": false,
             "cleanBody": "Destroy three opposing 20000 BP or less Spirits/Ultimates. For each Spirit/Ultimate destroyed by this effect, send two cores from your Trash to this Spirit."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nDestroy three opposing 20000 BP or less Spirits/Ultimates. For each Spirit/Ultimate destroyed by this effect, send two cores from your Trash to this Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Destroy three opposing 20000 BP or less Spirits/Ultimates.",
+              "originalClauseText": "Destroy three opposing 20000 BP or less Spirits/Ultimates.",
               "cleanText": "Destroy three opposing 20000 BP or less Spirits/Ultimates",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2336,7 +2838,9 @@
             },
             {
               "rawText": "For each Spirit/Ultimate destroyed by this effect, send two cores from your Trash to this Spirit.",
+              "originalClauseText": "For each Spirit/Ultimate destroyed by this effect, send two cores from your Trash to this Spirit.",
               "cleanText": "For each Spirit/Ultimate destroyed by this effect, send two cores from your Trash to this Spirit",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2344,14 +2848,37 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 2,
+                "from": {
+                  "zone": "trash",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-X02#a0",
+          "keywords": [],
+          "id": "CB01-X02#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_301ef6cb170e0f3405c4119032aa89b5b9b616997fd7207900dcda3a6582d660_7257881e14f93bce39f14facd1be9e62",
+          "physicalId": "CB01-X02#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_301ef6cb170e0f3405c4119032aa89b5b9b616997fd7207900dcda3a6582d660_7257881e14f93bce39f14facd1be9e62",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_301ef6cb170e0f3405c4119032aa89b5b9b616997fd7207900dcda3a6582d660_7257881e14f93bce39f14facd1be9e62",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_14014846f9c5c4a9370c3019a1191ba1e77cc3e4946bc5e917c8ceb329b870bb_6b129a29a2b5c495f17cfc2ed70f3693",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB01-X02#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2361,8 +2888,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2371,10 +2907,14 @@
             "isMain": false,
             "cleanBody": "Destroy an opposing Spirit, an opposing Ultimate, an opposing braved Brave and an opposing Nexus."
           },
+          "originalAbilityText": "[LV2][LV3] (When Attacks)\nDestroy an opposing Spirit, an opposing Ultimate, an opposing braved Brave and an opposing Nexus.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Destroy an opposing Spirit, an opposing Ultimate, an opposing braved Brave and an opposing Nexus.",
+              "originalClauseText": "Destroy an opposing Spirit, an opposing Ultimate, an opposing braved Brave and an opposing Nexus.",
               "cleanText": "Destroy an opposing Spirit, an opposing Ultimate, an opposing braved Brave and an opposing Nexus",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2392,7 +2932,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-X02#a1",
+          "keywords": [],
+          "id": "CB01-X02#AB_WHEN_ATTACKS_NONE_LV2_LV3_1ec2e617b11991941ecf1ead22ab6cfb7f551d054e5877f57c13b0a237167c8f_a82e98da1b4251be7d32e8b995c24b9b",
+          "physicalId": "CB01-X02#AB_WHEN_ATTACKS_NONE_LV2_LV3_1ec2e617b11991941ecf1ead22ab6cfb7f551d054e5877f57c13b0a237167c8f_a82e98da1b4251be7d32e8b995c24b9b",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_1ec2e617b11991941ecf1ead22ab6cfb7f551d054e5877f57c13b0a237167c8f_a82e98da1b4251be7d32e8b995c24b9b",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_55b504f1360c3ccf3c21a33e7bda6d01bdc8b57ad1d3e98c623e44dc048e99a1_7aa78f56bf310630b9e3b2ec313c9001",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -3039,10 +3594,24 @@
     "compiledIr": {
       "cardNumber": "CB01-019",
       "name": "The HellAlien Hipporito Seijin Callisto",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 4000
+        }
+      },
+      "originalEffectText": "[LV1][LV2] (When Summoned)\nSend one core from an opposing Spirit to their Reserve.\n\n[LV1][LV2] (Your Main Step)\nThe cost of every exactly-named \"The OddMachineKaiju Diabolic\" in your Hand gets -1.\n\n[LV2] (When Attacks)\nBy exhausting one of your exactly-named \"The VillainousAlien Temperor Seijin Batista\", send all cores from the opposing Reserve to their Trash.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "CB01-019#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3052,8 +3621,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3062,10 +3640,14 @@
             "isMain": false,
             "cleanBody": "Send one core from an opposing Spirit to their Reserve."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned)\nSend one core from an opposing Spirit to their Reserve.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Send one core from an opposing Spirit to their Reserve.",
+              "originalClauseText": "Send one core from an opposing Spirit to their Reserve.",
               "cleanText": "Send one core from an opposing Spirit to their Reserve",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -3073,14 +3655,36 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-019#a0",
+          "keywords": [],
+          "id": "CB01-019#AB_WHEN_SUMMONED_NONE_LV1_LV2_454be1b169e3ea0960cd92622d762416ed30bc338d4bad54a6b3b5f6e29dbd55_5e66ead707eb84c25923f417aea6262c",
+          "physicalId": "CB01-019#AB_WHEN_SUMMONED_NONE_LV1_LV2_454be1b169e3ea0960cd92622d762416ed30bc338d4bad54a6b3b5f6e29dbd55_5e66ead707eb84c25923f417aea6262c",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_454be1b169e3ea0960cd92622d762416ed30bc338d4bad54a6b3b5f6e29dbd55_5e66ead707eb84c25923f417aea6262c",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_dfb2e410eb2fee0bc4138d1ce5e1d714b0563cdbe8358daa1826c808682646b3_51104f355a835bb1722f26282687eaa0",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB01-019#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3090,8 +3694,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "MAIN_STEP",
+            "timings": [
+              "MAIN_STEP"
+            ],
             "timingLabel": "Your Main Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "MAIN_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3100,24 +3713,43 @@
             "isMain": false,
             "cleanBody": "The cost of every exactly-named \"The OddMachineKaiju Diabolic\" in your Hand gets -1."
           },
+          "originalAbilityText": "[LV1][LV2] (Your Main Step)\nThe cost of every exactly-named \"The OddMachineKaiju Diabolic\" in your Hand gets -1.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "The cost of every exactly-named \"The OddMachineKaiju Diabolic\" in your Hand gets -1.",
+              "originalClauseText": "The cost of every exactly-named \"The OddMachineKaiju Diabolic\" in your Hand gets -1.",
               "cleanText": "The cost of every exactly-named \"The OddMachineKaiju Diabolic\" in your Hand gets -1",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "COST_MODIFIER"
+                "op": "COST_MODIFIER",
+                "delta": -1
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-019#a1",
+          "keywords": [],
+          "id": "CB01-019#AB_MAIN_STEP_NONE_LV1_LV2_2847c607d164723eb073c83ddcee1aa04b35a3725bddbe35dad074f8fe9256df_6e5213d41fdf7be40b8da4719a728954",
+          "physicalId": "CB01-019#AB_MAIN_STEP_NONE_LV1_LV2_2847c607d164723eb073c83ddcee1aa04b35a3725bddbe35dad074f8fe9256df_6e5213d41fdf7be40b8da4719a728954",
+          "semanticId": "SEM#AB_MAIN_STEP_NONE_LV1_LV2_2847c607d164723eb073c83ddcee1aa04b35a3725bddbe35dad074f8fe9256df_6e5213d41fdf7be40b8da4719a728954",
+          "semanticIdV3": "SEM3#AB_MAIN_STEP_NONE_LV1_LV2_1e1a88d6aa275ac3959a5236917b2db68f69046e5e488c5f1c27b075300b457b_65e9f7825e15703a01ae0e4b4ea2ab4d",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "MAIN_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB01-019#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3126,8 +3758,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3136,10 +3777,14 @@
             "isMain": false,
             "cleanBody": "By exhausting one of your exactly-named \"The VillainousAlien Temperor Seijin Batista\", send all cores from the opposing Reserve to their Trash."
           },
+          "originalAbilityText": "[LV2] (When Attacks)\nBy exhausting one of your exactly-named \"The VillainousAlien Temperor Seijin Batista\", send all cores from the opposing Reserve to their Trash.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "By exhausting one of your exactly-named \"The VillainousAlien Temperor Seijin Batista\"",
+              "originalClauseText": "By exhausting one of your exactly-named \"The VillainousAlien Temperor Seijin Batista\"",
               "cleanText": "By exhausting one of your exactly-named \"The VillainousAlien Temperor Seijin Batista\"",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -3147,14 +3792,20 @@
               "duration": null,
               "op": {
                 "op": "EXHAUST",
+                "count": 1,
                 "target": {
-                  "side": "either"
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
                 }
               }
             },
             {
               "rawText": "send all cores from the opposing Reserve to their Trash.",
+              "originalClauseText": "send all cores from the opposing Reserve to their Trash.",
               "cleanText": "send all cores from the opposing Reserve to their Trash",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -3174,7 +3825,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-019#a2",
+          "keywords": [],
+          "id": "CB01-019#AB_WHEN_ATTACKS_NONE_LV2_79295314dee88eb4875570f32837f0cde950124738d79f32160f1ae298c0daa0_376e221a49ae3d9d255bff10c0b947d2",
+          "physicalId": "CB01-019#AB_WHEN_ATTACKS_NONE_LV2_79295314dee88eb4875570f32837f0cde950124738d79f32160f1ae298c0daa0_376e221a49ae3d9d255bff10c0b947d2",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_79295314dee88eb4875570f32837f0cde950124738d79f32160f1ae298c0daa0_376e221a49ae3d9d255bff10c0b947d2",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_124344e92ffd92be38be076de8f1ac805b862680a805c99cb03590b195069e7d_66c4931f076ff4a989b42fa009eb17ac",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -3207,10 +3873,29 @@
     "compiledIr": {
       "cardNumber": "CB01-024",
       "name": "The HundredBodyKaiju Belyudra",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 8000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 10000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 12000
+        }
+      },
+      "originalEffectText": "This Spirit/Spirit card is also treated as being exactly-named named \"Belial\".\n\n[LV1][LV2][LV3] (When Attacks)\nReturn up to 100 \"Kaiju\"/\"Seijin\"-named Spirit cards from your Trash to the deckbottom in any order. For each card returned by this effect, send two cores from any opposing Spirits to their Reserve.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "CB01-024#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3221,8 +3906,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3231,24 +3921,42 @@
             "isMain": false,
             "cleanBody": "This Spirit/Spirit card is also treated as being exactly-named named \"Belial\"."
           },
+          "originalAbilityText": "This Spirit/Spirit card is also treated as being exactly-named named \"Belial\".",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "This Spirit/Spirit card is also treated as being exactly-named named \"Belial\".",
+              "originalClauseText": "This Spirit/Spirit card is also treated as being exactly-named named \"Belial\".",
               "cleanText": "This Spirit/Spirit card is also treated as being exactly-named named \"Belial\"",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "TREAT_RULE",
+                "treatAs": "NAME",
+                "name": "Belial"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-024#a0",
+          "keywords": [],
+          "id": "CB01-024#AB_PASSIVE_NONE_LV1_LV2_LV3_4f3d3ce9b8665083d7dffcda41e2673162bb4deb23b4bd7408f03b0d94d6ef38_7c2d4cea6a86194e1c0d1b2024293182",
+          "physicalId": "CB01-024#AB_PASSIVE_NONE_LV1_LV2_LV3_4f3d3ce9b8665083d7dffcda41e2673162bb4deb23b4bd7408f03b0d94d6ef38_7c2d4cea6a86194e1c0d1b2024293182",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_4f3d3ce9b8665083d7dffcda41e2673162bb4deb23b4bd7408f03b0d94d6ef38_7c2d4cea6a86194e1c0d1b2024293182",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_2a8837966a5c1887353a346a6e84e224ba81e2f1d749909cc4f2954a5e119bdd_b0551b103d75f28897837a38431f424e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB01-024#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3259,8 +3967,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3269,26 +3986,44 @@
             "isMain": false,
             "cleanBody": "Return up to 100 \"Kaiju\"/\"Seijin\"-named Spirit cards from your Trash to the deckbottom in any order. For each card returned by this effect, send two cores from any opposing Spirits to their Reserve."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Attacks)\nReturn up to 100 \"Kaiju\"/\"Seijin\"-named Spirit cards from your Trash to the deckbottom in any order. For each card returned by this effect, send two cores from any opposing Spirits to their Reserve.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Return up to 100 \"Kaiju\"/\"Seijin\"-named Spirit cards from your Trash to the deckbottom in any order.",
+              "originalClauseText": "Return up to 100 \"Kaiju\"/\"Seijin\"-named Spirit cards from your Trash to the deckbottom in any order.",
               "cleanText": "Return up to 100 \"Kaiju\"/\"Seijin\"-named Spirit cards from your Trash to the deckbottom in any order",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
-                "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "DECK_BOTTOM",
+                "side": "self",
+                "count": 100,
+                "upTo": true,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "Kaiju",
+                  "nameIncludesAny": [
+                    "Kaiju",
+                    "Seijin"
+                  ]
+                },
+                "isOptional": false
               }
             },
             {
               "rawText": "For each card returned by this effect, send two cores from any opposing Spirits to their Reserve.",
+              "originalClauseText": "For each card returned by this effect, send two cores from any opposing Spirits to their Reserve.",
               "cleanText": "For each card returned by this effect, send two cores from any opposing Spirits to their Reserve",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -3296,11 +4031,34 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 2,
+                "from": {
+                  "zone": "field",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-024#a1",
+          "keywords": [],
+          "id": "CB01-024#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_c827be61dc7491799aa37bc3c7cd7d6c4376ad98c05ef409e390a08ef6699984_fe259682209fd86e2243e4176cc4f5e0",
+          "physicalId": "CB01-024#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_c827be61dc7491799aa37bc3c7cd7d6c4376ad98c05ef409e390a08ef6699984_fe259682209fd86e2243e4176cc4f5e0",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_c827be61dc7491799aa37bc3c7cd7d6c4376ad98c05ef409e390a08ef6699984_fe259682209fd86e2243e4176cc4f5e0",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_7908f5d9276e15359bced0df8d1799ab0c468b1da9ea93724b57baa0a815969d_454b7187a2f67e66e4f0c65cfe11d258",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -4159,10 +4917,24 @@
     "compiledIr": {
       "cardNumber": "CB01-030",
       "name": "The Love and Hate Warrior Camearra",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 6000
+        }
+      },
+      "originalEffectText": "[LV1][LV2] (When Summoned)\nBy discarding a Spirit card from your Hand, draw two cards.\n\n[LV2] (When Destroyed by the Opponent)\nYou can summon a \"Gatanothor\"-named Spirit card from your Hand/Trash, without paying the cost.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "CB01-030#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4172,8 +4944,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4182,10 +4963,14 @@
             "isMain": false,
             "cleanBody": "By discarding a Spirit card from your Hand, draw two cards."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned)\nBy discarding a Spirit card from your Hand, draw two cards.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By discarding a Spirit card from your Hand",
+              "originalClauseText": "By discarding a Spirit card from your Hand",
               "cleanText": "By discarding a Spirit card from your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -4199,7 +4984,9 @@
             },
             {
               "rawText": "draw two cards.",
+              "originalClauseText": "draw two cards.",
               "cleanText": "draw two cards",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -4213,10 +5000,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-030#a0",
+          "keywords": [],
+          "id": "CB01-030#AB_WHEN_SUMMONED_NONE_LV1_LV2_4762cda4ca5c749fb4fc13a619b8a9f583996252e2dd4dc0c581344baf197410_0eb99ca329df3d7462245fbc2371a193",
+          "physicalId": "CB01-030#AB_WHEN_SUMMONED_NONE_LV1_LV2_4762cda4ca5c749fb4fc13a619b8a9f583996252e2dd4dc0c581344baf197410_0eb99ca329df3d7462245fbc2371a193",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_4762cda4ca5c749fb4fc13a619b8a9f583996252e2dd4dc0c581344baf197410_0eb99ca329df3d7462245fbc2371a193",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_3c3cba57398949794ba12f7331cb8839d26e4b4f3f58bdadb3b371d32ea88be2_3d134e9259dcec9c2ccd8df96a76cc39",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB01-030#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4225,8 +5026,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_DESTROYED",
+            "timings": [
+              "WHEN_DESTROYED"
+            ],
             "timingLabel": "When Destroyed by the Opponent",
             "timingStep": "ANY",
+            "timingCause": "OPPONENT",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4235,10 +5045,14 @@
             "isMain": false,
             "cleanBody": "You can summon a \"Gatanothor\"-named Spirit card from your Hand/Trash, without paying the cost."
           },
+          "originalAbilityText": "[LV2] (When Destroyed by the Opponent)\nYou can summon a \"Gatanothor\"-named Spirit card from your Hand/Trash, without paying the cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can summon a \"Gatanothor\"-named Spirit card from your Hand/Trash, without paying the cost.",
+              "originalClauseText": "You can summon a \"Gatanothor\"-named Spirit card from your Hand/Trash, without paying the cost.",
               "cleanText": "You can summon a \"Gatanothor\"-named Spirit card from your Hand/Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -4246,11 +5060,37 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand_or_trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "Gatanothor"
+                },
+                "free": true,
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-030#a1",
+          "keywords": [],
+          "id": "CB01-030#AB_WHEN_DESTROYED_NONE_LV2_aa57723731be2346941aa8798de7bc2fa14eec1f98aeb3a9551b5ef198f62a3a_4bef20f6f63cf86b26b82fb0640bbbca",
+          "physicalId": "CB01-030#AB_WHEN_DESTROYED_NONE_LV2_aa57723731be2346941aa8798de7bc2fa14eec1f98aeb3a9551b5ef198f62a3a_4bef20f6f63cf86b26b82fb0640bbbca",
+          "semanticId": "SEM#AB_WHEN_DESTROYED_NONE_LV2_aa57723731be2346941aa8798de7bc2fa14eec1f98aeb3a9551b5ef198f62a3a_4bef20f6f63cf86b26b82fb0640bbbca",
+          "semanticIdV3": "SEM3#AB_WHEN_DESTROYED_NONE_LV2_f59dc716a32e7371dfc2d6e2d861571869fa6ff203b17aa85e612c1dd05f766d_0a46008713fe540e24ab9dc30538578c",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "OPPONENT",
+            "timingTriggers": [
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -4381,6 +5221,21 @@
     "compiledIr": {
       "cardNumber": "CB01-028",
       "name": "The OddMachineAlien Gapiya Seijin Sades",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 7000
+        }
+      },
+      "originalEffectText": "During (Either Attack Step), when opposing Spirits/Ultimates are summoned/[Advent], you can summon this Spirit card from your Hand/Trash, without paying the cost.\n\n[LV2] Flash - (Either Attack Step)\nBy exhausting one of your exactly-named \"The OddMachineKaiju Diabolic\", send all cores from one opposing Spirit/Ultimate to their Trash.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -4388,12 +5243,32 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 74
+          "index": 74,
+          "abilityId": "CB01-028#AB_PASSIVE_NONE_LV1_LV2_LV3_15279b3c7e241d932f63081863cfab25400a4ff0edf2904de1542bf1c7297048_7594455bcff90caff7816251ec7745d2",
+          "cardNumber": "CB01-028",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "CB01-028#a0"
         }
       ],
       "abilities": [
         {
-          "id": "CB01-028#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4404,8 +5279,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4414,10 +5294,14 @@
             "isMain": false,
             "cleanBody": "During (Either Attack Step), when opposing Spirits/Ultimates are summoned/[Advent], you can summon this Spirit card from your Hand/Trash, without paying the cost."
           },
+          "originalAbilityText": "During (Either Attack Step), when opposing Spirits/Ultimates are summoned/[Advent], you can summon this Spirit card from your Hand/Trash, without paying the cost.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "During (Either Attack Step), when opposing Spirits/Ultimates are summoned/[Advent], you can summon this Spirit card from your Hand/Trash, without paying the cost.",
+              "originalClauseText": "During (Either Attack Step), when opposing Spirits/Ultimates are summoned/[Advent], you can summon this Spirit card from your Hand/Trash, without paying the cost.",
               "cleanText": "During (Either Attack Step), when opposing Spirits/Ultimates are summoned/[Advent], you can summon this Spirit card from your Hand/Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -4425,14 +5309,57 @@
               "duration": null,
               "op": {
                 "op": "SUMMON_THIS_CARD",
-                "from": "HAND_OR_BURST"
+                "from": "TRASH",
+                "free": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-028#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": null,
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 74,
+              "abilityId": "CB01-028#AB_PASSIVE_NONE_LV1_LV2_LV3_15279b3c7e241d932f63081863cfab25400a4ff0edf2904de1542bf1c7297048_7594455bcff90caff7816251ec7745d2",
+              "cardNumber": "CB01-028",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "CB01-028#a0"
+            }
+          ],
+          "id": "CB01-028#AB_PASSIVE_NONE_LV1_LV2_LV3_15279b3c7e241d932f63081863cfab25400a4ff0edf2904de1542bf1c7297048_7594455bcff90caff7816251ec7745d2",
+          "physicalId": "CB01-028#AB_PASSIVE_NONE_LV1_LV2_LV3_15279b3c7e241d932f63081863cfab25400a4ff0edf2904de1542bf1c7297048_7594455bcff90caff7816251ec7745d2",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_15279b3c7e241d932f63081863cfab25400a4ff0edf2904de1542bf1c7297048_7594455bcff90caff7816251ec7745d2",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_417f7cc0078924dec039a7d498a28031690ae1d559e23ab941dafe5a276ae154_759232020d30a4f1156ff9dd1a967672",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB01-028#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4441,8 +5368,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4451,10 +5387,14 @@
             "isMain": false,
             "cleanBody": "By exhausting one of your exactly-named \"The OddMachineKaiju Diabolic\", send all cores from one opposing Spirit/Ultimate to their Trash."
           },
+          "originalAbilityText": "[LV2] Flash - (Either Attack Step)\nBy exhausting one of your exactly-named \"The OddMachineKaiju Diabolic\", send all cores from one opposing Spirit/Ultimate to their Trash.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "By exhausting one of your exactly-named \"The OddMachineKaiju Diabolic\"",
+              "originalClauseText": "By exhausting one of your exactly-named \"The OddMachineKaiju Diabolic\"",
               "cleanText": "By exhausting one of your exactly-named \"The OddMachineKaiju Diabolic\"",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -4462,14 +5402,20 @@
               "duration": null,
               "op": {
                 "op": "EXHAUST",
+                "count": 1,
                 "target": {
-                  "side": "either"
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
                 }
               }
             },
             {
               "rawText": "send all cores from one opposing Spirit/Ultimate to their Trash.",
+              "originalClauseText": "send all cores from one opposing Spirit/Ultimate to their Trash.",
               "cleanText": "send all cores from one opposing Spirit/Ultimate to their Trash",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -4477,11 +5423,34 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": "ALL",
+                "from": {
+                  "zone": "field",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "opp"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-028#a1",
+          "keywords": [],
+          "id": "CB01-028#AB_ATTACK_STEP_NONE_LV2_ca0e9ca3b79e2e5044376e54649c4bf08bdeb109ea23a4b615df254aba8f21eb_6758616ce1dc47cad17dc3d0dd800090",
+          "physicalId": "CB01-028#AB_ATTACK_STEP_NONE_LV2_ca0e9ca3b79e2e5044376e54649c4bf08bdeb109ea23a4b615df254aba8f21eb_6758616ce1dc47cad17dc3d0dd800090",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_ca0e9ca3b79e2e5044376e54649c4bf08bdeb109ea23a4b615df254aba8f21eb_6758616ce1dc47cad17dc3d0dd800090",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_f1a1dcb848881d3ceb6228dd5eb2a770ae3280617ddc452a5738c5017d7a5cdd_aed204fe9d19621ad681992948650941",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -6061,6 +7030,21 @@
     "compiledIr": {
       "cardNumber": "CB01-040",
       "name": "Ultraman Orb Emerium Slugger",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: \"Ultraman\"] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents)\nYou can show to the opponent, \"Seven\"/\"Zero\"-named cards, one of each from your Hand. For each card shown, put a core from the Void to this Spirit.\n\n[During Advent] [LV2] (When Attacks)\nDestroy an opposing Cost 5 or less Spirit.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -6068,12 +7052,32 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "CB01-040#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b6f569407c92282355f3f70ee00ddcca74110a104df1f003cb4cf6a8a9b87899_b43c291128badc0d6f6607a5dc9d3772",
+          "cardNumber": "CB01-040",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "CB01-040#a0"
         }
       ],
       "abilities": [
         {
-          "id": "CB01-040#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -6084,8 +7088,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: \"Ultraman\"",
@@ -6094,10 +7107,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Advent: \"Ultraman\"] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -6119,7 +7136,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -6137,10 +7156,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-040#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "\"Ultraman\"",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "CB01-040#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b6f569407c92282355f3f70ee00ddcca74110a104df1f003cb4cf6a8a9b87899_b43c291128badc0d6f6607a5dc9d3772",
+              "cardNumber": "CB01-040",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "CB01-040#a0"
+            }
+          ],
+          "id": "CB01-040#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b6f569407c92282355f3f70ee00ddcca74110a104df1f003cb4cf6a8a9b87899_b43c291128badc0d6f6607a5dc9d3772",
+          "physicalId": "CB01-040#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b6f569407c92282355f3f70ee00ddcca74110a104df1f003cb4cf6a8a9b87899_b43c291128badc0d6f6607a5dc9d3772",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b6f569407c92282355f3f70ee00ddcca74110a104df1f003cb4cf6a8a9b87899_b43c291128badc0d6f6607a5dc9d3772",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c2190d3a90481a0cd48564504a2c534712d69e2f3732938f4f6777d404698629_6cb8f6e382c6daeecd18af3f9d051e72",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB01-040#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -6150,8 +7213,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS"
+            ],
             "timingLabel": "When Advents",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -6160,10 +7232,14 @@
             "isMain": false,
             "cleanBody": "You can show to the opponent, \"Seven\"/\"Zero\"-named cards, one of each from your Hand. For each card shown, put a core from the Void to this Spirit."
           },
+          "originalAbilityText": "[LV1][LV2] (When Advents)\nYou can show to the opponent, \"Seven\"/\"Zero\"-named cards, one of each from your Hand. For each card shown, put a core from the Void to this Spirit.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can show to the opponent, \"Seven\"/\"Zero\"-named cards, one of each from your Hand.",
+              "originalClauseText": "You can show to the opponent, \"Seven\"/\"Zero\"-named cards, one of each from your Hand.",
               "cleanText": "You can show to the opponent, \"Seven\"/\"Zero\"-named cards, one of each from your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -6175,7 +7251,9 @@
             },
             {
               "rawText": "For each card shown, put a core from the Void to this Spirit.",
+              "originalClauseText": "For each card shown, put a core from the Void to this Spirit.",
               "cleanText": "For each card shown, put a core from the Void to this Spirit",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -6194,10 +7272,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-040#a1",
+          "keywords": [],
+          "id": "CB01-040#AB_WHEN_ADVENTS_NONE_LV1_LV2_797dfad66fd7f3b5cd7919d266c34757e3f6bb1aa4641c13a6b38e0969ccbbf5_e7e78f6407bf5d609665cca6fec71cb1",
+          "physicalId": "CB01-040#AB_WHEN_ADVENTS_NONE_LV1_LV2_797dfad66fd7f3b5cd7919d266c34757e3f6bb1aa4641c13a6b38e0969ccbbf5_e7e78f6407bf5d609665cca6fec71cb1",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_797dfad66fd7f3b5cd7919d266c34757e3f6bb1aa4641c13a6b38e0969ccbbf5_e7e78f6407bf5d609665cca6fec71cb1",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_4ea06df9b3277721b2d409fe2ec1e4fd0fc79f3d5fbaf04080c593787374b37e_a5445af4be388522897cfbc8b5a10cf8",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB01-040#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -6208,8 +7300,17 @@
               "During Advent"
             ],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -6218,10 +7319,14 @@
             "isMain": false,
             "cleanBody": "Destroy an opposing Cost 5 or less Spirit."
           },
+          "originalAbilityText": "[During Advent] [LV2] (When Attacks)\nDestroy an opposing Cost 5 or less Spirit.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Destroy an opposing Cost 5 or less Spirit.",
+              "originalClauseText": "Destroy an opposing Cost 5 or less Spirit.",
               "cleanText": "Destroy an opposing Cost 5 or less Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -6242,7 +7347,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-040#a2",
+          "keywords": [],
+          "id": "CB01-040#AB_WHEN_ATTACKS_NONE_LV2_139e54a96ab57571e2b5b035d1e045019d9e603df2927b3c86b9ff47b2eae9f2_fa1f2ca4f2ebe5265b23c5d4913fc12f",
+          "physicalId": "CB01-040#AB_WHEN_ATTACKS_NONE_LV2_139e54a96ab57571e2b5b035d1e045019d9e603df2927b3c86b9ff47b2eae9f2_fa1f2ca4f2ebe5265b23c5d4913fc12f",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_139e54a96ab57571e2b5b035d1e045019d9e603df2927b3c86b9ff47b2eae9f2_fa1f2ca4f2ebe5265b23c5d4913fc12f",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_6eada009aeffab64c0f9d868cbb1293c08862d18ae7fc2e58027e4a348e76669_b0614599e008a537dd47ff70469c605f",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -6270,6 +7390,21 @@
     "compiledIr": {
       "cardNumber": "CB01-043",
       "name": "Ultraman Orb Lightning Attacker",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 6000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: \"Ultraman\"] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents)\nYou can show to the opponent, \"Ginga\"/\"X\"-named cards, one of each from your Hand. For each card shown, the amount of cards to be discarded from Hand by this effect gets -1. Draw two cards. Then, discard two cards from your Hand.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -6277,12 +7412,32 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "CB01-043#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b6f569407c92282355f3f70ee00ddcca74110a104df1f003cb4cf6a8a9b87899_b43c291128badc0d6f6607a5dc9d3772",
+          "cardNumber": "CB01-043",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "CB01-043#a0"
         }
       ],
       "abilities": [
         {
-          "id": "CB01-043#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -6293,8 +7448,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: \"Ultraman\"",
@@ -6303,10 +7467,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Advent: \"Ultraman\"] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -6328,7 +7496,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -6346,10 +7516,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-043#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "\"Ultraman\"",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "CB01-043#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b6f569407c92282355f3f70ee00ddcca74110a104df1f003cb4cf6a8a9b87899_b43c291128badc0d6f6607a5dc9d3772",
+              "cardNumber": "CB01-043",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "CB01-043#a0"
+            }
+          ],
+          "id": "CB01-043#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b6f569407c92282355f3f70ee00ddcca74110a104df1f003cb4cf6a8a9b87899_b43c291128badc0d6f6607a5dc9d3772",
+          "physicalId": "CB01-043#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b6f569407c92282355f3f70ee00ddcca74110a104df1f003cb4cf6a8a9b87899_b43c291128badc0d6f6607a5dc9d3772",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b6f569407c92282355f3f70ee00ddcca74110a104df1f003cb4cf6a8a9b87899_b43c291128badc0d6f6607a5dc9d3772",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c2190d3a90481a0cd48564504a2c534712d69e2f3732938f4f6777d404698629_6cb8f6e382c6daeecd18af3f9d051e72",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB01-043#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -6359,8 +7573,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS"
+            ],
             "timingLabel": "When Advents",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -6369,10 +7592,14 @@
             "isMain": false,
             "cleanBody": "You can show to the opponent, \"Ginga\"/\"X\"-named cards, one of each from your Hand. For each card shown, the amount of cards to be discarded from Hand by this effect gets -1. Draw two cards. Then, discard two cards from your Hand."
           },
+          "originalAbilityText": "[LV1][LV2] (When Advents)\nYou can show to the opponent, \"Ginga\"/\"X\"-named cards, one of each from your Hand. For each card shown, the amount of cards to be discarded from Hand by this effect gets -1. Draw two cards. Then, discard two cards from your Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can show to the opponent, \"Ginga\"/\"X\"-named cards, one of each from your Hand.",
+              "originalClauseText": "You can show to the opponent, \"Ginga\"/\"X\"-named cards, one of each from your Hand.",
               "cleanText": "You can show to the opponent, \"Ginga\"/\"X\"-named cards, one of each from your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -6384,7 +7611,9 @@
             },
             {
               "rawText": "For each card shown, the amount of cards to be discarded from Hand by this effect gets -1.",
+              "originalClauseText": "For each card shown, the amount of cards to be discarded from Hand by this effect gets -1.",
               "cleanText": "For each card shown, the amount of cards to be discarded from Hand by this effect gets -1",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -6398,7 +7627,9 @@
             },
             {
               "rawText": "Draw two cards.",
+              "originalClauseText": "Draw two cards.",
               "cleanText": "Draw two cards",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -6413,7 +7644,9 @@
             },
             {
               "rawText": "discard two cards from your Hand.",
+              "originalClauseText": "discard two cards from your Hand.",
               "cleanText": "discard two cards from your Hand",
+              "clauseIndex": 3,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -6428,7 +7661,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-043#a1",
+          "keywords": [],
+          "id": "CB01-043#AB_WHEN_ADVENTS_NONE_LV1_LV2_e54c81a9a0b660123e47ba834e2f1da6337712c50a9a860e072a7c7eeb66d4ab_941a976efd6d8f8ae200c8c6422a889d",
+          "physicalId": "CB01-043#AB_WHEN_ADVENTS_NONE_LV1_LV2_e54c81a9a0b660123e47ba834e2f1da6337712c50a9a860e072a7c7eeb66d4ab_941a976efd6d8f8ae200c8c6422a889d",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_e54c81a9a0b660123e47ba834e2f1da6337712c50a9a860e072a7c7eeb66d4ab_941a976efd6d8f8ae200c8c6422a889d",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_50f6b47ecbd8c1785f382cbd7c9423eb76b9fbee2610e884bc5b700d8cde856c_1c4b677425b917018459996a9efcc026",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
@@ -6456,6 +7704,21 @@
     "compiledIr": {
       "cardNumber": "CB01-047",
       "name": "Ultraman Orb Orb Origin",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 10000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 15000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: \"Ultraman Orb\"] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[During Advent] [LV1][LV2]\nThis Spirit can't be destroyed by opposing effects.\n\n[LV2] (When Attacks)\nFor each pre-Advent card of this Spirit, destroy an opposing Cost 7 or less Spirit.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -6463,12 +7726,32 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "CB01-047#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_26ba4fb751df7d3ba6a68eabc2f03b9f2503d8825031080f4094d131d1f56c40_2ec3ace8c912903cddd6cdd0af70ae0a",
+          "cardNumber": "CB01-047",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "CB01-047#a0"
         }
       ],
       "abilities": [
         {
-          "id": "CB01-047#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -6479,8 +7762,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: \"Ultraman Orb\"",
@@ -6489,10 +7781,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Advent: \"Ultraman Orb\"] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -6514,7 +7810,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -6532,10 +7830,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-047#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "\"Ultraman Orb\"",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "CB01-047#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_26ba4fb751df7d3ba6a68eabc2f03b9f2503d8825031080f4094d131d1f56c40_2ec3ace8c912903cddd6cdd0af70ae0a",
+              "cardNumber": "CB01-047",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "CB01-047#a0"
+            }
+          ],
+          "id": "CB01-047#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_26ba4fb751df7d3ba6a68eabc2f03b9f2503d8825031080f4094d131d1f56c40_2ec3ace8c912903cddd6cdd0af70ae0a",
+          "physicalId": "CB01-047#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_26ba4fb751df7d3ba6a68eabc2f03b9f2503d8825031080f4094d131d1f56c40_2ec3ace8c912903cddd6cdd0af70ae0a",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_26ba4fb751df7d3ba6a68eabc2f03b9f2503d8825031080f4094d131d1f56c40_2ec3ace8c912903cddd6cdd0af70ae0a",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_5fd4bc24344a4baa60de401d826270eb47debd5450098c112c5f3f05164ae228_86c9dadac09f1f599f91225b2f506c99",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB01-047#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -6547,8 +7889,13 @@
               "During Advent"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -6557,24 +7904,44 @@
             "isMain": false,
             "cleanBody": "This Spirit can't be destroyed by opposing effects."
           },
+          "originalAbilityText": "[During Advent] [LV1][LV2]\nThis Spirit can't be destroyed by opposing effects.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "This Spirit can't be destroyed by opposing effects.",
+              "originalClauseText": "This Spirit can't be destroyed by opposing effects.",
               "cleanText": "This Spirit can't be destroyed by opposing effects",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "INDESTRUCTIBLE"
+                "op": "INDESTRUCTIBLE",
+                "by": [
+                  "OPPOSING_EFFECTS"
+                ],
+                "target": "self"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-047#a1",
+          "keywords": [],
+          "id": "CB01-047#AB_PASSIVE_NONE_LV1_LV2_3a5174870862c339bb7f91ad4b8ffbf9a834d669432125f892b3e21a711bf81d_5ecec1a45000a90ff2ae58fe70dad300",
+          "physicalId": "CB01-047#AB_PASSIVE_NONE_LV1_LV2_3a5174870862c339bb7f91ad4b8ffbf9a834d669432125f892b3e21a711bf81d_5ecec1a45000a90ff2ae58fe70dad300",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_3a5174870862c339bb7f91ad4b8ffbf9a834d669432125f892b3e21a711bf81d_5ecec1a45000a90ff2ae58fe70dad300",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_fc1abc0d76016516b620094c820d83f73274e801c74060a1bc89734b3462ab8f_1cf6068edc8d9ff57f12dbd0fe5a32d2",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB01-047#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -6583,8 +7950,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -6593,10 +7969,14 @@
             "isMain": false,
             "cleanBody": "For each pre-Advent card of this Spirit, destroy an opposing Cost 7 or less Spirit."
           },
+          "originalAbilityText": "[LV2] (When Attacks)\nFor each pre-Advent card of this Spirit, destroy an opposing Cost 7 or less Spirit.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "For each pre-Advent card of this Spirit, destroy an opposing Cost 7 or less Spirit.",
+              "originalClauseText": "For each pre-Advent card of this Spirit, destroy an opposing Cost 7 or less Spirit.",
               "cleanText": "For each pre-Advent card of this Spirit, destroy an opposing Cost 7 or less Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -6617,7 +7997,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-047#a2",
+          "keywords": [],
+          "id": "CB01-047#AB_WHEN_ATTACKS_NONE_LV2_f0bbde49a8f4e852546c96b4981058054c736aa9d230bc0f80ab1edf6d412cfc_a57f48a0ec39ef7bf274f32a262281b6",
+          "physicalId": "CB01-047#AB_WHEN_ATTACKS_NONE_LV2_f0bbde49a8f4e852546c96b4981058054c736aa9d230bc0f80ab1edf6d412cfc_a57f48a0ec39ef7bf274f32a262281b6",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_f0bbde49a8f4e852546c96b4981058054c736aa9d230bc0f80ab1edf6d412cfc_a57f48a0ec39ef7bf274f32a262281b6",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_6ccd31dee919e8c9cdfd5c1ab3ee6e2d5f3a627349d927dc60fd1c02ace8ae7e_e4379403f86b259a99bba575fa2daf0d",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -6645,6 +8040,21 @@
     "compiledIr": {
       "cardNumber": "CB01-X06",
       "name": "Ultraman Orb Orb Trinity",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 12000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 16000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: Cost 6 or more & \"Ultraman\"] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents)\nYou can show to the opponent \"Ginga\"/\"Victory\"/\"X\"-named cards, one of each, from your Hand. For each card shown, destroy an opposing Cost 10 or less Spirit.\n\n[LV2] Flash - (When Attacks)\nBy discarding one of this Spirit's pre-advent cards, refresh this Spirit.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -6652,12 +8062,32 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "CB01-X06#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c82245f443df5d5c918bcde7e1982bf59d12fbc81500a46c6fac3f5daef9ffb9_819099d0b05926341a0f178ce1bad9e9",
+          "cardNumber": "CB01-X06",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "CB01-X06#a0"
         }
       ],
       "abilities": [
         {
-          "id": "CB01-X06#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -6668,8 +8098,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: Cost 6 or more & \"Ultraman\"",
@@ -6678,10 +8117,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Advent: Cost 6 or more & \"Ultraman\"] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -6703,7 +8146,9 @@
             },
             {
               "rawText": "stack this from your Hand onto your target Spirit.",
+              "originalClauseText": "stack this from your Hand onto your target Spirit.",
               "cleanText": "stack this from your Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -6721,10 +8166,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-X06#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "Cost 6 or more & \"Ultraman\"",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "CB01-X06#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c82245f443df5d5c918bcde7e1982bf59d12fbc81500a46c6fac3f5daef9ffb9_819099d0b05926341a0f178ce1bad9e9",
+              "cardNumber": "CB01-X06",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "CB01-X06#a0"
+            }
+          ],
+          "id": "CB01-X06#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c82245f443df5d5c918bcde7e1982bf59d12fbc81500a46c6fac3f5daef9ffb9_819099d0b05926341a0f178ce1bad9e9",
+          "physicalId": "CB01-X06#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c82245f443df5d5c918bcde7e1982bf59d12fbc81500a46c6fac3f5daef9ffb9_819099d0b05926341a0f178ce1bad9e9",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c82245f443df5d5c918bcde7e1982bf59d12fbc81500a46c6fac3f5daef9ffb9_819099d0b05926341a0f178ce1bad9e9",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_823986da8389cf6d7b5a2a533ac3990d4078fa74db0faf1d599608a4ca981cb3_982e6b93e72f4e2026e43f658c4ac78e",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB01-X06#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -6734,8 +8223,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS"
+            ],
             "timingLabel": "When Advents",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -6744,10 +8242,14 @@
             "isMain": false,
             "cleanBody": "You can show to the opponent \"Ginga\"/\"Victory\"/\"X\"-named cards, one of each, from your Hand. For each card shown, destroy an opposing Cost 10 or less Spirit."
           },
+          "originalAbilityText": "[LV1][LV2] (When Advents)\nYou can show to the opponent \"Ginga\"/\"Victory\"/\"X\"-named cards, one of each, from your Hand. For each card shown, destroy an opposing Cost 10 or less Spirit.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can show to the opponent \"Ginga\"/\"Victory\"/\"X\"-named cards, one of each, from your Hand.",
+              "originalClauseText": "You can show to the opponent \"Ginga\"/\"Victory\"/\"X\"-named cards, one of each, from your Hand.",
               "cleanText": "You can show to the opponent \"Ginga\"/\"Victory\"/\"X\"-named cards, one of each, from your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -6759,7 +8261,9 @@
             },
             {
               "rawText": "For each card shown, destroy an opposing Cost 10 or less Spirit.",
+              "originalClauseText": "For each card shown, destroy an opposing Cost 10 or less Spirit.",
               "cleanText": "For each card shown, destroy an opposing Cost 10 or less Spirit",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -6780,10 +8284,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-X06#a1",
+          "keywords": [],
+          "id": "CB01-X06#AB_WHEN_ADVENTS_NONE_LV1_LV2_fac6930fa79ed3060938f70ef5782acc47aebb9c5bfea3d107829b16702f46e0_538c658861b951965cfe0a7c1e2c886c",
+          "physicalId": "CB01-X06#AB_WHEN_ADVENTS_NONE_LV1_LV2_fac6930fa79ed3060938f70ef5782acc47aebb9c5bfea3d107829b16702f46e0_538c658861b951965cfe0a7c1e2c886c",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_fac6930fa79ed3060938f70ef5782acc47aebb9c5bfea3d107829b16702f46e0_538c658861b951965cfe0a7c1e2c886c",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_207a60f071c750c999c458ee87bacd504ce600c46e248f7daff45092370be924_8647b8f3107a06790ae30c3f6c93db5b",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB01-X06#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -6792,8 +8310,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -6802,10 +8329,14 @@
             "isMain": false,
             "cleanBody": "By discarding one of this Spirit's pre-advent cards, refresh this Spirit."
           },
+          "originalAbilityText": "[LV2] Flash - (When Attacks)\nBy discarding one of this Spirit's pre-advent cards, refresh this Spirit.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "By discarding one of this Spirit's pre-advent cards",
+              "originalClauseText": "By discarding one of this Spirit's pre-advent cards",
               "cleanText": "By discarding one of this Spirit's pre-advent cards",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -6817,7 +8348,9 @@
             },
             {
               "rawText": "refresh this Spirit.",
+              "originalClauseText": "refresh this Spirit.",
               "cleanText": "refresh this Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -6829,7 +8362,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-X06#a2",
+          "keywords": [],
+          "id": "CB01-X06#AB_WHEN_ATTACKS_NONE_LV2_c591a738a96318374525aa8bb372d8428daade6bef955c323980138c37549181_6b873cdc39e1cb3bfcca30d86ccc23d6",
+          "physicalId": "CB01-X06#AB_WHEN_ATTACKS_NONE_LV2_c591a738a96318374525aa8bb372d8428daade6bef955c323980138c37549181_6b873cdc39e1cb3bfcca30d86ccc23d6",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_c591a738a96318374525aa8bb372d8428daade6bef955c323980138c37549181_6b873cdc39e1cb3bfcca30d86ccc23d6",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_bbfbb0050621d6deb1266433dbe112b1e5c4b606c0a1bdcc1557a50e003e127a_616260a56372e342313e902b1527a0ac",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
@@ -6857,6 +8405,21 @@
     "compiledIr": {
       "cardNumber": "CB01-041",
       "name": "Ultraman Orb Spacium Zeperion",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 8000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: \"Ultraman\"] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents)\nYou can show to the opponent, \"First Ultraman\"/\"Tiga\"-named cards, one of each from your Hand. For each card shown, destroy an opposing Cost 6 or less Spirit.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -6864,12 +8427,32 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "CB01-041#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b6f569407c92282355f3f70ee00ddcca74110a104df1f003cb4cf6a8a9b87899_b43c291128badc0d6f6607a5dc9d3772",
+          "cardNumber": "CB01-041",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "CB01-041#a0"
         }
       ],
       "abilities": [
         {
-          "id": "CB01-041#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -6880,8 +8463,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: \"Ultraman\"",
@@ -6890,10 +8482,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Advent: \"Ultraman\"] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -6915,7 +8511,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -6933,10 +8531,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-041#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "\"Ultraman\"",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "CB01-041#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b6f569407c92282355f3f70ee00ddcca74110a104df1f003cb4cf6a8a9b87899_b43c291128badc0d6f6607a5dc9d3772",
+              "cardNumber": "CB01-041",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "CB01-041#a0"
+            }
+          ],
+          "id": "CB01-041#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b6f569407c92282355f3f70ee00ddcca74110a104df1f003cb4cf6a8a9b87899_b43c291128badc0d6f6607a5dc9d3772",
+          "physicalId": "CB01-041#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b6f569407c92282355f3f70ee00ddcca74110a104df1f003cb4cf6a8a9b87899_b43c291128badc0d6f6607a5dc9d3772",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b6f569407c92282355f3f70ee00ddcca74110a104df1f003cb4cf6a8a9b87899_b43c291128badc0d6f6607a5dc9d3772",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c2190d3a90481a0cd48564504a2c534712d69e2f3732938f4f6777d404698629_6cb8f6e382c6daeecd18af3f9d051e72",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB01-041#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -6946,8 +8588,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS"
+            ],
             "timingLabel": "When Advents",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -6956,10 +8607,14 @@
             "isMain": false,
             "cleanBody": "You can show to the opponent, \"First Ultraman\"/\"Tiga\"-named cards, one of each from your Hand. For each card shown, destroy an opposing Cost 6 or less Spirit."
           },
+          "originalAbilityText": "[LV1][LV2] (When Advents)\nYou can show to the opponent, \"First Ultraman\"/\"Tiga\"-named cards, one of each from your Hand. For each card shown, destroy an opposing Cost 6 or less Spirit.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can show to the opponent, \"First Ultraman\"/\"Tiga\"-named cards, one of each from your Hand.",
+              "originalClauseText": "You can show to the opponent, \"First Ultraman\"/\"Tiga\"-named cards, one of each from your Hand.",
               "cleanText": "You can show to the opponent, \"First Ultraman\"/\"Tiga\"-named cards, one of each from your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -6971,7 +8626,9 @@
             },
             {
               "rawText": "For each card shown, destroy an opposing Cost 6 or less Spirit.",
+              "originalClauseText": "For each card shown, destroy an opposing Cost 6 or less Spirit.",
               "cleanText": "For each card shown, destroy an opposing Cost 6 or less Spirit",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -6992,7 +8649,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-041#a1",
+          "keywords": [],
+          "id": "CB01-041#AB_WHEN_ADVENTS_NONE_LV1_LV2_87ac542bf01a6dc1c7c5f9d44edba4e8528f2071ad79872b9afd0fa99ec5c71a_ea829fd5d522d75fcab4c20420c8b516",
+          "physicalId": "CB01-041#AB_WHEN_ADVENTS_NONE_LV1_LV2_87ac542bf01a6dc1c7c5f9d44edba4e8528f2071ad79872b9afd0fa99ec5c71a_ea829fd5d522d75fcab4c20420c8b516",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_87ac542bf01a6dc1c7c5f9d44edba4e8528f2071ad79872b9afd0fa99ec5c71a_ea829fd5d522d75fcab4c20420c8b516",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_f602253c749bf3381cb6554a616f1c8483deaed37643babf7ba9fd6c3a6b0770_c211c9a64d5911cb96590beb7b399f6a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -7020,6 +8692,21 @@
     "compiledIr": {
       "cardNumber": "CB01-049",
       "name": "Ultraman Orb Thunder Breaster",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: Cost 4 or more & \"Ultraman\"] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents)\nYou can show to the opponent, \"Zoffy\"/\"Belial\"-named cards, one of each from your Hand. For each card shown, send two cores from any opposing Spirits to their Reserve.\n\n[During Advent] [LV2] (When Attacks)\nDestroy an opposing Cost 5/6/7 Spirit.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -7027,12 +8714,32 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "CB01-049#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_49fdfbeed64da6535f9cb57c4870359a823361ebb05d881cdc0fb97e6bfa09e3_9a88b0136bc13edfe8b8d67ac44b9cdd",
+          "cardNumber": "CB01-049",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "CB01-049#a0"
         }
       ],
       "abilities": [
         {
-          "id": "CB01-049#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -7043,8 +8750,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: Cost 4 or more & \"Ultraman\"",
@@ -7053,10 +8769,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Advent: Cost 4 or more & \"Ultraman\"] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -7078,7 +8798,9 @@
             },
             {
               "rawText": "stack this from your Hand onto your target Spirit.",
+              "originalClauseText": "stack this from your Hand onto your target Spirit.",
               "cleanText": "stack this from your Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -7096,10 +8818,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-049#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "Cost 4 or more & \"Ultraman\"",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "CB01-049#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_49fdfbeed64da6535f9cb57c4870359a823361ebb05d881cdc0fb97e6bfa09e3_9a88b0136bc13edfe8b8d67ac44b9cdd",
+              "cardNumber": "CB01-049",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "CB01-049#a0"
+            }
+          ],
+          "id": "CB01-049#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_49fdfbeed64da6535f9cb57c4870359a823361ebb05d881cdc0fb97e6bfa09e3_9a88b0136bc13edfe8b8d67ac44b9cdd",
+          "physicalId": "CB01-049#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_49fdfbeed64da6535f9cb57c4870359a823361ebb05d881cdc0fb97e6bfa09e3_9a88b0136bc13edfe8b8d67ac44b9cdd",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_49fdfbeed64da6535f9cb57c4870359a823361ebb05d881cdc0fb97e6bfa09e3_9a88b0136bc13edfe8b8d67ac44b9cdd",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b4b280f150c59d1fd10050e73f6ad227a7b0d5d275c61433bb64d878b1a99472_05d512336c2269697dfc85d4688557da",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB01-049#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -7109,8 +8875,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS"
+            ],
             "timingLabel": "When Advents",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -7119,10 +8894,14 @@
             "isMain": false,
             "cleanBody": "You can show to the opponent, \"Zoffy\"/\"Belial\"-named cards, one of each from your Hand. For each card shown, send two cores from any opposing Spirits to their Reserve."
           },
+          "originalAbilityText": "[LV1][LV2] (When Advents)\nYou can show to the opponent, \"Zoffy\"/\"Belial\"-named cards, one of each from your Hand. For each card shown, send two cores from any opposing Spirits to their Reserve.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can show to the opponent, \"Zoffy\"/\"Belial\"-named cards, one of each from your Hand.",
+              "originalClauseText": "You can show to the opponent, \"Zoffy\"/\"Belial\"-named cards, one of each from your Hand.",
               "cleanText": "You can show to the opponent, \"Zoffy\"/\"Belial\"-named cards, one of each from your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -7134,7 +8913,9 @@
             },
             {
               "rawText": "For each card shown, send two cores from any opposing Spirits to their Reserve.",
+              "originalClauseText": "For each card shown, send two cores from any opposing Spirits to their Reserve.",
               "cleanText": "For each card shown, send two cores from any opposing Spirits to their Reserve",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -7142,14 +8923,36 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 2,
+                "from": {
+                  "zone": "field",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-049#a1",
+          "keywords": [],
+          "id": "CB01-049#AB_WHEN_ADVENTS_NONE_LV1_LV2_5751cdfa9cf32b785be10cba3647af204f7f4482151519474397c52f52db9434_e6734137a20bf64a16b9ab50b9b0f9d5",
+          "physicalId": "CB01-049#AB_WHEN_ADVENTS_NONE_LV1_LV2_5751cdfa9cf32b785be10cba3647af204f7f4482151519474397c52f52db9434_e6734137a20bf64a16b9ab50b9b0f9d5",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_5751cdfa9cf32b785be10cba3647af204f7f4482151519474397c52f52db9434_e6734137a20bf64a16b9ab50b9b0f9d5",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_649d17a624c1ea68b709908469f05af2bd747b6ba9aea66cf6cc44a442e6a773_c86616b78a1ebb7fc9fde85310ed4110",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB01-049#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -7160,8 +8963,17 @@
               "During Advent"
             ],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -7170,10 +8982,14 @@
             "isMain": false,
             "cleanBody": "Destroy an opposing Cost 5/6/7 Spirit."
           },
+          "originalAbilityText": "[During Advent] [LV2] (When Attacks)\nDestroy an opposing Cost 5/6/7 Spirit.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Destroy an opposing Cost 5/6/7 Spirit.",
+              "originalClauseText": "Destroy an opposing Cost 5/6/7 Spirit.",
               "cleanText": "Destroy an opposing Cost 5/6/7 Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -7189,7 +9005,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-049#a2",
+          "keywords": [],
+          "id": "CB01-049#AB_WHEN_ATTACKS_NONE_LV2_59a6bd6dda67f7b86bed3122d9e5246e4951f73f97594950189626f6a7c7732f_fe7758479ffc7eb673816ca006dac3f9",
+          "physicalId": "CB01-049#AB_WHEN_ATTACKS_NONE_LV2_59a6bd6dda67f7b86bed3122d9e5246e4951f73f97594950189626f6a7c7732f_fe7758479ffc7eb673816ca006dac3f9",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_59a6bd6dda67f7b86bed3122d9e5246e4951f73f97594950189626f6a7c7732f_fe7758479ffc7eb673816ca006dac3f9",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_510aa900d634b3e055c37ae1c2e5b11114eed862754c976a9d628afa7fdf0f52_1644a94fcab27d9ec24f8d82f3763784",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -7928,10 +9759,29 @@
     "compiledIr": {
       "cardNumber": "CB01-039",
       "name": "Ultraman X",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 6000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 6,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] (When Summoned)\nReturn a Red/Blue Spirit card from your Trash to the Hand.\n\n[LV2][LV3] (When Attacks)\nYou can discard a \"Kaiju\"/\"SuperBeast\"-named Spirit card from your Hand. Destroy all opposing Spirits with a cost equal or inferior to that of the card discarded by this effect.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "CB01-039#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -7942,8 +9792,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -7952,28 +9811,57 @@
             "isMain": false,
             "cleanBody": "Return a Red/Blue Spirit card from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nReturn a Red/Blue Spirit card from your Trash to the Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Return a Red/Blue Spirit card from your Trash to the Hand.",
+              "originalClauseText": "Return a Red/Blue Spirit card from your Trash to the Hand.",
               "cleanText": "Return a Red/Blue Spirit card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "colorsAny": [
+                    "Red",
+                    "Blue"
+                  ]
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-039#a0",
+          "keywords": [],
+          "id": "CB01-039#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_5621b9bc0f0f0531adae06433a469f2f92bdc18764a59cea9c894afad98c734e_14a141023f4434ec3d18e79829070ac1",
+          "physicalId": "CB01-039#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_5621b9bc0f0f0531adae06433a469f2f92bdc18764a59cea9c894afad98c734e_14a141023f4434ec3d18e79829070ac1",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_5621b9bc0f0f0531adae06433a469f2f92bdc18764a59cea9c894afad98c734e_14a141023f4434ec3d18e79829070ac1",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_278ffaf0f5c94c9e4f19bd031159bb024328ed763545ac254a5343d4f5838490_c3fc3829f357aec16719d55a92a752cc",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB01-039#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -7983,8 +9871,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -7993,10 +9890,14 @@
             "isMain": false,
             "cleanBody": "You can discard a \"Kaiju\"/\"SuperBeast\"-named Spirit card from your Hand. Destroy all opposing Spirits with a cost equal or inferior to that of the card discarded by this effect."
           },
+          "originalAbilityText": "[LV2][LV3] (When Attacks)\nYou can discard a \"Kaiju\"/\"SuperBeast\"-named Spirit card from your Hand. Destroy all opposing Spirits with a cost equal or inferior to that of the card discarded by this effect.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can discard a \"Kaiju\"/\"SuperBeast\"-named Spirit card from your Hand.",
+              "originalClauseText": "You can discard a \"Kaiju\"/\"SuperBeast\"-named Spirit card from your Hand.",
               "cleanText": "You can discard a \"Kaiju\"/\"SuperBeast\"-named Spirit card from your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -8010,7 +9911,9 @@
             },
             {
               "rawText": "Destroy all opposing Spirits with a cost equal or inferior to that of the card discarded by this effect.",
+              "originalClauseText": "Destroy all opposing Spirits with a cost equal or inferior to that of the card discarded by this effect.",
               "cleanText": "Destroy all opposing Spirits with a cost equal or inferior to that of the card discarded by this effect",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -8018,15 +9921,39 @@
               "duration": null,
               "op": {
                 "op": "DESTROY",
-                "count": 1,
+                "count": "ALL",
                 "target": {
-                  "side": "either"
-                },
-                "isCost": false
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "comparison": {
+                      "property": "COST",
+                      "operator": "LTE",
+                      "reference": "effect_card"
+                    }
+                  }
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-039#a1",
+          "keywords": [],
+          "id": "CB01-039#AB_WHEN_ATTACKS_NONE_LV2_LV3_0ca12579c42301d57908e1268cffe87473fad9468f65e333ce15462aa034196d_df47a2ff6b906ff1197c50494e2f6771",
+          "physicalId": "CB01-039#AB_WHEN_ATTACKS_NONE_LV2_LV3_0ca12579c42301d57908e1268cffe87473fad9468f65e333ce15462aa034196d_df47a2ff6b906ff1197c50494e2f6771",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_0ca12579c42301d57908e1268cffe87473fad9468f65e333ce15462aa034196d_df47a2ff6b906ff1197c50494e2f6771",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_33c0c991010bd921bd2e45e170680e18528654316595b4117b3f3d0c1e372b2b_381e1ebd66d0ad9f29063d21abd2473f",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -8215,10 +10142,29 @@
     "compiledIr": {
       "cardNumber": "CB01-042",
       "name": "Ultraseven",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 7000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 5,
+          "bp": 15000
+        }
+      },
+      "originalEffectText": "This card/Spirit is also treated as being exactly-named \"Ultraman\".\n\n[LV1][LV2][LV3] (When Summoned)\nDestroy an opposing Spirit with the lowest cost. During this turn, the opponent can't use Magic cards with a cost equal or inferior to that of the Spirit destroyed by this effect.\n\n[LV2][LV3] (When Attacks)\nYou can deploy a Nexus card from your Trash, without paying the cost.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "CB01-042#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -8229,8 +10175,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -8239,24 +10190,42 @@
             "isMain": false,
             "cleanBody": "This card/Spirit is also treated as being exactly-named \"Ultraman\"."
           },
+          "originalAbilityText": "This card/Spirit is also treated as being exactly-named \"Ultraman\".",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "This card/Spirit is also treated as being exactly-named \"Ultraman\".",
+              "originalClauseText": "This card/Spirit is also treated as being exactly-named \"Ultraman\".",
               "cleanText": "This card/Spirit is also treated as being exactly-named \"Ultraman\"",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "TREAT_RULE",
+                "treatAs": "NAME",
+                "name": "Ultraman"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-042#a0",
+          "keywords": [],
+          "id": "CB01-042#AB_PASSIVE_NONE_LV1_LV2_LV3_12edb006a2ea98825cf9ef20262165333d4b6a958b3727897cc0a63e132453f6_a7718ada03d3dbd2add6ef429806b2a7",
+          "physicalId": "CB01-042#AB_PASSIVE_NONE_LV1_LV2_LV3_12edb006a2ea98825cf9ef20262165333d4b6a958b3727897cc0a63e132453f6_a7718ada03d3dbd2add6ef429806b2a7",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_12edb006a2ea98825cf9ef20262165333d4b6a958b3727897cc0a63e132453f6_a7718ada03d3dbd2add6ef429806b2a7",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_711d4fd4c32a5aba9ae2d878b0c6c321be59c771dc133e92a81142aa82a4ad4a_9d22dc7c9145bcba8381d157ef5967bd",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB01-042#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -8267,8 +10236,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -8277,10 +10255,14 @@
             "isMain": false,
             "cleanBody": "Destroy an opposing Spirit with the lowest cost. During this turn, the opponent can't use Magic cards with a cost equal or inferior to that of the Spirit destroyed by this effect."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nDestroy an opposing Spirit with the lowest cost. During this turn, the opponent can't use Magic cards with a cost equal or inferior to that of the Spirit destroyed by this effect.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Destroy an opposing Spirit with the lowest cost.",
+              "originalClauseText": "Destroy an opposing Spirit with the lowest cost.",
               "cleanText": "Destroy an opposing Spirit with the lowest cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -8299,7 +10281,9 @@
             },
             {
               "rawText": "During this turn, the opponent can't use Magic cards with a cost equal or inferior to that of the Spirit destroyed by this effect.",
+              "originalClauseText": "During this turn, the opponent can't use Magic cards with a cost equal or inferior to that of the Spirit destroyed by this effect.",
               "cleanText": "the opponent can't use Magic cards with a cost equal or inferior to that of the Spirit destroyed by this effect",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -8312,10 +10296,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-042#a1",
+          "keywords": [],
+          "id": "CB01-042#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_be49642fcbaa5e8d69894cf0dbee6277197bf0965ab45f453e5362db2726f86a_a508df2e71807322febb4cf75240783f",
+          "physicalId": "CB01-042#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_be49642fcbaa5e8d69894cf0dbee6277197bf0965ab45f453e5362db2726f86a_a508df2e71807322febb4cf75240783f",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_be49642fcbaa5e8d69894cf0dbee6277197bf0965ab45f453e5362db2726f86a_a508df2e71807322febb4cf75240783f",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_d356b2d9d932900e83fee93bdf009e9f7aa8122acd07ce5ad9be8ce4043229e8_c393c7ef23bdc125f4e7f9a2b6db3fee",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB01-042#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -8325,8 +10323,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -8335,10 +10342,14 @@
             "isMain": false,
             "cleanBody": "You can deploy a Nexus card from your Trash, without paying the cost."
           },
+          "originalAbilityText": "[LV2][LV3] (When Attacks)\nYou can deploy a Nexus card from your Trash, without paying the cost.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "You can deploy a Nexus card from your Trash, without paying the cost.",
+              "originalClauseText": "You can deploy a Nexus card from your Trash, without paying the cost.",
               "cleanText": "You can deploy a Nexus card from your Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -8351,7 +10362,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB01-042#a2",
+          "keywords": [],
+          "id": "CB01-042#AB_WHEN_ATTACKS_NONE_LV2_LV3_9ae19790f28e95f2f054f2302da24dc98aa14dd5293e21dbc5192c6dfe01b014_9767f602b1ee67ca1af54044cbdaafdf",
+          "physicalId": "CB01-042#AB_WHEN_ATTACKS_NONE_LV2_LV3_9ae19790f28e95f2f054f2302da24dc98aa14dd5293e21dbc5192c6dfe01b014_9767f602b1ee67ca1af54044cbdaafdf",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_9ae19790f28e95f2f054f2302da24dc98aa14dd5293e21dbc5192c6dfe01b014_9767f602b1ee67ca1af54044cbdaafdf",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_a5a8cd953bf55d95dd32600734a0d218dab9f3209fbc7363eb438f724a252618_98807e8f1d63f996cd114e837f964493",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,

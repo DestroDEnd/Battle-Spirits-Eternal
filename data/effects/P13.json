@@ -1470,14 +1470,74 @@
     "compiledIr": {
       "cardNumber": "P13-09",
       "name": "Hummerbreak",
+      "type": "Brave",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 6000
+        }
+      },
+      "originalEffectText": "[Brave Condition: Cost 4 or more]\n\n[LV1] (When Summoned)\nSend a core from your Field or the Trash to the Void.\n[Rush: Blue]\n(While you have a Blue symbol, the following effect activates next.)\n[Blue Core]: During this turn, opposing Spirit/Brave/Nexus/Magic's \"BP+\" effects can't activate.",
+      "teams": [],
       "keywords": [
+        {
+          "name": "Brave Condition",
+          "parameter": "Cost 4 or more",
+          "wave": 1,
+          "hook": "brave_condition",
+          "bracketed": true,
+          "index": 0,
+          "abilityId": "P13-09#AB_PASSIVE_NONE_LV1_LV2_LV3_ab439b797e96b89e9c1f060d091c9ddb56f01f0841bdf997790a327c4a06e9af_b4382f074bc7cc5dc3a58927b1d62f37",
+          "cardNumber": "P13-09",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "P13-09#a0"
+        },
         {
           "name": "Brave",
           "parameter": "Cost 4 or more",
           "wave": 3,
           "hook": "brave",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "P13-09#AB_PASSIVE_NONE_LV1_LV2_LV3_ab439b797e96b89e9c1f060d091c9ddb56f01f0841bdf997790a327c4a06e9af_b4382f074bc7cc5dc3a58927b1d62f37",
+          "cardNumber": "P13-09",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "P13-09#a0"
         },
         {
           "name": "Rush",
@@ -1485,12 +1545,30 @@
           "wave": 2,
           "hook": "rush",
           "bracketed": true,
-          "index": 111
+          "index": 54,
+          "abilityId": "P13-09#AB_WHEN_SUMMONED_NONE_LV1_e5aa099b458a7c77c969f5dffe9fd85feaed85bbb2e505bc093e1b32a5ce3b5e_bb744eaab5408f534b68278cf1f18755",
+          "cardNumber": "P13-09",
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "P13-09#a1"
         }
       ],
       "abilities": [
         {
-          "id": "P13-09#a0",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -1501,8 +1579,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Brave Condition: Cost 4 or more",
@@ -1512,11 +1595,90 @@
             "cleanBody": ""
           },
           "rawText": "[Brave Condition: Cost 4 or more]",
+          "originalAbilityText": "[Brave Condition: Cost 4 or more]",
+          "abilityIndex": 0,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "BRAVE_CONDITION",
+            "expression": "Cost 4 or more",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "P13-09#a0",
+          "keywords": [
+            {
+              "name": "Brave Condition",
+              "parameter": "Cost 4 or more",
+              "wave": 1,
+              "hook": "brave_condition",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "P13-09#AB_PASSIVE_NONE_LV1_LV2_LV3_ab439b797e96b89e9c1f060d091c9ddb56f01f0841bdf997790a327c4a06e9af_b4382f074bc7cc5dc3a58927b1d62f37",
+              "cardNumber": "P13-09",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "P13-09#a0"
+            },
+            {
+              "name": "Brave",
+              "parameter": "Cost 4 or more",
+              "wave": 3,
+              "hook": "brave",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "P13-09#AB_PASSIVE_NONE_LV1_LV2_LV3_ab439b797e96b89e9c1f060d091c9ddb56f01f0841bdf997790a327c4a06e9af_b4382f074bc7cc5dc3a58927b1d62f37",
+              "cardNumber": "P13-09",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "P13-09#a0"
+            }
+          ],
+          "id": "P13-09#AB_PASSIVE_NONE_LV1_LV2_LV3_ab439b797e96b89e9c1f060d091c9ddb56f01f0841bdf997790a327c4a06e9af_b4382f074bc7cc5dc3a58927b1d62f37",
+          "physicalId": "P13-09#AB_PASSIVE_NONE_LV1_LV2_LV3_ab439b797e96b89e9c1f060d091c9ddb56f01f0841bdf997790a327c4a06e9af_b4382f074bc7cc5dc3a58927b1d62f37",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_ab439b797e96b89e9c1f060d091c9ddb56f01f0841bdf997790a327c4a06e9af_b4382f074bc7cc5dc3a58927b1d62f37",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_1c5caa0370c63e02d43e538e32ec10598cce83096cdd2ddd65881c3fcae831fa_7d288edb0e73bb4c9e5b70a21c5c361e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "P13-09#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1525,8 +1687,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1535,10 +1706,14 @@
             "isMain": false,
             "cleanBody": "Send a core from your Field or the Trash to the Void.\n[Rush: Blue]\n(While you have a Blue symbol, the following effect activates next.)\n[Blue Core]: During this turn, opposing Spirit/Brave/Nexus/Magic's \"BP+\" effects can't activate."
           },
+          "originalAbilityText": "[LV1] (When Summoned)\nSend a core from your Field or the Trash to the Void.\n[Rush: Blue]\n(While you have a Blue symbol, the following effect activates next.)\n[Blue Core]: During this turn, opposing Spirit/Brave/Nexus/Magic's \"BP+\" effects can't activate.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Send a core from your Field or the Trash to the Void.",
+              "originalClauseText": "Send a core from your Field or the Trash to the Void.",
               "cleanText": "Send a core from your Field or the Trash to the Void",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1546,12 +1721,17 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "to": {
+                  "zone": "void"
+                }
               }
             },
             {
               "rawText": "[Rush: Blue]",
+              "originalClauseText": "[Rush: Blue]",
               "cleanText": "[Rush: Blue]",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1561,40 +1741,88 @@
                 "op": "KEYWORD_ABILITY",
                 "keyword": "Rush",
                 "condition": {
+                  "kind": "STRUCTURED_CONDITION",
+                  "type": "COLOR_SYMBOL",
+                  "side": "self",
+                  "color": "blue",
                   "colorSymbol": "Blue"
                 }
               }
             },
             {
               "rawText": "(While you have a Blue symbol, the following effect activates next.)",
+              "originalClauseText": "(While you have a Blue symbol, the following effect activates next.)",
               "cleanText": "(While you have a Blue symbol, the following effect activates next.)",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_ABILITY",
-                "keyword": "Rush",
-                "condition": {
-                  "colorSymbol": "Blue"
-                }
+                "op": "RUSH_CONDITION"
               }
             },
             {
               "rawText": "During this turn, opposing Spirit/Brave/Nexus/Magic's \"BP+\" effects can't activate.",
+              "originalClauseText": "During this turn, opposing Spirit/Brave/Nexus/Magic's \"BP+\" effects can't activate.",
               "cleanText": "opposing Spirit/Brave/Nexus/Magic's \"BP+\" effects can't activate",
+              "clauseIndex": 3,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": "DURING_THIS_TURN",
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Brave"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "P13-09#a1",
+          "keywords": [
+            {
+              "name": "Rush",
+              "parameter": "Blue",
+              "wave": 2,
+              "hook": "rush",
+              "bracketed": true,
+              "index": 54,
+              "abilityId": "P13-09#AB_WHEN_SUMMONED_NONE_LV1_e5aa099b458a7c77c969f5dffe9fd85feaed85bbb2e505bc093e1b32a5ce3b5e_bb744eaab5408f534b68278cf1f18755",
+              "cardNumber": "P13-09",
+              "levels": [
+                1
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_SUMMONED",
+              "timingLabel": "When Summoned",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "P13-09#a1"
+            }
+          ],
+          "id": "P13-09#AB_WHEN_SUMMONED_NONE_LV1_e5aa099b458a7c77c969f5dffe9fd85feaed85bbb2e505bc093e1b32a5ce3b5e_bb744eaab5408f534b68278cf1f18755",
+          "physicalId": "P13-09#AB_WHEN_SUMMONED_NONE_LV1_e5aa099b458a7c77c969f5dffe9fd85feaed85bbb2e505bc093e1b32a5ce3b5e_bb744eaab5408f534b68278cf1f18755",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_e5aa099b458a7c77c969f5dffe9fd85feaed85bbb2e505bc093e1b32a5ce3b5e_bb744eaab5408f534b68278cf1f18755",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_46ea1fe26b52c7754bdea61c05dbec02b167b6e0001e424666e734d28546b562_007684be53c229f1101c71cbb470a898",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -2807,6 +3035,21 @@
     "compiledIr": {
       "cardNumber": "P13-25",
       "name": "The Twelfth Godfrey",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 4,
+          "bp": 8000
+        }
+      },
+      "originalEffectText": "[LV1][LV2] (When Summoned)\nSummon any number of Blue Cost 3 or less Spirit cards with [Charge] from your Hand/Trash, without paying the cost.\n\n[LV1][LV2] [Charge]\nYour \"opposing-deck-discarding effects\" discard +1 card.",
+      "teams": [],
       "keywords": [
         {
           "name": "Charge",
@@ -2814,7 +3057,27 @@
           "wave": 2,
           "hook": "charge",
           "bracketed": true,
-          "index": 86
+          "index": 59,
+          "abilityId": "P13-25#AB_WHEN_SUMMONED_NONE_LV1_LV2_8a18b7b6283f1be600605293957e2c3f4a28dc8dfe021f7ce6933785bee3a526_6a7784925b6fc546f0a5406c3ef745cc",
+          "cardNumber": "P13-25",
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "P13-25#a0"
         },
         {
           "name": "Charge",
@@ -2822,12 +3085,31 @@
           "wave": 2,
           "hook": "charge",
           "bracketed": true,
-          "index": 154
+          "index": 0,
+          "abilityId": "P13-25#AB_PASSIVE_NONE_LV1_LV2_92f00e67dfba40b830407851591cc24c50c4486b412769412a31118a96c8de3b_87fe9fb742e29fb3fc8dc8a091f5e230",
+          "cardNumber": "P13-25",
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "P13-25#a1"
         }
       ],
       "abilities": [
         {
-          "id": "P13-25#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2837,8 +3119,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2847,10 +3138,14 @@
             "isMain": false,
             "cleanBody": "Summon any number of Blue Cost 3 or less Spirit cards with [Charge] from your Hand/Trash, without paying the cost."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned)\nSummon any number of Blue Cost 3 or less Spirit cards with [Charge] from your Hand/Trash, without paying the cost.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Summon any number of Blue Cost 3 or less Spirit cards with [Charge] from your Hand/Trash, without paying the cost.",
+              "originalClauseText": "Summon any number of Blue Cost 3 or less Spirit cards with [Charge] from your Hand/Trash, without paying the cost.",
               "cleanText": "Summon any number of Blue Cost 3 or less Spirit cards with [Charge] from your Hand/Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2858,14 +3153,70 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand_or_trash",
+                "side": "self",
+                "count": "ALL",
+                "upTo": true,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "costLte": 3,
+                  "color": "Blue",
+                  "keyword": "Charge"
+                },
+                "free": true,
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "P13-25#a0",
+          "keywords": [
+            {
+              "name": "Charge",
+              "parameter": null,
+              "wave": 2,
+              "hook": "charge",
+              "bracketed": true,
+              "index": 59,
+              "abilityId": "P13-25#AB_WHEN_SUMMONED_NONE_LV1_LV2_8a18b7b6283f1be600605293957e2c3f4a28dc8dfe021f7ce6933785bee3a526_6a7784925b6fc546f0a5406c3ef745cc",
+              "cardNumber": "P13-25",
+              "levels": [
+                1,
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_SUMMONED",
+              "timingLabel": "When Summoned",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "P13-25#a0"
+            }
+          ],
+          "id": "P13-25#AB_WHEN_SUMMONED_NONE_LV1_LV2_8a18b7b6283f1be600605293957e2c3f4a28dc8dfe021f7ce6933785bee3a526_6a7784925b6fc546f0a5406c3ef745cc",
+          "physicalId": "P13-25#AB_WHEN_SUMMONED_NONE_LV1_LV2_8a18b7b6283f1be600605293957e2c3f4a28dc8dfe021f7ce6933785bee3a526_6a7784925b6fc546f0a5406c3ef745cc",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_8a18b7b6283f1be600605293957e2c3f4a28dc8dfe021f7ce6933785bee3a526_6a7784925b6fc546f0a5406c3ef745cc",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_09264e1e70337f58b7818ca92bf9feb017f4f1c93f548b831c9251ade5788583_655befc73c45620e13611246e60fc8d7",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "P13-25#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2875,8 +3226,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Charge",
@@ -2885,10 +3241,14 @@
             "isMain": false,
             "cleanBody": "Your \"opposing-deck-discarding effects\" discard +1 card."
           },
+          "originalAbilityText": "[LV1][LV2] [Charge]\nYour \"opposing-deck-discarding effects\" discard +1 card.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Your \"opposing-deck-discarding effects\" discard +1 card.",
+              "originalClauseText": "Your \"opposing-deck-discarding effects\" discard +1 card.",
               "cleanText": "Your \"opposing-deck-discarding effects\" discard +1 card",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2900,7 +3260,49 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "P13-25#a1",
+          "keywords": [
+            {
+              "name": "Charge",
+              "parameter": null,
+              "wave": 2,
+              "hook": "charge",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "P13-25#AB_PASSIVE_NONE_LV1_LV2_92f00e67dfba40b830407851591cc24c50c4486b412769412a31118a96c8de3b_87fe9fb742e29fb3fc8dc8a091f5e230",
+              "cardNumber": "P13-25",
+              "levels": [
+                1,
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "P13-25#a1"
+            }
+          ],
+          "id": "P13-25#AB_PASSIVE_NONE_LV1_LV2_92f00e67dfba40b830407851591cc24c50c4486b412769412a31118a96c8de3b_87fe9fb742e29fb3fc8dc8a091f5e230",
+          "physicalId": "P13-25#AB_PASSIVE_NONE_LV1_LV2_92f00e67dfba40b830407851591cc24c50c4486b412769412a31118a96c8de3b_87fe9fb742e29fb3fc8dc8a091f5e230",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_92f00e67dfba40b830407851591cc24c50c4486b412769412a31118a96c8de3b_87fe9fb742e29fb3fc8dc8a091f5e230",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_ff56b8216045236662fc43307fc9dc52ce64c58d391f5447dff1e62764a2d723_ae13a744fcb1756bcab7d4d27753a38c",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,

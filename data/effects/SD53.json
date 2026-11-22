@@ -8,10 +8,13 @@
     "compiledIr": {
       "cardNumber": "SD53-014",
       "name": "Ptolemaios",
+      "type": "Nexus",
+      "levels": {},
+      "originalEffectText": "[LV1][LV2] (Your Main Step)\nIf you control any Blue \"CB\" family Spirit, by paying one cost, draw two cards. Then, discard a card from your Hand. This effect can only be used once per turn.\n\n[LV2] (Your Main Step)\nOnce per turn, you can summon a \"Gundam Meister\" family Brave card from your Trash by paying one cost.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "SD53-014#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -21,8 +24,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "MAIN_STEP",
+            "timings": [
+              "MAIN_STEP"
+            ],
             "timingLabel": "Your Main Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "MAIN_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -31,10 +45,14 @@
             "isMain": false,
             "cleanBody": "If you control any Blue \"CB\" family Spirit, by paying one cost, draw two cards. Then, discard a card from your Hand."
           },
+          "originalAbilityText": "[LV1][LV2] (Your Main Step)\nIf you control any Blue \"CB\" family Spirit, by paying one cost, draw two cards. Then, discard a card from your Hand. This effect can only be used once per turn.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "If you control any Blue \"CB\" family Spirit, by paying one cost, draw two cards.",
+              "originalClauseText": "If you control any Blue \"CB\" family Spirit, by paying one cost, draw two cards.",
               "cleanText": "by paying one cost, draw two cards",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -49,7 +67,9 @@
             },
             {
               "rawText": "discard a card from your Hand.",
+              "originalClauseText": "discard a card from your Hand.",
               "cleanText": "discard a card from your Hand",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -64,10 +84,26 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD53-014#a0",
+          "keywords": [],
+          "id": "SD53-014#AB_MAIN_STEP_NONE_LV1_LV2_091316994f2af6338decc3722e1cf99adbd469fc1d17d1e9c85694d72116e59c_7c4d09b574f7611f1144ae0206c64796",
+          "physicalId": "SD53-014#AB_MAIN_STEP_NONE_LV1_LV2_091316994f2af6338decc3722e1cf99adbd469fc1d17d1e9c85694d72116e59c_7c4d09b574f7611f1144ae0206c64796",
+          "semanticId": "SEM#AB_MAIN_STEP_NONE_LV1_LV2_091316994f2af6338decc3722e1cf99adbd469fc1d17d1e9c85694d72116e59c_7c4d09b574f7611f1144ae0206c64796",
+          "semanticIdV3": "SEM3#AB_MAIN_STEP_NONE_LV1_LV2_112037d1ad52f59be8930d727dbe04e59b2c6782e81ae9670ee87ec9945c17c3_2474737da6502bc81a0d6ae08323e2c8",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "MAIN_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD53-014#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -76,8 +112,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "MAIN_STEP",
+            "timings": [
+              "MAIN_STEP"
+            ],
             "timingLabel": "Your Main Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "MAIN_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -86,10 +133,14 @@
             "isMain": false,
             "cleanBody": "you can summon a \"Gundam Meister\" family Brave card from your Trash by paying one cost."
           },
+          "originalAbilityText": "[LV2] (Your Main Step)\nOnce per turn, you can summon a \"Gundam Meister\" family Brave card from your Trash by paying one cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "you can summon a \"Gundam Meister\" family Brave card from your Trash by paying one cost.",
+              "originalClauseText": "you can summon a \"Gundam Meister\" family Brave card from your Trash by paying one cost.",
               "cleanText": "you can summon a \"Gundam Meister\" family Brave card from your Trash by paying one cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -97,11 +148,40 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Brave"
+                  ],
+                  "family": "Gundam Meister"
+                },
+                "free": false,
+                "costCores": 1,
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD53-014#a1",
+          "keywords": [],
+          "id": "SD53-014#AB_MAIN_STEP_NONE_LV2_42ee344d20cb6ed47f632fada9c55cc64efc4e45abe32f6361b57184b23beb81_9dcb1515838bf030f08a05db5dd72b28",
+          "physicalId": "SD53-014#AB_MAIN_STEP_NONE_LV2_42ee344d20cb6ed47f632fada9c55cc64efc4e45abe32f6361b57184b23beb81_9dcb1515838bf030f08a05db5dd72b28",
+          "semanticId": "SEM#AB_MAIN_STEP_NONE_LV2_42ee344d20cb6ed47f632fada9c55cc64efc4e45abe32f6361b57184b23beb81_9dcb1515838bf030f08a05db5dd72b28",
+          "semanticIdV3": "SEM3#AB_MAIN_STEP_NONE_LV2_86edc319464710428010fb7f21ad1a5a14012b57c63ce3f56902de7634fc262d_89f958e4909864a16129b8fe4c6f7221",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "MAIN_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -435,19 +515,78 @@
     "compiledIr": {
       "cardNumber": "SD53-012",
       "name": "GN Arms Type-E",
+      "type": "Brave",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 0,
+          "bp": 3000
+        }
+      },
+      "originalEffectText": "[Brave Condition: Cost 3 or more]\n\nWhen your \"Exia\"-named Spirit is summoned, you can return this card from the Trash to your Hand. This effect can only be used once per turn.\n\nOne and only copy of this card/Brave can be braved to a Spirit that is braved to a \"Pilot\" family Brave you control, ignoring the amount of Braves on it.\n\n[During Brave] (When Attacks)\nOnce per turn, refresh a Blue Nexus you control.",
+      "teams": [],
       "keywords": [
+        {
+          "name": "Brave Condition",
+          "parameter": "Cost 3 or more",
+          "wave": 1,
+          "hook": "brave_condition",
+          "bracketed": true,
+          "index": 0,
+          "abilityId": "SD53-012#AB_PASSIVE_NONE_LV1_LV2_LV3_9bb08a2d5ae0c25f4f6e64b7ec3ef3486d5bcef49db0ae5cafdf90ae2ae86dcc_6d1284d8113937983afe7023d8fc8a75",
+          "cardNumber": "SD53-012",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "SD53-012#a0"
+        },
         {
           "name": "Brave",
           "parameter": "Cost 3 or more",
           "wave": 3,
           "hook": "brave",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "SD53-012#AB_PASSIVE_NONE_LV1_LV2_LV3_9bb08a2d5ae0c25f4f6e64b7ec3ef3486d5bcef49db0ae5cafdf90ae2ae86dcc_6d1284d8113937983afe7023d8fc8a75",
+          "cardNumber": "SD53-012",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "SD53-012#a0"
         }
       ],
       "abilities": [
         {
-          "id": "SD53-012#a0",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -458,8 +597,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Brave Condition: Cost 3 or more",
@@ -469,11 +613,90 @@
             "cleanBody": ""
           },
           "rawText": "[Brave Condition: Cost 3 or more]",
+          "originalAbilityText": "[Brave Condition: Cost 3 or more]",
+          "abilityIndex": 0,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "BRAVE_CONDITION",
+            "expression": "Cost 3 or more",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD53-012#a0",
+          "keywords": [
+            {
+              "name": "Brave Condition",
+              "parameter": "Cost 3 or more",
+              "wave": 1,
+              "hook": "brave_condition",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "SD53-012#AB_PASSIVE_NONE_LV1_LV2_LV3_9bb08a2d5ae0c25f4f6e64b7ec3ef3486d5bcef49db0ae5cafdf90ae2ae86dcc_6d1284d8113937983afe7023d8fc8a75",
+              "cardNumber": "SD53-012",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "SD53-012#a0"
+            },
+            {
+              "name": "Brave",
+              "parameter": "Cost 3 or more",
+              "wave": 3,
+              "hook": "brave",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "SD53-012#AB_PASSIVE_NONE_LV1_LV2_LV3_9bb08a2d5ae0c25f4f6e64b7ec3ef3486d5bcef49db0ae5cafdf90ae2ae86dcc_6d1284d8113937983afe7023d8fc8a75",
+              "cardNumber": "SD53-012",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "SD53-012#a0"
+            }
+          ],
+          "id": "SD53-012#AB_PASSIVE_NONE_LV1_LV2_LV3_9bb08a2d5ae0c25f4f6e64b7ec3ef3486d5bcef49db0ae5cafdf90ae2ae86dcc_6d1284d8113937983afe7023d8fc8a75",
+          "physicalId": "SD53-012#AB_PASSIVE_NONE_LV1_LV2_LV3_9bb08a2d5ae0c25f4f6e64b7ec3ef3486d5bcef49db0ae5cafdf90ae2ae86dcc_6d1284d8113937983afe7023d8fc8a75",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_9bb08a2d5ae0c25f4f6e64b7ec3ef3486d5bcef49db0ae5cafdf90ae2ae86dcc_6d1284d8113937983afe7023d8fc8a75",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_f960eee868eae6bdf6c94fd803ab7211390791365d1a222dd825c82c14d08d74_ea1616baeb915f923b102bbdd67f0cb6",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD53-012#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -484,8 +707,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -494,10 +724,14 @@
             "isMain": false,
             "cleanBody": "When your \"Exia\"-named Spirit is summoned, you can return this card from the Trash to your Hand."
           },
+          "originalAbilityText": "When your \"Exia\"-named Spirit is summoned, you can return this card from the Trash to your Hand. This effect can only be used once per turn.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When your \"Exia\"-named Spirit is summoned, you can return this card from the Trash to your Hand.",
+              "originalClauseText": "When your \"Exia\"-named Spirit is summoned, you can return this card from the Trash to your Hand.",
               "cleanText": "When your \"Exia\"-named Spirit is summoned, you can return this card from the Trash to your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -505,17 +739,32 @@
               "duration": null,
               "op": {
                 "op": "SALVAGE",
+                "target": "this_card",
+                "from": "trash",
+                "destination": "HAND",
                 "count": 1,
-                "family": "this",
-                "targetType": "Spirit",
-                "destination": "HAND"
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD53-012#a1",
+          "keywords": [],
+          "id": "SD53-012#AB_PASSIVE_NONE_LV1_LV2_LV3_5e11ac5f19f1afcb789e9a9411ada2b90e5c3639f7b93b6dda18e2d6ae7f017c_d832954b7eaf55412916f3e807d2c00d",
+          "physicalId": "SD53-012#AB_PASSIVE_NONE_LV1_LV2_LV3_5e11ac5f19f1afcb789e9a9411ada2b90e5c3639f7b93b6dda18e2d6ae7f017c_d832954b7eaf55412916f3e807d2c00d",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_5e11ac5f19f1afcb789e9a9411ada2b90e5c3639f7b93b6dda18e2d6ae7f017c_d832954b7eaf55412916f3e807d2c00d",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_e8d7310c2d2d768fc9a267080b9255b74de811c8ad9919be3371488c1d7941e6_0542b175f36ff86a130f541a18ee288b",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD53-012#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -526,8 +775,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -536,24 +790,41 @@
             "isMain": false,
             "cleanBody": "One and only copy of this card/Brave can be braved to a Spirit that is braved to a \"Pilot\" family Brave you control, ignoring the amount of Braves on it."
           },
+          "originalAbilityText": "One and only copy of this card/Brave can be braved to a Spirit that is braved to a \"Pilot\" family Brave you control, ignoring the amount of Braves on it.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "One and only copy of this card/Brave can be braved to a Spirit that is braved to a \"Pilot\" family Brave you control, ignoring the amount of Braves on it.",
+              "originalClauseText": "One and only copy of this card/Brave can be braved to a Spirit that is braved to a \"Pilot\" family Brave you control, ignoring the amount of Braves on it.",
               "cleanText": "One and only copy of this card/Brave can be braved to a Spirit that is braved to a \"Pilot\" family Brave you control, ignoring the amount of Braves on it",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Brave"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD53-012#a2",
+          "keywords": [],
+          "id": "SD53-012#AB_PASSIVE_NONE_LV1_LV2_LV3_e7b83c337ed0405cae2e293d6d4e98945191aab86f4618b11242f7935bd6a65e_bdd21e7a300f0a476370f64a35e67bd8",
+          "physicalId": "SD53-012#AB_PASSIVE_NONE_LV1_LV2_LV3_e7b83c337ed0405cae2e293d6d4e98945191aab86f4618b11242f7935bd6a65e_bdd21e7a300f0a476370f64a35e67bd8",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_e7b83c337ed0405cae2e293d6d4e98945191aab86f4618b11242f7935bd6a65e_bdd21e7a300f0a476370f64a35e67bd8",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_32a5e773a6d52c4d9111f10631ea71d49946ea0481823f973f65ea1293d7544a_3bb0cfd669e0ed6dd1f9af39ba7d0768",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD53-012#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -566,8 +837,20 @@
               "During Brave"
             ],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN",
+              "WHILE_BRAVED"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -576,10 +859,14 @@
             "isMain": false,
             "cleanBody": "refresh a Blue Nexus you control."
           },
+          "originalAbilityText": "[During Brave] (When Attacks)\nOnce per turn, refresh a Blue Nexus you control.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "refresh a Blue Nexus you control.",
+              "originalClauseText": "refresh a Blue Nexus you control.",
               "cleanText": "refresh a Blue Nexus you control",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -587,13 +874,35 @@
               "duration": null,
               "op": {
                 "op": "REFRESH",
+                "count": 1,
                 "target": {
-                  "side": "either"
+                  "side": "self",
+                  "types": [
+                    "Nexus"
+                  ]
                 }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD53-012#a3",
+          "keywords": [],
+          "id": "SD53-012#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_4960c641148d5830baf5c673f523230c6b0f0fea8699063c58ffd0cdc988b2dc_bfae034a162ce90b9d63ddd102eb9f5e",
+          "physicalId": "SD53-012#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_4960c641148d5830baf5c673f523230c6b0f0fea8699063c58ffd0cdc988b2dc_bfae034a162ce90b9d63ddd102eb9f5e",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_4960c641148d5830baf5c673f523230c6b0f0fea8699063c58ffd0cdc988b2dc_bfae034a162ce90b9d63ddd102eb9f5e",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_792bb0c71fbec6917eab4c3f94e7fbb7b395668ec3ba2b221a384c702c654cfc_9f309f82b2462e4ab5a8bc5783eb966a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN",
+              "WHILE_BRAVED"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -621,19 +930,82 @@
     "compiledIr": {
       "cardNumber": "SD53-001",
       "name": "Gundam Kyrios",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 2000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 4,
+          "bp": 4000
+        }
+      },
+      "originalEffectText": "Flash - [Arm Int: Cost 4 ([Blue Core][Blue Core])] (Opposing Attack Step)\nYou can summon this card from your Hand at Cost 4 ([Blue Core][Blue Core]).\n\n[LV1][LV2] (When Summoned/Attacks)\nOnce per turn, put a core from the Void to this Spirit.\n\n[LV1][LV2] [Trans-Am] (When Attacks)\nBy returning this Spirit to your Hand, summon an exactly-named \"Gundam Kyrios (Trans-Am)\" from your Trash, without paying the cost.",
+      "teams": [],
       "keywords": [
+        {
+          "name": "Blue Core",
+          "parameter": null,
+          "wave": 1,
+          "hook": "blue_core",
+          "bracketed": true,
+          "index": 0,
+          "abilityId": "SD53-001#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1ccc88b6d7551fb2d025ec32e9498ba4e9badfecdca4d587d4a1f7944430b0e5_fc57a58fb5c14bccbe45b3fb86c30096",
+          "cardNumber": "SD53-001",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Opposing Attack Step",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "SD53-001#a0"
+        },
         {
           "name": "Trans-Am",
           "parameter": null,
           "wave": 5,
           "hook": "trans_am",
           "bracketed": true,
-          "index": 254
+          "index": 0,
+          "abilityId": "SD53-001#AB_WHEN_ATTACKS_NONE_LV1_LV2_72b780fb738829ddb875b472feec40ec63f718b435e63003c3cac36afc89e0f5_a2623b8054c3275d8decebf9e2516935",
+          "cardNumber": "SD53-001",
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "SD53-001#a2"
         }
       ],
       "abilities": [
         {
-          "id": "SD53-001#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -644,20 +1016,33 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Opposing Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "OPPONENT",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Blue Core",
             "burstCondition": null,
             "isFlash": true,
             "isMain": false,
-            "cleanBody": "You can summon this card from your Hand at Cost ([Blue Core][Blue Core])."
+            "cleanBody": "You can summon this card from your Hand at Cost 4 ([Blue Core][Blue Core])."
           },
+          "originalAbilityText": "Flash - [Arm Int: Cost 4 ([Blue Core][Blue Core])] (Opposing Attack Step)\nYou can summon this card from your Hand at Cost 4 ([Blue Core][Blue Core]).",
+          "abilityIndex": 0,
           "clauses": [
             {
-              "rawText": "You can summon this card from your Hand at Cost ([Blue Core][Blue Core]).",
-              "cleanText": "You can summon this card from your Hand at Cost ([Blue Core][Blue Core])",
+              "rawText": "You can summon this card from your Hand at Cost 4 ([Blue Core][Blue Core]).",
+              "originalClauseText": "You can summon this card from your Hand at Cost 4 ([Blue Core][Blue Core]).",
+              "cleanText": "You can summon this card from your Hand at Cost 4 ([Blue Core][Blue Core])",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -665,14 +1050,58 @@
               "duration": null,
               "op": {
                 "op": "SUMMON_THIS_CARD",
-                "from": "HAND_OR_BURST"
+                "from": "HAND"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD53-001#a0",
+          "keywords": [
+            {
+              "name": "Blue Core",
+              "parameter": null,
+              "wave": 1,
+              "hook": "blue_core",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "SD53-001#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1ccc88b6d7551fb2d025ec32e9498ba4e9badfecdca4d587d4a1f7944430b0e5_fc57a58fb5c14bccbe45b3fb86c30096",
+              "cardNumber": "SD53-001",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Opposing Attack Step",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "SD53-001#a0"
+            }
+          ],
+          "id": "SD53-001#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1ccc88b6d7551fb2d025ec32e9498ba4e9badfecdca4d587d4a1f7944430b0e5_fc57a58fb5c14bccbe45b3fb86c30096",
+          "physicalId": "SD53-001#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1ccc88b6d7551fb2d025ec32e9498ba4e9badfecdca4d587d4a1f7944430b0e5_fc57a58fb5c14bccbe45b3fb86c30096",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1ccc88b6d7551fb2d025ec32e9498ba4e9badfecdca4d587d4a1f7944430b0e5_fc57a58fb5c14bccbe45b3fb86c30096",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_934baf058f5a120c68cc546bcc492caa73725b4856650d7cdfc020070e18c9ec_078294802ad1a29fdc63551e6d37f43f",
+          "timingSemantics": {
+            "timingOwner": "OPPONENT",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD53-001#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -682,8 +1111,21 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED",
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Summoned/Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -692,10 +1134,14 @@
             "isMain": false,
             "cleanBody": "put a core from the Void to this Spirit."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned/Attacks)\nOnce per turn, put a core from the Void to this Spirit.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "put a core from the Void to this Spirit.",
+              "originalClauseText": "put a core from the Void to this Spirit.",
               "cleanText": "put a core from the Void to this Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -714,10 +1160,27 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD53-001#a1",
+          "keywords": [],
+          "id": "SD53-001#AB_WHEN_SUMMONED_NONE_LV1_LV2_716876acbe031c1aa60c553c9161c0f4d1f33ae12d3efe7cd208104504df4753_12949dad00fb1e0794e0d8a9a724e74f",
+          "physicalId": "SD53-001#AB_WHEN_SUMMONED_NONE_LV1_LV2_716876acbe031c1aa60c553c9161c0f4d1f33ae12d3efe7cd208104504df4753_12949dad00fb1e0794e0d8a9a724e74f",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_716876acbe031c1aa60c553c9161c0f4d1f33ae12d3efe7cd208104504df4753_12949dad00fb1e0794e0d8a9a724e74f",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_41362e05be285d76b3711c4d68afa6b6166bdfd644d899218664e28e5be16457_b46ac280508dbc334ff86c1daaeadf56",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD53-001#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -727,8 +1190,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Trans-Am",
@@ -737,10 +1209,14 @@
             "isMain": false,
             "cleanBody": "By returning this Spirit to your Hand, summon an exactly-named \"Gundam Kyrios (Trans-Am)\" from your Trash, without paying the cost."
           },
+          "originalAbilityText": "[LV1][LV2] [Trans-Am] (When Attacks)\nBy returning this Spirit to your Hand, summon an exactly-named \"Gundam Kyrios (Trans-Am)\" from your Trash, without paying the cost.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "By returning this Spirit to your Hand",
+              "originalClauseText": "By returning this Spirit to your Hand",
               "cleanText": "By returning this Spirit to your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -756,7 +1232,9 @@
             },
             {
               "rawText": "summon an exactly-named \"Gundam Kyrios (Trans-Am)\" from your Trash, without paying the cost.",
+              "originalClauseText": "summon an exactly-named \"Gundam Kyrios (Trans-Am)\" from your Trash, without paying the cost.",
               "cleanText": "summon an exactly-named \"Gundam Kyrios (Trans-Am)\" from your Trash, without paying the cost",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -764,11 +1242,66 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "Gundam Kyrios (Trans-Am)"
+                },
+                "free": true,
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD53-001#a2",
+          "keywords": [
+            {
+              "name": "Trans-Am",
+              "parameter": null,
+              "wave": 5,
+              "hook": "trans_am",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "SD53-001#AB_WHEN_ATTACKS_NONE_LV1_LV2_72b780fb738829ddb875b472feec40ec63f718b435e63003c3cac36afc89e0f5_a2623b8054c3275d8decebf9e2516935",
+              "cardNumber": "SD53-001",
+              "levels": [
+                1,
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "SD53-001#a2"
+            }
+          ],
+          "id": "SD53-001#AB_WHEN_ATTACKS_NONE_LV1_LV2_72b780fb738829ddb875b472feec40ec63f718b435e63003c3cac36afc89e0f5_a2623b8054c3275d8decebf9e2516935",
+          "physicalId": "SD53-001#AB_WHEN_ATTACKS_NONE_LV1_LV2_72b780fb738829ddb875b472feec40ec63f718b435e63003c3cac36afc89e0f5_a2623b8054c3275d8decebf9e2516935",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_72b780fb738829ddb875b472feec40ec63f718b435e63003c3cac36afc89e0f5_a2623b8054c3275d8decebf9e2516935",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_0d7b7c1a34e73448dd22a0cd80b33b6cb6ba05fc183f561b9a61f2e27ac39d08_b178350002d9ef2aa93411d369ff11ee",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -801,6 +1334,26 @@
     "compiledIr": {
       "cardNumber": "SD53-005",
       "name": "Gundam Kyrios ［Trans-Am］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 4000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 5,
+          "bp": 12000
+        }
+      },
+      "originalEffectText": "When you're using [Armed Intervention], the symbol of this card in Trash is also treated as being on the Field.\n\n[LV1][LV2][LV3] (When Summoned)\nYou can put a core from the Void each to one \"CB\" family Spirit and one \"Mothership\" family Nexus you control.\n\n[LV1][LV2][LV3] (Your End Step)\nSend this Spirit to your Trash.",
+      "teams": [],
       "keywords": [
         {
           "name": "Armed Intervention",
@@ -808,12 +1361,32 @@
           "wave": 5,
           "hook": "armed_intervention",
           "bracketed": true,
-          "index": 18
+          "index": 18,
+          "abilityId": "SD53-005#AB_PASSIVE_NONE_LV1_LV2_LV3_9a1e22d91730bfca9d1f2692edde658994e6cc68b1c520a0943f36942239a4fd_ff23f5b8ce7c29617a0498c4139c2192",
+          "cardNumber": "SD53-005",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "SD53-005#a0"
         }
       ],
       "abilities": [
         {
-          "id": "SD53-005#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -824,8 +1397,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -834,24 +1412,71 @@
             "isMain": false,
             "cleanBody": "When you're using [Armed Intervention], the symbol of this card in Trash is also treated as being on the Field."
           },
+          "originalAbilityText": "When you're using [Armed Intervention], the symbol of this card in Trash is also treated as being on the Field.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When you're using [Armed Intervention], the symbol of this card in Trash is also treated as being on the Field.",
+              "originalClauseText": "When you're using [Armed Intervention], the symbol of this card in Trash is also treated as being on the Field.",
               "cleanText": "When you're using [Armed Intervention], the symbol of this card in Trash is also treated as being on the Field",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Armed Intervention"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD53-005#a0",
+          "keywords": [
+            {
+              "name": "Armed Intervention",
+              "parameter": null,
+              "wave": 5,
+              "hook": "armed_intervention",
+              "bracketed": true,
+              "index": 18,
+              "abilityId": "SD53-005#AB_PASSIVE_NONE_LV1_LV2_LV3_9a1e22d91730bfca9d1f2692edde658994e6cc68b1c520a0943f36942239a4fd_ff23f5b8ce7c29617a0498c4139c2192",
+              "cardNumber": "SD53-005",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "SD53-005#a0"
+            }
+          ],
+          "id": "SD53-005#AB_PASSIVE_NONE_LV1_LV2_LV3_9a1e22d91730bfca9d1f2692edde658994e6cc68b1c520a0943f36942239a4fd_ff23f5b8ce7c29617a0498c4139c2192",
+          "physicalId": "SD53-005#AB_PASSIVE_NONE_LV1_LV2_LV3_9a1e22d91730bfca9d1f2692edde658994e6cc68b1c520a0943f36942239a4fd_ff23f5b8ce7c29617a0498c4139c2192",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_9a1e22d91730bfca9d1f2692edde658994e6cc68b1c520a0943f36942239a4fd_ff23f5b8ce7c29617a0498c4139c2192",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_6198f8f41dc2c7de6298cbd87a1ef2512bb9a637de0f67127b79f6ecc72d684a_c3e08c31932a8724f4ac90d13f52d5e6",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD53-005#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -862,8 +1487,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -872,10 +1506,14 @@
             "isMain": false,
             "cleanBody": "You can put a core from the Void each to one \"CB\" family Spirit and one \"Mothership\" family Nexus you control."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nYou can put a core from the Void each to one \"CB\" family Spirit and one \"Mothership\" family Nexus you control.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can put a core from the Void each to one \"CB\" family Spirit and one \"Mothership\" family Nexus you control.",
+              "originalClauseText": "You can put a core from the Void each to one \"CB\" family Spirit and one \"Mothership\" family Nexus you control.",
               "cleanText": "You can put a core from the Void each to one \"CB\" family Spirit and one \"Mothership\" family Nexus you control",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -883,14 +1521,31 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD53-005#a1",
+          "keywords": [],
+          "id": "SD53-005#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_0a4e2b4b9d67a3c8883979234be1a9443e8f46808517158a3a97c3e78eb0f8c0_810525367e30f9412a810f7dc81e45c2",
+          "physicalId": "SD53-005#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_0a4e2b4b9d67a3c8883979234be1a9443e8f46808517158a3a97c3e78eb0f8c0_810525367e30f9412a810f7dc81e45c2",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_0a4e2b4b9d67a3c8883979234be1a9443e8f46808517158a3a97c3e78eb0f8c0_810525367e30f9412a810f7dc81e45c2",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_b26f1db613b6331df7262504eee65de9cd9202c3482105b21d6884b80fbc2fca_bc26727512907a91feeda78df0d48113",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD53-005#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -901,8 +1556,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "END_OF_TURN",
+            "timings": [
+              "END_OF_TURN"
+            ],
             "timingLabel": "Your End Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "END_OF_TURN"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -911,22 +1575,43 @@
             "isMain": false,
             "cleanBody": "Send this Spirit to your Trash."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (Your End Step)\nSend this Spirit to your Trash.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Send this Spirit to your Trash.",
+              "originalClauseText": "Send this Spirit to your Trash.",
               "cleanText": "Send this Spirit to your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "SEND_TO_TRASH",
-                "target": "SELF"
+                "target": "SELF",
+                "from": "field",
+                "count": 1,
+                "op": "SEND_TO_TRASH"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD53-005#a2",
+          "keywords": [],
+          "id": "SD53-005#AB_END_OF_TURN_NONE_LV1_LV2_LV3_21d75d02bbab4d00bb798ce0ac352f022563c9beb331200f6fe4977a94ff9f16_5b48611fdcc1faa92236614c301d6b79",
+          "physicalId": "SD53-005#AB_END_OF_TURN_NONE_LV1_LV2_LV3_21d75d02bbab4d00bb798ce0ac352f022563c9beb331200f6fe4977a94ff9f16_5b48611fdcc1faa92236614c301d6b79",
+          "semanticId": "SEM#AB_END_OF_TURN_NONE_LV1_LV2_LV3_21d75d02bbab4d00bb798ce0ac352f022563c9beb331200f6fe4977a94ff9f16_5b48611fdcc1faa92236614c301d6b79",
+          "semanticIdV3": "SEM3#AB_END_OF_TURN_NONE_LV1_LV2_LV3_de7c21a7b627bc0daafdff485d31d3b2f1bd5d8b574fdf59de26b2802147bec4_72d088f64c0d8cb24a8f8d28973469b7",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "END_OF_TURN"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -949,10 +1634,19 @@
     "compiledIr": {
       "cardNumber": "SD53-004",
       "name": "Gundam Nadleeh",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 2000
+        }
+      },
+      "originalEffectText": "When your \"Virtue\"-named Spirits would leave the Field due to the opponent, you can summon this card from the Hand/Trash, without paying the cost. This effect can only be used once per turn.\n\n[LV1] (When Summoned)\nRefresh three \"CB\" family Spirits you control.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "SD53-004#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -963,8 +1657,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -973,10 +1674,14 @@
             "isMain": false,
             "cleanBody": "When your \"Virtue\"-named Spirits would leave the Field due to the opponent, you can summon this card from the Hand/Trash, without paying the cost."
           },
+          "originalAbilityText": "When your \"Virtue\"-named Spirits would leave the Field due to the opponent, you can summon this card from the Hand/Trash, without paying the cost. This effect can only be used once per turn.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When your \"Virtue\"-named Spirits would leave the Field due to the opponent, you can summon this card from the Hand/Trash, without paying the cost.",
+              "originalClauseText": "When your \"Virtue\"-named Spirits would leave the Field due to the opponent, you can summon this card from the Hand/Trash, without paying the cost.",
               "cleanText": "When your \"Virtue\"-named Spirits would leave the Field due to the opponent, you can summon this card from the Hand/Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -984,14 +1689,29 @@
               "duration": null,
               "op": {
                 "op": "SUMMON_THIS_CARD",
-                "from": "HAND_OR_BURST"
+                "from": "TRASH",
+                "free": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD53-004#a0",
+          "keywords": [],
+          "id": "SD53-004#AB_PASSIVE_NONE_LV1_LV2_LV3_17c893f188c23b0ee7ae773946599600c911cdbc2ffce109130f5124e51d14c1_a82d41a42baa405e3cabb69a6a7d725c",
+          "physicalId": "SD53-004#AB_PASSIVE_NONE_LV1_LV2_LV3_17c893f188c23b0ee7ae773946599600c911cdbc2ffce109130f5124e51d14c1_a82d41a42baa405e3cabb69a6a7d725c",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_17c893f188c23b0ee7ae773946599600c911cdbc2ffce109130f5124e51d14c1_a82d41a42baa405e3cabb69a6a7d725c",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_d323db85c5e0710ae6b8702eddad981bde35793ac4729c96166c995984046509_2029d6a3a3e20ecf4e195d59e8703e06",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD53-004#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1000,8 +1720,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1010,10 +1739,14 @@
             "isMain": false,
             "cleanBody": "Refresh three \"CB\" family Spirits you control."
           },
+          "originalAbilityText": "[LV1] (When Summoned)\nRefresh three \"CB\" family Spirits you control.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Refresh three \"CB\" family Spirits you control.",
+              "originalClauseText": "Refresh three \"CB\" family Spirits you control.",
               "cleanText": "Refresh three \"CB\" family Spirits you control",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1021,13 +1754,32 @@
               "duration": null,
               "op": {
                 "op": "REFRESH",
+                "count": 3,
                 "target": {
-                  "side": "either"
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
                 }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD53-004#a1",
+          "keywords": [],
+          "id": "SD53-004#AB_WHEN_SUMMONED_NONE_LV1_76ecace6f2a1a815f2a20565cf4a2317156783f569ba9e567e0cf88a1adb04be_93680f2eb8cad387772b7bf90ab6757a",
+          "physicalId": "SD53-004#AB_WHEN_SUMMONED_NONE_LV1_76ecace6f2a1a815f2a20565cf4a2317156783f569ba9e567e0cf88a1adb04be_93680f2eb8cad387772b7bf90ab6757a",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_76ecace6f2a1a815f2a20565cf4a2317156783f569ba9e567e0cf88a1adb04be_93680f2eb8cad387772b7bf90ab6757a",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_8c1fe6fc66268b46bb6832d4f2e13453f81cf3b42fb14ae2601f96a691e14117_927f98f66693370224bdfadc7781c5aa",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -1055,19 +1807,82 @@
     "compiledIr": {
       "cardNumber": "SD53-002",
       "name": "Gundam Virtue",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 2000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 4,
+          "bp": 5000
+        }
+      },
+      "originalEffectText": "Flash - [Arm Int: Cost 4 ([Blue Core][Blue Core][Blue Core])] (Opposing Attack Step)\nYou can summon this card from your Hand at Cost 4 ([Blue Core][Blue Core][Blue Core]).\n\n[LV1][LV2]\nWhen your \"CB\" family Spirits are destroyed by opposing effects, they can remain on the Field, exhausted.\n\n[LV1][LV2] [Trans-Am] (When Attacks/Blocks)\nBy returning this Spirit to your Hand, summon an exactly-named \"Gundam Virtue ［Trans-Am］\" from your Trash, without paying the cost.",
+      "teams": [],
       "keywords": [
+        {
+          "name": "Blue Core",
+          "parameter": null,
+          "wave": 1,
+          "hook": "blue_core",
+          "bracketed": true,
+          "index": 0,
+          "abilityId": "SD53-002#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1ccc88b6d7551fb2d025ec32e9498ba4e9badfecdca4d587d4a1f7944430b0e5_fc57a58fb5c14bccbe45b3fb86c30096",
+          "cardNumber": "SD53-002",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Opposing Attack Step",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "SD53-002#a0"
+        },
         {
           "name": "Trans-Am",
           "parameter": null,
           "wave": 5,
           "hook": "trans_am",
           "bracketed": true,
-          "index": 302
+          "index": 0,
+          "abilityId": "SD53-002#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_9823c50d8e97a7d9b3cec6bf682c0e192ade9ccb8739e73e6c87df87d100b047_04325ed1135a8713c9bb318d75dc8bc8",
+          "cardNumber": "SD53-002",
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS_OR_BLOCKS",
+          "timingLabel": "When Attacks/Blocks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "SD53-002#a2"
         }
       ],
       "abilities": [
         {
-          "id": "SD53-002#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1078,20 +1893,33 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Opposing Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "OPPONENT",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Blue Core",
             "burstCondition": null,
             "isFlash": true,
             "isMain": false,
-            "cleanBody": "You can summon this card from your Hand at Cost ([Blue Core][Blue Core][Blue Core])."
+            "cleanBody": "You can summon this card from your Hand at Cost 4 ([Blue Core][Blue Core][Blue Core])."
           },
+          "originalAbilityText": "Flash - [Arm Int: Cost 4 ([Blue Core][Blue Core][Blue Core])] (Opposing Attack Step)\nYou can summon this card from your Hand at Cost 4 ([Blue Core][Blue Core][Blue Core]).",
+          "abilityIndex": 0,
           "clauses": [
             {
-              "rawText": "You can summon this card from your Hand at Cost ([Blue Core][Blue Core][Blue Core]).",
-              "cleanText": "You can summon this card from your Hand at Cost ([Blue Core][Blue Core][Blue Core])",
+              "rawText": "You can summon this card from your Hand at Cost 4 ([Blue Core][Blue Core][Blue Core]).",
+              "originalClauseText": "You can summon this card from your Hand at Cost 4 ([Blue Core][Blue Core][Blue Core]).",
+              "cleanText": "You can summon this card from your Hand at Cost 4 ([Blue Core][Blue Core][Blue Core])",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1099,14 +1927,58 @@
               "duration": null,
               "op": {
                 "op": "SUMMON_THIS_CARD",
-                "from": "HAND_OR_BURST"
+                "from": "HAND"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD53-002#a0",
+          "keywords": [
+            {
+              "name": "Blue Core",
+              "parameter": null,
+              "wave": 1,
+              "hook": "blue_core",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "SD53-002#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1ccc88b6d7551fb2d025ec32e9498ba4e9badfecdca4d587d4a1f7944430b0e5_fc57a58fb5c14bccbe45b3fb86c30096",
+              "cardNumber": "SD53-002",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Opposing Attack Step",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "SD53-002#a0"
+            }
+          ],
+          "id": "SD53-002#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1ccc88b6d7551fb2d025ec32e9498ba4e9badfecdca4d587d4a1f7944430b0e5_fc57a58fb5c14bccbe45b3fb86c30096",
+          "physicalId": "SD53-002#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1ccc88b6d7551fb2d025ec32e9498ba4e9badfecdca4d587d4a1f7944430b0e5_fc57a58fb5c14bccbe45b3fb86c30096",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1ccc88b6d7551fb2d025ec32e9498ba4e9badfecdca4d587d4a1f7944430b0e5_fc57a58fb5c14bccbe45b3fb86c30096",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_934baf058f5a120c68cc546bcc492caa73725b4856650d7cdfc020070e18c9ec_078294802ad1a29fdc63551e6d37f43f",
+          "timingSemantics": {
+            "timingOwner": "OPPONENT",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD53-002#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1116,8 +1988,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1126,27 +2003,40 @@
             "isMain": false,
             "cleanBody": "When your \"CB\" family Spirits are destroyed by opposing effects, they can remain on the Field, exhausted."
           },
+          "originalAbilityText": "[LV1][LV2]\nWhen your \"CB\" family Spirits are destroyed by opposing effects, they can remain on the Field, exhausted.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When your \"CB\" family Spirits are destroyed by opposing effects, they can remain on the Field, exhausted.",
+              "originalClauseText": "When your \"CB\" family Spirits are destroyed by opposing effects, they can remain on the Field, exhausted.",
               "cleanText": "When your \"CB\" family Spirits are destroyed by opposing effects, they can remain on the Field, exhausted",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "EXHAUST",
-                "target": {
-                  "side": "either"
-                }
+                "op": "RESURRECT"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD53-002#a1",
+          "keywords": [],
+          "id": "SD53-002#AB_PASSIVE_NONE_LV1_LV2_6666b75dc73c58d9acb2ce9ad89f0ec29f2df186d804ea98c2f48a76368074de_a341a7b92d280d7fee5f3b1c89f41d37",
+          "physicalId": "SD53-002#AB_PASSIVE_NONE_LV1_LV2_6666b75dc73c58d9acb2ce9ad89f0ec29f2df186d804ea98c2f48a76368074de_a341a7b92d280d7fee5f3b1c89f41d37",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_6666b75dc73c58d9acb2ce9ad89f0ec29f2df186d804ea98c2f48a76368074de_a341a7b92d280d7fee5f3b1c89f41d37",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_8317977822b62f89a6c345b9d759a6b728eb77d7f470e18e9cd9141d1bebbd62_b40bcc24fb998875f3793ad9017be012",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD53-002#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1156,8 +2046,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timings": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
             "timingLabel": "When Attacks/Blocks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Trans-Am",
@@ -1166,10 +2067,14 @@
             "isMain": false,
             "cleanBody": "By returning this Spirit to your Hand, summon an exactly-named \"Gundam Virtue ［Trans-Am］\" from your Trash, without paying the cost."
           },
+          "originalAbilityText": "[LV1][LV2] [Trans-Am] (When Attacks/Blocks)\nBy returning this Spirit to your Hand, summon an exactly-named \"Gundam Virtue ［Trans-Am］\" from your Trash, without paying the cost.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "By returning this Spirit to your Hand",
+              "originalClauseText": "By returning this Spirit to your Hand",
               "cleanText": "By returning this Spirit to your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1185,7 +2090,9 @@
             },
             {
               "rawText": "summon an exactly-named \"Gundam Virtue ［Trans-Am］\" from your Trash, without paying the cost.",
+              "originalClauseText": "summon an exactly-named \"Gundam Virtue ［Trans-Am］\" from your Trash, without paying the cost.",
               "cleanText": "summon an exactly-named \"Gundam Virtue ［Trans-Am］\" from your Trash, without paying the cost",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1193,11 +2100,67 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "Gundam Virtue ［Trans-Am］"
+                },
+                "free": true,
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD53-002#a2",
+          "keywords": [
+            {
+              "name": "Trans-Am",
+              "parameter": null,
+              "wave": 5,
+              "hook": "trans_am",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "SD53-002#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_9823c50d8e97a7d9b3cec6bf682c0e192ade9ccb8739e73e6c87df87d100b047_04325ed1135a8713c9bb318d75dc8bc8",
+              "cardNumber": "SD53-002",
+              "levels": [
+                1,
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS_OR_BLOCKS",
+              "timingLabel": "When Attacks/Blocks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "SD53-002#a2"
+            }
+          ],
+          "id": "SD53-002#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_9823c50d8e97a7d9b3cec6bf682c0e192ade9ccb8739e73e6c87df87d100b047_04325ed1135a8713c9bb318d75dc8bc8",
+          "physicalId": "SD53-002#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_9823c50d8e97a7d9b3cec6bf682c0e192ade9ccb8739e73e6c87df87d100b047_04325ed1135a8713c9bb318d75dc8bc8",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_9823c50d8e97a7d9b3cec6bf682c0e192ade9ccb8739e73e6c87df87d100b047_04325ed1135a8713c9bb318d75dc8bc8",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_44bd26b53c8e955a4277efa481e4295a2efd29c07911de81e9a70082fbe7501e_e7ed6f399618b399f4e1bd8ce49f0a7f",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -1225,6 +2188,21 @@
     "compiledIr": {
       "cardNumber": "SD53-006",
       "name": "Gundam Virtue ［Trans-Am］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 6,
+          "bp": 15000
+        }
+      },
+      "originalEffectText": "When you're using [Armed Intervention], the symbol of this card in Trash is also treated as being on the Field.\n\n[LV1][LV2][LV3] (When Summoned)\nDestroy an opposing \"Mothership\" family Nexus. This effect can't be prevented by [Barrage]. Or, send four cores from any opposing Grandwalker Nexus(es) to the Void.\n\n[LV1][LV2][LV3] (Your End Step)\nSend this Spirit to your Trash.",
+      "teams": [],
       "keywords": [
         {
           "name": "Armed Intervention",
@@ -1232,7 +2210,28 @@
           "wave": 5,
           "hook": "armed_intervention",
           "bracketed": true,
-          "index": 18
+          "index": 18,
+          "abilityId": "SD53-006#AB_PASSIVE_NONE_LV1_LV2_LV3_9a1e22d91730bfca9d1f2692edde658994e6cc68b1c520a0943f36942239a4fd_ff23f5b8ce7c29617a0498c4139c2192",
+          "cardNumber": "SD53-006",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "SD53-006#a0"
         },
         {
           "name": "Barrage",
@@ -1240,12 +2239,32 @@
           "wave": 5,
           "hook": "barrage",
           "bracketed": true,
-          "index": 226
+          "index": 81,
+          "abilityId": "SD53-006#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_dd0d600ab19a29cb422ce2dfa0857e0f73c9076592adee88627a0869333a2c3b_537e46ea31bd8976315efc47e0701358",
+          "cardNumber": "SD53-006",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "SD53-006#a1"
         }
       ],
       "abilities": [
         {
-          "id": "SD53-006#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1256,8 +2275,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1266,24 +2290,71 @@
             "isMain": false,
             "cleanBody": "When you're using [Armed Intervention], the symbol of this card in Trash is also treated as being on the Field."
           },
+          "originalAbilityText": "When you're using [Armed Intervention], the symbol of this card in Trash is also treated as being on the Field.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When you're using [Armed Intervention], the symbol of this card in Trash is also treated as being on the Field.",
+              "originalClauseText": "When you're using [Armed Intervention], the symbol of this card in Trash is also treated as being on the Field.",
               "cleanText": "When you're using [Armed Intervention], the symbol of this card in Trash is also treated as being on the Field",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Armed Intervention"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD53-006#a0",
+          "keywords": [
+            {
+              "name": "Armed Intervention",
+              "parameter": null,
+              "wave": 5,
+              "hook": "armed_intervention",
+              "bracketed": true,
+              "index": 18,
+              "abilityId": "SD53-006#AB_PASSIVE_NONE_LV1_LV2_LV3_9a1e22d91730bfca9d1f2692edde658994e6cc68b1c520a0943f36942239a4fd_ff23f5b8ce7c29617a0498c4139c2192",
+              "cardNumber": "SD53-006",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "SD53-006#a0"
+            }
+          ],
+          "id": "SD53-006#AB_PASSIVE_NONE_LV1_LV2_LV3_9a1e22d91730bfca9d1f2692edde658994e6cc68b1c520a0943f36942239a4fd_ff23f5b8ce7c29617a0498c4139c2192",
+          "physicalId": "SD53-006#AB_PASSIVE_NONE_LV1_LV2_LV3_9a1e22d91730bfca9d1f2692edde658994e6cc68b1c520a0943f36942239a4fd_ff23f5b8ce7c29617a0498c4139c2192",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_9a1e22d91730bfca9d1f2692edde658994e6cc68b1c520a0943f36942239a4fd_ff23f5b8ce7c29617a0498c4139c2192",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_6198f8f41dc2c7de6298cbd87a1ef2512bb9a637de0f67127b79f6ecc72d684a_c3e08c31932a8724f4ac90d13f52d5e6",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD53-006#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1294,8 +2365,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1304,10 +2384,14 @@
             "isMain": false,
             "cleanBody": "Destroy an opposing \"Mothership\" family Nexus. This effect can't be prevented by [Barrage]. Or, send four cores from any opposing Grandwalker Nexus(es) to the Void."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nDestroy an opposing \"Mothership\" family Nexus. This effect can't be prevented by [Barrage]. Or, send four cores from any opposing Grandwalker Nexus(es) to the Void.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Destroy an opposing \"Mothership\" family Nexus.",
+              "originalClauseText": "Destroy an opposing \"Mothership\" family Nexus.",
               "cleanText": "Destroy an opposing \"Mothership\" family Nexus",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1324,19 +2408,25 @@
             },
             {
               "rawText": "This effect can't be prevented by [Barrage].",
+              "originalClauseText": "This effect can't be prevented by [Barrage].",
               "cleanText": "This effect can't be prevented by [Barrage]",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "COMBAT_RESTRICTION"
+                "op": "UNSUPPORTED",
+                "unhandledClause": "This effect can't be prevented by [Barrage]",
+                "reason": "UNSUPPORTED_EFFECT_PROTECTION: effect cannot be prevented by opposing effects"
               }
             },
             {
               "rawText": "send four cores from any opposing Grandwalker Nexus(es) to the Void.",
+              "originalClauseText": "send four cores from any opposing Grandwalker Nexus(es) to the Void.",
               "cleanText": "send four cores from any opposing Grandwalker Nexus(es) to the Void",
+              "clauseIndex": 2,
               "link": "or",
               "isOptional": false,
               "isCost": false,
@@ -1344,14 +2434,63 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 4,
+                "to": {
+                  "zone": "void"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "This effect can't be prevented by [Barrage]."
+          ],
+          "legacyId": "SD53-006#a1",
+          "keywords": [
+            {
+              "name": "Barrage",
+              "parameter": null,
+              "wave": 5,
+              "hook": "barrage",
+              "bracketed": true,
+              "index": 81,
+              "abilityId": "SD53-006#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_dd0d600ab19a29cb422ce2dfa0857e0f73c9076592adee88627a0869333a2c3b_537e46ea31bd8976315efc47e0701358",
+              "cardNumber": "SD53-006",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_SUMMONED",
+              "timingLabel": "When Summoned",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "SD53-006#a1"
+            }
+          ],
+          "id": "SD53-006#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_dd0d600ab19a29cb422ce2dfa0857e0f73c9076592adee88627a0869333a2c3b_537e46ea31bd8976315efc47e0701358",
+          "physicalId": "SD53-006#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_dd0d600ab19a29cb422ce2dfa0857e0f73c9076592adee88627a0869333a2c3b_537e46ea31bd8976315efc47e0701358",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_dd0d600ab19a29cb422ce2dfa0857e0f73c9076592adee88627a0869333a2c3b_537e46ea31bd8976315efc47e0701358",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a445c2267f7bf5c88682b978cd8229c64922bd90f24bb852dc0600fdeaaa42e6_9ef4098ff4cdb254d4fe6e68ae18fe2c",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD53-006#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1362,8 +2501,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "END_OF_TURN",
+            "timings": [
+              "END_OF_TURN"
+            ],
             "timingLabel": "Your End Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "END_OF_TURN"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1372,27 +2520,48 @@
             "isMain": false,
             "cleanBody": "Send this Spirit to your Trash."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (Your End Step)\nSend this Spirit to your Trash.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Send this Spirit to your Trash.",
+              "originalClauseText": "Send this Spirit to your Trash.",
               "cleanText": "Send this Spirit to your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "SEND_TO_TRASH",
-                "target": "SELF"
+                "target": "SELF",
+                "from": "field",
+                "count": 1,
+                "op": "SEND_TO_TRASH"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD53-006#a2",
+          "keywords": [],
+          "id": "SD53-006#AB_END_OF_TURN_NONE_LV1_LV2_LV3_21d75d02bbab4d00bb798ce0ac352f022563c9beb331200f6fe4977a94ff9f16_5b48611fdcc1faa92236614c301d6b79",
+          "physicalId": "SD53-006#AB_END_OF_TURN_NONE_LV1_LV2_LV3_21d75d02bbab4d00bb798ce0ac352f022563c9beb331200f6fe4977a94ff9f16_5b48611fdcc1faa92236614c301d6b79",
+          "semanticId": "SEM#AB_END_OF_TURN_NONE_LV1_LV2_LV3_21d75d02bbab4d00bb798ce0ac352f022563c9beb331200f6fe4977a94ff9f16_5b48611fdcc1faa92236614c301d6b79",
+          "semanticIdV3": "SEM3#AB_END_OF_TURN_NONE_LV1_LV2_LV3_de7c21a7b627bc0daafdff485d31d3b2f1bd5d8b574fdf59de26b2802147bec4_72d088f64c0d8cb24a8f8d28973469b7",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "END_OF_TURN"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
-      "compiledClausesCount": 5,
-      "unsupportedClausesCount": 0,
-      "isFullySupported": true
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 1,
+      "isFullySupported": false
     }
   },
   "SD53-003": {
@@ -1415,19 +2584,82 @@
     "compiledIr": {
       "cardNumber": "SD53-003",
       "name": "Gundam Dynames",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 4000
+        }
+      },
+      "originalEffectText": "Flash - [Arm Int: Cost 4 ([Blue Core][Blue Core][Blue Core])] (Opposing Attack Step)\nYou can summon this card from your Hand at Cost 4 ([Blue Core][Blue Core][Blue Core]).\n\n[LV1][LV2] (When Summoned/Attacks)\nIgnoring the Cost of Braves, destroy an opposing Cost 3 or less Spirit.\n\n[LV1][LV2] [Trans-Am] (When Attacks)\nBy returning this Spirit to your Hand, summon an exactly-named \"Gundam Dynames ［Trans-Am］\" from your Trash, without paying the cost.",
+      "teams": [],
       "keywords": [
+        {
+          "name": "Blue Core",
+          "parameter": null,
+          "wave": 1,
+          "hook": "blue_core",
+          "bracketed": true,
+          "index": 0,
+          "abilityId": "SD53-003#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1ccc88b6d7551fb2d025ec32e9498ba4e9badfecdca4d587d4a1f7944430b0e5_fc57a58fb5c14bccbe45b3fb86c30096",
+          "cardNumber": "SD53-003",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Opposing Attack Step",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "SD53-003#a0"
+        },
         {
           "name": "Trans-Am",
           "parameter": null,
           "wave": 5,
           "hook": "trans_am",
           "bracketed": true,
-          "index": 292
+          "index": 0,
+          "abilityId": "SD53-003#AB_WHEN_ATTACKS_NONE_LV1_LV2_30c20da05b073b0f668f63dd5933ad2e79c205379fe9ae171ee9f8444a36c5da_7a7f4b577ff0b7d8d4dd6d64e40cc04b",
+          "cardNumber": "SD53-003",
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "SD53-003#a2"
         }
       ],
       "abilities": [
         {
-          "id": "SD53-003#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1438,20 +2670,33 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Opposing Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "OPPONENT",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Blue Core",
             "burstCondition": null,
             "isFlash": true,
             "isMain": false,
-            "cleanBody": "You can summon this card from your Hand at Cost ([Blue Core][Blue Core][Blue Core])."
+            "cleanBody": "You can summon this card from your Hand at Cost 4 ([Blue Core][Blue Core][Blue Core])."
           },
+          "originalAbilityText": "Flash - [Arm Int: Cost 4 ([Blue Core][Blue Core][Blue Core])] (Opposing Attack Step)\nYou can summon this card from your Hand at Cost 4 ([Blue Core][Blue Core][Blue Core]).",
+          "abilityIndex": 0,
           "clauses": [
             {
-              "rawText": "You can summon this card from your Hand at Cost ([Blue Core][Blue Core][Blue Core]).",
-              "cleanText": "You can summon this card from your Hand at Cost ([Blue Core][Blue Core][Blue Core])",
+              "rawText": "You can summon this card from your Hand at Cost 4 ([Blue Core][Blue Core][Blue Core]).",
+              "originalClauseText": "You can summon this card from your Hand at Cost 4 ([Blue Core][Blue Core][Blue Core]).",
+              "cleanText": "You can summon this card from your Hand at Cost 4 ([Blue Core][Blue Core][Blue Core])",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1459,14 +2704,58 @@
               "duration": null,
               "op": {
                 "op": "SUMMON_THIS_CARD",
-                "from": "HAND_OR_BURST"
+                "from": "HAND"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD53-003#a0",
+          "keywords": [
+            {
+              "name": "Blue Core",
+              "parameter": null,
+              "wave": 1,
+              "hook": "blue_core",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "SD53-003#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1ccc88b6d7551fb2d025ec32e9498ba4e9badfecdca4d587d4a1f7944430b0e5_fc57a58fb5c14bccbe45b3fb86c30096",
+              "cardNumber": "SD53-003",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Opposing Attack Step",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "SD53-003#a0"
+            }
+          ],
+          "id": "SD53-003#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1ccc88b6d7551fb2d025ec32e9498ba4e9badfecdca4d587d4a1f7944430b0e5_fc57a58fb5c14bccbe45b3fb86c30096",
+          "physicalId": "SD53-003#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1ccc88b6d7551fb2d025ec32e9498ba4e9badfecdca4d587d4a1f7944430b0e5_fc57a58fb5c14bccbe45b3fb86c30096",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1ccc88b6d7551fb2d025ec32e9498ba4e9badfecdca4d587d4a1f7944430b0e5_fc57a58fb5c14bccbe45b3fb86c30096",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_934baf058f5a120c68cc546bcc492caa73725b4856650d7cdfc020070e18c9ec_078294802ad1a29fdc63551e6d37f43f",
+          "timingSemantics": {
+            "timingOwner": "OPPONENT",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD53-003#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1476,8 +2765,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED",
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Summoned/Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1486,10 +2786,14 @@
             "isMain": false,
             "cleanBody": "Ignoring the Cost of Braves, destroy an opposing Cost 3 or less Spirit."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned/Attacks)\nIgnoring the Cost of Braves, destroy an opposing Cost 3 or less Spirit.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Ignoring the Cost of Braves, destroy an opposing Cost 3 or less Spirit.",
+              "originalClauseText": "Ignoring the Cost of Braves, destroy an opposing Cost 3 or less Spirit.",
               "cleanText": "Ignoring the Cost of Braves, destroy an opposing Cost 3 or less Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1510,10 +2814,25 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD53-003#a1",
+          "keywords": [],
+          "id": "SD53-003#AB_WHEN_SUMMONED_NONE_LV1_LV2_54713315729229641888d97d5551680b342e1a04a097f414195bad7eb2208c02_90fd70f1a155b836120819945c09081c",
+          "physicalId": "SD53-003#AB_WHEN_SUMMONED_NONE_LV1_LV2_54713315729229641888d97d5551680b342e1a04a097f414195bad7eb2208c02_90fd70f1a155b836120819945c09081c",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_54713315729229641888d97d5551680b342e1a04a097f414195bad7eb2208c02_90fd70f1a155b836120819945c09081c",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_6e0fa55e570cd161184033093e5efc1361a9e66eb6a18fd95d4cbf256e325709_12fc7270eee0582a436ab1faaa03d063",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD53-003#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1523,8 +2842,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Trans-Am",
@@ -1533,10 +2861,14 @@
             "isMain": false,
             "cleanBody": "By returning this Spirit to your Hand, summon an exactly-named \"Gundam Dynames ［Trans-Am］\" from your Trash, without paying the cost."
           },
+          "originalAbilityText": "[LV1][LV2] [Trans-Am] (When Attacks)\nBy returning this Spirit to your Hand, summon an exactly-named \"Gundam Dynames ［Trans-Am］\" from your Trash, without paying the cost.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "By returning this Spirit to your Hand",
+              "originalClauseText": "By returning this Spirit to your Hand",
               "cleanText": "By returning this Spirit to your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1552,7 +2884,9 @@
             },
             {
               "rawText": "summon an exactly-named \"Gundam Dynames ［Trans-Am］\" from your Trash, without paying the cost.",
+              "originalClauseText": "summon an exactly-named \"Gundam Dynames ［Trans-Am］\" from your Trash, without paying the cost.",
               "cleanText": "summon an exactly-named \"Gundam Dynames ［Trans-Am］\" from your Trash, without paying the cost",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1560,11 +2894,66 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "Gundam Dynames ［Trans-Am］"
+                },
+                "free": true,
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD53-003#a2",
+          "keywords": [
+            {
+              "name": "Trans-Am",
+              "parameter": null,
+              "wave": 5,
+              "hook": "trans_am",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "SD53-003#AB_WHEN_ATTACKS_NONE_LV1_LV2_30c20da05b073b0f668f63dd5933ad2e79c205379fe9ae171ee9f8444a36c5da_7a7f4b577ff0b7d8d4dd6d64e40cc04b",
+              "cardNumber": "SD53-003",
+              "levels": [
+                1,
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "SD53-003#a2"
+            }
+          ],
+          "id": "SD53-003#AB_WHEN_ATTACKS_NONE_LV1_LV2_30c20da05b073b0f668f63dd5933ad2e79c205379fe9ae171ee9f8444a36c5da_7a7f4b577ff0b7d8d4dd6d64e40cc04b",
+          "physicalId": "SD53-003#AB_WHEN_ATTACKS_NONE_LV1_LV2_30c20da05b073b0f668f63dd5933ad2e79c205379fe9ae171ee9f8444a36c5da_7a7f4b577ff0b7d8d4dd6d64e40cc04b",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_30c20da05b073b0f668f63dd5933ad2e79c205379fe9ae171ee9f8444a36c5da_7a7f4b577ff0b7d8d4dd6d64e40cc04b",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_5644fe5dba5c19dff5a8727bf8fa14aba84e37b31b4682664e786ef02affb66a_95efb7d372eaa6b520f8d88c9c9f01db",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -1597,6 +2986,26 @@
     "compiledIr": {
       "cardNumber": "SD53-007",
       "name": "Gundam Dynames ［Trans-Am］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 7000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 5,
+          "bp": 12000
+        }
+      },
+      "originalEffectText": "When you're using [Armed Intervention], the symbol of this card in Trash is also treated as being on the Field.\n\n[LV1][LV2][LV3] (When Summoned)\nIgnoring the cost of Braves, destroy an opposing Cost 7 or less Spirit.\n\n[LV1][LV2][LV3] (Your End Step)\nSend this Spirit to your Trash.",
+      "teams": [],
       "keywords": [
         {
           "name": "Armed Intervention",
@@ -1604,12 +3013,32 @@
           "wave": 5,
           "hook": "armed_intervention",
           "bracketed": true,
-          "index": 18
+          "index": 18,
+          "abilityId": "SD53-007#AB_PASSIVE_NONE_LV1_LV2_LV3_9a1e22d91730bfca9d1f2692edde658994e6cc68b1c520a0943f36942239a4fd_ff23f5b8ce7c29617a0498c4139c2192",
+          "cardNumber": "SD53-007",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "SD53-007#a0"
         }
       ],
       "abilities": [
         {
-          "id": "SD53-007#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1620,8 +3049,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1630,24 +3064,71 @@
             "isMain": false,
             "cleanBody": "When you're using [Armed Intervention], the symbol of this card in Trash is also treated as being on the Field."
           },
+          "originalAbilityText": "When you're using [Armed Intervention], the symbol of this card in Trash is also treated as being on the Field.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When you're using [Armed Intervention], the symbol of this card in Trash is also treated as being on the Field.",
+              "originalClauseText": "When you're using [Armed Intervention], the symbol of this card in Trash is also treated as being on the Field.",
               "cleanText": "When you're using [Armed Intervention], the symbol of this card in Trash is also treated as being on the Field",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Armed Intervention"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD53-007#a0",
+          "keywords": [
+            {
+              "name": "Armed Intervention",
+              "parameter": null,
+              "wave": 5,
+              "hook": "armed_intervention",
+              "bracketed": true,
+              "index": 18,
+              "abilityId": "SD53-007#AB_PASSIVE_NONE_LV1_LV2_LV3_9a1e22d91730bfca9d1f2692edde658994e6cc68b1c520a0943f36942239a4fd_ff23f5b8ce7c29617a0498c4139c2192",
+              "cardNumber": "SD53-007",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "SD53-007#a0"
+            }
+          ],
+          "id": "SD53-007#AB_PASSIVE_NONE_LV1_LV2_LV3_9a1e22d91730bfca9d1f2692edde658994e6cc68b1c520a0943f36942239a4fd_ff23f5b8ce7c29617a0498c4139c2192",
+          "physicalId": "SD53-007#AB_PASSIVE_NONE_LV1_LV2_LV3_9a1e22d91730bfca9d1f2692edde658994e6cc68b1c520a0943f36942239a4fd_ff23f5b8ce7c29617a0498c4139c2192",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_9a1e22d91730bfca9d1f2692edde658994e6cc68b1c520a0943f36942239a4fd_ff23f5b8ce7c29617a0498c4139c2192",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_6198f8f41dc2c7de6298cbd87a1ef2512bb9a637de0f67127b79f6ecc72d684a_c3e08c31932a8724f4ac90d13f52d5e6",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD53-007#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1658,8 +3139,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1668,10 +3158,14 @@
             "isMain": false,
             "cleanBody": "Ignoring the cost of Braves, destroy an opposing Cost 7 or less Spirit."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nIgnoring the cost of Braves, destroy an opposing Cost 7 or less Spirit.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Ignoring the cost of Braves, destroy an opposing Cost 7 or less Spirit.",
+              "originalClauseText": "Ignoring the cost of Braves, destroy an opposing Cost 7 or less Spirit.",
               "cleanText": "Ignoring the cost of Braves, destroy an opposing Cost 7 or less Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1692,10 +3186,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD53-007#a1",
+          "keywords": [],
+          "id": "SD53-007#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_6fabb58043e36e66ba2b4a88718a0ef18e65cc0f92b6d6cb155fa39eef3455dd_5d1631d1c1de1b125711bfe107cfeb83",
+          "physicalId": "SD53-007#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_6fabb58043e36e66ba2b4a88718a0ef18e65cc0f92b6d6cb155fa39eef3455dd_5d1631d1c1de1b125711bfe107cfeb83",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_6fabb58043e36e66ba2b4a88718a0ef18e65cc0f92b6d6cb155fa39eef3455dd_5d1631d1c1de1b125711bfe107cfeb83",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_aa8ee8f6c76dc0ee10100e6cd563d9982f14c4f3143f956d7341e7b195b14a6b_78d42a9c5c927d8b0ef326fd3be206e2",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD53-007#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1706,8 +3214,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "END_OF_TURN",
+            "timings": [
+              "END_OF_TURN"
+            ],
             "timingLabel": "Your End Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "END_OF_TURN"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1716,22 +3233,43 @@
             "isMain": false,
             "cleanBody": "Send this Spirit to your Trash."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (Your End Step)\nSend this Spirit to your Trash.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Send this Spirit to your Trash.",
+              "originalClauseText": "Send this Spirit to your Trash.",
               "cleanText": "Send this Spirit to your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "SEND_TO_TRASH",
-                "target": "SELF"
+                "target": "SELF",
+                "from": "field",
+                "count": 1,
+                "op": "SEND_TO_TRASH"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD53-007#a2",
+          "keywords": [],
+          "id": "SD53-007#AB_END_OF_TURN_NONE_LV1_LV2_LV3_21d75d02bbab4d00bb798ce0ac352f022563c9beb331200f6fe4977a94ff9f16_5b48611fdcc1faa92236614c301d6b79",
+          "physicalId": "SD53-007#AB_END_OF_TURN_NONE_LV1_LV2_LV3_21d75d02bbab4d00bb798ce0ac352f022563c9beb331200f6fe4977a94ff9f16_5b48611fdcc1faa92236614c301d6b79",
+          "semanticId": "SEM#AB_END_OF_TURN_NONE_LV1_LV2_LV3_21d75d02bbab4d00bb798ce0ac352f022563c9beb331200f6fe4977a94ff9f16_5b48611fdcc1faa92236614c301d6b79",
+          "semanticIdV3": "SEM3#AB_END_OF_TURN_NONE_LV1_LV2_LV3_de7c21a7b627bc0daafdff485d31d3b2f1bd5d8b574fdf59de26b2802147bec4_72d088f64c0d8cb24a8f8d28973469b7",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "END_OF_TURN"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -1764,14 +3302,84 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A4862",
       "name": "Gundam Exia",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 4000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 5000
+        }
+      },
+      "originalEffectText": "Flash - [Arm Int: Cost 4 ([Blue Core][Blue Core][Blue Core])] (Opposing Attack Step)\nYou can summon this card from your Hand at Cost 4 ([Blue Core][Blue Core][Blue Core]).\n\n[LV1][LV2][LV3] [Trans-Am] (When Attacks)\nBy returning this Spirit to your Hand, summon an exactly-named \"Gundam Exia ［Trans-Am］\" from your Trash, without paying the cost. This effect can also activate at the end of the attack.\n\n[LV2][LV3] [Assault: 2] (When Attacks)\nThis Spirit can, up to twice per turn, be refreshed by exhausting one of your Nexuses.",
+      "teams": [],
       "keywords": [
+        {
+          "name": "Blue Core",
+          "parameter": null,
+          "wave": 1,
+          "hook": "blue_core",
+          "bracketed": true,
+          "index": 0,
+          "abilityId": "BATTLE-SPIRITS-A4862#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1ccc88b6d7551fb2d025ec32e9498ba4e9badfecdca4d587d4a1f7944430b0e5_fc57a58fb5c14bccbe45b3fb86c30096",
+          "cardNumber": "BATTLE-SPIRITS-A4862",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Opposing Attack Step",
+          "timingStep": "ANY",
+          "face": "B",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "BATTLE-SPIRITS-A4862#a0"
+        },
         {
           "name": "Trans-Am",
           "parameter": null,
           "wave": 5,
           "hook": "trans_am",
           "bracketed": true,
-          "index": 189
+          "index": 0,
+          "abilityId": "BATTLE-SPIRITS-A4862#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_641b071d2ab0af74d1395939a885ea0349a4b69d7c2824685dc5bf5bb9f7d45d_27f473efa4abe7543ee7f90dff8e79c0",
+          "cardNumber": "BATTLE-SPIRITS-A4862",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "B",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BATTLE-SPIRITS-A4862#a1"
         },
         {
           "name": "Assault",
@@ -1779,12 +3387,31 @@
           "wave": 1,
           "hook": "assault",
           "bracketed": true,
-          "index": 413
+          "index": 0,
+          "abilityId": "BATTLE-SPIRITS-A4862#AB_WHEN_ATTACKS_NONE_LV2_LV3_27c333b6147d88391e1fef92aebbd75212333fd20c2228b1d74e9a2076201936_7d93b57b12bd290d910915709fda13d2",
+          "cardNumber": "BATTLE-SPIRITS-A4862",
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "B",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BATTLE-SPIRITS-A4862#a2"
         }
       ],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A4862#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1795,20 +3422,33 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Opposing Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "OPPONENT",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Blue Core",
             "burstCondition": null,
             "isFlash": true,
             "isMain": false,
-            "cleanBody": "You can summon this card from your Hand at Cost ([Blue Core][Blue Core][Blue Core])."
+            "cleanBody": "You can summon this card from your Hand at Cost 4 ([Blue Core][Blue Core][Blue Core])."
           },
+          "originalAbilityText": "Flash - [Arm Int: Cost 4 ([Blue Core][Blue Core][Blue Core])] (Opposing Attack Step)\nYou can summon this card from your Hand at Cost 4 ([Blue Core][Blue Core][Blue Core]).",
+          "abilityIndex": 0,
           "clauses": [
             {
-              "rawText": "You can summon this card from your Hand at Cost ([Blue Core][Blue Core][Blue Core]).",
-              "cleanText": "You can summon this card from your Hand at Cost ([Blue Core][Blue Core][Blue Core])",
+              "rawText": "You can summon this card from your Hand at Cost 4 ([Blue Core][Blue Core][Blue Core]).",
+              "originalClauseText": "You can summon this card from your Hand at Cost 4 ([Blue Core][Blue Core][Blue Core]).",
+              "cleanText": "You can summon this card from your Hand at Cost 4 ([Blue Core][Blue Core][Blue Core])",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1816,14 +3456,58 @@
               "duration": null,
               "op": {
                 "op": "SUMMON_THIS_CARD",
-                "from": "HAND_OR_BURST"
+                "from": "HAND"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A4862#a0",
+          "keywords": [
+            {
+              "name": "Blue Core",
+              "parameter": null,
+              "wave": 1,
+              "hook": "blue_core",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BATTLE-SPIRITS-A4862#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1ccc88b6d7551fb2d025ec32e9498ba4e9badfecdca4d587d4a1f7944430b0e5_fc57a58fb5c14bccbe45b3fb86c30096",
+              "cardNumber": "BATTLE-SPIRITS-A4862",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Opposing Attack Step",
+              "timingStep": "ANY",
+              "face": "B",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "BATTLE-SPIRITS-A4862#a0"
+            }
+          ],
+          "id": "BATTLE-SPIRITS-A4862#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1ccc88b6d7551fb2d025ec32e9498ba4e9badfecdca4d587d4a1f7944430b0e5_fc57a58fb5c14bccbe45b3fb86c30096",
+          "physicalId": "BATTLE-SPIRITS-A4862#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1ccc88b6d7551fb2d025ec32e9498ba4e9badfecdca4d587d4a1f7944430b0e5_fc57a58fb5c14bccbe45b3fb86c30096",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1ccc88b6d7551fb2d025ec32e9498ba4e9badfecdca4d587d4a1f7944430b0e5_fc57a58fb5c14bccbe45b3fb86c30096",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_934baf058f5a120c68cc546bcc492caa73725b4856650d7cdfc020070e18c9ec_078294802ad1a29fdc63551e6d37f43f",
+          "timingSemantics": {
+            "timingOwner": "OPPONENT",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A4862#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1834,8 +3518,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Trans-Am",
@@ -1844,10 +3537,14 @@
             "isMain": false,
             "cleanBody": "By returning this Spirit to your Hand, summon an exactly-named \"Gundam Exia ［Trans-Am］\" from your Trash, without paying the cost. This effect can also activate at the end of the attack."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] [Trans-Am] (When Attacks)\nBy returning this Spirit to your Hand, summon an exactly-named \"Gundam Exia ［Trans-Am］\" from your Trash, without paying the cost. This effect can also activate at the end of the attack.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "By returning this Spirit to your Hand",
+              "originalClauseText": "By returning this Spirit to your Hand",
               "cleanText": "By returning this Spirit to your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1863,7 +3560,9 @@
             },
             {
               "rawText": "summon an exactly-named \"Gundam Exia ［Trans-Am］\" from your Trash, without paying the cost.",
+              "originalClauseText": "summon an exactly-named \"Gundam Exia ［Trans-Am］\" from your Trash, without paying the cost.",
               "cleanText": "summon an exactly-named \"Gundam Exia ［Trans-Am］\" from your Trash, without paying the cost",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1871,26 +3570,85 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "Gundam Exia ［Trans-Am］"
+                },
+                "free": true,
+                "isOptional": false
               }
             },
             {
               "rawText": "This effect can also activate at the end of the attack.",
+              "originalClauseText": "This effect can also activate at the end of the attack.",
               "cleanText": "This effect can also activate at the end of the attack",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
+                "timing": "END_OF_ATTACK",
+                "when": "END_OF_ATTACK",
                 "op": "TIMING_MODIFIER"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A4862#a1",
+          "keywords": [
+            {
+              "name": "Trans-Am",
+              "parameter": null,
+              "wave": 5,
+              "hook": "trans_am",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BATTLE-SPIRITS-A4862#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_641b071d2ab0af74d1395939a885ea0349a4b69d7c2824685dc5bf5bb9f7d45d_27f473efa4abe7543ee7f90dff8e79c0",
+              "cardNumber": "BATTLE-SPIRITS-A4862",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "B",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BATTLE-SPIRITS-A4862#a1"
+            }
+          ],
+          "id": "BATTLE-SPIRITS-A4862#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_641b071d2ab0af74d1395939a885ea0349a4b69d7c2824685dc5bf5bb9f7d45d_27f473efa4abe7543ee7f90dff8e79c0",
+          "physicalId": "BATTLE-SPIRITS-A4862#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_641b071d2ab0af74d1395939a885ea0349a4b69d7c2824685dc5bf5bb9f7d45d_27f473efa4abe7543ee7f90dff8e79c0",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_641b071d2ab0af74d1395939a885ea0349a4b69d7c2824685dc5bf5bb9f7d45d_27f473efa4abe7543ee7f90dff8e79c0",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_5f7e46ffbaac1a78bbf5676472689b437df0f8dbc1d32e2b453c3c8c1e744504_e3ee83f1ccbb4a97356ec66bdbdb3efd",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A4862#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1900,8 +3658,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Assault: 2",
@@ -1910,10 +3677,14 @@
             "isMain": false,
             "cleanBody": "This Spirit can, up to twice per turn, be refreshed by exhausting one of your Nexuses."
           },
+          "originalAbilityText": "[LV2][LV3] [Assault: 2] (When Attacks)\nThis Spirit can, up to twice per turn, be refreshed by exhausting one of your Nexuses.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "This Spirit can, up to twice per turn, be refreshed by exhausting one of your Nexuses.",
+              "originalClauseText": "This Spirit can, up to twice per turn, be refreshed by exhausting one of your Nexuses.",
               "cleanText": "This Spirit can, up to twice per turn, be refreshed by exhausting one of your Nexuses",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1925,7 +3696,51 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A4862#a2",
+          "keywords": [
+            {
+              "name": "Assault",
+              "parameter": "2",
+              "wave": 1,
+              "hook": "assault",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BATTLE-SPIRITS-A4862#AB_WHEN_ATTACKS_NONE_LV2_LV3_27c333b6147d88391e1fef92aebbd75212333fd20c2228b1d74e9a2076201936_7d93b57b12bd290d910915709fda13d2",
+              "cardNumber": "BATTLE-SPIRITS-A4862",
+              "levels": [
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "B",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BATTLE-SPIRITS-A4862#a2"
+            }
+          ],
+          "id": "BATTLE-SPIRITS-A4862#AB_WHEN_ATTACKS_NONE_LV2_LV3_27c333b6147d88391e1fef92aebbd75212333fd20c2228b1d74e9a2076201936_7d93b57b12bd290d910915709fda13d2",
+          "physicalId": "BATTLE-SPIRITS-A4862#AB_WHEN_ATTACKS_NONE_LV2_LV3_27c333b6147d88391e1fef92aebbd75212333fd20c2228b1d74e9a2076201936_7d93b57b12bd290d910915709fda13d2",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_27c333b6147d88391e1fef92aebbd75212333fd20c2228b1d74e9a2076201936_7d93b57b12bd290d910915709fda13d2",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_5f4920acb4ac09c3ad0be4b9f42209f8f834c861a44684e43f362a1afd743522_1955fdf4e1bfbdabf201a6aa4508f21c",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,

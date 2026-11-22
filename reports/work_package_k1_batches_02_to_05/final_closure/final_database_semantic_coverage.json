@@ -1,0 +1,88 @@
+{
+  "generatedAt": "2026-11-20T15:25:58.116Z",
+  "package": "MASTER_WORK_PACKAGE_K1",
+  "scope": "Batches 02 to 05 Final Closure",
+  "databaseMetrics": {
+    "totalCards": 15398,
+    "uniqueCanonicalCards": 14609,
+    "totalAbilities": 36422,
+    "totalClauses": 51734,
+    "shardsValidated": 514
+  },
+  "centralLedgerMetrics": {
+    "totalLedgerRecords": 18031,
+    "recordsPreservedWithoutDeletion": true,
+    "breakdownByStatus": {
+      "HANDLER_PRESENT": 13065,
+      "RESOLVED_VERIFIED": 3648,
+      "PARTIALLY_VERIFIED": 34,
+      "PARSED_FAILURE": 848,
+      "EXPLICIT_UNRECOVERABLE_BLOCKED": 194,
+      "SOURCE_CORRECTION_REQUIRED": 14,
+      "MANUAL_REVIEW_REQUIRED": 228
+    },
+    "breakdownByBatchAssignment": {
+      "K1-BATCH-05": 12427,
+      "K1-BATCH-03": 823,
+      "K1-BATCH-01_CARRY_FORWARD": 2593,
+      "K1-BATCH-02": 1380,
+      "K1-BATCH-04": 566,
+      "K1-BATCH-05_EXCLUSION": 14,
+      "MANUAL_REVIEW_QUEUE": 228
+    }
+  },
+  "batchImplementationSummaries": {
+    "K1-BATCH-02_CONDITIONS": {
+      "clausesAudited": 1380,
+      "resolvedVerified": 532,
+      "parsedFailureIsolated": 848,
+      "features": [
+        "COLOR_SYMBOL typed condition AST",
+        "Evaluator support for INVALID_CONTEXT, PRE_ADVENT_CARD, ACTIVATION_ORIGIN, OP_RULE_CONDITION",
+        "Compound and/or logic fix",
+        "ATTACKING_OR_BLOCKING_SPIRIT fallback"
+      ]
+    },
+    "K1-BATCH-03_KEYWORDS_PREREQUISITES": {
+      "suadconCardsAudited": 13,
+      "suadconCardsResolved": 13,
+      "features": [
+        "extractSuAdconTexts & parseSuAdconCondition with quote normalization",
+        "evaluateAdventCondition & evaluateSummonCondition",
+        "Ability prefix prerequisites (During Brave, When Braved, During Advent, During OC, During Set, Soul State, During Seal)",
+        "SJ13-12 level gating in continuous.js",
+        "game.performAdvent, game.executeAccel, game.executeChange, declareBlock Curse pre-capture"
+      ]
+    },
+    "K1-BATCH-04_INCOMPLETE_PARAMETERS": {
+      "clausesAudited": 582,
+      "recoveredExplicit": 386,
+      "unrecoverableComplex": 196,
+      "recoveryRatePercent": 66.32,
+      "features": [
+        "engine/parameter_recovery.js with 19 tracked ops",
+        "explicit parameter extraction in compiler/clause_patterns.js",
+        "executeOp runtime handlers for COUNT_OPERATION, DECK_OR_HAND_ACTION, REVEAL_CARDS, PUT_UNDERNEATH, MIRAGE_OPERATION, COPY_PRE_ADVENT_EFFECT, USE_FROM_HAND",
+        "fail-closed contract for MISSING_IR_PARAMETERS & UNRECOVERABLE_COMPLEX"
+      ]
+    },
+    "K1-BATCH-05_COMPLEX_EFFECTS": {
+      "clausesTargeted": 2692,
+      "batch01CarryForwardResolved": 2593,
+      "blockedCardsResolved": 4,
+      "driftCardsVerified": 2,
+      "features": [
+        "26RBS02-083 0-BP destruction replacement with pre-exit BP capture",
+        "26RDB01-024 opposing hand bounce",
+        "26RSD07-001 self bounce to deckbottom",
+        "BS27-082 BP debuff with BATTLING state filter",
+        "BS19-X05 & BS33-069 clean compilation & runtime execution",
+        "REMAIN_ON_FIELD (exhausted / refreshed) destruction replacement",
+        "LIFE_TO_RESERVE redirect to void / trash",
+        "UNPREVENTABLE bypass",
+        "narrowEitherSideFromClause & resolveTargets automatic side narrowing",
+        "resolveBounceDestination text-backed decktop/deckbottom resolution"
+      ]
+    }
+  }
+}

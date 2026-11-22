@@ -19,6 +19,21 @@
     "compiledIr": {
       "cardNumber": "SD64-X01",
       "name": "Mugendragon-the-First-Star",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 10000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 15000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: Flame Contract/Incarnate & C6 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Attacks)\nUnless the opponent sends a core from their Life to the Trash, they can't use Magic cards/[Accel]. If there is any \"Mugen\" among this Spirit's pre-advents, this effect sends +1 core to the Trash.\n\n[During OC & During Advent] [LV1][LV2] (Your Attack Step)\nWhen your \"Incarnate\" family Spirit makes the first attack of the turn, during this turn, that Spirit can gain two extra Red symbols.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -26,7 +41,28 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "SD64-X01#AB_FLASH_NONE_LV1_LV2_LV3_0b8bb66c7326fe98f39c980e152e672c5bb397321f5e10fe252abddee65322ef_7118579c25e8c6d40fbd6c29f861a99f",
+          "cardNumber": "SD64-X01",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "SD64-X01#a0"
         },
         {
           "name": "Accel",
@@ -34,12 +70,31 @@
           "wave": 2,
           "hook": "accel",
           "bracketed": true,
-          "index": 287
+          "index": 90,
+          "abilityId": "SD64-X01#AB_WHEN_ATTACKS_NONE_LV1_LV2_b79956b1e2f0d931714f2ea5ab7a33a8b4aeaaf504ff45b0ada8aa8724d11135_6089f7772b419a8983c2e54dd92db649",
+          "cardNumber": "SD64-X01",
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "SD64-X01#a1"
         }
       ],
       "abilities": [
         {
-          "id": "SD64-X01#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -50,8 +105,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: Flame Contract/Incarnate & C6 or more, (Your Turn)",
@@ -60,10 +122,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: Flame Contract/Incarnate & C6 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -85,7 +151,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -103,10 +171,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD64-X01#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "Flame Contract/Incarnate & C6 or more, (Your Turn)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "SD64-X01#AB_FLASH_NONE_LV1_LV2_LV3_0b8bb66c7326fe98f39c980e152e672c5bb397321f5e10fe252abddee65322ef_7118579c25e8c6d40fbd6c29f861a99f",
+              "cardNumber": "SD64-X01",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "SD64-X01#a0"
+            }
+          ],
+          "id": "SD64-X01#AB_FLASH_NONE_LV1_LV2_LV3_0b8bb66c7326fe98f39c980e152e672c5bb397321f5e10fe252abddee65322ef_7118579c25e8c6d40fbd6c29f861a99f",
+          "physicalId": "SD64-X01#AB_FLASH_NONE_LV1_LV2_LV3_0b8bb66c7326fe98f39c980e152e672c5bb397321f5e10fe252abddee65322ef_7118579c25e8c6d40fbd6c29f861a99f",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_0b8bb66c7326fe98f39c980e152e672c5bb397321f5e10fe252abddee65322ef_7118579c25e8c6d40fbd6c29f861a99f",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_a1edf8e86c1a5e62ffbc1a21b185b2ed656162d40a3eb0417e89d7978f025045_b6f30c44c4963f63bb7a8580e750a149",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD64-X01#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -116,8 +228,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -126,10 +247,14 @@
             "isMain": false,
             "cleanBody": "Unless the opponent sends a core from their Life to the Trash, they can't use Magic cards/[Accel]. If there is any \"Mugen\" among this Spirit's pre-advents, this effect sends +1 core to the Trash."
           },
+          "originalAbilityText": "[LV1][LV2] (When Attacks)\nUnless the opponent sends a core from their Life to the Trash, they can't use Magic cards/[Accel]. If there is any \"Mugen\" among this Spirit's pre-advents, this effect sends +1 core to the Trash.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Unless the opponent sends a core from their Life to the Trash, they can't use Magic cards/[Accel].",
+              "originalClauseText": "Unless the opponent sends a core from their Life to the Trash, they can't use Magic cards/[Accel].",
               "cleanText": "Unless the opponent sends a core from their Life to the Trash, they can't use Magic cards/[Accel]",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -137,26 +262,83 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "life",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             },
             {
               "rawText": "If there is any \"Mugen\" among this Spirit's pre-advents, this effect sends +1 core to the Trash.",
+              "originalClauseText": "If there is any \"Mugen\" among this Spirit's pre-advents, this effect sends +1 core to the Trash.",
               "cleanText": "this effect sends +1 core to the Trash",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": "If there is any \"Mugen\" among this Spirit's pre-advents",
               "duration": null,
               "op": {
-                "op": "MODIFY_EFFECT"
+                "op": "MODIFY_EFFECT",
+                "side": "self",
+                "param": "cores",
+                "delta": 1,
+                "targetEffect": "core_operation"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD64-X01#a1",
+          "keywords": [
+            {
+              "name": "Accel",
+              "parameter": null,
+              "wave": 2,
+              "hook": "accel",
+              "bracketed": true,
+              "index": 90,
+              "abilityId": "SD64-X01#AB_WHEN_ATTACKS_NONE_LV1_LV2_b79956b1e2f0d931714f2ea5ab7a33a8b4aeaaf504ff45b0ada8aa8724d11135_6089f7772b419a8983c2e54dd92db649",
+              "cardNumber": "SD64-X01",
+              "levels": [
+                1,
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "SD64-X01#a1"
+            }
+          ],
+          "id": "SD64-X01#AB_WHEN_ATTACKS_NONE_LV1_LV2_b79956b1e2f0d931714f2ea5ab7a33a8b4aeaaf504ff45b0ada8aa8724d11135_6089f7772b419a8983c2e54dd92db649",
+          "physicalId": "SD64-X01#AB_WHEN_ATTACKS_NONE_LV1_LV2_b79956b1e2f0d931714f2ea5ab7a33a8b4aeaaf504ff45b0ada8aa8724d11135_6089f7772b419a8983c2e54dd92db649",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_b79956b1e2f0d931714f2ea5ab7a33a8b4aeaaf504ff45b0ada8aa8724d11135_6089f7772b419a8983c2e54dd92db649",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_1d4a66d5074d8e587c13b3c2327f63d2097cdfaa0b21e27f8a37bd1733324e22_7a20da43022118f4aeb86c26a7c5474b",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD64-X01#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -168,8 +350,17 @@
               "During OC & During Advent"
             ],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -178,21 +369,43 @@
             "isMain": false,
             "cleanBody": "When your \"Incarnate\" family Spirit makes the first attack of the turn, during this turn, that Spirit can gain two extra Red symbols."
           },
+          "originalAbilityText": "[During OC & During Advent] [LV1][LV2] (Your Attack Step)\nWhen your \"Incarnate\" family Spirit makes the first attack of the turn, during this turn, that Spirit can gain two extra Red symbols.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When your \"Incarnate\" family Spirit makes the first attack of the turn, during this turn, that Spirit can gain two extra Red symbols.",
+              "originalClauseText": "When your \"Incarnate\" family Spirit makes the first attack of the turn, during this turn, that Spirit can gain two extra Red symbols.",
               "cleanText": "When your \"Incarnate\" family Spirit makes the first attack of the turn, during this turn, that Spirit can gain two extra Red symbols",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": "DURING_THIS_TURN",
               "op": {
-                "op": "ADD_SYMBOL"
+                "op": "ADD_SYMBOL",
+                "color": "Red",
+                "count": 2,
+                "side": "self"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD64-X01#a2",
+          "keywords": [],
+          "id": "SD64-X01#AB_ATTACK_STEP_NONE_LV1_LV2_d97717b7a0cf25e64ce9125ff8615192ce1ac916e642d57d12e7cf360d4ad4d0_fd5aa7637b9fb68a2554f5307cc70825",
+          "physicalId": "SD64-X01#AB_ATTACK_STEP_NONE_LV1_LV2_d97717b7a0cf25e64ce9125ff8615192ce1ac916e642d57d12e7cf360d4ad4d0_fd5aa7637b9fb68a2554f5307cc70825",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_d97717b7a0cf25e64ce9125ff8615192ce1ac916e642d57d12e7cf360d4ad4d0_fd5aa7637b9fb68a2554f5307cc70825",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_b0541dbef4c7f8818d5511705e439081f9b636214d3e2e6591b0705a7e988053_c2d451c94a63dbfeeebdc71cfce7da72",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,

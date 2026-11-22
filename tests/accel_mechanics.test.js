@@ -5,6 +5,8 @@ import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { PerCardRegistry } from '../engine/cards/index.js';
+import { createGame } from '../engine/index.js';
+import { createCardInstance, createFieldStack } from '../engine/state.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.join(__dirname, '..');
@@ -215,6 +217,432 @@ describe('Accel Mechanics & Highlighting Suite', () => {
     assert.equal(state.player.openCards.length, 0, 'Card removed from Open Zone');
     assert.equal(state.player.field.length, 1, 'Card placed onto Field');
     assert.equal(state.player.field[0].name, 'Test Accel Spirit');
+  });
+
+  it('7. Flash Timing Restriction: Flash Accel can only be activated during Attack Phase', async () => {
+    const game = createGame();
+    const flashAccelCard = createCardInstance({
+      id: 'ACCEL_FLASH_01',
+      name: 'Flash Accel Spirit',
+      type: 'Spirit',
+      cost: 4,
+      effect: 'Flash - [Accel: Cost 2 (Red)] Draw 1 card.',
+      compiledIr: {
+        abilities: [
+          {
+            id: 'ab_accel_flash',
+            header: { keyword: 'Accel', isFlash: true, timing: 'FLASH' },
+            clauses: [{ op: { op: 'DRAW', count: 1 } }]
+          }
+        ]
+      }
+    }, 'player');
+
+    game.state.players.player.hand = [flashAccelCard];
+    game.state.players.player.deck = [createCardInstance({ name: 'Deck Top' }, 'player')];
+    game.state.players.player.reserve = { normal: 5, soul: 0 };
+
+    // A: In MAIN step -> Must be rejected with FLASH_ONLY_DURING_ATTACK_STEP
+    game.state.step = 'MAIN';
+    game.state.activePlayer = 'player';
+    const resMain = await game.executeAccel('player', flashAccelCard.id);
+    assert.equal(resMain.success, false);
+    assert.equal(resMain.reason, 'FLASH_ONLY_DURING_ATTACK_STEP');
+    assert.equal(game.state.players.player.hand.length, 1);
+    assert.equal(game.state.players.player.removed.length, 0);
+
+    // B: In START step -> Must be rejected
+    game.state.step = 'START';
+    const resStart = await game.executeAccel('player', flashAccelCard.id);
+    assert.equal(resStart.success, false);
+    assert.equal(resStart.reason, 'FLASH_ONLY_DURING_ATTACK_STEP');
+
+    // C: In ATTACK step -> Must succeed and resolve
+    game.state.step = 'ATTACK';
+    const resAttack = await game.executeAccel('player', flashAccelCard.id);
+    assert.equal(resAttack.success, true);
+    assert.equal(resAttack.zone, 'removed');
+    assert.equal(game.state.players.player.removed.length, 1);
+    assert.equal(game.state.players.player.removed[0].id, flashAccelCard.id);
+  });
+
+  it('8. Main Timing Restriction: Main Accel can only be activated during Main Step', async () => {
+    const game = createGame();
+    const mainAccelCard = createCardInstance({
+      id: 'ACCEL_MAIN_01',
+      name: 'Main Accel Spirit',
+      type: 'Spirit',
+      cost: 5,
+      effect: 'Main - [Accel: Cost 3 (Red)] Draw 1 card.',
+      compiledIr: {
+        abilities: [
+          {
+            id: 'ab_accel_main',
+            header: { keyword: 'Accel', isMain: true, timing: 'MAIN' },
+            clauses: [{ op: { op: 'DRAW', count: 1 } }]
+          }
+        ]
+      }
+    }, 'player');
+
+    game.state.players.player.hand = [mainAccelCard];
+    game.state.players.player.deck = [createCardInstance({ name: 'Deck Top 2' }, 'player')];
+    game.state.players.player.reserve = { normal: 5, soul: 0 };
+
+    // A: In ATTACK step -> Must be rejected with MAIN_ONLY_DURING_MAIN_STEP
+    game.state.step = 'ATTACK';
+    const resAttack = await game.executeAccel('player', mainAccelCard.id);
+    assert.equal(resAttack.success, false);
+    assert.equal(resAttack.reason, 'MAIN_ONLY_DURING_MAIN_STEP');
+
+    // B: In MAIN step, but opponent turn -> Must be rejected with NOT_ACTIVE_PLAYER
+    game.state.step = 'MAIN';
+    game.state.activePlayer = 'opponent';
+    const resOppTurn = await game.executeAccel('player', mainAccelCard.id);
+    assert.equal(resOppTurn.success, false);
+    assert.equal(resOppTurn.reason, 'NOT_ACTIVE_PLAYER');
+
+    // C: In MAIN step on player turn -> Must succeed
+    game.state.activePlayer = 'player';
+    const resMain = await game.executeAccel('player', mainAccelCard.id);
+    assert.equal(resMain.success, true);
+    assert.equal(resMain.zone, 'removed');
+    assert.equal(game.state.players.player.removed.length, 1);
+  });
+
+  it('9. Source Zone Restriction: Accel can only be activated from Hand by default', async () => {
+    const game = createGame();
+    const accelCard = createCardInstance({
+      id: 'ACCEL_ZONE_01',
+      name: 'Zone Accel Spirit',
+      type: 'Spirit',
+      cost: 3,
+      effect: 'Flash - [Accel: Cost 1] Draw 1 card.',
+      compiledIr: {
+        abilities: [
+          {
+            id: 'ab_zone',
+            header: { keyword: 'Accel', isFlash: true, timing: 'FLASH' },
+            clauses: [{ op: { op: 'DRAW', count: 1 } }]
+          }
+        ]
+      }
+    }, 'player');
+
+    game.state.step = 'ATTACK';
+    game.state.players.player.reserve = { normal: 5, soul: 0 };
+    game.state.players.player.deck = [createCardInstance({ name: 'Deck Top' }, 'player')];
+
+    // Case A: Card is in Trash/Grave -> Rejected
+    game.state.players.player.grave = [accelCard];
+    game.state.players.player.hand = [];
+    const resGrave = await game.executeAccel('player', accelCard.id);
+    assert.equal(resGrave.success, false);
+    assert.equal(resGrave.reason, 'ACCEL_ONLY_FROM_HAND');
+
+    // Case B: Card is on Field -> Rejected
+    game.state.players.player.grave = [];
+    game.state.players.player.field = [createFieldStack(accelCard, { normal: 1, soul: 0 })];
+    const resField = await game.executeAccel('player', accelCard.id);
+    assert.equal(resField.success, false);
+    assert.equal(resField.reason, 'ACCEL_ONLY_FROM_HAND');
+
+    // Case C: Card is in Hand -> Allowed
+    game.state.players.player.field = [];
+    game.state.players.player.hand = [accelCard];
+    const resHand = await game.executeAccel('player', accelCard.id);
+    assert.equal(resHand.success, true);
+  });
+
+  it('10. Source Zone Override: Accel can be used from Trash when explicitly specified', async () => {
+    const game = createGame();
+    const accelCard = createCardInstance({
+      id: 'ACCEL_TRASH_01',
+      name: 'Trash Usable Accel',
+      type: 'Spirit',
+      cost: 3,
+      effect: 'Flash - [Accel: Cost 1] You can also use this card\'s [Accel] from the trash.',
+      compiledIr: {
+        abilities: [
+          {
+            id: 'ab_trash_accel',
+            header: { keyword: 'Accel', isFlash: true, timing: 'FLASH' },
+            clauses: [{ op: { op: 'DRAW', count: 1 } }]
+          }
+        ]
+      }
+    }, 'player');
+
+    game.state.step = 'ATTACK';
+    game.state.players.player.reserve = { normal: 5, soul: 0 };
+    game.state.players.player.grave = [accelCard];
+    game.state.players.player.deck = [createCardInstance({ name: 'D1' }, 'player')];
+
+    // With explicit modifier allowing Accel from trash
+    game.state.modifiers = [
+      { id: 'mod_trash_accel', type: 'CAN_USE_ACCEL_FROM_TRASH', side: 'player', duration: 'THIS_TURN' }
+    ];
+
+    const res = await game.executeAccel('player', accelCard.id);
+    assert.equal(res.success, true);
+    assert.equal(game.state.players.player.grave.length, 0, 'Card removed from Trash');
+    assert.equal(game.state.players.player.removed.length, 1, 'Card moved to Removed Zone');
+    assert.equal(game.state.players.player.removed[0].id, accelCard.id);
+  });
+
+  it('11. Accel Destination: After use, card is sent to Removed Zone with metadata flags', async () => {
+    const game = createGame();
+    const accelCard = createCardInstance({
+      id: 'ACCEL_DEST_01',
+      name: 'Destination Accel Spirit',
+      type: 'Spirit',
+      cost: 4,
+      effect: 'Flash - [Accel: Cost 2 (Red)] Draw 1 card.',
+      compiledIr: {
+        abilities: [
+          {
+            id: 'ab_dest',
+            header: { keyword: 'Accel', isFlash: true, timing: 'FLASH' },
+            clauses: [{ op: { op: 'DRAW', count: 1 } }]
+          }
+        ]
+      }
+    }, 'player');
+
+    game.state.step = 'ATTACK';
+    game.state.players.player.hand = [accelCard];
+    game.state.players.player.reserve = { normal: 5, soul: 0 };
+    game.state.players.player.deck = [createCardInstance({ name: 'D1' }, 'player')];
+
+    const res = await game.executeAccel('player', accelCard.id);
+    assert.equal(res.success, true);
+
+    // Assert destination is Removed Zone
+    assert.equal(game.state.players.player.hand.length, 1, 'Drawn card is in hand, Accel card is not');
+    assert.equal(game.state.players.player.hand[0].name, 'D1');
+    assert.equal(game.state.players.player.grave.length, 0, 'Accel card must NOT go to grave');
+    assert.equal(game.state.players.player.removed.length, 1, 'Accel card must be in removed zone');
+
+    const removedCard = game.state.players.player.removed[0];
+    assert.equal(removedCard.id, accelCard.id);
+    assert.equal(removedCard.faceUp, true, 'Card must be face-up');
+    assert.equal(removedCard.isAccelRemoved, true, 'isAccelRemoved flag set');
+    assert.equal(removedCard.fromAccel, true, 'fromAccel flag set');
+    assert.equal(removedCard.canSummonFromRemoved, true, 'canSummonFromRemoved flag set');
+  });
+
+  it('12. In Removed Zone, Accel CANNOT be activated again', async () => {
+    const game = createGame();
+    const accelCard = createCardInstance({
+      id: 'ACCEL_NO_REUSE_01',
+      name: 'No Reuse Accel Spirit',
+      type: 'Spirit',
+      cost: 4,
+      effect: 'Flash - [Accel: Cost 2] Draw 1 card.',
+      isAccelRemoved: true,
+      fromAccel: true,
+      canSummonFromRemoved: true,
+      compiledIr: {
+        abilities: [
+          {
+            id: 'ab_no_reuse',
+            header: { keyword: 'Accel', isFlash: true, timing: 'FLASH' },
+            clauses: [{ op: { op: 'DRAW', count: 1 } }]
+          }
+        ]
+      }
+    }, 'player');
+
+    // Place card in Removed Zone
+    game.state.players.player.removed = [accelCard];
+    game.state.players.player.hand = [];
+    game.state.players.player.reserve = { normal: 10, soul: 0 };
+
+    // Attempt Accel during Attack Step
+    game.state.step = 'ATTACK';
+    const resAttack = await game.executeAccel('player', accelCard.id);
+    assert.equal(resAttack.success, false);
+    assert.equal(resAttack.reason, 'ACCEL_CANNOT_BE_USED_FROM_REMOVED');
+
+    // Attempt Accel during Main Step
+    game.state.step = 'MAIN';
+    game.state.activePlayer = 'player';
+    const resMain = await game.executeAccel('player', accelCard.id);
+    assert.equal(resMain.success, false);
+    assert.equal(resMain.reason, 'ACCEL_CANNOT_BE_USED_FROM_REMOVED');
+  });
+
+  it('13. Summon from Removed Zone: Spirit placed by Accel can be summoned by paying printed cost', async () => {
+    const game = createGame();
+    const accelSpirit = createCardInstance({
+      id: 'ACCEL_SUMMON_01',
+      name: 'Summonable Accel Spirit',
+      type: 'Spirit',
+      cost: 4,
+      color: 'Red',
+      colors: ['Red'],
+      symbols: ['Red'],
+      levels: {
+        1: { cost: 1, bp: 3000 },
+        2: { cost: 3, bp: 5000 }
+      },
+      isAccelRemoved: true,
+      fromAccel: true,
+      canSummonFromRemoved: true
+    }, 'player');
+
+    // Place in Removed Zone
+    game.state.players.player.removed = [accelSpirit];
+    game.state.players.player.field = [];
+    game.state.players.player.reserve = { normal: 6, soul: 0 };
+    game.state.step = 'MAIN';
+    game.state.activePlayer = 'player';
+
+    // Summon via game.playCard
+    const summonRes = await game.playCard(accelSpirit.id, [], 'player');
+    assert.equal(summonRes.success, true);
+    assert.equal(game.state.players.player.removed.length, 0, 'Card removed from Removed Zone');
+    assert.equal(game.state.players.player.field.length, 1, 'Placed onto Field');
+    assert.equal(game.state.players.player.field[0].top.id, accelSpirit.id);
+    // Cost 4 paid + 1 core for LV1 = 5 cores total deducted from reserve
+    assert.equal(game.state.players.player.reserve.normal, 1);
+    assert.equal(game.state.players.player.field[0].cores.normal, 1);
+  });
+
+  it('14. Summon from Removed Zone: (When Summoned) triggers fire upon entry to field', async () => {
+    const game = createGame();
+    const accelSpirit = createCardInstance({
+      id: 'ACCEL_SUMMON_TRIGGER_01',
+      name: 'Trigger Accel Spirit',
+      type: 'Spirit',
+      cost: 3,
+      color: 'Red',
+      levels: { 1: { cost: 1, bp: 3000 } },
+      isAccelRemoved: true,
+      fromAccel: true,
+      canSummonFromRemoved: true,
+      compiledIr: {
+        abilities: [
+          {
+            id: 'ab_when_summoned',
+            header: { timing: 'WHEN_SUMMONED', levels: [1] },
+            clauses: [{ op: { op: 'DRAW', count: 1 } }]
+          }
+        ]
+      }
+    }, 'player');
+
+    game.state.players.player.removed = [accelSpirit];
+    game.state.players.player.deck = [createCardInstance({ name: 'Deck Card' }, 'player')];
+    game.state.players.player.reserve = { normal: 5, soul: 0 };
+    game.state.step = 'MAIN';
+    game.state.activePlayer = 'player';
+
+    const summonRes = await game.playCard(accelSpirit.id, [], 'player');
+    assert.equal(summonRes.success, true);
+    assert.equal(summonRes.abilityResults.length, 1);
+    assert.equal(game.state.players.player.hand.length, 1, 'Drew 1 card via When Summoned ability');
+    assert.equal(game.state.players.player.field.length, 1);
+  });
+
+  it('15. General Flash Timing: Magic cards with Flash only cannot be played in Main Step', async () => {
+    const game = createGame();
+    const flashMagic = createCardInstance({
+      id: 'MAGIC_FLASH_ONLY',
+      name: 'Flash Only Shield',
+      type: 'Magic',
+      cost: 3,
+      effect: 'Flash - Give a Spirit +2000 BP.',
+      compiledIr: {
+        abilities: [
+          {
+            id: 'ab_magic_flash',
+            header: { timing: 'FLASH', isFlash: true, isMain: false },
+            clauses: [{ op: { op: 'BP_BUFF', amount: 2000 } }]
+          }
+        ]
+      }
+    }, 'player');
+
+    game.state.players.player.hand = [flashMagic];
+    game.state.players.player.reserve = { normal: 5, soul: 0 };
+
+    // In MAIN step -> Must be rejected
+    game.state.step = 'MAIN';
+    game.state.activePlayer = 'player';
+    const resMain = await game.playCard(flashMagic.id, [], 'player');
+    assert.equal(resMain.success, false);
+    assert.equal(resMain.reason, 'FLASH_ONLY_DURING_ATTACK_STEP');
+
+    // In ATTACK step -> Allowed
+    game.state.step = 'ATTACK';
+    const resAttack = await game.playCard(flashMagic.id, [], 'player');
+    assert.equal(resAttack.success, true);
+  });
+
+  it('16. General Flash Timing: Spirit Flash ability on field cannot be activated in Main Step', async () => {
+    const game = createGame();
+    const spiritWithFlashAbility = createCardInstance({
+      id: 'SPIRIT_FLASH_AB',
+      name: 'Flash Ability Knight',
+      type: 'Spirit',
+      cost: 3,
+      levels: { 1: { cost: 1, bp: 3000 } },
+      compiledIr: {
+        abilities: [
+          {
+            id: 'ab_field_flash',
+            physicalId: 'phy_field_flash',
+            header: { timing: 'FLASH', isFlash: true, levels: [1] },
+            clauses: [{ op: { op: 'DRAW', count: 1 } }]
+          }
+        ]
+      }
+    }, 'player');
+
+    const stack = createFieldStack(spiritWithFlashAbility, { normal: 2, soul: 0 });
+    game.state.players.player.field = [stack];
+    game.state.players.player.deck = [createCardInstance({ name: 'Deck Card' }, 'player')];
+
+    // In MAIN step -> Must be rejected with FLASH_ONLY_DURING_ATTACK_STEP
+    game.state.step = 'MAIN';
+    game.state.activePlayer = 'player';
+    const resMain = await game.activateAbility(spiritWithFlashAbility.id, 'phy_field_flash', 'player');
+    assert.equal(resMain.success, false);
+    assert.ok(resMain.reason === 'FLASH_ONLY_DURING_ATTACK_STEP' || resMain.reason === 'ABILITY_TIMING_MISMATCH');
+    assert.equal(resMain.code, 'FLASH_ONLY_DURING_ATTACK_STEP');
+
+    // In ATTACK step -> Allowed
+    game.state.step = 'ATTACK';
+    const resAttack = await game.activateAbility(spiritWithFlashAbility.id, 'phy_field_flash', 'player');
+    assert.equal(resAttack.success, true);
+  });
+
+  it('17. Arena UI Protection: canCastAccel and castAccel reject reuse on openCards', () => {
+    const { arena } = createArenaTestEnvironment();
+    const testCard = {
+      uid: 'arena-accel-01',
+      id: 'BS43-020',
+      name: 'Arena Open Card',
+      type: 'Spirit',
+      cost: 3,
+      effect: 'Flash - [Accel: Cost 2] Draw 1 card.'
+    };
+
+    const state = arena.getState();
+    state.player.openCards = [testCard];
+    state.player.hand = [];
+    state.player.reserve = 5;
+
+    // canCastAccel must return allowed: false with reason ACCEL_CANNOT_BE_USED_FROM_REMOVED
+    const check = arena.canCastAccel(testCard, 'player');
+    assert.equal(check.allowed, false);
+    assert.equal(check.reason, 'ACCEL_CANNOT_BE_USED_FROM_REMOVED');
+
+    // castAccel must not activate
+    const initialTrash = state.player.trash;
+    arena.castAccel('arena-accel-01', 'player');
+    assert.equal(state.player.trash, initialTrash, 'No cores should be paid');
   });
 
 });

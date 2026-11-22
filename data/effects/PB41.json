@@ -24,10 +24,29 @@
     "compiledIr": {
       "cardNumber": "PB41-009",
       "name": "New Generation Ultraman Arc",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 5000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 8000
+        }
+      },
+      "originalEffectText": "This card/Spirit's symbol/reduction symbols are also treated as White.\n\n[LV1][LV2][LV3] (When Summoned/Attacks)\n(Once per Turn: Same Name) You can reveal two cards from your decktop. Among them, add an \"Ultraman\"/\"Earth Garon\"/\"YouPi\" to the Hand. Discard any remaining cards.\n\n[LV2][LV3] (Your Attack Step)\n(Can't Stack) When your \"Ultraman\" attacks, by sending one core, besides [Soul Core], from your Trash to that target, during this battle, that target gains +5000 BP.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "PB41-009#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -38,8 +57,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -48,24 +72,42 @@
             "isMain": false,
             "cleanBody": "This card/Spirit's symbol/reduction symbols are also treated as White."
           },
+          "originalAbilityText": "This card/Spirit's symbol/reduction symbols are also treated as White.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "This card/Spirit's symbol/reduction symbols are also treated as White.",
+              "originalClauseText": "This card/Spirit's symbol/reduction symbols are also treated as White.",
               "cleanText": "This card/Spirit's symbol/reduction symbols are also treated as White",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "TREAT_RULE",
+                "treatAs": "COLOR",
+                "color": "White"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-009#a0",
+          "keywords": [],
+          "id": "PB41-009#AB_PASSIVE_NONE_LV1_LV2_LV3_427f56fd0206c83e71a96c39abc2dc2d96d87f508750acbbafc3a837f3414aee_2013f463c1f5fcf8a3698623c73e3612",
+          "physicalId": "PB41-009#AB_PASSIVE_NONE_LV1_LV2_LV3_427f56fd0206c83e71a96c39abc2dc2d96d87f508750acbbafc3a837f3414aee_2013f463c1f5fcf8a3698623c73e3612",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_427f56fd0206c83e71a96c39abc2dc2d96d87f508750acbbafc3a837f3414aee_2013f463c1f5fcf8a3698623c73e3612",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_a618cdb722da638859797182b06904a6971766d027c70cf7268ab817b5bf5741_72e324e08c49cf4c946bdc49e3018d10",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB41-009#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -76,8 +118,21 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED",
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Summoned/Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
             "limit": "ONCE_PER_TURN_SAME_NAME",
             "cantStack": false,
             "keyword": null,
@@ -86,10 +141,14 @@
             "isMain": false,
             "cleanBody": "You can reveal two cards from your decktop. Among them, add an \"Ultraman\"/\"Earth Garon\"/\"YouPi\" to the Hand. Discard any remaining cards."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned/Attacks)\n(Once per Turn: Same Name) You can reveal two cards from your decktop. Among them, add an \"Ultraman\"/\"Earth Garon\"/\"YouPi\" to the Hand. Discard any remaining cards.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can reveal two cards from your decktop.",
+              "originalClauseText": "You can reveal two cards from your decktop.",
               "cleanText": "You can reveal two cards from your decktop",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -102,19 +161,24 @@
             },
             {
               "rawText": "Among them, add an \"Ultraman\"/\"Earth Garon\"/\"YouPi\" to the Hand.",
+              "originalClauseText": "Among them, add an \"Ultraman\"/\"Earth Garon\"/\"YouPi\" to the Hand.",
               "cleanText": "Among them, add an \"Ultraman\"/\"Earth Garon\"/\"YouPi\" to the Hand",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "ADD_TO_HAND"
+                "op": "UNSUPPORTED",
+                "rawText": "Among them, add an \"Ultraman\"/\"Earth Garon\"/\"YouPi\" to the Hand"
               }
             },
             {
               "rawText": "Discard any remaining cards.",
+              "originalClauseText": "Discard any remaining cards.",
               "cleanText": "Discard any remaining cards",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -125,10 +189,29 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "Among them, add an \"Ultraman\"/\"Earth Garon\"/\"YouPi\" to the Hand."
+          ],
+          "legacyId": "PB41-009#a1",
+          "keywords": [],
+          "id": "PB41-009#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_b6f128bd758cd2f7c35e2b96e349d307bd3da7cb1290c6bf99d3912f032b1e61_0e75f1db5d79f5da928e4c48c696714c",
+          "physicalId": "PB41-009#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_b6f128bd758cd2f7c35e2b96e349d307bd3da7cb1290c6bf99d3912f032b1e61_0e75f1db5d79f5da928e4c48c696714c",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_b6f128bd758cd2f7c35e2b96e349d307bd3da7cb1290c6bf99d3912f032b1e61_0e75f1db5d79f5da928e4c48c696714c",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_e16932bee9f803977e1bd9e6338b833f8d8482c2ef9a6b198632a06a8c82a87f_553a75143f506d8b42f786b07c75ac17",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB41-009#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -138,8 +221,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "CANT_STACK"
+            ],
             "limit": null,
             "cantStack": true,
             "keyword": null,
@@ -148,10 +242,14 @@
             "isMain": false,
             "cleanBody": "When your \"Ultraman\" attacks, by sending one core, besides [Soul Core], from your Trash to that target, during this battle, that target gains +5000 BP."
           },
+          "originalAbilityText": "[LV2][LV3] (Your Attack Step)\n(Can't Stack) When your \"Ultraman\" attacks, by sending one core, besides [Soul Core], from your Trash to that target, during this battle, that target gains +5000 BP.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When your \"Ultraman\" attacks, by sending one core, besides [Soul Core], from your Trash to that target, during this battle, that target gains +5000 BP.",
+              "originalClauseText": "When your \"Ultraman\" attacks, by sending one core, besides [Soul Core], from your Trash to that target, during this battle, that target gains +5000 BP.",
               "cleanText": "When your \"Ultraman\" attacks, by sending one core, besides [Soul Core], from your Trash to that target, during this battle, that target gains +5000 BP",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -166,12 +264,29 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-009#a2",
+          "keywords": [],
+          "id": "PB41-009#AB_ATTACK_STEP_NONE_LV2_LV3_92c126df2af9c4dc1d2b4bf45ab97b665ed1de0e276802a0b51b4dcea226a2da_d75813c055fcf7549dbddda972e6fb1e",
+          "physicalId": "PB41-009#AB_ATTACK_STEP_NONE_LV2_LV3_92c126df2af9c4dc1d2b4bf45ab97b665ed1de0e276802a0b51b4dcea226a2da_d75813c055fcf7549dbddda972e6fb1e",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_92c126df2af9c4dc1d2b4bf45ab97b665ed1de0e276802a0b51b4dcea226a2da_d75813c055fcf7549dbddda972e6fb1e",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_LV3_10ee801613bb8e9b470e1b9c8f225d63ba62a3527858582090602ac6b7579ad4_85d57623749175ba93142c74151562a1",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "CANT_STACK"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
-      "compiledClausesCount": 5,
-      "unsupportedClausesCount": 0,
-      "isFullySupported": true
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 1,
+      "isFullySupported": false
     }
   },
   "PB41-X01": {
@@ -363,19 +478,56 @@
     "compiledIr": {
       "cardNumber": "PB41-001",
       "name": "Special Aircraft No. 2 Windom ［2］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 2000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 4000
+        }
+      },
+      "originalEffectText": "[Mirage: Cost 2 ([White Core]]\n[During Set] (Your Main Step)\nYou can summon one of your White \"Zett\" Contract Cards from Soul State/pre-advent condition by paying one cost.\n\n[LV1][LV2] (When Summoned)\nYour counter +1. Then, if you have four counters or more, you can put a core from the Void to your Trash.",
+      "teams": [],
       "keywords": [
         {
           "name": "Mirage",
-          "parameter": "Cost 2 ([White Core",
+          "parameter": "Cost 2 (White Core)",
           "wave": 2,
           "hook": "mirage",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "PB41-001#AB_PASSIVE_NONE_LV1_LV2_LV3_e34d2decd92481f3bffa6a082c7a22fbd5e840d7538c0dd1a81d3f5c16019092_d344aadb0e8df5ff4c561c1e26630a52",
+          "cardNumber": "PB41-001",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [
+            "Mirage: Cost 2 (White Core)"
+          ],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB41-001#a0"
         }
       ],
       "abilities": [
         {
-          "id": "PB41-001#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -385,11 +537,16 @@
             ],
             "levelExplicit": false,
             "prefixes": [
-              "Mirage: Cost ([White Core]"
+              "Mirage: Cost 2 (White Core)"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -398,11 +555,57 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "originalAbilityText": "[Mirage: Cost 2 ([White Core]]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-001#a0",
+          "keywords": [
+            {
+              "name": "Mirage",
+              "parameter": "Cost 2 (White Core)",
+              "wave": 2,
+              "hook": "mirage",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB41-001#AB_PASSIVE_NONE_LV1_LV2_LV3_e34d2decd92481f3bffa6a082c7a22fbd5e840d7538c0dd1a81d3f5c16019092_d344aadb0e8df5ff4c561c1e26630a52",
+              "cardNumber": "PB41-001",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [
+                "Mirage: Cost 2 (White Core)"
+              ],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB41-001#a0"
+            }
+          ],
+          "id": "PB41-001#AB_PASSIVE_NONE_LV1_LV2_LV3_e34d2decd92481f3bffa6a082c7a22fbd5e840d7538c0dd1a81d3f5c16019092_d344aadb0e8df5ff4c561c1e26630a52",
+          "physicalId": "PB41-001#AB_PASSIVE_NONE_LV1_LV2_LV3_e34d2decd92481f3bffa6a082c7a22fbd5e840d7538c0dd1a81d3f5c16019092_d344aadb0e8df5ff4c561c1e26630a52",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_e34d2decd92481f3bffa6a082c7a22fbd5e840d7538c0dd1a81d3f5c16019092_d344aadb0e8df5ff4c561c1e26630a52",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_95bec836c983feebeac8c84125cb7d46c960934b35abebd166c486587a3498f9_d4353a773375990119810c40cab2d62c",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB41-001#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -415,8 +618,19 @@
               "During Set"
             ],
             "timing": "MAIN_STEP",
+            "timings": [
+              "MAIN_STEP"
+            ],
             "timingLabel": "Your Main Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "MAIN_STEP"
+            ],
+            "activationRestrictions": [
+              "DURING_SET"
+            ],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -425,10 +639,14 @@
             "isMain": false,
             "cleanBody": "You can summon one of your White \"Zett\" Contract Cards from Soul State/pre-advent condition by paying one cost."
           },
+          "originalAbilityText": "[During Set] (Your Main Step)\nYou can summon one of your White \"Zett\" Contract Cards from Soul State/pre-advent condition by paying one cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can summon one of your White \"Zett\" Contract Cards from Soul State/pre-advent condition by paying one cost.",
+              "originalClauseText": "You can summon one of your White \"Zett\" Contract Cards from Soul State/pre-advent condition by paying one cost.",
               "cleanText": "You can summon one of your White \"Zett\" Contract Cards from Soul State/pre-advent condition by paying one cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -436,14 +654,43 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "Zett",
+                  "color": "White"
+                },
+                "free": false,
+                "costCores": 1,
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-001#a1",
+          "keywords": [],
+          "id": "PB41-001#AB_MAIN_STEP_NONE_LV1_LV2_LV3_397b12766c489db701270522fa335e41697fe0a968114a2c54e382837da260d2_2293bce8f81c5815cf854f98bc845b2f",
+          "physicalId": "PB41-001#AB_MAIN_STEP_NONE_LV1_LV2_LV3_397b12766c489db701270522fa335e41697fe0a968114a2c54e382837da260d2_2293bce8f81c5815cf854f98bc845b2f",
+          "semanticId": "SEM#AB_MAIN_STEP_NONE_LV1_LV2_LV3_397b12766c489db701270522fa335e41697fe0a968114a2c54e382837da260d2_2293bce8f81c5815cf854f98bc845b2f",
+          "semanticIdV3": "SEM3#AB_MAIN_STEP_NONE_LV1_LV2_LV3_a5ecae79c4e42b696e8f8dbfe231d884ad326e23dee0a0c547c946732271f6c7_03f1656dc41d0d58249ba39e914f28ba",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "MAIN_STEP"
+            ],
+            "activationRestrictions": [
+              "DURING_SET"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB41-001#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -453,8 +700,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -463,10 +719,14 @@
             "isMain": false,
             "cleanBody": "Your counter +1. Then, if you have four counters or more, you can put a core from the Void to your Trash."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned)\nYour counter +1. Then, if you have four counters or more, you can put a core from the Void to your Trash.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Your counter +1.",
+              "originalClauseText": "Your counter +1.",
               "cleanText": "Your counter +1",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -479,7 +739,9 @@
             },
             {
               "rawText": "if you have four counters or more, you can put a core from the Void to your Trash.",
+              "originalClauseText": "if you have four counters or more, you can put a core from the Void to your Trash.",
               "cleanText": "you can put a core from the Void to your Trash",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": true,
               "isCost": false,
@@ -498,7 +760,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-001#a2",
+          "keywords": [],
+          "id": "PB41-001#AB_WHEN_SUMMONED_NONE_LV1_LV2_8fe1af453bb8af3dce512c08a4ef3c2e34921616167af17ff8ffec675ab70a01_c413751f4b857abc2880053abec46f05",
+          "physicalId": "PB41-001#AB_WHEN_SUMMONED_NONE_LV1_LV2_8fe1af453bb8af3dce512c08a4ef3c2e34921616167af17ff8ffec675ab70a01_c413751f4b857abc2880053abec46f05",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_8fe1af453bb8af3dce512c08a4ef3c2e34921616167af17ff8ffec675ab70a01_c413751f4b857abc2880053abec46f05",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_f0dd6ec83e93d587a0d021ba916daa340ba67a79380a5ca1b3d72c584371e5e3_2e7a10ef3c0f69eb280c09013bf6060b",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -917,10 +1194,29 @@
     "compiledIr": {
       "cardNumber": "PB41-010",
       "name": "The DarkGreatEmperor Kaiser-Darkness",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 9000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 13000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 5,
+          "bp": 18000
+        }
+      },
+      "originalEffectText": "This card/Spirit is also treated as being exactly-named \"Belial\".\n\nFlash -\nBy banishing four \"Belial\" in your Trash that are either Cost 7 or more or have the \"Grandwalker\" family, summon this card from the Hand/Trash without paying the cost. When you've done so, if it's the opposing Turn, you can send the [Soul Core] from your Trash to this Spirit.\n\n[LV1][LV2][LV3] (When Summoned/Attacks)\nFor each LV this Spirit has, you can send two cores from the opposing Field to the Reserve. Then, you can destroy an opposing Nexus.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "PB41-010#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -931,8 +1227,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -941,24 +1242,42 @@
             "isMain": false,
             "cleanBody": "This card/Spirit is also treated as being exactly-named \"Belial\"."
           },
+          "originalAbilityText": "This card/Spirit is also treated as being exactly-named \"Belial\".",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "This card/Spirit is also treated as being exactly-named \"Belial\".",
+              "originalClauseText": "This card/Spirit is also treated as being exactly-named \"Belial\".",
               "cleanText": "This card/Spirit is also treated as being exactly-named \"Belial\"",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "TREAT_RULE",
+                "treatAs": "NAME",
+                "name": "Belial"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-010#a0",
+          "keywords": [],
+          "id": "PB41-010#AB_PASSIVE_NONE_LV1_LV2_LV3_4f3d3ce9b8665083d7dffcda41e2673162bb4deb23b4bd7408f03b0d94d6ef38_7c2d4cea6a86194e1c0d1b2024293182",
+          "physicalId": "PB41-010#AB_PASSIVE_NONE_LV1_LV2_LV3_4f3d3ce9b8665083d7dffcda41e2673162bb4deb23b4bd7408f03b0d94d6ef38_7c2d4cea6a86194e1c0d1b2024293182",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_4f3d3ce9b8665083d7dffcda41e2673162bb4deb23b4bd7408f03b0d94d6ef38_7c2d4cea6a86194e1c0d1b2024293182",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_2a8837966a5c1887353a346a6e84e224ba81e2f1d749909cc4f2954a5e119bdd_b0551b103d75f28897837a38431f424e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB41-010#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -969,8 +1288,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -979,22 +1305,29 @@
             "isMain": false,
             "cleanBody": "By banishing four \"Belial\" in your Trash that are either Cost 7 or more or have the \"Grandwalker\" family, summon this card from the Hand/Trash without paying the cost. When you've done so, if it's the opposing Turn, you can send the [Soul Core] from your Trash to this Spirit."
           },
+          "originalAbilityText": "Flash -\nBy banishing four \"Belial\" in your Trash that are either Cost 7 or more or have the \"Grandwalker\" family, summon this card from the Hand/Trash without paying the cost. When you've done so, if it's the opposing Turn, you can send the [Soul Core] from your Trash to this Spirit.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "By banishing four \"Belial\" in your Trash that are either Cost 7 or more or have the \"Grandwalker\" family",
+              "originalClauseText": "By banishing four \"Belial\" in your Trash that are either Cost 7 or more or have the \"Grandwalker\" family",
               "cleanText": "By banishing four \"Belial\" in your Trash that are either Cost 7 or more or have the \"Grandwalker\" family",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "COST_MODIFIER"
+                "op": "COST_RULE",
+                "side": "self"
               }
             },
             {
               "rawText": "summon this card from the Hand/Trash without paying the cost.",
+              "originalClauseText": "summon this card from the Hand/Trash without paying the cost.",
               "cleanText": "summon this card from the Hand/Trash without paying the cost",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1002,12 +1335,15 @@
               "duration": null,
               "op": {
                 "op": "SUMMON_THIS_CARD",
-                "from": "HAND_OR_BURST"
+                "from": "TRASH",
+                "free": true
               }
             },
             {
               "rawText": "if it's the opposing Turn, you can send the [Soul Core] from your Trash to this Spirit.",
+              "originalClauseText": "if it's the opposing Turn, you can send the [Soul Core] from your Trash to this Spirit.",
               "cleanText": "you can send the [Soul Core] from your Trash to this Spirit",
+              "clauseIndex": 2,
               "link": "byDoing",
               "isOptional": true,
               "isCost": false,
@@ -1028,10 +1364,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-010#a1",
+          "keywords": [],
+          "id": "PB41-010#AB_FLASH_NONE_LV1_LV2_LV3_a4b586acc81051944a995256a0d3bc6ca443cab0cc419a1e5adbacb12d3d2114_96a39a2931aed202e2fd8f71224b0edb",
+          "physicalId": "PB41-010#AB_FLASH_NONE_LV1_LV2_LV3_a4b586acc81051944a995256a0d3bc6ca443cab0cc419a1e5adbacb12d3d2114_96a39a2931aed202e2fd8f71224b0edb",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_a4b586acc81051944a995256a0d3bc6ca443cab0cc419a1e5adbacb12d3d2114_96a39a2931aed202e2fd8f71224b0edb",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_762d8b884f4d5e513c489bb6f1bee4d525d5281bdacf4f7306577144e39f45d8_b3a4c0097db938d04a96e2a332eb827f",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB41-010#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1042,8 +1392,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED",
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Summoned/Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1052,10 +1413,14 @@
             "isMain": false,
             "cleanBody": "For each LV this Spirit has, you can send two cores from the opposing Field to the Reserve. Then, you can destroy an opposing Nexus."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned/Attacks)\nFor each LV this Spirit has, you can send two cores from the opposing Field to the Reserve. Then, you can destroy an opposing Nexus.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "For each LV this Spirit has, you can send two cores from the opposing Field to the Reserve.",
+              "originalClauseText": "For each LV this Spirit has, you can send two cores from the opposing Field to the Reserve.",
               "cleanText": "For each LV this Spirit has, you can send two cores from the opposing Field to the Reserve",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1077,7 +1442,9 @@
             },
             {
               "rawText": "you can destroy an opposing Nexus.",
+              "originalClauseText": "you can destroy an opposing Nexus.",
               "cleanText": "you can destroy an opposing Nexus",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": true,
               "isCost": false,
@@ -1095,7 +1462,23 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-010#a2",
+          "keywords": [],
+          "id": "PB41-010#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a0400f7f3ee9b7f0759dc65bea77e6fd739840aee59df71ee024a0eb6aacf3fa_7ec5b8601f45bcbdd704f15d9eb1c39c",
+          "physicalId": "PB41-010#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a0400f7f3ee9b7f0759dc65bea77e6fd739840aee59df71ee024a0eb6aacf3fa_7ec5b8601f45bcbdd704f15d9eb1c39c",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a0400f7f3ee9b7f0759dc65bea77e6fd739840aee59df71ee024a0eb6aacf3fa_7ec5b8601f45bcbdd704f15d9eb1c39c",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_81a3ba3cbea56795b796436c390fb5b012887309882f43319d1c5955a102ca4d_7c0bea63a04dc31a2a5654aa26fcd9dc",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
@@ -1128,10 +1511,29 @@
     "compiledIr": {
       "cardNumber": "PB41-011",
       "name": "The EvilAlien Zarab Seijin［First Generation Ultra Kaiju］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 6000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 8000
+        }
+      },
+      "originalEffectText": "This card/Spirit is also treated as being exactly-named \"Ultraman\".\n\n[LV1][LV2][LV3] (When Summoned)\nBanish two cards from the opposing Trash. Then, if you control any other “First Generation Ultra Kaiju” Spirit/Nexus, by sending one core, besides [Soul Core], from your Trash to the Void, draw a card.\n\n[LV2][LV3]\nWhen cores in your Trash are sent to the Void, you can heavy exhaust an opposing Spirit.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "PB41-011#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1142,8 +1544,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1152,24 +1559,42 @@
             "isMain": false,
             "cleanBody": "This card/Spirit is also treated as being exactly-named \"Ultraman\"."
           },
+          "originalAbilityText": "This card/Spirit is also treated as being exactly-named \"Ultraman\".",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "This card/Spirit is also treated as being exactly-named \"Ultraman\".",
+              "originalClauseText": "This card/Spirit is also treated as being exactly-named \"Ultraman\".",
               "cleanText": "This card/Spirit is also treated as being exactly-named \"Ultraman\"",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "TREAT_RULE",
+                "treatAs": "NAME",
+                "name": "Ultraman"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-011#a0",
+          "keywords": [],
+          "id": "PB41-011#AB_PASSIVE_NONE_LV1_LV2_LV3_12edb006a2ea98825cf9ef20262165333d4b6a958b3727897cc0a63e132453f6_a7718ada03d3dbd2add6ef429806b2a7",
+          "physicalId": "PB41-011#AB_PASSIVE_NONE_LV1_LV2_LV3_12edb006a2ea98825cf9ef20262165333d4b6a958b3727897cc0a63e132453f6_a7718ada03d3dbd2add6ef429806b2a7",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_12edb006a2ea98825cf9ef20262165333d4b6a958b3727897cc0a63e132453f6_a7718ada03d3dbd2add6ef429806b2a7",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_711d4fd4c32a5aba9ae2d878b0c6c321be59c771dc133e92a81142aa82a4ad4a_9d22dc7c9145bcba8381d157ef5967bd",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB41-011#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1180,8 +1605,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1190,10 +1624,14 @@
             "isMain": false,
             "cleanBody": "Banish two cards from the opposing Trash. Then, if you control any other “First Generation Ultra Kaiju” Spirit/Nexus, by sending one core, besides [Soul Core], from your Trash to the Void, draw a card."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nBanish two cards from the opposing Trash. Then, if you control any other “First Generation Ultra Kaiju” Spirit/Nexus, by sending one core, besides [Soul Core], from your Trash to the Void, draw a card.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Banish two cards from the opposing Trash.",
+              "originalClauseText": "Banish two cards from the opposing Trash.",
               "cleanText": "Banish two cards from the opposing Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1205,7 +1643,9 @@
             },
             {
               "rawText": "if you control any other \"First Generation Ultra Kaiju\" Spirit/Nexus, by sending one core, besides [Soul Core], from your Trash to the Void, draw a card.",
+              "originalClauseText": "if you control any other \"First Generation Ultra Kaiju\" Spirit/Nexus, by sending one core, besides [Soul Core], from your Trash to the Void, draw a card.",
               "cleanText": "by sending one core, besides [Soul Core], from your Trash to the Void, draw a card",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -1219,10 +1659,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-011#a1",
+          "keywords": [],
+          "id": "PB41-011#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a995d057740d75650a0f5351fc03f38226b1fd40376b0bf87703ed9084b8130c_021a531282adba0cf93fc42421a33664",
+          "physicalId": "PB41-011#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a995d057740d75650a0f5351fc03f38226b1fd40376b0bf87703ed9084b8130c_021a531282adba0cf93fc42421a33664",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a995d057740d75650a0f5351fc03f38226b1fd40376b0bf87703ed9084b8130c_021a531282adba0cf93fc42421a33664",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_4a13a551ea54fed3c1be875a36e942e9f6f12cf25552b47d657b79d2ce6fdbe0_8bfa41dc97e73ec1f5dd0c0d4467b92f",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB41-011#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1232,8 +1686,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1242,10 +1701,14 @@
             "isMain": false,
             "cleanBody": "When cores in your Trash are sent to the Void, you can heavy exhaust an opposing Spirit."
           },
+          "originalAbilityText": "[LV2][LV3]\nWhen cores in your Trash are sent to the Void, you can heavy exhaust an opposing Spirit.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When cores in your Trash are sent to the Void, you can heavy exhaust an opposing Spirit.",
+              "originalClauseText": "When cores in your Trash are sent to the Void, you can heavy exhaust an opposing Spirit.",
               "cleanText": "When cores in your Trash are sent to the Void, you can heavy exhaust an opposing Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1264,7 +1727,20 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-011#a2",
+          "keywords": [],
+          "id": "PB41-011#AB_PASSIVE_NONE_LV2_LV3_f3a91977b0fc2fc828befff71ad6a12eab346a08128b1cfd931e5be27ebc7888_43f0f25f451f8169271f09cbffec9aba",
+          "physicalId": "PB41-011#AB_PASSIVE_NONE_LV2_LV3_f3a91977b0fc2fc828befff71ad6a12eab346a08128b1cfd931e5be27ebc7888_43f0f25f451f8169271f09cbffec9aba",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV2_LV3_f3a91977b0fc2fc828befff71ad6a12eab346a08128b1cfd931e5be27ebc7888_43f0f25f451f8169271f09cbffec9aba",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV2_LV3_a2d580e562600211c386c61c6e329707c9d1755bbe3bf095c5829e5099e1198e_f2104e1ca569d22172db0709c89a8606",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -1281,6 +1757,10 @@
     "compiledIr": {
       "cardNumber": "PB41-X03",
       "name": "The VeteranWarrior Ultraman Zero",
+      "type": "Nexus",
+      "levels": {},
+      "originalEffectText": "[Core Charge: (White & \"Ultraman\"/\"Special Aircraft\") (\"Beliarok\" & Brave)]\n◆When you summon/advent a target Spirit/Brave, you can +1 core to this Nexus.\n◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus.\n\n[Grand Skill: 4] [LV1][LV2] Flash - (Either Attack Step)\n(Once per turn, send four cores from this Nexus to the Void) Refresh a White “Ultraman”/\"Special Aircraft\" Spirit/Ultimate you control. Or, during this battle, one of your White \"Ultraman\"/\"Special Aircraft\" can't be blocked.\n\n[Grand Field] [LV2] (Opposing Attack Step)\nAll your White \"Zett\"/\"Special Aircraft\" Spirits can block while exhausted.",
+      "teams": [],
       "keywords": [
         {
           "name": "Core Charge",
@@ -1288,7 +1768,28 @@
           "wave": 3,
           "hook": "core_charge",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "PB41-X03#AB_PASSIVE_NONE_LV1_LV2_LV3_43636119a8aba772fe6842ab62b343b10fa144d934a0a011bb857e894dbec60f_c14a6a807af940266eae56dcdc25b312",
+          "cardNumber": "PB41-X03",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB41-X03#a0"
         },
         {
           "name": "Grand Skill",
@@ -1296,7 +1797,29 @@
           "wave": 3,
           "hook": "grand_skill",
           "bracketed": true,
-          "index": 364
+          "index": 0,
+          "abilityId": "PB41-X03#AB_ATTACK_STEP_NONE_LV1_LV2_16de9ad2b2be21899cc9c13aee8ca17eb8ea5bf44854e28bb0c7f7760ef5ca83_0f516b405668ce081391c706189617ed",
+          "cardNumber": "PB41-X03",
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [
+            "Grand Skill: 4"
+          ],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PB41-X03#a3"
         },
         {
           "name": "Grand Field",
@@ -1304,12 +1827,32 @@
           "wave": 3,
           "hook": "grand_field",
           "bracketed": true,
-          "index": 648
+          "index": 0,
+          "abilityId": "PB41-X03#AB_ATTACK_STEP_NONE_LV2_fbe667013dfd9d04dee0cd7bddf58c48d9eccbeb29dea96e12d7eabc654560b6_a8962df77788dc7add0ad95a31783678",
+          "cardNumber": "PB41-X03",
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Opposing Attack Step",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [
+            "Grand Field"
+          ],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB41-X03#a4"
         }
       ],
       "abilities": [
         {
-          "id": "PB41-X03#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1320,8 +1863,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Core Charge: (White & \"Ultraman\"/\"Special Aircraft\") (\"Beliarok\" & Brave)",
@@ -1330,11 +1878,55 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "originalAbilityText": "[Core Charge: (White & \"Ultraman\"/\"Special Aircraft\") (\"Beliarok\" & Brave)]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-X03#a0",
+          "keywords": [
+            {
+              "name": "Core Charge",
+              "parameter": "(White & \"Ultraman\"/\"Special Aircraft\") (\"Beliarok\" & Brave)",
+              "wave": 3,
+              "hook": "core_charge",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB41-X03#AB_PASSIVE_NONE_LV1_LV2_LV3_43636119a8aba772fe6842ab62b343b10fa144d934a0a011bb857e894dbec60f_c14a6a807af940266eae56dcdc25b312",
+              "cardNumber": "PB41-X03",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB41-X03#a0"
+            }
+          ],
+          "id": "PB41-X03#AB_PASSIVE_NONE_LV1_LV2_LV3_43636119a8aba772fe6842ab62b343b10fa144d934a0a011bb857e894dbec60f_c14a6a807af940266eae56dcdc25b312",
+          "physicalId": "PB41-X03#AB_PASSIVE_NONE_LV1_LV2_LV3_43636119a8aba772fe6842ab62b343b10fa144d934a0a011bb857e894dbec60f_c14a6a807af940266eae56dcdc25b312",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_43636119a8aba772fe6842ab62b343b10fa144d934a0a011bb857e894dbec60f_c14a6a807af940266eae56dcdc25b312",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_43066845d2727e136263c07f53f222b064b5f0edf230161a90f8ea9c71d3af9a_e7b90e789b46c134214a8f98a95cf662",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB41-X03#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1345,8 +1937,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1355,10 +1952,14 @@
             "isMain": false,
             "cleanBody": "◆When you summon/advent a target Spirit/Brave, you can +1 core to this Nexus."
           },
+          "originalAbilityText": "◆When you summon/advent a target Spirit/Brave, you can +1 core to this Nexus.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "◆When you summon/advent a target Spirit/Brave, you can +1 core to this Nexus.",
+              "originalClauseText": "◆When you summon/advent a target Spirit/Brave, you can +1 core to this Nexus.",
               "cleanText": "When you summon/advent a target Spirit/Brave, you can +1 core to this Nexus",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1366,14 +1967,38 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit",
+                    "Brave",
+                    "Nexus"
+                  ]
+                },
+                "free": false,
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-X03#a1",
+          "keywords": [],
+          "id": "PB41-X03#AB_PASSIVE_NONE_LV1_LV2_LV3_10bfddc106feaf48c957ff67db9439bbf3a2ff149c174116d67fb318d39b9925_e8dd603cbb014f674ffee5731c9d8202",
+          "physicalId": "PB41-X03#AB_PASSIVE_NONE_LV1_LV2_LV3_10bfddc106feaf48c957ff67db9439bbf3a2ff149c174116d67fb318d39b9925_e8dd603cbb014f674ffee5731c9d8202",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_10bfddc106feaf48c957ff67db9439bbf3a2ff149c174116d67fb318d39b9925_e8dd603cbb014f674ffee5731c9d8202",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_45b16d75b3a8981c586d0bdc3755583f7ef5104d8e74c14cac08881483252bc7_ad9de74d3907169cf209527de57df30a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB41-X03#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1384,8 +2009,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1394,10 +2024,14 @@
             "isMain": false,
             "cleanBody": "◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus."
           },
+          "originalAbilityText": "◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.",
+              "originalClauseText": "◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.",
               "cleanText": "When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1412,7 +2046,9 @@
             },
             {
               "rawText": "For each target card among them, +1 core to this Nexus.",
+              "originalClauseText": "For each target card among them, +1 core to this Nexus.",
               "cleanText": "For each target card among them, +1 core to this Nexus",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1424,10 +2060,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-X03#a2",
+          "keywords": [],
+          "id": "PB41-X03#AB_PASSIVE_NONE_LV1_LV2_LV3_bdb3fc91837a43e6c35617c34d104b033363f3151d88ebbf9ed16deea81f939b_a512cfb5d0ec5fe4473d74750b224f98",
+          "physicalId": "PB41-X03#AB_PASSIVE_NONE_LV1_LV2_LV3_bdb3fc91837a43e6c35617c34d104b033363f3151d88ebbf9ed16deea81f939b_a512cfb5d0ec5fe4473d74750b224f98",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_bdb3fc91837a43e6c35617c34d104b033363f3151d88ebbf9ed16deea81f939b_a512cfb5d0ec5fe4473d74750b224f98",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_2419b1268caf1d6c0857cfad44abaea69472ca98c4a403552cdfc93a9aa20538_e2a4d0186cafab7c27e7177c73d40049",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB41-X03#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1439,8 +2087,17 @@
               "Grand Skill: 4"
             ],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1449,10 +2106,14 @@
             "isMain": false,
             "cleanBody": "(Once per turn, send four cores from this Nexus to the Void) Refresh a White “Ultraman”/\"Special Aircraft\" Spirit/Ultimate you control. Or, during this battle, one of your White \"Ultraman\"/\"Special Aircraft\" can't be blocked."
           },
+          "originalAbilityText": "[Grand Skill: 4] [LV1][LV2] Flash - (Either Attack Step)\n(Once per turn, send four cores from this Nexus to the Void) Refresh a White “Ultraman”/\"Special Aircraft\" Spirit/Ultimate you control. Or, during this battle, one of your White \"Ultraman\"/\"Special Aircraft\" can't be blocked.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "(Once per turn, send four cores from this Nexus to the Void) Refresh a White \"Ultraman\"/\"Special Aircraft\" Spirit/Ultimate you control.",
+              "originalClauseText": "(Once per turn, send four cores from this Nexus to the Void) Refresh a White \"Ultraman\"/\"Special Aircraft\" Spirit/Ultimate you control.",
               "cleanText": "(Once per turn, send four cores from this Nexus to the Void) Refresh a White \"Ultraman\"/\"Special Aircraft\" Spirit/Ultimate you control",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1460,26 +2121,81 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 4,
+                "from": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                },
+                "to": {
+                  "zone": "void"
+                }
               }
             },
             {
               "rawText": "during this battle, one of your White \"Ultraman\"/\"Special Aircraft\" can't be blocked.",
+              "originalClauseText": "during this battle, one of your White \"Ultraman\"/\"Special Aircraft\" can't be blocked.",
               "cleanText": "one of your White \"Ultraman\"/\"Special Aircraft\" can't be blocked",
+              "clauseIndex": 1,
               "link": "or",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": "DURING_THIS_BATTLE",
               "op": {
-                "op": "UNBLOCKABLE"
+                "op": "COMBAT_RESTRICTION"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-X03#a3",
+          "keywords": [
+            {
+              "name": "Grand Skill",
+              "parameter": "4",
+              "wave": 3,
+              "hook": "grand_skill",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB41-X03#AB_ATTACK_STEP_NONE_LV1_LV2_16de9ad2b2be21899cc9c13aee8ca17eb8ea5bf44854e28bb0c7f7760ef5ca83_0f516b405668ce081391c706189617ed",
+              "cardNumber": "PB41-X03",
+              "levels": [
+                1,
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [
+                "Grand Skill: 4"
+              ],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PB41-X03#a3"
+            }
+          ],
+          "id": "PB41-X03#AB_ATTACK_STEP_NONE_LV1_LV2_16de9ad2b2be21899cc9c13aee8ca17eb8ea5bf44854e28bb0c7f7760ef5ca83_0f516b405668ce081391c706189617ed",
+          "physicalId": "PB41-X03#AB_ATTACK_STEP_NONE_LV1_LV2_16de9ad2b2be21899cc9c13aee8ca17eb8ea5bf44854e28bb0c7f7760ef5ca83_0f516b405668ce081391c706189617ed",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_16de9ad2b2be21899cc9c13aee8ca17eb8ea5bf44854e28bb0c7f7760ef5ca83_0f516b405668ce081391c706189617ed",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_5f4dad105c8067857aef1315a79cc439600211e6de4d2ea0dabc2df64af38678_e9a19766491b560d9d8fa1ed5763f26c",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB41-X03#a4",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1490,8 +2206,17 @@
               "Grand Field"
             ],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Opposing Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "OPPONENT",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1500,10 +2225,14 @@
             "isMain": false,
             "cleanBody": "All your White \"Zett\"/\"Special Aircraft\" Spirits can block while exhausted."
           },
+          "originalAbilityText": "[Grand Field] [LV2] (Opposing Attack Step)\nAll your White \"Zett\"/\"Special Aircraft\" Spirits can block while exhausted.",
+          "abilityIndex": 4,
           "clauses": [
             {
               "rawText": "All your White \"Zett\"/\"Special Aircraft\" Spirits can block while exhausted.",
+              "originalClauseText": "All your White \"Zett\"/\"Special Aircraft\" Spirits can block while exhausted.",
               "cleanText": "All your White \"Zett\"/\"Special Aircraft\" Spirits can block while exhausted",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1514,7 +2243,52 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-X03#a4",
+          "keywords": [
+            {
+              "name": "Grand Field",
+              "parameter": null,
+              "wave": 3,
+              "hook": "grand_field",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB41-X03#AB_ATTACK_STEP_NONE_LV2_fbe667013dfd9d04dee0cd7bddf58c48d9eccbeb29dea96e12d7eabc654560b6_a8962df77788dc7add0ad95a31783678",
+              "cardNumber": "PB41-X03",
+              "levels": [
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Opposing Attack Step",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [
+                "Grand Field"
+              ],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB41-X03#a4"
+            }
+          ],
+          "id": "PB41-X03#AB_ATTACK_STEP_NONE_LV2_fbe667013dfd9d04dee0cd7bddf58c48d9eccbeb29dea96e12d7eabc654560b6_a8962df77788dc7add0ad95a31783678",
+          "physicalId": "PB41-X03#AB_ATTACK_STEP_NONE_LV2_fbe667013dfd9d04dee0cd7bddf58c48d9eccbeb29dea96e12d7eabc654560b6_a8962df77788dc7add0ad95a31783678",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_fbe667013dfd9d04dee0cd7bddf58c48d9eccbeb29dea96e12d7eabc654560b6_a8962df77788dc7add0ad95a31783678",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_a2c3905e7067b5a5ff251d9e10515bee98238f36551e8a1cbf1c943d51106fd2_5e0b0360adeb128e828901c6e8ba5cfa",
+          "timingSemantics": {
+            "timingOwner": "OPPONENT",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
@@ -1542,6 +2316,21 @@
     "compiledIr": {
       "cardNumber": "PB41-002",
       "name": "Ultraman Zett Alpha Edge ［5］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 6000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: \"Ultraman Zett\", (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Summoned/Advents)\n(Once per Turn: Same Name) Your counter +1. After this effect resolves, you can reveal three cards from your decktop. Among them, add a White \"Ultraman\"/\"Special Aircraft\" to the Hand. Discard any remaining cards.\n\n[During OC] [LV1][LV2]\nEither set, or add to the Hand a \"STORAGE\"/\"Zestium\" revealed from the deck by this Spirit's effect.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -1549,12 +2338,32 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "PB41-002#AB_FLASH_NONE_LV1_LV2_LV3_6b760bc1f1da6721fa84073d7ef5589d9f76ae1cab690970c7fbc0f5924c88c3_b646939deb8066db96e57a4e28ebabae",
+          "cardNumber": "PB41-002",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PB41-002#a0"
         }
       ],
       "abilities": [
         {
-          "id": "PB41-002#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1565,8 +2374,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: \"Ultraman Zett\", (Your Turn)",
@@ -1575,10 +2391,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: \"Ultraman Zett\", (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1600,7 +2420,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1618,10 +2440,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-002#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "\"Ultraman Zett\", (Your Turn)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB41-002#AB_FLASH_NONE_LV1_LV2_LV3_6b760bc1f1da6721fa84073d7ef5589d9f76ae1cab690970c7fbc0f5924c88c3_b646939deb8066db96e57a4e28ebabae",
+              "cardNumber": "PB41-002",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PB41-002#a0"
+            }
+          ],
+          "id": "PB41-002#AB_FLASH_NONE_LV1_LV2_LV3_6b760bc1f1da6721fa84073d7ef5589d9f76ae1cab690970c7fbc0f5924c88c3_b646939deb8066db96e57a4e28ebabae",
+          "physicalId": "PB41-002#AB_FLASH_NONE_LV1_LV2_LV3_6b760bc1f1da6721fa84073d7ef5589d9f76ae1cab690970c7fbc0f5924c88c3_b646939deb8066db96e57a4e28ebabae",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_6b760bc1f1da6721fa84073d7ef5589d9f76ae1cab690970c7fbc0f5924c88c3_b646939deb8066db96e57a4e28ebabae",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_c198e15212717c53951906a0eae8100940c3d7ce792fa3772612609e4bc14e03_5c6d2589f6da169ad4794bd6f1bd45bc",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB41-002#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1630,21 +2496,30 @@
             ],
             "levelExplicit": true,
             "prefixes": [],
-            "timing": "WHEN_SUMMONED",
-            "timingLabel": "When Summoned/Advents",
+            "timing": "PASSIVE",
+            "timings": [],
+            "timingLabel": "",
             "timingStep": "ANY",
-            "limit": "ONCE_PER_TURN_SAME_NAME",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "limit": null,
             "cantStack": false,
             "keyword": null,
             "burstCondition": null,
             "isFlash": false,
             "isMain": false,
-            "cleanBody": "Your counter +1. After this effect resolves, you can reveal three cards from your decktop. Among them, add a White \"Ultraman\"/\"Special Aircraft\" to the Hand. Discard any remaining cards."
+            "cleanBody": "(When Summoned/Advents)\n(Once per Turn: Same Name) Your counter +1. After this effect resolves, you can reveal three cards from your decktop. Among them, add a White \"Ultraman\"/\"Special Aircraft\" to the Hand. Discard any remaining cards."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned/Advents)\n(Once per Turn: Same Name) Your counter +1. After this effect resolves, you can reveal three cards from your decktop. Among them, add a White \"Ultraman\"/\"Special Aircraft\" to the Hand. Discard any remaining cards.",
+          "abilityIndex": 1,
           "clauses": [
             {
-              "rawText": "Your counter +1.",
-              "cleanText": "Your counter +1",
+              "rawText": "(When Summoned/Advents) Your counter +1.",
+              "originalClauseText": "(When Summoned/Advents) Your counter +1.",
+              "cleanText": "(When Summoned/Advents) Your counter +1",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1657,7 +2532,9 @@
             },
             {
               "rawText": "you can reveal three cards from your decktop.",
+              "originalClauseText": "you can reveal three cards from your decktop.",
               "cleanText": "you can reveal three cards from your decktop",
+              "clauseIndex": 1,
               "link": "afterResolves",
               "isOptional": true,
               "isCost": false,
@@ -1670,19 +2547,24 @@
             },
             {
               "rawText": "Among them, add a White \"Ultraman\"/\"Special Aircraft\" to the Hand.",
+              "originalClauseText": "Among them, add a White \"Ultraman\"/\"Special Aircraft\" to the Hand.",
               "cleanText": "Among them, add a White \"Ultraman\"/\"Special Aircraft\" to the Hand",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "ADD_TO_HAND"
+                "op": "UNSUPPORTED",
+                "rawText": "Among them, add a White \"Ultraman\"/\"Special Aircraft\" to the Hand"
               }
             },
             {
               "rawText": "Discard any remaining cards.",
+              "originalClauseText": "Discard any remaining cards.",
               "cleanText": "Discard any remaining cards",
+              "clauseIndex": 3,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1693,10 +2575,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "Among them, add a White \"Ultraman\"/\"Special Aircraft\" to the Hand."
+          ],
+          "legacyId": "PB41-002#a1",
+          "keywords": [],
+          "id": "PB41-002#AB_PASSIVE_NONE_LV1_LV2_2737bc5b7661242f6a641939094fa0c562835d41120f4f669a4fcced364164a8_4d4174adfddd32c4d0ae177812c1e0ed",
+          "physicalId": "PB41-002#AB_PASSIVE_NONE_LV1_LV2_2737bc5b7661242f6a641939094fa0c562835d41120f4f669a4fcced364164a8_4d4174adfddd32c4d0ae177812c1e0ed",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_2737bc5b7661242f6a641939094fa0c562835d41120f4f669a4fcced364164a8_4d4174adfddd32c4d0ae177812c1e0ed",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_48b1528bdee543289ce7941b37497be2d5cfbe5b5a6b1b718a92d5866c778832_88bd1905732948012b5123389790770e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB41-002#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1708,8 +2604,13 @@
               "During OC"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1718,26 +2619,46 @@
             "isMain": false,
             "cleanBody": "Either set, or add to the Hand a \"STORAGE\"/\"Zestium\" revealed from the deck by this Spirit's effect."
           },
+          "originalAbilityText": "[During OC] [LV1][LV2]\nEither set, or add to the Hand a \"STORAGE\"/\"Zestium\" revealed from the deck by this Spirit's effect.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Either set, or add to the Hand a \"STORAGE\"/\"Zestium\" revealed from the deck by this Spirit's effect.",
+              "originalClauseText": "Either set, or add to the Hand a \"STORAGE\"/\"Zestium\" revealed from the deck by this Spirit's effect.",
               "cleanText": "Either set, or add to the Hand a \"STORAGE\"/\"Zestium\" revealed from the deck by this Spirit's effect",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "ADD_TO_HAND"
+                "op": "UNSUPPORTED",
+                "rawText": "Either set, or add to the Hand a \"STORAGE\"/\"Zestium\" revealed from the deck by this Spirit's effect"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "Either set, or add to the Hand a \"STORAGE\"/\"Zestium\" revealed from the deck by this Spirit's effect."
+          ],
+          "legacyId": "PB41-002#a2",
+          "keywords": [],
+          "id": "PB41-002#AB_PASSIVE_NONE_LV1_LV2_3e937979af2352ef4fc9288694194328f80e19476b3fef3f0ba103897196395e_64e8e45ac2b2ed98f38412857097ec87",
+          "physicalId": "PB41-002#AB_PASSIVE_NONE_LV1_LV2_3e937979af2352ef4fc9288694194328f80e19476b3fef3f0ba103897196395e_64e8e45ac2b2ed98f38412857097ec87",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_3e937979af2352ef4fc9288694194328f80e19476b3fef3f0ba103897196395e_64e8e45ac2b2ed98f38412857097ec87",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_da2c28d0ad290d395ede600e26ed09c059e9eb70cc582c946ceb78e442c8f498_28e6e3014bfbc0213ba44416bd017664",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
-      "compiledClausesCount": 7,
-      "unsupportedClausesCount": 0,
-      "isFullySupported": true
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 2,
+      "isFullySupported": false
     }
   },
   "PB41-003": {
@@ -1760,6 +2681,21 @@
     "compiledIr": {
       "cardNumber": "PB41-003",
       "name": "Ultraman Zett Beta Smash ［2］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 7000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 12000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: \"Ultraman Zett\" & C2 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents/Attacks)\nYour counter +1. Then, once per turn, you can put a core from the Void to any of your Spirits. When core is put onto this Spirit via this effect, during this battle, this Spirit gains +3000 BP.\n\n[During OC] [LV1][LV2] (When Attacks)\nWhen only the opposing Spirit is destroyed via BP comparison, you can send an opposing Life to the Reserve.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -1767,12 +2703,32 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "PB41-003#AB_FLASH_NONE_LV1_LV2_LV3_6cf561197790039ee59c4644be95d6c4f3296446fd18c08dae473696ca401c9f_9bd14d71354c1c16ba2c2a7c87cbf319",
+          "cardNumber": "PB41-003",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PB41-003#a0"
         }
       ],
       "abilities": [
         {
-          "id": "PB41-003#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1783,8 +2739,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: \"Ultraman Zett\" & C2 or more, (Your Turn)",
@@ -1793,10 +2756,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: \"Ultraman Zett\" & C2 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1818,7 +2785,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1836,10 +2805,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-003#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "\"Ultraman Zett\" & C2 or more, (Your Turn)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB41-003#AB_FLASH_NONE_LV1_LV2_LV3_6cf561197790039ee59c4644be95d6c4f3296446fd18c08dae473696ca401c9f_9bd14d71354c1c16ba2c2a7c87cbf319",
+              "cardNumber": "PB41-003",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PB41-003#a0"
+            }
+          ],
+          "id": "PB41-003#AB_FLASH_NONE_LV1_LV2_LV3_6cf561197790039ee59c4644be95d6c4f3296446fd18c08dae473696ca401c9f_9bd14d71354c1c16ba2c2a7c87cbf319",
+          "physicalId": "PB41-003#AB_FLASH_NONE_LV1_LV2_LV3_6cf561197790039ee59c4644be95d6c4f3296446fd18c08dae473696ca401c9f_9bd14d71354c1c16ba2c2a7c87cbf319",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_6cf561197790039ee59c4644be95d6c4f3296446fd18c08dae473696ca401c9f_9bd14d71354c1c16ba2c2a7c87cbf319",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_d3635312aa2c23a930fac8cd430bd793feab5e94f7ec347d57fd443f9bbeea63_f897bc452162cc68517cfc36e9915966",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB41-003#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1849,8 +2862,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Advents/Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1859,10 +2883,14 @@
             "isMain": false,
             "cleanBody": "Your counter +1. Then, once per turn, you can put a core from the Void to any of your Spirits. When core is put onto this Spirit via this effect, during this battle, this Spirit gains +3000 BP."
           },
+          "originalAbilityText": "[LV1][LV2] (When Advents/Attacks)\nYour counter +1. Then, once per turn, you can put a core from the Void to any of your Spirits. When core is put onto this Spirit via this effect, during this battle, this Spirit gains +3000 BP.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Your counter +1.",
+              "originalClauseText": "Your counter +1.",
               "cleanText": "Your counter +1",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1875,7 +2903,9 @@
             },
             {
               "rawText": "once per turn, you can put a core from the Void to any of your Spirits.",
+              "originalClauseText": "once per turn, you can put a core from the Void to any of your Spirits.",
               "cleanText": "once per turn, you can put a core from the Void to any of your Spirits",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": true,
               "isCost": false,
@@ -1883,12 +2913,17 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                }
               }
             },
             {
               "rawText": "When core is put onto this Spirit via this effect, during this battle, this Spirit gains +3000 BP.",
+              "originalClauseText": "When core is put onto this Spirit via this effect, during this battle, this Spirit gains +3000 BP.",
               "cleanText": "When core is put onto this Spirit via this effect, during this battle, this Spirit gains +3000 BP",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1902,10 +2937,25 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-003#a1",
+          "keywords": [],
+          "id": "PB41-003#AB_WHEN_ADVENTS_NONE_LV1_LV2_4d761d739bcd61146f75cd5a2eb94e20379ff586df10d473c102189e52421553_1285967990951bbaf5e39fa650cfd528",
+          "physicalId": "PB41-003#AB_WHEN_ADVENTS_NONE_LV1_LV2_4d761d739bcd61146f75cd5a2eb94e20379ff586df10d473c102189e52421553_1285967990951bbaf5e39fa650cfd528",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_4d761d739bcd61146f75cd5a2eb94e20379ff586df10d473c102189e52421553_1285967990951bbaf5e39fa650cfd528",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_b782a059c46778dc3d2f830097c0563ee4df8895b9860c0e92a04776a2d27667_a0aeb5b2fbf17d62e8d85bccb6c96dc8",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB41-003#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1917,8 +2967,17 @@
               "During OC"
             ],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1927,10 +2986,14 @@
             "isMain": false,
             "cleanBody": "When only the opposing Spirit is destroyed via BP comparison, you can send an opposing Life to the Reserve."
           },
+          "originalAbilityText": "[During OC] [LV1][LV2] (When Attacks)\nWhen only the opposing Spirit is destroyed via BP comparison, you can send an opposing Life to the Reserve.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When only the opposing Spirit is destroyed via BP comparison, you can send an opposing Life to the Reserve.",
+              "originalClauseText": "When only the opposing Spirit is destroyed via BP comparison, you can send an opposing Life to the Reserve.",
               "cleanText": "When only the opposing Spirit is destroyed via BP comparison, you can send an opposing Life to the Reserve",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1938,11 +3001,34 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-003#a2",
+          "keywords": [],
+          "id": "PB41-003#AB_WHEN_ATTACKS_NONE_LV1_LV2_493ccb6174d24d55e68778e2f8488c65c5d0df1076b35e72a541264146d144ba_d0a8923e4bf1da26159e389248e4bcf7",
+          "physicalId": "PB41-003#AB_WHEN_ATTACKS_NONE_LV1_LV2_493ccb6174d24d55e68778e2f8488c65c5d0df1076b35e72a541264146d144ba_d0a8923e4bf1da26159e389248e4bcf7",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_493ccb6174d24d55e68778e2f8488c65c5d0df1076b35e72a541264146d144ba_d0a8923e4bf1da26159e389248e4bcf7",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_0848d039c3a3348cb0e8e4ad60c236fb88e761047660afe269a7f6e6a6322423_458266912e439ca371b18e8dd6d74112",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
@@ -1970,6 +3056,21 @@
     "compiledIr": {
       "cardNumber": "PB41-X02",
       "name": "Ultraman Zett Deathcium Rise Claw",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 8000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 12000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: \"Ultraman Zett\" & C7 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[During Advent] [LV1][LV2] (When Attacks)\nReturn any number of opposing Spirits up to a total of Cost 15 to the deckbottom, and for every 5 costs of the targets returned, discard a random card from the opposing Hand.\n\n[During OC] [LV1][LV2] Flash - (Your Attack Step)\nOnce per turn, this Spirit can refresh. When you've done so, you can send a core, besides [Soul Core], from the opposing Trash to the Void.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -1977,12 +3078,32 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "PB41-X02#AB_FLASH_NONE_LV1_LV2_LV3_2082c99d51f50914df14c6b5a5b9a8e62ee5e869087cd7e736a5fbb931ebd31c_3f0ae7f315a900bee23ff729d0faa655",
+          "cardNumber": "PB41-X02",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PB41-X02#a0"
         }
       ],
       "abilities": [
         {
-          "id": "PB41-X02#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1993,8 +3114,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: \"Ultraman Zett\" & C7 or more, (Your Turn)",
@@ -2003,10 +3131,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: \"Ultraman Zett\" & C7 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -2028,7 +3160,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -2046,10 +3180,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-X02#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "\"Ultraman Zett\" & C7 or more, (Your Turn)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB41-X02#AB_FLASH_NONE_LV1_LV2_LV3_2082c99d51f50914df14c6b5a5b9a8e62ee5e869087cd7e736a5fbb931ebd31c_3f0ae7f315a900bee23ff729d0faa655",
+              "cardNumber": "PB41-X02",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PB41-X02#a0"
+            }
+          ],
+          "id": "PB41-X02#AB_FLASH_NONE_LV1_LV2_LV3_2082c99d51f50914df14c6b5a5b9a8e62ee5e869087cd7e736a5fbb931ebd31c_3f0ae7f315a900bee23ff729d0faa655",
+          "physicalId": "PB41-X02#AB_FLASH_NONE_LV1_LV2_LV3_2082c99d51f50914df14c6b5a5b9a8e62ee5e869087cd7e736a5fbb931ebd31c_3f0ae7f315a900bee23ff729d0faa655",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_2082c99d51f50914df14c6b5a5b9a8e62ee5e869087cd7e736a5fbb931ebd31c_3f0ae7f315a900bee23ff729d0faa655",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_f38013157b543eaa5c4d3b640e5a80743c55a08f34beeed46fdb9f8b9041e63f_4cd5218ab5b5b25c1a651e809ba786fe",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB41-X02#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2061,8 +3239,17 @@
               "During Advent"
             ],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2071,10 +3258,14 @@
             "isMain": false,
             "cleanBody": "Return any number of opposing Spirits up to a total of Cost 15 to the deckbottom, and for every 5 costs of the targets returned, discard a random card from the opposing Hand."
           },
+          "originalAbilityText": "[During Advent] [LV1][LV2] (When Attacks)\nReturn any number of opposing Spirits up to a total of Cost 15 to the deckbottom, and for every 5 costs of the targets returned, discard a random card from the opposing Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Return any number of opposing Spirits up to a total of Cost 15 to the deckbottom, and for every 5 costs of the targets returned, discard a random card from the opposing Hand.",
+              "originalClauseText": "Return any number of opposing Spirits up to a total of Cost 15 to the deckbottom, and for every 5 costs of the targets returned, discard a random card from the opposing Hand.",
               "cleanText": "Return any number of opposing Spirits up to a total of Cost 15 to the deckbottom, and for every 5 costs of the targets returned, discard a random card from the opposing Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2089,10 +3280,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-X02#a1",
+          "keywords": [],
+          "id": "PB41-X02#AB_WHEN_ATTACKS_NONE_LV1_LV2_9f197cf64daca3907cd1521579a244990190e4bc5e167114b7b6e1df84522148_705e38e39db28a71c50e4322d2962ade",
+          "physicalId": "PB41-X02#AB_WHEN_ATTACKS_NONE_LV1_LV2_9f197cf64daca3907cd1521579a244990190e4bc5e167114b7b6e1df84522148_705e38e39db28a71c50e4322d2962ade",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_9f197cf64daca3907cd1521579a244990190e4bc5e167114b7b6e1df84522148_705e38e39db28a71c50e4322d2962ade",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_177abe3beace0e994ebd503e6e2a3c2bf186b9f0874ee1e23305586698cb9bde_7f7b0e98095365ce1530d7a682891e50",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB41-X02#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2104,8 +3309,19 @@
               "During OC"
             ],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -2114,10 +3330,14 @@
             "isMain": false,
             "cleanBody": "this Spirit can refresh. When you've done so, you can send a core, besides [Soul Core], from the opposing Trash to the Void."
           },
+          "originalAbilityText": "[During OC] [LV1][LV2] Flash - (Your Attack Step)\nOnce per turn, this Spirit can refresh. When you've done so, you can send a core, besides [Soul Core], from the opposing Trash to the Void.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "this Spirit can refresh.",
+              "originalClauseText": "this Spirit can refresh.",
               "cleanText": "this Spirit can refresh",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2130,18 +3350,45 @@
             },
             {
               "rawText": "you can send a core, besides [Soul Core], from the opposing Trash to the Void.",
+              "originalClauseText": "you can send a core, besides [Soul Core], from the opposing Trash to the Void.",
               "cleanText": "you can send a core, besides [Soul Core], from the opposing Trash to the Void",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "MOVE_CORE"
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "trash",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "void"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-X02#a2",
+          "keywords": [],
+          "id": "PB41-X02#AB_ATTACK_STEP_NONE_LV1_LV2_5181a61d82c111ade98849de12ba0972c255407816d2a323bbf5121a7d2a195e_ff97aea72c049fcec954a834fef566c1",
+          "physicalId": "PB41-X02#AB_ATTACK_STEP_NONE_LV1_LV2_5181a61d82c111ade98849de12ba0972c255407816d2a323bbf5121a7d2a195e_ff97aea72c049fcec954a834fef566c1",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_5181a61d82c111ade98849de12ba0972c255407816d2a323bbf5121a7d2a195e_ff97aea72c049fcec954a834fef566c1",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_2419e40b94b9a8ec9d3ab8feb7c6a5379d368166cd7e2abd6672e191d09afce1_9d1153fb7e0cec0af9115d70e5c69a60",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -2169,6 +3416,21 @@
     "compiledIr": {
       "cardNumber": "PB41-007",
       "name": "Ultraman Zett Delta Rise Claw ［4］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 7000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: \"Ultraman Zett\" & C5 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents/Attacks)\nReturn an opposing Brave to the deckbottom. After this effect resolves, you can destroy an opposing Spirit/Ultimate with four cores or less on it.\n\n[During OC] [LV1][LV2] (Either Attack Step)\nThis Spirit's effect is treated as colorless.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -2176,12 +3438,32 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "PB41-007#AB_FLASH_NONE_LV1_LV2_LV3_d1bcd5781339df2f76e53505e2aed61b821c5c1a4ca43338eccfeedd7b687b2b_ec9c5351725b42472361453659df2869",
+          "cardNumber": "PB41-007",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PB41-007#a0"
         }
       ],
       "abilities": [
         {
-          "id": "PB41-007#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2192,8 +3474,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: \"Ultraman Zett\" & C5 or more, (Either Attack Step)",
@@ -2202,10 +3491,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: \"Ultraman Zett\" & C5 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -2227,7 +3520,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -2245,10 +3540,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-007#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "\"Ultraman Zett\" & C5 or more, (Either Attack Step)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB41-007#AB_FLASH_NONE_LV1_LV2_LV3_d1bcd5781339df2f76e53505e2aed61b821c5c1a4ca43338eccfeedd7b687b2b_ec9c5351725b42472361453659df2869",
+              "cardNumber": "PB41-007",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PB41-007#a0"
+            }
+          ],
+          "id": "PB41-007#AB_FLASH_NONE_LV1_LV2_LV3_d1bcd5781339df2f76e53505e2aed61b821c5c1a4ca43338eccfeedd7b687b2b_ec9c5351725b42472361453659df2869",
+          "physicalId": "PB41-007#AB_FLASH_NONE_LV1_LV2_LV3_d1bcd5781339df2f76e53505e2aed61b821c5c1a4ca43338eccfeedd7b687b2b_ec9c5351725b42472361453659df2869",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_d1bcd5781339df2f76e53505e2aed61b821c5c1a4ca43338eccfeedd7b687b2b_ec9c5351725b42472361453659df2869",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_d1456a28cb640482fe7d42d077788a182e94827493cdbc737dd1b961e06c3e4c_2301b1c1fb32193e2e995cc46bf0d340",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB41-007#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2258,8 +3597,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Advents/Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2268,10 +3618,14 @@
             "isMain": false,
             "cleanBody": "Return an opposing Brave to the deckbottom. After this effect resolves, you can destroy an opposing Spirit/Ultimate with four cores or less on it."
           },
+          "originalAbilityText": "[LV1][LV2] (When Advents/Attacks)\nReturn an opposing Brave to the deckbottom. After this effect resolves, you can destroy an opposing Spirit/Ultimate with four cores or less on it.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Return an opposing Brave to the deckbottom.",
+              "originalClauseText": "Return an opposing Brave to the deckbottom.",
               "cleanText": "Return an opposing Brave to the deckbottom",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2287,7 +3641,9 @@
             },
             {
               "rawText": "you can destroy an opposing Spirit/Ultimate with four cores or less on it.",
+              "originalClauseText": "you can destroy an opposing Spirit/Ultimate with four cores or less on it.",
               "cleanText": "you can destroy an opposing Spirit/Ultimate with four cores or less on it",
+              "clauseIndex": 1,
               "link": "afterResolves",
               "isOptional": true,
               "isCost": false,
@@ -2305,10 +3661,25 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-007#a1",
+          "keywords": [],
+          "id": "PB41-007#AB_WHEN_ADVENTS_NONE_LV1_LV2_283b203edb01ac3f4712e1a96732b5a49a3f6f04d4477748dabd7c5b87486c76_d2fba0a4676b3c7dd57c1e865f403518",
+          "physicalId": "PB41-007#AB_WHEN_ADVENTS_NONE_LV1_LV2_283b203edb01ac3f4712e1a96732b5a49a3f6f04d4477748dabd7c5b87486c76_d2fba0a4676b3c7dd57c1e865f403518",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_283b203edb01ac3f4712e1a96732b5a49a3f6f04d4477748dabd7c5b87486c76_d2fba0a4676b3c7dd57c1e865f403518",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_3d2a9ea226a1ca89fa2606df34e200394e58ed2de6aaeedef3f8fd479522e558_f6a0c40e555cee6f892004e13802aa31",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB41-007#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2320,8 +3691,17 @@
               "During OC"
             ],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2330,21 +3710,41 @@
             "isMain": false,
             "cleanBody": "This Spirit's effect is treated as colorless."
           },
+          "originalAbilityText": "[During OC] [LV1][LV2] (Either Attack Step)\nThis Spirit's effect is treated as colorless.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "This Spirit's effect is treated as colorless.",
+              "originalClauseText": "This Spirit's effect is treated as colorless.",
               "cleanText": "This Spirit's effect is treated as colorless",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "TREAT_RULE",
+                "treatAs": "COLORLESS"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-007#a2",
+          "keywords": [],
+          "id": "PB41-007#AB_ATTACK_STEP_NONE_LV1_LV2_b461e7ad36b31f342bfe75b62a71f1e8d79b25e4c08a2e8c23799e96e00794cb_d99311e7c488c2a31b27d7131b98d3f8",
+          "physicalId": "PB41-007#AB_ATTACK_STEP_NONE_LV1_LV2_b461e7ad36b31f342bfe75b62a71f1e8d79b25e4c08a2e8c23799e96e00794cb_d99311e7c488c2a31b27d7131b98d3f8",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_b461e7ad36b31f342bfe75b62a71f1e8d79b25e4c08a2e8c23799e96e00794cb_d99311e7c488c2a31b27d7131b98d3f8",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_0da5acb83e401f86b17a2620126ff06b50acb0491acc0434ff8086739237842e_ce1ce1c7e3b3ed502ab8ae7b257fff9a",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -2372,6 +3772,21 @@
     "compiledIr": {
       "cardNumber": "PB41-005",
       "name": "Ultraman Zett Gamma Future ［2］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: \"Ultraman Zett\"& C3 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n(Once per Turn: Same Name) If you have four counters or more, you can [Contract Advent] this card from the Hand, treating your [Soul Core] as being sent to the Trash.\n\n[LV1][LV2] (When Advents)\nYou can return an opposing Spirit to the deckbottom.\n\n[During OC] [LV1][LV2]\nWhen your \"Special Aircraft\" is summoned, send up to four cores from an opposing Grandwalker Nexus to the Void.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -2379,7 +3794,28 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "PB41-005#AB_FLASH_NONE_LV1_LV2_LV3_c78be51d3a079ca980ddb46804d6f2197168b9aea9d95f6a5506cae364894b5b_b634d6da7b252be150bc0086064cf475",
+          "cardNumber": "PB41-005",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PB41-005#a0"
         },
         {
           "name": "Contract Advent",
@@ -2387,12 +3823,32 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 240
+          "index": 43,
+          "abilityId": "PB41-005#AB_PASSIVE_NONE_LV1_LV2_LV3_05645c8a45f7e36ad30ad6204962a977520c13ad1e1171985e9f32ebc92667a0_a7c088dc43cc763b562ad265e71261e4",
+          "cardNumber": "PB41-005",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB41-005#a1"
         }
       ],
       "abilities": [
         {
-          "id": "PB41-005#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2403,8 +3859,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: \"Ultraman Zett\"& C3 or more, (Either Attack Step)",
@@ -2413,10 +3876,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: \"Ultraman Zett\"& C3 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -2438,7 +3905,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -2456,10 +3925,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-005#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "\"Ultraman Zett\"& C3 or more, (Either Attack Step)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB41-005#AB_FLASH_NONE_LV1_LV2_LV3_c78be51d3a079ca980ddb46804d6f2197168b9aea9d95f6a5506cae364894b5b_b634d6da7b252be150bc0086064cf475",
+              "cardNumber": "PB41-005",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PB41-005#a0"
+            }
+          ],
+          "id": "PB41-005#AB_FLASH_NONE_LV1_LV2_LV3_c78be51d3a079ca980ddb46804d6f2197168b9aea9d95f6a5506cae364894b5b_b634d6da7b252be150bc0086064cf475",
+          "physicalId": "PB41-005#AB_FLASH_NONE_LV1_LV2_LV3_c78be51d3a079ca980ddb46804d6f2197168b9aea9d95f6a5506cae364894b5b_b634d6da7b252be150bc0086064cf475",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_c78be51d3a079ca980ddb46804d6f2197168b9aea9d95f6a5506cae364894b5b_b634d6da7b252be150bc0086064cf475",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_e82ae51dc1f22ec35dc875ca2d2936f3d61b89d1f112a3d953b81b3daefdba9b_ec5c0c2893fa8e30271d54d48d50e95a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB41-005#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2470,8 +3983,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
             "limit": "ONCE_PER_TURN_SAME_NAME",
             "cantStack": false,
             "keyword": null,
@@ -2480,24 +4000,73 @@
             "isMain": false,
             "cleanBody": "If you have four counters or more, you can [Contract Advent] this card from the Hand, treating your [Soul Core] as being sent to the Trash."
           },
+          "originalAbilityText": "(Once per Turn: Same Name) If you have four counters or more, you can [Contract Advent] this card from the Hand, treating your [Soul Core] as being sent to the Trash.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "If you have four counters or more, you can [Contract Advent] this card from the Hand, treating your [Soul Core] as being sent to the Trash.",
+              "originalClauseText": "If you have four counters or more, you can [Contract Advent] this card from the Hand, treating your [Soul Core] as being sent to the Trash.",
               "cleanText": "you can [Contract Advent] this card from the Hand, treating your [Soul Core] as being sent to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": "If you have four counters or more",
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Contract Advent"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-005#a1",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": null,
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 43,
+              "abilityId": "PB41-005#AB_PASSIVE_NONE_LV1_LV2_LV3_05645c8a45f7e36ad30ad6204962a977520c13ad1e1171985e9f32ebc92667a0_a7c088dc43cc763b562ad265e71261e4",
+              "cardNumber": "PB41-005",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": "ONCE_PER_TURN_SAME_NAME",
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB41-005#a1"
+            }
+          ],
+          "id": "PB41-005#AB_PASSIVE_NONE_LV1_LV2_LV3_05645c8a45f7e36ad30ad6204962a977520c13ad1e1171985e9f32ebc92667a0_a7c088dc43cc763b562ad265e71261e4",
+          "physicalId": "PB41-005#AB_PASSIVE_NONE_LV1_LV2_LV3_05645c8a45f7e36ad30ad6204962a977520c13ad1e1171985e9f32ebc92667a0_a7c088dc43cc763b562ad265e71261e4",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_05645c8a45f7e36ad30ad6204962a977520c13ad1e1171985e9f32ebc92667a0_a7c088dc43cc763b562ad265e71261e4",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_142084b771b6aa327b92b5beec76b88b3e6c254e7e0a933b688cfe9bf0559af9_46856392cddb66c4d782e3fc8b7927dd",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB41-005#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2507,8 +4076,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS"
+            ],
             "timingLabel": "When Advents",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2517,10 +4095,14 @@
             "isMain": false,
             "cleanBody": "You can return an opposing Spirit to the deckbottom."
           },
+          "originalAbilityText": "[LV1][LV2] (When Advents)\nYou can return an opposing Spirit to the deckbottom.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "You can return an opposing Spirit to the deckbottom.",
+              "originalClauseText": "You can return an opposing Spirit to the deckbottom.",
               "cleanText": "You can return an opposing Spirit to the deckbottom",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -2539,10 +4121,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-005#a2",
+          "keywords": [],
+          "id": "PB41-005#AB_WHEN_ADVENTS_NONE_LV1_LV2_691f9c138be92c919ae2ff6e4042272e34585de3331234a2ca1eea328da81d74_77fd5dab5a3e9d48c9fad1a03d3708ea",
+          "physicalId": "PB41-005#AB_WHEN_ADVENTS_NONE_LV1_LV2_691f9c138be92c919ae2ff6e4042272e34585de3331234a2ca1eea328da81d74_77fd5dab5a3e9d48c9fad1a03d3708ea",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_691f9c138be92c919ae2ff6e4042272e34585de3331234a2ca1eea328da81d74_77fd5dab5a3e9d48c9fad1a03d3708ea",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_2bc22929a74f61723b334e6af1f829ab5a72547fad9ba9685584e70316ea2284_173da98685a8945bb0a315b1f78da9a7",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB41-005#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2554,8 +4150,13 @@
               "During OC"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2564,10 +4165,14 @@
             "isMain": false,
             "cleanBody": "When your \"Special Aircraft\" is summoned, send up to four cores from an opposing Grandwalker Nexus to the Void."
           },
+          "originalAbilityText": "[During OC] [LV1][LV2]\nWhen your \"Special Aircraft\" is summoned, send up to four cores from an opposing Grandwalker Nexus to the Void.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "When your \"Special Aircraft\" is summoned, send up to four cores from an opposing Grandwalker Nexus to the Void.",
+              "originalClauseText": "When your \"Special Aircraft\" is summoned, send up to four cores from an opposing Grandwalker Nexus to the Void.",
               "cleanText": "When your \"Special Aircraft\" is summoned, send up to four cores from an opposing Grandwalker Nexus to the Void",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2575,11 +4180,27 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 4,
+                "to": {
+                  "zone": "void"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-005#a3",
+          "keywords": [],
+          "id": "PB41-005#AB_PASSIVE_NONE_LV1_LV2_973a9389cc84090bb2d540d4e740c083515cb154263d0c8d11d6f740cd7f2c0a_3cab83fd3b22c91211749ac452135896",
+          "physicalId": "PB41-005#AB_PASSIVE_NONE_LV1_LV2_973a9389cc84090bb2d540d4e740c083515cb154263d0c8d11d6f740cd7f2c0a_3cab83fd3b22c91211749ac452135896",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_973a9389cc84090bb2d540d4e740c083515cb154263d0c8d11d6f740cd7f2c0a_3cab83fd3b22c91211749ac452135896",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_3280cb90fee7615b3acf85c4e0cd0706a79262599c166c875565ee1d9c87cfb6_24f9e0b5b55627a17d019a851b96072a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -2596,19 +4217,13 @@
     "compiledIr": {
       "cardNumber": "PB41-008",
       "name": "Zestium Death Burst",
-      "keywords": [
-        {
-          "name": "Burst",
-          "parameter": "After your Life is reduced",
-          "wave": 2,
-          "hook": "burst",
-          "bracketed": true,
-          "index": 95
-        }
-      ],
+      "type": "Magic",
+      "levels": {},
+      "originalEffectText": "When your Cost 5 or more \"Ultraman Zett\" attacks, you can immediately activate this set card.\n\n[Burst: After your Life is reduced]\nReturn two differently-named \"Special Aircraft\" from your Trash to the Hand. Then, by paying the cost, activate this card's Flash effect.\n\n[Flash]\nReturn an opposing Spirit/Ultimate to the deckbottom. Or, including being in in Soul State/pre-advent condition, if you control any White \"Zett\" Contract Spirit, send three cores from an opposing Spirit/Ultimate to the Reserve.",
+      "teams": [],
+      "keywords": [],
       "abilities": [
         {
-          "id": "PB41-008#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2619,8 +4234,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2629,24 +4249,42 @@
             "isMain": false,
             "cleanBody": "When your Cost 5 or more \"Ultraman Zett\" attacks, you can immediately activate this set card."
           },
+          "originalAbilityText": "When your Cost 5 or more \"Ultraman Zett\" attacks, you can immediately activate this set card.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When your Cost 5 or more \"Ultraman Zett\" attacks, you can immediately activate this set card.",
+              "originalClauseText": "When your Cost 5 or more \"Ultraman Zett\" attacks, you can immediately activate this set card.",
               "cleanText": "When your Cost 5 or more \"Ultraman Zett\" attacks, you can immediately activate this set card",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "COST_MODIFIER"
+                "action": "set",
+                "side": "self",
+                "op": "MIRAGE_OPERATION"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-008#a0",
+          "keywords": [],
+          "id": "PB41-008#AB_PASSIVE_NONE_LV1_LV2_LV3_64b7d17cf8ea50764c7f164b521abcc37b183ebc46d321e33058ebe0680dc9d3_65764ba308e1c9fd9e9d53be0a319fcf",
+          "physicalId": "PB41-008#AB_PASSIVE_NONE_LV1_LV2_LV3_64b7d17cf8ea50764c7f164b521abcc37b183ebc46d321e33058ebe0680dc9d3_65764ba308e1c9fd9e9d53be0a319fcf",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_64b7d17cf8ea50764c7f164b521abcc37b183ebc46d321e33058ebe0680dc9d3_65764ba308e1c9fd9e9d53be0a319fcf",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_2344e16c502b3be05beabe0aec190753b11429ea441b22d31225ba8baae4d82f_5402ef4a0a0beeddf8955ae668c29c92",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB41-008#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2657,8 +4295,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "BURST",
+            "timings": [],
             "timingLabel": "Burst",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2667,26 +4312,37 @@
             "isMain": false,
             "cleanBody": "Return two differently-named \"Special Aircraft\" from your Trash to the Hand. Then, by paying the cost, activate this card's Flash effect."
           },
+          "originalAbilityText": "[Burst: After your Life is reduced]\nReturn two differently-named \"Special Aircraft\" from your Trash to the Hand. Then, by paying the cost, activate this card's Flash effect.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Return two differently-named \"Special Aircraft\" from your Trash to the Hand.",
+              "originalClauseText": "Return two differently-named \"Special Aircraft\" from your Trash to the Hand.",
               "cleanText": "Return two differently-named \"Special Aircraft\" from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
-                "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
+                "count": 2,
+                "upTo": false,
+                "filter": {
+                  "nameIncludes": "Special Aircraft"
+                },
+                "isOptional": false
               }
             },
             {
               "rawText": "by paying the cost, activate this card's Flash effect.",
+              "originalClauseText": "by paying the cost, activate this card's Flash effect.",
               "cleanText": "by paying the cost, activate this card's Flash effect",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -2697,10 +4353,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-008#a1",
+          "keywords": [],
+          "id": "PB41-008#AB_BURST_NONE_LV1_LV2_LV3_58fe5aaa5544d58943df11c8afa6b6e8b0940e0cd98c720c57e8b55b823e73b9_28c59628533ec8c94a241f62495c0279",
+          "physicalId": "PB41-008#AB_BURST_NONE_LV1_LV2_LV3_58fe5aaa5544d58943df11c8afa6b6e8b0940e0cd98c720c57e8b55b823e73b9_28c59628533ec8c94a241f62495c0279",
+          "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_58fe5aaa5544d58943df11c8afa6b6e8b0940e0cd98c720c57e8b55b823e73b9_28c59628533ec8c94a241f62495c0279",
+          "semanticIdV3": "SEM3#AB_BURST_NONE_LV1_LV2_LV3_ca1b9c08ef2997b0b384028cc338e4a644232602f687b11211f2ab93c464f64a_887f291a82ceb11ee32f26685fdd6ba5",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB41-008#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2711,8 +4381,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2721,10 +4398,14 @@
             "isMain": false,
             "cleanBody": "Return an opposing Spirit/Ultimate to the deckbottom. Or, including being in in Soul State/pre-advent condition, if you control any White \"Zett\" Contract Spirit, send three cores from an opposing Spirit/Ultimate to the Reserve."
           },
+          "originalAbilityText": "[Flash]\nReturn an opposing Spirit/Ultimate to the deckbottom. Or, including being in in Soul State/pre-advent condition, if you control any White \"Zett\" Contract Spirit, send three cores from an opposing Spirit/Ultimate to the Reserve.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Return an opposing Spirit/Ultimate to the deckbottom.",
+              "originalClauseText": "Return an opposing Spirit/Ultimate to the deckbottom.",
               "cleanText": "Return an opposing Spirit/Ultimate to the deckbottom",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2740,7 +4421,9 @@
             },
             {
               "rawText": "including being in in Soul State/pre-advent condition, if you control any White \"Zett\" Contract Spirit, send three cores from an opposing Spirit/Ultimate to the Reserve.",
+              "originalClauseText": "including being in in Soul State/pre-advent condition, if you control any White \"Zett\" Contract Spirit, send three cores from an opposing Spirit/Ultimate to the Reserve.",
               "cleanText": "including being in in Soul State/pre-advent condition, if you control any White \"Zett\" Contract Spirit, send three cores from an opposing Spirit/Ultimate to the Reserve",
+              "clauseIndex": 1,
               "link": "or",
               "isOptional": false,
               "isCost": false,
@@ -2765,7 +4448,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB41-008#a2",
+          "keywords": [],
+          "id": "PB41-008#AB_FLASH_NONE_LV1_LV2_LV3_6dbd1c7aedd027e226c40ccd266575e4b186dfde2f85d119bdb2aa5d357d797b_ffe01facd898f467468b5968626e8b93",
+          "physicalId": "PB41-008#AB_FLASH_NONE_LV1_LV2_LV3_6dbd1c7aedd027e226c40ccd266575e4b186dfde2f85d119bdb2aa5d357d797b_ffe01facd898f467468b5968626e8b93",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_6dbd1c7aedd027e226c40ccd266575e4b186dfde2f85d119bdb2aa5d357d797b_ffe01facd898f467468b5968626e8b93",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_4c7db1d72ba7e7f12de0092dde3bbd6f6e6c62d3b8d26934c82e857c793ea56e_fbfbb7e195ab8dd2af41cd4f49114d99",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,

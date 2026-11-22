@@ -1,0 +1,18 @@
+Transition,OldIdentityRetained,NewObjectCreated,UsageRestrictionRetained,RulesEvidence,EngineMechanism
+Field to Trash,NO,YES (in Trash),NO (Reset),Rule Manual 17.0 Sec 6-1-3: Card leaving field becomes new object in Trash,stack.id removed from field; topCard moves to grave; ordinary OPT counter terminates
+Trash to Field,NO,YES (on Field),NO (Fresh),Rule Manual 17.0 Sec 6-1-3: Card entering field is treated as newly placed object,Allocates fresh placementId and fresh stack.id; ordinary OPT can activate cleanly
+Field to Hand,NO,YES (in Hand),NO (Reset),Rule Manual 17.0 Sec 6-1-3: Hand return wipes field state and memory,stack destroyed; ordinary OPT terminates
+Hand to Field,NO,YES (on Field),NO (Fresh),Rule Manual 17.0 Sec 6-1-3: Normal summon creates brand new rules object,Allocates fresh placementId; ordinary OPT is unconsumed
+Field to Deck,NO,YES (in Deck),NO (Reset),Rule Manual 17.0 Sec 6-1-3: Bottom-deck or bounce to deck resets card,stack destroyed; ordinary OPT terminates
+Deck to Field,NO,YES (on Field),NO (Fresh),Rule Manual 17.0 Sec 6-1-3: Summoned from deck is a new rules object,Allocates fresh placementId; ordinary OPT is unconsumed
+Field to Soul State,YES,NO (Continuous on Field),YES (Retained),Rule Manual 17.0 Sec 10-2-1: Contract card in Soul State remains on field,stack.isSoulState = true; stack.id preserved; used limits remain consumed
+Soul State to Field (Revive/Manifest),YES,NO (Same Object),YES (Retained),Rule Manual 17.0 Sec 10-2-3: Returning from Soul State does not leave field,stack.isSoulState = false; placementId preserved; used limits remain consumed
+Field to Contract Advent Source,YES,NO (Becomes under-card),YES (Retained),Rule Manual 17.0 Sec 10-3-2: Contract card placed under Advent Spirit remains on field,Card moved to stack.under; field identity preserved
+Contract Advent Source to Field,YES,NO (Separation on field),YES (Retained),Rule Manual 17.0 Sec 10-3-4: Separating from stack does not leave field,New stack created on field preserving placement memory
+Brave Attachment (Field to Brave),YES,NO (Attached to Spirit),YES (Retained),Rule Manual 17.0 Sec 7-2: Brave card becomes braved equipment on same field stack,Brave placed in stack.braves; used Brave limits remain consumed
+Brave Detachment (Brave to Field Spirit),YES,NO (Separates into Spirit),YES (Retained),Rule Manual 17.0 Sec 7-3: Detached Brave remains on field in same turn,Brave becomes independent stack; used limits remain consumed
+Under-card to Trash,NO,YES (in Trash),NO (Reset),Rule Manual 17.0 Sec 6-1-3: Moving to Trash creates new object,Removed from stack.under; goes to grave; limits reset
+Burst Set (Hand to Burst Zone),NO,YES (in Burst Zone),N/A (Burst Object),Rule Manual 17.0 Sec 8-3: Placed face-down in Burst Zone,Stored in player.burst; inactive until trigger condition met
+Burst Activation to Field,NO,YES (on Field),NO (Fresh),Rule Manual 17.0 Sec 8-3-2: Burst resolves and enters field as Spirit,Allocates fresh placementId; ordinary OPT is unconsumed
+Field to Removed from Game,NO,YES (in Removed Zone),NO (Reset),Rule Manual 17.0 Sec 6-1-3: Removed from game resets field presence,stack removed from field; ordinary OPT terminates
+Removed from Game to Field,NO,YES (on Field),NO (Fresh),Rule Manual 17.0 Sec 6-1-3: Entry from removed zone treated as new object,Allocates fresh placementId; ordinary OPT is unconsumed

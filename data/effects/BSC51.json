@@ -24,19 +24,90 @@
     "compiledIr": {
       "cardNumber": "BSC51-CP04",
       "name": "［Artemis Chaser］Moonlaila Randog",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 7000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 10000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 14000
+        }
+      },
+      "originalEffectText": "Flash - [Manifest: \"［Adept Producer］Artemis\" & C3 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand.\n\n[team: Grand Siesta]\n\n[LV1][LV2][LV3] (When Manifests/Attacks)\nYou can return an opposing Spirit to the deckbottom. When you've done so, refresh a Spirit with [Mani] you control.\n\n[LV2][LV3] (End of Your Attack Step)\nYou can +1 core to one of your Yellow \"Artemis\" Grandwalker Nexuses. When you've done so, after the step ends, additional Draw Step and Refresh Step occur once and only once.",
+      "teams": [
+        "Grand Siesta"
+      ],
       "keywords": [
+        {
+          "name": "Manifest",
+          "parameter": "\"［Adept Producer］Artemis\" & C3 or more, (Either Attack Step)",
+          "wave": 1,
+          "hook": "manifest",
+          "bracketed": true,
+          "index": 0,
+          "abilityId": "BSC51-CP04#AB_FLASH_NONE_LV1_LV2_LV3_5e678aa8c096cc3c5b295fc47b6cee3c6f3c31c15adfe696aeb12083237e7c8b_004cc436594901b9878d5954b571f979",
+          "cardNumber": "BSC51-CP04",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "BSC51-CP04#a0"
+        },
         {
           "name": "Team",
           "parameter": "Grand Siesta",
           "wave": 5,
           "hook": "team",
           "bracketed": true,
-          "index": 184
+          "index": 0,
+          "abilityId": "BSC51-CP04#AB_PASSIVE_NONE_LV1_LV2_LV3_30c2817bbf0ee4a11f5ee75f93b4e085052f8dee9d44aa898bc11a98a34b8eaf_0524af4ad8b9364e50ab687390330fa0",
+          "cardNumber": "BSC51-CP04",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC51-CP04#a1"
         }
       ],
       "abilities": [
         {
-          "id": "BSC51-CP04#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -47,20 +118,31 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
-            "keyword": "Mani: \"［Adept Producer］Artemis\" & C3 or more, (Either Attack Step)",
+            "keyword": "Manifest: \"［Adept Producer］Artemis\" & C3 or more, (Either Attack Step)",
             "burstCondition": null,
             "isFlash": true,
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand."
           },
+          "originalAbilityText": "Flash - [Manifest: \"［Adept Producer］Artemis\" & C3 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -82,7 +164,9 @@
             },
             {
               "rawText": "pay one cost from the target to summon this card from the Hand.",
+              "originalClauseText": "pay one cost from the target to summon this card from the Hand.",
               "cleanText": "pay one cost from the target to summon this card from the Hand",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -94,11 +178,58 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC51-CP04#a0",
+          "keywords": [
+            {
+              "name": "Manifest",
+              "parameter": "\"［Adept Producer］Artemis\" & C3 or more, (Either Attack Step)",
+              "wave": 1,
+              "hook": "manifest",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC51-CP04#AB_FLASH_NONE_LV1_LV2_LV3_5e678aa8c096cc3c5b295fc47b6cee3c6f3c31c15adfe696aeb12083237e7c8b_004cc436594901b9878d5954b571f979",
+              "cardNumber": "BSC51-CP04",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "BSC51-CP04#a0"
+            }
+          ],
+          "id": "BSC51-CP04#AB_FLASH_NONE_LV1_LV2_LV3_5e678aa8c096cc3c5b295fc47b6cee3c6f3c31c15adfe696aeb12083237e7c8b_004cc436594901b9878d5954b571f979",
+          "physicalId": "BSC51-CP04#AB_FLASH_NONE_LV1_LV2_LV3_5e678aa8c096cc3c5b295fc47b6cee3c6f3c31c15adfe696aeb12083237e7c8b_004cc436594901b9878d5954b571f979",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_5e678aa8c096cc3c5b295fc47b6cee3c6f3c31c15adfe696aeb12083237e7c8b_004cc436594901b9878d5954b571f979",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_8e0b738b5cc42ec474157951ab521c53b8ee4520cce30c077f3e7917b634d261_9e2544d3df8472d7c5d905d04dd7d11a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC51-CP04#a1",
-          "type": "ABILITY",
+          "type": "TEAM_RESTRICTION",
+          "teams": [
+            "Grand Siesta"
+          ],
           "header": {
             "levels": [
               1,
@@ -108,8 +239,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -118,11 +254,56 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "rawText": "[team: Grand Siesta]",
+          "originalAbilityText": "[team: Grand Siesta]",
+          "abilityIndex": 1,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC51-CP04#a1",
+          "keywords": [
+            {
+              "name": "Team",
+              "parameter": "Grand Siesta",
+              "wave": 5,
+              "hook": "team",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC51-CP04#AB_PASSIVE_NONE_LV1_LV2_LV3_30c2817bbf0ee4a11f5ee75f93b4e085052f8dee9d44aa898bc11a98a34b8eaf_0524af4ad8b9364e50ab687390330fa0",
+              "cardNumber": "BSC51-CP04",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC51-CP04#a1"
+            }
+          ],
+          "id": "BSC51-CP04#AB_PASSIVE_NONE_LV1_LV2_LV3_30c2817bbf0ee4a11f5ee75f93b4e085052f8dee9d44aa898bc11a98a34b8eaf_0524af4ad8b9364e50ab687390330fa0",
+          "physicalId": "BSC51-CP04#AB_PASSIVE_NONE_LV1_LV2_LV3_30c2817bbf0ee4a11f5ee75f93b4e085052f8dee9d44aa898bc11a98a34b8eaf_0524af4ad8b9364e50ab687390330fa0",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_30c2817bbf0ee4a11f5ee75f93b4e085052f8dee9d44aa898bc11a98a34b8eaf_0524af4ad8b9364e50ab687390330fa0",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_05ef341a33b19f9d6f077ead0feb556f8aac89ac5d95c0db05ce14e0632e4739_f6896680344438c474aa2645c16738ab",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC51-CP04#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -133,8 +314,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "STEP_RESTRICTED",
+            "timings": [
+              "WHEN_MANIFESTS",
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Manifests/Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_MANIFESTS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -143,10 +335,14 @@
             "isMain": false,
             "cleanBody": "You can return an opposing Spirit to the deckbottom. When you've done so, refresh a Spirit with [Mani] you control."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Manifests/Attacks)\nYou can return an opposing Spirit to the deckbottom. When you've done so, refresh a Spirit with [Mani] you control.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "You can return an opposing Spirit to the deckbottom.",
+              "originalClauseText": "You can return an opposing Spirit to the deckbottom.",
               "cleanText": "You can return an opposing Spirit to the deckbottom",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -166,7 +362,9 @@
             },
             {
               "rawText": "refresh a Spirit with [Mani] you control.",
+              "originalClauseText": "refresh a Spirit with [Mani] you control.",
               "cleanText": "refresh a Spirit with [Mani] you control",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -184,10 +382,25 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC51-CP04#a2",
+          "keywords": [],
+          "id": "BSC51-CP04#AB_STEP_RESTRICTED_NONE_LV1_LV2_LV3_e41e43e692dd64f01f58c9431b6d7c2975d7e17bc986734a0b5aa11de5076b61_92749f01ab7e8585e66971b1e5d83685",
+          "physicalId": "BSC51-CP04#AB_STEP_RESTRICTED_NONE_LV1_LV2_LV3_e41e43e692dd64f01f58c9431b6d7c2975d7e17bc986734a0b5aa11de5076b61_92749f01ab7e8585e66971b1e5d83685",
+          "semanticId": "SEM#AB_STEP_RESTRICTED_NONE_LV1_LV2_LV3_e41e43e692dd64f01f58c9431b6d7c2975d7e17bc986734a0b5aa11de5076b61_92749f01ab7e8585e66971b1e5d83685",
+          "semanticIdV3": "SEM3#AB_STEP_RESTRICTED_NONE_LV1_LV2_LV3_5c9eccc14792a0446df805e8498a24f0849015ad4c30e6303e10909a64f0bb76_3ac9d4bf139c3ef1d0bff67f7f6ebbe5",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_MANIFESTS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC51-CP04#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -197,8 +410,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "End of Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -207,10 +429,14 @@
             "isMain": false,
             "cleanBody": "You can +1 core to one of your Yellow \"Artemis\" Grandwalker Nexuses. When you've done so, after the step ends, additional Draw Step and Refresh Step occur once and only once."
           },
+          "originalAbilityText": "[LV2][LV3] (End of Your Attack Step)\nYou can +1 core to one of your Yellow \"Artemis\" Grandwalker Nexuses. When you've done so, after the step ends, additional Draw Step and Refresh Step occur once and only once.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "You can +1 core to one of your Yellow \"Artemis\" Grandwalker Nexuses.",
+              "originalClauseText": "You can +1 core to one of your Yellow \"Artemis\" Grandwalker Nexuses.",
               "cleanText": "You can +1 core to one of your Yellow \"Artemis\" Grandwalker Nexuses",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -222,7 +448,9 @@
             },
             {
               "rawText": "after the step ends, additional Draw Step and Refresh Step occur once and only once.",
+              "originalClauseText": "after the step ends, additional Draw Step and Refresh Step occur once and only once.",
               "cleanText": "after the step ends, additional Draw Step and Refresh Step occur once and only once",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -235,7 +463,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC51-CP04#a3",
+          "keywords": [],
+          "id": "BSC51-CP04#AB_ATTACK_STEP_NONE_LV2_LV3_fb038e4b49b7645ea0559bf9dd05b06bedeea9e11405f3c885a2cdd2741bd976_ea91019eb85d403c58614e7d4484ef1b",
+          "physicalId": "BSC51-CP04#AB_ATTACK_STEP_NONE_LV2_LV3_fb038e4b49b7645ea0559bf9dd05b06bedeea9e11405f3c885a2cdd2741bd976_ea91019eb85d403c58614e7d4484ef1b",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_fb038e4b49b7645ea0559bf9dd05b06bedeea9e11405f3c885a2cdd2741bd976_ea91019eb85d403c58614e7d4484ef1b",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_LV3_0f8f814eff95cbac3e946afe4bcd4011c6d03db9ea40c98ac86f1cd771949f69_fed7dcc858de85e2230113fea0e37ff2",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
@@ -263,6 +506,23 @@
     "compiledIr": {
       "cardNumber": "BSC51-CP02",
       "name": "［Cyber Future］Fongneena",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 7000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: \"Fongneena\" & C1 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[team: Absolutes]\n\n[LV1][LV2] (When Summoned/Advents)\nYou can put one core from the Void each to two \"Fongneena\" you control.\n\n[During OC & During Advent] [LV1][LV2] (When Attacks)\n(Once per Turn: Same Name) You can send the [Soul Core] from your Trash to any \"Fongneena\". Then, if you have five counters or more, this Spirit can refresh.",
+      "teams": [
+        "Absolutes"
+      ],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -270,7 +530,28 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "BSC51-CP02#AB_FLASH_NONE_LV1_LV2_LV3_45e05e8a30b69c9c298a21f6ed0e912c6b3fc2b47f9417f8884eb1df0a3522d6_83e0896a1bacfbc48c1d327940988826",
+          "cardNumber": "BSC51-CP02",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "BSC51-CP02#a0"
         },
         {
           "name": "Team",
@@ -278,12 +559,32 @@
           "wave": 5,
           "hook": "team",
           "bracketed": true,
-          "index": 158
+          "index": 0,
+          "abilityId": "BSC51-CP02#AB_PASSIVE_NONE_LV1_LV2_LV3_5c50852ea7468d11180c0d7c81102d2b5e5a27bcd9fd2bac14a81f755738879f_fffc0e1db73cc9415c1c61bd92b2da2a",
+          "cardNumber": "BSC51-CP02",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC51-CP02#a1"
         }
       ],
       "abilities": [
         {
-          "id": "BSC51-CP02#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -294,8 +595,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: \"Fongneena\" & C1 or more, (Your Turn)",
@@ -304,10 +612,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: \"Fongneena\" & C1 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -329,7 +641,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -347,11 +661,58 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC51-CP02#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "\"Fongneena\" & C1 or more, (Your Turn)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC51-CP02#AB_FLASH_NONE_LV1_LV2_LV3_45e05e8a30b69c9c298a21f6ed0e912c6b3fc2b47f9417f8884eb1df0a3522d6_83e0896a1bacfbc48c1d327940988826",
+              "cardNumber": "BSC51-CP02",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "BSC51-CP02#a0"
+            }
+          ],
+          "id": "BSC51-CP02#AB_FLASH_NONE_LV1_LV2_LV3_45e05e8a30b69c9c298a21f6ed0e912c6b3fc2b47f9417f8884eb1df0a3522d6_83e0896a1bacfbc48c1d327940988826",
+          "physicalId": "BSC51-CP02#AB_FLASH_NONE_LV1_LV2_LV3_45e05e8a30b69c9c298a21f6ed0e912c6b3fc2b47f9417f8884eb1df0a3522d6_83e0896a1bacfbc48c1d327940988826",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_45e05e8a30b69c9c298a21f6ed0e912c6b3fc2b47f9417f8884eb1df0a3522d6_83e0896a1bacfbc48c1d327940988826",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_7d6c0e231080697b4c26ee63d553bfceb6ecfa4e4f3f357ecd265a74f474bf6b_8990daf671765d2fd20cbc5b1824a103",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC51-CP02#a1",
-          "type": "ABILITY",
+          "type": "TEAM_RESTRICTION",
+          "teams": [
+            "Absolutes"
+          ],
           "header": {
             "levels": [
               1,
@@ -361,8 +722,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -371,11 +737,56 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "rawText": "[team: Absolutes]",
+          "originalAbilityText": "[team: Absolutes]",
+          "abilityIndex": 1,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC51-CP02#a1",
+          "keywords": [
+            {
+              "name": "Team",
+              "parameter": "Absolutes",
+              "wave": 5,
+              "hook": "team",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC51-CP02#AB_PASSIVE_NONE_LV1_LV2_LV3_5c50852ea7468d11180c0d7c81102d2b5e5a27bcd9fd2bac14a81f755738879f_fffc0e1db73cc9415c1c61bd92b2da2a",
+              "cardNumber": "BSC51-CP02",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC51-CP02#a1"
+            }
+          ],
+          "id": "BSC51-CP02#AB_PASSIVE_NONE_LV1_LV2_LV3_5c50852ea7468d11180c0d7c81102d2b5e5a27bcd9fd2bac14a81f755738879f_fffc0e1db73cc9415c1c61bd92b2da2a",
+          "physicalId": "BSC51-CP02#AB_PASSIVE_NONE_LV1_LV2_LV3_5c50852ea7468d11180c0d7c81102d2b5e5a27bcd9fd2bac14a81f755738879f_fffc0e1db73cc9415c1c61bd92b2da2a",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_5c50852ea7468d11180c0d7c81102d2b5e5a27bcd9fd2bac14a81f755738879f_fffc0e1db73cc9415c1c61bd92b2da2a",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_bb39912bfdd774ad6d87334f6d1f350ddf27200d8a833bdea994f8f2997f570c_0051b1630dba65b51a9ef22d6e11d8b8",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC51-CP02#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -384,21 +795,45 @@
             ],
             "levelExplicit": true,
             "prefixes": [],
-            "timing": "WHEN_SUMMONED",
-            "timingLabel": "When Summoned/Advents",
+            "timing": "PASSIVE",
+            "timings": [],
+            "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
             "burstCondition": null,
             "isFlash": false,
             "isMain": false,
-            "cleanBody": "You can put one core from the Void each to two \"Fongneena\" you control."
+            "cleanBody": "(When Summoned/Advents)\nYou can put one core from the Void each to two \"Fongneena\" you control."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned/Advents)\nYou can put one core from the Void each to two \"Fongneena\" you control.",
+          "abilityIndex": 2,
           "clauses": [
             {
+              "rawText": "(When Summoned/Advents)",
+              "originalClauseText": "(When Summoned/Advents)",
+              "cleanText": "(When Summoned/Advents)",
+              "clauseIndex": 0,
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "UNSUPPORTED",
+                "rawText": "(When Summoned/Advents)"
+              }
+            },
+            {
               "rawText": "You can put one core from the Void each to two \"Fongneena\" you control.",
+              "originalClauseText": "You can put one core from the Void each to two \"Fongneena\" you control.",
               "cleanText": "You can put one core from the Void each to two \"Fongneena\" you control",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -406,14 +841,31 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "(When Summoned/Advents)"
+          ],
+          "legacyId": "BSC51-CP02#a2",
+          "keywords": [],
+          "id": "BSC51-CP02#AB_PASSIVE_NONE_LV1_LV2_c9c2b4c9b94935a557b551b5d9243099ed1109887dc45173455143de76a3ebf5_e21ff7a4febfd5ead7c71bb0dd2a2ea5",
+          "physicalId": "BSC51-CP02#AB_PASSIVE_NONE_LV1_LV2_c9c2b4c9b94935a557b551b5d9243099ed1109887dc45173455143de76a3ebf5_e21ff7a4febfd5ead7c71bb0dd2a2ea5",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_c9c2b4c9b94935a557b551b5d9243099ed1109887dc45173455143de76a3ebf5_e21ff7a4febfd5ead7c71bb0dd2a2ea5",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_58a36af54f738425a4ecba3c984c817ee11d1e20e5dca5bb875b6f167330c500_44f0783022dbc9d0861ffd3f516d0af6",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC51-CP02#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -425,8 +877,19 @@
               "During OC & During Advent"
             ],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
             "limit": "ONCE_PER_TURN_SAME_NAME",
             "cantStack": false,
             "keyword": null,
@@ -435,22 +898,34 @@
             "isMain": false,
             "cleanBody": "You can send the [Soul Core] from your Trash to any \"Fongneena\". Then, if you have five counters or more, this Spirit can refresh."
           },
+          "originalAbilityText": "[During OC & During Advent] [LV1][LV2] (When Attacks)\n(Once per Turn: Same Name) You can send the [Soul Core] from your Trash to any \"Fongneena\". Then, if you have five counters or more, this Spirit can refresh.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "You can send the [Soul Core] from your Trash to any \"Fongneena\".",
+              "originalClauseText": "You can send the [Soul Core] from your Trash to any \"Fongneena\".",
               "cleanText": "You can send the [Soul Core] from your Trash to any \"Fongneena\"",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "MOVE_CORE"
+                "op": "MOVE_SOUL_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             },
             {
               "rawText": "if you have five counters or more, this Spirit can refresh.",
+              "originalClauseText": "if you have five counters or more, this Spirit can refresh.",
               "cleanText": "this Spirit can refresh",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -462,12 +937,29 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC51-CP02#a3",
+          "keywords": [],
+          "id": "BSC51-CP02#AB_WHEN_ATTACKS_NONE_LV1_LV2_c4a00cf3216883102a86d34e7b7f5160715321074d0c8bb1feb1d2daa07f56d5_8f93a0bf909ab2a7f66e742f8c90491d",
+          "physicalId": "BSC51-CP02#AB_WHEN_ATTACKS_NONE_LV1_LV2_c4a00cf3216883102a86d34e7b7f5160715321074d0c8bb1feb1d2daa07f56d5_8f93a0bf909ab2a7f66e742f8c90491d",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_c4a00cf3216883102a86d34e7b7f5160715321074d0c8bb1feb1d2daa07f56d5_8f93a0bf909ab2a7f66e742f8c90491d",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_9cc7763ac9e19c02d089045dbc0e7bd72ee0cadb02a6ecb03e2170fd42a1f403_30a35dec3581a3d50ed71fe9659ab386",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
-      "unsupportedClausesCount": 0,
-      "isFullySupported": true
+      "unsupportedClausesCount": 1,
+      "isFullySupported": false
     }
   },
   "BSC51-CP05": {
@@ -687,6 +1179,23 @@
     "compiledIr": {
       "cardNumber": "PB15-D07",
       "name": "［Halloween Ghost］Rias Urovorun",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 2000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 4000
+        }
+      },
+      "originalEffectText": "[teams: Pretty Animals Twilight Gothic]\n\n[Mirage: Cost 3 ([Yellow Core])]\n[During Set] (Your Attack Step)\nWhen your Cost 6 or more \"Riolu Tida\"/\"Rias Urovorun\" is summoned, send two cores from any opposing Spirits to the Trash.\n\n[LV1][LV2] (When Summoned)\n(Once per Turn: Same Name) Return a \"Diva\" family Spirit card from your Trash to the Hand, and when \"Riolu Tida\" is returned, send a core from any opposing Spirit to the Reserve.",
+      "teams": [
+        "Pretty Animals Twilight Gothic"
+      ],
       "keywords": [
         {
           "name": "Team",
@@ -694,21 +1203,67 @@
           "wave": 5,
           "hook": "team",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "PB15-D07#AB_PASSIVE_NONE_LV1_LV2_LV3_578f36d5c3f764e58fa3467afc0e6f6da94dcc56de77bf24bcbcd09bff1d2111_19dab705e7737fd354d4b7cab2bc395c",
+          "cardNumber": "PB15-D07",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB15-D07#a0"
         },
         {
           "name": "Mirage",
-          "parameter": "Cost 3 ([Yellow Core",
+          "parameter": "Cost 3 ([Yellow Core])",
           "wave": 2,
           "hook": "mirage",
           "bracketed": true,
-          "index": 41
+          "index": 0,
+          "abilityId": "PB15-D07#AB_PASSIVE_NONE_LV1_LV2_LV3_7d36d126f45577f687699f4095f0157a0e0c3797cda6c5c545591d2f006286f2_47eb40ff1ef1ac80b1f1a95f6f74379f",
+          "cardNumber": "PB15-D07",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [
+            "Mirage: Cost 3 ([Yellow Core])"
+          ],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB15-D07#a1"
         }
       ],
       "abilities": [
         {
-          "id": "PB15-D07#a0",
-          "type": "ABILITY",
+          "type": "TEAM_RESTRICTION",
+          "teams": [
+            "Pretty Animals Twilight Gothic"
+          ],
           "header": {
             "levels": [
               1,
@@ -718,8 +1273,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -728,11 +1288,56 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "rawText": "[teams: Pretty Animals Twilight Gothic]",
+          "originalAbilityText": "[teams: Pretty Animals Twilight Gothic]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB15-D07#a0",
+          "keywords": [
+            {
+              "name": "Team",
+              "parameter": "Pretty Animals Twilight Gothic",
+              "wave": 5,
+              "hook": "team",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB15-D07#AB_PASSIVE_NONE_LV1_LV2_LV3_578f36d5c3f764e58fa3467afc0e6f6da94dcc56de77bf24bcbcd09bff1d2111_19dab705e7737fd354d4b7cab2bc395c",
+              "cardNumber": "PB15-D07",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB15-D07#a0"
+            }
+          ],
+          "id": "PB15-D07#AB_PASSIVE_NONE_LV1_LV2_LV3_578f36d5c3f764e58fa3467afc0e6f6da94dcc56de77bf24bcbcd09bff1d2111_19dab705e7737fd354d4b7cab2bc395c",
+          "physicalId": "PB15-D07#AB_PASSIVE_NONE_LV1_LV2_LV3_578f36d5c3f764e58fa3467afc0e6f6da94dcc56de77bf24bcbcd09bff1d2111_19dab705e7737fd354d4b7cab2bc395c",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_578f36d5c3f764e58fa3467afc0e6f6da94dcc56de77bf24bcbcd09bff1d2111_19dab705e7737fd354d4b7cab2bc395c",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_c5becf0183d4ee801a0841c4f4e8197ba0505e26e68c6c970b12d87ada938be1_86a30776d6a8b16819d8871bfd701dcb",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB15-D07#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -742,11 +1347,16 @@
             ],
             "levelExplicit": false,
             "prefixes": [
-              "Mirage: Cost ([Yellow Core])"
+              "Mirage: Cost 3 ([Yellow Core])"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -755,11 +1365,57 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "originalAbilityText": "[Mirage: Cost 3 ([Yellow Core])]",
+          "abilityIndex": 1,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB15-D07#a1",
+          "keywords": [
+            {
+              "name": "Mirage",
+              "parameter": "Cost 3 ([Yellow Core])",
+              "wave": 2,
+              "hook": "mirage",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB15-D07#AB_PASSIVE_NONE_LV1_LV2_LV3_7d36d126f45577f687699f4095f0157a0e0c3797cda6c5c545591d2f006286f2_47eb40ff1ef1ac80b1f1a95f6f74379f",
+              "cardNumber": "PB15-D07",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [
+                "Mirage: Cost 3 ([Yellow Core])"
+              ],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB15-D07#a1"
+            }
+          ],
+          "id": "PB15-D07#AB_PASSIVE_NONE_LV1_LV2_LV3_7d36d126f45577f687699f4095f0157a0e0c3797cda6c5c545591d2f006286f2_47eb40ff1ef1ac80b1f1a95f6f74379f",
+          "physicalId": "PB15-D07#AB_PASSIVE_NONE_LV1_LV2_LV3_7d36d126f45577f687699f4095f0157a0e0c3797cda6c5c545591d2f006286f2_47eb40ff1ef1ac80b1f1a95f6f74379f",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_7d36d126f45577f687699f4095f0157a0e0c3797cda6c5c545591d2f006286f2_47eb40ff1ef1ac80b1f1a95f6f74379f",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_91545d70c6638530a480a23c31819905a85a382db698b87685d6aca61e3d0efd_1bd81b7b7a6298eaa4586a242cb9b854",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB15-D07#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -772,8 +1428,19 @@
               "During Set"
             ],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "DURING_SET"
+            ],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -782,10 +1449,14 @@
             "isMain": false,
             "cleanBody": "When your Cost 6 or more \"Riolu Tida\"/\"Rias Urovorun\" is summoned, send two cores from any opposing Spirits to the Trash."
           },
+          "originalAbilityText": "[During Set] (Your Attack Step)\nWhen your Cost 6 or more \"Riolu Tida\"/\"Rias Urovorun\" is summoned, send two cores from any opposing Spirits to the Trash.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When your Cost 6 or more \"Riolu Tida\"/\"Rias Urovorun\" is summoned, send two cores from any opposing Spirits to the Trash.",
+              "originalClauseText": "When your Cost 6 or more \"Riolu Tida\"/\"Rias Urovorun\" is summoned, send two cores from any opposing Spirits to the Trash.",
               "cleanText": "When your Cost 6 or more \"Riolu Tida\"/\"Rias Urovorun\" is summoned, send two cores from any opposing Spirits to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -793,14 +1464,38 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 2,
+                "from": {
+                  "zone": "field",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB15-D07#a2",
+          "keywords": [],
+          "id": "PB15-D07#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_7b23d5e0b8819721ad28b55ee1019252c0a4786fa6ea434c5dd8b0419fd32885_04787b4fd5a20f421f65294c9a923f4f",
+          "physicalId": "PB15-D07#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_7b23d5e0b8819721ad28b55ee1019252c0a4786fa6ea434c5dd8b0419fd32885_04787b4fd5a20f421f65294c9a923f4f",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_7b23d5e0b8819721ad28b55ee1019252c0a4786fa6ea434c5dd8b0419fd32885_04787b4fd5a20f421f65294c9a923f4f",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_a744ce55427c7d65f4df9c802c1afa64ec7bafd49ee841ff75ba663382c5f7e9_832cd7a0d22dc8b176320364e0868457",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "DURING_SET"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB15-D07#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -810,8 +1505,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
             "limit": "ONCE_PER_TURN_SAME_NAME",
             "cantStack": false,
             "keyword": null,
@@ -820,22 +1526,55 @@
             "isMain": false,
             "cleanBody": "Return a \"Diva\" family Spirit card from your Trash to the Hand, and when \"Riolu Tida\" is returned, send a core from any opposing Spirit to the Reserve."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned)\n(Once per Turn: Same Name) Return a \"Diva\" family Spirit card from your Trash to the Hand, and when \"Riolu Tida\" is returned, send a core from any opposing Spirit to the Reserve.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "Return a \"Diva\" family Spirit card from your Trash to the Hand, and when \"Riolu Tida\" is returned, send a core from any opposing Spirit to the Reserve.",
+              "originalClauseText": "Return a \"Diva\" family Spirit card from your Trash to the Hand, and when \"Riolu Tida\" is returned, send a core from any opposing Spirit to the Reserve.",
               "cleanText": "Return a \"Diva\" family Spirit card from your Trash to the Hand, and when \"Riolu Tida\" is returned, send a core from any opposing Spirit to the Reserve",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "MOVE_CORE",
-                "isCost": false
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "family": "Diva",
+                  "nameIncludes": "Riolu Tida"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB15-D07#a3",
+          "keywords": [],
+          "id": "PB15-D07#AB_WHEN_SUMMONED_NONE_LV1_LV2_fb9181a2bee78dceba2c36a28fd3cceeb96181fb0aebace19fbf7dd5c88705e1_03a110b29b07324e5f11eec22300a6f8",
+          "physicalId": "PB15-D07#AB_WHEN_SUMMONED_NONE_LV1_LV2_fb9181a2bee78dceba2c36a28fd3cceeb96181fb0aebace19fbf7dd5c88705e1_03a110b29b07324e5f11eec22300a6f8",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_fb9181a2bee78dceba2c36a28fd3cceeb96181fb0aebace19fbf7dd5c88705e1_03a110b29b07324e5f11eec22300a6f8",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_47af2ccdbfa48dbb12807a46ec1f84107138fdf37bad88a9069c105b7eebe3f4_6a8e76a3d502043d63ce275494d0e5ef",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -868,14 +1607,57 @@
     "compiledIr": {
       "cardNumber": "PB15-D08",
       "name": "［Halloween Mummy］Saclaire Metum",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 4000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 3,
+          "bp": 5000
+        }
+      },
+      "originalEffectText": "This card/Spirit has every Team.\n\n[Mirage: Cost 3 ([Yellow Core][Yellow Core])]\n[During Set]\nOnce per step, when your “Stage Style”/“Grand Style” family Spirit is summoned/[advents], +1 core to any \"Producer\" Grandwalker Nexus you control.\n\n[LV1][LV2][LV3] (When Summoned)\nReturn a “Diva” family Spirit card from your Trash to the decktop.",
+      "teams": [],
       "keywords": [
         {
           "name": "Mirage",
-          "parameter": "Cost 3 ([Yellow Core",
+          "parameter": "Cost 3 ([Yellow Core][Yellow Core])",
           "wave": 2,
           "hook": "mirage",
           "bracketed": true,
-          "index": 34
+          "index": 0,
+          "abilityId": "PB15-D08#AB_PASSIVE_NONE_LV1_LV2_LV3_fe490843b555644d5f223941e97853cafa506c9352fa45d91e16b4cff3eb0cad_d32ecc6fc58d1f54d3fb45a1eedb1842",
+          "cardNumber": "PB15-D08",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [
+            "Mirage: Cost 3 ([Yellow Core][Yellow Core])"
+          ],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB15-D08#a1"
         },
         {
           "name": "Advent",
@@ -883,12 +1665,34 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 172
+          "index": 79,
+          "abilityId": "PB15-D08#AB_PASSIVE_NONE_LV1_LV2_LV3_a70eec5d72ed66e3d929beac01511e0b293245859778f077cf1a1fa2be8f3adb_e7a11aa71a12c9bfb39d60ea89c763c8",
+          "cardNumber": "PB15-D08",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [
+            "During Set"
+          ],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB15-D08#a2"
         }
       ],
       "abilities": [
         {
-          "id": "PB15-D08#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -899,8 +1703,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -909,24 +1718,42 @@
             "isMain": false,
             "cleanBody": "This card/Spirit has every Team."
           },
+          "originalAbilityText": "This card/Spirit has every Team.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "This card/Spirit has every Team.",
+              "originalClauseText": "This card/Spirit has every Team.",
               "cleanText": "This card/Spirit has every Team",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
+                "allTeams": true,
+                "scope": "all",
                 "op": "GAIN_TEAM"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB15-D08#a0",
+          "keywords": [],
+          "id": "PB15-D08#AB_PASSIVE_NONE_LV1_LV2_LV3_ee6d10d30cedec68bb497720c7447e4ad342ce3e7e98058d3c9ebbe16e4ac1ea_4db13c4e5a61f27cbab8bd8598ca53a5",
+          "physicalId": "PB15-D08#AB_PASSIVE_NONE_LV1_LV2_LV3_ee6d10d30cedec68bb497720c7447e4ad342ce3e7e98058d3c9ebbe16e4ac1ea_4db13c4e5a61f27cbab8bd8598ca53a5",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_ee6d10d30cedec68bb497720c7447e4ad342ce3e7e98058d3c9ebbe16e4ac1ea_4db13c4e5a61f27cbab8bd8598ca53a5",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_77b18724c1b8d9523fe488e401789f85a844cb3a1913fa7723a44040a662c575_99d81105d234799a32780b0acd86e43d",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB15-D08#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -936,11 +1763,16 @@
             ],
             "levelExplicit": false,
             "prefixes": [
-              "Mirage: Cost ([Yellow Core][Yellow Core])"
+              "Mirage: Cost 3 ([Yellow Core][Yellow Core])"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -949,11 +1781,57 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "originalAbilityText": "[Mirage: Cost 3 ([Yellow Core][Yellow Core])]",
+          "abilityIndex": 1,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB15-D08#a1",
+          "keywords": [
+            {
+              "name": "Mirage",
+              "parameter": "Cost 3 ([Yellow Core][Yellow Core])",
+              "wave": 2,
+              "hook": "mirage",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB15-D08#AB_PASSIVE_NONE_LV1_LV2_LV3_fe490843b555644d5f223941e97853cafa506c9352fa45d91e16b4cff3eb0cad_d32ecc6fc58d1f54d3fb45a1eedb1842",
+              "cardNumber": "PB15-D08",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [
+                "Mirage: Cost 3 ([Yellow Core][Yellow Core])"
+              ],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB15-D08#a1"
+            }
+          ],
+          "id": "PB15-D08#AB_PASSIVE_NONE_LV1_LV2_LV3_fe490843b555644d5f223941e97853cafa506c9352fa45d91e16b4cff3eb0cad_d32ecc6fc58d1f54d3fb45a1eedb1842",
+          "physicalId": "PB15-D08#AB_PASSIVE_NONE_LV1_LV2_LV3_fe490843b555644d5f223941e97853cafa506c9352fa45d91e16b4cff3eb0cad_d32ecc6fc58d1f54d3fb45a1eedb1842",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_fe490843b555644d5f223941e97853cafa506c9352fa45d91e16b4cff3eb0cad_d32ecc6fc58d1f54d3fb45a1eedb1842",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_8924811bae91e88a85c86d22fe17634a7511729a9a65dc1d31666c15404b604e_a43792a63a2c145d2ec7946fbf78a667",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB15-D08#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -966,8 +1844,15 @@
               "During Set"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "DURING_SET"
+            ],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -976,24 +1861,75 @@
             "isMain": false,
             "cleanBody": "Once per step, when your “Stage Style”/“Grand Style” family Spirit is summoned/[advents], +1 core to any \"Producer\" Grandwalker Nexus you control."
           },
+          "originalAbilityText": "[During Set]\nOnce per step, when your “Stage Style”/“Grand Style” family Spirit is summoned/[advents], +1 core to any \"Producer\" Grandwalker Nexus you control.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Once per step, when your \"Stage Style\"/\"Grand Style\" family Spirit is summoned/[advents], +1 core to any \"Producer\" Grandwalker Nexus you control.",
+              "originalClauseText": "Once per step, when your \"Stage Style\"/\"Grand Style\" family Spirit is summoned/[advents], +1 core to any \"Producer\" Grandwalker Nexus you control.",
               "cleanText": "Once per step, when your \"Stage Style\"/\"Grand Style\" family Spirit is summoned/[advents], +1 core to any \"Producer\" Grandwalker Nexus you control",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "GRANT_FAMILY"
+                "op": "KEYWORD_RULE",
+                "keyword": "advents"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB15-D08#a2",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": null,
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 79,
+              "abilityId": "PB15-D08#AB_PASSIVE_NONE_LV1_LV2_LV3_a70eec5d72ed66e3d929beac01511e0b293245859778f077cf1a1fa2be8f3adb_e7a11aa71a12c9bfb39d60ea89c763c8",
+              "cardNumber": "PB15-D08",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [
+                "During Set"
+              ],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB15-D08#a2"
+            }
+          ],
+          "id": "PB15-D08#AB_PASSIVE_NONE_LV1_LV2_LV3_a70eec5d72ed66e3d929beac01511e0b293245859778f077cf1a1fa2be8f3adb_e7a11aa71a12c9bfb39d60ea89c763c8",
+          "physicalId": "PB15-D08#AB_PASSIVE_NONE_LV1_LV2_LV3_a70eec5d72ed66e3d929beac01511e0b293245859778f077cf1a1fa2be8f3adb_e7a11aa71a12c9bfb39d60ea89c763c8",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_a70eec5d72ed66e3d929beac01511e0b293245859778f077cf1a1fa2be8f3adb_e7a11aa71a12c9bfb39d60ea89c763c8",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_2a24538ca4d1fc1fd8361a28228be93e388a3b2543edfb5e7eb31f66f3c4772c_208b1ae0f963562304462dbf1397d2c1",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "DURING_SET"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB15-D08#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1004,8 +1940,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1014,25 +1959,52 @@
             "isMain": false,
             "cleanBody": "Return a “Diva” family Spirit card from your Trash to the decktop."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nReturn a “Diva” family Spirit card from your Trash to the decktop.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "Return a \"Diva\" family Spirit card from your Trash to the decktop.",
+              "originalClauseText": "Return a \"Diva\" family Spirit card from your Trash to the decktop.",
               "cleanText": "Return a \"Diva\" family Spirit card from your Trash to the decktop",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "DECK_TOP",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "family": "Diva"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB15-D08#a3",
+          "keywords": [],
+          "id": "PB15-D08#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_2a03cf0262e94ff7267ec936334ba744794d8e99858442f806a641ce239de8bf_6a7796d67c7536f39152c0ff1ff55cd2",
+          "physicalId": "PB15-D08#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_2a03cf0262e94ff7267ec936334ba744794d8e99858442f806a641ce239de8bf_6a7796d67c7536f39152c0ff1ff55cd2",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_2a03cf0262e94ff7267ec936334ba744794d8e99858442f806a641ce239de8bf_6a7796d67c7536f39152c0ff1ff55cd2",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_1875e1436b579337eee02c53ae3297af83a121ab67a268608ef410b6ccceb09b_52838adeb64bf995e8793fad18883ea9",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -1521,6 +2493,28 @@
     "compiledIr": {
       "cardNumber": "BSC51-CP03",
       "name": "［Sengoku Witch Quartet］Flamme Sandria",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 9000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 14000
+        }
+      },
+      "originalEffectText": "[team: Twilight Gothic]\n\n(Once per Turn: Same Name) While this card is in the Trash, when your \"［Together Forever］Flamme Sandria\" is summoned, if you have three counters or more, you can return it to the Hand. Or, you can set it.\n\n[Burst: After your Life is reduced]\nSummon this card without paying the cost.\n\n[LV1][LV2][LV3] (When Summoned)\nYou can destroy every opposing 10000 BP or less Spirit, and draw a card for each target destroyed.",
+      "teams": [
+        "Twilight Gothic"
+      ],
       "keywords": [
         {
           "name": "Team",
@@ -1528,21 +2522,36 @@
           "wave": 5,
           "hook": "team",
           "bracketed": true,
-          "index": 0
-        },
-        {
-          "name": "Burst",
-          "parameter": "After your Life is reduced",
-          "wave": 2,
-          "hook": "burst",
-          "bracketed": true,
-          "index": 231
+          "index": 0,
+          "abilityId": "BSC51-CP03#AB_PASSIVE_NONE_LV1_LV2_LV3_13d02f88879ad828265dcbd6a15aef53790febb85cd2935e9d4a40e11c177d4b_2a77f49b1f4ea62ec14a5dbbee1bb918",
+          "cardNumber": "BSC51-CP03",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC51-CP03#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BSC51-CP03#a0",
-          "type": "ABILITY",
+          "type": "TEAM_RESTRICTION",
+          "teams": [
+            "Twilight Gothic"
+          ],
           "header": {
             "levels": [
               1,
@@ -1552,8 +2561,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1562,11 +2576,56 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "rawText": "[team: Twilight Gothic]",
+          "originalAbilityText": "[team: Twilight Gothic]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC51-CP03#a0",
+          "keywords": [
+            {
+              "name": "Team",
+              "parameter": "Twilight Gothic",
+              "wave": 5,
+              "hook": "team",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC51-CP03#AB_PASSIVE_NONE_LV1_LV2_LV3_13d02f88879ad828265dcbd6a15aef53790febb85cd2935e9d4a40e11c177d4b_2a77f49b1f4ea62ec14a5dbbee1bb918",
+              "cardNumber": "BSC51-CP03",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC51-CP03#a0"
+            }
+          ],
+          "id": "BSC51-CP03#AB_PASSIVE_NONE_LV1_LV2_LV3_13d02f88879ad828265dcbd6a15aef53790febb85cd2935e9d4a40e11c177d4b_2a77f49b1f4ea62ec14a5dbbee1bb918",
+          "physicalId": "BSC51-CP03#AB_PASSIVE_NONE_LV1_LV2_LV3_13d02f88879ad828265dcbd6a15aef53790febb85cd2935e9d4a40e11c177d4b_2a77f49b1f4ea62ec14a5dbbee1bb918",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_13d02f88879ad828265dcbd6a15aef53790febb85cd2935e9d4a40e11c177d4b_2a77f49b1f4ea62ec14a5dbbee1bb918",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_9d76e6d79d8e84d34eae171db46494ea011167c8ee30be960a1854e7fcfb1e9b_f6466ebeec89073dc815f93e7b4f9e26",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC51-CP03#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1577,8 +2636,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
             "limit": "ONCE_PER_TURN_SAME_NAME",
             "cantStack": false,
             "keyword": null,
@@ -1587,10 +2653,14 @@
             "isMain": false,
             "cleanBody": "While this card is in the Trash, when your \"［Together Forever］Flamme Sandria\" is summoned, if you have three counters or more, you can return it to the Hand. Or, you can set it."
           },
+          "originalAbilityText": "(Once per Turn: Same Name) While this card is in the Trash, when your \"［Together Forever］Flamme Sandria\" is summoned, if you have three counters or more, you can return it to the Hand. Or, you can set it.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "While this card is in the Trash, when your \"［Together Forever］Flamme Sandria\" is summoned, if you have three counters or more, you can return it to the Hand.",
+              "originalClauseText": "While this card is in the Trash, when your \"［Together Forever］Flamme Sandria\" is summoned, if you have three counters or more, you can return it to the Hand.",
               "cleanText": "when your \"［Together Forever］Flamme Sandria\" is summoned, if you have three counters or more, you can return it to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1604,7 +2674,9 @@
             },
             {
               "rawText": "you can set it.",
+              "originalClauseText": "you can set it.",
               "cleanText": "you can set it",
+              "clauseIndex": 1,
               "link": "or",
               "isOptional": true,
               "isCost": false,
@@ -1615,10 +2687,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC51-CP03#a1",
+          "keywords": [],
+          "id": "BSC51-CP03#AB_PASSIVE_NONE_LV1_LV2_LV3_663c8c2eb9b0d03577be1b95347e80463ec396c983984970ef1cfd143d822831_21b75053a3798f511169c9972c9571d6",
+          "physicalId": "BSC51-CP03#AB_PASSIVE_NONE_LV1_LV2_LV3_663c8c2eb9b0d03577be1b95347e80463ec396c983984970ef1cfd143d822831_21b75053a3798f511169c9972c9571d6",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_663c8c2eb9b0d03577be1b95347e80463ec396c983984970ef1cfd143d822831_21b75053a3798f511169c9972c9571d6",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_a11338b52334e9e845ad9b0d76bfe669c04d774543cfcb52795f8bd3da93ad1e_5010709b51933d650957bc94d6466902",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC51-CP03#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1629,8 +2715,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "BURST",
+            "timings": [],
             "timingLabel": "Burst",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1639,10 +2732,14 @@
             "isMain": false,
             "cleanBody": "Summon this card without paying the cost."
           },
+          "originalAbilityText": "[Burst: After your Life is reduced]\nSummon this card without paying the cost.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Summon this card without paying the cost.",
+              "originalClauseText": "Summon this card without paying the cost.",
               "cleanText": "Summon this card without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1655,10 +2752,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC51-CP03#a2",
+          "keywords": [],
+          "id": "BSC51-CP03#AB_BURST_NONE_LV1_LV2_LV3_3c9c4faa2bb027ba94d6b62ef0ddeace6a3806ee3ad7cebdddf8557ad52edcbb_d175630ac84a47679c94851e9d393c2f",
+          "physicalId": "BSC51-CP03#AB_BURST_NONE_LV1_LV2_LV3_3c9c4faa2bb027ba94d6b62ef0ddeace6a3806ee3ad7cebdddf8557ad52edcbb_d175630ac84a47679c94851e9d393c2f",
+          "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_3c9c4faa2bb027ba94d6b62ef0ddeace6a3806ee3ad7cebdddf8557ad52edcbb_d175630ac84a47679c94851e9d393c2f",
+          "semanticIdV3": "SEM3#AB_BURST_NONE_LV1_LV2_LV3_898d900cf5e22d6f07158cb152f1f62160bb5eb615e0856b22bcaa705c590cfd_4948ebbe46c2192ae96a08adf468096e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC51-CP03#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1669,8 +2780,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1679,10 +2799,14 @@
             "isMain": false,
             "cleanBody": "You can destroy every opposing 10000 BP or less Spirit, and draw a card for each target destroyed."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nYou can destroy every opposing 10000 BP or less Spirit, and draw a card for each target destroyed.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "You can destroy every opposing 10000 BP or less Spirit",
+              "originalClauseText": "You can destroy every opposing 10000 BP or less Spirit",
               "cleanText": "You can destroy every opposing 10000 BP or less Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1699,7 +2823,9 @@
             },
             {
               "rawText": "draw a card for each target destroyed.",
+              "originalClauseText": "draw a card for each target destroyed.",
               "cleanText": "draw a card for each target destroyed",
+              "clauseIndex": 1,
               "link": "also",
               "isOptional": false,
               "isCost": false,
@@ -1713,7 +2839,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC51-CP03#a3",
+          "keywords": [],
+          "id": "BSC51-CP03#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_d411f7e26dfb726391c746c46733ac8e41b2cf875265262565111421789206cf_ee51d3e975e66e03c9589e3ab5fa7be5",
+          "physicalId": "BSC51-CP03#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_d411f7e26dfb726391c746c46733ac8e41b2cf875265262565111421789206cf_ee51d3e975e66e03c9589e3ab5fa7be5",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_d411f7e26dfb726391c746c46733ac8e41b2cf875265262565111421789206cf_ee51d3e975e66e03c9589e3ab5fa7be5",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_3cf6a53c582518627b5edd6b91cf1e1c91445faee081a4e104688e0ebcecde8d_ffc62b9d3a4c1ac6b430affe4556b12e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -1741,6 +2882,23 @@
     "compiledIr": {
       "cardNumber": "BSC51-CP06",
       "name": "［Together Forever］Blackster",
+      "type": "Contract Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 2000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 3000
+        }
+      },
+      "originalEffectText": "[team: Legendoll]\n\nWhile this card is in Soul State, you can [Contract Advent] onto it. When you do, you can put any number of cores from your Field/Reserve to the advent card.\n\n[Contract Pre-Advent]/[Spirit] [LV1][LV2]\nOnce per turn, when your \"Diva\" family Spirit attacks, you can return from your Trash to the Hand a Cost 7 or more Spirit card with the same team as that target.\n\n[Contract Pre-Advent]/[Spirit] [LV1][LV2] (When Attacks)\nYour counter +1. Then, you can target and attack an opposing LV1 Spirit.",
+      "teams": [
+        "Legendoll"
+      ],
       "keywords": [
         {
           "name": "Team",
@@ -1748,7 +2906,28 @@
           "wave": 5,
           "hook": "team",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "BSC51-CP06#AB_PASSIVE_NONE_LV1_LV2_LV3_c618b1f3caa33b43c464fb89db4f51ea230a47bba3c46c318c7d7f96b0d9e8fa_fcec00fea366161be3efc54fde8f1d90",
+          "cardNumber": "BSC51-CP06",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC51-CP06#a0"
         },
         {
           "name": "Contract Advent",
@@ -1756,7 +2935,28 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 61
+          "index": 42,
+          "abilityId": "BSC51-CP06#AB_PASSIVE_NONE_LV1_LV2_LV3_5d6daad159d362f33951b3d55c5937c4baecfad7b555b9821993f753692fb64d_ccd14276bea705d71160577cab6c8c55",
+          "cardNumber": "BSC51-CP06",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC51-CP06#a1"
         },
         {
           "name": "Contract Pre-Advent",
@@ -1764,7 +2964,29 @@
           "wave": 2,
           "hook": "contract_pre_advent",
           "bracketed": true,
-          "index": 178
+          "index": 0,
+          "abilityId": "BSC51-CP06#AB_PASSIVE_NONE_LV1_LV2_587b761acf35b02d8b10f754eaa27a24e7e8708ae84819a5d9d4a25b7b2d6a9b_de76a65c23f70e2156a0bfeffffc4054",
+          "cardNumber": "BSC51-CP06",
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [
+            "Contract Pre-Advent"
+          ],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": "ONCE_PER_TURN",
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC51-CP06#a2"
         },
         {
           "name": "Contract Pre-Advent",
@@ -1772,13 +2994,37 @@
           "wave": 2,
           "hook": "contract_pre_advent",
           "bracketed": true,
-          "index": 383
+          "index": 0,
+          "abilityId": "BSC51-CP06#AB_WHEN_ATTACKS_NONE_LV1_LV2_b733412260215fc4782712a57521267a5d5c8b82670439743d3525cc091de755_a113fe3a23ad46554c137891898955ce",
+          "cardNumber": "BSC51-CP06",
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [
+            "Contract Pre-Advent"
+          ],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC51-CP06#a3"
         }
       ],
       "abilities": [
         {
-          "id": "BSC51-CP06#a0",
-          "type": "ABILITY",
+          "type": "TEAM_RESTRICTION",
+          "teams": [
+            "Legendoll"
+          ],
           "header": {
             "levels": [
               1,
@@ -1788,8 +3034,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1798,11 +3049,56 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "rawText": "[team: Legendoll]",
+          "originalAbilityText": "[team: Legendoll]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC51-CP06#a0",
+          "keywords": [
+            {
+              "name": "Team",
+              "parameter": "Legendoll",
+              "wave": 5,
+              "hook": "team",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC51-CP06#AB_PASSIVE_NONE_LV1_LV2_LV3_c618b1f3caa33b43c464fb89db4f51ea230a47bba3c46c318c7d7f96b0d9e8fa_fcec00fea366161be3efc54fde8f1d90",
+              "cardNumber": "BSC51-CP06",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC51-CP06#a0"
+            }
+          ],
+          "id": "BSC51-CP06#AB_PASSIVE_NONE_LV1_LV2_LV3_c618b1f3caa33b43c464fb89db4f51ea230a47bba3c46c318c7d7f96b0d9e8fa_fcec00fea366161be3efc54fde8f1d90",
+          "physicalId": "BSC51-CP06#AB_PASSIVE_NONE_LV1_LV2_LV3_c618b1f3caa33b43c464fb89db4f51ea230a47bba3c46c318c7d7f96b0d9e8fa_fcec00fea366161be3efc54fde8f1d90",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_c618b1f3caa33b43c464fb89db4f51ea230a47bba3c46c318c7d7f96b0d9e8fa_fcec00fea366161be3efc54fde8f1d90",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_e4d1e2f5480f6a946485ec63a9bb02ababdeaed739d229f5eb2ec4020b60f3d4_26f4b1d3e3e4b065e6cebaafe818268a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC51-CP06#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1813,8 +3109,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1823,22 +3124,29 @@
             "isMain": false,
             "cleanBody": "While this card is in Soul State, you can [Contract Advent] onto it. When you do, you can put any number of cores from your Field/Reserve to the advent card."
           },
+          "originalAbilityText": "While this card is in Soul State, you can [Contract Advent] onto it. When you do, you can put any number of cores from your Field/Reserve to the advent card.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "While this card is in Soul State, you can [Contract Advent] onto it.",
+              "originalClauseText": "While this card is in Soul State, you can [Contract Advent] onto it.",
               "cleanText": "you can [Contract Advent] onto it",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": "While this card is in Soul State",
               "duration": null,
               "op": {
-                "op": "CONTRACT_ADVENT_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Contract Advent"
               }
             },
             {
               "rawText": "When you do, you can put any number of cores from your Field/Reserve to the advent card.",
+              "originalClauseText": "When you do, you can put any number of cores from your Field/Reserve to the advent card.",
               "cleanText": "When you do, you can put any number of cores from your Field/Reserve to the advent card",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1852,10 +3160,52 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC51-CP06#a1",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": null,
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 42,
+              "abilityId": "BSC51-CP06#AB_PASSIVE_NONE_LV1_LV2_LV3_5d6daad159d362f33951b3d55c5937c4baecfad7b555b9821993f753692fb64d_ccd14276bea705d71160577cab6c8c55",
+              "cardNumber": "BSC51-CP06",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC51-CP06#a1"
+            }
+          ],
+          "id": "BSC51-CP06#AB_PASSIVE_NONE_LV1_LV2_LV3_5d6daad159d362f33951b3d55c5937c4baecfad7b555b9821993f753692fb64d_ccd14276bea705d71160577cab6c8c55",
+          "physicalId": "BSC51-CP06#AB_PASSIVE_NONE_LV1_LV2_LV3_5d6daad159d362f33951b3d55c5937c4baecfad7b555b9821993f753692fb64d_ccd14276bea705d71160577cab6c8c55",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_5d6daad159d362f33951b3d55c5937c4baecfad7b555b9821993f753692fb64d_ccd14276bea705d71160577cab6c8c55",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_24ae698eb1b79d0186e04cbf1414b7de6d2c52415b30523ff9ef4d86958ab903_b92f3bab0ab8646d292bc2c28f889a43",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC51-CP06#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1867,8 +3217,15 @@
               "Contract Pre-Advent"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -1877,28 +3234,86 @@
             "isMain": false,
             "cleanBody": "when your \"Diva\" family Spirit attacks, you can return from your Trash to the Hand a Cost 7 or more Spirit card with the same team as that target."
           },
+          "originalAbilityText": "[Contract Pre-Advent]/[Spirit] [LV1][LV2]\nOnce per turn, when your \"Diva\" family Spirit attacks, you can return from your Trash to the Hand a Cost 7 or more Spirit card with the same team as that target.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "when your \"Diva\" family Spirit attacks, you can return from your Trash to the Hand a Cost 7 or more Spirit card with the same team as that target.",
+              "originalClauseText": "when your \"Diva\" family Spirit attacks, you can return from your Trash to the Hand a Cost 7 or more Spirit card with the same team as that target.",
               "cleanText": "when your \"Diva\" family Spirit attacks, you can return from your Trash to the Hand a Cost 7 or more Spirit card with the same team as that target",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "costGte": 7,
+                  "family": "Diva"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC51-CP06#a2",
+          "keywords": [
+            {
+              "name": "Contract Pre-Advent",
+              "parameter": null,
+              "wave": 2,
+              "hook": "contract_pre_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC51-CP06#AB_PASSIVE_NONE_LV1_LV2_587b761acf35b02d8b10f754eaa27a24e7e8708ae84819a5d9d4a25b7b2d6a9b_de76a65c23f70e2156a0bfeffffc4054",
+              "cardNumber": "BSC51-CP06",
+              "levels": [
+                1,
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [
+                "Contract Pre-Advent"
+              ],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": "ONCE_PER_TURN",
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC51-CP06#a2"
+            }
+          ],
+          "id": "BSC51-CP06#AB_PASSIVE_NONE_LV1_LV2_587b761acf35b02d8b10f754eaa27a24e7e8708ae84819a5d9d4a25b7b2d6a9b_de76a65c23f70e2156a0bfeffffc4054",
+          "physicalId": "BSC51-CP06#AB_PASSIVE_NONE_LV1_LV2_587b761acf35b02d8b10f754eaa27a24e7e8708ae84819a5d9d4a25b7b2d6a9b_de76a65c23f70e2156a0bfeffffc4054",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_587b761acf35b02d8b10f754eaa27a24e7e8708ae84819a5d9d4a25b7b2d6a9b_de76a65c23f70e2156a0bfeffffc4054",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_7998c225401572a06875836c43c96ea10ac366c40f50796a34b136c17adcd140_131468f7c796bf4e37c189bdf89248c1",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC51-CP06#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1910,8 +3325,17 @@
               "Contract Pre-Advent"
             ],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1920,10 +3344,14 @@
             "isMain": false,
             "cleanBody": "Your counter +1. Then, you can target and attack an opposing LV1 Spirit."
           },
+          "originalAbilityText": "[Contract Pre-Advent]/[Spirit] [LV1][LV2] (When Attacks)\nYour counter +1. Then, you can target and attack an opposing LV1 Spirit.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "Your counter +1.",
+              "originalClauseText": "Your counter +1.",
               "cleanText": "Your counter +1",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1936,7 +3364,9 @@
             },
             {
               "rawText": "you can target and attack an opposing LV1 Spirit.",
+              "originalClauseText": "you can target and attack an opposing LV1 Spirit.",
               "cleanText": "you can target and attack an opposing LV1 Spirit",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": true,
               "isCost": false,
@@ -1947,7 +3377,53 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC51-CP06#a3",
+          "keywords": [
+            {
+              "name": "Contract Pre-Advent",
+              "parameter": null,
+              "wave": 2,
+              "hook": "contract_pre_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC51-CP06#AB_WHEN_ATTACKS_NONE_LV1_LV2_b733412260215fc4782712a57521267a5d5c8b82670439743d3525cc091de755_a113fe3a23ad46554c137891898955ce",
+              "cardNumber": "BSC51-CP06",
+              "levels": [
+                1,
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [
+                "Contract Pre-Advent"
+              ],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC51-CP06#a3"
+            }
+          ],
+          "id": "BSC51-CP06#AB_WHEN_ATTACKS_NONE_LV1_LV2_b733412260215fc4782712a57521267a5d5c8b82670439743d3525cc091de755_a113fe3a23ad46554c137891898955ce",
+          "physicalId": "BSC51-CP06#AB_WHEN_ATTACKS_NONE_LV1_LV2_b733412260215fc4782712a57521267a5d5c8b82670439743d3525cc091de755_a113fe3a23ad46554c137891898955ce",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_b733412260215fc4782712a57521267a5d5c8b82670439743d3525cc091de755_a113fe3a23ad46554c137891898955ce",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_f0586730f509812770f11a57ccf233fb5321cc299dcd55ff9ddbe9336c37d3b3_9ab188cb04847e03a5bea8578910ca6d",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,

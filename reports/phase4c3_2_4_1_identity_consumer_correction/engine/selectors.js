@@ -1,0 +1,785 @@
+/**
+ * engine/selectors.js
+ * 
+ * Deterministic target selection and validation based on compiled IR selectors.
+ * Enforces Armor / Heavy Armor protection (Rule 3.1: any effect affecting a card targets it).
+ */
+
+import { computeEffectiveBP, isImmune, computeLevel, computeSymbols } from './continuous.js';
+import { calculateEffectiveCost } from './payment.js';
+
+export function evaluateComparison(state, comp, candidate, context) {
+  if (!comp) return true;
+  const prop = String(comp.property || '').toUpperCase();
+  const op = String(comp.operator || '').toUpperCase();
+  const ref = String(comp.reference || '').toLowerCase();
+
+  let refValue = null;
+
+  if (ref === 'self') {
+    const srcStack = context.sourceStack || (context.controller && state.players[context.controller]?.field?.find(st => (st.top?.id || st.id) === (context.sourceCard?.id || context.sourceCard))) || (context.controller && state.players[context.controller]?.nexus?.find(st => (st.top?.id || st.id) === (context.sourceCard?.id || context.sourceCard)));
+    if (srcStack) {
+      if (prop === 'BP') refValue = computeEffectiveBP(state, srcStack);
+      else if (prop === 'COST') refValue = calculateEffectiveCost(state, srcStack.top || srcStack.card, context.controller);
+      else if (prop === 'CORES') refValue = typeof srcStack.cores === 'number' ? srcStack.cores : ((srcStack.cores?.normal || 0) + (srcStack.cores?.soul ? 1 : 0));
+      else if (prop === 'LEVEL') refValue = computeLevel(srcStack, state);
+      else if (prop === 'SYMBOLS') refValue = computeSymbols(state, srcStack).length;
+    } else if (context.sourceCard) {
+      const card = context.sourceCard;
+      if (prop === 'BP') refValue = card.bp || 0;
+      else if (prop === 'COST') refValue = card.cost || 0;
+      else if (prop === 'CORES') refValue = 0;
+      else if (prop === 'LEVEL') refValue = 1;
+      else if (prop === 'SYMBOLS') refValue = (card.symbols || [card.color || 'Red']).length;
+    }
+  } else if (ref === 'target' || ref === 'previous_target') {
+    const prev = context.previousTarget?.stack || context.previousTarget?.card || context.previousTarget;
+    if (prev) {
+      if (prev.top || prev.cores !== undefined) {
+        if (prop === 'BP') refValue = computeEffectiveBP(state, prev);
+        else if (prop === 'COST') refValue = calculateEffectiveCost(state, prev.top || prev.card, prev.controller || prev.owner);
+        else if (prop === 'CORES') refValue = typeof prev.cores === 'number' ? prev.cores : ((prev.cores?.normal || 0) + (prev.cores?.soul ? 1 : 0));
+        else if (prop === 'LEVEL') refValue = computeLevel(prev, state);
+        else if (prop === 'SYMBOLS') refValue = computeSymbols(state, prev).length;
+      } else {
+        if (prop === 'BP') refValue = prev.bp || 0;
+        else if (prop === 'COST') refValue = prev.cost || 0;
+        else if (prop === 'CORES') refValue = 0;
+        else if (prop === 'LEVEL') refValue = 1;
+        else if (prop === 'SYMBOLS') refValue = (prev.symbols || [prev.color || 'Red']).length;
+      }
+    }
+  } else if (ref === 'battling') {
+    const bId = state.combat ? (state.combat.attackerSide === context.controller ? state.combat.attackerStackId : state.combat.blockerStackId) : null;
+    const bStack = bId ? (state.players[context.controller]?.field || []).find(st => st.id === bId) : null;
+    if (bStack) {
+      if (prop === 'BP') refValue = computeEffectiveBP(state, bStack);
+      else if (prop === 'COST') refValue = calculateEffectiveCost(state, bStack.top, context.controller);
+    }
+  } else if (ref === 'effect_card') {
+    const effCard = context.effectCard || context.previousResult?.cards?.[0] || context.previousResult?.card || context.discardedCards?.[0];
+    if (effCard) {
+      if (prop === 'COST') refValue = effCard.cost || 0;
+      else if (prop === 'BP') refValue = effCard.bp || 0;
+    }
+  } else if (ref === 'allied_spirit') {
+    const spirits = (state.players[context.controller]?.field || []).filter(st => st.top?.type === 'Spirit');
+    if (spirits.length > 0) {
+      const vals = spirits.map(st => {
+        if (prop === 'COST') return calculateEffectiveCost(state, st.top, context.controller);
+        if (prop === 'BP') return computeEffectiveBP(state, st);
+        return 0;
+      });
+      refValue = Math.max(...vals);
+    }
+  }
+
+  if (refValue === null || refValue === undefined) {
+    return false;
+  }
+
+  let candValue = null;
+  const stack = candidate.stack;
+  const card = candidate.card || stack?.top || candidate;
+
+  if (prop === 'BP') {
+    candValue = candidate.bp !== undefined ? candidate.bp : (stack ? computeEffectiveBP(state, stack) : (card.bp || 0));
+  } else if (prop === 'COST') {
+    candValue = candidate.cost !== undefined ? candidate.cost : (card ? calculateEffectiveCost(state, card, candidate.side || 'opponent') : 0);
+  } else if (prop === 'CORES') {
+    candValue = stack ? (typeof stack.cores === 'number' ? stack.cores : ((stack.cores?.normal || 0) + (stack.cores?.soul ? 1 : 0))) : 0;
+  } else if (prop === 'LEVEL') {
+    candValue = stack ? computeLevel(stack, state) : 1;
+  } else if (prop === 'SYMBOLS') {
+    candValue = stack ? computeSymbols(state, stack).length : (card.symbols || [card.color || 'Red']).length;
+  }
+
+  if (candValue === null || candValue === undefined) return false;
+
+  if (op === 'LTE') return candValue <= refValue;
+  if (op === 'LT') return candValue < refValue;
+  if (op === 'GTE') return candValue >= refValue;
+  if (op === 'GT') return candValue > refValue;
+  if (op === 'EQ') return candValue === refValue;
+
+  return true;
+}
+
+export function queryCandidates(state, selector = {}, context = {}) {
+  const side = selector.side || 'opp';
+  const targetSides = (side === 'both' || side === 'either')
+    ? ['player', 'opponent']
+    : [(side === 'opp' || side === 'opponent')
+        ? (context.controller === 'player' ? 'opponent' : 'player')
+        : (context.controller || 'player')];
+
+  const rawTypes = selector.types || (selector.filter?.cardType ? [selector.filter.cardType] : (selector.cardType ? [selector.cardType] : ['Spirit']));
+  const targetTypes = Array.isArray(rawTypes) ? rawTypes : [rawTypes];
+  const filters = {
+    ...(selector.filters || {}),
+    ...(selector.filter || {}),
+    ...(selector.comparison ? { comparison: selector.comparison } : {})
+  };
+  if (selector.maxBp !== undefined && filters.bpLte === undefined) filters.bpLte = selector.maxBp;
+  if (selector.maxCost !== undefined && filters.costLte === undefined) filters.costLte = selector.maxCost;
+  if (filters.maxBp !== undefined && filters.bpLte === undefined) filters.bpLte = filters.maxBp;
+  if (filters.maxCost !== undefined && filters.costLte === undefined) filters.costLte = filters.maxCost;
+  const rawZone = String(selector.zone || selector.from || 'field').toLowerCase();
+  const zone = (rawZone === 'trash' || rawZone === 'graveyard') ? 'grave' : (rawZone === 'open' ? 'removed' : rawZone);
+
+  const results = [];
+
+  for (const s of targetSides) {
+    const p = state?.players?.[s];
+    if (!p) continue;
+
+    const isOpposing = context.controller ? (s !== context.controller) : true;
+
+    // 1. FIELD ZONE (Stacks, Braves, and Field Nexuses)
+    if (zone === 'field' || zone === 'nexus') {
+      // 1a. Field Stacks
+      if (zone === 'field' || targetTypes.some(t => String(t).toLowerCase().includes('nexus'))) {
+        for (const stack of p.field || []) {
+          const top = stack.top;
+          if (!top) continue;
+
+          // Type match (Rule: Ultimates are not Spirits)
+          const isGrandwalker = (String(top.type || '').toLowerCase().includes('nexus') || String(top.type || '').toLowerCase().includes('grandwalker')) &&
+            (String(top.type || '').toLowerCase().includes('grandwalker') || (Array.isArray(top.families) ? top.families : [top.family].filter(Boolean)).some(f => String(f).toLowerCase().includes('grandwalker')));
+
+          const matchesType = targetTypes.length === 0 || targetTypes.includes('Any') || targetTypes.includes('Card') ||
+            targetTypes.some(t => {
+              const lowT = String(t).toLowerCase();
+              const topT = String(top.type || '').toLowerCase();
+              if (lowT === 'grandwalker nexus' && isGrandwalker) return true;
+              return topT === lowT || topT.includes(lowT);
+            });
+          if (!matchesType) continue;
+
+          // Armor / Heavy Armor immunity check
+          const targetedGrandwalker = isGrandwalker && (
+            targetTypes.some(type => String(type).toLowerCase() === 'grandwalker nexus') ||
+            String(filters.family || '').toLowerCase().includes('grandwalker')
+          );
+          const effectType = selector.effectType || context.effectType || 'effect';
+          if (isOpposing && context.sourceCard && isImmune(state, stack, context.sourceCard, effectType, { bypassArmor: Boolean(context.bypassArmor || selector.ignoreArmor || filters.ignoreArmor), targetedGrandwalker })) {
+            continue;
+          }
+
+          // BP filter
+          const bp = computeEffectiveBP(state, stack);
+          if (filters.bpLte !== undefined && bp > filters.bpLte) continue;
+          if (filters.bpGte !== undefined && bp < filters.bpGte) continue;
+          if (filters.bpLt !== undefined && bp >= filters.bpLt) continue;
+          if (filters.bpGt !== undefined && bp <= filters.bpGt) continue;
+          if (filters.bpEq !== undefined && bp !== filters.bpEq) continue;
+          if (selector.maxTotalBp !== undefined && bp > selector.maxTotalBp) continue;
+
+          // Cost filter
+          const cost = calculateEffectiveCost(state, top, s);
+          if (filters.costLte !== undefined && cost > filters.costLte) continue;
+          if (filters.costGte !== undefined && cost < filters.costGte) continue;
+          if (filters.costLt !== undefined && cost >= filters.costLt) continue;
+          if (filters.costGt !== undefined && cost <= filters.costGt) continue;
+          if (filters.costEq !== undefined && cost !== filters.costEq) continue;
+          if (selector.maxTotalCost !== undefined && cost > selector.maxTotalCost) continue;
+
+          // Level filter
+          const level = stack.level || 1;
+          if (filters.levelLte !== undefined && level > filters.levelLte) continue;
+          if (filters.levelGte !== undefined && level < filters.levelGte) continue;
+          if (filters.level !== undefined && level !== filters.level) continue;
+
+          // State filter (e.g. EXHAUSTED)
+          if (filters.state && stack.state !== filters.state) continue;
+
+          // Symbol count filter
+          if (filters.symbolCount !== undefined) {
+            const syms = top.symbols || [top.color || 'Red'];
+            if (syms.length !== filters.symbolCount) continue;
+          }
+
+          // Family filter
+          if (filters.family || filters.families) {
+            const famQuery = String(filters.family || filters.families).toLowerCase();
+            const fams = top.families || (top.family ? [top.family] : []);
+            if (!fams.some(f => String(f).toLowerCase().includes(famQuery))) continue;
+          }
+
+          // Color filter
+          if (filters.color || filters.colors) {
+            const colorQuery = String(filters.color || filters.colors).toLowerCase();
+            const cols = top.colors || (top.color ? [top.color] : []);
+            if (!cols.some(c => String(c).toLowerCase() === colorQuery)) continue;
+          }
+
+          // Same family as previous
+          if (filters.sameFamilyAsPrevious) {
+            const previous = context.previousTarget?.card || context.previousTarget;
+            const previousFamilies = Array.isArray(previous?.families)
+              ? previous.families
+              : (previous?.family ? [previous.family] : []);
+            const targetFamilies = Array.isArray(top.families)
+              ? top.families
+              : (top.family ? [top.family] : []);
+            if (!previousFamilies.some(f => targetFamilies.some(t => String(t).toLowerCase() === String(f).toLowerCase()))) continue;
+          }
+
+          // Name filters
+          if (filters.nameIncludes && !top.name.toLowerCase().includes(filters.nameIncludes.toLowerCase())) continue;
+          if (filters.name && !top.name.toLowerCase().includes(filters.name.toLowerCase())) continue;
+          if (filters.exactName && top.name.toLowerCase() !== filters.exactName.toLowerCase()) continue;
+
+          // Relative comparison filter
+          if (filters.comparison && !evaluateComparison(state, filters.comparison, { stack, card: top, bp, cost, side: s }, context)) continue;
+
+          results.push({
+            type: 'stack',
+            stack,
+            card: top,
+            side: s,
+            zone: 'field',
+            bp,
+            cost
+          });
+        }
+      }
+
+      // 1b. Field Braves
+      if (zone === 'field') {
+        for (const stack of p.field || []) {
+          for (const brave of stack.braves || []) {
+            if (!targetTypes.includes('Any') && !targetTypes.includes('Card') && !targetTypes.includes('Brave') && !targetTypes.includes(brave.type)) continue;
+            if (filters.bpLte !== undefined && (brave.bp || 0) > filters.bpLte) continue;
+            if (filters.bpGte !== undefined && (brave.bp || 0) < filters.bpGte) continue;
+            if (selector.maxTotalBp !== undefined && (brave.bp || 0) > selector.maxTotalBp) continue;
+            const braveCost = calculateEffectiveCost(state, brave, s);
+            if (filters.costLte !== undefined && braveCost > filters.costLte) continue;
+            if (filters.costGte !== undefined && braveCost < filters.costGte) continue;
+            if (selector.maxTotalCost !== undefined && braveCost > selector.maxTotalCost) continue;
+            if (filters.comparison && !evaluateComparison(state, filters.comparison, { stack, card: brave, bp: brave.bp || 0, cost: braveCost, side: s }, context)) continue;
+            results.push({ type: 'brave', stack, card: brave, side: s, zone: 'field', bp: brave.bp || 0, cost: braveCost });
+          }
+        }
+      }
+
+      // 1c. Separate p.nexus list on field
+      if (Array.isArray(p.nexus) && (zone === 'nexus' || targetTypes.some(t => String(t).toLowerCase().includes('nexus')) || targetTypes.includes('Any') || targetTypes.includes('Card'))) {
+        for (const nex of p.nexus) {
+          if (!nex) continue;
+
+          // Armor / Heavy Armor / Immunity check for separate Nexus
+          const nexCores = typeof nex.cores === 'number'
+            ? { normal: nex.cores, soul: false }
+            : (nex.cores || { normal: 0, soul: false });
+          const nexStack = {
+            id: nex.id,
+            top: nex,
+            owner: s,
+            cores: nexCores,
+            field: [],
+            level: nex.level || 1,
+            state: nex.state || 'REFRESHED'
+          };
+          const isGrandwalker = Boolean(
+            String(nex.type || '').toLowerCase().includes('grandwalker') ||
+            (Array.isArray(nex.families) ? nex.families : [nex.family].filter(Boolean)).some(f => String(f).toLowerCase().includes('grandwalker'))
+          );
+          const targetedGrandwalker = isGrandwalker && (
+            targetTypes.some(type => String(type).toLowerCase() === 'grandwalker nexus') ||
+            String(filters.family || '').toLowerCase().includes('grandwalker')
+          );
+          const effectType = selector.effectType || context.effectType || 'effect';
+          const bypassArmor = Boolean(context.bypassArmor || selector.ignoreArmor || filters.ignoreArmor);
+          if (isOpposing && context.sourceCard && isImmune(state, nexStack, context.sourceCard, effectType, { bypassArmor, targetedGrandwalker })) {
+            continue;
+          }
+
+          const nexCost = calculateEffectiveCost(state, nex, s);
+          if (filters.costLte !== undefined && nexCost > filters.costLte) continue;
+          if (filters.costGte !== undefined && nexCost < filters.costGte) continue;
+          if (selector.maxTotalCost !== undefined && nexCost > selector.maxTotalCost) continue;
+          if (filters.nameIncludes && !nex.name.toLowerCase().includes(filters.nameIncludes.toLowerCase())) continue;
+          if (filters.name && !nex.name.toLowerCase().includes(filters.name.toLowerCase())) continue;
+          if (filters.comparison && !evaluateComparison(state, filters.comparison, { stack: nexStack, card: nex, cost: nexCost, side: s }, context)) continue;
+          results.push({ type: 'card', card: nex, side: s, zone: 'nexus', cost: nexCost });
+        }
+      }
+    }
+
+    // 2. HAND ZONE
+    else if (zone === 'hand') {
+      // Hidden information protection: do not enumerate opponent hand unless explicitly authorized
+      if (s !== context.controller && !selector.allowOpponentHand && !selector.opponentHand && !filters.hand) {
+        continue;
+      }
+      for (const card of p.hand || []) {
+        if (!card) continue;
+        if (targetTypes.length > 0 && !targetTypes.includes('Any') && !targetTypes.includes('Card') && !targetTypes.includes(card.type)) continue;
+        const handCost = calculateEffectiveCost(state, card, s);
+        if (filters.costLte !== undefined && handCost > filters.costLte) continue;
+        if (filters.costGte !== undefined && handCost < filters.costGte) continue;
+        if (selector.maxTotalCost !== undefined && handCost > selector.maxTotalCost) continue;
+        if (filters.family || filters.families) {
+          const famQuery = String(filters.family || filters.families).toLowerCase();
+          const fams = card.families || (card.family ? [card.family] : []);
+          if (!fams.some(f => String(f).toLowerCase().includes(famQuery))) continue;
+        }
+        if (filters.color || filters.colors) {
+          const colorQuery = String(filters.color || filters.colors).toLowerCase();
+          const cols = card.colors || (card.color ? [card.color] : []);
+          if (!cols.some(c => String(c).toLowerCase() === colorQuery)) continue;
+        }
+        if (filters.nameIncludes && !card.name.toLowerCase().includes(filters.nameIncludes.toLowerCase())) continue;
+        if (filters.name && !card.name.toLowerCase().includes(filters.name.toLowerCase())) continue;
+        if (filters.comparison && !evaluateComparison(state, filters.comparison, { card, cost: handCost, side: s }, context)) continue;
+        results.push({ type: 'card', card, side: s, zone: 'hand', cost: handCost });
+      }
+    }
+
+    // 3. GRAVE / TRASH ZONE
+    else if (zone === 'grave' || zone === 'trash') {
+      const graveCards = Array.isArray(p.grave) ? p.grave : (Array.isArray(p.trash) ? p.trash : []);
+      for (const card of graveCards) {
+        if (!card) continue;
+        if (targetTypes.length > 0 && !targetTypes.includes('Any') && !targetTypes.includes('Card') && !targetTypes.includes(card.type)) continue;
+        const graveCost = calculateEffectiveCost(state, card, s);
+        if (filters.costLte !== undefined && graveCost > filters.costLte) continue;
+        if (filters.costGte !== undefined && graveCost < filters.costGte) continue;
+        if (selector.maxTotalCost !== undefined && graveCost > selector.maxTotalCost) continue;
+        if (filters.family || filters.families) {
+          const famQuery = String(filters.family || filters.families).toLowerCase();
+          const fams = card.families || (card.family ? [card.family] : []);
+          if (!fams.some(f => String(f).toLowerCase().includes(famQuery))) continue;
+        }
+        if (filters.color || filters.colors) {
+          const colorQuery = String(filters.color || filters.colors).toLowerCase();
+          const cols = card.colors || (card.color ? [card.color] : []);
+          if (!cols.some(c => String(c).toLowerCase() === colorQuery)) continue;
+        }
+        if (filters.nameIncludes && !card.name.toLowerCase().includes(filters.nameIncludes.toLowerCase())) continue;
+        if (filters.name && !card.name.toLowerCase().includes(filters.name.toLowerCase())) continue;
+        if (filters.comparison && !evaluateComparison(state, filters.comparison, { card, cost: graveCost, side: s }, context)) continue;
+        results.push({ type: 'card', card, side: s, zone: 'grave', cost: graveCost });
+      }
+    }
+
+    // 4. REVEALED ZONE
+    else if (zone === 'revealed') {
+      const revealedCards = (p.revealed && p.revealed.length > 0) ? p.revealed : (context.revealedCards || []);
+      for (const card of revealedCards) {
+        if (!card) continue;
+        if (targetTypes.length > 0 && !targetTypes.includes('Any') && !targetTypes.includes('Card') && !targetTypes.includes(card.type)) continue;
+        const revCost = calculateEffectiveCost(state, card, s);
+        if (filters.costLte !== undefined && revCost > filters.costLte) continue;
+        if (filters.costGte !== undefined && revCost < filters.costGte) continue;
+        if (selector.maxTotalCost !== undefined && revCost > selector.maxTotalCost) continue;
+        if (filters.family || filters.families) {
+          const famQuery = String(filters.family || filters.families).toLowerCase();
+          const fams = card.families || (card.family ? [card.family] : []);
+          if (!fams.some(f => String(f).toLowerCase().includes(famQuery))) continue;
+        }
+        if (filters.color || filters.colors) {
+          const colorQuery = String(filters.color || filters.colors).toLowerCase();
+          const cols = card.colors || (card.color ? [card.color] : []);
+          if (!cols.some(c => String(c).toLowerCase() === colorQuery)) continue;
+        }
+        if (filters.nameIncludes && !card.name.toLowerCase().includes(filters.nameIncludes.toLowerCase())) continue;
+        if (filters.name && !card.name.toLowerCase().includes(filters.name.toLowerCase())) continue;
+        if (filters.comparison && !evaluateComparison(state, filters.comparison, { card, cost: revCost, side: s }, context)) continue;
+        results.push({ type: 'card', card, side: s, zone: 'revealed', cost: revCost });
+      }
+    }
+
+    // 5. REMOVED ZONE
+    else if (zone === 'removed') {
+      const removedCards = (p.removed && p.removed.length > 0) ? p.removed : (p.openCards || []);
+      for (const card of removedCards) {
+        if (!card) continue;
+        if (targetTypes.length > 0 && !targetTypes.includes('Any') && !targetTypes.includes('Card') && !targetTypes.includes(card.type)) continue;
+        const remCost = calculateEffectiveCost(state, card, s);
+        if (filters.costLte !== undefined && remCost > filters.costLte) continue;
+        if (filters.costGte !== undefined && remCost < filters.costGte) continue;
+        if (selector.maxTotalCost !== undefined && remCost > selector.maxTotalCost) continue;
+        if (filters.family || filters.families) {
+          const famQuery = String(filters.family || filters.families).toLowerCase();
+          const fams = card.families || (card.family ? [card.family] : []);
+          if (!fams.some(f => String(f).toLowerCase().includes(famQuery))) continue;
+        }
+        if (filters.nameIncludes && !card.name.toLowerCase().includes(filters.nameIncludes.toLowerCase())) continue;
+        if (filters.comparison && !evaluateComparison(state, filters.comparison, { card, cost: remCost, side: s }, context)) continue;
+        results.push({ type: 'card', card, side: s, zone: 'removed', cost: remCost });
+      }
+    }
+  }
+
+  return results;
+}
+
+export function validateSelection(candidates, chosen, selector = {}) {
+  const isOptionalChoice = Boolean(selector.optional || selector.isOptional || selector.upTo || selector.mode === 'TOTAL_BP_LTE' || selector.mode === 'TOTAL_COST_LTE');
+  if (!Array.isArray(chosen)) {
+    if (isOptionalChoice && (chosen === null || chosen === undefined || chosen?.declined === true)) {
+      return true;
+    }
+    return false;
+  }
+
+  if (chosen.length === 0) {
+    return isOptionalChoice;
+  }
+
+  // Reject duplicate candidate selection to prevent double-counting
+  const seenIds = new Set();
+  for (const c of chosen) {
+    const id = c?.id || c?.card?.id || c?.stack?.id || (typeof c === 'string' ? c : null);
+    if (id) {
+      if (seenIds.has(id)) return false;
+      seenIds.add(id);
+    }
+  }
+
+  // Verify all chosen are in candidates
+  for (const c of chosen) {
+    const valid = candidates.some(cand => 
+      cand === c ||
+      (cand.stack && cand.stack.id === (c.stack ? c.stack.id : c.id)) ||
+      (cand.card && cand.card.id === (c.card ? c.card.id : c.id)) ||
+      (cand.card && cand.card.id === c.id) ||
+      (cand.card && cand.card.id === c) ||
+      (cand.stack && cand.stack.id === c.id) ||
+      (cand.stack && cand.stack.id === c)
+    );
+    if (!valid) return false;
+  }
+
+  // TOTAL_BP_LTE mode (e.g. Evil Flame up to total 5000 BP)
+  if (selector.mode === 'TOTAL_BP_LTE' || selector.maxTotalBp !== undefined) {
+    const maxBp = selector.maxTotalBp !== undefined ? selector.maxTotalBp : Infinity;
+    let totalBp = 0;
+    for (const item of chosen) {
+      const match = candidates.find(cand =>
+        cand === item ||
+        (cand.card && cand.card.id === (item.card?.id || item.id || item)) ||
+        (cand.stack && cand.stack.id === (item.stack?.id || item.id || item))
+      );
+      totalBp += (match?.bp !== undefined ? match.bp : (item.bp || 0));
+    }
+    if (totalBp > maxBp) return false;
+  }
+
+  // TOTAL_COST_LTE mode (e.g. Siegfrieden XV up to total cost 9)
+  if (selector.mode === 'TOTAL_COST_LTE' || selector.maxTotalCost !== undefined) {
+    const maxCost = selector.maxTotalCost !== undefined ? selector.maxTotalCost : Infinity;
+    let totalCost = 0;
+    for (const item of chosen) {
+      const match = candidates.find(cand =>
+        cand === item ||
+        (cand.card && cand.card.id === (item.card?.id || item.id || item)) ||
+        (cand.stack && cand.stack.id === (item.stack?.id || item.id || item))
+      );
+      totalCost += (match?.cost !== undefined ? match.cost : (item.cost || 0));
+    }
+    if (totalCost > maxCost) return false;
+  }
+
+  // If in TOTAL_BP_LTE or TOTAL_COST_LTE, count is an upper bound if explicitly defined
+  if (selector.mode === 'TOTAL_BP_LTE' || selector.mode === 'TOTAL_COST_LTE') {
+    if (typeof selector.count === 'number' && selector.count !== Infinity && chosen.length > selector.count) {
+      return false;
+    }
+    return true;
+  }
+
+  // Exact or Up To count
+  const count = typeof selector.count === 'number' ? selector.count : 1;
+  if (isOptionalChoice) {
+    return chosen.length <= count;
+  }
+
+  return chosen.length === Math.min(count, candidates.length);
+}
+
+export function validateTargetAvailability(state, target, expectedZone = null) {
+  if (!state || !state.players || !target) return false;
+  const card = target.card || target.top || (target.id ? target : null);
+  if (!card || !card.id) return false;
+  const cardId = card.id;
+
+  const rawZone = expectedZone || target.zone || null;
+  const zoneToCheck = rawZone ? (rawZone === 'trash' ? 'grave' : (rawZone === 'open' ? 'removed' : rawZone)) : null;
+
+  const sides = (target.side === 'opponent' || target.side === 'opp')
+    ? ['opponent', 'player']
+    : ['player', 'opponent'];
+
+  for (const s of sides) {
+    const p = state.players[s];
+    if (!p) continue;
+
+    // 1. Check field stacks and attached braves
+    if (!zoneToCheck || zoneToCheck === 'field') {
+      // 1a. If targeted specifically as an attached Brave:
+      if (target.type === 'brave') {
+        if (target.stack?.id) {
+          const st = (p.field || []).find(st => st.id === target.stack.id);
+          if (st) {
+            return (st.braves || []).some(b => b && b.id === cardId);
+          }
+        } else {
+          for (const st of p.field || []) {
+            if ((st.braves || []).some(b => b && b.id === cardId)) return true;
+          }
+        }
+      }
+
+      // 1b. If targeted as a Spirit/Ultimate stack:
+      else if (target.type === 'stack' || target.stack) {
+        const targetStackId = target.stack?.id || target.id;
+        const st = (p.field || []).find(st => st.id === targetStackId);
+        if (st) {
+          // Top card identity check: Must still be the current top card of that stack!
+          return Boolean(st.top && st.top.id === cardId);
+        }
+      }
+
+      // 1c. General field stack search by top card
+      for (const st of p.field || []) {
+        if (st.top && st.top.id === cardId) return true;
+      }
+
+      // 1d. Field Nexuses
+      if ((p.nexus || []).some(n => n && n.id === cardId)) return true;
+      for (const st of p.field || []) {
+        if (st.top && (st.top.type || '').includes('Nexus') && st.top.id === cardId) return true;
+      }
+    }
+
+    // 2. Check nexus zone
+    if (zoneToCheck === 'nexus') {
+      if ((p.nexus || []).some(n => n && n.id === cardId)) return true;
+      for (const st of p.field || []) {
+        if (st.top && (st.top.type || '').includes('Nexus') && st.top.id === cardId) return true;
+      }
+    }
+
+    // 3. Check grave / trash
+    if (!zoneToCheck || zoneToCheck === 'grave') {
+      if ((p.grave || []).some(c => c && c.id === cardId)) return true;
+    }
+
+    // 4. Check hand
+    if (!zoneToCheck || zoneToCheck === 'hand') {
+      if ((p.hand || []).some(c => c && c.id === cardId)) return true;
+    }
+
+    // 5. Check revealed
+    if (!zoneToCheck || zoneToCheck === 'revealed') {
+      if ((p.revealed || []).some(c => c && c.id === cardId)) return true;
+      if (Array.isArray(state.revealedCards) && state.revealedCards.some(c => c && c.id === cardId)) return true;
+    }
+
+    // 6. Check removed
+    if (!zoneToCheck || zoneToCheck === 'removed') {
+      if ((p.removed || []).some(c => c && c.id === cardId)) return true;
+      if ((p.openCards || []).some(c => c && c.id === cardId)) return true;
+    }
+  }
+
+  return false;
+}
+
+export async function executeTargeting(state, op = {}, context = {}, promptResolver = null) {
+  // Normalize selector combining op, op.selector, op.target, and op.filter
+  const norm = {
+    side: op.side || op.selector?.side || op.target?.side || 'opp',
+    zone: op.zone || op.selector?.zone || op.target?.zone || op.from || 'field',
+    types: op.types || op.selector?.types || op.target?.types || (op.filter?.cardType ? [op.filter.cardType] : (((op.zone && op.zone !== 'field' && op.zone !== 'nexus') || (op.from && op.from !== 'field' && op.from !== 'nexus')) ? ['Any'] : ['Spirit'])),
+    filters: {
+      ...(op.filter || {}),
+      ...(op.filters || {}),
+      ...(op.selector?.filters || {}),
+      ...(op.target?.filters || {}),
+      ...(op.comparison ? { comparison: op.comparison } : {}),
+      ...(op.selector?.comparison ? { comparison: op.selector.comparison } : {}),
+      ...(op.target?.comparison ? { comparison: op.target.comparison } : {})
+    },
+    all: Boolean(op.all || op.selector?.all || op.target?.all),
+    count: typeof op.count === 'number' ? op.count : (typeof op.selector?.count === 'number' ? op.selector.count : (typeof op.target?.count === 'number' ? op.target.count : 1)),
+    upTo: Boolean(op.upTo || op.selector?.upTo || op.target?.upTo),
+    optional: Boolean(op.optional || op.isOptional || op.selector?.optional || op.target?.optional),
+    mode: op.mode || op.selector?.mode || op.target?.mode || (op.maxTotalBp !== undefined || op.selector?.maxTotalBp !== undefined || op.target?.maxTotalBp !== undefined ? 'TOTAL_BP_LTE' : (op.maxTotalCost !== undefined || op.selector?.maxTotalCost !== undefined || op.target?.maxTotalCost !== undefined ? 'TOTAL_COST_LTE' : undefined)),
+    maxTotalBp: op.maxTotalBp !== undefined ? op.maxTotalBp : (op.selector?.maxTotalBp !== undefined ? op.selector.maxTotalBp : op.target?.maxTotalBp),
+    maxTotalCost: op.maxTotalCost !== undefined ? op.maxTotalCost : (op.selector?.maxTotalCost !== undefined ? op.selector.maxTotalCost : op.target?.maxTotalCost),
+    ignoreArmor: Boolean(op.ignoreArmor || op.selector?.ignoreArmor || op.target?.ignoreArmor),
+    destination: op.destination || op.selector?.destination || op.target?.destination,
+    effectType: op.effectType || op.selector?.effectType || (op.op ? String(op.op).toLowerCase() : undefined),
+    title: op.title || op.selector?.title || 'Select target(s)',
+    promptType: op.promptType || 'SELECT_TARGET',
+    allowOpponentHand: Boolean(op.allowOpponentHand || op.opponentHand)
+  };
+
+  if (norm.mode === 'TOTAL_BP_LTE' || norm.mode === 'TOTAL_COST_LTE') {
+    norm.upTo = true;
+    if (op.count === undefined && op.selector?.count === undefined && op.target?.count === undefined) {
+      norm.count = Infinity;
+    }
+  }
+
+  // If selector explicitly references PREVIOUS_TARGET
+  const isPrevious = op.target === 'PREVIOUS_TARGET' ||
+    op.target?.target === 'PREVIOUS_TARGET' ||
+    op.target === 'previous' ||
+    Boolean(op.usePreviousTarget);
+
+  if (isPrevious) {
+    if (!context.previousTarget && (!context.selectedTargets || context.selectedTargets.length === 0)) {
+      context.selectedTargets = [];
+      context.previousTargets = [];
+      context.previousTarget = null;
+      return { success: false, reason: 'NO_PREVIOUS_TARGET', selected: [], cards: [], isTargetingResult: true };
+    }
+    const prevItems = context.selectedTargets?.length
+      ? context.selectedTargets
+      : (context.previousTargets?.length ? context.previousTargets : [context.previousTarget]);
+
+    const valid = [];
+    for (const item of prevItems) {
+      const checkZone = (op.zone || op.selector?.zone || op.from) || item.zone || null;
+      if (validateTargetAvailability(state, item, checkZone)) {
+        valid.push(item);
+      }
+    }
+    if (valid.length === 0) {
+      context.selectedTargets = [];
+      context.previousTargets = [];
+      context.previousTarget = null;
+      return { success: false, reason: 'PREVIOUS_TARGET_UNAVAILABLE', selected: [], cards: [], isTargetingResult: true };
+    }
+    const validCards = valid.map(item => item.card || item.top || item);
+    context.previousTarget = validCards[0];
+    context.previousTargets = validCards;
+    context.selectedTargets = valid;
+    return { success: true, count: valid.length, selected: valid, cards: validCards, isTargetingResult: true };
+  }
+
+  const candidates = queryCandidates(state, norm, context);
+  if (candidates.length === 0) {
+    context.selectedTargets = [];
+    context.previousTargets = [];
+    context.previousTarget = null;
+    if (norm.all) {
+      return {
+        success: true,
+        count: 0,
+        candidates: [],
+        selected: [],
+        cards: [],
+        isTargetingResult: true
+      };
+    }
+    return {
+      success: false,
+      reason: 'NO_LEGAL_TARGETS',
+      candidates: [],
+      selected: [],
+      cards: [],
+      isTargetingResult: true
+    };
+  }
+
+  // Simultaneous non-prompt targeting for all: true
+  if (norm.all) {
+    const selectedCandidates = [...candidates];
+    const selectedCards = selectedCandidates.map(c => c.card || c.top || c);
+    context.selectedTargets = selectedCandidates;
+    context.previousTargets = selectedCards;
+    context.previousTarget = selectedCards[0] || null;
+    return {
+      success: true,
+      count: selectedCards.length,
+      selected: selectedCandidates,
+      cards: selectedCards,
+      candidates,
+      isTargetingResult: true
+    };
+  }
+
+  if (!promptResolver || typeof promptResolver.choose !== 'function') {
+    context.selectedTargets = [];
+    context.previousTargets = [];
+    context.previousTarget = null;
+    return {
+      success: false,
+      reason: 'MISSING_PROMPT_RESOLVER',
+      candidates,
+      selected: [],
+      cards: [],
+      isTargetingResult: true
+    };
+  }
+
+  const isOptionalChoice = norm.optional || norm.upTo;
+  const prompt = {
+    type: norm.promptType,
+    title: norm.title,
+    candidates,
+    count: norm.count,
+    upTo: Boolean(norm.upTo || norm.optional),
+    optional: Boolean(norm.optional),
+    mode: norm.mode,
+    maxTotalBp: norm.maxTotalBp,
+    maxTotalCost: norm.maxTotalCost,
+    selector: norm,
+    chooser: context.controller || 'player',
+    context
+  };
+
+  const rawChosen = await promptResolver.choose(prompt);
+
+  // Handle optional decline or empty selection
+  if (rawChosen === null || rawChosen === undefined || rawChosen.declined === true || (Array.isArray(rawChosen) && rawChosen.length === 0)) {
+    context.selectedTargets = [];
+    context.previousTargets = [];
+    context.previousTarget = null;
+    if (isOptionalChoice) {
+      return { success: true, declined: true, count: 0, selected: [], cards: [], candidates, isTargetingResult: true };
+    }
+    return { success: false, reason: 'MANDATORY_TARGET_DECLINED', selected: [], cards: [], candidates, isTargetingResult: true };
+  }
+
+  const chosen = Array.isArray(rawChosen) ? rawChosen : [rawChosen];
+  const isValid = validateSelection(candidates, chosen, norm);
+  if (!isValid) {
+    context.selectedTargets = [];
+    context.previousTargets = [];
+    context.previousTarget = null;
+    return { success: false, reason: 'INVALID_TARGET_SELECTION', candidates, selected: [], cards: [], isTargetingResult: true };
+  }
+
+  // Map to candidate objects with .stack and .card preserving selection order
+  const selectedCandidates = chosen.map(ch => {
+    const found = candidates.find(cand =>
+      cand === ch ||
+      (cand.stack && cand.stack.id === (ch.stack?.id || ch.id || ch)) ||
+      (cand.card && cand.card.id === (ch.card?.id || ch.id || ch))
+    );
+    return found || ch;
+  });
+
+  const selectedCards = selectedCandidates.map(c => c.card || c.top || c);
+
+  // Set consistent context across clauses
+  context.selectedTargets = selectedCandidates;
+  context.previousTargets = selectedCards;
+  context.previousTarget = selectedCards[0] || null;
+
+  return {
+    success: true,
+    count: selectedCards.length,
+    selected: selectedCandidates,
+    cards: selectedCards,
+    candidates,
+    isTargetingResult: true
+  };
+}

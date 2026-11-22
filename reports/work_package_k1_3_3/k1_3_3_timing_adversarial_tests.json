@@ -1,0 +1,487 @@
+{
+  "sourceDerivedDistinctionsTested": [
+    {
+      "id": "SRC-T-01",
+      "name": "Source collision check: Opponent-only timingLabel vs generic timingLabel",
+      "detectedCollisionsCount": 34,
+      "passed": true,
+      "note": "Real corpus collisions explicitly detected and flagged in falseEquivalencesDiscovered."
+    },
+    {
+      "id": "SRC-T-02",
+      "name": "Depleted vs Destroyed source extraction",
+      "passed": true
+    },
+    {
+      "id": "SRC-T-03",
+      "name": "Original cost restriction source extraction",
+      "passed": true
+    },
+    {
+      "id": "SRC-T-04",
+      "name": "Your Battle Phase turn owner source extraction",
+      "passed": true
+    },
+    {
+      "id": "SRC-T-05",
+      "name": "Embedded executable text source extraction",
+      "passed": true
+    }
+  ],
+  "syntheticOnlyDistinctionsTested": [
+    {
+      "id": "SYN-T-01",
+      "name": "Main Step vs Flash timing",
+      "passed": true
+    },
+    {
+      "id": "SYN-T-02",
+      "name": "One trigger event vs multiple trigger events",
+      "passed": true
+    },
+    {
+      "id": "SYN-T-03",
+      "name": "OR condition vs AND condition",
+      "passed": true
+    },
+    {
+      "id": "SYN-T-04",
+      "name": "Optional vs mandatory activation",
+      "passed": true
+    },
+    {
+      "id": "SYN-T-05",
+      "name": "Once per turn vs once per game",
+      "passed": true
+    },
+    {
+      "id": "SYN-T-06",
+      "name": "Trigger qualifier vs level restriction",
+      "passed": true
+    },
+    {
+      "id": "SYN-T-07",
+      "name": "Different target restrictions with identical timing",
+      "passed": true
+    }
+  ],
+  "falseEquivalencesDiscoveredCount": 34,
+  "falseEquivalencesDiscovered": [
+    {
+      "semanticPatternId": "K12-SEM-2912f6454e7d0b16",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When Destroyed by the Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "26RBS01.json::26RBS01-018#a1",
+        "BS25.json::BS25-036#a1"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-40d916f0eebf066c",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When Destroyed by the Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "26RBS03.json::26RBS03-014#a0",
+        "BS40.json::BS40-012#a0"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-e89c1abcf4702390",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When Destroyed by the Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "26RBS03.json::26RBS03-063#a0",
+        "BSC33.json::BATTLE-SPIRITS-A14769#a2"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-993115ee2ac7cecf",
+      "collidingTimingLabels": [
+        "When destroyed by the opponent",
+        "When Destroyed by the Opponent",
+        "When Destroyed",
+        "When Destroyed by Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "BONE.json::BONE-SCOUT01#a1",
+        "BS35.json::BS35-038#a1",
+        "BSC19.json::BSC19-022#a1",
+        "BSC31.json::BSC31-023#a2"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-762952a5de5f2f67",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When Destroyed by the Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "BOTH.json::BOTH-HANDS#a0",
+        "BS42.json::BS42-015#a1"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-8136e154da9a6efb",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When Destroyed by the Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "BS04.json::BATTLE-SPIRITS-A11715#a0",
+        "BS40.json::BS40-016#a0"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-054021802d293e2a",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When Destroyed by the Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "BS04.json::BS04-X14#a2",
+        "CB01.json::CB01-029#a2"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-96a133111f48f8cd",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When Destroyed by the Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "BS09.json::BS09-015#a1",
+        "BSC19.json::BSC19-X05#a2"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-2c28a0210d402953",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When Destroyed by the Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "BS09.json::BS09-039#a1",
+        "CB21.json::CB21-014#a2"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-3206dd90ff5d2187",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When Destroyed by the Opponent",
+        "When Destroyed by Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "BS11.json::BS11-011#a0",
+        "CB05.json::CB05-012#a1",
+        "SD44.json::SD44-001#a2"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-7c639b44ad257624",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When Destroyed by the Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "BS11.json::BS11-041#a0",
+        "BS40.json::BS40-058#a0"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-6869e5708cf3248c",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When Destroyed by the Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "BS12.json::BATTLE-SPIRITS-A11745#a1",
+        "CB05.json::CB05-018#a1"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-67b7789e6567a3cd",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When Destroyed by the Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "BS12.json::BS12-016#a2",
+        "SD31.json::SD31-003#a1"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-bdffb091b4893214",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When Destroyed by the Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "BS12.json::BS12-035#a0",
+        "BS60.json::BS60-060#a2"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-fc6f75fe7afc37cb",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When Destroyed by the Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "BS13.json::BS13-012#a1",
+        "BS40.json::BS40-018#a0"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-97c96b11b05b6af1",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When Destroyed by the Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "BS13.json::BS13-X05#a1",
+        "BS29.json::BS29-033#a1"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-6325adbeb9469760",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When Destroyed by the Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "BS14.json::BS14-045#a1",
+        "BS45.json::BS45-048#a2"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-9021cb6bdb09a314",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When Destroyed by the Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "BS15.json::BS15-012#a1",
+        "CB08.json::BATTLE-SPIRITS-A3252#a1"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-21f2d4884e901f14",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When Destroyed by the Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "BS16.json::BS16-030#a0",
+        "CB08.json::BATTLE-SPIRITS-A5637#a0"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-989bff15209e6fd1",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When Destroyed by the Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "BS16.json::BS16-X02#a1",
+        "BS52.json::BS52-015#a3"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-013b4a638de6e913",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When Destroyed by the Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "BS23.json::BS23-023#a1",
+        "MISC.json::BATTLE-SPIRITS-A324#a0"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-ea725d2e0a3852f8",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When Destroyed by the opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "BS24.json::BS24-031#a0",
+        "MISC.json::BATTLE-SPIRITS-A3115#a0"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-5621ee76b5ffe13b",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When Destroyed by the Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "BS37.json::BS37-018#a0",
+        "BS54.json::BS54-045#a0"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-306dea47dde9945f",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When Destroyed by the Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "BS38.json::BATTLE-SPIRITS-A6525#a1",
+        "SD35.json::BATTLE-SPIRITS-A12995#a2"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-a738e4b845d47340",
+      "collidingTimingLabels": [
+        "When Destroyed by the Opponent",
+        "When Destroyed"
+      ],
+      "sampleAbilityRecordIds": [
+        "BS40.json::BS40-013#a0",
+        "BSC19.json::BSC19-026#a0"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-a4d62b0edcd770be",
+      "collidingTimingLabels": [
+        "When Destroyed by the Opponent",
+        "When Destroyed"
+      ],
+      "sampleAbilityRecordIds": [
+        "BS42.json::BS42-054-A13670#a1",
+        "BS72.json::BS72-023#a2"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-00bd2b99bf3fa46b",
+      "collidingTimingLabels": [
+        "When Destroyed by the Opponent",
+        "When Destroyed"
+      ],
+      "sampleAbilityRecordIds": [
+        "BS59.json::BS59-039#a0",
+        "BSC42.json::BSC42-014#a0"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-2ce706750c84a23b",
+      "collidingTimingLabels": [
+        "When Manifests/Attacks",
+        "When Depleted/Destroyed by the Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "BS70.json::BS70-063#a1",
+        "BSC26.json::BSC26-036#a1"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-62601299e490b273",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When Destroyed by the Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "BS73.json::BS73-X03#a2",
+        "CB09.json::BATTLE-SPIRITS-A5942#a3"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-1de49b62b4f0b2f7",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When Destroyed by the Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "BSC12.json::EX13-02#a1",
+        "SD68.json::SD68-001#a1"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-b80cbc0d321da2be",
+      "collidingTimingLabels": [
+        "When Manifests/Attacks",
+        "When Depleted/Destroyed by the Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "BSC44.json::BSC44-X05#a1",
+        "CB02.json::CB02-049#a1"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-8c4144bf640457b5",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When Destroyed by the Opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "CB01.json::CB01-032#a2",
+        "CB06.json::CB06-046#a0"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-4f8b5b84230fe99d",
+      "collidingTimingLabels": [
+        "When Destroyed by the Opponent",
+        "When Destroyed"
+      ],
+      "sampleAbilityRecordIds": [
+        "MISC.json::BATTLE-SPIRITS-A1081#a0",
+        "MISC.json::SHA-ZOO#a0"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    },
+    {
+      "semanticPatternId": "K12-SEM-738a13e1b5181d2d",
+      "collidingTimingLabels": [
+        "When Destroyed",
+        "When destroyed by the opponent"
+      ],
+      "sampleAbilityRecordIds": [
+        "MISC.json::BATTLE-SPIRITS-A4691#a0",
+        "MISC.json::BATTLE-SPIRITS-A7239#a1"
+      ],
+      "reason": "Opponent-only timingLabel collapsed into same semanticPatternId as non-opponent timingLabel."
+    }
+  ],
+  "falseDistinctionsDiscovered": [],
+  "remainingUnresolvedRecords": 312
+}

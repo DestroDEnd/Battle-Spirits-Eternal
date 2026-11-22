@@ -1,1 +1,1838 @@
-{"THE-SUN":{"cardNumber":"THE-SUN","name":"The OracleTwentyOnePillars XIX The Sun","keywords":[{"name":"Rush","parameter":"Red/Green","wave":2,"hook":"rush","bracketed":true,"index":149}],"abilities":[{"id":"THE-SUN#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can destroy an opposing single-symbol Spirit/Nexus, and the effects of the destroyed Spirit/Nexus can't activate.\n[Rush: Red/Green]\n(While you have Red/Green symbols, the following effect activate next)\n[Green Core][Green Core]: Put two cores from the Void to any Spirits you control.\n[Green Core][Green Core][Green Core]: Until the next opposing End Step, the opponent can't pay costs from the Field.\n[Red Core][Red Core][Red Core][Green Core][Green Core][Green Core]: At the end of battle, send two opposing Lives to the Void."},"clauses":[{"rawText":"You can destroy an opposing single-symbol Spirit/Nexus, and the effects of the destroyed Spirit/Nexus can't activate.","cleanText":"You can destroy an opposing single-symbol Spirit/Nexus, and the effects of the destroyed Spirit/Nexus can't activate","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"symbolCount":1}}}},{"rawText":"[Rush: Red/Green]","cleanText":"[Rush: Red/Green]","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_ABILITY","keyword":"Rush","condition":{"colorSymbol":"Red/Green"}}},{"rawText":"(While you have Red/Green symbols, the following effect activate next)","cleanText":"(While you have Red/Green symbols, the following effect activate next)","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_SYMBOL"}},{"rawText":"[Green Core][Green Core]: Put two cores from the Void to any Spirits you control.","cleanText":"[Green Core][Green Core]: Put two cores from the Void to any Spirits you control","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"[Green Core][Green Core][Green Core]: Until the next opposing End Step, the opponent can't pay costs from the Field.","cleanText":"[Green Core][Green Core][Green Core]: Until the next opposing End Step, the opponent can't pay costs from the Field","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"COST_MODIFIER"}},{"rawText":"[Red Core][Red Core][Red Core][Green Core][Green Core][Green Core]: At the end of battle, send two opposing Lives to the Void.","cleanText":"[Red Core][Red Core][Red Core][Green Core][Green Core][Green Core]: At the end of battle, send two opposing Lives to the Void","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":6,"unsupportedClausesCount":0,"isFullySupported":true},"THE-ANGELIA":{"cardNumber":"THE-ANGELIA","name":"The Angelia Grayel","keywords":[],"abilities":[{"id":"THE-ANGELIA#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"END_OF_TURN","timingLabel":"Your End Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"For each Spirit you control with Brilliance/Evil Light, you can reveal a card from your decktop. Add a Magic card among them to your Hand. Discard the remaining cards."},"clauses":[{"rawText":"For each Spirit you control with Brilliance/Evil Light, you can reveal a card from your decktop.","cleanText":"For each Spirit you control with Brilliance/Evil Light, you can reveal a card from your decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":1}},{"rawText":"Add a Magic card among them to your Hand.","cleanText":"Add a Magic card among them to your Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SALVAGE","cardType":"Magic"}},{"rawText":"Discard the remaining cards.","cleanText":"Discard the remaining cards","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DECK_OR_HAND_ACTION"}}],"unsupported":[]},{"id":"THE-ANGELIA#a1","type":"ABILITY","header":{"levels":[3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"At the end of battle, return all Magic cards you used during this battle to your Hand."},"clauses":[{"rawText":"At the end of battle, return all Magic cards you used during this battle to your Hand.","cleanText":"At the end of battle, return all Magic cards you used during this battle to your Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_BATTLE","op":{"op":"SALVAGE","cardType":"Magic","filter":{"usedThisBattle":true}}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"THE-DARKKNIGHT":{"cardNumber":"THE-DARKKNIGHT","name":"The DarkKnight Palomides","keywords":[],"abilities":[{"id":"THE-DARKKNIGHT#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Immortality: Cost (Either Attack Step) - This Spirit card in your Trash can be summoned when your Cost 3 Spirit is destroyed."},"clauses":[{"rawText":"Immortality: Cost (Either Attack Step) - This Spirit card in your Trash can be summoned when your Cost 3 Spirit is destroyed.","cleanText":"Immortality: Cost (Either Attack Step) - This Spirit card in your Trash can be summoned when your Cost 3 Spirit is destroyed","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}}],"unsupported":[]}],"compiledClausesCount":1,"unsupportedClausesCount":0,"isFullySupported":true},"THE-GREAT":{"cardNumber":"THE-GREAT","name":"The Great River and the Precipice","keywords":[],"abilities":[{"id":"THE-GREAT#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"All Spirit cards in your Hand with Windstorm gain 1 extra Green reduction symbol."},"clauses":[{"rawText":"All Spirit cards in your Hand with Windstorm gain 1 extra Green reduction symbol.","cleanText":"All Spirit cards in your Hand with Windstorm gain 1 extra Green reduction symbol","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_SYMBOL"}}],"unsupported":[]},{"id":"THE-GREAT#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"START_STEP","timingLabel":"Your Start Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When the opponent has a Burst set, exhaust an opposing Spirit."},"clauses":[{"rawText":"When the opponent has a Burst set, exhaust an opposing Spirit.","cleanText":"When the opponent has a Burst set, exhaust an opposing Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","isHeavy":false,"count":1,"target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"THE-GREAT-A10545":{"cardNumber":"THE-GREAT-A10545","name":"The Great Tree of Life","keywords":[],"abilities":[{"id":"THE-GREAT-A10545#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your Spirit is destroyed by the opponent, put a core from the Void to your Reserve."},"clauses":[{"rawText":"When your Spirit is destroyed by the opponent, put a core from the Void to your Reserve.","cleanText":"When your Spirit is destroyed by the opponent, put a core from the Void to your Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"void"},"to":{"zone":"reserve","side":"self"}}}],"unsupported":[]},{"id":"THE-GREAT-A10545#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Opposing Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When an opposing Spirit's attack reduces your life, put a core from the Void to your Reserve, and refresh a Spirit you control."},"clauses":[{"rawText":"When an opposing Spirit's attack reduces your life, put a core from the Void to your Reserve","cleanText":"When an opposing Spirit's attack reduces your life, put a core from the Void to your Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"void"},"to":{"zone":"reserve","side":"self"}}},{"rawText":"refresh a Spirit you control.","cleanText":"refresh a Spirit you control","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","count":1,"target":{"side":"self","types":["Spirit"]}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"THE-GUARDMAN":{"cardNumber":"THE-GUARDMAN","name":"The Guardman Pug","keywords":[],"abilities":[{"id":"THE-GUARDMAN#a0","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your Nexuses are destroyed, by sending a core from this Spirit to your Trash, one of the Nexuses destroyed remains on your field in the same state."},"clauses":[{"rawText":"When your Nexuses are destroyed, by sending a core from this Spirit to your Trash, one of the Nexuses destroyed remains on your field in the same state.","cleanText":"When your Nexuses are destroyed, by sending a core from this Spirit to your Trash, one of the Nexuses destroyed remains on your field in the same state","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":true}}],"unsupported":[]}],"compiledClausesCount":1,"unsupportedClausesCount":0,"isFullySupported":true},"THE-ISLAND":{"cardNumber":"THE-ISLAND","name":"The Island of Ocean Master","keywords":[],"abilities":[{"id":"THE-ISLAND#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_DESTROYED","timingLabel":"When Destroyed","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can deploy a Nexus card from your Trash, without paying the cost."},"clauses":[{"rawText":"You can deploy a Nexus card from your Trash, without paying the cost.","cleanText":"You can deploy a Nexus card from your Trash, without paying the cost","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DEPLOY_NEXUS","from":"trash","free":true}}],"unsupported":[]},{"id":"THE-ISLAND#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Treat all your \"Ocean Emperor\" family Spirits as being 1 Lv higher."},"clauses":[{"rawText":"Treat all your \"Ocean Emperor\" family Spirits as being 1 Lv higher.","cleanText":"Treat all your \"Ocean Emperor\" family Spirits as being 1 Lv higher","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TREAT_RULE"}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"THE-KINGDOM":{"cardNumber":"THE-KINGDOM","name":"The Kingdom between Two Rivers","keywords":[],"abilities":[{"id":"THE-KINGDOM#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_DEPLOYED","timingLabel":"When deployed","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"from your Hand, you can target a Nexus you control. Destroy an opposing Spirit with the same cost as that Nexus."},"clauses":[{"rawText":"from your Hand, you can target a Nexus you control.","cleanText":"from your Hand, you can target a Nexus you control","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"TARGET_CARD"}},{"rawText":"Destroy an opposing Spirit with the same cost as that Nexus.","cleanText":"Destroy an opposing Spirit with the same cost as that Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]},{"id":"THE-KINGDOM#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"All Spirits can't be refreshed by Nexus/Magic effects."},"clauses":[{"rawText":"All Spirits can't be refreshed by Nexus/Magic effects.","cleanText":"All Spirits can't be refreshed by Nexus/Magic effects","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"THE-LIGHT":{"cardNumber":"THE-LIGHT","name":"The Light Guiding Tower","keywords":[],"abilities":[{"id":"THE-LIGHT#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your Spirit with Heavy Armor is destroyed by an opposing Spirit of the color designated in its Heavy Armor by comparing BP, it returns to your field, exhausted."},"clauses":[{"rawText":"When your Spirit with Heavy Armor is destroyed by an opposing Spirit of the color designated in its Heavy Armor by comparing BP, it returns to your field, exhausted.","cleanText":"When your Spirit with Heavy Armor is destroyed by an opposing Spirit of the color designated in its Heavy Armor by comparing BP, it returns to your field, exhausted","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]},{"id":"THE-LIGHT#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"MAIN_STEP","timingLabel":"Opposing Main Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When the opponent draws due to Spirit/Brave/Nexus/Magic effects, after that effect resolves, the opposing main step ends."},"clauses":[{"rawText":"When the opponent draws due to Spirit/Brave/Nexus/Magic effects","cleanText":"When the opponent draws due to Spirit/Brave/Nexus/Magic effects","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}},{"rawText":"the opposing main step ends.","cleanText":"the opposing main step ends","link":"afterResolves","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"END_MAIN_STEP"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"THE-OPENED":{"cardNumber":"THE-OPENED","name":"The Opened Rock Door","keywords":[],"abilities":[{"id":"THE-OPENED#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Cost 0/3/6 Spirits can't block."},"clauses":[{"rawText":"Cost 0/3/6 Spirits can't block.","cleanText":"Cost 0/3/6 Spirits can't block","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"COST_MODIFIER"}}],"unsupported":[]},{"id":"THE-OPENED#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When only the opposing Spirits are destroyed by comparing BP with your \"Great General\" family Spirit, put a core from the Void to this Nexus."},"clauses":[{"rawText":"When only the opposing Spirits are destroyed by comparing BP with your \"Great General\" family Spirit, put a core from the Void to this Nexus.","cleanText":"When only the opposing Spirits are destroyed by comparing BP with your \"Great General\" family Spirit, put a core from the Void to this Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"void"},"to":{"zone":"field","target":"self"}}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"THE-PENTAGRAM":{"cardNumber":"THE-PENTAGRAM","name":"The Pentagram Castle","keywords":[],"abilities":[{"id":"THE-PENTAGRAM#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"START_STEP","timingLabel":"Your Start Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Send all cores from the opposing Reserve to their Trash."},"clauses":[{"rawText":"Send all cores from the opposing Reserve to their Trash.","cleanText":"Send all cores from the opposing Reserve to their Trash","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":"ALL","from":{"zone":"reserve","side":"opp"},"to":{"zone":"trash","side":"opp"}}}],"unsupported":[]},{"id":"THE-PENTAGRAM#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Opposing Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"At the start of the step, separate an opposing Brave Spirit, the opponent will decide how the cores will be moved for the separation."},"clauses":[{"rawText":"At the start of the step, separate an opposing Brave Spirit, the opponent will decide how the cores will be moved for the separation.","cleanText":"At the start of the step, separate an opposing Brave Spirit, the opponent will decide how the cores will be moved for the separation","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"THE-RANGE":{"cardNumber":"THE-RANGE","name":"The Range of Royal Crypts","keywords":[],"abilities":[{"id":"THE-RANGE#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By discarding a Magic card from your Hand, during this turn, a Spirit you control gets +3000 BP."},"clauses":[{"rawText":"By discarding a Magic card from your Hand","cleanText":"By discarding a Magic card from your Hand","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"DISCARD_HAND","chooser":"self","isCost":false}},{"rawText":"during this turn, a Spirit you control gets +3000 BP.","cleanText":"a Spirit you control gets +3000 BP","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"BP_BUFF","amount":3000,"target":{"side":"either"}}}],"unsupported":[]},{"id":"THE-RANGE#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your Spirits with Brilliance/Evil Light are destroyed by the opponent, by exhausting this Nexus, one of the destroyed Spirits remain on your field, exhausted."},"clauses":[{"rawText":"When your Spirits with Brilliance/Evil Light are destroyed by the opponent, by exhausting this Nexus, one of the destroyed Spirits remain on your field, exhausted.","cleanText":"When your Spirits with Brilliance/Evil Light are destroyed by the opponent, by exhausting this Nexus, one of the destroyed Spirits remain on your field, exhausted","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","target":"self"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"THE-SOUL":{"cardNumber":"THE-SOUL","name":"The Soul Fishing Place","keywords":[],"abilities":[{"id":"THE-SOUL#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"While you have a Burst set, this Nexus gains one extra Purple symbol."},"clauses":[{"rawText":"While you have a Burst set, this Nexus gains one extra Purple symbol.","cleanText":"this Nexus gains one extra Purple symbol","link":null,"isOptional":false,"isCost":false,"condition":"While you have a Burst set","duration":null,"op":{"op":"ADD_SYMBOL"}}],"unsupported":[]},{"id":"THE-SOUL#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"END_OF_TURN","timingLabel":"Your End Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"By discarding a \"Zombie\" family Spirit card from your Hand, draw 1 card from your deck."},"clauses":[{"rawText":"By discarding a \"Zombie\" family Spirit card from your Hand","cleanText":"By discarding a \"Zombie\" family Spirit card from your Hand","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"DISCARD_HAND","chooser":"self","isCost":false}},{"rawText":"draw 1 card from your deck.","cleanText":"draw 1 card from your deck","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"THE-SNOW":{"cardNumber":"THE-SNOW","name":"The Snow Crystal Tree","keywords":[],"abilities":[{"id":"THE-SNOW#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Opposing Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"At the end of the step, if your opponent did not attack this turn, put a core from the void to your Reserve."},"clauses":[{"rawText":"At the end of the step, if your opponent did not attack this turn, put a core from the void to your Reserve.","cleanText":"At the end of the step, if your opponent did not attack this turn, put a core from the void to your Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"void"},"to":{"zone":"reserve","side":"self"}}}],"unsupported":[]},{"id":"THE-SNOW#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"TURN_TRIGGER","timingLabel":"Opposing Turn","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your Spirit uses an Ice Wall effect, by sending a core from this Nexus to the trash, refresh that Spirit."},"clauses":[{"rawText":"When your Spirit uses an Ice Wall effect, by sending a core from this Nexus to the trash, refresh that Spirit.","cleanText":"When your Spirit uses an Ice Wall effect, by sending a core from this Nexus to the trash, refresh that Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":true}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"THE-THRONE":{"cardNumber":"THE-THRONE","name":"The Throne Inheritance Lottery","keywords":[],"abilities":[{"id":"THE-THRONE#a0","type":"ABILITY","header":{"levels":[1],"levelExplicit":true,"prefixes":[],"timing":"DRAW_STEP","timingLabel":"Your Draw Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Instead of drawing, you can discard the top card of your deck. If the discarded card is a \"War Princess\" family Spirit card, draw two cards from your deck. If the discarded card is a Magic card, put two cores from the void to any \"War Princess\" family Spirit(s) you control. If the discarded card is anything else, add it to your Hand."},"clauses":[{"rawText":"Instead of drawing, you can discard the top card of your deck.","cleanText":"Instead of drawing, you can discard the top card of your deck","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MILL"}},{"rawText":"If the discarded card is a \"War Princess\" family Spirit card, draw two cards from your deck.","cleanText":"draw two cards from your deck","link":null,"isOptional":false,"isCost":false,"condition":"If the discarded card is a \"War Princess\" family Spirit card","duration":null,"op":{"op":"DRAW","count":2,"chooser":"self","forEach":null}},{"rawText":"If the discarded card is a Magic card, put two cores from the void to any \"War Princess\" family Spirit(s) you control.","cleanText":"put two cores from the void to any \"War Princess\" family Spirit(s) you control","link":null,"isOptional":false,"isCost":false,"condition":"If the discarded card is a Magic card","duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"If the discarded card is anything else, add it to your Hand.","cleanText":"add it to your Hand","link":null,"isOptional":false,"isCost":false,"condition":"If the discarded card is anything else","duration":null,"op":{"op":"ADD_TO_HAND"}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"THE-UNEXPLORED":{"cardNumber":"THE-UNEXPLORED","name":"The Unexplored City in Jungle","keywords":[],"abilities":[{"id":"THE-UNEXPLORED#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When a card with Burst effect is discarded from your deck due to the opponent, add that card to your Hand. Also, during this turn, cards cannot be discarded from your deck."},"clauses":[{"rawText":"When a card with Burst effect is discarded from your deck due to the opponent, add that card to your Hand.","cleanText":"When a card with Burst effect is discarded from your deck due to the opponent, add that card to your Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DISCARD_HAND","chooser":"self","isCost":false}},{"rawText":"during this turn, cards cannot be discarded from your deck.","cleanText":"cards cannot be discarded from your deck","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"DECK_IMMUNITY"}}],"unsupported":[]},{"id":"THE-UNEXPLORED#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When you use a Magic card, after the effect resolves, draw 1 card from your deck."},"clauses":[{"rawText":"When you use a Magic card","cleanText":"When you use a Magic card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TRIGGERED_WATCHER"}},{"rawText":"draw 1 card from your deck.","cleanText":"draw 1 card from your deck","link":"afterResolves","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"THE-URTEXT":{"cardNumber":"THE-URTEXT","name":"The Urtext of Creativity","keywords":[],"abilities":[{"id":"THE-URTEXT#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_DEPLOYED","timingLabel":"When deployed","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"from your Hand, return a Yellow Magic card from your Trash to your Hand."},"clauses":[{"rawText":"from your Hand, return a Yellow Magic card from your Trash to your Hand.","cleanText":"from your Hand, return a Yellow Magic card from your Trash to your Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SALVAGE","count":1,"family":"Yellow","targetType":"Magic","destination":"HAND"}}],"unsupported":[]},{"id":"THE-URTEXT#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your Burst activates, if that Burst is a Magic card, you can activate its Main/Flash effect without paying the cost."},"clauses":[{"rawText":"When your Burst activates, if that Burst is a Magic card, you can activate its Main/Flash effect without paying the cost.","cleanText":"When your Burst activates, if that Burst is a Magic card, you can activate its Main/Flash effect without paying the cost","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"THE-WHIRTING":{"cardNumber":"THE-WHIRTING","name":"The Whirling Big Channel","keywords":[],"abilities":[{"id":"THE-WHIRTING#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"All exhausted Spirits can only be refreshed during the Refresh Step."},"clauses":[{"rawText":"All exhausted Spirits can only be refreshed during the Refresh Step.","cleanText":"All exhausted Spirits can only be refreshed during the Refresh Step","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","target":{"side":"either"}}}],"unsupported":[]},{"id":"THE-WHIRTING#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"While you have a Burst set, (When Destroyed) effects of Spirits can't activate."},"clauses":[{"rawText":"While you have a Burst set, (When Destroyed) effects of Spirits can't activate.","cleanText":"(When Destroyed) effects of Spirits can't activate","link":null,"isOptional":false,"isCost":false,"condition":"While you have a Burst set","duration":null,"op":{"op":"NEGATE_EFFECT"}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"THE-WRAITH":{"cardNumber":"THE-WRAITH","name":"The Wraith's Ruins","keywords":[],"abilities":[{"id":"THE-WRAITH#a0","type":"ABILITY","header":{"levels":[1],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your Spirits are destroyed by the opponent, by discarding four cards from your decktop, one of the destroyed Spirits remains on your field, exhausted."},"clauses":[{"rawText":"When your Spirits are destroyed by the opponent, by discarding four cards from your decktop, one of the destroyed Spirits remains on your field, exhausted.","cleanText":"When your Spirits are destroyed by the opponent, by discarding four cards from your decktop, one of the destroyed Spirits remains on your field, exhausted","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MILL_DECK","side":"opp"}}],"unsupported":[]}],"compiledClausesCount":1,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "THE-SUN": {
+    "cardNumber": "THE-SUN",
+    "name": "The OracleTwentyOnePillars XIX The Sun",
+    "keywords": [
+      {
+        "name": "Rush",
+        "parameter": "Red/Green",
+        "wave": 2,
+        "hook": "rush",
+        "bracketed": true,
+        "index": 149
+      }
+    ],
+    "abilities": [
+      {
+        "id": "THE-SUN#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_05c9c704f10f3c6e08f852e840f6afac7f6151adbab523adc23e34ff9a783745_38c2855f83708055f003559ef5b82567",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can destroy an opposing single-symbol Spirit/Nexus, and the effects of the destroyed Spirit/Nexus can't activate.\n[Rush: Red/Green]\n(While you have Red/Green symbols, the following effect activate next)\n[Green Core][Green Core]: Put two cores from the Void to any Spirits you control.\n[Green Core][Green Core][Green Core]: Until the next opposing End Step, the opponent can't pay costs from the Field.\n[Red Core][Red Core][Red Core][Green Core][Green Core][Green Core]: At the end of battle, send two opposing Lives to the Void."
+        },
+        "clauses": [
+          {
+            "rawText": "You can destroy an opposing single-symbol Spirit/Nexus, and the effects of the destroyed Spirit/Nexus can't activate.",
+            "cleanText": "You can destroy an opposing single-symbol Spirit/Nexus, and the effects of the destroyed Spirit/Nexus can't activate",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "symbolCount": 1
+                }
+              }
+            }
+          },
+          {
+            "rawText": "[Rush: Red/Green]",
+            "cleanText": "[Rush: Red/Green]",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_ABILITY",
+              "keyword": "Rush",
+              "condition": {
+                "colorSymbol": "Red/Green"
+              }
+            }
+          },
+          {
+            "rawText": "(While you have Red/Green symbols, the following effect activate next)",
+            "cleanText": "(While you have Red/Green symbols, the following effect activate next)",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_SYMBOL"
+            }
+          },
+          {
+            "rawText": "[Green Core][Green Core]: Put two cores from the Void to any Spirits you control.",
+            "cleanText": "[Green Core][Green Core]: Put two cores from the Void to any Spirits you control",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "[Green Core][Green Core][Green Core]: Until the next opposing End Step, the opponent can't pay costs from the Field.",
+            "cleanText": "[Green Core][Green Core][Green Core]: Until the next opposing End Step, the opponent can't pay costs from the Field",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          },
+          {
+            "rawText": "[Red Core][Red Core][Red Core][Green Core][Green Core][Green Core]: At the end of battle, send two opposing Lives to the Void.",
+            "cleanText": "[Red Core][Red Core][Red Core][Green Core][Green Core][Green Core]: At the end of battle, send two opposing Lives to the Void",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-SUN#a0",
+        "physicalId": "THE-SUN#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_05c9c704f10f3c6e08f852e840f6afac7f6151adbab523adc23e34ff9a783745_38c2855f83708055f003559ef5b82567",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_05c9c704f10f3c6e08f852e840f6afac7f6151adbab523adc23e34ff9a783745_38c2855f83708055f003559ef5b82567"
+      }
+    ],
+    "compiledClausesCount": 6,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "THE-ANGELIA": {
+    "cardNumber": "THE-ANGELIA",
+    "name": "The Angelia Grayel",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "THE-ANGELIA#AB_END_OF_TURN_NONE_LV1_LV2_LV3_bc30af9e5c22faff4fc8e5fbdeff29b1097811b168620549dee2d05bc548bd15_f600eff7f0e8820b05f32f8353f64647",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "END_OF_TURN",
+          "timingLabel": "Your End Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "For each Spirit you control with Brilliance/Evil Light, you can reveal a card from your decktop. Add a Magic card among them to your Hand. Discard the remaining cards."
+        },
+        "clauses": [
+          {
+            "rawText": "For each Spirit you control with Brilliance/Evil Light, you can reveal a card from your decktop.",
+            "cleanText": "For each Spirit you control with Brilliance/Evil Light, you can reveal a card from your decktop",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 1
+            }
+          },
+          {
+            "rawText": "Add a Magic card among them to your Hand.",
+            "cleanText": "Add a Magic card among them to your Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SALVAGE",
+              "cardType": "Magic"
+            }
+          },
+          {
+            "rawText": "Discard the remaining cards.",
+            "cleanText": "Discard the remaining cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DECK_OR_HAND_ACTION"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-ANGELIA#a0",
+        "physicalId": "THE-ANGELIA#AB_END_OF_TURN_NONE_LV1_LV2_LV3_bc30af9e5c22faff4fc8e5fbdeff29b1097811b168620549dee2d05bc548bd15_f600eff7f0e8820b05f32f8353f64647",
+        "semanticId": "SEM#AB_END_OF_TURN_NONE_LV1_LV2_LV3_bc30af9e5c22faff4fc8e5fbdeff29b1097811b168620549dee2d05bc548bd15_f600eff7f0e8820b05f32f8353f64647"
+      },
+      {
+        "id": "THE-ANGELIA#AB_WHEN_ATTACKS_NONE_LV3_c8c0671ca53ef65ddfe764aa030c1058cb6ce74e9dec4876ea3250d51c741140_3b4c163e90b48248772a071162acc205",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "At the end of battle, return all Magic cards you used during this battle to your Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "At the end of battle, return all Magic cards you used during this battle to your Hand.",
+            "cleanText": "At the end of battle, return all Magic cards you used during this battle to your Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_BATTLE",
+            "op": {
+              "op": "SALVAGE",
+              "cardType": "Magic",
+              "filter": {
+                "usedThisBattle": true
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-ANGELIA#a1",
+        "physicalId": "THE-ANGELIA#AB_WHEN_ATTACKS_NONE_LV3_c8c0671ca53ef65ddfe764aa030c1058cb6ce74e9dec4876ea3250d51c741140_3b4c163e90b48248772a071162acc205",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV3_c8c0671ca53ef65ddfe764aa030c1058cb6ce74e9dec4876ea3250d51c741140_3b4c163e90b48248772a071162acc205"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "THE-DARKKNIGHT": {
+    "cardNumber": "THE-DARKKNIGHT",
+    "name": "The DarkKnight Palomides",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "THE-DARKKNIGHT#AB_PASSIVE_NONE_LV1_LV2_LV3_7cc81f32398e3ccb564b5d8b667f70fa6018d8dd7e257254bbb2d962a1f6319c_1a05e03f6b77aae30daf1451e3b4f05a",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Immortality: Cost (Either Attack Step) - This Spirit card in your Trash can be summoned when your Cost 3 Spirit is destroyed."
+        },
+        "clauses": [
+          {
+            "rawText": "Immortality: Cost (Either Attack Step) - This Spirit card in your Trash can be summoned when your Cost 3 Spirit is destroyed.",
+            "cleanText": "Immortality: Cost (Either Attack Step) - This Spirit card in your Trash can be summoned when your Cost 3 Spirit is destroyed",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-DARKKNIGHT#a0",
+        "physicalId": "THE-DARKKNIGHT#AB_PASSIVE_NONE_LV1_LV2_LV3_7cc81f32398e3ccb564b5d8b667f70fa6018d8dd7e257254bbb2d962a1f6319c_1a05e03f6b77aae30daf1451e3b4f05a",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_7cc81f32398e3ccb564b5d8b667f70fa6018d8dd7e257254bbb2d962a1f6319c_1a05e03f6b77aae30daf1451e3b4f05a"
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "THE-GREAT": {
+    "cardNumber": "THE-GREAT",
+    "name": "The Great River and the Precipice",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "THE-GREAT#AB_PASSIVE_NONE_LV1_LV2_0e9a6201d79656566232f9adfb947ec56ceda15861ed735e2673dcf8527e7fb4_99195620dd1b64a751a3663075f9a014",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "All Spirit cards in your Hand with Windstorm gain 1 extra Green reduction symbol."
+        },
+        "clauses": [
+          {
+            "rawText": "All Spirit cards in your Hand with Windstorm gain 1 extra Green reduction symbol.",
+            "cleanText": "All Spirit cards in your Hand with Windstorm gain 1 extra Green reduction symbol",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_SYMBOL"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-GREAT#a0",
+        "physicalId": "THE-GREAT#AB_PASSIVE_NONE_LV1_LV2_0e9a6201d79656566232f9adfb947ec56ceda15861ed735e2673dcf8527e7fb4_99195620dd1b64a751a3663075f9a014",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_0e9a6201d79656566232f9adfb947ec56ceda15861ed735e2673dcf8527e7fb4_99195620dd1b64a751a3663075f9a014"
+      },
+      {
+        "id": "THE-GREAT#AB_START_STEP_NONE_LV2_abfeaaff79033aa04d80f86f88b65bd66956d4156a5e5fe726742a30855f22fe_c1a7bc1c8eff6864c4121120f0c6cd13",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "START_STEP",
+          "timingLabel": "Your Start Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When the opponent has a Burst set, exhaust an opposing Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "When the opponent has a Burst set, exhaust an opposing Spirit.",
+            "cleanText": "When the opponent has a Burst set, exhaust an opposing Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "isHeavy": false,
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-GREAT#a1",
+        "physicalId": "THE-GREAT#AB_START_STEP_NONE_LV2_abfeaaff79033aa04d80f86f88b65bd66956d4156a5e5fe726742a30855f22fe_c1a7bc1c8eff6864c4121120f0c6cd13",
+        "semanticId": "SEM#AB_START_STEP_NONE_LV2_abfeaaff79033aa04d80f86f88b65bd66956d4156a5e5fe726742a30855f22fe_c1a7bc1c8eff6864c4121120f0c6cd13"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "THE-GREAT-A10545": {
+    "cardNumber": "THE-GREAT-A10545",
+    "name": "The Great Tree of Life",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "THE-GREAT-A10545#AB_PASSIVE_NONE_LV1_LV2_3c32c32524798d356a1513b77d1558ed99ae9cce4ce1902534bc06cfb1664745_eccb848655f7446ba0a7550a6c70a143",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Spirit is destroyed by the opponent, put a core from the Void to your Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Spirit is destroyed by the opponent, put a core from the Void to your Reserve.",
+            "cleanText": "When your Spirit is destroyed by the opponent, put a core from the Void to your Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-GREAT-A10545#a0",
+        "physicalId": "THE-GREAT-A10545#AB_PASSIVE_NONE_LV1_LV2_3c32c32524798d356a1513b77d1558ed99ae9cce4ce1902534bc06cfb1664745_eccb848655f7446ba0a7550a6c70a143",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_3c32c32524798d356a1513b77d1558ed99ae9cce4ce1902534bc06cfb1664745_eccb848655f7446ba0a7550a6c70a143"
+      },
+      {
+        "id": "THE-GREAT-A10545#AB_ATTACK_STEP_NONE_LV2_1255db868d19848d88438f80a9815256a1dcb41445e90f24934795cb977aa3a7_0f1e78184ff306f6d422eb3b5af9b2ff",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Opposing Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When an opposing Spirit's attack reduces your life, put a core from the Void to your Reserve, and refresh a Spirit you control."
+        },
+        "clauses": [
+          {
+            "rawText": "When an opposing Spirit's attack reduces your life, put a core from the Void to your Reserve",
+            "cleanText": "When an opposing Spirit's attack reduces your life, put a core from the Void to your Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "refresh a Spirit you control.",
+            "cleanText": "refresh a Spirit you control",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "count": 1,
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-GREAT-A10545#a1",
+        "physicalId": "THE-GREAT-A10545#AB_ATTACK_STEP_NONE_LV2_1255db868d19848d88438f80a9815256a1dcb41445e90f24934795cb977aa3a7_0f1e78184ff306f6d422eb3b5af9b2ff",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_1255db868d19848d88438f80a9815256a1dcb41445e90f24934795cb977aa3a7_0f1e78184ff306f6d422eb3b5af9b2ff"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "THE-GUARDMAN": {
+    "cardNumber": "THE-GUARDMAN",
+    "name": "The Guardman Pug",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "THE-GUARDMAN#AB_PASSIVE_NONE_LV2_LV3_419820146b30420931007ec5a70d0af564e31691395561b7ae10bac8ca97fa99_552d6dd6619f670c931c868d0d5d20b8",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Nexuses are destroyed, by sending a core from this Spirit to your Trash, one of the Nexuses destroyed remains on your field in the same state."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Nexuses are destroyed, by sending a core from this Spirit to your Trash, one of the Nexuses destroyed remains on your field in the same state.",
+            "cleanText": "When your Nexuses are destroyed, by sending a core from this Spirit to your Trash, one of the Nexuses destroyed remains on your field in the same state",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": true
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-GUARDMAN#a0",
+        "physicalId": "THE-GUARDMAN#AB_PASSIVE_NONE_LV2_LV3_419820146b30420931007ec5a70d0af564e31691395561b7ae10bac8ca97fa99_552d6dd6619f670c931c868d0d5d20b8",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV2_LV3_419820146b30420931007ec5a70d0af564e31691395561b7ae10bac8ca97fa99_552d6dd6619f670c931c868d0d5d20b8"
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "THE-ISLAND": {
+    "cardNumber": "THE-ISLAND",
+    "name": "The Island of Ocean Master",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "THE-ISLAND#AB_WHEN_DESTROYED_NONE_LV1_LV2_3782810f587124ebfacacd147420f0b62c5f8d7673a23124b0d4c2e33bf3f376_4196f3087343a80fa307583c3810b002",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DESTROYED",
+          "timingLabel": "When Destroyed",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can deploy a Nexus card from your Trash, without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "You can deploy a Nexus card from your Trash, without paying the cost.",
+            "cleanText": "You can deploy a Nexus card from your Trash, without paying the cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DEPLOY_NEXUS",
+              "from": "trash",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-ISLAND#a0",
+        "physicalId": "THE-ISLAND#AB_WHEN_DESTROYED_NONE_LV1_LV2_3782810f587124ebfacacd147420f0b62c5f8d7673a23124b0d4c2e33bf3f376_4196f3087343a80fa307583c3810b002",
+        "semanticId": "SEM#AB_WHEN_DESTROYED_NONE_LV1_LV2_3782810f587124ebfacacd147420f0b62c5f8d7673a23124b0d4c2e33bf3f376_4196f3087343a80fa307583c3810b002"
+      },
+      {
+        "id": "THE-ISLAND#AB_ATTACK_STEP_NONE_LV2_1c7cc8bd5d4076f905fcfd1afc4e58373fb9c02be6e54e9cfdd66f11fd41a406_e3ecccda8cff88c4fccbe36e183d2126",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Treat all your \"Ocean Emperor\" family Spirits as being 1 Lv higher."
+        },
+        "clauses": [
+          {
+            "rawText": "Treat all your \"Ocean Emperor\" family Spirits as being 1 Lv higher.",
+            "cleanText": "Treat all your \"Ocean Emperor\" family Spirits as being 1 Lv higher",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-ISLAND#a1",
+        "physicalId": "THE-ISLAND#AB_ATTACK_STEP_NONE_LV2_1c7cc8bd5d4076f905fcfd1afc4e58373fb9c02be6e54e9cfdd66f11fd41a406_e3ecccda8cff88c4fccbe36e183d2126",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_1c7cc8bd5d4076f905fcfd1afc4e58373fb9c02be6e54e9cfdd66f11fd41a406_e3ecccda8cff88c4fccbe36e183d2126"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "THE-KINGDOM": {
+    "cardNumber": "THE-KINGDOM",
+    "name": "The Kingdom between Two Rivers",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "THE-KINGDOM#AB_WHEN_DEPLOYED_NONE_LV1_LV2_79743a98d413c7fc115bc6b8493d26855b7955da66acc0d1d03d11b92ae9b56c_7e0146b2ef14acfd124fdaaa2ddc4463",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DEPLOYED",
+          "timingLabel": "When deployed",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "from your Hand, you can target a Nexus you control. Destroy an opposing Spirit with the same cost as that Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "from your Hand, you can target a Nexus you control.",
+            "cleanText": "from your Hand, you can target a Nexus you control",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TARGET_CARD"
+            }
+          },
+          {
+            "rawText": "Destroy an opposing Spirit with the same cost as that Nexus.",
+            "cleanText": "Destroy an opposing Spirit with the same cost as that Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-KINGDOM#a0",
+        "physicalId": "THE-KINGDOM#AB_WHEN_DEPLOYED_NONE_LV1_LV2_79743a98d413c7fc115bc6b8493d26855b7955da66acc0d1d03d11b92ae9b56c_7e0146b2ef14acfd124fdaaa2ddc4463",
+        "semanticId": "SEM#AB_WHEN_DEPLOYED_NONE_LV1_LV2_79743a98d413c7fc115bc6b8493d26855b7955da66acc0d1d03d11b92ae9b56c_7e0146b2ef14acfd124fdaaa2ddc4463"
+      },
+      {
+        "id": "THE-KINGDOM#AB_ATTACK_STEP_NONE_LV2_34f6fa0a5ed7c4be45590848c84bb40410a12f91ac5afb2b43a89eee0b2279f9_42f1a09df19833dfdaefab4c89da7ca8",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "All Spirits can't be refreshed by Nexus/Magic effects."
+        },
+        "clauses": [
+          {
+            "rawText": "All Spirits can't be refreshed by Nexus/Magic effects.",
+            "cleanText": "All Spirits can't be refreshed by Nexus/Magic effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-KINGDOM#a1",
+        "physicalId": "THE-KINGDOM#AB_ATTACK_STEP_NONE_LV2_34f6fa0a5ed7c4be45590848c84bb40410a12f91ac5afb2b43a89eee0b2279f9_42f1a09df19833dfdaefab4c89da7ca8",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_34f6fa0a5ed7c4be45590848c84bb40410a12f91ac5afb2b43a89eee0b2279f9_42f1a09df19833dfdaefab4c89da7ca8"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "THE-LIGHT": {
+    "cardNumber": "THE-LIGHT",
+    "name": "The Light Guiding Tower",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "THE-LIGHT#AB_ATTACK_STEP_NONE_LV1_LV2_e8227747e3858d32929d9ffcfc87ba07cce234b3ed58f1aa6a84811a943db2f2_e85c9a83ba500d23c20c0b3520e32945",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Spirit with Heavy Armor is destroyed by an opposing Spirit of the color designated in its Heavy Armor by comparing BP, it returns to your field, exhausted."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Spirit with Heavy Armor is destroyed by an opposing Spirit of the color designated in its Heavy Armor by comparing BP, it returns to your field, exhausted.",
+            "cleanText": "When your Spirit with Heavy Armor is destroyed by an opposing Spirit of the color designated in its Heavy Armor by comparing BP, it returns to your field, exhausted",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-LIGHT#a0",
+        "physicalId": "THE-LIGHT#AB_ATTACK_STEP_NONE_LV1_LV2_e8227747e3858d32929d9ffcfc87ba07cce234b3ed58f1aa6a84811a943db2f2_e85c9a83ba500d23c20c0b3520e32945",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_e8227747e3858d32929d9ffcfc87ba07cce234b3ed58f1aa6a84811a943db2f2_e85c9a83ba500d23c20c0b3520e32945"
+      },
+      {
+        "id": "THE-LIGHT#AB_MAIN_STEP_NONE_LV2_f57857942af0a05ac229791484859ddc083653629eb1e5ea55bc75dfcccea0e7_2cc35f2a7cf900643935740127ded9d0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "MAIN_STEP",
+          "timingLabel": "Opposing Main Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When the opponent draws due to Spirit/Brave/Nexus/Magic effects, after that effect resolves, the opposing main step ends."
+        },
+        "clauses": [
+          {
+            "rawText": "When the opponent draws due to Spirit/Brave/Nexus/Magic effects",
+            "cleanText": "When the opponent draws due to Spirit/Brave/Nexus/Magic effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          },
+          {
+            "rawText": "the opposing main step ends.",
+            "cleanText": "the opposing main step ends",
+            "link": "afterResolves",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "END_MAIN_STEP"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-LIGHT#a1",
+        "physicalId": "THE-LIGHT#AB_MAIN_STEP_NONE_LV2_f57857942af0a05ac229791484859ddc083653629eb1e5ea55bc75dfcccea0e7_2cc35f2a7cf900643935740127ded9d0",
+        "semanticId": "SEM#AB_MAIN_STEP_NONE_LV2_f57857942af0a05ac229791484859ddc083653629eb1e5ea55bc75dfcccea0e7_2cc35f2a7cf900643935740127ded9d0"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "THE-OPENED": {
+    "cardNumber": "THE-OPENED",
+    "name": "The Opened Rock Door",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "THE-OPENED#AB_ATTACK_STEP_NONE_LV1_LV2_71104e745a93ade3c2d0df7ac79d9d3a787125e3e306be639dd87fcb08af816e_9de031edff450992993cf65e22064f83",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Cost 0/3/6 Spirits can't block."
+        },
+        "clauses": [
+          {
+            "rawText": "Cost 0/3/6 Spirits can't block.",
+            "cleanText": "Cost 0/3/6 Spirits can't block",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-OPENED#a0",
+        "physicalId": "THE-OPENED#AB_ATTACK_STEP_NONE_LV1_LV2_71104e745a93ade3c2d0df7ac79d9d3a787125e3e306be639dd87fcb08af816e_9de031edff450992993cf65e22064f83",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_71104e745a93ade3c2d0df7ac79d9d3a787125e3e306be639dd87fcb08af816e_9de031edff450992993cf65e22064f83"
+      },
+      {
+        "id": "THE-OPENED#AB_ATTACK_STEP_NONE_LV2_7f4590d025d40e73138e84dc22fd9c0d500b18df2f7381c4aa046ce39700eb25_2b54c7f861c7b7eac919407cfc93afa7",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When only the opposing Spirits are destroyed by comparing BP with your \"Great General\" family Spirit, put a core from the Void to this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "When only the opposing Spirits are destroyed by comparing BP with your \"Great General\" family Spirit, put a core from the Void to this Nexus.",
+            "cleanText": "When only the opposing Spirits are destroyed by comparing BP with your \"Great General\" family Spirit, put a core from the Void to this Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "field",
+                "target": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-OPENED#a1",
+        "physicalId": "THE-OPENED#AB_ATTACK_STEP_NONE_LV2_7f4590d025d40e73138e84dc22fd9c0d500b18df2f7381c4aa046ce39700eb25_2b54c7f861c7b7eac919407cfc93afa7",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_7f4590d025d40e73138e84dc22fd9c0d500b18df2f7381c4aa046ce39700eb25_2b54c7f861c7b7eac919407cfc93afa7"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "THE-PENTAGRAM": {
+    "cardNumber": "THE-PENTAGRAM",
+    "name": "The Pentagram Castle",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "THE-PENTAGRAM#AB_START_STEP_NONE_LV1_LV2_0efeab00431c2ddf087f8abf86b73cc81073b28c0cc6d8ec9865aa5148645d77_2e832f890e9682379f5db86402b80e7a",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "START_STEP",
+          "timingLabel": "Your Start Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Send all cores from the opposing Reserve to their Trash."
+        },
+        "clauses": [
+          {
+            "rawText": "Send all cores from the opposing Reserve to their Trash.",
+            "cleanText": "Send all cores from the opposing Reserve to their Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": "ALL",
+              "from": {
+                "zone": "reserve",
+                "side": "opp"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "opp"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-PENTAGRAM#a0",
+        "physicalId": "THE-PENTAGRAM#AB_START_STEP_NONE_LV1_LV2_0efeab00431c2ddf087f8abf86b73cc81073b28c0cc6d8ec9865aa5148645d77_2e832f890e9682379f5db86402b80e7a",
+        "semanticId": "SEM#AB_START_STEP_NONE_LV1_LV2_0efeab00431c2ddf087f8abf86b73cc81073b28c0cc6d8ec9865aa5148645d77_2e832f890e9682379f5db86402b80e7a"
+      },
+      {
+        "id": "THE-PENTAGRAM#AB_ATTACK_STEP_NONE_LV2_1912e9c1ba79d99e761664f0b822d6a723791b8f17c68752ed2d86758d1bf19c_d78c6241396a415b6db66bef09e6faff",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Opposing Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "At the start of the step, separate an opposing Brave Spirit, the opponent will decide how the cores will be moved for the separation."
+        },
+        "clauses": [
+          {
+            "rawText": "At the start of the step, separate an opposing Brave Spirit, the opponent will decide how the cores will be moved for the separation.",
+            "cleanText": "At the start of the step, separate an opposing Brave Spirit, the opponent will decide how the cores will be moved for the separation",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-PENTAGRAM#a1",
+        "physicalId": "THE-PENTAGRAM#AB_ATTACK_STEP_NONE_LV2_1912e9c1ba79d99e761664f0b822d6a723791b8f17c68752ed2d86758d1bf19c_d78c6241396a415b6db66bef09e6faff",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_1912e9c1ba79d99e761664f0b822d6a723791b8f17c68752ed2d86758d1bf19c_d78c6241396a415b6db66bef09e6faff"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "THE-RANGE": {
+    "cardNumber": "THE-RANGE",
+    "name": "The Range of Royal Crypts",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "THE-RANGE#AB_ATTACK_STEP_NONE_LV1_LV2_308710904aac53175d368f29f36805b367bd25f05fe1322d8c1deeddb29932f5_12299bff0ff90afd5b7c6c628cb06dc0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By discarding a Magic card from your Hand, during this turn, a Spirit you control gets +3000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "By discarding a Magic card from your Hand",
+            "cleanText": "By discarding a Magic card from your Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "chooser": "self",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "during this turn, a Spirit you control gets +3000 BP.",
+            "cleanText": "a Spirit you control gets +3000 BP",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 3000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-RANGE#a0",
+        "physicalId": "THE-RANGE#AB_ATTACK_STEP_NONE_LV1_LV2_308710904aac53175d368f29f36805b367bd25f05fe1322d8c1deeddb29932f5_12299bff0ff90afd5b7c6c628cb06dc0",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_308710904aac53175d368f29f36805b367bd25f05fe1322d8c1deeddb29932f5_12299bff0ff90afd5b7c6c628cb06dc0"
+      },
+      {
+        "id": "THE-RANGE#AB_ATTACK_STEP_NONE_LV2_378f7d192ddd5be89daebb6b0dbfb155da4f8012694b04cab9d600bb9e646d1c_fced2bfd22701e7314c42ca39e2c70df",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Spirits with Brilliance/Evil Light are destroyed by the opponent, by exhausting this Nexus, one of the destroyed Spirits remain on your field, exhausted."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Spirits with Brilliance/Evil Light are destroyed by the opponent, by exhausting this Nexus, one of the destroyed Spirits remain on your field, exhausted.",
+            "cleanText": "When your Spirits with Brilliance/Evil Light are destroyed by the opponent, by exhausting this Nexus, one of the destroyed Spirits remain on your field, exhausted",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-RANGE#a1",
+        "physicalId": "THE-RANGE#AB_ATTACK_STEP_NONE_LV2_378f7d192ddd5be89daebb6b0dbfb155da4f8012694b04cab9d600bb9e646d1c_fced2bfd22701e7314c42ca39e2c70df",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_378f7d192ddd5be89daebb6b0dbfb155da4f8012694b04cab9d600bb9e646d1c_fced2bfd22701e7314c42ca39e2c70df"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "THE-SOUL": {
+    "cardNumber": "THE-SOUL",
+    "name": "The Soul Fishing Place",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "THE-SOUL#AB_PASSIVE_NONE_LV1_LV2_f92ffe1950e38ad9f51df24d1f69d9031edf5c23d0f4ab1e04a9d2c97e711b64_6bbe9fbbdc69f67723d3f9f732335abf",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While you have a Burst set, this Nexus gains one extra Purple symbol."
+        },
+        "clauses": [
+          {
+            "rawText": "While you have a Burst set, this Nexus gains one extra Purple symbol.",
+            "cleanText": "this Nexus gains one extra Purple symbol",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While you have a Burst set",
+            "duration": null,
+            "op": {
+              "op": "ADD_SYMBOL"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-SOUL#a0",
+        "physicalId": "THE-SOUL#AB_PASSIVE_NONE_LV1_LV2_f92ffe1950e38ad9f51df24d1f69d9031edf5c23d0f4ab1e04a9d2c97e711b64_6bbe9fbbdc69f67723d3f9f732335abf",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_f92ffe1950e38ad9f51df24d1f69d9031edf5c23d0f4ab1e04a9d2c97e711b64_6bbe9fbbdc69f67723d3f9f732335abf"
+      },
+      {
+        "id": "THE-SOUL#AB_END_OF_TURN_NONE_LV2_5f077d817ad5173c18940e6407aff339683627dd7bcbf70070829af7b2f20e30_be43f2eefb9f64b610c2f13a9c773aa0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "END_OF_TURN",
+          "timingLabel": "Your End Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By discarding a \"Zombie\" family Spirit card from your Hand, draw 1 card from your deck."
+        },
+        "clauses": [
+          {
+            "rawText": "By discarding a \"Zombie\" family Spirit card from your Hand",
+            "cleanText": "By discarding a \"Zombie\" family Spirit card from your Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "chooser": "self",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "draw 1 card from your deck.",
+            "cleanText": "draw 1 card from your deck",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-SOUL#a1",
+        "physicalId": "THE-SOUL#AB_END_OF_TURN_NONE_LV2_5f077d817ad5173c18940e6407aff339683627dd7bcbf70070829af7b2f20e30_be43f2eefb9f64b610c2f13a9c773aa0",
+        "semanticId": "SEM#AB_END_OF_TURN_NONE_LV2_5f077d817ad5173c18940e6407aff339683627dd7bcbf70070829af7b2f20e30_be43f2eefb9f64b610c2f13a9c773aa0"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "THE-SNOW": {
+    "cardNumber": "THE-SNOW",
+    "name": "The Snow Crystal Tree",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "THE-SNOW#AB_ATTACK_STEP_NONE_LV1_LV2_a9c32f4e07d42e27caa643971d5132d114632530fe25da928d51338157295d75_5b11129e0990d1a23ea91e2d9a7007cc",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Opposing Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "At the end of the step, if your opponent did not attack this turn, put a core from the void to your Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "At the end of the step, if your opponent did not attack this turn, put a core from the void to your Reserve.",
+            "cleanText": "At the end of the step, if your opponent did not attack this turn, put a core from the void to your Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-SNOW#a0",
+        "physicalId": "THE-SNOW#AB_ATTACK_STEP_NONE_LV1_LV2_a9c32f4e07d42e27caa643971d5132d114632530fe25da928d51338157295d75_5b11129e0990d1a23ea91e2d9a7007cc",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_a9c32f4e07d42e27caa643971d5132d114632530fe25da928d51338157295d75_5b11129e0990d1a23ea91e2d9a7007cc"
+      },
+      {
+        "id": "THE-SNOW#AB_TURN_TRIGGER_NONE_LV2_fde27bcc538d0d092f817aa9c899d6160f7029ac2014bb03641dffe09cedc882_dd3b12e1ad431c9fdaa1198bf0eea5e7",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "TURN_TRIGGER",
+          "timingLabel": "Opposing Turn",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Spirit uses an Ice Wall effect, by sending a core from this Nexus to the trash, refresh that Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Spirit uses an Ice Wall effect, by sending a core from this Nexus to the trash, refresh that Spirit.",
+            "cleanText": "When your Spirit uses an Ice Wall effect, by sending a core from this Nexus to the trash, refresh that Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": true
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-SNOW#a1",
+        "physicalId": "THE-SNOW#AB_TURN_TRIGGER_NONE_LV2_fde27bcc538d0d092f817aa9c899d6160f7029ac2014bb03641dffe09cedc882_dd3b12e1ad431c9fdaa1198bf0eea5e7",
+        "semanticId": "SEM#AB_TURN_TRIGGER_NONE_LV2_fde27bcc538d0d092f817aa9c899d6160f7029ac2014bb03641dffe09cedc882_dd3b12e1ad431c9fdaa1198bf0eea5e7"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "THE-THRONE": {
+    "cardNumber": "THE-THRONE",
+    "name": "The Throne Inheritance Lottery",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "THE-THRONE#AB_DRAW_STEP_NONE_LV1_88129a462bfd790d2d69199447764bc9087a24ddd8a13656a12b60ff2b9b61f0_1d190dce496c0727cecd6a6660ea735a",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "DRAW_STEP",
+          "timingLabel": "Your Draw Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Instead of drawing, you can discard the top card of your deck. If the discarded card is a \"War Princess\" family Spirit card, draw two cards from your deck. If the discarded card is a Magic card, put two cores from the void to any \"War Princess\" family Spirit(s) you control. If the discarded card is anything else, add it to your Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "Instead of drawing, you can discard the top card of your deck.",
+            "cleanText": "Instead of drawing, you can discard the top card of your deck",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL"
+            }
+          },
+          {
+            "rawText": "If the discarded card is a \"War Princess\" family Spirit card, draw two cards from your deck.",
+            "cleanText": "draw two cards from your deck",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If the discarded card is a \"War Princess\" family Spirit card",
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 2,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "If the discarded card is a Magic card, put two cores from the void to any \"War Princess\" family Spirit(s) you control.",
+            "cleanText": "put two cores from the void to any \"War Princess\" family Spirit(s) you control",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If the discarded card is a Magic card",
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "If the discarded card is anything else, add it to your Hand.",
+            "cleanText": "add it to your Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If the discarded card is anything else",
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-THRONE#a0",
+        "physicalId": "THE-THRONE#AB_DRAW_STEP_NONE_LV1_88129a462bfd790d2d69199447764bc9087a24ddd8a13656a12b60ff2b9b61f0_1d190dce496c0727cecd6a6660ea735a",
+        "semanticId": "SEM#AB_DRAW_STEP_NONE_LV1_88129a462bfd790d2d69199447764bc9087a24ddd8a13656a12b60ff2b9b61f0_1d190dce496c0727cecd6a6660ea735a"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "THE-UNEXPLORED": {
+    "cardNumber": "THE-UNEXPLORED",
+    "name": "The Unexplored City in Jungle",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "THE-UNEXPLORED#AB_PASSIVE_NONE_LV1_LV2_418b3ae0880314b93bdb07410cdb21d35ae598dc4734797b8f4ee823024af730_ed7789ca7d71dfe4364d492148517482",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When a card with Burst effect is discarded from your deck due to the opponent, add that card to your Hand. Also, during this turn, cards cannot be discarded from your deck."
+        },
+        "clauses": [
+          {
+            "rawText": "When a card with Burst effect is discarded from your deck due to the opponent, add that card to your Hand.",
+            "cleanText": "When a card with Burst effect is discarded from your deck due to the opponent, add that card to your Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "chooser": "self",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "during this turn, cards cannot be discarded from your deck.",
+            "cleanText": "cards cannot be discarded from your deck",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "DECK_IMMUNITY"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-UNEXPLORED#a0",
+        "physicalId": "THE-UNEXPLORED#AB_PASSIVE_NONE_LV1_LV2_418b3ae0880314b93bdb07410cdb21d35ae598dc4734797b8f4ee823024af730_ed7789ca7d71dfe4364d492148517482",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_418b3ae0880314b93bdb07410cdb21d35ae598dc4734797b8f4ee823024af730_ed7789ca7d71dfe4364d492148517482"
+      },
+      {
+        "id": "THE-UNEXPLORED#AB_ATTACK_STEP_NONE_LV2_350d7e5f5e7019fcad01dec2d61d1fee741522cec2d3dbfda41af6229c63d3e0_9a6c9404809100a8656e4f5d64443ac4",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When you use a Magic card, after the effect resolves, draw 1 card from your deck."
+        },
+        "clauses": [
+          {
+            "rawText": "When you use a Magic card",
+            "cleanText": "When you use a Magic card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TRIGGERED_WATCHER"
+            }
+          },
+          {
+            "rawText": "draw 1 card from your deck.",
+            "cleanText": "draw 1 card from your deck",
+            "link": "afterResolves",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-UNEXPLORED#a1",
+        "physicalId": "THE-UNEXPLORED#AB_ATTACK_STEP_NONE_LV2_350d7e5f5e7019fcad01dec2d61d1fee741522cec2d3dbfda41af6229c63d3e0_9a6c9404809100a8656e4f5d64443ac4",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_350d7e5f5e7019fcad01dec2d61d1fee741522cec2d3dbfda41af6229c63d3e0_9a6c9404809100a8656e4f5d64443ac4"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "THE-URTEXT": {
+    "cardNumber": "THE-URTEXT",
+    "name": "The Urtext of Creativity",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "THE-URTEXT#AB_WHEN_DEPLOYED_NONE_LV1_LV2_6d0ed729ed633972013137e9a513bdb74c43749f038d05b9232a64baed869211_186b2e1e6eccd7ef82acdcd1e1e8b0e7",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DEPLOYED",
+          "timingLabel": "When deployed",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "from your Hand, return a Yellow Magic card from your Trash to your Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "from your Hand, return a Yellow Magic card from your Trash to your Hand.",
+            "cleanText": "from your Hand, return a Yellow Magic card from your Trash to your Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SALVAGE",
+              "count": 1,
+              "family": "Yellow",
+              "targetType": "Magic",
+              "destination": "HAND"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-URTEXT#a0",
+        "physicalId": "THE-URTEXT#AB_WHEN_DEPLOYED_NONE_LV1_LV2_6d0ed729ed633972013137e9a513bdb74c43749f038d05b9232a64baed869211_186b2e1e6eccd7ef82acdcd1e1e8b0e7",
+        "semanticId": "SEM#AB_WHEN_DEPLOYED_NONE_LV1_LV2_6d0ed729ed633972013137e9a513bdb74c43749f038d05b9232a64baed869211_186b2e1e6eccd7ef82acdcd1e1e8b0e7"
+      },
+      {
+        "id": "THE-URTEXT#AB_PASSIVE_NONE_LV2_e71d127114d2ac02272c7aa1b40d8e300d4c1fbcbb2c2481205334b28700f2c7_e298e8fe169e64d7745493fe462d32c4",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Burst activates, if that Burst is a Magic card, you can activate its Main/Flash effect without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Burst activates, if that Burst is a Magic card, you can activate its Main/Flash effect without paying the cost.",
+            "cleanText": "When your Burst activates, if that Burst is a Magic card, you can activate its Main/Flash effect without paying the cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-URTEXT#a1",
+        "physicalId": "THE-URTEXT#AB_PASSIVE_NONE_LV2_e71d127114d2ac02272c7aa1b40d8e300d4c1fbcbb2c2481205334b28700f2c7_e298e8fe169e64d7745493fe462d32c4",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV2_e71d127114d2ac02272c7aa1b40d8e300d4c1fbcbb2c2481205334b28700f2c7_e298e8fe169e64d7745493fe462d32c4"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "THE-WHIRTING": {
+    "cardNumber": "THE-WHIRTING",
+    "name": "The Whirling Big Channel",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "THE-WHIRTING#AB_PASSIVE_NONE_LV1_LV2_d480a2f40f8f8d6da4a0e2d96e46259e8374f7c7e8654e7d012e8cfde25da62a_45efd544ab8c02a7979c56b95779c0ce",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "All exhausted Spirits can only be refreshed during the Refresh Step."
+        },
+        "clauses": [
+          {
+            "rawText": "All exhausted Spirits can only be refreshed during the Refresh Step.",
+            "cleanText": "All exhausted Spirits can only be refreshed during the Refresh Step",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-WHIRTING#a0",
+        "physicalId": "THE-WHIRTING#AB_PASSIVE_NONE_LV1_LV2_d480a2f40f8f8d6da4a0e2d96e46259e8374f7c7e8654e7d012e8cfde25da62a_45efd544ab8c02a7979c56b95779c0ce",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_d480a2f40f8f8d6da4a0e2d96e46259e8374f7c7e8654e7d012e8cfde25da62a_45efd544ab8c02a7979c56b95779c0ce"
+      },
+      {
+        "id": "THE-WHIRTING#AB_PASSIVE_NONE_LV2_3347b6493c5ed23d566dcbf420109219b243a05c8f5062eb936eea10202c7ea8_c346f75b147105d9e9e0642075204bab",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While you have a Burst set, (When Destroyed) effects of Spirits can't activate."
+        },
+        "clauses": [
+          {
+            "rawText": "While you have a Burst set, (When Destroyed) effects of Spirits can't activate.",
+            "cleanText": "(When Destroyed) effects of Spirits can't activate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While you have a Burst set",
+            "duration": null,
+            "op": {
+              "op": "NEGATE_EFFECT"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-WHIRTING#a1",
+        "physicalId": "THE-WHIRTING#AB_PASSIVE_NONE_LV2_3347b6493c5ed23d566dcbf420109219b243a05c8f5062eb936eea10202c7ea8_c346f75b147105d9e9e0642075204bab",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV2_3347b6493c5ed23d566dcbf420109219b243a05c8f5062eb936eea10202c7ea8_c346f75b147105d9e9e0642075204bab"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "THE-WRAITH": {
+    "cardNumber": "THE-WRAITH",
+    "name": "The Wraith's Ruins",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "THE-WRAITH#AB_ATTACK_STEP_NONE_LV1_55dcbe4d3b19ebe328f0c1f9dc087773d9676f7039714488591bb0089eb5d3c4_7f1bb178b1f9011e35c6048b9856a742",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Spirits are destroyed by the opponent, by discarding four cards from your decktop, one of the destroyed Spirits remains on your field, exhausted."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Spirits are destroyed by the opponent, by discarding four cards from your decktop, one of the destroyed Spirits remains on your field, exhausted.",
+            "cleanText": "When your Spirits are destroyed by the opponent, by discarding four cards from your decktop, one of the destroyed Spirits remains on your field, exhausted",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "THE-WRAITH#a0",
+        "physicalId": "THE-WRAITH#AB_ATTACK_STEP_NONE_LV1_55dcbe4d3b19ebe328f0c1f9dc087773d9676f7039714488591bb0089eb5d3c4_7f1bb178b1f9011e35c6048b9856a742",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_55dcbe4d3b19ebe328f0c1f9dc087773d9676f7039714488591bb0089eb5d3c4_7f1bb178b1f9011e35c6048b9856a742"
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

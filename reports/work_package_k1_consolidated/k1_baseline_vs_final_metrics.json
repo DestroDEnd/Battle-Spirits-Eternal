@@ -1,0 +1,128 @@
+{
+  "generatedAt": "2026-11-21T02:11:23.646Z",
+  "format": "Battle Spirits Eternal - K1 Consolidated Baseline vs Final Metrics",
+  "gitHead": "0e3524a30738009e1e233d8ab9e6c7b562e07074",
+  "shards": {
+    "total": 514,
+    "verified": 514,
+    "missing": 0,
+    "unexpected": 0,
+    "hashMismatches": 0
+  },
+  "databaseInventory": {
+    "cardRecords": 15398,
+    "uniqueCanonicalCards": 14609,
+    "totalAbilityRecords": 36422,
+    "uniquePhysicalAbilityIds": 34855,
+    "uniqueSemanticAbilityIds": 18496,
+    "totalClauses": 51734
+  },
+  "centralLedgerSummary": {
+    "totalRecords": 18031,
+    "baselineResolvedVerified": 0,
+    "finalResolvedVerified": 3648,
+    "deltaResolvedVerified": 3648,
+    "breakdownByBatch": {
+      "K1-BATCH-05": 12427,
+      "K1-BATCH-03": 823,
+      "K1-BATCH-01_CARRY_FORWARD": 2593,
+      "K1-BATCH-02": 1380,
+      "K1-BATCH-04": 566,
+      "K1-BATCH-05_EXCLUSION": 14,
+      "MANUAL_REVIEW_QUEUE": 228
+    },
+    "breakdownByStatus": {
+      "HANDLER_PRESENT": 13065,
+      "RESOLVED_VERIFIED": 3648,
+      "PARTIALLY_VERIFIED": 34,
+      "PARSED_FAILURE": 848,
+      "EXPLICIT_UNRECOVERABLE_BLOCKED": 194,
+      "SOURCE_CORRECTION_REQUIRED": 14,
+      "MANUAL_REVIEW_REQUIRED": 228
+    },
+    "breakdownByBatchAndStatus": {
+      "K1-BATCH-05::HANDLER_PRESENT": 12259,
+      "K1-BATCH-03::HANDLER_PRESENT": 806,
+      "K1-BATCH-01_CARRY_FORWARD::RESOLVED_VERIFIED": 2593,
+      "K1-BATCH-03::PARTIALLY_VERIFIED": 4,
+      "K1-BATCH-02::RESOLVED_VERIFIED": 532,
+      "K1-BATCH-05::RESOLVED_VERIFIED": 138,
+      "K1-BATCH-02::PARSED_FAILURE": 848,
+      "K1-BATCH-04::RESOLVED_VERIFIED": 372,
+      "K1-BATCH-04::EXPLICIT_UNRECOVERABLE_BLOCKED": 194,
+      "K1-BATCH-05::PARTIALLY_VERIFIED": 30,
+      "K1-BATCH-03::RESOLVED_VERIFIED": 13,
+      "K1-BATCH-05_EXCLUSION::SOURCE_CORRECTION_REQUIRED": 14,
+      "MANUAL_REVIEW_QUEUE::MANUAL_REVIEW_REQUIRED": 228
+    }
+  },
+  "workstreamProgress": {
+    "batch01CarryForward": {
+      "totalClauses": 2593,
+      "resolvedVerified": 2593,
+      "mechanism": "narrowEitherSideFromClause context-sensitive polarity narrowing + text-backed bounce destination routing"
+    },
+    "batch02Conditions": {
+      "totalLedgerEntries": 1380,
+      "resolvedVerified": 532,
+      "parsedFailureUnsupported": 848,
+      "mechanism": "Structured condition AST parsing + 4-state evaluation (TRUE, FALSE, INVALID_CONTEXT, UNSUPPORTED)"
+    },
+    "batch03KeywordsPrerequisites": {
+      "totalLedgerEntries": 823,
+      "resolvedVerified": 13,
+      "partiallyVerified": 4,
+      "handlerPresent": 806,
+      "suadconCardsVerified": 13,
+      "prefixGatingCovered": [
+        "During Brave",
+        "When Braved",
+        "During Advent",
+        "During OC",
+        "During Set",
+        "Soul State",
+        "During Seal"
+      ]
+    },
+    "batch04Parameters": {
+      "totalLedgerEntries": 566,
+      "totalClausesScanned": 582,
+      "resolvedVerified": 372,
+      "clausesRecoveredExplicit": 386,
+      "explicitUnrecoverableBlocked": 194,
+      "clausesFailingClosed": 196,
+      "recoveryRatePercent": 66.32,
+      "policy": "STRICT_FAIL_CLOSED_NO_FABRICATED_DEFAULTS"
+    },
+    "batch05ComplexEffects": {
+      "totalLedgerEntries": 12427,
+      "resolvedVerified": 138,
+      "partiallyVerified": 30,
+      "handlerPresent": 12259,
+      "blockedCardsResolved": 4,
+      "driftCardsResolved": 2,
+      "replacementMechanismsVerified": [
+        "REMAIN_ON_FIELD (exhausted/refreshed replacement before stack core deduction)",
+        "0-BP destruction replacement (bpAtDestroy pre-exit calculation)",
+        "LIFE_TO_RESERVE redirection",
+        "UNPREVENTABLE bypass of all replacements & preventions",
+        "Anti-loop recursion protection"
+      ]
+    }
+  },
+  "performanceMetrics": {
+    "testName": "WPDE-PERF-01 (200 candidates, simultaneous DESTROY, continuous BP recalculation)",
+    "targetThresholdMs": 500,
+    "isolatedFreshProcessColdRunsMs": [
+      13.0102,
+      12.9667,
+      10.3524,
+      6.338,
+      11.4276
+    ],
+    "averageColdMs": 10.82,
+    "warmRunMs": 12.0038,
+    "headroomPercent": 97.84,
+    "status": "PASS"
+  }
+}

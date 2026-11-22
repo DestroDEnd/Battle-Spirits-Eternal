@@ -1,0 +1,81 @@
+{
+  "generatedAt": "2026-11-21T02:11:23.662Z",
+  "batch": "K1-BATCH-02",
+  "astGrammarFamilies": [
+    {
+      "family": "FIELD_STATE",
+      "description": "Presence or count of spirits/ultimates/nexuses on field matching colors, symbols, or families",
+      "countEvaluated": 184
+    },
+    {
+      "family": "BRAVE_STATE",
+      "description": "Whether card or spirit is braved, count of braves, or brave symbols",
+      "countEvaluated": 76
+    },
+    {
+      "family": "HAND_STATE",
+      "description": "Hand size thresholds, card types in hand, or hand reveal conditions",
+      "countEvaluated": 48
+    },
+    {
+      "family": "REMOVED_ZONE",
+      "description": "Cards or cores in removed-from-game zone",
+      "countEvaluated": 22
+    },
+    {
+      "family": "TEAM_FAMILY",
+      "description": "Team presence or family member count",
+      "countEvaluated": 34
+    },
+    {
+      "family": "COLOR_SYMBOL_THRESHOLD",
+      "description": "Specific symbol counts or color presence on field/trash",
+      "countEvaluated": 62
+    },
+    {
+      "family": "CORE_THRESHOLD",
+      "description": "Core count on field, reserve, or life",
+      "countEvaluated": 44
+    },
+    {
+      "family": "SOUL_CORE_STATE",
+      "description": "Soul Core location (life, reserve, trash, spirit, underneath)",
+      "countEvaluated": 32
+    },
+    {
+      "family": "BATTLE_COMBAT",
+      "description": "Attacking/blocking state, battling spirit BP/level, or combat phase",
+      "countEvaluated": 58
+    },
+    {
+      "family": "TURN_HISTORY",
+      "description": "Previous actions, cards summoned this turn, or turn count",
+      "countEvaluated": 26
+    },
+    {
+      "family": "PREVIOUS_RESULT",
+      "description": "Whether prior clause destroyed/bounced a card or dealt damage",
+      "countEvaluated": 24
+    },
+    {
+      "family": "COMPOUND_AND_OR",
+      "description": "Short-circuit compound conditions with AND / OR operators",
+      "countEvaluated": 42
+    }
+  ],
+  "evaluationStates": {
+    "TRUE": "Condition met in current game context; operation resolves",
+    "FALSE": "Condition not met; operation safely skipped without error",
+    "INVALID_CONTEXT": "Context required for evaluation (e.g. battling spirit) is absent; fails closed",
+    "UNSUPPORTED": "Grammar pattern not yet structured; fails closed to prevent illegal execution"
+  },
+  "databaseConditionMetrics": {
+    "clauseConditionsTotal": 4534,
+    "clauseConditionsEvaluable": 3537,
+    "opConditionsTotal": 406,
+    "opConditionsEvaluable": 406,
+    "ledgerBatch02Entries": 1380,
+    "ledgerBatch02ResolvedVerified": 532,
+    "ledgerBatch02ParsedFailure": 848
+  }
+}

@@ -337,13 +337,9 @@
       }
     }
 
-    // 3. Fallback: common cases
+    // 3. Fallback: standard duelist domain mapping
     if (!resolvedEmail) {
-      if (noSpaceLower === 'destrodend') {
-        resolvedEmail = 'destrodend@gmail.com';
-      } else {
-        resolvedEmail = `${noSpaceLower}@bsp-eternal.com`;
-      }
+      resolvedEmail = `${noSpaceLower}@bsp-eternal.com`;
     }
 
     try {
@@ -477,13 +473,9 @@
         }
       }
 
-      // 3. Fallback for known demo / default domains
+      // 3. Fallback for username domain mapping
       if (!targetEmail) {
-        if (noSpaceLower === 'destrodend') {
-          targetEmail = 'destrodend@gmail.com';
-        } else {
-          targetEmail = `${noSpaceLower}@bsp-eternal.com`;
-        }
+        targetEmail = `${noSpaceLower}@bsp-eternal.com`;
       }
     }
 

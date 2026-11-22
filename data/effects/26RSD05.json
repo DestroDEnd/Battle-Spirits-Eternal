@@ -494,10 +494,13 @@
     "compiledIr": {
       "cardNumber": "26RSD05-012",
       "name": "Rebirth Thunder",
+      "type": "Magic",
+      "levels": {},
+      "originalEffectText": "When your \"Thunder Dragon\" family Spirits are destroyed, you can return this card from the Trash to your Hand. You can only use this effect of the same card name once per turn.\n\n[Flash]\nTarget an opposing Spirit. During this turn, give it -2000 BP. Then, destroy it if it has 0 BP.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "26RSD05-012#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -508,8 +511,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
             "limit": "ONCE_PER_TURN_SAME_NAME",
             "cantStack": false,
             "keyword": null,
@@ -518,10 +528,14 @@
             "isMain": false,
             "cleanBody": "When your \"Thunder Dragon\" family Spirits are destroyed, you can return this card from the Trash to your Hand."
           },
+          "originalAbilityText": "When your \"Thunder Dragon\" family Spirits are destroyed, you can return this card from the Trash to your Hand. You can only use this effect of the same card name once per turn.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When your \"Thunder Dragon\" family Spirits are destroyed, you can return this card from the Trash to your Hand.",
+              "originalClauseText": "When your \"Thunder Dragon\" family Spirits are destroyed, you can return this card from the Trash to your Hand.",
               "cleanText": "When your \"Thunder Dragon\" family Spirits are destroyed, you can return this card from the Trash to your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -529,17 +543,32 @@
               "duration": null,
               "op": {
                 "op": "SALVAGE",
+                "target": "this_card",
+                "from": "trash",
+                "destination": "HAND",
                 "count": 1,
-                "family": "this",
-                "targetType": "Spirit",
-                "destination": "HAND"
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RSD05-012#a0",
+          "keywords": [],
+          "id": "26RSD05-012#AB_PASSIVE_NONE_LV1_LV2_LV3_f18bfef355280a2a6e23d094f70c642bc0106264bef44623d5d48e95bb7b3dde_67bd426e94ee9e819297c48a773d5f62",
+          "physicalId": "26RSD05-012#AB_PASSIVE_NONE_LV1_LV2_LV3_f18bfef355280a2a6e23d094f70c642bc0106264bef44623d5d48e95bb7b3dde_67bd426e94ee9e819297c48a773d5f62",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_f18bfef355280a2a6e23d094f70c642bc0106264bef44623d5d48e95bb7b3dde_67bd426e94ee9e819297c48a773d5f62",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_261022734181f9189f7943a08e01d61661addabe65c9b3ff3d6bf1f96b66bd79_41aaabf855b66bb04c5ee3d50d144d82",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "26RSD05-012#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -550,8 +579,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -560,10 +596,14 @@
             "isMain": false,
             "cleanBody": "Target an opposing Spirit. During this turn, give it -2000 BP. Then, destroy it if it has 0 BP."
           },
+          "originalAbilityText": "[Flash]\nTarget an opposing Spirit. During this turn, give it -2000 BP. Then, destroy it if it has 0 BP.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Target an opposing Spirit.",
+              "originalClauseText": "Target an opposing Spirit.",
               "cleanText": "Target an opposing Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -581,7 +621,9 @@
             },
             {
               "rawText": "During this turn, give it -2000 BP.",
+              "originalClauseText": "During this turn, give it -2000 BP.",
               "cleanText": "give it -2000 BP",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -596,7 +638,9 @@
             },
             {
               "rawText": "destroy it if it has 0 BP.",
+              "originalClauseText": "destroy it if it has 0 BP.",
               "cleanText": "destroy it if it has 0 BP",
+              "clauseIndex": 2,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -612,7 +656,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RSD05-012#a1",
+          "keywords": [],
+          "id": "26RSD05-012#AB_FLASH_NONE_LV1_LV2_LV3_c8d4fef54594cde1f0bc10e072cda978801b3a630b5da4fb45a49f15b132a6a9_cd63c9bd35912e885f8d90fb02a04928",
+          "physicalId": "26RSD05-012#AB_FLASH_NONE_LV1_LV2_LV3_c8d4fef54594cde1f0bc10e072cda978801b3a630b5da4fb45a49f15b132a6a9_cd63c9bd35912e885f8d90fb02a04928",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_c8d4fef54594cde1f0bc10e072cda978801b3a630b5da4fb45a49f15b132a6a9_cd63c9bd35912e885f8d90fb02a04928",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_66d5c4aa041750e6727d4207093861092e0b36a8d2bd0c2c4c59764a48c6be06_1e1b4ddc478fcb6c3e24674e1902e73c",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,

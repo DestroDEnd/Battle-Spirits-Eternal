@@ -1,1 +1,2476 @@
-{"CP14-X02R":{"cardNumber":"CP14-X02R","name":"The DarkDragonEmperor Ultimate-Siegfried","keywords":[{"name":"Ultimate Trigger","parameter":"[LV3","wave":3,"hook":"ultimate_trigger","bracketed":true,"index":56}],"abilities":[{"id":"CP14-X02R#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Summon Condition: You control one or more Red Spirit"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Summon Condition: You control one or more Red Spirit]","clauses":[],"unsupported":[]},{"id":"CP14-X02R#a1","type":"ABILITY","header":{"levels":[3,4,5],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Ultimate Trigger","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When Ultimate Trigger hits, when this Ultimate is blocked by opposing Spirit, send an opposing Life to their Reserve."},"clauses":[{"rawText":"When Ultimate Trigger hits, when this Ultimate is blocked by opposing Spirit, send an opposing Life to their Reserve.","cleanText":"When Ultimate Trigger hits, when this Ultimate is blocked by opposing Spirit, send an opposing Life to their Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"life","side":"opp"},"to":{"zone":"reserve","side":"opp"}}}],"unsupported":[]},{"id":"CP14-X02R#a2","type":"ABILITY","header":{"levels":[4,5],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When this Ultimate's attack reduces the opposing Life, destroy an opposing Brave Spirit. Or, destroy a Brave on any opposing Brave Spirit."},"clauses":[{"rawText":"When this Ultimate's attack reduces the opposing Life, destroy an opposing Brave Spirit.","cleanText":"When this Ultimate's attack reduces the opposing Life, destroy an opposing Brave Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Brave"]}}},{"rawText":"destroy a Brave on any opposing Brave Spirit.","cleanText":"destroy a Brave on any opposing Brave Spirit","link":"or","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"CP14-01":{"cardNumber":"CP14-01","name":"Ultimate-Siegfried-Baby","keywords":[{"name":"Ultimate Trigger","parameter":"[LV4","wave":3,"hook":"ultimate_trigger","bracketed":true,"index":56}],"abilities":[{"id":"CP14-01#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Summon Condition: You control one or more Red Spirit"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Summon Condition: You control one or more Red Spirit]","clauses":[],"unsupported":[]},{"id":"CP14-01#a1","type":"ABILITY","header":{"levels":[4],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Ultimate Trigger","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When Ultimate Trigger hits, the opponent must block if possible. However, Ultimates don't have to block. When blocked by an opposing Spirit, send an opposing Life to their Reserve."},"clauses":[{"rawText":"When Ultimate Trigger hits, the opponent must block if possible.","cleanText":"When Ultimate Trigger hits, the opponent must block if possible","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"FORCE_BLOCK","side":"opp"}},{"rawText":"Ultimates don't have to block.","cleanText":"Ultimates don't have to block","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}},{"rawText":"When blocked by an opposing Spirit, send an opposing Life to their Reserve.","cleanText":"When blocked by an opposing Spirit, send an opposing Life to their Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"life","side":"opp"},"to":{"zone":"reserve","side":"opp"}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"CP14-X06":{"cardNumber":"CP14-X06","name":"The ElectricMan Train","keywords":[],"abilities":[{"id":"CP14-X06#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can reveal four cards from your decktop. Add an Ultimate card among them to your Hand. Return any remaining cards to the deckbottom in any order."},"clauses":[{"rawText":"You can reveal four cards from your decktop.","cleanText":"You can reveal four cards from your decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":4}},{"rawText":"Add an Ultimate card among them to your Hand.","cleanText":"Add an Ultimate card among them to your Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_TO_HAND"}},{"rawText":"Return any remaining cards to the deckbottom in any order.","cleanText":"Return any remaining cards to the deckbottom in any order","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"RETURN_REVEALED_BOTTOM"}}],"unsupported":[]},{"id":"CP14-X06#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Spirit Soul: White - When you are summoning an Ultimate card, this Spirit gains an extra White Symbol."},"clauses":[{"rawText":"Spirit Soul: White - When you are summoning an Ultimate card, this Spirit gains an extra White Symbol.","cleanText":"Spirit Soul: White - When you are summoning an Ultimate card, this Spirit gains an extra White Symbol","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_SYMBOL"}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"CP14-X12":{"cardNumber":"CP14-X12","name":"Ultimate-Strikewurm","keywords":[{"name":"Double Ultimate Trigger","parameter":"[LV4","wave":3,"hook":"ultimate_trigger","bracketed":true,"index":153},{"name":"Double Hit","parameter":null,"wave":3,"hook":"double_hit","bracketed":true,"index":288}],"abilities":[{"id":"CP14-X12#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Summon Condition: You control one or more White Spirit"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Summon Condition: You control one or more White Spirit]","clauses":[],"unsupported":[]},{"id":"CP14-X12#a1","type":"ABILITY","header":{"levels":[3,4,5],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Opposing Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When opposing Ultimates attack, refresh this Ultimate."},"clauses":[{"rawText":"When opposing Ultimates attack, refresh this Ultimate.","cleanText":"When opposing Ultimates attack, refresh this Ultimate","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":"self"}}],"unsupported":[]},{"id":"CP14-X12#a2","type":"ABILITY","header":{"levels":[4,5],"levelExplicit":true,"prefixes":[],"timing":"WHEN_BLOCKS","timingLabel":"When Blocks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Double Ultimate Trigger","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"For each Ultimate Trigger hit, return an opposing non-battling Spirit to the Hand. [Double Hit] When it hits twice, also, discard an opposing Burst."},"clauses":[{"rawText":"For each Ultimate Trigger hit, return an opposing non-battling Spirit to the Hand.","cleanText":"For each Ultimate Trigger hit, return an opposing non-battling Spirit to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}},{"rawText":"[Double Hit] When it hits twice, also, discard an opposing Burst.","cleanText":"[Double Hit] When it hits twice, also, discard an opposing Burst","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DISCARD_BURST","side":"opp"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"CP14-02":{"cardNumber":"CP14-02","name":"Neo-Cerbelord","keywords":[{"name":"Brave","parameter":"Cost 5 or more","wave":3,"hook":"brave","bracketed":true,"index":0}],"abilities":[{"id":"CP14-02#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Brave Condition: Cost 5 or more","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Brave Condition: Cost 5 or more]","clauses":[],"unsupported":[]},{"id":"CP14-02#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["When Braved"],"timing":"WHEN_BRAVE_ATTACKS","timingLabel":"When Brave Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Target an Ultimate you control, and this Spirit can gain + (targeted Ultimate's BP) BP. If you control any Ultimate, once per turn, by discarding seven cards from your decktop, refresh this Spirit."},"clauses":[{"rawText":"Target an Ultimate you control, and this Spirit can gain + (targeted Ultimate's BP) BP.","cleanText":"Target an Ultimate you control, and this Spirit can gain + (targeted Ultimate's BP) BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BP_BUFF","amount":1000,"target":{"side":"either"}}},{"rawText":"If you control any Ultimate, once per turn, by discarding seven cards from your decktop, refresh this Spirit.","cleanText":"once per turn, by discarding seven cards from your decktop, refresh this Spirit","link":null,"isOptional":false,"isCost":false,"condition":"If you control any Ultimate","duration":null,"op":{"op":"REFRESH","target":"self"}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"CP14-X08":{"cardNumber":"CP14-X08","name":"The BeastChild Panzer","keywords":[],"abilities":[{"id":"CP14-X08#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can reveal four cards from your decktop. Add an Ultimate card among them to your Hand. Return the remaining cards to your deckbottom in any order."},"clauses":[{"rawText":"You can reveal four cards from your decktop.","cleanText":"You can reveal four cards from your decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":4}},{"rawText":"Add an Ultimate card among them to your Hand.","cleanText":"Add an Ultimate card among them to your Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_TO_HAND"}},{"rawText":"Return the remaining cards to your deckbottom in any order.","cleanText":"Return the remaining cards to your deckbottom in any order","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]},{"id":"CP14-X08#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Spirit Soul: Blue - When you are summoning an Ultimate card, this Spirit gains an extra Blue Symbol."},"clauses":[{"rawText":"Spirit Soul: Blue - When you are summoning an Ultimate card, this Spirit gains an extra Blue Symbol.","cleanText":"Spirit Soul: Blue - When you are summoning an Ultimate card, this Spirit gains an extra Blue Symbol","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_SYMBOL"}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"CP14-X10":{"cardNumber":"CP14-X10","name":"The BullAstralArmored BraveTaurus","keywords":[{"name":"Brave","parameter":"Astral Guardian/Cost 8","wave":3,"hook":"brave","bracketed":true,"index":0},{"name":"True-Clash","parameter":null,"wave":1,"hook":"clash","bracketed":true,"index":58}],"abilities":[{"id":"CP14-X10#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Brave Condition: Astral Guardian/Cost 8","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Brave Condition: Astral Guardian/Cost 8]","clauses":[],"unsupported":[]},{"id":"CP14-X10#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["During Brave"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"True-Clash","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Opposing Spirits/Ultimates must block if possible."},"clauses":[{"rawText":"Opposing Spirits/Ultimates must block if possible.","cleanText":"Opposing Spirits/Ultimates must block if possible","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"FORCE_BLOCK","side":"opp"}}],"unsupported":[]},{"id":"CP14-X10#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["During Brave"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When blocked, compare the number of symbols on this Spirit with the blocking opposing Spirit/Ultimate, and for each extra symbol this Spirit has, send an opposing Life to their Reserve."},"clauses":[{"rawText":"When blocked, compare the number of symbols on this Spirit with the blocking opposing Spirit/Ultimate, and for each extra symbol this Spirit has, send an opposing Life to their Reserve.","cleanText":"When blocked, compare the number of symbols on this Spirit with the blocking opposing Spirit/Ultimate, and for each extra symbol this Spirit has, send an opposing Life to their Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"life","side":"opp"},"to":{"zone":"reserve","side":"opp"}}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"CP14-X01R":{"cardNumber":"CP14-X01R","name":"The ImmortalDragon Eternal-Dragonis","keywords":[],"abilities":[{"id":"CP14-X01R#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When this Spirit card is sent to the Trash via opposing Ultimate Trigger/\"Deck Discarding effect\", you can summon it without paying the cost."},"clauses":[{"rawText":"When this Spirit card is sent to the Trash via opposing Ultimate Trigger/\"Deck Discarding effect\", you can summon it without paying the cost.","cleanText":"When this Spirit card is sent to the Trash via opposing Ultimate Trigger/\"Deck Discarding effect\", you can summon it without paying the cost","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}}],"unsupported":[]},{"id":"CP14-X01R#a1","type":"ABILITY","header":{"levels":[3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"While you or the opponent controls any Ultimate, this Spirit gains an extra Red symbol."},"clauses":[{"rawText":"While you or the opponent controls any Ultimate, this Spirit gains an extra Red symbol.","cleanText":"this Spirit gains an extra Red symbol","link":null,"isOptional":false,"isCost":false,"condition":"While you or the opponent controls any Ultimate","duration":null,"op":{"op":"ADD_SYMBOL"}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"CP14-X04":{"cardNumber":"CP14-X04","name":"The LittleDevil David","keywords":[],"abilities":[{"id":"CP14-X04#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can reveal four cards from your decktop. Add an Ultimate card among them to your Hand. Return the remaining cards to the deckbottom in any order."},"clauses":[{"rawText":"You can reveal four cards from your decktop.","cleanText":"You can reveal four cards from your decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":4}},{"rawText":"Add an Ultimate card among them to your Hand.","cleanText":"Add an Ultimate card among them to your Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_TO_HAND"}},{"rawText":"Return the remaining cards to the deckbottom in any order.","cleanText":"Return the remaining cards to the deckbottom in any order","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]},{"id":"CP14-X04#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"SSoul: Purple","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When you're summoning an Ultimate card, this Spirit gains [Purple Core] (an extra Purple Symbol)."},"clauses":[{"rawText":"When you're summoning an Ultimate card, this Spirit gains [Purple Core] (an extra Purple Symbol).","cleanText":"When you're summoning an Ultimate card, this Spirit gains [Purple Core] (an extra Purple Symbol)","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_SYMBOL"}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"CP14-X05":{"cardNumber":"CP14-X05","name":"The LittlePhoenix Nix","keywords":[],"abilities":[{"id":"CP14-X05#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can reveal four cards from your decktop. Add an Ultimate card among them to the Hand. Return any remaining cards to the deckbottom in any order."},"clauses":[{"rawText":"You can reveal four cards from your decktop.","cleanText":"You can reveal four cards from your decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":4}},{"rawText":"Add an Ultimate card among them to the Hand.","cleanText":"Add an Ultimate card among them to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_TO_HAND"}},{"rawText":"Return any remaining cards to the deckbottom in any order.","cleanText":"Return any remaining cards to the deckbottom in any order","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"RETURN_REVEALED_BOTTOM"}}],"unsupported":[]},{"id":"CP14-X05#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"SSoul: Green","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When you're summoning an Ultimate card, this Spirit gains [Green Core] (an extra Green Symbol)."},"clauses":[{"rawText":"When you're summoning an Ultimate card, this Spirit gains [Green Core] (an extra Green Symbol).","cleanText":"When you're summoning an Ultimate card, this Spirit gains [Green Core] (an extra Green Symbol)","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_SYMBOL"}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"CP14-X15":{"cardNumber":"CP14-X15","name":"The RubyFlameFist HinokoKnuckle","keywords":[{"name":"Brave","parameter":"Cost 3 or more Spirit/Ultimate","wave":3,"hook":"brave","bracketed":true,"index":0}],"abilities":[{"id":"CP14-X15#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Brave Condition: Cost 3 or more Spirit/Ultimate","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Brave Condition: Cost 3 or more Spirit/Ultimate]","clauses":[],"unsupported":[]},{"id":"CP14-X15#a1","type":"ABILITY","header":{"levels":[1],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Ignore the summoning conditions of all your Ultimate cards with cost 7 or less."},"clauses":[{"rawText":"Ignore the summoning conditions of all your Ultimate cards with cost 7 or less.","cleanText":"Ignore the summoning conditions of all your Ultimate cards with cost 7 or less","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"COST_MODIFIER"}}],"unsupported":[]},{"id":"CP14-X15#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["When Braved"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"All of your Ultimate symbols are also treated as Red symbols."},"clauses":[{"rawText":"All of your Ultimate symbols are also treated as Red symbols.","cleanText":"All of your Ultimate symbols are also treated as Red symbols","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TREAT_RULE"}}],"unsupported":[]},{"id":"CP14-X15#a3","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["When Braved"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"(When this Ultimate Brave Attacks) Destroy one opposing Ultimate with 5000 BP or less."},"clauses":[{"rawText":"(When this Ultimate Brave Attacks) Destroy one opposing Ultimate with 5000 BP or less.","cleanText":"(When this Ultimate Brave Attacks) Destroy one opposing Ultimate with 5000 BP or less","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Ultimate"]}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"CP14-X14R":{"cardNumber":"CP14-X14R","name":"The ShiningSwordDragonEmperor Shining-Ryuuman","keywords":[{"name":"Ultimate Unsheathe","parameter":"[LV3","wave":4,"hook":"unsheathe","bracketed":true,"index":69}],"abilities":[{"id":"CP14-X14R#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Summon Condition: You control one or more Cost 3 or higher Spirit"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Summon Condition: You control one or more Cost 3 or higher Spirit]","clauses":[],"unsupported":[]},{"id":"CP14-X14R#a1","type":"ABILITY","header":{"levels":[4,5],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Ultimate Unsheathe: [LV3","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can summon any number of \"Exalted Sword\" family Brave cards from your Hand, up to a total cost of 7. When a Brave is summoned via this effect, draw a card."},"clauses":[{"rawText":"You can summon any number of \"Exalted Sword\" family Brave cards from your Hand, up to a total cost of 7.","cleanText":"You can summon any number of \"Exalted Sword\" family Brave cards from your Hand, up to a total cost of 7","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}},{"rawText":"When a Brave is summoned via this effect, draw a card.","cleanText":"When a Brave is summoned via this effect, draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]},{"id":"CP14-X14R#a2","type":"ABILITY","header":{"levels":[4,5],"levelExplicit":true,"prefixes":["When Braved"],"timing":"WHEN_BRAVE_ATTACKS","timingLabel":"When Brave Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"During this turn, all your Brave Ultimates gain +3000 BP."},"clauses":[{"rawText":"During this turn, all your Brave Ultimates gain +3000 BP.","cleanText":"all your Brave Ultimates gain +3000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"BP_BUFF","amount":3000,"target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"CP14-X03":{"cardNumber":"CP14-X03","name":"The SmallFireDragon Hinoko","keywords":[],"abilities":[{"id":"CP14-X03#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can reveal four cards from your decktop. Add an Ultimate card among them to your Hand. Return the remaining cards to the bottom of your deck in any order you like."},"clauses":[{"rawText":"You can reveal four cards from your decktop.","cleanText":"You can reveal four cards from your decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":4}},{"rawText":"Add an Ultimate card among them to your Hand.","cleanText":"Add an Ultimate card among them to your Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_TO_HAND"}},{"rawText":"Return the remaining cards to the bottom of your deck in any order you like.","cleanText":"Return the remaining cards to the bottom of your deck in any order you like","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]},{"id":"CP14-X03#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Spirit Soul: Red - When you summon an Ultimate, this Spirit gets 1 extra Red Symbol."},"clauses":[{"rawText":"Spirit Soul: Red - When you summon an Ultimate, this Spirit gets 1 extra Red Symbol.","cleanText":"Spirit Soul: Red - When you summon an Ultimate, this Spirit gets 1 extra Red Symbol","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"CP14-X21":{"cardNumber":"CP14-X21","name":"The TwinStarDivas Laila Sisters","keywords":[],"abilities":[{"id":"CP14-X21#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When counting the number of Spirits for your Spirit effects, treat this Spirit as two Spirits."},"clauses":[{"rawText":"When counting the number of Spirits for your Spirit effects, treat this Spirit as two Spirits.","cleanText":"When counting the number of Spirits for your Spirit effects, treat this Spirit as two Spirits","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TREAT_RULE"}}],"unsupported":[]},{"id":"CP14-X21#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_BLOCKS","timingLabel":"When Blocks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Discard a number of cards from the opposing decktop equal to the number of \"Diva\" family Spirits you control. For each Magic card discarded by this effect, put one core from the Void to your Life."},"clauses":[{"rawText":"Discard a number of cards from the opposing decktop equal to the number of \"Diva\" family Spirits you control.","cleanText":"Discard a number of cards from the opposing decktop equal to the number of \"Diva\" family Spirits you control","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MILL_DECK","side":"opp"}},{"rawText":"For each Magic card discarded by this effect, put one core from the Void to your Life.","cleanText":"For each Magic card discarded by this effect, put one core from the Void to your Life","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"RECOVER_LIFE","count":1}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"CP14-X13":{"cardNumber":"CP14-X13","name":"The UltimateHeroDragon Ultimate-Yamato","keywords":[{"name":"Burst","parameter":"After your Life is reduced","wave":2,"hook":"burst","bracketed":true,"index":57},{"name":"Ultimate Trigger","parameter":"[LV4","wave":3,"hook":"ultimate_trigger","bracketed":true,"index":230}],"abilities":[{"id":"CP14-X13#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Summon Condition: You control one or more Red Spirits"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Summon Condition: You control one or more Red Spirits]","clauses":[],"unsupported":[]},{"id":"CP14-X13#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"BURST","timingLabel":"Burst","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":"AFTER_YOUR_LIFE_REDUCED","isFlash":false,"isMain":false,"cleanBody":"If your Life is at three or less, destroy an opposing 20000 BP or less Ultimate. After this effect resolves, summon this Ultimate card."},"clauses":[{"rawText":"If your Life is at three or less, destroy an opposing 20000 BP or less Ultimate.","cleanText":"destroy an opposing 20000 BP or less Ultimate","link":null,"isOptional":false,"isCost":false,"condition":"If your Life is at three or less","duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Ultimate"],"filters":{"bpLte":20000}}}},{"rawText":"summon this Ultimate card.","cleanText":"summon this Ultimate card","link":"afterResolves","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_THIS_CARD","from":"HAND_OR_BURST"}}],"unsupported":[]},{"id":"CP14-X13#a2","type":"ABILITY","header":{"levels":[4,5,6],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Ultimate Trigger","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When Ultimate Trigger hits, during this turn, when your Ultimates are blocked by opposing Spirits, send an opposing Life to their Reserve."},"clauses":[{"rawText":"When Ultimate Trigger hits, during this turn, when your Ultimates are blocked by opposing Spirits, send an opposing Life to their Reserve.","cleanText":"When Ultimate Trigger hits, during this turn, when your Ultimates are blocked by opposing Spirits, send an opposing Life to their Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"MOVE_CORE","count":1,"from":{"zone":"life","side":"opp"},"to":{"zone":"reserve","side":"opp"}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"CP14-X22":{"cardNumber":"CP14-X22","name":"The WisdomBladeDiva Agrs","keywords":[],"abilities":[{"id":"CP14-X22#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Return every opposing 6000 BP or less Spirit/Ultimate to the Hand, and for each Spirit/Ultimate returned, put a core from the Void to your Reserve."},"clauses":[{"rawText":"Return every opposing 6000 BP or less Spirit/Ultimate to the Hand, and for each Spirit/Ultimate returned, put a core from the Void to your Reserve.","cleanText":"Return every opposing 6000 BP or less Spirit/Ultimate to the Hand, and for each Spirit/Ultimate returned, put a core from the Void to your Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"void"},"to":{"zone":"reserve","side":"self"}}}],"unsupported":[]},{"id":"CP14-X22#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"While you control four or more \"Diva\" family Spirits, all your Spirits are unaffected by opposing Spirit/Ultimate effects."},"clauses":[{"rawText":"While you control four or more \"Diva\" family Spirits, all your Spirits are unaffected by opposing Spirit/Ultimate effects.","cleanText":"all your Spirits are unaffected by opposing Spirit/Ultimate effects","link":null,"isOptional":false,"isCost":false,"condition":"While you control four or more \"Diva\" family Spirits","duration":null,"op":{"op":"IMMUNITY","immuneTo":"OPPOSING_EFFECTS"}}],"unsupported":[]},{"id":"CP14-X22#a2","type":"ABILITY","header":{"levels":[3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Your Burst can't be discarded."},"clauses":[{"rawText":"Your Burst can't be discarded.","cleanText":"Your Burst can't be discarded","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"CP14-X09":{"cardNumber":"CP14-X09","name":"The WorldSaviourDiva Hocha","keywords":[{"name":"Burst","parameter":"After your Life is reduced","wave":2,"hook":"burst","bracketed":true,"index":0}],"abilities":[{"id":"CP14-X09#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"BURST","timingLabel":"Burst","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":"AFTER_YOUR_LIFE_REDUCED","isFlash":false,"isMain":false,"cleanBody":"Refresh every Yellow Spirit you control. Then, summon this Spirit card."},"clauses":[{"rawText":"Refresh every Yellow Spirit you control.","cleanText":"Refresh every Yellow Spirit you control","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":{"side":"either"}}},{"rawText":"summon this Spirit card.","cleanText":"summon this Spirit card","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_THIS_CARD","from":"HAND_OR_BURST"}}],"unsupported":[]},{"id":"CP14-X09#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_BATTLES","timingLabel":"When Battles","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"During this turn, give an opposing Spirit -3000 BP."},"clauses":[{"rawText":"During this turn, give an opposing Spirit -3000 BP.","cleanText":"give an opposing Spirit -3000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"BP_DEBUFF","amount":3000,"target":"PREVIOUS_TARGET","duration":"DURING_THIS_TURN"}}],"unsupported":[]},{"id":"CP14-X09#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When this Spirit is destroyed by the opponent, by exhausting one of your \"Diva\" family Spirits, this Spirit remains on the Field, refreshed."},"clauses":[{"rawText":"When this Spirit is destroyed by the opponent, by exhausting one of your \"Diva\" family Spirits, this Spirit remains on the Field, refreshed.","cleanText":"When this Spirit is destroyed by the opponent, by exhausting one of your \"Diva\" family Spirits, this Spirit remains on the Field, refreshed","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","count":1,"target":{"side":"self","types":["Spirit"]},"isCost":true}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"CP14-X11":{"cardNumber":"CP14-X11","name":"Ultimate-Apollodragon","keywords":[{"name":"Double Ultimate Trigger","parameter":"[LV4","wave":3,"hook":"ultimate_trigger","bracketed":true,"index":144},{"name":"Double Hit","parameter":null,"wave":3,"hook":"double_hit","bracketed":true,"index":272}],"abilities":[{"id":"CP14-X11#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Summon Condition: You control one or more Red Spirit"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Summon Condition: You control one or more Red Spirit]","clauses":[],"unsupported":[]},{"id":"CP14-X11#a1","type":"ABILITY","header":{"levels":[3,4,5],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can target and attack an opposing refreshed Spirit."},"clauses":[{"rawText":"You can target and attack an opposing refreshed Spirit.","cleanText":"You can target and attack an opposing refreshed Spirit","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"CONTINUOUS_RULE","rule":"CAN_ATTACK_REFRESHED"}}],"unsupported":[]},{"id":"CP14-X11#a2","type":"ABILITY","header":{"levels":[4,5],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Double Ultimate Trigger","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"For each Ultimate Trigger hit, destroy an opposing 9000 BP or less Spirit. [Double Hit] When it hits twice, also, send an opposing Life to their Reserve."},"clauses":[{"rawText":"For each Ultimate Trigger hit, destroy an opposing 9000 BP or less Spirit.","cleanText":"For each Ultimate Trigger hit, destroy an opposing 9000 BP or less Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"bpLte":9000}}}},{"rawText":"[Double Hit] When it hits twice, also, send an opposing Life to their Reserve.","cleanText":"[Double Hit] When it hits twice, also, send an opposing Life to their Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"life","side":"opp"},"to":{"zone":"reserve","side":"opp"}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "CP14-X02R": {
+    "cardNumber": "CP14-X02R",
+    "name": "The DarkDragonEmperor Ultimate-Siegfried",
+    "keywords": [
+      {
+        "name": "Ultimate Trigger",
+        "parameter": "[LV3",
+        "wave": 3,
+        "hook": "ultimate_trigger",
+        "bracketed": true,
+        "index": 56
+      }
+    ],
+    "abilities": [
+      {
+        "id": "CP14-X02R#AB_PASSIVE_NONE_LV1_LV2_LV3_96ca7c2b72f31761ed049464200e07f20462b640583ba53b4cb1e20e6079ad8f_68073801f61681173077997bb36b4b52",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Summon Condition: You control one or more Red Spirit"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Summon Condition: You control one or more Red Spirit]",
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "CP14-X02R#a0",
+        "physicalId": "CP14-X02R#AB_PASSIVE_NONE_LV1_LV2_LV3_96ca7c2b72f31761ed049464200e07f20462b640583ba53b4cb1e20e6079ad8f_68073801f61681173077997bb36b4b52",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_96ca7c2b72f31761ed049464200e07f20462b640583ba53b4cb1e20e6079ad8f_68073801f61681173077997bb36b4b52"
+      },
+      {
+        "id": "CP14-X02R#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_7f61dcb118b02577693043a5a2f3f9a5176780cfb9cf93e3adcffa721b3d20db_5b5baa48177ad2591be747886f1ed814",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3,
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Ultimate Trigger",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When Ultimate Trigger hits, when this Ultimate is blocked by opposing Spirit, send an opposing Life to their Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "When Ultimate Trigger hits, when this Ultimate is blocked by opposing Spirit, send an opposing Life to their Reserve.",
+            "cleanText": "When Ultimate Trigger hits, when this Ultimate is blocked by opposing Spirit, send an opposing Life to their Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "life",
+                "side": "opp"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "opp"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X02R#a1",
+        "physicalId": "CP14-X02R#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_7f61dcb118b02577693043a5a2f3f9a5176780cfb9cf93e3adcffa721b3d20db_5b5baa48177ad2591be747886f1ed814",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_7f61dcb118b02577693043a5a2f3f9a5176780cfb9cf93e3adcffa721b3d20db_5b5baa48177ad2591be747886f1ed814"
+      },
+      {
+        "id": "CP14-X02R#AB_WHEN_ATTACKS_NONE_LV4_LV5_ea59d8802b38bba34c913236519b72696530a9f3036ec427d654664b3d8580a2_504fa22151740b00cf19161062ec0967",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this Ultimate's attack reduces the opposing Life, destroy an opposing Brave Spirit. Or, destroy a Brave on any opposing Brave Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "When this Ultimate's attack reduces the opposing Life, destroy an opposing Brave Spirit.",
+            "cleanText": "When this Ultimate's attack reduces the opposing Life, destroy an opposing Brave Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Brave"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "destroy a Brave on any opposing Brave Spirit.",
+            "cleanText": "destroy a Brave on any opposing Brave Spirit",
+            "link": "or",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X02R#a2",
+        "physicalId": "CP14-X02R#AB_WHEN_ATTACKS_NONE_LV4_LV5_ea59d8802b38bba34c913236519b72696530a9f3036ec427d654664b3d8580a2_504fa22151740b00cf19161062ec0967",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV4_LV5_ea59d8802b38bba34c913236519b72696530a9f3036ec427d654664b3d8580a2_504fa22151740b00cf19161062ec0967"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "CP14-01": {
+    "cardNumber": "CP14-01",
+    "name": "Ultimate-Siegfried-Baby",
+    "keywords": [
+      {
+        "name": "Ultimate Trigger",
+        "parameter": "[LV4",
+        "wave": 3,
+        "hook": "ultimate_trigger",
+        "bracketed": true,
+        "index": 56
+      }
+    ],
+    "abilities": [
+      {
+        "id": "CP14-01#AB_PASSIVE_NONE_LV1_LV2_LV3_96ca7c2b72f31761ed049464200e07f20462b640583ba53b4cb1e20e6079ad8f_68073801f61681173077997bb36b4b52",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Summon Condition: You control one or more Red Spirit"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Summon Condition: You control one or more Red Spirit]",
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "CP14-01#a0",
+        "physicalId": "CP14-01#AB_PASSIVE_NONE_LV1_LV2_LV3_96ca7c2b72f31761ed049464200e07f20462b640583ba53b4cb1e20e6079ad8f_68073801f61681173077997bb36b4b52",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_96ca7c2b72f31761ed049464200e07f20462b640583ba53b4cb1e20e6079ad8f_68073801f61681173077997bb36b4b52"
+      },
+      {
+        "id": "CP14-01#AB_WHEN_ATTACKS_NONE_LV4_efb1142bac4e9d4d8500144486fd69ad5ab21f95c15c461a6c1a910a55ccefba_e0ea89eb6a2727641d6879efc5ecf87a",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            4
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Ultimate Trigger",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When Ultimate Trigger hits, the opponent must block if possible. However, Ultimates don't have to block. When blocked by an opposing Spirit, send an opposing Life to their Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "When Ultimate Trigger hits, the opponent must block if possible.",
+            "cleanText": "When Ultimate Trigger hits, the opponent must block if possible",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "FORCE_BLOCK",
+              "side": "opp"
+            }
+          },
+          {
+            "rawText": "Ultimates don't have to block.",
+            "cleanText": "Ultimates don't have to block",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          },
+          {
+            "rawText": "When blocked by an opposing Spirit, send an opposing Life to their Reserve.",
+            "cleanText": "When blocked by an opposing Spirit, send an opposing Life to their Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "life",
+                "side": "opp"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "opp"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-01#a1",
+        "physicalId": "CP14-01#AB_WHEN_ATTACKS_NONE_LV4_efb1142bac4e9d4d8500144486fd69ad5ab21f95c15c461a6c1a910a55ccefba_e0ea89eb6a2727641d6879efc5ecf87a",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV4_efb1142bac4e9d4d8500144486fd69ad5ab21f95c15c461a6c1a910a55ccefba_e0ea89eb6a2727641d6879efc5ecf87a"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "CP14-X06": {
+    "cardNumber": "CP14-X06",
+    "name": "The ElectricMan Train",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "CP14-X06#AB_WHEN_SUMMONED_NONE_LV1_LV2_916aefbb6ee6cf8ac4d5147a120a429cd6f914a9fa8674ecec079d54846ef2fb_8e81bd2f126a38132e4e3e93b51b405c",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can reveal four cards from your decktop. Add an Ultimate card among them to your Hand. Return any remaining cards to the deckbottom in any order."
+        },
+        "clauses": [
+          {
+            "rawText": "You can reveal four cards from your decktop.",
+            "cleanText": "You can reveal four cards from your decktop",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 4
+            }
+          },
+          {
+            "rawText": "Add an Ultimate card among them to your Hand.",
+            "cleanText": "Add an Ultimate card among them to your Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          },
+          {
+            "rawText": "Return any remaining cards to the deckbottom in any order.",
+            "cleanText": "Return any remaining cards to the deckbottom in any order",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "RETURN_REVEALED_BOTTOM"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X06#a0",
+        "physicalId": "CP14-X06#AB_WHEN_SUMMONED_NONE_LV1_LV2_916aefbb6ee6cf8ac4d5147a120a429cd6f914a9fa8674ecec079d54846ef2fb_8e81bd2f126a38132e4e3e93b51b405c",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_916aefbb6ee6cf8ac4d5147a120a429cd6f914a9fa8674ecec079d54846ef2fb_8e81bd2f126a38132e4e3e93b51b405c"
+      },
+      {
+        "id": "CP14-X06#AB_PASSIVE_NONE_LV1_LV2_0e9a6201d79656566232f9adfb947ec56ceda15861ed735e2673dcf8527e7fb4_99195620dd1b64a751a3663075f9a014",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Spirit Soul: White - When you are summoning an Ultimate card, this Spirit gains an extra White Symbol."
+        },
+        "clauses": [
+          {
+            "rawText": "Spirit Soul: White - When you are summoning an Ultimate card, this Spirit gains an extra White Symbol.",
+            "cleanText": "Spirit Soul: White - When you are summoning an Ultimate card, this Spirit gains an extra White Symbol",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_SYMBOL"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X06#a1",
+        "physicalId": "CP14-X06#AB_PASSIVE_NONE_LV1_LV2_0e9a6201d79656566232f9adfb947ec56ceda15861ed735e2673dcf8527e7fb4_99195620dd1b64a751a3663075f9a014",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_0e9a6201d79656566232f9adfb947ec56ceda15861ed735e2673dcf8527e7fb4_99195620dd1b64a751a3663075f9a014"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "CP14-X12": {
+    "cardNumber": "CP14-X12",
+    "name": "Ultimate-Strikewurm",
+    "keywords": [
+      {
+        "name": "Double Ultimate Trigger",
+        "parameter": "[LV4",
+        "wave": 3,
+        "hook": "ultimate_trigger",
+        "bracketed": true,
+        "index": 153
+      },
+      {
+        "name": "Double Hit",
+        "parameter": null,
+        "wave": 3,
+        "hook": "double_hit",
+        "bracketed": true,
+        "index": 288
+      }
+    ],
+    "abilities": [
+      {
+        "id": "CP14-X12#AB_PASSIVE_NONE_LV1_LV2_LV3_f51f757bf27bea20599b23c4db958d896ea2abd0b0e35f94e9dfb2938f96d2d7_2436f38f2043f1e1e3f452a247661fca",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Summon Condition: You control one or more White Spirit"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Summon Condition: You control one or more White Spirit]",
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "CP14-X12#a0",
+        "physicalId": "CP14-X12#AB_PASSIVE_NONE_LV1_LV2_LV3_f51f757bf27bea20599b23c4db958d896ea2abd0b0e35f94e9dfb2938f96d2d7_2436f38f2043f1e1e3f452a247661fca",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_f51f757bf27bea20599b23c4db958d896ea2abd0b0e35f94e9dfb2938f96d2d7_2436f38f2043f1e1e3f452a247661fca"
+      },
+      {
+        "id": "CP14-X12#AB_ATTACK_STEP_NONE_LV3_LV4_LV5_0a68abf8e98167d50fc3a6d6d75150301b82510272fd69c4a3245e28a7b091e8_56ae367491da919a3d5e076a998f42fd",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3,
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Opposing Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When opposing Ultimates attack, refresh this Ultimate."
+        },
+        "clauses": [
+          {
+            "rawText": "When opposing Ultimates attack, refresh this Ultimate.",
+            "cleanText": "When opposing Ultimates attack, refresh this Ultimate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X12#a1",
+        "physicalId": "CP14-X12#AB_ATTACK_STEP_NONE_LV3_LV4_LV5_0a68abf8e98167d50fc3a6d6d75150301b82510272fd69c4a3245e28a7b091e8_56ae367491da919a3d5e076a998f42fd",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV3_LV4_LV5_0a68abf8e98167d50fc3a6d6d75150301b82510272fd69c4a3245e28a7b091e8_56ae367491da919a3d5e076a998f42fd"
+      },
+      {
+        "id": "CP14-X12#AB_WHEN_BLOCKS_NONE_LV4_LV5_592f28416fc8be2ab33b57a42c46fbbd59fee459478e503942aee45ee6fdc04a_93baab2226946083f5b3bded72846f59",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_BLOCKS",
+          "timingLabel": "When Blocks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Double Ultimate Trigger",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "For each Ultimate Trigger hit, return an opposing non-battling Spirit to the Hand. [Double Hit] When it hits twice, also, discard an opposing Burst."
+        },
+        "clauses": [
+          {
+            "rawText": "For each Ultimate Trigger hit, return an opposing non-battling Spirit to the Hand.",
+            "cleanText": "For each Ultimate Trigger hit, return an opposing non-battling Spirit to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "[Double Hit] When it hits twice, also, discard an opposing Burst.",
+            "cleanText": "[Double Hit] When it hits twice, also, discard an opposing Burst",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_BURST",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X12#a2",
+        "physicalId": "CP14-X12#AB_WHEN_BLOCKS_NONE_LV4_LV5_592f28416fc8be2ab33b57a42c46fbbd59fee459478e503942aee45ee6fdc04a_93baab2226946083f5b3bded72846f59",
+        "semanticId": "SEM#AB_WHEN_BLOCKS_NONE_LV4_LV5_592f28416fc8be2ab33b57a42c46fbbd59fee459478e503942aee45ee6fdc04a_93baab2226946083f5b3bded72846f59"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "CP14-02": {
+    "cardNumber": "CP14-02",
+    "name": "Neo-Cerbelord",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "Cost 5 or more",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "CP14-02#AB_PASSIVE_NONE_LV1_LV2_LV3_bad661ddeedd4fabf0c3e0d1a0b0f7f46eb6cad4d35cc9301d1f8b9b5b0d4cf3_303175f68ccf142f43b72f0d09e35e3b",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: Cost 5 or more",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Brave Condition: Cost 5 or more]",
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "CP14-02#a0",
+        "physicalId": "CP14-02#AB_PASSIVE_NONE_LV1_LV2_LV3_bad661ddeedd4fabf0c3e0d1a0b0f7f46eb6cad4d35cc9301d1f8b9b5b0d4cf3_303175f68ccf142f43b72f0d09e35e3b",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_bad661ddeedd4fabf0c3e0d1a0b0f7f46eb6cad4d35cc9301d1f8b9b5b0d4cf3_303175f68ccf142f43b72f0d09e35e3b"
+      },
+      {
+        "id": "CP14-02#AB_WHEN_BRAVE_ATTACKS_NONE_LV1_LV2_LV3_5af00f921dee029f07ffb57b24c6ab8220126e897163f1b9e50cf53b01cb77f7_8b337462c42a4c503121b741444c4546",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "When Braved"
+          ],
+          "timing": "WHEN_BRAVE_ATTACKS",
+          "timingLabel": "When Brave Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Target an Ultimate you control, and this Spirit can gain + (targeted Ultimate's BP) BP. If you control any Ultimate, once per turn, by discarding seven cards from your decktop, refresh this Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Target an Ultimate you control, and this Spirit can gain + (targeted Ultimate's BP) BP.",
+            "cleanText": "Target an Ultimate you control, and this Spirit can gain + (targeted Ultimate's BP) BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 1000,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "If you control any Ultimate, once per turn, by discarding seven cards from your decktop, refresh this Spirit.",
+            "cleanText": "once per turn, by discarding seven cards from your decktop, refresh this Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If you control any Ultimate",
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-02#a1",
+        "physicalId": "CP14-02#AB_WHEN_BRAVE_ATTACKS_NONE_LV1_LV2_LV3_5af00f921dee029f07ffb57b24c6ab8220126e897163f1b9e50cf53b01cb77f7_8b337462c42a4c503121b741444c4546",
+        "semanticId": "SEM#AB_WHEN_BRAVE_ATTACKS_NONE_LV1_LV2_LV3_5af00f921dee029f07ffb57b24c6ab8220126e897163f1b9e50cf53b01cb77f7_8b337462c42a4c503121b741444c4546"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "CP14-X08": {
+    "cardNumber": "CP14-X08",
+    "name": "The BeastChild Panzer",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "CP14-X08#AB_WHEN_SUMMONED_NONE_LV1_LV2_4e2f0ecbd32871e3fd5450c6d9582bbe0ac76e7e01770411098562d2cee013a8_b3320048e16a15d53d638190b1a39058",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can reveal four cards from your decktop. Add an Ultimate card among them to your Hand. Return the remaining cards to your deckbottom in any order."
+        },
+        "clauses": [
+          {
+            "rawText": "You can reveal four cards from your decktop.",
+            "cleanText": "You can reveal four cards from your decktop",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 4
+            }
+          },
+          {
+            "rawText": "Add an Ultimate card among them to your Hand.",
+            "cleanText": "Add an Ultimate card among them to your Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          },
+          {
+            "rawText": "Return the remaining cards to your deckbottom in any order.",
+            "cleanText": "Return the remaining cards to your deckbottom in any order",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X08#a0",
+        "physicalId": "CP14-X08#AB_WHEN_SUMMONED_NONE_LV1_LV2_4e2f0ecbd32871e3fd5450c6d9582bbe0ac76e7e01770411098562d2cee013a8_b3320048e16a15d53d638190b1a39058",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_4e2f0ecbd32871e3fd5450c6d9582bbe0ac76e7e01770411098562d2cee013a8_b3320048e16a15d53d638190b1a39058"
+      },
+      {
+        "id": "CP14-X08#AB_PASSIVE_NONE_LV1_LV2_0e9a6201d79656566232f9adfb947ec56ceda15861ed735e2673dcf8527e7fb4_99195620dd1b64a751a3663075f9a014",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Spirit Soul: Blue - When you are summoning an Ultimate card, this Spirit gains an extra Blue Symbol."
+        },
+        "clauses": [
+          {
+            "rawText": "Spirit Soul: Blue - When you are summoning an Ultimate card, this Spirit gains an extra Blue Symbol.",
+            "cleanText": "Spirit Soul: Blue - When you are summoning an Ultimate card, this Spirit gains an extra Blue Symbol",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_SYMBOL"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X08#a1",
+        "physicalId": "CP14-X08#AB_PASSIVE_NONE_LV1_LV2_0e9a6201d79656566232f9adfb947ec56ceda15861ed735e2673dcf8527e7fb4_99195620dd1b64a751a3663075f9a014",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_0e9a6201d79656566232f9adfb947ec56ceda15861ed735e2673dcf8527e7fb4_99195620dd1b64a751a3663075f9a014"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "CP14-X10": {
+    "cardNumber": "CP14-X10",
+    "name": "The BullAstralArmored BraveTaurus",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "Astral Guardian/Cost 8",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      },
+      {
+        "name": "True-Clash",
+        "parameter": null,
+        "wave": 1,
+        "hook": "clash",
+        "bracketed": true,
+        "index": 58
+      }
+    ],
+    "abilities": [
+      {
+        "id": "CP14-X10#AB_PASSIVE_NONE_LV1_LV2_LV3_51705e90ada01c67bcbe87fef197ceb20e6c3ddda7bd4d307627655554af17cc_105b2741f879d24c7e2175e46b915140",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: Astral Guardian/Cost 8",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Brave Condition: Astral Guardian/Cost 8]",
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "CP14-X10#a0",
+        "physicalId": "CP14-X10#AB_PASSIVE_NONE_LV1_LV2_LV3_51705e90ada01c67bcbe87fef197ceb20e6c3ddda7bd4d307627655554af17cc_105b2741f879d24c7e2175e46b915140",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_51705e90ada01c67bcbe87fef197ceb20e6c3ddda7bd4d307627655554af17cc_105b2741f879d24c7e2175e46b915140"
+      },
+      {
+        "id": "CP14-X10#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_02b0542e984edb48666d5bf8f72245b51007db64ba9b940185b6ba13fee76d3b_cb5036178e2bed41394361e6b752a5a5",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "During Brave"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "True-Clash",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Opposing Spirits/Ultimates must block if possible."
+        },
+        "clauses": [
+          {
+            "rawText": "Opposing Spirits/Ultimates must block if possible.",
+            "cleanText": "Opposing Spirits/Ultimates must block if possible",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "FORCE_BLOCK",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X10#a1",
+        "physicalId": "CP14-X10#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_02b0542e984edb48666d5bf8f72245b51007db64ba9b940185b6ba13fee76d3b_cb5036178e2bed41394361e6b752a5a5",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_02b0542e984edb48666d5bf8f72245b51007db64ba9b940185b6ba13fee76d3b_cb5036178e2bed41394361e6b752a5a5"
+      },
+      {
+        "id": "CP14-X10#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_c724385b3b8bd087c80709c6b5b98da5d4987142147a82b3d856c8238243007b_fdc87e052ceb03c5fa90406bc85869df",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "During Brave"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When blocked, compare the number of symbols on this Spirit with the blocking opposing Spirit/Ultimate, and for each extra symbol this Spirit has, send an opposing Life to their Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "When blocked, compare the number of symbols on this Spirit with the blocking opposing Spirit/Ultimate, and for each extra symbol this Spirit has, send an opposing Life to their Reserve.",
+            "cleanText": "When blocked, compare the number of symbols on this Spirit with the blocking opposing Spirit/Ultimate, and for each extra symbol this Spirit has, send an opposing Life to their Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "life",
+                "side": "opp"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "opp"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X10#a2",
+        "physicalId": "CP14-X10#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_c724385b3b8bd087c80709c6b5b98da5d4987142147a82b3d856c8238243007b_fdc87e052ceb03c5fa90406bc85869df",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_c724385b3b8bd087c80709c6b5b98da5d4987142147a82b3d856c8238243007b_fdc87e052ceb03c5fa90406bc85869df"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "CP14-X01R": {
+    "cardNumber": "CP14-X01R",
+    "name": "The ImmortalDragon Eternal-Dragonis",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "CP14-X01R#AB_PASSIVE_NONE_LV1_LV2_LV3_7b2665b37d525a5031d9e1e17cad5b628eb3eda5c7164fadbd8bc6fcc21283ce_1262af503a258bb211236e4a7f4f86e6",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this Spirit card is sent to the Trash via opposing Ultimate Trigger/\"Deck Discarding effect\", you can summon it without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "When this Spirit card is sent to the Trash via opposing Ultimate Trigger/\"Deck Discarding effect\", you can summon it without paying the cost.",
+            "cleanText": "When this Spirit card is sent to the Trash via opposing Ultimate Trigger/\"Deck Discarding effect\", you can summon it without paying the cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X01R#a0",
+        "physicalId": "CP14-X01R#AB_PASSIVE_NONE_LV1_LV2_LV3_7b2665b37d525a5031d9e1e17cad5b628eb3eda5c7164fadbd8bc6fcc21283ce_1262af503a258bb211236e4a7f4f86e6",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_7b2665b37d525a5031d9e1e17cad5b628eb3eda5c7164fadbd8bc6fcc21283ce_1262af503a258bb211236e4a7f4f86e6"
+      },
+      {
+        "id": "CP14-X01R#AB_WHEN_ATTACKS_NONE_LV3_20f7bd4f2c75daff14d5081099d3da0077316854d36453c6942230acd651d46d_ed555c7976f26845e12db2d920c1e094",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While you or the opponent controls any Ultimate, this Spirit gains an extra Red symbol."
+        },
+        "clauses": [
+          {
+            "rawText": "While you or the opponent controls any Ultimate, this Spirit gains an extra Red symbol.",
+            "cleanText": "this Spirit gains an extra Red symbol",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While you or the opponent controls any Ultimate",
+            "duration": null,
+            "op": {
+              "op": "ADD_SYMBOL"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X01R#a1",
+        "physicalId": "CP14-X01R#AB_WHEN_ATTACKS_NONE_LV3_20f7bd4f2c75daff14d5081099d3da0077316854d36453c6942230acd651d46d_ed555c7976f26845e12db2d920c1e094",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV3_20f7bd4f2c75daff14d5081099d3da0077316854d36453c6942230acd651d46d_ed555c7976f26845e12db2d920c1e094"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "CP14-X04": {
+    "cardNumber": "CP14-X04",
+    "name": "The LittleDevil David",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "CP14-X04#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_632dab443db06846b44b211407dcf860e163f7cda1ca5f2c1905bfede9b8071c_f8f7270d55bf36c4fe8955657cf3fadd",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can reveal four cards from your decktop. Add an Ultimate card among them to your Hand. Return the remaining cards to the deckbottom in any order."
+        },
+        "clauses": [
+          {
+            "rawText": "You can reveal four cards from your decktop.",
+            "cleanText": "You can reveal four cards from your decktop",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 4
+            }
+          },
+          {
+            "rawText": "Add an Ultimate card among them to your Hand.",
+            "cleanText": "Add an Ultimate card among them to your Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          },
+          {
+            "rawText": "Return the remaining cards to the deckbottom in any order.",
+            "cleanText": "Return the remaining cards to the deckbottom in any order",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X04#a0",
+        "physicalId": "CP14-X04#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_632dab443db06846b44b211407dcf860e163f7cda1ca5f2c1905bfede9b8071c_f8f7270d55bf36c4fe8955657cf3fadd",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_632dab443db06846b44b211407dcf860e163f7cda1ca5f2c1905bfede9b8071c_f8f7270d55bf36c4fe8955657cf3fadd"
+      },
+      {
+        "id": "CP14-X04#AB_PASSIVE_NONE_LV1_LV2_LV3_3b40eef92ea199e81e643f47b78c17b9d4b538f6ce5426aacef3a41f2e8f8496_1e320b93e8be2ff9e1ab78633356453b",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "SSoul: Purple",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When you're summoning an Ultimate card, this Spirit gains [Purple Core] (an extra Purple Symbol)."
+        },
+        "clauses": [
+          {
+            "rawText": "When you're summoning an Ultimate card, this Spirit gains [Purple Core] (an extra Purple Symbol).",
+            "cleanText": "When you're summoning an Ultimate card, this Spirit gains [Purple Core] (an extra Purple Symbol)",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_SYMBOL"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X04#a1",
+        "physicalId": "CP14-X04#AB_PASSIVE_NONE_LV1_LV2_LV3_3b40eef92ea199e81e643f47b78c17b9d4b538f6ce5426aacef3a41f2e8f8496_1e320b93e8be2ff9e1ab78633356453b",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_3b40eef92ea199e81e643f47b78c17b9d4b538f6ce5426aacef3a41f2e8f8496_1e320b93e8be2ff9e1ab78633356453b"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "CP14-X05": {
+    "cardNumber": "CP14-X05",
+    "name": "The LittlePhoenix Nix",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "CP14-X05#AB_WHEN_SUMMONED_NONE_LV1_LV2_916aefbb6ee6cf8ac4d5147a120a429cd6f914a9fa8674ecec079d54846ef2fb_8e81bd2f126a38132e4e3e93b51b405c",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can reveal four cards from your decktop. Add an Ultimate card among them to the Hand. Return any remaining cards to the deckbottom in any order."
+        },
+        "clauses": [
+          {
+            "rawText": "You can reveal four cards from your decktop.",
+            "cleanText": "You can reveal four cards from your decktop",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 4
+            }
+          },
+          {
+            "rawText": "Add an Ultimate card among them to the Hand.",
+            "cleanText": "Add an Ultimate card among them to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          },
+          {
+            "rawText": "Return any remaining cards to the deckbottom in any order.",
+            "cleanText": "Return any remaining cards to the deckbottom in any order",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "RETURN_REVEALED_BOTTOM"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X05#a0",
+        "physicalId": "CP14-X05#AB_WHEN_SUMMONED_NONE_LV1_LV2_916aefbb6ee6cf8ac4d5147a120a429cd6f914a9fa8674ecec079d54846ef2fb_8e81bd2f126a38132e4e3e93b51b405c",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_916aefbb6ee6cf8ac4d5147a120a429cd6f914a9fa8674ecec079d54846ef2fb_8e81bd2f126a38132e4e3e93b51b405c"
+      },
+      {
+        "id": "CP14-X05#AB_PASSIVE_NONE_LV1_LV2_d0b54b54acc124ed457fc1d195598863fdd818956c19e5e07732a804e8a035ba_37cd7b518fa43b10c4b28a8cef9d96ca",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "SSoul: Green",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When you're summoning an Ultimate card, this Spirit gains [Green Core] (an extra Green Symbol)."
+        },
+        "clauses": [
+          {
+            "rawText": "When you're summoning an Ultimate card, this Spirit gains [Green Core] (an extra Green Symbol).",
+            "cleanText": "When you're summoning an Ultimate card, this Spirit gains [Green Core] (an extra Green Symbol)",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_SYMBOL"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X05#a1",
+        "physicalId": "CP14-X05#AB_PASSIVE_NONE_LV1_LV2_d0b54b54acc124ed457fc1d195598863fdd818956c19e5e07732a804e8a035ba_37cd7b518fa43b10c4b28a8cef9d96ca",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_d0b54b54acc124ed457fc1d195598863fdd818956c19e5e07732a804e8a035ba_37cd7b518fa43b10c4b28a8cef9d96ca"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "CP14-X15": {
+    "cardNumber": "CP14-X15",
+    "name": "The RubyFlameFist HinokoKnuckle",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "Cost 3 or more Spirit/Ultimate",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "CP14-X15#AB_PASSIVE_NONE_LV1_LV2_LV3_adc8583f8c4b377b1006f1b5bcf74dc97fc3f8e4301e4b99e627a8cb18625f01_4ae34fdd6c589f3eafd914f8a97f0b4c",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: Cost 3 or more Spirit/Ultimate",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Brave Condition: Cost 3 or more Spirit/Ultimate]",
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "CP14-X15#a0",
+        "physicalId": "CP14-X15#AB_PASSIVE_NONE_LV1_LV2_LV3_adc8583f8c4b377b1006f1b5bcf74dc97fc3f8e4301e4b99e627a8cb18625f01_4ae34fdd6c589f3eafd914f8a97f0b4c",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_adc8583f8c4b377b1006f1b5bcf74dc97fc3f8e4301e4b99e627a8cb18625f01_4ae34fdd6c589f3eafd914f8a97f0b4c"
+      },
+      {
+        "id": "CP14-X15#AB_PASSIVE_NONE_LV1_08b2680dc13a366667e9eb762a0158acf6b108aea2204b5fc53c64192f62218b_bdae54873d3d36d086ed0cbb414b82f0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Ignore the summoning conditions of all your Ultimate cards with cost 7 or less."
+        },
+        "clauses": [
+          {
+            "rawText": "Ignore the summoning conditions of all your Ultimate cards with cost 7 or less.",
+            "cleanText": "Ignore the summoning conditions of all your Ultimate cards with cost 7 or less",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X15#a1",
+        "physicalId": "CP14-X15#AB_PASSIVE_NONE_LV1_08b2680dc13a366667e9eb762a0158acf6b108aea2204b5fc53c64192f62218b_bdae54873d3d36d086ed0cbb414b82f0",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_08b2680dc13a366667e9eb762a0158acf6b108aea2204b5fc53c64192f62218b_bdae54873d3d36d086ed0cbb414b82f0"
+      },
+      {
+        "id": "CP14-X15#AB_PASSIVE_NONE_LV1_LV2_LV3_0abc9d311d0b0efe50d137e99a92f3836dd28c5fca378963441343b57f5b2ed9_f4be82937ad2e075f4b223a00aedf96a",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "When Braved"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "All of your Ultimate symbols are also treated as Red symbols."
+        },
+        "clauses": [
+          {
+            "rawText": "All of your Ultimate symbols are also treated as Red symbols.",
+            "cleanText": "All of your Ultimate symbols are also treated as Red symbols",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X15#a2",
+        "physicalId": "CP14-X15#AB_PASSIVE_NONE_LV1_LV2_LV3_0abc9d311d0b0efe50d137e99a92f3836dd28c5fca378963441343b57f5b2ed9_f4be82937ad2e075f4b223a00aedf96a",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_0abc9d311d0b0efe50d137e99a92f3836dd28c5fca378963441343b57f5b2ed9_f4be82937ad2e075f4b223a00aedf96a"
+      },
+      {
+        "id": "CP14-X15#AB_PASSIVE_NONE_LV1_LV2_LV3_8b110874367ad97a097ec8024484acfe328297331c3b0f2a145a18f9f627d099_a5f73f33817a46f1529eef29651dca76",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "When Braved"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "(When this Ultimate Brave Attacks) Destroy one opposing Ultimate with 5000 BP or less."
+        },
+        "clauses": [
+          {
+            "rawText": "(When this Ultimate Brave Attacks) Destroy one opposing Ultimate with 5000 BP or less.",
+            "cleanText": "(When this Ultimate Brave Attacks) Destroy one opposing Ultimate with 5000 BP or less",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Ultimate"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X15#a3",
+        "physicalId": "CP14-X15#AB_PASSIVE_NONE_LV1_LV2_LV3_8b110874367ad97a097ec8024484acfe328297331c3b0f2a145a18f9f627d099_a5f73f33817a46f1529eef29651dca76",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_8b110874367ad97a097ec8024484acfe328297331c3b0f2a145a18f9f627d099_a5f73f33817a46f1529eef29651dca76"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "CP14-X14R": {
+    "cardNumber": "CP14-X14R",
+    "name": "The ShiningSwordDragonEmperor Shining-Ryuuman",
+    "keywords": [
+      {
+        "name": "Ultimate Unsheathe",
+        "parameter": "[LV3",
+        "wave": 4,
+        "hook": "unsheathe",
+        "bracketed": true,
+        "index": 69
+      }
+    ],
+    "abilities": [
+      {
+        "id": "CP14-X14R#AB_PASSIVE_NONE_LV1_LV2_LV3_8df3eab329733fb66dcb6fe1f8571841d8d4f3332feb295c1cb83d4979278f4b_3e49869de066018b1cecc9d93ceffded",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Summon Condition: You control one or more Cost 3 or higher Spirit"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Summon Condition: You control one or more Cost 3 or higher Spirit]",
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "CP14-X14R#a0",
+        "physicalId": "CP14-X14R#AB_PASSIVE_NONE_LV1_LV2_LV3_8df3eab329733fb66dcb6fe1f8571841d8d4f3332feb295c1cb83d4979278f4b_3e49869de066018b1cecc9d93ceffded",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_8df3eab329733fb66dcb6fe1f8571841d8d4f3332feb295c1cb83d4979278f4b_3e49869de066018b1cecc9d93ceffded"
+      },
+      {
+        "id": "CP14-X14R#AB_WHEN_SUMMONED_NONE_LV4_LV5_0e2460b89e785651c339411a704a5758ceb106d460674fb8c3326dc9c8fe3e4b_c369b9ee82f5ef37c45eca55ff52730f",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Ultimate Unsheathe: [LV3",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can summon any number of \"Exalted Sword\" family Brave cards from your Hand, up to a total cost of 7. When a Brave is summoned via this effect, draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "You can summon any number of \"Exalted Sword\" family Brave cards from your Hand, up to a total cost of 7.",
+            "cleanText": "You can summon any number of \"Exalted Sword\" family Brave cards from your Hand, up to a total cost of 7",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          },
+          {
+            "rawText": "When a Brave is summoned via this effect, draw a card.",
+            "cleanText": "When a Brave is summoned via this effect, draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X14R#a1",
+        "physicalId": "CP14-X14R#AB_WHEN_SUMMONED_NONE_LV4_LV5_0e2460b89e785651c339411a704a5758ceb106d460674fb8c3326dc9c8fe3e4b_c369b9ee82f5ef37c45eca55ff52730f",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV4_LV5_0e2460b89e785651c339411a704a5758ceb106d460674fb8c3326dc9c8fe3e4b_c369b9ee82f5ef37c45eca55ff52730f"
+      },
+      {
+        "id": "CP14-X14R#AB_WHEN_BRAVE_ATTACKS_NONE_LV4_LV5_e1f3a9773bdf524c237acd8f23b00e35a40fc2c6525d3c93748c3863ef4c3e4d_c8d325e77a39b69d35f297f8b150a332",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "When Braved"
+          ],
+          "timing": "WHEN_BRAVE_ATTACKS",
+          "timingLabel": "When Brave Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "During this turn, all your Brave Ultimates gain +3000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, all your Brave Ultimates gain +3000 BP.",
+            "cleanText": "all your Brave Ultimates gain +3000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 3000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X14R#a2",
+        "physicalId": "CP14-X14R#AB_WHEN_BRAVE_ATTACKS_NONE_LV4_LV5_e1f3a9773bdf524c237acd8f23b00e35a40fc2c6525d3c93748c3863ef4c3e4d_c8d325e77a39b69d35f297f8b150a332",
+        "semanticId": "SEM#AB_WHEN_BRAVE_ATTACKS_NONE_LV4_LV5_e1f3a9773bdf524c237acd8f23b00e35a40fc2c6525d3c93748c3863ef4c3e4d_c8d325e77a39b69d35f297f8b150a332"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "CP14-X03": {
+    "cardNumber": "CP14-X03",
+    "name": "The SmallFireDragon Hinoko",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "CP14-X03#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_632dab443db06846b44b211407dcf860e163f7cda1ca5f2c1905bfede9b8071c_f8f7270d55bf36c4fe8955657cf3fadd",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can reveal four cards from your decktop. Add an Ultimate card among them to your Hand. Return the remaining cards to the bottom of your deck in any order you like."
+        },
+        "clauses": [
+          {
+            "rawText": "You can reveal four cards from your decktop.",
+            "cleanText": "You can reveal four cards from your decktop",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 4
+            }
+          },
+          {
+            "rawText": "Add an Ultimate card among them to your Hand.",
+            "cleanText": "Add an Ultimate card among them to your Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          },
+          {
+            "rawText": "Return the remaining cards to the bottom of your deck in any order you like.",
+            "cleanText": "Return the remaining cards to the bottom of your deck in any order you like",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X03#a0",
+        "physicalId": "CP14-X03#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_632dab443db06846b44b211407dcf860e163f7cda1ca5f2c1905bfede9b8071c_f8f7270d55bf36c4fe8955657cf3fadd",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_632dab443db06846b44b211407dcf860e163f7cda1ca5f2c1905bfede9b8071c_f8f7270d55bf36c4fe8955657cf3fadd"
+      },
+      {
+        "id": "CP14-X03#AB_PASSIVE_NONE_LV1_LV2_LV3_7cc81f32398e3ccb564b5d8b667f70fa6018d8dd7e257254bbb2d962a1f6319c_1a05e03f6b77aae30daf1451e3b4f05a",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Spirit Soul: Red - When you summon an Ultimate, this Spirit gets 1 extra Red Symbol."
+        },
+        "clauses": [
+          {
+            "rawText": "Spirit Soul: Red - When you summon an Ultimate, this Spirit gets 1 extra Red Symbol.",
+            "cleanText": "Spirit Soul: Red - When you summon an Ultimate, this Spirit gets 1 extra Red Symbol",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X03#a1",
+        "physicalId": "CP14-X03#AB_PASSIVE_NONE_LV1_LV2_LV3_7cc81f32398e3ccb564b5d8b667f70fa6018d8dd7e257254bbb2d962a1f6319c_1a05e03f6b77aae30daf1451e3b4f05a",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_7cc81f32398e3ccb564b5d8b667f70fa6018d8dd7e257254bbb2d962a1f6319c_1a05e03f6b77aae30daf1451e3b4f05a"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "CP14-X21": {
+    "cardNumber": "CP14-X21",
+    "name": "The TwinStarDivas Laila Sisters",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "CP14-X21#AB_PASSIVE_NONE_LV1_LV2_LV3_0abc9d311d0b0efe50d137e99a92f3836dd28c5fca378963441343b57f5b2ed9_f4be82937ad2e075f4b223a00aedf96a",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When counting the number of Spirits for your Spirit effects, treat this Spirit as two Spirits."
+        },
+        "clauses": [
+          {
+            "rawText": "When counting the number of Spirits for your Spirit effects, treat this Spirit as two Spirits.",
+            "cleanText": "When counting the number of Spirits for your Spirit effects, treat this Spirit as two Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X21#a0",
+        "physicalId": "CP14-X21#AB_PASSIVE_NONE_LV1_LV2_LV3_0abc9d311d0b0efe50d137e99a92f3836dd28c5fca378963441343b57f5b2ed9_f4be82937ad2e075f4b223a00aedf96a",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_0abc9d311d0b0efe50d137e99a92f3836dd28c5fca378963441343b57f5b2ed9_f4be82937ad2e075f4b223a00aedf96a"
+      },
+      {
+        "id": "CP14-X21#AB_WHEN_BLOCKS_NONE_LV1_LV2_LV3_fbfde6c6bbb095f804e7ef949ba517bdd6100a5bd8f0fa1e6830a61aa90c10a4_9188fafea42cb706f67e69d5cd1380c9",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_BLOCKS",
+          "timingLabel": "When Blocks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Discard a number of cards from the opposing decktop equal to the number of \"Diva\" family Spirits you control. For each Magic card discarded by this effect, put one core from the Void to your Life."
+        },
+        "clauses": [
+          {
+            "rawText": "Discard a number of cards from the opposing decktop equal to the number of \"Diva\" family Spirits you control.",
+            "cleanText": "Discard a number of cards from the opposing decktop equal to the number of \"Diva\" family Spirits you control",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "side": "opp"
+            }
+          },
+          {
+            "rawText": "For each Magic card discarded by this effect, put one core from the Void to your Life.",
+            "cleanText": "For each Magic card discarded by this effect, put one core from the Void to your Life",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "RECOVER_LIFE",
+              "count": 1
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X21#a1",
+        "physicalId": "CP14-X21#AB_WHEN_BLOCKS_NONE_LV1_LV2_LV3_fbfde6c6bbb095f804e7ef949ba517bdd6100a5bd8f0fa1e6830a61aa90c10a4_9188fafea42cb706f67e69d5cd1380c9",
+        "semanticId": "SEM#AB_WHEN_BLOCKS_NONE_LV1_LV2_LV3_fbfde6c6bbb095f804e7ef949ba517bdd6100a5bd8f0fa1e6830a61aa90c10a4_9188fafea42cb706f67e69d5cd1380c9"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "CP14-X13": {
+    "cardNumber": "CP14-X13",
+    "name": "The UltimateHeroDragon Ultimate-Yamato",
+    "keywords": [
+      {
+        "name": "Burst",
+        "parameter": "After your Life is reduced",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 57
+      },
+      {
+        "name": "Ultimate Trigger",
+        "parameter": "[LV4",
+        "wave": 3,
+        "hook": "ultimate_trigger",
+        "bracketed": true,
+        "index": 230
+      }
+    ],
+    "abilities": [
+      {
+        "id": "CP14-X13#AB_PASSIVE_NONE_LV1_LV2_LV3_bca9244a806bfe3257f6e18dbb01fb7d8c5205b31d03441feb26ebf58744ca72_d6e3e6dd29826e8e3f3e698687272c4c",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Summon Condition: You control one or more Red Spirits"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Summon Condition: You control one or more Red Spirits]",
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "CP14-X13#a0",
+        "physicalId": "CP14-X13#AB_PASSIVE_NONE_LV1_LV2_LV3_bca9244a806bfe3257f6e18dbb01fb7d8c5205b31d03441feb26ebf58744ca72_d6e3e6dd29826e8e3f3e698687272c4c",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_bca9244a806bfe3257f6e18dbb01fb7d8c5205b31d03441feb26ebf58744ca72_d6e3e6dd29826e8e3f3e698687272c4c"
+      },
+      {
+        "id": "CP14-X13#AB_BURST_NONE_LV1_LV2_LV3_8d53e672def39bda21f2421f958032c2137f2f544b1231cb7f2c98ab0a0edb68_8cde048e6cd7d7e71de996cf80460854",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "BURST",
+          "timingLabel": "Burst",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "If your Life is at three or less, destroy an opposing 20000 BP or less Ultimate. After this effect resolves, summon this Ultimate card."
+        },
+        "clauses": [
+          {
+            "rawText": "If your Life is at three or less, destroy an opposing 20000 BP or less Ultimate.",
+            "cleanText": "destroy an opposing 20000 BP or less Ultimate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If your Life is at three or less",
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Ultimate"
+                ],
+                "filters": {
+                  "bpLte": 20000
+                }
+              }
+            }
+          },
+          {
+            "rawText": "summon this Ultimate card.",
+            "cleanText": "summon this Ultimate card",
+            "link": "afterResolves",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_THIS_CARD",
+              "from": "HAND_OR_BURST"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X13#a1",
+        "physicalId": "CP14-X13#AB_BURST_NONE_LV1_LV2_LV3_8d53e672def39bda21f2421f958032c2137f2f544b1231cb7f2c98ab0a0edb68_8cde048e6cd7d7e71de996cf80460854",
+        "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_8d53e672def39bda21f2421f958032c2137f2f544b1231cb7f2c98ab0a0edb68_8cde048e6cd7d7e71de996cf80460854"
+      },
+      {
+        "id": "CP14-X13#AB_WHEN_ATTACKS_NONE_LV4_LV5_LV6_dbcea24312084198671ef6f192ee4435856d07c1744a525d78b59908f0ccfd14_40c93bf650e2ba14e75cee9e2c4dc04a",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            4,
+            5,
+            6
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Ultimate Trigger",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When Ultimate Trigger hits, during this turn, when your Ultimates are blocked by opposing Spirits, send an opposing Life to their Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "When Ultimate Trigger hits, during this turn, when your Ultimates are blocked by opposing Spirits, send an opposing Life to their Reserve.",
+            "cleanText": "When Ultimate Trigger hits, during this turn, when your Ultimates are blocked by opposing Spirits, send an opposing Life to their Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "life",
+                "side": "opp"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "opp"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X13#a2",
+        "physicalId": "CP14-X13#AB_WHEN_ATTACKS_NONE_LV4_LV5_LV6_dbcea24312084198671ef6f192ee4435856d07c1744a525d78b59908f0ccfd14_40c93bf650e2ba14e75cee9e2c4dc04a",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV4_LV5_LV6_dbcea24312084198671ef6f192ee4435856d07c1744a525d78b59908f0ccfd14_40c93bf650e2ba14e75cee9e2c4dc04a"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "CP14-X22": {
+    "cardNumber": "CP14-X22",
+    "name": "The WisdomBladeDiva Agrs",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "CP14-X22#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_4089f81a0e704611f28a2236e903e3ade937f4f6fd58bdd760f0eaf30587d9e1_4e05679f535dc2f82a1cabb46183c9eb",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Return every opposing 6000 BP or less Spirit/Ultimate to the Hand, and for each Spirit/Ultimate returned, put a core from the Void to your Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "Return every opposing 6000 BP or less Spirit/Ultimate to the Hand, and for each Spirit/Ultimate returned, put a core from the Void to your Reserve.",
+            "cleanText": "Return every opposing 6000 BP or less Spirit/Ultimate to the Hand, and for each Spirit/Ultimate returned, put a core from the Void to your Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X22#a0",
+        "physicalId": "CP14-X22#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_4089f81a0e704611f28a2236e903e3ade937f4f6fd58bdd760f0eaf30587d9e1_4e05679f535dc2f82a1cabb46183c9eb",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_4089f81a0e704611f28a2236e903e3ade937f4f6fd58bdd760f0eaf30587d9e1_4e05679f535dc2f82a1cabb46183c9eb"
+      },
+      {
+        "id": "CP14-X22#AB_PASSIVE_NONE_LV2_LV3_d68c0e56f679a7ff361a2959def64b5b4a835e9c82066a86efa0be1c45c4083e_e10a8518eda0e7efdcdf203d188145e0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While you control four or more \"Diva\" family Spirits, all your Spirits are unaffected by opposing Spirit/Ultimate effects."
+        },
+        "clauses": [
+          {
+            "rawText": "While you control four or more \"Diva\" family Spirits, all your Spirits are unaffected by opposing Spirit/Ultimate effects.",
+            "cleanText": "all your Spirits are unaffected by opposing Spirit/Ultimate effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While you control four or more \"Diva\" family Spirits",
+            "duration": null,
+            "op": {
+              "op": "IMMUNITY",
+              "immuneTo": "OPPOSING_EFFECTS"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X22#a1",
+        "physicalId": "CP14-X22#AB_PASSIVE_NONE_LV2_LV3_d68c0e56f679a7ff361a2959def64b5b4a835e9c82066a86efa0be1c45c4083e_e10a8518eda0e7efdcdf203d188145e0",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV2_LV3_d68c0e56f679a7ff361a2959def64b5b4a835e9c82066a86efa0be1c45c4083e_e10a8518eda0e7efdcdf203d188145e0"
+      },
+      {
+        "id": "CP14-X22#AB_ATTACK_STEP_NONE_LV3_4c6aef910905bdb719ebebc5382f23f662197887fed1b4cb17c04f77a7a0dd0e_7d9327b0e4ab06141c887c4c5ffcde06",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Your Burst can't be discarded."
+        },
+        "clauses": [
+          {
+            "rawText": "Your Burst can't be discarded.",
+            "cleanText": "Your Burst can't be discarded",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X22#a2",
+        "physicalId": "CP14-X22#AB_ATTACK_STEP_NONE_LV3_4c6aef910905bdb719ebebc5382f23f662197887fed1b4cb17c04f77a7a0dd0e_7d9327b0e4ab06141c887c4c5ffcde06",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV3_4c6aef910905bdb719ebebc5382f23f662197887fed1b4cb17c04f77a7a0dd0e_7d9327b0e4ab06141c887c4c5ffcde06"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "CP14-X09": {
+    "cardNumber": "CP14-X09",
+    "name": "The WorldSaviourDiva Hocha",
+    "keywords": [
+      {
+        "name": "Burst",
+        "parameter": "After your Life is reduced",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "CP14-X09#AB_BURST_NONE_LV1_LV2_LV3_d72dacf0de4496d24e29e98b43074f895b1a053e5b9c0f62f80011e97b6a355e_00136c58c269c9beb3de0a077e733b94",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "BURST",
+          "timingLabel": "Burst",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Refresh every Yellow Spirit you control. Then, summon this Spirit card."
+        },
+        "clauses": [
+          {
+            "rawText": "Refresh every Yellow Spirit you control.",
+            "cleanText": "Refresh every Yellow Spirit you control",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "summon this Spirit card.",
+            "cleanText": "summon this Spirit card",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_THIS_CARD",
+              "from": "HAND_OR_BURST"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X09#a0",
+        "physicalId": "CP14-X09#AB_BURST_NONE_LV1_LV2_LV3_d72dacf0de4496d24e29e98b43074f895b1a053e5b9c0f62f80011e97b6a355e_00136c58c269c9beb3de0a077e733b94",
+        "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_d72dacf0de4496d24e29e98b43074f895b1a053e5b9c0f62f80011e97b6a355e_00136c58c269c9beb3de0a077e733b94"
+      },
+      {
+        "id": "CP14-X09#AB_WHEN_BATTLES_NONE_LV2_LV3_63869b66a6328564ae0481ddc725645e13efaefc4b175d2f11c40d620102ac4a_cdbbabb990fa2ed6bf2974daa9178219",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_BATTLES",
+          "timingLabel": "When Battles",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "During this turn, give an opposing Spirit -3000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, give an opposing Spirit -3000 BP.",
+            "cleanText": "give an opposing Spirit -3000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 3000,
+              "target": "PREVIOUS_TARGET",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X09#a1",
+        "physicalId": "CP14-X09#AB_WHEN_BATTLES_NONE_LV2_LV3_63869b66a6328564ae0481ddc725645e13efaefc4b175d2f11c40d620102ac4a_cdbbabb990fa2ed6bf2974daa9178219",
+        "semanticId": "SEM#AB_WHEN_BATTLES_NONE_LV2_LV3_63869b66a6328564ae0481ddc725645e13efaefc4b175d2f11c40d620102ac4a_cdbbabb990fa2ed6bf2974daa9178219"
+      },
+      {
+        "id": "CP14-X09#AB_PASSIVE_NONE_LV2_LV3_293a6c66a80c9bea5410d2ae99f17d842d568d51357ab3812ba519707f2c14dd_3e4dd6e9d08f88f4c22b2cad9d5c8a38",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this Spirit is destroyed by the opponent, by exhausting one of your \"Diva\" family Spirits, this Spirit remains on the Field, refreshed."
+        },
+        "clauses": [
+          {
+            "rawText": "When this Spirit is destroyed by the opponent, by exhausting one of your \"Diva\" family Spirits, this Spirit remains on the Field, refreshed.",
+            "cleanText": "When this Spirit is destroyed by the opponent, by exhausting one of your \"Diva\" family Spirits, this Spirit remains on the Field, refreshed",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "count": 1,
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              },
+              "isCost": true
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X09#a2",
+        "physicalId": "CP14-X09#AB_PASSIVE_NONE_LV2_LV3_293a6c66a80c9bea5410d2ae99f17d842d568d51357ab3812ba519707f2c14dd_3e4dd6e9d08f88f4c22b2cad9d5c8a38",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV2_LV3_293a6c66a80c9bea5410d2ae99f17d842d568d51357ab3812ba519707f2c14dd_3e4dd6e9d08f88f4c22b2cad9d5c8a38"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "CP14-X11": {
+    "cardNumber": "CP14-X11",
+    "name": "Ultimate-Apollodragon",
+    "keywords": [
+      {
+        "name": "Double Ultimate Trigger",
+        "parameter": "[LV4",
+        "wave": 3,
+        "hook": "ultimate_trigger",
+        "bracketed": true,
+        "index": 144
+      },
+      {
+        "name": "Double Hit",
+        "parameter": null,
+        "wave": 3,
+        "hook": "double_hit",
+        "bracketed": true,
+        "index": 272
+      }
+    ],
+    "abilities": [
+      {
+        "id": "CP14-X11#AB_PASSIVE_NONE_LV1_LV2_LV3_96ca7c2b72f31761ed049464200e07f20462b640583ba53b4cb1e20e6079ad8f_68073801f61681173077997bb36b4b52",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Summon Condition: You control one or more Red Spirit"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Summon Condition: You control one or more Red Spirit]",
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "CP14-X11#a0",
+        "physicalId": "CP14-X11#AB_PASSIVE_NONE_LV1_LV2_LV3_96ca7c2b72f31761ed049464200e07f20462b640583ba53b4cb1e20e6079ad8f_68073801f61681173077997bb36b4b52",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_96ca7c2b72f31761ed049464200e07f20462b640583ba53b4cb1e20e6079ad8f_68073801f61681173077997bb36b4b52"
+      },
+      {
+        "id": "CP14-X11#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_8ea94bdf81e6d92e40e769b0a764141a565c52ca913512aac5b5c8fd239dd76d_9fda78e77f3f9c3d1ec932d46ff31985",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3,
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can target and attack an opposing refreshed Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "You can target and attack an opposing refreshed Spirit.",
+            "cleanText": "You can target and attack an opposing refreshed Spirit",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CONTINUOUS_RULE",
+              "rule": "CAN_ATTACK_REFRESHED"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X11#a1",
+        "physicalId": "CP14-X11#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_8ea94bdf81e6d92e40e769b0a764141a565c52ca913512aac5b5c8fd239dd76d_9fda78e77f3f9c3d1ec932d46ff31985",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_8ea94bdf81e6d92e40e769b0a764141a565c52ca913512aac5b5c8fd239dd76d_9fda78e77f3f9c3d1ec932d46ff31985"
+      },
+      {
+        "id": "CP14-X11#AB_WHEN_ATTACKS_NONE_LV4_LV5_cf5ab26ca124213ae0658d1bbe015c49f0a7e3d59fb4db9064788ddc03975723_50259631e10347d029eb6d935fdd87df",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Double Ultimate Trigger",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "For each Ultimate Trigger hit, destroy an opposing 9000 BP or less Spirit. [Double Hit] When it hits twice, also, send an opposing Life to their Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "For each Ultimate Trigger hit, destroy an opposing 9000 BP or less Spirit.",
+            "cleanText": "For each Ultimate Trigger hit, destroy an opposing 9000 BP or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 9000
+                }
+              }
+            }
+          },
+          {
+            "rawText": "[Double Hit] When it hits twice, also, send an opposing Life to their Reserve.",
+            "cleanText": "[Double Hit] When it hits twice, also, send an opposing Life to their Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "life",
+                "side": "opp"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "opp"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "CP14-X11#a2",
+        "physicalId": "CP14-X11#AB_WHEN_ATTACKS_NONE_LV4_LV5_cf5ab26ca124213ae0658d1bbe015c49f0a7e3d59fb4db9064788ddc03975723_50259631e10347d029eb6d935fdd87df",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV4_LV5_cf5ab26ca124213ae0658d1bbe015c49f0a7e3d59fb4db9064788ddc03975723_50259631e10347d029eb6d935fdd87df"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

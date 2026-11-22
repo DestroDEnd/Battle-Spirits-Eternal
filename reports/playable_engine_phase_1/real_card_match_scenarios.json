@@ -1,0 +1,33 @@
+{
+  "metadata": {
+    "generatedAt": "2026-11-21T03:24:07.048Z",
+    "testFile": "tests/playable_engine_local_match.test.js"
+  },
+  "scenarios": [
+    {
+      "scenarioId": "PLAYABLE-MATCH-01",
+      "title": "Full Multi-Turn Real Card Match Flow",
+      "description": "Multi-turn match executing through production APIs (createGame, game.flow, game.playCard, game.declareAttack, game.declareBlock). Real cards: BS01-002 (Rokceratops), BS01-006 (Merat), BS01-117 (Double Draw). Enforces Turn 1 step skips, cost payments, combat BP comparison, destroyed spirit recycling, core conservation (18 cores invariant).",
+      "turnsExecuted": 3,
+      "outcome": "SUCCESS_VERIFIED"
+    },
+    {
+      "scenarioId": "PLAYABLE-MATCH-02",
+      "title": "Deckout Victory Condition at Start Step",
+      "description": "Transitioning to active player Start Step with an empty deck triggers immediate loss by rule (Eternal Rule 3.5), awarding winReason DECK_OUT to opponent.",
+      "outcome": "SUCCESS_VERIFIED"
+    },
+    {
+      "scenarioId": "PLAYABLE-MATCH-03",
+      "title": "Life Depletion to 0 Victory Condition",
+      "description": "Combat direct hit reducing opponent life from 1 to 0 triggers state-based check resulting in victory with winReason LIFE_0.",
+      "outcome": "SUCCESS_VERIFIED"
+    },
+    {
+      "scenarioId": "PLAYABLE-MATCH-04",
+      "title": "Multi-Hit Combat Across Consecutive Attacks",
+      "description": "Double symbol spirit attacks unblocked twice and then delivers lethal third blow, correctly transitioning Life from 5 to 3 to 1 to 0.",
+      "outcome": "SUCCESS_VERIFIED"
+    }
+  ]
+}

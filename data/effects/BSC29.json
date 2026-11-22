@@ -216,10 +216,13 @@
     "compiledIr": {
       "cardNumber": "BSC29-023",
       "name": "A Keen and Clear Conquest!!",
+      "type": "Magic",
+      "levels": {},
+      "originalEffectText": "When only the opposing Spirit is destroyed by comparing BP with your Green Spirit, return this Magic card from the Trash to your Hand.\n\n[Flash]\nReturn an opposing exhausted Spirit/Ultimate to the Hand.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BSC29-023#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -230,8 +233,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -240,10 +248,14 @@
             "isMain": false,
             "cleanBody": "When only the opposing Spirit is destroyed by comparing BP with your Green Spirit, return this Magic card from the Trash to your Hand."
           },
+          "originalAbilityText": "When only the opposing Spirit is destroyed by comparing BP with your Green Spirit, return this Magic card from the Trash to your Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When only the opposing Spirit is destroyed by comparing BP with your Green Spirit, return this Magic card from the Trash to your Hand.",
+              "originalClauseText": "When only the opposing Spirit is destroyed by comparing BP with your Green Spirit, return this Magic card from the Trash to your Hand.",
               "cleanText": "When only the opposing Spirit is destroyed by comparing BP with your Green Spirit, return this Magic card from the Trash to your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -251,17 +263,38 @@
               "duration": null,
               "op": {
                 "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "family": "this",
-                "targetType": "Magic",
-                "destination": "HAND"
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit",
+                    "Magic"
+                  ],
+                  "color": "Green"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC29-023#a0",
+          "keywords": [],
+          "id": "BSC29-023#AB_PASSIVE_NONE_LV1_LV2_LV3_6208fe0af8353921d53ee1c34fd1445aeeb323dd797c080ea6d839a762112259_0f78e2d2c338aa46b63770bfaebcb503",
+          "physicalId": "BSC29-023#AB_PASSIVE_NONE_LV1_LV2_LV3_6208fe0af8353921d53ee1c34fd1445aeeb323dd797c080ea6d839a762112259_0f78e2d2c338aa46b63770bfaebcb503",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_6208fe0af8353921d53ee1c34fd1445aeeb323dd797c080ea6d839a762112259_0f78e2d2c338aa46b63770bfaebcb503",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_7e556313e52361e92759ac07fdf3cfaafccaef1e09578932f9c0dbbeedc809d0_77fa968e16c4e55d7225a91089f1b4bb",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC29-023#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -272,8 +305,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -282,10 +322,14 @@
             "isMain": false,
             "cleanBody": "Return an opposing exhausted Spirit/Ultimate to the Hand."
           },
+          "originalAbilityText": "[Flash]\nReturn an opposing exhausted Spirit/Ultimate to the Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Return an opposing exhausted Spirit/Ultimate to the Hand.",
+              "originalClauseText": "Return an opposing exhausted Spirit/Ultimate to the Hand.",
               "cleanText": "Return an opposing exhausted Spirit/Ultimate to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -300,7 +344,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC29-023#a1",
+          "keywords": [],
+          "id": "BSC29-023#AB_FLASH_NONE_LV1_LV2_LV3_b09dba91b5abfc3d401e000db034af418ff9fa72a7b8537c17b93bab4e24202b_eaffcdf148f66ce29de76ccbe2e910a7",
+          "physicalId": "BSC29-023#AB_FLASH_NONE_LV1_LV2_LV3_b09dba91b5abfc3d401e000db034af418ff9fa72a7b8537c17b93bab4e24202b_eaffcdf148f66ce29de76ccbe2e910a7",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_b09dba91b5abfc3d401e000db034af418ff9fa72a7b8537c17b93bab4e24202b_eaffcdf148f66ce29de76ccbe2e910a7",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_d4a027b339f60859a10b6757d59ddd010d3963c67f2c0504704a829a4a2ed188_ce5d53af0e3894ea9996943539fa63d5",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -317,10 +376,13 @@
     "compiledIr": {
       "cardNumber": "BSC29-019",
       "name": "Beloved Person",
+      "type": "Magic",
+      "levels": {},
+      "originalEffectText": "[Main]\nDraw two cards. Or, summon a Cost 3 or less Spirit card from your Trash without paying the cost.\n\n[Flash]\nDuring this turn, give a Spirit +3000 BP.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BSC29-019#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -331,8 +393,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "MAIN",
+            "timings": [],
             "timingLabel": "Main",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "MAIN"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -341,10 +410,14 @@
             "isMain": true,
             "cleanBody": "Draw two cards. Or, summon a Cost 3 or less Spirit card from your Trash without paying the cost."
           },
+          "originalAbilityText": "[Main]\nDraw two cards. Or, summon a Cost 3 or less Spirit card from your Trash without paying the cost.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Draw two cards.",
+              "originalClauseText": "Draw two cards.",
               "cleanText": "Draw two cards",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -359,7 +432,9 @@
             },
             {
               "rawText": "summon a Cost 3 or less Spirit card from your Trash without paying the cost.",
+              "originalClauseText": "summon a Cost 3 or less Spirit card from your Trash without paying the cost.",
               "cleanText": "summon a Cost 3 or less Spirit card from your Trash without paying the cost",
+              "clauseIndex": 1,
               "link": "or",
               "isOptional": false,
               "isCost": false,
@@ -367,14 +442,39 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "costLte": 3
+                },
+                "free": true,
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC29-019#a0",
+          "keywords": [],
+          "id": "BSC29-019#AB_MAIN_NONE_LV1_LV2_LV3_731bc7dd473cbd0773856534ff7ca1f52b31f5eb2aebd78d5ca2b33e4af6fc5c_1128e4e616de335a35ef31f6210049c8",
+          "physicalId": "BSC29-019#AB_MAIN_NONE_LV1_LV2_LV3_731bc7dd473cbd0773856534ff7ca1f52b31f5eb2aebd78d5ca2b33e4af6fc5c_1128e4e616de335a35ef31f6210049c8",
+          "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_731bc7dd473cbd0773856534ff7ca1f52b31f5eb2aebd78d5ca2b33e4af6fc5c_1128e4e616de335a35ef31f6210049c8",
+          "semanticIdV3": "SEM3#AB_MAIN_NONE_LV1_LV2_LV3_44e9c3b585e44bfd98407a7f37bd0e73a7141b134cad1feff27cee974b6449be_c0c9a74590480b79a392c77ceda70714",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "MAIN"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC29-019#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -385,8 +485,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -395,10 +502,14 @@
             "isMain": false,
             "cleanBody": "During this turn, give a Spirit +3000 BP."
           },
+          "originalAbilityText": "[Flash]\nDuring this turn, give a Spirit +3000 BP.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "During this turn, give a Spirit +3000 BP.",
+              "originalClauseText": "During this turn, give a Spirit +3000 BP.",
               "cleanText": "give a Spirit +3000 BP",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -412,7 +523,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC29-019#a1",
+          "keywords": [],
+          "id": "BSC29-019#AB_FLASH_NONE_LV1_LV2_LV3_b7267febc116065bc535a58f5f3ff29dbb5c8037e51c4522ec8e3594a43eeb5e_256987d37f959f9e5e2d57967e8b7841",
+          "physicalId": "BSC29-019#AB_FLASH_NONE_LV1_LV2_LV3_b7267febc116065bc535a58f5f3ff29dbb5c8037e51c4522ec8e3594a43eeb5e_256987d37f959f9e5e2d57967e8b7841",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_b7267febc116065bc535a58f5f3ff29dbb5c8037e51c4522ec8e3594a43eeb5e_256987d37f959f9e5e2d57967e8b7841",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_e77e36428ba010d21a3a91c4e536514dc0a9e3516f01ebc06843c143bb19628b_c53cf161c0a0ff85202f30c551928441",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -2651,10 +2777,13 @@
     "compiledIr": {
       "cardNumber": "BSC29-016",
       "name": "V-V-Victory!!",
+      "type": "Magic",
+      "levels": {},
+      "originalEffectText": "When only the opposing Spirit is destroyed by comparing BP with your Red Spirit, return this Magic card from the Trash to your Hand.\n\n[Flash]\nDestroy two opposing 4000 BP or less Spirits.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BSC29-016#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2665,8 +2794,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2675,10 +2809,14 @@
             "isMain": false,
             "cleanBody": "When only the opposing Spirit is destroyed by comparing BP with your Red Spirit, return this Magic card from the Trash to your Hand."
           },
+          "originalAbilityText": "When only the opposing Spirit is destroyed by comparing BP with your Red Spirit, return this Magic card from the Trash to your Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When only the opposing Spirit is destroyed by comparing BP with your Red Spirit, return this Magic card from the Trash to your Hand.",
+              "originalClauseText": "When only the opposing Spirit is destroyed by comparing BP with your Red Spirit, return this Magic card from the Trash to your Hand.",
               "cleanText": "When only the opposing Spirit is destroyed by comparing BP with your Red Spirit, return this Magic card from the Trash to your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2686,17 +2824,38 @@
               "duration": null,
               "op": {
                 "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "family": "this",
-                "targetType": "Magic",
-                "destination": "HAND"
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit",
+                    "Magic"
+                  ],
+                  "color": "Red"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC29-016#a0",
+          "keywords": [],
+          "id": "BSC29-016#AB_PASSIVE_NONE_LV1_LV2_LV3_b553ea0d5ae2b0f25a2abd98107bb1c81d68f8ce44323cce0f812d00220890f3_cfcb0611a18c63c674e771043ee38ecd",
+          "physicalId": "BSC29-016#AB_PASSIVE_NONE_LV1_LV2_LV3_b553ea0d5ae2b0f25a2abd98107bb1c81d68f8ce44323cce0f812d00220890f3_cfcb0611a18c63c674e771043ee38ecd",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_b553ea0d5ae2b0f25a2abd98107bb1c81d68f8ce44323cce0f812d00220890f3_cfcb0611a18c63c674e771043ee38ecd",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_cb860ce0dc532b80187db18646be1c6868edc117d6fdc6483ef2632a894d89a2_7b38fbffbde96bf44039618a8ea02d99",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC29-016#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2707,8 +2866,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2717,10 +2883,14 @@
             "isMain": false,
             "cleanBody": "Destroy two opposing 4000 BP or less Spirits."
           },
+          "originalAbilityText": "[Flash]\nDestroy two opposing 4000 BP or less Spirits.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Destroy two opposing 4000 BP or less Spirits.",
+              "originalClauseText": "Destroy two opposing 4000 BP or less Spirits.",
               "cleanText": "Destroy two opposing 4000 BP or less Spirits",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2741,7 +2911,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC29-016#a1",
+          "keywords": [],
+          "id": "BSC29-016#AB_FLASH_NONE_LV1_LV2_LV3_cfb1e63cdfee7c3e1455cddc18044ed5601ebb2dc87b54517732b9104fc71240_0828ac150ead86e609f947f68d35f252",
+          "physicalId": "BSC29-016#AB_FLASH_NONE_LV1_LV2_LV3_cfb1e63cdfee7c3e1455cddc18044ed5601ebb2dc87b54517732b9104fc71240_0828ac150ead86e609f947f68d35f252",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_cfb1e63cdfee7c3e1455cddc18044ed5601ebb2dc87b54517732b9104fc71240_0828ac150ead86e609f947f68d35f252",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_3aade7c86fad0ec790d257ed68d68b131c7935b371beb7a78b566cc352cccd95_17b9e393b6f00cbd3cd64e2e290b5b0a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,

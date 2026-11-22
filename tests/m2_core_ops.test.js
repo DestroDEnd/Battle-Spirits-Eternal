@@ -200,6 +200,7 @@ describe('Milestone 2 Core Operations Suite', () => {
   test('M2.9 - RECOVER_LIFE moves core from void to life and emits LIFE_RECOVERED', async () => {
     const state = createGameState([], []);
     state.players.player.life = 3;
+    state.players.player.voidCores.normal = 2;
     const events = new EventBus();
     const lifeEvents = [];
     events.on('LIFE_RECOVERED', async (ev) => lifeEvents.push(ev));

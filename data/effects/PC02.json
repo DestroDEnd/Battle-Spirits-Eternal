@@ -19,6 +19,21 @@
     "compiledIr": {
       "cardNumber": "PC02-001",
       "name": "Chocodra-Ange",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 7000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: Cloud Contract/Incarnate, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Summoned/Advents)\nYour counter +1. Then, you can return an \"Incarnate\" family Magic card from the Trash to your Hand.\n\n[During OC] [LV1][LV2] (Either Attack Step)\nWhen your \"Incarnate\" family Spirit/Ultimate makes the first attack/block of the turn, during this turn, you can give every opposing Spirit/Ultimate -5000 BP, and destroy any target that reaches BP 0.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -26,12 +41,32 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "PC02-001#AB_FLASH_NONE_LV1_LV2_LV3_b88ae729de7e9c05d2b0277f7896d3d71925d2cccc78c93a9f8224ce85506b4f_afc6f10fae0f9271e779f718b78a29f6",
+          "cardNumber": "PC02-001",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PC02-001#a0"
         }
       ],
       "abilities": [
         {
-          "id": "PC02-001#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -42,8 +77,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: Cloud Contract/Incarnate, (Either Attack Step)",
@@ -52,10 +94,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: Cloud Contract/Incarnate, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -77,7 +123,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -95,10 +143,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC02-001#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "Cloud Contract/Incarnate, (Either Attack Step)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PC02-001#AB_FLASH_NONE_LV1_LV2_LV3_b88ae729de7e9c05d2b0277f7896d3d71925d2cccc78c93a9f8224ce85506b4f_afc6f10fae0f9271e779f718b78a29f6",
+              "cardNumber": "PC02-001",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PC02-001#a0"
+            }
+          ],
+          "id": "PC02-001#AB_FLASH_NONE_LV1_LV2_LV3_b88ae729de7e9c05d2b0277f7896d3d71925d2cccc78c93a9f8224ce85506b4f_afc6f10fae0f9271e779f718b78a29f6",
+          "physicalId": "PC02-001#AB_FLASH_NONE_LV1_LV2_LV3_b88ae729de7e9c05d2b0277f7896d3d71925d2cccc78c93a9f8224ce85506b4f_afc6f10fae0f9271e779f718b78a29f6",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_b88ae729de7e9c05d2b0277f7896d3d71925d2cccc78c93a9f8224ce85506b4f_afc6f10fae0f9271e779f718b78a29f6",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_71794af21a7afe0508830f5222c73ebe196e9d5a802e471a591ba57bcc524713_db3de18b61dc75d3ba9f3c95ae763238",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC02-001#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -107,21 +199,45 @@
             ],
             "levelExplicit": true,
             "prefixes": [],
-            "timing": "WHEN_SUMMONED",
-            "timingLabel": "When Summoned/Advents",
+            "timing": "PASSIVE",
+            "timings": [],
+            "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
             "burstCondition": null,
             "isFlash": false,
             "isMain": false,
-            "cleanBody": "Your counter +1. Then, you can return an \"Incarnate\" family Magic card from the Trash to your Hand."
+            "cleanBody": "(When Summoned/Advents)\nYour counter +1. Then, you can return an \"Incarnate\" family Magic card from the Trash to your Hand."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned/Advents)\nYour counter +1. Then, you can return an \"Incarnate\" family Magic card from the Trash to your Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
+              "rawText": "(When Summoned/Advents)",
+              "originalClauseText": "(When Summoned/Advents)",
+              "cleanText": "(When Summoned/Advents)",
+              "clauseIndex": 0,
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "UNSUPPORTED",
+                "rawText": "(When Summoned/Advents)"
+              }
+            },
+            {
               "rawText": "Your counter +1.",
+              "originalClauseText": "Your counter +1.",
               "cleanText": "Your counter +1",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -134,25 +250,49 @@
             },
             {
               "rawText": "you can return an \"Incarnate\" family Magic card from the Trash to your Hand.",
+              "originalClauseText": "you can return an \"Incarnate\" family Magic card from the Trash to your Hand.",
               "cleanText": "you can return an \"Incarnate\" family Magic card from the Trash to your Hand",
+              "clauseIndex": 2,
               "link": "then",
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Magic"
+                  ],
+                  "family": "Incarnate"
+                },
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "(When Summoned/Advents)"
+          ],
+          "legacyId": "PC02-001#a1",
+          "keywords": [],
+          "id": "PC02-001#AB_PASSIVE_NONE_LV1_LV2_8d48344d59055d3a680758da19f55259df44855ae539eaa6bbc17958cf2f59b6_18069222a3a2bfa6fee4a194237343dd",
+          "physicalId": "PC02-001#AB_PASSIVE_NONE_LV1_LV2_8d48344d59055d3a680758da19f55259df44855ae539eaa6bbc17958cf2f59b6_18069222a3a2bfa6fee4a194237343dd",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_8d48344d59055d3a680758da19f55259df44855ae539eaa6bbc17958cf2f59b6_18069222a3a2bfa6fee4a194237343dd",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_9205594281ecf22bbc5986683c553b1bfc66f7b5bc820fa300d1b6e854971ea7_0683ee60ebaac944dfbaa72b97489186",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC02-001#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -164,8 +304,17 @@
               "During OC"
             ],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -174,10 +323,14 @@
             "isMain": false,
             "cleanBody": "When your \"Incarnate\" family Spirit/Ultimate makes the first attack/block of the turn, during this turn, you can give every opposing Spirit/Ultimate -5000 BP, and destroy any target that reaches BP 0."
           },
+          "originalAbilityText": "[During OC] [LV1][LV2] (Either Attack Step)\nWhen your \"Incarnate\" family Spirit/Ultimate makes the first attack/block of the turn, during this turn, you can give every opposing Spirit/Ultimate -5000 BP, and destroy any target that reaches BP 0.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When your \"Incarnate\" family Spirit/Ultimate makes the first attack/block of the turn, during this turn, you can give every opposing Spirit/Ultimate -5000 BP",
+              "originalClauseText": "When your \"Incarnate\" family Spirit/Ultimate makes the first attack/block of the turn, during this turn, you can give every opposing Spirit/Ultimate -5000 BP",
               "cleanText": "When your \"Incarnate\" family Spirit/Ultimate makes the first attack/block of the turn, during this turn, you can give every opposing Spirit/Ultimate -5000 BP",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -190,7 +343,9 @@
             },
             {
               "rawText": "destroy any target that reaches BP 0.",
+              "originalClauseText": "destroy any target that reaches BP 0.",
               "cleanText": "destroy any target that reaches BP 0",
+              "clauseIndex": 1,
               "link": "also",
               "isOptional": false,
               "isCost": false,
@@ -206,12 +361,27 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC02-001#a2",
+          "keywords": [],
+          "id": "PC02-001#AB_ATTACK_STEP_NONE_LV1_LV2_4a7e1d9579ebad498108e840f5e2f5ef52c695b4acf4a50af2461583b63359d5_1a307df0ecd97a964a179d4bb9fdeb7f",
+          "physicalId": "PC02-001#AB_ATTACK_STEP_NONE_LV1_LV2_4a7e1d9579ebad498108e840f5e2f5ef52c695b4acf4a50af2461583b63359d5_1a307df0ecd97a964a179d4bb9fdeb7f",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_4a7e1d9579ebad498108e840f5e2f5ef52c695b4acf4a50af2461583b63359d5_1a307df0ecd97a964a179d4bb9fdeb7f",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_7a34a9f9b310338fcfdbdf2303a27097220a47c6f09f3d9fab91301fb3093a92_acdffc8fac2358728fc5d771d69b6f8e",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
-      "unsupportedClausesCount": 0,
-      "isFullySupported": true
+      "unsupportedClausesCount": 1,
+      "isFullySupported": false
     }
   },
   "PC02-002": {
@@ -234,6 +404,21 @@
     "compiledIr": {
       "cardNumber": "PC02-002",
       "name": "Chocodra-Lucife",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 9000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: Cloud Contract/Incarnate & C3 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Summoned/Advents)\nYou can draw two cards from the deckbottom.\n\n[During OC] [LV1][LV2] (Either Attack Step)\nWhen your \"Incarnate\" family Spirit/Ultimate makes the first attack/block of the turn, during this turn, the effects of every opposing Nexus/Grandwalker Nexus can't activate.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -241,12 +426,32 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "PC02-002#AB_FLASH_NONE_LV1_LV2_LV3_dbe1ffe86723f61962a587715270e8471ae69de019c2195b6f42a0f659975813_ac3be2c85c5054e0d7fc43a868d08be8",
+          "cardNumber": "PC02-002",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PC02-002#a0"
         }
       ],
       "abilities": [
         {
-          "id": "PC02-002#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -257,8 +462,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: Cloud Contract/Incarnate & C3 or more, (Either Attack Step)",
@@ -267,10 +479,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: Cloud Contract/Incarnate & C3 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -292,7 +508,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -310,10 +528,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC02-002#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "Cloud Contract/Incarnate & C3 or more, (Either Attack Step)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PC02-002#AB_FLASH_NONE_LV1_LV2_LV3_dbe1ffe86723f61962a587715270e8471ae69de019c2195b6f42a0f659975813_ac3be2c85c5054e0d7fc43a868d08be8",
+              "cardNumber": "PC02-002",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PC02-002#a0"
+            }
+          ],
+          "id": "PC02-002#AB_FLASH_NONE_LV1_LV2_LV3_dbe1ffe86723f61962a587715270e8471ae69de019c2195b6f42a0f659975813_ac3be2c85c5054e0d7fc43a868d08be8",
+          "physicalId": "PC02-002#AB_FLASH_NONE_LV1_LV2_LV3_dbe1ffe86723f61962a587715270e8471ae69de019c2195b6f42a0f659975813_ac3be2c85c5054e0d7fc43a868d08be8",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_dbe1ffe86723f61962a587715270e8471ae69de019c2195b6f42a0f659975813_ac3be2c85c5054e0d7fc43a868d08be8",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_19446f6dd705a6a98bbab8277bccf7d46c6a3f899bce3b0173bee9bf90a36178_be64f5532ca01beaf963f01cc986205d",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC02-002#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -322,21 +584,45 @@
             ],
             "levelExplicit": true,
             "prefixes": [],
-            "timing": "WHEN_SUMMONED",
-            "timingLabel": "When Summoned/Advents",
+            "timing": "PASSIVE",
+            "timings": [],
+            "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
             "burstCondition": null,
             "isFlash": false,
             "isMain": false,
-            "cleanBody": "You can draw two cards from the deckbottom."
+            "cleanBody": "(When Summoned/Advents)\nYou can draw two cards from the deckbottom."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned/Advents)\nYou can draw two cards from the deckbottom.",
+          "abilityIndex": 1,
           "clauses": [
             {
+              "rawText": "(When Summoned/Advents)",
+              "originalClauseText": "(When Summoned/Advents)",
+              "cleanText": "(When Summoned/Advents)",
+              "clauseIndex": 0,
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "UNSUPPORTED",
+                "rawText": "(When Summoned/Advents)"
+              }
+            },
+            {
               "rawText": "You can draw two cards from the deckbottom.",
+              "originalClauseText": "You can draw two cards from the deckbottom.",
               "cleanText": "You can draw two cards from the deckbottom",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -350,10 +636,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "(When Summoned/Advents)"
+          ],
+          "legacyId": "PC02-002#a1",
+          "keywords": [],
+          "id": "PC02-002#AB_PASSIVE_NONE_LV1_LV2_633d0e6ca4fc49600bf23a72ea7dbe945c66c35c4d7468bc376972356cddb2ec_c06bf6dc20e2ef22ddc28517317c6d72",
+          "physicalId": "PC02-002#AB_PASSIVE_NONE_LV1_LV2_633d0e6ca4fc49600bf23a72ea7dbe945c66c35c4d7468bc376972356cddb2ec_c06bf6dc20e2ef22ddc28517317c6d72",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_633d0e6ca4fc49600bf23a72ea7dbe945c66c35c4d7468bc376972356cddb2ec_c06bf6dc20e2ef22ddc28517317c6d72",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_d9742c5ed56a104244038959b5f3397bdff18b5f3e8f90d16ec4656b78af0e70_1a5758361db9068129d71f33eccefef5",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC02-002#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -365,8 +665,17 @@
               "During OC"
             ],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -375,26 +684,45 @@
             "isMain": false,
             "cleanBody": "When your \"Incarnate\" family Spirit/Ultimate makes the first attack/block of the turn, during this turn, the effects of every opposing Nexus/Grandwalker Nexus can't activate."
           },
+          "originalAbilityText": "[During OC] [LV1][LV2] (Either Attack Step)\nWhen your \"Incarnate\" family Spirit/Ultimate makes the first attack/block of the turn, during this turn, the effects of every opposing Nexus/Grandwalker Nexus can't activate.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When your \"Incarnate\" family Spirit/Ultimate makes the first attack/block of the turn, during this turn, the effects of every opposing Nexus/Grandwalker Nexus can't activate.",
+              "originalClauseText": "When your \"Incarnate\" family Spirit/Ultimate makes the first attack/block of the turn, during this turn, the effects of every opposing Nexus/Grandwalker Nexus can't activate.",
               "cleanText": "When your \"Incarnate\" family Spirit/Ultimate makes the first attack/block of the turn, during this turn, the effects of every opposing Nexus/Grandwalker Nexus can't activate",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": "DURING_THIS_TURN",
               "op": {
-                "op": "GRANT_FAMILY"
+                "op": "NEGATE_EFFECT"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC02-002#a2",
+          "keywords": [],
+          "id": "PC02-002#AB_ATTACK_STEP_NONE_LV1_LV2_3a3db9f6940646c7c4b64beaa16520cef79fc45658e65df6e5fab2e539b4d4c6_8a3d7edda01874fdf34e61aec15ad1c6",
+          "physicalId": "PC02-002#AB_ATTACK_STEP_NONE_LV1_LV2_3a3db9f6940646c7c4b64beaa16520cef79fc45658e65df6e5fab2e539b4d4c6_8a3d7edda01874fdf34e61aec15ad1c6",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_3a3db9f6940646c7c4b64beaa16520cef79fc45658e65df6e5fab2e539b4d4c6_8a3d7edda01874fdf34e61aec15ad1c6",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_e0d2c3d26caf268b00c86b67685258de80f07ac089a9da091bf4a5d361f5c6e6_8c5fdd74071abeb4d61e0a3eb93db97b",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
-      "unsupportedClausesCount": 0,
-      "isFullySupported": true
+      "unsupportedClausesCount": 1,
+      "isFullySupported": false
     }
   },
   "PC02-X01": {
@@ -417,6 +745,21 @@
     "compiledIr": {
       "cardNumber": "PC02-X01",
       "name": "Chocodra-the-Morning-Star",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 12000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 15000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: Cloud Contract/Incarnate & C5 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents/Attacks)\nYour counter +1. Then, for every two counters you have, during this turn, an opposing Spirit can't attack/block.\n\n[During OC & During Advent] [LV1][LV2] Flash- (When Attacks)\nOnce per turn, return every opposing Spirit under the effect of \"can't block\" effects to the deckbottom. If there is any \"Choco\" among this Spirit's pre-advent cards, for each Spirit returned by this effect, send an opposing Life to the Reserve. (Max. 3)",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -424,12 +767,32 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "PC02-X01#AB_FLASH_NONE_LV1_LV2_LV3_6199a77b710d4ef662afc031f15162a5535e6624caaa4dcb009ee63a9f4fa346_9f2a437dd3604a75b8afd804ab3f9297",
+          "cardNumber": "PC02-X01",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PC02-X01#a0"
         }
       ],
       "abilities": [
         {
-          "id": "PC02-X01#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -440,8 +803,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: Cloud Contract/Incarnate & C5 or more, (Either Attack Step)",
@@ -450,10 +820,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: Cloud Contract/Incarnate & C5 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -475,7 +849,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -493,10 +869,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC02-X01#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "Cloud Contract/Incarnate & C5 or more, (Either Attack Step)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PC02-X01#AB_FLASH_NONE_LV1_LV2_LV3_6199a77b710d4ef662afc031f15162a5535e6624caaa4dcb009ee63a9f4fa346_9f2a437dd3604a75b8afd804ab3f9297",
+              "cardNumber": "PC02-X01",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PC02-X01#a0"
+            }
+          ],
+          "id": "PC02-X01#AB_FLASH_NONE_LV1_LV2_LV3_6199a77b710d4ef662afc031f15162a5535e6624caaa4dcb009ee63a9f4fa346_9f2a437dd3604a75b8afd804ab3f9297",
+          "physicalId": "PC02-X01#AB_FLASH_NONE_LV1_LV2_LV3_6199a77b710d4ef662afc031f15162a5535e6624caaa4dcb009ee63a9f4fa346_9f2a437dd3604a75b8afd804ab3f9297",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_6199a77b710d4ef662afc031f15162a5535e6624caaa4dcb009ee63a9f4fa346_9f2a437dd3604a75b8afd804ab3f9297",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_17489e380f5f3a27aaa27e099eef6d3cf34692faeeaff2060cad232bd0045075_35b77fea9365659fa86dd4cb9463dd12",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC02-X01#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -506,8 +926,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Advents/Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -516,10 +947,14 @@
             "isMain": false,
             "cleanBody": "Your counter +1. Then, for every two counters you have, during this turn, an opposing Spirit can't attack/block."
           },
+          "originalAbilityText": "[LV1][LV2] (When Advents/Attacks)\nYour counter +1. Then, for every two counters you have, during this turn, an opposing Spirit can't attack/block.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Your counter +1.",
+              "originalClauseText": "Your counter +1.",
               "cleanText": "Your counter +1",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -532,7 +967,9 @@
             },
             {
               "rawText": "for every two counters you have, during this turn, an opposing Spirit can't attack/block.",
+              "originalClauseText": "for every two counters you have, during this turn, an opposing Spirit can't attack/block.",
               "cleanText": "for every two counters you have, during this turn, an opposing Spirit can't attack/block",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -543,10 +980,25 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC02-X01#a1",
+          "keywords": [],
+          "id": "PC02-X01#AB_WHEN_ADVENTS_NONE_LV1_LV2_e3670c103e84fe64015b5506d4a9375ffa1baae0dc2b0a53473fb84df687d9d6_a2bccf76a33b7e484faafc52092ee5f3",
+          "physicalId": "PC02-X01#AB_WHEN_ADVENTS_NONE_LV1_LV2_e3670c103e84fe64015b5506d4a9375ffa1baae0dc2b0a53473fb84df687d9d6_a2bccf76a33b7e484faafc52092ee5f3",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_e3670c103e84fe64015b5506d4a9375ffa1baae0dc2b0a53473fb84df687d9d6_a2bccf76a33b7e484faafc52092ee5f3",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_f4808c82c47a4f9187a9612dffdde2efe3758352af7258dc24b94e5efe616839_a4cb61278a13b83368d19eeeeae1ac5a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC02-X01#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -558,8 +1010,19 @@
               "During OC & During Advent"
             ],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -568,10 +1031,14 @@
             "isMain": false,
             "cleanBody": "return every opposing Spirit under the effect of \"can't block\" effects to the deckbottom. If there is any \"Choco\" among this Spirit's pre-advent cards, for each Spirit returned by this effect, send an opposing Life to the Reserve."
           },
+          "originalAbilityText": "[During OC & During Advent] [LV1][LV2] Flash- (When Attacks)\nOnce per turn, return every opposing Spirit under the effect of \"can't block\" effects to the deckbottom. If there is any \"Choco\" among this Spirit's pre-advent cards, for each Spirit returned by this effect, send an opposing Life to the Reserve. (Max. 3)",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "return every opposing Spirit under the effect of \"can't block\" effects to the deckbottom.",
+              "originalClauseText": "return every opposing Spirit under the effect of \"can't block\" effects to the deckbottom.",
               "cleanText": "return every opposing Spirit under the effect of \"can't block\" effects to the deckbottom",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -587,7 +1054,9 @@
             },
             {
               "rawText": "If there is any \"Choco\" among this Spirit's pre-advent cards, for each Spirit returned by this effect, send an opposing Life to the Reserve.",
+              "originalClauseText": "If there is any \"Choco\" among this Spirit's pre-advent cards, for each Spirit returned by this effect, send an opposing Life to the Reserve.",
               "cleanText": "for each Spirit returned by this effect, send an opposing Life to the Reserve",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -595,11 +1064,36 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC02-X01#a2",
+          "keywords": [],
+          "id": "PC02-X01#AB_WHEN_ATTACKS_NONE_LV1_LV2_e2fa8dddbe088f0707b4f0de07e8221b0186ca5e6f0e1b836e579646079c328d_d025a3738f4ed04f2405e5c7b62f4906",
+          "physicalId": "PC02-X01#AB_WHEN_ATTACKS_NONE_LV1_LV2_e2fa8dddbe088f0707b4f0de07e8221b0186ca5e6f0e1b836e579646079c328d_d025a3738f4ed04f2405e5c7b62f4906",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_e2fa8dddbe088f0707b4f0de07e8221b0186ca5e6f0e1b836e579646079c328d_d025a3738f4ed04f2405e5c7b62f4906",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_07072a462aed91a7b2b703163ae5b3a0df2bf76b0d5822b4a920f36264a773ed_d393c29d29be13ecd330a6b6a6f9aa71",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,

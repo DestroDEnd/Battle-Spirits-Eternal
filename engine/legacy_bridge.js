@@ -8,6 +8,7 @@ import { AsyncResolver, DefaultPromptResolver } from './resolver.js';
 import { EventBus } from './events.js';
 import { computeEffectiveBP, computeLevel } from './continuous.js';
 import { checkStateBasedActions } from './sba.js';
+import { ensureRestrictionState, syncLegacyToRestrictions } from './restrictions.js';
 
 const LEGACY_ZONES = ['deck', 'hand', 'trashCards', 'voidCards', 'openCards'];
 
@@ -28,36 +29,94 @@ function normalizeLevels(levels) {
   return Object.keys(normalized).length ? normalized : { 1: { cost: 1, bp: 1000 } };
 }
 
-function makeCardMapper() {
-  const byUid = new Map();
-  const legacyById = new Map();
+function deepCloneLegacyCard(raw) {
+  if (!raw || typeof raw !== 'object') {
+    throw new Error('Cannot clone non-object legacy card');
+  }
+  try {
+    return structuredClone(raw);
+  } catch {
+    const cloneValue = (val, seen = new WeakMap()) => {
+      if (val === null || typeof val !== 'object') return val;
+      if (seen.has(val)) return seen.get(val);
+      if (Array.isArray(val)) {
+        const arr = [];
+        seen.set(val, arr);
+        for (let i = 0; i < val.length; i++) {
+          arr[i] = cloneValue(val[i], seen);
+        }
+        return arr;
+      }
+      const copy = {};
+      seen.set(val, copy);
+      for (const [k, v] of Object.entries(val)) {
+        copy[k] = cloneValue(v, seen);
+      }
+      return copy;
+    };
+    return cloneValue(raw);
+  }
+}
 
-  function toEngine(raw, owner) {
+function makeCardMapper() {
+  const byInstanceKey = new Map();
+  const rawToEngineByOwner = new Map();
+  const claimedRawOwner = new WeakMap();
+  const legacyById = new Map();
+  let uidSeq = 1;
+
+  function toEngine(raw, owner = 'player') {
     if (!raw) return null;
-    const uid = raw.uid || raw.card_number || raw.cardNumber || `legacy-${byUid.size}`;
-    if (byUid.has(uid)) return byUid.get(uid);
+    if (!rawToEngineByOwner.has(owner)) {
+      rawToEngineByOwner.set(owner, new WeakMap());
+    }
+    const ownerMap = rawToEngineByOwner.get(owner);
+    if (ownerMap.has(raw)) {
+      return ownerMap.get(raw);
+    }
+
+    const firstOwner = claimedRawOwner.get(raw);
+    let legacyTarget = raw;
+    if (firstOwner && firstOwner !== owner) {
+      legacyTarget = deepCloneLegacyCard(raw);
+    } else if (!firstOwner) {
+      claimedRawOwner.set(raw, owner);
+    }
+
+    const baseUid = legacyTarget.uid ? String(legacyTarget.uid) : null;
+    let instanceUid = baseUid;
+    if (!instanceUid || byInstanceKey.has(`${owner}:${instanceUid}`)) {
+      instanceUid = baseUid
+        ? `${owner}:${baseUid}#${uidSeq++}`
+        : `legacy_${owner}_${uidSeq++}`;
+    }
+
     const card = createCardInstance({
-      ...raw,
-      card_number: raw.card_number || raw.cardNumber || raw.id || '',
-      levels: normalizeLevels(raw.levels),
-      families: raw.families || (raw.family ? [raw.family] : []),
-      colors: raw.colors || [raw.color || 'Red'],
-      compiledIr: raw.compiledIr || null
+      ...legacyTarget,
+      card_number: legacyTarget.card_number || legacyTarget.cardNumber || legacyTarget.id || '',
+      levels: normalizeLevels(legacyTarget.levels),
+      families: legacyTarget.families || (legacyTarget.family ? [legacyTarget.family] : []),
+      colors: legacyTarget.colors || [legacyTarget.color || 'Red'],
+      compiledIr: legacyTarget.compiledIr || null
     }, owner);
-    card.uid = uid;
+    card.uid = instanceUid;
     card.owner = owner;
-    card.currentOwner = raw.currentOwner || owner;
-    byUid.set(uid, card);
-    legacyById.set(card.id, raw);
+    card.currentOwner = legacyTarget.currentOwner || owner;
+    ownerMap.set(raw, card);
+    byInstanceKey.set(`${owner}:${instanceUid}`, card);
+    legacyById.set(card.id, legacyTarget);
     return card;
   }
 
   function toLegacy(card) {
     if (!card) return null;
-    return legacyById.get(card.id) || byUid.get(card.uid) && legacyById.get(byUid.get(card.uid).id) || null;
+    if (legacyById.has(card.id)) return legacyById.get(card.id);
+    const owner = card.owner || 'player';
+    const mapped = byInstanceKey.get(`${owner}:${card.uid}`);
+    return mapped ? legacyById.get(mapped.id) || null : null;
   }
 
-  return { byUid, legacyById, toEngine, toLegacy };
+  return { byUid: byInstanceKey, legacyById, toEngine, toLegacy };
 }
 
 function getLegacySoulCard(legacyPlayer) {
@@ -68,13 +127,14 @@ function getLegacySoulCard(legacyPlayer) {
 function copyLegacyCardState(engineCard, legacyCard) {
   if (!engineCard || !legacyCard) return;
   legacyCard.currentOwner = engineCard.currentOwner || engineCard.owner;
+  legacyCard.name = engineCard.name || legacyCard.name;
   legacyCard.type = engineCard.type;
   legacyCard.cost = engineCard.cost;
   legacyCard.color = Array.isArray(engineCard.colors) ? (engineCard.colors[0] || legacyCard.color) : legacyCard.color;
   legacyCard.colors = Array.isArray(engineCard.colors) ? [...engineCard.colors] : [legacyCard.color || 'Red'];
   legacyCard.family = engineCard.family || legacyCard.family || '';
   legacyCard.families = Array.isArray(engineCard.families) ? [...engineCard.families] : (engineCard.family ? [engineCard.family] : []);
-  legacyCard.levels = engineCard.levels;
+  legacyCard.levels = engineCard.levels ? deepCloneLegacyCard(engineCard.levels) : legacyCard.levels;
   legacyCard.compiledIr = engineCard.compiledIr || legacyCard.compiledIr || null;
   legacyCard.effect = engineCard.effect || legacyCard.effect || '';
 }
@@ -87,7 +147,25 @@ export function createEngineStateFromLegacy(duelState) {
   const legacyPhases = duelState.phases || [];
   const phase = legacyPhases[duelState.phaseIndex] || duelState.step || 'START';
   state.step = ['START', 'CORE', 'DRAW', 'REFRESH', 'MAIN', 'ATTACK', 'END'].includes(phase) ? phase : 'MAIN';
-  state.modifiers = Array.isArray(duelState.modifiers) ? [...duelState.modifiers] : [];
+  const initialMods = Array.isArray(duelState.modifiers) ? duelState.modifiers
+    : (Array.isArray(duelState.continuousEffects) ? duelState.continuousEffects : []);
+  state.modifiers = [...initialMods];
+  state.continuousEffects = state.modifiers;
+  state.combat = duelState.combat ? { ...duelState.combat } : null;
+  state.abilityUses = duelState.abilityUses ? { ...duelState.abilityUses } : {};
+  if (duelState.restrictions && typeof duelState.restrictions === 'object' && duelState.restrictions.counters) {
+    state.restrictions = JSON.parse(JSON.stringify(duelState.restrictions));
+  } else {
+    ensureRestrictionState(state);
+    syncLegacyToRestrictions(state);
+  }
+  state.usedStructuredAbilities = Array.isArray(duelState.usedStructuredAbilities)
+    ? [...duelState.usedStructuredAbilities]
+    : (duelState.usedStructuredAbilities && typeof duelState.usedStructuredAbilities === 'object'
+      ? { ...duelState.usedStructuredAbilities }
+      : null);
+  state.winner = duelState.winner ?? null;
+  state.winReason = duelState.winReason ?? null;
 
   for (const side of ['player', 'opponent']) {
     const legacy = duelState[side] || {};
@@ -96,43 +174,47 @@ export function createEngineStateFromLegacy(duelState) {
     const trashTotal = Math.max(0, Number(legacy.trash) || 0);
     const soulLocation = legacy.soulCoreLocation || 'reserve';
     player.life = Number(legacy.life ?? 5);
+    player.counters = Number(legacy.counters || 0);
+    player.extraTurns = Number(legacy.extraTurns || 0);
     player.reserve.soul = soulLocation === 'reserve' ? 1 : 0;
     player.reserve.normal = Math.max(0, reserveTotal - player.reserve.soul);
     player.trash.soul = soulLocation === 'trash' ? 1 : 0;
     player.trash.normal = Math.max(0, trashTotal - player.trash.soul);
-    player.deck = (legacy.deck || []).map(card => mapper.toEngine(card, side));
-    player.hand = (legacy.hand || []).map(card => mapper.toEngine(card, side));
-    player.grave = (legacy.trashCards || legacy.grave || []).map(card => mapper.toEngine(card, side));
-    player.removed = [...(legacy.voidCards || []), ...(legacy.openCards || [])]
-      .map(card => mapper.toEngine(card, side));
+    player.deck = (legacy.deck || []).map(card => mapper.toEngine(card, side)).filter(Boolean);
+    player.hand = (legacy.hand || []).map(card => mapper.toEngine(card, side)).filter(Boolean);
+    player.grave = (legacy.trashCards || legacy.grave || []).map(card => mapper.toEngine(card, side)).filter(Boolean);
+    player.removed = (legacy.voidCards || []).map(card => mapper.toEngine(card, side)).filter(Boolean);
+    player.openCards = (legacy.openCards || []).map(card => mapper.toEngine(card, side)).filter(Boolean);
     player.burst = mapper.toEngine(legacy.burst || legacy.burstCard, side);
     player.mirage = mapper.toEngine(legacy.mirage, side);
-    player.nexus = (legacy.nexus || legacy.nexusCards || []).map(card => mapper.toEngine(card, side));
-    player.revealed = [];
+    player.nexus = (legacy.nexus || legacy.nexusCards || []).map(card => mapper.toEngine(card, side)).filter(Boolean);
+    player.revealed = (legacy.revealed || legacy.revealedCards || []).map(card => mapper.toEngine(card, side)).filter(Boolean);
     player.burstSetThisTurn = Boolean(legacy.burstSetThisTurn);
     player.mirageSetThisTurn = Boolean(legacy.mirageSetThisTurn);
 
     const allFieldCards = [...(legacy.field || []), ...(legacy.nexus || legacy.nexusCards || [])];
-    const seen = new Set();
+    const seenRaw = new Set();
+    const seenCardIds = new Set();
     for (const raw of allFieldCards) {
-      if (!raw) continue;
-      const uid = raw.uid || raw.card_number || raw.cardNumber;
-      if (seen.has(uid)) continue;
-      seen.add(uid);
+      if (!raw || seenRaw.has(raw)) continue;
+      seenRaw.add(raw);
       const card = mapper.toEngine(raw, side);
+      if (!card || seenCardIds.has(card.id)) continue;
+      seenCardIds.add(card.id);
       const soulUid = getLegacySoulCard(legacy);
-      const hasSoul = Boolean(raw.hasSoulCore || raw.hasSoul || (soulUid && soulUid === uid));
+      const hasSoul = Boolean(raw.hasSoulCore || raw.hasSoul || (soulUid && (soulUid === raw.uid || soulUid === card.uid)));
       const totalCores = Math.max(0, Number(raw.currentCores ?? raw.cores ?? (raw.type?.includes('Nexus') ? 1 : 0)) || 0);
       const stack = createFieldStack(card, {
         normal: Math.max(0, totalCores - (hasSoul ? 1 : 0)),
         soul: hasSoul ? 1 : 0
-      });
-      stack.id = `stack_${uid}`;
+      }, [], { placementId: raw.placementId || card.placementId });
+      stack.id = `stack_${card.id}`;
       stack.owner = side;
       stack.state = raw.isExhausted ? 'EXHAUSTED' : (raw.isHeavyExhausted ? 'HEAVY_EXHAUSTED' : 'REFRESHED');
       stack.isSoulState = Boolean(raw.isSoulState);
-      stack.braves = (raw.braves || (raw.brave ? [raw.brave] : [])).map(brave => mapper.toEngine(brave, side));
-      stack.under = (raw.under || raw.preAdventCards || []).map(under => mapper.toEngine(under, side));
+      stack.bonusLevel = Number(raw.bonusLevel || 0);
+      stack.braves = (raw.braves || (raw.brave ? [raw.brave] : [])).map(brave => mapper.toEngine(brave, side)).filter(Boolean);
+      stack.under = (raw.under || raw.preAdventCards || []).map(under => mapper.toEngine(under, side)).filter(Boolean);
       player.field.push(stack);
     }
   }
@@ -146,6 +228,10 @@ export function syncEngineStateToLegacy(state, duelState, mapper) {
     const legacy = duelState[side];
     if (!legacy) continue;
     legacy.life = enginePlayer.life;
+    legacy.counters = Number(enginePlayer.counters || 0);
+    legacy.extraTurns = Number(enginePlayer.extraTurns || 0);
+    legacy.burstSetThisTurn = Boolean(enginePlayer.burstSetThisTurn);
+    legacy.mirageSetThisTurn = Boolean(enginePlayer.mirageSetThisTurn);
     legacy.reserve = enginePlayer.reserve.normal + enginePlayer.reserve.soul;
     legacy.trash = enginePlayer.trash.normal + enginePlayer.trash.soul;
     if (enginePlayer.reserve.soul > 0) {
@@ -165,6 +251,13 @@ export function syncEngineStateToLegacy(state, duelState, mapper) {
     legacy.hand = copyZone('hand');
     legacy.trashCards = copyZone('grave');
     legacy.voidCards = copyZone('removed');
+    if (Array.isArray(enginePlayer.openCards) || Array.isArray(legacy.openCards)) {
+      legacy.openCards = copyZone('openCards');
+    }
+    legacy.revealed = copyZone('revealed');
+    if (Array.isArray(legacy.revealedCards)) {
+      legacy.revealedCards = legacy.revealed;
+    }
     legacy.burst = mapper.toLegacy(enginePlayer.burst);
     legacy.mirage = mapper.toLegacy(enginePlayer.mirage);
 
@@ -177,13 +270,27 @@ export function syncEngineStateToLegacy(state, duelState, mapper) {
       const hasSoul = Boolean(stack.cores.soul);
       const totalCores = (stack.cores.normal || 0) + (hasSoul ? 1 : 0);
       card.currentCores = totalCores;
+      card.placementId = stack.placementId;
       card.hasSoulCore = hasSoul;
       card.isExhausted = stack.state !== 'REFRESHED';
       card.isHeavyExhausted = stack.state === 'HEAVY_EXHAUSTED';
       card.isSoulState = Boolean(stack.isSoulState);
+      card.bonusLevel = Number(stack.bonusLevel || 0);
       card.currentLevel = computeLevel(stack, state);
       card.currentBp = computeEffectiveBP(state, stack);
-      card.braves = (stack.braves || []).map(brave => mapper.toLegacy(brave)).filter(Boolean);
+      card.braves = (stack.braves || []).map(brave => {
+        const lb = mapper.toLegacy(brave);
+        copyLegacyCardState(brave, lb);
+        return lb;
+      }).filter(Boolean);
+      card.under = (stack.under || []).map(under => {
+        const lu = mapper.toLegacy(under);
+        copyLegacyCardState(under, lu);
+        return lu || under;
+      }).filter(Boolean);
+      if (Array.isArray(card.preAdventCards)) {
+        card.preAdventCards = [...card.under];
+      }
       if (hasSoul) {
         legacy.soulCoreLocation = 'field';
         legacy.soulCoreSpiritUid = card.uid;
@@ -195,10 +302,51 @@ export function syncEngineStateToLegacy(state, duelState, mapper) {
     legacy.nexus = nexusCards;
     legacy.nexusCards = nexusCards;
     legacy.modifiers = state.modifiers;
+    legacy.continuousEffects = state.modifiers;
   }
   duelState.turn = state.turnNumber;
   duelState.activePlayer = state.activePlayer;
+  duelState.combat = state.combat ? { ...state.combat } : null;
+  duelState.abilityUses = state.abilityUses ? { ...state.abilityUses } : {};
+  if (state.restrictions) {
+    duelState.restrictions = JSON.parse(JSON.stringify(state.restrictions));
+  }
+  if (state.usedStructuredAbilities !== null && state.usedStructuredAbilities !== undefined) {
+    duelState.usedStructuredAbilities = Array.isArray(state.usedStructuredAbilities)
+      ? [...state.usedStructuredAbilities]
+      : { ...state.usedStructuredAbilities };
+  }
+  duelState.winner = state.winner ?? null;
+  duelState.winReason = state.winReason ?? null;
   duelState.modifiers = state.modifiers;
+  duelState.continuousEffects = state.modifiers;
+}
+
+export function pruneLegacyModifiers(duelState, expiryScope = 'BATTLE') {
+  if (!duelState) return;
+  const mods = Array.isArray(duelState.modifiers) ? duelState.modifiers
+    : (Array.isArray(duelState.continuousEffects) ? duelState.continuousEffects : []);
+  let filtered = mods;
+  if (expiryScope === 'BATTLE') {
+    filtered = mods.filter(m =>
+      m.duration !== 'THIS_BATTLE' && m.duration !== 'UNTIL_END_OF_BATTLE' &&
+      m.duration !== 'THIS_STEP' && m.duration !== 'UNTIL_END_OF_STEP'
+    );
+  } else if (expiryScope === 'TURN') {
+    filtered = mods.filter(m =>
+      m.duration !== 'THIS_TURN' && m.duration !== 'UNTIL_END_OF_TURN' &&
+      m.duration !== 'THIS_BATTLE' && m.duration !== 'UNTIL_END_OF_BATTLE' &&
+      m.duration !== 'THIS_STEP' && m.duration !== 'UNTIL_END_OF_STEP'
+    );
+  }
+  duelState.modifiers = filtered;
+  duelState.continuousEffects = filtered;
+  for (const side of ['player', 'opponent']) {
+    if (duelState[side]) {
+      duelState[side].modifiers = filtered;
+      duelState[side].continuousEffects = filtered;
+    }
+  }
 }
 
 function selectionKey(item) {
@@ -234,6 +382,15 @@ function bridgePrompt(prompt, mapper, promptResolver) {
 
 export async function resolveLegacyAbility(duelState, legacySourceCard, ability, controller = 'player', options = {}) {
   if (!duelState || !legacySourceCard || !ability) return { success: false, reason: 'INVALID_LEGACY_EFFECT_CONTEXT' };
+  const prefixes = (ability?.header?.prefixes || []).map(p => String(p).toLowerCase());
+  const bypassLevelCheck = (Boolean(legacySourceCard.isSoulState) && prefixes.some(p => p.includes('soul state'))) ||
+    Boolean(options?.context?.isContractPreAdvent) || prefixes.some(p => p.includes('contract pre-advent'));
+  if (!bypassLevelCheck && Array.isArray(ability?.header?.levels) && ability.header.levels.length > 0) {
+    const curLevel = Number(legacySourceCard.currentLevel || 1);
+    if (!ability.header.levels.includes(curLevel)) {
+      return { success: false, reason: 'ABILITY_LEVEL_MISMATCH' };
+    }
+  }
   const { state, mapper } = createEngineStateFromLegacy(duelState);
   const sourceCard = mapper.toEngine(legacySourceCard, controller);
   const sourceStack = state.players[controller].field.find(stack => stack.top.id === sourceCard?.id) || null;
@@ -245,6 +402,7 @@ export async function resolveLegacyAbility(duelState, legacySourceCard, ability,
     controller,
     sourceCard,
     sourceStack,
+    placementId: sourceStack?.placementId || legacySourceCard.placementId || (sourceCard?.id ? `p_${sourceCard.id}` : null),
     legacySourceCard
   }, events);
   await checkStateBasedActions(state, events);

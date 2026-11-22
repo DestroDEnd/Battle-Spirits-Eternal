@@ -1,0 +1,279 @@
+[
+  {
+    "id": "01_card_and_zone_operations",
+    "name": "Card and Zone Operations",
+    "familyKey": "CARD_AND_ZONE_OPERATIONS",
+    "batch": 1,
+    "summary": "Handles all physical and logical card movement across field, hand, trash, deck, and burst zones.",
+    "implementedVariants": [
+      "SUMMON::default",
+      "SUMMON::cost_gated",
+      "SUMMON::free",
+      "SUMMON_THIS_CARD::default",
+      "DEPLOY_NEXUS::default",
+      "DESTROY::default",
+      "DESTROY::bp_gated",
+      "DESTROY::cost_gated",
+      "BOUNCE::hand",
+      "BOUNCE::deck_bottom",
+      "BOUNCE::deck_top",
+      "BOUNCE::to_grave",
+      "BOUNCE_TO_DECKBOTTOM::default",
+      "RETURN_DECK_BOTTOM::default",
+      "PUT_CARD_ON_FIELD::default",
+      "BANISH::default",
+      "BANISH_HAND::default",
+      "BANISH_TRASH::default",
+      "ATTACH_CARD::default"
+    ],
+    "unsupportedVariants": [
+      "RESURRECT_OPPONENT_CARD",
+      "REMOVE_FROM_GAME_FACE_DOWN"
+    ],
+    "verification": "tests/real_cards_17_strengthened_regression.test.js, tests/work_package_hij_real_cards_e2e.test.js"
+  },
+  {
+    "id": "02_core_and_resource_operations",
+    "name": "Core and Resource Operations",
+    "familyKey": "CORE_AND_RESOURCE_OPERATIONS",
+    "batch": 2,
+    "summary": "Guarantees core conservation while supporting normal core, Soul Core, Reserve, and Life transfers.",
+    "implementedVariants": [
+      "MOVE_CORE::reserve_to_field",
+      "MOVE_CORE::field_to_reserve",
+      "MOVE_CORE::to_trash",
+      "MOVE_SOUL_CORE::reserve_to_field",
+      "MOVE_SOUL_CORE::field_to_trash",
+      "SWAP_CORES::default",
+      "EXCHANGE_CORE::default",
+      "RETRIEVE_CORES::trash_to_reserve",
+      "CORE_CHARGE::grandwalker",
+      "PAY_COST::normal",
+      "PAY_COST::with_soul_core",
+      "COST_MODIFIER::reduction",
+      "SEND_CORES_TO_VOID::field",
+      "BOOST_LIFE::reserve_to_life",
+      "SEND_LIFE_TO_VOID::default"
+    ],
+    "unsupportedVariants": [
+      "LOCK_OPPONENT_RESERVE_PERMANENT"
+    ],
+    "verification": "tests/core_game_rules_integrity_corrective.test.js, tests/work_package_hij2_runtime_atomicity.test.js"
+  },
+  {
+    "id": "03_deck_and_hand_operations",
+    "name": "Deck and Hand Operations",
+    "familyKey": "DECK_AND_HAND_OPERATIONS",
+    "batch": 2,
+    "summary": "Manages drawing, milling, revealing, and searching cards with strict zone conservation.",
+    "implementedVariants": [
+      "DRAW::count",
+      "DRAW::conditional",
+      "MILL::self",
+      "MILL::opponent",
+      "MILL::heavy_mill",
+      "REVEAL_DECKTOP::single",
+      "REVEAL_DECKTOP::multiple",
+      "LOOK_AT_DECK::default",
+      "LOOK_DECKTOP::default",
+      "DISCARD::hand",
+      "DISCARD_ZONE::field",
+      "SALVAGE::trash_to_hand",
+      "SEARCH_DECK::filtered_to_hand",
+      "RETURN_DECK_BOTTOM::default"
+    ],
+    "unsupportedVariants": [
+      "REORDER_ENTIRE_DECK_INTERACTIVE"
+    ],
+    "verification": "tests/work_package_hij_real_cards_e2e.test.js, tests/effect_execution_targeting_conditions.test.js"
+  },
+  {
+    "id": "04_bp_and_combat_operations",
+    "name": "BP and Combat Operations",
+    "familyKey": "BP_AND_COMBAT_OPERATIONS",
+    "batch": 1,
+    "summary": "Applies dynamic BP modifications, manages attack/block states, exhaustion, and refresh.",
+    "implementedVariants": [
+      "BP_BUFF::fixed",
+      "BP_BUFF::formula",
+      "BP_BUFF::per_core",
+      "BP_BUFF::per_nexus",
+      "BP_DEBUFF::fixed",
+      "BP_DEBUFF::formula",
+      "SET_BP::override",
+      "EXCHANGE_BP::default",
+      "SWITCH_BP::default",
+      "EXHAUST::target",
+      "EXHAUST::self",
+      "REFRESH::target",
+      "REFRESH::self",
+      "CANNOT_REFRESH::duration",
+      "FORCE_ATTACK::default",
+      "FORCE_BLOCK::default",
+      "CHOOSE_BLOCKER::default",
+      "TARGET_ATTACK::default",
+      "UNBLOCKABLE::default",
+      "PIERCING::default"
+    ],
+    "unsupportedVariants": [
+      "MULTI_STAGE_VARIABLE_BP_SWAP"
+    ],
+    "verification": "tests/timing_triggers_continuous_sba.test.js, tests/phase3_continuous_and_cost_gating.test.js"
+  },
+  {
+    "id": "05_targeting_and_decision_operations",
+    "name": "Targeting and Decision Operations",
+    "familyKey": "TARGETING_AND_DECISION_OPERATIONS",
+    "batch": 3,
+    "summary": "Orchestrates interactive card, color, level, and branch choices through InteractionController.",
+    "implementedVariants": [
+      "TARGET::single",
+      "TARGET::multiple",
+      "TARGET_SELECT::filtered",
+      "SELECT_TARGET::self",
+      "TARGET_CARDS::up_to",
+      "CHOOSE_TARGETS::cost_bounded",
+      "CHOOSE_TARGETS::bp_bounded",
+      "CHOOSE_COLOR::standard",
+      "CHOOSE_COLOR::from_field",
+      "CHOOSE_LEVEL::default",
+      "CHOOSE_FAMILY::default",
+      "OPPONENT_CHOICE::two_branch",
+      "REDIRECT_TARGET::default"
+    ],
+    "unsupportedVariants": [
+      "ARBITRARY_MULTI_PLAYER_AUCTION"
+    ],
+    "verification": "tests/effect_execution_targeting_conditions.test.js, tests/interaction_protocol.test.js"
+  },
+  {
+    "id": "06_conditions_and_restrictions",
+    "name": "Conditions and Restrictions",
+    "familyKey": "CONDITIONS_AND_RESTRICTIONS",
+    "batch": 3,
+    "summary": "Evaluates structured state predicates and enforces once-per-turn activation budgets.",
+    "implementedVariants": [
+      "PLAY_CONDITION::level",
+      "PLAY_CONDITION::cost",
+      "RESTRICTION::cannot_summon",
+      "RESTRICTION::cannot_draw",
+      "GLOBAL_RESTRICTION::deck_immunity",
+      "COMBAT_RESTRICTION::cannot_attack",
+      "IMMUNITY::color",
+      "IMMUNITY::spirit_magic",
+      "INDESTRUCTIBLE::bp_comparison",
+      "NEGATE_EFFECT::magic",
+      "PREVENT_DAMAGE::life",
+      "LIMIT_ONCE_PER_TURN::placement",
+      "LIMIT_ONCE_PER_TURN::same_name",
+      "NON_STACKABLE::default"
+    ],
+    "unsupportedVariants": [
+      "RETROACTIVE_TURN_REWIND"
+    ],
+    "verification": "tests/work_package_k1_batch_02_conditions.test.js, tests/core_game_rules_integrity_corrective.test.js"
+  },
+  {
+    "id": "07_continuous_timing_and_trigger_operations",
+    "name": "Continuous, Timing, and Trigger Operations",
+    "familyKey": "CONTINUOUS_TIMING_AND_TRIGGER_OPERATIONS",
+    "batch": 3,
+    "summary": "Schedules persistent modifiers, event watchers, and manages step/turn boundaries.",
+    "implementedVariants": [
+      "CONTINUOUS_RULE::passive_buff",
+      "REPLACEMENT_EFFECT::remain_on_field",
+      "REPLACEMENT_EFFECT::life_to_reserve",
+      "TRIGGERED_WATCHER::on_destroy",
+      "TRIGGER_CONDITION::when_attacks",
+      "ACTIVATE_TRIGGER::burst",
+      "TIMING_MODIFIER::flash_window",
+      "STEP_MODIFIER::extra_step",
+      "END_STEP::immediate",
+      "END_TURN::immediate"
+    ],
+    "unsupportedVariants": [
+      "PARALLEL_TURN_EXECUTION"
+    ],
+    "verification": "tests/work_package_k1_batch_05_complex_effects.test.js, tests/timing_triggers_continuous_sba.test.js"
+  },
+  {
+    "id": "08_specialized_mechanics",
+    "name": "Specialized Mechanics",
+    "familyKey": "SPECIALIZED_MECHANICS",
+    "batch": 4,
+    "summary": "Delivers high-complexity game mechanics: Advent, Burst, Mirage, Rebirth, and Tokens.",
+    "implementedVariants": [
+      "ADVENT::standard",
+      "ADVENT::contract",
+      "ADVENT_COST::soul_core",
+      "ADVENT_PAY::reserve_to_field",
+      "ADVENT_STACK::pre_advent_underneath",
+      "ACTIVATE_BURST::life_decreased",
+      "ACTIVATE_BURST::opponent_summon",
+      "MIRAGE_SET::from_hand",
+      "ACTIVATE_REBIRTH::conditional_flip",
+      "REBIRTH_FLIP::dual_side",
+      "ENTER_SOUL_STATE::default",
+      "BUNSHIN_SUMMON::deck_to_field",
+      "TOKEN_DEPLOYMENT::named_token",
+      "GRANDWALKER_CORE_RULE::core_charge",
+      "ACTIVATE_SOUL_DRIVE::banish_soul_core"
+    ],
+    "unsupportedVariants": [
+      "MULTI_DECK_TEAM_ADVENT"
+    ],
+    "verification": "tests/work_package_k1_batch_03_keywords_prerequisites.test.js, tests/work_package_hij1_operation_variants.test.js"
+  },
+  {
+    "id": "09_keyword_abilities",
+    "name": "Keyword Abilities",
+    "familyKey": "KEYWORD_ABILITIES",
+    "batch": 4,
+    "summary": "Implements named combat and resource keyword hooks registered in the Keyword Registry.",
+    "implementedVariants": [
+      "ACTIVATE_KEYWORD::clash",
+      "ACTIVATE_KEYWORD::armor",
+      "ACTIVATE_KEYWORD::heavy_armor",
+      "ACTIVATE_KEYWORD::rush",
+      "ACTIVATE_KEYWORD::curse",
+      "ACTIVATE_KEYWORD::crush",
+      "ACTIVATE_KEYWORD::holy_life",
+      "ACTIVATE_KEYWORD::u_trigger",
+      "ACTIVATE_KEYWORD::core_charge",
+      "ACTIVATE_KEYWORD::high_speed",
+      "ACTIVATE_KEYWORD::accel",
+      "ACTIVATE_KEYWORD::change",
+      "KEYWORD_RULE::unblockable_if_clash",
+      "KEYWORD_ABILITY::grant_keyword"
+    ],
+    "unsupportedVariants": [
+      "UNOFFICIAL_THIRD_PARTY_KEYWORDS"
+    ],
+    "verification": "tests/keyword_registry.test.js, tests/work_package_k1_batch_03_keywords_prerequisites.test.js"
+  },
+  {
+    "id": "10_system_and_attribute_operations",
+    "name": "System and Attribute Operations",
+    "familyKey": "SYSTEM_AND_ATTRIBUTE_OPERATIONS",
+    "batch": 4,
+    "summary": "Modifies card symbols, colors, families, counters, and provides engine copy primitives.",
+    "implementedVariants": [
+      "ADD_COLOR::single",
+      "ADD_COLOR::multi",
+      "ADD_SYMBOL::color_symbol",
+      "ADD_FAMILY::grant_family",
+      "ADD_COUNTER::core_count",
+      "TREAT_AS_VANILLA::lose_effects",
+      "TREAT_CORE_COUNT::virtual_count",
+      "TREAT_COST::virtual_cost",
+      "GAIN_TEAM::diva_team",
+      "TEAM_RULE::team_buff",
+      "COPY_ABILITY::on_field",
+      "COUNT_OPERATION::zone_count"
+    ],
+    "unsupportedVariants": [
+      "CROSS_MATCH_EXTERNAL_IMPORT"
+    ],
+    "verification": "tests/work_package_hij1_operation_variants.test.js, tests/work_package_hij_real_cards_e2e.test.js"
+  }
+]

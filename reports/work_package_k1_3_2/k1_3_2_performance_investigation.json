@@ -1,0 +1,28 @@
+{
+  "testFile": "tests/work_package_de_operations_and_cards.test.js",
+  "testName": "WPDE-PERF-01",
+  "lineRange": "319-338",
+  "thresholdMs": 500,
+  "measurementScope": {
+    "excludesNodeStartupAndImports": true,
+    "excludes200UnitSetup": true,
+    "includesExecuteOpDestroy200": true,
+    "includes50ComputeEffectiveBP": true
+  },
+  "coldFirstRunMs": 322.6365,
+  "coldDestroy200Ms": 322.2926,
+  "coldBp50Ms": 0.3439,
+  "warmupIterations": 10,
+  "measuredIterations": 30,
+  "stats": {
+    "minMs": 58.3053,
+    "maxMs": 205.1152,
+    "meanMs": 109.839,
+    "medianMs": 98.2286,
+    "stdDevMs": 35.4418,
+    "p95Ms": 184.136,
+    "thresholdViolations": 0
+  },
+  "priorK1_3_1ObservedFailureMs": 553.13,
+  "rootCauseAnalysis": "Almost all elapsed time is inside executeOp(DESTROY, 200 targets) which processes 200 stack destructions sequentially (zone lookup, moveCard, core cleanup, and event emission per stack). Warmed runs are fast, whereas cold/contended runs can exceed 500ms."
+}

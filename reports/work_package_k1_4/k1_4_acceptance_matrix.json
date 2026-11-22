@@ -1,0 +1,35 @@
+{
+    "package":  "K.1.4",
+    "readinessDecision":  "READY_WITH_LIMITED_CONDITIONS",
+    "conditions":  [
+                       "WPDE-PERF-01 passed inside tests/run_all.js but still exceeded 500ms in 3/5 cold fresh-process runs (929.02ms max).",
+                       "Historical audit preservation tests (K.1.3.1-K.1.3.4) detect expected hash changes on engine/index.js \u0026 engine/zones.js modified by K.1.4.",
+                       "18 Release/True Release declarations, 228 manual-review exclusions, and 59 ambiguous display candidates remain isolated in k1_4_unresolved_inventory.json."
+                   ],
+    "gates":  [
+                  {
+                      "gate":  "Timing identity",
+                      "status":  "PASS (34/34 collisions resolved by V3; 0 remaining)"
+                  },
+                  {
+                      "gate":  "Runtime prerequisites",
+                      "status":  "PASS (Brave Condition \u0026 Summon Condition enforced in playCard)"
+                  },
+                  {
+                      "gate":  "Keyword integration",
+                      "status":  "PARTIAL (Mirage set enforced in playCard; Release parsed, awaiting step trigger)"
+                  },
+                  {
+                      "gate":  "Team restrictions",
+                      "status":  "PASS (compiler/index.js TEAM_RESTRICTION + card.teams + hasTeam)"
+                  },
+                  {
+                      "gate":  "Batch 1 (8 core ops)",
+                      "status":  "PASS (6,610 abilities; all 8 core ops real-card verified)"
+                  },
+                  {
+                      "gate":  "Performance",
+                      "status":  "CONDITIONAL (run_all.js PASS; 3/5 fresh cold runs \u003e 500ms)"
+                  }
+              ]
+}

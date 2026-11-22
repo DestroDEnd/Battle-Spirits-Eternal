@@ -1,0 +1,129 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BattleSpiritsEternalStructuredExecutionEvidence",
+  "description": "Formal JSON Schema for Phase K Structured Execution Evidence Records",
+  "type": "object",
+  "required": [
+    "evidenceId",
+    "testId",
+    "testSuite",
+    "cardNumber",
+    "physicalAbilityId",
+    "opcode",
+    "controller",
+    "executionTimestamp",
+    "executionResult",
+    "assertionResult",
+    "evidenceTier"
+  ],
+  "properties": {
+    "evidenceId": {
+      "type": "string",
+      "pattern": "^EVID-[A-Z0-9_]+-[0-9]+-[0-9a-fA-F]+$"
+    },
+    "testId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "testSuite": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cardNumber": {
+      "type": "string",
+      "pattern": "^[0-9A-Za-z]+-[0-9A-Za-z]+$"
+    },
+    "physicalCardInstanceId": {
+      "type": ["string", "null"]
+    },
+    "physicalAbilityId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "semanticAbilityId": {
+      "type": ["string", "null"]
+    },
+    "compiledAbilityId": {
+      "type": ["string", "null"]
+    },
+    "opcode": {
+      "type": "string",
+      "pattern": "^[A-Z0-9_]+$"
+    },
+    "opcodeVariant": {
+      "type": "string"
+    },
+    "controller": {
+      "type": "string",
+      "enum": ["player", "opponent", "both"]
+    },
+    "sourceZone": {
+      "type": ["string", "null"],
+      "enum": ["deck", "hand", "field", "trash", "grave", "void", "life", "burst", "mirage", "removed", "openCards", null]
+    },
+    "sourceCard": {
+      "type": ["object", "null"]
+    },
+    "targetCard": {
+      "type": ["object", "null"]
+    },
+    "targetSelection": {
+      "type": ["array", "object", "null"]
+    },
+    "beforeState": {
+      "type": "object"
+    },
+    "afterState": {
+      "type": "object"
+    },
+    "expectedStateTransition": {
+      "type": "object"
+    },
+    "actualStateTransition": {
+      "type": "object"
+    },
+    "executionResult": {
+      "type": "object",
+      "required": ["success", "status"],
+      "properties": {
+        "success": { "type": "boolean" },
+        "status": { "type": "string" },
+        "reason": { "type": ["string", "null"] }
+      }
+    },
+    "assertionResult": {
+      "type": "object",
+      "required": ["passed", "assertedProperties"],
+      "properties": {
+        "passed": { "type": "boolean" },
+        "assertedProperties": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "failureDetails": { "type": ["string", "null"] }
+      }
+    },
+    "evidenceTier": {
+      "type": "string",
+      "enum": [
+        "NOT_IMPLEMENTED",
+        "COMPILER_ONLY",
+        "HANDLER_PRESENT",
+        "INTEGRATION_VERIFIED",
+        "SEMANTICALLY_VERIFIED",
+        "RULE_INTEGRATION_VERIFIED",
+        "BLOCKED_UNSUPPORTED_DEPENDENCY",
+        "VANILLA"
+      ]
+    },
+    "executionTimestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "durationMs": {
+      "type": "number",
+      "minimum": 0
+    }
+  },
+  "additionalProperties": false
+}

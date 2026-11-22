@@ -1,0 +1,1486 @@
+{
+  "DRAW": {
+    "op": "DRAW",
+    "supportedParamSchema": {
+      "required": [],
+      "optional": [
+        "count",
+        "side",
+        "amount"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'DRAW'",
+    "handlerPresent": true,
+    "variants": {
+      "DRAW:default": {
+        "testFile": "tests/effect_execution_targeting_conditions.test.js",
+        "testIds": [
+          "OPS-PRIORITY-01"
+        ],
+        "testedSuccessBehavior": "Draws N cards from deck to hand and emits CARD_DRAWN",
+        "testedRejectionBehavior": "Handles empty deck / deck-out without inventing cards",
+        "stateInvariantsAsserted": [
+          "card_conservation",
+          "zone_exclusivity"
+        ],
+        "eventBehaviorAsserted": [
+          "CARD_DRAWN"
+        ],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "OPS-PRIORITY-01: DESTROY excludes protected targets, BOUNCE supports grave/deck_bottom, DRAW emits CARD_DRAWN"
+        ]
+      }
+    },
+    "evidenceStatus": "SEMANTICALLY_VERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "DESTROY": {
+    "op": "DESTROY",
+    "supportedParamSchema": {
+      "required": [
+        "target"
+      ],
+      "optional": [
+        "count",
+        "filter",
+        "isCost"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'DESTROY'",
+    "handlerPresent": true,
+    "variants": {
+      "DESTROY:default": {
+        "testFile": "tests/effect_execution_targeting_conditions.test.js",
+        "testIds": [
+          "OPS-PRIORITY-01",
+          "PERF-TARGET-01"
+        ],
+        "testedSuccessBehavior": "Destroys legal targets, respects IMMUNITY/PROTECTION, sends stack+cores properly",
+        "testedRejectionBehavior": "Skips protected targets, returns NO_LEGAL_TARGETS when empty",
+        "stateInvariantsAsserted": [
+          "card_conservation",
+          "core_conservation",
+          "protection_check"
+        ],
+        "eventBehaviorAsserted": [
+          "DESTROYED",
+          "CARD_MOVED"
+        ],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "OPS-PRIORITY-01: DESTROY excludes protected targets, BOUNCE supports grave/deck_bottom, DRAW emits CARD_DRAWN",
+          "PERF-TARGET-01: 200-candidate resolveTargets, multi-target DESTROY, and 1,000 BP recalculations finish quickly"
+        ]
+      }
+    },
+    "evidenceStatus": "SEMANTICALLY_VERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "BOUNCE": {
+    "op": "BOUNCE",
+    "supportedParamSchema": {
+      "required": [
+        "target"
+      ],
+      "optional": [
+        "destination",
+        "to",
+        "count"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [
+      "BOUNCE:deck_ambiguous"
+    ],
+    "productionHandlerRef": "engine/ops/index.js:case 'BOUNCE'",
+    "handlerPresent": true,
+    "variants": {
+      "BOUNCE:hand": {
+        "testFile": "tests/phase4b2_destroy_bounce.test.js",
+        "testIds": [
+          "9.1 BOUNCE with all: true"
+        ],
+        "testedSuccessBehavior": "Returns target Spirit to owner hand and cores to reserve",
+        "testedRejectionBehavior": "Fails closed on protected targets or missing target",
+        "stateInvariantsAsserted": [
+          "card_conservation",
+          "core_conservation"
+        ],
+        "eventBehaviorAsserted": [
+          "CARD_MOVED"
+        ],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "9.1 BOUNCE with all: true bounces all matching spirits simultaneously without prompting"
+        ]
+      },
+      "BOUNCE:deck_bottom": {
+        "testFile": "tests/effect_execution_targeting_conditions.test.js",
+        "testIds": [
+          "OPS-PRIORITY-01"
+        ],
+        "testedSuccessBehavior": "Returns target to bottom of owner deck",
+        "testedRejectionBehavior": "Rejects ambiguous DECK without top/bottom",
+        "stateInvariantsAsserted": [
+          "card_conservation",
+          "core_conservation"
+        ],
+        "eventBehaviorAsserted": [
+          "CARD_MOVED"
+        ],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "OPS-PRIORITY-01: DESTROY excludes protected targets, BOUNCE supports grave/deck_bottom, DRAW emits CARD_DRAWN"
+        ]
+      },
+      "BOUNCE:grave": {
+        "testFile": "tests/effect_execution_targeting_conditions.test.js",
+        "testIds": [
+          "OPS-PRIORITY-01"
+        ],
+        "testedSuccessBehavior": "Sends target to owner grave",
+        "testedRejectionBehavior": "Fails closed when no legal targets",
+        "stateInvariantsAsserted": [
+          "card_conservation",
+          "core_conservation"
+        ],
+        "eventBehaviorAsserted": [
+          "CARD_MOVED"
+        ],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "OPS-PRIORITY-01: DESTROY excludes protected targets, BOUNCE supports grave/deck_bottom, DRAW emits CARD_DRAWN"
+        ]
+      },
+      "BOUNCE:deck_top": {
+        "testFile": "tests/phase4b2_destroy_bounce.test.js",
+        "testIds": [
+          "5.1 BOUNCE to deck_top"
+        ],
+        "testedSuccessBehavior": "Returns target to top of owner deck",
+        "testedRejectionBehavior": "Fails closed when no legal targets",
+        "stateInvariantsAsserted": [
+          "card_conservation"
+        ],
+        "eventBehaviorAsserted": [
+          "CARD_MOVED"
+        ],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "5.1 BOUNCE to deck_top places single card at index 0 of owner deck"
+        ]
+      }
+    },
+    "evidenceStatus": "PARTIALLY_SUPPORTED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "MOVE_CORE": {
+    "op": "MOVE_CORE",
+    "supportedParamSchema": {
+      "required": [
+        "count"
+      ],
+      "optional": [
+        "from",
+        "to",
+        "isSoulCore",
+        "side"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'MOVE_CORE'",
+    "handlerPresent": true,
+    "variants": {
+      "MOVE_CORE:default": {
+        "testFile": "tests/core_game_rules_integrity_corrective.test.js",
+        "testIds": [
+          "CORR-CORE-01",
+          "CORR-CORE-02"
+        ],
+        "testedSuccessBehavior": "Transfers cores with exact deduction === credit and Soul Core rules",
+        "testedRejectionBehavior": "Rejects Void overdraw, Life overdraw, and illegal Soul Core to Void",
+        "stateInvariantsAsserted": [
+          "core_conservation",
+          "soul_core_exclusivity"
+        ],
+        "eventBehaviorAsserted": [
+          "CORE_MOVED"
+        ],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "CORR-CORE-01: moveCore rejects unavailable Void normal/Soul cores and preserves all counts",
+          "CORR-CORE-02: moveCore rejects Life overdraw, enforces deduction === credit, and validates replacement destinations"
+        ]
+      }
+    },
+    "evidenceStatus": "SEMANTICALLY_VERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "SUMMON": {
+    "op": "SUMMON",
+    "supportedParamSchema": {
+      "required": [],
+      "optional": [
+        "from",
+        "initialCores",
+        "free",
+        "cost"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [
+      "SUMMON:from_BURST"
+    ],
+    "productionHandlerRef": "engine/ops/index.js:case 'SUMMON'",
+    "handlerPresent": true,
+    "variants": {
+      "SUMMON:from_HAND": {
+        "testFile": "tests/work_package_c1_auditor_and_regression.test.js",
+        "testIds": [
+          "C1-REG-03",
+          "C1-REG-05"
+        ],
+        "testedSuccessBehavior": "Pays cost, creates field stack, places LV1 cores, emits SUMMONED",
+        "testedRejectionBehavior": "Rejects invalid initialCores before id mutation; rolls back on CORE_PLACEMENT_FAILED",
+        "stateInvariantsAsserted": [
+          "core_conservation",
+          "card_conservation",
+          "no_partial_mutation"
+        ],
+        "eventBehaviorAsserted": [
+          "CORE_MOVED",
+          "SUMMONED"
+        ],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "C1-REG-03: SUMMON rejects invalid initialCores (0, negative, non-integer) before mutating card id",
+          "C1-REG-05: SUMMON rollback atomicity restores card to hand and preserves core total on CORE_PLACEMENT_FAILED"
+        ]
+      }
+    },
+    "evidenceStatus": "PARTIALLY_SUPPORTED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "SUMMON_FREE": {
+    "op": "SUMMON_FREE",
+    "supportedParamSchema": {
+      "required": [],
+      "optional": [
+        "from",
+        "target",
+        "initialCores",
+        "filter"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'SUMMON_FREE'",
+    "handlerPresent": true,
+    "variants": {
+      "SUMMON_FREE:from_HAND": {
+        "testFile": "tests/work_package_c1_auditor_and_regression.test.js",
+        "testIds": [
+          "C1-REG-04"
+        ],
+        "testedSuccessBehavior": "Summons without paying cost and places LV1 cores",
+        "testedRejectionBehavior": "Rejects CARD_ALREADY_ON_FIELD, DUPLICATE_CARD_OCCURRENCE, INVALID_SOURCE_ZONE",
+        "stateInvariantsAsserted": [
+          "core_conservation",
+          "zone_exclusivity"
+        ],
+        "eventBehaviorAsserted": [
+          "SUMMONED",
+          "CORE_MOVED"
+        ],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "C1-REG-04: SUMMON_FREE rejects CARD_ALREADY_ON_FIELD, DUPLICATE_CARD_OCCURRENCE, and INVALID_SOURCE_ZONE (from BURST)"
+        ]
+      },
+      "SUMMON_FREE:from_BURST": {
+        "testFile": "tests/phase4b3_reveal_burst_replace_summon.test.js",
+        "testIds": [
+          "3.1 Real Shard IR: BS60-034"
+        ],
+        "testedSuccessBehavior": "Summons active burst card onto field with LV1 core",
+        "testedRejectionBehavior": "Rejects if card not in burst or insufficient LV1 cores",
+        "stateInvariantsAsserted": [
+          "core_conservation",
+          "zone_exclusivity"
+        ],
+        "eventBehaviorAsserted": [
+          "SUMMONED"
+        ],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "3.1 Real Shard IR: BS60-034 (Eclair-Tiger) ACTIVATE_BURST resolves via AsyncResolver"
+        ]
+      }
+    },
+    "evidenceStatus": "SEMANTICALLY_VERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "REVEAL_CARDS": {
+    "op": "REVEAL_CARDS",
+    "supportedParamSchema": {
+      "required": [
+        "count",
+        "from"
+      ],
+      "optional": [
+        "side",
+        "isOptional"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [
+      "REVEAL_CARDS:bare_stub"
+    ],
+    "productionHandlerRef": "engine/ops/index.js:case 'REVEAL_CARDS'",
+    "handlerPresent": true,
+    "variants": {
+      "REVEAL_CARDS:DECK_self": {
+        "testFile": "tests/work_package_c2_evidence_and_compiler.test.js",
+        "testIds": [
+          "WPC2-REV-01",
+          "WPC2-REV-03"
+        ],
+        "testedSuccessBehavior": "Reveals exact count from self decktop, handles undersized/empty deck cleanly",
+        "testedRejectionBehavior": "Bare REVEAL_CARDS without count/from fails closed as UNSUPPORTED",
+        "stateInvariantsAsserted": [
+          "card_conservation",
+          "revealed_context_populated"
+        ],
+        "eventBehaviorAsserted": [
+          "CARDS_REVEALED"
+        ],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "WPC2-REV-01: BS69-036 (Medis) compiles structured REVEAL_CARDS and reveals exact 3 decktop cards",
+          "WPC2-REV-03: Structured REVEAL_CARDS handles undersized/empty deck and bare stub fails closed"
+        ]
+      },
+      "REVEAL_CARDS:DECK_both": {
+        "testFile": "tests/work_package_c2_evidence_and_compiler.test.js",
+        "testIds": [
+          "WPC2-REV-02"
+        ],
+        "testedSuccessBehavior": "Reveals exact count from both players decktop",
+        "testedRejectionBehavior": "Handles undersized/empty decks cleanly",
+        "stateInvariantsAsserted": [
+          "card_conservation"
+        ],
+        "eventBehaviorAsserted": [
+          "CARDS_REVEALED"
+        ],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "WPC2-REV-02: BS64-X04 (Gefan-Gnis) compiles structured REVEAL_CARDS for both players"
+        ]
+      },
+      "REVEAL_CARDS:HAND_self": {
+        "testFile": "tests/work_package_c2_evidence_and_compiler.test.js",
+        "testIds": [
+          "WPC2-REV-04"
+        ],
+        "testedSuccessBehavior": "Reveals from hand without removing cards from hand",
+        "testedRejectionBehavior": "Handles empty hand cleanly",
+        "stateInvariantsAsserted": [
+          "card_conservation",
+          "hand_preserved"
+        ],
+        "eventBehaviorAsserted": [
+          "CARDS_REVEALED"
+        ],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "WPC2-REV-04: Structured REVEAL_CARDS from HAND preserves hand membership and populates context"
+        ]
+      }
+    },
+    "evidenceStatus": "PARTIALLY_SUPPORTED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "REPLACEMENT_EFFECT": {
+    "op": "REPLACEMENT_EFFECT",
+    "supportedParamSchema": {
+      "required": [
+        "replaces",
+        "replacementZone"
+      ],
+      "optional": [
+        "targetStackId",
+        "side",
+        "duration",
+        "trigger",
+        "target",
+        "cost"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [
+      "REPLACEMENT_EFFECT:bare_stub"
+    ],
+    "productionHandlerRef": "engine/ops/index.js:case 'REPLACEMENT_EFFECT'",
+    "handlerPresent": true,
+    "variants": {
+      "REPLACEMENT_EFFECT:LIFE_CORE_to_void": {
+        "testFile": "tests/work_package_c1_auditor_and_regression.test.js",
+        "testIds": [
+          "C1-REG-06"
+        ],
+        "testedSuccessBehavior": "Redirects opposing life core reduction to Void instead of Reserve",
+        "testedRejectionBehavior": "Bare REPLACEMENT_EFFECT without spec returns UNSUPPORTED/MISSING_REPLACEMENT_SPEC",
+        "stateInvariantsAsserted": [
+          "core_conservation"
+        ],
+        "eventBehaviorAsserted": [
+          "CORE_MOVED",
+          "REPLACEMENT_EFFECT_APPLIED"
+        ],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "C1-REG-06: REPLACEMENT_EFFECT registers explicit replacement spec, rejects missing spec, and conserves cores on LIFE_CORE redirect"
+        ]
+      },
+      "REPLACEMENT_EFFECT:CORE_ADDITION_to_life": {
+        "testFile": "tests/work_package_c2_evidence_and_compiler.test.js",
+        "testIds": [
+          "WPC2-REP-01"
+        ],
+        "testedSuccessBehavior": "Redirects opposing Void core addition to player Life and emits LIFE_RECOVERED",
+        "testedRejectionBehavior": "Rejects when Void has 0 cores",
+        "stateInvariantsAsserted": [
+          "core_conservation"
+        ],
+        "eventBehaviorAsserted": [
+          "LIFE_RECOVERED",
+          "CORE_MOVED"
+        ],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "WPC2-REP-01: BS42-052 compiles CORE_ADDITION->life replacement, redirects with Void core conservation & LIFE_RECOVERED"
+        ]
+      },
+      "REPLACEMENT_EFFECT:CORE_ADDITION_to_field": {
+        "testFile": "tests/work_package_c2_evidence_and_compiler.test.js",
+        "testIds": [
+          "WPC2-REP-02"
+        ],
+        "testedSuccessBehavior": "Redirects Void core addition to valid targetStackId on field",
+        "testedRejectionBehavior": "Rejects missing/invalid targetStackId with zero partial mutation",
+        "stateInvariantsAsserted": [
+          "core_conservation",
+          "no_partial_mutation"
+        ],
+        "eventBehaviorAsserted": [
+          "REPLACEMENT_EFFECT_APPLIED",
+          "CORE_MOVED"
+        ],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "WPC2-REP-02: BS24-013 compiles CORE_ADDITION->field replacement and validates targetStackId"
+        ]
+      }
+    },
+    "evidenceStatus": "PARTIALLY_SUPPORTED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "BP_BUFF": {
+    "op": "BP_BUFF",
+    "supportedParamSchema": {
+      "required": [],
+      "optional": [
+        "amount",
+        "target",
+        "duration",
+        "all",
+        "forEach"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'BP_BUFF'",
+    "handlerPresent": true,
+    "variants": {
+      "BP_BUFF:default": {
+        "testFile": "tests/real_card_semantic_validation.test.js",
+        "testIds": [
+          "REAL-CARD-04",
+          "REAL-CARD-11"
+        ],
+        "testedSuccessBehavior": "Registers BP_BUFF modifier consumed by computeEffectiveBP",
+        "testedRejectionBehavior": "Respects duration expiration",
+        "stateInvariantsAsserted": [
+          "modifier_layering"
+        ],
+        "eventBehaviorAsserted": [],
+        "status": "HANDLER_PRESENT_UNVERIFIED",
+        "executableTestVerified": false,
+        "verificationFailureReason": "TEST_ID_NOT_REGISTERED:REAL-CARD-11",
+        "matchedRegisteredTests": [
+          "REAL-CARD-04: BS01-077 Baby-Loki (Spirit, White) WHEN_BLOCKS boosts effective BP during battle"
+        ]
+      }
+    },
+    "evidenceStatus": "HANDLER_PRESENT_UNVERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "BP_DEBUFF": {
+    "op": "BP_DEBUFF",
+    "supportedParamSchema": {
+      "required": [],
+      "optional": [
+        "amount",
+        "target",
+        "duration"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'BP_DEBUFF'",
+    "handlerPresent": true,
+    "variants": {
+      "BP_DEBUFF:default": {
+        "testFile": "tests/real_card_semantic_validation.test.js",
+        "testIds": [
+          "REAL-CARD-39"
+        ],
+        "testedSuccessBehavior": "Registers BP_DEBUFF modifier reducing opposing effective BP",
+        "testedRejectionBehavior": "Returns false when no opposing candidates exist",
+        "stateInvariantsAsserted": [
+          "modifier_layering"
+        ],
+        "eventBehaviorAsserted": [],
+        "status": "HANDLER_PRESENT_UNVERIFIED",
+        "executableTestVerified": false,
+        "verificationFailureReason": "TEST_ID_NOT_REGISTERED:REAL-CARD-39",
+        "matchedRegisteredTests": []
+      }
+    },
+    "evidenceStatus": "HANDLER_PRESENT_UNVERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "EXHAUST": {
+    "op": "EXHAUST",
+    "supportedParamSchema": {
+      "required": [
+        "target"
+      ],
+      "optional": [
+        "count",
+        "isHeavy"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'EXHAUST'",
+    "handlerPresent": true,
+    "variants": {
+      "EXHAUST:default": {
+        "testFile": "tests/real_card_semantic_validation.test.js",
+        "testIds": [
+          "REAL-CARD-25"
+        ],
+        "testedSuccessBehavior": "Exhausts or heavy-exhausts target stack",
+        "testedRejectionBehavior": "Respects protection and empty candidate pool",
+        "stateInvariantsAsserted": [
+          "stack_state_transition"
+        ],
+        "eventBehaviorAsserted": [],
+        "status": "HANDLER_PRESENT_UNVERIFIED",
+        "executableTestVerified": false,
+        "verificationFailureReason": "TEST_ID_NOT_REGISTERED:REAL-CARD-25",
+        "matchedRegisteredTests": []
+      }
+    },
+    "evidenceStatus": "HANDLER_PRESENT_UNVERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "REFRESH": {
+    "op": "REFRESH",
+    "supportedParamSchema": {
+      "required": [],
+      "optional": [
+        "target",
+        "count"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'REFRESH'",
+    "handlerPresent": true,
+    "variants": {
+      "REFRESH:default": {
+        "testFile": "tests/real_card_semantic_validation.test.js",
+        "testIds": [
+          "REAL-CARD-13",
+          "REAL-CARD-22"
+        ],
+        "testedSuccessBehavior": "Refreshes target stack (or downgrades HEAVY_EXHAUSTED -> EXHAUSTED)",
+        "testedRejectionBehavior": "Respects CANNOT_REFRESH modifier",
+        "stateInvariantsAsserted": [
+          "stack_state_transition"
+        ],
+        "eventBehaviorAsserted": [],
+        "status": "HANDLER_PRESENT_UNVERIFIED",
+        "executableTestVerified": false,
+        "verificationFailureReason": "TEST_ID_NOT_REGISTERED:REAL-CARD-13",
+        "matchedRegisteredTests": []
+      }
+    },
+    "evidenceStatus": "HANDLER_PRESENT_UNVERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "SET_LEVEL": {
+    "op": "SET_LEVEL",
+    "supportedParamSchema": {
+      "required": [
+        "value"
+      ],
+      "optional": [
+        "targetStackId",
+        "duration"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'SET_LEVEL'",
+    "handlerPresent": true,
+    "variants": {
+      "SET_LEVEL:default": {
+        "testFile": "tests/work_package_c1_auditor_and_regression.test.js",
+        "testIds": [
+          "C1-REG-01"
+        ],
+        "testedSuccessBehavior": "Creates SET_LEVEL modifier reflected by computeLevel",
+        "testedRejectionBehavior": "Clamped to valid card levels [1..maxLevel]",
+        "stateInvariantsAsserted": [
+          "modifier_layering"
+        ],
+        "eventBehaviorAsserted": [],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "C1-REG-01: SET_LEVEL creates SET_LEVEL modifier and computeLevel reflects effective level"
+        ]
+      }
+    },
+    "evidenceStatus": "SEMANTICALLY_VERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "COMPARE_LEVELS": {
+    "op": "COMPARE_LEVELS",
+    "supportedParamSchema": {
+      "required": [],
+      "optional": [
+        "target",
+        "targetStackId"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'COMPARE_LEVELS'",
+    "handlerPresent": true,
+    "variants": {
+      "COMPARE_LEVELS:default": {
+        "testFile": "tests/work_package_c1_auditor_and_regression.test.js",
+        "testIds": [
+          "C1-REG-02"
+        ],
+        "testedSuccessBehavior": "Compares computeLevel and destroys defeated opposing Spirit",
+        "testedRejectionBehavior": "Does not destroy if opposing level is higher",
+        "stateInvariantsAsserted": [
+          "card_conservation",
+          "core_conservation"
+        ],
+        "eventBehaviorAsserted": [
+          "DESTROYED",
+          "CARD_MOVED"
+        ],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "C1-REG-02: COMPARE_LEVELS destroys opposing Spirit with strictly lower effective level"
+        ]
+      }
+    },
+    "evidenceStatus": "SEMANTICALLY_VERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "SET_BP": {
+    "op": "SET_BP",
+    "supportedParamSchema": {
+      "required": [
+        "value"
+      ],
+      "optional": [
+        "targetStackId",
+        "duration"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'SET_BP'",
+    "handlerPresent": true,
+    "variants": {
+      "SET_BP:default": {
+        "testFile": "tests/phase2b_state_and_modifiers.test.js",
+        "testIds": [
+          "9. SET_BP, SET_LEVEL"
+        ],
+        "testedSuccessBehavior": "Creates SET_BP modifier consumed by computeEffectiveBP",
+        "testedRejectionBehavior": "Expires at duration boundary",
+        "stateInvariantsAsserted": [
+          "modifier_layering"
+        ],
+        "eventBehaviorAsserted": [],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "9. SET_BP, SET_LEVEL, and BP_OR_LEVEL_MODIFIER are consumed by computeEffectiveBP and computeLevel"
+        ]
+      }
+    },
+    "evidenceStatus": "SEMANTICALLY_VERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "RECOVER_LIFE": {
+    "op": "RECOVER_LIFE",
+    "supportedParamSchema": {
+      "required": [],
+      "optional": [
+        "count",
+        "side"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'RECOVER_LIFE'",
+    "handlerPresent": true,
+    "variants": {
+      "RECOVER_LIFE:default": {
+        "testFile": "tests/m2_core_ops.test.js",
+        "testIds": [
+          "M2.9 - RECOVER_LIFE"
+        ],
+        "testedSuccessBehavior": "Moves core from void to life and emits LIFE_RECOVERED",
+        "testedRejectionBehavior": "Rejects when void cores insufficient",
+        "stateInvariantsAsserted": [
+          "core_conservation"
+        ],
+        "eventBehaviorAsserted": [
+          "LIFE_RECOVERED",
+          "CORE_MOVED"
+        ],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "M2.9 - RECOVER_LIFE moves core from void to life and emits LIFE_RECOVERED"
+        ]
+      }
+    },
+    "evidenceStatus": "SEMANTICALLY_VERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "PREVENT_LIFE_LOSS": {
+    "op": "PREVENT_LIFE_LOSS",
+    "supportedParamSchema": {
+      "required": [],
+      "optional": [
+        "duration",
+        "side"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'PREVENT_LIFE_LOSS'",
+    "handlerPresent": true,
+    "variants": {
+      "PREVENT_LIFE_LOSS:default": {
+        "testFile": "tests/m2_core_ops.test.js",
+        "testIds": [
+          "M2.10 - PREVENT_LIFE_LOSS"
+        ],
+        "testedSuccessBehavior": "Blocks combat and effect life reduction for duration",
+        "testedRejectionBehavior": "Expires at turn/battle boundary",
+        "stateInvariantsAsserted": [
+          "core_conservation"
+        ],
+        "eventBehaviorAsserted": [],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "M2.10 - PREVENT_LIFE_LOSS blocks combat damage and effect life reduction"
+        ]
+      }
+    },
+    "evidenceStatus": "SEMANTICALLY_VERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "MILL_DECK": {
+    "op": "MILL_DECK",
+    "supportedParamSchema": {
+      "required": [],
+      "optional": [
+        "count",
+        "side"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'MILL_DECK'",
+    "handlerPresent": true,
+    "variants": {
+      "MILL_DECK:default": {
+        "testFile": "tests/real_card_semantic_validation.test.js",
+        "testIds": [
+          "REAL-CARD-29"
+        ],
+        "testedSuccessBehavior": "Moves top N cards from target deck to trash",
+        "testedRejectionBehavior": "Handles undersized deck without error",
+        "stateInvariantsAsserted": [
+          "card_conservation"
+        ],
+        "eventBehaviorAsserted": [
+          "CARD_MOVED"
+        ],
+        "status": "HANDLER_PRESENT_UNVERIFIED",
+        "executableTestVerified": false,
+        "verificationFailureReason": "TEST_ID_NOT_REGISTERED:REAL-CARD-29",
+        "matchedRegisteredTests": []
+      }
+    },
+    "evidenceStatus": "HANDLER_PRESENT_UNVERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "DISCARD_HAND": {
+    "op": "DISCARD_HAND",
+    "supportedParamSchema": {
+      "required": [],
+      "optional": [
+        "count",
+        "side"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'DISCARD_HAND'",
+    "handlerPresent": true,
+    "variants": {
+      "DISCARD_HAND:default": {
+        "testFile": "tests/real_card_semantic_validation.test.js",
+        "testIds": [
+          "REAL-CARD-15"
+        ],
+        "testedSuccessBehavior": "Discards card from target hand to grave",
+        "testedRejectionBehavior": "Handles empty hand cleanly",
+        "stateInvariantsAsserted": [
+          "card_conservation"
+        ],
+        "eventBehaviorAsserted": [
+          "CARD_MOVED"
+        ],
+        "status": "HANDLER_PRESENT_UNVERIFIED",
+        "executableTestVerified": false,
+        "verificationFailureReason": "TEST_ID_NOT_REGISTERED:REAL-CARD-15",
+        "matchedRegisteredTests": []
+      }
+    },
+    "evidenceStatus": "HANDLER_PRESENT_UNVERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "REVEAL_DECKTOP": {
+    "op": "REVEAL_DECKTOP",
+    "supportedParamSchema": {
+      "required": [],
+      "optional": [
+        "count"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'REVEAL_DECKTOP'",
+    "handlerPresent": true,
+    "variants": {
+      "REVEAL_DECKTOP:default": {
+        "testFile": "tests/m2_core_ops.test.js",
+        "testIds": [
+          "M2.1 - REVEAL_DECKTOP"
+        ],
+        "testedSuccessBehavior": "Reveals top N cards to revealed array and emits CARDS_REVEALED",
+        "testedRejectionBehavior": "Handles empty deck cleanly",
+        "stateInvariantsAsserted": [
+          "card_conservation"
+        ],
+        "eventBehaviorAsserted": [
+          "CARDS_REVEALED"
+        ],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "M2.1 - REVEAL_DECKTOP reveals cards from deck to revealed array and emits event"
+        ]
+      }
+    },
+    "evidenceStatus": "SEMANTICALLY_VERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "ADD_TO_HAND": {
+    "op": "ADD_TO_HAND",
+    "supportedParamSchema": {
+      "required": [],
+      "optional": [
+        "count",
+        "filter",
+        "target"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'ADD_TO_HAND'",
+    "handlerPresent": true,
+    "variants": {
+      "ADD_TO_HAND:default": {
+        "testFile": "tests/m2_core_ops.test.js",
+        "testIds": [
+          "M2.2 - ADD_TO_HAND"
+        ],
+        "testedSuccessBehavior": "Moves matching revealed card to hand and removes from revealed",
+        "testedRejectionBehavior": "Returns false if no matching revealed cards",
+        "stateInvariantsAsserted": [
+          "card_conservation"
+        ],
+        "eventBehaviorAsserted": [
+          "CARD_MOVED"
+        ],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "M2.2 - ADD_TO_HAND adds matching revealed card to hand and cleans revealed"
+        ]
+      }
+    },
+    "evidenceStatus": "SEMANTICALLY_VERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "DISCARD_REVEALED": {
+    "op": "DISCARD_REVEALED",
+    "supportedParamSchema": {
+      "required": [],
+      "optional": []
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'DISCARD_REVEALED'",
+    "handlerPresent": true,
+    "variants": {
+      "DISCARD_REVEALED:default": {
+        "testFile": "tests/m2_core_ops.test.js",
+        "testIds": [
+          "M2.3 - DISCARD_REVEALED"
+        ],
+        "testedSuccessBehavior": "Moves unchosen revealed cards to grave",
+        "testedRejectionBehavior": "No-ops cleanly when revealed is empty",
+        "stateInvariantsAsserted": [
+          "card_conservation"
+        ],
+        "eventBehaviorAsserted": [
+          "CARD_MOVED"
+        ],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "M2.3 - DISCARD_REVEALED sends all unchosen revealed cards to grave"
+        ]
+      }
+    },
+    "evidenceStatus": "SEMANTICALLY_VERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "RETURN_REVEALED_BOTTOM": {
+    "op": "RETURN_REVEALED_BOTTOM",
+    "supportedParamSchema": {
+      "required": [],
+      "optional": []
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'RETURN_REVEALED_BOTTOM'",
+    "handlerPresent": true,
+    "variants": {
+      "RETURN_REVEALED_BOTTOM:default": {
+        "testFile": "tests/m2_core_ops.test.js",
+        "testIds": [
+          "M2.4 - RETURN_REVEALED_BOTTOM"
+        ],
+        "testedSuccessBehavior": "Returns unchosen revealed cards to bottom of deck",
+        "testedRejectionBehavior": "No-ops cleanly when revealed is empty",
+        "stateInvariantsAsserted": [
+          "card_conservation"
+        ],
+        "eventBehaviorAsserted": [
+          "CARD_MOVED"
+        ],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "M2.4 - RETURN_REVEALED_BOTTOM returns cards to bottom of deck"
+        ]
+      }
+    },
+    "evidenceStatus": "SEMANTICALLY_VERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "DEPLOY_NEXUS": {
+    "op": "DEPLOY_NEXUS",
+    "supportedParamSchema": {
+      "required": [],
+      "optional": [
+        "from",
+        "free"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'DEPLOY_NEXUS'",
+    "handlerPresent": true,
+    "variants": {
+      "DEPLOY_NEXUS:default": {
+        "testFile": "tests/m2_core_ops.test.js",
+        "testIds": [
+          "M2.7 - DEPLOY_NEXUS"
+        ],
+        "testedSuccessBehavior": "Deploys Nexus to field and nexus list with 0 core base",
+        "testedRejectionBehavior": "Rejects when card missing",
+        "stateInvariantsAsserted": [
+          "card_conservation",
+          "zone_exclusivity"
+        ],
+        "eventBehaviorAsserted": [
+          "CARD_MOVED"
+        ],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "M2.7 - DEPLOY_NEXUS deploys Nexus card to field and nexus lists with 0 core base"
+        ]
+      }
+    },
+    "evidenceStatus": "SEMANTICALLY_VERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "IMMUNITY": {
+    "op": "IMMUNITY",
+    "supportedParamSchema": {
+      "required": [],
+      "optional": [
+        "immuneTo",
+        "duration"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'IMMUNITY'",
+    "handlerPresent": true,
+    "variants": {
+      "IMMUNITY:default": {
+        "testFile": "tests/real_card_semantic_validation.test.js",
+        "testIds": [
+          "REAL-CARD-10"
+        ],
+        "testedSuccessBehavior": "Grants protection from opposing effects matching scope",
+        "testedRejectionBehavior": "Expires at duration boundary",
+        "stateInvariantsAsserted": [
+          "protection_check"
+        ],
+        "eventBehaviorAsserted": [],
+        "status": "HANDLER_PRESENT_UNVERIFIED",
+        "executableTestVerified": false,
+        "verificationFailureReason": "TEST_ID_NOT_REGISTERED:REAL-CARD-10",
+        "matchedRegisteredTests": []
+      }
+    },
+    "evidenceStatus": "HANDLER_PRESENT_UNVERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "ADD_SYMBOL": {
+    "op": "ADD_SYMBOL",
+    "supportedParamSchema": {
+      "required": [],
+      "optional": [
+        "color",
+        "count",
+        "duration"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'ADD_SYMBOL'",
+    "handlerPresent": true,
+    "variants": {
+      "ADD_SYMBOL:default": {
+        "testFile": "tests/real_card_semantic_validation.test.js",
+        "testIds": [
+          "REAL-CARD-37"
+        ],
+        "testedSuccessBehavior": "Adds symbol modifier reflected by computeSymbols",
+        "testedRejectionBehavior": "Expires at duration boundary",
+        "stateInvariantsAsserted": [
+          "modifier_layering"
+        ],
+        "eventBehaviorAsserted": [],
+        "status": "HANDLER_PRESENT_UNVERIFIED",
+        "executableTestVerified": false,
+        "verificationFailureReason": "TEST_ID_NOT_REGISTERED:REAL-CARD-37",
+        "matchedRegisteredTests": []
+      }
+    },
+    "evidenceStatus": "HANDLER_PRESENT_UNVERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "GRANT_FAMILY": {
+    "op": "GRANT_FAMILY",
+    "supportedParamSchema": {
+      "required": [
+        "family"
+      ],
+      "optional": [
+        "target",
+        "duration"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'GRANT_FAMILY'",
+    "handlerPresent": true,
+    "variants": {
+      "GRANT_FAMILY:default": {
+        "testFile": "tests/real_card_semantic_validation.test.js",
+        "testIds": [
+          "REAL-CARD-27"
+        ],
+        "testedSuccessBehavior": "Grants family modifier reflected by target matching",
+        "testedRejectionBehavior": "Expires at duration boundary",
+        "stateInvariantsAsserted": [
+          "modifier_layering"
+        ],
+        "eventBehaviorAsserted": [],
+        "status": "HANDLER_PRESENT_UNVERIFIED",
+        "executableTestVerified": false,
+        "verificationFailureReason": "TEST_ID_NOT_REGISTERED:REAL-CARD-27",
+        "matchedRegisteredTests": []
+      }
+    },
+    "evidenceStatus": "HANDLER_PRESENT_UNVERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "SALVAGE": {
+    "op": "SALVAGE",
+    "supportedParamSchema": {
+      "required": [],
+      "optional": [
+        "filter",
+        "count"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'SALVAGE'",
+    "handlerPresent": true,
+    "variants": {
+      "SALVAGE:default": {
+        "testFile": "tests/m2_core_ops.test.js",
+        "testIds": [
+          "M2.11 - SALVAGE"
+        ],
+        "testedSuccessBehavior": "Retrieves matching card from grave into hand",
+        "testedRejectionBehavior": "Returns false when no matching card in grave",
+        "stateInvariantsAsserted": [
+          "card_conservation"
+        ],
+        "eventBehaviorAsserted": [
+          "CARD_MOVED"
+        ],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "M2.11 - SALVAGE retrieves matching card from grave into hand"
+        ]
+      }
+    },
+    "evidenceStatus": "SEMANTICALLY_VERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "DISCARD_BURST": {
+    "op": "DISCARD_BURST",
+    "supportedParamSchema": {
+      "required": [],
+      "optional": [
+        "side"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'DISCARD_BURST'",
+    "handlerPresent": true,
+    "variants": {
+      "DISCARD_BURST:default": {
+        "testFile": "tests/m2_core_ops.test.js",
+        "testIds": [
+          "M2.12 - DISCARD_BURST"
+        ],
+        "testedSuccessBehavior": "Discards opposing set burst card to grave",
+        "testedRejectionBehavior": "Returns false when no burst set",
+        "stateInvariantsAsserted": [
+          "card_conservation"
+        ],
+        "eventBehaviorAsserted": [
+          "CARD_MOVED"
+        ],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "M2.12 - DISCARD_BURST discards opposing set burst card to grave"
+        ]
+      }
+    },
+    "evidenceStatus": "SEMANTICALLY_VERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "ACTIVATE_BURST": {
+    "op": "ACTIVATE_BURST",
+    "supportedParamSchema": {
+      "required": [],
+      "optional": [
+        "isOptional"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'ACTIVATE_BURST'",
+    "handlerPresent": true,
+    "variants": {
+      "ACTIVATE_BURST:default": {
+        "testFile": "tests/phase4b3_reveal_burst_replace_summon.test.js",
+        "testIds": [
+          "3.1 Real Shard IR: BS60-034",
+          "3.9 ACTIVATE_BURST: Optional decline",
+          "3.10 Real Shard IR: SD42-011"
+        ],
+        "testedSuccessBehavior": "Clears burst slot, resolves burst ability, routes unplaced burst to grave",
+        "testedRejectionBehavior": "Respects BURST_LOCK, optional decline, missing burst, and unsupported burst effects",
+        "stateInvariantsAsserted": [
+          "card_conservation",
+          "zone_exclusivity"
+        ],
+        "eventBehaviorAsserted": [
+          "BURST_ACTIVATED",
+          "CARD_MOVED"
+        ],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "3.1 Real Shard IR: BS60-034 (Eclair-Tiger) ACTIVATE_BURST resolves via AsyncResolver",
+          "3.9 ACTIVATE_BURST: Optional decline retains card in Burst slot",
+          "3.10 Real Shard IR: SD42-011 (Decade Kiva) ACTIVATE_BURST destroys spirits and summons"
+        ]
+      }
+    },
+    "evidenceStatus": "SEMANTICALLY_VERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "SET_RESTRICTION": {
+    "op": "SET_RESTRICTION",
+    "supportedParamSchema": {
+      "required": [
+        "restriction"
+      ],
+      "optional": [
+        "side",
+        "duration"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'SET_RESTRICTION'",
+    "handlerPresent": true,
+    "variants": {
+      "SET_RESTRICTION:default": {
+        "testFile": "tests/real_card_semantic_validation.test.js",
+        "testIds": [
+          "REAL-CARD-24"
+        ],
+        "testedSuccessBehavior": "Registers SET_RESTRICTION modifier enforced by engine gates",
+        "testedRejectionBehavior": "Expires at duration boundary",
+        "stateInvariantsAsserted": [
+          "modifier_layering"
+        ],
+        "eventBehaviorAsserted": [],
+        "status": "HANDLER_PRESENT_UNVERIFIED",
+        "executableTestVerified": false,
+        "verificationFailureReason": "TEST_ID_NOT_REGISTERED:REAL-CARD-24",
+        "matchedRegisteredTests": []
+      }
+    },
+    "evidenceStatus": "HANDLER_PRESENT_UNVERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "UNPREVENTABLE": {
+    "op": "UNPREVENTABLE",
+    "supportedParamSchema": {
+      "required": [],
+      "optional": [
+        "scope",
+        "duration"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'UNPREVENTABLE'",
+    "handlerPresent": true,
+    "variants": {
+      "UNPREVENTABLE:default": {
+        "testFile": "tests/work_package_c_ops_conditions_compiler.test.js",
+        "testIds": [
+          "WPC-4C4-OPS"
+        ],
+        "testedSuccessBehavior": "Sets unpreventable context and modifier",
+        "testedRejectionBehavior": "Respects scope and duration",
+        "stateInvariantsAsserted": [
+          "modifier_layering"
+        ],
+        "eventBehaviorAsserted": [],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "WPC-4C4-OPS: implements UNPREVENTABLE, CONTINUE_BATTLE, CHANGE, COUNT_OPERATION, TOKEN_DEPLOYMENT, FORMAT_MARKER, CAST_MAGIC_FREE, and fails closed on bare stubs"
+        ]
+      }
+    },
+    "evidenceStatus": "SEMANTICALLY_VERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "CONTINUE_BATTLE": {
+    "op": "CONTINUE_BATTLE",
+    "supportedParamSchema": {
+      "required": [],
+      "optional": []
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'CONTINUE_BATTLE'",
+    "handlerPresent": true,
+    "variants": {
+      "CONTINUE_BATTLE:default": {
+        "testFile": "tests/work_package_c_ops_conditions_compiler.test.js",
+        "testIds": [
+          "WPC-4C4-OPS"
+        ],
+        "testedSuccessBehavior": "Marks battle continuation state on active combat",
+        "testedRejectionBehavior": "Rejects outside active combat",
+        "stateInvariantsAsserted": [
+          "combat_state"
+        ],
+        "eventBehaviorAsserted": [],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "WPC-4C4-OPS: implements UNPREVENTABLE, CONTINUE_BATTLE, CHANGE, COUNT_OPERATION, TOKEN_DEPLOYMENT, FORMAT_MARKER, CAST_MAGIC_FREE, and fails closed on bare stubs"
+        ]
+      }
+    },
+    "evidenceStatus": "SEMANTICALLY_VERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "PREVENT_LOSS": {
+    "op": "PREVENT_LOSS",
+    "supportedParamSchema": {
+      "required": [],
+      "optional": [
+        "duration",
+        "side"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'PREVENT_LOSS'",
+    "handlerPresent": true,
+    "variants": {
+      "PREVENT_LOSS:default": {
+        "testFile": "tests/phase2b_state_and_modifiers.test.js",
+        "testIds": [
+          "12. PREVENT_LOSS"
+        ],
+        "testedSuccessBehavior": "Prevents life-0 and deck-out loss until modifier expires",
+        "testedRejectionBehavior": "Expires cleanly at duration boundary",
+        "stateInvariantsAsserted": [
+          "sba_win_loss"
+        ],
+        "eventBehaviorAsserted": [],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "12. PREVENT_LOSS prevents game loss at 0 life and deck-out until modifier expires"
+        ]
+      }
+    },
+    "evidenceStatus": "SEMANTICALLY_VERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "FORMAT_MARKER": {
+    "op": "FORMAT_MARKER",
+    "supportedParamSchema": {
+      "required": [],
+      "optional": [
+        "marker",
+        "format"
+      ]
+    },
+    "explicitlyUnsupportedVariants": [],
+    "productionHandlerRef": "engine/ops/index.js:case 'FORMAT_MARKER'",
+    "handlerPresent": true,
+    "variants": {
+      "FORMAT_MARKER:default": {
+        "testFile": "tests/work_package_c_ops_conditions_compiler.test.js",
+        "testIds": [
+          "WPC-4C4-OPS"
+        ],
+        "testedSuccessBehavior": "Attaches format marker to sourceCard",
+        "testedRejectionBehavior": "No-ops safely without sourceCard",
+        "stateInvariantsAsserted": [
+          "card_metadata"
+        ],
+        "eventBehaviorAsserted": [],
+        "status": "SEMANTICALLY_VERIFIED",
+        "executableTestVerified": true,
+        "verificationFailureReason": null,
+        "matchedRegisteredTests": [
+          "WPC-4C4-OPS: implements UNPREVENTABLE, CONTINUE_BATTLE, CHANGE, COUNT_OPERATION, TOKEN_DEPLOYMENT, FORMAT_MARKER, CAST_MAGIC_FREE, and fails closed on bare stubs"
+        ]
+      }
+    },
+    "evidenceStatus": "SEMANTICALLY_VERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  }
+}

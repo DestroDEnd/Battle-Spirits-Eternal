@@ -96,10 +96,10 @@ export class CardRegistry {
       'DISCARD_HAND',
       'STEP_MODIFIER'
     ]);
-    return matching.some(ab => {
+    return matching.every(ab => {
       if (ab.overall === 'AURA_BP' || ab.overall === 'AURA_KEYWORDS') return true;
       const subs = ab.subEffects || [];
-      return subs.some(s => s.op !== 'PASSIVE_RULE' || EXECUTABLE_PASSIVE_RULES.has(s.rule));
+      return subs.length > 0 && subs.every(s => s.op !== 'PASSIVE_RULE' || EXECUTABLE_PASSIVE_RULES.has(s.rule));
     });
   }
 

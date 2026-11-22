@@ -677,10 +677,24 @@
     "compiledIr": {
       "cardNumber": "KF-15",
       "name": "The ParttimePrincess Kentuckyster",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 6000
+        }
+      },
+      "originalEffectText": "[LV1][LV2] (When Summoned)\nReturn a \"Colonel\"-named Spirit card from your Trash to the Hand.\n\n[LV2] (When Attacks)\nThis Spirit can't be blocked by opposing LV1 Spirits.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "KF-15#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -690,8 +704,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -700,28 +723,54 @@
             "isMain": false,
             "cleanBody": "Return a \"Colonel\"-named Spirit card from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned)\nReturn a \"Colonel\"-named Spirit card from your Trash to the Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Return a \"Colonel\"-named Spirit card from your Trash to the Hand.",
+              "originalClauseText": "Return a \"Colonel\"-named Spirit card from your Trash to the Hand.",
               "cleanText": "Return a \"Colonel\"-named Spirit card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "Colonel"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "KF-15#a0",
+          "keywords": [],
+          "id": "KF-15#AB_WHEN_SUMMONED_NONE_LV1_LV2_668251337235bddd7ec19f84343eb1bc982933583e5b1b5c2d6ac299c82c5f8d_cccadfb94606ea3c215c8d822f71edf2",
+          "physicalId": "KF-15#AB_WHEN_SUMMONED_NONE_LV1_LV2_668251337235bddd7ec19f84343eb1bc982933583e5b1b5c2d6ac299c82c5f8d_cccadfb94606ea3c215c8d822f71edf2",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_668251337235bddd7ec19f84343eb1bc982933583e5b1b5c2d6ac299c82c5f8d_cccadfb94606ea3c215c8d822f71edf2",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_67a395e410cbac31cb0c795fd91780142f7a4ab5a5bd44e65f58951ca55f8b19_eb0c78c71dfdd47217455ab6427c5e29",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "KF-15#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -730,8 +779,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -740,10 +798,14 @@
             "isMain": false,
             "cleanBody": "This Spirit can't be blocked by opposing LV1 Spirits."
           },
+          "originalAbilityText": "[LV2] (When Attacks)\nThis Spirit can't be blocked by opposing LV1 Spirits.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "This Spirit can't be blocked by opposing LV1 Spirits.",
+              "originalClauseText": "This Spirit can't be blocked by opposing LV1 Spirits.",
               "cleanText": "This Spirit can't be blocked by opposing LV1 Spirits",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -756,7 +818,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "KF-15#a1",
+          "keywords": [],
+          "id": "KF-15#AB_WHEN_ATTACKS_NONE_LV2_34146c22e26415224ace0c52b0fe5703e37a12c97e2ed407f0713f37738c5688_78ae5d5bcf5e928742e4fc26ac08c02a",
+          "physicalId": "KF-15#AB_WHEN_ATTACKS_NONE_LV2_34146c22e26415224ace0c52b0fe5703e37a12c97e2ed407f0713f37738c5688_78ae5d5bcf5e928742e4fc26ac08c02a",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_34146c22e26415224ace0c52b0fe5703e37a12c97e2ed407f0713f37738c5688_78ae5d5bcf5e928742e4fc26ac08c02a",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_8018bdcfa343372c8437b512f6c374984dd9b455be853340bb111a37b8dc1285_e979db8a07490c0c34c54365526af9b5",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,

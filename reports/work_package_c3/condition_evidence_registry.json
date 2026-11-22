@@ -1,0 +1,283 @@
+{
+  "CONTROL_CARD": {
+    "conditionType": "CONTROL_CARD",
+    "parserEvidence": "engine/conditions.js:parseConditionToStructured",
+    "evaluatorImplementation": "engine/conditions.js:case CONDITION_TYPES.CONTROL_CARD",
+    "testFile": "tests/phase4a_structured_conditions.test.js",
+    "testIds": [
+      "1. COND_CONTROL_CARD_TYPE_OR_FAMILY"
+    ],
+    "trueTest": "Returns TRUE when matching card is on controlled field",
+    "falseTest": "Returns FALSE when matching card is absent",
+    "unsupportedTest": "Returns UNSUPPORTED on malformed filter",
+    "evaluatorPresent": true,
+    "executableTestVerified": true,
+    "verificationFailureReason": null,
+    "matchedRegisteredTests": [
+      "1. COND_CONTROL_CARD_TYPE_OR_FAMILY: parses and evaluates field presence, type, family, name, color, and counts"
+    ],
+    "evidenceStatus": "SEMANTICALLY_VERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "COLOR_SYMBOL": {
+    "conditionType": "COLOR_SYMBOL",
+    "parserEvidence": "engine/conditions.js:parseConditionToStructured",
+    "evaluatorImplementation": "engine/conditions.js:case CONDITION_TYPES.COLOR_SYMBOL",
+    "testFile": "tests/effect_execution_targeting_conditions.test.js",
+    "testIds": [
+      "COND-TRISTATE-01"
+    ],
+    "trueTest": "Returns TRUE when controlled symbol count >= threshold",
+    "falseTest": "Returns FALSE when symbol count < threshold",
+    "unsupportedTest": "N/A",
+    "evaluatorPresent": true,
+    "executableTestVerified": false,
+    "verificationFailureReason": "NO_PRODUCTION_API_CALL:COND-TRISTATE-01",
+    "matchedRegisteredTests": [],
+    "evidenceStatus": "PARSED_EVALUABLE_UNVERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "COUNTER_THRESHOLD": {
+    "conditionType": "COUNTER_THRESHOLD",
+    "parserEvidence": "engine/conditions.js:parseConditionToStructured",
+    "evaluatorImplementation": "engine/conditions.js:case CONDITION_TYPES.COUNTER_THRESHOLD",
+    "testFile": "tests/phase4a_structured_conditions.test.js",
+    "testIds": [
+      "2. COND_COUNTER_THRESHOLD"
+    ],
+    "trueTest": "Returns TRUE when player counters meet threshold",
+    "falseTest": "Returns FALSE when counters below threshold",
+    "unsupportedTest": "N/A",
+    "evaluatorPresent": true,
+    "executableTestVerified": true,
+    "verificationFailureReason": null,
+    "matchedRegisteredTests": [
+      "2. COND_COUNTER_THRESHOLD: evaluates counter thresholds, boundary conditions, and ownership"
+    ],
+    "evidenceStatus": "SEMANTICALLY_VERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "SOUL_CORE_ON_SPIRIT": {
+    "conditionType": "SOUL_CORE_ON_SPIRIT",
+    "parserEvidence": "engine/conditions.js:parseConditionToStructured",
+    "evaluatorImplementation": "engine/conditions.js:case CONDITION_TYPES.SOUL_CORE_ON_SPIRIT",
+    "testFile": "tests/phase4a_structured_conditions.test.js",
+    "testIds": [
+      "3. COND_SOUL_CORE_ON_SPIRIT"
+    ],
+    "trueTest": "Returns TRUE when Soul Core is on qualifying Spirit",
+    "falseTest": "Returns FALSE when Soul Core is in Reserve/Trash",
+    "unsupportedTest": "N/A",
+    "evaluatorPresent": true,
+    "executableTestVerified": true,
+    "verificationFailureReason": null,
+    "matchedRegisteredTests": [
+      "3. COND_SOUL_CORE_ON_SPIRIT: checks soul core on source stack and field stacks with side validation"
+    ],
+    "evidenceStatus": "SEMANTICALLY_VERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "BURST_OR_MIRAGE_SET": {
+    "conditionType": "BURST_OR_MIRAGE_SET",
+    "parserEvidence": "engine/conditions.js:parseConditionToStructured",
+    "evaluatorImplementation": "engine/conditions.js:case CONDITION_TYPES.BURST_OR_MIRAGE_SET",
+    "testFile": "tests/phase4a_structured_conditions.test.js",
+    "testIds": [
+      "4. COND_BURST_OR_MIRAGE_SET"
+    ],
+    "trueTest": "Returns TRUE when Burst/Mirage is set",
+    "falseTest": "Returns FALSE when slot is empty",
+    "unsupportedTest": "N/A",
+    "evaluatorPresent": true,
+    "executableTestVerified": true,
+    "verificationFailureReason": null,
+    "matchedRegisteredTests": [
+      "4. COND_BURST_OR_MIRAGE_SET: evaluates Burst, Mirage, negation, color qualification, and OR combinator"
+    ],
+    "evidenceStatus": "SEMANTICALLY_VERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "LIFE_THRESHOLD": {
+    "conditionType": "LIFE_THRESHOLD",
+    "parserEvidence": "engine/conditions.js:parseConditionToStructured",
+    "evaluatorImplementation": "engine/conditions.js:case CONDITION_TYPES.LIFE_THRESHOLD",
+    "testFile": "tests/work_package_c1_auditor_and_regression.test.js",
+    "testIds": [
+      "C1-AUD-02"
+    ],
+    "trueTest": "Returns TRUE when life meets comparison",
+    "falseTest": "Returns FALSE when life fails comparison",
+    "unsupportedTest": "N/A",
+    "evaluatorPresent": true,
+    "executableTestVerified": true,
+    "verificationFailureReason": null,
+    "matchedRegisteredTests": [
+      "C1-AUD-02: Auditor never marks parsed conditions without evaluator support as SEMANTICALLY_VERIFIED"
+    ],
+    "evidenceStatus": "SEMANTICALLY_VERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "BATTLING_STATE": {
+    "conditionType": "BATTLING_STATE",
+    "parserEvidence": "engine/conditions.js:parseConditionToStructured",
+    "evaluatorImplementation": "engine/conditions.js:case CONDITION_TYPES.BATTLING_STATE",
+    "testFile": "tests/effect_execution_targeting_conditions.test.js",
+    "testIds": [
+      "COND-TRISTATE-01"
+    ],
+    "trueTest": "Returns TRUE when combat state matches",
+    "falseTest": "Returns FALSE outside matching combat",
+    "unsupportedTest": "N/A",
+    "evaluatorPresent": true,
+    "executableTestVerified": false,
+    "verificationFailureReason": "NO_PRODUCTION_API_CALL:COND-TRISTATE-01",
+    "matchedRegisteredTests": [],
+    "evidenceStatus": "PARSED_EVALUABLE_UNVERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "TURN_STEP_STATE": {
+    "conditionType": "TURN_STEP_STATE",
+    "parserEvidence": "engine/conditions.js:parseConditionToStructured",
+    "evaluatorImplementation": "engine/conditions.js:case CONDITION_TYPES.TURN_STEP_STATE",
+    "testFile": "tests/effect_execution_targeting_conditions.test.js",
+    "testIds": [
+      "COND-TRISTATE-01"
+    ],
+    "trueTest": "Returns TRUE when active turn/step matches",
+    "falseTest": "Returns FALSE on mismatch",
+    "unsupportedTest": "N/A",
+    "evaluatorPresent": true,
+    "executableTestVerified": false,
+    "verificationFailureReason": "NO_PRODUCTION_API_CALL:COND-TRISTATE-01",
+    "matchedRegisteredTests": [],
+    "evidenceStatus": "PARSED_EVALUABLE_UNVERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "HAND_SIZE_THRESHOLD": {
+    "conditionType": "HAND_SIZE_THRESHOLD",
+    "parserEvidence": "engine/conditions.js:parseConditionToStructured",
+    "evaluatorImplementation": "engine/conditions.js:case CONDITION_TYPES.HAND_SIZE_THRESHOLD",
+    "testFile": "tests/effect_execution_targeting_conditions.test.js",
+    "testIds": [
+      "COND-TRISTATE-01"
+    ],
+    "trueTest": "Returns TRUE when hand size meets threshold",
+    "falseTest": "Returns FALSE otherwise",
+    "unsupportedTest": "N/A",
+    "evaluatorPresent": true,
+    "executableTestVerified": false,
+    "verificationFailureReason": "NO_PRODUCTION_API_CALL:COND-TRISTATE-01",
+    "matchedRegisteredTests": [],
+    "evidenceStatus": "PARSED_EVALUABLE_UNVERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "BP_ZERO": {
+    "conditionType": "BP_ZERO",
+    "parserEvidence": "engine/conditions.js:parseConditionToStructured",
+    "evaluatorImplementation": "engine/conditions.js:case CONDITION_TYPES.BP_ZERO",
+    "testFile": "tests/effect_execution_targeting_conditions.test.js",
+    "testIds": [
+      "COND-TRISTATE-01"
+    ],
+    "trueTest": "Returns TRUE when effective BP === 0",
+    "falseTest": "Returns FALSE when effective BP > 0",
+    "unsupportedTest": "N/A",
+    "evaluatorPresent": true,
+    "executableTestVerified": false,
+    "verificationFailureReason": "NO_PRODUCTION_API_CALL:COND-TRISTATE-01",
+    "matchedRegisteredTests": [],
+    "evidenceStatus": "PARSED_EVALUABLE_UNVERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "SOUL_STATE": {
+    "conditionType": "SOUL_STATE",
+    "parserEvidence": "engine/conditions.js:parseConditionToStructured",
+    "evaluatorImplementation": "engine/conditions.js:case CONDITION_TYPES.SOUL_STATE",
+    "testFile": "tests/effect_execution_targeting_conditions.test.js",
+    "testIds": [
+      "COND-TRISTATE-01"
+    ],
+    "trueTest": "Returns TRUE when stack has Soul State",
+    "falseTest": "Returns FALSE otherwise",
+    "unsupportedTest": "N/A",
+    "evaluatorPresent": true,
+    "executableTestVerified": false,
+    "verificationFailureReason": "NO_PRODUCTION_API_CALL:COND-TRISTATE-01",
+    "matchedRegisteredTests": [],
+    "evidenceStatus": "PARSED_EVALUABLE_UNVERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "CARD_ZONE_STATE": {
+    "conditionType": "CARD_ZONE_STATE",
+    "parserEvidence": "engine/conditions.js:parseConditionToStructured",
+    "evaluatorImplementation": "engine/conditions.js:case CONDITION_TYPES.CARD_ZONE_STATE",
+    "testFile": "tests/effect_execution_targeting_conditions.test.js",
+    "testIds": [
+      "COND-TRISTATE-01"
+    ],
+    "trueTest": "Returns TRUE when card is in expected zone",
+    "falseTest": "Returns FALSE otherwise",
+    "unsupportedTest": "N/A",
+    "evaluatorPresent": true,
+    "executableTestVerified": false,
+    "verificationFailureReason": "NO_PRODUCTION_API_CALL:COND-TRISTATE-01",
+    "matchedRegisteredTests": [],
+    "evidenceStatus": "PARSED_EVALUABLE_UNVERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "TURN_HISTORY": {
+    "conditionType": "TURN_HISTORY",
+    "parserEvidence": "engine/conditions.js:parseConditionToStructured",
+    "evaluatorImplementation": "engine/conditions.js:case CONDITION_TYPES.TURN_HISTORY",
+    "testFile": "tests/work_package_c_ops_conditions_compiler.test.js",
+    "testIds": [
+      "WPC-4C5-COND"
+    ],
+    "trueTest": "Returns TRUE when event occurred this turn",
+    "falseTest": "Returns FALSE after turn reset",
+    "unsupportedTest": "N/A",
+    "evaluatorPresent": true,
+    "executableTestVerified": false,
+    "verificationFailureReason": "NO_PRODUCTION_API_CALL:WPC-4C5-COND",
+    "matchedRegisteredTests": [],
+    "evidenceStatus": "PARSED_EVALUABLE_UNVERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "COMPOUND": {
+    "conditionType": "COMPOUND",
+    "parserEvidence": "engine/conditions.js:parseConditionToStructured",
+    "evaluatorImplementation": "engine/conditions.js:case CONDITION_TYPES.COMPOUND",
+    "testFile": "tests/work_package_c_ops_conditions_compiler.test.js",
+    "testIds": [
+      "WPC-4C5-COND"
+    ],
+    "trueTest": "Tri-state AND/OR/NOT evaluates accurately",
+    "falseTest": "Tri-state short-circuiting works",
+    "unsupportedTest": "Propagates UNSUPPORTED on unknown child",
+    "evaluatorPresent": true,
+    "executableTestVerified": false,
+    "verificationFailureReason": "NO_PRODUCTION_API_CALL:WPC-4C5-COND",
+    "matchedRegisteredTests": [],
+    "evidenceStatus": "PARSED_EVALUABLE_UNVERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  },
+  "LEGACY_CONTEXT_CONDITION": {
+    "conditionType": "LEGACY_CONTEXT_CONDITION",
+    "parserEvidence": "engine/conditions.js:parseConditionToStructured",
+    "evaluatorImplementation": "engine/conditions.js:case CONDITION_TYPES.LEGACY_CONTEXT_CONDITION",
+    "testFile": "tests/effect_execution_targeting_conditions.test.js",
+    "testIds": [
+      "COND-TRISTATE-01"
+    ],
+    "trueTest": "Known legacy forms evaluate accurately",
+    "falseTest": "Known legacy forms return FALSE when unmet",
+    "unsupportedTest": "Unknown legacy strings return UNSUPPORTED (never default TRUE)",
+    "isPartialForm": true,
+    "evaluatorPresent": true,
+    "executableTestVerified": false,
+    "verificationFailureReason": "NO_PRODUCTION_API_CALL:COND-TRISTATE-01",
+    "matchedRegisteredTests": [],
+    "evidenceStatus": "PARSED_EVALUABLE_UNVERIFIED",
+    "lastAuditRevision": "Work Package C.3"
+  }
+}

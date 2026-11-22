@@ -8,19 +8,43 @@
     "compiledIr": {
       "cardNumber": "BSC24-050",
       "name": "Baltan Seijin's Clones",
+      "type": "Magic",
+      "levels": {},
+      "originalEffectText": "[Soul Burst] (After your Spirit is destroyed by the Opponent)\nYou can summon a Cost 3 or less Spirit card from your Trash. If this Burst is activated when a \"Baltan Seijin\"-named Spirit is destroyed, instead, you can summon up to three \"Baltan Seijin\"-named Spirit cards from your Trash. However, any (When Summoned) effects of the Spirits don't activate. Then, by paying the cost, activate this card's Flash effect.\n\n[Flash]\nDestroy an opposing exhausted Spirit.",
+      "teams": [],
       "keywords": [
         {
-          "name": "Burst",
-          "parameter": "s",
+          "name": "Soul Burst",
+          "parameter": null,
           "wave": 2,
           "hook": "burst",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "BSC24-050#AB_BURST_NONE_LV1_LV2_LV3_cd48776b35cb8d449fb8c941d595724ea3feac770c4f42650399c932fd48d016_c959cca8e0fb64051a588bf2aac111ca",
+          "cardNumber": "BSC24-050",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "BURST",
+          "timingLabel": "Soul Burst",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": "AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT",
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC24-050#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BSC24-050#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -31,20 +55,31 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "BURST",
-            "timingLabel": "Burst",
+            "timings": [],
+            "timingLabel": "Soul Burst",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
-            "keyword": null,
+            "keyword": "Soul Burst",
             "burstCondition": "AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT",
             "isFlash": false,
             "isMain": false,
             "cleanBody": "You can summon a Cost 3 or less Spirit card from your Trash. If this Burst is activated when a \"Baltan Seijin\"-named Spirit is destroyed, instead, you can summon up to three \"Baltan Seijin\"-named Spirit cards from your Trash. However, any (When Summoned) effects of the Spirits don't activate. Then, by paying the cost, activate this card's Flash effect."
           },
+          "originalAbilityText": "[Soul Burst] (After your Spirit is destroyed by the Opponent)\nYou can summon a Cost 3 or less Spirit card from your Trash. If this Burst is activated when a \"Baltan Seijin\"-named Spirit is destroyed, instead, you can summon up to three \"Baltan Seijin\"-named Spirit cards from your Trash. However, any (When Summoned) effects of the Spirits don't activate. Then, by paying the cost, activate this card's Flash effect.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "You can summon a Cost 3 or less Spirit card from your Trash.",
+              "originalClauseText": "You can summon a Cost 3 or less Spirit card from your Trash.",
               "cleanText": "You can summon a Cost 3 or less Spirit card from your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -52,12 +87,25 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "costLte": 3
+                },
+                "free": false,
+                "isOptional": true
               }
             },
             {
               "rawText": "If this Burst is activated when a \"Baltan Seijin\"-named Spirit is destroyed, instead, you can summon up to three \"Baltan Seijin\"-named Spirit cards from your Trash.",
+              "originalClauseText": "If this Burst is activated when a \"Baltan Seijin\"-named Spirit is destroyed, instead, you can summon up to three \"Baltan Seijin\"-named Spirit cards from your Trash.",
               "cleanText": "you can summon up to three \"Baltan Seijin\"-named Spirit cards from your Trash",
+              "clauseIndex": 1,
               "link": "instead",
               "isOptional": true,
               "isCost": false,
@@ -65,12 +113,25 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 3,
+                "upTo": true,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "Baltan Seijin"
+                },
+                "free": false,
+                "isOptional": true
               }
             },
             {
               "rawText": "any (When Summoned) effects of the Spirits don't activate.",
+              "originalClauseText": "any (When Summoned) effects of the Spirits don't activate.",
               "cleanText": "any (When Summoned) effects of the Spirits don't activate",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -82,7 +143,9 @@
             },
             {
               "rawText": "by paying the cost, activate this card's Flash effect.",
+              "originalClauseText": "by paying the cost, activate this card's Flash effect.",
               "cleanText": "by paying the cost, activate this card's Flash effect",
+              "clauseIndex": 3,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -93,10 +156,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC24-050#a0",
+          "keywords": [
+            {
+              "name": "Soul Burst",
+              "parameter": null,
+              "wave": 2,
+              "hook": "burst",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC24-050#AB_BURST_NONE_LV1_LV2_LV3_cd48776b35cb8d449fb8c941d595724ea3feac770c4f42650399c932fd48d016_c959cca8e0fb64051a588bf2aac111ca",
+              "cardNumber": "BSC24-050",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "BURST",
+              "timingLabel": "Soul Burst",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": "AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT",
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC24-050#a0"
+            }
+          ],
+          "id": "BSC24-050#AB_BURST_NONE_LV1_LV2_LV3_cd48776b35cb8d449fb8c941d595724ea3feac770c4f42650399c932fd48d016_c959cca8e0fb64051a588bf2aac111ca",
+          "physicalId": "BSC24-050#AB_BURST_NONE_LV1_LV2_LV3_cd48776b35cb8d449fb8c941d595724ea3feac770c4f42650399c932fd48d016_c959cca8e0fb64051a588bf2aac111ca",
+          "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_cd48776b35cb8d449fb8c941d595724ea3feac770c4f42650399c932fd48d016_c959cca8e0fb64051a588bf2aac111ca",
+          "semanticIdV3": "SEM3#AB_BURST_NONE_LV1_LV2_LV3_0dea7a6e423141234e2f7a1d31d4c43328883de172bbefd942b3ce46f824d331_866fde475588fb66ef8001d809b60e74",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC24-050#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -107,8 +214,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -117,10 +231,14 @@
             "isMain": false,
             "cleanBody": "Destroy an opposing exhausted Spirit."
           },
+          "originalAbilityText": "[Flash]\nDestroy an opposing exhausted Spirit.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Destroy an opposing exhausted Spirit.",
+              "originalClauseText": "Destroy an opposing exhausted Spirit.",
               "cleanText": "Destroy an opposing exhausted Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -141,7 +259,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC24-050#a1",
+          "keywords": [],
+          "id": "BSC24-050#AB_FLASH_NONE_LV1_LV2_LV3_bd4c5882097a183fdd1b171668004e800cea4bd8cf83cc15f6bd73813ef2a0a4_36663feb650ad116922a5047d33fcad3",
+          "physicalId": "BSC24-050#AB_FLASH_NONE_LV1_LV2_LV3_bd4c5882097a183fdd1b171668004e800cea4bd8cf83cc15f6bd73813ef2a0a4_36663feb650ad116922a5047d33fcad3",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_bd4c5882097a183fdd1b171668004e800cea4bd8cf83cc15f6bd73813ef2a0a4_36663feb650ad116922a5047d33fcad3",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_f2fd3659c74585900f739257682f7687b6b49609defa3ed03428716e4207746f_972edaf3ae05021e5d281fc50afafa9e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -1992,10 +2125,24 @@
     "compiledIr": {
       "cardNumber": "BSC24-007",
       "name": "The DevilAlterEgoBeast Gorg Fire Golza",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 6000
+        }
+      },
+      "originalEffectText": "[LV1][LV2] (When Summoned)\nReturn a Spirit card from your Trash to the Hand. If this Spirit was summoned by the effect of [The DevilBeast Zaigorg], instead, return all \"DevilBeast\"/\"DevilAlterEgo\"-named Spirit cards from your Trash to the Hand.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BSC24-007#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2005,8 +2152,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2015,10 +2171,14 @@
             "isMain": false,
             "cleanBody": "Return a Spirit card from your Trash to the Hand. If this Spirit was summoned by the effect of [The DevilBeast Zaigorg], instead, return all \"DevilBeast\"/\"DevilAlterEgo\"-named Spirit cards from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned)\nReturn a Spirit card from your Trash to the Hand. If this Spirit was summoned by the effect of [The DevilBeast Zaigorg], instead, return all \"DevilBeast\"/\"DevilAlterEgo\"-named Spirit cards from your Trash to the Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Return a Spirit card from your Trash to the Hand.",
+              "originalClauseText": "Return a Spirit card from your Trash to the Hand.",
               "cleanText": "Return a Spirit card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2026,28 +2186,66 @@
               "duration": null,
               "op": {
                 "op": "SALVAGE",
-                "cardType": "Spirit",
-                "count": 1
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "isOptional": false
               }
             },
             {
               "rawText": "If this Spirit was summoned by the effect of [The DevilBeast Zaigorg], instead, return all \"DevilBeast\"/\"DevilAlterEgo\"-named Spirit cards from your Trash to the Hand.",
+              "originalClauseText": "If this Spirit was summoned by the effect of [The DevilBeast Zaigorg], instead, return all \"DevilBeast\"/\"DevilAlterEgo\"-named Spirit cards from your Trash to the Hand.",
               "cleanText": "return all \"DevilBeast\"/\"DevilAlterEgo\"-named Spirit cards from your Trash to the Hand",
+              "clauseIndex": 1,
               "link": "instead",
               "isOptional": false,
               "isCost": false,
               "condition": "If this Spirit was summoned by the effect of [The DevilBeast Zaigorg]",
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "DevilBeast",
+                  "nameIncludesAny": [
+                    "DevilBeast",
+                    "DevilAlterEgo"
+                  ]
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC24-007#a0",
+          "keywords": [],
+          "id": "BSC24-007#AB_WHEN_SUMMONED_NONE_LV1_LV2_c4888014fb4146b1f9c8ca2413f6237eb699dfb732fadfe3f8f58e540dcf5b4a_453fd4198b6e3666ead7c16754f0922c",
+          "physicalId": "BSC24-007#AB_WHEN_SUMMONED_NONE_LV1_LV2_c4888014fb4146b1f9c8ca2413f6237eb699dfb732fadfe3f8f58e540dcf5b4a_453fd4198b6e3666ead7c16754f0922c",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_c4888014fb4146b1f9c8ca2413f6237eb699dfb732fadfe3f8f58e540dcf5b4a_453fd4198b6e3666ead7c16754f0922c",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_aa0152db8371713cb3a33daf0e12bd73013b53bd83c11d12648befee52fb9d9e_2d392e87db1ddba76df1ca01db59375e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -2416,10 +2614,29 @@
     "compiledIr": {
       "cardNumber": "BSC24-X05",
       "name": "The EvilGod Gatanothor",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 10000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 15000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 10,
+          "bp": 30000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] (Opposing Refresh Step)\nIf the opponent has Soul Core on their Field/Reserve, they can't return any core from their Trash to their Reserve.\n\n[LV2][LV3] (When Attacks)\nDestroy an opposing Cost 8 or less Spirit. If [Soul Core](Soul Core) is on this Spirit, the opposing Spirit destroyed by this effect is returned to the deckbottom.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BSC24-X05#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2430,8 +2647,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "REFRESH_STEP",
+            "timings": [
+              "REFRESH_STEP"
+            ],
             "timingLabel": "Opposing Refresh Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "OPPONENT",
+            "timingTriggers": [
+              "REFRESH_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2440,10 +2666,14 @@
             "isMain": false,
             "cleanBody": "If the opponent has Soul Core on their Field/Reserve, they can't return any core from their Trash to their Reserve."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (Opposing Refresh Step)\nIf the opponent has Soul Core on their Field/Reserve, they can't return any core from their Trash to their Reserve.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "If the opponent has Soul Core on their Field/Reserve, they can't return any core from their Trash to their Reserve.",
+              "originalClauseText": "If the opponent has Soul Core on their Field/Reserve, they can't return any core from their Trash to their Reserve.",
               "cleanText": "they can't return any core from their Trash to their Reserve",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2458,10 +2688,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC24-X05#a0",
+          "keywords": [],
+          "id": "BSC24-X05#AB_REFRESH_STEP_NONE_LV1_LV2_LV3_b5b8f93706e34433305f25df9a1cce67871555de52f8ed93fdb716ad6290d31d_632b743f6c8b6c226f256285cc74214e",
+          "physicalId": "BSC24-X05#AB_REFRESH_STEP_NONE_LV1_LV2_LV3_b5b8f93706e34433305f25df9a1cce67871555de52f8ed93fdb716ad6290d31d_632b743f6c8b6c226f256285cc74214e",
+          "semanticId": "SEM#AB_REFRESH_STEP_NONE_LV1_LV2_LV3_b5b8f93706e34433305f25df9a1cce67871555de52f8ed93fdb716ad6290d31d_632b743f6c8b6c226f256285cc74214e",
+          "semanticIdV3": "SEM3#AB_REFRESH_STEP_NONE_LV1_LV2_LV3_975c65fa5cb5f280d7fbf22b51799f421fbebf2c0919a6145987a89abbb35c42_a127bd983ed0809fab4b368336a69ff7",
+          "timingSemantics": {
+            "timingOwner": "OPPONENT",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "REFRESH_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC24-X05#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2471,8 +2715,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2481,10 +2734,14 @@
             "isMain": false,
             "cleanBody": "Destroy an opposing Cost 8 or less Spirit. If [Soul Core](Soul Core) is on this Spirit, the opposing Spirit destroyed by this effect is returned to the deckbottom."
           },
+          "originalAbilityText": "[LV2][LV3] (When Attacks)\nDestroy an opposing Cost 8 or less Spirit. If [Soul Core](Soul Core) is on this Spirit, the opposing Spirit destroyed by this effect is returned to the deckbottom.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Destroy an opposing Cost 8 or less Spirit.",
+              "originalClauseText": "Destroy an opposing Cost 8 or less Spirit.",
               "cleanText": "Destroy an opposing Cost 8 or less Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2506,7 +2763,9 @@
             },
             {
               "rawText": "If [Soul Core] is on this Spirit, the opposing Spirit destroyed by this effect is returned to the deckbottom.",
+              "originalClauseText": "If [Soul Core] is on this Spirit, the opposing Spirit destroyed by this effect is returned to the deckbottom.",
               "cleanText": "the opposing Spirit destroyed by this effect is returned to the deckbottom",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2521,7 +2780,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC24-X05#a1",
+          "keywords": [],
+          "id": "BSC24-X05#AB_WHEN_ATTACKS_NONE_LV2_LV3_8142ebda588dd7559c2dc6624a199c0875bf83233eb363fb37b138711093286d_4b61648d54abd9c60186ea89cd6399ab",
+          "physicalId": "BSC24-X05#AB_WHEN_ATTACKS_NONE_LV2_LV3_8142ebda588dd7559c2dc6624a199c0875bf83233eb363fb37b138711093286d_4b61648d54abd9c60186ea89cd6399ab",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_8142ebda588dd7559c2dc6624a199c0875bf83233eb363fb37b138711093286d_4b61648d54abd9c60186ea89cd6399ab",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_75cc29c985c51b1952ee7fbb4125b8c5c0b9e29b77e8afbdeb33ad45deff44a4_dced4ea14bb6257419fe9308c396c9fb",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -3009,10 +3283,13 @@
     "compiledIr": {
       "cardNumber": "BSC24-043",
       "name": "The Kaiju Graveyard",
+      "type": "Nexus",
+      "levels": {},
+      "originalEffectText": "[LV1][LV2] (Either Attack Step)\nWhen your Spirits are destroyed by the opponent, draw a card.\n\n[LV2] (Start of Opposing Attack Step)\nYou can summon a Cost 5 or less \"Kaiju\"/\"Seijin\"-named Spirit card from your Trash by using [Soul Core](Soul Core) as part of its summon cost.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BSC24-043#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3022,8 +3299,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3032,10 +3318,14 @@
             "isMain": false,
             "cleanBody": "When your Spirits are destroyed by the opponent, draw a card."
           },
+          "originalAbilityText": "[LV1][LV2] (Either Attack Step)\nWhen your Spirits are destroyed by the opponent, draw a card.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When your Spirits are destroyed by the opponent, draw a card.",
+              "originalClauseText": "When your Spirits are destroyed by the opponent, draw a card.",
               "cleanText": "When your Spirits are destroyed by the opponent, draw a card",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -3049,10 +3339,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC24-043#a0",
+          "keywords": [],
+          "id": "BSC24-043#AB_ATTACK_STEP_NONE_LV1_LV2_90c477e85f660ae1f00375a9a0ffabf24a29125fd62c0065b90523cc3eec1520_38e96b51fad477188e32b8a403aa9169",
+          "physicalId": "BSC24-043#AB_ATTACK_STEP_NONE_LV1_LV2_90c477e85f660ae1f00375a9a0ffabf24a29125fd62c0065b90523cc3eec1520_38e96b51fad477188e32b8a403aa9169",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_90c477e85f660ae1f00375a9a0ffabf24a29125fd62c0065b90523cc3eec1520_38e96b51fad477188e32b8a403aa9169",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_45845bf66095df70cc44da12c12c457356076fe42b2fd308d3cf095e58f08fa5_0ec37f5669f6ac9810b146919d88bcd4",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC24-043#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3061,8 +3365,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Start of Opposing Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "OPPONENT",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3071,10 +3384,14 @@
             "isMain": false,
             "cleanBody": "You can summon a Cost 5 or less \"Kaiju\"/\"Seijin\"-named Spirit card from your Trash by using [Soul Core](Soul Core) as part of its summon cost."
           },
+          "originalAbilityText": "[LV2] (Start of Opposing Attack Step)\nYou can summon a Cost 5 or less \"Kaiju\"/\"Seijin\"-named Spirit card from your Trash by using [Soul Core](Soul Core) as part of its summon cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can summon a Cost 5 or less \"Kaiju\"/\"Seijin\"-named Spirit card from your Trash by using [Soul Core] as part of its summon cost.",
+              "originalClauseText": "You can summon a Cost 5 or less \"Kaiju\"/\"Seijin\"-named Spirit card from your Trash by using [Soul Core] as part of its summon cost.",
               "cleanText": "You can summon a Cost 5 or less \"Kaiju\"/\"Seijin\"-named Spirit card from your Trash by using [Soul Core] as part of its summon cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -3082,11 +3399,42 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "costLte": 5,
+                  "nameIncludes": "Kaiju",
+                  "nameIncludesAny": [
+                    "Kaiju",
+                    "Seijin"
+                  ]
+                },
+                "free": false,
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC24-043#a1",
+          "keywords": [],
+          "id": "BSC24-043#AB_ATTACK_STEP_NONE_LV2_dfd3e39253f3f433bd2b1c605b7c7616555f9c6b45fff7eebe6bbff89b26ddd5_1f0a10d10663ab5ed7f779755d534993",
+          "physicalId": "BSC24-043#AB_ATTACK_STEP_NONE_LV2_dfd3e39253f3f433bd2b1c605b7c7616555f9c6b45fff7eebe6bbff89b26ddd5_1f0a10d10663ab5ed7f779755d534993",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_dfd3e39253f3f433bd2b1c605b7c7616555f9c6b45fff7eebe6bbff89b26ddd5_1f0a10d10663ab5ed7f779755d534993",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_7cba23591a39e65031b776af1ade756faa74ece00f61c97603db5f53ab0034dd_f92a69d03ae6d057f575ecf11a3b072a",
+          "timingSemantics": {
+            "timingOwner": "OPPONENT",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -4841,10 +5189,13 @@
     "compiledIr": {
       "cardNumber": "BSC24-046",
       "name": "The SuperAncientRuins R'lyeh",
+      "type": "Nexus",
+      "levels": {},
+      "originalEffectText": "[LV1][LV2] (Either Attack Step)\nWhen your \"Kaiju\"-named Spirit is destroyed, draw two cards, then discard two cards from your Hand.\n\n[LV2] (Start of Either Attack Step)\nYou can summon one [The SuperAncientApexSoldierKaiju Zoiger] from your Hand/Trash, without paying the cost.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BSC24-046#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4854,8 +5205,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4864,10 +5224,14 @@
             "isMain": false,
             "cleanBody": "When your \"Kaiju\"-named Spirit is destroyed, draw two cards, then discard two cards from your Hand."
           },
+          "originalAbilityText": "[LV1][LV2] (Either Attack Step)\nWhen your \"Kaiju\"-named Spirit is destroyed, draw two cards, then discard two cards from your Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When your \"Kaiju\"-named Spirit is destroyed, draw two cards, then discard two cards from your Hand.",
+              "originalClauseText": "When your \"Kaiju\"-named Spirit is destroyed, draw two cards, then discard two cards from your Hand.",
               "cleanText": "When your \"Kaiju\"-named Spirit is destroyed, draw two cards, then discard two cards from your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -4881,10 +5245,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC24-046#a0",
+          "keywords": [],
+          "id": "BSC24-046#AB_ATTACK_STEP_NONE_LV1_LV2_a126529017096b06eb66bf2be5736fc043fd7705866ca09accef4f331418c555_a2d5698563fb0ea1079161c04f4edf3b",
+          "physicalId": "BSC24-046#AB_ATTACK_STEP_NONE_LV1_LV2_a126529017096b06eb66bf2be5736fc043fd7705866ca09accef4f331418c555_a2d5698563fb0ea1079161c04f4edf3b",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_a126529017096b06eb66bf2be5736fc043fd7705866ca09accef4f331418c555_a2d5698563fb0ea1079161c04f4edf3b",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_08b3d1f98972cb97e3403dc33a13b47e4e6811e2d694dbad77645e3970595b83_4453cc69070dc0f71964eeabaf600de8",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC24-046#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4893,8 +5271,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Start of Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4903,10 +5290,14 @@
             "isMain": false,
             "cleanBody": "You can summon one [The SuperAncientApexSoldierKaiju Zoiger] from your Hand/Trash, without paying the cost."
           },
+          "originalAbilityText": "[LV2] (Start of Either Attack Step)\nYou can summon one [The SuperAncientApexSoldierKaiju Zoiger] from your Hand/Trash, without paying the cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can summon one [The SuperAncientApexSoldierKaiju Zoiger] from your Hand/Trash, without paying the cost.",
+              "originalClauseText": "You can summon one [The SuperAncientApexSoldierKaiju Zoiger] from your Hand/Trash, without paying the cost.",
               "cleanText": "You can summon one [The SuperAncientApexSoldierKaiju Zoiger] from your Hand/Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -4914,11 +5305,36 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand_or_trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "free": true,
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC24-046#a1",
+          "keywords": [],
+          "id": "BSC24-046#AB_ATTACK_STEP_NONE_LV2_f08ebab2ac6585fe588f5af85cbf5149b45cfc1689d7aa524569e119115efe15_96aee71cc38689b287fedcd9214a14db",
+          "physicalId": "BSC24-046#AB_ATTACK_STEP_NONE_LV2_f08ebab2ac6585fe588f5af85cbf5149b45cfc1689d7aa524569e119115efe15_96aee71cc38689b287fedcd9214a14db",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_f08ebab2ac6585fe588f5af85cbf5149b45cfc1689d7aa524569e119115efe15_96aee71cc38689b287fedcd9214a14db",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_af7526bec3807e9457defe3a043be6844bb99243051280357eba427da750b142_be64f96d0f027424df2531a21dd4302f",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -5401,10 +5817,24 @@
     "compiledIr": {
       "cardNumber": "BSC24-X03",
       "name": "Ultraman Belial",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 8000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "[LV1][LV2] (When Attacks)\nYou can summon a \"Kaiju\"/\"Seijin\"-named Spirit card from your Trash without paying the cost.\n\n[LV2] (When Attacks)\nDestroy an opposing exhausted Spirit. If [Soul Core](Soul Core) is on this Spirit, also, send cores equal to the level of the destroyed opposing Spirit from it to the Void.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BSC24-X03#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -5414,8 +5844,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -5424,10 +5863,14 @@
             "isMain": false,
             "cleanBody": "You can summon a \"Kaiju\"/\"Seijin\"-named Spirit card from your Trash without paying the cost."
           },
+          "originalAbilityText": "[LV1][LV2] (When Attacks)\nYou can summon a \"Kaiju\"/\"Seijin\"-named Spirit card from your Trash without paying the cost.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "You can summon a \"Kaiju\"/\"Seijin\"-named Spirit card from your Trash without paying the cost.",
+              "originalClauseText": "You can summon a \"Kaiju\"/\"Seijin\"-named Spirit card from your Trash without paying the cost.",
               "cleanText": "You can summon a \"Kaiju\"/\"Seijin\"-named Spirit card from your Trash without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -5435,14 +5878,43 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "Kaiju",
+                  "nameIncludesAny": [
+                    "Kaiju",
+                    "Seijin"
+                  ]
+                },
+                "free": true,
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC24-X03#a0",
+          "keywords": [],
+          "id": "BSC24-X03#AB_WHEN_ATTACKS_NONE_LV1_LV2_7c35cbbaaaca59a77936c86d9820356a7101d4b4cdc12392538b5bbfa99f7779_7199818a8c79bd9aab0de790e9eca0d0",
+          "physicalId": "BSC24-X03#AB_WHEN_ATTACKS_NONE_LV1_LV2_7c35cbbaaaca59a77936c86d9820356a7101d4b4cdc12392538b5bbfa99f7779_7199818a8c79bd9aab0de790e9eca0d0",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_7c35cbbaaaca59a77936c86d9820356a7101d4b4cdc12392538b5bbfa99f7779_7199818a8c79bd9aab0de790e9eca0d0",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_53eaea0cbbf73d0444f9cba5d5fc2feeef17989c0838c5379375c8deda838ec5_bf22574a430de7d8cb981ac87039a14a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC24-X03#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -5451,8 +5923,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -5461,10 +5942,14 @@
             "isMain": false,
             "cleanBody": "Destroy an opposing exhausted Spirit. If [Soul Core](Soul Core) is on this Spirit, also, send cores equal to the level of the destroyed opposing Spirit from it to the Void."
           },
+          "originalAbilityText": "[LV2] (When Attacks)\nDestroy an opposing exhausted Spirit. If [Soul Core](Soul Core) is on this Spirit, also, send cores equal to the level of the destroyed opposing Spirit from it to the Void.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Destroy an opposing exhausted Spirit.",
+              "originalClauseText": "Destroy an opposing exhausted Spirit.",
               "cleanText": "Destroy an opposing exhausted Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -5486,7 +5971,9 @@
             },
             {
               "rawText": "If [Soul Core] is on this Spirit, also, send cores equal to the level of the destroyed opposing Spirit from it to the Void.",
+              "originalClauseText": "If [Soul Core] is on this Spirit, also, send cores equal to the level of the destroyed opposing Spirit from it to the Void.",
               "cleanText": "also, send cores equal to the level of the destroyed opposing Spirit from it to the Void",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -5504,7 +5991,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC24-X03#a1",
+          "keywords": [],
+          "id": "BSC24-X03#AB_WHEN_ATTACKS_NONE_LV2_19073930bca1efd8f64333b0be15b8577a208e04d7e562f9323da6aaffd2a66a_3742a2e55391c5df6f0a7d7f6623366d",
+          "physicalId": "BSC24-X03#AB_WHEN_ATTACKS_NONE_LV2_19073930bca1efd8f64333b0be15b8577a208e04d7e562f9323da6aaffd2a66a_3742a2e55391c5df6f0a7d7f6623366d",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_19073930bca1efd8f64333b0be15b8577a208e04d7e562f9323da6aaffd2a66a_3742a2e55391c5df6f0a7d7f6623366d",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_a1e30c0c9ac1c40656d340d588a47fe49a0915d990ae60d437a07aeb0a4846d7_741481f4bfe4e19e08ce69cf0110a379",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,

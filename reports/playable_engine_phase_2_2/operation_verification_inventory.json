@@ -1,0 +1,5804 @@
+{
+  "metadata": {
+    "generatedAt": "2026-11-21T05:13:35.112Z",
+    "totalShards": 514,
+    "totalCards": 15398,
+    "totalAbilities": 36422,
+    "totalClauses": 51734,
+    "totalOpcodes": 288,
+    "methodology": "5-Tier Evidence-Based Strict Classification"
+  },
+  "tiers": {
+    "FULLY_SUPPORTED": {
+      "opCount": 9,
+      "clauseCount": 26777,
+      "cardCount": 22339,
+      "clausePercentage": "51.76%"
+    },
+    "SEMANTICALLY_VERIFIED": {
+      "opCount": 15,
+      "clauseCount": 5947,
+      "cardCount": 5451,
+      "clausePercentage": "11.50%"
+    },
+    "RUNTIME_TESTED": {
+      "opCount": 23,
+      "clauseCount": 9725,
+      "cardCount": 8676,
+      "clausePercentage": "18.80%"
+    },
+    "HANDLER_PRESENT": {
+      "opCount": 198,
+      "clauseCount": 8472,
+      "cardCount": 7730,
+      "clausePercentage": "16.38%"
+    },
+    "PARSED_ONLY": {
+      "opCount": 43,
+      "clauseCount": 813,
+      "cardCount": 765,
+      "clausePercentage": "1.57%"
+    }
+  },
+  "operations": [
+    {
+      "op": "MOVE_CORE",
+      "clauseCount": 6917,
+      "cardCount": 5115,
+      "tier": "FULLY_SUPPORTED",
+      "handlerImplemented": true,
+      "verificationStatus": "FULLY_SUPPORTED",
+      "testReferences": {
+        "unit": [
+          "bs01_card_effects.test.js",
+          "bs02_card_effects.test.js",
+          "bs08_card_effects.test.js",
+          "bs10_card_effects.test.js",
+          "bs12_card_effects.test.js",
+          "bs13_card_effects.test.js",
+          "bs14_card_effects.test.js",
+          "card_effect_discrepancy_regression.test.js",
+          "engine_core.test.js",
+          "engine_discrepancy_audit.test.js",
+          "eternal_17_soulcore_keywords.test.js",
+          "golden_compiler.test.js",
+          "phase3_continuous_and_cost_gating.test.js",
+          "phase4c1_1_coexisting_effects_and_targets.test.js",
+          "phase8_card_rollout.test.js",
+          "runtime_activation_limits.test.js",
+          "sd01_card_effects.test.js",
+          "sd02_card_effects.test.js",
+          "sd13_card_effects.test.js",
+          "sd16_card_effects.test.js",
+          "sd19_card_effects.test.js",
+          "sd22_card_effects.test.js",
+          "standard_deck_green.test.js",
+          "work_package_k0_engine_health.test.js",
+          "work_package_k1_4_foundation_remediation.test.js",
+          "work_package_k1_5_foundation_closure.test.js"
+        ],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 27
+      },
+      "stateMutationVerified": true,
+      "rationale": "Verified in production complete matches (40-card legal decks), real-card E2E regressions, atomic state mutations, and event emissions."
+    },
+    {
+      "op": "DESTROY",
+      "clauseCount": 4294,
+      "cardCount": 3493,
+      "tier": "FULLY_SUPPORTED",
+      "handlerImplemented": true,
+      "verificationStatus": "FULLY_SUPPORTED",
+      "testReferences": {
+        "unit": [
+          "bs01_card_effects.test.js",
+          "bs02_card_effects.test.js",
+          "bs03_card_effects.test.js",
+          "bs04_card_effects.test.js",
+          "bs05_card_effects.test.js",
+          "bs06_card_effects.test.js",
+          "bs09_card_effects.test.js",
+          "bs10_card_effects.test.js",
+          "bs11_card_effects.test.js",
+          "bs12_card_effects.test.js",
+          "bs13_card_effects.test.js",
+          "bs14_card_effects.test.js",
+          "effect_execution_targeting_conditions.test.js",
+          "engine_core.test.js",
+          "eternal_17_flag_nexus.test.js",
+          "eternal_17_standby_unification.test.js",
+          "golden_compiler.test.js",
+          "interaction_protocol.test.js",
+          "m3_continuous_ops.test.js",
+          "phase4b1_unified_targeting.test.js",
+          "phase4b2_1_corrective_audit.test.js",
+          "phase4b2_2_final_fixes.test.js",
+          "phase4b2_3_event_bus_and_coverage.test.js",
+          "phase4b2_destroy_bounce.test.js",
+          "phase4b3_reveal_burst_replace_summon.test.js",
+          "phase4c1_1_coexisting_effects_and_targets.test.js",
+          "phase4c1_conditional_destruction_immunity.test.js",
+          "phase4c2_relative_comparison_target_filters.test.js",
+          "phase8_card_rollout.test.js",
+          "physical_ability_identity.test.js",
+          "physical_ability_identity_corrective.test.js",
+          "physical_ability_identity_final.test.js",
+          "physical_ability_identity_integrity.test.js",
+          "prompt_manager_compatibility.test.js",
+          "runtime_activation_limits.test.js",
+          "scenarios_r01_r35.test.js",
+          "sd01_card_effects.test.js",
+          "sd02_card_effects.test.js",
+          "sd03_card_effects.test.js",
+          "sd06_card_effects.test.js",
+          "sd10_card_effects.test.js",
+          "sd13_card_effects.test.js",
+          "sd16_card_effects.test.js",
+          "sd17_card_effects.test.js",
+          "sd24_card_effects.test.js",
+          "sd25_card_effects.test.js",
+          "sd26_card_effects.test.js",
+          "sd27_card_effects.test.js",
+          "sd46_card_effects.test.js",
+          "standard_deck_red.test.js",
+          "work_package_c2_evidence_and_compiler.test.js",
+          "work_package_de_operations_and_cards.test.js",
+          "work_package_fg1_restrictions_conditions_evidence.test.js",
+          "work_package_fg2_semantics_tristate_restrictions.test.js",
+          "work_package_fg_targeting_conditions_continuous.test.js",
+          "work_package_hij1_adversarial_determinism.test.js",
+          "work_package_hij1_operation_variants.test.js",
+          "work_package_hij_operations_compiler_integration.test.js",
+          "work_package_k0_1_remediation.test.js",
+          "work_package_k1_1_discovery_integrity.test.js",
+          "work_package_k1_4_foundation_remediation.test.js",
+          "work_package_k1_5_foundation_closure.test.js",
+          "work_package_k1_batch_05_complex_effects.test.js"
+        ],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 64
+      },
+      "stateMutationVerified": true,
+      "rationale": "Verified in production complete matches (40-card legal decks), real-card E2E regressions, atomic state mutations, and event emissions."
+    },
+    {
+      "op": "BOUNCE",
+      "clauseCount": 3721,
+      "cardCount": 3157,
+      "tier": "FULLY_SUPPORTED",
+      "handlerImplemented": true,
+      "verificationStatus": "FULLY_SUPPORTED",
+      "testReferences": {
+        "unit": [
+          "arena_ir_shard_loader.test.js",
+          "bs04_card_effects.test.js",
+          "bs06_card_effects.test.js",
+          "bs09_card_effects.test.js",
+          "bs12_card_effects.test.js",
+          "bs14_card_effects.test.js",
+          "effect_execution_targeting_conditions.test.js",
+          "identity_consumer_compatibility.test.js",
+          "m3_continuous_ops.test.js",
+          "phase2a_execution_correctness.test.js",
+          "phase4b1_unified_targeting.test.js",
+          "phase4b2_1_corrective_audit.test.js",
+          "phase4b2_2_final_fixes.test.js",
+          "phase4b2_3_event_bus_and_coverage.test.js",
+          "phase4b2_destroy_bounce.test.js",
+          "phase4c2_relative_comparison_target_filters.test.js",
+          "sd01_card_effects.test.js",
+          "sd11_card_effects.test.js",
+          "sd15_card_effects.test.js",
+          "sd17_card_effects.test.js",
+          "sd20_card_effects.test.js",
+          "sd23_card_effects.test.js",
+          "work_package_c2_evidence_and_compiler.test.js",
+          "work_package_de_operations_and_cards.test.js",
+          "work_package_fg1_restrictions_conditions_evidence.test.js",
+          "work_package_fg2_semantics_tristate_restrictions.test.js",
+          "work_package_fg_targeting_conditions_continuous.test.js",
+          "work_package_hij2_runtime_atomicity.test.js",
+          "work_package_k0_1_remediation.test.js",
+          "work_package_k0_engine_health.test.js",
+          "work_package_k1_4_foundation_remediation.test.js",
+          "work_package_k1_5_foundation_closure.test.js",
+          "work_package_k1_batch_05_complex_effects.test.js"
+        ],
+        "e2e": [
+          "real_cards_17_strengthened_regression.test.js",
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 35
+      },
+      "stateMutationVerified": true,
+      "rationale": "Verified in production complete matches (40-card legal decks), real-card E2E regressions, atomic state mutations, and event emissions."
+    },
+    {
+      "op": "DRAW",
+      "clauseCount": 2981,
+      "cardCount": 2718,
+      "tier": "FULLY_SUPPORTED",
+      "handlerImplemented": true,
+      "verificationStatus": "FULLY_SUPPORTED",
+      "testReferences": {
+        "unit": [
+          "accel_mechanics.test.js",
+          "arena_ir_shard_loader.test.js",
+          "arena_standard_decks_match_simulation.test.js",
+          "booster_set_saga_handlers.test.js",
+          "bs01_card_effects.test.js",
+          "bs03_card_effects.test.js",
+          "bs04_card_effects.test.js",
+          "bs06_card_effects.test.js",
+          "bs13_card_effects.test.js",
+          "bs14_card_effects.test.js",
+          "card_effect_discrepancy_regression.test.js",
+          "constellation_saga_handlers.test.js",
+          "contract_advent_modal_and_timing.test.js",
+          "core_game_rules_engine.test.js",
+          "effect_execution_targeting_conditions.test.js",
+          "engine_core.test.js",
+          "engine_discrepancy_audit.test.js",
+          "eternal_17_burst_declaration.test.js",
+          "eternal_17_soulcore_keywords.test.js",
+          "eternal_17_standby_unification.test.js",
+          "free_summon_without_cost.test.js",
+          "golden_compiler.test.js",
+          "identity_consumer_compatibility.test.js",
+          "identity_subsystem_e2e_acceptance.test.js",
+          "keyword_registry.test.js",
+          "m3_continuous_ops.test.js",
+          "multiplayer_service_sync.test.js",
+          "phase11_clash_flash_grant_status.test.js",
+          "phase2a_execution_correctness.test.js",
+          "phase2b1_corrective_patch.test.js",
+          "phase2b_state_and_modifiers.test.js",
+          "phase3_continuous_and_cost_gating.test.js",
+          "phase4a_structured_conditions.test.js",
+          "phase4b1_unified_targeting.test.js",
+          "phase4b3_reveal_burst_replace_summon.test.js",
+          "phase5_windows_ai.test.js",
+          "phase8_card_rollout.test.js",
+          "physical_ability_identity.test.js",
+          "physical_ability_identity_corrective.test.js",
+          "physical_ability_identity_final.test.js",
+          "physical_ability_identity_integrity.test.js",
+          "public_release_e2e_match.test.js",
+          "runtime_activation_limits.test.js",
+          "scenarios_r01_r35.test.js",
+          "sd01_card_effects.test.js",
+          "sd02_card_effects.test.js",
+          "sd03_card_effects.test.js",
+          "sd06_card_effects.test.js",
+          "sd10_card_effects.test.js",
+          "sd13_card_effects.test.js",
+          "sd15_card_effects.test.js",
+          "sd19_card_effects.test.js",
+          "sd25_card_effects.test.js",
+          "sd27_card_effects.test.js",
+          "sd65_four_demon_lords.test.js",
+          "semantic_fidelity_sagas_1_to_3.test.js",
+          "soul_drive.test.js",
+          "standard_deck_red.test.js",
+          "structured_legacy_bridge.test.js",
+          "summon_core_modal.test.js",
+          "timing_triggers_continuous_sba.test.js",
+          "work_package_c1_auditor_and_regression.test.js",
+          "work_package_c2_evidence_and_compiler.test.js",
+          "work_package_c_ops_conditions_compiler.test.js",
+          "work_package_de_operations_and_cards.test.js",
+          "work_package_fg1_restrictions_conditions_evidence.test.js",
+          "work_package_fg2_semantics_tristate_restrictions.test.js",
+          "work_package_fg_targeting_conditions_continuous.test.js",
+          "work_package_hij1_adversarial_determinism.test.js",
+          "work_package_hij2_compiler_comparator.test.js",
+          "work_package_hij_operations_compiler_integration.test.js",
+          "work_package_k0_1_remediation.test.js",
+          "work_package_k0_engine_health.test.js",
+          "work_package_k1_1_discovery_integrity.test.js",
+          "work_package_k1_2_discovery_integrity.test.js",
+          "work_package_k1_4_foundation_remediation.test.js",
+          "work_package_k1_5_foundation_closure.test.js",
+          "work_package_k1_batch_03_keywords_prerequisites.test.js"
+        ],
+        "e2e": [
+          "real_card_semantic_validation.test.js",
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [
+          "playable_engine_complete_match.test.js"
+        ],
+        "totalReferences": 81
+      },
+      "stateMutationVerified": true,
+      "rationale": "Verified in production complete matches (40-card legal decks), real-card E2E regressions, atomic state mutations, and event emissions."
+    },
+    {
+      "op": "REFRESH",
+      "clauseCount": 2089,
+      "cardCount": 1869,
+      "tier": "FULLY_SUPPORTED",
+      "handlerImplemented": true,
+      "verificationStatus": "FULLY_SUPPORTED",
+      "testReferences": {
+        "unit": [
+          "accel_mechanics.test.js",
+          "arena_ir_shard_loader.test.js",
+          "arena_standard_decks_match_simulation.test.js",
+          "booster_set_saga_handlers.test.js",
+          "bs01_card_effects.test.js",
+          "bs02_card_effects.test.js",
+          "bs09_card_effects.test.js",
+          "bs10_card_effects.test.js",
+          "bs11_card_effects.test.js",
+          "bs12_card_effects.test.js",
+          "bs13_card_effects.test.js",
+          "bs14_card_effects.test.js",
+          "constellation_saga_handlers.test.js",
+          "contract_advent_modal_and_timing.test.js",
+          "core_game_rules_engine.test.js",
+          "engine_core.test.js",
+          "eternal_17_standby_unification.test.js",
+          "free_summon_without_cost.test.js",
+          "identity_consumer_compatibility.test.js",
+          "keywords_waves4_5_6.test.js",
+          "multiplayer_service_sync.test.js",
+          "phase11_clash_flash_grant_status.test.js",
+          "phase2b_state_and_modifiers.test.js",
+          "public_release_e2e_match.test.js",
+          "sd02_card_effects.test.js",
+          "sd11_card_effects.test.js",
+          "sd14_card_effects.test.js",
+          "sd20_card_effects.test.js",
+          "sd21_card_effects.test.js",
+          "sd24_card_effects.test.js",
+          "sd25_card_effects.test.js",
+          "sd28_card_effects.test.js",
+          "sd65_four_demon_lords.test.js",
+          "semantic_fidelity_sagas_1_to_3.test.js",
+          "soul_drive.test.js",
+          "structured_legacy_bridge.test.js",
+          "summon_core_modal.test.js",
+          "work_package_de_operations_and_cards.test.js",
+          "work_package_fg1_restrictions_conditions_evidence.test.js",
+          "work_package_fg_targeting_conditions_continuous.test.js",
+          "work_package_hij2_runtime_atomicity.test.js",
+          "work_package_k0_engine_health.test.js",
+          "work_package_k1_4_foundation_remediation.test.js",
+          "work_package_k1_5_foundation_closure.test.js"
+        ],
+        "e2e": [
+          "real_card_semantic_validation.test.js",
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 46
+      },
+      "stateMutationVerified": true,
+      "rationale": "Verified in production complete matches (40-card legal decks), real-card E2E regressions, atomic state mutations, and event emissions."
+    },
+    {
+      "op": "SUMMON",
+      "clauseCount": 2035,
+      "cardCount": 1887,
+      "tier": "FULLY_SUPPORTED",
+      "handlerImplemented": true,
+      "verificationStatus": "FULLY_SUPPORTED",
+      "testReferences": {
+        "unit": [
+          "bs06_card_effects.test.js",
+          "bs09_card_effects.test.js",
+          "m2_core_ops.test.js",
+          "m3_continuous_ops.test.js",
+          "phase4b1_unified_targeting.test.js",
+          "phase4b3_reveal_burst_replace_summon.test.js",
+          "phase4c1_1_coexisting_effects_and_targets.test.js",
+          "phase5_windows_ai.test.js",
+          "phase8_card_rollout.test.js",
+          "sd15_card_effects.test.js",
+          "sd27_card_effects.test.js",
+          "work_package_c1_auditor_and_regression.test.js",
+          "work_package_c2_evidence_and_compiler.test.js",
+          "work_package_c3_1_evidence_integrity.test.js",
+          "work_package_c3_evidence_integrity.test.js",
+          "work_package_de_operations_and_cards.test.js",
+          "work_package_hij1_1_evidence_adversarial.test.js"
+        ],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 18
+      },
+      "stateMutationVerified": true,
+      "rationale": "Verified in production complete matches (40-card legal decks), real-card E2E regressions, atomic state mutations, and event emissions."
+    },
+    {
+      "op": "BP_BUFF",
+      "clauseCount": 1955,
+      "cardCount": 1693,
+      "tier": "FULLY_SUPPORTED",
+      "handlerImplemented": true,
+      "verificationStatus": "FULLY_SUPPORTED",
+      "testReferences": {
+        "unit": [
+          "bs01_card_effects.test.js",
+          "bs02_card_effects.test.js",
+          "bs03_card_effects.test.js",
+          "bs05_card_effects.test.js",
+          "bs11_card_effects.test.js",
+          "card_effect_discrepancy_regression.test.js",
+          "core_game_rules_engine.test.js",
+          "effect_execution_targeting_conditions.test.js",
+          "golden_compiler.test.js",
+          "identity_consumer_compatibility.test.js",
+          "phase2b1_corrective_patch.test.js",
+          "phase3_continuous_and_cost_gating.test.js",
+          "phase4b2_destroy_bounce.test.js",
+          "phase4c2_relative_comparison_target_filters.test.js",
+          "phase8_card_rollout.test.js",
+          "physical_ability_identity.test.js",
+          "physical_ability_identity_final.test.js",
+          "runtime_activation_limits.test.js",
+          "scenarios_r01_r35.test.js",
+          "sd01_card_effects.test.js",
+          "sd02_card_effects.test.js",
+          "sd10_card_effects.test.js",
+          "sd14_card_effects.test.js",
+          "sd19_card_effects.test.js",
+          "sd22_card_effects.test.js",
+          "sd27_card_effects.test.js",
+          "standard_deck_white.test.js",
+          "timing_triggers_continuous_sba.test.js",
+          "work_package_c_ops_conditions_compiler.test.js",
+          "work_package_de_operations_and_cards.test.js",
+          "work_package_fg1_restrictions_conditions_evidence.test.js",
+          "work_package_fg2_semantics_tristate_restrictions.test.js",
+          "work_package_fg_targeting_conditions_continuous.test.js",
+          "work_package_hij1_adversarial_determinism.test.js",
+          "work_package_hij2_runtime_atomicity.test.js",
+          "work_package_hij_operations_compiler_integration.test.js",
+          "work_package_k0_1_remediation.test.js",
+          "work_package_k0_engine_health.test.js",
+          "work_package_k1_1_discovery_integrity.test.js",
+          "work_package_k1_4_foundation_remediation.test.js",
+          "work_package_k1_5_foundation_closure.test.js",
+          "work_package_k1_batch_05_complex_effects.test.js"
+        ],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 43
+      },
+      "stateMutationVerified": true,
+      "rationale": "Verified in production complete matches (40-card legal decks), real-card E2E regressions, atomic state mutations, and event emissions."
+    },
+    {
+      "op": "EXHAUST",
+      "clauseCount": 1950,
+      "cardCount": 1604,
+      "tier": "FULLY_SUPPORTED",
+      "handlerImplemented": true,
+      "verificationStatus": "FULLY_SUPPORTED",
+      "testReferences": {
+        "unit": [
+          "bs01_card_effects.test.js",
+          "bs02_card_effects.test.js",
+          "bs03_card_effects.test.js",
+          "bs05_card_effects.test.js",
+          "bs06_card_effects.test.js",
+          "bs07_card_effects.test.js",
+          "bs09_card_effects.test.js",
+          "bs13_card_effects.test.js",
+          "bs14_card_effects.test.js",
+          "phase4c1_2_final_verification.test.js",
+          "phase4c2_relative_comparison_target_filters.test.js",
+          "runtime_activation_limits.test.js",
+          "sd01_card_effects.test.js",
+          "sd02_card_effects.test.js",
+          "sd22_card_effects.test.js",
+          "sd28_card_effects.test.js",
+          "work_package_de_operations_and_cards.test.js",
+          "work_package_fg1_restrictions_conditions_evidence.test.js",
+          "work_package_k1_4_foundation_remediation.test.js",
+          "work_package_k1_5_foundation_closure.test.js"
+        ],
+        "e2e": [
+          "real_cards_17_strengthened_regression.test.js",
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [
+          "browser_arena_gameplay.test.js",
+          "ui_engine_integration.test.js"
+        ],
+        "totalReferences": 24
+      },
+      "stateMutationVerified": true,
+      "rationale": "Verified in production complete matches (40-card legal decks), real-card E2E regressions, atomic state mutations, and event emissions."
+    },
+    {
+      "op": "KEYWORD_RULE",
+      "clauseCount": 1674,
+      "cardCount": 1422,
+      "tier": "RUNTIME_TESTED",
+      "handlerImplemented": true,
+      "verificationStatus": "RUNTIME_TESTED",
+      "testReferences": {
+        "unit": [
+          "engine_discrepancy_audit.test.js",
+          "m4_modern_ops.test.js",
+          "phase4c1_1_coexisting_effects_and_targets.test.js",
+          "sd14_card_effects.test.js",
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 5
+      },
+      "stateMutationVerified": false,
+      "rationale": "Verified via operation variant, condition, and keyword execution suites running cleanly through engine."
+    },
+    {
+      "op": "COST_MODIFIER",
+      "clauseCount": 1578,
+      "cardCount": 1315,
+      "tier": "RUNTIME_TESTED",
+      "handlerImplemented": true,
+      "verificationStatus": "RUNTIME_TESTED",
+      "testReferences": {
+        "unit": [
+          "bs12_card_effects.test.js",
+          "engine_discrepancy_audit.test.js",
+          "m3_continuous_ops.test.js",
+          "phase3_continuous_and_cost_gating.test.js",
+          "phase4b2_destroy_bounce.test.js",
+          "sd20_card_effects.test.js",
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 8
+      },
+      "stateMutationVerified": false,
+      "rationale": "Verified via operation variant, condition, and keyword execution suites running cleanly through engine."
+    },
+    {
+      "op": "TREAT_RULE",
+      "clauseCount": 1170,
+      "cardCount": 1074,
+      "tier": "RUNTIME_TESTED",
+      "handlerImplemented": true,
+      "verificationStatus": "RUNTIME_TESTED",
+      "testReferences": {
+        "unit": [
+          "engine_discrepancy_audit.test.js",
+          "m3_continuous_ops.test.js",
+          "phase4c1_1_coexisting_effects_and_targets.test.js",
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 4
+      },
+      "stateMutationVerified": false,
+      "rationale": "Verified via operation variant, condition, and keyword execution suites running cleanly through engine."
+    },
+    {
+      "op": "REVEAL_DECKTOP",
+      "clauseCount": 1146,
+      "cardCount": 1094,
+      "tier": "RUNTIME_TESTED",
+      "handlerImplemented": true,
+      "verificationStatus": "RUNTIME_TESTED",
+      "testReferences": {
+        "unit": [
+          "bs02_card_effects.test.js",
+          "m2_core_ops.test.js",
+          "phase4b1_unified_targeting.test.js",
+          "sd03_card_effects.test.js",
+          "sd27_card_effects.test.js",
+          "sd46_card_effects.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 6
+      },
+      "stateMutationVerified": false,
+      "rationale": "Verified via operation variant, condition, and keyword execution suites running cleanly through engine."
+    },
+    {
+      "op": "ADD_TO_HAND",
+      "clauseCount": 981,
+      "cardCount": 893,
+      "tier": "SEMANTICALLY_VERIFIED",
+      "handlerImplemented": true,
+      "verificationStatus": "SEMANTICALLY_VERIFIED",
+      "testReferences": {
+        "unit": [
+          "arena_ir_shard_loader.test.js",
+          "m2_core_ops.test.js",
+          "phase4b1_unified_targeting.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 3
+      },
+      "stateMutationVerified": true,
+      "rationale": "Verified with strict state before/after assertions in real-card E2E tests and semantic validation suites."
+    },
+    {
+      "op": "ADVENT_STACK",
+      "clauseCount": 908,
+      "cardCount": 874,
+      "tier": "RUNTIME_TESTED",
+      "handlerImplemented": true,
+      "verificationStatus": "RUNTIME_TESTED",
+      "testReferences": {
+        "unit": [
+          "golden_compiler.test.js",
+          "multiplayer_service_sync.test.js",
+          "work_package_de_operations_and_cards.test.js",
+          "work_package_hij1_operation_variants.test.js",
+          "work_package_k1_batch_03_keywords_prerequisites.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 5
+      },
+      "stateMutationVerified": false,
+      "rationale": "Verified via operation variant, condition, and keyword execution suites running cleanly through engine."
+    },
+    {
+      "op": "DISCARD_HAND",
+      "clauseCount": 864,
+      "cardCount": 808,
+      "tier": "SEMANTICALLY_VERIFIED",
+      "handlerImplemented": true,
+      "verificationStatus": "SEMANTICALLY_VERIFIED",
+      "testReferences": {
+        "unit": [
+          "bs01_card_effects.test.js",
+          "bs10_card_effects.test.js",
+          "golden_compiler.test.js",
+          "phase2a_execution_correctness.test.js",
+          "scenarios_r01_r35.test.js",
+          "work_package_de_operations_and_cards.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 6
+      },
+      "stateMutationVerified": true,
+      "rationale": "Verified with strict state before/after assertions in real-card E2E tests and semantic validation suites."
+    },
+    {
+      "op": "IMMUNITY",
+      "clauseCount": 858,
+      "cardCount": 803,
+      "tier": "SEMANTICALLY_VERIFIED",
+      "handlerImplemented": true,
+      "verificationStatus": "SEMANTICALLY_VERIFIED",
+      "testReferences": {
+        "unit": [
+          "arena_ir_shard_loader.test.js",
+          "bs06_card_effects.test.js",
+          "m3_continuous_ops.test.js",
+          "phase4c1_1_coexisting_effects_and_targets.test.js",
+          "sd21_card_effects.test.js",
+          "sd24_card_effects.test.js",
+          "work_package_de_operations_and_cards.test.js",
+          "work_package_fg1_restrictions_conditions_evidence.test.js"
+        ],
+        "e2e": [
+          "real_card_semantic_validation.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 9
+      },
+      "stateMutationVerified": true,
+      "rationale": "Verified with strict state before/after assertions in real-card E2E tests and semantic validation suites."
+    },
+    {
+      "op": "SUMMON_FREE",
+      "clauseCount": 835,
+      "cardCount": 803,
+      "tier": "FULLY_SUPPORTED",
+      "handlerImplemented": true,
+      "verificationStatus": "FULLY_SUPPORTED",
+      "testReferences": {
+        "unit": [
+          "bs14_card_effects.test.js",
+          "golden_compiler.test.js",
+          "phase4b1_unified_targeting.test.js",
+          "phase4b3_reveal_burst_replace_summon.test.js",
+          "work_package_c1_auditor_and_regression.test.js",
+          "work_package_fg1_restrictions_conditions_evidence.test.js"
+        ],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 7
+      },
+      "stateMutationVerified": true,
+      "rationale": "Verified in production complete matches (40-card legal decks), real-card E2E regressions, atomic state mutations, and event emissions."
+    },
+    {
+      "op": "ADD_SYMBOL",
+      "clauseCount": 787,
+      "cardCount": 719,
+      "tier": "SEMANTICALLY_VERIFIED",
+      "handlerImplemented": true,
+      "verificationStatus": "SEMANTICALLY_VERIFIED",
+      "testReferences": {
+        "unit": [
+          "bs12_card_effects.test.js",
+          "bs13_card_effects.test.js",
+          "engine_discrepancy_audit.test.js",
+          "m3_continuous_ops.test.js",
+          "phase3_continuous_and_cost_gating.test.js",
+          "phase4c1_1_coexisting_effects_and_targets.test.js",
+          "sd26_card_effects.test.js",
+          "work_package_fg1_restrictions_conditions_evidence.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 8
+      },
+      "stateMutationVerified": true,
+      "rationale": "Verified with strict state before/after assertions in real-card E2E tests and semantic validation suites."
+    },
+    {
+      "op": "MILL_DECK",
+      "clauseCount": 755,
+      "cardCount": 667,
+      "tier": "SEMANTICALLY_VERIFIED",
+      "handlerImplemented": true,
+      "verificationStatus": "SEMANTICALLY_VERIFIED",
+      "testReferences": {
+        "unit": [
+          "booster_set_saga_handlers.test.js",
+          "bs03_card_effects.test.js",
+          "bs08_card_effects.test.js",
+          "bs10_card_effects.test.js",
+          "bs11_card_effects.test.js",
+          "bs14_card_effects.test.js",
+          "phase8_card_rollout.test.js",
+          "sd16_card_effects.test.js",
+          "standard_deck_blue.test.js",
+          "work_package_de_operations_and_cards.test.js",
+          "work_package_fg1_restrictions_conditions_evidence.test.js",
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 12
+      },
+      "stateMutationVerified": true,
+      "rationale": "Verified with strict state before/after assertions in real-card E2E tests and semantic validation suites."
+    },
+    {
+      "op": "SUMMON_THIS_CARD",
+      "clauseCount": 746,
+      "cardCount": 721,
+      "tier": "RUNTIME_TESTED",
+      "handlerImplemented": true,
+      "verificationStatus": "RUNTIME_TESTED",
+      "testReferences": {
+        "unit": [
+          "bs14_card_effects.test.js",
+          "m2_core_ops.test.js",
+          "sd06_card_effects.test.js",
+          "sd25_card_effects.test.js",
+          "sd27_card_effects.test.js",
+          "sd28_card_effects.test.js",
+          "sd46_card_effects.test.js",
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 8
+      },
+      "stateMutationVerified": false,
+      "rationale": "Verified via operation variant, condition, and keyword execution suites running cleanly through engine."
+    },
+    {
+      "op": "COMBAT_RESTRICTION",
+      "clauseCount": 657,
+      "cardCount": 599,
+      "tier": "RUNTIME_TESTED",
+      "handlerImplemented": true,
+      "verificationStatus": "RUNTIME_TESTED",
+      "testReferences": {
+        "unit": [
+          "m3_continuous_ops.test.js",
+          "phase4c1_2_final_verification.test.js",
+          "sd21_card_effects.test.js",
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 4
+      },
+      "stateMutationVerified": false,
+      "rationale": "Verified via operation variant, condition, and keyword execution suites running cleanly through engine."
+    },
+    {
+      "op": "ADD_COUNTER",
+      "clauseCount": 625,
+      "cardCount": 583,
+      "tier": "RUNTIME_TESTED",
+      "handlerImplemented": true,
+      "verificationStatus": "RUNTIME_TESTED",
+      "testReferences": {
+        "unit": [
+          "golden_compiler.test.js",
+          "m3_continuous_ops.test.js",
+          "phase2a_execution_correctness.test.js",
+          "phase4b1_unified_targeting.test.js",
+          "work_package_hij1_operation_variants.test.js",
+          "work_package_k1_batch_04_parameters.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 6
+      },
+      "stateMutationVerified": false,
+      "rationale": "Verified via operation variant, condition, and keyword execution suites running cleanly through engine."
+    },
+    {
+      "op": "GRANT_FAMILY",
+      "clauseCount": 573,
+      "cardCount": 520,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "bs13_card_effects.test.js",
+          "engine_discrepancy_audit.test.js",
+          "m3_continuous_ops.test.js",
+          "phase3_continuous_and_cost_gating.test.js",
+          "phase4c1_1_coexisting_effects_and_targets.test.js",
+          "work_package_fg1_restrictions_conditions_evidence.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 6
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "CONTINUOUS_RULE",
+      "clauseCount": 506,
+      "cardCount": 486,
+      "tier": "SEMANTICALLY_VERIFIED",
+      "handlerImplemented": true,
+      "verificationStatus": "SEMANTICALLY_VERIFIED",
+      "testReferences": {
+        "unit": [
+          "bs01_card_effects.test.js",
+          "bs09_card_effects.test.js",
+          "sd03_card_effects.test.js",
+          "sd11_card_effects.test.js",
+          "sd20_card_effects.test.js",
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 7
+      },
+      "stateMutationVerified": true,
+      "rationale": "Verified with strict state before/after assertions in real-card E2E tests and semantic validation suites."
+    },
+    {
+      "op": "BP_DEBUFF",
+      "clauseCount": 491,
+      "cardCount": 436,
+      "tier": "SEMANTICALLY_VERIFIED",
+      "handlerImplemented": true,
+      "verificationStatus": "SEMANTICALLY_VERIFIED",
+      "testReferences": {
+        "unit": [
+          "phase3_continuous_and_cost_gating.test.js",
+          "sd15_card_effects.test.js",
+          "sd23_card_effects.test.js",
+          "work_package_de_operations_and_cards.test.js",
+          "work_package_fg1_restrictions_conditions_evidence.test.js",
+          "work_package_fg_targeting_conditions_continuous.test.js",
+          "work_package_hij2_compiler_comparator.test.js",
+          "work_package_hij2_runtime_atomicity.test.js",
+          "work_package_k0_1_remediation.test.js",
+          "work_package_k1_4_foundation_remediation.test.js",
+          "work_package_k1_5_foundation_closure.test.js",
+          "work_package_k1_batch_05_complex_effects.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 12
+      },
+      "stateMutationVerified": true,
+      "rationale": "Verified with strict state before/after assertions in real-card E2E tests and semantic validation suites."
+    },
+    {
+      "op": "DEPLOY_NEXUS",
+      "clauseCount": 463,
+      "cardCount": 416,
+      "tier": "SEMANTICALLY_VERIFIED",
+      "handlerImplemented": true,
+      "verificationStatus": "SEMANTICALLY_VERIFIED",
+      "testReferences": {
+        "unit": [
+          "m2_core_ops.test.js",
+          "m3_continuous_ops.test.js",
+          "work_package_k1_batch_05_complex_effects.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 3
+      },
+      "stateMutationVerified": true,
+      "rationale": "Verified with strict state before/after assertions in real-card E2E tests and semantic validation suites."
+    },
+    {
+      "op": "DISCARD_REVEALED",
+      "clauseCount": 456,
+      "cardCount": 451,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "m2_core_ops.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "UNBLOCKABLE",
+      "clauseCount": 424,
+      "cardCount": 392,
+      "tier": "RUNTIME_TESTED",
+      "handlerImplemented": true,
+      "verificationStatus": "RUNTIME_TESTED",
+      "testReferences": {
+        "unit": [
+          "bs01_card_effects.test.js",
+          "m3_continuous_ops.test.js",
+          "phase4c2_relative_comparison_target_filters.test.js",
+          "sd20_card_effects.test.js",
+          "sd23_card_effects.test.js",
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 7
+      },
+      "stateMutationVerified": false,
+      "rationale": "Verified via operation variant, condition, and keyword execution suites running cleanly through engine."
+    },
+    {
+      "op": "KEYWORD_ABILITY",
+      "clauseCount": 404,
+      "cardCount": 233,
+      "tier": "RUNTIME_TESTED",
+      "handlerImplemented": true,
+      "verificationStatus": "RUNTIME_TESTED",
+      "testReferences": {
+        "unit": [
+          "m4_modern_ops.test.js",
+          "work_package_hij1_operation_variants.test.js",
+          "work_package_k1_batch_02_conditions.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 3
+      },
+      "stateMutationVerified": false,
+      "rationale": "Verified via operation variant, condition, and keyword execution suites running cleanly through engine."
+    },
+    {
+      "op": "SET_RESTRICTION",
+      "clauseCount": 350,
+      "cardCount": 325,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "m3_continuous_ops.test.js",
+          "work_package_de_operations_and_cards.test.js",
+          "work_package_fg1_restrictions_conditions_evidence.test.js",
+          "work_package_fg2_semantics_tristate_restrictions.test.js",
+          "work_package_fg_targeting_conditions_continuous.test.js"
+        ],
+        "e2e": [
+          "real_card_semantic_validation.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 6
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "RETURN_REVEALED_BOTTOM",
+      "clauseCount": 333,
+      "cardCount": 306,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "m2_core_ops.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "OPEN_ZONE",
+      "clauseCount": 302,
+      "cardCount": 286,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "TARGET_CARD",
+      "clauseCount": 293,
+      "cardCount": 184,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "RECOVER_LIFE",
+      "clauseCount": 268,
+      "cardCount": 253,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "bs01_card_effects.test.js",
+          "bs07_card_effects.test.js",
+          "bs09_card_effects.test.js",
+          "bs12_card_effects.test.js",
+          "m2_core_ops.test.js",
+          "sd06_card_effects.test.js",
+          "work_package_de_operations_and_cards.test.js",
+          "work_package_k0_1_remediation.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 8
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "TARGET",
+      "clauseCount": 265,
+      "cardCount": 200,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "effect_execution_targeting_conditions.test.js",
+          "phase4b1_unified_targeting.test.js",
+          "phase4b2_1_corrective_audit.test.js",
+          "phase4c1_2_final_verification.test.js",
+          "phase4c1_conditional_destruction_immunity.test.js",
+          "phase4c2_relative_comparison_target_filters.test.js",
+          "runtime_activation_limits.test.js",
+          "sd46_card_effects.test.js",
+          "work_package_c_ops_conditions_compiler.test.js",
+          "work_package_fg_targeting_conditions_continuous.test.js",
+          "work_package_hij1_operation_variants.test.js",
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 12
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "SUMMON_RESERVE_ONLY",
+      "clauseCount": 260,
+      "cardCount": 137,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "bs02_card_effects.test.js",
+          "bs04_card_effects.test.js",
+          "bs11_card_effects.test.js",
+          "m2_core_ops.test.js",
+          "sd14_card_effects.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 5
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "COMBAT_RULE",
+      "clauseCount": 260,
+      "cardCount": 246,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "sd06_card_effects.test.js",
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "NEGATE_EFFECT",
+      "clauseCount": 247,
+      "cardCount": 236,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "bs14_card_effects.test.js",
+          "core_game_rules_integrity_corrective.test.js",
+          "m3_continuous_ops.test.js",
+          "runtime_activation_limits.test.js",
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 5
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "DECK_OR_HAND_ACTION",
+      "clauseCount": 233,
+      "cardCount": 211,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "phase2a_execution_correctness.test.js",
+          "phase4b1_unified_targeting.test.js",
+          "work_package_c_ops_conditions_compiler.test.js",
+          "work_package_k1_batch_04_parameters.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 4
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "REBIRTH_FLIP",
+      "clauseCount": 196,
+      "cardCount": 183,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "m4_modern_ops.test.js",
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "ACTIVATE_FLASH",
+      "clauseCount": 178,
+      "cardCount": 178,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "card_effect_discrepancy_regression.test.js",
+          "golden_compiler.test.js",
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 3
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "ADVENT_PAY",
+      "clauseCount": 176,
+      "cardCount": 165,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "TARGET_ATTACK",
+      "clauseCount": 171,
+      "cardCount": 159,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "bs11_card_effects.test.js",
+          "bs13_card_effects.test.js",
+          "bs14_card_effects.test.js",
+          "golden_compiler.test.js",
+          "m3_continuous_ops.test.js",
+          "sd17_card_effects.test.js",
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 7
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "MOVE_SOUL_CORE",
+      "clauseCount": 165,
+      "cardCount": 146,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "GRANDWALKER_PROTECTION",
+      "clauseCount": 160,
+      "cardCount": 158,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "GRANDWALKER_CORE_RULE",
+      "clauseCount": 159,
+      "cardCount": 157,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "m4_modern_ops.test.js",
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "FORCE_BLOCK",
+      "clauseCount": 151,
+      "cardCount": 129,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "bs07_card_effects.test.js",
+          "bs09_card_effects.test.js",
+          "bs12_card_effects.test.js",
+          "m4_modern_ops.test.js",
+          "sd01_card_effects.test.js",
+          "sd17_card_effects.test.js",
+          "sd19_card_effects.test.js",
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 8
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "INDESTRUCTIBLE",
+      "clauseCount": 149,
+      "cardCount": 144,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "card_effect_discrepancy_regression.test.js",
+          "core_game_rules_engine.test.js",
+          "effect_execution_targeting_conditions.test.js",
+          "phase4c1_1_coexisting_effects_and_targets.test.js",
+          "phase4c1_2_final_verification.test.js",
+          "phase4c1_conditional_destruction_immunity.test.js",
+          "work_package_fg1_restrictions_conditions_evidence.test.js",
+          "work_package_fg_targeting_conditions_continuous.test.js",
+          "work_package_hij_operations_compiler_integration.test.js",
+          "work_package_k1_batch_05_complex_effects.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 10
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "CORE_CHARGE_ADD",
+      "clauseCount": 141,
+      "cardCount": 133,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "m4_modern_ops.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "SALVAGE",
+      "clauseCount": 137,
+      "cardCount": 130,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "bs01_card_effects.test.js",
+          "bs02_card_effects.test.js",
+          "m2_core_ops.test.js",
+          "work_package_de_operations_and_cards.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 4
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "UNPREVENTABLE",
+      "clauseCount": 131,
+      "cardCount": 127,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "card_effect_discrepancy_regression.test.js",
+          "work_package_c_ops_conditions_compiler.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "CORE_CHARGE_TRIGGER",
+      "clauseCount": 131,
+      "cardCount": 122,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "m4_modern_ops.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "TREAT_COLOR_SYMBOL",
+      "clauseCount": 124,
+      "cardCount": 116,
+      "tier": "SEMANTICALLY_VERIFIED",
+      "handlerImplemented": true,
+      "verificationStatus": "SEMANTICALLY_VERIFIED",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": true,
+      "rationale": "Verified with strict state before/after assertions in real-card E2E tests and semantic validation suites."
+    },
+    {
+      "op": "RESTRICTION",
+      "clauseCount": 123,
+      "cardCount": 117,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "GRANDWALKER_ACTION",
+      "clauseCount": 123,
+      "cardCount": 120,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "arena_ir_shard_loader.test.js",
+          "m4_modern_ops.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "CHOOSE_COLOR",
+      "clauseCount": 116,
+      "cardCount": 111,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "first_generation_effect_ops.test.js",
+          "m3_continuous_ops.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "REMOVED_ZONE_ACTION",
+      "clauseCount": 113,
+      "cardCount": 102,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "EXHAUSTED_BLOCK",
+      "clauseCount": 107,
+      "cardCount": 103,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "sd20_card_effects.test.js",
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "CARD_RULE_MODIFIER",
+      "clauseCount": 106,
+      "cardCount": 84,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_de_operations_and_cards.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "CONTINUE_BATTLE",
+      "clauseCount": 105,
+      "cardCount": 103,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "card_effect_discrepancy_regression.test.js",
+          "work_package_c_ops_conditions_compiler.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "CHANGE",
+      "clauseCount": 104,
+      "cardCount": 102,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_c_ops_conditions_compiler.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "DISCARD_BURST",
+      "clauseCount": 102,
+      "cardCount": 101,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "m2_core_ops.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "MODIFY_EFFECT",
+      "clauseCount": 81,
+      "cardCount": 80,
+      "tier": "RUNTIME_TESTED",
+      "handlerImplemented": true,
+      "verificationStatus": "RUNTIME_TESTED",
+      "testReferences": {
+        "unit": [
+          "work_package_c_ops_conditions_compiler.test.js",
+          "work_package_hij1_adversarial_determinism.test.js",
+          "work_package_hij1_operation_variants.test.js",
+          "work_package_k1_batch_04_parameters.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 4
+      },
+      "stateMutationVerified": false,
+      "rationale": "Verified via operation variant, condition, and keyword execution suites running cleanly through engine."
+    },
+    {
+      "op": "COUNT_OPERATION",
+      "clauseCount": 79,
+      "cardCount": 71,
+      "tier": "RUNTIME_TESTED",
+      "handlerImplemented": true,
+      "verificationStatus": "RUNTIME_TESTED",
+      "testReferences": {
+        "unit": [
+          "phase2a_execution_correctness.test.js",
+          "phase4b1_unified_targeting.test.js",
+          "work_package_c_ops_conditions_compiler.test.js",
+          "work_package_hij1_adversarial_determinism.test.js",
+          "work_package_hij1_operation_variants.test.js",
+          "work_package_k1_batch_04_parameters.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 6
+      },
+      "stateMutationVerified": false,
+      "rationale": "Verified via operation variant, condition, and keyword execution suites running cleanly through engine."
+    },
+    {
+      "op": "DAMAGE_CAP",
+      "clauseCount": 77,
+      "cardCount": 75,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "adversarial_m3_stress.test.js",
+          "sd01_card_effects.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "CAST_MAGIC_FREE",
+      "clauseCount": 76,
+      "cardCount": 70,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_c_ops_conditions_compiler.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "PREVENT_WHEN_SUMMONED",
+      "clauseCount": 76,
+      "cardCount": 75,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "REFRESH_BY_EXHAUSTING_NEXUS",
+      "clauseCount": 66,
+      "cardCount": 64,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "bs08_card_effects.test.js",
+          "bs13_card_effects.test.js",
+          "m4_modern_ops.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 3
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "PLAY_CONDITION",
+      "clauseCount": 63,
+      "cardCount": 60,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "KEYWORD_ACTION",
+      "clauseCount": 63,
+      "cardCount": 59,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "bs04_card_effects.test.js",
+          "m4_modern_ops.test.js",
+          "sd02_card_effects.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 3
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "ACTIVATE_EFFECT_ACTION",
+      "clauseCount": 59,
+      "cardCount": 52,
+      "tier": "SEMANTICALLY_VERIFIED",
+      "handlerImplemented": true,
+      "verificationStatus": "SEMANTICALLY_VERIFIED",
+      "testReferences": {
+        "unit": [
+          "phase2a_execution_correctness.test.js",
+          "work_package_hij2_compiler_comparator.test.js",
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 4
+      },
+      "stateMutationVerified": true,
+      "rationale": "Verified with strict state before/after assertions in real-card E2E tests and semantic validation suites."
+    },
+    {
+      "op": "DISCARD_REMAINING",
+      "clauseCount": 57,
+      "cardCount": 56,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "GRANT_BRAVE_SYMBOLS",
+      "clauseCount": 53,
+      "cardCount": 51,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "m3_continuous_ops.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "END_BATTLE",
+      "clauseCount": 52,
+      "cardCount": 50,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "bs01_card_effects.test.js",
+          "golden_compiler.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "BANISH_TRASH",
+      "clauseCount": 51,
+      "cardCount": 49,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "m4_modern_ops.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "DECK_ACTION",
+      "clauseCount": 50,
+      "cardCount": 45,
+      "tier": "RUNTIME_TESTED",
+      "handlerImplemented": true,
+      "verificationStatus": "RUNTIME_TESTED",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_adversarial_determinism.test.js",
+          "work_package_hij1_operation_variants.test.js",
+          "work_package_k1_batch_04_parameters.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 3
+      },
+      "stateMutationVerified": false,
+      "rationale": "Verified via operation variant, condition, and keyword execution suites running cleanly through engine."
+    },
+    {
+      "op": "TARGET_SELECT",
+      "clauseCount": 43,
+      "cardCount": 36,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "bs01_card_effects.test.js",
+          "identity_consumer_compatibility.test.js",
+          "runtime_activation_limits.test.js",
+          "work_package_fg_targeting_conditions_continuous.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 4
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "REMAIN_ON_FIELD",
+      "clauseCount": 42,
+      "cardCount": 38,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "CONTRACT_ADVENT_RULE",
+      "clauseCount": 42,
+      "cardCount": 42,
+      "tier": "RUNTIME_TESTED",
+      "handlerImplemented": true,
+      "verificationStatus": "RUNTIME_TESTED",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js",
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Verified via operation variant, condition, and keyword execution suites running cleanly through engine."
+    },
+    {
+      "op": "SET_SYMBOL",
+      "clauseCount": 41,
+      "cardCount": 39,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "engine_discrepancy_audit.test.js",
+          "golden_compiler.test.js",
+          "m3_continuous_ops.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 3
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "RESURRECT",
+      "clauseCount": 41,
+      "cardCount": 40,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_de_operations_and_cards.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "SET_BURST",
+      "clauseCount": 40,
+      "cardCount": 38,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "card_effect_discrepancy_regression.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "PREVENT_LIFE_LOSS",
+      "clauseCount": 38,
+      "cardCount": 36,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "m2_core_ops.test.js",
+          "phase2b1_corrective_patch.test.js",
+          "standard_deck_white.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 3
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "DISCARD_PRE_ADVENT",
+      "clauseCount": 37,
+      "cardCount": 36,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "golden_compiler.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "FORMAT_MARKER",
+      "clauseCount": 36,
+      "cardCount": 35,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_c_ops_conditions_compiler.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "OPPONENT_RESTRICTION",
+      "clauseCount": 36,
+      "cardCount": 36,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "TOKEN_DEPLOYMENT",
+      "clauseCount": 35,
+      "cardCount": 29,
+      "tier": "RUNTIME_TESTED",
+      "handlerImplemented": true,
+      "verificationStatus": "RUNTIME_TESTED",
+      "testReferences": {
+        "unit": [
+          "phase2a_execution_correctness.test.js",
+          "work_package_c_ops_conditions_compiler.test.js",
+          "work_package_hij1_adversarial_determinism.test.js",
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 4
+      },
+      "stateMutationVerified": false,
+      "rationale": "Verified via operation variant, condition, and keyword execution suites running cleanly through engine."
+    },
+    {
+      "op": "MODIFY_EFFECT_VALUE",
+      "clauseCount": 34,
+      "cardCount": 33,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js",
+          "work_package_k1_batch_04_parameters.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "ACTIVATE_CARD_EFFECT",
+      "clauseCount": 33,
+      "cardCount": 32,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "BURST_LOCK",
+      "clauseCount": 32,
+      "cardCount": 31,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "golden_compiler.test.js",
+          "phase4b3_reveal_burst_replace_summon.test.js",
+          "sd28_card_effects.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 3
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "RETURN_REMAINING_TO_DECK",
+      "clauseCount": 30,
+      "cardCount": 26,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "MIRAGE_OPERATION",
+      "clauseCount": 30,
+      "cardCount": 29,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "phase2a_execution_correctness.test.js",
+          "work_package_hij_operations_compiler_integration.test.js",
+          "work_package_k1_batch_04_parameters.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 3
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "TRIGGERED_WATCHER",
+      "clauseCount": 29,
+      "cardCount": 26,
+      "tier": "SEMANTICALLY_VERIFIED",
+      "handlerImplemented": true,
+      "verificationStatus": "SEMANTICALLY_VERIFIED",
+      "testReferences": {
+        "unit": [
+          "work_package_hij2_compiler_comparator.test.js",
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 3
+      },
+      "stateMutationVerified": true,
+      "rationale": "Verified with strict state before/after assertions in real-card E2E tests and semantic validation suites."
+    },
+    {
+      "op": "COPY_EFFECT",
+      "clauseCount": 29,
+      "cardCount": 29,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "ADVENT_RULE_MODIFIER",
+      "clauseCount": 28,
+      "cardCount": 24,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js",
+          "work_package_k1_batch_04_parameters.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "ADD_COLOR",
+      "clauseCount": 27,
+      "cardCount": 24,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "first_generation_effect_ops.test.js",
+          "work_package_fg1_restrictions_conditions_evidence.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "RULE_OR_TEXT_MODIFIER",
+      "clauseCount": 25,
+      "cardCount": 21,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "MAGIC_RESTRICTION",
+      "clauseCount": 25,
+      "cardCount": 24,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "BANISH",
+      "clauseCount": 25,
+      "cardCount": 25,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js",
+          "work_package_k1_batch_04_parameters.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "DECK_BUILDING_RULE",
+      "clauseCount": 24,
+      "cardCount": 23,
+      "tier": "RUNTIME_TESTED",
+      "handlerImplemented": true,
+      "verificationStatus": "RUNTIME_TESTED",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js",
+          "work_package_hij2_compiler_comparator.test.js"
+        ],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 3
+      },
+      "stateMutationVerified": false,
+      "rationale": "Verified via operation variant, condition, and keyword execution suites running cleanly through engine."
+    },
+    {
+      "op": "SET_HAND_COST",
+      "clauseCount": 24,
+      "cardCount": 24,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "first_generation_effect_ops.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "PUT_UNDERNEATH",
+      "clauseCount": 24,
+      "cardCount": 23,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_adversarial_determinism.test.js",
+          "work_package_hij_operations_compiler_integration.test.js",
+          "work_package_k1_batch_04_parameters.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 3
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "ADVENT",
+      "clauseCount": 24,
+      "cardCount": 23,
+      "tier": "RUNTIME_TESTED",
+      "handlerImplemented": true,
+      "verificationStatus": "RUNTIME_TESTED",
+      "testReferences": {
+        "unit": [
+          "golden_compiler.test.js",
+          "phase11_clash_flash_grant_status.test.js",
+          "phase9_contract_partner.test.js",
+          "sd45_card_effects.test.js",
+          "work_package_hij1_operation_variants.test.js",
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 6
+      },
+      "stateMutationVerified": false,
+      "rationale": "Verified via operation variant, condition, and keyword execution suites running cleanly through engine."
+    },
+    {
+      "op": "MODIFY_LIFE",
+      "clauseCount": 24,
+      "cardCount": 23,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_c1_auditor_and_regression.test.js",
+          "work_package_c3_evidence_integrity.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "ACTIVATE_EFFECT_SPECIAL",
+      "clauseCount": 24,
+      "cardCount": 23,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "AWAKEN_CORE_MOVE",
+      "clauseCount": 23,
+      "cardCount": 23,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "bs01_card_effects.test.js",
+          "bs02_card_effects.test.js",
+          "bs04_card_effects.test.js",
+          "bs06_card_effects.test.js",
+          "m4_modern_ops.test.js",
+          "sd01_card_effects.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 6
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "PIERCING_RULE",
+      "clauseCount": 23,
+      "cardCount": 22,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "REDIRECT_TARGET",
+      "clauseCount": 21,
+      "cardCount": 18,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_adversarial_determinism.test.js"
+        ],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "MODIFY_DESTINATION",
+      "clauseCount": 21,
+      "cardCount": 20,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "LOOK_HAND",
+      "clauseCount": 21,
+      "cardCount": 21,
+      "tier": "SEMANTICALLY_VERIFIED",
+      "handlerImplemented": true,
+      "verificationStatus": "SEMANTICALLY_VERIFIED",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": true,
+      "rationale": "Verified with strict state before/after assertions in real-card E2E tests and semantic validation suites."
+    },
+    {
+      "op": "DISCARD",
+      "clauseCount": 20,
+      "cardCount": 19,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "physical_ability_identity.test.js",
+          "work_package_fg1_restrictions_conditions_evidence.test.js",
+          "work_package_hij1_adversarial_determinism.test.js",
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 4
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "SEND_TO_VOID",
+      "clauseCount": 19,
+      "cardCount": 17,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "ATTACH_CARD_UNDERNEATH",
+      "clauseCount": 19,
+      "cardCount": 18,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "TREAT_LEVEL",
+      "clauseCount": 18,
+      "cardCount": 18,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "ACTIVATE_TRIGGER",
+      "clauseCount": 18,
+      "cardCount": 18,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "REVEAL_CARDS",
+      "clauseCount": 18,
+      "cardCount": 17,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "phase4b3_reveal_burst_replace_summon.test.js",
+          "work_package_c2_evidence_and_compiler.test.js",
+          "work_package_de_operations_and_cards.test.js",
+          "work_package_k1_batch_04_parameters.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 4
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "DISCARD_MIRAGE_COST",
+      "clauseCount": 18,
+      "cardCount": 18,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "DISCARD_ZONE",
+      "clauseCount": 18,
+      "cardCount": 18,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "CHOOSE_BLOCKER",
+      "clauseCount": 17,
+      "cardCount": 15,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "TRIGGER_CONDITION",
+      "clauseCount": 17,
+      "cardCount": 16,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "ADVENT_RULE",
+      "clauseCount": 16,
+      "cardCount": 15,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij2_compiler_comparator.test.js",
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 3
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "ADVENT_SOUL_CORE_ACTION",
+      "clauseCount": 16,
+      "cardCount": 15,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "BRAVE_EFFECT_ACTIVATION",
+      "clauseCount": 15,
+      "cardCount": 15,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "REDIRECT_CORE_DESTINATION",
+      "clauseCount": 14,
+      "cardCount": 12,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "REPLACEMENT_EFFECT",
+      "clauseCount": 14,
+      "cardCount": 14,
+      "tier": "RUNTIME_TESTED",
+      "handlerImplemented": true,
+      "verificationStatus": "RUNTIME_TESTED",
+      "testReferences": {
+        "unit": [
+          "core_game_rules_integrity_corrective.test.js",
+          "phase4b3_reveal_burst_replace_summon.test.js",
+          "work_package_c1_auditor_and_regression.test.js",
+          "work_package_c2_evidence_and_compiler.test.js",
+          "work_package_c3_1_evidence_integrity.test.js",
+          "work_package_de_operations_and_cards.test.js",
+          "work_package_fg1_restrictions_conditions_evidence.test.js",
+          "work_package_hij1_operation_variants.test.js",
+          "work_package_k0_1_remediation.test.js",
+          "work_package_k1_batch_04_parameters.test.js",
+          "work_package_k1_batch_05_complex_effects.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 11
+      },
+      "stateMutationVerified": false,
+      "rationale": "Verified via operation variant, condition, and keyword execution suites running cleanly through engine."
+    },
+    {
+      "op": "EXTRA_TURN",
+      "clauseCount": 14,
+      "cardCount": 13,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "m4_modern_ops.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "BANISH_DECK",
+      "clauseCount": 14,
+      "cardCount": 13,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "END_TURN",
+      "clauseCount": 14,
+      "cardCount": 11,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "ADVENT_COST",
+      "clauseCount": 14,
+      "cardCount": 14,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "BP_OR_LEVEL_MODIFIER",
+      "clauseCount": 14,
+      "cardCount": 12,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "phase2b1_corrective_patch.test.js",
+          "phase2b_state_and_modifiers.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "COMPARE_BP",
+      "clauseCount": 13,
+      "cardCount": 12,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "m4_modern_ops.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "GLOBAL_RESTRICTION",
+      "clauseCount": 13,
+      "cardCount": 9,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "phase4c1_1_coexisting_effects_and_targets.test.js",
+          "work_package_hij1_adversarial_determinism.test.js",
+          "work_package_hij_operations_compiler_integration.test.js",
+          "work_package_k1_batch_04_parameters.test.js"
+        ],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 5
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "ACTIVATE_BURST",
+      "clauseCount": 13,
+      "cardCount": 13,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "phase4b3_reveal_burst_replace_summon.test.js",
+          "work_package_de_operations_and_cards.test.js",
+          "work_package_fg1_restrictions_conditions_evidence.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 3
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "DECREASE_BP_EFFECT",
+      "clauseCount": 13,
+      "cardCount": 13,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "TRIGGER_COUNTER",
+      "clauseCount": 13,
+      "cardCount": 13,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js",
+          "work_package_k1_batch_04_parameters.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "CORE_CHARGE",
+      "clauseCount": 13,
+      "cardCount": 13,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "REMAIN_ON_FIELD_EXHAUSTED",
+      "clauseCount": 12,
+      "cardCount": 11,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "m4_modern_ops.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "DISCARD_UNDERNEATH_COST",
+      "clauseCount": 12,
+      "cardCount": 12,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "GAIN_TEAM",
+      "clauseCount": 12,
+      "cardCount": 12,
+      "tier": "RUNTIME_TESTED",
+      "handlerImplemented": true,
+      "verificationStatus": "RUNTIME_TESTED",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js",
+          "work_package_hij_operations_compiler_integration.test.js",
+          "work_package_k1_5_foundation_closure.test.js"
+        ],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 4
+      },
+      "stateMutationVerified": false,
+      "rationale": "Verified via operation variant, condition, and keyword execution suites running cleanly through engine."
+    },
+    {
+      "op": "RESTRICT_MAIN_STEP",
+      "clauseCount": 11,
+      "cardCount": 11,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "BUNSHIN_SUMMON",
+      "clauseCount": 11,
+      "cardCount": 11,
+      "tier": "RUNTIME_TESTED",
+      "handlerImplemented": true,
+      "verificationStatus": "RUNTIME_TESTED",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js",
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Verified via operation variant, condition, and keyword execution suites running cleanly through engine."
+    },
+    {
+      "op": "GAIN_FAMILY",
+      "clauseCount": 10,
+      "cardCount": 8,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "LIFE_OR_CORE_MODIFICATION",
+      "clauseCount": 10,
+      "cardCount": 9,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "CROSS_TRIGGER",
+      "clauseCount": 10,
+      "cardCount": 10,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "REMOVE_FROM_GAME",
+      "clauseCount": 10,
+      "cardCount": 9,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "SWAP_CARD",
+      "clauseCount": 10,
+      "cardCount": 9,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "SET_MIRAGE",
+      "clauseCount": 10,
+      "cardCount": 9,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "STACK_CARD",
+      "clauseCount": 10,
+      "cardCount": 10,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "DISCARD_AMONG",
+      "clauseCount": 9,
+      "cardCount": 7,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "LOSE_EFFECTS",
+      "clauseCount": 9,
+      "cardCount": 9,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "END_MAIN_STEP",
+      "clauseCount": 9,
+      "cardCount": 8,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "FORCE_ATTACK",
+      "clauseCount": 9,
+      "cardCount": 9,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "ATTACH_PRE_ADVENT_CARD",
+      "clauseCount": 9,
+      "cardCount": 9,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "STEP_MODIFIER",
+      "clauseCount": 9,
+      "cardCount": 8,
+      "tier": "RUNTIME_TESTED",
+      "handlerImplemented": true,
+      "verificationStatus": "RUNTIME_TESTED",
+      "testReferences": {
+        "unit": [
+          "bs01_card_effects.test.js",
+          "phase2b_state_and_modifiers.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Verified via operation variant, condition, and keyword execution suites running cleanly through engine."
+    },
+    {
+      "op": "BATTLE_RULE_MODIFIER",
+      "clauseCount": 8,
+      "cardCount": 5,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "REVEAL_HAND",
+      "clauseCount": 8,
+      "cardCount": 8,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "GRANT_ABILITY",
+      "clauseCount": 8,
+      "cardCount": 8,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "TARGET_FAMILY",
+      "clauseCount": 8,
+      "cardCount": 8,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "PREVENT_LOSS",
+      "clauseCount": 8,
+      "cardCount": 5,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "phase2b1_corrective_patch.test.js",
+          "phase2b_state_and_modifiers.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "CARD_UNDERNEATH",
+      "clauseCount": 8,
+      "cardCount": 5,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "TEAM_RULE",
+      "clauseCount": 8,
+      "cardCount": 8,
+      "tier": "RUNTIME_TESTED",
+      "handlerImplemented": true,
+      "verificationStatus": "RUNTIME_TESTED",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Verified via operation variant, condition, and keyword execution suites running cleanly through engine."
+    },
+    {
+      "op": "ON_BP_DESTROY",
+      "clauseCount": 7,
+      "cardCount": 6,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "SEAL_MOVE",
+      "clauseCount": 7,
+      "cardCount": 7,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "m4_modern_ops.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "ACTIVATE_REBIRTH",
+      "clauseCount": 7,
+      "cardCount": 7,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "USE_FROM_HAND",
+      "clauseCount": 7,
+      "cardCount": 7,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js",
+          "work_package_k1_batch_04_parameters.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "COPY_PRE_ADVENT_EFFECT",
+      "clauseCount": 7,
+      "cardCount": 7,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js",
+          "work_package_k1_batch_04_parameters.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "DISCARD_FIELD_MAGIC",
+      "clauseCount": 7,
+      "cardCount": 7,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "DECK_CONSTRUCTION_RULE",
+      "clauseCount": 6,
+      "cardCount": 5,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "DISCARD_CARD",
+      "clauseCount": 6,
+      "cardCount": 6,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "MODIFY_KEYWORD",
+      "clauseCount": 6,
+      "cardCount": 6,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "MILL",
+      "clauseCount": 6,
+      "cardCount": 5,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij2_runtime_atomicity.test.js",
+          "work_package_hij_operations_compiler_integration.test.js",
+          "work_package_k1_1_discovery_integrity.test.js",
+          "work_package_k1_batch_04_parameters.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 4
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "FLASH_PRIORITY",
+      "clauseCount": 6,
+      "cardCount": 6,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "DISCARD_FIELD",
+      "clauseCount": 6,
+      "cardCount": 5,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "REBIRTH_CORE_PLACEMENT",
+      "clauseCount": 6,
+      "cardCount": 6,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "m4_modern_ops.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "ENTER_SOUL_STATE",
+      "clauseCount": 6,
+      "cardCount": 6,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "PUT_CARD_ON_FIELD",
+      "clauseCount": 6,
+      "cardCount": 6,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "CAST_FROM_TRASH",
+      "clauseCount": 6,
+      "cardCount": 6,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "PUT_FACEDOWN_FIELD",
+      "clauseCount": 6,
+      "cardCount": 6,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "RETRIEVE_CORES",
+      "clauseCount": 5,
+      "cardCount": 5,
+      "tier": "SEMANTICALLY_VERIFIED",
+      "handlerImplemented": true,
+      "verificationStatus": "SEMANTICALLY_VERIFIED",
+      "testReferences": {
+        "unit": [],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": true,
+      "rationale": "Verified with strict state before/after assertions in real-card E2E tests and semantic validation suites."
+    },
+    {
+      "op": "COMPARE_LV_INSTEAD_OF_BP",
+      "clauseCount": 5,
+      "cardCount": 3,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "phase2b_state_and_modifiers.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "DISCARD_REMOVED",
+      "clauseCount": 5,
+      "cardCount": 5,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "SET_BP",
+      "clauseCount": 5,
+      "cardCount": 5,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "phase2b_state_and_modifiers.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "PAY_LIFE",
+      "clauseCount": 5,
+      "cardCount": 5,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "SWAP_CARDS",
+      "clauseCount": 5,
+      "cardCount": 5,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "DECK_IMMUNITY",
+      "clauseCount": 5,
+      "cardCount": 4,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "ACTIVATE_SOUL_DRIVE",
+      "clauseCount": 4,
+      "cardCount": 3,
+      "tier": "RUNTIME_TESTED",
+      "handlerImplemented": true,
+      "verificationStatus": "RUNTIME_TESTED",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Verified via operation variant, condition, and keyword execution suites running cleanly through engine."
+    },
+    {
+      "op": "SYMBOL_MODIFIER",
+      "clauseCount": 4,
+      "cardCount": 3,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "COPY_ABILITY",
+      "clauseCount": 4,
+      "cardCount": 4,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "SKIP_STEP",
+      "clauseCount": 4,
+      "cardCount": 4,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "phase2b_state_and_modifiers.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "LOOK_AT_DECK",
+      "clauseCount": 4,
+      "cardCount": 4,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "COUNT_MODIFIER",
+      "clauseCount": 4,
+      "cardCount": 4,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "DISCARD_COST",
+      "clauseCount": 4,
+      "cardCount": 3,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_fg1_restrictions_conditions_evidence.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "SHUFFLE_DECK",
+      "clauseCount": 4,
+      "cardCount": 3,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_adversarial_determinism.test.js",
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "REVEAL_INTERACTION",
+      "clauseCount": 4,
+      "cardCount": 3,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "PREVENT_DAMAGE",
+      "clauseCount": 4,
+      "cardCount": 4,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "m3_continuous_ops.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "SEND_TO_TRASH",
+      "clauseCount": 4,
+      "cardCount": 4,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "SELECT_TARGET",
+      "clauseCount": 3,
+      "cardCount": 2,
+      "tier": "SEMANTICALLY_VERIFIED",
+      "handlerImplemented": true,
+      "verificationStatus": "SEMANTICALLY_VERIFIED",
+      "testReferences": {
+        "unit": [
+          "phase4b1_unified_targeting.test.js",
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [
+          "ui_engine_integration.test.js"
+        ],
+        "totalReferences": 3
+      },
+      "stateMutationVerified": true,
+      "rationale": "Verified with strict state before/after assertions in real-card E2E tests and semantic validation suites."
+    },
+    {
+      "op": "END_ATTACK_STEP",
+      "clauseCount": 3,
+      "cardCount": 2,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "petit_stark_completion.test.js",
+          "petit_stark_white_machine.test.js",
+          "phase2b1_corrective_patch.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 3
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "SUMMON_MULTI",
+      "clauseCount": 3,
+      "cardCount": 3,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "LIMIT_DECK_DISCARD",
+      "clauseCount": 3,
+      "cardCount": 3,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij2_compiler_comparator.test.js",
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 3
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "BOOST_LIFE",
+      "clauseCount": 3,
+      "cardCount": 3,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "ACTIVATE_KEYWORD",
+      "clauseCount": 3,
+      "cardCount": 3,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "MULTIPLY_EFFECT",
+      "clauseCount": 3,
+      "cardCount": 3,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "BP_FORMULA",
+      "clauseCount": 3,
+      "cardCount": 3,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "END_STEP",
+      "clauseCount": 3,
+      "cardCount": 3,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "terra_dragon_and_keywords.test.js",
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "BATTLE_MODIFIER",
+      "clauseCount": 3,
+      "cardCount": 2,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "HEADER",
+      "clauseCount": 3,
+      "cardCount": 3,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "REBIRTH_ACTION",
+      "clauseCount": 3,
+      "cardCount": 3,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "USE_FROM_SOUL_STATE",
+      "clauseCount": 3,
+      "cardCount": 3,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "ADD_FAMILY",
+      "clauseCount": 3,
+      "cardCount": 2,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij2_compiler_comparator.test.js",
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [
+          "work_package_hij_real_cards_e2e.test.js"
+        ],
+        "integration": [],
+        "totalReferences": 3
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "SPECIAL_WIN",
+      "clauseCount": 3,
+      "cardCount": 3,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "DESTROY_ON_BP_ZERO",
+      "clauseCount": 3,
+      "cardCount": 2,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "SWITCH_CARD",
+      "clauseCount": 3,
+      "cardCount": 3,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "SWAP_CORES",
+      "clauseCount": 2,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "TREAT_NAME",
+      "clauseCount": 2,
+      "cardCount": 2,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "TREAT_AS_MAX_LEVEL",
+      "clauseCount": 2,
+      "cardCount": 2,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "first_generation_effect_ops.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "TRIGGERED_BUFF",
+      "clauseCount": 2,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "NEGATE_MAGIC",
+      "clauseCount": 2,
+      "cardCount": 2,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "TAKE_CONTROL",
+      "clauseCount": 2,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "TREAT_AS_VANILLA",
+      "clauseCount": 2,
+      "cardCount": 2,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "GUARD_TRIGGER",
+      "clauseCount": 2,
+      "cardCount": 2,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "LOOK_DECKTOP",
+      "clauseCount": 2,
+      "cardCount": 2,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "CARD_PLAY_PERMISSION",
+      "clauseCount": 2,
+      "cardCount": 2,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "MODIFY_ADVENT_CONDITION",
+      "clauseCount": 2,
+      "cardCount": 2,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "NON_STACKABLE",
+      "clauseCount": 2,
+      "cardCount": 2,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "ATTACH_CARD",
+      "clauseCount": 2,
+      "cardCount": 2,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "CAST_FROM_DECK",
+      "clauseCount": 2,
+      "cardCount": 2,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "REVEAL_FROM_HAND_COST",
+      "clauseCount": 2,
+      "cardCount": 2,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "ATTACK_RULE_MODIFIER",
+      "clauseCount": 2,
+      "cardCount": 2,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "WIN_GAME",
+      "clauseCount": 2,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "DECK_RULE",
+      "clauseCount": 2,
+      "cardCount": 2,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_k1_batch_04_parameters.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "GRANT_KEYWORD",
+      "clauseCount": 2,
+      "cardCount": 2,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "REDUCE_LIFE",
+      "clauseCount": 2,
+      "cardCount": 2,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "SEARCH_DECK",
+      "clauseCount": 2,
+      "cardCount": 2,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "TRIGGERED_ACTION",
+      "clauseCount": 2,
+      "cardCount": 2,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "TREAT_COST",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "LIMIT_ONCE_PER_TURN",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "CONTROL_RULE",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "RETURN_CONTROL",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "TREAT_CORE_COUNT",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "ENHANCE_KEYWORD",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "CHOOSE_LEVEL",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "SWITCH_BP",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "CORE_LOCK",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "OPPONENT_CHOICE",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "COPY_TRIGGER",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "COUNT_AS_MULTIPLE",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "COMPARE_LEVELS",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "phase2b_state_and_modifiers.test.js",
+          "work_package_c1_auditor_and_regression.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 2
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "RETURN_DECK_BOTTOM",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "FLIP_BUNSHIN",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij_operations_compiler_integration.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "SET_LEVEL",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "phase2b1_corrective_patch.test.js",
+          "phase2b_state_and_modifiers.test.js",
+          "timing_triggers_continuous_sba.test.js",
+          "work_package_c1_auditor_and_regression.test.js",
+          "work_package_fg1_restrictions_conditions_evidence.test.js",
+          "work_package_fg_targeting_conditions_continuous.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 6
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "EXPAND_TARGETS",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "CREATE_BUNSHIN",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "BATTLE_MULTIPLE",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "EXCHANGE_BP",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "DISCARD_HAND_MAX",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "EXCHANGE_CORE",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "TARGET_CARDS",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "SCHEDULED_DESTROY",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "IGNORE_CONDITIONS",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "BANISH_SOUL_CORE_VOID",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "CHOOSE_TARGETS",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "BANISH_HAND",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "PROTECTION",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "m3_continuous_ops.test.js",
+          "phase4b2_1_corrective_audit.test.js",
+          "phase4b2_2_final_fixes.test.js",
+          "phase4b2_3_event_bus_and_coverage.test.js",
+          "phase4b2_destroy_bounce.test.js",
+          "work_package_de_operations_and_cards.test.js",
+          "work_package_fg_targeting_conditions_continuous.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 7
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "GRANT_EFFECT",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "IGNORE_LEVELS",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "BANISH_COST",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "SEND_CORE_TO_VOID",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "CHOOSE_BATTLE_TARGET",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "DISCARD_FROM_FIELD_COST",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "BEFORE_ADVENT_TRIGGER",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "SEND_CORES_TO_VOID",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "CHANGE_TARGET",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "SIMULTANEOUS_BATTLE",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "VARIABLE_PAYMENT_EFFECT",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "LIFE_PAY_COST",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "SEPARATE_BRAVE",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "PAY_COST",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "BANISH_DESTINATION_RULE",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "LOSE_IMMUNITY",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "BOUNCE_TO_DECKBOTTOM",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "CHOOSE_FAMILY",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "CAN_ATTACK",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "SEMANTICALLY_VERIFIED",
+      "handlerImplemented": true,
+      "verificationStatus": "SEMANTICALLY_VERIFIED",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": true,
+      "rationale": "Verified with strict state before/after assertions in real-card E2E tests and semantic validation suites."
+    },
+    {
+      "op": "SET_BURST_FROM_HAND",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "REVEAL_BONUS",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "USE_ACCEL",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "PARSED_ONLY",
+      "handlerImplemented": true,
+      "verificationStatus": "PARSED_ONLY",
+      "testReferences": {
+        "unit": [],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 0
+      },
+      "stateMutationVerified": false,
+      "rationale": "Parsed into valid AST clauses in IR shards; runtime handler is a generic safe fallback awaiting dedicated tests."
+    },
+    {
+      "op": "TIMING_MODIFIER",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    },
+    {
+      "op": "LOOK_AT_HAND",
+      "clauseCount": 1,
+      "cardCount": 1,
+      "tier": "HANDLER_PRESENT",
+      "handlerImplemented": true,
+      "verificationStatus": "HANDLER_PRESENT",
+      "testReferences": {
+        "unit": [
+          "work_package_hij1_operation_variants.test.js"
+        ],
+        "e2e": [],
+        "integration": [],
+        "totalReferences": 1
+      },
+      "stateMutationVerified": false,
+      "rationale": "Dedicated opcode case exists in engine/ops/index.js; awaiting deep integration and regression test coverage."
+    }
+  ]
+}

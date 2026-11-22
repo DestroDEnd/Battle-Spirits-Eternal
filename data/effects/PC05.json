@@ -19,6 +19,21 @@
     "compiledIr": {
       "cardNumber": "PC05-001",
       "name": "Evangelion New Unit-02 Alpha & Unit-08 Revised Gamma",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 4,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "When this card in Hand would be discarded by your \"WILLE\" family effect, instead of sending it to the Trash, you can summon it.\n\n[LV1][LV2][LV3] (When Summoned)\nYou can destroy an opposing Nexus, and the effects of the destroyed Nexus can't activate. Also, when summoned via an effect, you can draw two cards.\n\n[LV1][LV2][LV3] [A.T. Field] (When Attacks/Blocks)\nThis Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.\n\n[LV2][LV3] Flash - (Your Attack Step)\nOnce per turn, during this battle, besides this Spirit, you can give one of your \"New Unit-02\"/\"Unit-08 Revised\" an extra Red symbol.",
+      "teams": [],
       "keywords": [
         {
           "name": "A.T. Field",
@@ -26,12 +41,32 @@
           "wave": 3,
           "hook": "at_field",
           "bracketed": true,
-          "index": 327
+          "index": 0,
+          "abilityId": "PC05-001#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+          "cardNumber": "PC05-001",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS_OR_BLOCKS",
+          "timingLabel": "When Attacks/Blocks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PC05-001#a2"
         }
       ],
       "abilities": [
         {
-          "id": "PC05-001#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -42,8 +77,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -52,25 +92,41 @@
             "isMain": false,
             "cleanBody": "When this card in Hand would be discarded by your \"WILLE\" family effect, instead of sending it to the Trash, you can summon it."
           },
+          "originalAbilityText": "When this card in Hand would be discarded by your \"WILLE\" family effect, instead of sending it to the Trash, you can summon it.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When this card in Hand would be discarded by your \"WILLE\" family effect, instead of sending it to the Trash, you can summon it.",
+              "originalClauseText": "When this card in Hand would be discarded by your \"WILLE\" family effect, instead of sending it to the Trash, you can summon it.",
               "cleanText": "When this card in Hand would be discarded by your \"WILLE\" family effect, instead of sending it to the Trash, you can summon it",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "SUMMON",
-                "free": true
+                "op": "SUMMON_THIS_CARD",
+                "from": "TRASH"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC05-001#a0",
+          "keywords": [],
+          "id": "PC05-001#AB_PASSIVE_NONE_LV1_LV2_LV3_4808fa52073599169ca27b9444f6b2a4379dbfce70b55cca59cea51205593030_f67e18981b5744916e4dff82f300bd02",
+          "physicalId": "PC05-001#AB_PASSIVE_NONE_LV1_LV2_LV3_4808fa52073599169ca27b9444f6b2a4379dbfce70b55cca59cea51205593030_f67e18981b5744916e4dff82f300bd02",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_4808fa52073599169ca27b9444f6b2a4379dbfce70b55cca59cea51205593030_f67e18981b5744916e4dff82f300bd02",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_4b4c197f138192df806f380414cb72a86edeb3dc15df95f16ff71ac4d2b8c7c3_b5895f37b67689f03c4c8f75388d1061",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC05-001#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -81,8 +137,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -91,10 +156,14 @@
             "isMain": false,
             "cleanBody": "You can destroy an opposing Nexus, and the effects of the destroyed Nexus can't activate. Also, when summoned via an effect, you can draw two cards."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nYou can destroy an opposing Nexus, and the effects of the destroyed Nexus can't activate. Also, when summoned via an effect, you can draw two cards.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can destroy an opposing Nexus, and the effects of the destroyed Nexus can't activate.",
+              "originalClauseText": "You can destroy an opposing Nexus, and the effects of the destroyed Nexus can't activate.",
               "cleanText": "You can destroy an opposing Nexus, and the effects of the destroyed Nexus can't activate",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -113,7 +182,9 @@
             },
             {
               "rawText": "when summoned via an effect, you can draw two cards.",
+              "originalClauseText": "when summoned via an effect, you can draw two cards.",
               "cleanText": "when summoned via an effect, you can draw two cards",
+              "clauseIndex": 1,
               "link": "also",
               "isOptional": true,
               "isCost": false,
@@ -127,10 +198,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC05-001#a1",
+          "keywords": [],
+          "id": "PC05-001#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_52cb0370166fc2cfc958a59a8d64cba27a000b6d29186ebe9e66c3fc5ca62a06_b8de66220122f8540a76a9f8f4288daa",
+          "physicalId": "PC05-001#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_52cb0370166fc2cfc958a59a8d64cba27a000b6d29186ebe9e66c3fc5ca62a06_b8de66220122f8540a76a9f8f4288daa",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_52cb0370166fc2cfc958a59a8d64cba27a000b6d29186ebe9e66c3fc5ca62a06_b8de66220122f8540a76a9f8f4288daa",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_8c0af269573d50fa8f6c61b16d7b2387e4a596d2c8bf3d1d692210f473add908_3f8e50b19d8b2ebff340e5da3da612f2",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC05-001#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -141,8 +226,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timings": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
             "timingLabel": "When Attacks/Blocks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "A.T. Field",
@@ -151,10 +247,14 @@
             "isMain": false,
             "cleanBody": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] [A.T. Field] (When Attacks/Blocks)\nThis Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.",
+              "originalClauseText": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.",
               "cleanText": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -166,10 +266,55 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC05-001#a2",
+          "keywords": [
+            {
+              "name": "A.T. Field",
+              "parameter": null,
+              "wave": 3,
+              "hook": "at_field",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PC05-001#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+              "cardNumber": "PC05-001",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS_OR_BLOCKS",
+              "timingLabel": "When Attacks/Blocks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PC05-001#a2"
+            }
+          ],
+          "id": "PC05-001#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+          "physicalId": "PC05-001#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_0c4f046ee5a8d8e01b6c6ff64a6b95460112ad5c93dce1e127368e6d123182df_38fe13e5a00948f574e9455c3c508e06",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC05-001#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -179,8 +324,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -189,21 +345,45 @@
             "isMain": false,
             "cleanBody": "during this battle, besides this Spirit, you can give one of your \"New Unit-02\"/\"Unit-08 Revised\" an extra Red symbol."
           },
+          "originalAbilityText": "[LV2][LV3] Flash - (Your Attack Step)\nOnce per turn, during this battle, besides this Spirit, you can give one of your \"New Unit-02\"/\"Unit-08 Revised\" an extra Red symbol.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "during this battle, besides this Spirit, you can give one of your \"New Unit-02\"/\"Unit-08 Revised\" an extra Red symbol.",
+              "originalClauseText": "during this battle, besides this Spirit, you can give one of your \"New Unit-02\"/\"Unit-08 Revised\" an extra Red symbol.",
               "cleanText": "besides this Spirit, you can give one of your \"New Unit-02\"/\"Unit-08 Revised\" an extra Red symbol",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": "DURING_THIS_BATTLE",
               "op": {
-                "op": "ADD_SYMBOL"
+                "op": "ADD_SYMBOL",
+                "color": "Red",
+                "count": 1,
+                "side": "self"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC05-001#a3",
+          "keywords": [],
+          "id": "PC05-001#AB_ATTACK_STEP_NONE_LV2_LV3_11000066fc461ef3d9e111ff1dd5492934f79aaa49f2b925f7c07f475ae75ee7_73810cf7a27a009c65dfbcb81d71d557",
+          "physicalId": "PC05-001#AB_ATTACK_STEP_NONE_LV2_LV3_11000066fc461ef3d9e111ff1dd5492934f79aaa49f2b925f7c07f475ae75ee7_73810cf7a27a009c65dfbcb81d71d557",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_11000066fc461ef3d9e111ff1dd5492934f79aaa49f2b925f7c07f475ae75ee7_73810cf7a27a009c65dfbcb81d71d557",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_LV3_9ab1debefdf45ac03a0ee99e615a6760a35af18c6569ccd2e88d1eaa468b106f_1ad693abe195854d351c862a4f426e5a",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -397,6 +577,21 @@
     "compiledIr": {
       "cardNumber": "PC05-002",
       "name": "Evangelion Unit-00 (Revised) & Unit-02 Beast Form 2nd Phase (Type 1)",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 4,
+          "bp": 11000
+        }
+      },
+      "originalEffectText": "At the start of the opposing Attack Step, if you control any \"Ayanami\"/\"Makinami\"/\"Misato\", you can summon this card from the Trash. When you've done so, during this turn, the \"unaffected by effects\" effects of opposing Spirits can't activate. This effect can't be prevented by opposing effects.\n\n[LV1][LV2][LV3] [A.T. Field] (When Attacks/Blocks)\nThis Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.\n\n[LV2][LV3] (When Attacks)\nBesides \"The 10th Apostle\", destroy an opposing Spirit with the highest BP, and the effects of the destroyed Spirit can't activate.",
+      "teams": [],
       "keywords": [
         {
           "name": "A.T. Field",
@@ -404,12 +599,32 @@
           "wave": 3,
           "hook": "at_field",
           "bracketed": true,
-          "index": 313
+          "index": 0,
+          "abilityId": "PC05-002#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+          "cardNumber": "PC05-002",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS_OR_BLOCKS",
+          "timingLabel": "When Attacks/Blocks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PC05-002#a1"
         }
       ],
       "abilities": [
         {
-          "id": "PC05-002#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -420,8 +635,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -430,10 +650,14 @@
             "isMain": false,
             "cleanBody": "At the start of the opposing Attack Step, if you control any \"Ayanami\"/\"Makinami\"/\"Misato\", you can summon this card from the Trash. When you've done so, during this turn, the \"unaffected by effects\" effects of opposing Spirits can't activate. This effect can't be prevented by opposing effects."
           },
+          "originalAbilityText": "At the start of the opposing Attack Step, if you control any \"Ayanami\"/\"Makinami\"/\"Misato\", you can summon this card from the Trash. When you've done so, during this turn, the \"unaffected by effects\" effects of opposing Spirits can't activate. This effect can't be prevented by opposing effects.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "At the start of the opposing Attack Step, if you control any \"Ayanami\"/\"Makinami\"/\"Misato\", you can summon this card from the Trash.",
+              "originalClauseText": "At the start of the opposing Attack Step, if you control any \"Ayanami\"/\"Makinami\"/\"Misato\", you can summon this card from the Trash.",
               "cleanText": "At the start of the opposing Attack Step, if you control any \"Ayanami\"/\"Makinami\"/\"Misato\", you can summon this card from the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -441,12 +665,14 @@
               "duration": null,
               "op": {
                 "op": "SUMMON_THIS_CARD",
-                "from": "HAND_OR_BURST"
+                "from": "TRASH"
               }
             },
             {
               "rawText": "during this turn, the \"unaffected by effects\" effects of opposing Spirits can't activate.",
+              "originalClauseText": "during this turn, the \"unaffected by effects\" effects of opposing Spirits can't activate.",
               "cleanText": "the \"unaffected by effects\" effects of opposing Spirits can't activate",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -458,21 +684,39 @@
             },
             {
               "rawText": "This effect can't be prevented by opposing effects.",
+              "originalClauseText": "This effect can't be prevented by opposing effects.",
               "cleanText": "This effect can't be prevented by opposing effects",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "UNPREVENTABLE"
+                "op": "UNSUPPORTED",
+                "unhandledClause": "This effect can't be prevented by opposing effects",
+                "reason": "UNSUPPORTED_EFFECT_PROTECTION: effect cannot be prevented by opposing effects"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "This effect can't be prevented by opposing effects."
+          ],
+          "legacyId": "PC05-002#a0",
+          "keywords": [],
+          "id": "PC05-002#AB_PASSIVE_NONE_LV1_LV2_LV3_b3cc4f6769692637f8f64a35f918f0c3ef4e47205953c57e5c6260424ba5c52e_4cb368c4e6d62eeb6987703dff7e580d",
+          "physicalId": "PC05-002#AB_PASSIVE_NONE_LV1_LV2_LV3_b3cc4f6769692637f8f64a35f918f0c3ef4e47205953c57e5c6260424ba5c52e_4cb368c4e6d62eeb6987703dff7e580d",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_b3cc4f6769692637f8f64a35f918f0c3ef4e47205953c57e5c6260424ba5c52e_4cb368c4e6d62eeb6987703dff7e580d",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_b28f649c8b67fba0f25b1d41c588319667cfbd880618c3f95b758c686d815847_be5af5a9dbb333850d74bef7412c2fa3",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC05-002#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -483,8 +727,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timings": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
             "timingLabel": "When Attacks/Blocks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "A.T. Field",
@@ -493,10 +748,14 @@
             "isMain": false,
             "cleanBody": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] [A.T. Field] (When Attacks/Blocks)\nThis Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.",
+              "originalClauseText": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.",
               "cleanText": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -508,10 +767,55 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC05-002#a1",
+          "keywords": [
+            {
+              "name": "A.T. Field",
+              "parameter": null,
+              "wave": 3,
+              "hook": "at_field",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PC05-002#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+              "cardNumber": "PC05-002",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS_OR_BLOCKS",
+              "timingLabel": "When Attacks/Blocks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PC05-002#a1"
+            }
+          ],
+          "id": "PC05-002#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+          "physicalId": "PC05-002#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_0c4f046ee5a8d8e01b6c6ff64a6b95460112ad5c93dce1e127368e6d123182df_38fe13e5a00948f574e9455c3c508e06",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC05-002#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -521,8 +825,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -531,10 +844,14 @@
             "isMain": false,
             "cleanBody": "Besides \"The 10th Apostle\", destroy an opposing Spirit with the highest BP, and the effects of the destroyed Spirit can't activate."
           },
+          "originalAbilityText": "[LV2][LV3] (When Attacks)\nBesides \"The 10th Apostle\", destroy an opposing Spirit with the highest BP, and the effects of the destroyed Spirit can't activate.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Besides \"The 10th Apostle\", destroy an opposing Spirit with the highest BP, and the effects of the destroyed Spirit can't activate.",
+              "originalClauseText": "Besides \"The 10th Apostle\", destroy an opposing Spirit with the highest BP, and the effects of the destroyed Spirit can't activate.",
               "cleanText": "Besides \"The 10th Apostle\", destroy an opposing Spirit with the highest BP, and the effects of the destroyed Spirit can't activate",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -552,12 +869,27 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC05-002#a2",
+          "keywords": [],
+          "id": "PC05-002#AB_WHEN_ATTACKS_NONE_LV2_LV3_1ec2e617b11991941ecf1ead22ab6cfb7f551d054e5877f57c13b0a237167c8f_a82e98da1b4251be7d32e8b995c24b9b",
+          "physicalId": "PC05-002#AB_WHEN_ATTACKS_NONE_LV2_LV3_1ec2e617b11991941ecf1ead22ab6cfb7f551d054e5877f57c13b0a237167c8f_a82e98da1b4251be7d32e8b995c24b9b",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_1ec2e617b11991941ecf1ead22ab6cfb7f551d054e5877f57c13b0a237167c8f_a82e98da1b4251be7d32e8b995c24b9b",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_55b504f1360c3ccf3c21a33e7bda6d01bdc8b57ad1d3e98c623e44dc048e99a1_7aa78f56bf310630b9e3b2ec313c9001",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
-      "compiledClausesCount": 5,
-      "unsupportedClausesCount": 0,
-      "isFullySupported": true
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 1,
+      "isFullySupported": false
     }
   },
   "PC05-X01": {
@@ -590,10 +922,34 @@
     "compiledIr": {
       "cardNumber": "PC05-X01",
       "name": "Evangelion Unit-01 & Unit-13",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 8000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 12000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 5,
+          "bp": 16000
+        },
+        "LV4": {
+          "level": 4,
+          "cost": 7,
+          "bp": 21000
+        }
+      },
+      "originalEffectText": "Flash - (Opposing Attack Step)\n(Once per Turn: Same Name) While an opposing Cost 7 or more Spirit/Ultimate is attacking, if you have any \"Ikari\" Brave/Nexus/Mirage, you can pay one cost to summon this card from the Hand.\n\n[LV1][LV2][LV3][LV4]\nFor both players, depleted/destroyed “Evangelion\"/\"EVANGELION\" are banished instead of being sent to the Trash.\n\n[LV2][LV3][LV4] (When Attacks/Blocks)\nBy destroying this Spirit, ignoring the cost of Braves, destroy every opposing Cost 7 or less Spirit/Ultimate.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "PC05-X01#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -604,8 +960,19 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Opposing Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "OPPONENT",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
             "limit": "ONCE_PER_TURN_SAME_NAME",
             "cantStack": false,
             "keyword": null,
@@ -614,10 +981,14 @@
             "isMain": false,
             "cleanBody": "While an opposing Cost 7 or more Spirit/Ultimate is attacking, if you have any \"Ikari\" Brave/Nexus/Mirage, you can pay one cost to summon this card from the Hand."
           },
+          "originalAbilityText": "Flash - (Opposing Attack Step)\n(Once per Turn: Same Name) While an opposing Cost 7 or more Spirit/Ultimate is attacking, if you have any \"Ikari\" Brave/Nexus/Mirage, you can pay one cost to summon this card from the Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "While an opposing Cost 7 or more Spirit/Ultimate is attacking, if you have any \"Ikari\" Brave/Nexus/Mirage, you can pay one cost to summon this card from the Hand.",
+              "originalClauseText": "While an opposing Cost 7 or more Spirit/Ultimate is attacking, if you have any \"Ikari\" Brave/Nexus/Mirage, you can pay one cost to summon this card from the Hand.",
               "cleanText": "if you have any \"Ikari\" Brave/Nexus/Mirage, you can pay one cost to summon this card from the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -625,14 +996,31 @@
               "duration": null,
               "op": {
                 "op": "SUMMON_THIS_CARD",
-                "from": "HAND_OR_BURST"
+                "from": "HAND",
+                "costCores": 1
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC05-X01#a0",
+          "keywords": [],
+          "id": "PC05-X01#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_47694a2f938de9738b14d04a9beaf4d00e24e516dc4c62a773cbab7f4856acf1_805279389fc4339540aefefd3a5f6376",
+          "physicalId": "PC05-X01#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_47694a2f938de9738b14d04a9beaf4d00e24e516dc4c62a773cbab7f4856acf1_805279389fc4339540aefefd3a5f6376",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_47694a2f938de9738b14d04a9beaf4d00e24e516dc4c62a773cbab7f4856acf1_805279389fc4339540aefefd3a5f6376",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1bc7358f9b5585d85180ddfb13c338e5953c96957d87e5846bed09813475cdff_2f842a6cc93fb523f09810160f75ad95",
+          "timingSemantics": {
+            "timingOwner": "OPPONENT",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC05-X01#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -644,8 +1032,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -654,24 +1047,42 @@
             "isMain": false,
             "cleanBody": "For both players, depleted/destroyed “Evangelion\"/\"EVANGELION\" are banished instead of being sent to the Trash."
           },
+          "originalAbilityText": "[LV1][LV2][LV3][LV4]\nFor both players, depleted/destroyed “Evangelion\"/\"EVANGELION\" are banished instead of being sent to the Trash.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "For both players, depleted/destroyed \"Evangelion\"/\"EVANGELION\" are banished instead of being sent to the Trash.",
+              "originalClauseText": "For both players, depleted/destroyed \"Evangelion\"/\"EVANGELION\" are banished instead of being sent to the Trash.",
               "cleanText": "For both players, depleted/destroyed \"Evangelion\"/\"EVANGELION\" are banished instead of being sent to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
+                "destination": "removed",
+                "replaces": "DESTROYED_OR_DEPLETED",
                 "op": "BANISH_DESTINATION_RULE"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC05-X01#a1",
+          "keywords": [],
+          "id": "PC05-X01#AB_PASSIVE_NONE_LV1_LV2_LV3_LV4_a6c46547a2457afbfc746af0c22a9f97818a703c2b88d9ed44c5d42ca31bb0b7_6bfd4f600ccd8464d2454885daad080a",
+          "physicalId": "PC05-X01#AB_PASSIVE_NONE_LV1_LV2_LV3_LV4_a6c46547a2457afbfc746af0c22a9f97818a703c2b88d9ed44c5d42ca31bb0b7_6bfd4f600ccd8464d2454885daad080a",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_LV4_a6c46547a2457afbfc746af0c22a9f97818a703c2b88d9ed44c5d42ca31bb0b7_6bfd4f600ccd8464d2454885daad080a",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_LV4_6a1ab25401c4b48865001864e9d5874ae6b7e71232c8c944e9f71bd7609b1274_189878557a58b9fc3163d965d2d02ff9",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC05-X01#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -682,8 +1093,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timings": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
             "timingLabel": "When Attacks/Blocks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -692,10 +1114,14 @@
             "isMain": false,
             "cleanBody": "By destroying this Spirit, ignoring the cost of Braves, destroy every opposing Cost 7 or less Spirit/Ultimate."
           },
+          "originalAbilityText": "[LV2][LV3][LV4] (When Attacks/Blocks)\nBy destroying this Spirit, ignoring the cost of Braves, destroy every opposing Cost 7 or less Spirit/Ultimate.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "By destroying this Spirit",
+              "originalClauseText": "By destroying this Spirit",
               "cleanText": "By destroying this Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -712,7 +1138,9 @@
             },
             {
               "rawText": "ignoring the cost of Braves, destroy every opposing Cost 7 or less Spirit/Ultimate.",
+              "originalClauseText": "ignoring the cost of Braves, destroy every opposing Cost 7 or less Spirit/Ultimate.",
               "cleanText": "ignoring the cost of Braves, destroy every opposing Cost 7 or less Spirit/Ultimate",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -728,7 +1156,23 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC05-X01#a2",
+          "keywords": [],
+          "id": "PC05-X01#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV2_LV3_LV4_41e476665d6fcfacc6e659e5dc382a6e084d1a1fa04282d7a2fce2784afcd990_8c8f2c2e9b5e175e93dc9a18c8c68cdc",
+          "physicalId": "PC05-X01#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV2_LV3_LV4_41e476665d6fcfacc6e659e5dc382a6e084d1a1fa04282d7a2fce2784afcd990_8c8f2c2e9b5e175e93dc9a18c8c68cdc",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV2_LV3_LV4_41e476665d6fcfacc6e659e5dc382a6e084d1a1fa04282d7a2fce2784afcd990_8c8f2c2e9b5e175e93dc9a18c8c68cdc",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV2_LV3_LV4_acefe308043c5db48155e8c0f77da2a81a20c61a1406b0c6b776a639b3390e37_d99c8f968f93cdb1bf7ec5067f2e0527",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -745,10 +1189,13 @@
     "compiledIr": {
       "cardNumber": "PC05-005",
       "name": "Fuyutsuki Kozo",
+      "type": "Nexus",
+      "levels": {},
+      "originalEffectText": "[LV1][LV2] (When Deployed)\nYou can reveal three cards from your decktop. Among them, besides any “Fuyutsuki Kozo”, add a “NERV” family card, and an “Ikari Gendo”/“Ikari Yui” to the Hand. Discard any remaining cards.\n\n[LV2] Flash - (Opposing Attack Step)\n(Once per Turn: Same Name) You can summon/deploy an “EVANGELION”/“Spear”/“Ikari Gendo” from your Hand/Trash",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "PC05-005#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -758,8 +1205,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_DEPLOYED",
+            "timings": [
+              "WHEN_DEPLOYED"
+            ],
             "timingLabel": "When Deployed",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_DEPLOYED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -768,10 +1224,14 @@
             "isMain": false,
             "cleanBody": "You can reveal three cards from your decktop. Among them, besides any “Fuyutsuki Kozo”, add a “NERV” family card, and an “Ikari Gendo”/“Ikari Yui” to the Hand. Discard any remaining cards."
           },
+          "originalAbilityText": "[LV1][LV2] (When Deployed)\nYou can reveal three cards from your decktop. Among them, besides any “Fuyutsuki Kozo”, add a “NERV” family card, and an “Ikari Gendo”/“Ikari Yui” to the Hand. Discard any remaining cards.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "You can reveal three cards from your decktop.",
+              "originalClauseText": "You can reveal three cards from your decktop.",
               "cleanText": "You can reveal three cards from your decktop",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -784,19 +1244,24 @@
             },
             {
               "rawText": "Among them, besides any \"Fuyutsuki Kozo\", add a \"NERV\" family card, and an \"Ikari Gendo\"/\"Ikari Yui\" to the Hand.",
+              "originalClauseText": "Among them, besides any \"Fuyutsuki Kozo\", add a \"NERV\" family card, and an \"Ikari Gendo\"/\"Ikari Yui\" to the Hand.",
               "cleanText": "Among them, besides any \"Fuyutsuki Kozo\", add a \"NERV\" family card, and an \"Ikari Gendo\"/\"Ikari Yui\" to the Hand",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "ADD_TO_HAND"
+                "op": "UNSUPPORTED",
+                "rawText": "Among them, besides any \"Fuyutsuki Kozo\", add a \"NERV\" family card, and an \"Ikari Gendo\"/\"Ikari Yui\" to the Hand"
               }
             },
             {
               "rawText": "Discard any remaining cards.",
+              "originalClauseText": "Discard any remaining cards.",
               "cleanText": "Discard any remaining cards",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -807,10 +1272,26 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "Among them, besides any \"Fuyutsuki Kozo\", add a \"NERV\" family card, and an \"Ikari Gendo\"/\"Ikari Yui\" to the Hand."
+          ],
+          "legacyId": "PC05-005#a0",
+          "keywords": [],
+          "id": "PC05-005#AB_WHEN_DEPLOYED_NONE_LV1_LV2_ef34733a20a1a9b3e15a3c8516d7db09b023bbc751fec7c65123d6a96ddb6d10_06514300709f2b211272dfb8eaaedaa2",
+          "physicalId": "PC05-005#AB_WHEN_DEPLOYED_NONE_LV1_LV2_ef34733a20a1a9b3e15a3c8516d7db09b023bbc751fec7c65123d6a96ddb6d10_06514300709f2b211272dfb8eaaedaa2",
+          "semanticId": "SEM#AB_WHEN_DEPLOYED_NONE_LV1_LV2_ef34733a20a1a9b3e15a3c8516d7db09b023bbc751fec7c65123d6a96ddb6d10_06514300709f2b211272dfb8eaaedaa2",
+          "semanticIdV3": "SEM3#AB_WHEN_DEPLOYED_NONE_LV1_LV2_cf8b3ef713b310701824c74e1a9bb638083b696a76d4498c3de846a169ef9697_c4ce5dd5399087bf734f4209db3cd9f5",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_DEPLOYED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC05-005#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -819,8 +1300,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Opposing Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "OPPONENT",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
             "limit": "ONCE_PER_TURN_SAME_NAME",
             "cantStack": false,
             "keyword": null,
@@ -829,10 +1321,14 @@
             "isMain": false,
             "cleanBody": "You can summon/deploy an “EVANGELION”/“Spear”/“Ikari Gendo” from your Hand/Trash"
           },
+          "originalAbilityText": "[LV2] Flash - (Opposing Attack Step)\n(Once per Turn: Same Name) You can summon/deploy an “EVANGELION”/“Spear”/“Ikari Gendo” from your Hand/Trash",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can summon/deploy an \"EVANGELION\"/\"Spear\"/\"Ikari Gendo\" from your Hand/Trash",
+              "originalClauseText": "You can summon/deploy an \"EVANGELION\"/\"Spear\"/\"Ikari Gendo\" from your Hand/Trash",
               "cleanText": "You can summon/deploy an \"EVANGELION\"/\"Spear\"/\"Ikari Gendo\" from your Hand/Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -844,12 +1340,29 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC05-005#a1",
+          "keywords": [],
+          "id": "PC05-005#AB_ATTACK_STEP_NONE_LV2_8842d54140f8892abad31bc8ca8582bac9e8ac0b3f526f8de8f70bed68438040_233fbbbc0e52c0e8ea5ada5553cfa2f4",
+          "physicalId": "PC05-005#AB_ATTACK_STEP_NONE_LV2_8842d54140f8892abad31bc8ca8582bac9e8ac0b3f526f8de8f70bed68438040_233fbbbc0e52c0e8ea5ada5553cfa2f4",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_8842d54140f8892abad31bc8ca8582bac9e8ac0b3f526f8de8f70bed68438040_233fbbbc0e52c0e8ea5ada5553cfa2f4",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_21b5a80654a67d12b081aa7a5309d110b59ff1b477df905cd515741e71b02fae_eb0e1d8917186a0b32f3d95f991ab476",
+          "timingSemantics": {
+            "timingOwner": "OPPONENT",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
-      "compiledClausesCount": 4,
-      "unsupportedClausesCount": 0,
-      "isFullySupported": true
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 1,
+      "isFullySupported": false
     }
   },
   "PC05-004": {
@@ -877,6 +1390,26 @@
     "compiledIr": {
       "cardNumber": "PC05-004",
       "name": "The 10th Apostle -Invasion-",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 9000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 11000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 13000
+        }
+      },
+      "originalEffectText": "Flash - (Opposing Attack Step)\nYou can summon this card from the Hand. When summoning with this effect, for each differently-named \"Angel\" family card in your Trash, this card gets -1 cost (Max. -6).\n\n[LV1][LV2][LV3] [A.T. Field] (When Attacks/Blocks)\nThis Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.\n\n[LV2][LV3] (When Attacks/Blocks)\nBy returning this Spirit to the deckbottom, summon a Cost 8 or more \"Angel\" family Spirit card from your Hand/Trash, without paying the cost.",
+      "teams": [],
       "keywords": [
         {
           "name": "A.T. Field",
@@ -884,12 +1417,32 @@
           "wave": 3,
           "hook": "at_field",
           "bracketed": true,
-          "index": 217
+          "index": 0,
+          "abilityId": "PC05-004#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+          "cardNumber": "PC05-004",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS_OR_BLOCKS",
+          "timingLabel": "When Attacks/Blocks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PC05-004#a1"
         }
       ],
       "abilities": [
         {
-          "id": "PC05-004#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -900,8 +1453,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Opposing Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "OPPONENT",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -910,10 +1472,14 @@
             "isMain": false,
             "cleanBody": "You can summon this card from the Hand. When summoning with this effect, for each differently-named \"Angel\" family card in your Trash, this card gets -1 cost ."
           },
+          "originalAbilityText": "Flash - (Opposing Attack Step)\nYou can summon this card from the Hand. When summoning with this effect, for each differently-named \"Angel\" family card in your Trash, this card gets -1 cost (Max. -6).",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "You can summon this card from the Hand.",
+              "originalClauseText": "You can summon this card from the Hand.",
               "cleanText": "You can summon this card from the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -921,26 +1487,43 @@
               "duration": null,
               "op": {
                 "op": "SUMMON_THIS_CARD",
-                "from": "HAND_OR_BURST"
+                "from": "HAND"
               }
             },
             {
               "rawText": "When summoning with this effect, for each differently-named \"Angel\" family card in your Trash, this card gets -1 cost .",
+              "originalClauseText": "When summoning with this effect, for each differently-named \"Angel\" family card in your Trash, this card gets -1 cost .",
               "cleanText": "When summoning with this effect, for each differently-named \"Angel\" family card in your Trash, this card gets -1 cost",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "COST_MODIFIER"
+                "op": "COST_MODIFIER",
+                "delta": -1
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC05-004#a0",
+          "keywords": [],
+          "id": "PC05-004#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_9bcb0cf3ff22ed019be74cffe35c9b985312176938e16fc8f85cb6b5ad049a11_0c8e93e4a22584d35fc80eecd44238f2",
+          "physicalId": "PC05-004#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_9bcb0cf3ff22ed019be74cffe35c9b985312176938e16fc8f85cb6b5ad049a11_0c8e93e4a22584d35fc80eecd44238f2",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_9bcb0cf3ff22ed019be74cffe35c9b985312176938e16fc8f85cb6b5ad049a11_0c8e93e4a22584d35fc80eecd44238f2",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_4e125cfcddae9ff93dd9f32d06b3c195b8bf1e715e44284eb626541ab77edc14_bae886014c49f80825356c488549f68d",
+          "timingSemantics": {
+            "timingOwner": "OPPONENT",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC05-004#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -951,8 +1534,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timings": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
             "timingLabel": "When Attacks/Blocks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "A.T. Field",
@@ -961,10 +1555,14 @@
             "isMain": false,
             "cleanBody": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] [A.T. Field] (When Attacks/Blocks)\nThis Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.",
+              "originalClauseText": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.",
               "cleanText": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -976,10 +1574,55 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC05-004#a1",
+          "keywords": [
+            {
+              "name": "A.T. Field",
+              "parameter": null,
+              "wave": 3,
+              "hook": "at_field",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PC05-004#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+              "cardNumber": "PC05-004",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS_OR_BLOCKS",
+              "timingLabel": "When Attacks/Blocks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PC05-004#a1"
+            }
+          ],
+          "id": "PC05-004#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+          "physicalId": "PC05-004#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_0c4f046ee5a8d8e01b6c6ff64a6b95460112ad5c93dce1e127368e6d123182df_38fe13e5a00948f574e9455c3c508e06",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC05-004#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -989,8 +1632,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timings": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
             "timingLabel": "When Attacks/Blocks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -999,10 +1653,14 @@
             "isMain": false,
             "cleanBody": "By returning this Spirit to the deckbottom, summon a Cost 8 or more \"Angel\" family Spirit card from your Hand/Trash, without paying the cost."
           },
+          "originalAbilityText": "[LV2][LV3] (When Attacks/Blocks)\nBy returning this Spirit to the deckbottom, summon a Cost 8 or more \"Angel\" family Spirit card from your Hand/Trash, without paying the cost.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "By returning this Spirit to the deckbottom",
+              "originalClauseText": "By returning this Spirit to the deckbottom",
               "cleanText": "By returning this Spirit to the deckbottom",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1018,7 +1676,9 @@
             },
             {
               "rawText": "summon a Cost 8 or more \"Angel\" family Spirit card from your Hand/Trash, without paying the cost.",
+              "originalClauseText": "summon a Cost 8 or more \"Angel\" family Spirit card from your Hand/Trash, without paying the cost.",
               "cleanText": "summon a Cost 8 or more \"Angel\" family Spirit card from your Hand/Trash, without paying the cost",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1026,11 +1686,39 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand_or_trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "costGte": 8,
+                  "family": "Angel"
+                },
+                "free": true,
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC05-004#a2",
+          "keywords": [],
+          "id": "PC05-004#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV2_LV3_76d6263c6234f9c52f1e6d0fc1868d954cfcdb20f8226e3ae369184bfdc256ad_25728e7b97484cf75c0123b566af1ec5",
+          "physicalId": "PC05-004#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV2_LV3_76d6263c6234f9c52f1e6d0fc1868d954cfcdb20f8226e3ae369184bfdc256ad_25728e7b97484cf75c0123b566af1ec5",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV2_LV3_76d6263c6234f9c52f1e6d0fc1868d954cfcdb20f8226e3ae369184bfdc256ad_25728e7b97484cf75c0123b566af1ec5",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV2_LV3_354bddba13c83251cc5741fc7fd0fcd89f3c8daebf6327a4da7099783fa41953_f24957e5efc162524a21be4192895d59",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -1063,6 +1751,26 @@
     "compiledIr": {
       "cardNumber": "PC04-X02",
       "name": "Ultraman Zett Delta Rise Claw ［3］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 7000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 10000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 6,
+          "bp": 18000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: \"Ultraman\" & Cost 6 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents/Attacks)\nOnce per turn, draw three cards, then discard two cards from your Hand. For each two costs of the total cost of cards discarded by this effect, send a core from any opposing Spirits to the Reserve.\n\n[LV2][LV3] Flash - (Either Attack Step)\nOnce per turn, treat this Spirit's color as colorless, and return an opposing Spirit with a cost equal or inferior to this Spirit's to the deckbottom.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -1070,12 +1778,32 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "PC04-X02#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c498ea74f75dce36426a876fed2d89db7d9a040fdc37833d06da503e6772e665_169bf555c5bb7ccf663298db14422832",
+          "cardNumber": "PC04-X02",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PC04-X02#a0"
         }
       ],
       "abilities": [
         {
-          "id": "PC04-X02#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1086,8 +1814,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: \"Ultraman\" & Cost 6 or more",
@@ -1096,10 +1833,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Advent: \"Ultraman\" & Cost 6 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1121,21 +1862,69 @@
             },
             {
               "rawText": "stack this onto your target Spirit.",
+              "originalClauseText": "stack this onto your target Spirit.",
               "cleanText": "stack this onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
+                "from": "hand",
+                "target": "TARGET",
                 "op": "STACK_CARD"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC04-X02#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "\"Ultraman\" & Cost 6 or more",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PC04-X02#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c498ea74f75dce36426a876fed2d89db7d9a040fdc37833d06da503e6772e665_169bf555c5bb7ccf663298db14422832",
+              "cardNumber": "PC04-X02",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PC04-X02#a0"
+            }
+          ],
+          "id": "PC04-X02#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c498ea74f75dce36426a876fed2d89db7d9a040fdc37833d06da503e6772e665_169bf555c5bb7ccf663298db14422832",
+          "physicalId": "PC04-X02#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c498ea74f75dce36426a876fed2d89db7d9a040fdc37833d06da503e6772e665_169bf555c5bb7ccf663298db14422832",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c498ea74f75dce36426a876fed2d89db7d9a040fdc37833d06da503e6772e665_169bf555c5bb7ccf663298db14422832",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_052274690e6ad4f0389c21f6bef42a51f7bfd3c6aff6d4bcde15ee4d7989d6f2_21e041c61151173f8e852a76c58656af",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC04-X02#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1146,8 +1935,21 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Advents/Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -1156,10 +1958,14 @@
             "isMain": false,
             "cleanBody": "draw three cards, then discard two cards from your Hand. For each two costs of the total cost of cards discarded by this effect, send a core from any opposing Spirits to the Reserve."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Advents/Attacks)\nOnce per turn, draw three cards, then discard two cards from your Hand. For each two costs of the total cost of cards discarded by this effect, send a core from any opposing Spirits to the Reserve.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "draw three cards, then discard two cards from your Hand.",
+              "originalClauseText": "draw three cards, then discard two cards from your Hand.",
               "cleanText": "draw three cards, then discard two cards from your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1174,7 +1980,9 @@
             },
             {
               "rawText": "For each two costs of the total cost of cards discarded by this effect, send a core from any opposing Spirits to the Reserve.",
+              "originalClauseText": "For each two costs of the total cost of cards discarded by this effect, send a core from any opposing Spirits to the Reserve.",
               "cleanText": "For each two costs of the total cost of cards discarded by this effect, send a core from any opposing Spirits to the Reserve",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1182,14 +1990,35 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "opp"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC04-X02#a1",
+          "keywords": [],
+          "id": "PC04-X02#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_1a8685c4d0202495348dd881d33c015e7a0d8093b4660b61ef48d8e43e20351f_ef917dc35ed368953bb57c5ba6d8eb5f",
+          "physicalId": "PC04-X02#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_1a8685c4d0202495348dd881d33c015e7a0d8093b4660b61ef48d8e43e20351f_ef917dc35ed368953bb57c5ba6d8eb5f",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_1a8685c4d0202495348dd881d33c015e7a0d8093b4660b61ef48d8e43e20351f_ef917dc35ed368953bb57c5ba6d8eb5f",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_2adce623297eeec971a2b66b0c9f3610b544f8690c7b8bf23da70d23d820ba27_594e81044bcbec129f63ca01514e3ca7",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC04-X02#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1199,8 +2028,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -1209,22 +2049,29 @@
             "isMain": false,
             "cleanBody": "treat this Spirit's color as colorless, and return an opposing Spirit with a cost equal or inferior to this Spirit's to the deckbottom."
           },
+          "originalAbilityText": "[LV2][LV3] Flash - (Either Attack Step)\nOnce per turn, treat this Spirit's color as colorless, and return an opposing Spirit with a cost equal or inferior to this Spirit's to the deckbottom.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "treat this Spirit's color as colorless",
+              "originalClauseText": "treat this Spirit's color as colorless",
               "cleanText": "treat this Spirit's color as colorless",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "TREAT_RULE",
+                "treatAs": "COLORLESS"
               }
             },
             {
               "rawText": "return an opposing Spirit with a cost equal or inferior to this Spirit's to the deckbottom.",
+              "originalClauseText": "return an opposing Spirit with a cost equal or inferior to this Spirit's to the deckbottom.",
               "cleanText": "return an opposing Spirit with a cost equal or inferior to this Spirit's to the deckbottom",
+              "clauseIndex": 1,
               "link": "also",
               "isOptional": false,
               "isCost": false,
@@ -1234,12 +2081,40 @@
                 "op": "BOUNCE",
                 "count": 1,
                 "target": {
-                  "side": "either"
-                }
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "comparison": {
+                      "property": "COST",
+                      "operator": "LTE",
+                      "reference": "self"
+                    }
+                  }
+                },
+                "destination": "DECK_BOTTOM"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC04-X02#a2",
+          "keywords": [],
+          "id": "PC04-X02#AB_ATTACK_STEP_NONE_LV2_LV3_764d9b42fde7276b6f6487f8ba1b61cdb5632869cf453a3246826620f74b0940_c9a5dc1f63872b02f9e93c9e2b8f2a8a",
+          "physicalId": "PC04-X02#AB_ATTACK_STEP_NONE_LV2_LV3_764d9b42fde7276b6f6487f8ba1b61cdb5632869cf453a3246826620f74b0940_c9a5dc1f63872b02f9e93c9e2b8f2a8a",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_764d9b42fde7276b6f6487f8ba1b61cdb5632869cf453a3246826620f74b0940_c9a5dc1f63872b02f9e93c9e2b8f2a8a",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_LV3_450e7b72bc9415baf8ad0a2abae21d62db9a1f08a28c098ec2f5ad0cce490b68_1ba6ecabc12e05c9b1649628f19410c5",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,

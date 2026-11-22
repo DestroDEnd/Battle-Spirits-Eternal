@@ -1,0 +1,195 @@
+{
+  "phase": "4B.4B",
+  "title": "Compiler Semantic Fidelity Audit",
+  "timestamp": "2026-11-14T13:51:58.200Z",
+  "auditScope": {
+    "totalCanonicalCards": 14609,
+    "totalIrShards": 514,
+    "totalAuditedAbilities": 34855
+  },
+  "highLevelFindings": {
+    "cleanAbilitiesCount": 32941,
+    "cleanAbilitiesPercentage": 94.51,
+    "defectiveAbilitiesCount": 1914,
+    "defectiveAbilitiesPercentage": 5.49,
+    "totalDistinctAffectedCards": 1776,
+    "affectedCardsPercentage": 12.16
+  },
+  "severityDistribution": {
+    "CRITICAL": 73,
+    "HIGH": 1090,
+    "MEDIUM": 751,
+    "LOW": 0,
+    "NONE": 32941
+  },
+  "classificationDistribution": {
+    "NO_DISCREPANCY_FOUND": 32941,
+    "SEMANTIC_SUBSTITUTION": 83,
+    "UNSUPPORTED_BY_COMPILER": 755,
+    "SEMANTIC_STRENGTHENING": 75,
+    "SEMANTIC_OMISSION": 239,
+    "WRONG_PARAMETER": 725,
+    "WRONG_TARGET": 37
+  },
+  "compilerDefectCounts": {
+    "DEF-REL-BP-01": {
+      "defectName": "Relative BP Comparison Omission in Blocking Restriction",
+      "severity": "HIGH",
+      "affectedCards": 2,
+      "affectedAbilities": 2,
+      "exampleCards": [
+        "BS01-018",
+        "BS01-012"
+      ]
+    },
+    "DEF-REL-TARGET-01": {
+      "defectName": "Relative BP/Cost/Core Comparison Filter Omitted in Target Selection",
+      "severity": "HIGH",
+      "affectedCards": 235,
+      "affectedAbilities": 235,
+      "exampleCards": [
+        "26RBS02-X16",
+        "P21-G03",
+        "BSCO-003",
+        "BSCO-023",
+        "BRAVE-TIGER"
+      ]
+    },
+    "DEF-LIMIT-OPT-01": {
+      "defectName": "Sentence-Based \"Once Per Turn\" Frequency Limit Dropped from Header",
+      "severity": "HIGH",
+      "affectedCards": 674,
+      "affectedAbilities": 737,
+      "exampleCards": [
+        "26RBS02-085",
+        "26RBS03-X03",
+        "26RCB02-X10",
+        "26RDB01-043",
+        "26RDB01-045"
+      ]
+    },
+    "DEF-FALLBACK-COMBAT-01": {
+      "defectName": "Unparameterized Generic COMBAT_RESTRICTION Fallback",
+      "severity": "MEDIUM",
+      "affectedCards": 521,
+      "affectedAbilities": 529,
+      "exampleCards": [
+        "26RBS01-122",
+        "26RBS01-119",
+        "26RBS01-X09",
+        "26RBS02-061",
+        "26RBS02-077"
+      ]
+    },
+    "DEF-FALLBACK-RULE-01": {
+      "defectName": "Unparameterized Generic COMBAT_RULE Fallback",
+      "severity": "MEDIUM",
+      "affectedCards": 246,
+      "affectedAbilities": 247,
+      "exampleCards": [
+        "P21-G03",
+        "BSCO-002",
+        "P14-X02",
+        "BS05-068",
+        "BS05-067"
+      ]
+    },
+    "DEF-IMMUNITY-ABS-01": {
+      "defectName": "Conditional Destruction Immunity Compiled as Absolute INDESTRUCTIBLE",
+      "severity": "CRITICAL",
+      "affectedCards": 73,
+      "affectedAbilities": 73,
+      "exampleCards": [
+        "26RBS02-X13",
+        "26RBS03-036",
+        "BS25-028",
+        "BS25-037",
+        "BS25-020"
+      ]
+    },
+    "DEF-CORE-ZERO-01": {
+      "defectName": "Core Removal Down-to-Zero Protection Stripped as Reminder Text",
+      "severity": "HIGH",
+      "affectedCards": 1,
+      "affectedAbilities": 1,
+      "exampleCards": [
+        "BATTLE-SPIRITS-A11139"
+      ]
+    },
+    "DEF-SEL-EXTREME-01": {
+      "defectName": "Extreme Target Constraint (Highest/Lowest BP/Cost) Omitted",
+      "severity": "HIGH",
+      "affectedCards": 41,
+      "affectedAbilities": 41,
+      "exampleCards": [
+        "BS12-008",
+        "BS19-X01",
+        "BS34-071",
+        "BS52-TX01-A11889",
+        "BS56-008"
+      ]
+    },
+    "DEF-PREREQ-LINK-01": {
+      "defectName": "Prerequisite Execution Link (\"If you do\", \"When you've done so\") Omitted",
+      "severity": "HIGH",
+      "affectedCards": 4,
+      "affectedAbilities": 4,
+      "exampleCards": [
+        "BS67-X12",
+        "BSC40-011",
+        "CB29-042",
+        "PB44-005"
+      ]
+    },
+    "DEF-SUBST-EFFECT-RESTR-01": {
+      "defectName": "Effect Activation Restriction Miscompiled as Combat Restriction",
+      "severity": "HIGH",
+      "affectedCards": 83,
+      "affectedAbilities": 83,
+      "exampleCards": [
+        "P15-12",
+        "BS04-089",
+        "BS05-073",
+        "BS10-108",
+        "BS11-078"
+      ]
+    }
+  },
+  "coreInvestigatedCases": {
+    "caseA_BS01_012_RelativeBP": {
+      "canonicalText": "This Spirit can't block Spirits with BP inferior to this Spirit's.",
+      "compiledIR": "SET_RESTRICTION target=self restriction=CANNOT_BLOCK",
+      "affectedCompilerRule": "compiler/clause_patterns.js:844",
+      "verdict": "CONFIRMED_COMPILER_DEFECT (SEMANTIC_STRENGTHENING / HIGH SEVERITY)",
+      "findings": "Compiler dropped relative BP condition and emitted unconditional CANNOT_BLOCK. Engine lacks dynamic relative BP block evaluation."
+    },
+    "caseB_NegationsAndProhibitions": {
+      "totalAffectedAbilities": 685,
+      "findings": "Loose regexes on 'can't be' emit generic empty COMBAT_RESTRICTION or absolute INDESTRUCTIBLE, distorting card immunity and activation rules."
+    },
+    "caseC_RelativeAndComparativeConditions": {
+      "totalAffectedAbilities": 525,
+      "findings": "Relative BP/cost/core comparison constraints against self or extremes (highest/lowest) are completely omitted in removal operations across 245+ abilities."
+    },
+    "caseD_DurationAndTiming": {
+      "totalAffectedAbilities": 737,
+      "findings": "Sentence-based 'once per turn' limits are dropped from header.limit across 737 abilities, allowing infinite or repeated effect activations in engine."
+    },
+    "caseE_CompoundAndConditionalEffects": {
+      "totalAffectedAbilities": 4,
+      "findings": "Prerequisite execution dependencies ('If you do', 'When you've done so') are unlinked, executing follow-up actions unconditionally."
+    },
+    "caseF_NumericalParameters": {
+      "totalAffectedAbilities": 1,
+      "findings": "Zero-depletion protection ('can't bring cores down to 0') is actively stripped by clause_splitter.js as reminder text."
+    }
+  },
+  "productionSafetyIntegrityStatement": {
+    "productionCodeModified": false,
+    "compilerLogicModified": false,
+    "cardImplementationStatusJsonModified": false,
+    "irShardsModified": false,
+    "cardsRecompiled": false,
+    "auditExportsSeparate": true
+  }
+}

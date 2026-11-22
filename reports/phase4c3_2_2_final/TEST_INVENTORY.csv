@@ -1,0 +1,201 @@
+test_id,suite,description,status
+TC-COL-01,tests/physical_ability_identity.test.js,"Descriptor A compiled in complete isolation",PASS
+TC-COL-02,tests/physical_ability_identity.test.js,"Descriptor B compiled in complete isolation",PASS
+TC-COL-03,tests/physical_ability_identity.test.js,"Sequential compilation: A compiled, then B compiled",PASS
+TC-COL-04,tests/physical_ability_identity.test.js,"Reverse sequential compilation: B compiled, then A compiled",PASS
+TC-COL-05,tests/physical_ability_identity.test.js,"Three descriptors: A, B, C compiled in arbitrary permutations",PASS
+TC-COL-06,tests/physical_ability_identity.test.js,"Full database batch compilation across 514 shards [BLOCKED]",BLOCKED
+TC-COL-07,tests/physical_ability_identity.test.js,"Incremental compilation of single modified card in isolation",PASS
+TC-COL-08,tests/physical_ability_identity.test.js,"Cross-environment serialization invariance (RFC 8785 canonical bytes)",PASS
+TC-COL-10,tests/physical_ability_identity.test.js,"Forced primary SHA-256 collision using injectable mock hash",PASS
+TC-COL-11,tests/physical_ability_identity.test.js,"Forced dual collision in both primary and secondary mock hashes",PASS
+TC-COL-12,tests/physical_ability_identity.test.js,"Existing persistent IDs remain unchanged after new colliding descriptor appears",PASS
+TC-ID-01,tests/physical_ability_identity.test.js,"Deterministic 256-bit SHA-256 digest over RFC 8785 canonical JSON across 100 runs",PASS
+TC-ID-02,tests/physical_ability_identity.test.js,"JSON object-key ordering changes preserve identity under RFC 8785",PASS
+TC-ID-03,tests/physical_ability_identity.test.js,"Meaningful execution clause-order changes alter physical identity",PASS
+TC-ID-04,tests/physical_ability_identity.test.js,"Cosmetic whitespace and formatting invariance",PASS
+TC-ID-05,tests/physical_ability_identity.test.js,"Reprint semantic equivalence across differing set codes and printings",PASS
+TC-COND-01,tests/physical_ability_identity_corrective.test.js,"Two different condition expressions with identical headers produce different descriptors and IDs",PASS
+TC-COND-02,tests/physical_ability_identity_corrective.test.js,"Equivalent condition expressions with harmless formatting differences produce identical identities",PASS
+TC-COND-03,tests/physical_ability_identity_corrective.test.js,"Condition blocks and ordinary executable abilities do not collide",PASS
+TC-COND-04,tests/physical_ability_identity_corrective.test.js,"Compiler integration via compileCard preserves distinct condition identities",PASS
+TC-INST-01,tests/physical_ability_identity_corrective.test.js,"Two identical abilities on one card receive distinct physical IDs and shared semantic ID",PASS
+TC-INST-02,tests/physical_ability_identity_corrective.test.js,"Two identical abilities on different cards receive distinct physical IDs and shared semantic ID",PASS
+TC-INST-03,tests/physical_ability_identity_corrective.test.js,"The same card compiled in isolation and in a batch produces 100% identical IDs",PASS
+TC-INST-04,tests/physical_ability_identity_corrective.test.js,"Ability order changes where underlying abilities are distinct preserve individual IDs",PASS
+TC-INST-05,tests/physical_ability_identity_corrective.test.js,"Repeated compilation of the same card produces 100% identical IDs and benign registry matches",PASS
+TC-INST-06,tests/physical_ability_identity_corrective.test.js,"Incremental compilation after an unrelated card is added preserves existing IDs",PASS
+TC-RFC-01,tests/physical_ability_identity_corrective.test.js,"Nested object key ordering (strict UTF-16 code unit order)",PASS
+TC-RFC-02,tests/physical_ability_identity_corrective.test.js,"Arrays and nested arrays preserve order",PASS
+TC-RFC-03,tests/physical_ability_identity_corrective.test.js,"Negative zero (-0) serialized as 0",PASS
+TC-RFC-04,tests/physical_ability_identity_corrective.test.js,"Floating-point serialization edge cases",PASS
+TC-RFC-05,tests/physical_ability_identity_corrective.test.js,"Non-finite numbers (NaN, Infinity, -Infinity) explicitly throw TypeError",PASS
+TC-RFC-06,tests/physical_ability_identity_corrective.test.js,"Undefined object properties explicitly throw TypeError (no silent omission)",PASS
+TC-RFC-07,tests/physical_ability_identity_corrective.test.js,"Undefined array elements explicitly throw TypeError (no silent conversion to null)",PASS
+TC-RFC-08,tests/physical_ability_identity_corrective.test.js,"Functions and symbols explicitly throw TypeError",PASS
+TC-RFC-09,tests/physical_ability_identity_corrective.test.js,"BigInt explicitly throws TypeError",PASS
+TC-RFC-10,tests/physical_ability_identity_corrective.test.js,"Sparse arrays with unassigned holes explicitly throw TypeError",PASS
+TC-RFC-11,tests/physical_ability_identity_corrective.test.js,"Lone high surrogates explicitly throw TypeError",PASS
+TC-RFC-12,tests/physical_ability_identity_corrective.test.js,"Lone low surrogates explicitly throw TypeError",PASS
+TC-RFC-13,tests/physical_ability_identity_corrective.test.js,"Valid supplementary Unicode characters (surrogate pairs) properly serialized",PASS
+TC-RFC-14,tests/physical_ability_identity_corrective.test.js,"Japanese characters and emoji preserved as literal UTF-8 in strings",PASS
+TC-RFC-15,tests/physical_ability_identity_corrective.test.js,"Known RFC 8785 canonicalization test vectors",PASS
+TC-PIPE-01,tests/physical_ability_identity_corrective.test.js,"Standard ability compilation derives ID post-keyword binding",PASS
+TC-PIPE-02,tests/physical_ability_identity_corrective.test.js,"Condition block compilation derives ID post-binding",PASS
+TC-PIPE-03,tests/physical_ability_identity_corrective.test.js,"Overridden card compilation derives ID post-binding",PASS
+TC-PIPE-04,tests/physical_ability_identity_corrective.test.js,"Keyword-bound ability compilation: bound keyword abilityId matches physicalId",PASS
+TC-PIPE-05,tests/physical_ability_identity_corrective.test.js,"Compilation where keyword binding does not modify ability",PASS
+TC-PIPE-06,tests/physical_ability_identity_corrective.test.js,"Repeated compilation of same source card through applicable paths",PASS
+TC-COMPAT-01,tests/physical_ability_identity_corrective.test.js,"Compiled abilities preserve legacyId, physicalId, semanticId, and id === physicalId",PASS
+TC-COMPAT-02,tests/physical_ability_identity_corrective.test.js,"Engine activation accepts both physicalId and legacyId",PASS
+TC-COMPAT-03,tests/physical_ability_identity_corrective.test.js,"Keyword bindings preserve abilityId matching physicalId with legacyAbilityId fallback",PASS
+TC-REG-01,tests/physical_ability_identity_corrective.test.js,"Repeated registration of the same descriptor returns status MATCH",PASS
+TC-REG-02,tests/physical_ability_identity_corrective.test.js,"Same physical ID with mismatched descriptor throws FatalCollisionError",PASS
+TC-REG-03,tests/physical_ability_identity_corrective.test.js,"Failed registration followed by valid registration keeps registry intact",PASS
+TC-REG-04,tests/physical_ability_identity_corrective.test.js,"Independent compilation sessions reset registry cleanly via clear()",PASS
+TC-REG-05,tests/physical_ability_identity_corrective.test.js,"Atomic snapshot and rollback upon exception during compilation",PASS
+TC-REG-06,tests/physical_ability_identity_corrective.test.js,"Duplicate ability instances register cleanly as separate entries without collision",PASS
+TC-SEM-01,tests/physical_ability_identity_final.test.js,"Identical operation ASTs with different harmless wording produce identical semantic IDs",PASS
+TC-SEM-02,tests/physical_ability_identity_final.test.js,"Different operation parameters produce different semantic IDs",PASS
+TC-SEM-03,tests/physical_ability_identity_final.test.js,"Different targets produce different semantic IDs",PASS
+TC-SEM-04,tests/physical_ability_identity_final.test.js,"Different durations produce different semantic IDs",PASS
+TC-SEM-05,tests/physical_ability_identity_final.test.js,"Different costs produce different semantic IDs",PASS
+TC-SEM-06,tests/physical_ability_identity_final.test.js,"Different conditions produce different semantic IDs",PASS
+TC-SEM-07,tests/physical_ability_identity_final.test.js,"Different clause ordering produces different semantic IDs",PASS
+TC-SEM-08,tests/physical_ability_identity_final.test.js,"Unsupported text remains part of identity when no structured operation is available",PASS
+TC-SEM-09,tests/physical_ability_identity_final.test.js,"Partially compiled clauses preserve both structured representation and unparsed remainder",PASS
+TC-SEM-10,tests/physical_ability_identity_final.test.js,"Physical IDs remain distinct across different canonical card numbers even when semantic IDs match",PASS
+TC-RFCVAL-01,tests/physical_ability_identity_final.test.js,"Symbol-keyed properties rejected explicitly",PASS
+TC-RFCVAL-02,tests/physical_ability_identity_final.test.js,"Date objects rejected explicitly",PASS
+TC-RFCVAL-03,tests/physical_ability_identity_final.test.js,"Map and Set rejected explicitly",PASS
+TC-RFCVAL-04,tests/physical_ability_identity_final.test.js,"Typed arrays and ArrayBuffer rejected explicitly",PASS
+TC-RFCVAL-05,tests/physical_ability_identity_final.test.js,"Class instances (non-plain objects) rejected explicitly",PASS
+TC-RFCVAL-06,tests/physical_ability_identity_final.test.js,"Circular references in objects and arrays rejected explicitly",PASS
+TC-RFCVAL-07,tests/physical_ability_identity_final.test.js,"Nested unsupported values inside operation ASTs rejected by sanitizeAstNode",PASS
+TC-RFCVAL-08,tests/physical_ability_identity_final.test.js,"Nested unsupported values inside condition ASTs rejected by sanitizeAstNode",PASS
+TC-RFCVAL-09,tests/physical_ability_identity_final.test.js,"Valid plain objects and arrays properly serialized",PASS
+TC-RFCVAL-10,tests/physical_ability_identity_final.test.js,"Every vector loaded from RFC8785_TEST_VECTORS.json executed and verified",PASS
+TC-ACT-01,tests/physical_ability_identity_final.test.js,"Actual engine activateAbility() succeeds using new physical ID",PASS
+TC-ACT-02,tests/physical_ability_identity_final.test.js,"Actual engine activateAbility() succeeds using legacy ID (#a0)",PASS
+TC-ACT-03,tests/physical_ability_identity_final.test.js,"Actual engine activateAbility() returns ABILITY_NOT_FOUND on unknown ID",PASS
+TC-ACT-04,tests/physical_ability_identity_final.test.js,"Actual engine activateAbility() targets specific requested ability (#a1 vs #a0)",PASS
+TC-ACT-05,tests/physical_ability_identity_final.test.js,"Actual engine activateAbility() correctly dispatches when multiple abilities exist on same card",PASS
+TC-ACT-06,tests/physical_ability_identity_final.test.js,"Actual engine activateAbility() functions with real card compiled via compileCard",PASS
+TC-ACT-07,tests/physical_ability_identity_final.test.js,"Duplicate identical ability instances do not cause accidental activation of wrong instance",PASS
+TC-CONDNORM-01,tests/physical_ability_identity_final.test.js,"Harmless whitespace variation normalizes to identical descriptor",PASS
+TC-CONDNORM-02,tests/physical_ability_identity_final.test.js,"Meaningful punctuation variation is preserved and produces different descriptors",PASS
+TC-CONDNORM-03,tests/physical_ability_identity_final.test.js,"Different numeric thresholds produce different descriptors",PASS
+TC-CONDNORM-04,tests/physical_ability_identity_final.test.js,"Different comparison operators produce different descriptors",PASS
+TC-CONDNORM-05,tests/physical_ability_identity_final.test.js,"Different card-type requirements produce different descriptors",PASS
+TC-CONDNORM-06,tests/physical_ability_identity_final.test.js,"Different logical connectors produce different descriptors",PASS
+TC-CONDNORM-07,tests/physical_ability_identity_final.test.js,"Different condition types produce different conditionTypes and descriptors",PASS
+TC-CONDNORM-08,tests/physical_ability_identity_final.test.js,"Unsupported condition expressions preserved as normalized text fallback",PASS
+TC-CONDNORM-09,tests/physical_ability_identity_final.test.js,"Explicit labeling of condition descriptor as CONDITION_TEXT_FALLBACK",PASS
+TC-CONDNORM-10,tests/physical_ability_identity_final.test.js,"Actual compiled condition-block identity verified via compileCard()",PASS
+TC-ARR-01,tests/physical_ability_identity_integrity.test.js,"Array with a symbol-keyed property explicitly throws TypeError",PASS
+TC-ARR-02,tests/physical_ability_identity_integrity.test.js,"Array with a named metadata property explicitly throws TypeError",PASS
+TC-ARR-03,tests/physical_ability_identity_integrity.test.js,"Array with unexpected numeric-looking property explicitly throws TypeError",PASS
+TC-ARR-04,tests/physical_ability_identity_integrity.test.js,"Array with an accessor property (getter/setter) throws TypeError without invoking getter",PASS
+TC-ARR-05,tests/physical_ability_identity_integrity.test.js,"Array with a non-enumerable unexpected property explicitly throws TypeError",PASS
+TC-ARR-06,tests/physical_ability_identity_integrity.test.js,"Valid dense arrays serialize and sanitize correctly",PASS
+TC-ARR-07,tests/physical_ability_identity_integrity.test.js,"Valid nested arrays preserve hierarchy and element order",PASS
+TC-ARR-08,tests/physical_ability_identity_integrity.test.js,"Sparse arrays with holes explicitly throw TypeError",PASS
+TC-ARR-09,tests/physical_ability_identity_integrity.test.js,"Arrays containing unsupported nested values explicitly throw TypeError",PASS
+TC-ARR-10,tests/physical_ability_identity_integrity.test.js,"Arrays with valid supplementary Unicode strings properly serialize and sanitize",PASS
+TC-ARR-11,tests/physical_ability_identity_integrity.test.js,"sanitizeAstNode rejects arrays with unexpected own properties in nested ASTs",PASS
+TC-SORT-01,tests/physical_ability_identity_integrity.test.js,"Mixed-case keyword names sort deterministically by UTF-16 code units",PASS
+TC-SORT-02,tests/physical_ability_identity_integrity.test.js,"Uppercase and lowercase combinations sort strictly by code unit order",PASS
+TC-SORT-03,tests/physical_ability_identity_integrity.test.js,"Punctuation in keyword names sorts deterministically",PASS
+TC-SORT-04,tests/physical_ability_identity_integrity.test.js,"Non-ASCII accented keyword names sort deterministically",PASS
+TC-SORT-05,tests/physical_ability_identity_integrity.test.js,"Japanese characters in keyword names sort deterministically",PASS
+TC-SORT-06,tests/physical_ability_identity_integrity.test.js,"Supplementary Unicode characters in keywords sort deterministically",PASS
+TC-SORT-07,tests/physical_ability_identity_integrity.test.js,"Keyword parameter ordering when keyword names are identical",PASS
+TC-SORT-08,tests/physical_ability_identity_integrity.test.js,"UTF-16 code-unit comparator verification across known ordering vectors",PASS
+TC-SORT-09,tests/physical_ability_identity_integrity.test.js,"Stable identities across repeated compilation regardless of initial keyword order",PASS
+TC-SORT-10,tests/physical_ability_identity_integrity.test.js,"Meaningful clause execution order is preserved (clauses are NOT sorted)",PASS
+Phase 2 Compiler - Chakrambat (BS01-010),tests/golden_compiler.test.js,"Phase 2 Compiler - Chakrambat (BS01-010)",PASS
+Phase 2 Compiler - Birgoyle (BATTLE-SPIRITS-A27,tests/golden_compiler.test.js,"Or connector)",PASS
+Phase 2 Compiler - Evil Flame (BS38-067,tests/golden_compiler.test.js,"Burst + Flash)",PASS
+Phase 2 Compiler - The Makai Holy Grail (BATTLE-SPIRITS-A2302),tests/golden_compiler.test.js,"Phase 2 Compiler - The Makai Holy Grail (BATTLE-SPIRITS-A2302)",PASS
+Phase 2 Compiler - The SacredEmperor Siegfrieden XV (BS66-XV02),tests/golden_compiler.test.js,"Phase 2 Compiler - The SacredEmperor Siegfrieden XV (BS66-XV02)",PASS
+Phase 2 Compiler - The EarthDeitySword Gaianohoko (SD28-X02,tests/golden_compiler.test.js,"Burst lock)",PASS
+Phase 2 Compiler - The PartnerDemonLord Javad (SD65-CX01),tests/golden_compiler.test.js,"Phase 2 Compiler - The PartnerDemonLord Javad (SD65-CX01)",PASS
+Phase 2 Compiler - Evil Draw (BATTLE-SPIRITS-A4233),tests/golden_compiler.test.js,"Phase 2 Compiler - Evil Draw (BATTLE-SPIRITS-A4233)",PASS
+Phase 2 Compiler - The TwinkleDragonEmperor New-Siegfried (BS40-X01),tests/golden_compiler.test.js,"Phase 2 Compiler - The TwinkleDragonEmperor New-Siegfried (BS40-X01)",PASS
+Phase 2 Compiler - The MakaiSoldier Curse Swordsman (SD41-004),tests/golden_compiler.test.js,"Phase 2 Compiler - The MakaiSoldier Curse Swordsman (SD41-004)",PASS
+Phase 2 Compiler - Gran-Dolbalkan (BS01-094),tests/golden_compiler.test.js,"Phase 2 Compiler - Gran-Dolbalkan (BS01-094)",PASS
+TC-ACT-01,tests/runtime_activation_limits.test.js,"First activation succeeds and consumes the physical ability limit",PASS
+TC-ACT-02,tests/runtime_activation_limits.test.js,"Second activation of the same physical ability is rejected",PASS
+TC-ACT-03,tests/runtime_activation_limits.test.js,"A second physical copy of the same card can independently activate its ordinary once-per-turn ability",PASS
+TC-ACT-04,tests/runtime_activation_limits.test.js,"Two distinct abilities on the same physical card maintain separate counters",PASS
+TC-ACT-05,tests/runtime_activation_limits.test.js,"A new physical placement receives the correct new restriction identity",PASS
+TC-ACT-06,tests/runtime_activation_limits.test.js,"First qualifying Same Name activation succeeds",PASS
+TC-ACT-07,tests/runtime_activation_limits.test.js,"Another physical copy with the same semantic ability is blocked for the same player",PASS
+TC-ACT-08,tests/runtime_activation_limits.test.js,"A different semantic ability on the same named card is not incorrectly blocked",PASS
+TC-ACT-09,tests/runtime_activation_limits.test.js,"The opponent has an independent Same Name restriction scope",PASS
+TC-ACT-10,tests/runtime_activation_limits.test.js,"Equivalent abilities with different physical placement IDs share the intended restriction",PASS
+TC-ACT-11,tests/runtime_activation_limits.test.js,"Failed declaration before commitment does not consume a limit",PASS
+TC-ACT-12,tests/runtime_activation_limits.test.js,"Unpayable cost before commitment does not consume a limit",PASS
+TC-ACT-13,tests/runtime_activation_limits.test.js,"Cancelled target selection before commitment does not consume a limit",PASS
+TC-ACT-14,tests/runtime_activation_limits.test.js,"Successful commitment consumes the limit exactly once",PASS
+TC-ACT-15,tests/runtime_activation_limits.test.js,"Negation after commitment does not refund the limit",PASS
+TC-ACT-16,tests/runtime_activation_limits.test.js,"Resolution failure after commitment does not refund the limit",PASS
+TC-ACT-17,tests/runtime_activation_limits.test.js,"Duplicate commitment callback does not double-consume",PASS
+TC-ACT-18,tests/runtime_activation_limits.test.js,"Declining an optional ability does not consume the limit",PASS
+TC-ACT-19,tests/runtime_activation_limits.test.js,"Accepting an optional ability follows the normal commitment process",PASS
+TC-ACT-20,tests/runtime_activation_limits.test.js,"FALSE prerequisite follows established skip behavior without consumption before commitment",PASS
+TC-ACT-21,tests/runtime_activation_limits.test.js,"UNSUPPORTED prerequisite blocks safely and reports unsupported evaluation",PASS
+TC-ACT-22,tests/runtime_activation_limits.test.js,"TURN restriction resets at the correct turn boundary",PASS
+TC-ACT-23,tests/runtime_activation_limits.test.js,"STEP restriction resets only at its correct step boundary",PASS
+TC-ACT-24,tests/runtime_activation_limits.test.js,"BATTLE restriction resets at battle end",PASS
+TC-ACT-25,tests/runtime_activation_limits.test.js,"ATTACK restriction resets at attack end",PASS
+TC-ACT-26,tests/runtime_activation_limits.test.js,"One player reset does not clear the opponent independent counters",PASS
+TC-ACT-27,tests/runtime_activation_limits.test.js,"Duplicate lifecycle events do not create incorrect counter state",PASS
+TC-ACT-28,tests/runtime_activation_limits.test.js,"JSON serialization and restoration preserve authoritative restriction state",PASS
+TC-ACT-29,tests/runtime_activation_limits.test.js,"Restored state still blocks an already-used activation",PASS
+TC-ACT-30,tests/runtime_activation_limits.test.js,"Legacy abilityUses mirror remains synchronized",PASS
+TC-ACT-31,tests/runtime_activation_limits.test.js,"Legacy activation entry point enforces the same restriction",PASS
+TC-ACT-32,tests/runtime_activation_limits.test.js,"Modern restriction state survives supported legacy conversion",PASS
+TC-ACT-33,tests/runtime_activation_limits.test.js,"Missing or malformed identity is rejected safely",PASS
+TC-ACT-34,tests/runtime_activation_limits.test.js,"Unknown restriction type is not treated as unrestricted",PASS
+TC-ACT-35,tests/runtime_activation_limits.test.js,"Existing golden compiler and engine regression tests remain unchanged and pass",PASS
+TC-ACT-FIX-01,tests/runtime_activation_limits.test.js,"Resolver halts immediately when commitActivation fails due to LIMIT_REACHED; operations are never executed",PASS
+TC-ACT-FIX-02,tests/runtime_activation_limits.test.js,"Multi-clause ability with commit failure in clause 1 does not execute clause 2 or subsequent clauses",PASS
+TC-ACT-FIX-03,tests/runtime_activation_limits.test.js,"Resolver halts and returns INVALID_IDENTITY when ability lacks valid physicalId/semanticId",PASS
+TC-ACT-FIX-04,tests/runtime_activation_limits.test.js,"Resolver halts and returns UNSUPPORTED_RESTRICTION when restriction type is unsupported",PASS
+TC-ACT-FIX-05,tests/runtime_activation_limits.test.js,"Resolver halts and returns INVALID_RESTRICTION_STATE when restriction state is corrupted",PASS
+TC-ACT-FIX-06,tests/runtime_activation_limits.test.js,"Real concurrent game.activateAbility calls with async barrier: only winning activation commits and pays costs",PASS
+TC-ACT-FIX-06B,tests/runtime_activation_limits.test.js,"Failed cost payment or prompt decline releases reservation and leaves zero costs paid",PASS
+TC-ACT-FIX-06C,tests/runtime_activation_limits.test.js,"Exception during ability resolution cleans up active reservation without leaks",PASS
+TC-ACT-FIX-06D,tests/runtime_activation_limits.test.js,"Post-commit effect failure or negation does not refund costs or release committed limit",PASS
+TC-ACT-FIX-07,tests/runtime_activation_limits.test.js,"Target prompt cancellation prior to commitment leaves limit intact and counter at 0",PASS
+TC-ACT-FIX-08,tests/runtime_activation_limits.test.js,"Unavailable/invalid targets before commitment abort resolution without consuming limit",PASS
+TC-ACT-FIX-09,tests/runtime_activation_limits.test.js,"Valid target selection triggers commitment exactly once before target operation effects execute",PASS
+TC-ACT-FIX-10,tests/runtime_activation_limits.test.js,"Multi-target selection commits once upon valid candidate selection",PASS
+TC-ACT-FIX-11,tests/runtime_activation_limits.test.js,"Post-commit negation (EFFECT_NEGATED) aborts effect execution but preserves consumed activation limit",PASS
+TC-ACT-FIX-12,tests/runtime_activation_limits.test.js,"game.endAttack() clears ATTACK-scoped counters while BATTLE-scoped counters remain intact",PASS
+TC-ACT-FIX-13,tests/runtime_activation_limits.test.js,"game.endBattle() clears BATTLE-scoped counters and THIS_BATTLE modifiers while ATTACK-scoped counters remain intact",PASS
+TC-ACT-FIX-14,tests/runtime_activation_limits.test.js,"Unblocked attack (resolveDirectHit) concludes combat resetting both ATTACK and BATTLE counters while preserving TURN and GAME counters",PASS
+TC-ACT-FIX-15,tests/runtime_activation_limits.test.js,"Ending battle does not reset turn-scoped or game-scoped restrictions",PASS
+TC-ACT-FIX-16,tests/runtime_activation_limits.test.js,"Repeated or redundant endAttack/endBattle calls are idempotent and do not corrupt state",PASS
+TC-ACT-FIX-17,tests/runtime_activation_limits.test.js,"Unknown string containing ""TURN"" (e.g. ""MY_TURN_SPECIAL"") is rejected as UNKNOWN/UNSUPPORTED_RESTRICTION",PASS
+TC-ACT-FIX-18,tests/runtime_activation_limits.test.js,"Unknown string containing ""GAME"" (e.g. ""GAME_OVER"") is rejected as UNKNOWN/UNSUPPORTED_RESTRICTION",PASS
+TC-ACT-FIX-19,tests/runtime_activation_limits.test.js,"Canonical restriction mapping accepts explicit aliases correctly",PASS
+TC-ACT-FIX-20,tests/runtime_activation_limits.test.js,"Non-string or empty restriction types are rejected safely without throws",PASS
+TC-ACT-FIX-21,tests/runtime_activation_limits.test.js,"Restriction with maxLimit <= 0 or non-integer is rejected as unsupported/invalid",PASS
+TC-ACT-FIX-22,tests/runtime_activation_limits.test.js,"Valid canonical types map deterministically to TURN, GAME, BATTLE, ATTACK scopes",PASS
+TC-ACT-FIX-23,tests/runtime_activation_limits.test.js,"State validation rejects negative counter values",PASS
+TC-ACT-FIX-24,tests/runtime_activation_limits.test.js,"State validation rejects non-integer / fractional counter values",PASS
+TC-ACT-FIX-25,tests/runtime_activation_limits.test.js,"State validation rejects NaN or Infinity counter values",PASS
+TC-ACT-FIX-26,tests/runtime_activation_limits.test.js,"State validation rejects malformed counters object (non-plain object, array, or null)",PASS
+TC-ACT-FIX-27,tests/runtime_activation_limits.test.js,"evaluateRestriction and commitRestriction return INVALID_RESTRICTION_STATE without silently repairing state into unrestricted",PASS
+TC-ACT-FIX-28,tests/runtime_activation_limits.test.js,"Valid serialized state survives round-trip validation and restoration",PASS
+TC-ACT-FIX-29,tests/runtime_activation_limits.test.js,"Legacy turn:cardId:abilityId format is mirrored and synced into authoritative counters without data loss",PASS
+TC-ACT-FIX-30,tests/runtime_activation_limits.test.js,"Legacy cardId_abilityId format is mirrored and synced into authoritative counters",PASS
+TC-ACT-FIX-31,tests/runtime_activation_limits.test.js,"Ambiguous legacy keys are safely isolated in meta._ambiguousLegacy without overwriting authoritative counters",PASS
+TC-ACT-FIX-32,tests/runtime_activation_limits.test.js,"Synchronized legacy state cannot bypass or decrement modern authoritative restriction limits",PASS
+TC-ACT-FIX-33,tests/runtime_activation_limits.test.js,"State validation rejects arrays, class instances, and objects with non-plain prototypes",PASS
+TC-ACT-FIX-34,tests/runtime_activation_limits.test.js,"State validation enforces explicit metadata schema and rejects unknown type or scope",PASS
+TC-ACT-FIX-35,tests/runtime_activation_limits.test.js,"State validation rejects contradictory type and scope pairs",PASS
+TC-ACT-FIX-36,tests/runtime_activation_limits.test.js,"State validation verifies reservations as finite non-negative integers",PASS
+TC-ACT-FIX-37,tests/runtime_activation_limits.test.js,"undefined initializes default restriction state, while explicit null is rejected",PASS

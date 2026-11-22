@@ -1,0 +1,55 @@
+{
+    "package":  "K.1.3.1",
+    "overallStatus":  "ACCEPTED_WITH_CONDITIONS",
+    "conditionReason":  "All K.1.3.1 semantic, dependency, reconciliation, determinism, and preservation audits passed; however, run_verified_suites.mjs --all recorded 1 latency-threshold failure (WPDE-PERF-01: 553.13ms vs \u003c500ms), and the audit surfaced real compiler/engine blockers that must be resolved or waived before K1-BATCH-01.",
+    "criteria":  [
+                     {
+                         "id":  "K1.3.1-AC-01",
+                         "requirement":  "Every dependency edge has an evidence-based classification (no static subsystem misrepresentation)",
+                         "status":  "PASS",
+                         "evidence":  "k1_3_1_dependency_evidence_audit.json"
+                     },
+                     {
+                         "id":  "K1.3.1-AC-02",
+                         "requirement":  "All 312 timing discrepancies classified and reconciled",
+                         "status":  "PASS",
+                         "evidence":  "k1_3_1_timing_semantic_audit.json"
+                     },
+                     {
+                         "id":  "K1.3.1-AC-03",
+                         "requirement":  "All 14 executable-effect and 226 unresolved exclusions remain traceable",
+                         "status":  "PASS",
+                         "evidence":  "k1_3_1_unresolved_exclusion_audit.json"
+                     },
+                     {
+                         "id":  "K1.3.1-AC-04",
+                         "requirement":  "All 104 cleanBody mismatches and 750 DISPLAY_ONLY_METADATA records reconciled",
+                         "status":  "PASS",
+                         "evidence":  "k1_3_1_cleanbody_followup_audit.json"
+                     },
+                     {
+                         "id":  "K1.3.1-AC-05",
+                         "requirement":  "All source joins resolve 1-to-1 via \u003cshard\u003e::\u003ccardKey\u003e#a\u003cindex\u003e",
+                         "status":  "PASS",
+                         "evidence":  "k1_3_1_source_reconciliation.json"
+                     },
+                     {
+                         "id":  "K1.3.1-AC-06",
+                         "requirement":  "Adversarial tests and determinism verified",
+                         "status":  "PASS",
+                         "evidence":  "k1_3_1_determinism_report.json"
+                     },
+                     {
+                         "id":  "K1.3.1-AC-07",
+                         "requirement":  "K.1.1, K.1.2, K.1.3 outputs unchanged and engine/compiler/IR untouched",
+                         "status":  "PASS",
+                         "evidence":  "k1_3_1_git_change_audit.json"
+                     },
+                     {
+                         "id":  "K1.3.1-AC-08",
+                         "requirement":  "Regression suites pass",
+                         "status":  "PARTIAL",
+                         "evidence":  "k1_3_1_test_results.json (run_all.js 2364/2364 PASS; run_verified_suites.mjs 931/932, WPDE-PERF-01 553.13ms vs \u003c500ms)"
+                     }
+                 ]
+}

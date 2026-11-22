@@ -232,6 +232,21 @@
     "compiledIr": {
       "cardNumber": "SJ17-01",
       "name": "The TwinkleBeastKing Blazoma",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 8000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: Ten Crown & Cost 4 or more] ((Either Attack Step))\nBy sending your [Soul Core](Soul Core) to the Trash, stack this from your Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents)\nDestroy an opposing 10000 BP or less Spirit and an opposing 10000 BP or less Ultimate.\n\n[LV2] Flash - (When Attacks)\nBy discarding a pre-Advent card beneath this Spirit, summon a \"God-King\" family Spirit card from your Hand, without paying the cost.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -239,12 +254,32 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "SJ17-01#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b0b5766ccabba62a49c25c15a8ee5299f7ae880b4c543303e665e1ab17e95ab5_dfa0027a7f668c039c0db58b8bddb5a1",
+          "cardNumber": "SJ17-01",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "SJ17-01#a0"
         }
       ],
       "abilities": [
         {
-          "id": "SJ17-01#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -255,8 +290,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: Ten Crown & Cost 4 or more",
@@ -265,10 +309,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core](Soul Core) to the Trash, stack this from your Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Advent: Ten Crown & Cost 4 or more] ((Either Attack Step))\nBy sending your [Soul Core](Soul Core) to the Trash, stack this from your Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -290,7 +338,9 @@
             },
             {
               "rawText": "stack this from your Hand onto your target Spirit.",
+              "originalClauseText": "stack this from your Hand onto your target Spirit.",
               "cleanText": "stack this from your Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -308,10 +358,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SJ17-01#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "Ten Crown & Cost 4 or more",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "SJ17-01#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b0b5766ccabba62a49c25c15a8ee5299f7ae880b4c543303e665e1ab17e95ab5_dfa0027a7f668c039c0db58b8bddb5a1",
+              "cardNumber": "SJ17-01",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "SJ17-01#a0"
+            }
+          ],
+          "id": "SJ17-01#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b0b5766ccabba62a49c25c15a8ee5299f7ae880b4c543303e665e1ab17e95ab5_dfa0027a7f668c039c0db58b8bddb5a1",
+          "physicalId": "SJ17-01#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b0b5766ccabba62a49c25c15a8ee5299f7ae880b4c543303e665e1ab17e95ab5_dfa0027a7f668c039c0db58b8bddb5a1",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b0b5766ccabba62a49c25c15a8ee5299f7ae880b4c543303e665e1ab17e95ab5_dfa0027a7f668c039c0db58b8bddb5a1",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_e582393be1dd4ca064f32bdbde89d00a6dcdaef2f0b5ac64fd4a6e2b84f17a58_08645eb135985995239a02d0abc81dd6",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SJ17-01#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -321,8 +415,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS"
+            ],
             "timingLabel": "When Advents",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -331,10 +434,14 @@
             "isMain": false,
             "cleanBody": "Destroy an opposing 10000 BP or less Spirit and an opposing 10000 BP or less Ultimate."
           },
+          "originalAbilityText": "[LV1][LV2] (When Advents)\nDestroy an opposing 10000 BP or less Spirit and an opposing 10000 BP or less Ultimate.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Destroy an opposing 10000 BP or less Spirit and an opposing 10000 BP or less Ultimate.",
+              "originalClauseText": "Destroy an opposing 10000 BP or less Spirit and an opposing 10000 BP or less Ultimate.",
               "cleanText": "Destroy an opposing 10000 BP or less Spirit and an opposing 10000 BP or less Ultimate",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -355,10 +462,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SJ17-01#a1",
+          "keywords": [],
+          "id": "SJ17-01#AB_WHEN_ADVENTS_NONE_LV1_LV2_14677f3f685a08403aecfc95ac9654dc835ee1d15be67a648f63bce4adc9d41c_53e06080f69f0ffa877ac62ce567ab56",
+          "physicalId": "SJ17-01#AB_WHEN_ADVENTS_NONE_LV1_LV2_14677f3f685a08403aecfc95ac9654dc835ee1d15be67a648f63bce4adc9d41c_53e06080f69f0ffa877ac62ce567ab56",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_14677f3f685a08403aecfc95ac9654dc835ee1d15be67a648f63bce4adc9d41c_53e06080f69f0ffa877ac62ce567ab56",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_eb06027be6184302f8c719f3ed19595671be1a076578644c65cd1ba479eb2405_89c958cc49635d80b80383fca9e60909",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SJ17-01#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -367,8 +488,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -377,10 +507,14 @@
             "isMain": false,
             "cleanBody": "By discarding a pre-Advent card beneath this Spirit, summon a \"God-King\" family Spirit card from your Hand, without paying the cost."
           },
+          "originalAbilityText": "[LV2] Flash - (When Attacks)\nBy discarding a pre-Advent card beneath this Spirit, summon a \"God-King\" family Spirit card from your Hand, without paying the cost.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "By discarding a pre-Advent card beneath this Spirit",
+              "originalClauseText": "By discarding a pre-Advent card beneath this Spirit",
               "cleanText": "By discarding a pre-Advent card beneath this Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -394,7 +528,9 @@
             },
             {
               "rawText": "summon a \"God-King\" family Spirit card from your Hand, without paying the cost.",
+              "originalClauseText": "summon a \"God-King\" family Spirit card from your Hand, without paying the cost.",
               "cleanText": "summon a \"God-King\" family Spirit card from your Hand, without paying the cost",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -402,11 +538,37 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "family": "God-King"
+                },
+                "free": true,
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SJ17-01#a2",
+          "keywords": [],
+          "id": "SJ17-01#AB_WHEN_ATTACKS_NONE_LV2_9a3fa50d93ecf8c832518d4b3d19295c1d1ca618d9c66d55e40a691a9c8fe23c_733e66af19cce476673c0f80689ad018",
+          "physicalId": "SJ17-01#AB_WHEN_ATTACKS_NONE_LV2_9a3fa50d93ecf8c832518d4b3d19295c1d1ca618d9c66d55e40a691a9c8fe23c_733e66af19cce476673c0f80689ad018",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_9a3fa50d93ecf8c832518d4b3d19295c1d1ca618d9c66d55e40a691a9c8fe23c_733e66af19cce476673c0f80689ad018",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_7a0d4e6650d61cc95030f6d7d8e618928b8b4e8091e8aeb09c9e544b67cf34cc_b06eee351e6495c9211e75990240d00f",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,

@@ -166,4 +166,91 @@ describe('Battling Engine Discrepancy Audit & Phase 1 Regression Suite', () => {
     assert.ok(!arenaSrc.includes("const hasPursuit = (unit.effect || '').toLowerCase().includes('pursuit');"), 'Naive .includes("pursuit") must be removed');
     assert.ok(!arenaSrc.includes('else if (descText.includes(\'core\') && descText.includes(\'from the void\'))'), 'SPECIAL_EFFECT else-if chain must be converted to sequential if blocks');
   });
+
+  it('6. Phase 2: Compiler extracts structured parameters for MOVE_CORE, ADD_SYMBOL, GRANT_FAMILY, TREAT_RULE, COST_MODIFIER, KEYWORD_RULE', async () => {
+    const { compileClauseToOp } = await import('../compiler/clause_patterns.js');
+
+    // MOVE_CORE parameterization
+    const opCore1 = compileClauseToOp({ cleanText: 'Put two cores from the Void to a Nexus you control.' });
+    assert.equal(opCore1.op, 'MOVE_CORE');
+    assert.equal(opCore1.count, 2);
+    assert.equal(opCore1.from.zone, 'void');
+    assert.equal(opCore1.to.zone, 'field');
+
+    const opCore2 = compileClauseToOp({ cleanText: 'Send two cores from each opposing Spirit to their Trash.' });
+    assert.equal(opCore2.op, 'MOVE_CORE');
+    assert.equal(opCore2.count, 2);
+    assert.equal(opCore2.from.zone, 'field');
+    assert.equal(opCore2.to.zone, 'trash');
+    assert.equal(opCore2.to.side, 'opp');
+
+    // SYMBOLS
+    const opSymZero = compileClauseToOp({ cleanText: 'The symbols of all opposing Spirits become zero.' });
+    assert.equal(opSymZero.op, 'SET_SYMBOL');
+    assert.equal(opSymZero.count, 0);
+    assert.equal(opSymZero.side, 'opp');
+
+    const opSymAdd = compileClauseToOp({ cleanText: 'Give this Spirit one additional Red symbol.' });
+    assert.equal(opSymAdd.op, 'ADD_SYMBOL');
+    assert.equal(opSymAdd.color, 'Red');
+    assert.equal(opSymAdd.count, 1);
+
+    // GRANT_FAMILY
+    const opFam = compileClauseToOp({ cleanText: 'Give this Spirit the "Machine" family.' });
+    assert.equal(opFam.op, 'GRANT_FAMILY');
+    assert.equal(opFam.family, 'Machine');
+
+    const opNotFam = compileClauseToOp({ cleanText: 'Discard until a "Saga" family card is discarded.' });
+    assert.notEqual(opNotFam.op, 'GRANT_FAMILY', 'Text mentioning family without granting it must not emit GRANT_FAMILY');
+
+    // TREAT_RULE
+    const opTreatLv = compileClauseToOp({ cleanText: 'Treat this Spirit as LV2.' });
+    assert.equal(opTreatLv.op, 'TREAT_RULE');
+    assert.equal(opTreatLv.treatAs, 'LEVEL');
+    assert.equal(opTreatLv.level, 2);
+
+    const opTreatCol = compileClauseToOp({ cleanText: 'Treat this Spirit as being Red.' });
+    assert.equal(opTreatCol.op, 'TREAT_RULE');
+    assert.equal(opTreatCol.treatAs, 'COLOR');
+    assert.equal(opTreatCol.color, 'Red');
+
+    // COST_MODIFIER
+    const opCostDelta = compileClauseToOp({ cleanText: 'Decrease the cost of this card by 2.' });
+    assert.equal(opCostDelta.op, 'COST_MODIFIER');
+    assert.equal(opCostDelta.delta, -2);
+
+    // KEYWORD_RULE
+    const opKw = compileClauseToOp({ cleanText: 'While this Spirit has [Armor: Red], it cannot be destroyed.' });
+    assert.equal(opKw.op, 'KEYWORD_RULE');
+    assert.equal(opKw.keyword, 'Armor: Red');
+  });
+
+  it('7. Phase 2: Zero bare parameterless clauses exist in data/ir_shards/', () => {
+    const shardsDir = path.join(rootDir, 'data', 'ir_shards');
+    const files = fs.readdirSync(shardsDir).filter(f => f.endsWith('.json'));
+    let bareCount = 0;
+    const bareExamples = [];
+
+    for (const file of files) {
+      const content = JSON.parse(fs.readFileSync(path.join(shardsDir, file), 'utf8'));
+      const cards = content.cards || content;
+      for (const [id, card] of Object.entries(cards)) {
+        if (!card.abilities) continue;
+        for (const ability of card.abilities) {
+          if (!ability.clauses) continue;
+          for (const clause of ability.clauses) {
+            const keys = Object.keys(clause).filter(k => k !== 'op' && k !== 'rawText' && k !== 'cleanText');
+            if (keys.length === 0) {
+              bareCount++;
+              if (bareExamples.length < 5) {
+                bareExamples.push(`${file}:${id} -> ${clause.op} (${clause.rawText || ''})`);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    assert.equal(bareCount, 0, `Expected 0 bare clauses in IR shards, found ${bareCount}: ${bareExamples.join('; ')}`);
+  });
 });

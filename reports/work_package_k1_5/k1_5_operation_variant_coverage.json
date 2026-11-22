@@ -1,0 +1,393 @@
+{
+  "package": "K.1.5",
+  "generatedAt": "2026-11-20T11:22:58.456Z",
+  "totalOpsInRegistry": 199,
+  "totalVariantsDiscovered": 221,
+  "semanticallyVerifiedVariants": 195,
+  "handlerPresentUnverifiedVariants": 26,
+  "unsupportedVariants": 0,
+  "batch1VariantBreakdown": [
+    {
+      "op": "DRAW",
+      "batch1AbilitiesUsingOp": 1718,
+      "handlerPresent": true,
+      "registeredInEvidence": true,
+      "hasContract": true,
+      "clauseCount": 2981,
+      "verifiedClauses": 2981,
+      "unverifiedClauses": 0,
+      "incompleteClauses": 0,
+      "partialClauses": 0,
+      "variants": [
+        {
+          "variant": "DRAW:default",
+          "status": "SEMANTICALLY_VERIFIED",
+          "testFile": "tests/effect_execution_targeting_conditions.test.js",
+          "testIds": [
+            "OPS-PRIORITY-01: DESTROY excludes protected targets, BOUNCE supports grave/deck_bottom, DRAW emits CARD_DRAWN"
+          ],
+          "inVerifiedRunner": true,
+          "executionStatus": "PASS"
+        }
+      ]
+    },
+    {
+      "op": "BP_BUFF",
+      "batch1AbilitiesUsingOp": 1493,
+      "handlerPresent": true,
+      "registeredInEvidence": true,
+      "hasContract": true,
+      "clauseCount": 1955,
+      "verifiedClauses": 1909,
+      "unverifiedClauses": 46,
+      "incompleteClauses": 0,
+      "partialClauses": 0,
+      "variants": [
+        {
+          "variant": "BP_BUFF:default",
+          "status": "SEMANTICALLY_VERIFIED",
+          "testFile": "tests/real_card_semantic_validation.test.js",
+          "testIds": [
+            "REAL-CARD-04: BS01-077 Baby-Loki (Spirit, White) WHEN_BLOCKS boosts effective BP during battle"
+          ],
+          "inVerifiedRunner": true,
+          "executionStatus": "PASS"
+        }
+      ]
+    },
+    {
+      "op": "BP_DEBUFF",
+      "batch1AbilitiesUsingOp": 236,
+      "handlerPresent": true,
+      "registeredInEvidence": true,
+      "hasContract": true,
+      "clauseCount": 491,
+      "verifiedClauses": 491,
+      "unverifiedClauses": 0,
+      "incompleteClauses": 0,
+      "partialClauses": 0,
+      "variants": [
+        {
+          "variant": "BP_DEBUFF:default",
+          "status": "SEMANTICALLY_VERIFIED",
+          "testFile": "tests/work_package_fg_targeting_conditions_continuous.test.js",
+          "testIds": [
+            "WPFG-INT: Continuous BP debuff enables threshold DESTROY and FlowController respects CANNOT_REFRESH"
+          ],
+          "inVerifiedRunner": true,
+          "executionStatus": "PASS"
+        }
+      ]
+    },
+    {
+      "op": "DESTROY",
+      "batch1AbilitiesUsingOp": 2001,
+      "handlerPresent": true,
+      "registeredInEvidence": true,
+      "hasContract": true,
+      "clauseCount": 4294,
+      "verifiedClauses": 3714,
+      "unverifiedClauses": 580,
+      "incompleteClauses": 0,
+      "partialClauses": 0,
+      "variants": [
+        {
+          "variant": "DESTROY:default",
+          "status": "SEMANTICALLY_VERIFIED",
+          "testFile": "tests/effect_execution_targeting_conditions.test.js",
+          "testIds": [
+            "OPS-PRIORITY-01: DESTROY excludes protected targets, BOUNCE supports grave/deck_bottom, DRAW emits CARD_DRAWN",
+            "PERF-TARGET-01: 200-candidate resolveTargets, multi-target DESTROY, and 1,000 BP recalculations finish quickly"
+          ],
+          "inVerifiedRunner": true,
+          "executionStatus": "PASS"
+        }
+      ]
+    },
+    {
+      "op": "BOUNCE",
+      "batch1AbilitiesUsingOp": 1020,
+      "handlerPresent": true,
+      "registeredInEvidence": true,
+      "hasContract": true,
+      "clauseCount": 3721,
+      "verifiedClauses": 2205,
+      "unverifiedClauses": 1516,
+      "incompleteClauses": 0,
+      "partialClauses": 152,
+      "variants": [
+        {
+          "variant": "BOUNCE:hand",
+          "status": "SEMANTICALLY_VERIFIED",
+          "testFile": "tests/phase4b2_destroy_bounce.test.js",
+          "testIds": [
+            "9.1 BOUNCE with all: true bounces all matching spirits simultaneously without prompting"
+          ],
+          "inVerifiedRunner": false,
+          "executionStatus": "PASS"
+        },
+        {
+          "variant": "BOUNCE:deck_bottom",
+          "status": "SEMANTICALLY_VERIFIED",
+          "testFile": "tests/effect_execution_targeting_conditions.test.js",
+          "testIds": [
+            "OPS-PRIORITY-01: DESTROY excludes protected targets, BOUNCE supports grave/deck_bottom, DRAW emits CARD_DRAWN"
+          ],
+          "inVerifiedRunner": true,
+          "executionStatus": "PASS"
+        },
+        {
+          "variant": "BOUNCE:grave",
+          "status": "SEMANTICALLY_VERIFIED",
+          "testFile": "tests/effect_execution_targeting_conditions.test.js",
+          "testIds": [
+            "OPS-PRIORITY-01: DESTROY excludes protected targets, BOUNCE supports grave/deck_bottom, DRAW emits CARD_DRAWN"
+          ],
+          "inVerifiedRunner": true,
+          "executionStatus": "PASS"
+        },
+        {
+          "variant": "BOUNCE:deck_top",
+          "status": "SEMANTICALLY_VERIFIED",
+          "testFile": "tests/phase4b2_destroy_bounce.test.js",
+          "testIds": [
+            "5.1 BOUNCE to deck_top places single card at index 0 of owner deck"
+          ],
+          "inVerifiedRunner": false,
+          "executionStatus": "PASS"
+        }
+      ]
+    },
+    {
+      "op": "EXHAUST",
+      "batch1AbilitiesUsingOp": 888,
+      "handlerPresent": true,
+      "registeredInEvidence": true,
+      "hasContract": true,
+      "clauseCount": 1950,
+      "verifiedClauses": 1531,
+      "unverifiedClauses": 419,
+      "incompleteClauses": 0,
+      "partialClauses": 0,
+      "variants": [
+        {
+          "variant": "EXHAUST:default",
+          "status": "SEMANTICALLY_VERIFIED",
+          "testFile": "tests/work_package_de_operations_and_cards.test.js",
+          "testIds": [
+            "WPDE-D3: EXHAUST, REFRESH, RESTORE, and CANNOT_REFRESH enforce locks, HEAVY_EXHAUSTED downgrade, and FlowController integration"
+          ],
+          "inVerifiedRunner": true,
+          "executionStatus": "PASS"
+        }
+      ]
+    },
+    {
+      "op": "REFRESH",
+      "batch1AbilitiesUsingOp": 1188,
+      "handlerPresent": true,
+      "registeredInEvidence": true,
+      "hasContract": true,
+      "clauseCount": 2089,
+      "verifiedClauses": 1958,
+      "unverifiedClauses": 131,
+      "incompleteClauses": 0,
+      "partialClauses": 0,
+      "variants": [
+        {
+          "variant": "REFRESH:default",
+          "status": "SEMANTICALLY_VERIFIED",
+          "testFile": "tests/work_package_de_operations_and_cards.test.js",
+          "testIds": [
+            "WPDE-D3: EXHAUST, REFRESH, RESTORE, and CANNOT_REFRESH enforce locks, HEAVY_EXHAUSTED downgrade, and FlowController integration"
+          ],
+          "inVerifiedRunner": true,
+          "executionStatus": "PASS"
+        }
+      ]
+    },
+    {
+      "op": "MOVE_CORE",
+      "batch1AbilitiesUsingOp": 3389,
+      "handlerPresent": true,
+      "registeredInEvidence": true,
+      "hasContract": true,
+      "clauseCount": 6917,
+      "verifiedClauses": 6917,
+      "unverifiedClauses": 0,
+      "incompleteClauses": 0,
+      "partialClauses": 0,
+      "variants": [
+        {
+          "variant": "MOVE_CORE:default",
+          "status": "SEMANTICALLY_VERIFIED",
+          "testFile": "tests/core_game_rules_integrity_corrective.test.js",
+          "testIds": [
+            "CORR-CORE-01: moveCore rejects unavailable Void normal/Soul cores and preserves all counts",
+            "CORR-CORE-02: moveCore rejects Life overdraw, enforces deduction === credit, and validates replacement destinations"
+          ],
+          "inVerifiedRunner": true,
+          "executionStatus": "PASS"
+        }
+      ]
+    }
+  ],
+  "isolatedUnverifiedVariants": [
+    {
+      "op": "RECOVER_LIFE",
+      "variant": "RECOVER_LIFE:default",
+      "status": "HANDLER_PRESENT_UNVERIFIED",
+      "reason": "TEST_ID_NOT_REGISTERED:M2.9 - RECOVER_LIFE"
+    },
+    {
+      "op": "PREVENT_LIFE_LOSS",
+      "variant": "PREVENT_LIFE_LOSS:default",
+      "status": "HANDLER_PRESENT_UNVERIFIED",
+      "reason": "TEST_ID_NOT_REGISTERED:M2.10 - PREVENT_LIFE_LOSS"
+    },
+    {
+      "op": "MILL_DECK",
+      "variant": "MILL_DECK:default",
+      "status": "HANDLER_PRESENT_UNVERIFIED",
+      "reason": "TEST_ID_NOT_REGISTERED:REAL-CARD-29"
+    },
+    {
+      "op": "DISCARD_HAND",
+      "variant": "DISCARD_HAND:default",
+      "status": "HANDLER_PRESENT_UNVERIFIED",
+      "reason": "TEST_ID_NOT_REGISTERED:REAL-CARD-15"
+    },
+    {
+      "op": "REVEAL_DECKTOP",
+      "variant": "REVEAL_DECKTOP:default",
+      "status": "HANDLER_PRESENT_UNVERIFIED",
+      "reason": "TEST_ID_NOT_REGISTERED:M2.1 - REVEAL_DECKTOP"
+    },
+    {
+      "op": "ADD_TO_HAND",
+      "variant": "ADD_TO_HAND:default",
+      "status": "HANDLER_PRESENT_UNVERIFIED",
+      "reason": "TEST_ID_NOT_REGISTERED:M2.2 - ADD_TO_HAND"
+    },
+    {
+      "op": "DISCARD_REVEALED",
+      "variant": "DISCARD_REVEALED:default",
+      "status": "HANDLER_PRESENT_UNVERIFIED",
+      "reason": "TEST_ID_NOT_REGISTERED:M2.3 - DISCARD_REVEALED"
+    },
+    {
+      "op": "RETURN_REVEALED_BOTTOM",
+      "variant": "RETURN_REVEALED_BOTTOM:default",
+      "status": "HANDLER_PRESENT_UNVERIFIED",
+      "reason": "TEST_ID_NOT_REGISTERED:M2.4 - RETURN_REVEALED_BOTTOM"
+    },
+    {
+      "op": "DEPLOY_NEXUS",
+      "variant": "DEPLOY_NEXUS:default",
+      "status": "HANDLER_PRESENT_UNVERIFIED",
+      "reason": "TEST_ID_NOT_REGISTERED:M2.7 - DEPLOY_NEXUS"
+    },
+    {
+      "op": "IMMUNITY",
+      "variant": "IMMUNITY:default",
+      "status": "HANDLER_PRESENT_UNVERIFIED",
+      "reason": "TEST_ID_NOT_REGISTERED:REAL-CARD-10"
+    },
+    {
+      "op": "ADD_SYMBOL",
+      "variant": "ADD_SYMBOL:default",
+      "status": "HANDLER_PRESENT_UNVERIFIED",
+      "reason": "TEST_ID_NOT_REGISTERED:REAL-CARD-37"
+    },
+    {
+      "op": "GRANT_FAMILY",
+      "variant": "GRANT_FAMILY:default",
+      "status": "HANDLER_PRESENT_UNVERIFIED",
+      "reason": "TEST_ID_NOT_REGISTERED:REAL-CARD-27"
+    },
+    {
+      "op": "SALVAGE",
+      "variant": "SALVAGE:default",
+      "status": "HANDLER_PRESENT_UNVERIFIED",
+      "reason": "TEST_ID_NOT_REGISTERED:M2.11 - SALVAGE"
+    },
+    {
+      "op": "DISCARD_BURST",
+      "variant": "DISCARD_BURST:default",
+      "status": "HANDLER_PRESENT_UNVERIFIED",
+      "reason": "TEST_ID_NOT_REGISTERED:M2.12 - DISCARD_BURST"
+    },
+    {
+      "op": "SET_RESTRICTION",
+      "variant": "SET_RESTRICTION:default",
+      "status": "HANDLER_PRESENT_UNVERIFIED",
+      "reason": "TEST_ID_NOT_REGISTERED:REAL-CARD-24"
+    },
+    {
+      "op": "COUNT_MODIFIER",
+      "variant": "COUNT_MODIFIER:default",
+      "status": "HANDLER_PRESENT_UNVERIFIED",
+      "reason": "NO_PRODUCTION_API_CALL:HIJ1-RULE-045 [CARD_RULES_E2E]: BSC31-CP04 (The DashingYatagarasuTwinkle Magoichi) resolves COUNT_MODIFIER"
+    },
+    {
+      "op": "DECK_CONSTRUCTION_RULE",
+      "variant": "DECK_CONSTRUCTION_RULE:default",
+      "status": "HANDLER_PRESENT_UNVERIFIED",
+      "reason": "NO_PRODUCTION_API_CALL:HIJ1-RULE-007 [CARD_RULES_E2E]: P21-G02 (The EvilDeityEmperor Zera-Phorobia) resolves DECK_CONSTRUCTION_RULE"
+    },
+    {
+      "op": "FORCE_ATTACK",
+      "variant": "FORCE_ATTACK:default",
+      "status": "HANDLER_PRESENT_UNVERIFIED",
+      "reason": "NO_PRODUCTION_API_CALL:HIJ1-RULE-026 [CARD_RULES_E2E]: BS18-029 (Bat-Holliday) resolves FORCE_ATTACK"
+    },
+    {
+      "op": "REDIRECT_TARGET",
+      "variant": "REDIRECT_TARGET:default",
+      "status": "HANDLER_PRESENT_UNVERIFIED",
+      "reason": "TEST_ID_NOT_REGISTERED:HIJ1-RULE-021 [CARD_RULES_E2E]: BS04-054 (Arcanasoldier-Cinq) resolves REDIRECT_TARGET"
+    },
+    {
+      "op": "RETRIEVE_CORES",
+      "variant": "RETRIEVE_CORES:default",
+      "status": "HANDLER_PRESENT_UNVERIFIED",
+      "reason": "NO_PRODUCTION_API_CALL:HIJ1-E2E-062 [CARD_ABILITY_E2E]: 26RSD01-006 (Cupell) resolves RETRIEVE_CORES"
+    },
+    {
+      "op": "DECK_BUILDING_RULE",
+      "variant": "DECK_BUILDING_RULE:default",
+      "status": "HANDLER_PRESENT_UNVERIFIED",
+      "reason": "NO_PRODUCTION_API_CALL:HIJ1-RULE-001 [CARD_RULES_E2E]: P15-17 (The Minis' Great Athletics Meeting) resolves DECK_BUILDING_RULE"
+    },
+    {
+      "op": "GAIN_TEAM",
+      "variant": "GAIN_TEAM:default",
+      "status": "HANDLER_PRESENT_UNVERIFIED",
+      "reason": "NO_PRODUCTION_API_CALL:HIJ1-RULE-046 [CARD_RULES_E2E]: BATTLE-SPIRITS-A14695 (［Academy Seraph］Aeriphiel) resolves GAIN_TEAM"
+    },
+    {
+      "op": "TEAM_RULE",
+      "variant": "TEAM_RULE:default",
+      "status": "HANDLER_PRESENT_UNVERIFIED",
+      "reason": "NO_PRODUCTION_API_CALL:HIJ1-RULE-054 [CARD_RULES_E2E]: BATTLE-SPIRITS-A15090 (［Off Shot］Klara) resolves TEAM_RULE"
+    },
+    {
+      "op": "COST_MODIFIER",
+      "variant": "COST_MODIFIER:default",
+      "status": "HANDLER_PRESENT_UNVERIFIED",
+      "reason": "NO_PRODUCTION_API_CALL:HIJ1-RULE-025 [CARD_RULES_E2E]: BS08-057 (The Red Sand Glass) resolves COST_MODIFIER"
+    },
+    {
+      "op": "CONTINUOUS_RULE",
+      "variant": "CONTINUOUS_RULE:default",
+      "status": "HANDLER_PRESENT_UNVERIFIED",
+      "reason": "NO_PRODUCTION_API_CALL:HIJ1-RULE-012 [CARD_RULES_E2E]: BATTLE-SPIRITS-A161 (Attack Shift) resolves CONTINUOUS_RULE"
+    },
+    {
+      "op": "UNBLOCKABLE",
+      "variant": "UNBLOCKABLE:default",
+      "status": "HANDLER_PRESENT_UNVERIFIED",
+      "reason": "NO_PRODUCTION_API_CALL:HIJ1-RULE-003 [CARD_RULES_E2E]: 26RCB01-X05 (Kamen Rider Ryuki Survive (26RCB01-X05)) resolves UNBLOCKABLE"
+    }
+  ]
+}

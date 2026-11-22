@@ -24,6 +24,26 @@
     "compiledIr": {
       "cardNumber": "PB18-U06",
       "name": "Glitter Tiga",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 12000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 15000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 20000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: Blue & Cost 6 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\nThis card/Spirit is also treated as being exactly-named \"Ultraman\".\n\n[LV1][LV2][LV3] (When Advents/Attacks)\nDestroy an opposing Spirit/Ultimate with the highest cost.\n\n[LV2][LV3] (When Attacks)\nWhen the opponent would use card from their Hand, unless they send two cores from their Reserve to the Trash, they can't use it. While this Spirit is [During Advent], this effect sends +2 cores to Trash.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -31,12 +51,32 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "PB18-U06#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_a76ae789e27afd8ab2e84bc2ff7084334dbe189e33e5e9c27b224d32e5512e7c_b845a022b13b303c3fe912a11ebcc95e",
+          "cardNumber": "PB18-U06",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PB18-U06#a0"
         }
       ],
       "abilities": [
         {
-          "id": "PB18-U06#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -47,8 +87,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: Blue & Cost 6 or more",
@@ -57,10 +106,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Advent: Blue & Cost 6 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -82,7 +135,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -100,10 +155,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB18-U06#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "Blue & Cost 6 or more",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB18-U06#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_a76ae789e27afd8ab2e84bc2ff7084334dbe189e33e5e9c27b224d32e5512e7c_b845a022b13b303c3fe912a11ebcc95e",
+              "cardNumber": "PB18-U06",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PB18-U06#a0"
+            }
+          ],
+          "id": "PB18-U06#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_a76ae789e27afd8ab2e84bc2ff7084334dbe189e33e5e9c27b224d32e5512e7c_b845a022b13b303c3fe912a11ebcc95e",
+          "physicalId": "PB18-U06#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_a76ae789e27afd8ab2e84bc2ff7084334dbe189e33e5e9c27b224d32e5512e7c_b845a022b13b303c3fe912a11ebcc95e",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_a76ae789e27afd8ab2e84bc2ff7084334dbe189e33e5e9c27b224d32e5512e7c_b845a022b13b303c3fe912a11ebcc95e",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c2e3bc979c4f4af5d3bd2b83168ac6ce4bcb14f157eabea02bcd07d9de509bb8_25df24596dbeabdf566fbc39f2050de2",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB18-U06#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -114,8 +213,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -124,24 +228,42 @@
             "isMain": false,
             "cleanBody": "This card/Spirit is also treated as being exactly-named \"Ultraman\"."
           },
+          "originalAbilityText": "This card/Spirit is also treated as being exactly-named \"Ultraman\".",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "This card/Spirit is also treated as being exactly-named \"Ultraman\".",
+              "originalClauseText": "This card/Spirit is also treated as being exactly-named \"Ultraman\".",
               "cleanText": "This card/Spirit is also treated as being exactly-named \"Ultraman\"",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "TREAT_RULE",
+                "treatAs": "NAME",
+                "name": "Ultraman"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB18-U06#a1",
+          "keywords": [],
+          "id": "PB18-U06#AB_PASSIVE_NONE_LV1_LV2_LV3_12edb006a2ea98825cf9ef20262165333d4b6a958b3727897cc0a63e132453f6_a7718ada03d3dbd2add6ef429806b2a7",
+          "physicalId": "PB18-U06#AB_PASSIVE_NONE_LV1_LV2_LV3_12edb006a2ea98825cf9ef20262165333d4b6a958b3727897cc0a63e132453f6_a7718ada03d3dbd2add6ef429806b2a7",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_12edb006a2ea98825cf9ef20262165333d4b6a958b3727897cc0a63e132453f6_a7718ada03d3dbd2add6ef429806b2a7",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_711d4fd4c32a5aba9ae2d878b0c6c321be59c771dc133e92a81142aa82a4ad4a_9d22dc7c9145bcba8381d157ef5967bd",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB18-U06#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -152,8 +274,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Advents/Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -162,10 +295,14 @@
             "isMain": false,
             "cleanBody": "Destroy an opposing Spirit/Ultimate with the highest cost."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Advents/Attacks)\nDestroy an opposing Spirit/Ultimate with the highest cost.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Destroy an opposing Spirit/Ultimate with the highest cost.",
+              "originalClauseText": "Destroy an opposing Spirit/Ultimate with the highest cost.",
               "cleanText": "Destroy an opposing Spirit/Ultimate with the highest cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -183,10 +320,25 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB18-U06#a2",
+          "keywords": [],
+          "id": "PB18-U06#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_f7b23fcb066b5148032502325e5249af5cf21b03786fc22b61bd3f05b4fcf8c0_3e9694b929b6ca0d493ff82714b3674a",
+          "physicalId": "PB18-U06#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_f7b23fcb066b5148032502325e5249af5cf21b03786fc22b61bd3f05b4fcf8c0_3e9694b929b6ca0d493ff82714b3674a",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_f7b23fcb066b5148032502325e5249af5cf21b03786fc22b61bd3f05b4fcf8c0_3e9694b929b6ca0d493ff82714b3674a",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_37b4b08018946801480f6589ad68ae353c5789feb7eab6c42bd46b57c6da3058_ca140fe4f12586570d3fbf202d9d8792",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB18-U06#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -196,8 +348,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -206,10 +367,14 @@
             "isMain": false,
             "cleanBody": "When the opponent would use card from their Hand, unless they send two cores from their Reserve to the Trash, they can't use it. While this Spirit is [During Advent], this effect sends +2 cores to Trash."
           },
+          "originalAbilityText": "[LV2][LV3] (When Attacks)\nWhen the opponent would use card from their Hand, unless they send two cores from their Reserve to the Trash, they can't use it. While this Spirit is [During Advent], this effect sends +2 cores to Trash.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "When the opponent would use card from their Hand, unless they send two cores from their Reserve to the Trash, they can't use it.",
+              "originalClauseText": "When the opponent would use card from their Hand, unless they send two cores from their Reserve to the Trash, they can't use it.",
               "cleanText": "When the opponent would use card from their Hand, unless they send two cores from their Reserve to the Trash, they can't use it",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -217,23 +382,52 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 2,
+                "from": {
+                  "zone": "reserve",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             },
             {
               "rawText": "While this Spirit is [During Advent], this effect sends +2 cores to Trash.",
+              "originalClauseText": "While this Spirit is [During Advent], this effect sends +2 cores to Trash.",
               "cleanText": "this effect sends +2 cores to Trash",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": "While this Spirit is [During Advent]",
               "duration": null,
               "op": {
-                "op": "MODIFY_EFFECT"
+                "op": "MODIFY_EFFECT",
+                "side": "self",
+                "param": "cores",
+                "delta": 2,
+                "targetEffect": "core_operation"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB18-U06#a3",
+          "keywords": [],
+          "id": "PB18-U06#AB_WHEN_ATTACKS_NONE_LV2_LV3_f4d07997f4790f400984cbd4a6f9357d43192da01921d87d9c66a521ad107ef9_c3b5c9c5279b7a9a8f42c352f45e5780",
+          "physicalId": "PB18-U06#AB_WHEN_ATTACKS_NONE_LV2_LV3_f4d07997f4790f400984cbd4a6f9357d43192da01921d87d9c66a521ad107ef9_c3b5c9c5279b7a9a8f42c352f45e5780",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_f4d07997f4790f400984cbd4a6f9357d43192da01921d87d9c66a521ad107ef9_c3b5c9c5279b7a9a8f42c352f45e5780",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_7b4393490077dc40f687ca2270ad3b6369014e4515b5026dadc40980114c1257_403676480083d523cedc1a4b634dec0c",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
@@ -966,19 +1160,29 @@
     "compiledIr": {
       "cardNumber": "PB18-U05",
       "name": "Ultraman Tarou",
-      "keywords": [
-        {
-          "name": "Burst",
-          "parameter": "After your Life is reduced",
-          "wave": 2,
-          "hook": "burst",
-          "bracketed": true,
-          "index": 115
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 9000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 6,
+          "bp": 14000
         }
-      ],
+      },
+      "originalEffectText": "During (Either End Step), by sending your [Soul Core] to the Trash, return this card from your Trash to the Hand.\n\n[Burst: After your Life is reduced]\nDestroy an opposing Cost 8 or less Spirit/Ultimate. When this effect destroys, draw a card. After this effect resolves, summon this card without paying the cost.\n\n[LV2][LV3] Flash - (Either Attack Step)\nBy destroying this Spirit, destroy any number of opposing Spirits up to a total of Cost 8.",
+      "teams": [],
+      "keywords": [],
       "abilities": [
         {
-          "id": "PB18-U05#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -989,8 +1193,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -999,10 +1208,14 @@
             "isMain": false,
             "cleanBody": "During (Either End Step), by sending your [Soul Core] to the Trash, return this card from your Trash to the Hand."
           },
+          "originalAbilityText": "During (Either End Step), by sending your [Soul Core] to the Trash, return this card from your Trash to the Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "During (Either End Step), by sending your [Soul Core] to the Trash, return this card from your Trash to the Hand.",
+              "originalClauseText": "During (Either End Step), by sending your [Soul Core] to the Trash, return this card from your Trash to the Hand.",
               "cleanText": "During (Either End Step), by sending your [Soul Core] to the Trash, return this card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1023,10 +1236,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB18-U05#a0",
+          "keywords": [],
+          "id": "PB18-U05#AB_PASSIVE_NONE_LV1_LV2_LV3_f99b1e353212cd678f414cbb9b7619df6d0829037b97f6088def564c3cf21366_488f79719a1cfc7c88ac3567b23df7e5",
+          "physicalId": "PB18-U05#AB_PASSIVE_NONE_LV1_LV2_LV3_f99b1e353212cd678f414cbb9b7619df6d0829037b97f6088def564c3cf21366_488f79719a1cfc7c88ac3567b23df7e5",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_f99b1e353212cd678f414cbb9b7619df6d0829037b97f6088def564c3cf21366_488f79719a1cfc7c88ac3567b23df7e5",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_e3fd5bfd2788e674b21a5bb7115cb7dbc43cb4809aa726548390e82227a4d04f_56ce0f19203dc451b7f8bbcab2f99470",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB18-U05#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1037,8 +1262,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "BURST",
+            "timings": [],
             "timingLabel": "Burst",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1047,10 +1279,14 @@
             "isMain": false,
             "cleanBody": "Destroy an opposing Cost 8 or less Spirit/Ultimate. When this effect destroys, draw a card. After this effect resolves, summon this card without paying the cost."
           },
+          "originalAbilityText": "[Burst: After your Life is reduced]\nDestroy an opposing Cost 8 or less Spirit/Ultimate. When this effect destroys, draw a card. After this effect resolves, summon this card without paying the cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Destroy an opposing Cost 8 or less Spirit/Ultimate.",
+              "originalClauseText": "Destroy an opposing Cost 8 or less Spirit/Ultimate.",
               "cleanText": "Destroy an opposing Cost 8 or less Spirit/Ultimate",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1072,7 +1308,9 @@
             },
             {
               "rawText": "When this effect destroys, draw a card.",
+              "originalClauseText": "When this effect destroys, draw a card.",
               "cleanText": "When this effect destroys, draw a card",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1087,7 +1325,9 @@
             },
             {
               "rawText": "summon this card without paying the cost.",
+              "originalClauseText": "summon this card without paying the cost.",
               "cleanText": "summon this card without paying the cost",
+              "clauseIndex": 2,
               "link": "afterResolves",
               "isOptional": false,
               "isCost": false,
@@ -1100,10 +1340,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB18-U05#a1",
+          "keywords": [],
+          "id": "PB18-U05#AB_BURST_NONE_LV1_LV2_LV3_44b095065998f2c4b919fc41e5cfc2b00beb3bafb0e6cb4ba299e5211e19f600_9b1565409da4a5041c5261552897eb2c",
+          "physicalId": "PB18-U05#AB_BURST_NONE_LV1_LV2_LV3_44b095065998f2c4b919fc41e5cfc2b00beb3bafb0e6cb4ba299e5211e19f600_9b1565409da4a5041c5261552897eb2c",
+          "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_44b095065998f2c4b919fc41e5cfc2b00beb3bafb0e6cb4ba299e5211e19f600_9b1565409da4a5041c5261552897eb2c",
+          "semanticIdV3": "SEM3#AB_BURST_NONE_LV1_LV2_LV3_66595fc8edd3bc4b7aca96cd68500fc39e18b30264fd6a697718a7f8ae724610_aa04c59964ef197128b6d6e500a1d063",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB18-U05#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1113,8 +1367,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1123,10 +1386,14 @@
             "isMain": false,
             "cleanBody": "By destroying this Spirit, destroy any number of opposing Spirits up to a total of Cost 8."
           },
+          "originalAbilityText": "[LV2][LV3] Flash - (Either Attack Step)\nBy destroying this Spirit, destroy any number of opposing Spirits up to a total of Cost 8.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "By destroying this Spirit",
+              "originalClauseText": "By destroying this Spirit",
               "cleanText": "By destroying this Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1143,7 +1410,9 @@
             },
             {
               "rawText": "destroy any number of opposing Spirits up to a total of Cost 8.",
+              "originalClauseText": "destroy any number of opposing Spirits up to a total of Cost 8.",
               "cleanText": "destroy any number of opposing Spirits up to a total of Cost 8",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1159,7 +1428,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB18-U05#a2",
+          "keywords": [],
+          "id": "PB18-U05#AB_ATTACK_STEP_NONE_LV2_LV3_977200d4a0cfc5fb18af272f3a2d37bb10b13ef760a695a77550d80199b896d7_9950dea88b4d69e6df70aa2eecfaeb55",
+          "physicalId": "PB18-U05#AB_ATTACK_STEP_NONE_LV2_LV3_977200d4a0cfc5fb18af272f3a2d37bb10b13ef760a695a77550d80199b896d7_9950dea88b4d69e6df70aa2eecfaeb55",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_977200d4a0cfc5fb18af272f3a2d37bb10b13ef760a695a77550d80199b896d7_9950dea88b4d69e6df70aa2eecfaeb55",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_LV3_52ff7caa7f0414521d8ad258f03f511aae0afc988eabfae38f58ca6d7cbd76c9_e7b3242a48e46b6bd280da37c64c987a",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,

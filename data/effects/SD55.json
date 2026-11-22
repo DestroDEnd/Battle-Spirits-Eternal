@@ -1495,10 +1495,29 @@
     "compiledIr": {
       "cardNumber": "SD55-008",
       "name": "The ClownDragon Gingar Dragon",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 7000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 5,
+          "bp": 12000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] (When Attacks)\nDuring this turn, unless the opponent sends one of their Lives to the Trash, they can't use cards from their Hand/Removed Zone.\n\n[LV2][LV3] (When Attacks)\nThis Spirit gains +2000 BP for each Spirit you control. At the end of battle, send an opposing Life to the Reserve.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "SD55-008#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1509,8 +1528,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1519,10 +1547,14 @@
             "isMain": false,
             "cleanBody": "During this turn, unless the opponent sends one of their Lives to the Trash, they can't use cards from their Hand/Removed Zone."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Attacks)\nDuring this turn, unless the opponent sends one of their Lives to the Trash, they can't use cards from their Hand/Removed Zone.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "During this turn, unless the opponent sends one of their Lives to the Trash, they can't use cards from their Hand/Removed Zone.",
+              "originalClauseText": "During this turn, unless the opponent sends one of their Lives to the Trash, they can't use cards from their Hand/Removed Zone.",
               "cleanText": "unless the opponent sends one of their Lives to the Trash, they can't use cards from their Hand/Removed Zone",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1533,10 +1565,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD55-008#a0",
+          "keywords": [],
+          "id": "SD55-008#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_14f258e53857aeb742110e52085f0b0bd4c832e5db0205c45e1b81f8c10f028a_12ad27b4337378854671e0e08ba6d5a1",
+          "physicalId": "SD55-008#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_14f258e53857aeb742110e52085f0b0bd4c832e5db0205c45e1b81f8c10f028a_12ad27b4337378854671e0e08ba6d5a1",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_14f258e53857aeb742110e52085f0b0bd4c832e5db0205c45e1b81f8c10f028a_12ad27b4337378854671e0e08ba6d5a1",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_93a566ca6e7b5f422842f5a27e8b2d66d8a432105c4afb1c9dce199a52e16461_bc477440e23663280c29735d071a8aa1",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD55-008#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1546,8 +1592,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1556,10 +1611,14 @@
             "isMain": false,
             "cleanBody": "This Spirit gains +2000 BP for each Spirit you control. At the end of battle, send an opposing Life to the Reserve."
           },
+          "originalAbilityText": "[LV2][LV3] (When Attacks)\nThis Spirit gains +2000 BP for each Spirit you control. At the end of battle, send an opposing Life to the Reserve.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "This Spirit gains +2000 BP for each Spirit you control.",
+              "originalClauseText": "This Spirit gains +2000 BP for each Spirit you control.",
               "cleanText": "This Spirit gains +2000 BP for each Spirit you control",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1574,7 +1633,9 @@
             },
             {
               "rawText": "At the end of battle, send an opposing Life to the Reserve.",
+              "originalClauseText": "At the end of battle, send an opposing Life to the Reserve.",
               "cleanText": "At the end of battle, send an opposing Life to the Reserve",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1582,11 +1643,34 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD55-008#a1",
+          "keywords": [],
+          "id": "SD55-008#AB_WHEN_ATTACKS_NONE_LV2_LV3_7eb678a6cfbdb61dc8101654d1add89d8478008fe1742a24e366cdfd1c8bc1e1_60efe0e3e4c621a20451d5b33ffb9e9c",
+          "physicalId": "SD55-008#AB_WHEN_ATTACKS_NONE_LV2_LV3_7eb678a6cfbdb61dc8101654d1add89d8478008fe1742a24e366cdfd1c8bc1e1_60efe0e3e4c621a20451d5b33ffb9e9c",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_7eb678a6cfbdb61dc8101654d1add89d8478008fe1742a24e366cdfd1c8bc1e1_60efe0e3e4c621a20451d5b33ffb9e9c",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_9e2f373d1a88506e18e9749a00f7927e226493eb901618fc8676c38018cb41c4_7650047bbe932dd3d298a0c783b8dda9",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -1619,10 +1703,29 @@
     "compiledIr": {
       "cardNumber": "SD55-002",
       "name": "The ClownDragon Melt Dragon",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 4000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 5000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] (When Summoned)\nYou can destroy an opposing Nexus, and when destroys, besides [Soul Core], send three cores from your Trash to the Reserve.\n\n[LV3] (Your End Step)\nDraw until you have four cards in Hand.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "SD55-002#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1633,8 +1736,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1643,10 +1755,14 @@
             "isMain": false,
             "cleanBody": "You can destroy an opposing Nexus, and when destroys, besides [Soul Core], send three cores from your Trash to the Reserve."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nYou can destroy an opposing Nexus, and when destroys, besides [Soul Core], send three cores from your Trash to the Reserve.",
+          "abilityIndex": 0,
           "clauses": [
             {
-              "rawText": "You can destroy an opposing Nexus, and when destroys, besides [Soul Core], send three cores from your Trash to the Reserve.",
-              "cleanText": "You can destroy an opposing Nexus, and when destroys, besides [Soul Core], send three cores from your Trash to the Reserve",
+              "rawText": "You can destroy an opposing Nexus",
+              "originalClauseText": "You can destroy an opposing Nexus",
+              "cleanText": "You can destroy an opposing Nexus",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1662,12 +1778,45 @@
                   ]
                 }
               }
+            },
+            {
+              "rawText": "besides [Soul Core], send three cores from your Trash to the Reserve.",
+              "originalClauseText": "besides [Soul Core], send three cores from your Trash to the Reserve.",
+              "cleanText": "besides [Soul Core], send three cores from your Trash to the Reserve",
+              "clauseIndex": 1,
+              "link": "ifYouDo",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 3,
+                "from": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD55-002#a0",
+          "keywords": [],
+          "id": "SD55-002#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_d7fdbdab457469000cea203b28bdd7dc923e6c3c85a39a1fbb5037570b6b5839_dbd9d4e5aeee1ae155eb760585a49860",
+          "physicalId": "SD55-002#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_d7fdbdab457469000cea203b28bdd7dc923e6c3c85a39a1fbb5037570b6b5839_dbd9d4e5aeee1ae155eb760585a49860",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_d7fdbdab457469000cea203b28bdd7dc923e6c3c85a39a1fbb5037570b6b5839_dbd9d4e5aeee1ae155eb760585a49860",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_e729515fd43f31a6d72279c14e1c0561e6c522225fb05a4f5b95f0de87513713_6a4112b39ba1d6fc32a57219833bb1d3",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD55-002#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1676,8 +1825,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "END_OF_TURN",
+            "timings": [
+              "END_OF_TURN"
+            ],
             "timingLabel": "Your End Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "END_OF_TURN"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1686,10 +1844,14 @@
             "isMain": false,
             "cleanBody": "Draw until you have four cards in Hand."
           },
+          "originalAbilityText": "[LV3] (Your End Step)\nDraw until you have four cards in Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Draw until you have four cards in Hand.",
+              "originalClauseText": "Draw until you have four cards in Hand.",
               "cleanText": "Draw until you have four cards in Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1702,10 +1864,25 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD55-002#a1",
+          "keywords": [],
+          "id": "SD55-002#AB_END_OF_TURN_NONE_LV3_81d8546e01400295ee43557235e69353dd943f297927273c1949756f476b5098_95b150bba15cd14e3537ffdfcc2a8489",
+          "physicalId": "SD55-002#AB_END_OF_TURN_NONE_LV3_81d8546e01400295ee43557235e69353dd943f297927273c1949756f476b5098_95b150bba15cd14e3537ffdfcc2a8489",
+          "semanticId": "SEM#AB_END_OF_TURN_NONE_LV3_81d8546e01400295ee43557235e69353dd943f297927273c1949756f476b5098_95b150bba15cd14e3537ffdfcc2a8489",
+          "semanticIdV3": "SEM3#AB_END_OF_TURN_NONE_LV3_9aa156241ad1c1f41223f3c340c70a538554b66a2da5a44ce8a9e45dad360b25_34f3970cad771bec80c44ec9b2f228a3",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "END_OF_TURN"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
-      "compiledClausesCount": 2,
+      "compiledClausesCount": 3,
       "unsupportedClausesCount": 0,
       "isFullySupported": true
     }
@@ -1845,10 +2022,29 @@
     "compiledIr": {
       "cardNumber": "SD55-007",
       "name": "The ClownDragon Trickster Dragon",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 6000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 9000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] (Start of Your Attack Step)\nBesides [Soul Core], send three cores from your Trash to any of your \"Primal\" family Spirits.\n\n[LV3] (When Attacks)\nOnce per turn, by returning one Rebirth card from your Trash to the Hand, this Spirit refreshes.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "SD55-007#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1859,8 +2055,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "START_OF_ATTACK_STEP",
+            "timings": [
+              "START_OF_ATTACK_STEP"
+            ],
             "timingLabel": "Start of Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "START_OF_ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1869,10 +2074,14 @@
             "isMain": false,
             "cleanBody": "Besides [Soul Core], send three cores from your Trash to any of your \"Primal\" family Spirits."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (Start of Your Attack Step)\nBesides [Soul Core], send three cores from your Trash to any of your \"Primal\" family Spirits.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Besides [Soul Core], send three cores from your Trash to any of your \"Primal\" family Spirits.",
+              "originalClauseText": "Besides [Soul Core], send three cores from your Trash to any of your \"Primal\" family Spirits.",
               "cleanText": "Besides [Soul Core], send three cores from your Trash to any of your \"Primal\" family Spirits",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1880,14 +2089,32 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 3,
+                "from": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD55-007#a0",
+          "keywords": [],
+          "id": "SD55-007#AB_START_OF_ATTACK_STEP_NONE_LV1_LV2_LV3_3597e62c9af68bc9fef39c25bde58f2ed08fad07ea0fa6ea238f298d248737dd_93066bba103ba4d5336ad0ebf8f764ff",
+          "physicalId": "SD55-007#AB_START_OF_ATTACK_STEP_NONE_LV1_LV2_LV3_3597e62c9af68bc9fef39c25bde58f2ed08fad07ea0fa6ea238f298d248737dd_93066bba103ba4d5336ad0ebf8f764ff",
+          "semanticId": "SEM#AB_START_OF_ATTACK_STEP_NONE_LV1_LV2_LV3_3597e62c9af68bc9fef39c25bde58f2ed08fad07ea0fa6ea238f298d248737dd_93066bba103ba4d5336ad0ebf8f764ff",
+          "semanticIdV3": "SEM3#AB_START_OF_ATTACK_STEP_NONE_LV1_LV2_LV3_5966745943919bafaf39537b0c88d4e0041029314b9a40f7ad2e36d3e07ec7ef_894d8a52f44e5173341df54cdf967048",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "START_OF_ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD55-007#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1896,8 +2123,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -1906,10 +2144,14 @@
             "isMain": false,
             "cleanBody": "by returning one Rebirth card from your Trash to the Hand, this Spirit refreshes."
           },
+          "originalAbilityText": "[LV3] (When Attacks)\nOnce per turn, by returning one Rebirth card from your Trash to the Hand, this Spirit refreshes.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "By returning one Rebirth card from your Trash to the Hand",
+              "originalClauseText": "By returning one Rebirth card from your Trash to the Hand",
               "cleanText": "By returning one Rebirth card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1925,7 +2167,9 @@
             },
             {
               "rawText": "this Spirit refreshes.",
+              "originalClauseText": "this Spirit refreshes.",
               "cleanText": "this Spirit refreshes",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1937,7 +2181,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD55-007#a1",
+          "keywords": [],
+          "id": "SD55-007#AB_WHEN_ATTACKS_NONE_LV3_a6f3d7925c16ace2ab78ba862208fa3039909df4096b0e84090dd03ca6951e24_6593ea50dcc2222c33d352d29f29d315",
+          "physicalId": "SD55-007#AB_WHEN_ATTACKS_NONE_LV3_a6f3d7925c16ace2ab78ba862208fa3039909df4096b0e84090dd03ca6951e24_6593ea50dcc2222c33d352d29f29d315",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV3_a6f3d7925c16ace2ab78ba862208fa3039909df4096b0e84090dd03ca6951e24_6593ea50dcc2222c33d352d29f29d315",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV3_6ff0fc6bc1b7089877c10997d017b15f9243cbe72f92eb4076659cffbc630a99_11a9c725cac368c7b7cde7d526340edd",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -2390,6 +2651,10 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A14299",
       "name": "Wandering Grandwalker Lolo",
+      "type": "Nexus",
+      "levels": {},
+      "originalEffectText": "[Grandwalker Nexus]\nThis Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.\n\n[Core Charge: (Clown/Primal & Cost 3 or more, Rebirth Spirit) (Rebirth Nexus)]\n◆When you summon/advent/deploy a target Spirit/Nexus, you can put a core from the Void onto this Nexus.\n◆When this Nexus is deployed, if you do not control any Grandwalker Nexus with the same card name as this card, you can send three cards from your decktop to the Trash. For each target card among them, put a core from the Void onto this Nexus.\n\n[Grand Field] [LV1][LV2] (Your Main Step)\nWhen you are summoning a \"Primal\" family Spirit card, this Nexus' symbol is also treated as Red/Purple/Green/White/Yellow/Blue.\n\n[Grand Skill: 3] [LV2] (Your Main Step)\n(Once per turn, send three cores from this Nexus to the Void) Draw a card. Or, if you have two or less counters, flip a pre-Rebirth Nexus you control.",
+      "teams": [],
       "keywords": [
         {
           "name": "Core Charge",
@@ -2397,7 +2662,28 @@
           "wave": 3,
           "hook": "core_charge",
           "bracketed": true,
-          "index": 284
+          "index": 0,
+          "abilityId": "BATTLE-SPIRITS-A14299#AB_PASSIVE_NONE_LV1_LV2_LV3_8c8642eb2188af865d6b6451c62c7dc70388ba990dbdee715a209b255efba70d_804f21cd5e09ec20df573d6b0f8287d9",
+          "cardNumber": "BATTLE-SPIRITS-A14299",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "B",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BATTLE-SPIRITS-A14299#a1"
         },
         {
           "name": "Grand Field",
@@ -2405,7 +2691,29 @@
           "wave": 3,
           "hook": "grand_field",
           "bracketed": true,
-          "index": 712
+          "index": 0,
+          "abilityId": "BATTLE-SPIRITS-A14299#AB_MAIN_STEP_NONE_LV1_LV2_5aca816e0b7cc27aad13cd27d5ee62e4540e477acddcb56fa83f5632083b9332_6d1fb6da5aca6df3c3dcdf3342740dcf",
+          "cardNumber": "BATTLE-SPIRITS-A14299",
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "MAIN_STEP",
+          "timingLabel": "Your Main Step",
+          "timingStep": "ANY",
+          "face": "B",
+          "prefixes": [
+            "Grand Field"
+          ],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BATTLE-SPIRITS-A14299#a4"
         },
         {
           "name": "Grand Skill",
@@ -2413,12 +2721,32 @@
           "wave": 3,
           "hook": "grand_skill",
           "bracketed": true,
-          "index": 883
+          "index": 0,
+          "abilityId": "BATTLE-SPIRITS-A14299#AB_MAIN_STEP_NONE_LV2_0036e05915917a537a839cce0f2f38f34012791cafa5af6724e7bacac3fb81a8_1f1348f6808c06132f6a356a165b1677",
+          "cardNumber": "BATTLE-SPIRITS-A14299",
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "MAIN_STEP",
+          "timingLabel": "Your Main Step",
+          "timingStep": "ANY",
+          "face": "B",
+          "prefixes": [
+            "Grand Skill: 3"
+          ],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BATTLE-SPIRITS-A14299#a5"
         }
       ],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A14299#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2431,8 +2759,13 @@
               "Grandwalker Nexus"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2441,10 +2774,14 @@
             "isMain": false,
             "cleanBody": "This Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses."
           },
+          "originalAbilityText": "[Grandwalker Nexus]\nThis Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "This Nexus can only be affected by effects that target Grandwalker Nexuses.",
+              "originalClauseText": "This Nexus can only be affected by effects that target Grandwalker Nexuses.",
               "cleanText": "This Nexus can only be affected by effects that target Grandwalker Nexuses",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2456,7 +2793,9 @@
             },
             {
               "rawText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.",
+              "originalClauseText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.",
               "cleanText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2467,10 +2806,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A14299#a0",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A14299#AB_PASSIVE_NONE_LV1_LV2_LV3_942d11e6205bb2a4b67e50627106ae1cfc6bc84946419fa2fa1ebb7898a10897_210a76468ae036766b69e1bbc98cd961",
+          "physicalId": "BATTLE-SPIRITS-A14299#AB_PASSIVE_NONE_LV1_LV2_LV3_942d11e6205bb2a4b67e50627106ae1cfc6bc84946419fa2fa1ebb7898a10897_210a76468ae036766b69e1bbc98cd961",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_942d11e6205bb2a4b67e50627106ae1cfc6bc84946419fa2fa1ebb7898a10897_210a76468ae036766b69e1bbc98cd961",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_34c6111b2026968ed42bfa5f6eb8f5495e381c90eb8118f1bd14e55b04d3c296_de06c5174ba9de1f98a264fb73e5cf09",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A14299#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2481,8 +2832,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Core Charge: (Clown/Primal & Cost 3 or more, Rebirth Spirit) (Rebirth Nexus)",
@@ -2491,11 +2847,55 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "originalAbilityText": "[Core Charge: (Clown/Primal & Cost 3 or more, Rebirth Spirit) (Rebirth Nexus)]",
+          "abilityIndex": 1,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A14299#a1",
+          "keywords": [
+            {
+              "name": "Core Charge",
+              "parameter": "(Clown/Primal & Cost 3 or more, Rebirth Spirit) (Rebirth Nexus)",
+              "wave": 3,
+              "hook": "core_charge",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BATTLE-SPIRITS-A14299#AB_PASSIVE_NONE_LV1_LV2_LV3_8c8642eb2188af865d6b6451c62c7dc70388ba990dbdee715a209b255efba70d_804f21cd5e09ec20df573d6b0f8287d9",
+              "cardNumber": "BATTLE-SPIRITS-A14299",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "B",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BATTLE-SPIRITS-A14299#a1"
+            }
+          ],
+          "id": "BATTLE-SPIRITS-A14299#AB_PASSIVE_NONE_LV1_LV2_LV3_8c8642eb2188af865d6b6451c62c7dc70388ba990dbdee715a209b255efba70d_804f21cd5e09ec20df573d6b0f8287d9",
+          "physicalId": "BATTLE-SPIRITS-A14299#AB_PASSIVE_NONE_LV1_LV2_LV3_8c8642eb2188af865d6b6451c62c7dc70388ba990dbdee715a209b255efba70d_804f21cd5e09ec20df573d6b0f8287d9",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_8c8642eb2188af865d6b6451c62c7dc70388ba990dbdee715a209b255efba70d_804f21cd5e09ec20df573d6b0f8287d9",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_646ce38d861dff80ca63e74116e209ed28fbca152d16527bf7e43db2e9178e91_d27e1e32ac8fb0fc647a03021d4b8916",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A14299#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2506,8 +2906,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2516,10 +2921,14 @@
             "isMain": false,
             "cleanBody": "◆When you summon/advent/deploy a target Spirit/Nexus, you can put a core from the Void onto this Nexus."
           },
+          "originalAbilityText": "◆When you summon/advent/deploy a target Spirit/Nexus, you can put a core from the Void onto this Nexus.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "◆When you summon/advent/deploy a target Spirit/Nexus, you can put a core from the Void onto this Nexus.",
+              "originalClauseText": "◆When you summon/advent/deploy a target Spirit/Nexus, you can put a core from the Void onto this Nexus.",
               "cleanText": "When you summon/advent/deploy a target Spirit/Nexus, you can put a core from the Void onto this Nexus",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -2527,14 +2936,34 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                },
+                "to": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A14299#a2",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A14299#AB_PASSIVE_NONE_LV1_LV2_LV3_078f3c55abc7dc58f057cbecb25a8ae148d83bf7e356a99e5f7b0ed775887603_f611bf931088373270c009920d336ad5",
+          "physicalId": "BATTLE-SPIRITS-A14299#AB_PASSIVE_NONE_LV1_LV2_LV3_078f3c55abc7dc58f057cbecb25a8ae148d83bf7e356a99e5f7b0ed775887603_f611bf931088373270c009920d336ad5",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_078f3c55abc7dc58f057cbecb25a8ae148d83bf7e356a99e5f7b0ed775887603_f611bf931088373270c009920d336ad5",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_892e79423b02eaf963da37ff31c146996548220896e706d0005db3d396b2aaed_dc211f6c71dafa060fd12e61831e90d1",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A14299#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2545,8 +2974,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2555,10 +2989,14 @@
             "isMain": false,
             "cleanBody": "◆When this Nexus is deployed, if you do not control any Grandwalker Nexus with the same card name as this card, you can send three cards from your decktop to the Trash. For each target card among them, put a core from the Void onto this Nexus."
           },
+          "originalAbilityText": "◆When this Nexus is deployed, if you do not control any Grandwalker Nexus with the same card name as this card, you can send three cards from your decktop to the Trash. For each target card among them, put a core from the Void onto this Nexus.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "◆When this Nexus is deployed, if you do not control any Grandwalker Nexus with the same card name as this card, you can send three cards from your decktop to the Trash.",
+              "originalClauseText": "◆When this Nexus is deployed, if you do not control any Grandwalker Nexus with the same card name as this card, you can send three cards from your decktop to the Trash.",
               "cleanText": "When this Nexus is deployed, if you do not control any Grandwalker Nexus with the same card name as this card, you can send three cards from your decktop to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -2573,7 +3011,9 @@
             },
             {
               "rawText": "For each target card among them, put a core from the Void onto this Nexus.",
+              "originalClauseText": "For each target card among them, put a core from the Void onto this Nexus.",
               "cleanText": "For each target card among them, put a core from the Void onto this Nexus",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2588,10 +3028,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A14299#a3",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A14299#AB_PASSIVE_NONE_LV1_LV2_LV3_15fdc5c968545ea1189cf829b58b58f8fd560b871602022bc78306ef064a158c_83a7dd28781a9ee99bd5df550441c103",
+          "physicalId": "BATTLE-SPIRITS-A14299#AB_PASSIVE_NONE_LV1_LV2_LV3_15fdc5c968545ea1189cf829b58b58f8fd560b871602022bc78306ef064a158c_83a7dd28781a9ee99bd5df550441c103",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_15fdc5c968545ea1189cf829b58b58f8fd560b871602022bc78306ef064a158c_83a7dd28781a9ee99bd5df550441c103",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_0a277a74beef0e1d4c790a1fb4be05c97a9e8a28e3c0f17d745f1867513b2595_54a63d4e3b71fd72975ab899b475059d",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A14299#a4",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2603,8 +3055,17 @@
               "Grand Field"
             ],
             "timing": "MAIN_STEP",
+            "timings": [
+              "MAIN_STEP"
+            ],
             "timingLabel": "Your Main Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "MAIN_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2613,10 +3074,14 @@
             "isMain": false,
             "cleanBody": "When you are summoning a \"Primal\" family Spirit card, this Nexus' symbol is also treated as Red/Purple/Green/White/Yellow/Blue."
           },
+          "originalAbilityText": "[Grand Field] [LV1][LV2] (Your Main Step)\nWhen you are summoning a \"Primal\" family Spirit card, this Nexus' symbol is also treated as Red/Purple/Green/White/Yellow/Blue.",
+          "abilityIndex": 4,
           "clauses": [
             {
               "rawText": "When you are summoning a \"Primal\" family Spirit card, this Nexus' symbol is also treated as Red/Purple/Green/White/Yellow/Blue.",
+              "originalClauseText": "When you are summoning a \"Primal\" family Spirit card, this Nexus' symbol is also treated as Red/Purple/Green/White/Yellow/Blue.",
               "cleanText": "When you are summoning a \"Primal\" family Spirit card, this Nexus' symbol is also treated as Red/Purple/Green/White/Yellow/Blue",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2624,14 +3089,79 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit",
+                    "Nexus"
+                  ],
+                  "family": "Primal",
+                  "colorsAny": [
+                    "Red",
+                    "Purple",
+                    "Green",
+                    "White",
+                    "Yellow",
+                    "Blue"
+                  ]
+                },
+                "free": false,
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A14299#a4",
+          "keywords": [
+            {
+              "name": "Grand Field",
+              "parameter": null,
+              "wave": 3,
+              "hook": "grand_field",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BATTLE-SPIRITS-A14299#AB_MAIN_STEP_NONE_LV1_LV2_5aca816e0b7cc27aad13cd27d5ee62e4540e477acddcb56fa83f5632083b9332_6d1fb6da5aca6df3c3dcdf3342740dcf",
+              "cardNumber": "BATTLE-SPIRITS-A14299",
+              "levels": [
+                1,
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "MAIN_STEP",
+              "timingLabel": "Your Main Step",
+              "timingStep": "ANY",
+              "face": "B",
+              "prefixes": [
+                "Grand Field"
+              ],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BATTLE-SPIRITS-A14299#a4"
+            }
+          ],
+          "id": "BATTLE-SPIRITS-A14299#AB_MAIN_STEP_NONE_LV1_LV2_5aca816e0b7cc27aad13cd27d5ee62e4540e477acddcb56fa83f5632083b9332_6d1fb6da5aca6df3c3dcdf3342740dcf",
+          "physicalId": "BATTLE-SPIRITS-A14299#AB_MAIN_STEP_NONE_LV1_LV2_5aca816e0b7cc27aad13cd27d5ee62e4540e477acddcb56fa83f5632083b9332_6d1fb6da5aca6df3c3dcdf3342740dcf",
+          "semanticId": "SEM#AB_MAIN_STEP_NONE_LV1_LV2_5aca816e0b7cc27aad13cd27d5ee62e4540e477acddcb56fa83f5632083b9332_6d1fb6da5aca6df3c3dcdf3342740dcf",
+          "semanticIdV3": "SEM3#AB_MAIN_STEP_NONE_LV1_LV2_e66321c1ecfd08d9da2e93af8bbdca7c24740de2fad290d48013380ed21886f3_f39df8e4532ffa2239ba835e70a55ba9",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "MAIN_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A14299#a5",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2642,8 +3172,17 @@
               "Grand Skill: 3"
             ],
             "timing": "MAIN_STEP",
+            "timings": [
+              "MAIN_STEP"
+            ],
             "timingLabel": "Your Main Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "MAIN_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2652,10 +3191,14 @@
             "isMain": false,
             "cleanBody": "(Once per turn, send three cores from this Nexus to the Void) Draw a card. Or, if you have two or less counters, flip a pre-Rebirth Nexus you control."
           },
+          "originalAbilityText": "[Grand Skill: 3] [LV2] (Your Main Step)\n(Once per turn, send three cores from this Nexus to the Void) Draw a card. Or, if you have two or less counters, flip a pre-Rebirth Nexus you control.",
+          "abilityIndex": 5,
           "clauses": [
             {
               "rawText": "(Once per turn, send three cores from this Nexus to the Void) Draw a card.",
+              "originalClauseText": "(Once per turn, send three cores from this Nexus to the Void) Draw a card.",
               "cleanText": "(Once per turn, send three cores from this Nexus to the Void) Draw a card",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2670,7 +3213,9 @@
             },
             {
               "rawText": "if you have two or less counters, flip a pre-Rebirth Nexus you control.",
+              "originalClauseText": "if you have two or less counters, flip a pre-Rebirth Nexus you control.",
               "cleanText": "flip a pre-Rebirth Nexus you control",
+              "clauseIndex": 1,
               "link": "or",
               "isOptional": false,
               "isCost": false,
@@ -2681,7 +3226,52 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A14299#a5",
+          "keywords": [
+            {
+              "name": "Grand Skill",
+              "parameter": "3",
+              "wave": 3,
+              "hook": "grand_skill",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BATTLE-SPIRITS-A14299#AB_MAIN_STEP_NONE_LV2_0036e05915917a537a839cce0f2f38f34012791cafa5af6724e7bacac3fb81a8_1f1348f6808c06132f6a356a165b1677",
+              "cardNumber": "BATTLE-SPIRITS-A14299",
+              "levels": [
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "MAIN_STEP",
+              "timingLabel": "Your Main Step",
+              "timingStep": "ANY",
+              "face": "B",
+              "prefixes": [
+                "Grand Skill: 3"
+              ],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BATTLE-SPIRITS-A14299#a5"
+            }
+          ],
+          "id": "BATTLE-SPIRITS-A14299#AB_MAIN_STEP_NONE_LV2_0036e05915917a537a839cce0f2f38f34012791cafa5af6724e7bacac3fb81a8_1f1348f6808c06132f6a356a165b1677",
+          "physicalId": "BATTLE-SPIRITS-A14299#AB_MAIN_STEP_NONE_LV2_0036e05915917a537a839cce0f2f38f34012791cafa5af6724e7bacac3fb81a8_1f1348f6808c06132f6a356a165b1677",
+          "semanticId": "SEM#AB_MAIN_STEP_NONE_LV2_0036e05915917a537a839cce0f2f38f34012791cafa5af6724e7bacac3fb81a8_1f1348f6808c06132f6a356a165b1677",
+          "semanticIdV3": "SEM3#AB_MAIN_STEP_NONE_LV2_2b64b061a776fe439eced31ce7280a12850136daa26f438ff509026e86e70a27_bc566107b7005a06395b91c3890853d6",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "MAIN_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 8,

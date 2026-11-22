@@ -1,0 +1,316 @@
+Test ID,Suite,Description,Status,Duration (ms)
+"DATA-AUDIT","data_audit.test.js","Phase 1 Data Integrity - cards_index.json validation","PASS",123.8467
+"DATA-AUDIT","data_audit.test.js","Phase 1 Data Integrity - cards_detailed.json validation","PASS",185.7186
+"DATA-AUDIT","data_audit.test.js","Phase 1 Data Integrity - Sharded effects directory validation","PASS",1498.5604
+"GOLDEN-COMPILER","golden_compiler.test.js","Phase 2 Compiler - Chakrambat (BS01-010)","PASS",8.4427
+"GOLDEN-COMPILER","golden_compiler.test.js","Phase 2 Compiler - Birgoyle (BATTLE-SPIRITS-A27: Or connector)","PASS",37.8498
+"GOLDEN-COMPILER","golden_compiler.test.js","Phase 2 Compiler - Evil Flame (BS38-067: Burst + Flash)","PASS",8.0006
+"GOLDEN-COMPILER","golden_compiler.test.js","Phase 2 Compiler - The Makai Holy Grail (BATTLE-SPIRITS-A2302)","PASS",3.804
+"GOLDEN-COMPILER","golden_compiler.test.js","Phase 2 Compiler - The SacredEmperor Siegfrieden XV (BS66-XV02)","PASS",19.7869
+"GOLDEN-COMPILER","golden_compiler.test.js","Phase 2 Compiler - The EarthDeitySword Gaianohoko (SD28-X02: Burst lock)","PASS",2.4005
+"GOLDEN-COMPILER","golden_compiler.test.js","Phase 2 Compiler - The PartnerDemonLord Javad (SD65-CX01)","PASS",8.1535
+"GOLDEN-COMPILER","golden_compiler.test.js","Phase 2 Compiler - Evil Draw (BATTLE-SPIRITS-A4233)","PASS",2.4114
+"GOLDEN-COMPILER","golden_compiler.test.js","Phase 2 Compiler - The TwinkleDragonEmperor New-Siegfried (BS40-X01)","PASS",2.8667
+"GOLDEN-COMPILER","golden_compiler.test.js","Phase 2 Compiler - The MakaiSoldier Curse Swordsman (SD41-004)","PASS",0.835
+"GOLDEN-COMPILER","golden_compiler.test.js","Phase 2 Compiler - Gran-Dolbalkan (BS01-094)","PASS",0.6673
+"TC-ID-CONSUMER-01","identity_consumer_compatibility.test.js","TC-ID-CONSUMER-01: Two identical abilities on the same card retain distinct physical references","PASS",4.5726
+"TC-ID-CONSUMER-02","identity_consumer_compatibility.test.js","TC-ID-CONSUMER-02: Two identical abilities on different cards do not share activation state","PASS",21.7974
+"TC-ID-CONSUMER-03","identity_consumer_compatibility.test.js","TC-ID-CONSUMER-03: Two reprints share intended semantic identity but retain distinct physical runtime identities","PASS",0.9592
+"TC-ID-CONSUMER-04","identity_consumer_compatibility.test.js","TC-ID-CONSUMER-04: Physical identity lookup takes precedence over legacy fallback","PASS",1.1353
+"TC-ID-CONSUMER-05","identity_consumer_compatibility.test.js","TC-ID-CONSUMER-05: Ambiguous legacy lookup fails safely rather than selecting the first match","PASS",0.8429
+"TC-ID-CONSUMER-06","identity_consumer_compatibility.test.js","TC-ID-CONSUMER-06: Triggered ability references survive stack creation and resolution","PASS",3.6984
+"TC-ID-CONSUMER-07","identity_consumer_compatibility.test.js","TC-ID-CONSUMER-07: Pending activation references survive asynchronous prompts","PASS",5.2069
+"TC-ID-CONSUMER-08","identity_consumer_compatibility.test.js","TC-ID-CONSUMER-08: Keyword bindings resolve the correct physical ability","PASS",1.2951
+"TC-ID-CONSUMER-09","identity_consumer_compatibility.test.js","TC-ID-CONSUMER-09: Granted abilities retain correct source and physical identity","PASS",3.2913
+"TC-ID-CONSUMER-10","identity_consumer_compatibility.test.js","TC-ID-CONSUMER-10: Activation-limit counters remain isolated between distinct physical abilities","PASS",2.1153
+"TC-ID-CONSUMER-11","identity_consumer_compatibility.test.js","TC-ID-CONSUMER-11: Save/load preserves pending ability references, active reservations, and activation state","PASS",2.2088
+"TC-ID-CONSUMER-12","identity_consumer_compatibility.test.js","TC-ID-CONSUMER-12: Legacy save references continue to resolve where unambiguous","PASS",0.3672
+"TC-ID-CONSUMER-13","identity_consumer_compatibility.test.js","TC-ID-CONSUMER-13: Unknown physical IDs fail explicitly","PASS",0.7616
+"TC-ID-CONSUMER-14","identity_consumer_compatibility.test.js","TC-ID-CONSUMER-14: Semantic IDs cannot accidentally be used as physical activation references","PASS",0.6729
+"TC-ID-CONSUMER-15","identity_consumer_compatibility.test.js","TC-ID-CONSUMER-15: Existing identity and activation-limit regression suites remain green","PASS",5.2517
+"TC-ID-CONSUMER-16","identity_consumer_compatibility.test.js","TC-ID-CONSUMER-16: Descriptor with no physicalId behavior and uncompiled compatibility","PASS",1.1927
+"TC-ID-CONSUMER-17","identity_consumer_compatibility.test.js","TC-ID-CONSUMER-17: Descriptor whose id differs from its physicalId does not match by id","PASS",0.6578
+"TC-ID-CONSUMER-18","identity_consumer_compatibility.test.js","TC-ID-CONSUMER-18: Valid compiled descriptor with id === physicalId activates successfully","PASS",0.5848
+"TC-ID-CONSUMER-19","identity_consumer_compatibility.test.js","TC-ID-CONSUMER-19: Legacy-only descriptor resolved through legacyId","PASS",0.9546
+"TC-ID-CONSUMER-20","identity_consumer_compatibility.test.js","TC-ID-CONSUMER-20: Ambiguous legacy reference is rejected safely","PASS",0.5561
+"TC-ID-CONSUMER-21","identity_consumer_compatibility.test.js","TC-ID-CONSUMER-21: Physical lookup taking precedence over legacy fallback","PASS",0.6877
+"TC-COL-01","physical_ability_identity.test.js","TC-COL-01: Descriptor A compiled in complete isolation","PASS",3.3728
+"TC-COL-02","physical_ability_identity.test.js","TC-COL-02: Descriptor B compiled in complete isolation","PASS",1.403
+"TC-COL-03","physical_ability_identity.test.js","TC-COL-03: Sequential compilation: A compiled, then B compiled","PASS",1.1116
+"TC-COL-04","physical_ability_identity.test.js","TC-COL-04: Reverse sequential compilation: B compiled, then A compiled","PASS",1.0315
+"TC-COL-05","physical_ability_identity.test.js","TC-COL-05: Three descriptors: A, B, C compiled in arbitrary permutations","PASS",6.5953
+"TC-COL-06","physical_ability_identity.test.js","TC-COL-06: Full database batch compilation across 514 shards","PASS",2655.2072
+"TC-COL-07","physical_ability_identity.test.js","TC-COL-07: Incremental compilation of single modified card in isolation","PASS",0.6092
+"TC-COL-08","physical_ability_identity.test.js","TC-COL-08: Cross-environment serialization invariance (RFC 8785 canonical bytes)","PASS",1.6683
+"TC-COL-10","physical_ability_identity.test.js","TC-COL-10: Forced primary SHA-256 collision using injectable mock hash","PASS",0.7033
+"TC-COL-11","physical_ability_identity.test.js","TC-COL-11: Forced dual collision in both primary and secondary mock hashes","PASS",1.4246
+"TC-COL-12","physical_ability_identity.test.js","TC-COL-12: Existing persistent IDs remain unchanged after new colliding descriptor appears","PASS",0.6085
+"TC-ID-01","physical_ability_identity.test.js","TC-ID-01: Deterministic 256-bit SHA-256 digest over RFC 8785 canonical JSON across 100 runs","PASS",4.8814
+"TC-ID-02","physical_ability_identity.test.js","TC-ID-02: JSON object-key ordering changes preserve identity under RFC 8785","PASS",0.2483
+"TC-ID-03","physical_ability_identity.test.js","TC-ID-03: Meaningful execution clause-order changes alter physical identity","PASS",0.1769
+"TC-ID-04","physical_ability_identity.test.js","TC-ID-04: Cosmetic whitespace and formatting invariance","PASS",0.2179
+"TC-ID-05","physical_ability_identity.test.js","TC-ID-05: Reprint semantic equivalence across differing set codes and printings","PASS",0.3437
+"TC-COND-01","physical_ability_identity.test.js","TC-COND-01: Two different condition expressions with identical headers produce different descriptors and IDs","PASS",15.3775
+"TC-COND-02","physical_ability_identity.test.js","TC-COND-02: Equivalent condition expressions with harmless formatting differences produce identical identities","PASS",0.6181
+"TC-COND-03","physical_ability_identity.test.js","TC-COND-03: Condition blocks and ordinary executable abilities do not collide","PASS",6.2243
+"TC-COND-04","physical_ability_identity.test.js","TC-COND-04: Compiler integration via compileCard preserves distinct condition identities","PASS",42.6744
+"TC-INST-01","physical_ability_identity.test.js","TC-INST-01: Two identical abilities on one card receive distinct physical IDs and shared semantic ID","PASS",6.3122
+"TC-INST-02","physical_ability_identity.test.js","TC-INST-02: Two identical abilities on different cards receive distinct physical IDs and shared semantic ID","PASS",1.709
+"TC-INST-03","physical_ability_identity.test.js","TC-INST-03: The same card compiled in isolation and in a batch produces 100% identical IDs","PASS",32.4984
+"TC-INST-04","physical_ability_identity.test.js","TC-INST-04: Ability order changes where underlying abilities are distinct preserve individual IDs","PASS",0.9925
+"TC-INST-05","physical_ability_identity.test.js","TC-INST-05: Repeated compilation of the same card produces 100% identical IDs and benign registry matches","PASS",1.6858
+"TC-INST-06","physical_ability_identity.test.js","TC-INST-06: Incremental compilation after an unrelated card is added preserves existing IDs","PASS",177.5626
+"TC-RFC-01","unknown","TC-RFC-01: Nested object key ordering (strict UTF-16 code unit order)","PASS",0.3689
+"TC-RFC-02","unknown","TC-RFC-02: Arrays and nested arrays preserve order","PASS",0.172
+"TC-RFC-03","unknown","TC-RFC-03: Negative zero (-0) serialized as 0","PASS",0.5289
+"TC-RFC-04","unknown","TC-RFC-04: Floating-point serialization edge cases","PASS",0.1486
+"TC-RFC-05","unknown","TC-RFC-05: Non-finite numbers (NaN, Infinity, -Infinity) explicitly throw TypeError","PASS",1.2489
+"TC-RFC-06","unknown","TC-RFC-06: Undefined object properties explicitly throw TypeError (no silent omission)","PASS",0.2783
+"TC-RFC-07","unknown","TC-RFC-07: Undefined array elements explicitly throw TypeError (no silent conversion to null)","PASS",0.157
+"TC-RFC-08","unknown","TC-RFC-08: Functions and symbols explicitly throw TypeError","PASS",0.3188
+"TC-RFC-09","unknown","TC-RFC-09: BigInt explicitly throws TypeError","PASS",0.2174
+"TC-RFC-10","unknown","TC-RFC-10: Sparse arrays with unassigned holes explicitly throw TypeError","PASS",0.175
+"TC-RFC-11","unknown","TC-RFC-11: Lone high surrogates explicitly throw TypeError","PASS",0.2229
+"TC-RFC-12","unknown","TC-RFC-12: Lone low surrogates explicitly throw TypeError","PASS",0.1706
+"TC-RFC-13","unknown","TC-RFC-13: Valid supplementary Unicode characters (surrogate pairs) properly serialized","PASS",0.1794
+"TC-RFC-14","unknown","TC-RFC-14: Japanese characters and emoji preserved as literal UTF-8 in strings","PASS",0.1427
+"TC-RFC-15","unknown","TC-RFC-15: Known RFC 8785 canonicalization test vectors","PASS",0.1492
+"TC-PIPE-01","unknown","TC-PIPE-01: Standard ability compilation derives ID post-keyword binding","PASS",3.0746
+"TC-PIPE-02","unknown","TC-PIPE-02: Condition block compilation derives ID post-binding","PASS",1.4157
+"TC-PIPE-03","unknown","TC-PIPE-03: Overridden card compilation derives ID post-binding","PASS",0.6505
+"TC-PIPE-04","unknown","TC-PIPE-04: Keyword-bound ability compilation: bound keyword abilityId matches physicalId","PASS",0.7412
+"TC-PIPE-05","unknown","TC-PIPE-05: Compilation where keyword binding does not modify ability","PASS",0.5676
+"TC-PIPE-06","unknown","TC-PIPE-06: Repeated compilation of same source card through applicable paths","PASS",0.8494
+"TC-COMPAT-01","unknown","TC-COMPAT-01: Compiled abilities preserve legacyId, physicalId, semanticId, and id === physicalId","PASS",3.4548
+"TC-COMPAT-02","unknown","TC-COMPAT-02: Engine activation accepts both physicalId and legacyId","PASS",0.4374
+"TC-COMPAT-03","unknown","TC-COMPAT-03: Keyword bindings preserve abilityId matching physicalId with legacyAbilityId fallback","PASS",2.9419
+"TC-REG-01","physical_ability_identity_corrective.test.js","TC-REG-01: Repeated registration of the same descriptor returns status MATCH","PASS",0.2939
+"TC-REG-02","physical_ability_identity_corrective.test.js","TC-REG-02: Same physical ID with mismatched descriptor throws FatalCollisionError","PASS",0.3822
+"TC-REG-03","physical_ability_identity_corrective.test.js","TC-REG-03: Failed registration followed by valid registration keeps registry intact","PASS",0.2955
+"TC-REG-04","physical_ability_identity_corrective.test.js","TC-REG-04: Independent compilation sessions reset registry cleanly via clear()","PASS",0.1677
+"TC-REG-05","physical_ability_identity_corrective.test.js","TC-REG-05: Atomic snapshot and rollback upon exception during compilation","PASS",0.2496
+"TC-REG-06","physical_ability_identity_corrective.test.js","TC-REG-06: Duplicate ability instances register cleanly as separate entries without collision","PASS",0.303
+"TC-SEM-01","unknown","TC-SEM-01: Identical operation ASTs with different harmless wording produce identical semantic IDs","PASS",10.2547
+"TC-SEM-02","unknown","TC-SEM-02: Different operation parameters produce different semantic IDs","PASS",0.6892
+"TC-SEM-03","unknown","TC-SEM-03: Different targets produce different semantic IDs","PASS",0.5626
+"TC-SEM-04","unknown","TC-SEM-04: Different durations produce different semantic IDs","PASS",0.4238
+"TC-SEM-05","unknown","TC-SEM-05: Different costs produce different semantic IDs","PASS",4.2733
+"TC-SEM-06","unknown","TC-SEM-06: Different conditions produce different semantic IDs","PASS",0.7725
+"TC-SEM-07","unknown","TC-SEM-07: Different clause ordering produces different semantic IDs","PASS",0.6236
+"TC-SEM-08","unknown","TC-SEM-08: Unsupported text remains part of identity when no structured operation is available","PASS",0.4413
+"TC-SEM-09","unknown","TC-SEM-09: Partially compiled clauses preserve both structured representation and unparsed remainder","PASS",0.2849
+"TC-SEM-10","unknown","TC-SEM-10: Physical IDs remain distinct across different canonical card numbers even when semantic IDs match","PASS",6.0728
+"TC-RFCVAL-01","unknown","TC-RFCVAL-01: Symbol-keyed properties rejected explicitly","PASS",1.8471
+"TC-RFCVAL-02","unknown","TC-RFCVAL-02: Date objects rejected explicitly","PASS",0.6701
+"TC-RFCVAL-03","unknown","TC-RFCVAL-03: Map and Set rejected explicitly","PASS",0.4028
+"TC-RFCVAL-04","unknown","TC-RFCVAL-04: Typed arrays and ArrayBuffer rejected explicitly","PASS",0.3013
+"TC-RFCVAL-05","unknown","TC-RFCVAL-05: Class instances (non-plain objects) rejected explicitly","PASS",0.2739
+"TC-RFCVAL-06","unknown","TC-RFCVAL-06: Circular references in objects and arrays rejected explicitly","PASS",0.274
+"TC-RFCVAL-07","unknown","TC-RFCVAL-07: Nested unsupported values inside operation ASTs rejected by sanitizeAstNode","PASS",0.252
+"TC-RFCVAL-08","unknown","TC-RFCVAL-08: Nested unsupported values inside condition ASTs rejected by sanitizeAstNode","PASS",0.5105
+"TC-RFCVAL-09","unknown","TC-RFCVAL-09: Valid plain objects and arrays properly serialized","PASS",0.1488
+"TC-RFCVAL-10","unknown","TC-RFCVAL-10: Every vector loaded from RFC8785_TEST_VECTORS.json executed and verified","PASS",3.0374
+"TC-ACT-01","runtime_activation_limits.test.js","TC-ACT-01: Actual engine activateAbility() succeeds using new physical ID","PASS",61.1254
+"TC-ACT-02","runtime_activation_limits.test.js","TC-ACT-02: Actual engine activateAbility() succeeds using legacy ID (#a0)","PASS",13.0628
+"TC-ACT-03","runtime_activation_limits.test.js","TC-ACT-03: Actual engine activateAbility() returns ABILITY_NOT_FOUND on unknown ID","PASS",1.4969
+"TC-ACT-04","runtime_activation_limits.test.js","TC-ACT-04: Actual engine activateAbility() targets specific requested ability (#a1 vs #a0)","PASS",2.0809
+"TC-ACT-05","runtime_activation_limits.test.js","TC-ACT-05: Actual engine activateAbility() correctly dispatches when multiple abilities exist on same card","PASS",6.7959
+"TC-ACT-06","runtime_activation_limits.test.js","TC-ACT-06: Actual engine activateAbility() functions with real card compiled via compileCard","PASS",6.7046
+"TC-ACT-07","runtime_activation_limits.test.js","TC-ACT-07: Duplicate identical ability instances do not cause accidental activation of wrong instance","PASS",2.1371
+"TC-CONDNORM-01","physical_ability_identity.test.js","TC-CONDNORM-01: Harmless whitespace variation normalizes to identical descriptor","PASS",0.6837
+"TC-CONDNORM-02","physical_ability_identity.test.js","TC-CONDNORM-02: Meaningful punctuation variation is preserved and produces different descriptors","PASS",0.1486
+"TC-CONDNORM-03","physical_ability_identity.test.js","TC-CONDNORM-03: Different numeric thresholds produce different descriptors","PASS",0.0985
+"TC-CONDNORM-04","physical_ability_identity.test.js","TC-CONDNORM-04: Different comparison operators produce different descriptors","PASS",0.0949
+"TC-CONDNORM-05","physical_ability_identity.test.js","TC-CONDNORM-05: Different card-type requirements produce different descriptors","PASS",0.1087
+"TC-CONDNORM-06","physical_ability_identity.test.js","TC-CONDNORM-06: Different logical connectors produce different descriptors","PASS",0.1332
+"TC-CONDNORM-07","physical_ability_identity.test.js","TC-CONDNORM-07: Different condition types produce different conditionTypes and descriptors","PASS",0.1299
+"TC-CONDNORM-08","physical_ability_identity.test.js","TC-CONDNORM-08: Unsupported condition expressions preserved as normalized text fallback","PASS",0.2064
+"TC-CONDNORM-09","physical_ability_identity.test.js","TC-CONDNORM-09: Explicit labeling of condition descriptor as CONDITION_TEXT_FALLBACK","PASS",0.2354
+"TC-CONDNORM-10","physical_ability_identity.test.js","TC-CONDNORM-10: Actual compiled condition-block identity verified via compileCard()","PASS",3.3455
+"TC-ARR-01","unknown","TC-ARR-01: Array with a symbol-keyed property explicitly throws TypeError","PASS",6.3361
+"TC-ARR-02","unknown","TC-ARR-02: Array with a named metadata property explicitly throws TypeError","PASS",0.6889
+"TC-ARR-03","unknown","TC-ARR-03: Array with unexpected numeric-looking property explicitly throws TypeError","PASS",0.6131
+"TC-ARR-04","unknown","TC-ARR-04: Array with an accessor property (getter/setter) throws TypeError without invoking getter","PASS",0.5602
+"TC-ARR-05","unknown","TC-ARR-05: Array with a non-enumerable unexpected property explicitly throws TypeError","PASS",0.385
+"TC-ARR-06","unknown","TC-ARR-06: Valid dense arrays serialize and sanitize correctly","PASS",0.9259
+"TC-ARR-07","unknown","TC-ARR-07: Valid nested arrays preserve hierarchy and element order","PASS",0.2959
+"TC-ARR-08","unknown","TC-ARR-08: Sparse arrays with holes explicitly throw TypeError","PASS",0.3412
+"TC-ARR-09","unknown","TC-ARR-09: Arrays containing unsupported nested values explicitly throw TypeError","PASS",0.4204
+"TC-ARR-10","unknown","TC-ARR-10: Arrays with valid supplementary Unicode strings properly serialize and sanitize","PASS",0.3393
+"TC-ARR-11","unknown","TC-ARR-11: sanitizeAstNode rejects arrays with unexpected own properties in nested ASTs","PASS",0.3782
+"TC-SORT-01","unknown","TC-SORT-01: Mixed-case keyword names sort deterministically by UTF-16 code units","PASS",0.6542
+"TC-SORT-02","unknown","TC-SORT-02: Uppercase and lowercase combinations sort strictly by code unit order","PASS",5.4292
+"TC-SORT-03","unknown","TC-SORT-03: Punctuation in keyword names sorts deterministically","PASS",0.2742
+"TC-SORT-04","unknown","TC-SORT-04: Non-ASCII accented keyword names sort deterministically","PASS",0.2221
+"TC-SORT-05","unknown","TC-SORT-05: Japanese characters in keyword names sort deterministically","PASS",0.1815
+"TC-SORT-06","unknown","TC-SORT-06: Supplementary Unicode characters in keywords sort deterministically","PASS",0.1466
+"TC-SORT-07","unknown","TC-SORT-07: Keyword parameter ordering when keyword names are identical","PASS",0.2123
+"TC-SORT-08","unknown","TC-SORT-08: UTF-16 code-unit comparator verification across known ordering vectors","PASS",0.1412
+"TC-SORT-09","unknown","TC-SORT-09: Stable identities across repeated compilation regardless of initial keyword order","PASS",1.6985
+"TC-SORT-10","unknown","TC-SORT-10: Meaningful clause execution order is preserved (clauses are NOT sorted)","PASS",0.4702
+"TC-ACT-01","runtime_activation_limits.test.js","TC-ACT-01: First activation succeeds and consumes the physical ability limit","PASS",21.8241
+"TC-ACT-02","runtime_activation_limits.test.js","TC-ACT-02: Second activation of the same physical ability is rejected","PASS",2.0309
+"TC-ACT-03","runtime_activation_limits.test.js","TC-ACT-03: A second physical copy of the same card can independently activate its ordinary once-per-turn ability","PASS",6.7212
+"TC-ACT-04","runtime_activation_limits.test.js","TC-ACT-04: Two distinct abilities on the same physical card maintain separate counters","PASS",2.4992
+"TC-ACT-05","runtime_activation_limits.test.js","TC-ACT-05: A new physical placement receives the correct new restriction identity","PASS",1.4677
+"TC-ACT-06","runtime_activation_limits.test.js","TC-ACT-06: First qualifying Same Name activation succeeds","PASS",1.0723
+"TC-ACT-07","runtime_activation_limits.test.js","TC-ACT-07: Another physical copy with the same semantic ability is blocked for the same player","PASS",1.212
+"TC-ACT-08","runtime_activation_limits.test.js","TC-ACT-08: A different semantic ability on the same named card is not incorrectly blocked","PASS",1.1339
+"TC-ACT-09","runtime_activation_limits.test.js","TC-ACT-09: The opponent has an independent Same Name restriction scope","PASS",1.1827
+"TC-ACT-10","runtime_activation_limits.test.js","TC-ACT-10: Equivalent abilities with different physical placement IDs share the intended restriction","PASS",1.0717
+"TC-ACT-11","runtime_activation_limits.test.js","TC-ACT-11: Failed declaration before commitment does not consume a limit","PASS",0.6089
+"TC-ACT-12","runtime_activation_limits.test.js","TC-ACT-12: Unpayable cost before commitment does not consume a limit","PASS",3.9533
+"TC-ACT-13","runtime_activation_limits.test.js","TC-ACT-13: Cancelled target selection before commitment does not consume a limit","PASS",4.4647
+"TC-ACT-14","runtime_activation_limits.test.js","TC-ACT-14: Successful commitment consumes the limit exactly once","PASS",0.7276
+"TC-ACT-15","runtime_activation_limits.test.js","TC-ACT-15: Negation after commitment does not refund the limit","PASS",0.8038
+"TC-ACT-16","runtime_activation_limits.test.js","TC-ACT-16: Resolution failure after commitment does not refund the limit","PASS",0.6241
+"TC-ACT-17","runtime_activation_limits.test.js","TC-ACT-17: Duplicate commitment callback does not double-consume","PASS",0.7231
+"TC-ACT-18","runtime_activation_limits.test.js","TC-ACT-18: Declining an optional ability does not consume the limit","PASS",0.6484
+"TC-ACT-19","runtime_activation_limits.test.js","TC-ACT-19: Accepting an optional ability follows the normal commitment process","PASS",0.7474
+"TC-ACT-20","runtime_activation_limits.test.js","TC-ACT-20: FALSE prerequisite follows established skip behavior without consumption before commitment","PASS",2.5591
+"TC-ACT-21","runtime_activation_limits.test.js","TC-ACT-21: UNSUPPORTED prerequisite blocks safely and reports unsupported evaluation","PASS",1.3969
+"TC-ACT-22","runtime_activation_limits.test.js","TC-ACT-22: TURN restriction resets at the correct turn boundary","PASS",3.4654
+"TC-ACT-23","runtime_activation_limits.test.js","TC-ACT-23: STEP restriction resets only at its correct step boundary","PASS",0.9496
+"TC-ACT-24","runtime_activation_limits.test.js","TC-ACT-24: BATTLE restriction resets at battle end","PASS",1.9356
+"TC-ACT-25","runtime_activation_limits.test.js","TC-ACT-25: ATTACK restriction resets at attack end","PASS",0.9396
+"TC-ACT-26","runtime_activation_limits.test.js","TC-ACT-26: One player reset does not clear the opponent independent counters","PASS",0.6364
+"TC-ACT-27","runtime_activation_limits.test.js","TC-ACT-27: Duplicate lifecycle events do not create incorrect counter state","PASS",1.2432
+"TC-ACT-28","runtime_activation_limits.test.js","TC-ACT-28: JSON serialization and restoration preserve authoritative restriction state","PASS",0.9083
+"TC-ACT-29","runtime_activation_limits.test.js","TC-ACT-29: Restored state still blocks an already-used activation","PASS",0.8639
+"TC-ACT-30","runtime_activation_limits.test.js","TC-ACT-30: Legacy abilityUses mirror remains synchronized","PASS",0.5777
+"TC-ACT-31","runtime_activation_limits.test.js","TC-ACT-31: Legacy activation entry point enforces the same restriction","PASS",2.6683
+"TC-ACT-32","runtime_activation_limits.test.js","TC-ACT-32: Modern restriction state survives supported legacy conversion","PASS",0.7758
+"TC-ACT-33","runtime_activation_limits.test.js","TC-ACT-33: Missing or malformed identity is rejected safely","PASS",0.3984
+"TC-ACT-34","runtime_activation_limits.test.js","TC-ACT-34: Unknown restriction type is not treated as unrestricted","PASS",0.3167
+"TC-ACT-35","runtime_activation_limits.test.js","TC-ACT-35: Existing golden compiler and engine regression tests remain unchanged and pass","PASS",4.4988
+"TC-ACT-FIX-01","runtime_activation_limits.test.js","TC-ACT-FIX-01: Resolver halts immediately when commitActivation fails due to LIMIT_REACHED; operations are never executed","PASS",0.512
+"TC-ACT-FIX-02","runtime_activation_limits.test.js","TC-ACT-FIX-02: Multi-clause ability with commit failure in clause 1 does not execute clause 2 or subsequent clauses","PASS",0.4483
+"TC-ACT-FIX-03","runtime_activation_limits.test.js","TC-ACT-FIX-03: Resolver halts and returns INVALID_IDENTITY when ability lacks valid physicalId/semanticId","PASS",0.2385
+"TC-ACT-FIX-04","runtime_activation_limits.test.js","TC-ACT-FIX-04: Resolver halts and returns UNSUPPORTED_RESTRICTION when restriction type is unsupported","PASS",0.2873
+"TC-ACT-FIX-05","runtime_activation_limits.test.js","TC-ACT-FIX-05: Resolver halts and returns INVALID_RESTRICTION_STATE when restriction state is corrupted","PASS",0.3908
+"TC-ACT-FIX-06","runtime_activation_limits.test.js","TC-ACT-FIX-06: Real concurrent game.activateAbility calls with async barrier: only winning activation commits and pays costs","PASS",1.0693
+"TC-ACT-FIX-06B","runtime_activation_limits.test.js","TC-ACT-FIX-06B: Failed cost payment or prompt decline releases reservation and leaves zero costs paid","PASS",1.0247
+"TC-ACT-FIX-06C","runtime_activation_limits.test.js","TC-ACT-FIX-06C: Exception during ability resolution cleans up active reservation without leaks","PASS",1.305
+"TC-ACT-FIX-06D","runtime_activation_limits.test.js","TC-ACT-FIX-06D: Post-commit effect failure or negation does not refund costs or release committed limit","PASS",0.6667
+"TC-ACT-FIX-07","runtime_activation_limits.test.js","TC-ACT-FIX-07: Target prompt cancellation prior to commitment leaves limit intact and counter at 0","PASS",0.9981
+"TC-ACT-FIX-08","runtime_activation_limits.test.js","TC-ACT-FIX-08: Unavailable/invalid targets before commitment abort resolution without consuming limit","PASS",0.7048
+"TC-ACT-FIX-09","runtime_activation_limits.test.js","TC-ACT-FIX-09: Valid target selection triggers commitment exactly once before target operation effects execute","PASS",1.2813
+"TC-ACT-FIX-10","runtime_activation_limits.test.js","TC-ACT-FIX-10: Multi-target selection commits once upon valid candidate selection","PASS",1.0428
+"TC-ACT-FIX-11","runtime_activation_limits.test.js","TC-ACT-FIX-11: Post-commit negation (EFFECT_NEGATED) aborts effect execution but preserves consumed activation limit","PASS",0.5481
+"TC-ACT-FIX-12","runtime_activation_limits.test.js","TC-ACT-FIX-12: game.endAttack() clears ATTACK-scoped counters while BATTLE-scoped counters remain intact","PASS",0.2569
+"TC-ACT-FIX-13","runtime_activation_limits.test.js","TC-ACT-FIX-13: game.endBattle() clears BATTLE-scoped counters and THIS_BATTLE modifiers while ATTACK-scoped counters remain intact","PASS",0.2511
+"TC-ACT-FIX-14","runtime_activation_limits.test.js","TC-ACT-FIX-14: Unblocked attack (resolveDirectHit) concludes combat resetting both ATTACK and BATTLE counters while preserving TURN and GAME counters","PASS",0.4034
+"TC-ACT-FIX-15","runtime_activation_limits.test.js","TC-ACT-FIX-15: Ending battle does not reset turn-scoped or game-scoped restrictions","PASS",0.2225
+"TC-ACT-FIX-16","runtime_activation_limits.test.js","TC-ACT-FIX-16: Repeated or redundant endAttack/endBattle calls are idempotent and do not corrupt state","PASS",0.2219
+"TC-ACT-FIX-17","runtime_activation_limits.test.js","TC-ACT-FIX-17: Unknown string containing ""TURN"" (e.g. ""MY_TURN_SPECIAL"") is rejected as UNKNOWN/UNSUPPORTED_RESTRICTION","PASS",0.097
+"TC-ACT-FIX-18","runtime_activation_limits.test.js","TC-ACT-FIX-18: Unknown string containing ""GAME"" (e.g. ""GAME_OVER"") is rejected as UNKNOWN/UNSUPPORTED_RESTRICTION","PASS",0.0766
+"TC-ACT-FIX-19","runtime_activation_limits.test.js","TC-ACT-FIX-19: Canonical restriction mapping accepts explicit aliases correctly","PASS",0.087
+"TC-ACT-FIX-20","runtime_activation_limits.test.js","TC-ACT-FIX-20: Non-string or empty restriction types are rejected safely without throws","PASS",0.0766
+"TC-ACT-FIX-21","runtime_activation_limits.test.js","TC-ACT-FIX-21: Restriction with maxLimit <= 0 or non-integer is rejected as unsupported/invalid","PASS",0.1472
+"TC-ACT-FIX-22","runtime_activation_limits.test.js","TC-ACT-FIX-22: Valid canonical types map deterministically to TURN, GAME, BATTLE, ATTACK scopes","PASS",2.364
+"TC-ACT-FIX-23","runtime_activation_limits.test.js","TC-ACT-FIX-23: State validation rejects negative counter values","PASS",0.5675
+"TC-ACT-FIX-24","runtime_activation_limits.test.js","TC-ACT-FIX-24: State validation rejects non-integer / fractional counter values","PASS",0.1772
+"TC-ACT-FIX-25","runtime_activation_limits.test.js","TC-ACT-FIX-25: State validation rejects NaN or Infinity counter values","PASS",0.1317
+"TC-ACT-FIX-26","runtime_activation_limits.test.js","TC-ACT-FIX-26: State validation rejects malformed counters object (non-plain object, array, or null)","PASS",0.1147
+"TC-ACT-FIX-27","runtime_activation_limits.test.js","TC-ACT-FIX-27: evaluateRestriction and commitRestriction return INVALID_RESTRICTION_STATE without silently repairing state into unrestricted","PASS",0.1769
+"TC-ACT-FIX-28","runtime_activation_limits.test.js","TC-ACT-FIX-28: Valid serialized state survives round-trip validation and restoration","PASS",0.3156
+"TC-ACT-FIX-29","runtime_activation_limits.test.js","TC-ACT-FIX-29: Legacy turn:cardId:abilityId format is mirrored and synced into authoritative counters without data loss","PASS",0.1579
+"TC-ACT-FIX-30","runtime_activation_limits.test.js","TC-ACT-FIX-30: Legacy cardId_abilityId format is mirrored and synced into authoritative counters","PASS",0.1096
+"TC-ACT-FIX-31","runtime_activation_limits.test.js","TC-ACT-FIX-31: Ambiguous legacy keys are safely isolated in meta._ambiguousLegacy without overwriting authoritative counters","PASS",0.1492
+"TC-ACT-FIX-32","runtime_activation_limits.test.js","TC-ACT-FIX-32: Synchronized legacy state cannot bypass or decrement modern authoritative restriction limits","PASS",0.6143
+"TC-ACT-FIX-33","runtime_activation_limits.test.js","TC-ACT-FIX-33: State validation rejects arrays, class instances, and objects with non-plain prototypes","PASS",0.2485
+"TC-ACT-FIX-34","runtime_activation_limits.test.js","TC-ACT-FIX-34: State validation enforces explicit metadata schema and rejects unknown type or scope","PASS",0.1747
+"TC-ACT-FIX-35","runtime_activation_limits.test.js","TC-ACT-FIX-35: State validation rejects contradictory type and scope pairs","PASS",0.1262
+"TC-ACT-FIX-36","runtime_activation_limits.test.js","TC-ACT-FIX-36: State validation verifies reservations as finite non-negative integers","PASS",0.2243
+"TC-ACT-FIX-37","runtime_activation_limits.test.js","TC-ACT-FIX-37: undefined initializes default restriction state, while explicit null is rejected","PASS",0.294
+"TC-RES-LIFE-01","runtime_activation_limits.test.js","TC-RES-LIFE-01: Activation A reserves capacity, lifecycle reset occurs, and A handle becomes invalid","PASS",0.4236
+"TC-RES-LIFE-02","runtime_activation_limits.test.js","TC-RES-LIFE-02: After A is invalidated, activation B reserves the same key. Releasing A must not decrement B reservation (real engine)","PASS",0.8502
+"TC-RES-LIFE-03","runtime_activation_limits.test.js","TC-RES-LIFE-03: After A is invalidated, calling commit() on A must fail without changing counters or reservations","PASS",0.3033
+"TC-RES-LIFE-04","runtime_activation_limits.test.js","TC-RES-LIFE-04: Repeated release() calls on an invalidated handle do not mutate current reservation state","PASS",0.3293
+"TC-RES-LIFE-05","runtime_activation_limits.test.js","TC-RES-LIFE-05: A stale handle from an earlier lifecycle cannot affect a new lifecycle using the same restriction key (real engine)","PASS",0.7201
+"TC-RES-LIFE-06","runtime_activation_limits.test.js","TC-RES-LIFE-06: An ATTACK reset does not invalidate a BATTLE reservation","PASS",0.2442
+"TC-RES-LIFE-07","runtime_activation_limits.test.js","TC-RES-LIFE-07: A BATTLE reset does not invalidate a TURN reservation","PASS",0.3273
+"TC-RES-LIFE-08","runtime_activation_limits.test.js","TC-RES-LIFE-08: A TURN reset invalidates only appropriate TURN reservations and preserves GAME reservations","PASS",0.7734
+"TC-RES-LIFE-09","runtime_activation_limits.test.js","TC-RES-LIFE-09: Competing game.activateAbility requests remain safe when lifecycle transition occurs while paused at prompt (real engine)","PASS",1.7747
+"TC-RES-LIFE-10","runtime_activation_limits.test.js","TC-RES-LIFE-10: No reservation leaks remain after all activations and lifecycle transitions complete","PASS",0.7771
+"TC-META-01","unknown","TC-META-01: Empty ordinary metadata record is rejected","PASS",0.239
+"TC-META-02","unknown","TC-META-02: Missing metadata type is rejected","PASS",0.2541
+"TC-META-03","unknown","TC-META-03: Missing metadata scope is rejected","PASS",0.1436
+"TC-META-04","unknown","TC-META-04: Missing metadata limit is rejected","PASS",0.1518
+"TC-META-05","unknown","TC-META-05: Unknown metadata type is rejected","PASS",0.1081
+"TC-META-06","unknown","TC-META-06: Unknown metadata scope is rejected","PASS",0.1139
+"TC-META-07","unknown","TC-META-07: Contradictory type/scope pair is rejected","PASS",0.11
+"TC-META-08","unknown","TC-META-08: Invalid restriction key is rejected","PASS",0.1384
+"TC-META-09","unknown","TC-META-09: Malformed reservation record is rejected","PASS",0.1429
+"TC-META-10","unknown","TC-META-10: Reservation ID mismatch is rejected","PASS",0.16
+"TC-META-11","unknown","TC-META-11: Reservation counter inconsistent with active reservation records is rejected","PASS",0.1751
+"TC-META-12","unknown","TC-META-12: Active reservation referencing missing or contradictory restriction metadata is rejected","PASS",0.164
+"TC-META-13","unknown","TC-META-13: Duplicate reservation IDs are rejected","PASS",0.1193
+"TC-META-14","unknown","TC-META-14: Invalid lifecycle generation is rejected","PASS",1.6424
+"TC-META-15","unknown","TC-META-15: Valid _ambiguousLegacy metadata remains accepted according to its documented schema","PASS",0.5898
+"TC-META-16","unknown","TC-META-16: Valid reservation state survives JSON serialization and restoration","PASS",0.4305
+"TC-META-17","unknown","TC-META-17: Validation rejects malformed state without mutating it","PASS",0.1615
+"TC-META-18","unknown","TC-META-18: Existing valid legacy-compatible state remains accepted","PASS",0.2973
+"TC-META-19","unknown","TC-META-19: Positive reservation counter with no _reservations namespace is rejected","PASS",0.1421
+"TC-META-20","unknown","TC-META-20: Empty _reservations namespace with positive reservation counter is rejected","PASS",0.1056
+"TC-META-21","unknown","TC-META-21: Active reservation record with missing reservation counter is rejected","PASS",0.1816
+"TC-META-22","unknown","TC-META-22: Empty reservation dictionaries with no active reservations remain valid","PASS",0.3668
+"TC-META-23","unknown","TC-META-23: Multiple active reservation records for one key must exactly match the counter","PASS",0.1344
+"TC-META-24","unknown","TC-META-24: Reservation generation equal to current scope generation is accepted","PASS",0.0763
+"TC-META-25","unknown","TC-META-25: Reservation with stale generation is rejected","PASS",0.0773
+"TC-META-26","unknown","TC-META-26: Reservation with future generation is rejected","PASS",0.0789
+"TC-META-27","unknown","TC-META-27: Missing scope generation follows the documented initialization policy (defaults to 1)","PASS",0.0835
+"TC-META-28","unknown","TC-META-28: JSON-restored stale reservation cannot block or authorize a new activation","PASS",0.4263
+"TC-META-29","unknown","TC-META-29: Missing reservation status is rejected","PASS",0.1029
+"TC-META-30","unknown","TC-META-30: Explicit ACTIVE status is accepted","PASS",0.0712
+"TC-META-31","unknown","TC-META-31: Unknown or finalized status in active reservation namespace is rejected","PASS",0.1588
+"TC-META-32","unknown","TC-META-32: Unknown _generations metadata namespace is rejected","PASS",0.0649
+"TC-RES-LIFE-11","runtime_activation_limits.test.js","TC-RES-LIFE-11: Exported releaseReservation releases a current valid reservation","PASS",0.341
+"TC-RES-LIFE-12","runtime_activation_limits.test.js","TC-RES-LIFE-12: Exported releaseReservation rejects a stale reservation","PASS",0.1917
+"TC-RES-LIFE-13","runtime_activation_limits.test.js","TC-RES-LIFE-13: Releasing an old reservation cannot decrement a newer reservation on the same key","PASS",0.1377
+"TC-RES-LIFE-14","runtime_activation_limits.test.js","TC-RES-LIFE-14: Repeated exported release is idempotent","PASS",0.2497
+"TC-RES-LIFE-15","runtime_activation_limits.test.js","TC-RES-LIFE-15: Exported release preserves unrelated reservations and lifecycle scopes","PASS",0.1204
+"TC-RES-FINAL-01","runtime_activation_limits.test.js","TC-RES-FINAL-01: Release succeeds for valid reservation and decrements counter exactly once","PASS",0.2112
+"TC-RES-FINAL-02","runtime_activation_limits.test.js","TC-RES-FINAL-02: Release rejects missing counter without deleting record (meta._reservations[resId] remains)","PASS",0.1903
+"TC-RES-FINAL-03","runtime_activation_limits.test.js","TC-RES-FINAL-03: Release rejects zero counter without mutating record or counter","PASS",0.1682
+"TC-RES-FINAL-04","runtime_activation_limits.test.js","TC-RES-FINAL-04: Release rejects counter/active-record count mismatch without mutating state","PASS",0.1715
+"TC-RES-FINAL-05","runtime_activation_limits.test.js","TC-RES-FINAL-05: Commit rejects missing counter without consuming usage limit (real production path: game.activateAbility())","PASS",0.5889
+"TC-RES-FINAL-06","runtime_activation_limits.test.js","TC-RES-FINAL-06: Commit rejects zero counter without consuming usage limit","PASS",0.261
+"TC-RES-FINAL-07","runtime_activation_limits.test.js","TC-RES-FINAL-07: Commit rejects counter/active-record count mismatch without consuming usage limit (real production path)","PASS",0.3978
+"TC-RES-FINAL-08","runtime_activation_limits.test.js","TC-RES-FINAL-08: Valid commit converts exactly one active reservation into one committed usage","PASS",0.3127
+"TC-RES-FINAL-09","runtime_activation_limits.test.js","TC-RES-FINAL-09: Failed finalization preserves unrelated reservations","PASS",0.3682
+"TC-RES-FINAL-10","runtime_activation_limits.test.js","TC-RES-FINAL-10: Repeated release or commit cannot double-finalize reservation","PASS",0.3979
+"TC-RES-FINAL-11","runtime_activation_limits.test.js","TC-RES-FINAL-11: Stale reservation handles remain unable to mutate newer lifecycle reservations","PASS",0.3758
+"TC-RES-FINAL-12","runtime_activation_limits.test.js","TC-RES-FINAL-12: Actual game.activateAbility() works correctly under valid concurrent activation (real engine)","PASS",0.7555
+"TC-RES-COMMIT-COUNTER-01","runtime_activation_limits.test.js","TC-RES-COMMIT-COUNTER-01: Missing committed counter is treated as zero and valid commit succeeds","PASS",0.2164
+"TC-RES-COMMIT-COUNTER-02","runtime_activation_limits.test.js","TC-RES-COMMIT-COUNTER-02: Negative committed counter is rejected with zero mutation","PASS",0.2876
+"TC-RES-COMMIT-COUNTER-03","runtime_activation_limits.test.js","TC-RES-COMMIT-COUNTER-03: Fractional committed counter is rejected with zero mutation","PASS",0.2288
+"TC-RES-COMMIT-COUNTER-04","runtime_activation_limits.test.js","TC-RES-COMMIT-COUNTER-04: NaN and Infinity are rejected with zero mutation","PASS",0.3288
+"TC-RES-COMMIT-COUNTER-05","runtime_activation_limits.test.js","TC-RES-COMMIT-COUNTER-05: String and null committed counters are rejected with zero mutation","PASS",0.3594
+"TC-RES-COMMIT-COUNTER-06","runtime_activation_limits.test.js","TC-RES-COMMIT-COUNTER-06: Malformed counters container is rejected with zero mutation","PASS",0.3571
+"TC-RES-COMMIT-COUNTER-07","runtime_activation_limits.test.js","TC-RES-COMMIT-COUNTER-07: Valid positive committed counter increments exactly once","PASS",0.2817
+"TC-RES-COMMIT-COUNTER-08","runtime_activation_limits.test.js","TC-RES-COMMIT-COUNTER-08: Real game.activateAbility() path rejects corrupted committed-counter state without consuming the reservation or paying costs","PASS",0.7741
+"TC-RES-CONTEXT-01","runtime_activation_limits.test.js","TC-RES-CONTEXT-01: Valid plain context with no _committedKeys commits successfully and creates a Set","PASS",0.2307
+"TC-RES-CONTEXT-02","runtime_activation_limits.test.js","TC-RES-CONTEXT-02: Existing valid Set is updated exactly once","PASS",0.2136
+"TC-RES-CONTEXT-03","runtime_activation_limits.test.js","TC-RES-CONTEXT-03: Plain object _committedKeys is rejected with zero state mutation","PASS",0.3426
+"TC-RES-CONTEXT-04","runtime_activation_limits.test.js","TC-RES-CONTEXT-04: Array _committedKeys is rejected with zero state mutation","PASS",0.2487
+"TC-RES-CONTEXT-05","runtime_activation_limits.test.js","TC-RES-CONTEXT-05: Set-like object with has() but no genuine Set implementation is rejected with zero state mutation","PASS",0.244
+"TC-RES-CONTEXT-06","runtime_activation_limits.test.js","TC-RES-CONTEXT-06: Frozen context is rejected safely with zero state mutation","PASS",0.251
+"TC-RES-CONTEXT-07","runtime_activation_limits.test.js","TC-RES-CONTEXT-07: Non-writable isCommitted is rejected with zero state mutation","PASS",1.811
+"TC-RES-CONTEXT-08","runtime_activation_limits.test.js","TC-RES-CONTEXT-08: Null context follows the documented supported behavior","PASS",1.049
+"TC-RES-CONTEXT-09","runtime_activation_limits.test.js","TC-RES-CONTEXT-09: Duplicate commit remains rejected without changing counters or reservation state","PASS",0.9768
+"TC-RES-CONTEXT-FINAL-01","runtime_activation_limits.test.js","TC-RES-CONTEXT-FINAL-01: Genuine Set with an overridden throwing add() is rejected before mutation","PASS",0.5673
+"TC-RES-CONTEXT-FINAL-02","runtime_activation_limits.test.js","TC-RES-CONTEXT-FINAL-02: Genuine Set with an overridden throwing has() is rejected before mutation","PASS",0.9701
+"TC-RES-CONTEXT-FINAL-03","runtime_activation_limits.test.js","TC-RES-CONTEXT-FINAL-03: Accessor setter for isCommitted is rejected before mutation","PASS",0.7097
+"TC-RES-CONTEXT-FINAL-04","runtime_activation_limits.test.js","TC-RES-CONTEXT-FINAL-04: Throwing getter for _committedKeys is rejected without invoking it","PASS",0.5464
+"TC-RES-CONTEXT-FINAL-05","runtime_activation_limits.test.js","TC-RES-CONTEXT-FINAL-05: Throwing getter for sourceCard is rejected before mutation","PASS",0.5833
+"TC-RES-CONTEXT-FINAL-06","runtime_activation_limits.test.js","TC-RES-CONTEXT-FINAL-06: Throwing getter for sourceStack is rejected before mutation","PASS",0.6958
+"TC-RES-CONTEXT-FINAL-07","runtime_activation_limits.test.js","TC-RES-CONTEXT-FINAL-07: Valid ordinary context with no Set still commits successfully","PASS",0.4387
+"TC-RES-CONTEXT-FINAL-08","runtime_activation_limits.test.js","TC-RES-CONTEXT-FINAL-08: Valid context with a normal Set commits exactly once","PASS",0.3379
+"TC-RES-CONTEXT-FINAL-09","runtime_activation_limits.test.js","TC-RES-CONTEXT-FINAL-09: Invalid context leaves reservation records, reservation counters, committed counters, metadata, and abilityUses unchanged","PASS",0.7821
+"TC-RES-CONTEXT-FINAL-10","runtime_activation_limits.test.js","TC-RES-CONTEXT-FINAL-10: Actual game.activateAbility() integration path remains correct for valid and invalid contexts","PASS",1.1275
+"TC-RES-PROXY-ORDER-01","runtime_activation_limits.test.js","TC-RES-PROXY-ORDER-01: Context Proxy with a throwing getPrototypeOf trap is rejected without throwing","PASS",0.4344
+"TC-RES-PROXY-ORDER-02","runtime_activation_limits.test.js","TC-RES-PROXY-ORDER-02: Context Proxy with a side-effecting getPrototypeOf trap is rejected without invoking the trap","PASS",0.3326
+"TC-RES-PROXY-ORDER-03","runtime_activation_limits.test.js","TC-RES-PROXY-ORDER-03: Context Proxy rejection leaves reservation records, reservation counters, committed counters, metadata, and abilityUses unchanged","PASS",0.4142
+"TC-RES-PROXY-ORDER-04","runtime_activation_limits.test.js","TC-RES-PROXY-ORDER-04: Direct isAssignableContextProperty() call with a Proxy rejects it without invoking Proxy traps","PASS",0.2064
+"TC-RES-PROXY-ORDER-05","runtime_activation_limits.test.js","TC-RES-PROXY-ORDER-05: Ordinary valid plain-object contexts still commit successfully","PASS",0.9724

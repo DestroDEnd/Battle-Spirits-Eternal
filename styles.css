@@ -2320,6 +2320,108 @@ body {
 .modal-info { display: flex; flex-direction: column; gap: 1rem; }
 .modal-title { font-size: 1.5rem; font-weight: 900; line-height: 1.25; color: #fff; }
 .modal-jpname { font-size: 0.88rem; color: var(--muted); }
+
+/* ══════════════════════════════════════════════════════════
+   REBIRTH / REBORN FORM BANNER & TAG (Wiki-styled)
+   ══════════════════════════════════════════════════════════ */
+.modal-rebirth-tag {
+  display: block;
+  background: rgba(30, 41, 59, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 8px;
+  padding: 0.65rem 1rem;
+  margin: 0.25rem 0 0.4rem 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
+}
+
+.modal-rebirth-tag:hover {
+  background: rgba(30, 41, 59, 0.88);
+  border-color: rgba(56, 189, 248, 0.5);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 14px rgba(56, 189, 248, 0.15);
+}
+
+.rebirth-tag-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  text-align: center;
+  font-size: 0.93rem;
+  line-height: 1.45;
+  color: #e2e8f0;
+}
+
+.rebirth-tag-icon {
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(56, 189, 248, 0.16);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #38bdf8;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.modal-rebirth-tag:hover .rebirth-tag-icon {
+  transform: rotate(180deg);
+}
+
+.rebirth-tag-text {
+  flex: 1;
+}
+
+.rebirth-type-pill {
+  color: #38bdf8;
+  font-weight: 700;
+  border-bottom: 1px dotted rgba(56, 189, 248, 0.6);
+  padding: 0 2px;
+}
+
+.rebirth-reborn-pill {
+  color: #38bdf8;
+  font-weight: 700;
+  padding: 0 2px;
+}
+
+.rebirth-target-link {
+  color: #38bdf8;
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+
+.rebirth-target-link:hover {
+  color: #7dd3fc;
+  background: rgba(56, 189, 248, 0.18);
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.7);
+  text-decoration-color: #7dd3fc;
+}
+
+.btn-modal-rebirth {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(14, 165, 233, 0.25));
+  border-color: rgba(56, 189, 248, 0.45);
+  color: #38bdf8;
+  font-weight: 700;
+}
+
+.btn-modal-rebirth:hover {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(14, 165, 233, 0.4));
+  border-color: #38bdf8;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
+}
+
 .badges { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 
 .badge {
@@ -10011,31 +10113,82 @@ body {
 /* ── BURST CENTER TURN SLOT (Between Opponent & Player Burst Zones) ── */
 .battle-center-hub {
   display: flex !important;
-  gap: 0.85rem !important;
-  align-items: stretch !important;
+  gap: 0.6rem !important;
+  align-items: center !important;
   width: 100% !important;
-  margin: 0.65rem 0 !important;
+  margin: 0.25rem 0 !important;
+  height: 32px !important;
+  min-height: 32px !important;
+  max-height: 32px !important;
+  box-sizing: border-box !important;
 }
 
 .battle-void-zone {
-  flex: 0 0 210px;
-  width: 210px;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  height: 30px !important;
+  min-height: 30px !important;
+  max-height: 30px !important;
+  padding: 0.18rem 0.55rem !important;
+  border-radius: 0.45rem !important;
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 0.45rem !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
 }
 
 .battle-nexus-zone {
-  flex: 0 0 220px;
-  width: 220px;
-  min-height: 84px;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  height: 30px !important;
+  min-height: 0 !important;
+  max-height: 30px !important;
+  overflow: hidden !important;
   background: linear-gradient(135deg, rgba(30, 41, 59, 0.75), rgba(15, 23, 42, 0.95));
   border: 1px solid rgba(56, 189, 248, 0.35);
-  border-radius: 0.75rem;
-  padding: 0.5rem 0.75rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  border-radius: 0.45rem !important;
+  padding: 0.18rem 0.55rem !important;
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.45rem !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   user-select: none;
+}
+.battle-nexus-zone .bnz-content,
+.battle-nexus-zone #battleNexusZoneContent,
+#battleNexusZoneContent {
+  display: none !important;
+}
+.battle-nexus-zone .bnz-top {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.25rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.battle-nexus-zone .bnz-icon {
+  font-size: 0.8rem !important;
+}
+.battle-nexus-zone .bnz-title {
+  font-size: 0.65rem !important;
+  font-weight: 800 !important;
+  color: #38bdf8 !important;
+  letter-spacing: 0.05em !important;
+}
+.battle-nexus-zone .bnz-count-badge {
+  font-size: 0.62rem !important;
+  font-weight: 700 !important;
+  padding: 1px 5px !important;
+  border-radius: 4px !important;
+  background: rgba(56, 189, 248, 0.2) !important;
+  color: #bae6fd !important;
 }
 .battle-nexus-zone:hover {
   border-color: rgba(56, 189, 248, 0.75);
@@ -12466,4 +12619,812 @@ body {
   .deck-sheet-actions {
     display: none !important;
   }
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   SINGLE-FRAME ARENA MODE (ZERO-SCROLL VIEWPORT-FITTED DUEL)
+   ══════════════════════════════════════════════════════════════ */
+body.arena-in-duel {
+  overflow: hidden !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
+}
+
+body.arena-in-duel .app-header {
+  height: 42px !important;
+  min-height: 42px !important;
+  max-height: 42px !important;
+  padding: 0 0.85rem !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  position: relative !important;
+  z-index: 100 !important;
+}
+
+body.arena-in-duel .brand-icon {
+  font-size: 1.1rem !important;
+}
+
+body.arena-in-duel .brand-title {
+  font-size: 0.95rem !important;
+}
+
+body.arena-in-duel .nav-tabs {
+  gap: 0.35rem !important;
+}
+
+body.arena-in-duel .nav-tabs .tab-btn {
+  padding: 0.25rem 0.65rem !important;
+  font-size: 0.76rem !important;
+}
+
+body.arena-in-duel main.main {
+  padding: 0.3rem 0.65rem 0.3rem 0.65rem !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  height: calc(100vh - 42px) !important;
+  max-height: calc(100vh - 42px) !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+}
+
+body.arena-in-duel .battle-arena-section {
+  height: 100% !important;
+  max-height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Hide pre-match lobbies & banners during duel */
+body.arena-in-duel .arena-header,
+body.arena-in-duel .arena-mode-switch,
+body.arena-in-duel .online-pvp-lobby,
+body.arena-in-duel #battleLobby {
+  display: none !important;
+}
+
+/* Duel Table fills the entire single frame */
+body.arena-in-duel #battleDuelTable {
+  height: 100% !important;
+  max-height: 100% !important;
+  flex: 1 1 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  padding: 0.2rem 0.4rem !important;
+  box-sizing: border-box !important;
+}
+
+/* Main 2-column duel grid */
+body.arena-in-duel .duel-layout-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 280px !important;
+  gap: 0.65rem !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  overflow: hidden !important;
+  align-items: stretch !important;
+}
+
+@media (max-width: 1200px) {
+  body.arena-in-duel .duel-layout-grid {
+    grid-template-columns: 1fr 250px !important;
+    gap: 0.45rem !important;
+  }
+}
+
+/* Main Battlefield Column */
+body.arena-in-duel .duel-battlefield-main {
+  height: 100% !important;
+  max-height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  gap: 0.2rem !important;
+  overflow: hidden !important;
+}
+
+/* Duelist Zone HUDs (Opponent & Player) */
+body.arena-in-duel .duelist-zone-hud {
+  padding: 0.2rem 0.55rem !important;
+  min-height: 32px !important;
+  max-height: 34px !important;
+  margin-bottom: 0 !important;
+  border-radius: 0.5rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  background: rgba(15, 23, 42, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-sizing: border-box !important;
+}
+
+body.arena-in-duel .duelist-info-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.45rem !important;
+}
+
+body.arena-in-duel .duelist-name {
+  font-size: 0.8rem !important;
+  font-weight: 800 !important;
+  white-space: nowrap !important;
+}
+
+body.arena-in-duel .life-container {
+  display: flex !important;
+  gap: 0.2rem !important;
+  align-items: center !important;
+}
+
+body.arena-in-duel .life-gem-wrap svg {
+  width: 20px !important;
+  height: 23px !important;
+}
+
+body.arena-in-duel .duelist-cores-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.3rem !important;
+  flex-wrap: nowrap !important;
+}
+
+body.arena-in-duel .core-counter-pill {
+  padding: 0.15rem 0.45rem !important;
+  font-size: 0.72rem !important;
+  height: 22px !important;
+  border-radius: 0.35rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.25rem !important;
+  white-space: nowrap !important;
+}
+
+body.arena-in-duel .core-counter-pill svg {
+  width: 12px !important;
+  height: 14px !important;
+}
+
+body.arena-in-duel .soul-core-pill {
+  padding: 0.15rem 0.5rem !important;
+  font-size: 0.72rem !important;
+  height: 22px !important;
+  border-radius: 0.35rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.25rem !important;
+  white-space: nowrap !important;
+}
+
+body.arena-in-duel .soul-core-pill svg {
+  width: 13px !important;
+  height: 15px !important;
+}
+
+body.arena-in-duel .burst-slot-pill {
+  padding: 0.15rem 0.45rem !important;
+  font-size: 0.7rem !important;
+  height: 22px !important;
+  white-space: nowrap !important;
+}
+
+/* Battlefield Rows (Battle Lines + Burst Zones) - Decluttered & Balanced */
+body.arena-in-duel .battlefield-row {
+  flex: 1 1 0 !important;
+  min-height: 105px !important;
+  max-height: 145px !important;
+  margin-bottom: 0 !important;
+  display: flex !important;
+  gap: 0.45rem !important;
+  align-items: stretch !important;
+  box-sizing: border-box !important;
+}
+
+body.arena-in-duel .battlefield-row .field-zone {
+  flex: 1 1 0 !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  padding: 0.2rem 0.5rem !important;
+  margin-bottom: 0 !important;
+  border-radius: 0.55rem !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.65rem !important;
+  background: rgba(0, 0, 0, 0.25) !important;
+  box-sizing: border-box !important;
+}
+
+/* Field Spirit Card: Clean, modern digital TCG layout */
+body.arena-in-duel .field-spirit-card {
+  width: 102px !important;
+  height: calc(100% - 6px) !important;
+  max-height: 136px !important;
+  min-height: 96px !important;
+  padding: 0.24rem !important;
+  border-radius: 0.5rem !important;
+  font-size: 0.65rem !important;
+  flex-shrink: 0 !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  position: relative !important;
+}
+
+/* Hide drag handles and declutter zoom buttons */
+body.arena-in-duel .fsc-drag-handle {
+  display: none !important;
+}
+
+body.arena-in-duel .fsc-zoom-btn {
+  opacity: 0 !important;
+  width: 16px !important;
+  height: 16px !important;
+  font-size: 0.65rem !important;
+  top: 3px !important;
+  right: 3px !important;
+  transition: opacity 0.15s ease !important;
+  background: rgba(15, 23, 42, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 3px !important;
+  z-index: 8 !important;
+}
+
+body.arena-in-duel .field-spirit-card:hover .fsc-zoom-btn {
+  opacity: 1 !important;
+}
+
+/* Header row: LV & BP */
+body.arena-in-duel .fsc-header-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100% !important;
+  padding: 0 1px !important;
+  margin-bottom: 2px !important;
+  height: 15px !important;
+}
+
+body.arena-in-duel .fsc-level-tag {
+  font-size: 0.6rem !important;
+  font-weight: 800 !important;
+  padding: 1px 4px !important;
+  border-radius: 3px !important;
+  line-height: 1 !important;
+}
+
+body.arena-in-duel .fsc-bp-tag {
+  font-size: 0.62rem !important;
+  font-weight: 800 !important;
+  padding: 1px 4px !important;
+  border-radius: 3px !important;
+  line-height: 1 !important;
+}
+
+/* Core Stepper: compact and crisp */
+body.arena-in-duel .fsc-core-stepper {
+  height: 18px !important;
+  min-height: 18px !important;
+  padding: 1px 3px !important;
+  margin: 0 0 2px 0 !important;
+  border-radius: 4px !important;
+  gap: 2px !important;
+  box-sizing: border-box !important;
+}
+
+body.arena-in-duel .fsc-step-btn {
+  width: 16px !important;
+  height: 16px !important;
+  font-size: 0.75rem !important;
+  border-radius: 3px !important;
+}
+
+body.arena-in-duel .fsc-cores-display {
+  font-size: 0.62rem !important;
+  line-height: 1 !important;
+}
+
+body.arena-in-duel .fsc-hex-group {
+  gap: 2px !important;
+  align-items: center !important;
+}
+
+body.arena-in-duel .fsc-core-num {
+  font-size: 0.65rem !important;
+  font-weight: 800 !important;
+}
+
+body.arena-in-duel .fsc-sc-tag {
+  font-size: 0.55rem !important;
+  font-weight: 800 !important;
+}
+
+/* Card Artwork: enlarged & prominent */
+body.arena-in-duel .fsc-img-wrap {
+  height: 52px !important;
+  width: 100% !important;
+  border-radius: 3px !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+}
+
+body.arena-in-duel .fsc-img-wrap img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* Card Name */
+body.arena-in-duel .fsc-name {
+  font-size: 0.58rem !important;
+  font-weight: 700 !important;
+  line-height: 1.1 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  text-align: center !important;
+  margin: 2px 0 1px 0 !important;
+  color: #e2e8f0 !important;
+}
+
+/* Status Pill */
+body.arena-in-duel .fsc-status-pill {
+  font-size: 0.52rem !important;
+  font-weight: 800 !important;
+  padding: 1px 4px !important;
+  height: 13px !important;
+  line-height: 11px !important;
+  border-radius: 3px !important;
+  letter-spacing: 0.02em !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+  display: inline-block !important;
+}
+
+/* Soul Core Action Button: sleek, non-intrusive */
+body.arena-in-duel .fsc-sc-btn {
+  height: 17px !important;
+  font-size: 0.56rem !important;
+  font-weight: 700 !important;
+  padding: 1px 4px !important;
+  margin: 2px 0 0 0 !important;
+  border-radius: 3px !important;
+  width: 100% !important;
+  line-height: 1 !important;
+  letter-spacing: 0.02em !important;
+}
+
+body.arena-in-duel .fsc-sc-btn.place {
+  background: rgba(245, 158, 11, 0.15) !important;
+  border: 1px solid rgba(245, 158, 11, 0.35) !important;
+  color: #fde047 !important;
+  box-shadow: none !important;
+}
+
+body.arena-in-duel .fsc-sc-btn.place:hover {
+  background: rgba(245, 158, 11, 0.35) !important;
+  border-color: #fbbf24 !important;
+  color: #fff !important;
+}
+
+body.arena-in-duel .fsc-sc-btn.remove {
+  background: rgba(239, 68, 68, 0.15) !important;
+  border: 1px solid rgba(239, 68, 68, 0.35) !important;
+  color: #fca5a5 !important;
+  box-shadow: none !important;
+}
+
+body.arena-in-duel .fsc-sc-btn.remove:hover {
+  background: rgba(239, 68, 68, 0.35) !important;
+  border-color: #f87171 !important;
+  color: #fff !important;
+}
+
+/* Soul Core Badge on Card Header */
+body.arena-in-duel .spirit-soul-core-badge {
+  top: -7px !important;
+  font-size: 0.52rem !important;
+  font-weight: 800 !important;
+  padding: 0.1rem 0.4rem !important;
+  border-radius: 9999px !important;
+  gap: 2px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.7) !important;
+}
+
+body.arena-in-duel .spirit-soul-core-badge svg {
+  width: 10px !important;
+  height: 11px !important;
+}
+
+/* Redundant HUD Pills suppressed in Single-Frame Arena */
+body.arena-in-duel .duelist-cores-right .void-counter-pill,
+body.arena-in-duel .duelist-cores-right .burst-slot-pill {
+  display: none !important;
+}
+
+/* Compact HUD soul-core-pill */
+body.arena-in-duel .soul-core-pill {
+  max-width: 130px !important;
+  padding: 0.12rem 0.4rem !important;
+  font-size: 0.68rem !important;
+  height: 22px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Burst Field Zone (next to battle lines) */
+body.arena-in-duel .burst-field-zone {
+  flex: 0 0 80px !important;
+  width: 80px !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  padding: 0.2rem !important;
+  border-radius: 0.55rem !important;
+  box-sizing: border-box !important;
+}
+
+body.arena-in-duel .burst-field-zone .bfz-lock {
+  font-size: 1.1rem !important;
+}
+
+body.arena-in-duel .burst-field-zone .bfz-title {
+  font-size: 0.62rem !important;
+}
+
+body.arena-in-duel .burst-field-zone .bfz-desc {
+  display: none !important;
+}
+
+/* Center Hub (The Void, Nexus Field, Clash & Turn Indicator) */
+body.arena-in-duel .battle-center-hub {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 0.45rem !important;
+  margin: 0 !important;
+  padding: 0.1rem 0.2rem !important;
+  min-height: 34px !important;
+  max-height: 36px !important;
+  box-sizing: border-box !important;
+}
+
+body.arena-in-duel .battle-void-zone {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  height: 30px !important;
+  min-height: 0 !important;
+  max-height: 30px !important;
+  padding: 0.18rem 0.55rem !important;
+  border-radius: 0.45rem !important;
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 0.45rem !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+}
+
+body.arena-in-duel .bvz-top {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.25rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.arena-in-duel .bvz-icon {
+  font-size: 0.8rem !important;
+}
+
+body.arena-in-duel .bvz-title {
+  font-size: 0.65rem !important;
+  font-weight: 800 !important;
+}
+
+body.arena-in-duel .bvz-cores {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 1px !important;
+}
+
+body.arena-in-duel .bvz-cores svg {
+  width: 13px !important;
+  height: 15px !important;
+}
+
+body.arena-in-duel .bvz-desc {
+  display: none !important;
+}
+
+body.arena-in-duel .battle-nexus-zone {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  height: 30px !important;
+  min-height: 0 !important;
+  max-height: 30px !important;
+  overflow: hidden !important;
+  padding: 0.18rem 0.55rem !important;
+  border-radius: 0.45rem !important;
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.45rem !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+}
+
+body.arena-in-duel .bnz-top {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.25rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.arena-in-duel .bnz-icon {
+  font-size: 0.8rem !important;
+}
+
+body.arena-in-duel .bnz-title {
+  font-size: 0.65rem !important;
+  font-weight: 800 !important;
+}
+
+body.arena-in-duel .bnz-count-badge {
+  font-size: 0.62rem !important;
+  padding: 1px 5px !important;
+  border-radius: 4px !important;
+  background: rgba(56, 189, 248, 0.2) !important;
+  color: #bae6fd !important;
+}
+
+body.arena-in-duel .bnz-content,
+body.arena-in-duel #battleNexusZoneContent {
+  display: none !important;
+}
+
+body.arena-in-duel .battle-clash-center {
+  flex: 1 1 auto !important;
+  text-align: center !important;
+  font-size: 0.72rem !important;
+  color: #94a3b8 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  padding: 0 0.35rem !important;
+}
+
+body.arena-in-duel .burst-center-turn-slot {
+  flex: 0 0 auto !important;
+}
+
+body.arena-in-duel .turn-badge {
+  height: 30px !important;
+  padding: 0 0.55rem !important;
+  border-radius: 0.4rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.35rem !important;
+  box-sizing: border-box !important;
+}
+
+body.arena-in-duel .turn-badge-label {
+  font-size: 0.68rem !important;
+  font-weight: 900 !important;
+}
+
+body.arena-in-duel .turn-badge-player {
+  font-size: 0.65rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+}
+
+body.arena-in-duel .turn-badge-step {
+  font-size: 0.62rem !important;
+  color: #fbbf24 !important;
+  font-weight: 700 !important;
+}
+
+/* Player Hand Zone */
+body.arena-in-duel .player-hand-zone {
+  margin-top: 0 !important;
+  flex: 0 0 auto !important;
+  box-sizing: border-box !important;
+}
+
+body.arena-in-duel .hand-label {
+  font-size: 0.65rem !important;
+  margin-bottom: 0.1rem !important;
+}
+
+/* Dynamic Turn 1 Mulligan Prompt Bar inside Hand */
+body.arena-in-duel .mulligan-prompt-bar {
+  padding: 4px 10px !important;
+  margin-bottom: 4px !important;
+  border-radius: 6px !important;
+  font-size: 0.72rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 8px !important;
+  box-sizing: border-box !important;
+}
+
+body.arena-in-duel .mulligan-prompt-bar button {
+  padding: 3px 9px !important;
+  font-size: 0.72rem !important;
+}
+
+/* Static banner completely hidden */
+#turn1MulliganBanner,
+.mulligan-banner {
+  display: none !important;
+}
+
+/* Hide floating deck drawer widget on arena page and during duels */
+body:has(#battleArena) #deckQuickWidgetWrap,
+body.arena-in-duel #deckQuickWidgetWrap,
+.battle-arena-section ~ #deckQuickWidgetWrap,
+#deckQuickWidgetWrap:has(~ #battleArena) {
+  display: none !important;
+}
+
+body.arena-in-duel .hand-track {
+  gap: 0.4rem !important;
+  padding-bottom: 0.1rem !important;
+  align-items: flex-end !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+
+body.arena-in-duel .hand-card-item {
+  width: 74px !important;
+  height: 100px !important;
+  padding: 0.2rem !important;
+  border-radius: 0.4rem !important;
+  flex-shrink: 0 !important;
+  box-sizing: border-box !important;
+}
+
+body.arena-in-duel .hc-cost-badge {
+  width: 17px !important;
+  height: 17px !important;
+  font-size: 0.62rem !important;
+  top: -3px !important;
+  left: -3px !important;
+}
+
+body.arena-in-duel .hc-img-wrap {
+  height: 48px !important;
+}
+
+body.arena-in-duel .hc-name {
+  font-size: 0.56rem !important;
+  line-height: 1.1 !important;
+  max-height: 20px !important;
+  overflow: hidden !important;
+}
+
+/* Duel Controls Toolbar */
+body.arena-in-duel .duel-toolbar {
+  margin-top: 0.15rem !important;
+  padding-top: 0.15rem !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  gap: 0.35rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+body.arena-in-duel .btn-next-phase {
+  padding: 0.3rem 0.8rem !important;
+  font-size: 0.76rem !important;
+  border-radius: 0.4rem !important;
+}
+
+body.arena-in-duel .btn-auto-duel {
+  padding: 0.3rem 0.65rem !important;
+  font-size: 0.72rem !important;
+  border-radius: 0.4rem !important;
+}
+
+body.arena-in-duel .btn-duel-tool {
+  padding: 0.25rem 0.5rem !important;
+  font-size: 0.7rem !important;
+  border-radius: 0.4rem !important;
+}
+
+/* Hide bulky bottom battle log in single-frame arena */
+body.arena-in-duel .battle-log-wrap {
+  display: none !important;
+}
+
+/* Right Column: Step Navigator (Phase Progression) */
+body.arena-in-duel .duel-step-navigator {
+  height: 100% !important;
+  max-height: 100% !important;
+  position: static !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  padding: 0.5rem 0.65rem !important;
+  border-radius: 0.6rem !important;
+  box-sizing: border-box !important;
+}
+
+body.arena-in-duel .step-nav-header {
+  margin-bottom: 0.3rem !important;
+  padding-bottom: 0.2rem !important;
+  flex: 0 0 auto !important;
+}
+
+body.arena-in-duel .snh-tag {
+  font-size: 0.6rem !important;
+}
+
+body.arena-in-duel .snh-title {
+  font-size: 0.9rem !important;
+  margin: 0.1rem 0 !important;
+}
+
+body.arena-in-duel .snh-sub {
+  font-size: 0.65rem !important;
+}
+
+body.arena-in-duel .step-card-list {
+  flex: 1 1 auto !important;
+  overflow-y: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.25rem !important;
+  margin-bottom: 0.25rem !important;
+  padding-right: 2px !important;
+}
+
+body.arena-in-duel .step-card {
+  padding: 0.28rem 0.5rem !important;
+  border-radius: 0.4rem !important;
+}
+
+body.arena-in-duel .sc-header {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.3rem !important;
+}
+
+body.arena-in-duel .sc-num {
+  font-size: 0.68rem !important;
+  width: 17px !important;
+  height: 17px !important;
+}
+
+body.arena-in-duel .sc-name {
+  font-size: 0.72rem !important;
+}
+
+body.arena-in-duel .sc-status {
+  font-size: 0.62rem !important;
+  padding: 1px 4px !important;
+}
+
+body.arena-in-duel .step-card .sc-desc {
+  font-size: 0.65rem !important;
+  margin: 0.08rem 0 0.2rem 0 !important;
+  line-height: 1.15 !important;
+}
+
+body.arena-in-duel .step-card .btn-step-action {
+  padding: 0.22rem 0.45rem !important;
+  font-size: 0.7rem !important;
+  border-radius: 0.35rem !important;
 }

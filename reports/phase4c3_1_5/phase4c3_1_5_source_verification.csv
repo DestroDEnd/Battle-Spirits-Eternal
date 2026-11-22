@@ -1,0 +1,7 @@
+item_id,source_file,function_or_scope,line_range,architectural_topic,verified_code_behavior,design_compatibility,audit_status
+SRC-01,engine/state.js,createGameState(),110-117,Restriction State Storage,Only abilityUses: {} is defined; state.restrictions does not exist.,INCOMPATIBLE_UNTIL_IMPLEMENTED,VERIFIED
+SRC-02,engine/index.js,activateAbility(),228-242,Usage Limit Check & Consumption,Checks only ONCE_PER_TURN using turnNumber:cardId:abilityId; consumes only after success in line 241.,INCOMPATIBLE_DEFECTIVE_TIMING,VERIFIED
+SRC-03,engine/flow.js,advanceStep(),44-70,Turn Boundary Reset,turnNumber is incremented; abilityUses is never cleared.,REQUIRES_RESET_ADAPTER,VERIFIED
+SRC-04,engine/legacy_bridge.js,serializeDuelState() & createLegacyDuelState(),154, 302,Legacy Serialization,Mirrors only duelState.abilityUses; ignores structured restrictions.,REQUIRES_BRIDGE_ADAPTER,VERIFIED
+SRC-05,compiler/header_parser.js,parseAbilityHeader(),113-124, 329-334,Compiler Limit Extraction,Extracts only 3 hardcoded sentences and leading (Once per Turn) headers; drops 826 restrictions.,COMPILER_DEFECT_CONFIRMED,VERIFIED
+SRC-06,compiler/clause_splitter.js,splitClauses(),1-304,Clause Splitting & Ordering,Splits clauses sequentially; preserves execution order of operations.,COMPATIBLE_WITH_AST_ORDERING,VERIFIED

@@ -152,4 +152,10 @@ export function registerWave3Keywords(registry) {
   registry.register({ ...BraveKeyword, id: 'Reload' });
   registry.register({ ...BraveKeyword, id: 'Contract Reload' });
   registry.register({ ...BraveKeyword, id: 'Revive' });
+  registry.register({ ...BraveKeyword, id: 'Extreme Drive' });
+  registry.register({ ...BraveKeyword, id: 'Pyro Drive' });
+  registry.register({ ...BraveKeyword, id: 'True-Drive' });
+  registry.register({ ...BraveKeyword, id: 'Twinkle Equip' });
+  registry.register({ id: 'Ultimate Energy', name: 'Ultimate Energy', wave: 3, hooks: {} });
+  registry.register({ id: 'Ultimate Hand', name: 'Ultimate Hand', wave: 3, hooks: {} });
 }

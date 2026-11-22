@@ -1,1 +1,780 @@
-{"PX15-05":{"cardNumber":"PX15-05","name":"Mikafar no Tsubone","keywords":[],"abilities":[{"id":"PX15-05#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When you would use a Magic card, you can pay the entire cost by using one [Soul Core](Soul Core)."},"clauses":[{"rawText":"When you would use a Magic card, you can pay the entire cost by using one [Soul Core].","cleanText":"When you would use a Magic card, you can pay the entire cost by using one [Soul Core]","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"COST_MODIFIER"}}],"unsupported":[]},{"id":"PX15-05#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your \"SengokuPrincess\"-named Spirit exhausts, draw a card."},"clauses":[{"rawText":"When your \"SengokuPrincess\"-named Spirit exhausts, draw a card.","cleanText":"When your \"SengokuPrincess\"-named Spirit exhausts, draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"PX15-02":{"cardNumber":"PX15-02","name":"The SengokuSpearDeity Kugel-Horn","keywords":[],"abilities":[{"id":"PX15-02#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit and your Spirit with Soul Core on it are unaffected by opposing Spirit/Ultimate/Brave effects."},"clauses":[{"rawText":"This Spirit and your Spirit with Soul Core on it are unaffected by opposing Spirit/Ultimate/Brave effects.","cleanText":"This Spirit and your Spirit with Soul Core on it are unaffected by opposing Spirit/Ultimate/Brave effects","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"IMMUNITY","immuneTo":"OPPOSING_EFFECTS"}}],"unsupported":[]},{"id":"PX15-02#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"TURN_TRIGGER","timingLabel":"Opposing Turn","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When the opponent uses any Magic card, by sending the [Soul Core](Soul Core) from any of your Spirits to your Trash, negate the effect."},"clauses":[{"rawText":"When the opponent uses any Magic card, by sending the [Soul Core] from any of your Spirits to your Trash, negate the effect.","cleanText":"When the opponent uses any Magic card, by sending the [Soul Core] from any of your Spirits to your Trash, negate the effect","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"NEGATE_EFFECT"}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"PX15-03":{"cardNumber":"PX15-03","name":"The CancerNinja Cancerd","keywords":[],"abilities":[{"id":"PX15-03#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When this Spirit, or your Spirit with [Soul Core] on it attacks, the opponent can only block if they block with two Spirits or two Ultimates. When that Spirit is blocked, choose one of them to battle against."},"clauses":[{"rawText":"When this Spirit, or your Spirit with [Soul Core] on it attacks, the opponent can only block if they block with two Spirits or two Ultimates.","cleanText":"When this Spirit, or your Spirit with [Soul Core] on it attacks, the opponent can only block if they block with two Spirits or two Ultimates","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"COMBAT_RESTRICTION"}},{"rawText":"When that Spirit is blocked, choose one of them to battle against.","cleanText":"When that Spirit is blocked, choose one of them to battle against","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"CHOOSE_BLOCKER"}}],"unsupported":[]},{"id":"PX15-03#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Exhaust an opposing Spirit."},"clauses":[{"rawText":"Exhaust an opposing Spirit.","cleanText":"Exhaust an opposing Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","isHeavy":false,"count":1,"target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"PX15-04":{"cardNumber":"PX15-04","name":"The SengokuShogun Destlord","keywords":[],"abilities":[{"id":"PX15-04#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing LV2 Spirit."},"clauses":[{"rawText":"Destroy an opposing LV2 Spirit.","cleanText":"Destroy an opposing LV2 Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}}],"unsupported":[]},{"id":"PX15-04#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your Spirit with Soul Core attacks, by sending two cores from an opposing Spirit/Ultimate to their Trash, put two cores from the Void to your Reserve."},"clauses":[{"rawText":"When your Spirit with Soul Core attacks, by sending two cores from an opposing Spirit/Ultimate to their Trash, put two cores from the Void to your Reserve.","cleanText":"When your Spirit with Soul Core attacks, by sending two cores from an opposing Spirit/Ultimate to their Trash, put two cores from the Void to your Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":2,"from":{"zone":"void"},"to":{"zone":"reserve","side":"self","types":["Spirit"]},"chooser":"self"}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"PX15-06":{"cardNumber":"PX15-06","name":"The SengokuSuperDragon Siegwurm-Nova","keywords":[],"abilities":[{"id":"PX15-06#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"By sending all cores from one of your \"Siegwurm\"-named Spirits or one of your other \"Lord\" family Spirits to your Trash, put cores from the Void to your Life until it becomes five."},"clauses":[{"rawText":"By sending all cores from one of your \"Siegwurm\"-named Spirits or one of your other \"Lord\" family Spirits to your Trash","cleanText":"By sending all cores from one of your \"Siegwurm\"-named Spirits or one of your other \"Lord\" family Spirits to your Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"put cores from the Void to your Life until it becomes five.","cleanText":"put cores from the Void to your Life until it becomes five","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"RECOVER_LIFE","count":1}}],"unsupported":[]},{"id":"PX15-06#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy any number of opposing Spirits/Ultimates up to a total of 10000 BP. Then, the opponent must block with their Spirits/Ultimates if possible."},"clauses":[{"rawText":"Destroy any number of opposing Spirits/Ultimates up to a total of 10000 BP.","cleanText":"Destroy any number of opposing Spirits/Ultimates up to a total of 10000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","mode":"TOTAL_BP_LTE","maxTotalBp":10000,"target":{"side":"opp","types":["Spirit","Ultimate"]}}},{"rawText":"the opponent must block with their Spirits/Ultimates if possible.","cleanText":"the opponent must block with their Spirits/Ultimates if possible","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"COMBAT_RULE"}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"PX15-01":{"cardNumber":"PX15-01","name":"The SengokuEmperor Alexander","keywords":[{"name":"Assault","parameter":"4","wave":1,"hook":"assault","bracketed":true,"index":16},{"name":"Assault","parameter":null,"wave":1,"hook":"assault","bracketed":true,"index":234}],"abilities":[{"id":"PX15-01#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Assault: 4","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit can, up to four times per turn, be refreshed by exhausting one of your Nexuses."},"clauses":[{"rawText":"This Spirit can, up to four times per turn, be refreshed by exhausting one of your Nexuses.","cleanText":"This Spirit can, up to four times per turn, be refreshed by exhausting one of your Nexuses","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH_BY_EXHAUSTING_NEXUS","target":"self"}}],"unsupported":[]},{"id":"PX15-01#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your Nexus with Soul Core on it is exhausted by your Spirit's [Assault], unless the opponent sends three cores from their Reserve to their Trash, they can't block."},"clauses":[{"rawText":"When your Nexus with Soul Core on it is exhausted by your Spirit's [Assault], unless the opponent sends three cores from their Reserve to their Trash, they can't block.","cleanText":"When your Nexus with Soul Core on it is exhausted by your Spirit's [Assault], unless the opponent sends three cores from their Reserve to their Trash, they can't block","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"PX15-08":{"cardNumber":"PX15-08","name":"［Sengoku Dancing Princess］Fongneena","keywords":[{"name":"Team","parameter":"Absolutes","wave":5,"hook":"team","bracketed":true,"index":0}],"abilities":[{"id":"PX15-08#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"clauses":[],"unsupported":[]},{"id":"PX15-08#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your \"Diva\" family Spirit attacks, exhaust an opposing Spirit."},"clauses":[{"rawText":"When your \"Diva\" family Spirit attacks, exhaust an opposing Spirit.","cleanText":"When your \"Diva\" family Spirit attacks, exhaust an opposing Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","isHeavy":false,"count":1,"target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]},{"id":"PX15-08#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your \"Diva\" family Spirit's attack reduces the opposing Life, send an opposing Life to their Trash."},"clauses":[{"rawText":"When your \"Diva\" family Spirit's attack reduces the opposing Life, send an opposing Life to their Trash.","cleanText":"When your \"Diva\" family Spirit's attack reduces the opposing Life, send an opposing Life to their Trash","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "PX15-05": {
+    "cardNumber": "PX15-05",
+    "name": "Mikafar no Tsubone",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PX15-05#AB_PASSIVE_NONE_LV1_LV2_LV3_ea31b94223f7f3ec519d22083aa26abc6211cf919c73b32ca1dd41eceb631c97_d51b2be9a05ef8c997b4f696b3d001f3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When you would use a Magic card, you can pay the entire cost by using one [Soul Core](Soul Core)."
+        },
+        "clauses": [
+          {
+            "rawText": "When you would use a Magic card, you can pay the entire cost by using one [Soul Core].",
+            "cleanText": "When you would use a Magic card, you can pay the entire cost by using one [Soul Core]",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX15-05#a0",
+        "physicalId": "PX15-05#AB_PASSIVE_NONE_LV1_LV2_LV3_ea31b94223f7f3ec519d22083aa26abc6211cf919c73b32ca1dd41eceb631c97_d51b2be9a05ef8c997b4f696b3d001f3",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_ea31b94223f7f3ec519d22083aa26abc6211cf919c73b32ca1dd41eceb631c97_d51b2be9a05ef8c997b4f696b3d001f3"
+      },
+      {
+        "id": "PX15-05#AB_ATTACK_STEP_NONE_LV2_LV3_7ef5a892722521d7cdb3e9cb20b65d504644be0efcb38fc51462f214e0a8335c_590bfccb0d1d3d31c546edaa40fa0678",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your \"SengokuPrincess\"-named Spirit exhausts, draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "When your \"SengokuPrincess\"-named Spirit exhausts, draw a card.",
+            "cleanText": "When your \"SengokuPrincess\"-named Spirit exhausts, draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX15-05#a1",
+        "physicalId": "PX15-05#AB_ATTACK_STEP_NONE_LV2_LV3_7ef5a892722521d7cdb3e9cb20b65d504644be0efcb38fc51462f214e0a8335c_590bfccb0d1d3d31c546edaa40fa0678",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_7ef5a892722521d7cdb3e9cb20b65d504644be0efcb38fc51462f214e0a8335c_590bfccb0d1d3d31c546edaa40fa0678"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX15-02": {
+    "cardNumber": "PX15-02",
+    "name": "The SengokuSpearDeity Kugel-Horn",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PX15-02#AB_PASSIVE_NONE_LV1_LV2_LV3_fce20df17147fde7fb3f43faaa202f27b241e48e6368bf5f90c30fc5ca6ffe52_3dd102dfd620b56f51612dbf0625ba7c",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit and your Spirit with Soul Core on it are unaffected by opposing Spirit/Ultimate/Brave effects."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit and your Spirit with Soul Core on it are unaffected by opposing Spirit/Ultimate/Brave effects.",
+            "cleanText": "This Spirit and your Spirit with Soul Core on it are unaffected by opposing Spirit/Ultimate/Brave effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "IMMUNITY",
+              "immuneTo": "OPPOSING_EFFECTS"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX15-02#a0",
+        "physicalId": "PX15-02#AB_PASSIVE_NONE_LV1_LV2_LV3_fce20df17147fde7fb3f43faaa202f27b241e48e6368bf5f90c30fc5ca6ffe52_3dd102dfd620b56f51612dbf0625ba7c",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_fce20df17147fde7fb3f43faaa202f27b241e48e6368bf5f90c30fc5ca6ffe52_3dd102dfd620b56f51612dbf0625ba7c"
+      },
+      {
+        "id": "PX15-02#AB_TURN_TRIGGER_NONE_LV2_LV3_129c50ad8ad89ea1e218a8201e296c1916b9a7a5c23560dfd670fbc93594a1fd_69410672500e8a061562e4b8ac04e0b3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "TURN_TRIGGER",
+          "timingLabel": "Opposing Turn",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When the opponent uses any Magic card, by sending the [Soul Core](Soul Core) from any of your Spirits to your Trash, negate the effect."
+        },
+        "clauses": [
+          {
+            "rawText": "When the opponent uses any Magic card, by sending the [Soul Core] from any of your Spirits to your Trash, negate the effect.",
+            "cleanText": "When the opponent uses any Magic card, by sending the [Soul Core] from any of your Spirits to your Trash, negate the effect",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "NEGATE_EFFECT"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX15-02#a1",
+        "physicalId": "PX15-02#AB_TURN_TRIGGER_NONE_LV2_LV3_129c50ad8ad89ea1e218a8201e296c1916b9a7a5c23560dfd670fbc93594a1fd_69410672500e8a061562e4b8ac04e0b3",
+        "semanticId": "SEM#AB_TURN_TRIGGER_NONE_LV2_LV3_129c50ad8ad89ea1e218a8201e296c1916b9a7a5c23560dfd670fbc93594a1fd_69410672500e8a061562e4b8ac04e0b3"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX15-03": {
+    "cardNumber": "PX15-03",
+    "name": "The CancerNinja Cancerd",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PX15-03#AB_ATTACK_STEP_NONE_LV1_LV2_ac0b867802269596b0ece365314689c603fc9a5b8c2f4f39f5f6b16bfe83d114_3e014486c99276abd2673bdbf7a680c8",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this Spirit, or your Spirit with [Soul Core] on it attacks, the opponent can only block if they block with two Spirits or two Ultimates. When that Spirit is blocked, choose one of them to battle against."
+        },
+        "clauses": [
+          {
+            "rawText": "When this Spirit, or your Spirit with [Soul Core] on it attacks, the opponent can only block if they block with two Spirits or two Ultimates.",
+            "cleanText": "When this Spirit, or your Spirit with [Soul Core] on it attacks, the opponent can only block if they block with two Spirits or two Ultimates",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COMBAT_RESTRICTION"
+            }
+          },
+          {
+            "rawText": "When that Spirit is blocked, choose one of them to battle against.",
+            "cleanText": "When that Spirit is blocked, choose one of them to battle against",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CHOOSE_BLOCKER"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX15-03#a0",
+        "physicalId": "PX15-03#AB_ATTACK_STEP_NONE_LV1_LV2_ac0b867802269596b0ece365314689c603fc9a5b8c2f4f39f5f6b16bfe83d114_3e014486c99276abd2673bdbf7a680c8",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_ac0b867802269596b0ece365314689c603fc9a5b8c2f4f39f5f6b16bfe83d114_3e014486c99276abd2673bdbf7a680c8"
+      },
+      {
+        "id": "PX15-03#AB_WHEN_ATTACKS_NONE_LV2_04fd69b8590758dd4292cd2a38006da240573422d8e9ad1b49cbca33d2875590_a24bc287648f53d0744b087801ec319c",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Exhaust an opposing Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Exhaust an opposing Spirit.",
+            "cleanText": "Exhaust an opposing Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "isHeavy": false,
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX15-03#a1",
+        "physicalId": "PX15-03#AB_WHEN_ATTACKS_NONE_LV2_04fd69b8590758dd4292cd2a38006da240573422d8e9ad1b49cbca33d2875590_a24bc287648f53d0744b087801ec319c",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_04fd69b8590758dd4292cd2a38006da240573422d8e9ad1b49cbca33d2875590_a24bc287648f53d0744b087801ec319c"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX15-04": {
+    "cardNumber": "PX15-04",
+    "name": "The SengokuShogun Destlord",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PX15-04#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_ab04bdb4fe7551adea55c8feb9e6900283cbf2b940f5aad21ba4100129e01534_240a5ff769fa658891b3ee5d3b813288",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing LV2 Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing LV2 Spirit.",
+            "cleanText": "Destroy an opposing LV2 Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX15-04#a0",
+        "physicalId": "PX15-04#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_ab04bdb4fe7551adea55c8feb9e6900283cbf2b940f5aad21ba4100129e01534_240a5ff769fa658891b3ee5d3b813288",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_ab04bdb4fe7551adea55c8feb9e6900283cbf2b940f5aad21ba4100129e01534_240a5ff769fa658891b3ee5d3b813288"
+      },
+      {
+        "id": "PX15-04#AB_ATTACK_STEP_NONE_LV2_LV3_b58baf6caf461cc1a091294250f1e95eed9e4ab1e3a5539057f136c3d0cec4be_a9a6d4e8627d6333beafb4431821441a",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Spirit with Soul Core attacks, by sending two cores from an opposing Spirit/Ultimate to their Trash, put two cores from the Void to your Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Spirit with Soul Core attacks, by sending two cores from an opposing Spirit/Ultimate to their Trash, put two cores from the Void to your Reserve.",
+            "cleanText": "When your Spirit with Soul Core attacks, by sending two cores from an opposing Spirit/Ultimate to their Trash, put two cores from the Void to your Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 2,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              },
+              "chooser": "self"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX15-04#a1",
+        "physicalId": "PX15-04#AB_ATTACK_STEP_NONE_LV2_LV3_b58baf6caf461cc1a091294250f1e95eed9e4ab1e3a5539057f136c3d0cec4be_a9a6d4e8627d6333beafb4431821441a",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_b58baf6caf461cc1a091294250f1e95eed9e4ab1e3a5539057f136c3d0cec4be_a9a6d4e8627d6333beafb4431821441a"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX15-06": {
+    "cardNumber": "PX15-06",
+    "name": "The SengokuSuperDragon Siegwurm-Nova",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PX15-06#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_41f072cda55eb80e29d3c544fd6d97b6fb4f4b84c02e8f2ae26641aa17a59d0e_9ded9be012e028d26a4c5a9ac3d3c940",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By sending all cores from one of your \"Siegwurm\"-named Spirits or one of your other \"Lord\" family Spirits to your Trash, put cores from the Void to your Life until it becomes five."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending all cores from one of your \"Siegwurm\"-named Spirits or one of your other \"Lord\" family Spirits to your Trash",
+            "cleanText": "By sending all cores from one of your \"Siegwurm\"-named Spirits or one of your other \"Lord\" family Spirits to your Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "put cores from the Void to your Life until it becomes five.",
+            "cleanText": "put cores from the Void to your Life until it becomes five",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "RECOVER_LIFE",
+              "count": 1
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX15-06#a0",
+        "physicalId": "PX15-06#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_41f072cda55eb80e29d3c544fd6d97b6fb4f4b84c02e8f2ae26641aa17a59d0e_9ded9be012e028d26a4c5a9ac3d3c940",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_41f072cda55eb80e29d3c544fd6d97b6fb4f4b84c02e8f2ae26641aa17a59d0e_9ded9be012e028d26a4c5a9ac3d3c940"
+      },
+      {
+        "id": "PX15-06#AB_WHEN_ATTACKS_NONE_LV2_LV3_96c75a436c71a02b00a676e7c13a0af9d8d3673fa9272343e7a6885a0fe7ecfc_81e8ffd69323e54903b84eb547ecaf36",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy any number of opposing Spirits/Ultimates up to a total of 10000 BP. Then, the opponent must block with their Spirits/Ultimates if possible."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy any number of opposing Spirits/Ultimates up to a total of 10000 BP.",
+            "cleanText": "Destroy any number of opposing Spirits/Ultimates up to a total of 10000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "mode": "TOTAL_BP_LTE",
+              "maxTotalBp": 10000,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit",
+                  "Ultimate"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "the opponent must block with their Spirits/Ultimates if possible.",
+            "cleanText": "the opponent must block with their Spirits/Ultimates if possible",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COMBAT_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX15-06#a1",
+        "physicalId": "PX15-06#AB_WHEN_ATTACKS_NONE_LV2_LV3_96c75a436c71a02b00a676e7c13a0af9d8d3673fa9272343e7a6885a0fe7ecfc_81e8ffd69323e54903b84eb547ecaf36",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_96c75a436c71a02b00a676e7c13a0af9d8d3673fa9272343e7a6885a0fe7ecfc_81e8ffd69323e54903b84eb547ecaf36"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX15-01": {
+    "cardNumber": "PX15-01",
+    "name": "The SengokuEmperor Alexander",
+    "keywords": [
+      {
+        "name": "Assault",
+        "parameter": "4",
+        "wave": 1,
+        "hook": "assault",
+        "bracketed": true,
+        "index": 16
+      },
+      {
+        "name": "Assault",
+        "parameter": null,
+        "wave": 1,
+        "hook": "assault",
+        "bracketed": true,
+        "index": 234
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PX15-01#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_24b8b57eb5fb8ecdcc89877013eda8afa1bc313eb3cd061e684109976d174b01_37fdfb01af77ee2215ddce9113b2ac09",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Assault: 4",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit can, up to four times per turn, be refreshed by exhausting one of your Nexuses."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit can, up to four times per turn, be refreshed by exhausting one of your Nexuses.",
+            "cleanText": "This Spirit can, up to four times per turn, be refreshed by exhausting one of your Nexuses",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH_BY_EXHAUSTING_NEXUS",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX15-01#a0",
+        "physicalId": "PX15-01#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_24b8b57eb5fb8ecdcc89877013eda8afa1bc313eb3cd061e684109976d174b01_37fdfb01af77ee2215ddce9113b2ac09",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_24b8b57eb5fb8ecdcc89877013eda8afa1bc313eb3cd061e684109976d174b01_37fdfb01af77ee2215ddce9113b2ac09"
+      },
+      {
+        "id": "PX15-01#AB_ATTACK_STEP_NONE_LV2_LV3_8ff97692cee0904fac6e7c86f77fb2a6cd12441c17de94cf1cf90e3dfa766a0a_5f45bf425e9d9ad0f8dcace920304031",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Nexus with Soul Core on it is exhausted by your Spirit's [Assault], unless the opponent sends three cores from their Reserve to their Trash, they can't block."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Nexus with Soul Core on it is exhausted by your Spirit's [Assault], unless the opponent sends three cores from their Reserve to their Trash, they can't block.",
+            "cleanText": "When your Nexus with Soul Core on it is exhausted by your Spirit's [Assault], unless the opponent sends three cores from their Reserve to their Trash, they can't block",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX15-01#a1",
+        "physicalId": "PX15-01#AB_ATTACK_STEP_NONE_LV2_LV3_8ff97692cee0904fac6e7c86f77fb2a6cd12441c17de94cf1cf90e3dfa766a0a_5f45bf425e9d9ad0f8dcace920304031",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_8ff97692cee0904fac6e7c86f77fb2a6cd12441c17de94cf1cf90e3dfa766a0a_5f45bf425e9d9ad0f8dcace920304031"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX15-08": {
+    "cardNumber": "PX15-08",
+    "name": "［Sengoku Dancing Princess］Fongneena",
+    "keywords": [
+      {
+        "name": "Team",
+        "parameter": "Absolutes",
+        "wave": 5,
+        "hook": "team",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PX15-08#AB_PASSIVE_NONE_LV1_LV2_LV3_7e0997c8c8011f070690e5fbd4cd54aff987500f0433e645ad7ac887fe59b290_0f3036d7831fcd6aff12c1d93d9849e1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "PX15-08#a0",
+        "physicalId": "PX15-08#AB_PASSIVE_NONE_LV1_LV2_LV3_7e0997c8c8011f070690e5fbd4cd54aff987500f0433e645ad7ac887fe59b290_0f3036d7831fcd6aff12c1d93d9849e1",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_7e0997c8c8011f070690e5fbd4cd54aff987500f0433e645ad7ac887fe59b290_0f3036d7831fcd6aff12c1d93d9849e1"
+      },
+      {
+        "id": "PX15-08#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_be61cedbbe1964a52f9f3ee5f7c0e226c4cb0dea89a5442cfb9c480f29bbad05_6210d0af1c5baddc9784a7592589f918",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your \"Diva\" family Spirit attacks, exhaust an opposing Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "When your \"Diva\" family Spirit attacks, exhaust an opposing Spirit.",
+            "cleanText": "When your \"Diva\" family Spirit attacks, exhaust an opposing Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "isHeavy": false,
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX15-08#a1",
+        "physicalId": "PX15-08#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_be61cedbbe1964a52f9f3ee5f7c0e226c4cb0dea89a5442cfb9c480f29bbad05_6210d0af1c5baddc9784a7592589f918",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_be61cedbbe1964a52f9f3ee5f7c0e226c4cb0dea89a5442cfb9c480f29bbad05_6210d0af1c5baddc9784a7592589f918"
+      },
+      {
+        "id": "PX15-08#AB_ATTACK_STEP_NONE_LV2_LV3_6cc0ba4933baa83867c31b451646da7599592801719e1f4b3bd46bb1564c23ac_b24c64ff7f444e797512258f3e8096b2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your \"Diva\" family Spirit's attack reduces the opposing Life, send an opposing Life to their Trash."
+        },
+        "clauses": [
+          {
+            "rawText": "When your \"Diva\" family Spirit's attack reduces the opposing Life, send an opposing Life to their Trash.",
+            "cleanText": "When your \"Diva\" family Spirit's attack reduces the opposing Life, send an opposing Life to their Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX15-08#a2",
+        "physicalId": "PX15-08#AB_ATTACK_STEP_NONE_LV2_LV3_6cc0ba4933baa83867c31b451646da7599592801719e1f4b3bd46bb1564c23ac_b24c64ff7f444e797512258f3e8096b2",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_6cc0ba4933baa83867c31b451646da7599592801719e1f4b3bd46bb1564c23ac_b24c64ff7f444e797512258f3e8096b2"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

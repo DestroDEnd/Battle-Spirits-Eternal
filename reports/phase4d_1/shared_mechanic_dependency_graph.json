@@ -1,0 +1,90 @@
+{
+  "metadata": {
+    "generatedAt": "2026-11-21T10:24:32.051Z",
+    "architecture": "Layered Engine Primitives & Rules Orchestration"
+  },
+  "nodes": [
+    {
+      "id": "E1",
+      "name": "Core Manipulation & Resource Transfer",
+      "description": "Core flow, reserve transfers, Void charging, soul core routing, payment and cost reduction."
+    },
+    {
+      "id": "E2",
+      "name": "Continuous Effects & Static Modifiers",
+      "description": "BP modifications, symbol modification, color treating, passive protections (Armor, Heavy Armor, Immunity)."
+    },
+    {
+      "id": "E3",
+      "name": "Replacement Effects & Destruction Prevention",
+      "description": "Prevention of destruction, depletion or bounce, redirecting zones, remain on field mechanics."
+    },
+    {
+      "id": "E4",
+      "name": "Timing Windows & Activation Conditions",
+      "description": "Step/phase triggers, When Destroyed, Flash timing, combat trigger evaluation, structured conditions."
+    },
+    {
+      "id": "E5",
+      "name": "Target Resolution & Candidate Filtering",
+      "description": "Multi-criteria target querying, candidate validation, prompt decision resolution, redirection."
+    },
+    {
+      "id": "E6",
+      "name": "Special Card Type Mechanics",
+      "description": "Subsystems for Brave (fusion/separation), Mirage (set/trigger), Grandwalker Nexuses (divine skills), Contract cards (soul state), Ultimates (U-trigger), and Advent."
+    },
+    {
+      "id": "E7",
+      "name": "Keyword Ability Delegation",
+      "description": "Delegation to specialized keyword handlers (Curse, Confront, Tribute, Immortal, Awakening, Bound, etc.)."
+    },
+    {
+      "id": "E8",
+      "name": "Deck & Hand Manipulation",
+      "description": "Drawing, discarding, deck search, milling, revealing, and bottom-deck bounce."
+    }
+  ],
+  "dependencies": [
+    {
+      "from": "E1",
+      "to": "E2",
+      "reason": "Continuous BP/level computation requires active cores on stacks"
+    },
+    {
+      "from": "E1",
+      "to": "E5",
+      "reason": "Candidate filtering often evaluates core counts in reserve/trash"
+    },
+    {
+      "from": "E2",
+      "to": "E3",
+      "reason": "Replacement effects evaluate protection modifiers and effective BP"
+    },
+    {
+      "from": "E2",
+      "to": "E4",
+      "reason": "Timing triggers depend on active abilities enabled at specific levels"
+    },
+    {
+      "from": "E4",
+      "to": "E5",
+      "reason": "Triggered effects resolve target selections through interaction prompt"
+    },
+    {
+      "from": "E5",
+      "to": "E8",
+      "reason": "Target selection drives card movement, bounce destinations, and hand swaps"
+    },
+    {
+      "from": "E1",
+      "to": "E6",
+      "reason": "Special card types (Brave, Mirage, Grandwalker, Contract) require specialized core and soul core routing"
+    },
+    {
+      "from": "E2",
+      "to": "E7",
+      "reason": "Keyword abilities resolve continuous rules and combat modifications"
+    }
+  ]
+}

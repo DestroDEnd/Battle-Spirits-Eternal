@@ -890,7 +890,7 @@ function formatEffectKeywordsInModal(text) {
   safe = safe.replace(/(?<!<[^>]*)(?:\[(?:Ultimate Trigger|U-Trigger|Cross Ultimate Trigger|XU-Trigger|Hit|Critical Hit)\]|【(?:Uトリガー|XUトリガー|ヒット|クリティカルヒット)】)/gi, '<span class="effect-keyword-pill kw-utrigger">$&</span>');
 
   // 12. Highlight all Official Battle Spirits Wiki Keywords (English and Japanese)
-  const allKwPattern = /\[(A\.T\.\s*Field|Accel(?::[^\]]+)?|Advent(?::[^\]]+)?|Amplify|Appeal|Armed Intervention|Armor(?::[^\]]+)?|Assault(?::\s*\d+)?|Assemble|Awaken|Barrage|Bombardment|Brilliance|Buddy|Bunshin(?::\s*\d+)?|Burst(?::[^\]]+)?|Burst S|Bushido|Cast Off|Catalyze|Change|Charge|Clash|Clock Up|Consecutive Blade|Contract Armor|Contract Awaken|Contract Unleash|Core Charge|Count Break|Crush|Curse|Digivolution(?::[^\]]+)?|Digivolve(?::[^\]]+)?|Dispersion|Diva Rush|Double Drive|Draw Lock|Emperor Road|Fast Draw|Fierce Windstorm|Flashing Swift|Fortress|Friend|Funnel|God Strike|Grand Assault|Grand Field|Grand Ice Wall|Grand Skill|Grandphosis|Great Assault|Great Crush|Heavenly Light|Heavy Armor(?::[^\]]+)?|Heavy Exhaust(?::[^\]]+)?|High Speed|Holy Life|Ice Wall(?::[^\]]+)?|Immortality(?::[^\]]+)?|Infinite Blade|Infinite Flame|Kagemusha|Leap|Level Up|Load(?::\s*\d+)?|Manifest(?::[^\]]+)?|Mani(?::[^\]]+)?|Mirage(?::[^\]]+)?|My Unit|NT-D|On Stage|Plunder|Poison Blade|PS Armor|Pursuit|Rebirth|Reload|Resonance|Revive|Rumble(?::\s*\d+)?|Rush(?::[^\]]+)?|Seal|Shamanism|Show Up|Six Heaven Rush|Soar|Solo Part|Soul Awaken|Soul Burst(?::[^\]]+)?|Soul Drive|Soul Magic|Sound Speed|Spellbind|Spell Blight|Spirit Soul(?::[^\]]+)?|Stampede|Super Boost|Super Unleash|Supreme Clash|Trans-Am(?::[^\]]+)?|Tribute(?::[^\]]+)?|Trigger Counter|True-Awaken|True-Clash|True-Curse|Twinkle(?::[^\]]+)?|Ultra Armor(?::[^\]]+)?|Ultra Holy Life|Unleash|Unsheathe|Windstorm(?::\s*\d+)?|Zero Counter|Flash|Twinkle Necromancy)\]|【(連鎖(?::[^】]+)?|激突|呪撃|粉砕|大粉砕|装甲(?::[^】]+)?|重装甲(?::[^】]+)?|超装甲(?::[^】]+)?|神速|烈神速|抜刀|覚醒|超覚醒|不老不死|ソウルドライブ|バースト(?::[^】]+)?|ソウルバースト|アクセル(?::[^】]+)?|煌臨(?::[^】]+)?|契約煌臨(?::[^】]+)?|顕現|ミラージュ(?::[^】]+)?|転醒|影武者|六天連鎖(?::[^】]+)?|連刃|強襲(?::[^】]+)?|旋風(?::[^】]+)?|聖命|氷壁(?::[^】]+)?)】/gi;
+  const allKwPattern = /\[(A\.T\.\s*Field|Accel(?::[^\]]+)?|Advent(?::[^\]]+)?|Amplify|Appeal|Armed Intervention|Armor(?::[^\]]+)?|Assault(?::\s*\d+)?|Assemble|Awaken|Barrage|Bombardment|Brilliance|Buddy|Bunshin(?::\s*\d+)?|Burst(?::[^\]]+)?|Burst S|Bushido|Cast Off|Catalyze|Change|Charge|Clash|Clock Up|Consecutive Blade|Contract Armor|Contract Awaken|Contract Unleash|Core Charge|Count Break|Crush|Curse|Digivolution(?::[^\]]+)?|Digivolve(?::[^\]]+)?|Dispersion|Diva Rush|Double Drive|Draw Lock|Emperor Road|Fast Draw|Fierce Windstorm|Flashing Swift|Fortress|Friend|Funnel|God Strike|Grand Assault|Grand Field|Grand Ice Wall|Grand Skill|Grandphosis|Great Assault|Great Crush|Heavenly Light|Heavy Armor(?::[^\]]+)?|Heavy Exhaust(?::[^\]]+)?|High Speed|Holy Life|Ice Wall(?::[^\]]+)?|Immortality(?::[^\]]+)?|Infinite Blade|Infinite Flame|Kagemusha|Leap|Level Up|Load(?::\s*\d+)?|Manifest(?::[^\]]+)?|Mani(?::[^\]]+)?|Mirage(?::[^\]]+)?|My Unit|NT-D|On Stage|Plunder|Poison Blade|PS Armor|Pursuit|(?:Zero\s+|Sortie\s+|Illusive\s+|Lucent\s+)?Rebirth(?::\s*\d+)?|Phantom Return|Phantom Awaken|Reload|Resonance|Revive|Rumble(?::\s*\d+)?|Rush(?::[^\]]+)?|Seal|Shamanism|Show Up|Six Heaven Rush|Soar|Solo Part|Soul Awaken|Soul Burst(?::[^\]]+)?|Soul Drive|Soul Magic|Sound Speed|Spellbind|Spell Blight|Spirit Soul(?::[^\]]+)?|Stampede|Super Boost|Super Unleash|Supreme Clash|Trans-Am(?::[^\]]+)?|Tribute(?::[^\]]+)?|Trigger Counter|True-Awaken|True-Clash|True-Curse|Twinkle(?::[^\]]+)?|Ultra Armor(?::[^\]]+)?|Ultra Holy Life|Unleash|Unsheathe|Windstorm(?::\s*\d+)?|Zero Counter|Flash|Twinkle Necromancy)\]|【(連鎖(?::[^】]+)?|激突|呪撃|粉砕|大粉砕|装甲(?::[^】]+)?|重装甲(?::[^】]+)?|超装甲(?::[^】]+)?|神速|烈神速|抜刀|覚醒|超覚醒|不老不死|ソウルドライブ|バースト(?::[^】]+)?|ソウルバースト|アクセル(?::[^】]+)?|煌臨(?::[^】]+)?|契約煌臨(?::[^】]+)?|顕現|ミラージュ(?::[^】]+)?|転醒|零転醒|出撃転醒|幻転醒|影武者|六天連鎖(?::[^】]+)?|連刃|強襲(?::[^】]+)?|旋風(?::[^】]+)?|聖命|氷壁(?::[^】]+)?)】/gi;
 
   safe = safe.replace(allKwPattern, (match) => {
     let cls = 'kw-generic';
@@ -922,7 +922,7 @@ function formatEffectKeywordsInModal(text) {
     else if (low.includes('change') || low.includes('チェンジ')) cls = 'kw-change';
     else if (low.includes('charge')) cls = 'kw-charge';
     else if (low.includes('rush') || low.includes('連鎖')) cls = 'kw-rush';
-    else if (low.includes('rebirth') || low.includes('転醒')) cls = 'kw-rebirth';
+    else if (low.includes('rebirth') || low.includes('転醒') || low.includes('phantom return') || low.includes('phantom awaken')) cls = 'kw-rebirth';
     else if (low.includes('kagemusha') || low.includes('影武者')) cls = 'kw-kagemusha';
     else if (low.includes('unsheathe') || low.includes('抜刀')) cls = 'kw-unsheathe';
     else if (low.includes('unleash')) cls = 'kw-unleash';
@@ -970,6 +970,14 @@ const DeckQuickView = {
 
   init() {
     if (typeof document === 'undefined') return;
+    // Do not inject floating deck widget on the Arena page
+    if (window.location.pathname.includes('arena') || document.getElementById('battleArena') || document.querySelector('.battle-arena-section')) {
+      const existing = document.getElementById('deckQuickWidgetWrap');
+      if (existing) {
+        try { existing.remove(); } catch (e) {}
+      }
+      return;
+    }
     this.injectDOM();
     this.update();
   },
@@ -1685,7 +1693,7 @@ const ModalCardArtworkManager = {
         indicator.style.display = 'block';
         if (current.is_alternate) {
           indicator.className = 'modal-art-indicator is-alt';
-          indicator.textContent = `活動異圖 · ${current.name} (${this.currentIndex + 1}/${total})`;
+          indicator.textContent = `Alternate Art · ${current.name} (${this.currentIndex + 1}/${total})`;
         } else {
           indicator.className = 'modal-art-indicator';
           indicator.textContent = `Standard Art (${this.currentIndex + 1}/${total})`;
@@ -2027,6 +2035,185 @@ function renderManualActionsIntoModal(card, fieldUnit, isPlayerField) {
   modalEffect.appendChild(container);
 }
 
+// ══════════════════════════════════════════════════════════
+// REBIRTH / REBORN FORM MANAGER & FLIP NAVIGATION
+// ══════════════════════════════════════════════════════════
+window.__rebirthCatalog = null;
+
+async function initRebirthCatalog() {
+  if (window.__rebirthCatalog) return window.__rebirthCatalog;
+  try {
+    const res = await fetch('/api/rebirth-catalog');
+    if (res.ok) {
+      window.__rebirthCatalog = await res.json();
+    } else {
+      const res2 = await fetch('./data/rebirth_catalog.json');
+      if (res2.ok) {
+        window.__rebirthCatalog = await res2.json();
+      }
+    }
+  } catch (e) {
+    // Fallback quietly
+  }
+  return window.__rebirthCatalog;
+}
+
+if (typeof window !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => initRebirthCatalog());
+  } else {
+    initRebirthCatalog();
+  }
+}
+
+function getCardRebirthInfo(cardOrName) {
+  if (!cardOrName) return null;
+  // If the card already has verified rebirth metadata from the DB/API
+  if (typeof cardOrName === 'object' && cardOrName.rebirth && cardOrName.rebirth.partner_name) {
+    return cardOrName.rebirth;
+  }
+  const name = typeof cardOrName === 'string' ? cardOrName : cardOrName.name;
+  const num = typeof cardOrName === 'object' ? cardOrName.card_number : null;
+  if (!name && !num) return null;
+
+  // Check verified rebirth catalog only (from Category:Rebirth / Rebirth_Side_A / Rebirth_Side_B)
+  // Cards with similar names or brackets/dashes do NOT count as rebirth forms!
+  if (window.__rebirthCatalog) {
+    if (num && window.__rebirthCatalog[num]) {
+      return window.__rebirthCatalog[num];
+    }
+    if (name && window.__rebirthCatalog[name]) {
+      return window.__rebirthCatalog[name];
+    }
+    // Also check normalized brackets if applicable
+    const normalizedName = name.replace(/［/g, '[').replace(/］/g, ']');
+    if (window.__rebirthCatalog[normalizedName]) {
+      return window.__rebirthCatalog[normalizedName];
+    }
+  }
+  return null;
+}
+
+function renderRebirthTagInModal(card) {
+  if (!card) return;
+  const rebirth = getCardRebirthInfo(card);
+
+  let tagEl = document.getElementById('modalRebirthTag');
+  if (!tagEl) {
+    const badgesEl = document.getElementById('modalBadges');
+    if (badgesEl && badgesEl.parentNode) {
+      tagEl = document.createElement('div');
+      tagEl.id = 'modalRebirthTag';
+      tagEl.className = 'modal-rebirth-tag';
+      badgesEl.parentNode.insertBefore(tagEl, badgesEl);
+    }
+  }
+
+  const rebirthBtn = document.getElementById('modalRebirthBtn');
+
+  if (!rebirth || !rebirth.partner_name) {
+    if (tagEl) {
+      tagEl.style.display = 'none';
+      tagEl.innerHTML = '';
+    }
+    if (rebirthBtn) rebirthBtn.style.display = 'none';
+    return;
+  }
+
+  const cardType = esc(rebirth.card_type || card.type || 'Spirit');
+  const partnerName = rebirth.partner_name;
+  const isSideB = rebirth.side === 'B';
+
+  const relationHtml = isSideB
+    ? `This <span class="rebirth-type-pill">${cardType}</span> is the <span class="rebirth-reborn-pill">Reborn</span> form of <a href="javascript:void(0)" class="rebirth-target-link" onclick="flipModalRebirthCard('${escapeJsStr(partnerName)}'); return false;" title="Click to view original form: ${esc(partnerName)}">${esc(partnerName)}</a>.`
+    : `This <span class="rebirth-type-pill">${cardType}</span> can be <span class="rebirth-reborn-pill">Reborn</span> into <a href="javascript:void(0)" class="rebirth-target-link" onclick="flipModalRebirthCard('${escapeJsStr(partnerName)}'); return false;" title="Click to view Reborn form: ${esc(partnerName)}">${esc(partnerName)}</a>.`;
+
+  if (tagEl) {
+    tagEl.innerHTML = `
+      <div class="rebirth-tag-inner">
+        <span class="rebirth-tag-icon" title="Flip / Rebirth">🔄</span>
+        <span class="rebirth-tag-text">${relationHtml}</span>
+      </div>
+    `;
+    tagEl.style.display = 'block';
+  }
+
+  if (rebirthBtn) {
+    rebirthBtn.style.display = 'inline-flex';
+    rebirthBtn.innerHTML = isSideB ? '🔄 Base Form' : '🔄 Reborn Form';
+    rebirthBtn.title = isSideB ? `Flip to Base form: ${partnerName}` : `Flip to Reborn form: ${partnerName}`;
+    rebirthBtn.onclick = () => flipModalRebirthCard(partnerName);
+  }
+}
+
+window.flipModalRebirthCard = function(targetName) {
+  let partner = targetName;
+  if (!partner) {
+    const card = S.currentCard;
+    const info = getCardRebirthInfo(card);
+    if (info && info.partner_name) {
+      partner = info.partner_name;
+    }
+  }
+  if (!partner) return;
+
+  const art = document.getElementById('modalArt');
+  if (art) {
+    art.style.transition = 'transform 0.22s ease-in, opacity 0.22s ease-in';
+    art.style.transform = 'scaleX(0)';
+    setTimeout(() => {
+      openCardDetail(partner, null).then(() => {
+        if (art) {
+          art.style.transform = 'scaleX(1)';
+          art.style.opacity = '1';
+        }
+      });
+    }, 180);
+  } else {
+    openCardDetail(partner, null);
+  }
+};
+
+function formatCardLevels(card) {
+  if (!card) return 'No level data.';
+  if (card.raw_levels && typeof card.raw_levels === 'string' && card.raw_levels.trim().length > 0) {
+    return card.raw_levels;
+  }
+  const levels = card.levels;
+  if (!levels) return 'No level data.';
+  if (typeof levels === 'string') return levels;
+
+  if (Array.isArray(levels)) {
+    return levels.map(l => {
+      if (typeof l === 'object' && l !== null) {
+        const lvl = l.level ?? l.lv ?? '?';
+        const cores = l.cores ?? l.cost ?? l.core ?? 1;
+        const coreWord = cores === 1 ? 'core' : 'cores';
+        const bp = l.bp ? `, ${l.bp} BP` : '';
+        return `Level ${lvl}: ${cores} ${coreWord}${bp}`;
+      }
+      return String(l);
+    }).join('\n');
+  }
+
+  if (typeof levels === 'object') {
+    const entries = Object.entries(levels);
+    if (entries.length === 0) return 'No level data.';
+    return entries.map(([key, val]) => {
+      if (typeof val === 'object' && val !== null) {
+        const lvl = val.level ?? key.replace(/^LV/i, '') ?? key;
+        const cores = val.cores ?? val.cost ?? val.core ?? 1;
+        const coreWord = cores === 1 ? 'core' : 'cores';
+        const bp = val.bp ? `, ${val.bp} BP` : '';
+        return `Level ${lvl}: ${cores} ${coreWord}${bp}`;
+      }
+      return `${key}: ${val}`;
+    }).join('\n');
+  }
+
+  return String(levels);
+}
+
 async function openCardDetail(name, contextList, cardUid = null) {
   const modal = document.getElementById('cardModal');
   if (!modal) return;
@@ -2041,6 +2228,15 @@ async function openCardDetail(name, contextList, cardUid = null) {
   document.getElementById('modalEffect').innerHTML = '';
   document.getElementById('modalFlavor').style.display = 'none';
   document.getElementById('modalSets').innerHTML = '';
+  const rebirthTag = document.getElementById('modalRebirthTag');
+  if (rebirthTag) {
+    rebirthTag.style.display = 'none';
+    rebirthTag.innerHTML = '';
+  }
+  const rebirthBtn = document.getElementById('modalRebirthBtn');
+  if (rebirthBtn) {
+    rebirthBtn.style.display = 'none';
+  }
   if (typeof initCardFoilTilt === 'function') {
     initCardFoilTilt();
   }
@@ -2466,11 +2662,7 @@ async function openCardDetail(name, contextList, cardUid = null) {
     if (memCard) {
       if (memCard.image_url) document.getElementById('modalArt').src = window.cleanCardImageUrl(memCard.image_url);
       if (memCard.kanji) document.getElementById('modalJpName').textContent = memCard.kanji;
-      if (memCard.raw_levels) {
-        document.getElementById('modalLevels').textContent = memCard.raw_levels;
-      } else if (memCard.levels && Array.isArray(memCard.levels)) {
-        document.getElementById('modalLevels').textContent = memCard.levels.map(l => `Level ${l.level}: ${l.cores} core, ${l.bp} BP`).join('\n');
-      }
+      document.getElementById('modalLevels').textContent = formatCardLevels(memCard);
       if (memCard.effect) {
         document.getElementById('modalEffect').innerHTML = formatEffectKeywordsInModal(memCard.effect);
         renderManualActionsIntoModal(memCard, fieldUnit, isPlayerField);
@@ -2480,6 +2672,7 @@ async function openCardDetail(name, contextList, cardUid = null) {
         fl.textContent = '"' + memCard.flavor + '"';
         fl.style.display = 'block';
       }
+      renderRebirthTagInModal(memCard);
     }
   }
 
@@ -2515,7 +2708,9 @@ async function openCardDetail(name, contextList, cardUid = null) {
     const families = card.families || (card.family ? [card.family] : []);
     families.forEach(f => bb.innerHTML += `<a class="badge badge-family" href="./browse.html?family=${encodeURIComponent(f)}" style="cursor:pointer;text-decoration:none;" title="Explore ${esc(f)} family">${esc(f)} ↗</a>`);
 
-    document.getElementById('modalLevels').textContent = card.levels || 'No level data.';
+    renderRebirthTagInModal(card);
+
+    document.getElementById('modalLevels').textContent = formatCardLevels(card);
     document.getElementById('modalEffect').innerHTML = formatEffectKeywordsInModal(card.effect || card.summary || '');
     renderManualActionsIntoModal(card, fieldUnit, isPlayerField);
 

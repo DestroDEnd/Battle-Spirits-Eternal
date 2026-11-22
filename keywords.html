@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=6.1">
+  <link rel="stylesheet" href="./styles.css?v=7.3">
   <style>
     .keyword-categories-grid {
       display: grid;
@@ -264,6 +264,7 @@
         <button class="btn-modal-outline btn-modal-remove-card" id="modalRemoveDeckBtn" onclick="removeModalCardFromDeck()" style="display:none;">- Remove from Deck</button>
         <button class="btn-modal-outline btn-modal-nav-btn" id="modalSubPrevBtn" onclick="navigateCardModal(-1)" title="Previous Card" style="display:none;">‹ Prev</button>
         <button class="btn-modal-outline btn-modal-nav-btn" id="modalSubNextBtn" onclick="navigateCardModal(1)" title="Next Card" style="display:none;">Next ›</button>
+        <button class="btn-modal-outline btn-modal-rebirth" id="modalRebirthBtn" onclick="flipModalRebirthCard()" style="display:none;" title="Flip / Rebirth form">🔄 Rebirth Form</button>
         <a class="btn-modal-outline" id="modalDownload" href="#" target="_blank">⬇️ Save Art</a>
         <a class="btn-modal-outline" id="modalWikiLink" href="#" target="_blank">Wiki ↗</a>
       </div>
@@ -273,6 +274,7 @@
         <div class="modal-jpname" id="modalJpName"></div>
         <h2 class="modal-title" id="modalTitle"></h2>
       </div>
+      <div class="modal-rebirth-tag" id="modalRebirthTag" style="display:none;"></div>
       <div class="badges" id="modalBadges"></div>
       <div class="info-box">
         <div class="info-box-label">Levels & Battle Points</div>
@@ -321,8 +323,8 @@
 </nav>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/sql-wasm.js"></script>
-  <script src="./wasm_db.js?v=6.1"></script>
-  <script src="./app.js?v=6.1"></script>
+  <script src="./wasm_db.js?v=7.3"></script>
+  <script src="./app.js?v=7.3"></script>
 <script>
 let allKeywords = [];
 let currentCategory = 'all';
@@ -335,8 +337,12 @@ let totalKwCards = 0;
 async function initKeywordsPage() {
   try {
     let res = await fetch('./keywords_data.json');
-    if (!res.ok) res = await fetch('/api/keywords');
-    if (res.ok) {
+    let ct = (res.headers && res.headers.get('content-type')) || '';
+    if (!res.ok || ct.includes('text/html')) {
+      res = await fetch('./api/keywords');
+      ct = (res.headers && res.headers.get('content-type')) || '';
+    }
+    if (res.ok && !ct.includes('text/html')) {
       const data = await res.json();
       allKeywords = data.keywords || [];
     }

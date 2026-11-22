@@ -1,0 +1,169 @@
+[
+  {
+    "batch": 1,
+    "wave": "Wave 1: Combat & Physical Zone Operations",
+    "priority": "P0 - Release Critical",
+    "families": [
+      "CARD_AND_ZONE_OPERATIONS",
+      "BP_AND_COMBAT_OPERATIONS"
+    ],
+    "opcodes": [
+      "SUMMON",
+      "SUMMON_FREE",
+      "SUMMON_THIS_CARD",
+      "SUMMON_MULTI",
+      "DEPLOY_NEXUS",
+      "DESTROY",
+      "BOUNCE",
+      "BOUNCE_TO_DECKBOTTOM",
+      "RETURN_DECK_BOTTOM",
+      "BP_BUFF",
+      "BP_DEBUFF",
+      "SET_BP",
+      "BP_FORMULA",
+      "EXHAUST",
+      "REFRESH",
+      "CANNOT_REFRESH",
+      "FORCE_ATTACK",
+      "FORCE_BLOCK",
+      "CHOOSE_BLOCKER",
+      "TARGET_ATTACK",
+      "PIERCING",
+      "UNBLOCKABLE"
+    ],
+    "testSuites": [
+      "tests/work_package_hij1_operation_variants.test.js",
+      "tests/real_cards_17_strengthened_regression.test.js",
+      "tests/core_game_rules_integrity_corrective.test.js",
+      "tests/timing_triggers_continuous_sba.test.js"
+    ],
+    "status": "IMPLEMENTED_AND_VERIFIED"
+  },
+  {
+    "batch": 2,
+    "wave": "Wave 2: Resource, Deck & Hand Flow",
+    "priority": "P0 - Release Critical",
+    "families": [
+      "CORE_AND_RESOURCE_OPERATIONS",
+      "DECK_AND_HAND_OPERATIONS"
+    ],
+    "opcodes": [
+      "MOVE_CORE",
+      "MOVE_SOUL_CORE",
+      "SWAP_CORES",
+      "EXCHANGE_CORE",
+      "RETRIEVE_CORES",
+      "CORE_CHARGE",
+      "PAY_COST",
+      "COST_MODIFIER",
+      "SEND_CORES_TO_VOID",
+      "BOOST_LIFE",
+      "DRAW",
+      "MILL",
+      "REVEAL_DECKTOP",
+      "LOOK_AT_DECK",
+      "DISCARD",
+      "DISCARD_ZONE",
+      "SALVAGE",
+      "SEARCH_DECK",
+      "DECK_OR_HAND_ACTION",
+      "DECK_ACTION"
+    ],
+    "testSuites": [
+      "tests/work_package_hij1_operation_variants.test.js",
+      "tests/core_game_rules_integrity_corrective.test.js",
+      "tests/work_package_hij2_runtime_atomicity.test.js",
+      "tests/phase3_continuous_and_cost_gating.test.js"
+    ],
+    "status": "IMPLEMENTED_AND_VERIFIED"
+  },
+  {
+    "batch": 3,
+    "wave": "Wave 3: Decisions, Restrictions & Continuous Rules",
+    "priority": "P1 - High Priority",
+    "families": [
+      "TARGETING_AND_DECISION_OPERATIONS",
+      "CONDITIONS_AND_RESTRICTIONS",
+      "CONTINUOUS_TIMING_AND_TRIGGER_OPERATIONS"
+    ],
+    "opcodes": [
+      "TARGET",
+      "TARGET_SELECT",
+      "TARGET_CARD",
+      "SELECT_TARGET",
+      "TARGET_CARDS",
+      "CHOOSE_TARGETS",
+      "CHOOSE_COLOR",
+      "CHOOSE_LEVEL",
+      "CHOOSE_FAMILY",
+      "OPPONENT_CHOICE",
+      "PLAY_CONDITION",
+      "RESTRICTION",
+      "GLOBAL_RESTRICTION",
+      "COMBAT_RESTRICTION",
+      "IMMUNITY",
+      "INDESTRUCTIBLE",
+      "NEGATE_EFFECT",
+      "LIMIT_ONCE_PER_TURN",
+      "NON_STACKABLE",
+      "CONTINUOUS_RULE",
+      "REPLACEMENT_EFFECT",
+      "TRIGGERED_WATCHER",
+      "TRIGGER_CONDITION",
+      "ACTIVATE_TRIGGER",
+      "TIMING_MODIFIER",
+      "STEP_MODIFIER",
+      "END_STEP",
+      "END_TURN"
+    ],
+    "testSuites": [
+      "tests/effect_execution_targeting_conditions.test.js",
+      "tests/timing_triggers_continuous_sba.test.js",
+      "tests/interaction_protocol.test.js",
+      "tests/work_package_k1_batch_02_conditions.test.js",
+      "tests/work_package_k1_batch_05_complex_effects.test.js"
+    ],
+    "status": "IMPLEMENTED_AND_VERIFIED"
+  },
+  {
+    "batch": 4,
+    "wave": "Wave 4: Advanced Mechanics, Keywords & Attributes",
+    "priority": "P1 - High Priority",
+    "families": [
+      "SPECIALIZED_MECHANICS",
+      "KEYWORD_ABILITIES",
+      "SYSTEM_AND_ATTRIBUTE_OPERATIONS"
+    ],
+    "opcodes": [
+      "ADVENT",
+      "ADVENT_COST",
+      "ADVENT_PAY",
+      "ADVENT_RULE",
+      "CONTRACT_ADVENT_RULE",
+      "ACTIVATE_BURST",
+      "ACTIVATE_REBIRTH",
+      "REBIRTH_FLIP",
+      "MIRAGE_SET",
+      "ENTER_SOUL_STATE",
+      "BUNSHIN_SUMMON",
+      "TOKEN_DEPLOYMENT",
+      "GRANDWALKER_CORE_RULE",
+      "ACTIVATE_KEYWORD",
+      "KEYWORD_RULE",
+      "KEYWORD_ABILITY",
+      "ADD_COLOR",
+      "ADD_SYMBOL",
+      "ADD_FAMILY",
+      "ADD_COUNTER",
+      "TREAT_AS_VANILLA",
+      "TREAT_CORE_COUNT",
+      "TREAT_COST"
+    ],
+    "testSuites": [
+      "tests/work_package_k1_batch_03_keywords_prerequisites.test.js",
+      "tests/work_package_hij1_operation_variants.test.js",
+      "tests/work_package_hij_real_cards_e2e.test.js"
+    ],
+    "status": "IMPLEMENTED_AND_VERIFIED"
+  }
+]

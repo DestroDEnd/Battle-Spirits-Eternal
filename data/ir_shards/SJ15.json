@@ -1,1 +1,1647 @@
-{"SJ15-13":{"cardNumber":"SJ15-13","name":"Musha Siegfried","keywords":[],"abilities":[{"id":"SJ15-13#a0","type":"ABILITY","header":{"levels":[1,2,3,4],"levelExplicit":true,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"Awaken - You can put any number of cores from Spirits you control to this Spirit."},"clauses":[{"rawText":"Awaken - You can put any number of cores from Spirits you control to this Spirit.","cleanText":"Awaken - You can put any number of cores from Spirits you control to this Spirit","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]},{"id":"SJ15-13#a1","type":"ABILITY","header":{"levels":[2,3,4],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"While [Soul Core](Soul Core) is on this Spirit, all Spirits with Awaken you control gain +10000 BP."},"clauses":[{"rawText":"While [Soul Core] is on this Spirit, all Spirits with Awaken you control gain +10000 BP.","cleanText":"all Spirits with Awaken you control gain +10000 BP","link":null,"isOptional":false,"isCost":false,"condition":"While [Soul Core] is on this Spirit","duration":null,"op":{"op":"BP_BUFF","amount":10000,"target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"SJ15-08":{"cardNumber":"SJ15-08","name":"Burning Lance Assault","keywords":[],"abilities":[{"id":"SJ15-08#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"During this turn, give one of your Spirits +4000 BP. When only the opposing Spirit/Ultimate is destroyed by that Spirit via BP comparison, draw two cards."},"clauses":[{"rawText":"During this turn, give one of your Spirits +4000 BP.","cleanText":"give one of your Spirits +4000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"BP_BUFF","amount":4000,"target":{"side":"either"}}},{"rawText":"When only the opposing Spirit/Ultimate is destroyed by that Spirit via BP comparison, draw two cards.","cleanText":"When only the opposing Spirit/Ultimate is destroyed by that Spirit via BP comparison, draw two cards","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":2,"chooser":"self","forEach":null}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"SJ15-10":{"cardNumber":"SJ15-10","name":"The ArmoredMothShinobi Zerokage","keywords":[{"name":"Burst","parameter":"s","wave":2,"hook":"burst","bracketed":true,"index":0}],"abilities":[{"id":"SJ15-10#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"BURST","timingLabel":"Burst","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":"AFTER_OPPONENT_SUMMON_EFFECT","isFlash":false,"isMain":false,"cleanBody":"Exhaust an opposing Spirit. When this effect exhausts a 5000 BP or less Spirit, return that Spirit to the deckbottom. After this effect resolves, summon this Spirit card without paying the cost."},"clauses":[{"rawText":"Exhaust an opposing Spirit.","cleanText":"Exhaust an opposing Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","isHeavy":false,"count":1,"target":{"side":"opp","types":["Spirit"]}}},{"rawText":"When this effect exhausts a 5000 BP or less Spirit, return that Spirit to the deckbottom.","cleanText":"When this effect exhausts a 5000 BP or less Spirit, return that Spirit to the deckbottom","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}},{"rawText":"summon this Spirit card without paying the cost.","cleanText":"summon this Spirit card without paying the cost","link":"afterResolves","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_FREE","from":"HAND"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"SJ15-14":{"cardNumber":"SJ15-14","name":"The FierceWarDragon Tenjou","keywords":[],"abilities":[{"id":"SJ15-14#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy every opposing Nexus. For each Nexus destroyed by this effect, draw a card."},"clauses":[{"rawText":"Destroy every opposing Nexus.","cleanText":"Destroy every opposing Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}},{"rawText":"For each Nexus destroyed by this effect, draw a card.","cleanText":"For each Nexus destroyed by this effect, draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":"DISCARDED_COUNT"}}],"unsupported":[]},{"id":"SJ15-14#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"By sending this Spirit's [Soul Core](Soul Core) to your Trash, immediately activate one of your Soul Bursts."},"clauses":[{"rawText":"By sending this Spirit's [Soul Core] to your Trash","cleanText":"By sending this Spirit's [Soul Core] to your Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"ADVENT_SOUL_CORE_ACTION"}},{"rawText":"immediately activate one of your Soul Bursts.","cleanText":"immediately activate one of your Soul Bursts","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"SJ15-18":{"cardNumber":"SJ15-18","name":"The SengokuNinja Souldragon-Haze","keywords":[],"abilities":[{"id":"SJ15-18#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"By destroying an opposing 10000 BP or less Spirit, put two cores from the Void to this Spirit."},"clauses":[{"rawText":"By destroying an opposing 10000 BP or less Spirit","cleanText":"By destroying an opposing 10000 BP or less Spirit","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}},{"rawText":"put two cores from the Void to this Spirit.","cleanText":"put two cores from the Void to this Spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":2,"from":{"zone":"void"},"to":{"zone":"field","target":"self"}}}],"unsupported":[]},{"id":"SJ15-18#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When only the opposing Spirit is destroyed via BP comparison, refresh this Spirit. By sending [Soul Core] (Soul Core) from this Spirit to your Trash, also, exhaust up to two opposing Spirits."},"clauses":[{"rawText":"When only the opposing Spirit is destroyed via BP comparison, refresh this Spirit.","cleanText":"When only the opposing Spirit is destroyed via BP comparison, refresh this Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":"self"}},{"rawText":"By sending [Soul Core] (Soul Core) from this Spirit to your Trash, also, exhaust up to two opposing Spirits.","cleanText":"By sending [Soul Core] (Soul Core) from this Spirit to your Trash, also, exhaust up to two opposing Spirits","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"SJ15-17":{"cardNumber":"SJ15-17","name":"The SengokuSeaEmperor Souldragon-Tide","keywords":[],"abilities":[{"id":"SJ15-17#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing Cost 8 or less Spirit."},"clauses":[{"rawText":"Destroy an opposing Cost 8 or less Spirit.","cleanText":"Destroy an opposing Cost 8 or less Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"costLte":8}}}}],"unsupported":[]},{"id":"SJ15-17#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"The opponent can't use Purple/White/Yellow Magic cards. By sending [Soul Core](Soul Core) from this Spirit to your Trash, also, destroy up to two opposing Cost 6 or less Spirits."},"clauses":[{"rawText":"The opponent can't use Purple/White/Yellow Magic cards.","cleanText":"The opponent can't use Purple/White/Yellow Magic cards","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MAGIC_RESTRICTION"}},{"rawText":"By sending [Soul Core] from this Spirit to your Trash, also, destroy up to two opposing Cost 6 or less Spirits.","cleanText":"By sending [Soul Core] from this Spirit to your Trash, also, destroy up to two opposing Cost 6 or less Spirits","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"SJ15-19":{"cardNumber":"SJ15-19","name":"The SengokuBeastEmperor Souldragon-Flame","keywords":[{"name":"Burst","parameter":"s","wave":2,"hook":"burst","bracketed":true,"index":0}],"abilities":[{"id":"SJ15-19#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"BURST","timingLabel":"Burst","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":"AFTER_YOUR_LIFE_REDUCED","isFlash":false,"isMain":false,"cleanBody":"If your Life is three or less, summon any number of \"Souldragon\"-named Spirit cards from your Hand without paying the cost. After this effect resolves, summon this Spirit card without paying the cost."},"clauses":[{"rawText":"If your Life is three or less, summon any number of \"Souldragon\"-named Spirit cards from your Hand without paying the cost.","cleanText":"summon any number of \"Souldragon\"-named Spirit cards from your Hand without paying the cost","link":null,"isOptional":false,"isCost":false,"condition":"If your Life is three or less","duration":null,"op":{"op":"SUMMON","free":true}},{"rawText":"summon this Spirit card without paying the cost.","cleanText":"summon this Spirit card without paying the cost","link":"afterResolves","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_FREE","from":"HAND"}}],"unsupported":[]},{"id":"SJ15-19#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Draw a card. By sending [Soul Core](Soul Core) from this Spirit to your Trash, also, destroy up to two opposing 7000 BP or less Spirits."},"clauses":[{"rawText":"Draw a card.","cleanText":"Draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}},{"rawText":"By sending [Soul Core] from this Spirit to your Trash, also, destroy up to two opposing 7000 BP or less Spirits.","cleanText":"By sending [Soul Core] from this Spirit to your Trash, also, destroy up to two opposing 7000 BP or less Spirits","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"SJ15-06":{"cardNumber":"SJ15-06","name":"The ThreeVassalsDragon Fuse Cland","keywords":[],"abilities":[{"id":"SJ15-06#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy any number of opposing Spirits up to a total of 5000 BP. If [Soul Core](Soul Core) was used to pay the summon cost, increase the limit of this \"BP Destruction Effect\" by +5000."},"clauses":[{"rawText":"Destroy any number of opposing Spirits up to a total of 5000 BP.","cleanText":"Destroy any number of opposing Spirits up to a total of 5000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","mode":"TOTAL_BP_LTE","maxTotalBp":5000,"target":{"side":"opp","types":["Spirit"]}}},{"rawText":"If [Soul Core] was used to pay the summon cost, increase the limit of this \"BP Destruction Effect\" by +5000.","cleanText":"increase the limit of this \"BP Destruction Effect\" by +5000","link":null,"isOptional":false,"isCost":false,"condition":"If [Soul Core] was used to pay the summon cost","duration":null,"op":{"op":"BP_BUFF","amount":5000,"target":{"side":"either"}}}],"unsupported":[]},{"id":"SJ15-06#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing braved Brave. Or, destroy an opposing Nexus."},"clauses":[{"rawText":"Destroy an opposing braved Brave.","cleanText":"Destroy an opposing braved Brave","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Brave"]}}},{"rawText":"destroy an opposing Nexus.","cleanText":"destroy an opposing Nexus","link":"or","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Nexus"]}}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"SJ15-05":{"cardNumber":"SJ15-05","name":"The ThreeVassalsDragon Ingenious Hyoubu","keywords":[],"abilities":[{"id":"SJ15-05#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Return all \"Ultimate Trooper\" family Spirit cards from your Trash to the Hand."},"clauses":[{"rawText":"Return all \"Ultimate Trooper\" family Spirit cards from your Trash to the Hand.","cleanText":"Return all \"Ultimate Trooper\" family Spirit cards from your Trash to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]},{"id":"SJ15-05#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"MAIN_STEP","timingLabel":"Your Main Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"While you control [The ThreeVassalsDragon Lancefighting Shougen], [The ThreeVassalsDragon Ingenious Hyoubu] and [The ThreeVassalsDragon Fuse Cland], at least one of each, all [The WarParamountWarDragon BuraiDragon] in your Hand becomes Cost 4."},"clauses":[{"rawText":"While you control [The ThreeVassalsDragon Lancefighting Shougen], [The ThreeVassalsDragon Ingenious Hyoubu] and [The ThreeVassalsDragon Fuse Cland], at least one of each, all [The WarParamountWarDragon BuraiDragon] in your Hand becomes Cost 4.","cleanText":"[The ThreeVassalsDragon Ingenious Hyoubu] and [The ThreeVassalsDragon Fuse Cland], at least one of each, all [The WarParamountWarDragon BuraiDragon] in your Hand becomes Cost 4","link":null,"isOptional":false,"isCost":false,"condition":"While you control [The ThreeVassalsDragon Lancefighting Shougen]","duration":null,"op":{"op":"COST_MODIFIER"}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"SJ15-04":{"cardNumber":"SJ15-04","name":"The ThreeVassalsDragon Lancefighting Shougen","keywords":[],"abilities":[{"id":"SJ15-04#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_DESTROYED","timingLabel":"When Destroyed","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing 5000 BP or less Spirit. If [Soul Core](Soul Core) is on this Spirit, also, draw two cards."},"clauses":[{"rawText":"Destroy an opposing 5000 BP or less Spirit.","cleanText":"Destroy an opposing 5000 BP or less Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"bpLte":5000}}}},{"rawText":"If [Soul Core] is on this Spirit, also, draw two cards.","cleanText":"also, draw two cards","link":null,"isOptional":false,"isCost":false,"condition":"If [Soul Core] is on this Spirit","duration":null,"op":{"op":"DRAW","count":2,"chooser":"self","forEach":null}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"SJ15-01":{"cardNumber":"SJ15-01","name":"The WarParamountFlameDragon Souldragon-Blaze","keywords":[{"name":"Consecutive Blade","parameter":null,"wave":1,"hook":"consecutive_blade","bracketed":true,"index":118}],"abilities":[{"id":"SJ15-01#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"All your \"Ultimate Trooper\"/\"War Dragon\" family Spirits gain +5000 BP."},"clauses":[{"rawText":"All your \"Ultimate Trooper\"/\"War Dragon\" family Spirits gain +5000 BP.","cleanText":"All your \"Ultimate Trooper\"/\"War Dragon\" family Spirits gain +5000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BP_BUFF","amount":5000,"target":{"side":"either"}}}],"unsupported":[]},{"id":"SJ15-01#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Consecutive Blade","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"By sending [Soul Core] (Soul Core) from this Spirit to your Trash, the opponent must block with two of their Spirits/Ultimates if possible, and simultaneously battle this Spirit."},"clauses":[{"rawText":"By sending [Soul Core] (Soul Core) from this Spirit to your Trash","cleanText":"By sending [Soul Core] (Soul Core) from this Spirit to your Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_SOUL_CORE"}},{"rawText":"the opponent must block with two of their Spirits/Ultimates if possible, and simultaneously battle this Spirit.","cleanText":"the opponent must block with two of their Spirits/Ultimates if possible, and simultaneously battle this Spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"COMBAT_RULE"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"SJ15-07R":{"cardNumber":"SJ15-07R","name":"The WarParamountWarDragon BuraiDragon","keywords":[],"abilities":[{"id":"SJ15-07R#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your \"Ultimate Trooper\" family Spirit attacks, destroy an opposing Spirit/Ultimate with BP equal or inferior to that Spirit's."},"clauses":[{"rawText":"When your \"Ultimate Trooper\" family Spirit attacks, destroy an opposing Spirit/Ultimate with BP equal or inferior to that Spirit's.","cleanText":"When your \"Ultimate Trooper\" family Spirit attacks, destroy an opposing Spirit/Ultimate with BP equal or inferior to that Spirit's","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]},{"id":"SJ15-07R#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"By sending cores from your Life to any of your Spirits until you have one Life left, during this turn, all your \"Ultimate Trooper\" family Spirits get +5000 BP and one extra Red symbol."},"clauses":[{"rawText":"By sending cores from your Life to any of your Spirits until you have one Life left","cleanText":"By sending cores from your Life to any of your Spirits until you have one Life left","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"during this turn, all your \"Ultimate Trooper\" family Spirits get +5000 BP and one extra Red symbol.","cleanText":"all your \"Ultimate Trooper\" family Spirits get +5000 BP and one extra Red symbol","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"BP_BUFF","amount":5000,"target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"SJ15-09":{"cardNumber":"SJ15-09","name":"The WarParamount AshuraDragon","keywords":[],"abilities":[{"id":"SJ15-09#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending [Soul Core](Soul Core) on this Spirit to your Trash, destroy one of your Spirits, and add all of that Spirit's BP and symbols to this Spirit."},"clauses":[{"rawText":"By sending [Soul Core] on this Spirit to your Trash","cleanText":"By sending [Soul Core] on this Spirit to your Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_SOUL_CORE"}},{"rawText":"destroy one of your Spirits","cleanText":"destroy one of your Spirits","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}},{"rawText":"add all of that Spirit's BP and symbols to this Spirit.","cleanText":"add all of that Spirit's BP and symbols to this Spirit","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_SYMBOL"}}],"unsupported":[]},{"id":"SJ15-09#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your \"Ultimate Trooper\" family Spirit is destroyed, destroy an opposing 5000 BP or less Spirit."},"clauses":[{"rawText":"When your \"Ultimate Trooper\" family Spirit is destroyed, destroy an opposing 5000 BP or less Spirit.","cleanText":"When your \"Ultimate Trooper\" family Spirit is destroyed, destroy an opposing 5000 BP or less Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"bpLte":5000}}}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"SJ15-02":{"cardNumber":"SJ15-02","name":"The WarParamount MaximumDragon","keywords":[],"abilities":[{"id":"SJ15-02#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This card is limited to one copy per deck."},"clauses":[{"rawText":"This card is limited to one copy per deck.","cleanText":"This card is limited to one copy per deck","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DECK_CONSTRUCTION_RULE"}}],"unsupported":[]}],"compiledClausesCount":1,"unsupportedClausesCount":0,"isFullySupported":true},"SJ15-16":{"cardNumber":"SJ15-16","name":"Twin Heavens United","keywords":[{"name":"Burst","parameter":"s","wave":2,"hook":"burst","bracketed":true,"index":0}],"abilities":[{"id":"SJ15-16#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"BURST","timingLabel":"Burst","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":"AFTER_YOUR_LIFE_REDUCED","isFlash":false,"isMain":false,"cleanBody":"Destroy two opposing 5000 BP or less Spirits. When two Spirits are destroyed by this effect, draw a card. Then by paying the cost, activate this card's Main effect."},"clauses":[{"rawText":"Destroy two opposing 5000 BP or less Spirits.","cleanText":"Destroy two opposing 5000 BP or less Spirits","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":2,"target":{"side":"opp","types":["Spirit"],"filters":{"bpLte":5000}}}},{"rawText":"When two Spirits are destroyed by this effect, draw a card.","cleanText":"When two Spirits are destroyed by this effect, draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}},{"rawText":"Then by paying the cost, activate this card's Main effect.","cleanText":"Then by paying the cost, activate this card's Main effect","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ACTIVATE_CARD_EFFECT","timing":"MAIN","payCost":true}}],"unsupported":[]},{"id":"SJ15-16#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"MAIN","timingLabel":"Main","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":true,"cleanBody":"Draw two cards."},"clauses":[{"rawText":"Draw two cards.","cleanText":"Draw two cards","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":2,"chooser":"self","forEach":null}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "SJ15-13": {
+    "cardNumber": "SJ15-13",
+    "name": "Musha Siegfried",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SJ15-13#AB_FLASH_NONE_LV1_LV2_LV3_LV4_b6dc18f6d74fa6ddb2d5f038814fa69d60f5e75f9a4c5300a4ea2ecb2889c45e_41e064e2a4dcdd79a9cd4ef6a8228118",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Awaken - You can put any number of cores from Spirits you control to this Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Awaken - You can put any number of cores from Spirits you control to this Spirit.",
+            "cleanText": "Awaken - You can put any number of cores from Spirits you control to this Spirit",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ15-13#a0",
+        "physicalId": "SJ15-13#AB_FLASH_NONE_LV1_LV2_LV3_LV4_b6dc18f6d74fa6ddb2d5f038814fa69d60f5e75f9a4c5300a4ea2ecb2889c45e_41e064e2a4dcdd79a9cd4ef6a8228118",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_LV4_b6dc18f6d74fa6ddb2d5f038814fa69d60f5e75f9a4c5300a4ea2ecb2889c45e_41e064e2a4dcdd79a9cd4ef6a8228118"
+      },
+      {
+        "id": "SJ15-13#AB_PASSIVE_NONE_LV2_LV3_LV4_5bfc70b29133101c7529641fb8f44925a9b23734b863dc7b93107b9b98659011_d82df15a4f895ccd9d6e67b6d83fdd6b",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3,
+            4
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While [Soul Core](Soul Core) is on this Spirit, all Spirits with Awaken you control gain +10000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "While [Soul Core] is on this Spirit, all Spirits with Awaken you control gain +10000 BP.",
+            "cleanText": "all Spirits with Awaken you control gain +10000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While [Soul Core] is on this Spirit",
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 10000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ15-13#a1",
+        "physicalId": "SJ15-13#AB_PASSIVE_NONE_LV2_LV3_LV4_5bfc70b29133101c7529641fb8f44925a9b23734b863dc7b93107b9b98659011_d82df15a4f895ccd9d6e67b6d83fdd6b",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV2_LV3_LV4_5bfc70b29133101c7529641fb8f44925a9b23734b863dc7b93107b9b98659011_d82df15a4f895ccd9d6e67b6d83fdd6b"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ15-08": {
+    "cardNumber": "SJ15-08",
+    "name": "Burning Lance Assault",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SJ15-08#AB_FLASH_NONE_LV1_LV2_LV3_ee4f76f4c5be2c7b4afa4b4856a4e7e5d0d7d74510adb880028c4db381afb596_6343a0482793a9db427546ed468e1f06",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, give one of your Spirits +4000 BP. When only the opposing Spirit/Ultimate is destroyed by that Spirit via BP comparison, draw two cards."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, give one of your Spirits +4000 BP.",
+            "cleanText": "give one of your Spirits +4000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 4000,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "When only the opposing Spirit/Ultimate is destroyed by that Spirit via BP comparison, draw two cards.",
+            "cleanText": "When only the opposing Spirit/Ultimate is destroyed by that Spirit via BP comparison, draw two cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 2,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ15-08#a0",
+        "physicalId": "SJ15-08#AB_FLASH_NONE_LV1_LV2_LV3_ee4f76f4c5be2c7b4afa4b4856a4e7e5d0d7d74510adb880028c4db381afb596_6343a0482793a9db427546ed468e1f06",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_ee4f76f4c5be2c7b4afa4b4856a4e7e5d0d7d74510adb880028c4db381afb596_6343a0482793a9db427546ed468e1f06"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ15-10": {
+    "cardNumber": "SJ15-10",
+    "name": "The ArmoredMothShinobi Zerokage",
+    "keywords": [
+      {
+        "name": "Burst",
+        "parameter": "s",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SJ15-10#AB_BURST_NONE_LV1_LV2_LV3_b992814a427223bf483570df3b0b7824b96a23673ee9fbe193fc16d326295d89_dc82ee6715de773c03e321169a039845",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "BURST",
+          "timingLabel": "Burst",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": "AFTER_OPPONENT_SUMMON_EFFECT",
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Exhaust an opposing Spirit. When this effect exhausts a 5000 BP or less Spirit, return that Spirit to the deckbottom. After this effect resolves, summon this Spirit card without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "Exhaust an opposing Spirit.",
+            "cleanText": "Exhaust an opposing Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "isHeavy": false,
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "When this effect exhausts a 5000 BP or less Spirit, return that Spirit to the deckbottom.",
+            "cleanText": "When this effect exhausts a 5000 BP or less Spirit, return that Spirit to the deckbottom",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "summon this Spirit card without paying the cost.",
+            "cleanText": "summon this Spirit card without paying the cost",
+            "link": "afterResolves",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_FREE",
+              "from": "HAND"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ15-10#a0",
+        "physicalId": "SJ15-10#AB_BURST_NONE_LV1_LV2_LV3_b992814a427223bf483570df3b0b7824b96a23673ee9fbe193fc16d326295d89_dc82ee6715de773c03e321169a039845",
+        "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_b992814a427223bf483570df3b0b7824b96a23673ee9fbe193fc16d326295d89_dc82ee6715de773c03e321169a039845"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ15-14": {
+    "cardNumber": "SJ15-14",
+    "name": "The FierceWarDragon Tenjou",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SJ15-14#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_10c2637e2da54fc232a1955260d44daa472d25ecd6e37f225115b8ae7bf76df5_20270e9fcb3470298e7087fafb17cbed",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy every opposing Nexus. For each Nexus destroyed by this effect, draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy every opposing Nexus.",
+            "cleanText": "Destroy every opposing Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "For each Nexus destroyed by this effect, draw a card.",
+            "cleanText": "For each Nexus destroyed by this effect, draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": "DISCARDED_COUNT"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ15-14#a0",
+        "physicalId": "SJ15-14#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_10c2637e2da54fc232a1955260d44daa472d25ecd6e37f225115b8ae7bf76df5_20270e9fcb3470298e7087fafb17cbed",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_10c2637e2da54fc232a1955260d44daa472d25ecd6e37f225115b8ae7bf76df5_20270e9fcb3470298e7087fafb17cbed"
+      },
+      {
+        "id": "SJ15-14#AB_WHEN_ATTACKS_NONE_LV2_LV3_64acf9267f28895969922fc4f4a86d8f77c9c02089d460af468af32a3d7eac6c_2d8abe0dd73486beb929317c02e6bf63",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By sending this Spirit's [Soul Core](Soul Core) to your Trash, immediately activate one of your Soul Bursts."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending this Spirit's [Soul Core] to your Trash",
+            "cleanText": "By sending this Spirit's [Soul Core] to your Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_SOUL_CORE_ACTION"
+            }
+          },
+          {
+            "rawText": "immediately activate one of your Soul Bursts.",
+            "cleanText": "immediately activate one of your Soul Bursts",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ15-14#a1",
+        "physicalId": "SJ15-14#AB_WHEN_ATTACKS_NONE_LV2_LV3_64acf9267f28895969922fc4f4a86d8f77c9c02089d460af468af32a3d7eac6c_2d8abe0dd73486beb929317c02e6bf63",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_64acf9267f28895969922fc4f4a86d8f77c9c02089d460af468af32a3d7eac6c_2d8abe0dd73486beb929317c02e6bf63"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ15-18": {
+    "cardNumber": "SJ15-18",
+    "name": "The SengokuNinja Souldragon-Haze",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SJ15-18#AB_WHEN_SUMMONED_NONE_LV1_LV2_a912150a6c0ea523fe05340637563eb24e37cf366ad38810b1683f770ab48234_fd4947d787038932911a3a1f903e8fce",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By destroying an opposing 10000 BP or less Spirit, put two cores from the Void to this Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By destroying an opposing 10000 BP or less Spirit",
+            "cleanText": "By destroying an opposing 10000 BP or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "put two cores from the Void to this Spirit.",
+            "cleanText": "put two cores from the Void to this Spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 2,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "field",
+                "target": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ15-18#a0",
+        "physicalId": "SJ15-18#AB_WHEN_SUMMONED_NONE_LV1_LV2_a912150a6c0ea523fe05340637563eb24e37cf366ad38810b1683f770ab48234_fd4947d787038932911a3a1f903e8fce",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_a912150a6c0ea523fe05340637563eb24e37cf366ad38810b1683f770ab48234_fd4947d787038932911a3a1f903e8fce"
+      },
+      {
+        "id": "SJ15-18#AB_WHEN_ATTACKS_NONE_LV2_8a7cd20b83d74329f1f198636481992fa0a7153c90f57204d5121004dc9ad1b3_9a24eecc9634faedbbf22d7dd7e82457",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When only the opposing Spirit is destroyed via BP comparison, refresh this Spirit. By sending [Soul Core] (Soul Core) from this Spirit to your Trash, also, exhaust up to two opposing Spirits."
+        },
+        "clauses": [
+          {
+            "rawText": "When only the opposing Spirit is destroyed via BP comparison, refresh this Spirit.",
+            "cleanText": "When only the opposing Spirit is destroyed via BP comparison, refresh this Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          },
+          {
+            "rawText": "By sending [Soul Core] (Soul Core) from this Spirit to your Trash, also, exhaust up to two opposing Spirits.",
+            "cleanText": "By sending [Soul Core] (Soul Core) from this Spirit to your Trash, also, exhaust up to two opposing Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ15-18#a1",
+        "physicalId": "SJ15-18#AB_WHEN_ATTACKS_NONE_LV2_8a7cd20b83d74329f1f198636481992fa0a7153c90f57204d5121004dc9ad1b3_9a24eecc9634faedbbf22d7dd7e82457",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_8a7cd20b83d74329f1f198636481992fa0a7153c90f57204d5121004dc9ad1b3_9a24eecc9634faedbbf22d7dd7e82457"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ15-17": {
+    "cardNumber": "SJ15-17",
+    "name": "The SengokuSeaEmperor Souldragon-Tide",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SJ15-17#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_e55a4a14b8d4d5ef3a47fd4bdc5f6fdc2f88bfe5ba267f0257d92ddbad4f1dcb_beeceb119295160dc004bddad9570ae4",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Cost 8 or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Cost 8 or less Spirit.",
+            "cleanText": "Destroy an opposing Cost 8 or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 8
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ15-17#a0",
+        "physicalId": "SJ15-17#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_e55a4a14b8d4d5ef3a47fd4bdc5f6fdc2f88bfe5ba267f0257d92ddbad4f1dcb_beeceb119295160dc004bddad9570ae4",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_e55a4a14b8d4d5ef3a47fd4bdc5f6fdc2f88bfe5ba267f0257d92ddbad4f1dcb_beeceb119295160dc004bddad9570ae4"
+      },
+      {
+        "id": "SJ15-17#AB_WHEN_ATTACKS_NONE_LV2_LV3_865191af8ccadf5757349e7bf6de6118179c283606eb453fb487dd19f3fb8f30_b891749b072f9feb863b774e1b197b20",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "The opponent can't use Purple/White/Yellow Magic cards. By sending [Soul Core](Soul Core) from this Spirit to your Trash, also, destroy up to two opposing Cost 6 or less Spirits."
+        },
+        "clauses": [
+          {
+            "rawText": "The opponent can't use Purple/White/Yellow Magic cards.",
+            "cleanText": "The opponent can't use Purple/White/Yellow Magic cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MAGIC_RESTRICTION"
+            }
+          },
+          {
+            "rawText": "By sending [Soul Core] from this Spirit to your Trash, also, destroy up to two opposing Cost 6 or less Spirits.",
+            "cleanText": "By sending [Soul Core] from this Spirit to your Trash, also, destroy up to two opposing Cost 6 or less Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ15-17#a1",
+        "physicalId": "SJ15-17#AB_WHEN_ATTACKS_NONE_LV2_LV3_865191af8ccadf5757349e7bf6de6118179c283606eb453fb487dd19f3fb8f30_b891749b072f9feb863b774e1b197b20",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_865191af8ccadf5757349e7bf6de6118179c283606eb453fb487dd19f3fb8f30_b891749b072f9feb863b774e1b197b20"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ15-19": {
+    "cardNumber": "SJ15-19",
+    "name": "The SengokuBeastEmperor Souldragon-Flame",
+    "keywords": [
+      {
+        "name": "Burst",
+        "parameter": "s",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SJ15-19#AB_BURST_NONE_LV1_LV2_LV3_4dfe93242a357b589683a73c2709d151fcaa8477ee43ac029915f461921ce4ba_939813367a26349e668ed02c6c3ec2a4",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "BURST",
+          "timingLabel": "Burst",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "If your Life is three or less, summon any number of \"Souldragon\"-named Spirit cards from your Hand without paying the cost. After this effect resolves, summon this Spirit card without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "If your Life is three or less, summon any number of \"Souldragon\"-named Spirit cards from your Hand without paying the cost.",
+            "cleanText": "summon any number of \"Souldragon\"-named Spirit cards from your Hand without paying the cost",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If your Life is three or less",
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          },
+          {
+            "rawText": "summon this Spirit card without paying the cost.",
+            "cleanText": "summon this Spirit card without paying the cost",
+            "link": "afterResolves",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_FREE",
+              "from": "HAND"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ15-19#a0",
+        "physicalId": "SJ15-19#AB_BURST_NONE_LV1_LV2_LV3_4dfe93242a357b589683a73c2709d151fcaa8477ee43ac029915f461921ce4ba_939813367a26349e668ed02c6c3ec2a4",
+        "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_4dfe93242a357b589683a73c2709d151fcaa8477ee43ac029915f461921ce4ba_939813367a26349e668ed02c6c3ec2a4"
+      },
+      {
+        "id": "SJ15-19#AB_WHEN_ATTACKS_NONE_LV2_LV3_c87b29ab545368622f375708337248045d54dbebc757321f464419d9a85d09d4_d71fbde53b1a806a451d3a0ecc6faa9e",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Draw a card. By sending [Soul Core](Soul Core) from this Spirit to your Trash, also, destroy up to two opposing 7000 BP or less Spirits."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw a card.",
+            "cleanText": "Draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "By sending [Soul Core] from this Spirit to your Trash, also, destroy up to two opposing 7000 BP or less Spirits.",
+            "cleanText": "By sending [Soul Core] from this Spirit to your Trash, also, destroy up to two opposing 7000 BP or less Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ15-19#a1",
+        "physicalId": "SJ15-19#AB_WHEN_ATTACKS_NONE_LV2_LV3_c87b29ab545368622f375708337248045d54dbebc757321f464419d9a85d09d4_d71fbde53b1a806a451d3a0ecc6faa9e",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_c87b29ab545368622f375708337248045d54dbebc757321f464419d9a85d09d4_d71fbde53b1a806a451d3a0ecc6faa9e"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ15-06": {
+    "cardNumber": "SJ15-06",
+    "name": "The ThreeVassalsDragon Fuse Cland",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SJ15-06#AB_WHEN_SUMMONED_NONE_LV1_LV2_0020abd36016ec15f6222b0751f757ea2ee8ef4a3512714da25e3128750c10e1_82a841726a77cf0bcd2ae889afebcc01",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy any number of opposing Spirits up to a total of 5000 BP. If [Soul Core](Soul Core) was used to pay the summon cost, increase the limit of this \"BP Destruction Effect\" by +5000."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy any number of opposing Spirits up to a total of 5000 BP.",
+            "cleanText": "Destroy any number of opposing Spirits up to a total of 5000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "mode": "TOTAL_BP_LTE",
+              "maxTotalBp": 5000,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "If [Soul Core] was used to pay the summon cost, increase the limit of this \"BP Destruction Effect\" by +5000.",
+            "cleanText": "increase the limit of this \"BP Destruction Effect\" by +5000",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If [Soul Core] was used to pay the summon cost",
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 5000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ15-06#a0",
+        "physicalId": "SJ15-06#AB_WHEN_SUMMONED_NONE_LV1_LV2_0020abd36016ec15f6222b0751f757ea2ee8ef4a3512714da25e3128750c10e1_82a841726a77cf0bcd2ae889afebcc01",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_0020abd36016ec15f6222b0751f757ea2ee8ef4a3512714da25e3128750c10e1_82a841726a77cf0bcd2ae889afebcc01"
+      },
+      {
+        "id": "SJ15-06#AB_WHEN_ATTACKS_NONE_LV2_fe21e3d23c6f5261c0b56f860859556ac2aa80890dec43df7012b4e55f58596e_17e594951fed62c025143563564532e6",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing braved Brave. Or, destroy an opposing Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing braved Brave.",
+            "cleanText": "Destroy an opposing braved Brave",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Brave"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "destroy an opposing Nexus.",
+            "cleanText": "destroy an opposing Nexus",
+            "link": "or",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Nexus"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ15-06#a1",
+        "physicalId": "SJ15-06#AB_WHEN_ATTACKS_NONE_LV2_fe21e3d23c6f5261c0b56f860859556ac2aa80890dec43df7012b4e55f58596e_17e594951fed62c025143563564532e6",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_fe21e3d23c6f5261c0b56f860859556ac2aa80890dec43df7012b4e55f58596e_17e594951fed62c025143563564532e6"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ15-05": {
+    "cardNumber": "SJ15-05",
+    "name": "The ThreeVassalsDragon Ingenious Hyoubu",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SJ15-05#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_1590bebed7ebd80f94f9b2e20ac1bbeccd511378d124a41cfb1219089db04b5d_94dccb16e76334dafd405e0360c7db6a",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Return all \"Ultimate Trooper\" family Spirit cards from your Trash to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "Return all \"Ultimate Trooper\" family Spirit cards from your Trash to the Hand.",
+            "cleanText": "Return all \"Ultimate Trooper\" family Spirit cards from your Trash to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ15-05#a0",
+        "physicalId": "SJ15-05#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_1590bebed7ebd80f94f9b2e20ac1bbeccd511378d124a41cfb1219089db04b5d_94dccb16e76334dafd405e0360c7db6a",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_1590bebed7ebd80f94f9b2e20ac1bbeccd511378d124a41cfb1219089db04b5d_94dccb16e76334dafd405e0360c7db6a"
+      },
+      {
+        "id": "SJ15-05#AB_MAIN_STEP_NONE_LV2_LV3_4b551197c738a9256f391979c26ee434b82109b32e9ffb1f88e37581fa215016_d7d47a88077451baba6779f775d439c9",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "MAIN_STEP",
+          "timingLabel": "Your Main Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While you control [The ThreeVassalsDragon Lancefighting Shougen], [The ThreeVassalsDragon Ingenious Hyoubu] and [The ThreeVassalsDragon Fuse Cland], at least one of each, all [The WarParamountWarDragon BuraiDragon] in your Hand becomes Cost 4."
+        },
+        "clauses": [
+          {
+            "rawText": "While you control [The ThreeVassalsDragon Lancefighting Shougen], [The ThreeVassalsDragon Ingenious Hyoubu] and [The ThreeVassalsDragon Fuse Cland], at least one of each, all [The WarParamountWarDragon BuraiDragon] in your Hand becomes Cost 4.",
+            "cleanText": "[The ThreeVassalsDragon Ingenious Hyoubu] and [The ThreeVassalsDragon Fuse Cland], at least one of each, all [The WarParamountWarDragon BuraiDragon] in your Hand becomes Cost 4",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While you control [The ThreeVassalsDragon Lancefighting Shougen]",
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ15-05#a1",
+        "physicalId": "SJ15-05#AB_MAIN_STEP_NONE_LV2_LV3_4b551197c738a9256f391979c26ee434b82109b32e9ffb1f88e37581fa215016_d7d47a88077451baba6779f775d439c9",
+        "semanticId": "SEM#AB_MAIN_STEP_NONE_LV2_LV3_4b551197c738a9256f391979c26ee434b82109b32e9ffb1f88e37581fa215016_d7d47a88077451baba6779f775d439c9"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ15-04": {
+    "cardNumber": "SJ15-04",
+    "name": "The ThreeVassalsDragon Lancefighting Shougen",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SJ15-04#AB_WHEN_DESTROYED_NONE_LV1_LV2_LV3_5e88bb193fd3a77959497e2bcd7c678c926d850ed8cc3f9803f05fe85b70a0ba_f5f22b8cc1f76b3c8c6c2f05a26628d7",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DESTROYED",
+          "timingLabel": "When Destroyed",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing 5000 BP or less Spirit. If [Soul Core](Soul Core) is on this Spirit, also, draw two cards."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing 5000 BP or less Spirit.",
+            "cleanText": "Destroy an opposing 5000 BP or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 5000
+                }
+              }
+            }
+          },
+          {
+            "rawText": "If [Soul Core] is on this Spirit, also, draw two cards.",
+            "cleanText": "also, draw two cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If [Soul Core] is on this Spirit",
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 2,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ15-04#a0",
+        "physicalId": "SJ15-04#AB_WHEN_DESTROYED_NONE_LV1_LV2_LV3_5e88bb193fd3a77959497e2bcd7c678c926d850ed8cc3f9803f05fe85b70a0ba_f5f22b8cc1f76b3c8c6c2f05a26628d7",
+        "semanticId": "SEM#AB_WHEN_DESTROYED_NONE_LV1_LV2_LV3_5e88bb193fd3a77959497e2bcd7c678c926d850ed8cc3f9803f05fe85b70a0ba_f5f22b8cc1f76b3c8c6c2f05a26628d7"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ15-01": {
+    "cardNumber": "SJ15-01",
+    "name": "The WarParamountFlameDragon Souldragon-Blaze",
+    "keywords": [
+      {
+        "name": "Consecutive Blade",
+        "parameter": null,
+        "wave": 1,
+        "hook": "consecutive_blade",
+        "bracketed": true,
+        "index": 118
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SJ15-01#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_368e720eb080a86950a1828a99861183a60bddc3543dce7520a1b38c5a048fd6_b292927c22b4a7aad58a764e2ca6c30e",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "All your \"Ultimate Trooper\"/\"War Dragon\" family Spirits gain +5000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "All your \"Ultimate Trooper\"/\"War Dragon\" family Spirits gain +5000 BP.",
+            "cleanText": "All your \"Ultimate Trooper\"/\"War Dragon\" family Spirits gain +5000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 5000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ15-01#a0",
+        "physicalId": "SJ15-01#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_368e720eb080a86950a1828a99861183a60bddc3543dce7520a1b38c5a048fd6_b292927c22b4a7aad58a764e2ca6c30e",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_368e720eb080a86950a1828a99861183a60bddc3543dce7520a1b38c5a048fd6_b292927c22b4a7aad58a764e2ca6c30e"
+      },
+      {
+        "id": "SJ15-01#AB_WHEN_ATTACKS_NONE_LV2_LV3_4b48a8a81afa2ae2ececfa436968e3ccbe9288b15b3c37eadcf28237e52e1c38_61339019fdc4693c111525dc7f5760bf",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Consecutive Blade",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By sending [Soul Core] (Soul Core) from this Spirit to your Trash, the opponent must block with two of their Spirits/Ultimates if possible, and simultaneously battle this Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending [Soul Core] (Soul Core) from this Spirit to your Trash",
+            "cleanText": "By sending [Soul Core] (Soul Core) from this Spirit to your Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_SOUL_CORE"
+            }
+          },
+          {
+            "rawText": "the opponent must block with two of their Spirits/Ultimates if possible, and simultaneously battle this Spirit.",
+            "cleanText": "the opponent must block with two of their Spirits/Ultimates if possible, and simultaneously battle this Spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COMBAT_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ15-01#a1",
+        "physicalId": "SJ15-01#AB_WHEN_ATTACKS_NONE_LV2_LV3_4b48a8a81afa2ae2ececfa436968e3ccbe9288b15b3c37eadcf28237e52e1c38_61339019fdc4693c111525dc7f5760bf",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_4b48a8a81afa2ae2ececfa436968e3ccbe9288b15b3c37eadcf28237e52e1c38_61339019fdc4693c111525dc7f5760bf"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ15-07R": {
+    "cardNumber": "SJ15-07R",
+    "name": "The WarParamountWarDragon BuraiDragon",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SJ15-07R#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_0b7e115b33c61bc684ff63101eb3086bbfc9f566f8c16d58602ad276865a03d6_e333a88122a608e09af84fa559b9530f",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your \"Ultimate Trooper\" family Spirit attacks, destroy an opposing Spirit/Ultimate with BP equal or inferior to that Spirit's."
+        },
+        "clauses": [
+          {
+            "rawText": "When your \"Ultimate Trooper\" family Spirit attacks, destroy an opposing Spirit/Ultimate with BP equal or inferior to that Spirit's.",
+            "cleanText": "When your \"Ultimate Trooper\" family Spirit attacks, destroy an opposing Spirit/Ultimate with BP equal or inferior to that Spirit's",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ15-07R#a0",
+        "physicalId": "SJ15-07R#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_0b7e115b33c61bc684ff63101eb3086bbfc9f566f8c16d58602ad276865a03d6_e333a88122a608e09af84fa559b9530f",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_0b7e115b33c61bc684ff63101eb3086bbfc9f566f8c16d58602ad276865a03d6_e333a88122a608e09af84fa559b9530f"
+      },
+      {
+        "id": "SJ15-07R#AB_WHEN_ATTACKS_NONE_LV2_LV3_d1c17441b8bb601627a00b4bc45e5db495eaa8177e445c6f67694b3cedf9d8a3_74504a776dfe3cf9a0981a1cc3fb13c3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By sending cores from your Life to any of your Spirits until you have one Life left, during this turn, all your \"Ultimate Trooper\" family Spirits get +5000 BP and one extra Red symbol."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending cores from your Life to any of your Spirits until you have one Life left",
+            "cleanText": "By sending cores from your Life to any of your Spirits until you have one Life left",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "during this turn, all your \"Ultimate Trooper\" family Spirits get +5000 BP and one extra Red symbol.",
+            "cleanText": "all your \"Ultimate Trooper\" family Spirits get +5000 BP and one extra Red symbol",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 5000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ15-07R#a1",
+        "physicalId": "SJ15-07R#AB_WHEN_ATTACKS_NONE_LV2_LV3_d1c17441b8bb601627a00b4bc45e5db495eaa8177e445c6f67694b3cedf9d8a3_74504a776dfe3cf9a0981a1cc3fb13c3",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_d1c17441b8bb601627a00b4bc45e5db495eaa8177e445c6f67694b3cedf9d8a3_74504a776dfe3cf9a0981a1cc3fb13c3"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ15-09": {
+    "cardNumber": "SJ15-09",
+    "name": "The WarParamount AshuraDragon",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SJ15-09#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_1480a79245ab06022a0b6e00843611e6be853f1de992c4430544e04f24bcb4e5_04d17a5de787bcf2b2876a04eedb4075",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending [Soul Core](Soul Core) on this Spirit to your Trash, destroy one of your Spirits, and add all of that Spirit's BP and symbols to this Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending [Soul Core] on this Spirit to your Trash",
+            "cleanText": "By sending [Soul Core] on this Spirit to your Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_SOUL_CORE"
+            }
+          },
+          {
+            "rawText": "destroy one of your Spirits",
+            "cleanText": "destroy one of your Spirits",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "add all of that Spirit's BP and symbols to this Spirit.",
+            "cleanText": "add all of that Spirit's BP and symbols to this Spirit",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_SYMBOL"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ15-09#a0",
+        "physicalId": "SJ15-09#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_1480a79245ab06022a0b6e00843611e6be853f1de992c4430544e04f24bcb4e5_04d17a5de787bcf2b2876a04eedb4075",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_1480a79245ab06022a0b6e00843611e6be853f1de992c4430544e04f24bcb4e5_04d17a5de787bcf2b2876a04eedb4075"
+      },
+      {
+        "id": "SJ15-09#AB_ATTACK_STEP_NONE_LV2_LV3_1fdb098505c9db2e063c1b84bea5566c90600466c30713bd7f5d8a7186b1a2da_1c0327eb8dfba6087762fc8a2b17a163",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your \"Ultimate Trooper\" family Spirit is destroyed, destroy an opposing 5000 BP or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "When your \"Ultimate Trooper\" family Spirit is destroyed, destroy an opposing 5000 BP or less Spirit.",
+            "cleanText": "When your \"Ultimate Trooper\" family Spirit is destroyed, destroy an opposing 5000 BP or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 5000
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ15-09#a1",
+        "physicalId": "SJ15-09#AB_ATTACK_STEP_NONE_LV2_LV3_1fdb098505c9db2e063c1b84bea5566c90600466c30713bd7f5d8a7186b1a2da_1c0327eb8dfba6087762fc8a2b17a163",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_1fdb098505c9db2e063c1b84bea5566c90600466c30713bd7f5d8a7186b1a2da_1c0327eb8dfba6087762fc8a2b17a163"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ15-02": {
+    "cardNumber": "SJ15-02",
+    "name": "The WarParamount MaximumDragon",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SJ15-02#AB_PASSIVE_NONE_LV1_LV2_LV3_3c4db52ac8792d9e6d4fa0ee6092d8312910c6e9771710649982ebb5beaa8b46_007b51c29affe9a8348ee793ddad7c38",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This card is limited to one copy per deck."
+        },
+        "clauses": [
+          {
+            "rawText": "This card is limited to one copy per deck.",
+            "cleanText": "This card is limited to one copy per deck",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DECK_CONSTRUCTION_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ15-02#a0",
+        "physicalId": "SJ15-02#AB_PASSIVE_NONE_LV1_LV2_LV3_3c4db52ac8792d9e6d4fa0ee6092d8312910c6e9771710649982ebb5beaa8b46_007b51c29affe9a8348ee793ddad7c38",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_3c4db52ac8792d9e6d4fa0ee6092d8312910c6e9771710649982ebb5beaa8b46_007b51c29affe9a8348ee793ddad7c38"
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ15-16": {
+    "cardNumber": "SJ15-16",
+    "name": "Twin Heavens United",
+    "keywords": [
+      {
+        "name": "Burst",
+        "parameter": "s",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SJ15-16#AB_BURST_NONE_LV1_LV2_LV3_c5bf1061aae1e0750d1d6d599e0df1b56cbe825c215b9dd5e1aa44970c377c50_8cabec11b1ab62a355257cbf5f1062ae",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "BURST",
+          "timingLabel": "Burst",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy two opposing 5000 BP or less Spirits. When two Spirits are destroyed by this effect, draw a card. Then by paying the cost, activate this card's Main effect."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy two opposing 5000 BP or less Spirits.",
+            "cleanText": "Destroy two opposing 5000 BP or less Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 2,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 5000
+                }
+              }
+            }
+          },
+          {
+            "rawText": "When two Spirits are destroyed by this effect, draw a card.",
+            "cleanText": "When two Spirits are destroyed by this effect, draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "Then by paying the cost, activate this card's Main effect.",
+            "cleanText": "Then by paying the cost, activate this card's Main effect",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ACTIVATE_CARD_EFFECT",
+              "timing": "MAIN",
+              "payCost": true
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ15-16#a0",
+        "physicalId": "SJ15-16#AB_BURST_NONE_LV1_LV2_LV3_c5bf1061aae1e0750d1d6d599e0df1b56cbe825c215b9dd5e1aa44970c377c50_8cabec11b1ab62a355257cbf5f1062ae",
+        "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_c5bf1061aae1e0750d1d6d599e0df1b56cbe825c215b9dd5e1aa44970c377c50_8cabec11b1ab62a355257cbf5f1062ae"
+      },
+      {
+        "id": "SJ15-16#AB_MAIN_NONE_LV1_LV2_LV3_bf176e84fef4777226e614134c818ffa2cc6fae229c0ab8752c2d916dc235498_c9b24c3d1211de491bd64fe17290918d",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "Draw two cards."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw two cards.",
+            "cleanText": "Draw two cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 2,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SJ15-16#a1",
+        "physicalId": "SJ15-16#AB_MAIN_NONE_LV1_LV2_LV3_bf176e84fef4777226e614134c818ffa2cc6fae229c0ab8752c2d916dc235498_c9b24c3d1211de491bd64fe17290918d",
+        "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_bf176e84fef4777226e614134c818ffa2cc6fae229c0ab8752c2d916dc235498_c9b24c3d1211de491bd64fe17290918d"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

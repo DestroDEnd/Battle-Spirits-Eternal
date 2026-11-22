@@ -293,4 +293,12 @@ export function registerWave5Keywords(registry) {
   registry.register({ ...CollabActionKeyword, id: 'Buddy' });
   registry.register({ ...CollabActionKeyword, id: 'Time Vent' });
   registry.register({ ...CollabActionKeyword, id: 'Type: Driver' });
+  registry.register({ ...DivaRushKeyword, id: 'Charge Song' });
+  registry.register({ id: 'Resonance', name: 'Resonance', wave: 5, hooks: {} });
+  registry.register({ id: 'Resonance Blast', name: 'Resonance Blast', wave: 5, hooks: {} });
+  registry.register({ id: 'RioRia Blast', name: 'RioRia Blast', wave: 5, hooks: {} });
+  registry.register({ id: 'Friendshipower', name: 'Friendshipower', wave: 5, hooks: {} });
+  registry.register({ id: 'Love Me Zone', name: 'Love Me Zone', wave: 5, hooks: {} });
+  registry.register({ ...OnStageKeyword, id: 'Moon On The Stage' });
+  registry.register({ ...CollabActionKeyword, id: 'Dan Kuroto Deus Advent' });
 }

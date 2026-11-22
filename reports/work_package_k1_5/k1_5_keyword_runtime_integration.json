@@ -1,0 +1,31 @@
+{
+  "package": "K.1.5",
+  "generatedAt": "2026-11-20T11:22:47.727Z",
+  "keywordDependencyNodesTotal": 516,
+  "families": [
+    {
+      "family": "Mirage",
+      "nodeCount": 499,
+      "sourceRepresentation": "[Mirage: Cost N (Color)] + [During Set]",
+      "compilerTransform": "compiler/header_parser.js (prefix & cost/color extraction)",
+      "structuredDescriptor": "parseMirageDeclaration in engine/prerequisites.js",
+      "runtimeRegistrationAndDispatch": "setMirageFromHand & getActiveMirageAbilities in engine/index.js / engine/prerequisites.js",
+      "finalStateConsumer": "player.mirage slot, prior-Mirage replacement to grave, During Set ability trigger on declareAttack",
+      "behavioralTest": "K1.5-B3 & B4",
+      "status": "RUNTIME_INTEGRATED"
+    },
+    {
+      "family": "Release / True Release",
+      "nodeCount": 17,
+      "sourceRepresentation": "[Release: N] / [True Release] (incl. [Soul Core] variants)",
+      "compilerTransform": "compiler/header_parser.js prefix extraction",
+      "structuredDescriptor": "parseReleaseDeclaration in engine/prerequisites.js",
+      "runtimeRegistrationAndDispatch": "executeReleaseRuntime in engine/prerequisites.js invoked from declareAttack in engine/index.js",
+      "finalStateConsumer": "Atomic Nexus-to-Spirit normal/Soul core transfer",
+      "behavioralTest": "K1.5-B3 & B4",
+      "status": "RUNTIME_INTEGRATED"
+    }
+  ],
+  "totalDependencyNodesAccountedFor": 1818,
+  "totalDependencyEdgesAccountedFor": 3632
+}

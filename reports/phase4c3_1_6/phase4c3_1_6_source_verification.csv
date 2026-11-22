@@ -1,0 +1,7 @@
+area_id,source_file,function_name,line_range,current_verified_behavior,required_future_change,verifying_test_id,audit_status
+SRC-01,engine/state.js,createGameState(),110-117,"Defines only abilityUses: {}; state.restrictions is absent.","Initialize state.restrictions = { counters: {}, meta: {} } in Phase 4C.3.2.",TC-COMP-02,VERIFIED
+SRC-02,engine/index.js,activateAbility(),228-242,"Consumes limit only after successful operation execution; checks card on field only.","Commit at Stage 4 post-payment pre-resolution; allow non-field source zones.",TC-CLS-06B,VERIFIED
+SRC-03,engine/flow.js,advanceStep(),44-70,"Increments turnNumber; never resets usage counters, causing unbounded growth.","Invoke resetRestrictions(TURN/STEP/BATTLE) at boundary transitions.",TC-RESET-01,VERIFIED
+SRC-04,engine/legacy_bridge.js,serializeDuelState() & createLegacyDuelState(),154, 302,"Mirrors only duelState.abilityUses; drops all structured restriction counters.","Implement bidirectional translation between restrictions and abilityUses.",TC-COMP-01,VERIFIED
+SRC-05,compiler/header_parser.js,parseAbilityHeader(),113-124, 329-334,"Parses only 3 hardcoded sentences and leading (Once per Turn) headers; drops 826 limits.","Implement 21-pattern regex engine capturing sentence, inline, and postfix limits.",TC-ID-01,VERIFIED
+SRC-06,compiler/clause_splitter.js,splitClauses(),1-304,"Splits clauses sequentially in original text order.","Preserve sequential clause order in canonical descriptor; never sort clauses.",TC-ID-04,VERIFIED

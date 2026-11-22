@@ -186,10 +186,29 @@
     "compiledIr": {
       "cardNumber": "SD57-X01",
       "name": "Queen Oichi",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 8000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 5,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "Flash - (Either Attack Step)\nIf you control any six-colored Spirit/Nexus, you can summon this card from the Hand by paying two costs.\n\n[LV1][LV2][LV3] (When Summoned/Attacks)\nDuring this turn, treat this Spirit's color as colorless, and send two cores from the opposing Field to the Reserve.\n\n[LV2][LV3]\nWhen this Spirit would leave the Field due to the opponent, you can summon a six-colored Spirit card from your Trash, without paying the cost.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "SD57-X01#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -200,8 +219,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -210,10 +238,14 @@
             "isMain": false,
             "cleanBody": "If you control any six-colored Spirit/Nexus, you can summon this card from the Hand by paying two costs."
           },
+          "originalAbilityText": "Flash - (Either Attack Step)\nIf you control any six-colored Spirit/Nexus, you can summon this card from the Hand by paying two costs.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "If you control any six-colored Spirit/Nexus, you can summon this card from the Hand by paying two costs.",
+              "originalClauseText": "If you control any six-colored Spirit/Nexus, you can summon this card from the Hand by paying two costs.",
               "cleanText": "you can summon this card from the Hand by paying two costs",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -221,14 +253,28 @@
               "duration": null,
               "op": {
                 "op": "SUMMON_THIS_CARD",
-                "from": "HAND_OR_BURST"
+                "from": "HAND"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD57-X01#a0",
+          "keywords": [],
+          "id": "SD57-X01#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_da2df8aae246775dfdc488ce6cb3ce84409c65ef5bcf2ff039e803a8b6959511_99895f3de329d43eb488d0525de8b9c7",
+          "physicalId": "SD57-X01#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_da2df8aae246775dfdc488ce6cb3ce84409c65ef5bcf2ff039e803a8b6959511_99895f3de329d43eb488d0525de8b9c7",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_da2df8aae246775dfdc488ce6cb3ce84409c65ef5bcf2ff039e803a8b6959511_99895f3de329d43eb488d0525de8b9c7",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_53551910c56b20c216e249ae7b264dd119f678059eb5e4138f11bf8dbcdbb46f_92a85385d9028b2beda27a428614a310",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD57-X01#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -239,8 +285,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED",
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Summoned/Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -249,22 +306,29 @@
             "isMain": false,
             "cleanBody": "During this turn, treat this Spirit's color as colorless, and send two cores from the opposing Field to the Reserve."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned/Attacks)\nDuring this turn, treat this Spirit's color as colorless, and send two cores from the opposing Field to the Reserve.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "During this turn, treat this Spirit's color as colorless",
+              "originalClauseText": "During this turn, treat this Spirit's color as colorless",
               "cleanText": "treat this Spirit's color as colorless",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": "DURING_THIS_TURN",
               "op": {
-                "op": "TREAT_RULE"
+                "op": "TREAT_RULE",
+                "treatAs": "COLORLESS"
               }
             },
             {
               "rawText": "send two cores from the opposing Field to the Reserve.",
+              "originalClauseText": "send two cores from the opposing Field to the Reserve.",
               "cleanText": "send two cores from the opposing Field to the Reserve",
+              "clauseIndex": 1,
               "link": "also",
               "isOptional": false,
               "isCost": false,
@@ -285,10 +349,25 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD57-X01#a1",
+          "keywords": [],
+          "id": "SD57-X01#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_8615e176ef22875f1a1bcc34da5102d4bf5b1d376bae07f5cfdbd76b40faf9ff_6438ec08f4bca8c48be5bbdef55e2cfd",
+          "physicalId": "SD57-X01#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_8615e176ef22875f1a1bcc34da5102d4bf5b1d376bae07f5cfdbd76b40faf9ff_6438ec08f4bca8c48be5bbdef55e2cfd",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_8615e176ef22875f1a1bcc34da5102d4bf5b1d376bae07f5cfdbd76b40faf9ff_6438ec08f4bca8c48be5bbdef55e2cfd",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_666b1cf9ae44684306d0da0ad8eeb31b97a64e4e612789fd04fdb1d0b1b0db78_fbba495077bf866f72c0247514fa153f",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD57-X01#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -298,8 +377,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -308,10 +392,14 @@
             "isMain": false,
             "cleanBody": "When this Spirit would leave the Field due to the opponent, you can summon a six-colored Spirit card from your Trash, without paying the cost."
           },
+          "originalAbilityText": "[LV2][LV3]\nWhen this Spirit would leave the Field due to the opponent, you can summon a six-colored Spirit card from your Trash, without paying the cost.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When this Spirit would leave the Field due to the opponent, you can summon a six-colored Spirit card from your Trash, without paying the cost.",
+              "originalClauseText": "When this Spirit would leave the Field due to the opponent, you can summon a six-colored Spirit card from your Trash, without paying the cost.",
               "cleanText": "When this Spirit would leave the Field due to the opponent, you can summon a six-colored Spirit card from your Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -319,11 +407,34 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "free": true,
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD57-X01#a2",
+          "keywords": [],
+          "id": "SD57-X01#AB_PASSIVE_NONE_LV2_LV3_1ad8519cdfef5ad8bc83ec90af859650950ace885c01e2a2a0a102c6348d1755_8d7095ccce25f44f0a199499b5b111e2",
+          "physicalId": "SD57-X01#AB_PASSIVE_NONE_LV2_LV3_1ad8519cdfef5ad8bc83ec90af859650950ace885c01e2a2a0a102c6348d1755_8d7095ccce25f44f0a199499b5b111e2",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV2_LV3_1ad8519cdfef5ad8bc83ec90af859650950ace885c01e2a2a0a102c6348d1755_8d7095ccce25f44f0a199499b5b111e2",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV2_LV3_b8870dfe04f9089273278610bfb9d86b850ba7faf2ab4e371b642a46da4082e0_818515477863465756f3d33c9baa723c",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -340,6 +451,10 @@
     "compiledIr": {
       "cardNumber": "SD57-CP01",
       "name": "Tenma Nobunaga",
+      "type": "Nexus",
+      "levels": {},
+      "originalEffectText": "[Grandwalker Nexus]\nThis Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.\n\n[Core Charge: (Heavenly Demon King/Evil Shadow/Clever Machine/Machine Beast & Cost 3 or more)]\n◆When you Summon/Advent a target Spirit, you can put a core from the Void to this Nexus.\n◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put a core from the Void to this Nexus.\n\n[LV1][LV2]\nThis Nexus's symbol is also treated as Red/Purple/Green/Yellow/Blue.\n\n[Grand Skill: 2] [LV1][LV2] Flash - (Either Attack Step)\n(Once per turn, send two cores from this Nexus to the Void) For each symbol color you have, send a core from an opposing Spirit to the Reserve.\n\n[Grand Field] [LV2]\nFulfill one symbol color for the conditions of your [Six Heaven Rush]/[Six Heaven Rebirth].",
+      "teams": [],
       "keywords": [
         {
           "name": "Core Charge",
@@ -347,7 +462,28 @@
           "wave": 3,
           "hook": "core_charge",
           "bracketed": true,
-          "index": 284
+          "index": 0,
+          "abilityId": "SD57-CP01#AB_PASSIVE_NONE_LV1_LV2_LV3_274527075cbca6e8887de5d047d096864c5a9c50979e296fdc54cf4eca85bea6_d66adba2fab5abf21344ac82574ef55f",
+          "cardNumber": "SD57-CP01",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "SD57-CP01#a1"
         },
         {
           "name": "Grand Skill",
@@ -355,7 +491,29 @@
           "wave": 3,
           "hook": "grand_skill",
           "bracketed": true,
-          "index": 777
+          "index": 0,
+          "abilityId": "SD57-CP01#AB_ATTACK_STEP_NONE_LV1_LV2_33d3cc4b143d6dec8daa4d0553ddd18f2851a58282646c0531db3a47e5a57d78_edad66fb09abb3ba548f4641b967542c",
+          "cardNumber": "SD57-CP01",
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [
+            "Grand Skill: 2"
+          ],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "SD57-CP01#a5"
         },
         {
           "name": "Grand Field",
@@ -363,7 +521,28 @@
           "wave": 3,
           "hook": "grand_field",
           "bracketed": true,
-          "index": 979
+          "index": 0,
+          "abilityId": "SD57-CP01#AB_PASSIVE_NONE_LV2_ee4ef7b09656b86fe3fd24f0a4286101a89e1c1b78cbd75ac4f4a43c70e39dd9_1fd61484f89f856819cf6adb4dee2534",
+          "cardNumber": "SD57-CP01",
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [
+            "Grand Field"
+          ],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "SD57-CP01#a6"
         },
         {
           "name": "Six Heaven Rush",
@@ -371,7 +550,28 @@
           "wave": 2,
           "hook": "rush",
           "bracketed": true,
-          "index": 1051
+          "index": 52,
+          "abilityId": "SD57-CP01#AB_PASSIVE_NONE_LV2_ee4ef7b09656b86fe3fd24f0a4286101a89e1c1b78cbd75ac4f4a43c70e39dd9_1fd61484f89f856819cf6adb4dee2534",
+          "cardNumber": "SD57-CP01",
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [
+            "Grand Field"
+          ],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "SD57-CP01#a6"
         },
         {
           "name": "Six Heaven Rebirth",
@@ -379,12 +579,32 @@
           "wave": 2,
           "hook": "rebirth",
           "bracketed": true,
-          "index": 1069
+          "index": 70,
+          "abilityId": "SD57-CP01#AB_PASSIVE_NONE_LV2_ee4ef7b09656b86fe3fd24f0a4286101a89e1c1b78cbd75ac4f4a43c70e39dd9_1fd61484f89f856819cf6adb4dee2534",
+          "cardNumber": "SD57-CP01",
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [
+            "Grand Field"
+          ],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "SD57-CP01#a6"
         }
       ],
       "abilities": [
         {
-          "id": "SD57-CP01#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -397,8 +617,13 @@
               "Grandwalker Nexus"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -407,10 +632,14 @@
             "isMain": false,
             "cleanBody": "This Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses."
           },
+          "originalAbilityText": "[Grandwalker Nexus]\nThis Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "This Nexus can only be affected by effects that target Grandwalker Nexuses.",
+              "originalClauseText": "This Nexus can only be affected by effects that target Grandwalker Nexuses.",
               "cleanText": "This Nexus can only be affected by effects that target Grandwalker Nexuses",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -422,7 +651,9 @@
             },
             {
               "rawText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.",
+              "originalClauseText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.",
               "cleanText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -433,10 +664,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD57-CP01#a0",
+          "keywords": [],
+          "id": "SD57-CP01#AB_PASSIVE_NONE_LV1_LV2_LV3_942d11e6205bb2a4b67e50627106ae1cfc6bc84946419fa2fa1ebb7898a10897_210a76468ae036766b69e1bbc98cd961",
+          "physicalId": "SD57-CP01#AB_PASSIVE_NONE_LV1_LV2_LV3_942d11e6205bb2a4b67e50627106ae1cfc6bc84946419fa2fa1ebb7898a10897_210a76468ae036766b69e1bbc98cd961",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_942d11e6205bb2a4b67e50627106ae1cfc6bc84946419fa2fa1ebb7898a10897_210a76468ae036766b69e1bbc98cd961",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_34c6111b2026968ed42bfa5f6eb8f5495e381c90eb8118f1bd14e55b04d3c296_de06c5174ba9de1f98a264fb73e5cf09",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD57-CP01#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -447,8 +690,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Core Charge: (Heavenly Demon King/Evil Shadow/Clever Machine/Machine Beast & Cost 3 or more)",
@@ -457,11 +705,55 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "originalAbilityText": "[Core Charge: (Heavenly Demon King/Evil Shadow/Clever Machine/Machine Beast & Cost 3 or more)]",
+          "abilityIndex": 1,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD57-CP01#a1",
+          "keywords": [
+            {
+              "name": "Core Charge",
+              "parameter": "(Heavenly Demon King/Evil Shadow/Clever Machine/Machine Beast & Cost 3 or more)",
+              "wave": 3,
+              "hook": "core_charge",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "SD57-CP01#AB_PASSIVE_NONE_LV1_LV2_LV3_274527075cbca6e8887de5d047d096864c5a9c50979e296fdc54cf4eca85bea6_d66adba2fab5abf21344ac82574ef55f",
+              "cardNumber": "SD57-CP01",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "SD57-CP01#a1"
+            }
+          ],
+          "id": "SD57-CP01#AB_PASSIVE_NONE_LV1_LV2_LV3_274527075cbca6e8887de5d047d096864c5a9c50979e296fdc54cf4eca85bea6_d66adba2fab5abf21344ac82574ef55f",
+          "physicalId": "SD57-CP01#AB_PASSIVE_NONE_LV1_LV2_LV3_274527075cbca6e8887de5d047d096864c5a9c50979e296fdc54cf4eca85bea6_d66adba2fab5abf21344ac82574ef55f",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_274527075cbca6e8887de5d047d096864c5a9c50979e296fdc54cf4eca85bea6_d66adba2fab5abf21344ac82574ef55f",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_6c107f224b9a6f3e68f40baa81fa153b649e0080a960ad0198b412041154acb2_c6b4d51637384c4cc8d712c8635538e3",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD57-CP01#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -472,8 +764,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -482,10 +779,14 @@
             "isMain": false,
             "cleanBody": "◆When you Summon/Advent a target Spirit, you can put a core from the Void to this Nexus."
           },
+          "originalAbilityText": "◆When you Summon/Advent a target Spirit, you can put a core from the Void to this Nexus.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "◆When you Summon/Advent a target Spirit, you can put a core from the Void to this Nexus.",
+              "originalClauseText": "◆When you Summon/Advent a target Spirit, you can put a core from the Void to this Nexus.",
               "cleanText": "When you Summon/Advent a target Spirit, you can put a core from the Void to this Nexus",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -504,10 +805,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD57-CP01#a2",
+          "keywords": [],
+          "id": "SD57-CP01#AB_PASSIVE_NONE_LV1_LV2_LV3_878127661c4f08c4f0a6ef69ab964ca3b5531986003f4c4670eeb484a01ac702_deeec4a3d1bedd6bcad8433349f9536a",
+          "physicalId": "SD57-CP01#AB_PASSIVE_NONE_LV1_LV2_LV3_878127661c4f08c4f0a6ef69ab964ca3b5531986003f4c4670eeb484a01ac702_deeec4a3d1bedd6bcad8433349f9536a",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_878127661c4f08c4f0a6ef69ab964ca3b5531986003f4c4670eeb484a01ac702_deeec4a3d1bedd6bcad8433349f9536a",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_69788a1939f9d4fbc6370e3c777b2dc167920178b9a4a257eba1308d023038f8_0faf096da8582e8721171bd6c64ae59a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD57-CP01#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -518,8 +831,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -528,10 +846,14 @@
             "isMain": false,
             "cleanBody": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put a core from the Void to this Nexus."
           },
+          "originalAbilityText": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put a core from the Void to this Nexus.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.",
+              "originalClauseText": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.",
               "cleanText": "When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -544,7 +866,9 @@
             },
             {
               "rawText": "For each target card among them, put a core from the Void to this Nexus.",
+              "originalClauseText": "For each target card among them, put a core from the Void to this Nexus.",
               "cleanText": "For each target card among them, put a core from the Void to this Nexus",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -563,10 +887,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD57-CP01#a3",
+          "keywords": [],
+          "id": "SD57-CP01#AB_PASSIVE_NONE_LV1_LV2_LV3_66fa8fb8c2430ebb8e185e70e1e2f83760feb1d55a487dc708b9d21dacacf6f4_d6f80c287b3e07cbc59a0206c895ae8f",
+          "physicalId": "SD57-CP01#AB_PASSIVE_NONE_LV1_LV2_LV3_66fa8fb8c2430ebb8e185e70e1e2f83760feb1d55a487dc708b9d21dacacf6f4_d6f80c287b3e07cbc59a0206c895ae8f",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_66fa8fb8c2430ebb8e185e70e1e2f83760feb1d55a487dc708b9d21dacacf6f4_d6f80c287b3e07cbc59a0206c895ae8f",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_12b8fbe81f4f645c450a253ab19e486366ce0dedca7e42ccc89eed059d62a09e_708f18ed6b96da44107864ae12e9cfa2",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD57-CP01#a4",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -576,8 +912,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -586,24 +927,42 @@
             "isMain": false,
             "cleanBody": "This Nexus's symbol is also treated as Red/Purple/Green/Yellow/Blue."
           },
+          "originalAbilityText": "[LV1][LV2]\nThis Nexus's symbol is also treated as Red/Purple/Green/Yellow/Blue.",
+          "abilityIndex": 4,
           "clauses": [
             {
               "rawText": "This Nexus's symbol is also treated as Red/Purple/Green/Yellow/Blue.",
+              "originalClauseText": "This Nexus's symbol is also treated as Red/Purple/Green/Yellow/Blue.",
               "cleanText": "This Nexus's symbol is also treated as Red/Purple/Green/Yellow/Blue",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "TREAT_RULE",
+                "treatAs": "COLOR",
+                "color": "Red"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD57-CP01#a4",
+          "keywords": [],
+          "id": "SD57-CP01#AB_PASSIVE_NONE_LV1_LV2_f6aa517d3819341d7a0d22a4720c23107c9f7af91fb79a912d42bcb7f633773d_7da551518550318032c43ecb9b5e5f1f",
+          "physicalId": "SD57-CP01#AB_PASSIVE_NONE_LV1_LV2_f6aa517d3819341d7a0d22a4720c23107c9f7af91fb79a912d42bcb7f633773d_7da551518550318032c43ecb9b5e5f1f",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_f6aa517d3819341d7a0d22a4720c23107c9f7af91fb79a912d42bcb7f633773d_7da551518550318032c43ecb9b5e5f1f",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_b90f6d5acc5cec8615b1186a4bc146a33fa46b5fbf41a1d8ac41d21a176dd883_a13ac004595641f2d945a1ba213e1ca5",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD57-CP01#a5",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -615,8 +974,17 @@
               "Grand Skill: 2"
             ],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -625,10 +993,14 @@
             "isMain": false,
             "cleanBody": "(Once per turn, send two cores from this Nexus to the Void) For each symbol color you have, send a core from an opposing Spirit to the Reserve."
           },
+          "originalAbilityText": "[Grand Skill: 2] [LV1][LV2] Flash - (Either Attack Step)\n(Once per turn, send two cores from this Nexus to the Void) For each symbol color you have, send a core from an opposing Spirit to the Reserve.",
+          "abilityIndex": 5,
           "clauses": [
             {
               "rawText": "(Once per turn, send two cores from this Nexus to the Void) For each symbol color you have, send a core from an opposing Spirit to the Reserve.",
+              "originalClauseText": "(Once per turn, send two cores from this Nexus to the Void) For each symbol color you have, send a core from an opposing Spirit to the Reserve.",
               "cleanText": "(Once per turn, send two cores from this Nexus to the Void) For each symbol color you have, send a core from an opposing Spirit to the Reserve",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -652,10 +1024,55 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD57-CP01#a5",
+          "keywords": [
+            {
+              "name": "Grand Skill",
+              "parameter": "2",
+              "wave": 3,
+              "hook": "grand_skill",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "SD57-CP01#AB_ATTACK_STEP_NONE_LV1_LV2_33d3cc4b143d6dec8daa4d0553ddd18f2851a58282646c0531db3a47e5a57d78_edad66fb09abb3ba548f4641b967542c",
+              "cardNumber": "SD57-CP01",
+              "levels": [
+                1,
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [
+                "Grand Skill: 2"
+              ],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "SD57-CP01#a5"
+            }
+          ],
+          "id": "SD57-CP01#AB_ATTACK_STEP_NONE_LV1_LV2_33d3cc4b143d6dec8daa4d0553ddd18f2851a58282646c0531db3a47e5a57d78_edad66fb09abb3ba548f4641b967542c",
+          "physicalId": "SD57-CP01#AB_ATTACK_STEP_NONE_LV1_LV2_33d3cc4b143d6dec8daa4d0553ddd18f2851a58282646c0531db3a47e5a57d78_edad66fb09abb3ba548f4641b967542c",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_33d3cc4b143d6dec8daa4d0553ddd18f2851a58282646c0531db3a47e5a57d78_edad66fb09abb3ba548f4641b967542c",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_69b6646996feebd3d6e7510821170195bf38f04ac8f700f494c875968bc7f52a_b33c1c46cddbd8d27e2b4978d9991112",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD57-CP01#a6",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -666,8 +1083,13 @@
               "Grand Field"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -676,21 +1098,127 @@
             "isMain": false,
             "cleanBody": "Fulfill one symbol color for the conditions of your [Six Heaven Rush]/[Six Heaven Rebirth]."
           },
+          "originalAbilityText": "[Grand Field] [LV2]\nFulfill one symbol color for the conditions of your [Six Heaven Rush]/[Six Heaven Rebirth].",
+          "abilityIndex": 6,
           "clauses": [
             {
               "rawText": "Fulfill one symbol color for the conditions of your [Six Heaven Rush]/[Six Heaven Rebirth].",
+              "originalClauseText": "Fulfill one symbol color for the conditions of your [Six Heaven Rush]/[Six Heaven Rebirth].",
               "cleanText": "Fulfill one symbol color for the conditions of your [Six Heaven Rush]/[Six Heaven Rebirth]",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Six Heaven Rush"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD57-CP01#a6",
+          "keywords": [
+            {
+              "name": "Grand Field",
+              "parameter": null,
+              "wave": 3,
+              "hook": "grand_field",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "SD57-CP01#AB_PASSIVE_NONE_LV2_ee4ef7b09656b86fe3fd24f0a4286101a89e1c1b78cbd75ac4f4a43c70e39dd9_1fd61484f89f856819cf6adb4dee2534",
+              "cardNumber": "SD57-CP01",
+              "levels": [
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [
+                "Grand Field"
+              ],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "SD57-CP01#a6"
+            },
+            {
+              "name": "Six Heaven Rush",
+              "parameter": null,
+              "wave": 2,
+              "hook": "rush",
+              "bracketed": true,
+              "index": 52,
+              "abilityId": "SD57-CP01#AB_PASSIVE_NONE_LV2_ee4ef7b09656b86fe3fd24f0a4286101a89e1c1b78cbd75ac4f4a43c70e39dd9_1fd61484f89f856819cf6adb4dee2534",
+              "cardNumber": "SD57-CP01",
+              "levels": [
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [
+                "Grand Field"
+              ],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "SD57-CP01#a6"
+            },
+            {
+              "name": "Six Heaven Rebirth",
+              "parameter": null,
+              "wave": 2,
+              "hook": "rebirth",
+              "bracketed": true,
+              "index": 70,
+              "abilityId": "SD57-CP01#AB_PASSIVE_NONE_LV2_ee4ef7b09656b86fe3fd24f0a4286101a89e1c1b78cbd75ac4f4a43c70e39dd9_1fd61484f89f856819cf6adb4dee2534",
+              "cardNumber": "SD57-CP01",
+              "levels": [
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [
+                "Grand Field"
+              ],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "SD57-CP01#a6"
+            }
+          ],
+          "id": "SD57-CP01#AB_PASSIVE_NONE_LV2_ee4ef7b09656b86fe3fd24f0a4286101a89e1c1b78cbd75ac4f4a43c70e39dd9_1fd61484f89f856819cf6adb4dee2534",
+          "physicalId": "SD57-CP01#AB_PASSIVE_NONE_LV2_ee4ef7b09656b86fe3fd24f0a4286101a89e1c1b78cbd75ac4f4a43c70e39dd9_1fd61484f89f856819cf6adb4dee2534",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV2_ee4ef7b09656b86fe3fd24f0a4286101a89e1c1b78cbd75ac4f4a43c70e39dd9_1fd61484f89f856819cf6adb4dee2534",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV2_ba0ec1af9df8463957426ae760d0cc3d80ff4c1357bebd138c562ee2f3895a33_0adba084f2c6c88dc5a80c3e10d06016",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 8,

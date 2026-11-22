@@ -1,0 +1,73 @@
+{
+  "generatedAt": "2026-11-19T15:52:28.147Z",
+  "nodes": [
+    "GameStateManager",
+    "ZoneManager",
+    "FlowController",
+    "TriggerQueueManager",
+    "AsyncResolver",
+    "TargetingSystem",
+    "ConditionEvaluator",
+    "RestrictionManager",
+    "BattleManager",
+    "ReplacementEffects",
+    "PreventionEffects",
+    "KeywordRegistry",
+    "OperationHandlers"
+  ],
+  "edges": [
+    {
+      "from": "TriggeredEffects",
+      "to": [
+        "TriggerQueueManager",
+        "AsyncResolver",
+        "RestrictionManager"
+      ]
+    },
+    {
+      "from": "ConditionalEffects",
+      "to": [
+        "ConditionEvaluator",
+        "GameStateManager"
+      ]
+    },
+    {
+      "from": "TargetedEffects",
+      "to": [
+        "TargetingSystem",
+        "PreventionEffects"
+      ]
+    },
+    {
+      "from": "ReplacementEffects",
+      "to": [
+        "ZoneManager",
+        "EventBus"
+      ]
+    },
+    {
+      "from": "CompoundEffects",
+      "to": [
+        "AsyncResolver",
+        "ConditionEvaluator",
+        "TargetingSystem"
+      ]
+    },
+    {
+      "from": "BattleEffects",
+      "to": [
+        "BattleManager",
+        "TargetingSystem",
+        "TriggerQueueManager"
+      ]
+    },
+    {
+      "from": "KeywordMechanics",
+      "to": [
+        "KeywordRegistry",
+        "OperationHandlers",
+        "ContinuousModifiers"
+      ]
+    }
+  ]
+}

@@ -574,10 +574,24 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A6823",
       "name": "Netherdwarf",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 1000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 2000
+        }
+      },
+      "originalEffectText": "[LV1][LV2]\nThis Spirit's color and symbol are also treated as White.\n\n[LV2] (When Destroyed by the Opponent)\nBy sending a core from your Reserve to your Trash, this Spirit returns to the Hand.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A6823#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -587,8 +601,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -597,10 +616,14 @@
             "isMain": false,
             "cleanBody": "This Spirit's color and symbol are also treated as White."
           },
+          "originalAbilityText": "[LV1][LV2]\nThis Spirit's color and symbol are also treated as White.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "This Spirit's color and symbol are also treated as White.",
+              "originalClauseText": "This Spirit's color and symbol are also treated as White.",
               "cleanText": "This Spirit's color and symbol are also treated as White",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -612,10 +635,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A6823#a0",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A6823#AB_PASSIVE_NONE_LV1_LV2_78a52038155ac1d70fff2fdc3df61c4b1ea64c44a86d9ac2bdf9aaabd7db0e6b_a9d2b30d373b6e9f405d1f9dea08c1f3",
+          "physicalId": "BATTLE-SPIRITS-A6823#AB_PASSIVE_NONE_LV1_LV2_78a52038155ac1d70fff2fdc3df61c4b1ea64c44a86d9ac2bdf9aaabd7db0e6b_a9d2b30d373b6e9f405d1f9dea08c1f3",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_78a52038155ac1d70fff2fdc3df61c4b1ea64c44a86d9ac2bdf9aaabd7db0e6b_a9d2b30d373b6e9f405d1f9dea08c1f3",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_4e319260e75db97ef37b60d93e24c0e5ded550ab5f6af3b2059f333a0ee14535_c9759d5d1e37e757024f3c9c8b1d9cc0",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A6823#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -624,8 +659,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_DESTROYED",
+            "timings": [
+              "WHEN_DESTROYED"
+            ],
             "timingLabel": "When Destroyed by the Opponent",
             "timingStep": "ANY",
+            "timingCause": "OPPONENT",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -634,10 +678,14 @@
             "isMain": false,
             "cleanBody": "By sending a core from your Reserve to your Trash, this Spirit returns to the Hand."
           },
+          "originalAbilityText": "[LV2] (When Destroyed by the Opponent)\nBy sending a core from your Reserve to your Trash, this Spirit returns to the Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "By sending a core from your Reserve to your Trash",
+              "originalClauseText": "By sending a core from your Reserve to your Trash",
               "cleanText": "By sending a core from your Reserve to your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -645,12 +693,22 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             },
             {
               "rawText": "this Spirit returns to the Hand.",
+              "originalClauseText": "this Spirit returns to the Hand.",
               "cleanText": "this Spirit returns to the Hand",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -665,7 +723,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A6823#a1",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A6823#AB_WHEN_DESTROYED_NONE_LV2_4d109ec91927a3250caf23158ee8a05f489e8de460f7e3dd05686f84500484ee_3fcf713753d149b8d0fce6aff9434a07",
+          "physicalId": "BATTLE-SPIRITS-A6823#AB_WHEN_DESTROYED_NONE_LV2_4d109ec91927a3250caf23158ee8a05f489e8de460f7e3dd05686f84500484ee_3fcf713753d149b8d0fce6aff9434a07",
+          "semanticId": "SEM#AB_WHEN_DESTROYED_NONE_LV2_4d109ec91927a3250caf23158ee8a05f489e8de460f7e3dd05686f84500484ee_3fcf713753d149b8d0fce6aff9434a07",
+          "semanticIdV3": "SEM3#AB_WHEN_DESTROYED_NONE_LV2_ffe4f13eb5b2f54b28b09529e0c03ce04501639387ceb2818c1c9fa16da5bdd3_08a9dbfd40366c0c7b9481431d46630c",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "OPPONENT",
+            "timingTriggers": [
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -800,6 +873,21 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A7352",
       "name": "Rabbat",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 1000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 2000
+        }
+      },
+      "originalEffectText": "Flash - [High Speed]\nThis Spirit card in Hand can be summoned by paying the cost with cores in the Reserve. In this case, cores to be put on this Spirit must also be from the Reserve.\n\n[LV2] Flash - (Either Attack Step)\nBy sending [Soul Core](Soul Core) from this Spirit to the Trash, this Spirit returns to the Hand.",
+      "teams": [],
       "keywords": [
         {
           "name": "High Speed",
@@ -807,12 +895,32 @@
           "wave": 2,
           "hook": "high_speed",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "BATTLE-SPIRITS-A7352#AB_FLASH_NONE_LV1_LV2_LV3_3f01bade6c02c981f49d8bed4548cc040577e4e631f48c0bc81870acc612a01b_d2e4a2549e4a8ff497c4ba80c4baff76",
+          "cardNumber": "BATTLE-SPIRITS-A7352",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "B",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "BATTLE-SPIRITS-A7352#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A7352#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -823,8 +931,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "High Speed",
@@ -833,10 +948,14 @@
             "isMain": false,
             "cleanBody": "This Spirit card in Hand can be summoned by paying the cost with cores in the Reserve. In this case, cores to be put on this Spirit must also be from the Reserve."
           },
+          "originalAbilityText": "Flash - [High Speed]\nThis Spirit card in Hand can be summoned by paying the cost with cores in the Reserve. In this case, cores to be put on this Spirit must also be from the Reserve.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "This Spirit card in Hand can be summoned by paying the cost with cores in the Reserve.",
+              "originalClauseText": "This Spirit card in Hand can be summoned by paying the cost with cores in the Reserve.",
               "cleanText": "This Spirit card in Hand can be summoned by paying the cost with cores in the Reserve",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -848,7 +967,9 @@
             },
             {
               "rawText": "In this case, cores to be put on this Spirit must also be from the Reserve.",
+              "originalClauseText": "In this case, cores to be put on this Spirit must also be from the Reserve.",
               "cleanText": "In this case, cores to be put on this Spirit must also be from the Reserve",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -859,10 +980,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A7352#a0",
+          "keywords": [
+            {
+              "name": "High Speed",
+              "parameter": null,
+              "wave": 2,
+              "hook": "high_speed",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BATTLE-SPIRITS-A7352#AB_FLASH_NONE_LV1_LV2_LV3_3f01bade6c02c981f49d8bed4548cc040577e4e631f48c0bc81870acc612a01b_d2e4a2549e4a8ff497c4ba80c4baff76",
+              "cardNumber": "BATTLE-SPIRITS-A7352",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "B",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "BATTLE-SPIRITS-A7352#a0"
+            }
+          ],
+          "id": "BATTLE-SPIRITS-A7352#AB_FLASH_NONE_LV1_LV2_LV3_3f01bade6c02c981f49d8bed4548cc040577e4e631f48c0bc81870acc612a01b_d2e4a2549e4a8ff497c4ba80c4baff76",
+          "physicalId": "BATTLE-SPIRITS-A7352#AB_FLASH_NONE_LV1_LV2_LV3_3f01bade6c02c981f49d8bed4548cc040577e4e631f48c0bc81870acc612a01b_d2e4a2549e4a8ff497c4ba80c4baff76",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_3f01bade6c02c981f49d8bed4548cc040577e4e631f48c0bc81870acc612a01b_d2e4a2549e4a8ff497c4ba80c4baff76",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_2d72fe490c55138b0da9da2f5b84f5062ecd10848ba85a69aaa1a9974db5f4ed_eb20996f2c3a688b7a5b2f32c050906e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A7352#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -871,8 +1036,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -881,10 +1055,14 @@
             "isMain": false,
             "cleanBody": "By sending [Soul Core](Soul Core) from this Spirit to the Trash, this Spirit returns to the Hand."
           },
+          "originalAbilityText": "[LV2] Flash - (Either Attack Step)\nBy sending [Soul Core](Soul Core) from this Spirit to the Trash, this Spirit returns to the Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "By sending [Soul Core] from this Spirit to the Trash",
+              "originalClauseText": "By sending [Soul Core] from this Spirit to the Trash",
               "cleanText": "By sending [Soul Core] from this Spirit to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -906,7 +1084,9 @@
             },
             {
               "rawText": "this Spirit returns to the Hand.",
+              "originalClauseText": "this Spirit returns to the Hand.",
               "cleanText": "this Spirit returns to the Hand",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -921,7 +1101,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A7352#a1",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A7352#AB_ATTACK_STEP_NONE_LV2_b6d15bed4b86475f277a847852a4f6168599e5031670803c9a97fcb24dc3e9ab_c26d635d79f4d982143589691a1c0d9a",
+          "physicalId": "BATTLE-SPIRITS-A7352#AB_ATTACK_STEP_NONE_LV2_b6d15bed4b86475f277a847852a4f6168599e5031670803c9a97fcb24dc3e9ab_c26d635d79f4d982143589691a1c0d9a",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_b6d15bed4b86475f277a847852a4f6168599e5031670803c9a97fcb24dc3e9ab_c26d635d79f4d982143589691a1c0d9a",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_cbb12e90c6d63ccdf79c7133b0e5b257b11f05c0c7f17f6c8ceb379f07e6e0ac_d74dc3019c4e19bea62d6014f3d019ea",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -1722,10 +1917,24 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A12157",
       "name": "The Second's HoppingBeast Droplop",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 2000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 3000
+        }
+      },
+      "originalEffectText": "[LV1][LV2] (When Summoned)\nPut a core from the Void to your Reserve.\n\n[LV1][LV2] (When Destroyed by the Opponent)\nBy sending a core from your Reserve to your Trash, this Spirit returns to the Hand.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A12157#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1735,8 +1944,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1745,10 +1963,14 @@
             "isMain": false,
             "cleanBody": "Put a core from the Void to your Reserve."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned)\nPut a core from the Void to your Reserve.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Put a core from the Void to your Reserve.",
+              "originalClauseText": "Put a core from the Void to your Reserve.",
               "cleanText": "Put a core from the Void to your Reserve",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1767,10 +1989,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A12157#a0",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A12157#AB_WHEN_SUMMONED_NONE_LV1_LV2_9b42c3fa5680048d75ef020b146e627eaa54bfc6c582b31c6267ff3cd1e36eae_fa7f251cf6d6e74a8c9840fe3783269d",
+          "physicalId": "BATTLE-SPIRITS-A12157#AB_WHEN_SUMMONED_NONE_LV1_LV2_9b42c3fa5680048d75ef020b146e627eaa54bfc6c582b31c6267ff3cd1e36eae_fa7f251cf6d6e74a8c9840fe3783269d",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_9b42c3fa5680048d75ef020b146e627eaa54bfc6c582b31c6267ff3cd1e36eae_fa7f251cf6d6e74a8c9840fe3783269d",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_7f164b511e5fad2631cc6c4fa2b508946704b356f0eef7aaccbb18b36046cc46_3aea496c57640549c3b96abec50a6bf5",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A12157#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1780,8 +2016,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_DESTROYED",
+            "timings": [
+              "WHEN_DESTROYED"
+            ],
             "timingLabel": "When Destroyed by the Opponent",
             "timingStep": "ANY",
+            "timingCause": "OPPONENT",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1790,10 +2035,14 @@
             "isMain": false,
             "cleanBody": "By sending a core from your Reserve to your Trash, this Spirit returns to the Hand."
           },
+          "originalAbilityText": "[LV1][LV2] (When Destroyed by the Opponent)\nBy sending a core from your Reserve to your Trash, this Spirit returns to the Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "By sending a core from your Reserve to your Trash",
+              "originalClauseText": "By sending a core from your Reserve to your Trash",
               "cleanText": "By sending a core from your Reserve to your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1801,12 +2050,22 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             },
             {
               "rawText": "this Spirit returns to the Hand.",
+              "originalClauseText": "this Spirit returns to the Hand.",
               "cleanText": "this Spirit returns to the Hand",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1821,7 +2080,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A12157#a1",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A12157#AB_WHEN_DESTROYED_NONE_LV1_LV2_ac59961911deeaafb0e9447da1da62698b6441bd6085030c9902edec1f094ef1_2b53e9be5bf08cba7ea08a884d4077b5",
+          "physicalId": "BATTLE-SPIRITS-A12157#AB_WHEN_DESTROYED_NONE_LV1_LV2_ac59961911deeaafb0e9447da1da62698b6441bd6085030c9902edec1f094ef1_2b53e9be5bf08cba7ea08a884d4077b5",
+          "semanticId": "SEM#AB_WHEN_DESTROYED_NONE_LV1_LV2_ac59961911deeaafb0e9447da1da62698b6441bd6085030c9902edec1f094ef1_2b53e9be5bf08cba7ea08a884d4077b5",
+          "semanticIdV3": "SEM3#AB_WHEN_DESTROYED_NONE_LV1_LV2_01546c9df4d860c7f7b63b9fa6e4762854e9b2a82e04a9d17ee423af31252c4a_5cec7f7043879ec01c449620355e622c",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "OPPONENT",
+            "timingTriggers": [
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -2119,10 +2393,13 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A14366",
       "name": "Wild Ride",
+      "type": "Magic",
+      "levels": {},
+      "originalEffectText": "During (Your End Step), return a [Wild Ride] from your Trash to the Hand. This effect can only be used once per turn.\n\n[Flash]\nDuring this turn, give one of your Spirits +3000 BP, and the effect:\"(When Attacks/Blocks) When only the opposing Spirit is destroyed by BP comparison, this Spirit refreshes.\"",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A14366#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2133,8 +2410,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -2143,28 +2427,49 @@
             "isMain": false,
             "cleanBody": "During (Your End Step), return a [Wild Ride] from your Trash to the Hand."
           },
+          "originalAbilityText": "During (Your End Step), return a [Wild Ride] from your Trash to the Hand. This effect can only be used once per turn.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "During (Your End Step), return a [Wild Ride] from your Trash to the Hand.",
+              "originalClauseText": "During (Your End Step), return a [Wild Ride] from your Trash to the Hand.",
               "cleanText": "During (Your End Step), return a [Wild Ride] from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {},
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A14366#a0",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A14366#AB_PASSIVE_NONE_LV1_LV2_LV3_e76626e58f8e9154e8472d8d689c61586203939e7de8e00a2f4e2609a7fd15ce_96fed1cd01c5bddd7be2041d4fb3e1ce",
+          "physicalId": "BATTLE-SPIRITS-A14366#AB_PASSIVE_NONE_LV1_LV2_LV3_e76626e58f8e9154e8472d8d689c61586203939e7de8e00a2f4e2609a7fd15ce_96fed1cd01c5bddd7be2041d4fb3e1ce",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_e76626e58f8e9154e8472d8d689c61586203939e7de8e00a2f4e2609a7fd15ce_96fed1cd01c5bddd7be2041d4fb3e1ce",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_1785be6e4e11951675efb6eee5444ecbcf89d237deea25f89c90b0e17bd6b34d_24381d6b05ad40a680f0b998be97494f",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A14366#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2175,8 +2480,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2185,10 +2497,14 @@
             "isMain": false,
             "cleanBody": "During this turn, give one of your Spirits +3000 BP, and the effect:\"(When Attacks/Blocks) When only the opposing Spirit is destroyed by BP comparison, this Spirit refreshes.\""
           },
+          "originalAbilityText": "[Flash]\nDuring this turn, give one of your Spirits +3000 BP, and the effect:\"(When Attacks/Blocks) When only the opposing Spirit is destroyed by BP comparison, this Spirit refreshes.\"",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "During this turn, give one of your Spirits +3000 BP, and the effect:\"(When Attacks/Blocks) When only the opposing Spirit is destroyed by BP comparison, this Spirit refreshes.\"",
+              "originalClauseText": "During this turn, give one of your Spirits +3000 BP, and the effect:\"(When Attacks/Blocks) When only the opposing Spirit is destroyed by BP comparison, this Spirit refreshes.\"",
               "cleanText": "give one of your Spirits +3000 BP, and the effect:\"(When Attacks/Blocks) When only the opposing Spirit is destroyed by BP comparison, this Spirit refreshes.\"",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2200,7 +2516,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A14366#a1",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A14366#AB_FLASH_NONE_LV1_LV2_LV3_ffdbe78506ca034aebd992fa378a1ea491b41a22379bc07805af9e7ce352114b_7ad8e7eb0816f74ee20957f65f233bab",
+          "physicalId": "BATTLE-SPIRITS-A14366#AB_FLASH_NONE_LV1_LV2_LV3_ffdbe78506ca034aebd992fa378a1ea491b41a22379bc07805af9e7ce352114b_7ad8e7eb0816f74ee20957f65f233bab",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_ffdbe78506ca034aebd992fa378a1ea491b41a22379bc07805af9e7ce352114b_7ad8e7eb0816f74ee20957f65f233bab",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_681c9780ad2008a4dcea1fdc91b5b3368d0c89eeddc7a744f527e7a87f8c4993_a953047d6c885fca951b9049925bdc46",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,

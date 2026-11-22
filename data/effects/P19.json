@@ -150,10 +150,24 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A5952",
       "name": "Kamen Rider Zero-One Flying Falcon",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 4,
+          "bp": 6000
+        }
+      },
+      "originalEffectText": "This symbol and reduction symbols of this card/Spirit are also treated as Red/Purple/White/Yellow/Blue.\n\n[LV1][LV2] (When Summoned)\nPut one core from the Void to your Trash. Also, put one core from the Void to a \"Kamen\" family Spirit you control, other than this one.\n\n[LV2] (When Attacks)\nBy paying three cost, refresh this Spirit.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A5952#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -164,8 +178,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -174,24 +193,42 @@
             "isMain": false,
             "cleanBody": "This symbol and reduction symbols of this card/Spirit are also treated as Red/Purple/White/Yellow/Blue."
           },
+          "originalAbilityText": "This symbol and reduction symbols of this card/Spirit are also treated as Red/Purple/White/Yellow/Blue.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "This symbol and reduction symbols of this card/Spirit are also treated as Red/Purple/White/Yellow/Blue.",
+              "originalClauseText": "This symbol and reduction symbols of this card/Spirit are also treated as Red/Purple/White/Yellow/Blue.",
               "cleanText": "This symbol and reduction symbols of this card/Spirit are also treated as Red/Purple/White/Yellow/Blue",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "TREAT_RULE",
+                "treatAs": "COLOR",
+                "color": "Red"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A5952#a0",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A5952#AB_PASSIVE_NONE_LV1_LV2_LV3_abeef8787577e0a693ac0b20dce8dab22e0aa5f730e374013eb04e54a79e55ea_710bf62537e0b3b47440675f421938ab",
+          "physicalId": "BATTLE-SPIRITS-A5952#AB_PASSIVE_NONE_LV1_LV2_LV3_abeef8787577e0a693ac0b20dce8dab22e0aa5f730e374013eb04e54a79e55ea_710bf62537e0b3b47440675f421938ab",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_abeef8787577e0a693ac0b20dce8dab22e0aa5f730e374013eb04e54a79e55ea_710bf62537e0b3b47440675f421938ab",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_cbee9a1a3f80d5b3a5f7d532be695fa8e6f75f575aa3c2d1695891b8f5c00b58_6f957cee83e31c6d3642048735f84d63",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A5952#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -201,8 +238,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -211,10 +257,14 @@
             "isMain": false,
             "cleanBody": "Put one core from the Void to your Trash. Also, put one core from the Void to a \"Kamen\" family Spirit you control, other than this one."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned)\nPut one core from the Void to your Trash. Also, put one core from the Void to a \"Kamen\" family Spirit you control, other than this one.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Put one core from the Void to your Trash.",
+              "originalClauseText": "Put one core from the Void to your Trash.",
               "cleanText": "Put one core from the Void to your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -234,7 +284,9 @@
             },
             {
               "rawText": "put one core from the Void to a \"Kamen\" family Spirit you control, other than this one.",
+              "originalClauseText": "put one core from the Void to a \"Kamen\" family Spirit you control, other than this one.",
               "cleanText": "put one core from the Void to a \"Kamen\" family Spirit you control, other than this one",
+              "clauseIndex": 1,
               "link": "also",
               "isOptional": false,
               "isCost": false,
@@ -242,14 +294,31 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A5952#a1",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A5952#AB_WHEN_SUMMONED_NONE_LV1_LV2_89f77af457fcb9c083ed1bc461cd3fe83069df9365c124712c178a9b69d21d77_6fcb8e1e1e29fcd040af54f7162b9c7f",
+          "physicalId": "BATTLE-SPIRITS-A5952#AB_WHEN_SUMMONED_NONE_LV1_LV2_89f77af457fcb9c083ed1bc461cd3fe83069df9365c124712c178a9b69d21d77_6fcb8e1e1e29fcd040af54f7162b9c7f",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_89f77af457fcb9c083ed1bc461cd3fe83069df9365c124712c178a9b69d21d77_6fcb8e1e1e29fcd040af54f7162b9c7f",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_d2010f151532c5f229f1792f00ee949f6f451fbc735c5b4c0caf1ac43e5109fb_0d8a594f17a6a30e3611be7cf2832885",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A5952#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -258,8 +327,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -268,22 +346,32 @@
             "isMain": false,
             "cleanBody": "By paying three cost, refresh this Spirit."
           },
+          "originalAbilityText": "[LV2] (When Attacks)\nBy paying three cost, refresh this Spirit.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "By paying three cost",
+              "originalClauseText": "By paying three cost",
               "cleanText": "By paying three cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "COST_MODIFIER"
+                "source": "field",
+                "cost": 1,
+                "op": "PAY_COST",
+                "count": 3,
+                "isCost": true
               }
             },
             {
               "rawText": "refresh this Spirit.",
+              "originalClauseText": "refresh this Spirit.",
               "cleanText": "refresh this Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -295,7 +383,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A5952#a2",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A5952#AB_WHEN_ATTACKS_NONE_LV2_32fe71ff67bbb5c1e14890b44378541df3bb4d5673b48ea0999b275bf4226a1c_4949d6bca9899e11893cd7fcc837958a",
+          "physicalId": "BATTLE-SPIRITS-A5952#AB_WHEN_ATTACKS_NONE_LV2_32fe71ff67bbb5c1e14890b44378541df3bb4d5673b48ea0999b275bf4226a1c_4949d6bca9899e11893cd7fcc837958a",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_32fe71ff67bbb5c1e14890b44378541df3bb4d5673b48ea0999b275bf4226a1c_4949d6bca9899e11893cd7fcc837958a",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_ffe5c0848ab5953ab6e76339b7af9e15f98f9df600f708d50d2f1afca3d305dd_0cc20c27f209306a0f2195a56681c603",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,

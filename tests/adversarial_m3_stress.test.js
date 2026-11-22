@@ -241,6 +241,7 @@ test('Adversarial M3: Damage Cap mechanics (SD01-039 Blizzard Wall capping unblo
   game.state.step = 'ATTACK';
   game.state.activePlayer = 'player';
   const p = game.state.players.player;
+  p.voidCores.normal = 1; // Void core available for WHEN_BATTLES core boost
   const o = game.state.players.opponent;
 
   const c1 = p.hand.shift();
@@ -289,6 +290,7 @@ test('Adversarial M3: Battle timing coverage (WHEN_BATTLES ability on attack dec
   game.state.step = 'ATTACK';
   game.state.activePlayer = 'player';
   const p = game.state.players.player;
+  p.voidCores.normal = 1; // Void core available for WHEN_BATTLES core boost
 
   const card = p.hand.shift();
   // Place Kingghepardo at LV2 (3 cores)

@@ -1,0 +1,367 @@
+{
+  "generatedAt": "2026-11-20T14:32:56.368Z",
+  "batch": "K1-BATCH-04",
+  "trackedIncompleteOpsCount": 19,
+  "trackedIncompleteOps": [
+    "DECK_OR_HAND_ACTION",
+    "MODIFY_EFFECT",
+    "COUNT_OPERATION",
+    "DECK_ACTION",
+    "MODIFY_EFFECT_VALUE",
+    "ADVENT_RULE_MODIFIER",
+    "MIRAGE_OPERATION",
+    "REVEAL_CARDS",
+    "REPLACEMENT_EFFECT",
+    "TRIGGER_COUNTER",
+    "PUT_UNDERNEATH",
+    "COPY_PRE_ADVENT_EFFECT",
+    "USE_FROM_HAND",
+    "TOKEN_DEPLOYMENT",
+    "ADVENT",
+    "MILL",
+    "ACTIVATE_TRIGGER",
+    "GLOBAL_RESTRICTION",
+    "DECK_RULE"
+  ],
+  "totalIncompleteClausesScanned": 582,
+  "recoveredExplicitCount": 386,
+  "unrecoverableComplexCount": 196,
+  "recoveryRatePercent": 66.32,
+  "byOpBreakdown": {
+    "TOKEN_DEPLOYMENT": {
+      "total": 3,
+      "recoveredExplicit": 3,
+      "unrecoverableComplex": 0
+    },
+    "DECK_OR_HAND_ACTION": {
+      "total": 233,
+      "recoveredExplicit": 120,
+      "unrecoverableComplex": 113
+    },
+    "REPLACEMENT_EFFECT": {
+      "total": 11,
+      "recoveredExplicit": 4,
+      "unrecoverableComplex": 7
+    },
+    "MODIFY_EFFECT": {
+      "total": 80,
+      "recoveredExplicit": 63,
+      "unrecoverableComplex": 17
+    },
+    "ACTIVATE_TRIGGER": {
+      "total": 2,
+      "recoveredExplicit": 2,
+      "unrecoverableComplex": 0
+    },
+    "TRIGGER_COUNTER": {
+      "total": 11,
+      "recoveredExplicit": 11,
+      "unrecoverableComplex": 0
+    },
+    "PUT_UNDERNEATH": {
+      "total": 8,
+      "recoveredExplicit": 6,
+      "unrecoverableComplex": 2
+    },
+    "ADVENT": {
+      "total": 3,
+      "recoveredExplicit": 3,
+      "unrecoverableComplex": 0
+    },
+    "DECK_ACTION": {
+      "total": 46,
+      "recoveredExplicit": 30,
+      "unrecoverableComplex": 16
+    },
+    "REVEAL_CARDS": {
+      "total": 15,
+      "recoveredExplicit": 12,
+      "unrecoverableComplex": 3
+    },
+    "COUNT_OPERATION": {
+      "total": 79,
+      "recoveredExplicit": 61,
+      "unrecoverableComplex": 18
+    },
+    "MODIFY_EFFECT_VALUE": {
+      "total": 34,
+      "recoveredExplicit": 14,
+      "unrecoverableComplex": 20
+    },
+    "GLOBAL_RESTRICTION": {
+      "total": 2,
+      "recoveredExplicit": 2,
+      "unrecoverableComplex": 0
+    },
+    "MIRAGE_OPERATION": {
+      "total": 20,
+      "recoveredExplicit": 20,
+      "unrecoverableComplex": 0
+    },
+    "COPY_PRE_ADVENT_EFFECT": {
+      "total": 5,
+      "recoveredExplicit": 5,
+      "unrecoverableComplex": 0
+    },
+    "ADVENT_RULE_MODIFIER": {
+      "total": 22,
+      "recoveredExplicit": 22,
+      "unrecoverableComplex": 0
+    },
+    "USE_FROM_HAND": {
+      "total": 4,
+      "recoveredExplicit": 4,
+      "unrecoverableComplex": 0
+    },
+    "DECK_RULE": {
+      "total": 1,
+      "recoveredExplicit": 1,
+      "unrecoverableComplex": 0
+    },
+    "MILL": {
+      "total": 3,
+      "recoveredExplicit": 3,
+      "unrecoverableComplex": 0
+    }
+  },
+  "recoveredSamplesByOp": {
+    "TOKEN_DEPLOYMENT": {
+      "shard": "26RBS03.json",
+      "cardNumber": "26RBS03-078",
+      "abilityId": "26RBS03-078#AB_END_OF_TURN_NONE_LV2_040f1ec2ee01fbfff19564ea658632830694bebd3d0056329c783dd01b81d535_bc5e896bb5f3cc0d6e4ecf1c2db1882c",
+      "rawText": "If your Life is at two or less, send out up to two Tokens instead.",
+      "recoveredParams": {
+        "count": 2,
+        "upTo": true,
+        "tokenName": "Token"
+      }
+    },
+    "DECK_OR_HAND_ACTION": {
+      "shard": "BS02.json",
+      "cardNumber": "BS02-108",
+      "abilityId": "BS02-108#AB_MAIN_NONE_LV1_LV2_LV3_980738123473a66dfadd34f100f99a97234497950f403dc59b04911cd79f17e7_3c8a4a2199927aca8786817d51438705",
+      "rawText": "By putting any number of Magic cards from your Hand onto the Removed Zone",
+      "recoveredParams": {
+        "action": "MOVE_CARD",
+        "from": "hand",
+        "to": "removed",
+        "side": "self",
+        "count": "ANY",
+        "filter": {
+          "type": "Magic"
+        },
+        "isCost": true
+      }
+    },
+    "REPLACEMENT_EFFECT": {
+      "shard": "BS03.json",
+      "cardNumber": "BATTLE-SPIRITS-A3454",
+      "abilityId": "BATTLE-SPIRITS-A3454#AB_PASSIVE_NONE_LV2_LV3_9ecea36e5d7c1d3c367038ace8d63d38a372e4dcccae32d81cbb079c3f3d2414_fcdb25a3eb9ff6b1c5ff7b95c7e414ab",
+      "rawText": "Each time a \"Toy Beast\" spirit you control is destroyed, move it to your hand instead.",
+      "recoveredParams": {
+        "replaces": "DESTRUCTION",
+        "replacementZone": "hand",
+        "side": "self",
+        "filter": {
+          "family": "Toy Beast",
+          "type": "Spirit"
+        }
+      }
+    },
+    "MODIFY_EFFECT": {
+      "shard": "BS23.json",
+      "cardNumber": "BS23-039",
+      "abilityId": "BS23-039#AB_WHEN_SUMMONED_NONE_LV1_LV2_32ae486234633357f7915c4360a02273385b69c434f8bddf0f897c488a627232_7bae311c95443cdf92147e7358ee8632",
+      "rawText": "If you control any \"Turel\"-named Spirit, this effect reveals five cards instead.",
+      "recoveredParams": {
+        "param": "count",
+        "value": 5,
+        "newCount": 5,
+        "targetEffect": "reveal"
+      }
+    },
+    "ACTIVATE_TRIGGER": {
+      "shard": "BS23.json",
+      "cardNumber": "BS23-026",
+      "abilityId": "BS23-026#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_7ffa2d0bdd3d494c6cc515c942afaad2405e4ad0bb5e38cdb03c59850d53226f_a32ef7e751bebba3d4445f458528e335",
+      "rawText": "Activate one of your Spirits' [Bunshin].",
+      "recoveredParams": {
+        "trigger": "BUNSHIN",
+        "effectType": "KEYWORD"
+      }
+    },
+    "TRIGGER_COUNTER": {
+      "shard": "BS26.json",
+      "cardNumber": "BS26-078",
+      "abilityId": "BS26-078#AB_PASSIVE_NONE_LV1_LV2_LV3_280e4c8bb61eeb0efdeee438e7d71f16d9830557463382998ca22df7e7f505f8_56acd3d4eff8d76737f1d346653dfcef",
+      "rawText": "When an opposing Ultimate Trigger hits, if this card is in the Hand, you can use the following effect before the \"When hits\" effect activates.",
+      "recoveredParams": {
+        "counterTiming": "ON_OPPOSING_ULTIMATE_TRIGGER_HIT",
+        "zone": "hand",
+        "side": "self"
+      }
+    },
+    "PUT_UNDERNEATH": {
+      "shard": "BS27.json",
+      "cardNumber": "BS27-X01",
+      "abilityId": "BS27-X01#AB_WHEN_BATTLES_NONE_LV1_LV2_LV3_af66b47369a894cfc0d1ade68c57bc2aff51e06cd43fb1aac4cdc2cb860ef916_79293be2bd2f241019703f6b3995b0b4",
+      "rawText": "Put two cards from the opposing decktop under any opposing Spirits/Ultimates facedown.",
+      "recoveredParams": {
+        "from": "decktop",
+        "fromSide": "opp",
+        "count": 2,
+        "facedown": true,
+        "target": {
+          "side": "opp",
+          "types": [
+            "Spirit",
+            "Ultimate"
+          ]
+        }
+      }
+    },
+    "ADVENT": {
+      "shard": "BS41.json",
+      "cardNumber": "BATTLE-SPIRITS-A11765",
+      "abilityId": "BATTLE-SPIRITS-A11765#AB_PASSIVE_NONE_LV1_LV2_LV3_7e4897c260151dce40eaaa3c3f55515c522af08d8186688caeca3eed6f71ef35_5cd71cc57a96241ecba115d69118faec",
+      "rawText": "You can also stack this Spirit card onto your Blue Nexus with at least one core on it via [Advent].",
+      "recoveredParams": {
+        "from": "hand",
+        "adventType": "Advent",
+        "target": {
+          "side": "self",
+          "types": [
+            "Nexus"
+          ]
+        }
+      }
+    },
+    "DECK_ACTION": {
+      "shard": "BS44.json",
+      "cardNumber": "BS44-056",
+      "abilityId": "BS44-056#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a73a89299a804db62761515974d230c86151e4d783f01480e047f487bf837719_d160732f2a4ac4e4362139c96f716ca3",
+      "rawText": "Remturn any remaining card to the deckbottom in any order.",
+      "recoveredParams": {
+        "action": "RETURN_BOTTOM",
+        "from": "revealed",
+        "to": "deck_bottom",
+        "destination": "DECK_BOTTOM",
+        "side": "self",
+        "all": true
+      }
+    },
+    "REVEAL_CARDS": {
+      "shard": "BS50.json",
+      "cardNumber": "BATTLE-SPIRITS-A313",
+      "abilityId": "BATTLE-SPIRITS-A313#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_e6bc522c1a8545467dc798fee0bcc0d541b3b61bf66f0918b6ab1b83094091b4_f129c6d47a03f4f0ab75bf85a2fc0d6b",
+      "rawText": "Reveal one card from the opposing decktop.",
+      "recoveredParams": {
+        "count": 1,
+        "from": "deck",
+        "side": "opp"
+      }
+    },
+    "COUNT_OPERATION": {
+      "shard": "BS51.json",
+      "cardNumber": "BS51-10THX04",
+      "abilityId": "BS51-10THX04#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_47ec635daf53baacc300934135223f737f15722d25af2de144eb0f678b09300e_5e4db4c4fddceec01c69d6ce78d2ec22",
+      "rawText": "when there is any \"Sagitto\" among this Spirit's pre-Advent cards, if it's your Attack Step, you can send up to two opposing Lives to the Void.",
+      "recoveredParams": {
+        "action": "SEND_LIFE_TO_VOID",
+        "side": "opp",
+        "count": 2,
+        "to": "void"
+      }
+    },
+    "MODIFY_EFFECT_VALUE": {
+      "shard": "BS55.json",
+      "cardNumber": "BS55-018",
+      "abilityId": "BS55-018#AB_ATTACK_STEP_NONE_LV2_LV3_1e43396d24ee7227ecbfd61d330455fcbdcfe7c3b9755e09a61edbb22705158d_53d75c7c7fca7a3e55a56dd97b8938e9",
+      "rawText": "If you have three counters or more, this effect banishes +1 card.",
+      "recoveredParams": {
+        "param": "count",
+        "delta": 1,
+        "targetEffect": "banish"
+      }
+    },
+    "GLOBAL_RESTRICTION": {
+      "shard": "BS58.json",
+      "cardNumber": "BS58-007",
+      "abilityId": "BS58-007#AB_WHEN_ATTACKS_NONE_LV1_LV2_e93a6424275583b5e8b113b3ed9d43b34b413350fcedd1d12fcad28545045ec2_41d697ea3b81a404edae129f404dfbbf",
+      "rawText": "Neither player can use cards from Hand outside of Flash Timing.",
+      "recoveredParams": {
+        "restriction": "PREVENT_NON_FLASH_HAND",
+        "side": "both"
+      }
+    },
+    "MIRAGE_OPERATION": {
+      "shard": "BS61.json",
+      "cardNumber": "BS61-029",
+      "abilityId": "BS61-029#AB_PASSIVE_NONE_LV1_LV2_LV3_dcfe854ac1e1ed49d2aef1b28a3944f7d5076f3b1780ab85310ea9851db58b26_fc5b67c4d68e91899dd634b83db5f672",
+      "rawText": "At the start of opposing Attack Step, if the opponent controls three or more Spirits, you can immediately activate this set card.",
+      "recoveredParams": {
+        "action": "activate_set_card",
+        "mode": "ACTIVATE_SET",
+        "zone": "mirage",
+        "side": "self"
+      }
+    },
+    "COPY_PRE_ADVENT_EFFECT": {
+      "shard": "BS63.json",
+      "cardNumber": "BS63-CP04",
+      "abilityId": "BS63-CP04#AB_PASSIVE_NONE_LV1_LV2_LV3_f430d28988ce678590d885f56f3c470385bc986abf2b65a0231a3d414b4f01e2_8b87ed3f148d1f615db487d04852d053",
+      "rawText": "This Spirit gains every effect of a \"Glow-Kaiser\" pre-advent card beneath this Spirit, ignoring levels.",
+      "recoveredParams": {
+        "scope": "pre_advent",
+        "filter": {
+          "name": "Glow-Kaiser"
+        },
+        "ignoreLevels": true,
+        "count": "ALL"
+      }
+    },
+    "ADVENT_RULE_MODIFIER": {
+      "shard": "BS65.json",
+      "cardNumber": "BS65-XV02",
+      "abilityId": "BS65-XV02#AB_PASSIVE_NONE_LV1_LV2_LV3_cc4f81ca2cc9e151dbc47dc0110ed7b1e431c64aabac422c18ed7b5b06db5608_7a8c5b4f0ee6934b103024d38d3c58d4",
+      "rawText": "This card can [Contract Advent] from the Removed Zone.",
+      "recoveredParams": {
+        "fromZone": "removed",
+        "adventType": "CONTRACT_ADVENT",
+        "rule": "ADVENT_FROM_REMOVED"
+      }
+    },
+    "USE_FROM_HAND": {
+      "shard": "BS67.json",
+      "cardNumber": "BS67-083",
+      "abilityId": "BS67-083#AB_PASSIVE_NONE_LV1_LV2_LV3_e747c978f4c3a1cdc25b5b3aaa4271b38f1a7910658af2a46dada6eb4927cb6c_1c958563bc5a06b7b13aee71fcf853a3",
+      "rawText": "At the start of Opposing Attack Step, you can use this card from the Hand.",
+      "recoveredParams": {
+        "cardType": "SELF",
+        "timing": "OPPOSING_ATTACK_STEP",
+        "zone": "hand"
+      }
+    },
+    "DECK_RULE": {
+      "shard": "CB15.json",
+      "cardNumber": "CB15-012",
+      "abilityId": "CB15-012#AB_PASSIVE_NONE_LV1_LV2_LV3_32a8a5d1c3a7c6211deb24e24c64428ed488d5764810b0670b54525b0ef2ffee_d61dcea72e9b9b23419f5ce1f8dda05a",
+      "rawText": "You can put up to five copies of this card in your deck.",
+      "recoveredParams": {
+        "rule": "MAX_COPIES",
+        "maxCopies": 5
+      }
+    },
+    "MILL": {
+      "shard": "MISC.json",
+      "cardNumber": "BATTLE-SPIRITS-A8791",
+      "abilityId": "BATTLE-SPIRITS-A8791#AB_ATTACK_STEP_NONE_LV1_LV2_e19a4d2a383024382c60c28c63af10dde192c80d0784aaa0e22891940f55f175_88d5af08815ecbfc274ef9769a4ca799",
+      "rawText": "Each time this spirit deals any damage to your opponent's life, move the top 5 cards of your opponent's Deck to their Trash.",
+      "recoveredParams": {
+        "count": 5,
+        "side": "opp",
+        "from": "deck"
+      }
+    }
+  }
+}

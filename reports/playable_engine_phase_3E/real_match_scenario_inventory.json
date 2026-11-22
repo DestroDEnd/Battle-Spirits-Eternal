@@ -1,0 +1,68 @@
+[
+  {
+    "id": "MATCH-01",
+    "name": "Full Multi-Turn Game from Valid 40-Card Decks to Legitimate Victory",
+    "deckValidation": "Passed (40 cards, max 3 copies, computed attestation digest)",
+    "turnsExecuted": 5,
+    "phasesExercised": [
+      "START",
+      "CORE",
+      "DRAW",
+      "REFRESH",
+      "MAIN",
+      "ATTACK",
+      "END"
+    ],
+    "mechanicsExercised": [
+      "Summoning",
+      "Core Payment",
+      "Attack Declaration",
+      "Blocker Pass",
+      "Life Reduction",
+      "Win Resolution"
+    ],
+    "tampering": "Zero state tampering; 100% production engine APIs",
+    "finalState": "Player 1 wins by reducing Opponent Life from 5 to 0.",
+    "testFile": "tests/playable_engine_complete_match.test.js::COMPLETE-MATCH-01"
+  },
+  {
+    "id": "MATCH-02",
+    "name": "Deckout Sudden Death Victory on Turn Start",
+    "deckValidation": "Passed (Legal decks)",
+    "turnsExecuted": 3,
+    "phasesExercised": [
+      "START",
+      "DRAW"
+    ],
+    "mechanicsExercised": [
+      "Turn Progression",
+      "Empty Deck Draw",
+      "SBA Deckout Loss"
+    ],
+    "tampering": "Zero state tampering",
+    "finalState": "Player whose deck reaches 0 loses immediately on mandatory draw.",
+    "testFile": "tests/playable_engine_local_match.test.js::PLAYABLE-MATCH-02"
+  },
+  {
+    "id": "MATCH-03",
+    "name": "Native CDP Real Browser Arena Gameplay Match",
+    "deckValidation": "Passed (Pre-loaded production decks)",
+    "turnsExecuted": 3,
+    "phasesExercised": [
+      "START",
+      "MAIN",
+      "ATTACK",
+      "END"
+    ],
+    "mechanicsExercised": [
+      "UI Card Play",
+      "Cost Modal Payment",
+      "Target Modal Submit",
+      "Defense Modal Block Pass",
+      "Combat BP Resolution"
+    ],
+    "tampering": "Zero direct state mutation; genuine DOM clicks via Chrome DevTools Protocol",
+    "finalState": "Player attacks on Turn 3; Opponent Life reduced from 5 to 4 with screenshot evidence.",
+    "testFile": "tests/real_browser_arena.test.js"
+  }
+]

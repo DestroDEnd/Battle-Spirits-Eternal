@@ -1,0 +1,248 @@
+{
+  "inventoryVersion": "1.0.0",
+  "generatedAt": "2026-11-21T07:18:23.060Z",
+  "totalSharedDependencies": 17,
+  "dependencies": [
+    {
+      "id": "DEP-01",
+      "name": "Target Candidate Evaluation",
+      "module": "engine/selectors.js",
+      "primaryFunction": "executeTargeting(state, op, context, promptResolver)",
+      "status": "COMPLETE",
+      "stability": "HIGH",
+      "contractsEnforced": [
+        "Zone query",
+        "Type filter",
+        "Comparison (BP/Cost/Level)",
+        "Armor/Immunity",
+        "Selection bounds"
+      ]
+    },
+    {
+      "id": "DEP-02",
+      "name": "Structured Condition Evaluator",
+      "module": "engine/conditions.js",
+      "primaryFunction": "evaluateStructuredCondition(state, condStr, context)",
+      "status": "COMPLETE",
+      "stability": "HIGH",
+      "contractsEnforced": [
+        "4-state evaluation",
+        "Team presence",
+        "Soul Core state",
+        "Life threshold",
+        "Turn history"
+      ]
+    },
+    {
+      "id": "DEP-03",
+      "name": "Card & Filter Matching",
+      "module": "engine/ops/index.js",
+      "primaryFunction": "matchesCardFilter(card, filter, op)",
+      "status": "COMPLETE",
+      "stability": "HIGH",
+      "contractsEnforced": [
+        "Family matching",
+        "Color matching",
+        "Cost bounds",
+        "Card type",
+        "Keyword presence"
+      ]
+    },
+    {
+      "id": "DEP-04",
+      "name": "Player Decision Interaction Protocol",
+      "module": "engine/interaction.js",
+      "primaryFunction": "InteractionController.request(prompt)",
+      "status": "COMPLETE",
+      "stability": "HIGH",
+      "contractsEnforced": [
+        "Promise barrier",
+        "Candidate legality",
+        "Stale response rejection",
+        "UI adapter serialization"
+      ]
+    },
+    {
+      "id": "DEP-05",
+      "name": "Effective Cost & Payment Engine",
+      "module": "engine/payment.js",
+      "primaryFunction": "calculateEffectiveCost(state, card, side), payCost(...)",
+      "status": "COMPLETE",
+      "stability": "HIGH",
+      "contractsEnforced": [
+        "Symbol reduction",
+        "Payment plan validation",
+        "Soul core tracking",
+        "Cost bounds"
+      ]
+    },
+    {
+      "id": "DEP-06",
+      "name": "Authoritative Core Movement",
+      "module": "engine/zones.js",
+      "primaryFunction": "moveCore(state, count, from, to, options, events)",
+      "status": "COMPLETE",
+      "stability": "HIGH",
+      "contractsEnforced": [
+        "Core conservation",
+        "Soul core location",
+        "Zone validation",
+        "CORE_MOVED emission"
+      ]
+    },
+    {
+      "id": "DEP-07",
+      "name": "Physical Card Zone Transitions",
+      "module": "engine/zones.js",
+      "primaryFunction": "moveCard(state, card, toZone, toSide, options, events)",
+      "status": "COMPLETE",
+      "stability": "HIGH",
+      "contractsEnforced": [
+        "Ownership tracking",
+        "Placement ID reset",
+        "Stack dissolution",
+        "Event emission"
+      ]
+    },
+    {
+      "id": "DEP-08",
+      "name": "Effective BP Calculation",
+      "module": "engine/continuous.js",
+      "primaryFunction": "computeEffectiveBP(state, stack)",
+      "status": "COMPLETE",
+      "stability": "HIGH",
+      "contractsEnforced": [
+        "Base BP",
+        "Level calculation",
+        "Continuous buffs/debuffs",
+        "Zero floor"
+      ]
+    },
+    {
+      "id": "DEP-09",
+      "name": "Modifier Duration Management",
+      "module": "engine/continuous.js",
+      "primaryFunction": "pruneExpiredModifiers(state, currentPhase)",
+      "status": "COMPLETE",
+      "stability": "HIGH",
+      "contractsEnforced": [
+        "Scope pruning (BATTLE, ATTACK, TURN)",
+        "Source card tracking",
+        "Timestamp ordering"
+      ]
+    },
+    {
+      "id": "DEP-10",
+      "name": "Timing & Window Eligibility",
+      "module": "engine/windows.js, engine/flow.js",
+      "primaryFunction": "TimingWindowManager.canActivate(timing, step, phase)",
+      "status": "COMPLETE",
+      "stability": "HIGH",
+      "contractsEnforced": [
+        "Step restriction",
+        "Flash priority",
+        "Prefix prerequisites",
+        "Turn 1 restrictions"
+      ]
+    },
+    {
+      "id": "DEP-11",
+      "name": "Trigger Discovery & Queue Manager",
+      "module": "engine/triggers.js",
+      "primaryFunction": "TriggerQueueManager.enqueueTrigger(trigger), resolveNext()",
+      "status": "COMPLETE",
+      "stability": "HIGH",
+      "contractsEnforced": [
+        "FIFO per player",
+        "Active player priority",
+        "Simultaneous ordering",
+        "Stale trigger discard"
+      ]
+    },
+    {
+      "id": "DEP-12",
+      "name": "Continuous Layer & Keyword Registry",
+      "module": "engine/continuous.js, engine/keywords/index.js",
+      "primaryFunction": "getActiveStackKeywords(stack, state), isImmune(stack, effect)",
+      "status": "COMPLETE",
+      "stability": "HIGH",
+      "contractsEnforced": [
+        "Armor/Heavy Armor",
+        "Unblockable",
+        "Symbol grant",
+        "Color grant"
+      ]
+    },
+    {
+      "id": "DEP-13",
+      "name": "Replacement Effects Pipeline",
+      "module": "engine/continuous.js, engine/ops/index.js",
+      "primaryFunction": "checkReplacementEffects(state, eventType, eventData)",
+      "status": "PARTIAL",
+      "stability": "MEDIUM",
+      "contractsEnforced": [
+        "Single-stage redirection",
+        "Destruction replacement",
+        "Life loss prevention"
+      ],
+      "knownGaps": [
+        "Multi-replacement priority arbitration queued for Phase 3C"
+      ]
+    },
+    {
+      "id": "DEP-14",
+      "name": "Activation Restriction & Budget Engine",
+      "module": "engine/restrictions.js",
+      "primaryFunction": "reserveRestriction(state, ability, ctx), commitRestriction(...)",
+      "status": "COMPLETE",
+      "stability": "HIGH",
+      "contractsEnforced": [
+        "Stage 4 commitment",
+        "Same Name scoping",
+        "Once per turn/game",
+        "Safe serialization"
+      ]
+    },
+    {
+      "id": "DEP-15",
+      "name": "Deterministic Event Dispatch Bus",
+      "module": "engine/events.js",
+      "primaryFunction": "EventBus.emit(event), EventBus.on(type, handler)",
+      "status": "COMPLETE",
+      "stability": "HIGH",
+      "contractsEnforced": [
+        "Synchronous/Asynchronous emission",
+        "Turn history updates",
+        "Zero memory leaks"
+      ]
+    },
+    {
+      "id": "DEP-16",
+      "name": "State-Based Actions (SBA) Engine",
+      "module": "engine/sba.js",
+      "primaryFunction": "checkStateBasedActions(state, events), stabilizeGameState(...)",
+      "status": "COMPLETE",
+      "stability": "HIGH",
+      "contractsEnforced": [
+        "0-core destruction",
+        "0-BP destruction",
+        "0-life defeat",
+        "Iterative stabilization"
+      ]
+    },
+    {
+      "id": "DEP-17",
+      "name": "Asynchronous Ability Resolver",
+      "module": "engine/resolver.js",
+      "primaryFunction": "AsyncResolver.resolveAbility(state, ability, context, events)",
+      "status": "COMPLETE",
+      "stability": "HIGH",
+      "contractsEnforced": [
+        "Frame stack depth limit (32)",
+        "Clause link branching",
+        "Targeting synchronization",
+        "Fail-fast commitment"
+      ]
+    }
+  ]
+}

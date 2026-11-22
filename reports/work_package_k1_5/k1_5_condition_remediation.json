@@ -1,0 +1,71 @@
+{
+  "package": "K.1.5",
+  "generatedAt": "2026-11-20T11:22:47.731Z",
+  "historicalK11": {
+    "PARSED_EVALUABLE": 3421,
+    "PARSE_FAILURE": 1114
+  },
+  "historicalK12ConditionLocation": {
+    "clauseConditionFailures": 1113,
+    "opConditionFailures": 406,
+    "abilitiesWithAnyCondFail": 1322
+  },
+  "postK15Live": {
+    "totalInstances": 4535,
+    "byStatus": {
+      "PARSED_EVALUABLE": 3537,
+      "PARSE_FAILURE": 998
+    },
+    "uniqueFailurePatterns": 912
+  },
+  "postK15ConditionLocation": {
+    "totalConditionInstances": 4940,
+    "byLocation": {
+      "header.condition": {
+        "total": 0,
+        "evaluable": 0,
+        "failures": 0,
+        "byStatus": {}
+      },
+      "clause.condition": {
+        "total": 4534,
+        "evaluable": 3537,
+        "failures": 997,
+        "byStatus": {
+          "PARSED_EVALUABLE": 3537,
+          "PARSE_FAILURE": 996,
+          "STRUCTURED_NO_EVALUATOR": 1
+        }
+      },
+      "clause.op.condition": {
+        "total": 406,
+        "evaluable": 0,
+        "failures": 406,
+        "byStatus": {
+          "PARSE_FAILURE": 2,
+          "STRUCTURED_UNTYPED_OR_UNRESOLVED": 404
+        }
+      }
+    },
+    "abilitiesWithHeaderCondFail": 0,
+    "abilitiesWithClauseCondFail": 974,
+    "abilitiesWithOpCondFail": 239,
+    "abilitiesWithAnyCondFail": 1213
+  },
+  "reductionSummary": {
+    "k11ParseFailureDelta": -116,
+    "k12AbilitiesWithAnyCondFailDelta": -109
+  },
+  "newAndFixedConditionSupport": [
+    "TEAM_PRESENCE (all Spirits/Nexuses have [Team], N+ distinct team names)",
+    "BRAVE_STACK_STATE (\"While braved to \\\"Name\\\"\", \"While braved to \\\"Family\\\" Spirit\")",
+    "ATTACKING_OR_BLOCKING_SPIRIT multi-name (\"While your \\\"A\\\"/\\\"B\\\" is attacking\") and self-or-family attacking/blocking",
+    "FIELD_COMPOSITION (\"If every Spirit/Ultimate you control has \\\"Family\\\" family\") + team support",
+    "CONTROL_CARD multi-name, bravedWithFamily, and hasTiming (\"Spirit with When Blocks/Attacks/Summoned effects\")",
+    "CARD_RESULT family/name/color checks (\"If that card has \\\"A\\\"/\\\"B\\\" family\")",
+    "Fixed ctrlMatch fallthrough bug (`if (!filter) return null;` instead of `return { filter: null }`) so extended rules after ctrlMatch execute reliably"
+  ],
+  "evaluatedConditionTypesCount": 26,
+  "remainingConditionFailuresEnteringBatch02": 1213,
+  "behavioralTest": "K1.5-D1 & COND-TRISTATE-01 & WPC-4C5-COND"
+}

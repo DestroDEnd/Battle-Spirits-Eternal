@@ -1,0 +1,578 @@
+{
+  "conditions": {
+    "totalConditionInstances": 4940,
+    "reconciledWithAuthoritativeEnumerator": true,
+    "parsedStructuredCount": 4078,
+    "parseFailureCount": 862,
+    "reconciledTotalCheck": true,
+    "reconciledEvidenceCheck": true,
+    "byStructuredType": {
+      "CONTROL_CARD": 986,
+      "COLOR_SYMBOL": 431,
+      "COUNTER_THRESHOLD": 389,
+      "ATTACKING_OR_BLOCKING_SPIRIT": 263,
+      "SOUL_CORE_ON_SPIRIT": 226,
+      "CARD_RESULT": 188,
+      "BURST_OR_MIRAGE_SET": 187,
+      "LIFE_THRESHOLD": 151,
+      "ZONE_CARD_COUNT": 132,
+      "BRAVE_STACK_STATE": 119,
+      "HAND_SIZE_THRESHOLD": 117,
+      "TURN_HISTORY": 115,
+      "BATTLING_STATE": 105,
+      "LEGACY_CONTEXT_CONDITION": 101,
+      "SPIRIT_STAT_THRESHOLD": 96,
+      "TURN_STEP_STATE": 81,
+      "FIELD_COMPOSITION": 78,
+      "BP_ZERO": 60,
+      "PREVIOUS_OP_SUCCESS": 51,
+      "CARD_ZONE_STATE": 43,
+      "SOUL_STATE": 43,
+      "STACK_STATE": 42,
+      "SOUL_CORE_LOCATION": 27,
+      "ACTIVATION_ORIGIN": 17,
+      "RESERVE_CORE_THRESHOLD": 8,
+      "TEAM_PRESENCE": 8,
+      "PRE_ADVENT_CARD": 8,
+      "COMPOUND": 4,
+      "OP_RULE_CONDITION": 2
+    },
+    "evidenceBreakdown": {
+      "PARSE_FAILURE": 862,
+      "PARSED_UNSUPPORTED_TYPE": 0,
+      "PARSED_EVALUABLE_UNVERIFIED": 35,
+      "SEMANTICALLY_VERIFIED": 4043,
+      "NEEDS_MANUAL_REVIEW": 0
+    }
+  },
+  "targetingAndComparisonOps": [
+    {
+      "op": "TARGET",
+      "handlerPresent": true,
+      "registryEntry": {
+        "op": "TARGET",
+        "supportedParamSchema": {
+          "required": [],
+          "optional": []
+        },
+        "explicitlyUnsupportedVariants": [],
+        "productionHandlerRef": "engine/ops/index.js:case 'TARGET'",
+        "handlerPresent": true,
+        "variants": {
+          "TARGET:default": {
+            "classification": "OPERATION_VARIANT",
+            "testFile": "tests/work_package_hij1_operation_variants.test.js",
+            "testIds": [
+              "HIJ1-OPVAR-07 [OPERATION_VARIANT]: ADVENT_STACK, ADVENT_PAY, SUMMON_THIS_CARD, OPEN_ZONE, TARGET, TARGET_CARD, NEGATE_EFFECT, REBIRTH_FLIP, ACTIVATE_FLASH, TARGET_ATTACK, FORCE_BLOCK, MOVE_SOUL_CORE, GRANDWALKER_PROTECTION, GRANDWALKER_CORE_RULE"
+            ],
+            "testedSuccessBehavior": "Executes TARGET with state transition and invariant checks",
+            "testedRejectionBehavior": "Fails closed on missing IR parameters / invalid context",
+            "stateInvariantsAsserted": [
+              "state_transition_verified"
+            ],
+            "eventBehaviorAsserted": [],
+            "status": "SEMANTICALLY_VERIFIED",
+            "executableTestVerified": true,
+            "inFullRunner": true,
+            "inVerifiedRunner": true,
+            "executionStatus": "PASS",
+            "verificationFailureReason": null,
+            "matchedRegisteredTests": [
+              "HIJ1-OPVAR-07 [OPERATION_VARIANT]: ADVENT_STACK, ADVENT_PAY, SUMMON_THIS_CARD, OPEN_ZONE, TARGET, TARGET_CARD, NEGATE_EFFECT, REBIRTH_FLIP, ACTIVATE_FLASH, TARGET_ATTACK, FORCE_BLOCK, MOVE_SOUL_CORE, GRANDWALKER_PROTECTION, GRANDWALKER_CORE_RULE"
+            ]
+          }
+        },
+        "evidenceStatus": "SEMANTICALLY_VERIFIED",
+        "lastAuditRevision": "Work Package C.3.1"
+      }
+    },
+    {
+      "op": "TARGET_CARD",
+      "handlerPresent": true,
+      "registryEntry": {
+        "op": "TARGET_CARD",
+        "supportedParamSchema": {
+          "required": [],
+          "optional": []
+        },
+        "explicitlyUnsupportedVariants": [],
+        "productionHandlerRef": "engine/ops/index.js:case 'TARGET_CARD'",
+        "handlerPresent": true,
+        "variants": {
+          "TARGET_CARD:default": {
+            "classification": "OPERATION_VARIANT",
+            "testFile": "tests/work_package_hij1_operation_variants.test.js",
+            "testIds": [
+              "HIJ1-OPVAR-07 [OPERATION_VARIANT]: ADVENT_STACK, ADVENT_PAY, SUMMON_THIS_CARD, OPEN_ZONE, TARGET, TARGET_CARD, NEGATE_EFFECT, REBIRTH_FLIP, ACTIVATE_FLASH, TARGET_ATTACK, FORCE_BLOCK, MOVE_SOUL_CORE, GRANDWALKER_PROTECTION, GRANDWALKER_CORE_RULE"
+            ],
+            "testedSuccessBehavior": "Executes TARGET_CARD with state transition and invariant checks",
+            "testedRejectionBehavior": "Fails closed on missing IR parameters / invalid context",
+            "stateInvariantsAsserted": [
+              "state_transition_verified"
+            ],
+            "eventBehaviorAsserted": [],
+            "status": "SEMANTICALLY_VERIFIED",
+            "executableTestVerified": true,
+            "inFullRunner": true,
+            "inVerifiedRunner": true,
+            "executionStatus": "PASS",
+            "verificationFailureReason": null,
+            "matchedRegisteredTests": [
+              "HIJ1-OPVAR-07 [OPERATION_VARIANT]: ADVENT_STACK, ADVENT_PAY, SUMMON_THIS_CARD, OPEN_ZONE, TARGET, TARGET_CARD, NEGATE_EFFECT, REBIRTH_FLIP, ACTIVATE_FLASH, TARGET_ATTACK, FORCE_BLOCK, MOVE_SOUL_CORE, GRANDWALKER_PROTECTION, GRANDWALKER_CORE_RULE"
+            ]
+          }
+        },
+        "evidenceStatus": "SEMANTICALLY_VERIFIED",
+        "lastAuditRevision": "Work Package C.3.1"
+      }
+    },
+    {
+      "op": "TARGET_SELECT",
+      "handlerPresent": true,
+      "registryEntry": null
+    },
+    {
+      "op": "REDIRECT_TARGET",
+      "handlerPresent": true,
+      "registryEntry": {
+        "op": "REDIRECT_TARGET",
+        "supportedParamSchema": {
+          "required": [
+            "newTarget",
+            "filter",
+            "bpMax",
+            "mode"
+          ],
+          "optional": [
+            "target",
+            "side",
+            "duration"
+          ]
+        },
+        "explicitlyUnsupportedVariants": [],
+        "productionHandlerRef": "engine/ops/index.js:case 'REDIRECT_TARGET'",
+        "handlerPresent": true,
+        "variants": {
+          "REDIRECT_TARGET:default": {
+            "testFile": "tests/work_package_hij_real_cards_e2e.test.js",
+            "testIds": [
+              "HIJ1-RULE-021 [CARD_RULES_E2E]: BS04-054 (Arcanasoldier-Cinq) resolves REDIRECT_TARGET"
+            ],
+            "testedSuccessBehavior": "Executes REDIRECT_TARGET (REDIRECT_TARGET:default) with valid state transition and identity/core conservation",
+            "testedRejectionBehavior": "Fails closed on MISSING_IR_PARAMETERS / invalid targets / missing cost or resources",
+            "stateInvariantsAsserted": [
+              "state_transition_verified",
+              "card_and_core_conservation"
+            ],
+            "eventBehaviorAsserted": [
+              "TARGET_REDIRECTED"
+            ],
+            "status": "HANDLER_PRESENT_UNVERIFIED",
+            "executableTestVerified": false,
+            "inFullRunner": false,
+            "inVerifiedRunner": false,
+            "executionStatus": "NOT_EXECUTED",
+            "verificationFailureReason": "TEST_ID_NOT_REGISTERED:HIJ1-RULE-021 [CARD_RULES_E2E]: BS04-054 (Arcanasoldier-Cinq) resolves REDIRECT_TARGET",
+            "matchedRegisteredTests": []
+          }
+        },
+        "evidenceStatus": "HANDLER_PRESENT_UNVERIFIED",
+        "lastAuditRevision": "Work Package C.3.1"
+      }
+    },
+    {
+      "op": "CHANGE_TARGET",
+      "handlerPresent": true,
+      "registryEntry": {
+        "op": "CHANGE_TARGET",
+        "supportedParamSchema": {
+          "required": [],
+          "optional": []
+        },
+        "explicitlyUnsupportedVariants": [],
+        "productionHandlerRef": "engine/ops/index.js:case 'CHANGE_TARGET'",
+        "handlerPresent": true,
+        "variants": {
+          "CHANGE_TARGET:default": {
+            "testFile": "tests/work_package_hij1_operation_variants.test.js",
+            "testIds": [
+              "HIJ1-OPVAR-10 [OPERATION_VARIANT]: Combat, Targeting, Immunity, and Copy ops (ATTACK_RULE_MODIFIER, BATTLE_MODIFIER, BATTLE_MULTIPLE, CAN_ATTACK, CHANGE_TARGET, CHOOSE_BATTLE_TARGET, CHOOSE_BLOCKER, COPY_ABILITY, COPY_PRE_ADVENT_EFFECT, COPY_TRIGGER, EXCHANGE_BP, SWITCH_BP, EXPAND_TARGETS, GUARD_TRIGGER, LOSE_IMMUNITY, MULTIPLY_EFFECT, NEGATE_MAGIC, SCHEDULED_DESTROY, SELECT_TARGET, SIMULTANEOUS_BATTLE)"
+            ],
+            "testedSuccessBehavior": "Executes CHANGE_TARGET (CHANGE_TARGET:default) with valid state transition and identity/core conservation",
+            "testedRejectionBehavior": "Fails closed on MISSING_IR_PARAMETERS / invalid targets / missing cost or resources",
+            "stateInvariantsAsserted": [
+              "state_transition_verified",
+              "card_and_core_conservation"
+            ],
+            "eventBehaviorAsserted": [],
+            "status": "SEMANTICALLY_VERIFIED",
+            "executableTestVerified": true,
+            "inFullRunner": true,
+            "inVerifiedRunner": true,
+            "executionStatus": "PASS",
+            "verificationFailureReason": null,
+            "matchedRegisteredTests": [
+              "HIJ1-OPVAR-10 [OPERATION_VARIANT]: Combat, Targeting, Immunity, and Copy ops (ATTACK_RULE_MODIFIER, BATTLE_MODIFIER, BATTLE_MULTIPLE, CAN_ATTACK, CHANGE_TARGET, CHOOSE_BATTLE_TARGET, CHOOSE_BLOCKER, COPY_ABILITY, COPY_PRE_ADVENT_EFFECT, COPY_TRIGGER, EXCHANGE_BP, SWITCH_BP, EXPAND_TARGETS, GUARD_TRIGGER, LOSE_IMMUNITY, MULTIPLY_EFFECT, NEGATE_MAGIC, SCHEDULED_DESTROY, SELECT_TARGET, SIMULTANEOUS_BATTLE)"
+            ]
+          }
+        },
+        "evidenceStatus": "SEMANTICALLY_VERIFIED",
+        "lastAuditRevision": "Work Package C.3.1"
+      }
+    }
+  ],
+  "continuousAndModifierOps": [
+    {
+      "op": "BP_BUFF",
+      "handlerPresent": true,
+      "registryEntry": {
+        "op": "BP_BUFF",
+        "supportedParamSchema": {
+          "required": [],
+          "optional": [
+            "amount",
+            "target",
+            "duration",
+            "all",
+            "forEach"
+          ]
+        },
+        "explicitlyUnsupportedVariants": [],
+        "productionHandlerRef": "engine/ops/index.js:case 'BP_BUFF'",
+        "handlerPresent": true,
+        "variants": {
+          "BP_BUFF:default": {
+            "testFile": "tests/real_card_semantic_validation.test.js",
+            "testIds": [
+              "REAL-CARD-04: BS01-077 Baby-Loki (Spirit, White) WHEN_BLOCKS boosts effective BP during battle"
+            ],
+            "testedSuccessBehavior": "Registers BP_BUFF modifier consumed by computeEffectiveBP",
+            "testedRejectionBehavior": "Respects duration expiration",
+            "stateInvariantsAsserted": [
+              "modifier_layering"
+            ],
+            "eventBehaviorAsserted": [],
+            "status": "SEMANTICALLY_VERIFIED",
+            "executableTestVerified": true,
+            "inFullRunner": true,
+            "inVerifiedRunner": true,
+            "executionStatus": "PASS",
+            "verificationFailureReason": null,
+            "matchedRegisteredTests": [
+              "REAL-CARD-04: BS01-077 Baby-Loki (Spirit, White) WHEN_BLOCKS boosts effective BP during battle"
+            ]
+          }
+        },
+        "evidenceStatus": "SEMANTICALLY_VERIFIED",
+        "lastAuditRevision": "Work Package C.3.1"
+      }
+    },
+    {
+      "op": "BP_DEBUFF",
+      "handlerPresent": true,
+      "registryEntry": {
+        "op": "BP_DEBUFF",
+        "supportedParamSchema": {
+          "required": [],
+          "optional": [
+            "amount",
+            "target",
+            "duration"
+          ]
+        },
+        "explicitlyUnsupportedVariants": [],
+        "productionHandlerRef": "engine/ops/index.js:case 'BP_DEBUFF'",
+        "handlerPresent": true,
+        "variants": {
+          "BP_DEBUFF:default": {
+            "testFile": "tests/work_package_fg_targeting_conditions_continuous.test.js",
+            "testIds": [
+              "WPFG-INT: Continuous BP debuff enables threshold DESTROY and FlowController respects CANNOT_REFRESH"
+            ],
+            "testedSuccessBehavior": "Registers BP_DEBUFF modifier reducing opposing effective BP",
+            "testedRejectionBehavior": "Returns false when no opposing candidates exist",
+            "stateInvariantsAsserted": [
+              "modifier_layering"
+            ],
+            "eventBehaviorAsserted": [],
+            "status": "SEMANTICALLY_VERIFIED",
+            "executableTestVerified": true,
+            "inFullRunner": true,
+            "inVerifiedRunner": true,
+            "executionStatus": "PASS",
+            "verificationFailureReason": null,
+            "matchedRegisteredTests": [
+              "WPFG-INT: Continuous BP debuff enables threshold DESTROY and FlowController respects CANNOT_REFRESH"
+            ]
+          }
+        },
+        "evidenceStatus": "SEMANTICALLY_VERIFIED",
+        "lastAuditRevision": "Work Package C.3.1"
+      }
+    },
+    {
+      "op": "SET_BP",
+      "handlerPresent": true,
+      "registryEntry": {
+        "op": "SET_BP",
+        "supportedParamSchema": {
+          "required": [
+            "value"
+          ],
+          "optional": [
+            "targetStackId",
+            "duration"
+          ]
+        },
+        "explicitlyUnsupportedVariants": [],
+        "productionHandlerRef": "engine/ops/index.js:case 'SET_BP'",
+        "handlerPresent": true,
+        "variants": {
+          "SET_BP:default": {
+            "testFile": "tests/phase2b_state_and_modifiers.test.js",
+            "testIds": [
+              "9. SET_BP, SET_LEVEL, and BP_OR_LEVEL_MODIFIER are consumed by computeEffectiveBP and computeLevel"
+            ],
+            "testedSuccessBehavior": "Creates SET_BP modifier consumed by computeEffectiveBP",
+            "testedRejectionBehavior": "Expires at duration boundary",
+            "stateInvariantsAsserted": [
+              "modifier_layering"
+            ],
+            "eventBehaviorAsserted": [],
+            "status": "SEMANTICALLY_VERIFIED",
+            "executableTestVerified": true,
+            "inFullRunner": true,
+            "inVerifiedRunner": false,
+            "executionStatus": "PASS",
+            "verificationFailureReason": null,
+            "matchedRegisteredTests": [
+              "9. SET_BP, SET_LEVEL, and BP_OR_LEVEL_MODIFIER are consumed by computeEffectiveBP and computeLevel"
+            ]
+          }
+        },
+        "evidenceStatus": "SEMANTICALLY_VERIFIED",
+        "lastAuditRevision": "Work Package C.3.1"
+      }
+    },
+    {
+      "op": "ADD_SYMBOL",
+      "handlerPresent": true,
+      "registryEntry": {
+        "op": "ADD_SYMBOL",
+        "supportedParamSchema": {
+          "required": [],
+          "optional": [
+            "color",
+            "count",
+            "duration"
+          ]
+        },
+        "explicitlyUnsupportedVariants": [],
+        "productionHandlerRef": "engine/ops/index.js:case 'ADD_SYMBOL'",
+        "handlerPresent": true,
+        "variants": {
+          "ADD_SYMBOL:default": {
+            "testFile": "tests/real_card_semantic_validation.test.js",
+            "testIds": [
+              "REAL-CARD-37"
+            ],
+            "testedSuccessBehavior": "Adds symbol modifier reflected by computeSymbols",
+            "testedRejectionBehavior": "Expires at duration boundary",
+            "stateInvariantsAsserted": [
+              "modifier_layering"
+            ],
+            "eventBehaviorAsserted": [],
+            "status": "HANDLER_PRESENT_UNVERIFIED",
+            "executableTestVerified": false,
+            "inFullRunner": false,
+            "inVerifiedRunner": false,
+            "executionStatus": "NOT_EXECUTED",
+            "verificationFailureReason": "TEST_ID_NOT_REGISTERED:REAL-CARD-37",
+            "matchedRegisteredTests": []
+          }
+        },
+        "evidenceStatus": "HANDLER_PRESENT_UNVERIFIED",
+        "lastAuditRevision": "Work Package C.3.1"
+      }
+    },
+    {
+      "op": "GRANT_KEYWORD",
+      "handlerPresent": true,
+      "registryEntry": null
+    },
+    {
+      "op": "COST_MOD",
+      "handlerPresent": false,
+      "registryEntry": null
+    },
+    {
+      "op": "COST_MODIFIER",
+      "handlerPresent": true,
+      "registryEntry": {
+        "op": "COST_MODIFIER",
+        "supportedParamSchema": {
+          "required": [],
+          "optional": []
+        },
+        "explicitlyUnsupportedVariants": [],
+        "productionHandlerRef": "engine/ops/index.js:case 'COST_MODIFIER'",
+        "handlerPresent": true,
+        "variants": {
+          "COST_MODIFIER:default": {
+            "classification": "CARD_RULES_E2E",
+            "testFile": "tests/work_package_hij_real_cards_e2e.test.js",
+            "testIds": [
+              "HIJ1-RULE-025 [CARD_RULES_E2E]: BS08-057 (The Red Sand Glass) resolves COST_MODIFIER"
+            ],
+            "testedSuccessBehavior": "Executes COST_MODIFIER with state transition and invariant checks",
+            "testedRejectionBehavior": "Fails closed on missing IR parameters / invalid context",
+            "stateInvariantsAsserted": [
+              "state_transition_verified"
+            ],
+            "eventBehaviorAsserted": [],
+            "status": "HANDLER_PRESENT_UNVERIFIED",
+            "executableTestVerified": false,
+            "inFullRunner": false,
+            "inVerifiedRunner": false,
+            "executionStatus": "NOT_EXECUTED",
+            "verificationFailureReason": "NO_PRODUCTION_API_CALL:HIJ1-RULE-025 [CARD_RULES_E2E]: BS08-057 (The Red Sand Glass) resolves COST_MODIFIER",
+            "matchedRegisteredTests": []
+          }
+        },
+        "evidenceStatus": "HANDLER_PRESENT_UNVERIFIED",
+        "lastAuditRevision": "Work Package C.3.1"
+      }
+    },
+    {
+      "op": "CHANGE_LEVEL",
+      "handlerPresent": false,
+      "registryEntry": null
+    },
+    {
+      "op": "RULE_OR_TEXT_MODIFIER",
+      "handlerPresent": true,
+      "registryEntry": null
+    }
+  ],
+  "restrictionOps": [
+    {
+      "op": "SET_RESTRICTION",
+      "handlerPresent": true,
+      "registryEntry": {
+        "op": "SET_RESTRICTION",
+        "supportedParamSchema": {
+          "required": [
+            "restriction"
+          ],
+          "optional": [
+            "side",
+            "duration"
+          ]
+        },
+        "explicitlyUnsupportedVariants": [],
+        "productionHandlerRef": "engine/ops/index.js:case 'SET_RESTRICTION'",
+        "handlerPresent": true,
+        "variants": {
+          "SET_RESTRICTION:default": {
+            "testFile": "tests/real_card_semantic_validation.test.js",
+            "testIds": [
+              "REAL-CARD-24"
+            ],
+            "testedSuccessBehavior": "Registers SET_RESTRICTION modifier enforced by engine gates",
+            "testedRejectionBehavior": "Expires at duration boundary",
+            "stateInvariantsAsserted": [
+              "modifier_layering"
+            ],
+            "eventBehaviorAsserted": [],
+            "status": "HANDLER_PRESENT_UNVERIFIED",
+            "executableTestVerified": false,
+            "inFullRunner": false,
+            "inVerifiedRunner": false,
+            "executionStatus": "NOT_EXECUTED",
+            "verificationFailureReason": "TEST_ID_NOT_REGISTERED:REAL-CARD-24",
+            "matchedRegisteredTests": []
+          }
+        },
+        "evidenceStatus": "HANDLER_PRESENT_UNVERIFIED",
+        "lastAuditRevision": "Work Package C.3.1"
+      }
+    },
+    {
+      "op": "CANNOT_ATTACK",
+      "handlerPresent": true,
+      "registryEntry": null
+    },
+    {
+      "op": "CANNOT_BLOCK",
+      "handlerPresent": true,
+      "registryEntry": null
+    },
+    {
+      "op": "CANNOT_REFRESH",
+      "handlerPresent": true,
+      "registryEntry": null
+    }
+  ],
+  "immunityAndProtectionOps": [
+    {
+      "op": "IMMUNITY",
+      "handlerPresent": true,
+      "registryEntry": {
+        "op": "IMMUNITY",
+        "supportedParamSchema": {
+          "required": [],
+          "optional": [
+            "immuneTo",
+            "duration"
+          ]
+        },
+        "explicitlyUnsupportedVariants": [],
+        "productionHandlerRef": "engine/ops/index.js:case 'IMMUNITY'",
+        "handlerPresent": true,
+        "variants": {
+          "IMMUNITY:default": {
+            "testFile": "tests/real_card_semantic_validation.test.js",
+            "testIds": [
+              "REAL-CARD-10"
+            ],
+            "testedSuccessBehavior": "Grants protection from opposing effects matching scope",
+            "testedRejectionBehavior": "Expires at duration boundary",
+            "stateInvariantsAsserted": [
+              "protection_check"
+            ],
+            "eventBehaviorAsserted": [],
+            "status": "HANDLER_PRESENT_UNVERIFIED",
+            "executableTestVerified": false,
+            "inFullRunner": false,
+            "inVerifiedRunner": false,
+            "executionStatus": "NOT_EXECUTED",
+            "verificationFailureReason": "TEST_ID_NOT_REGISTERED:REAL-CARD-10",
+            "matchedRegisteredTests": []
+          }
+        },
+        "evidenceStatus": "HANDLER_PRESENT_UNVERIFIED",
+        "lastAuditRevision": "Work Package C.3.1"
+      }
+    },
+    {
+      "op": "INDESTRUCTIBLE",
+      "handlerPresent": true,
+      "registryEntry": null
+    },
+    {
+      "op": "PROTECTION",
+      "handlerPresent": true,
+      "registryEntry": null
+    },
+    {
+      "op": "GRANT_ARMOR",
+      "handlerPresent": false,
+      "registryEntry": null
+    },
+    {
+      "op": "ARMOR",
+      "handlerPresent": false,
+      "registryEntry": null
+    }
+  ]
+}

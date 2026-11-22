@@ -1,0 +1,615 @@
+<USER_REQUEST>
+# BATTLE SPIRITS ETERNAL — K1 CONSOLIDATED CORRECTIVE & IMPLEMENTATION PACKAGE
+## K1.0–K1.5 Defect Resolution + Batches 02–05 Implementation, Integration & Acceptance
+
+**Project:** Battle Spirits Eternal  
+**Active Workspace:** `C:\Users\namis\Downloads\BSP`  
+**Execution Environment:** Antigravity  
+**Scope:** K1.0–K1.5 corrections and complete K1 Batches 02–05  
+**Execution Mode:** Full engineering implementation, not audit-only.
+
+---
+
+# 1. PRIMARY OBJECTIVE
+
+Complete the outstanding corrective work accumulated through K1.5 and ensure the functionality assigned to K1 Batches 02–05 is correctly implemented, integrated and independently verified.
+
+This is one consolidated engineering assignment.
+
+Do not treat the K1.5 completion report as proof that all earlier defects have been resolved.
+
+Do not treat the existence of Batch 02–05 completion reports as proof that all their functionality is correct.
+
+The assignment has two major objectives:
+
+**OBJECTIVE A — K1.0–K1.5 CORRECTIVE RESOLUTION**
+
+Identify and resolve all outstanding implementation defects, semantic inaccuracies, incomplete parameter handling, compiler discrepancies, runtime integration problems, testing deficiencies and evidence inconsistencies from K1.0 through K1.5.
+
+**OBJECTIVE B — COMPLETE BATCHES 02–05**
+
+Implement, correct and validate the functionality covered by:
+
+- Batch 02: Structured Conditions
+- Batch 03: Keywords and Prerequisites
+- Batch 04: Parameter Recovery
+- Batch 05: Complex Effects, Replacement/Prevention and Batch 01 Carry-Forward
+
+Both objectives must be completed before final acceptance.
+
+---
+
+# 2. AUTHORITATIVE PROJECT BASELINE
+
+Before changing anything, inspect the actual workspace.
+
+Use the following reports as primary references:
+
+- `reports/work_package_k1/`
+- `reports/work_package_k1_1/`
+- `reports/work_package_k1_2/`
+- `reports/work_package_k1_3/`
+- `reports/work_package_k1_3_1/`
+- `reports/work_package_k1_3_2/`
+- `reports/work_package_k1_3_3/`
+- `reports/work_package_k1_3_4/`
+- `reports/work_package_k1_4/`
+- `reports/work_package_k1_5/`
+- `reports/work_package_k1_batches_02_to_05/`
+- `reports/work_package_k1_batches_02_to_05/final_closure/`
+
+Inspect the corresponding source code, tests, audit scripts, evidence registries and central unresolved ledger.
+
+Important existing files include:
+
+- `engine/conditions.js`
+- `engine/prerequisites.js`
+- `engine/parameter_recovery.js`
+- `engine/ops/index.js`
+- `engine/resolver.js`
+- `compiler/`
+- `scripts/k1_batches_ledger_builder.mjs`
+- `scripts/checkpoint_k1_batch_02.mjs`
+- `scripts/checkpoint_k1_batch_03.mjs`
+- `scripts/checkpoint_k1_batch_04.mjs`
+- `scripts/checkpoint_k1_batch_05.mjs`
+- `tests/work_package_k1_batch_02_conditions.test.js`
+- `tests/work_package_k1_batch_03_keywords_prerequisites.test.js`
+- `tests/work_package_k1_batch_04_parameters.test.js`
+- `tests/work_package_k1_batch_05_complex_effects.test.js`
+
+The latest K1 central unresolved ledger is:
+
+`reports/work_package_k1_batches_02_to_05/final_closure/k1_central_unresolved_ledger.json`
+
+Use it alongside the earlier K1.5 inventories.
+
+**Recalculate all baseline metrics from the actual current source. Historical metrics are reference points, not assumed current values.**
+
+---
+
+# 3. WORKSTREAM A — CORRECT ALL OUTSTANDING K1.0–K1.5 DEFECTS
+
+Perform a systematic review of all work completed through K1.5.
+
+Investigate the following areas.
+
+## A1. Discovery and inventory integrity
+
+Verify:
+
+- All 514 IR shards are accounted for.
+- All canonical cards and abilities are correctly identified.
+- No duplicate or missing discovery records exist.
+- All operation and condition occurrences are attributed correctly.
+- All unresolved records are preserved.
+- Historical and current inventories reconcile.
+
+Correct any discovery, classification, attribution or reconciliation defects.
+
+## A2. Semantic correctness
+
+Inspect the semantic classification and verification logic.
+
+Verify that:
+
+- Operation variants are distinguished using their complete semantic parameters.
+- Conditions are classified according to their actual meaning.
+- Unsupported effects remain unsupported.
+- Manual-review cases are not incorrectly promoted.
+- Partially implemented effects are represented accurately.
+- No implementation is marked verified merely because a corresponding handler exists.
+
+## A3. Parameter recovery foundation
+
+Inspect the K1.4 and K1.5 parameter recovery work.
+
+Investigate:
+
+- Missing parameters.
+- Incorrect parameter inference.
+- Ambiguous destination zones.
+- Missing target-side information.
+- Incorrect quantity extraction.
+- Incorrect ownership/controller interpretation.
+- Complex prose that cannot be safely recovered.
+- Compiler and runtime disagreements.
+
+Correct the responsible parsing, normalization, compilation or runtime stage.
+
+Preserve strict fail-closed behavior when parameters cannot be recovered reliably.
+
+## A4. Evidence and acceptance integrity
+
+Inspect:
+
+- Evidence registry completeness.
+- Variant-to-test attribution.
+- Real-card test authenticity.
+- Duplicate evidence.
+- Incorrect acceptance classifications.
+- Inconsistent historical reports.
+- Unverified implementations represented as verified.
+
+Correct evidence defects without manufacturing test coverage.
+
+## A5. K1.5 foundation closure
+
+Review every K1.5 acceptance requirement.
+
+Confirm that all required foundation capabilities work together, including:
+
+- Discovery integrity.
+- Semantic classification.
+- Operation and condition identification.
+- Parameter recovery foundations.
+- Evidence attribution.
+- Unresolved-ledger preservation.
+- Regression compatibility.
+
+Any unresolved defect must be corrected before final acceptance.
+
+---
+
+# 4. WORKSTREAM B — BATCH 02: STRUCTURED CONDITIONS
+
+Implement and validate the complete Batch 02 condition scope.
+
+Inspect all unresolved condition patterns and the existing condition parser/evaluator architecture.
+
+Required areas include:
+
+- Field-state conditions.
+- Brave-state conditions.
+- Hand-state conditions.
+- Removed-zone conditions.
+- Team and family conditions.
+- Color and symbol thresholds.
+- Core thresholds.
+- Soul-core state.
+- Battle and combat conditions.
+- Turn-history conditions.
+- Previous-action and result conditions.
+- Compound conditions.
+- Conditions embedded inside operation clauses.
+
+### Requirements
+
+1. Parse conditions into structured representations.
+2. Preserve the original source wording.
+3. Implement corresponding runtime evaluators.
+4. Distinguish `TRUE`, `FALSE`, `INVALID_CONTEXT` and `UNSUPPORTED`.
+5. Connect structured conditions to the actual production resolver.
+6. Ensure condition evaluation uses the correct player, source, target and game-state context.
+7. Validate against actual compiled cards.
+
+Never convert an unsupported condition into a successful condition merely to allow an effect to execute.
+
+### Required tests
+
+- Parser tests.
+- Condition truth-table tests.
+- Invalid-context tests.
+- Unsupported-condition tests.
+- Compound-condition tests.
+- Real-card end-to-end tests.
+- Regression tests.
+
+---
+
+# 5. WORKSTREAM C — BATCH 03: KEYWORDS AND PREREQUISITES
+
+Implement and validate keyword lifecycle and ability prerequisite handling.
+
+Cover the keyword families identified in the existing Batch 03 discovery inventory.
+
+At minimum, investigate:
+
+- Advent.
+- Soul State.
+- Underlying-card and stack prerequisites.
+- Burst.
+- Mirage.
+- Release and True Release.
+- Accel.
+- Change.
+- High Speed.
+- Heavy Armor.
+- Clash.
+- Curse.
+- Crush.
+- Holy Life.
+- U-Trigger.
+- Core Charge.
+- Rebirth.
+- Brave.
+- Other discovered keyword families.
+
+### Requirements
+
+1. Correctly identify keyword prerequisites.
+2. Preserve keyword timing and activation restrictions.
+3. Evaluate prerequisites against actual game state.
+4. Enforce conditions before the corresponding ability resolves.
+5. Preserve activation costs and optionality.
+6. Ensure correct interactions with the resolver, trigger system and player prompts.
+7. Avoid activating an ability when its prerequisites are not satisfied.
+
+### Required tests
+
+- Keyword parser tests.
+- Prerequisite truth-table tests.
+- Lifecycle tests.
+- Timing tests.
+- Failure and cancellation tests.
+- Real-card end-to-end tests.
+- Regression tests.
+
+Do not implement keywords as superficial labels or unconditional triggers.
+
+---
+
+# 6. WORKSTREAM D — BATCH 04: PARAMETER RECOVERY
+
+Resolve the incomplete-parameter work identified by Batch 04.
+
+Investigate all relevant clauses and distinguish recoverable information from genuinely unrecoverable information.
+
+### Required coverage
+
+- Target parameters.
+- Destination zones.
+- Source and destination ownership.
+- Controller and opponent distinctions.
+- Quantity and count.
+- BP and cost thresholds.
+- Card types and filters.
+- Core quantities.
+- Summon parameters.
+- Bounce and destruction destinations.
+- Deck-top and deck-bottom distinctions.
+- Multi-target parameters.
+- Complex parameter combinations.
+
+### Requirements
+
+1. Retrieve the original canonical wording.
+2. Inspect the compiler's original output.
+3. Identify exactly where parameter information was lost.
+4. Correct the responsible stage.
+5. Preserve the original meaning.
+6. Verify that recovered parameters reach the actual runtime handler.
+7. Test resulting state mutations.
+
+Do not use broad default values to make incomplete clauses appear valid.
+
+Unrecoverable complex prose must remain explicitly classified as such.
+
+---
+
+# 7. WORKSTREAM E — BATCH 05: COMPLEX EFFECTS AND REPLACEMENT/PREVENTION
+
+Implement and validate the complex effects identified in Batch 05.
+
+### E1. Blocked-card carry-forward
+
+Investigate and validate the original blocked-card cases, including:
+
+- `26RBS02-083`
+- `26RDB01-024`
+- `26RSD07-001`
+- `BS27-082`
+
+Preserve their original compiled parameters and card semantics.
+
+### E2. Drift-card investigation
+
+Investigate:
+
+- `BS19-X05`
+- `BS33-069`
+
+Validate their timing, trigger and ability representations.
+
+### E3. Replacement and prevention mechanics
+
+Implement and verify:
+
+- Destruction replacement.
+- Remaining on field.
+- Deck-bottom redirection.
+- Life-to-reserve replacement.
+- Unpreventable effects.
+- Destruction prevention.
+- Replacement priority.
+- Prevention bypass.
+- Replacement recursion protection.
+- Correct interaction with immunity and protection.
+
+### E4. Batch 01 carry-forward
+
+Preserve and validate:
+
+- Deck-top versus deck-bottom destination inference.
+- Strict failure when destination evidence is insufficient.
+- Opponent versus friendly target-side inference.
+- Automatic target-side narrowing using actual clause context.
+
+### Requirements
+
+Every complex effect must:
+
+1. Compile correctly.
+2. Preserve its original parameters.
+3. Execute through the production resolver.
+4. Mutate the correct game state.
+5. Emit appropriate events.
+6. Respect replacement and prevention rules.
+7. Handle failures without partial or invalid state mutation.
+8. Have independently verifiable tests.
+
+Do not implement generic success-returning placeholders.
+
+---
+
+# 8. INTEGRATION REQUIREMENTS
+
+All five workstreams must operate as one coherent system.
+
+In particular, validate the complete pipeline:
+
+`Canonical Card Text → Compiler → Stored IR → Condition Evaluation → Prerequisite Evaluation → Parameter Resolution → Target Selection → Operation Execution → Game-State Mutation → Events`
+
+Verify that:
+
+- Conditions correctly gate operations.
+- Prerequisites correctly gate abilities.
+- Recovered parameters reach the intended operation.
+- Targets are selected legally.
+- Replacement and prevention effects interact correctly.
+- Timing and sequencing remain intact.
+- Costs are paid at the correct stage.
+- Player cancellation and failed selections are handled correctly.
+- Unsupported operations never silently succeed.
+
+Avoid implementing parallel systems where an existing subsystem can be extended safely.
+
+---
+
+# 9. REAL-CARD END-TO-END VALIDATION
+
+This is a mandatory acceptance requirement.
+
+A genuine card-level test must:
+
+1. Identify the actual canonical card.
+2. Retrieve its original source wording.
+3. Retrieve its original compiled IR.
+4. Initialize the production game engine.
+5. Establish a legal game state.
+6. Execute the actual ability through the production resolver.
+7. Verify the actual resulting game state and emitted events.
+
+Do not:
+
+- Replace original parameters with manually constructed equivalents.
+- Use generic substitute cards.
+- Bypass the resolver by directly calling low-level handlers and calling the result card-level E2E.
+- Manually select targets to manufacture successful outcomes.
+- Skip difficult clauses.
+
+Maintain separate test classifications:
+
+- `CARD_ABILITY_E2E`
+- `CARD_RULES_E2E`
+- `OPERATION_VARIANT`
+- `CONDITION_SEMANTICS`
+- `COMPILER_FIDELITY`
+- `INVARIANT`
+- `ADVERSARIAL`
+- `UNIT`
+- `INTEGRATION`
+
+A passing unit test must never be counted as a genuine card-level E2E test.
+
+---
+
+# 10. REGRESSION AND PRESERVATION REQUIREMENTS
+
+Preserve all previously accepted implementations.
+
+Run:
+
+- K1.1–K1.5 regression suites.
+- Batch 02 regression suite.
+- Batch 03 regression suite.
+- Batch 04 regression suite.
+- Batch 05 regression suite.
+- Compiler regression suites.
+- Existing D/E and F/G integration suites.
+- Relevant H/I/J suites.
+- Data integrity tests.
+- Exhaustive 514-shard validation.
+- Full project test suite.
+
+Do not weaken assertions, delete tests, skip failing tests or change expected results without a documented semantic justification.
+
+If an existing test is genuinely incorrect, document the defect and provide a rules-based correction with replacement coverage.
+
+The final regression must have zero unexplained failures and zero unexplained skips.
+
+---
+
+# 11. ENGINEERING CONSTRAINTS
+
+The following rules are mandatory:
+
+- Work exclusively in `C:\Users\namis\Downloads\BSP`.
+- Inspect the live repository before modifications.
+- Preserve all accepted work.
+- Do not overwrite historical completion reports.
+- Do not create duplicate implementations.
+- Do not change canonical card identities.
+- Do not mass-promote card implementation statuses.
+- Do not fabricate card effects.
+- Do not silently treat unsupported semantics as supported.
+- Do not claim verification based on code presence alone.
+- Do not bulk-recompile or regenerate all 514 IR shards without explicit authorization.
+- Preserve the existing source shard inventory and provenance.
+- Do not discard unrelated user modifications.
+- Maintain explicit unresolved records for anything that cannot be safely implemented.
+
+Create a baseline snapshot and track all changes attributable to this assignment.
+
+---
+
+# 12. IMPLEMENTATION EXECUTION STRATEGY
+
+Execute this assignment in the following dependency order:
+
+**Stage 1:** Inspect and establish the complete K1.0–K1.5 baseline.
+
+**Stage 2:** Correct outstanding K1.0–K1.5 defects.
+
+**Stage 3:** Implement and validate Batch 02.
+
+**Stage 4:** Implement and validate Batch 03.
+
+**Stage 5:** Implement and validate Batch 04.
+
+**Stage 6:** Implement and validate Batch 05.
+
+**Stage 7:** Perform cross-subsystem integration and resolve regressions.
+
+**Stage 8:** Perform the consolidated final audit and acceptance verification.
+
+The existing Batch 02–05 implementations must be inspected first. Retain correct work, repair incomplete work and implement only missing functionality.
+
+Do not restart already-completed work unnecessarily.
+
+Do not stop after producing an inventory or implementation plan. This assignment authorizes the actual corrective and implementation work described above.
+
+If a particular semantic cannot be reliably established, preserve its unsupported/manual-review status and continue with the remaining work.
+
+---
+
+# 13. REQUIRED FINAL DELIVERABLES
+
+Create a new report directory:
+
+`reports/work_package_k1_consolidated/`
+
+Produce:
+
+1. `k1_consolidated_completion_report.md`
+2. `k1_baseline_vs_final_metrics.json`
+3. `k1_corrective_changes.json`
+4. `k1_condition_coverage.json`
+5. `k1_keyword_prerequisite_coverage.json`
+6. `k1_parameter_recovery_coverage.json`
+7. `k1_complex_effects_coverage.json`
+8. `k1_operation_variant_coverage.json`
+9. `k1_real_card_e2e_inventory.json`
+10. `k1_unresolved_ledger.json`
+11. `k1_regression_matrix.json`
+12. `k1_acceptance_matrix.json`
+13. `MANIFEST.txt`
+14. `k1_consolidated_handoff.zip`
+
+The ZIP must contain the relevant modified source files, new tests, scripts, audit reports, execution logs, evidence registries and manifests needed to reproduce the results.
+
+Generate SHA-256 hashes and byte sizes for packaged files.
+
+Verify the archive against its manifest.
+
+---
+
+# 14. FINAL COMPLETION REPORT
+
+The completion report must explain:
+
+- Original K1.0–K1.5 findings.
+- All corrective changes.
+- Batch 02 implementation.
+- Batch 03 implementation.
+- Batch 04 implementation.
+- Batch 05 implementation.
+- Compiler and runtime integration.
+- Real-card E2E validation.
+- Before-and-after coverage metrics.
+- Test classifications and results.
+- Full regression results.
+- Data and source preservation.
+- Remaining unsupported semantics.
+- Remaining manual-review cases.
+- Known architectural limitations.
+- Exact modified files.
+- Reproduction commands.
+- Source revision and archive verification.
+
+All metrics must be generated from actual source and execution results.
+
+Do not claim complete coverage if unresolved functionality remains.
+
+---
+
+# 15. ACCEPTANCE CRITERIA
+
+This consolidated assignment can be considered successfully completed only when:
+
+1. Outstanding K1.0–K1.5 defects have been investigated and corrected or explicitly dispositioned.
+2. Batch 02 condition functionality is implemented and verified.
+3. Batch 03 keyword and prerequisite functionality is implemented and verified.
+4. Batch 04 parameter recovery is implemented and verified.
+5. Batch 05 complex effects and replacement/prevention functionality is implemented and verified.
+6. All five areas work through the production engine.
+7. Genuine card-level E2E tests demonstrate actual behavior.
+8. Existing accepted functionality remains intact.
+9. Full regression results are documented.
+10. The unresolved ledger is accurate and reconciled.
+11. The handoff archive is reproducible and its manifest verified.
+
+A remaining unsupported effect does not automatically invalidate the entire assignment if its limitations are accurately documented and its execution fails safely. However, it must never be falsely represented as implemented.
+
+---
+
+# 16. STOP CONDITION
+
+After completing the corrective work, all four batches, integration, regression and final handoff:
+
+- Stop implementation.
+- Do not start additional K1 batches.
+- Do not start K2.
+- Do not begin unrelated card implementation.
+- Do not modify the workspace while awaiting review.
+
+Present the completion report, archive, acceptance matrix and any remaining blockers.
+
+Wait for independent review and explicit user approval before starting the next work package.
+
+**FINAL OBJECTIVE: Deliver a corrected, integrated and independently verifiable K1 foundation, with Batches 02–05 fully implemented to the extent supported by established card semantics and actual production-path evidence.**
+:::
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-11-21T07:33:53+05:30.
+</ADDITIONAL_METADATA>

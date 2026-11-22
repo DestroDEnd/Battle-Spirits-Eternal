@@ -1,1 +1,383 @@
-{"BSH-006":{"cardNumber":"BSH-006","name":"Dark Sanctuary","keywords":[],"abilities":[{"id":"BSH-006#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"MAIN","timingLabel":"Main","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":true,"cleanBody":"During this turn, all opposing effects can't be activated."},"clauses":[{"rawText":"During this turn, all opposing effects can't be activated.","cleanText":"all opposing effects can't be activated","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"COMBAT_RESTRICTION"}}],"unsupported":[]}],"compiledClausesCount":1,"unsupportedClausesCount":0,"isFullySupported":true},"BSH-003":{"cardNumber":"BSH-003","name":"King's Downfall","keywords":[],"abilities":[{"id":"BSH-003#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"MAIN","timingLabel":"Main","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":true,"cleanBody":"Destroy 1 opposing Spirit/Ultimate with the highest BP."},"clauses":[{"rawText":"Destroy 1 opposing Spirit/Ultimate with the highest BP.","cleanText":"Destroy 1 opposing Spirit/Ultimate with the highest BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]}],"compiledClausesCount":1,"unsupportedClausesCount":0,"isFullySupported":true},"BSH-001":{"cardNumber":"BSH-001","name":"Otherworld Change","keywords":[],"abilities":[{"id":"BSH-001#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"MAIN","timingLabel":"Main","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":true,"cleanBody":"Destroy every opposing Nexus and every Brave on opposing Brave Spirits/Ultimates."},"clauses":[{"rawText":"Destroy every opposing Nexus and every Brave on opposing Brave Spirits/Ultimates.","cleanText":"Destroy every opposing Nexus and every Brave on opposing Brave Spirits/Ultimates","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}}],"unsupported":[]}],"compiledClausesCount":1,"unsupportedClausesCount":0,"isFullySupported":true},"BSH-004":{"cardNumber":"BSH-004","name":"Rule Reversal","keywords":[],"abilities":[{"id":"BSH-004#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"MAIN","timingLabel":"Main","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":true,"cleanBody":"Until end of turn, all Spirits/Ultimates the BSH player controls gain +10000 BP. Additionally, reverse the attacking order of the BSH player."},"clauses":[{"rawText":"Until end of turn, all Spirits/Ultimates the BSH player controls gain +10000 BP.","cleanText":"all Spirits/Ultimates the BSH player controls gain +10000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"UNTIL_END_OF_TURN","op":{"op":"BP_BUFF","amount":10000,"target":{"side":"either"}}},{"rawText":"Additionally, reverse the attacking order of the BSH player.","cleanText":"Additionally, reverse the attacking order of the BSH player","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BATTLE_RULE_MODIFIER"}}],"unsupported":[]},{"id":"BSH-004#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"During your opponent's turn, at the end of this battle, end the attack step."},"clauses":[{"rawText":"During your opponent's turn, at the end of this battle, end the attack step.","cleanText":"During your opponent's turn, at the end of this battle, end the attack step","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"COMBAT_RULE"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"BSH-002":{"cardNumber":"BSH-002","name":"World Collapse","keywords":[],"abilities":[{"id":"BSH-002#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"MAIN","timingLabel":"Main","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":true,"cleanBody":"Destroy all opposing set bursts and all opposing Ultimates."},"clauses":[{"rawText":"Destroy all opposing set bursts and all opposing Ultimates.","cleanText":"Destroy all opposing set bursts and all opposing Ultimates","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}}],"unsupported":[]}],"compiledClausesCount":1,"unsupportedClausesCount":0,"isFullySupported":true},"BSH-005":{"cardNumber":"BSH-005","name":"World Release","keywords":[],"abilities":[{"id":"BSH-005#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"MAIN","timingLabel":"Main","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":true,"cleanBody":"Move 3 cores from the void to the BSH player's reserve, and the BSH player draws 3 cards from their deck."},"clauses":[{"rawText":"Move 3 cores from the void to the BSH player's reserve, and the BSH player draws 3 cards from their deck.","cleanText":"Move 3 cores from the void to the BSH player's reserve, and the BSH player draws 3 cards from their deck","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":1,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "BSH-006": {
+    "cardNumber": "BSH-006",
+    "name": "Dark Sanctuary",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BSH-006#AB_MAIN_NONE_LV1_LV2_LV3_d5e4dc4e31e79f0febd12923dcf73cd33a0d9973f1fdecc095b2b11f3e26fe9a_8ef3a7ebfd0315de4e7096319ee0a67d",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "During this turn, all opposing effects can't be activated."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, all opposing effects can't be activated.",
+            "cleanText": "all opposing effects can't be activated",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "COMBAT_RESTRICTION"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "BSH-006#a0",
+        "physicalId": "BSH-006#AB_MAIN_NONE_LV1_LV2_LV3_d5e4dc4e31e79f0febd12923dcf73cd33a0d9973f1fdecc095b2b11f3e26fe9a_8ef3a7ebfd0315de4e7096319ee0a67d",
+        "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_d5e4dc4e31e79f0febd12923dcf73cd33a0d9973f1fdecc095b2b11f3e26fe9a_8ef3a7ebfd0315de4e7096319ee0a67d"
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BSH-003": {
+    "cardNumber": "BSH-003",
+    "name": "King's Downfall",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BSH-003#AB_MAIN_NONE_LV1_LV2_LV3_be3f510eff5d0497a3b8d2a2ad28862a1b514c5f618647b12cd81b3f8054474a_63cfbfca88b76ef9f79d72404263c464",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "Destroy 1 opposing Spirit/Ultimate with the highest BP."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy 1 opposing Spirit/Ultimate with the highest BP.",
+            "cleanText": "Destroy 1 opposing Spirit/Ultimate with the highest BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "BSH-003#a0",
+        "physicalId": "BSH-003#AB_MAIN_NONE_LV1_LV2_LV3_be3f510eff5d0497a3b8d2a2ad28862a1b514c5f618647b12cd81b3f8054474a_63cfbfca88b76ef9f79d72404263c464",
+        "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_be3f510eff5d0497a3b8d2a2ad28862a1b514c5f618647b12cd81b3f8054474a_63cfbfca88b76ef9f79d72404263c464"
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BSH-001": {
+    "cardNumber": "BSH-001",
+    "name": "Otherworld Change",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BSH-001#AB_MAIN_NONE_LV1_LV2_LV3_11d86d937669587cba4f1b24d68aedeacb964e1d9cab7114731a3bbebf385534_f4fa2113fd5310a3d45261a9b0423a71",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "Destroy every opposing Nexus and every Brave on opposing Brave Spirits/Ultimates."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy every opposing Nexus and every Brave on opposing Brave Spirits/Ultimates.",
+            "cleanText": "Destroy every opposing Nexus and every Brave on opposing Brave Spirits/Ultimates",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "BSH-001#a0",
+        "physicalId": "BSH-001#AB_MAIN_NONE_LV1_LV2_LV3_11d86d937669587cba4f1b24d68aedeacb964e1d9cab7114731a3bbebf385534_f4fa2113fd5310a3d45261a9b0423a71",
+        "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_11d86d937669587cba4f1b24d68aedeacb964e1d9cab7114731a3bbebf385534_f4fa2113fd5310a3d45261a9b0423a71"
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BSH-004": {
+    "cardNumber": "BSH-004",
+    "name": "Rule Reversal",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BSH-004#AB_MAIN_NONE_LV1_LV2_LV3_5ea1bffb358a7cc86beac0d1ede0f38102bfabf8d95041b958bfd3c1c3780920_071dec0e95006503b34fd0769aa28795",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "Until end of turn, all Spirits/Ultimates the BSH player controls gain +10000 BP. Additionally, reverse the attacking order of the BSH player."
+        },
+        "clauses": [
+          {
+            "rawText": "Until end of turn, all Spirits/Ultimates the BSH player controls gain +10000 BP.",
+            "cleanText": "all Spirits/Ultimates the BSH player controls gain +10000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "UNTIL_END_OF_TURN",
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 10000,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "Additionally, reverse the attacking order of the BSH player.",
+            "cleanText": "Additionally, reverse the attacking order of the BSH player",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BATTLE_RULE_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "BSH-004#a0",
+        "physicalId": "BSH-004#AB_MAIN_NONE_LV1_LV2_LV3_5ea1bffb358a7cc86beac0d1ede0f38102bfabf8d95041b958bfd3c1c3780920_071dec0e95006503b34fd0769aa28795",
+        "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_5ea1bffb358a7cc86beac0d1ede0f38102bfabf8d95041b958bfd3c1c3780920_071dec0e95006503b34fd0769aa28795"
+      },
+      {
+        "id": "BSH-004#AB_FLASH_NONE_LV1_LV2_LV3_11fe516b0cf4e2b44127ca7fe1b97f21b51db567d251aae78d0a6e02ad4d67a1_2c0bb5dd63c9a71ade2d4506b3fba8a9",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During your opponent's turn, at the end of this battle, end the attack step."
+        },
+        "clauses": [
+          {
+            "rawText": "During your opponent's turn, at the end of this battle, end the attack step.",
+            "cleanText": "During your opponent's turn, at the end of this battle, end the attack step",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COMBAT_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "BSH-004#a1",
+        "physicalId": "BSH-004#AB_FLASH_NONE_LV1_LV2_LV3_11fe516b0cf4e2b44127ca7fe1b97f21b51db567d251aae78d0a6e02ad4d67a1_2c0bb5dd63c9a71ade2d4506b3fba8a9",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_11fe516b0cf4e2b44127ca7fe1b97f21b51db567d251aae78d0a6e02ad4d67a1_2c0bb5dd63c9a71ade2d4506b3fba8a9"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BSH-002": {
+    "cardNumber": "BSH-002",
+    "name": "World Collapse",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BSH-002#AB_MAIN_NONE_LV1_LV2_LV3_11d86d937669587cba4f1b24d68aedeacb964e1d9cab7114731a3bbebf385534_f4fa2113fd5310a3d45261a9b0423a71",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "Destroy all opposing set bursts and all opposing Ultimates."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy all opposing set bursts and all opposing Ultimates.",
+            "cleanText": "Destroy all opposing set bursts and all opposing Ultimates",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "BSH-002#a0",
+        "physicalId": "BSH-002#AB_MAIN_NONE_LV1_LV2_LV3_11d86d937669587cba4f1b24d68aedeacb964e1d9cab7114731a3bbebf385534_f4fa2113fd5310a3d45261a9b0423a71",
+        "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_11d86d937669587cba4f1b24d68aedeacb964e1d9cab7114731a3bbebf385534_f4fa2113fd5310a3d45261a9b0423a71"
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BSH-005": {
+    "cardNumber": "BSH-005",
+    "name": "World Release",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BSH-005#AB_MAIN_NONE_LV1_LV2_LV3_b4cc4e5df5483ca8023a8d87ea5fa5d148224b2480c60ccd9770f25af27cd0aa_883980dd464a8f44e1f995701741135b",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "Move 3 cores from the void to the BSH player's reserve, and the BSH player draws 3 cards from their deck."
+        },
+        "clauses": [
+          {
+            "rawText": "Move 3 cores from the void to the BSH player's reserve, and the BSH player draws 3 cards from their deck.",
+            "cleanText": "Move 3 cores from the void to the BSH player's reserve, and the BSH player draws 3 cards from their deck",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "BSH-005#a0",
+        "physicalId": "BSH-005#AB_MAIN_NONE_LV1_LV2_LV3_b4cc4e5df5483ca8023a8d87ea5fa5d148224b2480c60ccd9770f25af27cd0aa_883980dd464a8f44e1f995701741135b",
+        "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_b4cc4e5df5483ca8023a8d87ea5fa5d148224b2480c60ccd9770f25af27cd0aa_883980dd464a8f44e1f995701741135b"
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

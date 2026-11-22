@@ -1,0 +1,84 @@
+{
+  "auditMetadata": {
+    "auditTimestamp": "2026-11-21T09:55:00.000Z",
+    "project": "Battle Spirits Eternal (BSP)",
+    "phase": "Phase 4D.1 Baseline Repository Audit",
+    "environment": {
+      "nodeVersion": "v24.x",
+      "os": "Windows_NT",
+      "workspace": "C:\\Users\\namis\\Downloads\\BSP"
+    }
+  },
+  "gitStatus": {
+    "branch": "main",
+    "uncommittedModificationsCount": 514,
+    "untrackedFilesPreserved": true
+  },
+  "corpusCounts": {
+    "cardsDetailedCount": 14443,
+    "cardsIndexCount": 14443,
+    "sqliteCardsCount": 14443,
+    "sqliteCardsV2Count": 14611,
+    "shardUniqueCardsCount": 14609,
+    "shardTotalInstancesCount": 15398,
+    "totalShardFiles": 514,
+    "totalCompiledAbilities": 36422,
+    "totalCompiledClauses": 51734,
+    "totalUniqueOpcodes": 288
+  },
+  "corpusDiscrepancies": {
+    "detailedOnlyCount": 22,
+    "shardsOnlyCount": 188,
+    "reprintDuplicatesCount": 789,
+    "cardsV2ExtraCount": 2,
+    "cardsV2ExtraCards": [
+      "BATTLE-SPIRITS-A13741",
+      "BATTLE-SPIRITS-A13799"
+    ],
+    "reconciliationFormula": "14443 (detailed) - 22 (detailed-only) + 188 (shards-only) = 14609 (shard unique)",
+    "instanceFormula": "14609 (shard unique) + 789 (reprints) = 15398 (total instances)",
+    "cardsV2Formula": "14609 (shard unique) + 2 (composite IDs) = 14611 (sqlite cards_v2)"
+  },
+  "findingsValidation": {
+    "findingA_BrowserGameplayTest": {
+      "status": "CONFIRMED_DEFECT_EXISTS",
+      "file": "tests/real_browser_arena.test.js",
+      "lineRange": "282-355",
+      "details": "Test manually assigns s.opponent.field = [oppTargetSpirit, oppIllegalSpirit], manually filters legal candidates (bp <= 2000), directly calls window.BattleArena.promptStructuredDecision, manually removes target from field, and manually increments s.opponent.trash.",
+      "severity": "CRITICAL"
+    },
+    "findingB_OpcodeSemanticEvidence": {
+      "status": "CONFIRMED_DEFECT_EXISTS",
+      "file": "scripts/generate_phase4d_work_package_d.mjs",
+      "lineRange": "16-26, 171-183",
+      "details": "Opcode verification status determined purely by regex string matching: files searched for case '${code}': and tests searched for literal string ['\"]${code}['\"]. Handler presence + string match was treated as SEMANTICALLY_VERIFIED without runtime execution.",
+      "severity": "HIGH"
+    },
+    "findingC_MasterTestRunner": {
+      "status": "CONFIRMED_DEFECT_EXISTS",
+      "file": "scripts/run_master_verification.mjs",
+      "lineRange": "350-356",
+      "details": "Discovered test files not configured in MASTER_SUITES were assigned disposition STANDALONE_VERIFIED by default without actually executing them or verifying test pass counts.",
+      "severity": "HIGH"
+    },
+    "findingD_CardSupportMatrix": {
+      "status": "CONFIRMED_DEFECT_EXISTS",
+      "file": "reports/phase4d/card_effect_support_matrix.json",
+      "details": "Supported abilities counts were determined by handler presence in ops engine rather than verified runtime execution evidence.",
+      "severity": "HIGH"
+    },
+    "findingE_CardCorpusReconciliation": {
+      "status": "REPRODUCED_AND_VERIFIED",
+      "details": "All figures mathematically reconciled: 14,443 detailed, 14,609 unique shard cards, 15,398 shard instances, 514 shards, 36,422 abilities, 51,734 clauses, 288 unique opcodes. SQLite cards_v2 count of 14,611 explained by 2 composite IDs.",
+      "severity": "RESOLVED"
+    }
+  },
+  "activeMasterBattery": {
+    "suitesExecuted": 40,
+    "testsExecuted": 747,
+    "testsPassed": 747,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "passRate": "100.00%"
+  }
+}

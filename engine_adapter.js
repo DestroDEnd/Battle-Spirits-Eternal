@@ -18,15 +18,21 @@ import { checkStateBasedActions } from './engine/sba.js';
 import { createDefaultKeywordRegistry } from './engine/keywords/index.js';
 import { TimingWindowManager } from './engine/windows.js';
 import { PromptManager } from './engine/prompt_manager.js';
+import { InteractionController, INTERACTION_TYPES, INTERACTION_STATUS } from './engine/interaction.js';
 import { AIDecider } from './engine/ai.js';
 import { setupOpeningHands } from './engine/mulligan.js';
+import { queryCandidates, resolveTargets } from './engine/selectors.js';
 import { createGame } from './engine/index.js';
-import { resolveLegacyAbility } from './engine/legacy_bridge.js';
+import { resolveLegacyAbility, pruneLegacyModifiers } from './engine/legacy_bridge.js';
 
 export const BSEngineAdapter = {
   ETERNAL_RULES,
   createGame,
   createGameState,
+  createCardInstance,
+  createFieldStack,
+  queryCandidates,
+  resolveTargets,
   createCardInstance,
   createFieldStack,
   EventBus,
@@ -45,23 +51,27 @@ export const BSEngineAdapter = {
   createDefaultKeywordRegistry,
   TimingWindowManager,
   PromptManager,
+  InteractionController,
+  INTERACTION_TYPES,
+  INTERACTION_STATUS,
   AIDecider,
   setupOpeningHands,
   resolveLegacyAbility,
+  pruneLegacyModifiers,
 
   /**
    * Helper to initialize a duel session linking the engine and the UI
    */
   initDuelSession(options = {}) {
-    const promptManager = options.promptManager || new PromptManager();
     const aiDecider = options.aiDecider || new AIDecider({ archetype: options.aiArchetype || 'red' });
     const game = createGame({
       playerDeck: options.playerDeck || [],
       opponentDeck: options.opponentDeck || [],
       firstPlayer: options.firstPlayer || 'player',
-      promptManager,
       ai: aiDecider,
-      usePromptManager: true
+      usePromptManager: true,
+      interactive: true,
+      ...options
     });
 
     return {
@@ -69,15 +79,19 @@ export const BSEngineAdapter = {
       state: game.state,
       flow: game.flow,
       events: game.events,
-      promptManager,
+      promptManager: game.promptManager,
+      interactionController: game.interactionController,
       aiDecider,
-      windows: new TimingWindowManager(game.state, game.events, promptManager)
+      windows: new TimingWindowManager(game.state, game.events, game.promptManager)
     };
   }
 };
 
 if (typeof window !== 'undefined') {
   window.BSEngineAdapter = BSEngineAdapter;
+}
+if (typeof globalThis !== 'undefined') {
+  globalThis.BSEngineAdapter = BSEngineAdapter;
 }
 
 export default BSEngineAdapter;

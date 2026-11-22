@@ -19,10 +19,24 @@
     "compiledIr": {
       "cardNumber": "P15-16",
       "name": "The PantherBladeOgre Gakuu",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 7000
+        }
+      },
+      "originalEffectText": "[LV1][LV2] (When Attacks)\nBy discarding a Purple Spirit card/Ultimate card from your Hand, destroy an opposing exhausted Spirit.\n\n[LV2] (When Destroyed by the Opponent)\nReturn a Purple Spirit card/Ultimate card from your Trash to the Hand.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "P15-16#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -32,8 +46,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -42,10 +65,14 @@
             "isMain": false,
             "cleanBody": "By discarding a Purple Spirit card/Ultimate card from your Hand, destroy an opposing exhausted Spirit."
           },
+          "originalAbilityText": "[LV1][LV2] (When Attacks)\nBy discarding a Purple Spirit card/Ultimate card from your Hand, destroy an opposing exhausted Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By discarding a Purple Spirit card/Ultimate card from your Hand",
+              "originalClauseText": "By discarding a Purple Spirit card/Ultimate card from your Hand",
               "cleanText": "By discarding a Purple Spirit card/Ultimate card from your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -59,7 +86,9 @@
             },
             {
               "rawText": "destroy an opposing exhausted Spirit.",
+              "originalClauseText": "destroy an opposing exhausted Spirit.",
               "cleanText": "destroy an opposing exhausted Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -80,10 +109,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "P15-16#a0",
+          "keywords": [],
+          "id": "P15-16#AB_WHEN_ATTACKS_NONE_LV1_LV2_41cfb383c8d879881f7a498a1b1247ea8766b08244df22293f402a8cdf43da53_2609e61d36e7280add146f503661cf0e",
+          "physicalId": "P15-16#AB_WHEN_ATTACKS_NONE_LV1_LV2_41cfb383c8d879881f7a498a1b1247ea8766b08244df22293f402a8cdf43da53_2609e61d36e7280add146f503661cf0e",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_41cfb383c8d879881f7a498a1b1247ea8766b08244df22293f402a8cdf43da53_2609e61d36e7280add146f503661cf0e",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_01997c97a7f97238258bf1f4a3d58aced627987ab51f1a6e377757e598711683_06ba9e6107e3c204984a085f10b8b384",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "P15-16#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -92,8 +135,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_DESTROYED",
+            "timings": [
+              "WHEN_DESTROYED"
+            ],
             "timingLabel": "When Destroyed by the Opponent",
             "timingStep": "ANY",
+            "timingCause": "OPPONENT",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -102,25 +154,53 @@
             "isMain": false,
             "cleanBody": "Return a Purple Spirit card/Ultimate card from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV2] (When Destroyed by the Opponent)\nReturn a Purple Spirit card/Ultimate card from your Trash to the Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Return a Purple Spirit card/Ultimate card from your Trash to the Hand.",
+              "originalClauseText": "Return a Purple Spirit card/Ultimate card from your Trash to the Hand.",
               "cleanText": "Return a Purple Spirit card/Ultimate card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit",
+                    "Ultimate"
+                  ],
+                  "color": "Purple"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "P15-16#a1",
+          "keywords": [],
+          "id": "P15-16#AB_WHEN_DESTROYED_NONE_LV2_ec4e5377f080ac5d68e84f8139297448014297fe9f207e4ad7c6ed4a1701b679_9f4f0fc24f285327d30025004092a134",
+          "physicalId": "P15-16#AB_WHEN_DESTROYED_NONE_LV2_ec4e5377f080ac5d68e84f8139297448014297fe9f207e4ad7c6ed4a1701b679_9f4f0fc24f285327d30025004092a134",
+          "semanticId": "SEM#AB_WHEN_DESTROYED_NONE_LV2_ec4e5377f080ac5d68e84f8139297448014297fe9f207e4ad7c6ed4a1701b679_9f4f0fc24f285327d30025004092a134",
+          "semanticIdV3": "SEM3#AB_WHEN_DESTROYED_NONE_LV2_20bb8781274bee9d4cd46c65a6537c4b9f8f6f03f4c22272ef615fa543d51365_6ff1704d8dfc85ac190aed5263cf4fbe",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "OPPONENT",
+            "timingTriggers": [
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,

@@ -1,0 +1,126 @@
+{
+  "generatedAt": "2026-11-19T15:13:10.242Z",
+  "subsystems": [
+    {
+      "subsystem": "Game-state manager",
+      "sourceFiles": [
+        "engine/state.js",
+        "engine/sba.js"
+      ],
+      "status": "VERIFIED",
+      "findings": "Deterministic instance/placement IDs, core conservation & validateGameState integrity checks pass."
+    },
+    {
+      "subsystem": "Turn manager",
+      "sourceFiles": [
+        "engine/flow.js",
+        "engine/rules/eternal.js"
+      ],
+      "status": "VERIFIED",
+      "findings": "Eternal Turn 1 skips CORE & ATTACK, atomic END->START lifecycle resets & modifier pruning pass."
+    },
+    {
+      "subsystem": "Battle manager",
+      "sourceFiles": [
+        "engine/index.js"
+      ],
+      "status": "VERIFIED_WITH_LIMITATIONS",
+      "findings": "declareAttack/declareBlock/BP comparison and state.combat cleanup work; direct endBattle/endAttack clears restrictions & modifiers."
+    },
+    {
+      "subsystem": "Trigger manager",
+      "sourceFiles": [
+        "engine/triggers.js",
+        "engine/index.js"
+      ],
+      "status": "VERIFIED_WITH_LIMITATIONS",
+      "findings": "TriggerQueueManager deduplicates per-event triggers, cancels on field exit, and reserves OPT/OPG; legacy EventBus listeners in engine/index.js also route through AsyncResolver.resolveAbility which enforces reserveRestriction."
+    },
+    {
+      "subsystem": "Effect resolver",
+      "sourceFiles": [
+        "engine/resolver.js"
+      ],
+      "status": "VERIFIED",
+      "findings": "Compound byDoing/or/afterResolves, cost failure abort without OPT consumption, depth guard, and finally reservation release verified."
+    },
+    {
+      "subsystem": "Condition evaluator",
+      "sourceFiles": [
+        "engine/conditions.js"
+      ],
+      "status": "DEFECT_FOUND_AND_FIXED",
+      "findings": "Strict tri-state TRUE/FALSE/UNSUPPORTED verified; fixed K0-DEF-01 fallback in compareTo ATTACK_TARGET/OPPONENT_BATTLER to inspect state.combat when state.battle is absent. 1,115 condition parse failures remain for future K phases."
+    },
+    {
+      "subsystem": "Targeting system",
+      "sourceFiles": [
+        "engine/selectors.js"
+      ],
+      "status": "DEFECT_FOUND_AND_FIXED",
+      "findings": "Fixed K0-DEF-01 (resolveTargets(\"battling\") ignored state.combat) and K0-DEF-02 (queryCandidates/executeTargeting dropped/mishandled state:\"BATTLING\")."
+    },
+    {
+      "subsystem": "Cost/resource manager",
+      "sourceFiles": [
+        "engine/payment.js",
+        "engine/zones.js"
+      ],
+      "status": "VERIFIED",
+      "findings": "Atomic preflight payCost, Soul Core rules, and moveCore over-withdrawal rejection verified."
+    },
+    {
+      "subsystem": "Usage tracking",
+      "sourceFiles": [
+        "engine/restrictions.js"
+      ],
+      "status": "VERIFIED",
+      "findings": "OPT, OPG, ONCE_PER_TURN_SAME_NAME, ONCE_PER_GAME_SAME_NAME, copy independence, and reset boundaries verified."
+    },
+    {
+      "subsystem": "Zone manager",
+      "sourceFiles": [
+        "engine/zones.js"
+      ],
+      "status": "VERIFIED",
+      "findings": "Owner vs controller routing, standby staging, and core conservation verified."
+    },
+    {
+      "subsystem": "Replacement effects",
+      "sourceFiles": [
+        "engine/events.js",
+        "engine/windows.js",
+        "engine/ops/index.js"
+      ],
+      "status": "VERIFIED_WITH_LIMITATIONS",
+      "findings": "BEFORE_LIFE_REDUCED prevention/replacement works; some card-specific replacement bounce rules (e.g. 26RBS02-083) remain Package K scope."
+    },
+    {
+      "subsystem": "Prevention effects",
+      "sourceFiles": [
+        "engine/continuous.js",
+        "engine/restrictions.js"
+      ],
+      "status": "VERIFIED_WITH_LIMITATIONS",
+      "findings": "Armor/Heavy Armor, CANNOT_REFRESH, CANNOT_EXHAUST, and CANNOT_USE_ABILITY verified; card-specific immunities expanded in Package K."
+    },
+    {
+      "subsystem": "Operation registry",
+      "sourceFiles": [
+        "engine/ops/index.js",
+        "scripts/evidence_registry.mjs"
+      ],
+      "status": "VERIFIED_WITH_LIMITATIONS",
+      "findings": "All 288 unique ops have handlers; 185 variants SEMANTICALLY_VERIFIED, 118 unverified, 17 unsupported, 582 incomplete params."
+    },
+    {
+      "subsystem": "Regression system",
+      "sourceFiles": [
+        "tests/run_all.js",
+        "scripts/run_verified_suites.mjs"
+      ],
+      "status": "VERIFIED",
+      "findings": "Full regression and verified suites pass cleanly with zero failures and zero skips."
+    }
+  ]
+}

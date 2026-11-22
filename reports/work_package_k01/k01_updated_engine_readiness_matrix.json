@@ -1,0 +1,75 @@
+{
+  "generatedAt": "2026-11-19T15:55:28.313Z",
+  "subsystems": [
+    {
+      "subsystem": "Game-state manager",
+      "status": "VERIFIED",
+      "notes": "Owner/controller, core conservation, validateGameState verified."
+    },
+    {
+      "subsystem": "Turn manager",
+      "status": "VERIFIED",
+      "notes": "Eternal Turn 1 skips, END->START atomic resets, modifier pruning verified."
+    },
+    {
+      "subsystem": "Battle manager",
+      "status": "DEFECT_FOUND_AND_FIXED",
+      "notes": "endBattle() now clears state.combat = null & state.battle = null (K01-XSUB-08)."
+    },
+    {
+      "subsystem": "Trigger manager",
+      "status": "VERIFIED_WITH_LIMITATIONS",
+      "notes": "Multi-ability queuing, dedup, field-exit cancel, and OPT verified (K01-XSUB-02, 06, 09)."
+    },
+    {
+      "subsystem": "Effect resolver",
+      "status": "VERIFIED",
+      "notes": "Compound conditions, cost abort, depth guard verified (K01-XSUB-07, K0-RESOLVER-01)."
+    },
+    {
+      "subsystem": "Condition evaluator",
+      "status": "VERIFIED_WITH_LIMITATIONS",
+      "notes": "Tri-state TRUE/FALSE/UNSUPPORTED verified; 1,114 parse failures cataloged for K1-BATCH-02."
+    },
+    {
+      "subsystem": "Targeting system",
+      "status": "VERIFIED",
+      "notes": "K0-DEF-01/02 preserved; mid-resolution invalidation & Armor filtering verified (K01-XSUB-03, 05)."
+    },
+    {
+      "subsystem": "Cost/resource manager",
+      "status": "VERIFIED",
+      "notes": "Atomic payCost & moveCore verified."
+    },
+    {
+      "subsystem": "Usage tracking",
+      "status": "VERIFIED",
+      "notes": "OPT/OPG/SAME_NAME isolation verified."
+    },
+    {
+      "subsystem": "Zone manager",
+      "status": "DEFECT_FOUND_AND_FIXED",
+      "notes": "commitStackExit() now supports m.filter.maxCost/costLte for destruction replacement (K01-XSUB-04)."
+    },
+    {
+      "subsystem": "Replacement effects",
+      "status": "VERIFIED_WITH_LIMITATIONS",
+      "notes": "Cost-gated destruction replacement verified; card-specific IR (26RBS02-083) deferred to K1-BATCH-05."
+    },
+    {
+      "subsystem": "Prevention effects",
+      "status": "VERIFIED_WITH_LIMITATIONS",
+      "notes": "Armor: Red blocks DESTROY before replacement (K01-XSUB-05); rare immunities deferred to K1-BATCH-05."
+    },
+    {
+      "subsystem": "Operation registry",
+      "status": "VERIFIED_WITH_LIMITATIONS",
+      "notes": "296 handlers; 35 SEMANTICALLY_VERIFIED, 164 INCOMPLETE, 97 EXECUTABLE."
+    },
+    {
+      "subsystem": "Regression system",
+      "status": "VERIFIED",
+      "notes": "2,358 / 2,358 tests, 932 / 932 verified suites, 514 / 514 shards pass."
+    }
+  ]
+}

@@ -3,11 +3,22 @@
  * 
  * Single source of truth for Battle Spirits Eternal format game rules.
  * Governs flow, setup, SBA, priority, and 17.0 mechanics.
+ *
+ * Provenance Note (Phase 4C.3.3.1.1):
+ * - Local engine implementation & tests (`tests/eternal_17_*.test.js`) target
+ *   Battle Spirits Official Rule Manual [Eternal] Ver. 17.0 (https://www.battlespirits.com/rule/official-rule-manual-eternal/).
+ * - No official Ver. 17.0 or Ver. 17.1 rulebook PDF is stored in this repository;
+ *   therefore official rulebook page/rule citations and Ver. 17.0 vs Ver. 17.1
+ *   deltas remain NEEDS_MANUAL_REVIEW until the official PDF is audited locally.
  */
+
+import { createHash } from 'node:crypto';
 
 export const ETERNAL_RULES = {
   formatName: 'Eternal',
   formatVersion: '17.0',
+  officialPortalUrl: 'https://www.battlespirits.com/rule/official-rule-manual-eternal/',
+  rulesSourceStatus: 'LOCAL_17_0_IMPLEMENTATION_PENDING_OFFICIAL_PDF_AUDIT',
 
   // Deck Construction Rules
   deck: {
@@ -97,3 +108,88 @@ export const ETERNAL_RULES = {
     allowAttributeKeywordStacking: true // Ver 17.0: Crush, Assault etc. can stack
   }
 };
+
+/**
+ * Validates a deck against Eternal format deck construction rules:
+ * - Minimum deck size (40 cards) and maximum deck size (Infinity)
+ * - Maximum copies per canonical card name (3 copies)
+ * - Maximum Contract Partners (1 Contract Spirit or Flag Nexus)
+ *
+ * @param {Array<object>} deckCards
+ * @param {object} [rules=ETERNAL_RULES]
+ * @returns {{ valid: boolean, errors: string[] }}
+ */
+export function validateDeck(deckCards, rules = ETERNAL_RULES) {
+  const errors = [];
+  if (!Array.isArray(deckCards)) {
+    return { valid: false, errors: ['Deck must be an array of card definitions'] };
+  }
+
+  if (deckCards.length < rules.deck.minSize) {
+    errors.push(`Deck size ${deckCards.length} is below minimum ${rules.deck.minSize}`);
+  }
+  if (Number.isFinite(rules.deck.maxSize) && deckCards.length > rules.deck.maxSize) {
+    errors.push(`Deck size ${deckCards.length} exceeds maximum ${rules.deck.maxSize}`);
+  }
+
+  const nameCounts = new Map();
+  let contractPartners = 0;
+
+  for (let i = 0; i < deckCards.length; i++) {
+    const card = deckCards[i];
+    if (!card || typeof card !== 'object') {
+      errors.push(`Invalid card entry at deck index ${i}`);
+      continue;
+    }
+
+    const nameKey = String(card.name || '').trim();
+    if (!nameKey) {
+      errors.push(`Card at deck index ${i} is missing a card name`);
+    } else {
+      const nextCount = (nameCounts.get(nameKey) || 0) + 1;
+      nameCounts.set(nameKey, nextCount);
+      const customMax = card.deckRule?.maxCopies;
+      const allowedCopies = customMax === 'UNLIMITED'
+        ? Infinity
+        : (typeof customMax === 'number' && customMax >= 0 ? customMax : rules.deck.maxCopiesPerName);
+      if (Number.isFinite(allowedCopies) && nextCount === allowedCopies + 1) {
+        errors.push(`Card "${nameKey}" exceeds maximum ${allowedCopies} copies per deck`);
+      }
+    }
+
+    const family = String(card.family || (Array.isArray(card.families) ? card.families.join(' ') : '')).toLowerCase();
+    const type = String(card.type || '');
+    const isPartner = Boolean(
+      card.is_contract_partner ||
+      card.isContractPartner ||
+      type === 'Contract Nexus' ||
+      (type.includes('Contract') && family.includes('flag'))
+    );
+    if (isPartner) {
+      contractPartners++;
+    }
+  }
+
+  if (contractPartners > rules.deck.maxContractPartners) {
+    errors.push(`Deck contains ${contractPartners} Contract Partners, exceeding maximum ${rules.deck.maxContractPartners}`);
+  }
+
+  return { valid: errors.length === 0, errors };
+}
+
+/**
+ * Computes a deterministic SHA-256 digest over a deck's canonical card entries
+ * for deck-legality attestation in saved/restored game states.
+ *
+ * @param {Array<object>} deckCards
+ * @returns {string}
+ */
+export function computeDeckAttestationDigest(deckCards) {
+  const normalized = (Array.isArray(deckCards) ? deckCards : []).map(c => ({
+    cardNumber: String(c?.card_number || c?.cardNumber || c?.id || ''),
+    name: String(c?.name || '').trim(),
+    type: String(c?.type || ''),
+    isContractPartner: Boolean(c?.is_contract_partner || c?.isContractPartner || c?.type === 'Contract Nexus')
+  }));
+  return createHash('sha256').update(JSON.stringify(normalized)).digest('hex');
+}

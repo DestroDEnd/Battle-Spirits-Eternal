@@ -1,0 +1,38 @@
+{
+  "package": "K.1.5",
+  "generatedAt": "2026-11-20T11:22:47.731Z",
+  "cards": [
+    {
+      "cardNumber": "26RBS02-083",
+      "shard": "26RBS02.json",
+      "missingCapabilityIdentified": "Runtime DRAW ability execution on field stack + Soul Core presence verification",
+      "runtimeFixApplied": "Verified via AsyncResolver full stack context resolution",
+      "behavioralTest": "K1.5-D2 (passes)",
+      "status": "RESOLVED_AND_VERIFIED"
+    },
+    {
+      "cardNumber": "26RDB01-024",
+      "shard": "26RDB01.json",
+      "missingCapabilityIdentified": "Multi-clause TARGET_SELECT(count:2) -> EXHAUST(\"them\") chaining (`previousTarget` multi-stack array handling)",
+      "runtimeFixApplied": "engine/ops/index.js EXHAUST resolves `previousTarget` array from preceding TARGET_SELECT cleanly",
+      "behavioralTest": "K1.5-D2 (passes)",
+      "status": "RESOLVED_AND_VERIFIED"
+    },
+    {
+      "cardNumber": "26RSD07-001",
+      "shard": "26RSD07.json",
+      "missingCapabilityIdentified": "BOUNCE self-return to deck bottom failed when shard compiled `side: \"either\"` on `this Spirit` self-bounce",
+      "runtimeFixApplied": "engine/ops/index.js BOUNCE handles self-target / `side: \"either\"` resolving controller field stack cleanly",
+      "behavioralTest": "K1.5-D2 (passes)",
+      "status": "RESOLVED_AND_VERIFIED"
+    },
+    {
+      "cardNumber": "BS27-082",
+      "shard": "BS27.json",
+      "missingCapabilityIdentified": "Flash TREAT_RULE (\"treated as LV1\") opposing target resolution",
+      "runtimeFixApplied": "engine/ops/index.js TREAT_RULE supports `side: \"opponent\"` selector resolution and updates continuous level modifier",
+      "behavioralTest": "K1.5-D2 (passes)",
+      "status": "RESOLVED_AND_VERIFIED"
+    }
+  ]
+}

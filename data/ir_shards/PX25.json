@@ -1,1 +1,1299 @@
-{"PX25-06":{"cardNumber":"PX25-06","name":"The DivineWorldSearcher Alex","keywords":[{"name":"Unleash","parameter":"1, Contract","wave":2,"hook":"unleash","bracketed":true,"index":185}],"abilities":[{"id":"PX25-06#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Mani: Contract Grandwalker Nexus & C2 or more, (Either Attack Step)","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"pay one cost from the target to summon this card from the Hand.","cleanText":"pay one cost from the target to summon this card from the Hand","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_PAY","from":"HAND"}}],"unsupported":[]},{"id":"PX25-06#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":["Unleash: 1, Contract"],"timing":"STEP_RESTRICTED","timingLabel":"When Manifests","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Draw a card. Then, you can send a core from any of your Contract Grandwalker Nexus to this Spirit. When you've done so, if it's the opposing Attack Step, during this battle, the effects of an opposing Spirit/Ultimate/Nexus can't activate, and when this battle ends, end the Attack Step."},"clauses":[{"rawText":"Draw a card.","cleanText":"Draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}},{"rawText":"you can send a core from any of your Contract Grandwalker Nexus to this Spirit.","cleanText":"you can send a core from any of your Contract Grandwalker Nexus to this Spirit","link":"then","isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"if it's the opposing Attack Step, during this battle, the effects of an opposing Spirit/Ultimate/Nexus can't activate, and when this battle ends, end the Attack Step.","cleanText":"during this battle, the effects of an opposing Spirit/Ultimate/Nexus can't activate, and when this battle ends, end the Attack Step","link":"byDoing","isOptional":false,"isCost":false,"condition":"if it's the opposing Attack Step","duration":"DURING_THIS_BATTLE","op":{"op":"COMBAT_RULE"}}],"unsupported":[]},{"id":"PX25-06#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit's symbol is also treated as Red/Purple/Green/Yellow/Blue."},"clauses":[{"rawText":"This Spirit's symbol is also treated as Red/Purple/Green/Yellow/Blue.","cleanText":"This Spirit's symbol is also treated as Red/Purple/Green/Yellow/Blue","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TREAT_RULE"}}],"unsupported":[]}],"compiledClausesCount":6,"unsupportedClausesCount":0,"isFullySupported":true},"PX25-03":{"cardNumber":"PX25-03","name":"The FugurumaDeityPrincess Kuroe","keywords":[],"abilities":[{"id":"PX25-03#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This card is also treated as a Magic card, and is unaffected by opposing effects in Hand."},"clauses":[{"rawText":"This card is also treated as a Magic card, and is unaffected by opposing effects in Hand.","cleanText":"This card is also treated as a Magic card, and is unaffected by opposing effects in Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"IMMUNITY","immuneTo":"OPPOSING_EFFECTS"}}],"unsupported":[]},{"id":"PX25-03#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"(You can't use this effect while it's on the Field)\nDuring this turn, the symbol of an opposing Spirit/Ultimate is fixed as zero. If you control any Rebirth Spirit/Rebirth Nexus, this effect can't be prevented by opposing effects. After this effect resolves, you can summon this card without paying the cost."},"clauses":[{"rawText":"(You can't use this effect while it's on the Field)","cleanText":"(You can't use this effect while it's on the Field)","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"PLAY_CONDITION"}},{"rawText":"During this turn, the symbol of an opposing Spirit/Ultimate is fixed as zero.","cleanText":"the symbol of an opposing Spirit/Ultimate is fixed as zero","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"ADD_SYMBOL"}},{"rawText":"If you control any Rebirth Spirit/Rebirth Nexus, this effect can't be prevented by opposing effects.","cleanText":"this effect can't be prevented by opposing effects","link":null,"isOptional":false,"isCost":false,"condition":"If you control any Rebirth Spirit/Rebirth Nexus","duration":null,"op":{"op":"UNPREVENTABLE"}},{"rawText":"you can summon this card without paying the cost.","cleanText":"you can summon this card without paying the cost","link":"afterResolves","isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_FREE","target":"this_card","from":"BURST"}}],"unsupported":[]},{"id":"PX25-03#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned/Attacks","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"destroy an opposing Nexus, and draw a card from the deckbottom."},"clauses":[{"rawText":"destroy an opposing Nexus","cleanText":"destroy an opposing Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Nexus"]}}},{"rawText":"draw a card from the deckbottom.","cleanText":"draw a card from the deckbottom","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]}],"compiledClausesCount":7,"unsupportedClausesCount":0,"isFullySupported":true},"PX25-04":{"cardNumber":"PX25-04","name":"The SixShieldConcluser Kei","keywords":[{"name":"Mirage","parameter":"Cost 2 ([Core","wave":2,"hook":"mirage","bracketed":true,"index":39}],"abilities":[{"id":"PX25-04#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can set this card from the Trash."},"clauses":[{"rawText":"You can set this card from the Trash.","cleanText":"You can set this card from the Trash","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SET_BURST"}}],"unsupported":[]},{"id":"PX25-04#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Mirage: Cost ([Core])"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"clauses":[],"unsupported":[]},{"id":"PX25-04#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["During Set"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Including being in Soul State/pre-advent condition, while you control any Contract Spirit/Contract Grandwalker Nexus, your set Bursts which include the color of those targets are unaffected by opposing effects."},"clauses":[{"rawText":"Including being in Soul State/pre-advent condition, while you control any Contract Spirit/Contract Grandwalker Nexus, your set Bursts which include the color of those targets are unaffected by opposing effects.","cleanText":"Including being in Soul State/pre-advent condition, while you control any Contract Spirit/Contract Grandwalker Nexus, your set Bursts which include the color of those targets are unaffected by opposing effects","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"IMMUNITY","immuneTo":"OPPOSING_EFFECTS"}}],"unsupported":[]},{"id":"PX25-04#a3","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":"ONCE_PER_TURN_SAME_NAME","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can return a Burst card from your Trash to the Hand. When this effect returns any \"Concluser\" family card, for every 4 costs of the target, +1 core to any of your Grandwalker Nexuses."},"clauses":[{"rawText":"You can return a Burst card from your Trash to the Hand.","cleanText":"You can return a Burst card from your Trash to the Hand","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}},{"rawText":"When this effect returns any \"Concluser\" family card, for every 4 costs of the target, +1 core to any of your Grandwalker Nexuses.","cleanText":"When this effect returns any \"Concluser\" family card, for every 4 costs of the target, +1 core to any of your Grandwalker Nexuses","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"PX25-01":{"cardNumber":"PX25-01","name":"The Bearer of Core Light, Suzuri Hideto","keywords":[{"name":"Core Charge","parameter":"(Blue) (Core Charge via summon/advent only once per turn)","wave":3,"hook":"core_charge","bracketed":true,"index":0},{"name":"Grand Skill","parameter":"4","wave":3,"hook":"grand_skill","bracketed":true,"index":536}],"abilities":[{"id":"PX25-01#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Core Charge: (Blue) (Core Charge via summon/advent only once per turn)","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"clauses":[],"unsupported":[]},{"id":"PX25-01#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"◆When you summon/advent a target Spirit, you can +1 core to this Nexus."},"clauses":[{"rawText":"◆When you summon/advent a target Spirit, you can +1 core to this Nexus.","cleanText":"When you summon/advent a target Spirit, you can +1 core to this Nexus","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}}],"unsupported":[]},{"id":"PX25-01#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus."},"clauses":[{"rawText":"◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.","cleanText":"When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"CORE_CHARGE_TRIGGER","millCount":3}},{"rawText":"For each target card among them, +1 core to this Nexus.","cleanText":"For each target card among them, +1 core to this Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"CORE_CHARGE_ADD","count":1}}],"unsupported":[]},{"id":"PX25-01#a3","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_DEPLOYED","timingLabel":"When Deployed","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"+2 cores to this Nexus. Then, (Once per Turn: Same Name) you can deploy a Cost 4 or less Blue-only Nexus card from your Trash, without paying the cost."},"clauses":[{"rawText":"+2 cores to this Nexus.","cleanText":"+2 cores to this Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE"}},{"rawText":"you can deploy a Cost 4 or less Blue-only Nexus card from your Trash, without paying the cost.","cleanText":"you can deploy a Cost 4 or less Blue-only Nexus card from your Trash, without paying the cost","link":"then","isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DEPLOY_NEXUS","free":true}}],"unsupported":[]},{"id":"PX25-01#a4","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":["Grand Skill: 4"],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"(Send four cores from this Nexus to the Void) Destroy an opposing Spirit/Ultimate with the lowest cost."},"clauses":[{"rawText":"(Send four cores from this Nexus to the Void) Destroy an opposing Spirit/Ultimate with the lowest cost.","cleanText":"(Send four cores from this Nexus to the Void) Destroy an opposing Spirit/Ultimate with the lowest cost","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]}],"compiledClausesCount":6,"unsupportedClausesCount":0,"isFullySupported":true},"PX25-02":{"cardNumber":"PX25-02","name":"The Bearer of Core Light, Momose Yuuki","keywords":[{"name":"Core Charge","parameter":"(White) (Core Charge via summon/advent only once per turn)","wave":3,"hook":"core_charge","bracketed":true,"index":0},{"name":"Grand Skill","parameter":"4","wave":3,"hook":"grand_skill","bracketed":true,"index":586}],"abilities":[{"id":"PX25-02#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Core Charge: (White) (Core Charge via summon/advent only once per turn)","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"clauses":[],"unsupported":[]},{"id":"PX25-02#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"◆When you summon/advent a target Spirit, you can +1 core to this Nexus."},"clauses":[{"rawText":"◆When you summon/advent a target Spirit, you can +1 core to this Nexus.","cleanText":"When you summon/advent a target Spirit, you can +1 core to this Nexus","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}}],"unsupported":[]},{"id":"PX25-02#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus."},"clauses":[{"rawText":"◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.","cleanText":"When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"CORE_CHARGE_TRIGGER","millCount":3}},{"rawText":"For each target card among them, +1 core to this Nexus.","cleanText":"For each target card among them, +1 core to this Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"CORE_CHARGE_ADD","count":1}}],"unsupported":[]},{"id":"PX25-02#a3","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_DEPLOYED","timingLabel":"When Deployed","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"+2 cores to this Nexus. Then, you can reveal two cards from your decktop. Among them, you can summon a White Cost 5 or less card, without paying the cost. Return any remaining cards to the deckbottom."},"clauses":[{"rawText":"+2 cores to this Nexus.","cleanText":"+2 cores to this Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE"}},{"rawText":"you can reveal two cards from your decktop.","cleanText":"you can reveal two cards from your decktop","link":"then","isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":2}},{"rawText":"Among them, you can summon a White Cost 5 or less card, without paying the cost.","cleanText":"Among them, you can summon a White Cost 5 or less card, without paying the cost","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}},{"rawText":"Return any remaining cards to the deckbottom.","cleanText":"Return any remaining cards to the deckbottom","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"RETURN_REVEALED_BOTTOM"}}],"unsupported":[]},{"id":"PX25-02#a4","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":["Grand Skill: 4"],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"(Send four cores from this Nexus to the Void) During this battle, one of your Spirits can't be blocked."},"clauses":[{"rawText":"(Send four cores from this Nexus to the Void) During this battle, one of your Spirits can't be blocked.","cleanText":"(Send four cores from this Nexus to the Void) During this battle, one of your Spirits can't be blocked","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_BATTLE","op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":8,"unsupportedClausesCount":0,"isFullySupported":true},"PX25-05":{"cardNumber":"PX25-05","name":"The Investigator Lolo","keywords":[{"name":"Core Charge","parameter":null,"wave":3,"hook":"core_charge","bracketed":true,"index":86},{"name":"Accel","parameter":"Cost 3 ([Core","wave":2,"hook":"accel","bracketed":true,"index":328}],"abilities":[{"id":"PX25-05#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When this card is revealed from the deck by your effect, or sent to the Trash by your [Core Charge], you can add it to the Hand."},"clauses":[{"rawText":"When this card is revealed from the deck by your effect, or sent to the Trash by your [Core Charge], you can add it to the Hand.","cleanText":"When this card is revealed from the deck by your effect, or sent to the Trash by your [Core Charge], you can add it to the Hand","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_TO_HAND"}}],"unsupported":[]},{"id":"PX25-05#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":true,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"While this card is in the Removed Zone, when you're summoning/deploying any Ultimate card, or \"Devotee\"/\"Grandwalker\" family Nexus card, fulfill one of its reduction symbols."},"clauses":[{"rawText":"While this card is in the Removed Zone, when you're summoning/deploying any Ultimate card, or \"Devotee\"/\"Grandwalker\" family Nexus card, fulfill one of its reduction symbols.","cleanText":"when you're summoning/deploying any Ultimate card, or \"Devotee\"/\"Grandwalker\" family Nexus card, fulfill one of its reduction symbols","link":null,"isOptional":false,"isCost":false,"condition":"While this card is in the Removed Zone","duration":null,"op":{"op":"DEPLOY_NEXUS","free":true}}],"unsupported":[]},{"id":"PX25-05#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Core","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"Reveal three cards from your decktop. Among them, add a \"Devotee\"/ \"Concluser\"/ \"Ultimate Queen\" family Ultimate card, and a Contract Grandwalker Nexus card to the Hand. Discard any remaining cards. After this effect resolves, put this card onto the Removed Zone."},"clauses":[{"rawText":"Reveal three cards from your decktop.","cleanText":"Reveal three cards from your decktop","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":3}},{"rawText":"Among them, add a \"Devotee\"/ \"Concluser\"/ \"Ultimate Queen\" family Ultimate card, and a Contract Grandwalker Nexus card to the Hand.","cleanText":"Among them, add a \"Devotee\"/ \"Concluser\"/ \"Ultimate Queen\" family Ultimate card, and a Contract Grandwalker Nexus card to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_TO_HAND"}},{"rawText":"Discard any remaining cards.","cleanText":"Discard any remaining cards","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DISCARD_REVEALED"}},{"rawText":"put this card onto the Removed Zone.","cleanText":"put this card onto the Removed Zone","link":"afterResolves","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"OPEN_ZONE"}}],"unsupported":[]}],"compiledClausesCount":6,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "PX25-06": {
+    "cardNumber": "PX25-06",
+    "name": "The DivineWorldSearcher Alex",
+    "keywords": [
+      {
+        "name": "Unleash",
+        "parameter": "1, Contract",
+        "wave": 2,
+        "hook": "unleash",
+        "bracketed": true,
+        "index": 185
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PX25-06#AB_FLASH_NONE_LV1_LV2_LV3_1e7e91bb109e21e8ccdf69343c0b88eb672e29eccb1ca4edaec262bc59fea87e_82ad934a754f8f361b1bfb0585d266f1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Mani: Contract Grandwalker Nexus & C2 or more, (Either Attack Step)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "pay one cost from the target to summon this card from the Hand.",
+            "cleanText": "pay one cost from the target to summon this card from the Hand",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_PAY",
+              "from": "HAND"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX25-06#a0",
+        "physicalId": "PX25-06#AB_FLASH_NONE_LV1_LV2_LV3_1e7e91bb109e21e8ccdf69343c0b88eb672e29eccb1ca4edaec262bc59fea87e_82ad934a754f8f361b1bfb0585d266f1",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_1e7e91bb109e21e8ccdf69343c0b88eb672e29eccb1ca4edaec262bc59fea87e_82ad934a754f8f361b1bfb0585d266f1"
+      },
+      {
+        "id": "PX25-06#AB_STEP_RESTRICTED_NONE_LV1_LV2_LV3_553045fc29ff10d145cb5beffb9c1d06f1a5f82fd866851d47cd8b818e4df817_8cd0ffa1ab2a798e862ac7a7bcdc0011",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Unleash: 1, Contract"
+          ],
+          "timing": "STEP_RESTRICTED",
+          "timingLabel": "When Manifests",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Draw a card. Then, you can send a core from any of your Contract Grandwalker Nexus to this Spirit. When you've done so, if it's the opposing Attack Step, during this battle, the effects of an opposing Spirit/Ultimate/Nexus can't activate, and when this battle ends, end the Attack Step."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw a card.",
+            "cleanText": "Draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "you can send a core from any of your Contract Grandwalker Nexus to this Spirit.",
+            "cleanText": "you can send a core from any of your Contract Grandwalker Nexus to this Spirit",
+            "link": "then",
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "if it's the opposing Attack Step, during this battle, the effects of an opposing Spirit/Ultimate/Nexus can't activate, and when this battle ends, end the Attack Step.",
+            "cleanText": "during this battle, the effects of an opposing Spirit/Ultimate/Nexus can't activate, and when this battle ends, end the Attack Step",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": "if it's the opposing Attack Step",
+            "duration": "DURING_THIS_BATTLE",
+            "op": {
+              "op": "COMBAT_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX25-06#a1",
+        "physicalId": "PX25-06#AB_STEP_RESTRICTED_NONE_LV1_LV2_LV3_553045fc29ff10d145cb5beffb9c1d06f1a5f82fd866851d47cd8b818e4df817_8cd0ffa1ab2a798e862ac7a7bcdc0011",
+        "semanticId": "SEM#AB_STEP_RESTRICTED_NONE_LV1_LV2_LV3_553045fc29ff10d145cb5beffb9c1d06f1a5f82fd866851d47cd8b818e4df817_8cd0ffa1ab2a798e862ac7a7bcdc0011"
+      },
+      {
+        "id": "PX25-06#AB_PASSIVE_NONE_LV1_LV2_LV3_0abc9d311d0b0efe50d137e99a92f3836dd28c5fca378963441343b57f5b2ed9_f4be82937ad2e075f4b223a00aedf96a",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit's symbol is also treated as Red/Purple/Green/Yellow/Blue."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit's symbol is also treated as Red/Purple/Green/Yellow/Blue.",
+            "cleanText": "This Spirit's symbol is also treated as Red/Purple/Green/Yellow/Blue",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX25-06#a2",
+        "physicalId": "PX25-06#AB_PASSIVE_NONE_LV1_LV2_LV3_0abc9d311d0b0efe50d137e99a92f3836dd28c5fca378963441343b57f5b2ed9_f4be82937ad2e075f4b223a00aedf96a",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_0abc9d311d0b0efe50d137e99a92f3836dd28c5fca378963441343b57f5b2ed9_f4be82937ad2e075f4b223a00aedf96a"
+      }
+    ],
+    "compiledClausesCount": 6,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX25-03": {
+    "cardNumber": "PX25-03",
+    "name": "The FugurumaDeityPrincess Kuroe",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PX25-03#AB_PASSIVE_NONE_LV1_LV2_LV3_fce20df17147fde7fb3f43faaa202f27b241e48e6368bf5f90c30fc5ca6ffe52_3dd102dfd620b56f51612dbf0625ba7c",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This card is also treated as a Magic card, and is unaffected by opposing effects in Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "This card is also treated as a Magic card, and is unaffected by opposing effects in Hand.",
+            "cleanText": "This card is also treated as a Magic card, and is unaffected by opposing effects in Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "IMMUNITY",
+              "immuneTo": "OPPOSING_EFFECTS"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX25-03#a0",
+        "physicalId": "PX25-03#AB_PASSIVE_NONE_LV1_LV2_LV3_fce20df17147fde7fb3f43faaa202f27b241e48e6368bf5f90c30fc5ca6ffe52_3dd102dfd620b56f51612dbf0625ba7c",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_fce20df17147fde7fb3f43faaa202f27b241e48e6368bf5f90c30fc5ca6ffe52_3dd102dfd620b56f51612dbf0625ba7c"
+      },
+      {
+        "id": "PX25-03#AB_FLASH_NONE_LV1_LV2_LV3_7aa548c79daeece38b09ed990253cf58e65e4e2d2b564870884cd68cc2326713_099c16a57acba4e8f40931d14b894474",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "(You can't use this effect while it's on the Field)\nDuring this turn, the symbol of an opposing Spirit/Ultimate is fixed as zero. If you control any Rebirth Spirit/Rebirth Nexus, this effect can't be prevented by opposing effects. After this effect resolves, you can summon this card without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "(You can't use this effect while it's on the Field)",
+            "cleanText": "(You can't use this effect while it's on the Field)",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "PLAY_CONDITION"
+            }
+          },
+          {
+            "rawText": "During this turn, the symbol of an opposing Spirit/Ultimate is fixed as zero.",
+            "cleanText": "the symbol of an opposing Spirit/Ultimate is fixed as zero",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "ADD_SYMBOL"
+            }
+          },
+          {
+            "rawText": "If you control any Rebirth Spirit/Rebirth Nexus, this effect can't be prevented by opposing effects.",
+            "cleanText": "this effect can't be prevented by opposing effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If you control any Rebirth Spirit/Rebirth Nexus",
+            "duration": null,
+            "op": {
+              "op": "UNPREVENTABLE"
+            }
+          },
+          {
+            "rawText": "you can summon this card without paying the cost.",
+            "cleanText": "you can summon this card without paying the cost",
+            "link": "afterResolves",
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_FREE",
+              "target": "this_card",
+              "from": "BURST"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX25-03#a1",
+        "physicalId": "PX25-03#AB_FLASH_NONE_LV1_LV2_LV3_7aa548c79daeece38b09ed990253cf58e65e4e2d2b564870884cd68cc2326713_099c16a57acba4e8f40931d14b894474",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_7aa548c79daeece38b09ed990253cf58e65e4e2d2b564870884cd68cc2326713_099c16a57acba4e8f40931d14b894474"
+      },
+      {
+        "id": "PX25-03#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_ed6d32a8f22747789b3da4c5e84bb299efc804daba3455c5f5dad521c522302d_54312ef933d85b03849a89a2c73ac845",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned/Attacks",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "destroy an opposing Nexus, and draw a card from the deckbottom."
+        },
+        "clauses": [
+          {
+            "rawText": "destroy an opposing Nexus",
+            "cleanText": "destroy an opposing Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Nexus"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "draw a card from the deckbottom.",
+            "cleanText": "draw a card from the deckbottom",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX25-03#a2",
+        "physicalId": "PX25-03#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_ed6d32a8f22747789b3da4c5e84bb299efc804daba3455c5f5dad521c522302d_54312ef933d85b03849a89a2c73ac845",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_ed6d32a8f22747789b3da4c5e84bb299efc804daba3455c5f5dad521c522302d_54312ef933d85b03849a89a2c73ac845"
+      }
+    ],
+    "compiledClausesCount": 7,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX25-04": {
+    "cardNumber": "PX25-04",
+    "name": "The SixShieldConcluser Kei",
+    "keywords": [
+      {
+        "name": "Mirage",
+        "parameter": "Cost 2 ([Core",
+        "wave": 2,
+        "hook": "mirage",
+        "bracketed": true,
+        "index": 39
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PX25-04#AB_PASSIVE_NONE_LV1_LV2_LV3_65efd5ae332871788d4db76fab348d9b00d2fa16627e88712925a8becd634e1b_ac5d384b292be43962238b7c86d9ecdc",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can set this card from the Trash."
+        },
+        "clauses": [
+          {
+            "rawText": "You can set this card from the Trash.",
+            "cleanText": "You can set this card from the Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SET_BURST"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX25-04#a0",
+        "physicalId": "PX25-04#AB_PASSIVE_NONE_LV1_LV2_LV3_65efd5ae332871788d4db76fab348d9b00d2fa16627e88712925a8becd634e1b_ac5d384b292be43962238b7c86d9ecdc",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_65efd5ae332871788d4db76fab348d9b00d2fa16627e88712925a8becd634e1b_ac5d384b292be43962238b7c86d9ecdc"
+      },
+      {
+        "id": "PX25-04#AB_PASSIVE_NONE_LV1_LV2_LV3_7e0997c8c8011f070690e5fbd4cd54aff987500f0433e645ad7ac887fe59b290_0f3036d7831fcd6aff12c1d93d9849e1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Mirage: Cost ([Core])"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "PX25-04#a1",
+        "physicalId": "PX25-04#AB_PASSIVE_NONE_LV1_LV2_LV3_7e0997c8c8011f070690e5fbd4cd54aff987500f0433e645ad7ac887fe59b290_0f3036d7831fcd6aff12c1d93d9849e1",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_7e0997c8c8011f070690e5fbd4cd54aff987500f0433e645ad7ac887fe59b290_0f3036d7831fcd6aff12c1d93d9849e1"
+      },
+      {
+        "id": "PX25-04#AB_PASSIVE_NONE_LV1_LV2_LV3_fce20df17147fde7fb3f43faaa202f27b241e48e6368bf5f90c30fc5ca6ffe52_3dd102dfd620b56f51612dbf0625ba7c",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "During Set"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Including being in Soul State/pre-advent condition, while you control any Contract Spirit/Contract Grandwalker Nexus, your set Bursts which include the color of those targets are unaffected by opposing effects."
+        },
+        "clauses": [
+          {
+            "rawText": "Including being in Soul State/pre-advent condition, while you control any Contract Spirit/Contract Grandwalker Nexus, your set Bursts which include the color of those targets are unaffected by opposing effects.",
+            "cleanText": "Including being in Soul State/pre-advent condition, while you control any Contract Spirit/Contract Grandwalker Nexus, your set Bursts which include the color of those targets are unaffected by opposing effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "IMMUNITY",
+              "immuneTo": "OPPOSING_EFFECTS"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX25-04#a2",
+        "physicalId": "PX25-04#AB_PASSIVE_NONE_LV1_LV2_LV3_fce20df17147fde7fb3f43faaa202f27b241e48e6368bf5f90c30fc5ca6ffe52_3dd102dfd620b56f51612dbf0625ba7c",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_fce20df17147fde7fb3f43faaa202f27b241e48e6368bf5f90c30fc5ca6ffe52_3dd102dfd620b56f51612dbf0625ba7c"
+      },
+      {
+        "id": "PX25-04#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_59b6f836cd95ea89c83676f5758df5cbe0b80951475100c70243ab019b6a65a4_8e3a47e9f983445fda47464804bca1d9",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can return a Burst card from your Trash to the Hand. When this effect returns any \"Concluser\" family card, for every 4 costs of the target, +1 core to any of your Grandwalker Nexuses."
+        },
+        "clauses": [
+          {
+            "rawText": "You can return a Burst card from your Trash to the Hand.",
+            "cleanText": "You can return a Burst card from your Trash to the Hand",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "When this effect returns any \"Concluser\" family card, for every 4 costs of the target, +1 core to any of your Grandwalker Nexuses.",
+            "cleanText": "When this effect returns any \"Concluser\" family card, for every 4 costs of the target, +1 core to any of your Grandwalker Nexuses",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX25-04#a3",
+        "physicalId": "PX25-04#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_59b6f836cd95ea89c83676f5758df5cbe0b80951475100c70243ab019b6a65a4_8e3a47e9f983445fda47464804bca1d9",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_59b6f836cd95ea89c83676f5758df5cbe0b80951475100c70243ab019b6a65a4_8e3a47e9f983445fda47464804bca1d9"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX25-01": {
+    "cardNumber": "PX25-01",
+    "name": "The Bearer of Core Light, Suzuri Hideto",
+    "keywords": [
+      {
+        "name": "Core Charge",
+        "parameter": "(Blue) (Core Charge via summon/advent only once per turn)",
+        "wave": 3,
+        "hook": "core_charge",
+        "bracketed": true,
+        "index": 0
+      },
+      {
+        "name": "Grand Skill",
+        "parameter": "4",
+        "wave": 3,
+        "hook": "grand_skill",
+        "bracketed": true,
+        "index": 536
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PX25-01#AB_PASSIVE_NONE_LV1_LV2_LV3_591cf30c93d129a6f8bc2dbc0736938acba06085511dceda843f8590babb806b_a8b9fa6f6dc2f7d2198cf518269c11b3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Core Charge: (Blue) (Core Charge via summon/advent only once per turn)",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "PX25-01#a0",
+        "physicalId": "PX25-01#AB_PASSIVE_NONE_LV1_LV2_LV3_591cf30c93d129a6f8bc2dbc0736938acba06085511dceda843f8590babb806b_a8b9fa6f6dc2f7d2198cf518269c11b3",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_591cf30c93d129a6f8bc2dbc0736938acba06085511dceda843f8590babb806b_a8b9fa6f6dc2f7d2198cf518269c11b3"
+      },
+      {
+        "id": "PX25-01#AB_PASSIVE_NONE_LV1_LV2_LV3_7b2665b37d525a5031d9e1e17cad5b628eb3eda5c7164fadbd8bc6fcc21283ce_1262af503a258bb211236e4a7f4f86e6",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆When you summon/advent a target Spirit, you can +1 core to this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆When you summon/advent a target Spirit, you can +1 core to this Nexus.",
+            "cleanText": "When you summon/advent a target Spirit, you can +1 core to this Nexus",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX25-01#a1",
+        "physicalId": "PX25-01#AB_PASSIVE_NONE_LV1_LV2_LV3_7b2665b37d525a5031d9e1e17cad5b628eb3eda5c7164fadbd8bc6fcc21283ce_1262af503a258bb211236e4a7f4f86e6",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_7b2665b37d525a5031d9e1e17cad5b628eb3eda5c7164fadbd8bc6fcc21283ce_1262af503a258bb211236e4a7f4f86e6"
+      },
+      {
+        "id": "PX25-01#AB_PASSIVE_NONE_LV1_LV2_LV3_4bb19fa1966cae3954d0c4101e31ad7e067c35392079f675e3208dc595906003_d61a63d547291fe9ed5807358fd2cc62",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.",
+            "cleanText": "When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CORE_CHARGE_TRIGGER",
+              "millCount": 3
+            }
+          },
+          {
+            "rawText": "For each target card among them, +1 core to this Nexus.",
+            "cleanText": "For each target card among them, +1 core to this Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CORE_CHARGE_ADD",
+              "count": 1
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX25-01#a2",
+        "physicalId": "PX25-01#AB_PASSIVE_NONE_LV1_LV2_LV3_4bb19fa1966cae3954d0c4101e31ad7e067c35392079f675e3208dc595906003_d61a63d547291fe9ed5807358fd2cc62",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_4bb19fa1966cae3954d0c4101e31ad7e067c35392079f675e3208dc595906003_d61a63d547291fe9ed5807358fd2cc62"
+      },
+      {
+        "id": "PX25-01#AB_WHEN_DEPLOYED_NONE_LV1_LV2_090055f1e106d4931d4aaf71784297580394a06be0b033ffc2c7daee7f5de05b_9d4ed31271f18e88aaf6af9e0a9a0bb9",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DEPLOYED",
+          "timingLabel": "When Deployed",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "+2 cores to this Nexus. Then, (Once per Turn: Same Name) you can deploy a Cost 4 or less Blue-only Nexus card from your Trash, without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "+2 cores to this Nexus.",
+            "cleanText": "+2 cores to this Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE"
+            }
+          },
+          {
+            "rawText": "you can deploy a Cost 4 or less Blue-only Nexus card from your Trash, without paying the cost.",
+            "cleanText": "you can deploy a Cost 4 or less Blue-only Nexus card from your Trash, without paying the cost",
+            "link": "then",
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DEPLOY_NEXUS",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX25-01#a3",
+        "physicalId": "PX25-01#AB_WHEN_DEPLOYED_NONE_LV1_LV2_090055f1e106d4931d4aaf71784297580394a06be0b033ffc2c7daee7f5de05b_9d4ed31271f18e88aaf6af9e0a9a0bb9",
+        "semanticId": "SEM#AB_WHEN_DEPLOYED_NONE_LV1_LV2_090055f1e106d4931d4aaf71784297580394a06be0b033ffc2c7daee7f5de05b_9d4ed31271f18e88aaf6af9e0a9a0bb9"
+      },
+      {
+        "id": "PX25-01#AB_ATTACK_STEP_NONE_LV2_1b70254a1816b20c24b7679be77120ff3c57d8588c8d8851434751a809338bc1_d8f9576c21a7d2cc60c878ef1c9a73d4",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Grand Skill: 4"
+          ],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "(Send four cores from this Nexus to the Void) Destroy an opposing Spirit/Ultimate with the lowest cost."
+        },
+        "clauses": [
+          {
+            "rawText": "(Send four cores from this Nexus to the Void) Destroy an opposing Spirit/Ultimate with the lowest cost.",
+            "cleanText": "(Send four cores from this Nexus to the Void) Destroy an opposing Spirit/Ultimate with the lowest cost",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX25-01#a4",
+        "physicalId": "PX25-01#AB_ATTACK_STEP_NONE_LV2_1b70254a1816b20c24b7679be77120ff3c57d8588c8d8851434751a809338bc1_d8f9576c21a7d2cc60c878ef1c9a73d4",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_1b70254a1816b20c24b7679be77120ff3c57d8588c8d8851434751a809338bc1_d8f9576c21a7d2cc60c878ef1c9a73d4"
+      }
+    ],
+    "compiledClausesCount": 6,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX25-02": {
+    "cardNumber": "PX25-02",
+    "name": "The Bearer of Core Light, Momose Yuuki",
+    "keywords": [
+      {
+        "name": "Core Charge",
+        "parameter": "(White) (Core Charge via summon/advent only once per turn)",
+        "wave": 3,
+        "hook": "core_charge",
+        "bracketed": true,
+        "index": 0
+      },
+      {
+        "name": "Grand Skill",
+        "parameter": "4",
+        "wave": 3,
+        "hook": "grand_skill",
+        "bracketed": true,
+        "index": 586
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PX25-02#AB_PASSIVE_NONE_LV1_LV2_LV3_2725c90900e1384a152be30fd28735089f0ac05fc79f1c839917a81a5ba41111_b6403a537af79663251ac4ae64cb5aab",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Core Charge: (White) (Core Charge via summon/advent only once per turn)",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "PX25-02#a0",
+        "physicalId": "PX25-02#AB_PASSIVE_NONE_LV1_LV2_LV3_2725c90900e1384a152be30fd28735089f0ac05fc79f1c839917a81a5ba41111_b6403a537af79663251ac4ae64cb5aab",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_2725c90900e1384a152be30fd28735089f0ac05fc79f1c839917a81a5ba41111_b6403a537af79663251ac4ae64cb5aab"
+      },
+      {
+        "id": "PX25-02#AB_PASSIVE_NONE_LV1_LV2_LV3_7b2665b37d525a5031d9e1e17cad5b628eb3eda5c7164fadbd8bc6fcc21283ce_1262af503a258bb211236e4a7f4f86e6",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆When you summon/advent a target Spirit, you can +1 core to this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆When you summon/advent a target Spirit, you can +1 core to this Nexus.",
+            "cleanText": "When you summon/advent a target Spirit, you can +1 core to this Nexus",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX25-02#a1",
+        "physicalId": "PX25-02#AB_PASSIVE_NONE_LV1_LV2_LV3_7b2665b37d525a5031d9e1e17cad5b628eb3eda5c7164fadbd8bc6fcc21283ce_1262af503a258bb211236e4a7f4f86e6",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_7b2665b37d525a5031d9e1e17cad5b628eb3eda5c7164fadbd8bc6fcc21283ce_1262af503a258bb211236e4a7f4f86e6"
+      },
+      {
+        "id": "PX25-02#AB_PASSIVE_NONE_LV1_LV2_LV3_4bb19fa1966cae3954d0c4101e31ad7e067c35392079f675e3208dc595906003_d61a63d547291fe9ed5807358fd2cc62",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.",
+            "cleanText": "When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CORE_CHARGE_TRIGGER",
+              "millCount": 3
+            }
+          },
+          {
+            "rawText": "For each target card among them, +1 core to this Nexus.",
+            "cleanText": "For each target card among them, +1 core to this Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CORE_CHARGE_ADD",
+              "count": 1
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX25-02#a2",
+        "physicalId": "PX25-02#AB_PASSIVE_NONE_LV1_LV2_LV3_4bb19fa1966cae3954d0c4101e31ad7e067c35392079f675e3208dc595906003_d61a63d547291fe9ed5807358fd2cc62",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_4bb19fa1966cae3954d0c4101e31ad7e067c35392079f675e3208dc595906003_d61a63d547291fe9ed5807358fd2cc62"
+      },
+      {
+        "id": "PX25-02#AB_WHEN_DEPLOYED_NONE_LV1_LV2_7775af334e9aea7d10e4682287e95e08a821fb3b4e885f228093a3a0baa16d41_6afe60d73e357872d8708cac25735544",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DEPLOYED",
+          "timingLabel": "When Deployed",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "+2 cores to this Nexus. Then, you can reveal two cards from your decktop. Among them, you can summon a White Cost 5 or less card, without paying the cost. Return any remaining cards to the deckbottom."
+        },
+        "clauses": [
+          {
+            "rawText": "+2 cores to this Nexus.",
+            "cleanText": "+2 cores to this Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE"
+            }
+          },
+          {
+            "rawText": "you can reveal two cards from your decktop.",
+            "cleanText": "you can reveal two cards from your decktop",
+            "link": "then",
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 2
+            }
+          },
+          {
+            "rawText": "Among them, you can summon a White Cost 5 or less card, without paying the cost.",
+            "cleanText": "Among them, you can summon a White Cost 5 or less card, without paying the cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          },
+          {
+            "rawText": "Return any remaining cards to the deckbottom.",
+            "cleanText": "Return any remaining cards to the deckbottom",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "RETURN_REVEALED_BOTTOM"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX25-02#a3",
+        "physicalId": "PX25-02#AB_WHEN_DEPLOYED_NONE_LV1_LV2_7775af334e9aea7d10e4682287e95e08a821fb3b4e885f228093a3a0baa16d41_6afe60d73e357872d8708cac25735544",
+        "semanticId": "SEM#AB_WHEN_DEPLOYED_NONE_LV1_LV2_7775af334e9aea7d10e4682287e95e08a821fb3b4e885f228093a3a0baa16d41_6afe60d73e357872d8708cac25735544"
+      },
+      {
+        "id": "PX25-02#AB_ATTACK_STEP_NONE_LV2_0f72e173e00167dd0c8b81579d9aeba78cce12bb2b328c04edacdf135893045e_d3779508fb0c0a68b10973a720605bcd",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Grand Skill: 4"
+          ],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "(Send four cores from this Nexus to the Void) During this battle, one of your Spirits can't be blocked."
+        },
+        "clauses": [
+          {
+            "rawText": "(Send four cores from this Nexus to the Void) During this battle, one of your Spirits can't be blocked.",
+            "cleanText": "(Send four cores from this Nexus to the Void) During this battle, one of your Spirits can't be blocked",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_BATTLE",
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX25-02#a4",
+        "physicalId": "PX25-02#AB_ATTACK_STEP_NONE_LV2_0f72e173e00167dd0c8b81579d9aeba78cce12bb2b328c04edacdf135893045e_d3779508fb0c0a68b10973a720605bcd",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_0f72e173e00167dd0c8b81579d9aeba78cce12bb2b328c04edacdf135893045e_d3779508fb0c0a68b10973a720605bcd"
+      }
+    ],
+    "compiledClausesCount": 8,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX25-05": {
+    "cardNumber": "PX25-05",
+    "name": "The Investigator Lolo",
+    "keywords": [
+      {
+        "name": "Core Charge",
+        "parameter": null,
+        "wave": 3,
+        "hook": "core_charge",
+        "bracketed": true,
+        "index": 86
+      },
+      {
+        "name": "Accel",
+        "parameter": "Cost 3 ([Core",
+        "wave": 2,
+        "hook": "accel",
+        "bracketed": true,
+        "index": 328
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PX25-05#AB_PASSIVE_NONE_LV1_LV2_LV3_950a35712229737ccd60e1e4d7180e794cf3968e856b14c2044cf03859c40017_8053f7eeb51f8c8f6ce580259d35ade2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this card is revealed from the deck by your effect, or sent to the Trash by your [Core Charge], you can add it to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "When this card is revealed from the deck by your effect, or sent to the Trash by your [Core Charge], you can add it to the Hand.",
+            "cleanText": "When this card is revealed from the deck by your effect, or sent to the Trash by your [Core Charge], you can add it to the Hand",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX25-05#a0",
+        "physicalId": "PX25-05#AB_PASSIVE_NONE_LV1_LV2_LV3_950a35712229737ccd60e1e4d7180e794cf3968e856b14c2044cf03859c40017_8053f7eeb51f8c8f6ce580259d35ade2",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_950a35712229737ccd60e1e4d7180e794cf3968e856b14c2044cf03859c40017_8053f7eeb51f8c8f6ce580259d35ade2"
+      },
+      {
+        "id": "PX25-05#AB_PASSIVE_NONE_LV1_LV2_LV3_1324cbfeec8cd1b12d32966b4b8f5c9c6a8734a307af4258c1335d5a9aa2e5f0_e6335b5c536fb50d5438e7e90f360c6f",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": true,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While this card is in the Removed Zone, when you're summoning/deploying any Ultimate card, or \"Devotee\"/\"Grandwalker\" family Nexus card, fulfill one of its reduction symbols."
+        },
+        "clauses": [
+          {
+            "rawText": "While this card is in the Removed Zone, when you're summoning/deploying any Ultimate card, or \"Devotee\"/\"Grandwalker\" family Nexus card, fulfill one of its reduction symbols.",
+            "cleanText": "when you're summoning/deploying any Ultimate card, or \"Devotee\"/\"Grandwalker\" family Nexus card, fulfill one of its reduction symbols",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While this card is in the Removed Zone",
+            "duration": null,
+            "op": {
+              "op": "DEPLOY_NEXUS",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX25-05#a1",
+        "physicalId": "PX25-05#AB_PASSIVE_NONE_LV1_LV2_LV3_1324cbfeec8cd1b12d32966b4b8f5c9c6a8734a307af4258c1335d5a9aa2e5f0_e6335b5c536fb50d5438e7e90f360c6f",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_1324cbfeec8cd1b12d32966b4b8f5c9c6a8734a307af4258c1335d5a9aa2e5f0_e6335b5c536fb50d5438e7e90f360c6f"
+      },
+      {
+        "id": "PX25-05#AB_FLASH_NONE_LV1_LV2_LV3_dd465ce4fe7edd1a2e6b0f1fb02500289047ab628ba9dd54902df00743b5446f_74163e02288ec69b5ff9af99c4445947",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Core",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Reveal three cards from your decktop. Among them, add a \"Devotee\"/ \"Concluser\"/ \"Ultimate Queen\" family Ultimate card, and a Contract Grandwalker Nexus card to the Hand. Discard any remaining cards. After this effect resolves, put this card onto the Removed Zone."
+        },
+        "clauses": [
+          {
+            "rawText": "Reveal three cards from your decktop.",
+            "cleanText": "Reveal three cards from your decktop",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 3
+            }
+          },
+          {
+            "rawText": "Among them, add a \"Devotee\"/ \"Concluser\"/ \"Ultimate Queen\" family Ultimate card, and a Contract Grandwalker Nexus card to the Hand.",
+            "cleanText": "Among them, add a \"Devotee\"/ \"Concluser\"/ \"Ultimate Queen\" family Ultimate card, and a Contract Grandwalker Nexus card to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          },
+          {
+            "rawText": "Discard any remaining cards.",
+            "cleanText": "Discard any remaining cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_REVEALED"
+            }
+          },
+          {
+            "rawText": "put this card onto the Removed Zone.",
+            "cleanText": "put this card onto the Removed Zone",
+            "link": "afterResolves",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "OPEN_ZONE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX25-05#a2",
+        "physicalId": "PX25-05#AB_FLASH_NONE_LV1_LV2_LV3_dd465ce4fe7edd1a2e6b0f1fb02500289047ab628ba9dd54902df00743b5446f_74163e02288ec69b5ff9af99c4445947",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_dd465ce4fe7edd1a2e6b0f1fb02500289047ab628ba9dd54902df00743b5446f_74163e02288ec69b5ff9af99c4445947"
+      }
+    ],
+    "compiledClausesCount": 6,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "canonical_id": "WIKI-284",
+  "canonical_name": "Resonance",
+  "aliases": [
+    "共鳴；kyoumei"
+  ],
+  "wiki_url": "https://battle-spirits.fandom.com/wiki/Resonance",
+  "official_definition": "Resonance: XX(/YY) (When Attacks) You can reveal a card from your decktop. If that card is \"XX\"(/\"YY\")-named, you can summon/deploy it without paying the cost. Discard any remaining card.",
+  "ownership_rules": {
+    "native_syntax": "Ability block header contains [Resonance] or [Resonance: Param]",
+    "prose_exclusion": "Mentions inside body clauses (\"with [Resonance]\", \"give [Resonance]\") classified as REFERENCES or GRANTED, never NATIVE."
+  },
+  "activation_conditions": {
+    "timing": "WHEN_ATTACKS",
+    "timing_step": "ANY",
+    "required_zone": "FIELD",
+    "soul_core_required": false
+  },
+  "timing": "WHEN_ATTACKS",
+  "costs": {
+    "description": "None (Standard ability activation)",
+    "payment_destination": "NONE"
+  },
+  "targets": {
+    "eligibility": "FRIENDLY_FIELD",
+    "selection_type": "AUTOMATIC_RULES"
+  },
+  "player_decisions": "DETERMINISTIC_RULES_RESOLUTION",
+  "restrictions": {
+    "once_per_turn": false,
+    "cant_stack": false,
+    "same_name": false
+  },
+  "resolution": {
+    "description": "Mills cards from opposing decktop to Grave.",
+    "destination_zone": "GRAVE"
+  },
+  "interactions": {
+    "armor_immunity_applicable": true,
+    "replacement_effect": false
+  },
+  "variants": [],
+  "official_examples": [],
+  "unresolved_rules": [],
+  "implementation_status": "SPEC_CATALOGED",
+  "evidence_references": [
+    "WIKI: https://battle-spirits.fandom.com/wiki/Resonance",
+    "CORPUS_NATIVE_COUNT: 0"
+  ]
+}

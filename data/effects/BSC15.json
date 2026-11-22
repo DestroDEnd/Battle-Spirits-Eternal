@@ -333,19 +333,29 @@
     "compiledIr": {
       "cardNumber": "BSC15-003",
       "name": "Satoridemon",
-      "keywords": [
-        {
-          "name": "Burst",
-          "parameter": "After your Life is reduced",
-          "wave": 2,
-          "hook": "burst",
-          "bracketed": true,
-          "index": 82
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 6000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 6,
+          "bp": 9000
         }
-      ],
+      },
+      "originalEffectText": "After your Burst activates, return this Spirit card from your Trash to the Hand.\n\n[Burst: After your Life is reduced]\nSend cores from every opposing Spirit to the Reserve until only one core remains on each of them. After this effect resolves, if you control any Ultimate, summon this Spirit card.",
+      "teams": [],
+      "keywords": [],
       "abilities": [
         {
-          "id": "BSC15-003#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -356,8 +366,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -366,28 +381,45 @@
             "isMain": false,
             "cleanBody": "After your Burst activates, return this Spirit card from your Trash to the Hand."
           },
+          "originalAbilityText": "After your Burst activates, return this Spirit card from your Trash to the Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "After your Burst activates, return this Spirit card from your Trash to the Hand.",
+              "originalClauseText": "After your Burst activates, return this Spirit card from your Trash to the Hand.",
               "cleanText": "After your Burst activates, return this Spirit card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "target": "this_card",
+                "from": "trash",
+                "destination": "HAND",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC15-003#a0",
+          "keywords": [],
+          "id": "BSC15-003#AB_PASSIVE_NONE_LV1_LV2_LV3_007b0118cb6c46572d4a1cc83694211a7c1eb56d493bf4b4e32209240a8b14a9_275658c6147f6bd1286657474f98be88",
+          "physicalId": "BSC15-003#AB_PASSIVE_NONE_LV1_LV2_LV3_007b0118cb6c46572d4a1cc83694211a7c1eb56d493bf4b4e32209240a8b14a9_275658c6147f6bd1286657474f98be88",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_007b0118cb6c46572d4a1cc83694211a7c1eb56d493bf4b4e32209240a8b14a9_275658c6147f6bd1286657474f98be88",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_61f7a7b1e4d9056da4ccc7910730c9b6bc6168a7af7b9c87113b8e725a11d6d5_f09884d091013a489fa642d816c4166e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC15-003#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -398,8 +430,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "BURST",
+            "timings": [],
             "timingLabel": "Burst",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -408,10 +447,14 @@
             "isMain": false,
             "cleanBody": "Send cores from every opposing Spirit to the Reserve until only one core remains on each of them. After this effect resolves, if you control any Ultimate, summon this Spirit card."
           },
+          "originalAbilityText": "[Burst: After your Life is reduced]\nSend cores from every opposing Spirit to the Reserve until only one core remains on each of them. After this effect resolves, if you control any Ultimate, summon this Spirit card.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Send cores from every opposing Spirit to the Reserve until only one core remains on each of them.",
+              "originalClauseText": "Send cores from every opposing Spirit to the Reserve until only one core remains on each of them.",
               "cleanText": "Send cores from every opposing Spirit to the Reserve until only one core remains on each of them",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -419,12 +462,18 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "opp"
+                }
               }
             },
             {
               "rawText": "if you control any Ultimate, summon this Spirit card.",
+              "originalClauseText": "if you control any Ultimate, summon this Spirit card.",
               "cleanText": "summon this Spirit card",
+              "clauseIndex": 1,
               "link": "afterResolves",
               "isOptional": false,
               "isCost": false,
@@ -436,7 +485,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC15-003#a1",
+          "keywords": [],
+          "id": "BSC15-003#AB_BURST_NONE_LV1_LV2_LV3_6c1ce1242099a398d4ae976906e2530f6ff635f90bcaa9920386a63d35bd2062_f0cf628cbb9308c1dbeeb020c02ddeeb",
+          "physicalId": "BSC15-003#AB_BURST_NONE_LV1_LV2_LV3_6c1ce1242099a398d4ae976906e2530f6ff635f90bcaa9920386a63d35bd2062_f0cf628cbb9308c1dbeeb020c02ddeeb",
+          "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_6c1ce1242099a398d4ae976906e2530f6ff635f90bcaa9920386a63d35bd2062_f0cf628cbb9308c1dbeeb020c02ddeeb",
+          "semanticIdV3": "SEM3#AB_BURST_NONE_LV1_LV2_LV3_17aa8351dc3da7d88ffac7d878ff5bfa575b2ac51aee4ddbab4c7dc718356a14_1cc133267a0ec3a9b6b00ed2e0311a3c",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,

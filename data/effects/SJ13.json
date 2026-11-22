@@ -135,6 +135,21 @@
     "compiledIr": {
       "cardNumber": "SJ13-08",
       "name": "The FriendlyRobo Saikyo-Leon",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 2000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 4000
+        }
+      },
+      "originalEffectText": "[LV1][LV2] (When Summoned)\nReturn an opposing Spirit to the Hand.\n[Rush: Yellow]\n(While you have a Yellow symbol, the following effect activates next)\n[Yellow Core]: Return a Cost 2 Spirit card from your Trash to the Hand.",
+      "teams": [],
       "keywords": [
         {
           "name": "Rush",
@@ -142,12 +157,31 @@
           "wave": 2,
           "hook": "rush",
           "bracketed": true,
-          "index": 66
+          "index": 39,
+          "abilityId": "SJ13-08#AB_WHEN_SUMMONED_NONE_LV1_LV2_c8c9c0e8d2e85e99457b907fab2a8271f0f1816a568d734e231f684d1b1335ad_138a89cc5c56d89c9a99c046fc7cf2c6",
+          "cardNumber": "SJ13-08",
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "SJ13-08#a0"
         }
       ],
       "abilities": [
         {
-          "id": "SJ13-08#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -157,8 +191,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -167,10 +210,14 @@
             "isMain": false,
             "cleanBody": "Return an opposing Spirit to the Hand.\n[Rush: Yellow]\n(While you have a Yellow symbol, the following effect activates next)\n[Yellow Core]: Return a Cost 2 Spirit card from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned)\nReturn an opposing Spirit to the Hand.\n[Rush: Yellow]\n(While you have a Yellow symbol, the following effect activates next)\n[Yellow Core]: Return a Cost 2 Spirit card from your Trash to the Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Return an opposing Spirit to the Hand.",
+              "originalClauseText": "Return an opposing Spirit to the Hand.",
               "cleanText": "Return an opposing Spirit to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -190,7 +237,9 @@
             },
             {
               "rawText": "[Rush: Yellow]",
+              "originalClauseText": "[Rush: Yellow]",
               "cleanText": "[Rush: Yellow]",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -200,13 +249,19 @@
                 "op": "KEYWORD_ABILITY",
                 "keyword": "Rush",
                 "condition": {
+                  "kind": "STRUCTURED_CONDITION",
+                  "type": "COLOR_SYMBOL",
+                  "side": "self",
+                  "color": "yellow",
                   "colorSymbol": "Yellow"
                 }
               }
             },
             {
               "rawText": "(While you have a Yellow symbol, the following effect activates next)",
+              "originalClauseText": "(While you have a Yellow symbol, the following effect activates next)",
               "cleanText": "(While you have a Yellow symbol, the following effect activates next)",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -216,28 +271,85 @@
                 "op": "KEYWORD_ABILITY",
                 "keyword": "Rush",
                 "condition": {
+                  "kind": "STRUCTURED_CONDITION",
+                  "type": "COLOR_SYMBOL",
+                  "side": "self",
+                  "color": "yellow",
                   "colorSymbol": "Yellow"
                 }
               }
             },
             {
               "rawText": "Return a Cost 2 Spirit card from your Trash to the Hand.",
+              "originalClauseText": "Return a Cost 2 Spirit card from your Trash to the Hand.",
               "cleanText": "Return a Cost 2 Spirit card from your Trash to the Hand",
+              "clauseIndex": 3,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SJ13-08#a0",
+          "keywords": [
+            {
+              "name": "Rush",
+              "parameter": "Yellow",
+              "wave": 2,
+              "hook": "rush",
+              "bracketed": true,
+              "index": 39,
+              "abilityId": "SJ13-08#AB_WHEN_SUMMONED_NONE_LV1_LV2_c8c9c0e8d2e85e99457b907fab2a8271f0f1816a568d734e231f684d1b1335ad_138a89cc5c56d89c9a99c046fc7cf2c6",
+              "cardNumber": "SJ13-08",
+              "levels": [
+                1,
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_SUMMONED",
+              "timingLabel": "When Summoned",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "SJ13-08#a0"
+            }
+          ],
+          "id": "SJ13-08#AB_WHEN_SUMMONED_NONE_LV1_LV2_c8c9c0e8d2e85e99457b907fab2a8271f0f1816a568d734e231f684d1b1335ad_138a89cc5c56d89c9a99c046fc7cf2c6",
+          "physicalId": "SJ13-08#AB_WHEN_SUMMONED_NONE_LV1_LV2_c8c9c0e8d2e85e99457b907fab2a8271f0f1816a568d734e231f684d1b1335ad_138a89cc5c56d89c9a99c046fc7cf2c6",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_c8c9c0e8d2e85e99457b907fab2a8271f0f1816a568d734e231f684d1b1335ad_138a89cc5c56d89c9a99c046fc7cf2c6",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_9a9de2b8789ee2872466c25761e568e9705daff1e81bf9ca10c75209200c5f7d_d8c85850847e6fdf15f374e2d53ecd64",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,

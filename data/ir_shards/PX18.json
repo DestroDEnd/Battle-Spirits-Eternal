@@ -1,1 +1,506 @@
-{"PX18-01":{"cardNumber":"PX18-01","name":"The CollapseDragonDeity Drag-Hyperion","keywords":[],"abilities":[{"id":"PX18-01#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When this Spirit would leave the Field due to an opposing effect, send an opposing Life to their Reserve."},"clauses":[{"rawText":"When this Spirit would leave the Field due to an opposing effect, send an opposing Life to their Reserve.","cleanText":"When this Spirit would leave the Field due to an opposing effect, send an opposing Life to their Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"life","side":"opp"},"to":{"zone":"reserve","side":"opp"}}}],"unsupported":[]},{"id":"PX18-01#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can send four cores from any Red Grandwalker Nexuses you control to the Void. When you've done so, destroy four opposing 15000 BP or less Spirits/Ultimates. Cores on the Spirits/Ultimates destroyed by this effect are sent to the Trash, not the Reserve."},"clauses":[{"rawText":"You can send four cores from any Red Grandwalker Nexuses you control to the Void.","cleanText":"You can send four cores from any Red Grandwalker Nexuses you control to the Void","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"destroy four opposing 15000 BP or less Spirits/Ultimates.","cleanText":"destroy four opposing 15000 BP or less Spirits/Ultimates","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}},{"rawText":"Cores on the Spirits/Ultimates destroyed by this effect are sent to the Trash, not the Reserve.","cleanText":"Cores on the Spirits/Ultimates destroyed by this effect are sent to the Trash, not the Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REDIRECT_CORE_DESTINATION"}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"PX18-02":{"cardNumber":"PX18-02","name":"The CollapseGoddess Ruler-Themis","keywords":[{"name":"Heavy Armor","parameter":"Red/Purple/Green/Yellow","wave":1,"hook":"heavy_armor","bracketed":true,"index":11}],"abilities":[{"id":"PX18-02#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Heavy Armor: Red/Purple/Green/Yellow","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit is unaffected by opposing Red/Purple/Green/Yellow Spirit/Brave/Nexus/Magic effects."},"clauses":[{"rawText":"This Spirit is unaffected by opposing Red/Purple/Green/Yellow Spirit/Brave/Nexus/Magic effects.","cleanText":"This Spirit is unaffected by opposing Red/Purple/Green/Yellow Spirit/Brave/Nexus/Magic effects","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"CONTINUOUS_RULE","rule":"IMMUNITY"}}],"unsupported":[]},{"id":"PX18-02#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can send four cores from any of your White Grandwalker Nexuses to the Void. When you've done so, during the next (Your Turn), the (Core Step), (Main Step) and (Attack Step) are turned into (Draw Step)."},"clauses":[{"rawText":"You can send four cores from any of your White Grandwalker Nexuses to the Void.","cleanText":"You can send four cores from any of your White Grandwalker Nexuses to the Void","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"during the next (Your Turn), the (Core Step), (Main Step) and (Attack Step) are turned into (Draw Step).","cleanText":"during the next (Your Turn), the (Core Step), (Main Step) and (Attack Step) are turned into (Draw Step)","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"PX18-05":{"cardNumber":"PX18-05","name":"The CollapsePhantomGoddess Mitera-Tethys","keywords":[],"abilities":[{"id":"PX18-05#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"During this turn, give an opposing Spirit/Ultimate -5000 BP. For each Yellow Spirit you control, activate this effect once, and destroy all Spirits/Ultimates who are brought to 0 BP by this effect."},"clauses":[{"rawText":"During this turn, give an opposing Spirit/Ultimate -5000 BP.","cleanText":"give an opposing Spirit/Ultimate -5000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"BP_DEBUFF","amount":5000}},{"rawText":"For each Yellow Spirit you control, activate this effect once","cleanText":"For each Yellow Spirit you control, activate this effect once","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ACTIVATE_EFFECT_ACTION"}},{"rawText":"destroy all Spirits/Ultimates who are brought to 0 BP by this effect.","cleanText":"destroy all Spirits/Ultimates who are brought to 0 BP by this effect","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}}],"unsupported":[]},{"id":"PX18-05#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"You can send four cores from any of your Yellow Grandwalker Nexuses to the Void. When you've done so, during this turn, the LV1/LV2/LV3/LV4/LV5/LV6 BP of all opposing Spirits/Ultimates becomes 1000 BP."},"clauses":[{"rawText":"You can send four cores from any of your Yellow Grandwalker Nexuses to the Void.","cleanText":"You can send four cores from any of your Yellow Grandwalker Nexuses to the Void","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"during this turn, the LV1/LV2/LV3/LV4/LV5/LV6 BP of all opposing Spirits/Ultimates becomes 1000 BP.","cleanText":"the LV1/LV2/LV3/LV4/LV5/LV6 BP of all opposing Spirits/Ultimates becomes 1000 BP","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"BP_OR_LEVEL_MODIFIER"}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"PX18-06":{"cardNumber":"PX18-06","name":"The CollapseSeaDeity Magne-Okeanos","keywords":[],"abilities":[{"id":"PX18-06#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can send four cores from any of your Blue Grandwalker Nexuses to Void. When you've done so, discard 10 cards from the opposing decktop. Also, if your opposing Hand is five or more, by discarding the entire opposing Hand, the opponent draws two cards."},"clauses":[{"rawText":"You can send four cores from any of your Blue Grandwalker Nexuses to Void.","cleanText":"You can send four cores from any of your Blue Grandwalker Nexuses to Void","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"discard 10 cards from the opposing decktop.","cleanText":"discard 10 cards from the opposing decktop","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MILL_DECK","side":"opp"}},{"rawText":"if your opposing Hand is five or more, by discarding the entire opposing Hand, the opponent draws two cards.","cleanText":"by discarding the entire opposing Hand, the opponent draws two cards","link":"also","isOptional":false,"isCost":false,"condition":"if your opposing Hand is five or more","duration":null,"op":{"op":"DISCARD_HAND","all":true}}],"unsupported":[]},{"id":"PX18-06#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Ignoring the cost of Braves, destroy two opposing Cost 5 or less Spirits."},"clauses":[{"rawText":"Ignoring the cost of Braves, destroy two opposing Cost 5 or less Spirits.","cleanText":"Ignoring the cost of Braves, destroy two opposing Cost 5 or less Spirits","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":2,"target":{"side":"opp","types":["Spirit"],"filters":{"costLte":5}}}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "PX18-01": {
+    "cardNumber": "PX18-01",
+    "name": "The CollapseDragonDeity Drag-Hyperion",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PX18-01#AB_PASSIVE_NONE_LV1_LV2_LV3_be9099644087968eb73ca9b52948da5c0adcd2a33454a8dafd8b674f36c78cbd_44fcbf033199777a81d87bb687f99829",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this Spirit would leave the Field due to an opposing effect, send an opposing Life to their Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "When this Spirit would leave the Field due to an opposing effect, send an opposing Life to their Reserve.",
+            "cleanText": "When this Spirit would leave the Field due to an opposing effect, send an opposing Life to their Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "life",
+                "side": "opp"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "opp"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX18-01#a0",
+        "physicalId": "PX18-01#AB_PASSIVE_NONE_LV1_LV2_LV3_be9099644087968eb73ca9b52948da5c0adcd2a33454a8dafd8b674f36c78cbd_44fcbf033199777a81d87bb687f99829",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_be9099644087968eb73ca9b52948da5c0adcd2a33454a8dafd8b674f36c78cbd_44fcbf033199777a81d87bb687f99829"
+      },
+      {
+        "id": "PX18-01#AB_WHEN_ATTACKS_NONE_LV2_LV3_ee77b5ad0d952195e94d8941343a3b96194ae6bc06b053ee595ce317183a29a5_a7fa33ce1ea477512624adea820b0b7f",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can send four cores from any Red Grandwalker Nexuses you control to the Void. When you've done so, destroy four opposing 15000 BP or less Spirits/Ultimates. Cores on the Spirits/Ultimates destroyed by this effect are sent to the Trash, not the Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "You can send four cores from any Red Grandwalker Nexuses you control to the Void.",
+            "cleanText": "You can send four cores from any Red Grandwalker Nexuses you control to the Void",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "destroy four opposing 15000 BP or less Spirits/Ultimates.",
+            "cleanText": "destroy four opposing 15000 BP or less Spirits/Ultimates",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "Cores on the Spirits/Ultimates destroyed by this effect are sent to the Trash, not the Reserve.",
+            "cleanText": "Cores on the Spirits/Ultimates destroyed by this effect are sent to the Trash, not the Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REDIRECT_CORE_DESTINATION"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX18-01#a1",
+        "physicalId": "PX18-01#AB_WHEN_ATTACKS_NONE_LV2_LV3_ee77b5ad0d952195e94d8941343a3b96194ae6bc06b053ee595ce317183a29a5_a7fa33ce1ea477512624adea820b0b7f",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_ee77b5ad0d952195e94d8941343a3b96194ae6bc06b053ee595ce317183a29a5_a7fa33ce1ea477512624adea820b0b7f"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX18-02": {
+    "cardNumber": "PX18-02",
+    "name": "The CollapseGoddess Ruler-Themis",
+    "keywords": [
+      {
+        "name": "Heavy Armor",
+        "parameter": "Red/Purple/Green/Yellow",
+        "wave": 1,
+        "hook": "heavy_armor",
+        "bracketed": true,
+        "index": 11
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PX18-02#AB_PASSIVE_NONE_LV1_LV2_330ede871210a62ff4848915bc0bff7abb22abceb54d04e56136e8cfdf24e651_13e4fcfe691444df58ccb4451e36584e",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Heavy Armor: Red/Purple/Green/Yellow",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit is unaffected by opposing Red/Purple/Green/Yellow Spirit/Brave/Nexus/Magic effects."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit is unaffected by opposing Red/Purple/Green/Yellow Spirit/Brave/Nexus/Magic effects.",
+            "cleanText": "This Spirit is unaffected by opposing Red/Purple/Green/Yellow Spirit/Brave/Nexus/Magic effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CONTINUOUS_RULE",
+              "rule": "IMMUNITY"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX18-02#a0",
+        "physicalId": "PX18-02#AB_PASSIVE_NONE_LV1_LV2_330ede871210a62ff4848915bc0bff7abb22abceb54d04e56136e8cfdf24e651_13e4fcfe691444df58ccb4451e36584e",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_330ede871210a62ff4848915bc0bff7abb22abceb54d04e56136e8cfdf24e651_13e4fcfe691444df58ccb4451e36584e"
+      },
+      {
+        "id": "PX18-02#AB_WHEN_ATTACKS_NONE_LV2_5e5996426758078a8dd13ea4b0fc0ebe41bcea0a66de15af5b570e0947c83739_555a1071b95ff4031c219a6db1d131e7",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can send four cores from any of your White Grandwalker Nexuses to the Void. When you've done so, during the next (Your Turn), the (Core Step), (Main Step) and (Attack Step) are turned into (Draw Step)."
+        },
+        "clauses": [
+          {
+            "rawText": "You can send four cores from any of your White Grandwalker Nexuses to the Void.",
+            "cleanText": "You can send four cores from any of your White Grandwalker Nexuses to the Void",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "during the next (Your Turn), the (Core Step), (Main Step) and (Attack Step) are turned into (Draw Step).",
+            "cleanText": "during the next (Your Turn), the (Core Step), (Main Step) and (Attack Step) are turned into (Draw Step)",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX18-02#a1",
+        "physicalId": "PX18-02#AB_WHEN_ATTACKS_NONE_LV2_5e5996426758078a8dd13ea4b0fc0ebe41bcea0a66de15af5b570e0947c83739_555a1071b95ff4031c219a6db1d131e7",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_5e5996426758078a8dd13ea4b0fc0ebe41bcea0a66de15af5b570e0947c83739_555a1071b95ff4031c219a6db1d131e7"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX18-05": {
+    "cardNumber": "PX18-05",
+    "name": "The CollapsePhantomGoddess Mitera-Tethys",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PX18-05#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_060b8bd3581a493d5af196f1d33d88a78f96dc00af91148636357f8f3b3db854_d607d8d27a74b2388e4e2f0adffb4686",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "During this turn, give an opposing Spirit/Ultimate -5000 BP. For each Yellow Spirit you control, activate this effect once, and destroy all Spirits/Ultimates who are brought to 0 BP by this effect."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, give an opposing Spirit/Ultimate -5000 BP.",
+            "cleanText": "give an opposing Spirit/Ultimate -5000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 5000
+            }
+          },
+          {
+            "rawText": "For each Yellow Spirit you control, activate this effect once",
+            "cleanText": "For each Yellow Spirit you control, activate this effect once",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ACTIVATE_EFFECT_ACTION"
+            }
+          },
+          {
+            "rawText": "destroy all Spirits/Ultimates who are brought to 0 BP by this effect.",
+            "cleanText": "destroy all Spirits/Ultimates who are brought to 0 BP by this effect",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX18-05#a0",
+        "physicalId": "PX18-05#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_060b8bd3581a493d5af196f1d33d88a78f96dc00af91148636357f8f3b3db854_d607d8d27a74b2388e4e2f0adffb4686",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_060b8bd3581a493d5af196f1d33d88a78f96dc00af91148636357f8f3b3db854_d607d8d27a74b2388e4e2f0adffb4686"
+      },
+      {
+        "id": "PX18-05#AB_FLASH_NONE_LV2_LV3_802823eb730032ff2a6471f634238bc9c6aeafeeba1ed590999727d66c4ebda0_84c1891b15ce52197bf32ef23180dead",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "You can send four cores from any of your Yellow Grandwalker Nexuses to the Void. When you've done so, during this turn, the LV1/LV2/LV3/LV4/LV5/LV6 BP of all opposing Spirits/Ultimates becomes 1000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "You can send four cores from any of your Yellow Grandwalker Nexuses to the Void.",
+            "cleanText": "You can send four cores from any of your Yellow Grandwalker Nexuses to the Void",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "during this turn, the LV1/LV2/LV3/LV4/LV5/LV6 BP of all opposing Spirits/Ultimates becomes 1000 BP.",
+            "cleanText": "the LV1/LV2/LV3/LV4/LV5/LV6 BP of all opposing Spirits/Ultimates becomes 1000 BP",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_OR_LEVEL_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX18-05#a1",
+        "physicalId": "PX18-05#AB_FLASH_NONE_LV2_LV3_802823eb730032ff2a6471f634238bc9c6aeafeeba1ed590999727d66c4ebda0_84c1891b15ce52197bf32ef23180dead",
+        "semanticId": "SEM#AB_FLASH_NONE_LV2_LV3_802823eb730032ff2a6471f634238bc9c6aeafeeba1ed590999727d66c4ebda0_84c1891b15ce52197bf32ef23180dead"
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX18-06": {
+    "cardNumber": "PX18-06",
+    "name": "The CollapseSeaDeity Magne-Okeanos",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PX18-06#AB_WHEN_ATTACKS_NONE_LV1_LV2_a33ac0884a00d3d16f0071c9c7f3c7c66b84428db2cc8b751e139eff1be08336_13d343c1785eebb363ae1098f01f4710",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can send four cores from any of your Blue Grandwalker Nexuses to Void. When you've done so, discard 10 cards from the opposing decktop. Also, if your opposing Hand is five or more, by discarding the entire opposing Hand, the opponent draws two cards."
+        },
+        "clauses": [
+          {
+            "rawText": "You can send four cores from any of your Blue Grandwalker Nexuses to Void.",
+            "cleanText": "You can send four cores from any of your Blue Grandwalker Nexuses to Void",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "discard 10 cards from the opposing decktop.",
+            "cleanText": "discard 10 cards from the opposing decktop",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "side": "opp"
+            }
+          },
+          {
+            "rawText": "if your opposing Hand is five or more, by discarding the entire opposing Hand, the opponent draws two cards.",
+            "cleanText": "by discarding the entire opposing Hand, the opponent draws two cards",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": "if your opposing Hand is five or more",
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "all": true
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX18-06#a0",
+        "physicalId": "PX18-06#AB_WHEN_ATTACKS_NONE_LV1_LV2_a33ac0884a00d3d16f0071c9c7f3c7c66b84428db2cc8b751e139eff1be08336_13d343c1785eebb363ae1098f01f4710",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_a33ac0884a00d3d16f0071c9c7f3c7c66b84428db2cc8b751e139eff1be08336_13d343c1785eebb363ae1098f01f4710"
+      },
+      {
+        "id": "PX18-06#AB_WHEN_ATTACKS_NONE_LV2_3aea79d0ad76c29c2322e8b81f0a55bcb87a59b5e56fcfdafc4afe6a3b38402a_831a3f697260f3af46ae8c7904efd299",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Ignoring the cost of Braves, destroy two opposing Cost 5 or less Spirits."
+        },
+        "clauses": [
+          {
+            "rawText": "Ignoring the cost of Braves, destroy two opposing Cost 5 or less Spirits.",
+            "cleanText": "Ignoring the cost of Braves, destroy two opposing Cost 5 or less Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 2,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 5
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX18-06#a1",
+        "physicalId": "PX18-06#AB_WHEN_ATTACKS_NONE_LV2_3aea79d0ad76c29c2322e8b81f0a55bcb87a59b5e56fcfdafc4afe6a3b38402a_831a3f697260f3af46ae8c7904efd299",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_3aea79d0ad76c29c2322e8b81f0a55bcb87a59b5e56fcfdafc4afe6a3b38402a_831a3f697260f3af46ae8c7904efd299"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

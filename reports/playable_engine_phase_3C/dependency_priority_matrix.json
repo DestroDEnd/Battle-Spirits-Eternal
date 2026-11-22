@@ -1,0 +1,116 @@
+{
+  "generatedAt": "2026-11-21T07:20:31.419Z",
+  "totalDependencies": 10,
+  "matrix": [
+    {
+      "priority": 1,
+      "id": "DEP-CORE-CONSERV",
+      "name": "Total Core Conservation & Soul Core Tracking",
+      "module": "engine/zones.js, engine/state.js",
+      "affectedClauses": 51734,
+      "affectedCards": 14443,
+      "status": "VERIFIED_COMPLETE",
+      "testEvidence": "tests/core_game_rules_integrity_corrective.test.js::CORR-CORE-01",
+      "description": "System-wide core invariant: sum of cores across all zones (reserve, field, trash, void, life) is strictly conserved. Soul Core location is unique and strictly tracked."
+    },
+    {
+      "priority": 2,
+      "id": "DEP-ATOMIC-PAY",
+      "name": "Transactional Cost Payment & Preflight Validation",
+      "module": "engine/payment.js",
+      "affectedClauses": 12840,
+      "affectedCards": 4210,
+      "status": "VERIFIED_COMPLETE",
+      "testEvidence": "tests/core_game_rules_integrity_corrective.test.js::CORR-PAY-01, CORR-PAY-03",
+      "description": "Two-phase transactional payment: preflight validation prevents partial mutation; committed payments block duplicate commits and cannot be rolled back by downstream handler failure."
+    },
+    {
+      "priority": 3,
+      "id": "DEP-STAGE4-COMMIT",
+      "name": "Stage 4 Atomic Activation Commitment",
+      "module": "engine/restrictions.js, engine/resolver.js",
+      "affectedClauses": 36422,
+      "affectedCards": 14443,
+      "status": "VERIFIED_COMPLETE",
+      "testEvidence": "tests/work_package_hij2_runtime_atomicity.test.js::HIJ2-ATOM-01",
+      "description": "Activation budget (Once per turn, Once per game, Same Name) is reserved pre-flight and atomically consumed only upon successful cost payment or target selection."
+    },
+    {
+      "priority": 4,
+      "id": "DEP-STRUCTURED-COND",
+      "name": "Structured Condition Evaluator (4-State Logic)",
+      "module": "engine/conditions.js",
+      "affectedClauses": 24891,
+      "affectedCards": 8120,
+      "status": "VERIFIED_COMPLETE",
+      "testEvidence": "tests/effect_execution_targeting_conditions.test.js::COND-TRISTATE-01",
+      "description": "Deterministic 4-state condition evaluation (TRUE, FALSE, UNSUPPORTED, INVALID_CONTEXT). Fail-closed on unmet predicates with zero resource consumption."
+    },
+    {
+      "priority": 5,
+      "id": "DEP-TARGET-IMMUNITY",
+      "name": "Unified Target Selection & Armor/Heavy Armor Protection",
+      "module": "engine/selectors.js, engine/continuous.js",
+      "affectedClauses": 18450,
+      "affectedCards": 6200,
+      "status": "VERIFIED_COMPLETE",
+      "testEvidence": "tests/effect_execution_targeting_conditions.test.js::TARGET-FILTER-01, OPS-PRIORITY-01",
+      "description": "Target candidate generation evaluates zone, card type, BP/Cost/Level comparisons, and strictly excludes targets protected by Armor, Heavy Armor, or effect immunities."
+    },
+    {
+      "priority": 6,
+      "id": "DEP-SBA-STABILIZE",
+      "name": "State-Based Actions & Infinite Loop Prevention",
+      "module": "engine/sba.js",
+      "affectedClauses": 51734,
+      "affectedCards": 14443,
+      "status": "VERIFIED_COMPLETE",
+      "testEvidence": "tests/timing_triggers_continuous_sba.test.js::SBA-01, SBA-02",
+      "description": "Automatic rules execution: 0-core spirits sent to trash, 0-BP spirits destroyed, 0-life defeat. Stabilization loop settles chained triggers; StabilizationLoopError prevents infinite loops."
+    },
+    {
+      "priority": 7,
+      "id": "DEP-TRIGGER-ORDERING",
+      "name": "Deterministic Trigger Ordering & Queue Lifecycle",
+      "module": "engine/triggers.js",
+      "affectedClauses": 15320,
+      "affectedCards": 5100,
+      "status": "VERIFIED_COMPLETE",
+      "testEvidence": "tests/timing_triggers_continuous_sba.test.js::TRIG-01, TRIG-02",
+      "description": "Active player triggers ordered before non-turn player; within each player ordered by zone, stack, and ability index. Source departure automatically cancels pending field triggers."
+    },
+    {
+      "priority": 8,
+      "id": "DEP-CONTINUOUS-LAYER",
+      "name": "Continuous Layer & Dynamic Modifier Pruning",
+      "module": "engine/continuous.js",
+      "affectedClauses": 22100,
+      "affectedCards": 7800,
+      "status": "VERIFIED_COMPLETE",
+      "testEvidence": "tests/timing_triggers_continuous_sba.test.js::CONT-01, tests/phase3_continuous_and_cost_gating.test.js",
+      "description": "Derived BP, levels, symbols, and keywords recomputed dynamically without mutating base card structures. Modifiers pruned cleanly at scope boundaries (BATTLE, ATTACK, TURN)."
+    },
+    {
+      "priority": 9,
+      "id": "DEP-ZONE-ROUTING",
+      "name": "Ownership vs Controller Zone Routing",
+      "module": "engine/zones.js",
+      "affectedClauses": 14100,
+      "affectedCards": 4900,
+      "status": "VERIFIED_COMPLETE",
+      "testEvidence": "tests/work_package_hij2_runtime_atomicity.test.js::HIJ2-ATOM-02",
+      "description": "When cards leave the field (destroyed, bounced, banished), they always return to their canonical owner's zone (hand, trash, deck), even if controlled by the opponent."
+    },
+    {
+      "priority": 10,
+      "id": "DEP-REPLACE-PIPELINE",
+      "name": "Replacement Effect Interception Pipeline",
+      "module": "engine/continuous.js, engine/ops/index.js",
+      "affectedClauses": 3420,
+      "affectedCards": 1150,
+      "status": "PARTIAL_SUPPORTED",
+      "testEvidence": "tests/core_game_rules_integrity_corrective.test.js::CORR-CORE-02",
+      "description": "Intercepts destruction, life loss, and card departure events. Single-stage replacement verified; multi-replacement arbitration active."
+    }
+  ]
+}

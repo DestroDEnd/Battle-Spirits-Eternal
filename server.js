@@ -6,7 +6,10 @@ import zlib from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 import { DatabaseSync } from 'node:sqlite';
 import { SAGA_DEFINITIONS, getSagaById, resolveCardSaga } from './engine/rules/saga_catalog.js';
-import { resolveCardArtworks, getCachedArtworks } from './engine/rules/card_artworks_service.js';
+import { resolveCardArtworks, getCachedArtworks, loadArtworksCache } from './engine/rules/card_artworks_service.js';
+import { getDefaultSessionManager } from './engine/session_manager.js';
+import { hashToken } from './engine/session_store.js';
+import { attachWebSocketServer } from './engine/websocket_server.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -60,6 +63,7 @@ let cachedFilters = null;
 let cachedKeywordsData = null;
 let cachedFeaturedXRares = null;
 let cachedAiWeights = null;
+let cachedRebirthCatalog = null;
 let serverDb = null;
 try {
   const dbPath = path.join(__dirname, 'battle_spirits.db');
@@ -68,6 +72,21 @@ try {
   }
 } catch (e) {
   console.warn('[Server] Could not initialize SQLite DatabaseSync:', e.message);
+}
+
+function ensureRebirthCatalogLoaded() {
+  if (!cachedRebirthCatalog) {
+    try {
+      const catalogPath = path.join(__dirname, 'data', 'rebirth_catalog.json');
+      if (fs.existsSync(catalogPath)) {
+        cachedRebirthCatalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
+      } else {
+        cachedRebirthCatalog = {};
+      }
+    } catch (e) {
+      cachedRebirthCatalog = {};
+    }
+  }
 }
 
 function ensureCardsIndexLoaded() {
@@ -85,7 +104,12 @@ function ensureCardsIndexLoaded() {
       const sourceDict = detailed || cachedCardsIndex;
       for (const [cNum, entry] of Object.entries(sourceDict)) {
         if (entry && entry.name) {
-          cachedCardsByName[entry.name.toLowerCase()] = entry;
+          const lowerName = entry.name.toLowerCase();
+          cachedCardsByName[lowerName] = entry;
+          const normalized = lowerName.replace(/［/g, '[').replace(/］/g, ']').trim();
+          if (normalized !== lowerName) {
+            cachedCardsByName[normalized] = entry;
+          }
         }
         if (entry && (entry.card_number || cNum)) {
           const numKey = (entry.card_number || cNum).toLowerCase();
@@ -100,7 +124,31 @@ function ensureCardsIndexLoaded() {
   }
 }
 
-const server = http.createServer((req, res) => {
+function readJsonBody(req) {
+  return new Promise((resolve, reject) => {
+    let body = '';
+    req.on('data', chunk => {
+      body += chunk;
+      if (body.length > 5 * 1024 * 1024) {
+        reject(new Error('PAYLOAD_TOO_LARGE'));
+      }
+    });
+    req.on('end', () => {
+      if (!body.trim()) {
+        resolve({});
+        return;
+      }
+      try {
+        resolve(JSON.parse(body));
+      } catch (err) {
+        reject(new Error('INVALID_JSON_BODY'));
+      }
+    });
+    req.on('error', reject);
+  });
+}
+
+const server = http.createServer(async (req, res) => {
   console.log(`[REQ] ${req.method} ${req.url}`);
   // CORS & caching headers for local development
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -117,6 +165,247 @@ const server = http.createServer((req, res) => {
   let pathname = decodeURIComponent(parsedUrl.pathname);
 
   // ── API ROUTES ──
+
+  // ── SESSION MANAGEMENT API (PHASE M) ──
+  if (pathname.toLowerCase().startsWith('/api/sessions')) {
+    const sessionManager = getDefaultSessionManager();
+    const parts = pathname.split('/').filter(Boolean); // ['api', 'sessions', ...]
+    const subRoute = parts[2] ? parts[2].toLowerCase() : '';
+    const subAction = parts[3] ? parts[3].toLowerCase() : '';
+
+    // Extract Bearer token from headers or query
+    const authHeader = req.headers['authorization'] || '';
+    const headerToken = authHeader.startsWith('Bearer ') ? authHeader.slice(7).trim() : '';
+    const queryToken = parsedUrl.searchParams.get('token') || '';
+    const effectiveToken = headerToken || queryToken;
+
+    // POST /api/sessions/create
+    if (subRoute === 'create' && req.method === 'POST') {
+      try {
+        const body = await readJsonBody(req);
+        const result = await sessionManager.createMatch(body);
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(result));
+      } catch (err) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: err.message, code: err.code }));
+      }
+      return;
+    }
+
+    // POST /api/sessions/join
+    if (subRoute === 'join' && req.method === 'POST') {
+      try {
+        const body = await readJsonBody(req);
+        const result = await sessionManager.joinMatch(body.matchId, body.playerInfo);
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(result));
+      } catch (err) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: err.message, code: err.code }));
+      }
+      return;
+    }
+
+    // GET /api/sessions/active
+    if (subRoute === 'active' && req.method === 'GET') {
+      const playerId = parsedUrl.searchParams.get('playerId');
+      const activeMatches = sessionManager.getActiveMatches(playerId);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ activeMatches }));
+      return;
+    }
+
+    // GET /api/sessions/history
+    if (subRoute === 'history' && req.method === 'GET') {
+      const limit = parseInt(parsedUrl.searchParams.get('limit') || '50', 10);
+      const playerId = parsedUrl.searchParams.get('playerId');
+      const history = sessionManager.getMatchHistory(limit, playerId);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ history }));
+      return;
+    }
+
+    // GET /api/sessions/health
+    if (subRoute === 'health' && req.method === 'GET') {
+      const health = sessionManager.store.validateStorageHealth();
+      res.writeHead(health.healthy ? 200 : 503, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(health));
+      return;
+    }
+
+    // Match-specific routes: /api/sessions/:matchId or /api/sessions/:matchId/:action
+    if (parts[2]) {
+      const matchId = parts[2];
+
+      // GET /api/sessions/:matchId/events
+      if (subAction === 'events' && req.method === 'GET') {
+        try {
+          const sinceSeq = parseInt(parsedUrl.searchParams.get('sinceSeq') || '0', 10);
+          const events = await sessionManager.getEvents(matchId, sinceSeq, effectiveToken);
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ matchId, events }));
+        } catch (err) {
+          const statusCode = (err.code === 'AUTHENTICATION_REQUIRED' || err.code === 'INVALID_AUTH_TOKEN' || err.message.includes('AUTHENTICATION') || err.message.includes('INVALID_AUTH')) ? 401
+            : (err.message.includes('NOT_FOUND') ? 404 : 400);
+          res.writeHead(statusCode, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: err.message, code: err.code }));
+        }
+        return;
+      }
+
+      // POST /api/sessions/:matchId/heartbeat
+      if (subAction === 'heartbeat' && req.method === 'POST') {
+        try {
+          const body = await readJsonBody(req).catch(() => ({}));
+          const authToken = body.authToken || effectiveToken;
+          const result = await sessionManager.recordHeartbeat(matchId, authToken);
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify(result));
+        } catch (err) {
+          const statusCode = (err.code === 'AUTHENTICATION_REQUIRED' || err.code === 'INVALID_AUTH_TOKEN' || err.message.includes('AUTHENTICATION') || err.message.includes('INVALID_AUTH')) ? 401
+            : (err.message.includes('NOT_FOUND') ? 404 : 400);
+          res.writeHead(statusCode, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: err.message, code: err.code }));
+        }
+        return;
+      }
+
+      // GET /api/sessions/:matchId/stream (Real-Time Server-Sent Events)
+      if (subAction === 'stream' && req.method === 'GET') {
+        try {
+          const session = sessionManager.store.loadSession(matchId);
+          if (!session) {
+            res.writeHead(404, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: `Match "${matchId}" not found` }));
+            return;
+          }
+          if (!effectiveToken) {
+            res.writeHead(401, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'AUTHENTICATION_REQUIRED: Missing auth token' }));
+            return;
+          }
+          const tokenH = hashToken(effectiveToken);
+          let viewerSide = null;
+          if (session.player1.tokenHash === tokenH) viewerSide = 'player';
+          else if (session.player2.tokenHash === tokenH) viewerSide = 'opponent';
+
+          if (!viewerSide) {
+            res.writeHead(401, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'INVALID_AUTH_TOKEN: Unauthorized token' }));
+            return;
+          }
+
+          res.writeHead(200, {
+            'Content-Type': 'text/event-stream',
+            'Cache-Control': 'no-cache',
+            'Connection': 'keep-alive',
+            'Access-Control-Allow-Origin': '*'
+          });
+
+          // Replay missed events
+          const sinceSeq = parseInt(req.headers['last-event-id'] || parsedUrl.searchParams.get('sinceSeq') || '0', 10);
+          const initialEvents = await sessionManager.getEvents(matchId, sinceSeq, effectiveToken);
+          for (const evt of initialEvents) {
+            res.write(`id: ${evt.seq}\nevent: match_event\ndata: ${JSON.stringify(evt)}\n\n`);
+          }
+
+          // Subscribe for real-time live events
+          const unsubscribe = sessionManager.subscribe(matchId, viewerSide, (evt) => {
+            res.write(`id: ${evt.seq}\nevent: match_event\ndata: ${JSON.stringify(evt)}\n\n`);
+          });
+
+          req.on('close', () => {
+            unsubscribe();
+          });
+        } catch (err) {
+          if (!res.headersSent) {
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: err.message }));
+          }
+        }
+        return;
+      }
+
+      // POST /api/sessions/:matchId/action
+      if (subAction === 'action' && req.method === 'POST') {
+        try {
+          const body = await readJsonBody(req);
+          const authToken = body.authToken || body.authContext?.authToken || effectiveToken;
+          const result = await sessionManager.submitPlayerAction(matchId, body.action || body, { authToken });
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify(result));
+        } catch (err) {
+          const statusCode = (err.message.includes('AUTHENTICATION') || err.message.includes('INVALID_AUTH')) ? 401
+            : (err.message.includes('IMPERSONATION') ? 403 : 400);
+          res.writeHead(statusCode, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: err.message, code: err.code }));
+        }
+        return;
+      }
+
+      // POST /api/sessions/:matchId/reconnect
+      if (subAction === 'reconnect' && req.method === 'POST') {
+        try {
+          const body = await readJsonBody(req);
+          const authToken = body.authToken || effectiveToken;
+          const result = await sessionManager.reconnectToMatch(matchId, authToken);
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify(result));
+        } catch (err) {
+          const statusCode = (err.message.includes('AUTHENTICATION') || err.message.includes('INVALID_AUTH')) ? 401 : 400;
+          res.writeHead(statusCode, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: err.message, code: err.code }));
+        }
+        return;
+      }
+
+      // POST /api/sessions/:matchId/leave
+      if (subAction === 'leave' && req.method === 'POST') {
+        try {
+          const body = await readJsonBody(req);
+          const authToken = body.authToken || effectiveToken;
+          const result = await sessionManager.leaveArena(matchId, authToken);
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ success: true, match: result }));
+        } catch (err) {
+          res.writeHead(400, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: err.message, code: err.code }));
+        }
+        return;
+      }
+
+      // POST /api/sessions/:matchId/forfeit
+      if (subAction === 'forfeit' && req.method === 'POST') {
+        try {
+          const body = await readJsonBody(req);
+          const authToken = body.authToken || effectiveToken;
+          const result = await sessionManager.forfeitMatch(matchId, authToken, body.reason);
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify(result));
+        } catch (err) {
+          res.writeHead(400, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: err.message, code: err.code }));
+        }
+        return;
+      }
+
+      // GET /api/sessions/:matchId (query state & clock)
+      if (!subAction && req.method === 'GET') {
+        try {
+          const result = await sessionManager.getPlayerMatchState(matchId, effectiveToken || null);
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify(result));
+        } catch (err) {
+          const statusCode = (err.code === 'AUTHENTICATION_REQUIRED' || err.code === 'INVALID_AUTH_TOKEN' || err.message.includes('AUTHENTICATION') || err.message.includes('INVALID_AUTH')) ? 401
+            : (err.message.includes('NOT_FOUND') ? 404 : 400);
+          res.writeHead(statusCode, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: err.message, code: err.code }));
+        }
+        return;
+      }
+    }
+  }
 
   // Image proxy endpoint to bypass CORS and referer hotlinking blocks
   if (pathname.toLowerCase() === '/api/proxy-image') {
@@ -654,18 +943,30 @@ const server = http.createServer((req, res) => {
         }
 
         if (cardType && cardType.toLowerCase() !== 'all') {
-          conditions.push('LOWER(type) = LOWER(?)');
-          sqlParams.push(cardType);
+          const ct = cardType.toLowerCase();
+          if (ct === 'grandwalker') {
+            conditions.push('(LOWER(type) LIKE ? OR family LIKE ? OR families_json LIKE ?)');
+            sqlParams.push('%grandwalker%', '%Grandwalker%', '%"Grandwalker"%');
+          } else {
+            conditions.push('(LOWER(type) = ? OR LOWER(type) LIKE ?)');
+            sqlParams.push(ct, `%${ct}%`);
+          }
         }
 
         if (rarity && rarity.toLowerCase() !== 'all') {
-          conditions.push('LOWER(rarity) = LOWER(?)');
-          sqlParams.push(rarity);
+          const ru = rarity.toLowerCase();
+          if (ru === 'cxr' || ru.includes('contract x')) {
+            conditions.push('(LOWER(rarity) LIKE ? OR LOWER(rarity) LIKE ?)');
+            sqlParams.push('%contract x%', '%cx%');
+          } else {
+            conditions.push('LOWER(rarity) = LOWER(?)');
+            sqlParams.push(rarity);
+          }
         }
 
         if (family && family.toLowerCase() !== 'all') {
-          conditions.push('(family LIKE ? OR families_json LIKE ?)');
-          sqlParams.push(`%${family}%`, `%"${family}"%`);
+          conditions.push('(family = ? OR families_json LIKE ?)');
+          sqlParams.push(family, `%"${family}"%`);
         }
 
         if (setName) {
@@ -762,6 +1063,14 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  // /api/rebirth-catalog (Rebirth / Reborn mappings for all dual-faced cards)
+  if (pathname.toLowerCase() === '/api/rebirth-catalog') {
+    ensureRebirthCatalogLoaded();
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(cachedRebirthCatalog || {}));
+    return;
+  }
+
   // /api/card-artworks
   if (pathname.toLowerCase() === '/api/card-artworks') {
     ensureCardsIndexLoaded();
@@ -808,11 +1117,17 @@ const server = http.createServer((req, res) => {
     const name = (parsedUrl.searchParams.get('name') || '').toLowerCase().trim();
     const num = (parsedUrl.searchParams.get('card_number') || parsedUrl.searchParams.get('id') || '').trim();
     let found = null;
-    if (name) found = cachedCardsByName[name];
+    if (name) found = cachedCardsByName[name] || cachedCardsByName[name.replace(/［/g, '[').replace(/］/g, ']')];
     if (!found && num) found = cachedCardsByNumber[num.toLowerCase()] || cachedCardsIndex[num];
     if (found) {
       const cachedArts = getCachedArtworks(found.name, found.card_number);
-      const payload = cachedArts ? { ...found, artworks: cachedArts } : found;
+      const payload = cachedArts ? { ...found, artworks: cachedArts } : { ...found };
+      if (!payload.rebirth) {
+        ensureRebirthCatalogLoaded();
+        if (cachedRebirthCatalog && cachedRebirthCatalog[found.name]) {
+          payload.rebirth = cachedRebirthCatalog[found.name];
+        }
+      }
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify(payload));
       return;
@@ -892,6 +1207,16 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  // Check dynamic battle routes
+  const lowerPath = pathname.toLowerCase();
+  if (
+    lowerPath.startsWith('/battle/') ||
+    lowerPath.startsWith('/arena/') ||
+    lowerPath.startsWith('/duel/')
+  ) {
+    pathname = '/arena.html';
+  }
+
   // Check route map
   if (ROUTE_MAP[pathname.toLowerCase()]) {
     pathname = ROUTE_MAP[pathname.toLowerCase()];
@@ -930,13 +1255,9 @@ const server = http.createServer((req, res) => {
     const contentType = MIME_TYPES[ext] || 'application/octet-stream';
 
     // Set high-performance caching headers
-    let cacheControl = 'no-cache';
+    let cacheControl = 'no-cache, no-store, must-revalidate';
     if (['.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp', '.ico', '.woff', '.woff2', '.ttf'].includes(ext)) {
       cacheControl = 'public, max-age=86400, stale-while-revalidate=604800';
-    } else if (['.css', '.js', '.mjs'].includes(ext)) {
-      cacheControl = 'public, max-age=3600, must-revalidate';
-    } else if (ext === '.db') {
-      cacheControl = 'public, max-age=604800, stale-while-revalidate=86400';
     }
 
     // Check gzip support for text-based and compressible binary resources
@@ -963,6 +1284,23 @@ const server = http.createServer((req, res) => {
     }
   });
 });
+
+// Attach Phase M.1 Real-Time WebSocket Server
+const defaultSessionMgr = getDefaultSessionManager();
+attachWebSocketServer(server, defaultSessionMgr);
+
+// Reconcile stale connections on startup
+defaultSessionMgr.reconcileStaleConnections();
+
+// Periodic Connection Lease Checker (every 5 seconds)
+const leaseTimer = setInterval(() => {
+  try {
+    defaultSessionMgr.checkConnectionLeases();
+  } catch (err) {
+    console.error('[SessionLease] Background lease check error:', err.message);
+  }
+}, 5000);
+leaseTimer.unref();
 
 server.listen(PORT, HOST, () => {
   console.log(`\n⚔️ Battle Spirits Eternal Local Server running at:`);

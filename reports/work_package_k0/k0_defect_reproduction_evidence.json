@@ -1,0 +1,27 @@
+{
+  "generatedAt": "2026-11-19T15:13:10.270Z",
+  "defects": [
+    {
+      "defectId": "K0-DEF-01",
+      "title": "resolveTargets(\"battling\") and relative battler condition ignore state.combat",
+      "responsibleFiles": [
+        "engine/selectors.js:resolveTargets",
+        "engine/conditions.js:evaluateStructuredCondition"
+      ],
+      "reproductionTest": "K0-DEF-01 in tests/work_package_k0_engine_health.test.js",
+      "beforeFixFailure": "AssertionError: Expected battling target to resolve during active state.combat, got NO_BATTLING_SPIRIT",
+      "afterFixStatus": "PASS"
+    },
+    {
+      "defectId": "K0-DEF-02",
+      "title": "queryCandidates/executeTargeting drop/mishandle state: \"BATTLING\" filter",
+      "responsibleFiles": [
+        "engine/selectors.js:queryCandidates",
+        "engine/selectors.js:executeTargeting"
+      ],
+      "reproductionTest": "K0-DEF-02 in tests/work_package_k0_engine_health.test.js",
+      "beforeFixFailure": "AssertionError: Expected 'OPP-BATTLER', got 'OPP-BYSTANDER' (dropped state:'BATTLING')",
+      "afterFixStatus": "PASS"
+    }
+  ]
+}

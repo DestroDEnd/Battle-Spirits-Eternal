@@ -1,0 +1,39 @@
+{
+  "package": "K.1.5",
+  "generatedAt": "2026-11-20T11:22:47.725Z",
+  "priorConfirmedRuntimeConsumersInK134": 0,
+  "prerequisiteNodesTotal": 1302,
+  "breakdown": {
+    "braveCondition": {
+      "nodes": 903,
+      "sourceField": "ability.type === \"CONDITION\" / \"[Brave Condition: ...]\"",
+      "compilerTransform": "compiler/header_parser.js & compiler/index.js",
+      "structuredParser": "parseBraveCondition in engine/prerequisites.js",
+      "runtimeEvaluator": "evaluateBraveCondition in engine/prerequisites.js",
+      "runtimeCaller": "playCard in engine/index.js (pre-payment legality check & slot attachment)",
+      "behavioralTests": [
+        "K1.5-B1 & B2",
+        "K1.4-B1 & B2"
+      ]
+    },
+    "summonCondition": {
+      "nodes": 386,
+      "sourceField": "ability.type === \"CONDITION\" / \"[Summon Condition: ...]\"",
+      "compilerTransform": "compiler/header_parser.js & compiler/index.js",
+      "structuredParser": "parseSummonCondition in engine/prerequisites.js",
+      "runtimeEvaluator": "evaluateSummonCondition in engine/prerequisites.js",
+      "runtimeCaller": "playCard in engine/index.js (pre-payment Ultimate/Spirit summon gate)",
+      "behavioralTests": [
+        "K1.5-B1 & B2",
+        "K1.4-B1 & B2"
+      ]
+    },
+    "suadconComplexAdvent": {
+      "nodes": 13,
+      "status": "EXPLICITLY_ISOLATED_PENDING_BATCH_03",
+      "reason": "Super Advent condition patterns require Advent-step specific overlay checks beyond normal summon path"
+    }
+  },
+  "runtimeConfirmedNodes": 1289,
+  "explicitlyIsolatedNodes": 13
+}

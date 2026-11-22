@@ -510,6 +510,26 @@
     "compiledIr": {
       "cardNumber": "P14-X05",
       "name": "The DarknessGuide Rutile",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 5000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 5,
+          "bp": 7000
+        }
+      },
+      "originalEffectText": "When Spirits with [Rush] you control are destroyed by the opponent, return this Spirit card from your Trash to the Hand.\n\n[LV1][LV2][LV3] (When Summoned)\nIf your Life is three or less, you can summon an \"Exalted Sword\" family Brave card from your Hand/Trash, without paying the cost.",
+      "teams": [],
       "keywords": [
         {
           "name": "Rush",
@@ -517,12 +537,32 @@
           "wave": 2,
           "hook": "rush",
           "bracketed": true,
-          "index": 18
+          "index": 18,
+          "abilityId": "P14-X05#AB_PASSIVE_NONE_LV1_LV2_LV3_eccf008bdcf92f0a553346e6e92326491c16d5e50a91f89d74932f75452bcd25_630933b7e721b4ecd462d359855bc421",
+          "cardNumber": "P14-X05",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "P14-X05#a0"
         }
       ],
       "abilities": [
         {
-          "id": "P14-X05#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -533,8 +573,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -543,28 +588,75 @@
             "isMain": false,
             "cleanBody": "When Spirits with [Rush] you control are destroyed by the opponent, return this Spirit card from your Trash to the Hand."
           },
+          "originalAbilityText": "When Spirits with [Rush] you control are destroyed by the opponent, return this Spirit card from your Trash to the Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When Spirits with [Rush] you control are destroyed by the opponent, return this Spirit card from your Trash to the Hand.",
+              "originalClauseText": "When Spirits with [Rush] you control are destroyed by the opponent, return this Spirit card from your Trash to the Hand.",
               "cleanText": "When Spirits with [Rush] you control are destroyed by the opponent, return this Spirit card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "target": "this_card",
+                "from": "trash",
+                "destination": "HAND",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "P14-X05#a0",
+          "keywords": [
+            {
+              "name": "Rush",
+              "parameter": null,
+              "wave": 2,
+              "hook": "rush",
+              "bracketed": true,
+              "index": 18,
+              "abilityId": "P14-X05#AB_PASSIVE_NONE_LV1_LV2_LV3_eccf008bdcf92f0a553346e6e92326491c16d5e50a91f89d74932f75452bcd25_630933b7e721b4ecd462d359855bc421",
+              "cardNumber": "P14-X05",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "P14-X05#a0"
+            }
+          ],
+          "id": "P14-X05#AB_PASSIVE_NONE_LV1_LV2_LV3_eccf008bdcf92f0a553346e6e92326491c16d5e50a91f89d74932f75452bcd25_630933b7e721b4ecd462d359855bc421",
+          "physicalId": "P14-X05#AB_PASSIVE_NONE_LV1_LV2_LV3_eccf008bdcf92f0a553346e6e92326491c16d5e50a91f89d74932f75452bcd25_630933b7e721b4ecd462d359855bc421",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_eccf008bdcf92f0a553346e6e92326491c16d5e50a91f89d74932f75452bcd25_630933b7e721b4ecd462d359855bc421",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_0fff056b995a46248de08ca92075e75fbcbd841ff7125acf709ceb739758694a_9e204c95d17cfbb993f41fbc9c538657",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "P14-X05#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -575,8 +667,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -585,10 +686,14 @@
             "isMain": false,
             "cleanBody": "If your Life is three or less, you can summon an \"Exalted Sword\" family Brave card from your Hand/Trash, without paying the cost."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nIf your Life is three or less, you can summon an \"Exalted Sword\" family Brave card from your Hand/Trash, without paying the cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "If your Life is three or less, you can summon an \"Exalted Sword\" family Brave card from your Hand/Trash, without paying the cost.",
+              "originalClauseText": "If your Life is three or less, you can summon an \"Exalted Sword\" family Brave card from your Hand/Trash, without paying the cost.",
               "cleanText": "you can summon an \"Exalted Sword\" family Brave card from your Hand/Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -596,11 +701,37 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand_or_trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Brave"
+                  ],
+                  "family": "Exalted Sword"
+                },
+                "free": true,
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "P14-X05#a1",
+          "keywords": [],
+          "id": "P14-X05#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_cebb0753e08cf463d6e6f61a6140de34879361b5a60854e29cca1549828c0829_2ace014b9109948f7c4e4e47e5ee58ae",
+          "physicalId": "P14-X05#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_cebb0753e08cf463d6e6f61a6140de34879361b5a60854e29cca1549828c0829_2ace014b9109948f7c4e4e47e5ee58ae",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_cebb0753e08cf463d6e6f61a6140de34879361b5a60854e29cca1549828c0829_2ace014b9109948f7c4e4e47e5ee58ae",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_136a259efc616c51594710e9562b7b1b1a858c49083cb9a4fb088d6464379cab_6fc1c5d583042bbfe03a77bffafdca20",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -633,6 +764,26 @@
     "compiledIr": {
       "cardNumber": "P14-X06",
       "name": "The LightGuide Lapis",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 4000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 3,
+          "bp": 5000
+        }
+      },
+      "originalEffectText": "When Spirits with [Charge] you control are destroyed by the opponent, return this Spirit card from the Trash to your Hand.\n\n[LV1][LV2][LV3] (When Summoned)\nWhen your Life is three or less, you can summon a \"Fencer\" family Spirit card from your Hand, without paying the cost.",
+      "teams": [],
       "keywords": [
         {
           "name": "Charge",
@@ -640,12 +791,32 @@
           "wave": 2,
           "hook": "charge",
           "bracketed": true,
-          "index": 18
+          "index": 18,
+          "abilityId": "P14-X06#AB_PASSIVE_NONE_LV1_LV2_LV3_eed557fb3c201fe456ec2f53b5cb4c68dc2925189f144af8c2c44b7ef3ce8bd2_2502ac922c8f89523bafcd25f807a6f6",
+          "cardNumber": "P14-X06",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "P14-X06#a0"
         }
       ],
       "abilities": [
         {
-          "id": "P14-X06#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -656,8 +827,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -666,10 +842,14 @@
             "isMain": false,
             "cleanBody": "When Spirits with [Charge] you control are destroyed by the opponent, return this Spirit card from the Trash to your Hand."
           },
+          "originalAbilityText": "When Spirits with [Charge] you control are destroyed by the opponent, return this Spirit card from the Trash to your Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When Spirits with [Charge] you control are destroyed by the opponent, return this Spirit card from the Trash to your Hand.",
+              "originalClauseText": "When Spirits with [Charge] you control are destroyed by the opponent, return this Spirit card from the Trash to your Hand.",
               "cleanText": "When Spirits with [Charge] you control are destroyed by the opponent, return this Spirit card from the Trash to your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -677,17 +857,60 @@
               "duration": null,
               "op": {
                 "op": "SALVAGE",
+                "target": "this_card",
+                "from": "trash",
+                "destination": "HAND",
                 "count": 1,
-                "family": "this",
-                "targetType": "Spirit",
-                "destination": "HAND"
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "P14-X06#a0",
+          "keywords": [
+            {
+              "name": "Charge",
+              "parameter": null,
+              "wave": 2,
+              "hook": "charge",
+              "bracketed": true,
+              "index": 18,
+              "abilityId": "P14-X06#AB_PASSIVE_NONE_LV1_LV2_LV3_eed557fb3c201fe456ec2f53b5cb4c68dc2925189f144af8c2c44b7ef3ce8bd2_2502ac922c8f89523bafcd25f807a6f6",
+              "cardNumber": "P14-X06",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "P14-X06#a0"
+            }
+          ],
+          "id": "P14-X06#AB_PASSIVE_NONE_LV1_LV2_LV3_eed557fb3c201fe456ec2f53b5cb4c68dc2925189f144af8c2c44b7ef3ce8bd2_2502ac922c8f89523bafcd25f807a6f6",
+          "physicalId": "P14-X06#AB_PASSIVE_NONE_LV1_LV2_LV3_eed557fb3c201fe456ec2f53b5cb4c68dc2925189f144af8c2c44b7ef3ce8bd2_2502ac922c8f89523bafcd25f807a6f6",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_eed557fb3c201fe456ec2f53b5cb4c68dc2925189f144af8c2c44b7ef3ce8bd2_2502ac922c8f89523bafcd25f807a6f6",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_bc9008314bb148986ce39e7e5598bb03d9d53b060004dc537a005e9614c5ce7f_685cb308eb31a0dac9148b8368133e1b",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "P14-X06#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -698,8 +921,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -708,10 +940,14 @@
             "isMain": false,
             "cleanBody": "When your Life is three or less, you can summon a \"Fencer\" family Spirit card from your Hand, without paying the cost."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nWhen your Life is three or less, you can summon a \"Fencer\" family Spirit card from your Hand, without paying the cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When your Life is three or less, you can summon a \"Fencer\" family Spirit card from your Hand, without paying the cost.",
+              "originalClauseText": "When your Life is three or less, you can summon a \"Fencer\" family Spirit card from your Hand, without paying the cost.",
               "cleanText": "When your Life is three or less, you can summon a \"Fencer\" family Spirit card from your Hand, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -719,11 +955,37 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "family": "Fencer"
+                },
+                "free": true,
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "P14-X06#a1",
+          "keywords": [],
+          "id": "P14-X06#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_7861638c5aafa855166fac84a9d983729839545948688fd6d30b3e71b47dfd47_9e936eae1916e379f20f86115411322a",
+          "physicalId": "P14-X06#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_7861638c5aafa855166fac84a9d983729839545948688fd6d30b3e71b47dfd47_9e936eae1916e379f20f86115411322a",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_7861638c5aafa855166fac84a9d983729839545948688fd6d30b3e71b47dfd47_9e936eae1916e379f20f86115411322a",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_70a1daa219dfb29eb840c1691110271572d4b5993cbb2ed3bdff281e84435278_3282ea00680db8c8c4756d698f70ac80",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,

@@ -158,10 +158,24 @@
     "compiledIr": {
       "cardNumber": "26RSD01-006",
       "name": "Cupell",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 4,
+          "bp": 7000
+        }
+      },
+      "originalEffectText": "[LV1-2]When Summoned\nSend up to two cores, besides [Soul Core], from your Trash to this Spirit.\n\n[LV2]Your End Step\nYou can target one of your \"Windfang\" family Spirits/Nexuses. Send the [Soul Core] from your Trash to it.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "26RSD01-006#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -171,8 +185,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -181,24 +204,47 @@
             "isMain": false,
             "cleanBody": "Send up to two cores, besides [Soul Core], from your Trash to this Spirit."
           },
+          "originalAbilityText": "[LV1-2]When Summoned\nSend up to two cores, besides [Soul Core], from your Trash to this Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Send up to two cores, besides [Soul Core], from your Trash to this Spirit.",
+              "originalClauseText": "Send up to two cores, besides [Soul Core], from your Trash to this Spirit.",
               "cleanText": "Send up to two cores, besides [Soul Core], from your Trash to this Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
+                "count": 2,
+                "from": "grave",
+                "to": "field",
+                "excludeSoulCore": true,
+                "upTo": true,
                 "op": "RETRIEVE_CORES"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RSD01-006#a0",
+          "keywords": [],
+          "id": "26RSD01-006#AB_WHEN_SUMMONED_NONE_LV1_LV2_37961520c41b1b48f26391b66fb791e3f4e590fb8b7c2ff6870525f9937fd5c2_450012ae7fb7c46f50e607d472497fa7",
+          "physicalId": "26RSD01-006#AB_WHEN_SUMMONED_NONE_LV1_LV2_37961520c41b1b48f26391b66fb791e3f4e590fb8b7c2ff6870525f9937fd5c2_450012ae7fb7c46f50e607d472497fa7",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_37961520c41b1b48f26391b66fb791e3f4e590fb8b7c2ff6870525f9937fd5c2_450012ae7fb7c46f50e607d472497fa7",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_e7a9b05823eaae07732f4908ab7175c2c750b0f5d272c066b51536b2180379df_83a367a394551a2eb17ea510d6961af9",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "26RSD01-006#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -207,8 +253,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "END_OF_TURN",
+            "timings": [
+              "END_OF_TURN"
+            ],
             "timingLabel": "Your End Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "END_OF_TURN"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -217,22 +272,28 @@
             "isMain": false,
             "cleanBody": "You can target one of your \"Windfang\" family Spirits/Nexuses. Send the [Soul Core] from your Trash to it."
           },
+          "originalAbilityText": "[LV2]Your End Step\nYou can target one of your \"Windfang\" family Spirits/Nexuses. Send the [Soul Core] from your Trash to it.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can target one of your \"Windfang\" family Spirits/Nexuses.",
+              "originalClauseText": "You can target one of your \"Windfang\" family Spirits/Nexuses.",
               "cleanText": "You can target one of your \"Windfang\" family Spirits/Nexuses",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "GRANT_FAMILY"
+                "op": "TARGET_CARD"
               }
             },
             {
               "rawText": "Send the [Soul Core] from your Trash to it.",
+              "originalClauseText": "Send the [Soul Core] from your Trash to it.",
               "cleanText": "Send the [Soul Core] from your Trash to it",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -243,7 +304,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RSD01-006#a1",
+          "keywords": [],
+          "id": "26RSD01-006#AB_END_OF_TURN_NONE_LV2_98000e228417b4f1405181c80f1673a086bf2df9ab76cbda300f84d5f63e3d23_52966b6121dbf91281e48926aa65ac7f",
+          "physicalId": "26RSD01-006#AB_END_OF_TURN_NONE_LV2_98000e228417b4f1405181c80f1673a086bf2df9ab76cbda300f84d5f63e3d23_52966b6121dbf91281e48926aa65ac7f",
+          "semanticId": "SEM#AB_END_OF_TURN_NONE_LV2_98000e228417b4f1405181c80f1673a086bf2df9ab76cbda300f84d5f63e3d23_52966b6121dbf91281e48926aa65ac7f",
+          "semanticIdV3": "SEM3#AB_END_OF_TURN_NONE_LV2_a059e54e5f1dec3c7358421c3c6a6ecaa8b27377ff38c50869d4d7cad97ab829_053e61637facd5541136cdf950a9f8c8",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "END_OF_TURN"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -846,10 +922,24 @@
     "compiledIr": {
       "cardNumber": "26RSD01-008",
       "name": "Sertarius",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 7000
+        }
+      },
+      "originalEffectText": "Legacy\n[LV1-2]When Summoned\nYou can target a \"Windfang\" family Spirit card, besides \"Sertarius\", in your Trash. Return it to the Hand.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "26RSD01-008#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -859,8 +949,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -869,22 +968,28 @@
             "isMain": false,
             "cleanBody": "You can target a \"Windfang\" family Spirit card, besides \"Sertarius\", in your Trash. Return it to the Hand."
           },
+          "originalAbilityText": "[LV1-2]When Summoned\nYou can target a \"Windfang\" family Spirit card, besides \"Sertarius\", in your Trash. Return it to the Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "You can target a \"Windfang\" family Spirit card, besides \"Sertarius\", in your Trash.",
+              "originalClauseText": "You can target a \"Windfang\" family Spirit card, besides \"Sertarius\", in your Trash.",
               "cleanText": "You can target a \"Windfang\" family Spirit card, besides \"Sertarius\", in your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "GRANT_FAMILY"
+                "op": "TARGET_CARD"
               }
             },
             {
               "rawText": "Return it to the Hand.",
+              "originalClauseText": "Return it to the Hand.",
               "cleanText": "Return it to the Hand",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -897,7 +1002,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RSD01-008#a0",
+          "keywords": [],
+          "id": "26RSD01-008#AB_WHEN_SUMMONED_NONE_LV1_LV2_be294d98f71fa5e6da6e13097c2f4dcf8ed73578b5af6b8f072b81a92d91d642_4e20207f64215c22fa18f02c5af8b056",
+          "physicalId": "26RSD01-008#AB_WHEN_SUMMONED_NONE_LV1_LV2_be294d98f71fa5e6da6e13097c2f4dcf8ed73578b5af6b8f072b81a92d91d642_4e20207f64215c22fa18f02c5af8b056",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_be294d98f71fa5e6da6e13097c2f4dcf8ed73578b5af6b8f072b81a92d91d642_4e20207f64215c22fa18f02c5af8b056",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_a569a868264b1f5762e19a101547631b0c2593ac060342e4f4ea86f3241ffc73_bfc32f5946d31e1332dadf308d200e2f",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -1165,10 +1285,24 @@
     "compiledIr": {
       "cardNumber": "26RSD01-X01",
       "name": "The FlyingScarlet Rensis",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 8000
+        }
+      },
+      "originalEffectText": "Legacy\n[LV1-2]When Summoned\nTarget an opposing 7000 BP or less Spirit. Destroy it.\n\n[LV2]When Attacks\nYou can target a \"Windfang\" family Spirit you control. Put up to two cores, besides [Soul Core], from your Trash to it.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "26RSD01-X01#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1178,8 +1312,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1188,10 +1331,14 @@
             "isMain": false,
             "cleanBody": "Target an opposing 7000 BP or less Spirit. Destroy it."
           },
+          "originalAbilityText": "[LV1-2]When Summoned\nTarget an opposing 7000 BP or less Spirit. Destroy it.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Target an opposing 7000 BP or less Spirit.",
+              "originalClauseText": "Target an opposing 7000 BP or less Spirit.",
               "cleanText": "Target an opposing 7000 BP or less Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1203,7 +1350,9 @@
             },
             {
               "rawText": "Destroy it.",
+              "originalClauseText": "Destroy it.",
               "cleanText": "Destroy it",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1215,10 +1364,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RSD01-X01#a0",
+          "keywords": [],
+          "id": "26RSD01-X01#AB_WHEN_SUMMONED_NONE_LV1_LV2_a8a55d76dc2234ae6eaec5ce7d45d8b8baab547fa65999e9e3536cbb29cb4df4_0c23883a9b0c5825f154e41a36567bde",
+          "physicalId": "26RSD01-X01#AB_WHEN_SUMMONED_NONE_LV1_LV2_a8a55d76dc2234ae6eaec5ce7d45d8b8baab547fa65999e9e3536cbb29cb4df4_0c23883a9b0c5825f154e41a36567bde",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_a8a55d76dc2234ae6eaec5ce7d45d8b8baab547fa65999e9e3536cbb29cb4df4_0c23883a9b0c5825f154e41a36567bde",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_b419528b50564d0dc4d325735aa5b04f40df150292d409fccf49c550471c22b6_37ce60c5f19707642891e144cb5fa8bf",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "26RSD01-X01#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1227,8 +1390,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1237,33 +1409,64 @@
             "isMain": false,
             "cleanBody": "You can target a \"Windfang\" family Spirit you control. Put up to two cores, besides [Soul Core], from your Trash to it."
           },
+          "originalAbilityText": "[LV2]When Attacks\nYou can target a \"Windfang\" family Spirit you control. Put up to two cores, besides [Soul Core], from your Trash to it.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can target a \"Windfang\" family Spirit you control.",
+              "originalClauseText": "You can target a \"Windfang\" family Spirit you control.",
               "cleanText": "You can target a \"Windfang\" family Spirit you control",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "GRANT_FAMILY"
+                "op": "TARGET_CARD"
               }
             },
             {
               "rawText": "Put up to two cores, besides [Soul Core], from your Trash to it.",
+              "originalClauseText": "Put up to two cores, besides [Soul Core], from your Trash to it.",
               "cleanText": "Put up to two cores, besides [Soul Core], from your Trash to it",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "MOVE_CORE"
+                "op": "MOVE_CORE",
+                "count": 2,
+                "from": {
+                  "zone": "trash",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RSD01-X01#a1",
+          "keywords": [],
+          "id": "26RSD01-X01#AB_WHEN_ATTACKS_NONE_LV2_f986d724cdd4d5c32d20a0e86ac8dff44132c215e7995cb568c159b46de7807c_3b9873ac614827182ad95fe5fb8b65e1",
+          "physicalId": "26RSD01-X01#AB_WHEN_ATTACKS_NONE_LV2_f986d724cdd4d5c32d20a0e86ac8dff44132c215e7995cb568c159b46de7807c_3b9873ac614827182ad95fe5fb8b65e1",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_f986d724cdd4d5c32d20a0e86ac8dff44132c215e7995cb568c159b46de7807c_3b9873ac614827182ad95fe5fb8b65e1",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_06e1c13f943491276c174905d7433daf411ac5d1821f278870e7f378d280e333_c1b5ec1c2e3bd310c216fcd3e3dd3a81",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -1280,10 +1483,13 @@
     "compiledIr": {
       "cardNumber": "26RSD01-011",
       "name": "The Floating Stone Realm",
+      "type": "Nexus",
+      "levels": {},
+      "originalEffectText": "[LV1-2] When Deployed\nIf you control any exhausted Red Spirit, target a Cost 4 or less \"Windfang\" family Spirit card in your Trash. Return it to the Hand.\n\n[LV2] Your Attack Step\nAll your Spirits with Legacy gain +2000 BP.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "26RSD01-011#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1293,8 +1499,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_DEPLOYED",
+            "timings": [
+              "WHEN_DEPLOYED"
+            ],
             "timingLabel": "When Deployed",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_DEPLOYED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1303,22 +1518,29 @@
             "isMain": false,
             "cleanBody": "If you control any exhausted Red Spirit, target a Cost 4 or less \"Windfang\" family Spirit card in your Trash. Return it to the Hand."
           },
+          "originalAbilityText": "[LV1-2] When Deployed\nIf you control any exhausted Red Spirit, target a Cost 4 or less \"Windfang\" family Spirit card in your Trash. Return it to the Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "If you control any exhausted Red Spirit, target a Cost 4 or less \"Windfang\" family Spirit card in your Trash.",
+              "originalClauseText": "If you control any exhausted Red Spirit, target a Cost 4 or less \"Windfang\" family Spirit card in your Trash.",
               "cleanText": "target a Cost 4 or less \"Windfang\" family Spirit card in your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": "If you control any exhausted Red Spirit",
               "duration": null,
               "op": {
-                "op": "COST_MODIFIER"
+                "op": "TARGET_CONSTRAINT",
+                "target": "COST"
               }
             },
             {
               "rawText": "Return it to the Hand.",
+              "originalClauseText": "Return it to the Hand.",
               "cleanText": "Return it to the Hand",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1331,10 +1553,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RSD01-011#a0",
+          "keywords": [],
+          "id": "26RSD01-011#AB_WHEN_DEPLOYED_NONE_LV1_LV2_109c0a847cbd9bcd555b8394b06cfdf43deeb3e40871b27d3b5fbe34adb9b87b_c60fb7f7d93fe489ae6579c1ab858c4e",
+          "physicalId": "26RSD01-011#AB_WHEN_DEPLOYED_NONE_LV1_LV2_109c0a847cbd9bcd555b8394b06cfdf43deeb3e40871b27d3b5fbe34adb9b87b_c60fb7f7d93fe489ae6579c1ab858c4e",
+          "semanticId": "SEM#AB_WHEN_DEPLOYED_NONE_LV1_LV2_109c0a847cbd9bcd555b8394b06cfdf43deeb3e40871b27d3b5fbe34adb9b87b_c60fb7f7d93fe489ae6579c1ab858c4e",
+          "semanticIdV3": "SEM3#AB_WHEN_DEPLOYED_NONE_LV1_LV2_ac9e2351ddae114d9a2c48bd6b33046bfeb65dc60187d5ca29f07101f5373263_fc7ca0fb5150aa438077b6eae2466d27",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_DEPLOYED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "26RSD01-011#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1343,8 +1579,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1353,10 +1598,14 @@
             "isMain": false,
             "cleanBody": "All your Spirits with Legacy gain +2000 BP."
           },
+          "originalAbilityText": "[LV2] Your Attack Step\nAll your Spirits with Legacy gain +2000 BP.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "All your Spirits with Legacy gain +2000 BP.",
+              "originalClauseText": "All your Spirits with Legacy gain +2000 BP.",
               "cleanText": "All your Spirits with Legacy gain +2000 BP",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1371,7 +1620,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RSD01-011#a1",
+          "keywords": [],
+          "id": "26RSD01-011#AB_ATTACK_STEP_NONE_LV2_9a0c47014fc3c2ddbb6fbddea6d35f383411cff84e1cf100f4b6243b82695a0f_f3eddad504f2e5aab1c5d005d98dd3f7",
+          "physicalId": "26RSD01-011#AB_ATTACK_STEP_NONE_LV2_9a0c47014fc3c2ddbb6fbddea6d35f383411cff84e1cf100f4b6243b82695a0f_f3eddad504f2e5aab1c5d005d98dd3f7",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_9a0c47014fc3c2ddbb6fbddea6d35f383411cff84e1cf100f4b6243b82695a0f_f3eddad504f2e5aab1c5d005d98dd3f7",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_3e8ed501a74ae7238249f97a9bd719999c4c53126f403834d26d75fb649978b0_0b639b6162c2d5b7a6a8abd5ce352cb1",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,

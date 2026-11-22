@@ -1,0 +1,1857 @@
+{
+  "timestamp": "2026-11-21T10:56:29.332Z",
+  "modules": {
+    "ai.js": {
+      "lineCount": 162,
+      "imports": [
+        "./continuous.js"
+      ],
+      "exports": [
+        "AIDecider"
+      ],
+      "hasStateMutation": true,
+      "hasAsync": false
+    },
+    "conditions.js": {
+      "lineCount": 3035,
+      "imports": [
+        "./continuous.js",
+        "./prerequisites.js"
+      ],
+      "exports": [
+        "CONDITION_RESULT",
+        "CONDITION_TYPES",
+        "parseConditionNumber",
+        "compareNumeric",
+        "resolveTargetSides",
+        "getStackController",
+        "cardMatchesType",
+        "cardMatchesFamily",
+        "cardMatchesName",
+        "cardMatchesColor",
+        "cardHasKeyword",
+        "cardMatchesFilterSpec",
+        "countControlledMatchingCards",
+        "hasSoulCoreOnStack",
+        "findSoulCoreStackOnField",
+        "parseConditionToStructured",
+        "evaluateStructuredCondition"
+      ],
+      "hasStateMutation": true,
+      "hasAsync": false
+    },
+    "continuous.js": {
+      "lineCount": 1443,
+      "imports": [],
+      "exports": [
+        "parseLevelMap",
+        "computeLevel",
+        "computeBaseBP",
+        "computeEffectiveBP",
+        "computeColors",
+        "computeFamilies",
+        "computeSymbols",
+        "computeFieldSymbols",
+        "getActiveStackKeywords",
+        "isImmune",
+        "canAttack",
+        "canBlock",
+        "matchesTargetFilter",
+        "isModifierApplicable",
+        "CircularContinuousDependencyError",
+        "sortModifiersByLayer",
+        "pruneExpiredModifiers",
+        "computeEffectiveCharacteristics",
+        "RESTRICTION_SPECIFICATIONS",
+        "isActionRestricted",
+        "isTargetProtectedFrom"
+      ],
+      "hasStateMutation": true,
+      "hasAsync": false
+    },
+    "events.js": {
+      "lineCount": 69,
+      "imports": [],
+      "exports": [
+        "EventBus"
+      ],
+      "hasStateMutation": false,
+      "hasAsync": true
+    },
+    "flow.js": {
+      "lineCount": 371,
+      "imports": [
+        "./rules/eternal.js",
+        "./state.js",
+        "./zones.js",
+        "./sba.js",
+        "./continuous.js",
+        "./restrictions.js"
+      ],
+      "exports": [
+        "FlowController"
+      ],
+      "hasStateMutation": true,
+      "hasAsync": true
+    },
+    "index.js": {
+      "lineCount": 1459,
+      "imports": [
+        "./rules/eternal.js",
+        "./state.js",
+        "./events.js",
+        "./flow.js",
+        "./resolver.js",
+        "./zones.js",
+        "./payment.js",
+        "./continuous.js",
+        "./sba.js",
+        "./keywords/index.js",
+        "./windows.js",
+        "./triggers.js",
+        "./prompt_manager.js",
+        "./interaction.js",
+        "./ops/index.js",
+        "./restrictions.js",
+        "./prerequisites.js"
+      ],
+      "exports": [
+        "endBattle",
+        "endAttack",
+        "createGame"
+      ],
+      "hasStateMutation": true,
+      "hasAsync": true
+    },
+    "interaction.js": {
+      "lineCount": 414,
+      "imports": [],
+      "exports": [
+        "resetInteractionCounter",
+        "INTERACTION_TYPES",
+        "INTERACTION_STATUS",
+        "createInteractionRequest",
+        "validateInteractionResponse",
+        "InteractionController"
+      ],
+      "hasStateMutation": false,
+      "hasAsync": true
+    },
+    "legacy_bridge.js": {
+      "lineCount": 412,
+      "imports": [
+        "./state.js",
+        "./resolver.js",
+        "./events.js",
+        "./continuous.js",
+        "./sba.js",
+        "./restrictions.js"
+      ],
+      "exports": [
+        "createEngineStateFromLegacy",
+        "syncEngineStateToLegacy",
+        "pruneLegacyModifiers",
+        "resolveLegacyAbility"
+      ],
+      "hasStateMutation": true,
+      "hasAsync": true
+    },
+    "mulligan.js": {
+      "lineCount": 90,
+      "imports": [
+        "./rules/eternal.js"
+      ],
+      "exports": [
+        "setupOpeningHands"
+      ],
+      "hasStateMutation": true,
+      "hasAsync": true
+    },
+    "parameter_recovery.js": {
+      "lineCount": 627,
+      "imports": [],
+      "exports": [
+        "INCOMPLETE_PARAMETER_OPS",
+        "isIncompleteOpObject",
+        "recoverExplicitOpParameters",
+        "classifyIncompleteParameterClause"
+      ],
+      "hasStateMutation": false,
+      "hasAsync": false
+    },
+    "payment.js": {
+      "lineCount": 537,
+      "imports": [
+        "./continuous.js"
+      ],
+      "exports": [
+        "PaymentEventDispatchError",
+        "calculateEffectiveCost",
+        "canAffordCost",
+        "buildPaymentPlan",
+        "payCost"
+      ],
+      "hasStateMutation": true,
+      "hasAsync": true
+    },
+    "prerequisites.js": {
+      "lineCount": 865,
+      "imports": [
+        "./zones.js",
+        "./payment.js"
+      ],
+      "exports": [
+        "parseBraveCondition",
+        "evaluateBraveCondition",
+        "parseSummonCondition",
+        "evaluateSummonCondition",
+        "extractSuAdconTexts",
+        "parseSuAdconCondition",
+        "parseAdventDeclaration",
+        "evaluateAdventCondition",
+        "evaluateAbilityPrefixPrerequisites",
+        "parseMirageDeclaration",
+        "setMirageFromHand",
+        "getActiveMirageAbilities",
+        "parseReleaseDeclaration",
+        "executeReleaseRuntime",
+        "parseTeamTags",
+        "extractCardTeams",
+        "hasTeam"
+      ],
+      "hasStateMutation": true,
+      "hasAsync": true
+    },
+    "prompt_manager.js": {
+      "lineCount": 85,
+      "imports": [
+        "./interaction.js"
+      ],
+      "exports": [
+        "PromptManager"
+      ],
+      "hasStateMutation": false,
+      "hasAsync": false
+    },
+    "resolver.js": {
+      "lineCount": 787,
+      "imports": [
+        "./ops/index.js",
+        "./selectors.js",
+        "./conditions.js",
+        "./restrictions.js",
+        "./continuous.js",
+        "./prerequisites.js"
+      ],
+      "exports": [
+        "evaluateCondition",
+        "ResolutionDepthExceededError",
+        "AsyncResolver",
+        "DefaultPromptResolver"
+      ],
+      "hasStateMutation": true,
+      "hasAsync": true
+    },
+    "restrictions.js": {
+      "lineCount": 1880,
+      "imports": [
+        "node:util"
+      ],
+      "exports": [
+        "RESTRICTION_STATUS",
+        "RESTRICTION_TYPE",
+        "RESTRICTION_SCOPE",
+        "VALID_TYPES",
+        "VALID_SCOPES",
+        "VALID_TYPE_SCOPE_MAP",
+        "isPlainObject",
+        "isValidRestrictionKeyForScope",
+        "isValidRestrictionKey",
+        "normalizeRestrictionType",
+        "validateRestrictionState",
+        "ensureRestrictionState",
+        "buildRestrictionKey",
+        "getSafeDataProperty",
+        "isAssignableContextProperty",
+        "_finalizeReservation",
+        "evaluateRestriction",
+        "reserveRestriction",
+        "releaseReservation",
+        "commitRestriction",
+        "preflightGenerations",
+        "resetRestrictions",
+        "syncLegacyToRestrictions",
+        "restoreRestrictionState"
+      ],
+      "hasStateMutation": true,
+      "hasAsync": false
+    },
+    "sba.js": {
+      "lineCount": 166,
+      "imports": [
+        "./rules/eternal.js",
+        "./zones.js",
+        "./continuous.js"
+      ],
+      "exports": [
+        "StabilizationLoopError",
+        "checkStateBasedActions",
+        "stabilizeGameState"
+      ],
+      "hasStateMutation": true,
+      "hasAsync": true
+    },
+    "selectors.js": {
+      "lineCount": 1110,
+      "imports": [
+        "./continuous.js",
+        "./payment.js",
+        "./prerequisites.js"
+      ],
+      "exports": [
+        "evaluateComparisonStrict",
+        "evaluateComparison",
+        "queryCandidates",
+        "validateSelection",
+        "validateTargetAvailability",
+        "executeTargeting",
+        "resolveTargets"
+      ],
+      "hasStateMutation": true,
+      "hasAsync": true
+    },
+    "state.js": {
+      "lineCount": 361,
+      "imports": [
+        "./rules/eternal.js"
+      ],
+      "exports": [
+        "resetInstanceIdCounter",
+        "resetPlacementIdCounter",
+        "createCardInstance",
+        "createFieldStack",
+        "createInitialPlayerState",
+        "createEmptyTurnHistory",
+        "resetTurnHistory",
+        "createGameState",
+        "getTotalPlayerCores",
+        "validateGameState"
+      ],
+      "hasStateMutation": true,
+      "hasAsync": false
+    },
+    "telemetry.js": {
+      "lineCount": 50,
+      "imports": [],
+      "exports": [
+        "isTelemetryEnabled",
+        "setTelemetryEnabled",
+        "recordOpcodeExecution",
+        "getRecordedTelemetry",
+        "clearRecordedTelemetry"
+      ],
+      "hasStateMutation": false,
+      "hasAsync": false
+    },
+    "triggers.js": {
+      "lineCount": 273,
+      "imports": [
+        "./continuous.js",
+        "./restrictions.js"
+      ],
+      "exports": [
+        "TRIGGER_STATUS",
+        "LEGAL_TRIGGER_TRANSITIONS",
+        "transitionTriggerStatus",
+        "TriggerQueueManager"
+      ],
+      "hasStateMutation": true,
+      "hasAsync": true
+    },
+    "windows.js": {
+      "lineCount": 472,
+      "imports": [
+        "./zones.js",
+        "./payment.js",
+        "./conditions.js",
+        "./continuous.js"
+      ],
+      "exports": [
+        "WINDOW_TYPES",
+        "WINDOW_STATUS",
+        "TimingWindowManager"
+      ],
+      "hasStateMutation": true,
+      "hasAsync": true
+    },
+    "zones.js": {
+      "lineCount": 1069,
+      "imports": [
+        "./rules/eternal.js",
+        "./continuous.js"
+      ],
+      "exports": [
+        "stageStackStandby",
+        "commitStackExit",
+        "flushStandbyStacks",
+        "moveCard",
+        "moveCore"
+      ],
+      "hasStateMutation": true,
+      "hasAsync": true
+    }
+  },
+  "corpus": {
+    "shardFilesCount": 514,
+    "shardCardEntries": 15398,
+    "uniqueShardCardsCount": 14609,
+    "totalAbilities": 36422,
+    "totalClauses": 51734,
+    "uniqueOpcodesCount": 288,
+    "handledOpcodesCount": 288,
+    "missingOpcodesCount": 0
+  },
+  "missingOpcodes": [],
+  "handledOpcodes": [
+    {
+      "op": "MOVE_CORE",
+      "cardCount": 5115,
+      "clauseCount": 6917
+    },
+    {
+      "op": "DESTROY",
+      "cardCount": 3493,
+      "clauseCount": 4294
+    },
+    {
+      "op": "BOUNCE",
+      "cardCount": 3157,
+      "clauseCount": 3721
+    },
+    {
+      "op": "DRAW",
+      "cardCount": 2718,
+      "clauseCount": 2981
+    },
+    {
+      "op": "SUMMON",
+      "cardCount": 1887,
+      "clauseCount": 2035
+    },
+    {
+      "op": "REFRESH",
+      "cardCount": 1869,
+      "clauseCount": 2089
+    },
+    {
+      "op": "BP_BUFF",
+      "cardCount": 1693,
+      "clauseCount": 1955
+    },
+    {
+      "op": "EXHAUST",
+      "cardCount": 1604,
+      "clauseCount": 1950
+    },
+    {
+      "op": "KEYWORD_RULE",
+      "cardCount": 1422,
+      "clauseCount": 1674
+    },
+    {
+      "op": "COST_MODIFIER",
+      "cardCount": 1315,
+      "clauseCount": 1578
+    },
+    {
+      "op": "REVEAL_DECKTOP",
+      "cardCount": 1094,
+      "clauseCount": 1146
+    },
+    {
+      "op": "TREAT_RULE",
+      "cardCount": 1074,
+      "clauseCount": 1170
+    },
+    {
+      "op": "ADD_TO_HAND",
+      "cardCount": 893,
+      "clauseCount": 981
+    },
+    {
+      "op": "ADVENT_STACK",
+      "cardCount": 874,
+      "clauseCount": 908
+    },
+    {
+      "op": "DISCARD_HAND",
+      "cardCount": 808,
+      "clauseCount": 864
+    },
+    {
+      "op": "SUMMON_FREE",
+      "cardCount": 803,
+      "clauseCount": 835
+    },
+    {
+      "op": "IMMUNITY",
+      "cardCount": 803,
+      "clauseCount": 858
+    },
+    {
+      "op": "SUMMON_THIS_CARD",
+      "cardCount": 721,
+      "clauseCount": 746
+    },
+    {
+      "op": "ADD_SYMBOL",
+      "cardCount": 719,
+      "clauseCount": 787
+    },
+    {
+      "op": "MILL_DECK",
+      "cardCount": 667,
+      "clauseCount": 755
+    },
+    {
+      "op": "COMBAT_RESTRICTION",
+      "cardCount": 599,
+      "clauseCount": 657
+    },
+    {
+      "op": "ADD_COUNTER",
+      "cardCount": 583,
+      "clauseCount": 625
+    },
+    {
+      "op": "GRANT_FAMILY",
+      "cardCount": 520,
+      "clauseCount": 573
+    },
+    {
+      "op": "CONTINUOUS_RULE",
+      "cardCount": 486,
+      "clauseCount": 506
+    },
+    {
+      "op": "DISCARD_REVEALED",
+      "cardCount": 451,
+      "clauseCount": 456
+    },
+    {
+      "op": "BP_DEBUFF",
+      "cardCount": 436,
+      "clauseCount": 491
+    },
+    {
+      "op": "DEPLOY_NEXUS",
+      "cardCount": 416,
+      "clauseCount": 463
+    },
+    {
+      "op": "UNBLOCKABLE",
+      "cardCount": 392,
+      "clauseCount": 424
+    },
+    {
+      "op": "SET_RESTRICTION",
+      "cardCount": 325,
+      "clauseCount": 350
+    },
+    {
+      "op": "RETURN_REVEALED_BOTTOM",
+      "cardCount": 306,
+      "clauseCount": 333
+    },
+    {
+      "op": "OPEN_ZONE",
+      "cardCount": 286,
+      "clauseCount": 302
+    },
+    {
+      "op": "RECOVER_LIFE",
+      "cardCount": 253,
+      "clauseCount": 268
+    },
+    {
+      "op": "COMBAT_RULE",
+      "cardCount": 246,
+      "clauseCount": 260
+    },
+    {
+      "op": "NEGATE_EFFECT",
+      "cardCount": 236,
+      "clauseCount": 247
+    },
+    {
+      "op": "KEYWORD_ABILITY",
+      "cardCount": 233,
+      "clauseCount": 404
+    },
+    {
+      "op": "DECK_OR_HAND_ACTION",
+      "cardCount": 211,
+      "clauseCount": 233
+    },
+    {
+      "op": "TARGET",
+      "cardCount": 200,
+      "clauseCount": 265
+    },
+    {
+      "op": "TARGET_CARD",
+      "cardCount": 184,
+      "clauseCount": 293
+    },
+    {
+      "op": "REBIRTH_FLIP",
+      "cardCount": 183,
+      "clauseCount": 196
+    },
+    {
+      "op": "ACTIVATE_FLASH",
+      "cardCount": 178,
+      "clauseCount": 178
+    },
+    {
+      "op": "ADVENT_PAY",
+      "cardCount": 165,
+      "clauseCount": 176
+    },
+    {
+      "op": "TARGET_ATTACK",
+      "cardCount": 159,
+      "clauseCount": 171
+    },
+    {
+      "op": "GRANDWALKER_PROTECTION",
+      "cardCount": 158,
+      "clauseCount": 160
+    },
+    {
+      "op": "GRANDWALKER_CORE_RULE",
+      "cardCount": 157,
+      "clauseCount": 159
+    },
+    {
+      "op": "MOVE_SOUL_CORE",
+      "cardCount": 146,
+      "clauseCount": 165
+    },
+    {
+      "op": "INDESTRUCTIBLE",
+      "cardCount": 144,
+      "clauseCount": 149
+    },
+    {
+      "op": "SUMMON_RESERVE_ONLY",
+      "cardCount": 137,
+      "clauseCount": 260
+    },
+    {
+      "op": "CORE_CHARGE_ADD",
+      "cardCount": 133,
+      "clauseCount": 141
+    },
+    {
+      "op": "SALVAGE",
+      "cardCount": 130,
+      "clauseCount": 137
+    },
+    {
+      "op": "FORCE_BLOCK",
+      "cardCount": 129,
+      "clauseCount": 151
+    },
+    {
+      "op": "UNPREVENTABLE",
+      "cardCount": 127,
+      "clauseCount": 131
+    },
+    {
+      "op": "CORE_CHARGE_TRIGGER",
+      "cardCount": 122,
+      "clauseCount": 131
+    },
+    {
+      "op": "GRANDWALKER_ACTION",
+      "cardCount": 120,
+      "clauseCount": 123
+    },
+    {
+      "op": "RESTRICTION",
+      "cardCount": 117,
+      "clauseCount": 123
+    },
+    {
+      "op": "TREAT_COLOR_SYMBOL",
+      "cardCount": 116,
+      "clauseCount": 124
+    },
+    {
+      "op": "CHOOSE_COLOR",
+      "cardCount": 111,
+      "clauseCount": 116
+    },
+    {
+      "op": "CONTINUE_BATTLE",
+      "cardCount": 103,
+      "clauseCount": 105
+    },
+    {
+      "op": "EXHAUSTED_BLOCK",
+      "cardCount": 103,
+      "clauseCount": 107
+    },
+    {
+      "op": "REMOVED_ZONE_ACTION",
+      "cardCount": 102,
+      "clauseCount": 113
+    },
+    {
+      "op": "CHANGE",
+      "cardCount": 102,
+      "clauseCount": 104
+    },
+    {
+      "op": "DISCARD_BURST",
+      "cardCount": 101,
+      "clauseCount": 102
+    },
+    {
+      "op": "CARD_RULE_MODIFIER",
+      "cardCount": 84,
+      "clauseCount": 106
+    },
+    {
+      "op": "MODIFY_EFFECT",
+      "cardCount": 80,
+      "clauseCount": 81
+    },
+    {
+      "op": "DAMAGE_CAP",
+      "cardCount": 75,
+      "clauseCount": 77
+    },
+    {
+      "op": "PREVENT_WHEN_SUMMONED",
+      "cardCount": 75,
+      "clauseCount": 76
+    },
+    {
+      "op": "COUNT_OPERATION",
+      "cardCount": 71,
+      "clauseCount": 79
+    },
+    {
+      "op": "CAST_MAGIC_FREE",
+      "cardCount": 70,
+      "clauseCount": 76
+    },
+    {
+      "op": "REFRESH_BY_EXHAUSTING_NEXUS",
+      "cardCount": 64,
+      "clauseCount": 66
+    },
+    {
+      "op": "PLAY_CONDITION",
+      "cardCount": 60,
+      "clauseCount": 63
+    },
+    {
+      "op": "KEYWORD_ACTION",
+      "cardCount": 59,
+      "clauseCount": 63
+    },
+    {
+      "op": "DISCARD_REMAINING",
+      "cardCount": 56,
+      "clauseCount": 57
+    },
+    {
+      "op": "ACTIVATE_EFFECT_ACTION",
+      "cardCount": 52,
+      "clauseCount": 59
+    },
+    {
+      "op": "GRANT_BRAVE_SYMBOLS",
+      "cardCount": 51,
+      "clauseCount": 53
+    },
+    {
+      "op": "END_BATTLE",
+      "cardCount": 50,
+      "clauseCount": 52
+    },
+    {
+      "op": "BANISH_TRASH",
+      "cardCount": 49,
+      "clauseCount": 51
+    },
+    {
+      "op": "DECK_ACTION",
+      "cardCount": 45,
+      "clauseCount": 50
+    },
+    {
+      "op": "CONTRACT_ADVENT_RULE",
+      "cardCount": 42,
+      "clauseCount": 42
+    },
+    {
+      "op": "RESURRECT",
+      "cardCount": 40,
+      "clauseCount": 41
+    },
+    {
+      "op": "SET_SYMBOL",
+      "cardCount": 39,
+      "clauseCount": 41
+    },
+    {
+      "op": "REMAIN_ON_FIELD",
+      "cardCount": 38,
+      "clauseCount": 42
+    },
+    {
+      "op": "SET_BURST",
+      "cardCount": 38,
+      "clauseCount": 40
+    },
+    {
+      "op": "TARGET_SELECT",
+      "cardCount": 36,
+      "clauseCount": 43
+    },
+    {
+      "op": "PREVENT_LIFE_LOSS",
+      "cardCount": 36,
+      "clauseCount": 38
+    },
+    {
+      "op": "DISCARD_PRE_ADVENT",
+      "cardCount": 36,
+      "clauseCount": 37
+    },
+    {
+      "op": "OPPONENT_RESTRICTION",
+      "cardCount": 36,
+      "clauseCount": 36
+    },
+    {
+      "op": "FORMAT_MARKER",
+      "cardCount": 35,
+      "clauseCount": 36
+    },
+    {
+      "op": "MODIFY_EFFECT_VALUE",
+      "cardCount": 33,
+      "clauseCount": 34
+    },
+    {
+      "op": "ACTIVATE_CARD_EFFECT",
+      "cardCount": 32,
+      "clauseCount": 33
+    },
+    {
+      "op": "BURST_LOCK",
+      "cardCount": 31,
+      "clauseCount": 32
+    },
+    {
+      "op": "TOKEN_DEPLOYMENT",
+      "cardCount": 29,
+      "clauseCount": 35
+    },
+    {
+      "op": "COPY_EFFECT",
+      "cardCount": 29,
+      "clauseCount": 29
+    },
+    {
+      "op": "MIRAGE_OPERATION",
+      "cardCount": 29,
+      "clauseCount": 30
+    },
+    {
+      "op": "RETURN_REMAINING_TO_DECK",
+      "cardCount": 26,
+      "clauseCount": 30
+    },
+    {
+      "op": "TRIGGERED_WATCHER",
+      "cardCount": 26,
+      "clauseCount": 29
+    },
+    {
+      "op": "BANISH",
+      "cardCount": 25,
+      "clauseCount": 25
+    },
+    {
+      "op": "ADD_COLOR",
+      "cardCount": 24,
+      "clauseCount": 27
+    },
+    {
+      "op": "MAGIC_RESTRICTION",
+      "cardCount": 24,
+      "clauseCount": 25
+    },
+    {
+      "op": "SET_HAND_COST",
+      "cardCount": 24,
+      "clauseCount": 24
+    },
+    {
+      "op": "ADVENT_RULE_MODIFIER",
+      "cardCount": 24,
+      "clauseCount": 28
+    },
+    {
+      "op": "DECK_BUILDING_RULE",
+      "cardCount": 23,
+      "clauseCount": 24
+    },
+    {
+      "op": "AWAKEN_CORE_MOVE",
+      "cardCount": 23,
+      "clauseCount": 23
+    },
+    {
+      "op": "PUT_UNDERNEATH",
+      "cardCount": 23,
+      "clauseCount": 24
+    },
+    {
+      "op": "ADVENT",
+      "cardCount": 23,
+      "clauseCount": 24
+    },
+    {
+      "op": "MODIFY_LIFE",
+      "cardCount": 23,
+      "clauseCount": 24
+    },
+    {
+      "op": "ACTIVATE_EFFECT_SPECIAL",
+      "cardCount": 23,
+      "clauseCount": 24
+    },
+    {
+      "op": "PIERCING_RULE",
+      "cardCount": 22,
+      "clauseCount": 23
+    },
+    {
+      "op": "RULE_OR_TEXT_MODIFIER",
+      "cardCount": 21,
+      "clauseCount": 25
+    },
+    {
+      "op": "LOOK_HAND",
+      "cardCount": 21,
+      "clauseCount": 21
+    },
+    {
+      "op": "MODIFY_DESTINATION",
+      "cardCount": 20,
+      "clauseCount": 21
+    },
+    {
+      "op": "DISCARD",
+      "cardCount": 19,
+      "clauseCount": 20
+    },
+    {
+      "op": "REDIRECT_TARGET",
+      "cardCount": 18,
+      "clauseCount": 21
+    },
+    {
+      "op": "TREAT_LEVEL",
+      "cardCount": 18,
+      "clauseCount": 18
+    },
+    {
+      "op": "ACTIVATE_TRIGGER",
+      "cardCount": 18,
+      "clauseCount": 18
+    },
+    {
+      "op": "DISCARD_MIRAGE_COST",
+      "cardCount": 18,
+      "clauseCount": 18
+    },
+    {
+      "op": "DISCARD_ZONE",
+      "cardCount": 18,
+      "clauseCount": 18
+    },
+    {
+      "op": "ATTACH_CARD_UNDERNEATH",
+      "cardCount": 18,
+      "clauseCount": 19
+    },
+    {
+      "op": "SEND_TO_VOID",
+      "cardCount": 17,
+      "clauseCount": 19
+    },
+    {
+      "op": "REVEAL_CARDS",
+      "cardCount": 17,
+      "clauseCount": 18
+    },
+    {
+      "op": "TRIGGER_CONDITION",
+      "cardCount": 16,
+      "clauseCount": 17
+    },
+    {
+      "op": "CHOOSE_BLOCKER",
+      "cardCount": 15,
+      "clauseCount": 17
+    },
+    {
+      "op": "ADVENT_RULE",
+      "cardCount": 15,
+      "clauseCount": 16
+    },
+    {
+      "op": "ADVENT_SOUL_CORE_ACTION",
+      "cardCount": 15,
+      "clauseCount": 16
+    },
+    {
+      "op": "BRAVE_EFFECT_ACTIVATION",
+      "cardCount": 15,
+      "clauseCount": 15
+    },
+    {
+      "op": "REPLACEMENT_EFFECT",
+      "cardCount": 14,
+      "clauseCount": 14
+    },
+    {
+      "op": "ADVENT_COST",
+      "cardCount": 14,
+      "clauseCount": 14
+    },
+    {
+      "op": "ACTIVATE_BURST",
+      "cardCount": 13,
+      "clauseCount": 13
+    },
+    {
+      "op": "DECREASE_BP_EFFECT",
+      "cardCount": 13,
+      "clauseCount": 13
+    },
+    {
+      "op": "EXTRA_TURN",
+      "cardCount": 13,
+      "clauseCount": 14
+    },
+    {
+      "op": "TRIGGER_COUNTER",
+      "cardCount": 13,
+      "clauseCount": 13
+    },
+    {
+      "op": "BANISH_DECK",
+      "cardCount": 13,
+      "clauseCount": 14
+    },
+    {
+      "op": "CORE_CHARGE",
+      "cardCount": 13,
+      "clauseCount": 13
+    },
+    {
+      "op": "REDIRECT_CORE_DESTINATION",
+      "cardCount": 12,
+      "clauseCount": 14
+    },
+    {
+      "op": "COMPARE_BP",
+      "cardCount": 12,
+      "clauseCount": 13
+    },
+    {
+      "op": "DISCARD_UNDERNEATH_COST",
+      "cardCount": 12,
+      "clauseCount": 12
+    },
+    {
+      "op": "BP_OR_LEVEL_MODIFIER",
+      "cardCount": 12,
+      "clauseCount": 14
+    },
+    {
+      "op": "GAIN_TEAM",
+      "cardCount": 12,
+      "clauseCount": 12
+    },
+    {
+      "op": "RESTRICT_MAIN_STEP",
+      "cardCount": 11,
+      "clauseCount": 11
+    },
+    {
+      "op": "REMAIN_ON_FIELD_EXHAUSTED",
+      "cardCount": 11,
+      "clauseCount": 12
+    },
+    {
+      "op": "BUNSHIN_SUMMON",
+      "cardCount": 11,
+      "clauseCount": 11
+    },
+    {
+      "op": "END_TURN",
+      "cardCount": 11,
+      "clauseCount": 14
+    },
+    {
+      "op": "CROSS_TRIGGER",
+      "cardCount": 10,
+      "clauseCount": 10
+    },
+    {
+      "op": "STACK_CARD",
+      "cardCount": 10,
+      "clauseCount": 10
+    },
+    {
+      "op": "LIFE_OR_CORE_MODIFICATION",
+      "cardCount": 9,
+      "clauseCount": 10
+    },
+    {
+      "op": "GLOBAL_RESTRICTION",
+      "cardCount": 9,
+      "clauseCount": 13
+    },
+    {
+      "op": "LOSE_EFFECTS",
+      "cardCount": 9,
+      "clauseCount": 9
+    },
+    {
+      "op": "FORCE_ATTACK",
+      "cardCount": 9,
+      "clauseCount": 9
+    },
+    {
+      "op": "REMOVE_FROM_GAME",
+      "cardCount": 9,
+      "clauseCount": 10
+    },
+    {
+      "op": "SWAP_CARD",
+      "cardCount": 9,
+      "clauseCount": 10
+    },
+    {
+      "op": "ATTACH_PRE_ADVENT_CARD",
+      "cardCount": 9,
+      "clauseCount": 9
+    },
+    {
+      "op": "SET_MIRAGE",
+      "cardCount": 9,
+      "clauseCount": 10
+    },
+    {
+      "op": "GAIN_FAMILY",
+      "cardCount": 8,
+      "clauseCount": 10
+    },
+    {
+      "op": "REVEAL_HAND",
+      "cardCount": 8,
+      "clauseCount": 8
+    },
+    {
+      "op": "GRANT_ABILITY",
+      "cardCount": 8,
+      "clauseCount": 8
+    },
+    {
+      "op": "TARGET_FAMILY",
+      "cardCount": 8,
+      "clauseCount": 8
+    },
+    {
+      "op": "END_MAIN_STEP",
+      "cardCount": 8,
+      "clauseCount": 9
+    },
+    {
+      "op": "STEP_MODIFIER",
+      "cardCount": 8,
+      "clauseCount": 9
+    },
+    {
+      "op": "TEAM_RULE",
+      "cardCount": 8,
+      "clauseCount": 8
+    },
+    {
+      "op": "DISCARD_AMONG",
+      "cardCount": 7,
+      "clauseCount": 9
+    },
+    {
+      "op": "SEAL_MOVE",
+      "cardCount": 7,
+      "clauseCount": 7
+    },
+    {
+      "op": "ACTIVATE_REBIRTH",
+      "cardCount": 7,
+      "clauseCount": 7
+    },
+    {
+      "op": "USE_FROM_HAND",
+      "cardCount": 7,
+      "clauseCount": 7
+    },
+    {
+      "op": "COPY_PRE_ADVENT_EFFECT",
+      "cardCount": 7,
+      "clauseCount": 7
+    },
+    {
+      "op": "DISCARD_FIELD_MAGIC",
+      "cardCount": 7,
+      "clauseCount": 7
+    },
+    {
+      "op": "ON_BP_DESTROY",
+      "cardCount": 6,
+      "clauseCount": 7
+    },
+    {
+      "op": "DISCARD_CARD",
+      "cardCount": 6,
+      "clauseCount": 6
+    },
+    {
+      "op": "MODIFY_KEYWORD",
+      "cardCount": 6,
+      "clauseCount": 6
+    },
+    {
+      "op": "FLASH_PRIORITY",
+      "cardCount": 6,
+      "clauseCount": 6
+    },
+    {
+      "op": "REBIRTH_CORE_PLACEMENT",
+      "cardCount": 6,
+      "clauseCount": 6
+    },
+    {
+      "op": "ENTER_SOUL_STATE",
+      "cardCount": 6,
+      "clauseCount": 6
+    },
+    {
+      "op": "PUT_CARD_ON_FIELD",
+      "cardCount": 6,
+      "clauseCount": 6
+    },
+    {
+      "op": "CAST_FROM_TRASH",
+      "cardCount": 6,
+      "clauseCount": 6
+    },
+    {
+      "op": "PUT_FACEDOWN_FIELD",
+      "cardCount": 6,
+      "clauseCount": 6
+    },
+    {
+      "op": "BATTLE_RULE_MODIFIER",
+      "cardCount": 5,
+      "clauseCount": 8
+    },
+    {
+      "op": "RETRIEVE_CORES",
+      "cardCount": 5,
+      "clauseCount": 5
+    },
+    {
+      "op": "DECK_CONSTRUCTION_RULE",
+      "cardCount": 5,
+      "clauseCount": 6
+    },
+    {
+      "op": "DISCARD_REMOVED",
+      "cardCount": 5,
+      "clauseCount": 5
+    },
+    {
+      "op": "PREVENT_LOSS",
+      "cardCount": 5,
+      "clauseCount": 8
+    },
+    {
+      "op": "MILL",
+      "cardCount": 5,
+      "clauseCount": 6
+    },
+    {
+      "op": "SET_BP",
+      "cardCount": 5,
+      "clauseCount": 5
+    },
+    {
+      "op": "PAY_LIFE",
+      "cardCount": 5,
+      "clauseCount": 5
+    },
+    {
+      "op": "DISCARD_FIELD",
+      "cardCount": 5,
+      "clauseCount": 6
+    },
+    {
+      "op": "CARD_UNDERNEATH",
+      "cardCount": 5,
+      "clauseCount": 8
+    },
+    {
+      "op": "SWAP_CARDS",
+      "cardCount": 5,
+      "clauseCount": 5
+    },
+    {
+      "op": "COPY_ABILITY",
+      "cardCount": 4,
+      "clauseCount": 4
+    },
+    {
+      "op": "SKIP_STEP",
+      "cardCount": 4,
+      "clauseCount": 4
+    },
+    {
+      "op": "LOOK_AT_DECK",
+      "cardCount": 4,
+      "clauseCount": 4
+    },
+    {
+      "op": "COUNT_MODIFIER",
+      "cardCount": 4,
+      "clauseCount": 4
+    },
+    {
+      "op": "DECK_IMMUNITY",
+      "cardCount": 4,
+      "clauseCount": 5
+    },
+    {
+      "op": "PREVENT_DAMAGE",
+      "cardCount": 4,
+      "clauseCount": 4
+    },
+    {
+      "op": "SEND_TO_TRASH",
+      "cardCount": 4,
+      "clauseCount": 4
+    },
+    {
+      "op": "ACTIVATE_SOUL_DRIVE",
+      "cardCount": 3,
+      "clauseCount": 4
+    },
+    {
+      "op": "COMPARE_LV_INSTEAD_OF_BP",
+      "cardCount": 3,
+      "clauseCount": 5
+    },
+    {
+      "op": "SYMBOL_MODIFIER",
+      "cardCount": 3,
+      "clauseCount": 4
+    },
+    {
+      "op": "SUMMON_MULTI",
+      "cardCount": 3,
+      "clauseCount": 3
+    },
+    {
+      "op": "LIMIT_DECK_DISCARD",
+      "cardCount": 3,
+      "clauseCount": 3
+    },
+    {
+      "op": "BOOST_LIFE",
+      "cardCount": 3,
+      "clauseCount": 3
+    },
+    {
+      "op": "ACTIVATE_KEYWORD",
+      "cardCount": 3,
+      "clauseCount": 3
+    },
+    {
+      "op": "MULTIPLY_EFFECT",
+      "cardCount": 3,
+      "clauseCount": 3
+    },
+    {
+      "op": "BP_FORMULA",
+      "cardCount": 3,
+      "clauseCount": 3
+    },
+    {
+      "op": "END_STEP",
+      "cardCount": 3,
+      "clauseCount": 3
+    },
+    {
+      "op": "HEADER",
+      "cardCount": 3,
+      "clauseCount": 3
+    },
+    {
+      "op": "REBIRTH_ACTION",
+      "cardCount": 3,
+      "clauseCount": 3
+    },
+    {
+      "op": "USE_FROM_SOUL_STATE",
+      "cardCount": 3,
+      "clauseCount": 3
+    },
+    {
+      "op": "SPECIAL_WIN",
+      "cardCount": 3,
+      "clauseCount": 3
+    },
+    {
+      "op": "DISCARD_COST",
+      "cardCount": 3,
+      "clauseCount": 4
+    },
+    {
+      "op": "SHUFFLE_DECK",
+      "cardCount": 3,
+      "clauseCount": 4
+    },
+    {
+      "op": "REVEAL_INTERACTION",
+      "cardCount": 3,
+      "clauseCount": 4
+    },
+    {
+      "op": "SWITCH_CARD",
+      "cardCount": 3,
+      "clauseCount": 3
+    },
+    {
+      "op": "SELECT_TARGET",
+      "cardCount": 2,
+      "clauseCount": 3
+    },
+    {
+      "op": "END_ATTACK_STEP",
+      "cardCount": 2,
+      "clauseCount": 3
+    },
+    {
+      "op": "TREAT_NAME",
+      "cardCount": 2,
+      "clauseCount": 2
+    },
+    {
+      "op": "TREAT_AS_MAX_LEVEL",
+      "cardCount": 2,
+      "clauseCount": 2
+    },
+    {
+      "op": "NEGATE_MAGIC",
+      "cardCount": 2,
+      "clauseCount": 2
+    },
+    {
+      "op": "TREAT_AS_VANILLA",
+      "cardCount": 2,
+      "clauseCount": 2
+    },
+    {
+      "op": "GUARD_TRIGGER",
+      "cardCount": 2,
+      "clauseCount": 2
+    },
+    {
+      "op": "LOOK_DECKTOP",
+      "cardCount": 2,
+      "clauseCount": 2
+    },
+    {
+      "op": "CARD_PLAY_PERMISSION",
+      "cardCount": 2,
+      "clauseCount": 2
+    },
+    {
+      "op": "MODIFY_ADVENT_CONDITION",
+      "cardCount": 2,
+      "clauseCount": 2
+    },
+    {
+      "op": "NON_STACKABLE",
+      "cardCount": 2,
+      "clauseCount": 2
+    },
+    {
+      "op": "ATTACH_CARD",
+      "cardCount": 2,
+      "clauseCount": 2
+    },
+    {
+      "op": "BATTLE_MODIFIER",
+      "cardCount": 2,
+      "clauseCount": 3
+    },
+    {
+      "op": "CAST_FROM_DECK",
+      "cardCount": 2,
+      "clauseCount": 2
+    },
+    {
+      "op": "ADD_FAMILY",
+      "cardCount": 2,
+      "clauseCount": 3
+    },
+    {
+      "op": "REVEAL_FROM_HAND_COST",
+      "cardCount": 2,
+      "clauseCount": 2
+    },
+    {
+      "op": "ATTACK_RULE_MODIFIER",
+      "cardCount": 2,
+      "clauseCount": 2
+    },
+    {
+      "op": "DECK_RULE",
+      "cardCount": 2,
+      "clauseCount": 2
+    },
+    {
+      "op": "DESTROY_ON_BP_ZERO",
+      "cardCount": 2,
+      "clauseCount": 3
+    },
+    {
+      "op": "GRANT_KEYWORD",
+      "cardCount": 2,
+      "clauseCount": 2
+    },
+    {
+      "op": "REDUCE_LIFE",
+      "cardCount": 2,
+      "clauseCount": 2
+    },
+    {
+      "op": "SEARCH_DECK",
+      "cardCount": 2,
+      "clauseCount": 2
+    },
+    {
+      "op": "TRIGGERED_ACTION",
+      "cardCount": 2,
+      "clauseCount": 2
+    },
+    {
+      "op": "SWAP_CORES",
+      "cardCount": 1,
+      "clauseCount": 2
+    },
+    {
+      "op": "TRIGGERED_BUFF",
+      "cardCount": 1,
+      "clauseCount": 2
+    },
+    {
+      "op": "TREAT_COST",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "LIMIT_ONCE_PER_TURN",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "TAKE_CONTROL",
+      "cardCount": 1,
+      "clauseCount": 2
+    },
+    {
+      "op": "CONTROL_RULE",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "RETURN_CONTROL",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "TREAT_CORE_COUNT",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "ENHANCE_KEYWORD",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "CHOOSE_LEVEL",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "SWITCH_BP",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "CORE_LOCK",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "OPPONENT_CHOICE",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "COPY_TRIGGER",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "COUNT_AS_MULTIPLE",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "COMPARE_LEVELS",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "RETURN_DECK_BOTTOM",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "FLIP_BUNSHIN",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "SET_LEVEL",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "EXPAND_TARGETS",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "CREATE_BUNSHIN",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "BATTLE_MULTIPLE",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "EXCHANGE_BP",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "DISCARD_HAND_MAX",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "EXCHANGE_CORE",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "TARGET_CARDS",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "SCHEDULED_DESTROY",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "IGNORE_CONDITIONS",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "BANISH_SOUL_CORE_VOID",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "CHOOSE_TARGETS",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "BANISH_HAND",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "PROTECTION",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "GRANT_EFFECT",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "IGNORE_LEVELS",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "BANISH_COST",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "SEND_CORE_TO_VOID",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "CHOOSE_BATTLE_TARGET",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "DISCARD_FROM_FIELD_COST",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "WIN_GAME",
+      "cardCount": 1,
+      "clauseCount": 2
+    },
+    {
+      "op": "BEFORE_ADVENT_TRIGGER",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "SEND_CORES_TO_VOID",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "CHANGE_TARGET",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "SIMULTANEOUS_BATTLE",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "VARIABLE_PAYMENT_EFFECT",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "LIFE_PAY_COST",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "SEPARATE_BRAVE",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "PAY_COST",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "BANISH_DESTINATION_RULE",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "LOSE_IMMUNITY",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "BOUNCE_TO_DECKBOTTOM",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "CHOOSE_FAMILY",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "CAN_ATTACK",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "SET_BURST_FROM_HAND",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "REVEAL_BONUS",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "USE_ACCEL",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "TIMING_MODIFIER",
+      "cardCount": 1,
+      "clauseCount": 1
+    },
+    {
+      "op": "LOOK_AT_HAND",
+      "cardCount": 1,
+      "clauseCount": 1
+    }
+  ]
+}

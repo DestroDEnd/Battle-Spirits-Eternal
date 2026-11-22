@@ -8,12 +8,54 @@
   <meta http-equiv="Pragma" content="no-cache"/>
   <meta http-equiv="Expires" content="0"/>
   <title>Battle Spirits Eternal | Battle Arena</title>
+  <script type="importmap">
+  {
+    "imports": {
+      "node:crypto": "./engine/shims/node_crypto.js",
+      "node:util": "./engine/shims/node_util.js"
+    }
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=6.1">
+  <link rel="stylesheet" href="./styles.css?v=7.3">
+  <style>
+    /* Complete suppression of floating deck drawer widget and legacy mulligan banner on arena */
+    #deckQuickWidgetWrap,
+    .deck-quick-widget-wrap,
+    #deckQuickTrigger,
+    .deck-quick-trigger,
+    #turn1MulliganBanner,
+    .mulligan-banner,
+    #battleNexusZoneContent,
+    .battle-nexus-zone .bnz-content {
+      display: none !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
+
+    @keyframes pulseWarning {
+      0% { transform: scale(1); box-shadow: 0 0 15px rgba(239,68,68,0.5); }
+      50% { transform: scale(1.03); box-shadow: 0 0 30px rgba(239,68,68,0.85); }
+      100% { transform: scale(1); box-shadow: 0 0 15px rgba(239,68,68,0.5); }
+    }
+    .turn-warning-corner {
+      transition: all 0.25s ease-in-out;
+    }
+  </style>
 </head>
 <body class="arena-page-body">
+
+<!-- 1-MINUTE CORNER COUNTDOWN WARNING (SHOWDOWN PERSISTENT TURN CLOCK) -->
+<div class="turn-warning-corner" id="arenaTurnWarningCorner" style="display:none;position:fixed;top:1.25rem;right:1.25rem;z-index:99999;background:rgba(15,23,42,0.95);border:2px solid #ef4444;box-shadow:0 0 25px rgba(239,68,68,0.6);border-radius:12px;padding:0.75rem 1.25rem;align-items:center;gap:0.75rem;backdrop-filter:blur(10px);animation:pulseWarning 1.5s infinite;">
+  <span style="font-size:1.75rem;">⏳</span>
+  <div>
+    <div style="font-size:0.7rem;font-weight:800;color:#ef4444;letter-spacing:1px;text-transform:uppercase;">1-MINUTE TURN WARNING</div>
+    <div style="font-size:1.5rem;font-weight:900;font-family:monospace;color:#f87171;" id="cornerWarningCountdown">01:00</div>
+    <div style="font-size:0.72rem;color:#cbd5e1;" id="cornerWarningPlayer">Active: Player 1</div>
+  </div>
+</div>
 
 <!-- ╔══════════════════ NAVBAR ══════════════════╗ -->
 <header class="navbar">
@@ -55,6 +97,23 @@
         <button class="arena-mode-tab" id="tabModePvp" onclick="BattleArena.switchMode('pvp')">
           <span>🌐 Online 1v1 Multiplayer (PvP)</span>
         </button>
+      </div>
+
+      <!-- ⚔️ ACTIVE BATTLES & RESUME PANEL (SHOWDOWN PERSISTENT SESSIONS) ⚔️ -->
+      <div class="active-battles-section" id="activeBattlesSection" style="margin: 1rem 0 1.5rem 0;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;">
+          <div style="display:flex;align-items:center;gap:0.6rem;">
+            <span style="font-size:1.1rem;">🔥</span>
+            <span style="font-weight:800;font-size:1rem;color:#f1f5f9;letter-spacing:0.5px;">ACTIVE BATTLES</span>
+            <span class="active-battles-badge" id="activeBattlesCountBadge" style="background:#0284c7;color:#fff;font-size:0.72rem;font-weight:700;padding:2px 8px;border-radius:9999px;">0</span>
+          </div>
+          <button class="btn-refresh-battles" onclick="BattleArena.refreshActiveBattles()" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:#94a3b8;font-size:0.75rem;padding:4px 10px;border-radius:6px;cursor:pointer;">🔄 Refresh</button>
+        </div>
+        <div class="active-battles-list" id="activeBattlesList" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));gap:0.75rem;">
+          <div class="no-active-battles" id="noActiveBattlesNotice" style="color:#64748b;font-size:0.85rem;padding:1rem;background:rgba(15,23,42,0.6);border-radius:8px;border:1px dashed rgba(255,255,255,0.1);">
+            No active battles currently running. Start a new match below!
+          </div>
+        </div>
       </div>
 
       <!-- ONLINE PVP MULTIPLAYER LOBBY -->
@@ -219,6 +278,24 @@
 
       <!-- DUEL TABLE BATTLEFIELD VIEW -->
       <div class="battle-duel-table" id="battleDuelTable">
+        <!-- Persistent Session Header & Synchronized Turn Clock -->
+        <div class="session-hud-bar" id="sessionHudBar" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 1rem;background:rgba(15,23,42,0.85);border-radius:10px;border:1px solid rgba(56,189,248,0.25);margin-bottom:0.75rem;">
+          <div style="display:flex;align-items:center;gap:0.75rem;">
+            <span class="match-mode-tag" id="hudMatchModeTag" style="background:#0284c7;color:#fff;font-size:0.75rem;font-weight:700;padding:2px 8px;border-radius:4px;">VS AI</span>
+            <span class="match-id-display" id="hudMatchIdDisplay" style="color:#94a3b8;font-size:0.8rem;font-family:monospace;">Match: Local</span>
+            <span class="match-status-tag" id="hudMatchStatusTag" style="background:rgba(34,197,94,0.2);color:#4ade80;font-size:0.75rem;font-weight:700;padding:2px 8px;border-radius:4px;">ACTIVE</span>
+          </div>
+          <div class="turn-clock-hud" id="turnClockHud" style="display:flex;align-items:center;gap:0.75rem;">
+            <div style="text-align:right;">
+              <div style="font-size:0.7rem;color:#94a3b8;font-weight:700;" id="hudClockPlayerLabel">PLAYER 1 TURN</div>
+              <div style="font-size:1.15rem;font-weight:800;font-family:monospace;color:#38bdf8;" id="hudClockTimeDisplay">04:00</div>
+            </div>
+            <div style="width:60px;height:7px;background:rgba(255,255,255,0.1);border-radius:9999px;overflow:hidden;">
+              <div id="hudClockProgressFill" style="width:100%;height:100%;background:#38bdf8;transition:width 0.5s linear;"></div>
+            </div>
+          </div>
+        </div>
+
         <div class="duel-layout-grid">
           <!-- Left Column: Main Battlefield -->
           <div class="duel-battlefield-main">
@@ -605,17 +682,7 @@
             <span style="font-size:0.75rem;color:#94a3b8;">Click any card to inspect full stats, levels &amp; abilities</span>
           </div>
 
-          <!-- Turn 1 Mulligan Banner -->
-          <div class="mulligan-banner" id="turn1MulliganBanner" style="display:none;">
-            <div class="mb-info">
-              <span class="mb-badge">Turn 1 Mulligan</span>
-              <span class="mb-text">Review your 4 opening cards. Official Eternal rules permit a one-time hand redraw before taking Turn 1 actions.</span>
-            </div>
-            <div class="mb-actions">
-              <button class="btn-mulligan-redraw" onclick="BattleArena.executeMulligan()">🔄 Redraw 4 Cards</button>
-              <button class="btn-mulligan-keep" onclick="BattleArena.confirmOpeningHand()">✓ Keep Hand</button>
-            </div>
-          </div>
+
 
           <div class="hand-track" id="playerHand">
             <!-- Injected hand cards -->
@@ -634,7 +701,9 @@
             <button class="btn-duel-tool" onclick="BattleArena.openZoneModal('player-nexus')" title="View all active Nexuses on the field">🏛️ View Nexuses</button>
             <button class="btn-duel-tool" onclick="BattleArena.openZoneModal('void')" title="View cards in The Void & Cosmic Reservoir">🌌 View Void</button>
             <button class="btn-duel-tool" onclick="BattleArena.startDuel()">🔄 Restart Match</button>
-            <button class="btn-duel-tool" onclick="document.getElementById('battleDuelTable').style.display='none'; document.getElementById('battleLobby').style.display='block';">📋 Switch Decks</button>
+            <button class="btn-duel-tool" onclick="BattleArena.exitDuelToLobby()">📋 Switch Decks</button>
+            <button class="btn-duel-tool btn-leave-arena" id="btnLeaveArena" onclick="BattleArena.leaveArena()" title="Leave Arena without forfeiting match (can be resumed anytime)">🚪 Leave Arena</button>
+            <button class="btn-duel-tool btn-forfeit-match" id="btnForfeitMatch" onclick="BattleArena.forfeitMatch()" style="color:#f87171;border-color:rgba(239,68,68,0.4);" title="Surrender / forfeit this match">🏳️ Forfeit Match</button>
           </div>
         </div>
 
@@ -1145,6 +1214,7 @@
         <button class="btn-modal-primary" id="modalDuelBraveBtn" style="display:none;background:linear-gradient(135deg,#a855f7,#6366f1);">🔗 Brave onto Spirit</button>
         <button class="btn-modal-outline btn-modal-nav-btn" id="modalSubPrevBtn" onclick="navigateCardModal(-1)" title="Previous Card" style="display:none;">‹ Prev</button>
         <button class="btn-modal-outline btn-modal-nav-btn" id="modalSubNextBtn" onclick="navigateCardModal(1)" title="Next Card" style="display:none;">Next ›</button>
+        <button class="btn-modal-outline btn-modal-rebirth" id="modalRebirthBtn" onclick="flipModalRebirthCard()" style="display:none;" title="Flip / Rebirth form">🔄 Rebirth Form</button>
         <a class="btn-modal-outline" id="modalDownload" href="#" target="_blank">⬇️ Save Art</a>
         <a class="btn-modal-outline" id="modalWikiLink" href="#" target="_blank">Wiki ↗</a>
       </div>
@@ -1154,6 +1224,7 @@
         <div class="modal-jpname" id="modalJpName"></div>
         <h2 class="modal-title" id="modalTitle"></h2>
       </div>
+      <div class="modal-rebirth-tag" id="modalRebirthTag" style="display:none;"></div>
       <div class="badges" id="modalBadges"></div>
       <div class="modal-field-status-box" id="modalFieldStatus" style="display:none;"></div>
       <div class="info-box">
@@ -1191,7 +1262,7 @@
 <!-- Scripts -->
 <!-- WebAssembly SQLite Engine (sql.js) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/sql-wasm.js"></script>
-<script src="./wasm_db.js?v=6.1"></script>
+<script src="./wasm_db.js?v=7.3"></script>
 
 <!-- Firebase Client SDK (Compat CDN for GitHub Pages) -->
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -1199,12 +1270,12 @@
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
-<script src="./firebase_service.js?v=6.1"></script>
-<script src="./multiplayer_service.js?v=6.1"></script>
-<script src="./app.js?v=6.1"></script>
-<script src="./engine/cards/bundle.js?v=6.1"></script>
-<script type="module" src="./engine_adapter.js?v=6.1"></script>
-<script src="./battle_arena.js?v=6.1"></script>
+<script src="./firebase_service.js?v=7.3"></script>
+<script src="./multiplayer_service.js?v=7.3"></script>
+<script src="./app.js?v=7.3"></script>
+<script src="./engine/cards/bundle.js?v=7.3"></script>
+<script type="module" src="./engine_adapter.js?v=7.3"></script>
+<script src="./battle_arena.js?v=7.3"></script>
 <script>
   // Check for auto-start or query parameters on dedicated arena page
   (function() {

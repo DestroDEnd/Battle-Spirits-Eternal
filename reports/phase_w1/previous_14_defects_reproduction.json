@@ -1,0 +1,128 @@
+[
+  {
+    "defect_id": 1,
+    "name": "Curse blocker target never destroyed at battle end",
+    "rule_reference": "https://battle-spirits.fandom.com/wiki/Curse",
+    "historical_defect_confirmed": true,
+    "historical_root_cause": "state.combat.curseTargetStackId was set on block, but onBattleEnd hook was missing and engine/flow never resolved it.",
+    "current_reproduction_outcome": "DEFECT_REMEDIED_AND_VERIFIED",
+    "evidence": "onBlockDeclared tags target: true; onBattleEnd moves blocker to grave: true."
+  },
+  {
+    "defect_id": 2,
+    "name": "True-Curse timing mismatch and silent target fallback",
+    "rule_reference": "https://battle-spirits.fandom.com/wiki/True-Curse",
+    "historical_defect_confirmed": true,
+    "historical_root_cause": "True-Curse fell back silently to oppField[0] when prompt was declined, and WHEN_ATTACKS destruction timing was rejected.",
+    "current_reproduction_outcome": "DEFECT_REMEDIED_AND_VERIFIED",
+    "evidence": "Silent fallback (|| oppField[0]) removed: true. Player autonomy strictly respected."
+  },
+  {
+    "defect_id": 3,
+    "name": "Ultra Heavy Armor omitted from armor-family immunity",
+    "rule_reference": "https://battle-spirits.fandom.com/wiki/Ultra_Heavy_Armor",
+    "historical_defect_confirmed": true,
+    "historical_root_cause": "Ultra Heavy Armor was missing from isArmorFamily array in engine/continuous.js line 659.",
+    "current_reproduction_outcome": "DEFECT_REMEDIED_AND_VERIFIED",
+    "evidence": "isImmune returns true for matching White effect: true."
+  },
+  {
+    "defect_id": 4,
+    "name": "Wave Crush mechanics inherited incorrectly from Crush",
+    "rule_reference": "https://battle-spirits.fandom.com/wiki/Wave_Crush",
+    "historical_defect_confirmed": true,
+    "historical_root_cause": "Wave Crush was cloned from Crush (milled by LV to grave instead of banishing by cost to removed zone and fixing symbol 0).",
+    "current_reproduction_outcome": "DEFECT_REMEDIED_AND_VERIFIED",
+    "evidence": "Cost 8 banishes 3 cards to removed zone (actual: 3); fixes symbol to zero: true."
+  },
+  {
+    "defect_id": 5,
+    "name": "XV Crush mechanics inherited incorrectly from Great Crush",
+    "rule_reference": "https://battle-spirits.fandom.com/wiki/XV_Crush",
+    "historical_defect_confirmed": true,
+    "historical_root_cause": "XV Crush was cloned from Great Crush (attack timing mill by LV instead of 10 mill and conditional cost 15 destruction).",
+    "current_reproduction_outcome": "DEFECT_REMEDIED_AND_VERIFIED",
+    "evidence": "10 cards milled to grave plus conditional destruction of target (actual grave: 11)."
+  },
+  {
+    "defect_id": 6,
+    "name": "Heaven Holy Life incorrect scope",
+    "rule_reference": "https://battle-spirits.fandom.com/wiki/Heaven_Holy_Life",
+    "historical_defect_confirmed": true,
+    "historical_root_cause": "Holy Life hook checked only attackerStack, failing when another friendly spirit dealt combat damage.",
+    "current_reproduction_outcome": "DEFECT_REPRODUCED_STILL_BROKEN",
+    "evidence": "Heaven Holy Life triggered by another friendly attacking spirit: life went from 3 to 3."
+  },
+  {
+    "defect_id": 7,
+    "name": "Chaotic Holy Life incorrect trigger timing",
+    "rule_reference": "https://battle-spirits.fandom.com/wiki/Chaotic_Holy_Life",
+    "historical_defect_confirmed": true,
+    "historical_root_cause": "Chaotic Holy Life was cloned from Holy Life (triggered on direct life damage instead of on block and at battle end).",
+    "current_reproduction_outcome": "DEFECT_REPRODUCED_STILL_BROKEN",
+    "evidence": "Triggered on block (life: 4) and battle end (life: 5). Verified authentic timing."
+  },
+  {
+    "defect_id": 8,
+    "name": "Dark Assault incorrect refresh cost and effect",
+    "rule_reference": "https://battle-spirits.fandom.com/wiki/Dark_Assault",
+    "historical_defect_confirmed": true,
+    "historical_root_cause": "Dark Assault was cloned from Assault (expected Nexus exhaustion instead of discarding 3 cards from hand/decktop).",
+    "current_reproduction_outcome": "DEFECT_REMEDIED_AND_VERIFIED",
+    "evidence": "Discarded 3 cards from hand/decktop and refreshed attacker (actual grave: 3, state: REFRESHED)."
+  },
+  {
+    "defect_id": 9,
+    "name": "Clash defending player choice not enforced",
+    "rule_reference": "https://battle-spirits.fandom.com/wiki/Clash",
+    "historical_defect_confirmed": true,
+    "historical_root_cause": "resolveDirectHit in engine/index.js did not verify mustBlockIfAble, permitting direct hits even when valid blockers existed.",
+    "current_reproduction_outcome": "DEFECT_REMEDIED_AND_VERIFIED",
+    "evidence": "resolveDirectHit strictly rejects with MUST_BLOCK_IF_ABLE when blockers exist: true."
+  },
+  {
+    "defect_id": 10,
+    "name": "Type: Driver compiler extraction failure",
+    "rule_reference": "https://battle-spirits.fandom.com/wiki/Type:_Driver",
+    "historical_defect_confirmed": true,
+    "historical_root_cause": "Bracket parser regex /[([A-Za-z0-9.-s]+?):/ split on colon, reducing keyword name to \"Type\".",
+    "current_reproduction_outcome": "DEFECT_REMEDIED_AND_VERIFIED",
+    "evidence": "extractKeywords('[Type: Driver]') extracted name: \"Type: Driver\", parameter: null."
+  },
+  {
+    "defect_id": 11,
+    "name": "Type: Song compiler extraction failure",
+    "rule_reference": "https://battle-spirits.fandom.com/wiki/Type:_Song",
+    "historical_defect_confirmed": true,
+    "historical_root_cause": "Bracket parser regex /[([A-Za-z0-9.-s]+?):/ split on colon, reducing keyword name to \"Type\".",
+    "current_reproduction_outcome": "DEFECT_REMEDIED_AND_VERIFIED",
+    "evidence": "extractKeywords('[Type: Song]') extracted name: \"Type: Song\", parameter: null."
+  },
+  {
+    "defect_id": 12,
+    "name": "Type: Field compiler extraction failure",
+    "rule_reference": "https://battle-spirits.fandom.com/wiki/Type:_Field",
+    "historical_defect_confirmed": true,
+    "historical_root_cause": "Bracket parser regex /[([A-Za-z0-9.-s]+?):/ split on colon, reducing keyword name to \"Type\".",
+    "current_reproduction_outcome": "DEFECT_REMEDIED_AND_VERIFIED",
+    "evidence": "extractKeywords('[Type: Field]') extracted name: \"Type: Field\", parameter: null."
+  },
+  {
+    "defect_id": 13,
+    "name": "Type: Flower compiler extraction failure",
+    "rule_reference": "https://battle-spirits.fandom.com/wiki/Type:_Flower",
+    "historical_defect_confirmed": true,
+    "historical_root_cause": "Bracket parser regex /[([A-Za-z0-9.-s]+?):/ split on colon, reducing keyword name to \"Type\".",
+    "current_reproduction_outcome": "DEFECT_REMEDIED_AND_VERIFIED",
+    "evidence": "extractKeywords('[Type: Flower]') extracted name: \"Type: Flower\", parameter: null."
+  },
+  {
+    "defect_id": 14,
+    "name": "Type: Vision compiler extraction failure",
+    "rule_reference": "https://battle-spirits.fandom.com/wiki/Type:_Vision",
+    "historical_defect_confirmed": true,
+    "historical_root_cause": "Bracket parser regex /[([A-Za-z0-9.-s]+?):/ split on colon, reducing keyword name to \"Type\".",
+    "current_reproduction_outcome": "DEFECT_REMEDIED_AND_VERIFIED",
+    "evidence": "extractKeywords('[Type: Vision]') extracted name: \"Type: Vision\", parameter: null."
+  }
+]

@@ -1560,6 +1560,26 @@
     "compiledIr": {
       "cardNumber": "SD62-005",
       "name": "Evangelion Test Type Unit-01 -Progressive Knife-",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 5000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 5,
+          "bp": 7000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] (When Summoned)\nYou can send two cores from an opposing Spirit to the Reserve.\n\n[LV1][LV2][LV3] [A.T. Field] (When Attacks/Blocks)\nThis Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.\n\n[LV2][LV3] (When Attacks)\nReturn a Nexus card from the Trash to your Hand. Then, destroy an opposing Spirit with two cores or less on it.",
+      "teams": [],
       "keywords": [
         {
           "name": "A.T. Field",
@@ -1567,12 +1587,32 @@
           "wave": 3,
           "hook": "at_field",
           "bracketed": true,
-          "index": 112
+          "index": 0,
+          "abilityId": "SD62-005#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+          "cardNumber": "SD62-005",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS_OR_BLOCKS",
+          "timingLabel": "When Attacks/Blocks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "SD62-005#a1"
         }
       ],
       "abilities": [
         {
-          "id": "SD62-005#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1583,8 +1623,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1593,10 +1642,14 @@
             "isMain": false,
             "cleanBody": "You can send two cores from an opposing Spirit to the Reserve."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nYou can send two cores from an opposing Spirit to the Reserve.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "You can send two cores from an opposing Spirit to the Reserve.",
+              "originalClauseText": "You can send two cores from an opposing Spirit to the Reserve.",
               "cleanText": "You can send two cores from an opposing Spirit to the Reserve",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1620,10 +1673,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD62-005#a0",
+          "keywords": [],
+          "id": "SD62-005#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_7ed4f96420cb7d1d36543e5b3ce2c92d3cf2102ef96c3d1b88ebb9fa7df874ab_e6a3662d69dfd2acce9adce6afa85134",
+          "physicalId": "SD62-005#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_7ed4f96420cb7d1d36543e5b3ce2c92d3cf2102ef96c3d1b88ebb9fa7df874ab_e6a3662d69dfd2acce9adce6afa85134",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_7ed4f96420cb7d1d36543e5b3ce2c92d3cf2102ef96c3d1b88ebb9fa7df874ab_e6a3662d69dfd2acce9adce6afa85134",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_6946636a3cc45bb9662f63b482f45000f58adeef9da943367f9c208edc463249_757303bb8a909214ce723a0e9a725e09",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD62-005#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1634,8 +1701,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timings": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
             "timingLabel": "When Attacks/Blocks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "A.T. Field",
@@ -1644,10 +1722,14 @@
             "isMain": false,
             "cleanBody": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] [A.T. Field] (When Attacks/Blocks)\nThis Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.",
+              "originalClauseText": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.",
               "cleanText": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1659,10 +1741,55 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD62-005#a1",
+          "keywords": [
+            {
+              "name": "A.T. Field",
+              "parameter": null,
+              "wave": 3,
+              "hook": "at_field",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "SD62-005#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+              "cardNumber": "SD62-005",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS_OR_BLOCKS",
+              "timingLabel": "When Attacks/Blocks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "SD62-005#a1"
+            }
+          ],
+          "id": "SD62-005#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+          "physicalId": "SD62-005#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_0c4f046ee5a8d8e01b6c6ff64a6b95460112ad5c93dce1e127368e6d123182df_38fe13e5a00948f574e9455c3c508e06",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD62-005#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1672,8 +1799,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1682,10 +1818,14 @@
             "isMain": false,
             "cleanBody": "Return a Nexus card from the Trash to your Hand. Then, destroy an opposing Spirit with two cores or less on it."
           },
+          "originalAbilityText": "[LV2][LV3] (When Attacks)\nReturn a Nexus card from the Trash to your Hand. Then, destroy an opposing Spirit with two cores or less on it.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Return a Nexus card from the Trash to your Hand.",
+              "originalClauseText": "Return a Nexus card from the Trash to your Hand.",
               "cleanText": "Return a Nexus card from the Trash to your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1693,15 +1833,24 @@
               "duration": null,
               "op": {
                 "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "family": null,
-                "targetType": "Spirit",
-                "destination": "HAND"
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Nexus"
+                  ]
+                },
+                "isOptional": false
               }
             },
             {
               "rawText": "destroy an opposing Spirit with two cores or less on it.",
+              "originalClauseText": "destroy an opposing Spirit with two cores or less on it.",
               "cleanText": "destroy an opposing Spirit with two cores or less on it",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -1719,7 +1868,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD62-005#a2",
+          "keywords": [],
+          "id": "SD62-005#AB_WHEN_ATTACKS_NONE_LV2_LV3_a67f4d50f28161f0e3f90b38608cc0d9fc86364e21f729cf3fd7575f79272e7d_b78d067557bd90133df667e026416efe",
+          "physicalId": "SD62-005#AB_WHEN_ATTACKS_NONE_LV2_LV3_a67f4d50f28161f0e3f90b38608cc0d9fc86364e21f729cf3fd7575f79272e7d_b78d067557bd90133df667e026416efe",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_a67f4d50f28161f0e3f90b38608cc0d9fc86364e21f729cf3fd7575f79272e7d_b78d067557bd90133df667e026416efe",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_78f4e57ee0cfe2814f663b21084ca4bc21724bbfb9bca75405060216213b9fd6_9a3c297c42e8676e115df6b909a91899",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -2446,6 +2610,10 @@
     "compiledIr": {
       "cardNumber": "SD62-CP01",
       "name": "Katsuragi Misato",
+      "type": "Nexus",
+      "levels": {},
+      "originalEffectText": "[Grandwalker Nexus]\nThis Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.\n\n[Core Charge] (\"Evangelion\") (NERV & Brave) (NERV & Nexus)\n◆When you summon/advent/deploy a target Spirit/Brave/Nexus, you can put one core from the Void onto this Nexus.\n◆When this Nexus is deployed, if you don't control a Nexus with the same card name as this card, you can send three cards from your decktop to the Trash. For each target card among them, place one core from the Void onto this Nexus.\n\n[Grand Skill: 2] [LV1][LV2] Flash - (Either Attack Step)\n(Once per turn, send two cores from this Nexus to the Void) You can summon an “Evangelion”-named Spirit card from your Hand. This effect doesn't trigger [Core Charge].\n\n[Grand Field] [LV2] (Your Attack Step)\nWhen your “Evangelion\"-named Spirit destroys/depletes opposing Spirits, by sending five cores from this Nexus to the Void, send an opposing Live to the Reserve.",
+      "teams": [],
       "keywords": [
         {
           "name": "Core Charge",
@@ -2453,7 +2621,28 @@
           "wave": 3,
           "hook": "core_charge",
           "bracketed": true,
-          "index": 284
+          "index": 0,
+          "abilityId": "SD62-CP01#AB_PASSIVE_NONE_LV1_LV2_LV3_d3834c7d69c437bd0a0113c9e12e20e006aaa06595fb5a2e1ae8b4d55c380913_22e2bb1c80fb71b1afb7835d6d5b9cfb",
+          "cardNumber": "SD62-CP01",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "SD62-CP01#a1"
         },
         {
           "name": "Grand Skill",
@@ -2461,7 +2650,29 @@
           "wave": 3,
           "hook": "grand_skill",
           "bracketed": true,
-          "index": 689
+          "index": 0,
+          "abilityId": "SD62-CP01#AB_ATTACK_STEP_NONE_LV1_LV2_c4b45933cb6482020b9d320769d55e373c73bf7a72aeca3beba25828e9f1b8fa_c54f353ec9cbf40683a6cf3b53bc8095",
+          "cardNumber": "SD62-CP01",
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [
+            "Grand Skill: 2"
+          ],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "SD62-CP01#a4"
         },
         {
           "name": "Core Charge",
@@ -2469,7 +2680,29 @@
           "wave": 3,
           "hook": "core_charge",
           "bracketed": true,
-          "index": 899
+          "index": 153,
+          "abilityId": "SD62-CP01#AB_ATTACK_STEP_NONE_LV1_LV2_c4b45933cb6482020b9d320769d55e373c73bf7a72aeca3beba25828e9f1b8fa_c54f353ec9cbf40683a6cf3b53bc8095",
+          "cardNumber": "SD62-CP01",
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [
+            "Grand Skill: 2"
+          ],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "SD62-CP01#a4"
         },
         {
           "name": "Grand Field",
@@ -2477,12 +2710,32 @@
           "wave": 3,
           "hook": "grand_field",
           "bracketed": true,
-          "index": 915
+          "index": 0,
+          "abilityId": "SD62-CP01#AB_ATTACK_STEP_NONE_LV2_f0d60c412d35b7c8153ed2b7b81e784a70327d690dfaf5d26a4b8fafc4646033_b1ea83a619d1bae19e30d4a2fd457f3b",
+          "cardNumber": "SD62-CP01",
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [
+            "Grand Field"
+          ],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "SD62-CP01#a5"
         }
       ],
       "abilities": [
         {
-          "id": "SD62-CP01#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2495,8 +2748,13 @@
               "Grandwalker Nexus"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2505,10 +2763,14 @@
             "isMain": false,
             "cleanBody": "This Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses."
           },
+          "originalAbilityText": "[Grandwalker Nexus]\nThis Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "This Nexus can only be affected by effects that target Grandwalker Nexuses.",
+              "originalClauseText": "This Nexus can only be affected by effects that target Grandwalker Nexuses.",
               "cleanText": "This Nexus can only be affected by effects that target Grandwalker Nexuses",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2520,7 +2782,9 @@
             },
             {
               "rawText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.",
+              "originalClauseText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.",
               "cleanText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2531,10 +2795,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD62-CP01#a0",
+          "keywords": [],
+          "id": "SD62-CP01#AB_PASSIVE_NONE_LV1_LV2_LV3_942d11e6205bb2a4b67e50627106ae1cfc6bc84946419fa2fa1ebb7898a10897_210a76468ae036766b69e1bbc98cd961",
+          "physicalId": "SD62-CP01#AB_PASSIVE_NONE_LV1_LV2_LV3_942d11e6205bb2a4b67e50627106ae1cfc6bc84946419fa2fa1ebb7898a10897_210a76468ae036766b69e1bbc98cd961",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_942d11e6205bb2a4b67e50627106ae1cfc6bc84946419fa2fa1ebb7898a10897_210a76468ae036766b69e1bbc98cd961",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_34c6111b2026968ed42bfa5f6eb8f5495e381c90eb8118f1bd14e55b04d3c296_de06c5174ba9de1f98a264fb73e5cf09",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD62-CP01#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2545,8 +2821,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Core Charge",
@@ -2555,24 +2836,71 @@
             "isMain": false,
             "cleanBody": "(\"Evangelion\") (NERV & Brave) (NERV & Nexus)"
           },
+          "originalAbilityText": "[Core Charge] (\"Evangelion\") (NERV & Brave) (NERV & Nexus)",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "(\"Evangelion\") (NERV & Brave) (NERV & Nexus)",
+              "originalClauseText": "(\"Evangelion\") (NERV & Brave) (NERV & Nexus)",
               "cleanText": "(\"Evangelion\") (NERV & Brave) (NERV & Nexus)",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Brave"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD62-CP01#a1",
+          "keywords": [
+            {
+              "name": "Core Charge",
+              "parameter": null,
+              "wave": 3,
+              "hook": "core_charge",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "SD62-CP01#AB_PASSIVE_NONE_LV1_LV2_LV3_d3834c7d69c437bd0a0113c9e12e20e006aaa06595fb5a2e1ae8b4d55c380913_22e2bb1c80fb71b1afb7835d6d5b9cfb",
+              "cardNumber": "SD62-CP01",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "SD62-CP01#a1"
+            }
+          ],
+          "id": "SD62-CP01#AB_PASSIVE_NONE_LV1_LV2_LV3_d3834c7d69c437bd0a0113c9e12e20e006aaa06595fb5a2e1ae8b4d55c380913_22e2bb1c80fb71b1afb7835d6d5b9cfb",
+          "physicalId": "SD62-CP01#AB_PASSIVE_NONE_LV1_LV2_LV3_d3834c7d69c437bd0a0113c9e12e20e006aaa06595fb5a2e1ae8b4d55c380913_22e2bb1c80fb71b1afb7835d6d5b9cfb",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_d3834c7d69c437bd0a0113c9e12e20e006aaa06595fb5a2e1ae8b4d55c380913_22e2bb1c80fb71b1afb7835d6d5b9cfb",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_393f8b2c1c6d0b27f0e2ad41dcd40c5bb14d521f7f0f9d3f0efe9ce70b8a1d6b_b2cd057a9b4cbfb9bc241384b2fd3821",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD62-CP01#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2583,8 +2911,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2593,10 +2926,14 @@
             "isMain": false,
             "cleanBody": "◆When you summon/advent/deploy a target Spirit/Brave/Nexus, you can put one core from the Void onto this Nexus."
           },
+          "originalAbilityText": "◆When you summon/advent/deploy a target Spirit/Brave/Nexus, you can put one core from the Void onto this Nexus.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "◆When you summon/advent/deploy a target Spirit/Brave/Nexus, you can put one core from the Void onto this Nexus.",
+              "originalClauseText": "◆When you summon/advent/deploy a target Spirit/Brave/Nexus, you can put one core from the Void onto this Nexus.",
               "cleanText": "When you summon/advent/deploy a target Spirit/Brave/Nexus, you can put one core from the Void onto this Nexus",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -2604,14 +2941,34 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                },
+                "to": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD62-CP01#a2",
+          "keywords": [],
+          "id": "SD62-CP01#AB_PASSIVE_NONE_LV1_LV2_LV3_078f3c55abc7dc58f057cbecb25a8ae148d83bf7e356a99e5f7b0ed775887603_f611bf931088373270c009920d336ad5",
+          "physicalId": "SD62-CP01#AB_PASSIVE_NONE_LV1_LV2_LV3_078f3c55abc7dc58f057cbecb25a8ae148d83bf7e356a99e5f7b0ed775887603_f611bf931088373270c009920d336ad5",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_078f3c55abc7dc58f057cbecb25a8ae148d83bf7e356a99e5f7b0ed775887603_f611bf931088373270c009920d336ad5",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_892e79423b02eaf963da37ff31c146996548220896e706d0005db3d396b2aaed_dc211f6c71dafa060fd12e61831e90d1",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD62-CP01#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2622,8 +2979,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2632,10 +2994,14 @@
             "isMain": false,
             "cleanBody": "◆When this Nexus is deployed, if you don't control a Nexus with the same card name as this card, you can send three cards from your decktop to the Trash. For each target card among them, place one core from the Void onto this Nexus."
           },
+          "originalAbilityText": "◆When this Nexus is deployed, if you don't control a Nexus with the same card name as this card, you can send three cards from your decktop to the Trash. For each target card among them, place one core from the Void onto this Nexus.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "◆When this Nexus is deployed, if you don't control a Nexus with the same card name as this card, you can send three cards from your decktop to the Trash.",
+              "originalClauseText": "◆When this Nexus is deployed, if you don't control a Nexus with the same card name as this card, you can send three cards from your decktop to the Trash.",
               "cleanText": "When this Nexus is deployed, if you don't control a Nexus with the same card name as this card, you can send three cards from your decktop to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -2650,7 +3016,9 @@
             },
             {
               "rawText": "For each target card among them, place one core from the Void onto this Nexus.",
+              "originalClauseText": "For each target card among them, place one core from the Void onto this Nexus.",
               "cleanText": "For each target card among them, place one core from the Void onto this Nexus",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2661,10 +3029,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD62-CP01#a3",
+          "keywords": [],
+          "id": "SD62-CP01#AB_PASSIVE_NONE_LV1_LV2_LV3_23de45b12331c9efe5f15182b6447965fd6a15c060a6cbc56ae485ce4d0881c4_4966672f8ec6578936b4d6590239a407",
+          "physicalId": "SD62-CP01#AB_PASSIVE_NONE_LV1_LV2_LV3_23de45b12331c9efe5f15182b6447965fd6a15c060a6cbc56ae485ce4d0881c4_4966672f8ec6578936b4d6590239a407",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_23de45b12331c9efe5f15182b6447965fd6a15c060a6cbc56ae485ce4d0881c4_4966672f8ec6578936b4d6590239a407",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_6bd16963991e26fb4ea7b14914a3c08d31d6ed7ff401fc0ae4c2225858633f1e_27ebf585ae4346c5bcca953eb3fa0bcc",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD62-CP01#a4",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2676,8 +3056,17 @@
               "Grand Skill: 2"
             ],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2686,10 +3075,14 @@
             "isMain": false,
             "cleanBody": "(Once per turn, send two cores from this Nexus to the Void) You can summon an “Evangelion”-named Spirit card from your Hand. This effect doesn't trigger [Core Charge]."
           },
+          "originalAbilityText": "[Grand Skill: 2] [LV1][LV2] Flash - (Either Attack Step)\n(Once per turn, send two cores from this Nexus to the Void) You can summon an “Evangelion”-named Spirit card from your Hand. This effect doesn't trigger [Core Charge].",
+          "abilityIndex": 4,
           "clauses": [
             {
               "rawText": "(Once per turn, send two cores from this Nexus to the Void) You can summon an \"Evangelion\"-named Spirit card from your Hand.",
+              "originalClauseText": "(Once per turn, send two cores from this Nexus to the Void) You can summon an \"Evangelion\"-named Spirit card from your Hand.",
               "cleanText": "(Once per turn, send two cores from this Nexus to the Void) You can summon an \"Evangelion\"-named Spirit card from your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -2697,26 +3090,112 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 2,
+                "from": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                },
+                "to": {
+                  "zone": "void"
+                }
               }
             },
             {
               "rawText": "This effect doesn't trigger [Core Charge].",
+              "originalClauseText": "This effect doesn't trigger [Core Charge].",
               "cleanText": "This effect doesn't trigger [Core Charge]",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Core Charge"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD62-CP01#a4",
+          "keywords": [
+            {
+              "name": "Grand Skill",
+              "parameter": "2",
+              "wave": 3,
+              "hook": "grand_skill",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "SD62-CP01#AB_ATTACK_STEP_NONE_LV1_LV2_c4b45933cb6482020b9d320769d55e373c73bf7a72aeca3beba25828e9f1b8fa_c54f353ec9cbf40683a6cf3b53bc8095",
+              "cardNumber": "SD62-CP01",
+              "levels": [
+                1,
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [
+                "Grand Skill: 2"
+              ],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "SD62-CP01#a4"
+            },
+            {
+              "name": "Core Charge",
+              "parameter": null,
+              "wave": 3,
+              "hook": "core_charge",
+              "bracketed": true,
+              "index": 153,
+              "abilityId": "SD62-CP01#AB_ATTACK_STEP_NONE_LV1_LV2_c4b45933cb6482020b9d320769d55e373c73bf7a72aeca3beba25828e9f1b8fa_c54f353ec9cbf40683a6cf3b53bc8095",
+              "cardNumber": "SD62-CP01",
+              "levels": [
+                1,
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [
+                "Grand Skill: 2"
+              ],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "SD62-CP01#a4"
+            }
+          ],
+          "id": "SD62-CP01#AB_ATTACK_STEP_NONE_LV1_LV2_c4b45933cb6482020b9d320769d55e373c73bf7a72aeca3beba25828e9f1b8fa_c54f353ec9cbf40683a6cf3b53bc8095",
+          "physicalId": "SD62-CP01#AB_ATTACK_STEP_NONE_LV1_LV2_c4b45933cb6482020b9d320769d55e373c73bf7a72aeca3beba25828e9f1b8fa_c54f353ec9cbf40683a6cf3b53bc8095",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_c4b45933cb6482020b9d320769d55e373c73bf7a72aeca3beba25828e9f1b8fa_c54f353ec9cbf40683a6cf3b53bc8095",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_d3ba084d3cceceb6a628725a038b8b46d85494ecf8760a81e818ccd9250ac4a6_0e55b0a0dfe6a69e1180b355992d72d8",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD62-CP01#a5",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2727,8 +3206,17 @@
               "Grand Field"
             ],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2737,10 +3225,14 @@
             "isMain": false,
             "cleanBody": "When your “Evangelion\"-named Spirit destroys/depletes opposing Spirits, by sending five cores from this Nexus to the Void, send an opposing Live to the Reserve."
           },
+          "originalAbilityText": "[Grand Field] [LV2] (Your Attack Step)\nWhen your “Evangelion\"-named Spirit destroys/depletes opposing Spirits, by sending five cores from this Nexus to the Void, send an opposing Live to the Reserve.",
+          "abilityIndex": 5,
           "clauses": [
             {
               "rawText": "When your \"Evangelion\"-named Spirit destroys/depletes opposing Spirits, by sending five cores from this Nexus to the Void, send an opposing Live to the Reserve.",
+              "originalClauseText": "When your \"Evangelion\"-named Spirit destroys/depletes opposing Spirits, by sending five cores from this Nexus to the Void, send an opposing Live to the Reserve.",
               "cleanText": "When your \"Evangelion\"-named Spirit destroys/depletes opposing Spirits, by sending five cores from this Nexus to the Void, send an opposing Live to the Reserve",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2748,11 +3240,64 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 5,
+                "from": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                },
+                "to": {
+                  "zone": "void"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD62-CP01#a5",
+          "keywords": [
+            {
+              "name": "Grand Field",
+              "parameter": null,
+              "wave": 3,
+              "hook": "grand_field",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "SD62-CP01#AB_ATTACK_STEP_NONE_LV2_f0d60c412d35b7c8153ed2b7b81e784a70327d690dfaf5d26a4b8fafc4646033_b1ea83a619d1bae19e30d4a2fd457f3b",
+              "cardNumber": "SD62-CP01",
+              "levels": [
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Your Attack Step",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [
+                "Grand Field"
+              ],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "SD62-CP01#a5"
+            }
+          ],
+          "id": "SD62-CP01#AB_ATTACK_STEP_NONE_LV2_f0d60c412d35b7c8153ed2b7b81e784a70327d690dfaf5d26a4b8fafc4646033_b1ea83a619d1bae19e30d4a2fd457f3b",
+          "physicalId": "SD62-CP01#AB_ATTACK_STEP_NONE_LV2_f0d60c412d35b7c8153ed2b7b81e784a70327d690dfaf5d26a4b8fafc4646033_b1ea83a619d1bae19e30d4a2fd457f3b",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_f0d60c412d35b7c8153ed2b7b81e784a70327d690dfaf5d26a4b8fafc4646033_b1ea83a619d1bae19e30d4a2fd457f3b",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_1b56905b3dce887785d56c24b448f9148e3394df593716efd323e1005cf0d78e_c47abd8898269f5b0b43091a1ffa1a83",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 9,
@@ -3151,10 +3696,13 @@
     "compiledIr": {
       "cardNumber": "SD62-015",
       "name": "The Human Instrumentality Project",
+      "type": "Magic",
+      "levels": {},
+      "originalEffectText": "[Main]\nDraw two cards. Or, return an \"Unit-01\"/\"Ikari Shinji\"-named card from the Trash to your Hand.\n\n[Flash]\nDuring this turn, give an \"Evangelion\"-named Spirit you control +3000 BP.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "SD62-015#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3165,8 +3713,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "MAIN",
+            "timings": [],
             "timingLabel": "Main",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "MAIN"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3175,10 +3730,14 @@
             "isMain": true,
             "cleanBody": "Draw two cards. Or, return an \"Unit-01\"/\"Ikari Shinji\"-named card from the Trash to your Hand."
           },
+          "originalAbilityText": "[Main]\nDraw two cards. Or, return an \"Unit-01\"/\"Ikari Shinji\"-named card from the Trash to your Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Draw two cards.",
+              "originalClauseText": "Draw two cards.",
               "cleanText": "Draw two cards",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -3193,25 +3752,50 @@
             },
             {
               "rawText": "return an \"Unit-01\"/\"Ikari Shinji\"-named card from the Trash to your Hand.",
+              "originalClauseText": "return an \"Unit-01\"/\"Ikari Shinji\"-named card from the Trash to your Hand.",
               "cleanText": "return an \"Unit-01\"/\"Ikari Shinji\"-named card from the Trash to your Hand",
+              "clauseIndex": 1,
               "link": "or",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "nameIncludes": "Unit-01",
+                  "nameIncludesAny": [
+                    "Unit-01",
+                    "Ikari Shinji"
+                  ]
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD62-015#a0",
+          "keywords": [],
+          "id": "SD62-015#AB_MAIN_NONE_LV1_LV2_LV3_99c489651bdc58a1f566759db5ab42e68b28a60fe19a566032f33b8583d3120e_41a71e05fe1c4cc998bfaa42a191d3f9",
+          "physicalId": "SD62-015#AB_MAIN_NONE_LV1_LV2_LV3_99c489651bdc58a1f566759db5ab42e68b28a60fe19a566032f33b8583d3120e_41a71e05fe1c4cc998bfaa42a191d3f9",
+          "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_99c489651bdc58a1f566759db5ab42e68b28a60fe19a566032f33b8583d3120e_41a71e05fe1c4cc998bfaa42a191d3f9",
+          "semanticIdV3": "SEM3#AB_MAIN_NONE_LV1_LV2_LV3_d5d087c3eca8a68794030910a02c58daadfa37148035c0d7b1926b5a735e41c7_4b7303381898b0b96344cd10c01f2a49",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "MAIN"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD62-015#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3222,8 +3806,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3232,10 +3823,14 @@
             "isMain": false,
             "cleanBody": "During this turn, give an \"Evangelion\"-named Spirit you control +3000 BP."
           },
+          "originalAbilityText": "[Flash]\nDuring this turn, give an \"Evangelion\"-named Spirit you control +3000 BP.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "During this turn, give an \"Evangelion\"-named Spirit you control +3000 BP.",
+              "originalClauseText": "During this turn, give an \"Evangelion\"-named Spirit you control +3000 BP.",
               "cleanText": "give an \"Evangelion\"-named Spirit you control +3000 BP",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -3250,7 +3845,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD62-015#a1",
+          "keywords": [],
+          "id": "SD62-015#AB_FLASH_NONE_LV1_LV2_LV3_b592677a2e66a75abab877dc45c39cf245e6fcc2243cac04c88d034bba4c273f_2090f8cee0d729c1bfa1febc6bbf5377",
+          "physicalId": "SD62-015#AB_FLASH_NONE_LV1_LV2_LV3_b592677a2e66a75abab877dc45c39cf245e6fcc2243cac04c88d034bba4c273f_2090f8cee0d729c1bfa1febc6bbf5377",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_b592677a2e66a75abab877dc45c39cf245e6fcc2243cac04c88d034bba4c273f_2090f8cee0d729c1bfa1febc6bbf5377",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_281be807941d725a219c89817a9d2273866c531aaa074b4277316376a8bef9cf_5a2bf32f8bef2f5ba171cc5c2bdecf33",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -3267,19 +3877,45 @@
     "compiledIr": {
       "cardNumber": "SD62-014",
       "name": "The Special Agency NERV",
+      "type": "Nexus",
+      "levels": {},
+      "originalEffectText": "[Mirage: Cost 3 ([Purple Core])]\n[During Set] (Opposing Attack Step)\nOnce per turn, when your Life would be reduced by the attack of opposing Spirits, you can reveal two cards from your decktop. By adding a “NERV” family Spirit card among them to your Hand, decrease the number of Life to be reduced by -1. Discard any remaining cards.\n\n[LV1] (When Deployed)\nYou can summon/deploy a “Pilot” & “NERV” family card from your Hand/Trash, without paying the cost.",
+      "teams": [],
       "keywords": [
         {
           "name": "Mirage",
-          "parameter": "Cost 3 ([Purple Core",
+          "parameter": "Cost 3 ([Purple Core])",
           "wave": 2,
           "hook": "mirage",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "SD62-014#AB_PASSIVE_NONE_LV1_LV2_LV3_2ff6678966d26ff469f83fcddd401e0c30d5cd2dce2c0d3398ad0e11fa8971ba_d92cf90085295c4ca155312e74167cfa",
+          "cardNumber": "SD62-014",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [
+            "Mirage: Cost 3 ([Purple Core])"
+          ],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "SD62-014#a0"
         }
       ],
       "abilities": [
         {
-          "id": "SD62-014#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3289,11 +3925,16 @@
             ],
             "levelExplicit": false,
             "prefixes": [
-              "Mirage: Cost ([Purple Core])"
+              "Mirage: Cost 3 ([Purple Core])"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3302,11 +3943,57 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "originalAbilityText": "[Mirage: Cost 3 ([Purple Core])]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD62-014#a0",
+          "keywords": [
+            {
+              "name": "Mirage",
+              "parameter": "Cost 3 ([Purple Core])",
+              "wave": 2,
+              "hook": "mirage",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "SD62-014#AB_PASSIVE_NONE_LV1_LV2_LV3_2ff6678966d26ff469f83fcddd401e0c30d5cd2dce2c0d3398ad0e11fa8971ba_d92cf90085295c4ca155312e74167cfa",
+              "cardNumber": "SD62-014",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [
+                "Mirage: Cost 3 ([Purple Core])"
+              ],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "SD62-014#a0"
+            }
+          ],
+          "id": "SD62-014#AB_PASSIVE_NONE_LV1_LV2_LV3_2ff6678966d26ff469f83fcddd401e0c30d5cd2dce2c0d3398ad0e11fa8971ba_d92cf90085295c4ca155312e74167cfa",
+          "physicalId": "SD62-014#AB_PASSIVE_NONE_LV1_LV2_LV3_2ff6678966d26ff469f83fcddd401e0c30d5cd2dce2c0d3398ad0e11fa8971ba_d92cf90085295c4ca155312e74167cfa",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_2ff6678966d26ff469f83fcddd401e0c30d5cd2dce2c0d3398ad0e11fa8971ba_d92cf90085295c4ca155312e74167cfa",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_819795343730b878ac32f807d3db77d7573af185143ab773da45553932304789_6f9907c8526da7d34dd6091b65c1cfa6",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD62-014#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3319,8 +4006,20 @@
               "During Set"
             ],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Opposing Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "OPPONENT",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "DURING_SET",
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -3329,10 +4028,14 @@
             "isMain": false,
             "cleanBody": "when your Life would be reduced by the attack of opposing Spirits, you can reveal two cards from your decktop. By adding a “NERV” family Spirit card among them to your Hand, decrease the number of Life to be reduced by -1. Discard any remaining cards."
           },
+          "originalAbilityText": "[During Set] (Opposing Attack Step)\nOnce per turn, when your Life would be reduced by the attack of opposing Spirits, you can reveal two cards from your decktop. By adding a “NERV” family Spirit card among them to your Hand, decrease the number of Life to be reduced by -1. Discard any remaining cards.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "when your Life would be reduced by the attack of opposing Spirits, you can reveal two cards from your decktop.",
+              "originalClauseText": "when your Life would be reduced by the attack of opposing Spirits, you can reveal two cards from your decktop.",
               "cleanText": "when your Life would be reduced by the attack of opposing Spirits, you can reveal two cards from your decktop",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -3344,20 +4047,40 @@
               }
             },
             {
-              "rawText": "By adding a \"NERV\" family Spirit card among them to your Hand, decrease the number of Life to be reduced by -1.",
-              "cleanText": "By adding a \"NERV\" family Spirit card among them to your Hand, decrease the number of Life to be reduced by -1",
+              "rawText": "By adding a \"NERV\" family Spirit card among them to your Hand",
+              "originalClauseText": "By adding a \"NERV\" family Spirit card among them to your Hand",
+              "cleanText": "By adding a \"NERV\" family Spirit card among them to your Hand",
+              "clauseIndex": 1,
               "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "UNSUPPORTED",
+                "rawText": "adding a \"NERV\" family Spirit card among them to your Hand"
+              }
+            },
+            {
+              "rawText": "decrease the number of Life to be reduced by -1.",
+              "originalClauseText": "decrease the number of Life to be reduced by -1.",
+              "cleanText": "decrease the number of Life to be reduced by -1",
+              "clauseIndex": 2,
+              "link": "byDoing",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "ADD_TO_HAND"
+                "op": "UNSUPPORTED",
+                "rawText": "decrease the number of Life to be reduced by -1"
               }
             },
             {
               "rawText": "Discard any remaining cards.",
+              "originalClauseText": "Discard any remaining cards.",
               "cleanText": "Discard any remaining cards",
+              "clauseIndex": 3,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -3368,10 +4091,30 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "By adding a \"NERV\" family Spirit card among them to your Hand",
+            "decrease the number of Life to be reduced by -1."
+          ],
+          "legacyId": "SD62-014#a1",
+          "keywords": [],
+          "id": "SD62-014#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_7fc0c615387bb69101dcb090bc159311da5152a7dbafd159142e20b9ec044714_2c2da57bf5271907443ddf97f58a623d",
+          "physicalId": "SD62-014#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_7fc0c615387bb69101dcb090bc159311da5152a7dbafd159142e20b9ec044714_2c2da57bf5271907443ddf97f58a623d",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_7fc0c615387bb69101dcb090bc159311da5152a7dbafd159142e20b9ec044714_2c2da57bf5271907443ddf97f58a623d",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_100299cca862d6dfa0be74de2ae0d3506c2023de0e1f253afc02d5c591f37c7f_3587695f0009b8718ca6ec8f9bc01c43",
+          "timingSemantics": {
+            "timingOwner": "OPPONENT",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "DURING_SET",
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD62-014#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3380,8 +4123,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_DEPLOYED",
+            "timings": [
+              "WHEN_DEPLOYED"
+            ],
             "timingLabel": "When Deployed",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_DEPLOYED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3390,10 +4142,14 @@
             "isMain": false,
             "cleanBody": "You can summon/deploy a “Pilot” & “NERV” family card from your Hand/Trash, without paying the cost."
           },
+          "originalAbilityText": "[LV1] (When Deployed)\nYou can summon/deploy a “Pilot” & “NERV” family card from your Hand/Trash, without paying the cost.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "You can summon/deploy a \"Pilot\" & \"NERV\" family card from your Hand/Trash, without paying the cost.",
+              "originalClauseText": "You can summon/deploy a \"Pilot\" & \"NERV\" family card from your Hand/Trash, without paying the cost.",
               "cleanText": "You can summon/deploy a \"Pilot\" & \"NERV\" family card from your Hand/Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -3405,12 +4161,27 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD62-014#a2",
+          "keywords": [],
+          "id": "SD62-014#AB_WHEN_DEPLOYED_NONE_LV1_cf098d7acd800b945440f6c1b0a293e19b64433fbb641d55218fb8d3289da9f4_095467971fbb6e7099b4a4eb15f1509a",
+          "physicalId": "SD62-014#AB_WHEN_DEPLOYED_NONE_LV1_cf098d7acd800b945440f6c1b0a293e19b64433fbb641d55218fb8d3289da9f4_095467971fbb6e7099b4a4eb15f1509a",
+          "semanticId": "SEM#AB_WHEN_DEPLOYED_NONE_LV1_cf098d7acd800b945440f6c1b0a293e19b64433fbb641d55218fb8d3289da9f4_095467971fbb6e7099b4a4eb15f1509a",
+          "semanticIdV3": "SEM3#AB_WHEN_DEPLOYED_NONE_LV1_821068d865b9a942576fe80bd39a5cde1477e0decf3d553df3b457c9a5e6fab4_f20613640e6fb5dc07fb4cc5d02b3391",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_DEPLOYED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
-      "compiledClausesCount": 4,
-      "unsupportedClausesCount": 0,
-      "isFullySupported": true
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 2,
+      "isFullySupported": false
     }
   }
 }

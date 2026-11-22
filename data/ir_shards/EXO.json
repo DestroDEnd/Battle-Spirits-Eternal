@@ -1,1 +1,210 @@
-{"EXO-URO":{"cardNumber":"EXO-URO","name":"The VioletCorpseGodKing Exo-Ourovorius","keywords":[{"name":"Advent","parameter":"Death Dragon & Cost 5 or more","wave":2,"hook":"advent","bracketed":true,"index":8},{"name":"Accel","parameter":null,"wave":2,"hook":"accel","bracketed":true,"index":172},{"name":"Advent","parameter":null,"wave":2,"hook":"advent","bracketed":true,"index":264},{"name":"Twinkle Spellbind","parameter":null,"wave":4,"hook":"spellbind","bracketed":true,"index":286}],"abilities":[{"id":"EXO-URO#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step)","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Advent: Death Dragon & Cost 5 or more","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending [Soul Core] to your Trash, stack this from your Hand onto your target Spirit."},"clauses":[{"rawText":"By sending [Soul Core] to your Trash","cleanText":"By sending [Soul Core] to your Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"stack this from your Hand onto your target Spirit.","cleanText":"stack this from your Hand onto your target Spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_STACK","from":"HAND","target":{"side":"self","types":["Spirit"]}}}],"unsupported":[]},{"id":"EXO-URO#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"After your [Accel] effect resolves, you can stack this Spirit card from the Hand onto your Spirits via [Advent]."},"clauses":[{"rawText":"After your [Accel] effect resolves, you can stack this Spirit card from the Hand onto your Spirits via [Advent].","cleanText":"After your [Accel] effect resolves, you can stack this Spirit card from the Hand onto your Spirits via [Advent]","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_RULE"}}],"unsupported":[]},{"id":"EXO-URO#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"TURN_TRIGGER","timingLabel":"Opposing Turn","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Twinkle Spellbind","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"At the start of each opposing step, you can send a core from opposing Spirits/the opposing Reserve to their Trash. While this Spirit is [During Advent], when any Spirit is depleted by this effect, send an opposing Life to their Trash."},"clauses":[{"rawText":"At the start of each opposing step, you can send a core from opposing Spirits/the opposing Reserve to their Trash.","cleanText":"At the start of each opposing step, you can send a core from opposing Spirits/the opposing Reserve to their Trash","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"While this Spirit is [During Advent], when any Spirit is depleted by this effect, send an opposing Life to their Trash.","cleanText":"when any Spirit is depleted by this effect, send an opposing Life to their Trash","link":null,"isOptional":false,"isCost":false,"condition":"While this Spirit is [During Advent]","duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "EXO-URO": {
+    "cardNumber": "EXO-URO",
+    "name": "The VioletCorpseGodKing Exo-Ourovorius",
+    "keywords": [
+      {
+        "name": "Advent",
+        "parameter": "Death Dragon & Cost 5 or more",
+        "wave": 2,
+        "hook": "advent",
+        "bracketed": true,
+        "index": 8
+      },
+      {
+        "name": "Accel",
+        "parameter": null,
+        "wave": 2,
+        "hook": "accel",
+        "bracketed": true,
+        "index": 172
+      },
+      {
+        "name": "Advent",
+        "parameter": null,
+        "wave": 2,
+        "hook": "advent",
+        "bracketed": true,
+        "index": 264
+      },
+      {
+        "name": "Twinkle Spellbind",
+        "parameter": null,
+        "wave": 4,
+        "hook": "spellbind",
+        "bracketed": true,
+        "index": 286
+      }
+    ],
+    "abilities": [
+      {
+        "id": "EXO-URO#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_2a1036e306c7997b314b5c0f944493fb968cbfae12e5101cd6efee9532f18c49_72f310ffc35e8485ca43b1a3a52d0a44",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Advent: Death Dragon & Cost 5 or more",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending [Soul Core] to your Trash, stack this from your Hand onto your target Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending [Soul Core] to your Trash",
+            "cleanText": "By sending [Soul Core] to your Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "stack this from your Hand onto your target Spirit.",
+            "cleanText": "stack this from your Hand onto your target Spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_STACK",
+              "from": "HAND",
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "EXO-URO#a0",
+        "physicalId": "EXO-URO#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_2a1036e306c7997b314b5c0f944493fb968cbfae12e5101cd6efee9532f18c49_72f310ffc35e8485ca43b1a3a52d0a44",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_2a1036e306c7997b314b5c0f944493fb968cbfae12e5101cd6efee9532f18c49_72f310ffc35e8485ca43b1a3a52d0a44"
+      },
+      {
+        "id": "EXO-URO#AB_PASSIVE_NONE_LV1_LV2_LV3_b7a90d79b26521f5d24cc6d997509058f1d2661aa643854d81b487c07fe12791_fe23832ac3208857717f3e93511a5545",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "After your [Accel] effect resolves, you can stack this Spirit card from the Hand onto your Spirits via [Advent]."
+        },
+        "clauses": [
+          {
+            "rawText": "After your [Accel] effect resolves, you can stack this Spirit card from the Hand onto your Spirits via [Advent].",
+            "cleanText": "After your [Accel] effect resolves, you can stack this Spirit card from the Hand onto your Spirits via [Advent]",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "EXO-URO#a1",
+        "physicalId": "EXO-URO#AB_PASSIVE_NONE_LV1_LV2_LV3_b7a90d79b26521f5d24cc6d997509058f1d2661aa643854d81b487c07fe12791_fe23832ac3208857717f3e93511a5545",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_b7a90d79b26521f5d24cc6d997509058f1d2661aa643854d81b487c07fe12791_fe23832ac3208857717f3e93511a5545"
+      },
+      {
+        "id": "EXO-URO#AB_TURN_TRIGGER_NONE_LV2_LV3_4a3b7ebed2d2a4323e347daa72c6511a08367552965a59cec8828c3ea012aca5_bcad9e27b1a9edf4930bebe342a70661",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "TURN_TRIGGER",
+          "timingLabel": "Opposing Turn",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Twinkle Spellbind",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "At the start of each opposing step, you can send a core from opposing Spirits/the opposing Reserve to their Trash. While this Spirit is [During Advent], when any Spirit is depleted by this effect, send an opposing Life to their Trash."
+        },
+        "clauses": [
+          {
+            "rawText": "At the start of each opposing step, you can send a core from opposing Spirits/the opposing Reserve to their Trash.",
+            "cleanText": "At the start of each opposing step, you can send a core from opposing Spirits/the opposing Reserve to their Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "While this Spirit is [During Advent], when any Spirit is depleted by this effect, send an opposing Life to their Trash.",
+            "cleanText": "when any Spirit is depleted by this effect, send an opposing Life to their Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While this Spirit is [During Advent]",
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "EXO-URO#a2",
+        "physicalId": "EXO-URO#AB_TURN_TRIGGER_NONE_LV2_LV3_4a3b7ebed2d2a4323e347daa72c6511a08367552965a59cec8828c3ea012aca5_bcad9e27b1a9edf4930bebe342a70661",
+        "semanticId": "SEM#AB_TURN_TRIGGER_NONE_LV2_LV3_4a3b7ebed2d2a4323e347daa72c6511a08367552965a59cec8828c3ea012aca5_bcad9e27b1a9edf4930bebe342a70661"
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

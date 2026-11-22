@@ -117,6 +117,29 @@ export class KeywordRegistry {
           });
         }
       }
+
+      // Check field for team-wide life damage keywords (e.g. Heaven Holy Life)
+      const friendlyField = state.players[attackerSide]?.field || [];
+      for (const st of friendlyField) {
+        if (st.id === combat.attackerStackId) continue;
+        const otherKeywords = this.getActiveKeywords(st, { timing: 'PASSIVE' }, state);
+        for (const kwItem of otherKeywords) {
+          if (kwItem.name === 'Heaven Holy Life') {
+            const handler = this.get(kwItem.name);
+            if (handler && handler.hooks && handler.hooks.onLifeDamage) {
+              await handler.hooks.onLifeDamage({
+                game,
+                state,
+                attackerStack: st,
+                damagePlayer: event.player,
+                keyword: kwItem,
+                event,
+                resolver
+              });
+            }
+          }
+        }
+      }
     });
 
     // 4. Unit Destroyed hook: Curse, True-Curse, Stampede, Immortality
@@ -126,9 +149,12 @@ export class KeywordRegistry {
 
       // 4a. Trigger onBattleDestroyed hooks on the destroyed card itself (e.g. True-Curse, Immortality)
       if (event.cause === 'battle' || event.cause === 'destroy') {
-        const destroyedKeywords = event.stack
+        let destroyedKeywords = event.stack
           ? this.getActiveKeywords(event.stack, { timing: 'WHEN_DESTROYED' }, state)
           : this.extractCardKeywords(destroyedCard);
+        if ((!destroyedKeywords || destroyedKeywords.length === 0) && event.stack && state.combat) {
+          destroyedKeywords = this.getActiveKeywords(event.stack, { timing: 'WHEN_ATTACKS' }, state);
+        }
         for (const kwItem of destroyedKeywords) {
           const handler = this.get(kwItem.name);
           if (handler && handler.hooks && handler.hooks.onBattleDestroyed) {

@@ -1,0 +1,38 @@
+{
+  "moduleCreated": "engine/prerequisites.js",
+  "integratedIn": "engine/index.js (playCard)",
+  "confirmedRuntimeConsumers": [
+    {
+      "mechanic": "Brave Condition",
+      "sourceField": "type=CONDITION, header.keyword/cleanBody/rawText",
+      "compilerRef": "compiler/index.js:136",
+      "parserFn": "parseBraveCondition (engine/prerequisites.js)",
+      "runtimeConsumer": "evaluateBraveCondition in engine/index.js playCard (pre-payment + braving)",
+      "testRef": "tests/work_package_k1_4_foundation_remediation.test.js"
+    },
+    {
+      "mechanic": "Summon Condition",
+      "sourceField": "type=CONDITION, header.prefixes/rawText",
+      "compilerRef": "compiler/index.js:136",
+      "parserFn": "parseSummonCondition (engine/prerequisites.js)",
+      "runtimeConsumer": "evaluateSummonCondition in engine/index.js playCard (pre-payment)",
+      "testRef": "tests/work_package_k1_4_foundation_remediation.test.js"
+    },
+    {
+      "mechanic": "Mirage Set Cost & Zone Placement",
+      "sourceField": "header.prefixes (Mirage: Cost N ...)",
+      "compilerRef": "compiler/keyword_compiler.js:70",
+      "parserFn": "parseMirageDeclaration (engine/prerequisites.js)",
+      "runtimeConsumer": "engine/index.js playCard(options.setAsMirage=true) -> moveCard(..., \"mirage\")",
+      "testRef": "tests/work_package_k1_4_foundation_remediation.test.js"
+    },
+    {
+      "mechanic": "Release / True Release Declaration Parser",
+      "sourceField": "header.prefixes (Release / True Release)",
+      "compilerRef": "compiler/header_parser.js:105",
+      "parserFn": "parseReleaseDeclaration (engine/prerequisites.js)",
+      "runtimeConsumer": "DESCRIPTOR_PARSED_ONLY_AWAITING_FULL_STEP_TRIGGER_WIRING",
+      "testRef": "tests/work_package_k1_4_foundation_remediation.test.js"
+    }
+  ]
+}

@@ -24,14 +24,86 @@
     "compiledIr": {
       "cardNumber": "SD68-X01",
       "name": "The SunConcluserDragon Apollonia-Vern",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 10000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 13000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 5,
+          "bp": 16000
+        }
+      },
+      "originalEffectText": "Flash - [Manifest: \"Contractor Apollon\" & C7 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand.\n\n[Unleash: 2] [LV1][LV2][LV3] (When Attacks)\nDestroy an opposing Spirit/Ultimate with the highest BP, and for each symbol on the destroyed target, send an opposing Life to the Trash. By sending two cores from your Red Grandwalker Nexuses to this Spirit, this destruction effect can't be prevented by opposing effects.\n\n[LV2][LV3] Flash - (When Attacks)\nOnce per turn, you can negate an opposing active White Magic/[Accel] effect, other than on-field effects.",
+      "teams": [],
       "keywords": [
+        {
+          "name": "Manifest",
+          "parameter": "\"Contractor Apollon\" & C7 or more, (Your Turn)",
+          "wave": 1,
+          "hook": "manifest",
+          "bracketed": true,
+          "index": 0,
+          "abilityId": "SD68-X01#AB_FLASH_NONE_LV1_LV2_LV3_92385cded7af73ca8140537b2ad24860aad24986dbc4c3f608e1d708faceff6d_9d564bbbd7b56b93044edcd3138008d2",
+          "cardNumber": "SD68-X01",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "SD68-X01#a0"
+        },
         {
           "name": "Unleash",
           "parameter": "2",
           "wave": 2,
           "hook": "unleash",
           "bracketed": true,
-          "index": 170
+          "index": 0,
+          "abilityId": "SD68-X01#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_c067cb9af5f9a537598f002ebc22261691a30a1b26ee8b54f23db1487d7f406a_f8f25e7ecf47c7f55190ab14983c97a4",
+          "cardNumber": "SD68-X01",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [
+            "Unleash: 2"
+          ],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "SD68-X01#a1"
         },
         {
           "name": "Accel",
@@ -39,12 +111,31 @@
           "wave": 2,
           "hook": "accel",
           "bracketed": true,
-          "index": 583
+          "index": 46,
+          "abilityId": "SD68-X01#AB_WHEN_ATTACKS_NONE_LV2_LV3_b01ceffa46658d7f336d9e8ce3f8a9c369a76bca8809d6b9374c6bc927d7402b_d2d060ea0a2fcf57de5fe2606c0c2120",
+          "cardNumber": "SD68-X01",
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": "ONCE_PER_TURN",
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "SD68-X01#a2"
         }
       ],
       "abilities": [
         {
-          "id": "SD68-X01#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -55,20 +146,31 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
-            "keyword": "Mani: \"Contractor Apollon\" & C7 or more, (Your Turn)",
+            "keyword": "Manifest: \"Contractor Apollon\" & C7 or more, (Your Turn)",
             "burstCondition": null,
             "isFlash": true,
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand."
           },
+          "originalAbilityText": "Flash - [Manifest: \"Contractor Apollon\" & C7 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -90,7 +192,9 @@
             },
             {
               "rawText": "pay one cost from the target to summon this card from the Hand.",
+              "originalClauseText": "pay one cost from the target to summon this card from the Hand.",
               "cleanText": "pay one cost from the target to summon this card from the Hand",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -102,10 +206,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD68-X01#a0",
+          "keywords": [
+            {
+              "name": "Manifest",
+              "parameter": "\"Contractor Apollon\" & C7 or more, (Your Turn)",
+              "wave": 1,
+              "hook": "manifest",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "SD68-X01#AB_FLASH_NONE_LV1_LV2_LV3_92385cded7af73ca8140537b2ad24860aad24986dbc4c3f608e1d708faceff6d_9d564bbbd7b56b93044edcd3138008d2",
+              "cardNumber": "SD68-X01",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "SD68-X01#a0"
+            }
+          ],
+          "id": "SD68-X01#AB_FLASH_NONE_LV1_LV2_LV3_92385cded7af73ca8140537b2ad24860aad24986dbc4c3f608e1d708faceff6d_9d564bbbd7b56b93044edcd3138008d2",
+          "physicalId": "SD68-X01#AB_FLASH_NONE_LV1_LV2_LV3_92385cded7af73ca8140537b2ad24860aad24986dbc4c3f608e1d708faceff6d_9d564bbbd7b56b93044edcd3138008d2",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_92385cded7af73ca8140537b2ad24860aad24986dbc4c3f608e1d708faceff6d_9d564bbbd7b56b93044edcd3138008d2",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_fd089baf29d63d89494920ed7c020a5e7118f2158d0521c62ee2a97c69257173_b49e01f3a0d1825706e6241e841392d1",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD68-X01#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -118,8 +266,17 @@
               "Unleash: 2"
             ],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -128,10 +285,14 @@
             "isMain": false,
             "cleanBody": "Destroy an opposing Spirit/Ultimate with the highest BP, and for each symbol on the destroyed target, send an opposing Life to the Trash. By sending two cores from your Red Grandwalker Nexuses to this Spirit, this destruction effect can't be prevented by opposing effects."
           },
+          "originalAbilityText": "[Unleash: 2] [LV1][LV2][LV3] (When Attacks)\nDestroy an opposing Spirit/Ultimate with the highest BP, and for each symbol on the destroyed target, send an opposing Life to the Trash. By sending two cores from your Red Grandwalker Nexuses to this Spirit, this destruction effect can't be prevented by opposing effects.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Destroy an opposing Spirit/Ultimate with the highest BP, and for each symbol on the destroyed target, send an opposing Life to the Trash.",
+              "originalClauseText": "Destroy an opposing Spirit/Ultimate with the highest BP, and for each symbol on the destroyed target, send an opposing Life to the Trash.",
               "cleanText": "Destroy an opposing Spirit/Ultimate with the highest BP, and for each symbol on the destroyed target, send an opposing Life to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -149,23 +310,94 @@
               }
             },
             {
-              "rawText": "By sending two cores from your Red Grandwalker Nexuses to this Spirit, this destruction effect can't be prevented by opposing effects.",
-              "cleanText": "By sending two cores from your Red Grandwalker Nexuses to this Spirit, this destruction effect can't be prevented by opposing effects",
+              "rawText": "By sending two cores from your Red Grandwalker Nexuses to this Spirit",
+              "originalClauseText": "By sending two cores from your Red Grandwalker Nexuses to this Spirit",
+              "cleanText": "By sending two cores from your Red Grandwalker Nexuses to this Spirit",
+              "clauseIndex": 1,
               "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 2,
+                "to": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                }
+              }
+            },
+            {
+              "rawText": "this destruction effect can't be prevented by opposing effects.",
+              "originalClauseText": "this destruction effect can't be prevented by opposing effects.",
+              "cleanText": "this destruction effect can't be prevented by opposing effects",
+              "clauseIndex": 2,
+              "link": "byDoing",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "MOVE_CORE",
-                "isCost": false
+                "op": "UNSUPPORTED",
+                "unhandledClause": "this destruction effect can't be prevented by opposing effects",
+                "reason": "UNSUPPORTED_EFFECT_PROTECTION: effect cannot be prevented by opposing effects"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "this destruction effect can't be prevented by opposing effects."
+          ],
+          "legacyId": "SD68-X01#a1",
+          "keywords": [
+            {
+              "name": "Unleash",
+              "parameter": "2",
+              "wave": 2,
+              "hook": "unleash",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "SD68-X01#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_c067cb9af5f9a537598f002ebc22261691a30a1b26ee8b54f23db1487d7f406a_f8f25e7ecf47c7f55190ab14983c97a4",
+              "cardNumber": "SD68-X01",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [
+                "Unleash: 2"
+              ],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "SD68-X01#a1"
+            }
+          ],
+          "id": "SD68-X01#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_c067cb9af5f9a537598f002ebc22261691a30a1b26ee8b54f23db1487d7f406a_f8f25e7ecf47c7f55190ab14983c97a4",
+          "physicalId": "SD68-X01#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_c067cb9af5f9a537598f002ebc22261691a30a1b26ee8b54f23db1487d7f406a_f8f25e7ecf47c7f55190ab14983c97a4",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_c067cb9af5f9a537598f002ebc22261691a30a1b26ee8b54f23db1487d7f406a_f8f25e7ecf47c7f55190ab14983c97a4",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_5b7b3c4fa4b6d302a96e8b36df58e23f535a48ab613d4a8fdfd47709846147d2_4377abd43c843a4e05651fe3a96aaa1a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD68-X01#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -175,8 +407,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -185,26 +428,77 @@
             "isMain": false,
             "cleanBody": "you can negate an opposing active White Magic/[Accel] effect, other than on-field effects."
           },
+          "originalAbilityText": "[LV2][LV3] Flash - (When Attacks)\nOnce per turn, you can negate an opposing active White Magic/[Accel] effect, other than on-field effects.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "you can negate an opposing active White Magic/[Accel] effect, other than on-field effects.",
+              "originalClauseText": "you can negate an opposing active White Magic/[Accel] effect, other than on-field effects.",
               "cleanText": "you can negate an opposing active White Magic/[Accel] effect, other than on-field effects",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "NEGATE_EFFECT"
+                "op": "KEYWORD_RULE",
+                "keyword": "Accel"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD68-X01#a2",
+          "keywords": [
+            {
+              "name": "Accel",
+              "parameter": null,
+              "wave": 2,
+              "hook": "accel",
+              "bracketed": true,
+              "index": 46,
+              "abilityId": "SD68-X01#AB_WHEN_ATTACKS_NONE_LV2_LV3_b01ceffa46658d7f336d9e8ce3f8a9c369a76bca8809d6b9374c6bc927d7402b_d2d060ea0a2fcf57de5fe2606c0c2120",
+              "cardNumber": "SD68-X01",
+              "levels": [
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": "ONCE_PER_TURN",
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "SD68-X01#a2"
+            }
+          ],
+          "id": "SD68-X01#AB_WHEN_ATTACKS_NONE_LV2_LV3_b01ceffa46658d7f336d9e8ce3f8a9c369a76bca8809d6b9374c6bc927d7402b_d2d060ea0a2fcf57de5fe2606c0c2120",
+          "physicalId": "SD68-X01#AB_WHEN_ATTACKS_NONE_LV2_LV3_b01ceffa46658d7f336d9e8ce3f8a9c369a76bca8809d6b9374c6bc927d7402b_d2d060ea0a2fcf57de5fe2606c0c2120",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_b01ceffa46658d7f336d9e8ce3f8a9c369a76bca8809d6b9374c6bc927d7402b_d2d060ea0a2fcf57de5fe2606c0c2120",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_5af4c8348293f3358457d2331d4cbe279372898b660829fb89c98747eb48a4e0_db1c5a9fee5b26cf1cc463d97ed20f54",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
-      "unsupportedClausesCount": 0,
-      "isFullySupported": true
+      "unsupportedClausesCount": 1,
+      "isFullySupported": false
     }
   },
   "SD68-003": {
@@ -227,10 +521,24 @@
     "compiledIr": {
       "cardNumber": "SD68-003",
       "name": "Folk-StarDragon",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 6000
+        }
+      },
+      "originalEffectText": "[LV1][LV2] (When Summoned)\nReturn a non-Cost 4 \"Astral Dragon\"/\"Olym\" family card from your Trash to the Hand.\n\n[LV2] (Your Attack Step)\nWhen your Hand increases via your \"Astral Dragon\"/\"Olym\" family effect, you can destroy an opposing 5000 BP or less Spirit/Ultimate. For each core on all your \"Contractor Apollon\" combined, increase the limit of this \"BP Destruction effect\" by +2000.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "SD68-003#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -240,8 +548,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -250,28 +567,52 @@
             "isMain": false,
             "cleanBody": "Return a non-Cost 4 \"Astral Dragon\"/\"Olym\" family card from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned)\nReturn a non-Cost 4 \"Astral Dragon\"/\"Olym\" family card from your Trash to the Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Return a non-Cost 4 \"Astral Dragon\"/\"Olym\" family card from your Trash to the Hand.",
+              "originalClauseText": "Return a non-Cost 4 \"Astral Dragon\"/\"Olym\" family card from your Trash to the Hand.",
               "cleanText": "Return a non-Cost 4 \"Astral Dragon\"/\"Olym\" family card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "nameIncludes": "Astral Dragon",
+                  "family": "Olym"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD68-003#a0",
+          "keywords": [],
+          "id": "SD68-003#AB_WHEN_SUMMONED_NONE_LV1_LV2_fc0b3013624c6bc01540d52544f2176aa825253e090d9861b7a4ee217efae4cf_b0a3dc5d0fd276b96d4ec4e86ae3e1ff",
+          "physicalId": "SD68-003#AB_WHEN_SUMMONED_NONE_LV1_LV2_fc0b3013624c6bc01540d52544f2176aa825253e090d9861b7a4ee217efae4cf_b0a3dc5d0fd276b96d4ec4e86ae3e1ff",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_fc0b3013624c6bc01540d52544f2176aa825253e090d9861b7a4ee217efae4cf_b0a3dc5d0fd276b96d4ec4e86ae3e1ff",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_06205a39ede2d87fb00483426dfb6cf08536ac3296cf6a8900c010de9f1119bb_9ba2d953f640fb7d22a3804eb0f22122",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD68-003#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -280,8 +621,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -290,10 +640,14 @@
             "isMain": false,
             "cleanBody": "When your Hand increases via your \"Astral Dragon\"/\"Olym\" family effect, you can destroy an opposing 5000 BP or less Spirit/Ultimate. For each core on all your \"Contractor Apollon\" combined, increase the limit of this \"BP Destruction effect\" by +2000."
           },
+          "originalAbilityText": "[LV2] (Your Attack Step)\nWhen your Hand increases via your \"Astral Dragon\"/\"Olym\" family effect, you can destroy an opposing 5000 BP or less Spirit/Ultimate. For each core on all your \"Contractor Apollon\" combined, increase the limit of this \"BP Destruction effect\" by +2000.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When your Hand increases via your \"Astral Dragon\"/\"Olym\" family effect, you can destroy an opposing 5000 BP or less Spirit/Ultimate.",
+              "originalClauseText": "When your Hand increases via your \"Astral Dragon\"/\"Olym\" family effect, you can destroy an opposing 5000 BP or less Spirit/Ultimate.",
               "cleanText": "When your Hand increases via your \"Astral Dragon\"/\"Olym\" family effect, you can destroy an opposing 5000 BP or less Spirit/Ultimate",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -315,7 +669,9 @@
             },
             {
               "rawText": "For each core on all your \"Contractor Apollon\" combined, increase the limit of this \"BP Destruction effect\" by +2000.",
+              "originalClauseText": "For each core on all your \"Contractor Apollon\" combined, increase the limit of this \"BP Destruction effect\" by +2000.",
               "cleanText": "For each core on all your \"Contractor Apollon\" combined, increase the limit of this \"BP Destruction effect\" by +2000",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -330,7 +686,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD68-003#a1",
+          "keywords": [],
+          "id": "SD68-003#AB_ATTACK_STEP_NONE_LV2_01d7bfb852139c5a83eecb6a3dd15148e3f0bc7bd4ead3d91fbb483c0ec45743_0ef2e5297921080dafffd25805ff2a6a",
+          "physicalId": "SD68-003#AB_ATTACK_STEP_NONE_LV2_01d7bfb852139c5a83eecb6a3dd15148e3f0bc7bd4ead3d91fbb483c0ec45743_0ef2e5297921080dafffd25805ff2a6a",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_01d7bfb852139c5a83eecb6a3dd15148e3f0bc7bd4ead3d91fbb483c0ec45743_0ef2e5297921080dafffd25805ff2a6a",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_c699a67a101df3066cf78445374a970465e51495f45ed29e5be22517e10b0103_b3fb49287a5a31eda41e18e90411a025",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -442,10 +813,13 @@
     "compiledIr": {
       "cardNumber": "SD68-006",
       "name": "Star Dust Flame",
+      "type": "Magic",
+      "levels": {},
+      "originalEffectText": "When this card was sent to the Trash from deck by your \"Apollon\" Grandwalker Nexus' effect, you can add it to the Hand. When you've done so, you can +1 core to any Red Grandwalker Nexus you control.\n\n[Flash]\nDestroy either an opposing 10000 BP or less Spirit, or an opposing 15000 BP or less Ultimate. If you control any \"Contractor Apollon\", increase the limit of this \"BP Destruction effect\" by +10000.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "SD68-006#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -456,8 +830,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -466,10 +845,14 @@
             "isMain": false,
             "cleanBody": "When this card was sent to the Trash from deck by your \"Apollon\" Grandwalker Nexus' effect, you can add it to the Hand. When you've done so, you can +1 core to any Red Grandwalker Nexus you control."
           },
+          "originalAbilityText": "When this card was sent to the Trash from deck by your \"Apollon\" Grandwalker Nexus' effect, you can add it to the Hand. When you've done so, you can +1 core to any Red Grandwalker Nexus you control.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When this card was sent to the Trash from deck by your \"Apollon\" Grandwalker Nexus' effect, you can add it to the Hand.",
+              "originalClauseText": "When this card was sent to the Trash from deck by your \"Apollon\" Grandwalker Nexus' effect, you can add it to the Hand.",
               "cleanText": "When this card was sent to the Trash from deck by your \"Apollon\" Grandwalker Nexus' effect, you can add it to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -481,7 +864,9 @@
             },
             {
               "rawText": "you can +1 core to any Red Grandwalker Nexus you control.",
+              "originalClauseText": "you can +1 core to any Red Grandwalker Nexus you control.",
               "cleanText": "you can +1 core to any Red Grandwalker Nexus you control",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": true,
               "isCost": false,
@@ -492,10 +877,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD68-006#a0",
+          "keywords": [],
+          "id": "SD68-006#AB_PASSIVE_NONE_LV1_LV2_LV3_df9685a7891d46757b78bd4595d80bcdf083b78bd4c941da3901199b944c366c_dcbd964f9d41682fde4499c73e27c3b2",
+          "physicalId": "SD68-006#AB_PASSIVE_NONE_LV1_LV2_LV3_df9685a7891d46757b78bd4595d80bcdf083b78bd4c941da3901199b944c366c_dcbd964f9d41682fde4499c73e27c3b2",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_df9685a7891d46757b78bd4595d80bcdf083b78bd4c941da3901199b944c366c_dcbd964f9d41682fde4499c73e27c3b2",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_9cd4d8b157d6558cc2f030ee2027698d415fb4ce4835e526cd30982e6208e055_b6b1e37b5015225fed86109efdf01f11",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD68-006#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -506,8 +903,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -516,10 +920,14 @@
             "isMain": false,
             "cleanBody": "Destroy either an opposing 10000 BP or less Spirit, or an opposing 15000 BP or less Ultimate. If you control any \"Contractor Apollon\", increase the limit of this \"BP Destruction effect\" by +10000."
           },
+          "originalAbilityText": "[Flash]\nDestroy either an opposing 10000 BP or less Spirit, or an opposing 15000 BP or less Ultimate. If you control any \"Contractor Apollon\", increase the limit of this \"BP Destruction effect\" by +10000.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Destroy either an opposing 10000 BP or less Spirit, or an opposing 15000 BP or less Ultimate.",
+              "originalClauseText": "Destroy either an opposing 10000 BP or less Spirit, or an opposing 15000 BP or less Ultimate.",
               "cleanText": "Destroy either an opposing 10000 BP or less Spirit, or an opposing 15000 BP or less Ultimate",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -536,7 +944,9 @@
             },
             {
               "rawText": "If you control any \"Contractor Apollon\", increase the limit of this \"BP Destruction effect\" by +10000.",
+              "originalClauseText": "If you control any \"Contractor Apollon\", increase the limit of this \"BP Destruction effect\" by +10000.",
               "cleanText": "increase the limit of this \"BP Destruction effect\" by +10000",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -551,7 +961,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD68-006#a1",
+          "keywords": [],
+          "id": "SD68-006#AB_FLASH_NONE_LV1_LV2_LV3_1d3f4c3e447aaf9bb121525dbe0c5ff519d0354c96cbb3426152b6098ed19562_7fbfbb4beafe43966f4259cf21b47621",
+          "physicalId": "SD68-006#AB_FLASH_NONE_LV1_LV2_LV3_1d3f4c3e447aaf9bb121525dbe0c5ff519d0354c96cbb3426152b6098ed19562_7fbfbb4beafe43966f4259cf21b47621",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_1d3f4c3e447aaf9bb121525dbe0c5ff519d0354c96cbb3426152b6098ed19562_7fbfbb4beafe43966f4259cf21b47621",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_4341f5abe130822ac2ebb59352dce55425121726a40bfce9dd48d788d0fac737_63d1beaf57245e572ee2978cb86f06e6",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -801,14 +1226,39 @@
     "compiledIr": {
       "cardNumber": "SD68-CX01",
       "name": "The FlameWheelContractor Apollon",
+      "type": "Contract Nexus",
+      "levels": {},
+      "originalEffectText": "[Neo-Core Charge:: (Astral Dragon/Devotee/Concluser & Cost 3 or more)]\n◆When your target Spirit is summoned, you can +1 core to this Nexus.\n◆(Once per Turn: Same Name) When this Nexus is deployed, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus.\n\n[Revive] Main - (Once per Turn: Same Name) You can deploy this card from Soul State.\n\n2 [LV1][LV2] Flash -\n(Once per turn, send two cores from this Nexus to the Void) Your counters +2. Then, if it's the Attack Step, ignoring \"BP+\" and \"give +BP\" effects, destroy an opposing 7000 BP or less Spirit/Ultimate.\n\n[Contract Field] [LV2] (Your Attack Step)\n(Can't Stack) When your \"Astral Dragon\" family Spirit attacks, you can reveal a card from your decktop. If it's a \"Devotee\"/\"Concluser\" family card, send an opposing Life to the Reserve. Add the revealed card to the Hand.",
+      "teams": [],
       "keywords": [
         {
           "name": "Neo-Core Charge",
-          "parameter": "(Astral Dragon/Devotee/Concluser & Cost 3 or more)",
+          "parameter": ": (Astral Dragon/Devotee/Concluser & Cost 3 or more)",
           "wave": 3,
           "hook": "neo_core_charge",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "SD68-CX01#AB_PASSIVE_NONE_LV1_LV2_LV3_7611d8030db737deb9b6c69a8594444433f7fd14d2a5aabe90197e72665c91d8_e0eee5b8ef0ebb2e0f63dd9fb8321321",
+          "cardNumber": "SD68-CX01",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "SD68-CX01#a0"
         },
         {
           "name": "Revive",
@@ -816,20 +1266,62 @@
           "wave": 3,
           "hook": "revive",
           "bracketed": true,
-          "index": 311
+          "index": 0,
+          "abilityId": "SD68-CX01#AB_MAIN_NONE_LV1_LV2_LV3_a133989a75a7ae85775b36efd544be2422cdac1b44be465d34c40e408ab21879_88cc4793a30fa9f3ec7b2874bd261432",
+          "cardNumber": "SD68-CX01",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "isFlash": false,
+          "isMain": true,
+          "legacyAbilityId": "SD68-CX01#a3"
         },
         {
-          "name": "Contract Field",
-          "parameter": null,
+          "name": "Grand Skill",
+          "parameter": "2",
           "wave": 3,
-          "hook": "contract_field",
+          "hook": "grand_skill",
           "bracketed": true,
-          "index": 620
+          "index": 0,
+          "abilityId": "SD68-CX01#AB_FLASH_NONE_LV1_LV2_40f7d104da0f3bcdb52e4ad7b9be02ca6daceacdfd02ab68b442f6867157c439_07f7f2ee9d0011549c5392b68e2a6ff8",
+          "cardNumber": "SD68-CX01",
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [
+            "Grand Skill: 2"
+          ],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "SD68-CX01#a4"
         }
       ],
       "abilities": [
         {
-          "id": "SD68-CX01#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -840,8 +1332,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Neo-Core Charge:: (Astral Dragon/Devotee/Concluser & Cost 3 or more)",
@@ -850,11 +1347,55 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "originalAbilityText": "[Neo-Core Charge:: (Astral Dragon/Devotee/Concluser & Cost 3 or more)]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD68-CX01#a0",
+          "keywords": [
+            {
+              "name": "Neo-Core Charge",
+              "parameter": ": (Astral Dragon/Devotee/Concluser & Cost 3 or more)",
+              "wave": 3,
+              "hook": "neo_core_charge",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "SD68-CX01#AB_PASSIVE_NONE_LV1_LV2_LV3_7611d8030db737deb9b6c69a8594444433f7fd14d2a5aabe90197e72665c91d8_e0eee5b8ef0ebb2e0f63dd9fb8321321",
+              "cardNumber": "SD68-CX01",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "SD68-CX01#a0"
+            }
+          ],
+          "id": "SD68-CX01#AB_PASSIVE_NONE_LV1_LV2_LV3_7611d8030db737deb9b6c69a8594444433f7fd14d2a5aabe90197e72665c91d8_e0eee5b8ef0ebb2e0f63dd9fb8321321",
+          "physicalId": "SD68-CX01#AB_PASSIVE_NONE_LV1_LV2_LV3_7611d8030db737deb9b6c69a8594444433f7fd14d2a5aabe90197e72665c91d8_e0eee5b8ef0ebb2e0f63dd9fb8321321",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_7611d8030db737deb9b6c69a8594444433f7fd14d2a5aabe90197e72665c91d8_e0eee5b8ef0ebb2e0f63dd9fb8321321",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_a18ddf7b6ac6dad5a3824e0b17334f8fbae15782cbfeac7d60dfc6ba19d97723_e910048592c7e0ab9f2089172234dd3b",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD68-CX01#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -865,8 +1406,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -875,24 +1421,49 @@
             "isMain": false,
             "cleanBody": "◆When your target Spirit is summoned, you can +1 core to this Nexus."
           },
+          "originalAbilityText": "◆When your target Spirit is summoned, you can +1 core to this Nexus.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "◆When your target Spirit is summoned, you can +1 core to this Nexus.",
+              "originalClauseText": "◆When your target Spirit is summoned, you can +1 core to this Nexus.",
               "cleanText": "When your target Spirit is summoned, you can +1 core to this Nexus",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "MOVE_CORE"
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                },
+                "to": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD68-CX01#a1",
+          "keywords": [],
+          "id": "SD68-CX01#AB_PASSIVE_NONE_LV1_LV2_LV3_078f3c55abc7dc58f057cbecb25a8ae148d83bf7e356a99e5f7b0ed775887603_f611bf931088373270c009920d336ad5",
+          "physicalId": "SD68-CX01#AB_PASSIVE_NONE_LV1_LV2_LV3_078f3c55abc7dc58f057cbecb25a8ae148d83bf7e356a99e5f7b0ed775887603_f611bf931088373270c009920d336ad5",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_078f3c55abc7dc58f057cbecb25a8ae148d83bf7e356a99e5f7b0ed775887603_f611bf931088373270c009920d336ad5",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_892e79423b02eaf963da37ff31c146996548220896e706d0005db3d396b2aaed_dc211f6c71dafa060fd12e61831e90d1",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD68-CX01#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -903,8 +1474,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -913,10 +1489,14 @@
             "isMain": false,
             "cleanBody": "◆(Once per Turn: Same Name) When this Nexus is deployed, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus."
           },
+          "originalAbilityText": "◆(Once per Turn: Same Name) When this Nexus is deployed, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "◆ When this Nexus is deployed, you can send three cards from your decktop to the Trash.",
+              "originalClauseText": "◆ When this Nexus is deployed, you can send three cards from your decktop to the Trash.",
               "cleanText": "When this Nexus is deployed, you can send three cards from your decktop to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -931,7 +1511,9 @@
             },
             {
               "rawText": "For each target card among them, +1 core to this Nexus.",
+              "originalClauseText": "For each target card among them, +1 core to this Nexus.",
               "cleanText": "For each target card among them, +1 core to this Nexus",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -943,10 +1525,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD68-CX01#a2",
+          "keywords": [],
+          "id": "SD68-CX01#AB_PASSIVE_NONE_LV1_LV2_LV3_bdb3fc91837a43e6c35617c34d104b033363f3151d88ebbf9ed16deea81f939b_a512cfb5d0ec5fe4473d74750b224f98",
+          "physicalId": "SD68-CX01#AB_PASSIVE_NONE_LV1_LV2_LV3_bdb3fc91837a43e6c35617c34d104b033363f3151d88ebbf9ed16deea81f939b_a512cfb5d0ec5fe4473d74750b224f98",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_bdb3fc91837a43e6c35617c34d104b033363f3151d88ebbf9ed16deea81f939b_a512cfb5d0ec5fe4473d74750b224f98",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_2419b1268caf1d6c0857cfad44abaea69472ca98c4a403552cdfc93a9aa20538_e2a4d0186cafab7c27e7177c73d40049",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD68-CX01#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -957,8 +1551,19 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "MAIN",
+            "timings": [
+              "MAIN"
+            ],
             "timingLabel": "Main",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "MAIN"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
             "limit": "ONCE_PER_TURN_SAME_NAME",
             "cantStack": false,
             "keyword": "Revive",
@@ -967,10 +1572,14 @@
             "isMain": true,
             "cleanBody": "You can deploy this card from Soul State."
           },
+          "originalAbilityText": "[Revive] Main - (Once per Turn: Same Name) You can deploy this card from Soul State.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "You can deploy this card from Soul State.",
+              "originalClauseText": "You can deploy this card from Soul State.",
               "cleanText": "You can deploy this card from Soul State",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -982,10 +1591,56 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD68-CX01#a3",
+          "keywords": [
+            {
+              "name": "Revive",
+              "parameter": null,
+              "wave": 3,
+              "hook": "revive",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "SD68-CX01#AB_MAIN_NONE_LV1_LV2_LV3_a133989a75a7ae85775b36efd544be2422cdac1b44be465d34c40e408ab21879_88cc4793a30fa9f3ec7b2874bd261432",
+              "cardNumber": "SD68-CX01",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "MAIN",
+              "timingLabel": "Main",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": "ONCE_PER_TURN_SAME_NAME",
+              "isFlash": false,
+              "isMain": true,
+              "legacyAbilityId": "SD68-CX01#a3"
+            }
+          ],
+          "id": "SD68-CX01#AB_MAIN_NONE_LV1_LV2_LV3_a133989a75a7ae85775b36efd544be2422cdac1b44be465d34c40e408ab21879_88cc4793a30fa9f3ec7b2874bd261432",
+          "physicalId": "SD68-CX01#AB_MAIN_NONE_LV1_LV2_LV3_a133989a75a7ae85775b36efd544be2422cdac1b44be465d34c40e408ab21879_88cc4793a30fa9f3ec7b2874bd261432",
+          "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_a133989a75a7ae85775b36efd544be2422cdac1b44be465d34c40e408ab21879_88cc4793a30fa9f3ec7b2874bd261432",
+          "semanticIdV3": "SEM3#AB_MAIN_NONE_LV1_LV2_LV3_67ddc7c656b0d0c2b8fa014865a27d7d92653e5f66c518d079dd743d78e323c3_c576398bae8878402905c9e2884b813b",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "MAIN"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD68-CX01#a4",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -997,8 +1652,15 @@
               "Grand Skill: 2"
             ],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1007,10 +1669,14 @@
             "isMain": false,
             "cleanBody": "(Once per turn, send two cores from this Nexus to the Void) Your counters +2. Then, if it's the Attack Step, ignoring \"BP+\" and \"give +BP\" effects, destroy an opposing 7000 BP or less Spirit/Ultimate."
           },
+          "originalAbilityText": "2 [LV1][LV2] Flash -\n(Once per turn, send two cores from this Nexus to the Void) Your counters +2. Then, if it's the Attack Step, ignoring \"BP+\" and \"give +BP\" effects, destroy an opposing 7000 BP or less Spirit/Ultimate.",
+          "abilityIndex": 4,
           "clauses": [
             {
               "rawText": "(Once per turn, send two cores from this Nexus to the Void) Your counters +2.",
+              "originalClauseText": "(Once per turn, send two cores from this Nexus to the Void) Your counters +2.",
               "cleanText": "(Once per turn, send two cores from this Nexus to the Void) Your counters +2",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1023,7 +1689,9 @@
             },
             {
               "rawText": "if it's the Attack Step, ignoring \"BP+\" and \"give +BP\" effects, destroy an opposing 7000 BP or less Spirit/Ultimate.",
+              "originalClauseText": "if it's the Attack Step, ignoring \"BP+\" and \"give +BP\" effects, destroy an opposing 7000 BP or less Spirit/Ultimate.",
               "cleanText": "ignoring \"BP+\" and \"give +BP\" effects, destroy an opposing 7000 BP or less Spirit/Ultimate",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -1044,10 +1712,55 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD68-CX01#a4",
+          "keywords": [
+            {
+              "name": "Grand Skill",
+              "parameter": "2",
+              "wave": 3,
+              "hook": "grand_skill",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "SD68-CX01#AB_FLASH_NONE_LV1_LV2_40f7d104da0f3bcdb52e4ad7b9be02ca6daceacdfd02ab68b442f6867157c439_07f7f2ee9d0011549c5392b68e2a6ff8",
+              "cardNumber": "SD68-CX01",
+              "levels": [
+                1,
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [
+                "Grand Skill: 2"
+              ],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "SD68-CX01#a4"
+            }
+          ],
+          "id": "SD68-CX01#AB_FLASH_NONE_LV1_LV2_40f7d104da0f3bcdb52e4ad7b9be02ca6daceacdfd02ab68b442f6867157c439_07f7f2ee9d0011549c5392b68e2a6ff8",
+          "physicalId": "SD68-CX01#AB_FLASH_NONE_LV1_LV2_40f7d104da0f3bcdb52e4ad7b9be02ca6daceacdfd02ab68b442f6867157c439_07f7f2ee9d0011549c5392b68e2a6ff8",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_40f7d104da0f3bcdb52e4ad7b9be02ca6daceacdfd02ab68b442f6867157c439_07f7f2ee9d0011549c5392b68e2a6ff8",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_0c66896a9a75359864d10d6fdadb572b5f82e218bce99a1e8a03c31bceea0735_7bee8b6e641d5c27f92bd65a39cbb58f",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD68-CX01#a5",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1056,8 +1769,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "CANT_STACK"
+            ],
             "limit": null,
             "cantStack": true,
             "keyword": null,
@@ -1066,10 +1790,14 @@
             "isMain": false,
             "cleanBody": "When your \"Astral Dragon\" family Spirit attacks, you can reveal a card from your decktop. If it's a \"Devotee\"/\"Concluser\" family card, send an opposing Life to the Reserve. Add the revealed card to the Hand."
           },
+          "originalAbilityText": "[Contract Field] [LV2] (Your Attack Step)\n(Can't Stack) When your \"Astral Dragon\" family Spirit attacks, you can reveal a card from your decktop. If it's a \"Devotee\"/\"Concluser\" family card, send an opposing Life to the Reserve. Add the revealed card to the Hand.",
+          "abilityIndex": 5,
           "clauses": [
             {
               "rawText": "When your \"Astral Dragon\" family Spirit attacks, you can reveal a card from your decktop.",
+              "originalClauseText": "When your \"Astral Dragon\" family Spirit attacks, you can reveal a card from your decktop.",
               "cleanText": "When your \"Astral Dragon\" family Spirit attacks, you can reveal a card from your decktop",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1082,7 +1810,9 @@
             },
             {
               "rawText": "If it's a \"Devotee\"/\"Concluser\" family card, send an opposing Life to the Reserve.",
+              "originalClauseText": "If it's a \"Devotee\"/\"Concluser\" family card, send an opposing Life to the Reserve.",
               "cleanText": "send an opposing Life to the Reserve",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1090,28 +1820,58 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "self"
+                }
               }
             },
             {
               "rawText": "Add the revealed card to the Hand.",
+              "originalClauseText": "Add the revealed card to the Hand.",
               "cleanText": "Add the revealed card to the Hand",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "ADD_TO_HAND"
+                "op": "UNSUPPORTED",
+                "rawText": "Add the revealed card to the Hand"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "Add the revealed card to the Hand."
+          ],
+          "legacyId": "SD68-CX01#a5",
+          "keywords": [],
+          "id": "SD68-CX01#AB_ATTACK_STEP_NONE_LV2_1eb8a13c1262031c23a03e6bbe439b7d48cb269421df1cf4f0530106665ba46e_c243f0cf244746f7c89e52a5e7e8acdc",
+          "physicalId": "SD68-CX01#AB_ATTACK_STEP_NONE_LV2_1eb8a13c1262031c23a03e6bbe439b7d48cb269421df1cf4f0530106665ba46e_c243f0cf244746f7c89e52a5e7e8acdc",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_1eb8a13c1262031c23a03e6bbe439b7d48cb269421df1cf4f0530106665ba46e_c243f0cf244746f7c89e52a5e7e8acdc",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_645837bc376453bb1fc47a776b059c57a9b8d7837472be5fdfc725c662796e7f_15f8867a67df58c70f08c9448c7f18fa",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "CANT_STACK"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
-      "compiledClausesCount": 9,
-      "unsupportedClausesCount": 0,
-      "isFullySupported": true
+      "compiledClausesCount": 8,
+      "unsupportedClausesCount": 1,
+      "isFullySupported": false
     }
   },
   "SD68-001": {

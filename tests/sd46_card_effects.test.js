@@ -107,6 +107,7 @@ describe('SD46 Card Effects & Mechanics Regression Suite', () => {
 
     it('Void cores can be moved onto a Grandwalker Nexus and tracked in state', async () => {
       const state = createGameState();
+      state.players.player.voidCores.normal = 10;
       const nexus = makeEngineCard('SD46-CP01', 'Mogami Shunta', 'Nexus', { family: 'Grandwalker' });
       const stack = field(state, 'player', nexus, 1);
       state.players.player.voidCores.normal = 2;
@@ -120,6 +121,7 @@ describe('SD46 Card Effects & Mechanics Regression Suite', () => {
 
     it('SD46-007 passive immunity blocks opposing Spirit and Nexus effects but not Magic', () => {
       const state = createGameState();
+      state.players.player.voidCores.normal = 10;
       const target = makeEngineCard('SD46-007', 'Tigrigoreus', 'Spirit', { compiledIr: getCardOverride('SD46-007') });
       const stack = field(state, 'player', target);
       assert.equal(isImmune(state, stack, makeEngineCard('T-SPIRIT', 'source', 'Spirit', {}, 'opponent')), true);
@@ -129,6 +131,7 @@ describe('SD46 Card Effects & Mechanics Regression Suite', () => {
 
     it('SD46-007 can block while exhausted and gains BP during the opponent attack step', () => {
       const state = createGameState();
+      state.players.player.voidCores.normal = 10;
       const source = makeEngineCard('SD46-007', 'Tigrigoreus', 'Spirit', { compiledIr: getCardOverride('SD46-007') });
       const defender = field(state, 'player', source, 3);
       defender.state = 'EXHAUSTED';
@@ -140,6 +143,7 @@ describe('SD46 Card Effects & Mechanics Regression Suite', () => {
 
     it('Mogami Shunta protects its Grandwalker Nexus and restricts core movement to explicit targeting', async () => {
       const state = createGameState();
+      state.players.player.voidCores.normal = 10;
       const nexusCard = makeEngineCard('SD46-CP01', 'Mogami Shunta', 'Nexus', { family: 'Grandwalker', compiledIr: getCardOverride('SD46-CP01') });
       const nexus = field(state, 'player', nexusCard, 1);
       const source = makeEngineCard('T-EFFECT', 'Nexus effect', 'Spirit', {}, 'opponent');
@@ -152,6 +156,7 @@ describe('SD46 Card Effects & Mechanics Regression Suite', () => {
 
     it('Braves attached to Spirits are found by Brave selectors', () => {
       const state = createGameState();
+      state.players.player.voidCores.normal = 10;
       const host = makeEngineCard('T-HOST', 'Host', 'Spirit');
       const brave = makeEngineCard('T-BRAVE', 'Attached Brave', 'Brave');
       const stack = field(state, 'opponent', host);
@@ -162,6 +167,7 @@ describe('SD46 Card Effects & Mechanics Regression Suite', () => {
 
     it('SD46-001 adds only the specified two cards from its reveal and discards the rest', async () => {
       const state = createGameState();
+      state.players.player.voidCores.normal = 10;
       const source = makeEngineCard('SD46-001', 'Thunder-Z-Puma', 'Spirit', { compiledIr: getCardOverride('SD46-001') });
       const shunta = makeEngineCard('SD46-CP01', 'Mogami Shunta', 'Nexus');
       const target = makeEngineCard('T-GODKING', 'Red God King', 'Spirit', { color: 'Red', family: 'God-King' });
@@ -206,6 +212,7 @@ describe('SD46 Card Effects & Mechanics Regression Suite', () => {
     it('SD46-007 Main Accel draws one card, then moves itself to the Removed Zone', async () => {
       resetInstanceIdCounter();
       const state = createGameState();
+      state.players.player.voidCores.normal = 10;
       const accel = createCardInstance({
         card_number: 'SD46-007', name: 'The SteelThunderKnight Tigrigoreus',
         type: 'Spirit', cost: 3, levels: { 1: { cost: 1, bp: 1000 } }
@@ -230,6 +237,7 @@ describe('SD46 Card Effects & Mechanics Regression Suite', () => {
     it('SD46-X03 Flash Accel returns three opposing Spirits or Ultimates, then removes itself', async () => {
       resetInstanceIdCounter();
       const state = createGameState();
+      state.players.player.voidCores.normal = 10;
       const source = makeEngineCard('SD46-X03', 'Igridios-Z', 'Spirit', { compiledIr: getCardOverride('SD46-X03') });
       state.players.player.hand.push(source);
       const targets = [
@@ -251,6 +259,7 @@ describe('SD46 Card Effects & Mechanics Regression Suite', () => {
     it('SD46-X01 follows the first destroyed Spirit family when choosing its second target', async () => {
       resetInstanceIdCounter();
       const state = createGameState();
+      state.players.player.voidCores.normal = 10;
       const source = makeEngineCard('SD46-X01', 'Blitz-Tiger-Z', 'Spirit', { compiledIr: getCardOverride('SD46-X01') });
       const first = makeEngineCard('T-WOLF-1', 'Wolf Spirit', 'Spirit', { family: 'Wolf', bp: 8000 }, 'opponent');
       const unrelated = makeEngineCard('T-SNAKE-1', 'Snake Spirit', 'Spirit', { family: 'Snake', bp: 4000 }, 'opponent');
@@ -296,6 +305,7 @@ describe('SD46 Card Effects & Mechanics Regression Suite', () => {
 
     it('SD46-006 gains one Void core per three cards in the opposing hand', async () => {
       const state = createGameState();
+      state.players.player.voidCores.normal = 10;
       const source = makeEngineCard('SD46-006', 'Licospiros', 'Spirit', { compiledIr: getCardOverride('SD46-006') });
       const stack = field(state, 'player', source);
       state.players.opponent.hand.push(...Array.from({ length: 7 }, (_, i) => makeEngineCard(`HAND-${i}`, `Hand ${i}`, 'Magic', {}, 'opponent')));
@@ -306,6 +316,7 @@ describe('SD46 Card Effects & Mechanics Regression Suite', () => {
 
     it('SD46-006 returns itself to hand only when destroyed by the opponent', async () => {
       const state = createGameState();
+      state.players.player.voidCores.normal = 10;
       const source = makeEngineCard('SD46-006', 'Licospiros', 'Spirit', { compiledIr: getCardOverride('SD46-006') });
       state.players.player.grave.push(source);
       const ability = getCardOverride('SD46-006').abilities.find(a => a.header.timing === 'WHEN_DESTROYED');
@@ -332,6 +343,7 @@ describe('SD46 Card Effects & Mechanics Regression Suite', () => {
 
     it('Mogami Shunta Core Charge reacts only to a qualifying Spirit or Brave summon', async () => {
       const game = createGame();
+      game.state.players.player.voidCores.normal = 10;
       const nexus = makeEngineCard('SD46-CP01', 'Mogami Shunta', 'Nexus', { family: 'Grandwalker', compiledIr: getCardOverride('SD46-CP01') });
       const nexusStack = field(game.state, 'player', nexus, 1);
       const tooSmall = makeEngineCard('T-CHEAP', 'Cheap God-King', 'Spirit', { family: 'God-King', cost: 2 });

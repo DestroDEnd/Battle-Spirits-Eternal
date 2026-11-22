@@ -233,7 +233,9 @@ export const BS18_OVERRIDES = {
             "condition": null,
             "duration": null,
             "op": {
-              "op": "FORCE_ATTACK"
+              "op": "FORCE_ATTACK",
+              "side": "opp",
+              "minAttacks": 1
             }
           }
         ],

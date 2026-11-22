@@ -1,0 +1,90 @@
+{
+  "batch": "K1-BATCH-02",
+  "title": "Conditions Remediation & Runtime Integration",
+  "generatedAt": "2026-11-20T13:20:50.509Z",
+  "overallStatus": "PASSED",
+  "criteria": [
+    {
+      "id": "B2-C1",
+      "criterion": "Four-state tri+invalid evaluation (TRUE / FALSE / UNSUPPORTED / INVALID_CONTEXT) without breaking existing UNSUPPORTED contracts",
+      "status": "PASS",
+      "evidence": "tests/work_package_k1_batch_02_conditions.test.js (K1B2-01, K1B2-02) + fg1/fg2/hij1 suites"
+    },
+    {
+      "id": "B2-C2",
+      "criterion": "All 406 op.condition instances evaluated at runtime (404 Rush colorSymbol + BOTH_PLAYERS_CONTROL_NEXUS + LEVEL_LTE) & compiler emits typed COLOR_SYMBOL AST",
+      "status": "PASS",
+      "metrics": {
+        "opCondTotal": 406,
+        "opCondAuditEvaluable": 2,
+        "opCondRuntimeEvaluable": 406,
+        "opCondFailures": 0
+      },
+      "evidence": "engine/resolver.js, engine/ops/index.js, compiler/clause_patterns.js, K1B2-04, K1B2-05"
+    },
+    {
+      "id": "B2-C3",
+      "criterion": "High-impact Batch 2 clause.condition patterns added cleanly (compound fix, pre-advent, summon/use origin, counter sets, Hand+Removed, teams/braves/Rebirth)",
+      "status": "PASS",
+      "metrics": {
+        "before": 3537,
+        "after": 3672,
+        "delta": 135
+      },
+      "evidence": "tests/work_package_k1_batch_02_conditions.test.js (K1B2-01..K1B2-05)"
+    },
+    {
+      "id": "B2-C4",
+      "criterion": "Regression suite (Batch 02 + existing condition/compiler/K1.5 tests) passes 100%",
+      "status": "PASS",
+      "testCounts": {
+        "passed": 109,
+        "failed": 0
+      }
+    },
+    {
+      "id": "B2-C5",
+      "criterion": "Central unresolved ledger updated in-place with zero deleted entries",
+      "status": "PASS",
+      "metrics": {
+        "updatedCount": 1380,
+        "totalRecords": 18031,
+        "summary": {
+          "byBatch": {
+            "K1-BATCH-05": 12427,
+            "K1-BATCH-03": 823,
+            "K1-BATCH-01_CARRY_FORWARD": 2593,
+            "K1-BATCH-02": 1380,
+            "K1-BATCH-04": 566,
+            "K1-BATCH-05_EXCLUSION": 14,
+            "MANUAL_REVIEW_QUEUE": 228
+          },
+          "byStatus": {
+            "HANDLER_PRESENT": 13203,
+            "UNVERIFIED": 2454,
+            "PARTIALLY_VERIFIED": 186,
+            "RESOLVED_VERIFIED": 532,
+            "PARSED_FAILURE": 848,
+            "PARAMETERS_INCOMPLETE": 566,
+            "SOURCE_CORRECTION_REQUIRED": 14,
+            "MANUAL_REVIEW_REQUIRED": 228
+          },
+          "byBatchAndStatus": {
+            "K1-BATCH-05::HANDLER_PRESENT": 12397,
+            "K1-BATCH-03::HANDLER_PRESENT": 806,
+            "K1-BATCH-01_CARRY_FORWARD::UNVERIFIED": 2441,
+            "K1-BATCH-03::PARTIALLY_VERIFIED": 4,
+            "K1-BATCH-02::RESOLVED_VERIFIED": 532,
+            "K1-BATCH-02::PARSED_FAILURE": 848,
+            "K1-BATCH-04::PARAMETERS_INCOMPLETE": 566,
+            "K1-BATCH-01_CARRY_FORWARD::PARTIALLY_VERIFIED": 152,
+            "K1-BATCH-05::PARTIALLY_VERIFIED": 30,
+            "K1-BATCH-03::UNVERIFIED": 13,
+            "K1-BATCH-05_EXCLUSION::SOURCE_CORRECTION_REQUIRED": 14,
+            "MANUAL_REVIEW_QUEUE::MANUAL_REVIEW_REQUIRED": 228
+          }
+        }
+      }
+    }
+  ]
+}

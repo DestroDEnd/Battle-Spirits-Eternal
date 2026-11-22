@@ -1,0 +1,91 @@
+{
+  "batch": "K1-BATCH-03",
+  "title": "Keywords, Prerequisites & All 13 SuAdcon Cards",
+  "generatedAt": "2026-11-20T13:43:42.594Z",
+  "overallStatus": "PASSED",
+  "criteria": [
+    {
+      "id": "B3-C1",
+      "criterion": "All 13 SuAdcon abilities parsed (including curly quotes) and enforced in evaluateAdventCondition, evaluateSummonCondition, ADVENT_STACK, and game.performAdvent",
+      "status": "PASS",
+      "metrics": {
+        "total": 13,
+        "verified": 13
+      },
+      "evidence": "tests/work_package_k1_batch_03_keywords_prerequisites.test.js (K1B3-01)"
+    },
+    {
+      "id": "B3-C2",
+      "criterion": "Prefix prerequisite gating implemented and tested for During Brave, During Advent, During OC, During Set, Soul State, and During Seal",
+      "status": "PASS",
+      "metrics": {
+        "During Brave / When Braved": 1191,
+        "During Advent": 301,
+        "During OC": 373,
+        "During Set": 548,
+        "Soul State": 86,
+        "During Seal": 131
+      },
+      "evidence": "tests/work_package_k1_batch_03_keywords_prerequisites.test.js (K1B3-02)"
+    },
+    {
+      "id": "B3-C3",
+      "criterion": "Real-card E2E execution for Burst, Mirage, Release/True Release, Accel, Change, High Speed, Rush, Heavy Armor, Clash, Curse, Crush, Holy Life, U-Trigger, Core Charge, Rebirth",
+      "status": "PASS",
+      "evidence": "tests/work_package_k1_batch_03_keywords_prerequisites.test.js (K1B3-03, K1B3-04)"
+    },
+    {
+      "id": "B3-C4",
+      "criterion": "Batch 03 + keyword/contract/K1.5/Batch 02 regression suites pass 100%",
+      "status": "PASS",
+      "testCounts": {
+        "passed": 29,
+        "failed": 0
+      }
+    },
+    {
+      "id": "B3-C5",
+      "criterion": "Central ledger updated in-place resolving all 13 COMPLEX_ADVENT_PREREQUISITE entries with zero deleted records",
+      "status": "PASS",
+      "metrics": {
+        "updatedCount": 13,
+        "totalRecords": 18031,
+        "summary": {
+          "byBatch": {
+            "K1-BATCH-05": 12427,
+            "K1-BATCH-03": 823,
+            "K1-BATCH-01_CARRY_FORWARD": 2593,
+            "K1-BATCH-02": 1380,
+            "K1-BATCH-04": 566,
+            "K1-BATCH-05_EXCLUSION": 14,
+            "MANUAL_REVIEW_QUEUE": 228
+          },
+          "byStatus": {
+            "HANDLER_PRESENT": 13203,
+            "UNVERIFIED": 2441,
+            "PARTIALLY_VERIFIED": 186,
+            "RESOLVED_VERIFIED": 545,
+            "PARSED_FAILURE": 848,
+            "PARAMETERS_INCOMPLETE": 566,
+            "SOURCE_CORRECTION_REQUIRED": 14,
+            "MANUAL_REVIEW_REQUIRED": 228
+          },
+          "byBatchAndStatus": {
+            "K1-BATCH-05::HANDLER_PRESENT": 12397,
+            "K1-BATCH-03::HANDLER_PRESENT": 806,
+            "K1-BATCH-01_CARRY_FORWARD::UNVERIFIED": 2441,
+            "K1-BATCH-03::PARTIALLY_VERIFIED": 4,
+            "K1-BATCH-02::RESOLVED_VERIFIED": 532,
+            "K1-BATCH-02::PARSED_FAILURE": 848,
+            "K1-BATCH-04::PARAMETERS_INCOMPLETE": 566,
+            "K1-BATCH-01_CARRY_FORWARD::PARTIALLY_VERIFIED": 152,
+            "K1-BATCH-05::PARTIALLY_VERIFIED": 30,
+            "K1-BATCH-03::RESOLVED_VERIFIED": 13,
+            "K1-BATCH-05_EXCLUSION::SOURCE_CORRECTION_REQUIRED": 14,
+            "MANUAL_REVIEW_QUEUE::MANUAL_REVIEW_REQUIRED": 228
+          }
+        }
+      }
+    }
+  ]
+}

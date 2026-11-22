@@ -1,0 +1,104 @@
+Test_ID,Category,Description,Test_File,Status,Verification_Target
+TC-ACT-01,Ordinary OPT,First activation succeeds and consumes physical limit,tests/runtime_activation_limits.test.js,PASS,Physical ability limit
+TC-ACT-02,Ordinary OPT,Second activation rejected within same turn,tests/runtime_activation_limits.test.js,PASS,Physical ability limit
+TC-ACT-03,Ordinary OPT,Second physical copy activates independently,tests/runtime_activation_limits.test.js,PASS,Placement independence
+TC-ACT-04,Ordinary OPT,Distinct abilities on same card separate counters,tests/runtime_activation_limits.test.js,PASS,Ability isolation
+TC-ACT-05,Ordinary OPT,New physical placement receives new restriction identity,tests/runtime_activation_limits.test.js,PASS,Placement re-entry
+TC-ACT-06,Same Name OPT,First qualifying Same Name activation succeeds,tests/runtime_activation_limits.test.js,PASS,Semantic ability limit
+TC-ACT-07,Same Name OPT,Second physical copy blocked for same player,tests/runtime_activation_limits.test.js,PASS,Semantic ability limit
+TC-ACT-08,Same Name OPT,Different semantic ability on same card allowed,tests/runtime_activation_limits.test.js,PASS,Semantic differentiation
+TC-ACT-09,Same Name OPT,Opponent has independent Same Name scope,tests/runtime_activation_limits.test.js,PASS,Player scope independence
+TC-ACT-10,Same Name OPT,Equivalent abilities across placements share limit,tests/runtime_activation_limits.test.js,PASS,Shared semantic identity
+TC-ACT-11,Commit Timing,Failed declaration before commit does not consume,tests/runtime_activation_limits.test.js,PASS,Stage 4 atomic commit
+TC-ACT-12,Commit Timing,Unpayable cost before commit does not consume,tests/runtime_activation_limits.test.js,PASS,Stage 4 atomic commit
+TC-ACT-13,Commit Timing,Cancelled target before commit does not consume,tests/runtime_activation_limits.test.js,PASS,Stage 4 atomic commit
+TC-ACT-14,Commit Timing,Successful commitment consumes limit exactly once,tests/runtime_activation_limits.test.js,PASS,Stage 4 atomic commit
+TC-ACT-15,Commit Timing,Negation after commitment does not refund limit,tests/runtime_activation_limits.test.js,PASS,Post-commit preservation
+TC-ACT-16,Commit Timing,Resolution failure after commit does not refund,tests/runtime_activation_limits.test.js,PASS,Post-commit preservation
+TC-ACT-17,Commit Timing,Duplicate commitment callback does not double-consume,tests/runtime_activation_limits.test.js,PASS,Idempotent commit
+TC-ACT-18,Optionality,Declining optional ability does not consume,tests/runtime_activation_limits.test.js,PASS,Optionality prompt
+TC-ACT-19,Optionality,Accepting optional ability follows commitment,tests/runtime_activation_limits.test.js,PASS,Optionality prompt
+TC-ACT-20,Conditions,FALSE prerequisite skips without consumption,tests/runtime_activation_limits.test.js,PASS,Prerequisite evaluation
+TC-ACT-21,Conditions,UNSUPPORTED prerequisite blocks safely,tests/runtime_activation_limits.test.js,PASS,Prerequisite evaluation
+TC-ACT-22,Lifecycle Resets,TURN restriction resets at turn boundary,tests/runtime_activation_limits.test.js,PASS,TURN scope lifecycle
+TC-ACT-23,Lifecycle Resets,STEP restriction resets at step boundary,tests/runtime_activation_limits.test.js,PASS,STEP scope lifecycle
+TC-ACT-24,Lifecycle Resets,BATTLE restriction resets at battle end,tests/runtime_activation_limits.test.js,PASS,BATTLE scope lifecycle
+TC-ACT-25,Lifecycle Resets,ATTACK restriction resets at attack end,tests/runtime_activation_limits.test.js,PASS,ATTACK scope lifecycle
+TC-ACT-26,Lifecycle Resets,One player reset does not clear opponent counters,tests/runtime_activation_limits.test.js,PASS,Player scope isolation
+TC-ACT-27,Lifecycle Resets,Duplicate lifecycle events idempotent,tests/runtime_activation_limits.test.js,PASS,Lifecycle idempotence
+TC-ACT-28,Persistence,JSON serialization preserves restriction state,tests/runtime_activation_limits.test.js,PASS,Authoritative JSON state
+TC-ACT-29,Persistence,Restored state blocks already-used activation,tests/runtime_activation_limits.test.js,PASS,Authoritative JSON state
+TC-ACT-30,Legacy Compatibility,Legacy abilityUses mirror synchronized,tests/runtime_activation_limits.test.js,PASS,Legacy mirror sync
+TC-ACT-31,Legacy Compatibility,Legacy activation entry point enforces limit,tests/runtime_activation_limits.test.js,PASS,Legacy bridge resolve
+TC-ACT-32,Legacy Compatibility,Modern restriction state survives legacy conversion,tests/runtime_activation_limits.test.js,PASS,Legacy bridge sync
+TC-ACT-33,Validation,Missing or malformed identity rejected safely,tests/runtime_activation_limits.test.js,PASS,Identity validation
+TC-ACT-34,Validation,Unknown restriction type not treated as unrestricted,tests/runtime_activation_limits.test.js,PASS,Type validation
+TC-ACT-35,Regression,Compiler and engine regression tests pass,tests/runtime_activation_limits.test.js,PASS,Regression harness
+TC-ACT-FIX-01,Concurrency & Halting,Resolver halts when commit fails on limit,tests/runtime_activation_limits.test.js,PASS,Pre-commit failure halt
+TC-ACT-FIX-02,Concurrency & Halting,Multi-clause halts at clause 1 on commit fail,tests/runtime_activation_limits.test.js,PASS,Multi-clause atomic halt
+TC-ACT-FIX-03,Validation & Identity,Resolver halts on invalid physicalId/semanticId,tests/runtime_activation_limits.test.js,PASS,Resolver identity check
+TC-ACT-FIX-04,Validation & Identity,Resolver halts on unsupported restriction type,tests/runtime_activation_limits.test.js,PASS,Resolver type check
+TC-ACT-FIX-05,Validation & Identity,Resolver halts on corrupted restriction state,tests/runtime_activation_limits.test.js,PASS,Resolver state check
+TC-ACT-FIX-06,Concurrency & Atomic,Concurrent activations: only winner commits/pays,tests/runtime_activation_limits.test.js,PASS,Reservation-based concurrency
+TC-ACT-FIX-06B,Concurrency & Atomic,Failed cost/decline releases reservation,tests/runtime_activation_limits.test.js,PASS,Reservation release
+TC-ACT-FIX-06C,Concurrency & Atomic,Exception during resolution releases reservation,tests/runtime_activation_limits.test.js,PASS,Exception safety
+TC-ACT-FIX-06D,Concurrency & Atomic,Post-commit failure preserves committed limit,tests/runtime_activation_limits.test.js,PASS,Post-commit preservation
+TC-ACT-FIX-07,Target Selection,Target prompt cancellation aborts before commit,tests/runtime_activation_limits.test.js,PASS,Prompt cancellation
+TC-ACT-FIX-08,Target Selection,Unavailable targets abort resolution before commit,tests/runtime_activation_limits.test.js,PASS,Target eligibility
+TC-ACT-FIX-09,Target Selection,Target selection commits once before effect,tests/runtime_activation_limits.test.js,PASS,Target commit order
+TC-ACT-FIX-10,Target Selection,Multi-target commits once upon valid candidate,tests/runtime_activation_limits.test.js,PASS,Multi-target commit
+TC-ACT-FIX-11,Effect Negation,Post-commit negation aborts effect, preserves limit,tests/runtime_activation_limits.test.js,PASS,Negation handling
+TC-ACT-FIX-12,Lifecycle Resets,game.endAttack clears attack counters, keeps battle,tests/runtime_activation_limits.test.js,PASS,Scoped endAttack
+TC-ACT-FIX-13,Lifecycle Resets,game.endBattle clears battle counters, keeps attack,tests/runtime_activation_limits.test.js,PASS,Scoped endBattle
+TC-ACT-FIX-14,Lifecycle Resets,resolveDirectHit resets attack/battle, keeps turn/game,tests/runtime_activation_limits.test.js,PASS,Combat conclusion
+TC-ACT-FIX-15,Lifecycle Resets,Ending battle does not reset turn or game counters,tests/runtime_activation_limits.test.js,PASS,Turn/game preservation
+TC-ACT-FIX-16,Lifecycle Resets,Redundant endAttack/endBattle idempotent,tests/runtime_activation_limits.test.js,PASS,Lifecycle idempotence
+TC-ACT-FIX-17,Validation & Aliases,Unknown substring TURN rejected as UNKNOWN,tests/runtime_activation_limits.test.js,PASS,Strict alias matching
+TC-ACT-FIX-18,Validation & Aliases,Unknown substring GAME rejected as UNKNOWN,tests/runtime_activation_limits.test.js,PASS,Strict alias matching
+TC-ACT-FIX-19,Validation & Aliases,Canonical mapping accepts explicit aliases,tests/runtime_activation_limits.test.js,PASS,Alias canonicalization
+TC-ACT-FIX-20,Validation & Aliases,Non-string or empty type rejected safely,tests/runtime_activation_limits.test.js,PASS,Type sanitization
+TC-ACT-FIX-21,Validation & Aliases,maxLimit <= 0 or non-integer rejected,tests/runtime_activation_limits.test.js,PASS,Limit sanitization
+TC-ACT-FIX-22,Validation & Aliases,Valid canonical types map to scopes,tests/runtime_activation_limits.test.js,PASS,Type-to-scope map
+TC-ACT-FIX-23,Validation & Schema,State validation rejects negative counter,tests/runtime_activation_limits.test.js,PASS,Counter schema
+TC-ACT-FIX-24,Validation & Schema,State validation rejects fractional counter,tests/runtime_activation_limits.test.js,PASS,Counter schema
+TC-ACT-FIX-25,Validation & Schema,State validation rejects NaN/Infinity counter,tests/runtime_activation_limits.test.js,PASS,Counter schema
+TC-ACT-FIX-26,Validation & Schema,State validation rejects non-plain counters object,tests/runtime_activation_limits.test.js,PASS,Prototype validation
+TC-ACT-FIX-27,Validation & Schema,Corrupted state returns INVALID_RESTRICTION_STATE,tests/runtime_activation_limits.test.js,PASS,No silent repair
+TC-ACT-FIX-28,Validation & Schema,Valid serialized state survives round-trip,tests/runtime_activation_limits.test.js,PASS,JSON persistence
+TC-ACT-FIX-29,Legacy Sync,turn:cardId:abilityId format synced to counters,tests/runtime_activation_limits.test.js,PASS,Legacy sync
+TC-ACT-FIX-30,Legacy Sync,cardId_abilityId format synced to counters,tests/runtime_activation_limits.test.js,PASS,Legacy sync
+TC-ACT-FIX-31,Legacy Sync,Ambiguous keys isolated in meta._ambiguousLegacy,tests/runtime_activation_limits.test.js,PASS,Legacy sync safety
+TC-ACT-FIX-32,Legacy Sync,Synced legacy state cannot bypass modern limits,tests/runtime_activation_limits.test.js,PASS,Limit enforcement
+TC-ACT-FIX-33,Validation & Schema,Validation rejects arrays/class instances,tests/runtime_activation_limits.test.js,PASS,Prototype validation
+TC-ACT-FIX-34,Validation & Schema,Validation enforces metadata schema,tests/runtime_activation_limits.test.js,PASS,Metadata schema
+TC-ACT-FIX-35,Validation & Schema,Validation rejects contradictory type/scope,tests/runtime_activation_limits.test.js,PASS,Type/scope agreement
+TC-ACT-FIX-36,Validation & Schema,Validation verifies reservations as non-negative integers,tests/runtime_activation_limits.test.js,PASS,Reservation counters
+TC-ACT-FIX-37,Validation & Schema,undefined initializes state, null rejected,tests/runtime_activation_limits.test.js,PASS,ensureRestrictionState
+TC-RES-LIFE-01,Reservation Lifecycle,Activation A reserves, lifecycle reset invalidates handle,tests/runtime_activation_limits.test.js,PASS,Handle invalidation
+TC-RES-LIFE-02,Reservation Lifecycle,Invalidated handle release does not decrement new reservation,tests/runtime_activation_limits.test.js,PASS,Real engine concurrency
+TC-RES-LIFE-03,Reservation Lifecycle,Commit on invalidated handle fails with RESERVATION_INVALIDATED,tests/runtime_activation_limits.test.js,PASS,Stale commit rejection
+TC-RES-LIFE-04,Reservation Lifecycle,Repeated release on invalidated handle is idempotent,tests/runtime_activation_limits.test.js,PASS,Release idempotence
+TC-RES-LIFE-05,Reservation Lifecycle,Stale handle from earlier lifecycle cannot affect new lifecycle,tests/runtime_activation_limits.test.js,PASS,Real engine attack cycle
+TC-RES-LIFE-06,Reservation Lifecycle,ATTACK reset does not invalidate BATTLE reservation,tests/runtime_activation_limits.test.js,PASS,Scope reset isolation
+TC-RES-LIFE-07,Reservation Lifecycle,BATTLE reset does not invalidate TURN reservation,tests/runtime_activation_limits.test.js,PASS,Scope reset isolation
+TC-RES-LIFE-08,Reservation Lifecycle,TURN reset invalidates TURN reservations, preserves GAME,tests/runtime_activation_limits.test.js,PASS,Game scope preservation
+TC-RES-LIFE-09,Reservation Lifecycle,Competing requests safe when lifecycle reset during prompt,tests/runtime_activation_limits.test.js,PASS,Real engine prompt transition
+TC-RES-LIFE-10,Reservation Lifecycle,No reservation leaks remain after activations and resets,tests/runtime_activation_limits.test.js,PASS,Zero leak guarantee
+TC-META-01,Strict Metadata,Empty ordinary metadata record is rejected,tests/runtime_activation_limits.test.js,PASS,Empty record rejection
+TC-META-02,Strict Metadata,Missing metadata type is rejected,tests/runtime_activation_limits.test.js,PASS,Required field schema
+TC-META-03,Strict Metadata,Missing metadata scope is rejected,tests/runtime_activation_limits.test.js,PASS,Required field schema
+TC-META-04,Strict Metadata,Missing metadata limit is rejected,tests/runtime_activation_limits.test.js,PASS,Required field schema
+TC-META-05,Strict Metadata,Unknown metadata type is rejected,tests/runtime_activation_limits.test.js,PASS,Type validation
+TC-META-06,Strict Metadata,Unknown metadata scope is rejected,tests/runtime_activation_limits.test.js,PASS,Scope validation
+TC-META-07,Strict Metadata,Contradictory type/scope pair is rejected,tests/runtime_activation_limits.test.js,PASS,Type/scope agreement
+TC-META-08,Strict Metadata,Invalid restriction key prefix is rejected,tests/runtime_activation_limits.test.js,PASS,Key prefix validation
+TC-META-09,Strict Metadata,Malformed reservation record is rejected,tests/runtime_activation_limits.test.js,PASS,Reservation record schema
+TC-META-10,Strict Metadata,Reservation ID mismatch is rejected,tests/runtime_activation_limits.test.js,PASS,Reservation record integrity
+TC-META-11,Strict Metadata,Reservation counter inconsistent with records rejected,tests/runtime_activation_limits.test.js,PASS,Counter-record agreement
+TC-META-12,Strict Metadata,Reservation contradicting metadata rejected,tests/runtime_activation_limits.test.js,PASS,Reservation-metadata agreement
+TC-META-13,Strict Metadata,Duplicate or invalid reservation ID rejected,tests/runtime_activation_limits.test.js,PASS,Reservation ID schema
+TC-META-14,Strict Metadata,Invalid lifecycle generation rejected,tests/runtime_activation_limits.test.js,PASS,Generation token validation
+TC-META-15,Strict Metadata,Valid _ambiguousLegacy accepted, unknown underscore rejected,tests/runtime_activation_limits.test.js,PASS,Namespace gating
+TC-META-16,Strict Metadata,Valid reservation state survives JSON round-trip,tests/runtime_activation_limits.test.js,PASS,JSON persistence
+TC-META-17,Strict Metadata,Validation rejects malformed state without mutating it,tests/runtime_activation_limits.test.js,PASS,Non-mutating validation
+TC-META-18,Strict Metadata,Existing valid legacy-compatible state accepted,tests/runtime_activation_limits.test.js,PASS,Legacy compatibility

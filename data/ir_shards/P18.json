@@ -1,1 +1,513 @@
-{"P18-01":{"cardNumber":"P18-01","name":"Kamen Rider Build RabbitTank Sparkling Form","keywords":[{"name":"Change","parameter":"Cost 4 ([Red Core","wave":2,"hook":"change","bracketed":true,"index":8}],"abilities":[{"id":"P18-01#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Change: Cost ([Red Core][White Core][Blue Core])"],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"During this battle, treat your attacking Spirit as being at its highest level. After this effect resolves, either discard this card or replace one of your Cost 6 or less \"Kamen\" family Spirits with this card in refreshed condition. If the Spirit is currently battling, continue the battle."},"clauses":[{"rawText":"During this battle, treat your attacking Spirit as being at its highest level.","cleanText":"treat your attacking Spirit as being at its highest level","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_BATTLE","op":{"op":"TREAT_RULE"}},{"rawText":"either discard this card or replace one of your Cost 6 or less \"Kamen\" family Spirits with this card in refreshed condition.","cleanText":"either discard this card or replace one of your Cost 6 or less \"Kamen\" family Spirits with this card in refreshed condition","link":"afterResolves","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"CHANGE","maxCost":6}},{"rawText":"If the Spirit is currently battling, continue the battle.","cleanText":"continue the battle","link":null,"isOptional":false,"isCost":false,"condition":"If the Spirit is currently battling","duration":null,"op":{"op":"CONTINUE_BATTLE"}}],"unsupported":[]},{"id":"P18-01#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS_OR_BLOCKS","timingLabel":"When Attacks/Blocks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can reveal three cards from your decktop. Add a \"Kamen\" family Spirit card among them to the Hand. Discard any remaining cards."},"clauses":[{"rawText":"You can reveal three cards from your decktop.","cleanText":"You can reveal three cards from your decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":3}},{"rawText":"Add a \"Kamen\" family Spirit card among them to the Hand.","cleanText":"Add a \"Kamen\" family Spirit card among them to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_TO_HAND"}},{"rawText":"Discard any remaining cards.","cleanText":"Discard any remaining cards","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DISCARD_REVEALED"}}],"unsupported":[]}],"compiledClausesCount":6,"unsupportedClausesCount":0,"isFullySupported":true},"P18-03":{"cardNumber":"P18-03","name":"Ordinemon","keywords":[],"abilities":[{"id":"P18-03#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Advent: Mega (Either Attack Step)","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, stack this from your hand onto your target spirit."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"stack this from your hand onto your target spirit.","cleanText":"stack this from your hand onto your target spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_STACK","from":"HAND","target":{"side":"self","types":["Spirit"]}}}],"unsupported":[]},{"id":"P18-03#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ADVENTS","timingLabel":"When Advents/Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can add one Spirit you control as a pre-Advent card to this Spirit. When you've done so, this Spirit refreshes."},"clauses":[{"rawText":"You can add one Spirit you control as a pre-Advent card to this Spirit.","cleanText":"You can add one Spirit you control as a pre-Advent card to this Spirit","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"ATTACH_CARD_UNDERNEATH"}},{"rawText":"this Spirit refreshes.","cleanText":"this Spirit refreshes","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":"self"}}],"unsupported":[]},{"id":"P18-03#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"You can return one of this Spirit's pre-Advent cards to the deckbottom. When you've done so, destroy an opposing exhausted spirit, and put two cores from the Void to this Spirit."},"clauses":[{"rawText":"You can return one of this Spirit's pre-Advent cards to the deckbottom.","cleanText":"You can return one of this Spirit's pre-Advent cards to the deckbottom","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}},{"rawText":"destroy an opposing exhausted spirit","cleanText":"destroy an opposing exhausted spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"state":"EXHAUSTED"}}}},{"rawText":"put two cores from the Void to this Spirit.","cleanText":"put two cores from the Void to this Spirit","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":2,"from":{"zone":"void"},"to":{"zone":"field","target":"self"}}}],"unsupported":[]}],"compiledClausesCount":7,"unsupportedClausesCount":0,"isFullySupported":true},"P18-09":{"cardNumber":"P18-09","name":"The MoonnightDiva Lirina","keywords":[],"abilities":[{"id":"P18-09#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can draw a card from the deckbottom."},"clauses":[{"rawText":"You can draw a card from the deckbottom.","cleanText":"You can draw a card from the deckbottom","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]},{"id":"P18-09#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When this Spirit would leave the Field due to opposing effects, return it to the Hand."},"clauses":[{"rawText":"When this Spirit would leave the Field due to opposing effects, return it to the Hand.","cleanText":"When this Spirit would leave the Field due to opposing effects, return it to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","target":"PREVIOUS_TARGET","destination":"HAND"}}],"unsupported":[]},{"id":"P18-09#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit's color and symbol are also treated as Purple."},"clauses":[{"rawText":"This Spirit's color and symbol are also treated as Purple.","cleanText":"This Spirit's color and symbol are also treated as Purple","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TREAT_COLOR_SYMBOL","color":"Purple"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "P18-01": {
+    "cardNumber": "P18-01",
+    "name": "Kamen Rider Build RabbitTank Sparkling Form",
+    "keywords": [
+      {
+        "name": "Change",
+        "parameter": "Cost 4 ([Red Core",
+        "wave": 2,
+        "hook": "change",
+        "bracketed": true,
+        "index": 8
+      }
+    ],
+    "abilities": [
+      {
+        "id": "P18-01#AB_FLASH_NONE_LV1_LV2_LV3_8a6f977fd690a20bc4b1d8134c55c165a7aec02fb3a7a0db2d23b33576156769_7a8833e47274ec03b4e209a313ba0ccd",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Change: Cost ([Red Core][White Core][Blue Core])"
+          ],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this battle, treat your attacking Spirit as being at its highest level. After this effect resolves, either discard this card or replace one of your Cost 6 or less \"Kamen\" family Spirits with this card in refreshed condition. If the Spirit is currently battling, continue the battle."
+        },
+        "clauses": [
+          {
+            "rawText": "During this battle, treat your attacking Spirit as being at its highest level.",
+            "cleanText": "treat your attacking Spirit as being at its highest level",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_BATTLE",
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          },
+          {
+            "rawText": "either discard this card or replace one of your Cost 6 or less \"Kamen\" family Spirits with this card in refreshed condition.",
+            "cleanText": "either discard this card or replace one of your Cost 6 or less \"Kamen\" family Spirits with this card in refreshed condition",
+            "link": "afterResolves",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CHANGE",
+              "maxCost": 6
+            }
+          },
+          {
+            "rawText": "If the Spirit is currently battling, continue the battle.",
+            "cleanText": "continue the battle",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If the Spirit is currently battling",
+            "duration": null,
+            "op": {
+              "op": "CONTINUE_BATTLE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P18-01#a0",
+        "physicalId": "P18-01#AB_FLASH_NONE_LV1_LV2_LV3_8a6f977fd690a20bc4b1d8134c55c165a7aec02fb3a7a0db2d23b33576156769_7a8833e47274ec03b4e209a313ba0ccd",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_8a6f977fd690a20bc4b1d8134c55c165a7aec02fb3a7a0db2d23b33576156769_7a8833e47274ec03b4e209a313ba0ccd"
+      },
+      {
+        "id": "P18-01#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_94c8976ffadd3e2edfceed3e8905ca4316d5605ebf918f89936bd0f89b86f70c_534f84849e2f8ee48a0c14263115def1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS_OR_BLOCKS",
+          "timingLabel": "When Attacks/Blocks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can reveal three cards from your decktop. Add a \"Kamen\" family Spirit card among them to the Hand. Discard any remaining cards."
+        },
+        "clauses": [
+          {
+            "rawText": "You can reveal three cards from your decktop.",
+            "cleanText": "You can reveal three cards from your decktop",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 3
+            }
+          },
+          {
+            "rawText": "Add a \"Kamen\" family Spirit card among them to the Hand.",
+            "cleanText": "Add a \"Kamen\" family Spirit card among them to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          },
+          {
+            "rawText": "Discard any remaining cards.",
+            "cleanText": "Discard any remaining cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_REVEALED"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P18-01#a1",
+        "physicalId": "P18-01#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_94c8976ffadd3e2edfceed3e8905ca4316d5605ebf918f89936bd0f89b86f70c_534f84849e2f8ee48a0c14263115def1",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_94c8976ffadd3e2edfceed3e8905ca4316d5605ebf918f89936bd0f89b86f70c_534f84849e2f8ee48a0c14263115def1"
+      }
+    ],
+    "compiledClausesCount": 6,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "P18-03": {
+    "cardNumber": "P18-03",
+    "name": "Ordinemon",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "P18-03#AB_FLASH_NONE_LV1_LV2_LV3_a5dcd84fdd6bd34e2bfba328d8a534917a3c788612c3390cedfed1501962e30d_37340db61b7d099d61a1410f6f109dc3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Advent: Mega (Either Attack Step)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, stack this from your hand onto your target spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "stack this from your hand onto your target spirit.",
+            "cleanText": "stack this from your hand onto your target spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_STACK",
+              "from": "HAND",
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P18-03#a0",
+        "physicalId": "P18-03#AB_FLASH_NONE_LV1_LV2_LV3_a5dcd84fdd6bd34e2bfba328d8a534917a3c788612c3390cedfed1501962e30d_37340db61b7d099d61a1410f6f109dc3",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_a5dcd84fdd6bd34e2bfba328d8a534917a3c788612c3390cedfed1501962e30d_37340db61b7d099d61a1410f6f109dc3"
+      },
+      {
+        "id": "P18-03#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_05773442544b8ed1dec3df9f47cf7ff22d41bda07af36933835bd4ed91b00e73_bce86adce23149120ead201d721355ff",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ADVENTS",
+          "timingLabel": "When Advents/Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can add one Spirit you control as a pre-Advent card to this Spirit. When you've done so, this Spirit refreshes."
+        },
+        "clauses": [
+          {
+            "rawText": "You can add one Spirit you control as a pre-Advent card to this Spirit.",
+            "cleanText": "You can add one Spirit you control as a pre-Advent card to this Spirit",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ATTACH_CARD_UNDERNEATH"
+            }
+          },
+          {
+            "rawText": "this Spirit refreshes.",
+            "cleanText": "this Spirit refreshes",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P18-03#a1",
+        "physicalId": "P18-03#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_05773442544b8ed1dec3df9f47cf7ff22d41bda07af36933835bd4ed91b00e73_bce86adce23149120ead201d721355ff",
+        "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_05773442544b8ed1dec3df9f47cf7ff22d41bda07af36933835bd4ed91b00e73_bce86adce23149120ead201d721355ff"
+      },
+      {
+        "id": "P18-03#AB_WHEN_ATTACKS_NONE_LV2_LV3_bd15f05baf37d62eec88dcb07299811e76b52642fb74e284b6d091fc4beb4562_7aff4d36cf59d082da5a2ab3610ec274",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "You can return one of this Spirit's pre-Advent cards to the deckbottom. When you've done so, destroy an opposing exhausted spirit, and put two cores from the Void to this Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "You can return one of this Spirit's pre-Advent cards to the deckbottom.",
+            "cleanText": "You can return one of this Spirit's pre-Advent cards to the deckbottom",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "destroy an opposing exhausted spirit",
+            "cleanText": "destroy an opposing exhausted spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "state": "EXHAUSTED"
+                }
+              }
+            }
+          },
+          {
+            "rawText": "put two cores from the Void to this Spirit.",
+            "cleanText": "put two cores from the Void to this Spirit",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 2,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "field",
+                "target": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P18-03#a2",
+        "physicalId": "P18-03#AB_WHEN_ATTACKS_NONE_LV2_LV3_bd15f05baf37d62eec88dcb07299811e76b52642fb74e284b6d091fc4beb4562_7aff4d36cf59d082da5a2ab3610ec274",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_bd15f05baf37d62eec88dcb07299811e76b52642fb74e284b6d091fc4beb4562_7aff4d36cf59d082da5a2ab3610ec274"
+      }
+    ],
+    "compiledClausesCount": 7,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "P18-09": {
+    "cardNumber": "P18-09",
+    "name": "The MoonnightDiva Lirina",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "P18-09#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_ab41e0f26aad5fe7e7ba946754910d7f6c5ceaf0a12348f6fe814f18ba624c08_261374947cf141f4797d67ad7432729b",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can draw a card from the deckbottom."
+        },
+        "clauses": [
+          {
+            "rawText": "You can draw a card from the deckbottom.",
+            "cleanText": "You can draw a card from the deckbottom",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P18-09#a0",
+        "physicalId": "P18-09#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_ab41e0f26aad5fe7e7ba946754910d7f6c5ceaf0a12348f6fe814f18ba624c08_261374947cf141f4797d67ad7432729b",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_ab41e0f26aad5fe7e7ba946754910d7f6c5ceaf0a12348f6fe814f18ba624c08_261374947cf141f4797d67ad7432729b"
+      },
+      {
+        "id": "P18-09#AB_PASSIVE_NONE_LV1_LV2_LV3_8e456e3918223ac5621dcd0953990cd6491997856637b1dd6702e99414d057e9_9ffdd55d19d27920f2fd594f279ded63",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this Spirit would leave the Field due to opposing effects, return it to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "When this Spirit would leave the Field due to opposing effects, return it to the Hand.",
+            "cleanText": "When this Spirit would leave the Field due to opposing effects, return it to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "target": "PREVIOUS_TARGET",
+              "destination": "HAND"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P18-09#a1",
+        "physicalId": "P18-09#AB_PASSIVE_NONE_LV1_LV2_LV3_8e456e3918223ac5621dcd0953990cd6491997856637b1dd6702e99414d057e9_9ffdd55d19d27920f2fd594f279ded63",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_8e456e3918223ac5621dcd0953990cd6491997856637b1dd6702e99414d057e9_9ffdd55d19d27920f2fd594f279ded63"
+      },
+      {
+        "id": "P18-09#AB_PASSIVE_NONE_LV2_LV3_afa17a70aba022ba9bfe015db1dec1c144128e6aceef63d98a9771d6b12ee198_d371bd8f595b89c1aa373246afc6afce",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit's color and symbol are also treated as Purple."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit's color and symbol are also treated as Purple.",
+            "cleanText": "This Spirit's color and symbol are also treated as Purple",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_COLOR_SYMBOL",
+              "color": "Purple"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P18-09#a2",
+        "physicalId": "P18-09#AB_PASSIVE_NONE_LV2_LV3_afa17a70aba022ba9bfe015db1dec1c144128e6aceef63d98a9771d6b12ee198_d371bd8f595b89c1aa373246afc6afce",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV2_LV3_afa17a70aba022ba9bfe015db1dec1c144128e6aceef63d98a9771d6b12ee198_d371bd8f595b89c1aa373246afc6afce"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

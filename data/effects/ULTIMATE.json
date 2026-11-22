@@ -397,10 +397,29 @@
     "compiledIr": {
       "cardNumber": "SJ15-05",
       "name": "The ThreeVassalsDragon Ingenious Hyoubu",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 5000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 6000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] (When Summoned)\nReturn all \"Ultimate Trooper\" family Spirit cards from your Trash to the Hand.\n\n[LV2][LV3] (Your Main Step)\nWhile you control [The ThreeVassalsDragon Lancefighting Shougen], [The ThreeVassalsDragon Ingenious Hyoubu] and [The ThreeVassalsDragon Fuse Cland], at least one of each, all [The WarParamountWarDragon BuraiDragon] in your Hand becomes Cost 4.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "SJ15-05#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -411,8 +430,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -421,28 +449,55 @@
             "isMain": false,
             "cleanBody": "Return all \"Ultimate Trooper\" family Spirit cards from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nReturn all \"Ultimate Trooper\" family Spirit cards from your Trash to the Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Return all \"Ultimate Trooper\" family Spirit cards from your Trash to the Hand.",
+              "originalClauseText": "Return all \"Ultimate Trooper\" family Spirit cards from your Trash to the Hand.",
               "cleanText": "Return all \"Ultimate Trooper\" family Spirit cards from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit",
+                    "Ultimate"
+                  ],
+                  "family": "Ultimate Trooper"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SJ15-05#a0",
+          "keywords": [],
+          "id": "SJ15-05#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_e117e8cdf2cdb078f0d82de3f1ba844c43e8c87b5af8b6a7e2dd250c1173c4cf_e87e9f17228478a328a2871218a75528",
+          "physicalId": "SJ15-05#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_e117e8cdf2cdb078f0d82de3f1ba844c43e8c87b5af8b6a7e2dd250c1173c4cf_e87e9f17228478a328a2871218a75528",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_e117e8cdf2cdb078f0d82de3f1ba844c43e8c87b5af8b6a7e2dd250c1173c4cf_e87e9f17228478a328a2871218a75528",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_14f419d77c12d67357cb8c42d39dc740a7fcdfa04479bbf1784986f282dfe37d_50087b97c4370b378a9ad4f9bd340e09",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SJ15-05#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -452,8 +507,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "MAIN_STEP",
+            "timings": [
+              "MAIN_STEP"
+            ],
             "timingLabel": "Your Main Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "MAIN_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -462,21 +526,41 @@
             "isMain": false,
             "cleanBody": "While you control [The ThreeVassalsDragon Lancefighting Shougen], [The ThreeVassalsDragon Ingenious Hyoubu] and [The ThreeVassalsDragon Fuse Cland], at least one of each, all [The WarParamountWarDragon BuraiDragon] in your Hand becomes Cost 4."
           },
+          "originalAbilityText": "[LV2][LV3] (Your Main Step)\nWhile you control [The ThreeVassalsDragon Lancefighting Shougen], [The ThreeVassalsDragon Ingenious Hyoubu] and [The ThreeVassalsDragon Fuse Cland], at least one of each, all [The WarParamountWarDragon BuraiDragon] in your Hand becomes Cost 4.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "While you control [The ThreeVassalsDragon Lancefighting Shougen], [The ThreeVassalsDragon Ingenious Hyoubu] and [The ThreeVassalsDragon Fuse Cland], at least one of each, all [The WarParamountWarDragon BuraiDragon] in your Hand becomes Cost 4.",
+              "originalClauseText": "While you control [The ThreeVassalsDragon Lancefighting Shougen], [The ThreeVassalsDragon Ingenious Hyoubu] and [The ThreeVassalsDragon Fuse Cland], at least one of each, all [The WarParamountWarDragon BuraiDragon] in your Hand becomes Cost 4.",
               "cleanText": "[The ThreeVassalsDragon Ingenious Hyoubu] and [The ThreeVassalsDragon Fuse Cland], at least one of each, all [The WarParamountWarDragon BuraiDragon] in your Hand becomes Cost 4",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": "While you control [The ThreeVassalsDragon Lancefighting Shougen]",
               "duration": null,
               "op": {
-                "op": "COST_MODIFIER"
+                "op": "KEYWORD_RULE",
+                "keyword": "The ThreeVassalsDragon Ingenious Hyoubu"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SJ15-05#a1",
+          "keywords": [],
+          "id": "SJ15-05#AB_MAIN_STEP_NONE_LV2_LV3_32afe4dea2c31ccbbb6dc9468d2f15aae9b6c670ac576245216527537dc79f14_38a84f461ad4c29ac358867f4aa466dd",
+          "physicalId": "SJ15-05#AB_MAIN_STEP_NONE_LV2_LV3_32afe4dea2c31ccbbb6dc9468d2f15aae9b6c670ac576245216527537dc79f14_38a84f461ad4c29ac358867f4aa466dd",
+          "semanticId": "SEM#AB_MAIN_STEP_NONE_LV2_LV3_32afe4dea2c31ccbbb6dc9468d2f15aae9b6c670ac576245216527537dc79f14_38a84f461ad4c29ac358867f4aa466dd",
+          "semanticIdV3": "SEM3#AB_MAIN_STEP_NONE_LV2_LV3_802f79578dffe626cf488670c7fe701977566c38b8bcbe129473fa6eddf3fa97_72ab8c6be1cced036b8774261184e344",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "MAIN_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,

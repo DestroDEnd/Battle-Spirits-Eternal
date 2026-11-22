@@ -1,0 +1,877 @@
+[
+  {
+    "testId": "HIJ1-E2E-034",
+    "cardNumber": "26RBS02-032",
+    "op": "BOUNCE",
+    "auditFinding": "FAILED_EXACT_SEMANTIC_ASSERTION: Eligible target must bounce to destination",
+    "effectText": "Your Turn Can't Stack\nWhen opposing Spirits are heavily exhausted by your effect, if you control any \"Primeval Floodragon\" family Spirit/Nexus, you can return this card from your Trash to the Hand.\n\n[LV2] True ReleaseWhen Attacks\nThe opponent targets a refreshed Spirit they control. Exhaust it.",
+    "shard": "MISC.json",
+    "abilities": [
+      {
+        "clauses": [
+          {
+            "rawText": "When opposing Spirits are heavily exhausted by your effect, if you control any \"Primeval Floodragon\" family Spirit/Nexus, you can return this card from your Trash to the Hand.",
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "The opponent targets a refreshed Spirit they control.",
+            "op": {
+              "op": "REFRESH",
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "Exhaust it.",
+            "op": {
+              "op": "EXHAUST",
+              "target": "PREVIOUS_TARGET"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "testId": "HIJ1-E2E-039",
+    "cardNumber": "26RBS02-083",
+    "op": "BOUNCE",
+    "auditFinding": "FAILED_EXACT_SEMANTIC_ASSERTION: Eligible target must bounce to destination",
+    "effectText": "[LV1-2] Your Attack Step\nAll opposing Cost 5 or less Spirits that are destroyed at 0 BP are returned to the deckbottom in any order instead of being sent to the Trash.\n\n[LV2] Either Attack StepOnce Per Turn\nWhen your non-attacking/non-blocking \"Topaz\" family Spirits are destroyed by the opponent, draw a card.",
+    "shard": "AUG.json",
+    "abilities": [
+      {
+        "clauses": [
+          {
+            "rawText": "All opposing Cost 5 or less Spirits that are destroyed at 0 BP are returned to the deckbottom in any order instead of being sent to the Trash.",
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "When your non-attacking/non-blocking \"Topaz\" family Spirits are destroyed by the opponent, draw a card.",
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "testId": "HIJ1-E2E-060",
+    "cardNumber": "26RDB01-024",
+    "op": "BOUNCE",
+    "auditFinding": "FAILED_EXACT_SEMANTIC_ASSERTION: Eligible target must bounce to destination",
+    "effectText": "[teams: Green Wave Shiny Hearts]\n\n[LV1-2] During Attack\nWhen blocked, you can target two opposing Spirits. Exhaust them.\n\n[LV2] During Attack\nWhen this Spirit's attack reduces the opposing Life, if you pay two costs, the opponent returns a card from their Hand to the deckbottom.",
+    "shard": "26RDB01.json",
+    "abilities": [
+      {
+        "clauses": []
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "When blocked, you can target two opposing Spirits.",
+            "op": {
+              "op": "TARGET_SELECT"
+            }
+          },
+          {
+            "rawText": "Exhaust them.",
+            "op": {
+              "op": "EXHAUST",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "When this Spirit's attack reduces the opposing Life, if you pay two costs, the opponent returns a card from their Hand to the deckbottom.",
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "testId": "HIJ1-E2E-067",
+    "cardNumber": "26RSD07-001",
+    "op": "BOUNCE",
+    "auditFinding": "FAILED_EXACT_SEMANTIC_ASSERTION: Eligible target must bounce to destination",
+    "effectText": "[LV1-2] [Invoke: Main]\nReturn this Spirit to the deckbottom ▶ You can deploy a \"CODE Zeroider\" from your Hand, without paying the cost.",
+    "shard": "26RSD07.json",
+    "abilities": [
+      {
+        "clauses": [
+          {
+            "rawText": "Return this Spirit to the deckbottom ▶ You can deploy a \"CODE Zeroider\" from your Hand, without paying the cost.",
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "testId": "HIJ1-E2E-096",
+    "cardNumber": "BS02-106",
+    "op": "REFRESH",
+    "auditFinding": "FAILED_EXACT_SEMANTIC_ASSERTION: Non-matching cost Spirit must remain EXHAUSTED",
+    "effectText": "[Flash]\nRefresh all Cost 2 Spirits.",
+    "shard": "BS02.json",
+    "abilities": [
+      {
+        "clauses": [
+          {
+            "rawText": "Refresh all Cost 2 Spirits.",
+            "op": {
+              "op": "REFRESH",
+              "all": true,
+              "target": {
+                "types": [
+                  "Spirit"
+                ],
+                "cost": 2
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "testId": "HIJ1-E2E-122",
+    "cardNumber": "BS19-109",
+    "op": "BP_DEBUFF",
+    "auditFinding": "FAILED_EXACT_SEMANTIC_ASSERTION: Expected values to be strictly equal:",
+    "effectText": "[Flash]\nDuring this turn, give an opposing Spirit -3000 BP.",
+    "shard": "BS19.json",
+    "abilities": [
+      {
+        "clauses": [
+          {
+            "rawText": "During this turn, give an opposing Spirit -3000 BP.",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 3000,
+              "target": "PREVIOUS_TARGET",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "testId": "HIJ1-E2E-123",
+    "cardNumber": "BS19-049",
+    "op": "BP_DEBUFF",
+    "auditFinding": "FAILED_EXACT_SEMANTIC_ASSERTION: Expected values to be strictly equal:",
+    "effectText": "[LV1][LV2][LV3] (When Summoned)\nDuring this turn, give an opposing Spirit -2000 BP.",
+    "shard": "BS19.json",
+    "abilities": [
+      {
+        "clauses": [
+          {
+            "rawText": "During this turn, give an opposing Spirit -2000 BP.",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 2000,
+              "target": "PREVIOUS_TARGET",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "testId": "HIJ1-E2E-124",
+    "cardNumber": "BS19-X05",
+    "op": "BP_DEBUFF",
+    "auditFinding": "FAILED_EXACT_SEMANTIC_ASSERTION: Expected values to be strictly equal:",
+    "effectText": "[LV1][LV2][LV3] (When Battles)\nDuring this turn, give two opposing Spirits -3000 BP.\n\n[LV2][LV3]\nWhen this Spirit is destroyed by opposing effects, it remains on the Field, refreshed, and you draw a card.\n\n[LV3] (Your Attack Step)\nWhen the battle of your \"Divine Spirit\" family Spirit resolves, if the blocking opposing Spirit is 3000 BP or less, without comparing BP, the attack is treated as not blocked.",
+    "shard": "BS19.json",
+    "abilities": [
+      {
+        "clauses": [
+          {
+            "rawText": "During this turn, give two opposing Spirits -3000 BP.",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 3000
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "When this Spirit is destroyed by opposing effects, it remains on the Field, refreshed, and you draw a card.",
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "When the battle of your \"Divine Spirit\" family Spirit resolves, if the blocking opposing Spirit is 3000 BP or less, without comparing BP, the attack is treated as not blocked.",
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 1000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "testId": "HIJ1-E2E-125",
+    "cardNumber": "BS19-053",
+    "op": "BP_DEBUFF",
+    "auditFinding": "FAILED_EXACT_SEMANTIC_ASSERTION: Expected values to be strictly equal:",
+    "effectText": "[LV1][LV2][LV3] (When Attacks)\nDuring this turn, give an opposing Spirit -2000 BP.\n\n[When Braved] [LV2][LV3] (When Brave Attacks)\nDuring the Flash Timing, you can use a Yellow Magic card without paying the cost.\n\n[LV3] (When Attacks)\nWhen you use a Cost 3 Magic card, after that effect resolves, refresh this Spirit.",
+    "shard": "BS19.json",
+    "abilities": [
+      {
+        "clauses": [
+          {
+            "rawText": "During this turn, give an opposing Spirit -2000 BP.",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 2000,
+              "target": "PREVIOUS_TARGET",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "During the Flash Timing, you can use a Yellow Magic card without paying the cost.",
+            "op": {
+              "op": "CAST_MAGIC_FREE"
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "When you use a Cost 3 Magic card",
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          },
+          {
+            "rawText": "refresh this Spirit.",
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "testId": "HIJ1-E2E-126",
+    "cardNumber": "BS20-X05",
+    "op": "BP_DEBUFF",
+    "auditFinding": "FAILED_EXACT_SEMANTIC_ASSERTION: Expected values to be strictly equal:",
+    "effectText": "[LV1][LV2][LV3] (Your Attack Step)\nWhen your \"Divine Spirit\" family Spirit attacks, during this turn, give an opposing Spirit -3000 BP.\n\n[LV2][LV3] (When Attacks)\nWhen opposing Spirits are brought to 0 BP, you can return all Spirits that are brought to 0 BP to the decktop.\n\n[LV3] [Charge]\nYour “BP- effect” decreases 1000 further.",
+    "shard": "BS20.json",
+    "abilities": [
+      {
+        "clauses": [
+          {
+            "rawText": "When your \"Divine Spirit\" family Spirit attacks, during this turn, give an opposing Spirit -3000 BP.",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 3000,
+              "target": "PREVIOUS_TARGET",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "When opposing Spirits are brought to 0 BP, you can return all Spirits that are brought to 0 BP to the decktop.",
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "Your \"BP- effect\" decreases 1000 further.",
+            "op": {
+              "op": "DECREASE_BP_EFFECT",
+              "amount": 1000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "testId": "HIJ1-E2E-127",
+    "cardNumber": "BS20-044",
+    "op": "BP_DEBUFF",
+    "auditFinding": "FAILED_EXACT_SEMANTIC_ASSERTION: Expected values to be strictly equal:",
+    "effectText": "[LV1][LV2][LV3] (When Destroyed)\nBy exhausting a Yellow Spirit you control, this Spirit remains on the Field, exhausted.\n\n[When Braved] [LV2][LV3] (When Attacks/Blocks)\nDuring this turn, give an opposing Spirit -3000 BP.",
+    "shard": "BS20.json",
+    "abilities": [
+      {
+        "clauses": [
+          {
+            "rawText": "By exhausting a Yellow Spirit you control",
+            "op": {
+              "op": "EXHAUST",
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "this Spirit remains on the Field, exhausted.",
+            "op": {
+              "op": "EXHAUST",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "During this turn, give an opposing Spirit -3000 BP.",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 3000,
+              "target": "PREVIOUS_TARGET",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "testId": "HIJ1-E2E-128",
+    "cardNumber": "BS21-082",
+    "op": "BP_DEBUFF",
+    "auditFinding": "FAILED_EXACT_SEMANTIC_ASSERTION: Expected values to be strictly equal:",
+    "effectText": "[Main]\nDuring this turn, give all your Yellow Spirits the effect: \"(When Attacks) By sending a core from your Life to this Spirit, this Spirit can't be blocked. You can't activate Bursts via this effect.\"\n\n[Flash]\nDuring this turn, give an opposing Spirit -2000 BP.",
+    "shard": "BS21.json",
+    "abilities": [
+      {
+        "clauses": [
+          {
+            "rawText": "During this turn, give all your Yellow Spirits the effect: \"(When Attacks) By sending a core from your Life to this Spirit, this Spirit can't be blocked.",
+            "op": {
+              "op": "UNBLOCKABLE",
+              "target": "self"
+            }
+          },
+          {
+            "rawText": "You can't activate Bursts via this effect.\"",
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "During this turn, give an opposing Spirit -2000 BP.",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 2000,
+              "target": "PREVIOUS_TARGET",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "testId": "HIJ1-E2E-129",
+    "cardNumber": "BS21-045",
+    "op": "BP_DEBUFF",
+    "auditFinding": "FAILED_EXACT_SEMANTIC_ASSERTION: Expected values to be strictly equal:",
+    "effectText": "[LV1][LV2][LV3] (When Attacks)\nDuring this turn, give an opposing Spirit -3000 BP.\n\n[LV2][LV3] (Your Attack Step)\nAll your \"Astral Soul\" family Spirits can't be blocked by opposing Spirits with 0 BP.",
+    "shard": "BS21.json",
+    "abilities": [
+      {
+        "clauses": [
+          {
+            "rawText": "During this turn, give an opposing Spirit -3000 BP.",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 3000,
+              "target": "PREVIOUS_TARGET",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "All your \"Astral Soul\" family Spirits can't be blocked by opposing Spirits with 0 BP.",
+            "op": {
+              "op": "UNBLOCKABLE"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "testId": "HIJ1-E2E-130",
+    "cardNumber": "BS22-043",
+    "op": "BP_DEBUFF",
+    "auditFinding": "FAILED_EXACT_SEMANTIC_ASSERTION: Expected values to be strictly equal:",
+    "effectText": "[LV1][LV2][LV3] (Opposing Attack Step)\nWhen your Yellow Spirits block any opposing refreshed Spirit, destroy that opposing Spirit.\n\n[LV2][LV3] (When Attacks)\nDuring this turn, give an opposing Spirit -3000 BP.",
+    "shard": "BS22.json",
+    "abilities": [
+      {
+        "clauses": [
+          {
+            "rawText": "When your Yellow Spirits block any opposing refreshed Spirit, destroy that opposing Spirit.",
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "During this turn, give an opposing Spirit -3000 BP.",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 3000,
+              "target": "PREVIOUS_TARGET",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "testId": "HIJ1-E2E-133",
+    "cardNumber": "BS27-082",
+    "op": "BP_DEBUFF",
+    "auditFinding": "FAILED_EXACT_SEMANTIC_ASSERTION: Expected values to be strictly equal:",
+    "effectText": "[Trigger Counter]\nWhen an opposing Ultimate-Trigger hits, if this Magic card is in your Hand, you can use the following effect before the \"When hits\" effect activates.\n\n█ During this battle, give an opposing battling Ultimate -10000 BP.\n\n[Flash]\nDuring this turn, treat an opposing Spirit as LV1.",
+    "shard": "BS27.json",
+    "abilities": [
+      {
+        "clauses": [
+          {
+            "rawText": "When an opposing Ultimate-Trigger hits, if this Magic card is in your Hand, you can use the following effect before the \"When hits\" effect activates.",
+            "op": {
+              "op": "TRIGGER_COUNTER"
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "█ During this battle, give an opposing battling Ultimate -10000 BP.",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 10000
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "During this turn, treat an opposing Spirit as LV1.",
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "testId": "HIJ1-E2E-134",
+    "cardNumber": "BS27-067",
+    "op": "BP_DEBUFF",
+    "auditFinding": "FAILED_EXACT_SEMANTIC_ASSERTION: Expected values to be strictly equal:",
+    "effectText": "[Brave Condition: Cost 3 or more]\n\n[When Braved] (When Brave Attack)\nDuring this battle, give an opposing Spirit/Ultimate -5000 BP.",
+    "shard": "BS27.json",
+    "abilities": [
+      {
+        "clauses": []
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "During this battle, give an opposing Spirit/Ultimate -5000 BP.",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 5000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "testId": "HIJ1-E2E-135",
+    "cardNumber": "BS28-081",
+    "op": "BP_DEBUFF",
+    "auditFinding": "FAILED_EXACT_SEMANTIC_ASSERTION: Expected values to be strictly equal:",
+    "effectText": "When this set card is discarded by the opponent, you can activate it, ignoring the Burst condition.\n\n[Burst: After your Life is reduced]\nYou can summon a Yellow Spirit card from your Hand, without paying the cost. However, any (When Summoned) effects of the Spirit can't activate. Then, by paying the cost, activate this card's Flash effect.\n\n[Flash]\nDuring this battle, give an opposing Spirit/Ultimate -5000 BP.",
+    "shard": "BS28.json",
+    "abilities": [
+      {
+        "clauses": [
+          {
+            "rawText": "When this set card is discarded by the opponent, you can activate it, ignoring the Burst condition.",
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "You can summon a Yellow Spirit card from your Hand, without paying the cost.",
+            "op": {
+              "op": "SUMMON_FREE",
+              "from": "hand",
+              "color": "Yellow"
+            }
+          },
+          {
+            "rawText": "any (When Summoned) effects of the Spirit can't activate.",
+            "op": {
+              "op": "PREVENT_WHEN_SUMMONED"
+            }
+          },
+          {
+            "rawText": "by paying the cost, activate this card's Flash effect.",
+            "op": {
+              "op": "ACTIVATE_FLASH"
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "During this battle, give an opposing Spirit/Ultimate -5000 BP.",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 5000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "testId": "HIJ1-E2E-137",
+    "cardNumber": "BS29-029",
+    "op": "BP_DEBUFF",
+    "auditFinding": "FAILED_EXACT_SEMANTIC_ASSERTION: Expected values to be strictly equal:",
+    "effectText": "[LV1][LV2] [SSoul: Yellow]\nWhen you're summoning an Ultimate card, this Spirit gains [Yellow Core] (an extra Yellow symbol).\n\n[LV2] (When Destroyed by the Opponent)\nDuring this turn, give an opposing Spirit -5000 BP.",
+    "shard": "BS29.json",
+    "abilities": [
+      {
+        "clauses": [
+          {
+            "rawText": "When you're summoning an Ultimate card, this Spirit gains [Yellow Core] (an extra Yellow symbol).",
+            "op": {
+              "op": "ADD_SYMBOL"
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "During this turn, give an opposing Spirit -5000 BP.",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 5000,
+              "target": "PREVIOUS_TARGET",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "testId": "HIJ1-E2E-145",
+    "cardNumber": "BS32-045",
+    "op": "BP_DEBUFF",
+    "auditFinding": "FAILED_EXACT_SEMANTIC_ASSERTION: Expected values to be strictly equal:",
+    "effectText": "[Soul Burst] (After an opposing Spirit/Ultimate attacks)\nPut a core from the Void to your Life. Also, if this Burst was activated via [Catalyze], return all Magic cards of a single color from your Trash to the Hand. After this effect resolves, summon this Spirit card without paying the cost.\n\n[LV2][LV3] (Either Attack Step)\nWhen you use a Magic card, during this turn, give an opposing Spirit -10000 BP.",
+    "shard": "BS32.json",
+    "abilities": [
+      {
+        "clauses": [
+          {
+            "rawText": "Put a core from the Void to your Life.",
+            "op": {
+              "op": "RECOVER_LIFE",
+              "count": 1
+            }
+          },
+          {
+            "rawText": "if this Burst was activated via [Catalyze], return all Magic cards of a single color from your Trash to the Hand.",
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "summon this Spirit card without paying the cost.",
+            "op": {
+              "op": "SUMMON_FREE",
+              "from": "HAND"
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "When you use a Magic card, during this turn, give an opposing Spirit -10000 BP.",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 10000,
+              "target": "PREVIOUS_TARGET",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "testId": "HIJ1-E2E-147",
+    "cardNumber": "BS32-XX02",
+    "op": "MILL",
+    "auditFinding": "FAILED_EXACT_SEMANTIC_ASSERTION: Expected values to be strictly equal:",
+    "effectText": "[LV1][LV2][LV3]\nWhile there are only Yellow symbols on your Field, you do not lose the game even if your Life becomes zero.\n\n[LV1][LV2][LV3] (Your Start Step)\nWhen your Life is zero, send six cards from your decktop to the Trash. This effect doesn't stack.\n\n[LV3] (Either Attack Step)\nIf you control ten or more Yellow symbols, the BP of every opposing Spirit/Ultimate becomes 0.",
+    "shard": "BS32.json",
+    "abilities": [
+      {
+        "clauses": [
+          {
+            "rawText": "While there are only Yellow symbols on your Field, you do not lose the game even if your Life becomes zero.",
+            "op": {
+              "op": "PREVENT_LOSS"
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "When your Life is zero, send six cards from your decktop to the Trash.",
+            "op": {
+              "op": "MILL",
+              "count": 6
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "If you control ten or more Yellow symbols, the BP of every opposing Spirit/Ultimate becomes 0.",
+            "op": {
+              "op": "SET_BP"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "testId": "HIJ1-E2E-149",
+    "cardNumber": "BS33-069",
+    "op": "BP_DEBUFF",
+    "auditFinding": "FAILED_EXACT_SEMANTIC_ASSERTION: Expected values to be strictly equal:",
+    "effectText": "[Soul Burst] (After an opposing Spirit's/Brave's (When Summoned) effect resolves)\nDuring this turn, a Spirit you control can't be destroyed. After this effect resolves, deploy this Nexus card without paying the cost.\n\n[LV1][LV2] (When Deployed)\nDuring this turn, all opposing Spirits become LV1.\n\n[LV2] (Either Attack Step)\nAll battling opposing Spirits get -3000 BP.",
+    "shard": "BS33.json",
+    "abilities": [
+      {
+        "clauses": [
+          {
+            "rawText": "During this turn, a Spirit you control can't be destroyed.",
+            "op": {
+              "op": "INDESTRUCTIBLE"
+            }
+          },
+          {
+            "rawText": "deploy this Nexus card without paying the cost.",
+            "op": {
+              "op": "DEPLOY_NEXUS",
+              "free": true
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "During this turn, all opposing Spirits become LV1.",
+            "op": {
+              "op": "SET_LEVEL"
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "All battling opposing Spirits get -3000 BP.",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 3000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "testId": "HIJ1-E2E-152",
+    "cardNumber": "BATTLE-SPIRITS-A10193",
+    "op": "BP_DEBUFF",
+    "auditFinding": "FAILED_EXACT_SEMANTIC_ASSERTION: Expected values to be strictly equal:",
+    "effectText": "[LV1][LV2][LV3] (Start of Either Attack Step)\nDuring this turn, for each \"Drifting Spirit\" family Spirit you control, give all opposing Spirits/Ultimates -3000 BP.\n\n[LV2][LV3]\nWhen opposing Spirits/Ultimates are brought to 0 BP, exhaust all those Spirits/Ultimates.\n\n[LV3] (When Attacks)\nBy destroying an opposing 0 BP Spirit, this Spirit refreshes.",
+    "shard": "BS35.json",
+    "abilities": [
+      {
+        "clauses": [
+          {
+            "rawText": "During this turn, for each \"Drifting Spirit\" family Spirit you control, give all opposing Spirits/Ultimates -3000 BP.",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 3000
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "When opposing Spirits/Ultimates are brought to 0 BP, exhaust all those Spirits/Ultimates.",
+            "op": {
+              "op": "EXHAUST",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "clauses": [
+          {
+            "rawText": "By destroying an opposing 0 BP Spirit",
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "this Spirit refreshes.",
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

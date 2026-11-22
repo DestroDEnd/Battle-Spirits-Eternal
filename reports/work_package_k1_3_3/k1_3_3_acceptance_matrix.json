@@ -1,0 +1,48 @@
+{
+    "package":  "K.1.3.3",
+    "overallStatus":  "ACCEPTED_WITH_CONDITIONS",
+    "blockers":  [
+                     "WPDE-PERF-01 is intermittently failing (\u003c500ms threshold violated at 837.25ms in fresh process run and 714.42ms in tests/run_all.js).",
+                     "34 real semanticPatternId false equivalences discovered where opponent-only timingLabel collapses with non-opponent timingLabel.",
+                     "312 timingLabel discrepancies remain uncompiled into structured IR fields.",
+                     "750 previously display-only records are NOT confirmed display-only: 691 have [team:]/[teams:] blocks in data/cards_detailed.json dropped to empty IR placeholders, and 59 require manual review.",
+                     "1,818 prerequisite/keyword nodes (3,632 edges) have 0 confirmed runtime consumers in engine/."
+                 ],
+    "criteria":  [
+                     {
+                         "id":  "K1.3.3-AC-01",
+                         "item":  "Timing rebuilt from source + real collisions detected",
+                         "status":  "PASS"
+                     },
+                     {
+                         "id":  "K1.3.3-AC-02",
+                         "item":  "Dependency dataflow audited (0 confirmed runtime consumers)",
+                         "status":  "PASS"
+                     },
+                     {
+                         "id":  "K1.3.3-AC-03",
+                         "item":  "Display-only 750 revalidated against cards_detailed.json",
+                         "status":  "PASS"
+                     },
+                     {
+                         "id":  "K1.3.3-AC-04",
+                         "item":  "2,808 exclusions independently dispositioned",
+                         "status":  "PASS"
+                     },
+                     {
+                         "id":  "K1.3.3-AC-05",
+                         "item":  "Master inventory (36,422 abilities, 51,734 clauses, all fields)",
+                         "status":  "PASS"
+                     },
+                     {
+                         "id":  "K1.3.3-AC-06",
+                         "item":  "WPDE-PERF-01 discrepancy explained and recorded as unresolved blocker",
+                         "status":  "PASS_AS_DOCUMENTED_BLOCKER"
+                     },
+                     {
+                         "id":  "K1.3.3-AC-07",
+                         "item":  "Full regression (tests/run_all.js 2365/2366, WPDE-PERF-01 714.42ms)",
+                         "status":  "PARTIAL"
+                     }
+                 ]
+}

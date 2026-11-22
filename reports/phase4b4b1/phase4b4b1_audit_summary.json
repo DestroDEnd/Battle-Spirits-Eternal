@@ -1,0 +1,706 @@
+{
+  "phase": "4B.4B.1",
+  "title": "Compiler Semantic Fidelity Audit — Reconciled Evidence & Metric Verification",
+  "timestamp": "2026-11-14T15:44:53.324Z",
+  "auditScope": {
+    "totalCanonicalCards": 14609,
+    "totalIrShards": 514,
+    "totalAuditedAbilities": 34855
+  },
+  "reconciledAbilityMetrics": {
+    "totalAuditedAbilities": 34855,
+    "cleanAbilitiesCount": 32941,
+    "cleanAbilitiesPercentage": 94.51,
+    "uniqueDefectiveAbilitiesCount": 1914,
+    "defectiveAbilitiesPercentage": 5.49,
+    "totalDefectAssignmentsAcrossTypes": 1952,
+    "multiDefectAbilitiesCount": 38,
+    "excessAbilityAssignments": 38,
+    "reconciliationEquation": "32,941 clean + 1,914 defective = 34,855 total audited abilities; 1,914 unique defective abilities + 38 multi-defect overlapping assignments = 1,952 defect assignments"
+  },
+  "reconciledCardMetrics": {
+    "totalCanonicalCards": 14609,
+    "uniqueAffectedCardsCount": 1776,
+    "affectedCardsPercentage": 12.16,
+    "totalCardDefectAssignmentsAcrossTypes": 1880,
+    "multiDefectCardsCount": 101,
+    "cardsWithTwoDefects": 98,
+    "cardsWithThreeDefects": 3,
+    "excessCardAssignments": 104,
+    "reconciliationEquation": "1,776 unique affected cards + 104 excess assignments (98 cards * 1 + 3 cards * 2) = 1,880 total defect-to-card assignments"
+  },
+  "severityDistribution": {
+    "CRITICAL": 73,
+    "HIGH": 1090,
+    "MEDIUM": 751,
+    "LOW": 0,
+    "NONE": 32941
+  },
+  "classificationDistribution11Formal": {
+    "NO_DISCREPANCY_FOUND": {
+      "count": 32941,
+      "percentage": 94.51,
+      "meaning": "Source and IR appear semantically consistent"
+    },
+    "UNSUPPORTED_BY_COMPILER": {
+      "count": 755,
+      "percentage": 2.17,
+      "meaning": "Compiler emitted generic unparameterized fallback ops (COMBAT_RESTRICTION, COMBAT_RULE)"
+    },
+    "WRONG_PARAMETER": {
+      "count": 725,
+      "percentage": 2.08,
+      "meaning": "Frequency limits, thresholds, or comparisons omitted/incorrect"
+    },
+    "SEMANTIC_OMISSION": {
+      "count": 239,
+      "percentage": 0.69,
+      "meaning": "Original text contains requirements completely missing from IR"
+    },
+    "SEMANTIC_SUBSTITUTION": {
+      "count": 83,
+      "percentage": 0.24,
+      "meaning": "IR represents a fundamentally different operation or meaning"
+    },
+    "SEMANTIC_STRENGTHENING": {
+      "count": 75,
+      "percentage": 0.22,
+      "meaning": "IR represents a strictly stronger effect than printed (e.g. absolute invulnerability)"
+    },
+    "WRONG_TARGET": {
+      "count": 37,
+      "percentage": 0.11,
+      "meaning": "Target constraints or extreme selectors omitted"
+    },
+    "SEMANTIC_WEAKENING": {
+      "count": 0,
+      "percentage": 0,
+      "meaning": "IR represents a weaker version of the original effect"
+    },
+    "WRONG_TIMING": {
+      "count": 0,
+      "percentage": 0,
+      "meaning": "Trigger or duration is incorrect"
+    },
+    "WRONG_ORDER": {
+      "count": 0,
+      "percentage": 0,
+      "meaning": "Clause sequencing is incorrect"
+    },
+    "AMBIGUOUS_SOURCE": {
+      "count": 0,
+      "percentage": 0,
+      "meaning": "Original card text cannot be interpreted confidently"
+    }
+  },
+  "overlappingAbilitiesDetails": {
+    "count": 38,
+    "abilities": [
+      {
+        "abilityId": "BSCO-003#a1",
+        "cardNumber": "BSCO-003",
+        "cardName": "The ApexDragonMarquis Palvisor",
+        "defects": [
+          "DEF-REL-TARGET-01",
+          "DEF-LIMIT-OPT-01"
+        ],
+        "text": "Destroy an opposing Spirit/Ultimate with BP equal or inferior to this Spirit's, and once per turn, this Spirit refreshes."
+      },
+      {
+        "abilityId": "BS12-008#a0",
+        "cardNumber": "BS12-008",
+        "cardName": "Grand-Dragcastle",
+        "defects": [
+          "DEF-FALLBACK-RULE-01",
+          "DEF-SEL-EXTREME-01"
+        ],
+        "text": "You can target and attack a Spirit with the highest BP on the opposing Field."
+      },
+      {
+        "abilityId": "BS32-040#a1",
+        "cardNumber": "BS32-040",
+        "cardName": "Yuki Girl",
+        "defects": [
+          "DEF-SUBST-EFFECT-RESTR-01",
+          "DEF-FALLBACK-RULE-01"
+        ],
+        "text": "(This effect can't be used while on the Field.) When this battle ends, if your Life is at two or less, end the Attack Step."
+      },
+      {
+        "abilityId": "BATTLE-SPIRITS-A5264#a1",
+        "cardNumber": "BATTLE-SPIRITS-A5264",
+        "cardName": "Kaigyuu-Arms",
+        "defects": [
+          "DEF-REL-TARGET-01",
+          "DEF-FALLBACK-COMBAT-01"
+        ],
+        "text": "If this Spirit has 10000 BP or more, destroy an opposing Spirit with a cost equal or inferior to this Spirit's. If this Spirit has 20000 BP or more, also, the opponent can only block with a Spirit with Soul Core on it."
+      },
+      {
+        "abilityId": "BS34-029#a1",
+        "cardNumber": "BS34-029",
+        "cardName": "The EarthShinobi Daibeet",
+        "defects": [
+          "DEF-FALLBACK-COMBAT-01",
+          "DEF-FALLBACK-RULE-01"
+        ],
+        "text": "The opponent can only block if they block with two Spirits or two Ultimates. When this Spirit is blocked, choose one of the two to battle against."
+      },
+      {
+        "abilityId": "BS34-071#a1",
+        "cardNumber": "BS34-071",
+        "cardName": "The World of Owari",
+        "defects": [
+          "DEF-FALLBACK-COMBAT-01",
+          "DEF-SEL-EXTREME-01"
+        ],
+        "text": "While your \"God-Sechs\" Spirit is attacking, the opponent can only block with their Spirit with the highest BP."
+      },
+      {
+        "abilityId": "BS44-067#a2",
+        "cardNumber": "BS44-067",
+        "cardName": "Drag-Pulsar",
+        "defects": [
+          "DEF-REL-TARGET-01",
+          "DEF-LIMIT-OPT-01"
+        ],
+        "text": "Destroy an opposing Spirit/Ultimate with a BP equal or inferior to this Spirit's. When this effect destroys any Spirit/Ultimate, once per turn, this Spirit refreshes."
+      },
+      {
+        "abilityId": "BATTLE-SPIRITS-A4637#a5",
+        "cardNumber": "BATTLE-SPIRITS-A4637",
+        "cardName": "Grandwalker Dan",
+        "defects": [
+          "DEF-LIMIT-OPT-01",
+          "DEF-FALLBACK-RULE-01"
+        ],
+        "text": "(Once per turn, send four cores from this Nexus to the Void) Destroy an opposing 10000 BP or less Spirit/Ultimate. Also, during this turn, the opponent can't end the Attack Step via effects."
+      },
+      {
+        "abilityId": "BATTLE-SPIRITS-A320#a1",
+        "cardNumber": "BATTLE-SPIRITS-A320",
+        "cardName": "The CancerBushin Cancerd X",
+        "defects": [
+          "DEF-FALLBACK-COMBAT-01",
+          "DEF-FALLBACK-RULE-01"
+        ],
+        "text": "When your \"Galaxian\"/\"Avatar\" family Spirit attacks, the opponent must block with two Spirits, otherwise they can't block. When that Spirit you control is blocked, choose one of the two to battle against."
+      },
+      {
+        "abilityId": "BS49-X01#a0",
+        "cardNumber": "BS49-X01",
+        "cardName": "The DinosaurBushin Murakumo Rex",
+        "defects": [
+          "DEF-REL-TARGET-01",
+          "DEF-LIMIT-OPT-01"
+        ],
+        "text": "You can send two cores from any of your Red/Blue Grandwalker Nexuses to this Spirit. When you've done so, destroy an opposing Spirit/Ultimate with BP equal or inferior to this Spirit's. Also, if you control any Blue symbols, send two cores from any opposing Grandwalker Nexuses to the Void, and once per turn, this Spirit can refresh."
+      },
+      {
+        "abilityId": "BATTLE-SPIRITS-A13714#a1",
+        "cardNumber": "BATTLE-SPIRITS-A13714",
+        "cardName": "The YoukaiEmperor En'ou",
+        "defects": [
+          "DEF-FALLBACK-COMBAT-01",
+          "DEF-FALLBACK-RULE-01"
+        ],
+        "text": "You can put a core from any of your Purple/Yellow Grandwalker Nexus to this Spirit. When you've done so, during this turn, an opposing Spirit can't block. Also, if you control any Purple symbols, during this battle, the opponent can't end the Attack Step via effects."
+      },
+      {
+        "abilityId": "BATTLE-SPIRITS-A498#a2",
+        "cardNumber": "BATTLE-SPIRITS-A498",
+        "cardName": "The Angelia Milleniel -Phoenix Wing-",
+        "defects": [
+          "DEF-LIMIT-OPT-01",
+          "DEF-FALLBACK-RULE-01"
+        ],
+        "text": "The opponent can't end the Attack Step with effects. Also, once per turn, after a Flash effect, besides [During Set] effects, of your Magic resolves, refresh this Spirit, and draw a card from the deckbottom."
+      },
+      {
+        "abilityId": "BS62-062#a1",
+        "cardNumber": "BS62-062",
+        "cardName": "The IronPlateRagingBeast Vanburg",
+        "defects": [
+          "DEF-LIMIT-OPT-01",
+          "DEF-FALLBACK-RULE-01"
+        ],
+        "text": "The opponent can't end the Attack Step via effects. Also, once per turn, this Spirit can refresh."
+      },
+      {
+        "abilityId": "BS69-X07#a1",
+        "cardNumber": "BS69-X07",
+        "cardName": "The GreatToolcraftBird Popol-Vuh",
+        "defects": [
+          "DEF-LIMIT-OPT-01",
+          "DEF-FALLBACK-COMBAT-01"
+        ],
+        "text": "During this turn, an opposing Spirit/Ultimate can't attack/block. Then, (Once per Turn: Same Name) during this turn, when your Life or the opposing Life is increased or reduced, activate the same effect once more."
+      },
+      {
+        "abilityId": "BS70-086#a1",
+        "cardNumber": "BS70-086",
+        "cardName": "Gravity Sphere",
+        "defects": [
+          "DEF-FALLBACK-COMBAT-01",
+          "DEF-FALLBACK-RULE-01"
+        ],
+        "text": "During this turn, an opposing Spirit/Ultimate can't block. Or, if your Life is at three or less, and you control any \"Contractor Uranus\", when this battle ends, end the Attack Step."
+      },
+      {
+        "abilityId": "BS73-012#a1",
+        "cardNumber": "BS73-012",
+        "cardName": "Samurai-Dragon X",
+        "defects": [
+          "DEF-LIMIT-OPT-01",
+          "DEF-SEL-EXTREME-01"
+        ],
+        "text": "Destroy an opposing Spirit with the lowest BP. Also, once per turn, if you have eight counters or more, you can send the [Soul Core] from your Trash to this Spirit."
+      },
+      {
+        "abilityId": "BS73-012#a2",
+        "cardNumber": "BS73-012",
+        "cardName": "Samurai-Dragon X",
+        "defects": [
+          "DEF-REL-TARGET-01",
+          "DEF-LIMIT-OPT-01"
+        ],
+        "text": "When your [Soul Core] is sent to the Trash, destroy an opposing Spirit with a BP equal or inferior to this Spirit's, and once per turn, this Spirit can refresh."
+      },
+      {
+        "abilityId": "BS73-047#a1",
+        "cardNumber": "BS73-047",
+        "cardName": "The BerylJewelShieldFairy Morgana",
+        "defects": [
+          "DEF-LIMIT-OPT-01",
+          "DEF-FALLBACK-COMBAT-01"
+        ],
+        "text": "(You can't use this effect while it's on Field) During this turn, an opposing Spirit/Ultimate can't attack/block. After this effect resolves, (Once per Turn: Same Name) you can summon this card without paying the cost."
+      },
+      {
+        "abilityId": "BS75-028#a0",
+        "cardNumber": "BS75-028",
+        "cardName": "The RevelationDragon Unnis",
+        "defects": [
+          "DEF-LIMIT-OPT-01",
+          "DEF-FALLBACK-COMBAT-01"
+        ],
+        "text": "This card in Trash is unaffected by opposing effects, and (Once per Turn: Same Name) during your Main Step, if you control any \"Contractor Mitra\", you can let this card enter Soul State. When you've done so, by +1 core to one of your \"Contractor Mitra\" Grandwalker Nexuses, during this turn, all your \"Awakened Dragon\" family cards in the Trash is unaffected by opposing effects. This \"unaffected by effects\" effect can't be prevented by opposing effects."
+      },
+      {
+        "abilityId": "BS75-059#a2",
+        "cardNumber": "BS75-059",
+        "cardName": "The TraitorHero Alter-Randolph",
+        "defects": [
+          "DEF-LIMIT-OPT-01",
+          "DEF-FALLBACK-RULE-01"
+        ],
+        "text": "During this turn, the opponent can't end the Attack Step via effects. Also, once per turn, you can refresh a Spirit you control."
+      },
+      {
+        "abilityId": "BS77-CP04#a4",
+        "cardNumber": "BS77-CP04",
+        "cardName": "The DestructionContractor Shiva",
+        "defects": [
+          "DEF-LIMIT-OPT-01",
+          "DEF-FALLBACK-COMBAT-01"
+        ],
+        "text": "For this Nexus, its symbols are unaffected by opposing effects, and its number of cores can't be brought to less than three by opposing effects. Also, once per turn, when your \"Death Dragon\" family \"Destruction Effect\"/ \"Core Removal Effect\" would activate, by discarding a facedown card from your Removed Zone, that effect can't be prevented by opposing effects."
+      },
+      {
+        "abilityId": "BSC42-085#a1",
+        "cardNumber": "BSC42-085",
+        "cardName": "Silent Wall LT",
+        "defects": [
+          "DEF-FALLBACK-COMBAT-01",
+          "DEF-FALLBACK-RULE-01"
+        ],
+        "text": "When this battle ends, end the Attack Step. Or, during this battle, your Life can't be reduced. Then, banish this card."
+      },
+      {
+        "abilityId": "BSC46-X07#a3",
+        "cardNumber": "BSC46-X07",
+        "cardName": "［Starry Hamal］Sephi Aries",
+        "defects": [
+          "DEF-LIMIT-OPT-01",
+          "DEF-FALLBACK-RULE-01"
+        ],
+        "text": "The opponent can't end the Attack Step via effects. Also, (Can't Stack) all your [CoZ12] Spirits can refresh at the end of battle, once per turn per Spirit."
+      },
+      {
+        "abilityId": "BSC46-CX01#a3",
+        "cardNumber": "BSC46-CX01",
+        "cardName": "［Together Forever］Flamme Sandria",
+        "defects": [
+          "DEF-REL-TARGET-01",
+          "DEF-LIMIT-OPT-01"
+        ],
+        "text": "Your counter +1. Then, you can destroy an opposing Spirit with a BP equal or inferior to this Spirit's, and when destroys, once per turn, you can return a Magic card with [Song] from your Field/Trash to the Hand."
+      },
+      {
+        "abilityId": "BSC47-CX03#a4",
+        "cardNumber": "BSC47-CX03",
+        "cardName": "The AffectionContractor Parvati",
+        "defects": [
+          "DEF-LIMIT-OPT-01",
+          "DEF-FALLBACK-COMBAT-01"
+        ],
+        "text": "(Once per turn, send three cores from this Nexus to the Void) You can set a \"Hunter Beast\" family Mirage card from your Hand/Trash without paying the cost. When you've done so, during this turn, an opposing Spirit can't block."
+      },
+      {
+        "abilityId": "BSC50-XV04#a2",
+        "cardNumber": "BSC50-XV04",
+        "cardName": "The MoonlightDragon Strike-Siegwurm XV",
+        "defects": [
+          "DEF-REL-TARGET-01",
+          "DEF-LIMIT-OPT-01"
+        ],
+        "text": "You can return to the Hand an opposing Spirit/Ultimate with a cost equal or inferior to this Spirit's. When you've done so, once per turn, this Spirit can refresh."
+      },
+      {
+        "abilityId": "BSC50-029#a1",
+        "cardNumber": "BSC50-029",
+        "cardName": "The FangEmperor Cerbelord LT",
+        "defects": [
+          "DEF-REL-TARGET-01",
+          "DEF-LIMIT-OPT-01"
+        ],
+        "text": "You can discard five cards from your decktop. When you've done so, you can destroy an opposing Spirit with a cost equal or inferior to this Spirit's. Then, once per turn, if this Spirit is \"SunDragon\", this Spirit can refresh."
+      },
+      {
+        "abilityId": "CB02-XX01#a1",
+        "cardNumber": "CB02-XX01",
+        "cardName": "Omnimon",
+        "defects": [
+          "DEF-REL-TARGET-01",
+          "DEF-LIMIT-OPT-01"
+        ],
+        "text": "Destroy an opposing Spirit/Ultimate with BP equal or inferior to this Spirit's, and once per turn, this Spirit refreshes."
+      },
+      {
+        "abilityId": "CB18-017#a1",
+        "cardNumber": "CB18-017",
+        "cardName": "The LastJudgementer Gillvalis［Ultra Kaiju 2020］",
+        "defects": [
+          "DEF-REL-TARGET-01",
+          "DEF-LIMIT-OPT-01"
+        ],
+        "text": "Destroy an opposing Spirit with BP equal or inferior to this Spirit's, and once per turn, refresh this Spirit."
+      },
+      {
+        "abilityId": "CB25-061#a1",
+        "cardNumber": "CB25-061",
+        "cardName": "Bright Noa ［U.C. 0093］",
+        "defects": [
+          "DEF-LIMIT-OPT-01",
+          "DEF-FALLBACK-COMBAT-01"
+        ],
+        "text": "You can brave one of your Spirit-condition “Amuro” Brave to one of your “Nu Gundam” Spirit, following that Spirit's state. Or, (Once per Turn: Same Name), you can summon a “LB” family Spirit card from the Hand. When you do, the number of cores on every Spirit you control can't be brought to less than one."
+      },
+      {
+        "abilityId": "CB25-X01#a0",
+        "cardNumber": "CB25-X01",
+        "cardName": "Sazabi",
+        "defects": [
+          "DEF-FALLBACK-COMBAT-01",
+          "DEF-SEL-EXTREME-01"
+        ],
+        "text": "You can destroy an opposing Spirit with the highest BP, and you can draw a card for each symbol that destroyed Spirit has. While braved to \"Char\", this destruction effect can't be prevented by opposing effects."
+      },
+      {
+        "abilityId": "CB29-042#a2",
+        "cardNumber": "CB29-042",
+        "cardName": "Raphael Gundam",
+        "defects": [
+          "DEF-FALLBACK-COMBAT-01",
+          "DEF-PREREQ-LINK-01"
+        ],
+        "text": "You can return up to two Cost 5 or more \"CB\"/\"Federation\" family cards from your Trash to the deckbottom. when you've done so, for each card returned, ignoring the cost of Braves, destroy an opposing Cost 7 or less Spirit. This destruction effect can't be prevented by \"Armor\"-named effects."
+      },
+      {
+        "abilityId": "CB29-CX01#a1",
+        "cardNumber": "CB29-CX01",
+        "cardName": "Gundam Lfrith ［Bit On Form］",
+        "defects": [
+          "DEF-LIMIT-OPT-01",
+          "DEF-FALLBACK-COMBAT-01"
+        ],
+        "text": "When your \"School\" family Spirit is summoned/attacks, your counter +1.  Then, once per turn, during this turn, an opposing Spirit can't attack/block."
+      },
+      {
+        "abilityId": "CB34-X05#a2",
+        "cardNumber": "CB34-X05",
+        "cardName": "Kamen Rider Geats Oneness",
+        "defects": [
+          "DEF-LIMIT-OPT-01",
+          "DEF-FALLBACK-RULE-01"
+        ],
+        "text": "The opponent can't end the Attack Step via effects. Also, (Can't Stack) all your \"Kamen\" & \"Imp\" family Spirits can refresh once per turn per Spirit at the end of battle."
+      },
+      {
+        "abilityId": "PB33-001#a0",
+        "cardNumber": "PB33-001",
+        "cardName": "The BladeEmperorTigerDeity Blade-Tiger",
+        "defects": [
+          "DEF-REL-TARGET-01",
+          "DEF-LIMIT-OPT-01"
+        ],
+        "text": "You can destroy an opposing Spirit/Ultimate with a BP equal or inferior to this Spirit's, or an opposing Spirit/Ultimate with the highest BP. When this effect destroys, once per turn, if it's your turn, send an opposing Life to the Trash, and this Spirit refreshes."
+      },
+      {
+        "abilityId": "PB42-009#a4",
+        "cardNumber": "PB42-009",
+        "cardName": "Henshin!! Kamen Rider Gavv",
+        "defects": [
+          "DEF-LIMIT-OPT-01",
+          "DEF-FALLBACK-COMBAT-01"
+        ],
+        "text": "(Once per turn, send three cores from this Nexus to Void) Send two cores from an opposing Spirit to the Reserve. Then, you can -1 your counter. When you've done so, during this turn, an opposing Spirit with one core or less on it can't attack/block."
+      },
+      {
+        "abilityId": "BATTLE-SPIRITS-A15196#a2",
+        "cardNumber": "BATTLE-SPIRITS-A15196",
+        "cardName": "［School Band］Speania Squall (Vo/Gt)",
+        "defects": [
+          "DEF-REL-TARGET-01",
+          "DEF-LIMIT-OPT-01"
+        ],
+        "text": "Return an opposing Spirit with a cost equal or inferior to this Spirit's to the deckbottom. Then, if you control any \"Ba\"-named Spirit, once per turn, refresh this Spirit."
+      },
+      {
+        "abilityId": "P22-05#a1",
+        "cardNumber": "P22-05",
+        "cardName": "The CorpseSlashingMusha Ryoudan",
+        "defects": [
+          "DEF-REL-TARGET-01",
+          "DEF-LIMIT-OPT-01"
+        ],
+        "text": "You can destroy an opposing Spirit with a number of core equal or inferior to this Spirit's, and when destroys, once per turn, this Spirit can refresh."
+      }
+    ]
+  },
+  "multiDefectCardsSummary": {
+    "totalMultiDefectCards": 101,
+    "cardsWithThreeDefects": [
+      {
+        "cardNumber": "BATTLE-SPIRITS-A320",
+        "cardName": "The CancerBushin Cancerd X",
+        "defectCount": 3,
+        "defects": [
+          "DEF-FALLBACK-COMBAT-01",
+          "DEF-FALLBACK-RULE-01",
+          "DEF-LIMIT-OPT-01"
+        ]
+      },
+      {
+        "cardNumber": "BS73-012",
+        "cardName": "Samurai-Dragon X",
+        "defectCount": 3,
+        "defects": [
+          "DEF-LIMIT-OPT-01",
+          "DEF-SEL-EXTREME-01",
+          "DEF-REL-TARGET-01"
+        ]
+      },
+      {
+        "cardNumber": "PB33-001",
+        "cardName": "The BladeEmperorTigerDeity Blade-Tiger",
+        "defectCount": 3,
+        "defects": [
+          "DEF-REL-TARGET-01",
+          "DEF-LIMIT-OPT-01",
+          "DEF-FALLBACK-COMBAT-01"
+        ]
+      }
+    ],
+    "cardsWithTwoDefectsCount": 98
+  },
+  "bs01RelativeBpValidation": {
+    "cardsTested": [
+      "BS01-012",
+      "BS01-018"
+    ],
+    "printedTextIdentical": true,
+    "compiledIrIdentical": true,
+    "printedText": "This Spirit can't block Spirits with BP inferior to this Spirit's.",
+    "compiledIR": {
+      "op": "SET_RESTRICTION",
+      "target": "self",
+      "restriction": "CANNOT_BLOCK"
+    },
+    "relativeBpDropped": true,
+    "engineMechanismEvaluated": "engine/continuous.js canBlock() evaluates CANNOT_BLOCK unconditionally. No continuous relative BP comparison against attacker exists in engine.",
+    "defectSeparation": "Compiler defect: strips relative BP comparison. Engine limitation: cannotBlock modifier does not support dynamic comparison filters against attacker stack."
+  },
+  "compilerDefectsAudit": {
+    "DEF-REL-BP-01": {
+      "name": "Relative BP Comparison Omission in Blocking Restriction",
+      "affectedCompilerRule": "compiler/clause_patterns.js:844",
+      "classification": "SEMANTIC_STRENGTHENING",
+      "severity": "HIGH",
+      "affectedCards": 2,
+      "affectedAbilities": 2
+    },
+    "DEF-REL-TARGET-01": {
+      "name": "Relative BP/Cost/Core Comparison Filter Omitted in Target Selection",
+      "affectedCompilerRule": "compiler/clause_patterns.js:various",
+      "classification": "SEMANTIC_OMISSION",
+      "severity": "HIGH",
+      "affectedCards": 235,
+      "affectedAbilities": 235
+    },
+    "DEF-LIMIT-OPT-01": {
+      "name": "Sentence-Based \"Once Per Turn\" Frequency Limit Dropped from Header",
+      "affectedCompilerRule": "compiler/header_parser.js:various",
+      "classification": "WRONG_PARAMETER",
+      "severity": "HIGH",
+      "affectedCards": 674,
+      "affectedAbilities": 737
+    },
+    "DEF-FALLBACK-COMBAT-01": {
+      "name": "Unparameterized Generic COMBAT_RESTRICTION Fallback",
+      "affectedCompilerRule": "compiler/clause_patterns.js:2343",
+      "classification": "UNSUPPORTED_BY_COMPILER",
+      "severity": "MEDIUM",
+      "affectedCards": 521,
+      "affectedAbilities": 529
+    },
+    "DEF-FALLBACK-RULE-01": {
+      "name": "Unparameterized Generic COMBAT_RULE Fallback",
+      "affectedCompilerRule": "compiler/clause_patterns.js:2346",
+      "classification": "UNSUPPORTED_BY_COMPILER",
+      "severity": "MEDIUM",
+      "affectedCards": 246,
+      "affectedAbilities": 247
+    },
+    "DEF-IMMUNITY-ABS-01": {
+      "name": "Conditional Destruction Immunity Compiled as Absolute INDESTRUCTIBLE",
+      "affectedCompilerRule": "compiler/clause_patterns.js:2340",
+      "classification": "SEMANTIC_STRENGTHENING",
+      "severity": "CRITICAL",
+      "affectedCards": 73,
+      "affectedAbilities": 73
+    },
+    "DEF-CORE-ZERO-01": {
+      "name": "Core Removal Down-to-Zero Protection Stripped as Reminder Text",
+      "affectedCompilerRule": "compiler/clause_splitter.js:28",
+      "classification": "SEMANTIC_OMISSION",
+      "severity": "HIGH",
+      "affectedCards": 1,
+      "affectedAbilities": 1
+    },
+    "DEF-SEL-EXTREME-01": {
+      "name": "Extreme Target Constraint (Highest/Lowest BP/Cost) Omitted",
+      "affectedCompilerRule": "compiler/clause_patterns.js:various",
+      "classification": "WRONG_TARGET",
+      "severity": "HIGH",
+      "affectedCards": 41,
+      "affectedAbilities": 41
+    },
+    "DEF-PREREQ-LINK-01": {
+      "name": "Prerequisite Execution Link (\"If you do\", \"When you've done so\") Omitted",
+      "affectedCompilerRule": "compiler/clause_splitter.js:connectorRegex",
+      "classification": "SEMANTIC_OMISSION",
+      "severity": "HIGH",
+      "affectedCards": 4,
+      "affectedAbilities": 4
+    },
+    "DEF-SUBST-EFFECT-RESTR-01": {
+      "name": "Effect Activation Restriction Miscompiled as Combat Restriction",
+      "affectedCompilerRule": "compiler/clause_patterns.js:2342",
+      "classification": "SEMANTIC_SUBSTITUTION",
+      "severity": "HIGH",
+      "affectedCards": 83,
+      "affectedAbilities": 83
+    }
+  },
+  "automatedVerificationAssertionsLog": [
+    {
+      "assertionIndex": 1,
+      "checkName": "Card semantic audit row count",
+      "expected": 34855,
+      "actual": 34855,
+      "status": "PASSED",
+      "description": "Verifies that every compiled card ability across all 514 shards is evaluated in the audit ledger"
+    },
+    {
+      "assertionIndex": 2,
+      "checkName": "Compiler defect catalog row count",
+      "expected": 10,
+      "actual": 10,
+      "status": "PASSED",
+      "description": "Verifies exactly 10 distinct compiler defect types are documented in phase4b4b1_compiler_defects.csv"
+    },
+    {
+      "assertionIndex": 3,
+      "checkName": "Test gap analysis row count",
+      "expected": 10,
+      "actual": 10,
+      "status": "PASSED",
+      "description": "Verifies exactly 10 test gap entries correspond 1:1 with each identified compiler defect"
+    },
+    {
+      "assertionIndex": 4,
+      "checkName": "Card impact ledger row count",
+      "expected": 1776,
+      "actual": 1776,
+      "status": "PASSED",
+      "description": "Verifies that exactly 1,776 unique cards are affected and deduplicated in phase4b4b1_card_impact.csv"
+    },
+    {
+      "assertionIndex": 5,
+      "checkName": "Total abilities reconciliation arithmetic",
+      "expected": "32,941 clean + 1,914 defective = 34,855 total",
+      "actual": "32,941 clean + 1,914 defective = 34,855 total",
+      "status": "PASSED",
+      "description": "Verifies clean abilities (32,941) plus unique defective abilities (1,914) equals total audited abilities (34,855)"
+    },
+    {
+      "assertionIndex": 6,
+      "checkName": "Ability defect assignments reconciliation arithmetic",
+      "expected": "1,914 unique + 38 multi-defect assignments = 1,952 total assignments",
+      "actual": "1,914 unique + 38 multi-defect assignments = 1,952 total assignments",
+      "status": "PASSED",
+      "description": "Verifies the 38-count difference between unique defective abilities (1,914) and sum of defect rows (1,952)"
+    },
+    {
+      "assertionIndex": 7,
+      "checkName": "Card defect assignments reconciliation arithmetic",
+      "expected": "1,776 unique cards + 104 multi-defect assignments = 1,880 total assignments",
+      "actual": "1,776 unique cards + 104 multi-defect assignments = 1,880 total assignments",
+      "status": "PASSED",
+      "description": "Verifies the 104-count difference between unique affected cards (1,776) and sum of card counts across defects (1,880)"
+    },
+    {
+      "assertionIndex": 8,
+      "checkName": "Clean abilities severity match",
+      "expected": "cleanAbilities === severity.NONE (32,941 === 32,941)",
+      "actual": "32,941 === 32,941",
+      "status": "PASSED",
+      "description": "Verifies clean abilities strictly match records with severity NONE"
+    },
+    {
+      "assertionIndex": 9,
+      "checkName": "Defective abilities severity sum",
+      "expected": "CRITICAL(73) + HIGH(1090) + MEDIUM(751) + LOW(0) === 1,914",
+      "actual": "1,914 === 1,914",
+      "status": "PASSED",
+      "description": "Verifies defective abilities strictly sum across non-NONE severity levels"
+    },
+    {
+      "assertionIndex": 10,
+      "checkName": "Production immutability verification",
+      "expected": "git diff --stat engine/ compiler/ data/ returns clean",
+      "actual": "0 files modified in engine, compiler, or data",
+      "status": "PASSED",
+      "description": "Verifies zero modifications have been made to production source code, compiler, IR shards, or status database"
+    }
+  ],
+  "productionSafetyIntegrityStatement": {
+    "productionCodeModified": false,
+    "compilerLogicModified": false,
+    "cardImplementationStatusJsonModified": false,
+    "irShardsModified": false,
+    "cardsRecompiled": false,
+    "auditExportsSeparate": true
+  }
+}

@@ -572,7 +572,9 @@ export const BS05_OVERRIDES = {
             "condition": null,
             "duration": "DURING_THIS_TURN",
             "op": {
-              "op": "LIMIT_DECK_DISCARD"
+              "op": "LIMIT_DECK_DISCARD",
+              "maxPerTurn": 5,
+              "targetSide": "self"
             }
           }
         ],

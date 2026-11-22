@@ -31,6 +31,19 @@ export const CurseKeyword = {
         // Tag blocker to be destroyed at end of battle by Curse
         state.combat.curseTargetStackId = blockerStack.id;
       }
+    },
+    async onBattleEnd({ state, blockerCard, game }) {
+      if (state.combat && state.combat.curseTargetStackId) {
+        const oppSide = state.combat.attackerSide === 'player' ? 'opponent' : 'player';
+        const oppField = state.players[oppSide]?.field || [];
+        const target = oppField.find(st => st.id === state.combat.curseTargetStackId);
+        if (target && target.top) {
+          await moveCard(state, target.top, 'grave', target.owner || oppSide, {
+            cause: 'curse',
+            by: state.combat.attackerSide
+          }, game.events);
+        }
+      }
     }
   }
 };
@@ -92,10 +105,13 @@ export const AssaultKeyword = {
         chooser: ownerSide
       });
 
-      if (choice && choice.accepted) {
-        const nexusToExhaust = choice.nexus || readyNexuses[0];
-        nexusToExhaust.state = 'EXHAUSTED';
-        attackerStack.state = 'REFRESHED';
+      if (choice && choice.accepted !== false) {
+        const selected = Array.isArray(choice) ? choice[0] : (choice.selected ? choice.selected[0] : choice.nexus || choice.target || choice);
+        const nexusToExhaust = selected && readyNexuses.find(n => n.id === (selected.id || selected) || n === selected);
+        if (nexusToExhaust) {
+          nexusToExhaust.state = 'EXHAUSTED';
+          attackerStack.state = 'REFRESHED';
+        }
       }
     }
   }
@@ -360,7 +376,7 @@ export const TrueCurseKeyword = {
           chooser: ownerSide
         });
         const selected = Array.isArray(chosen) ? chosen[0] : chosen;
-        const target = (selected && (selected.stack || selected)) || oppField[0];
+        const target = (selected && (selected.stack || selected));
         if (target) {
           await commitStackExit(state, target, 'grave', { cause: 'true_curse' }, game.events);
         }
@@ -398,8 +414,8 @@ export const GreatCrushKeyword = {
             candidates: oppSpirits,
             chooser: attackerStack.owner
           });
-          const selected = Array.isArray(chosen) ? chosen[0] : chosen;
-          const target = (selected && (selected.stack || selected)) || oppSpirits[0];
+          const selected = Array.isArray(chosen) ? chosen[0] : (chosen?.selected ? chosen.selected[0] : chosen?.stack || chosen);
+          const target = selected && oppSpirits.find(st => st.id === (selected.id || selected) || st === selected);
           if (target) {
             await commitStackExit(state, target, 'grave', { cause: 'great_crush_burst_destroy', by: attackerStack.owner }, game.events);
           }
@@ -499,8 +515,8 @@ export const SupremeClashKeyword = {
             candidates: oppField,
             chooser: attackerStack?.owner || 'player'
           });
-          const selected = Array.isArray(chosen) ? chosen[0] : chosen;
-          const target = (selected && (selected.stack || selected)) || oppField[0];
+          const selected = Array.isArray(chosen) ? chosen[0] : (chosen?.selected ? chosen.selected[0] : chosen?.stack || chosen);
+          const target = selected && oppField.find(st => st.id === (selected.id || selected) || st === selected);
           if (target) {
             target.state = 'EXHAUSTED';
           }
@@ -532,8 +548,8 @@ export const GrandAssaultKeyword = {
       });
 
       if (choice && choice.accepted !== false) {
-        const selected = Array.isArray(choice) ? choice[0] : choice;
-        const nexusToExhaust = selected?.nexus || selected || allNexuses[0];
+        const selected = Array.isArray(choice) ? choice[0] : (choice?.selected ? choice.selected[0] : choice?.nexus || choice?.target || choice);
+        const nexusToExhaust = selected && allNexuses.find(n => n.id === (selected.id || selected) || n === selected);
         if (nexusToExhaust) {
           nexusToExhaust.state = 'EXHAUSTED';
           attackerStack.state = 'REFRESHED';
@@ -591,28 +607,218 @@ export const UltraAwakenKeyword = {
   }
 };
 
+export const WaveCrushKeyword = {
+  id: 'Wave Crush',
+  name: 'Wave Crush',
+  wave: 1,
+  hooks: {
+    async onAttackDeclared({ state, attackerStack, game }) {
+      const oppSide = attackerStack.owner === 'player' ? 'opponent' : 'player';
+      const opp = state.players[oppSide];
+      const cost = Number(attackerStack.top?.cost ?? 0);
+      const count = 1 + Math.floor(cost / 4);
+
+      if (state.combat) {
+        state.combat.fixedSymbolZero = true;
+      }
+
+      for (let i = 0; i < count; i++) {
+        if (!opp.deck || opp.deck.length === 0) break;
+        const topCard = opp.deck[0];
+        await moveCard(state, topCard, 'removed', oppSide, { cause: 'wave_crush', by: attackerStack.owner }, game.events);
+      }
+    }
+  }
+};
+
+export const XVCrushKeyword = {
+  id: 'XV Crush',
+  name: 'XV Crush',
+  wave: 1,
+  hooks: {
+    async onAttackDeclared({ state, attackerStack, resolver, game }) {
+      const oppSide = attackerStack.owner === 'player' ? 'opponent' : 'player';
+      const opp = state.players[oppSide];
+
+      for (let i = 0; i < 10; i++) {
+        if (!opp.deck || opp.deck.length === 0) break;
+        const topCard = opp.deck[0];
+        await moveCard(state, topCard, 'grave', oppSide, { cause: 'xv_crush', by: attackerStack.owner }, game.events);
+      }
+
+      const hasBanished = (opp.removed && opp.removed.length > 0) || (opp.open && opp.open.length > 0);
+      if (hasBanished && resolver?.promptResolver) {
+        const oppField = (opp.field || []).filter(st => st.top && (st.top.type === 'Spirit' || st.top.type === 'Ultimate'));
+        if (oppField.length > 0) {
+          const chosen = await resolver.promptResolver.choose({
+            type: 'SELECT_XV_CRUSH_TARGETS',
+            title: '[XV Crush]: Destroy opposing Spirits/Ultimates up to total cost 15',
+            candidates: oppField,
+            chooser: attackerStack.owner,
+            maxTotalCost: 15
+          });
+          const targets = Array.isArray(chosen) ? chosen : (chosen ? [chosen] : []);
+          for (const item of targets) {
+            const stackToDestroy = item?.stack || item;
+            if (stackToDestroy && stackToDestroy.top) {
+              await commitStackExit(state, stackToDestroy, 'grave', { cause: 'xv_crush', by: attackerStack.owner }, game.events);
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+export const ChaoticHolyLifeKeyword = {
+  id: 'Chaotic Holy Life',
+  name: 'Chaotic Holy Life',
+  wave: 1,
+  hooks: {
+    async onBlockDeclared({ state, attackerStack, game }) {
+      const ownerSide = attackerStack.owner || 'player';
+      const owner = state.players[ownerSide];
+      if (owner.life < 5) {
+        await moveCore(state, 1, { zone: 'void' }, { zone: 'life', side: ownerSide }, {
+          cause: 'chaotic_holy_life',
+          by: ownerSide
+        }, game.events);
+      }
+    },
+    async onBattleEnd({ state, attackerStack, game }) {
+      if (!attackerStack) return;
+      const ownerSide = attackerStack.owner || 'player';
+      const owner = state.players[ownerSide];
+      if (owner.life < 5) {
+        await moveCore(state, 1, { zone: 'void' }, { zone: 'life', side: ownerSide }, {
+          cause: 'chaotic_holy_life',
+          by: ownerSide
+        }, game.events);
+      }
+    }
+  }
+};
+
+export const HeavenHolyLifeKeyword = {
+  id: 'Heaven Holy Life',
+  name: 'Heaven Holy Life',
+  wave: 1,
+  hooks: {
+    async onLifeDamage({ state, attackerStack, game }) {
+      const ownerSide = attackerStack.owner || 'player';
+      const owner = state.players[ownerSide];
+      if (owner.life < 5) {
+        await moveCore(state, 1, { zone: 'void' }, { zone: 'life', side: ownerSide }, {
+          cause: 'heaven_holy_life',
+          by: ownerSide
+        }, game.events);
+      }
+    }
+  }
+};
+
+export const DarkAssaultKeyword = {
+  id: 'Dark Assault',
+  name: 'Dark Assault',
+  wave: 1,
+  hooks: {
+    async onAttackDeclared({ state, attackerStack, resolver, game }) {
+      const ownerSide = attackerStack.owner || 'player';
+      const owner = state.players[ownerSide];
+      attackerStack.darkAssaultUses = (attackerStack.darkAssaultUses || 0);
+      if (attackerStack.darkAssaultUses >= 2) return;
+
+      const handCount = owner.hand?.length || 0;
+      const deckCount = owner.deck?.length || 0;
+      if (handCount + deckCount < 3) return;
+
+      const choice = await resolver?.promptResolver?.choose({
+        type: 'CONFIRM_DARK_ASSAULT',
+        title: 'Activate [Dark Assault]: Discard 3 cards from hand/decktop to refresh this Spirit?',
+        candidates: owner.hand || [],
+        chooser: ownerSide
+      });
+
+      if (choice && choice.accepted) {
+        attackerStack.darkAssaultUses += 1;
+        let discarded = 0;
+        const selectedHand = choice.selectedCards || [];
+        for (const c of selectedHand) {
+          if (discarded >= 3) break;
+          await moveCard(state, c, 'grave', ownerSide, { cause: 'dark_assault' }, game.events);
+          discarded++;
+        }
+        while (discarded < 3 && owner.deck.length > 0) {
+          await moveCard(state, owner.deck[0], 'grave', ownerSide, { cause: 'dark_assault' }, game.events);
+          discarded++;
+        }
+        attackerStack.state = 'REFRESHED';
+      }
+    }
+  }
+};
+
+export const InfiniteBladeKeyword = {
+  id: 'Infinite Blade',
+  name: 'Infinite Blade',
+  wave: 1,
+  hooks: {
+    async onAttackDeclared({ state, attackerStack, resolver, game }) {
+      if (!state.combat || !attackerStack) return;
+      if (attackerStack.cores?.soul > 0) {
+        state.combat.canTargetAttack = true;
+        state.combat.noExhaustOnTargetAttack = true;
+        const oppSide = attackerStack.owner === 'player' ? 'opponent' : 'player';
+        const oppField = (state.players[oppSide]?.field || []).filter(st => st.top && (st.top.type === 'Spirit' || st.top.type === 'Ultimate'));
+        if (oppField.length > 0 && resolver?.promptResolver) {
+          const choice = await resolver.promptResolver.choose({
+            type: 'SELECT_INFINITE_BLADE_TARGET',
+            title: '[Infinite Blade]: Target and attack an opposing Spirit/Ultimate without exhausting?',
+            candidates: oppField,
+            chooser: attackerStack.owner
+          });
+          if (choice && choice.selectedTargetId) {
+            const target = oppField.find(st => st.id === choice.selectedTargetId);
+            if (target) {
+              state.combat.targetedBlockerStackId = target.id;
+              state.combat.blockerStackId = target.id;
+              attackerStack.state = 'REFRESHED';
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
 export function registerWave1Keywords(registry) {
   registry.register(ClashKeyword);
   registry.register(TrueClashKeyword);
   registry.register(SupremeClashKeyword);
   registry.register({ ...SupremeClashKeyword, id: 'Ultra Clash' });
   registry.register({ ...ClashKeyword, id: 'Clash X' });
+  registry.register({ ...ClashKeyword, id: 'Twinkle Clash' });
   registry.register(CurseKeyword);
   registry.register(TrueCurseKeyword);
   registry.register(CrushKeyword);
   registry.register(GreatCrushKeyword);
-  registry.register({ ...CrushKeyword, id: 'Wave Crush' });
-  registry.register({ ...GreatCrushKeyword, id: 'XV Crush' });
+  registry.register(WaveCrushKeyword);
+  registry.register(XVCrushKeyword);
   registry.register(HolyLifeKeyword);
   registry.register(UltraHolyLifeKeyword);
   registry.register({ ...UltraHolyLifeKeyword, id: 'Divine Holy Life' });
-  registry.register({ ...HolyLifeKeyword, id: 'Chaotic Holy Life' });
+  registry.register(ChaoticHolyLifeKeyword);
+  registry.register(HeavenHolyLifeKeyword);
   registry.register(AssaultKeyword);
   registry.register(GrandAssaultKeyword);
   registry.register({ ...GrandAssaultKeyword, id: 'Great Assault' });
-  registry.register({ ...AssaultKeyword, id: 'Dark Assault' });
+  registry.register({ ...AssaultKeyword, id: 'Ultra Assault' });
+  registry.register({ ...AssaultKeyword, id: 'Roaring Assault' });
+  registry.register(DarkAssaultKeyword);
+  registry.register(InfiniteBladeKeyword);
   registry.register(WindstormKeyword);
   registry.register(FierceWindstormKeyword);
+  registry.register({ ...WindstormKeyword, id: 'Violent Windstorm' });
   registry.register(AwakenKeyword);
   registry.register(UltraAwakenKeyword);
   registry.register(HeavyArmorKeyword);
@@ -628,6 +834,8 @@ export function registerWave1Keywords(registry) {
   registry.register({ ...HeavyArmorKeyword, id: 'TP Armor' });
   registry.register({ ...HeavyArmorKeyword, id: 'MD Armor' });
   registry.register({ ...HeavyArmorKeyword, id: 'G.A.T. Field' });
+  registry.register({ ...HeavyArmorKeyword, id: 'Illusive Armor' });
+  registry.register({ ...UltraArmorKeyword, id: 'Illusive Ultra Heavy Armor' });
   registry.register(ConsecutiveBladeKeyword);
   registry.register(TrueConsecutiveBladeKeyword);
   registry.register(RekkaConsecutiveBladeKeyword);
@@ -643,6 +851,18 @@ export function registerWave1Keywords(registry) {
   registry.register({ ...AwakenKeyword, id: 'Contract Awaken' });
   registry.register({ ...AwakenKeyword, id: 'Re Awaken' });
   registry.register({ ...AwakenKeyword, id: 'Soul Awaken' });
+  registry.register({ ...AwakenKeyword, id: 'Phantom Awaken' });
+  registry.register({ id: 'Phantom Return', name: 'Phantom Return', wave: 1, hooks: {} });
   registry.register({ ...CurseKeyword, id: 'Grudging Curse' });
-  registry.register({ ...HolyLifeKeyword, id: 'Heaven Holy Life' });
+  registry.register({ id: 'Supremacy', name: 'Supremacy', wave: 1, hooks: {} });
+  registry.register({ id: 'Consecutive Dominance', name: 'Consecutive Dominance', wave: 1, hooks: {} });
+  registry.register({ id: 'Dragonshot', name: 'Dragonshot', wave: 1, hooks: {} });
+  registry.register({ id: 'Emperor Road', name: 'Emperor Road', wave: 1, hooks: {} });
+  registry.register({ id: 'Genesis', name: 'Genesis', wave: 1, hooks: {} });
+  registry.register({ id: 'True Genesis', name: 'True Genesis', wave: 1, hooks: {} });
+  registry.register({ id: 'Infinite Flame', name: 'Infinite Flame', wave: 1, hooks: {} });
+  registry.register({ id: 'True Infinite Flame', name: 'True Infinite Flame', wave: 1, hooks: {} });
+  registry.register({ id: 'Furious Charge', name: 'Furious Charge', wave: 1, hooks: {} });
+  registry.register({ id: 'Vermillion Furious Charge', name: 'Vermillion Furious Charge', wave: 1, hooks: {} });
+  registry.register({ id: 'Super Boost', name: 'Super Boost', wave: 1, hooks: {} });
 }

@@ -1,0 +1,74 @@
+[
+  {
+    "id": "RFC8785-OFFICIAL-01",
+    "description": "RFC 8785 Section 3.2.3 Object Property Sorting",
+    "input": { "b": 1, "a": 2 },
+    "expected": "{\"a\":2,\"b\":1}"
+  },
+  {
+    "id": "RFC8785-OFFICIAL-02",
+    "description": "RFC 8785 Section 3.2.3 UTF-16 Code Unit Ordering",
+    "input": { "\u20ac": "Euro Sign", "\r": "Carriage Return" },
+    "expected": "{\"\\r\":\"Carriage Return\",\"\u20ac\":\"Euro Sign\"}"
+  },
+  {
+    "id": "RFC8785-OFFICIAL-03",
+    "description": "RFC 8785 Section 3.2.2.3 Negative Zero Serialization to 0",
+    "input": -0,
+    "expected": "0"
+  },
+  {
+    "id": "RFC8785-OFFICIAL-04",
+    "description": "RFC 8785 Section 3.2.2.3 Negative Zero inside Object",
+    "input": { "val": -0 },
+    "expected": "{\"val\":0}"
+  },
+  {
+    "id": "RFC8785-OFFICIAL-05",
+    "description": "RFC 8785 Section 3.2.2.3 IEEE 754 Floating Point Rounding and Exponential",
+    "input": { "a": 1e+20, "b": 1e+21, "c": 0.000001, "d": 0.0000001 },
+    "expected": "{\"a\":100000000000000000000,\"b\":1e+21,\"c\":0.000001,\"d\":1e-7}"
+  },
+  {
+    "id": "RFC8785-OFFICIAL-06",
+    "description": "RFC 8785 Section 3.2.2.2 String Escaping Controls",
+    "input": { "text": "line1\nline2\ttab\r\nquote:\" slash:\\" },
+    "expected": "{\"text\":\"line1\\nline2\\ttab\\r\\nquote:\\\" slash:\\\\\"}"
+  },
+  {
+    "id": "RFC8785-OFFICIAL-07",
+    "description": "RFC 8785 Section 3.2.2.2 Control Characters Below U+0020",
+    "input": { "bell": "\u0007", "nullChar": "\u0000" },
+    "expected": "{\"bell\":\"\\u0007\",\"nullChar\":\"\\u0000\"}"
+  },
+  {
+    "id": "RFC8785-OFFICIAL-08",
+    "description": "RFC 8785 Section 3.2.4 Array Element Order Preservation",
+    "input": [3, [2, 1], "alpha", { "b": 2, "a": 1 }],
+    "expected": "[3,[2,1],\"alpha\",{\"a\":1,\"b\":2}]"
+  },
+  {
+    "id": "RFC8785-EDGE-01",
+    "description": "Valid Supplementary Character (Emoji Surrogate Pair U+1F600)",
+    "input": { "emoji": "\uD83D\uDE00" },
+    "expected": "{\"emoji\":\"😀\"}"
+  },
+  {
+    "id": "RFC8785-EDGE-02",
+    "description": "Japanese Multibyte UTF-8 Text Preservation",
+    "input": { "name": "超神星龍ジークヴルム・ノヴァ", "cost": 8 },
+    "expected": "{\"cost\":8,\"name\":\"超神星龍ジークヴルム・ノヴァ\"}"
+  },
+  {
+    "id": "RFC8785-EDGE-03",
+    "description": "Complex Nested Data Structure with Null and Boolean",
+    "input": { "active": true, "disabled": false, "metadata": null, "nested": { "z": [1, 2], "y": {} } },
+    "expected": "{\"active\":true,\"disabled\":false,\"metadata\":null,\"nested\":{\"y\":{},\"z\":[1,2]}}"
+  },
+  {
+    "id": "RFC8785-EDGE-04",
+    "description": "Empty Structures",
+    "input": { "emptyObj": {}, "emptyArr": [] },
+    "expected": "{\"emptyArr\":[],\"emptyObj\":{}}"
+  }
+]

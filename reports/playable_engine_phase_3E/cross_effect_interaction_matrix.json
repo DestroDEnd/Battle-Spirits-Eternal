@@ -1,0 +1,42 @@
+[
+  {
+    "interaction": "Cost Reduction + Cost Increase Modifiers",
+    "effect1": "SYMBOL_MODIFIER / Cost Reduction Symbols",
+    "effect2": "COST_MODIFIER (Amount +2)",
+    "expectedResult": "Base cost + 2, then reduced by friendly symbols. Invariant holds.",
+    "status": "VERIFIED_PASS",
+    "suite": "tests/phase3_continuous_and_cost_gating.test.js"
+  },
+  {
+    "interaction": "0-BP Debuff + State-Based Destruction",
+    "effect1": "BP_DEBUFF (-5000 BP)",
+    "effect2": "SBA check (BP <= 0)",
+    "expectedResult": "Spirit BP reduced to 0; SBA triggers destruction; card moves to trash; cores move to reserve.",
+    "status": "VERIFIED_PASS",
+    "suite": "tests/timing_triggers_continuous_sba.test.js::SBA-01"
+  },
+  {
+    "interaction": "Target Selection + Armor Immunity",
+    "effect1": "TARGET_SELECT (All opposing spirits)",
+    "effect2": "ARMOR (White / Heavy Armor)",
+    "expectedResult": "Protected spirit excluded from target candidates; non-protected spirits targeted.",
+    "status": "VERIFIED_PASS",
+    "suite": "tests/effect_execution_targeting_conditions.test.js::OPS-PRIORITY-01"
+  },
+  {
+    "interaction": "Multi-Clause Ability + Prerequisite Failure",
+    "effect1": "byDoing / whenYouveDoneSo link",
+    "effect2": "Prior clause failed or depleted activating spirit",
+    "expectedResult": "Follow-up clause aborts with PREREQUISITE_FAILED or SOURCE_DEPLETED.",
+    "status": "VERIFIED_PASS",
+    "suite": "tests/work_package_hij1_conditions_truth_table.test.js"
+  },
+  {
+    "interaction": "Destruction + Replacement Effect",
+    "effect1": "DESTROY opcode",
+    "effect2": "REPLACEMENT_EFFECT (REMAIN_ON_FIELD exhausted)",
+    "expectedResult": "Card remains on field exhausted; DESTROYED event replaced.",
+    "status": "VERIFIED_PASS",
+    "suite": "tests/work_package_k1_batch_05_complex_effects.test.js::K1B5-03"
+  }
+]

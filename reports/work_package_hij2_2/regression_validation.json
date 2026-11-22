@@ -1,0 +1,76 @@
+{
+  "generatedAt": "2026-11-19T14:44:17.408Z",
+  "nodeVersion": "v24.16.0",
+  "referenceBaseline": {
+    "ledgerValidation": "PASS",
+    "dataAudit": "3/3",
+    "shardValidation": "514/514",
+    "verifiedSuites": "932/932",
+    "fullRegression": "2,326/2,326",
+    "newArchiveVerifierTestsAddedInHij2_2": 13,
+    "expectedFullRegressionWithHij2_2VerifierTests": "2,339/2,339"
+  },
+  "observed": [
+    {
+      "id": "ledger_validation",
+      "command": "node scripts/validate_hij2_1_ledger.mjs",
+      "exitCode": 0,
+      "durationMs": 135,
+      "pass": null,
+      "fail": null,
+      "skipped": null,
+      "suites": null
+    },
+    {
+      "id": "archive_verifier_tests",
+      "command": "node --test tests/work_package_hij2_2_archive_verifier.test.js",
+      "exitCode": 0,
+      "durationMs": 401,
+      "pass": 13,
+      "fail": 0,
+      "skipped": 0,
+      "suites": 0
+    },
+    {
+      "id": "data_audit",
+      "command": "node --test tests/data_audit.test.js",
+      "exitCode": 0,
+      "durationMs": 2247,
+      "pass": 3,
+      "fail": 0,
+      "skipped": 0,
+      "suites": 0
+    },
+    {
+      "id": "shard_validation",
+      "command": "node scripts/validate_514_shards_exhaustive.mjs",
+      "exitCode": 0,
+      "durationMs": 5314,
+      "pass": null,
+      "fail": null,
+      "skipped": null,
+      "suites": null
+    },
+    {
+      "id": "verified_suites",
+      "command": "node scripts/run_verified_suites.mjs --all",
+      "exitCode": 0,
+      "durationMs": 34135,
+      "pass": 932,
+      "fail": 0,
+      "skipped": 0,
+      "suites": 0
+    },
+    {
+      "id": "full_regression",
+      "command": "node tests/run_all.js",
+      "exitCode": 0,
+      "durationMs": 92590,
+      "pass": 2339,
+      "fail": 0,
+      "skipped": 0,
+      "suites": 335
+    }
+  ],
+  "allPassedZeroFailsZeroSkips": true
+}

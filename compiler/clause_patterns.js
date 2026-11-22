@@ -4,6 +4,8 @@
  * Pattern recognizer translating normalized clause text into typed IR operations.
  */
 
+import { isIncompleteOpObject, recoverExplicitOpParameters } from '../engine/parameter_recovery.js';
+
 const NUMBER_WORDS = {
   a: 1, an: 1, one: 1, two: 2, three: 3, four: 4, five: 5,
   six: 6, seven: 7, eight: 8, nine: 9, ten: 10
@@ -11,21 +13,506 @@ const NUMBER_WORDS = {
 
 export function parseNumber(val) {
   if (!val) return 1;
-  const lower = String(val).toLowerCase().trim();
+  const lower = String(val).toLowerCase().replace(/^up\s+to\s+/i, '').trim();
   if (NUMBER_WORDS[lower] !== undefined) return NUMBER_WORDS[lower];
   const num = parseInt(lower, 10);
   return isNaN(num) ? 1 : num;
 }
 
+function extractRevealCardParams(text) {
+  const countMatch = text.match(/(?:reveal|look\s+at)\s+(?:the\s+top\s+)?(\d+|a|an|one|two|three|four|five|six|seven|eight|nine|ten)\s+cards?/i) ||
+    text.match(/(?:you\s+can\s+)(\d+|a|an|one|two|three|four|five|six|seven|eight|nine|ten)\s+cards?\s+from/i);
+  const count = countMatch ? parseNumber(countMatch[1]) : 1;
+  const from = /\bhand\b/i.test(text) ? 'HAND' : 'DECK';
+  const side = /(?:each|both)\s+players?/i.test(text)
+    ? 'both'
+    : (/\bopposing\b/i.test(text) ? 'opp' : 'self');
+  const op = { op: 'REVEAL_CARDS', count, from, side };
+  if (/^\s*you\s+can\b/i.test(text)) op.isOptional = true;
+  return op;
+}
+
+export function parseRelativeComparison(text) {
+  if (!text) return null;
+  const t = text.toLowerCase();
+
+  const hasComp = /equal or inferior|inferior or equal|equal to or inferior|inferior to or equal|equal or less|less than or equal|equal to or less|equal to inferior|inferior to|fewer cores than|lv inferior|equal or more|more than or equal|superior to|greater than/i.test(t);
+  if (!hasComp) return null;
+
+  let property = null;
+  if (/\b(?:bp|battle points?)\b/i.test(t)) {
+    property = 'BP';
+  } else if (/\bcost\b/i.test(t)) {
+    property = 'COST';
+  } else if (/\b(?:cores?|number of cores?)\b/i.test(t)) {
+    property = 'CORES';
+  } else if (/\b(?:lv|level)\b/i.test(t)) {
+    property = 'LEVEL';
+  } else if (/\bsymbols?\b/i.test(t)) {
+    property = 'SYMBOLS';
+  }
+
+  if (!property) return null;
+
+  let operator = null;
+  if (/equal or inferior|inferior or equal|equal to or inferior|inferior to or equal|equal or less|less than or equal|equal to or less|equal to inferior/i.test(t)) {
+    operator = 'LTE';
+  } else if (/inferior to|less than|fewer cores than|lv inferior/i.test(t)) {
+    operator = 'LT';
+  } else if (/equal or more|more than or equal|equal to or more|greater than or equal/i.test(t)) {
+    operator = 'GTE';
+  } else if (/superior to|greater than|more than/i.test(t)) {
+    operator = 'GT';
+  } else if (/equal/i.test(t)) {
+    operator = 'EQ';
+  }
+
+  if (!operator) return null;
+
+  let reference = 'self';
+  if (/that of your battling spirit|your battling spirit/i.test(t)) {
+    reference = 'battling';
+  } else if (/that spirit's|that target's|that brave's/i.test(t)) {
+    reference = 'target';
+  } else if (/card discarded|card you returned|spirit summoned|cards added|card on the opposing removed zone|revealed card|contents of an opposing burst|that burst|that card's/i.test(t)) {
+    reference = 'effect_card';
+  } else if (/one of your ".*?" family spirits/i.test(t)) {
+    reference = 'allied_spirit';
+  } else if (/this spirit's|this spirit|this nexus's|this nexus|this ultimate's|this ultimate|this card's/i.test(t)) {
+    reference = 'self';
+  } else if (/that spirit/i.test(t)) {
+    reference = 'target';
+  }
+
+  return { property, operator, reference };
+}
+
+export function parseCoreMovement(text) {
+  const isSoul = /\[soul\s+core\]/i.test(text) && !/besides\s+\[soul\s+core\]|other\s+than\s+\[soul\s+core\]|except\s+\[soul\s+core\]/i.test(text);
+  
+  let count = 1;
+  if (/all\s+(?:the\s+)?cores|every\s+core/i.test(text)) {
+    count = 'ALL';
+  } else {
+    const cMatch = text.match(/(?:send|put|move|gain|take|\+)\s*(?:up\s+to\s+)?(a|an|one|two|three|four|five|six|seven|eight|nine|ten|\d+)\s+cores?/i)
+      || text.match(/(\d+|[a-z]+)\s+cores?\s+(?:from|to|each)/i);
+    if (cMatch) {
+      count = parseNumber(cMatch[1]);
+    }
+  }
+
+  let from = null;
+  if (/from\s+(?:the\s+)?void/i.test(text)) {
+    from = { zone: 'void' };
+  } else if (/from\s+(?:the\s+|their\s+)?opposing\s+trash/i.test(text)) {
+    from = { zone: 'trash', side: 'opp' };
+  } else if (/from\s+(?:your\s+|the\s+)?trash/i.test(text)) {
+    from = { zone: 'trash', side: 'self' };
+  } else if (/from\s+(?:their|the\s+opposing)\s+reserve/i.test(text)) {
+    from = { zone: 'reserve', side: 'opp' };
+  } else if (/from\s+(?:your\s+)?reserve/i.test(text)) {
+    from = { zone: 'reserve', side: 'self' };
+  } else if (/from\s+(?:your\s+)?life/i.test(text)) {
+    from = { zone: 'life', side: 'self' };
+  } else if (/from\s+(?:their|the\s+opposing)\s+life/i.test(text)) {
+    from = { zone: 'life', side: 'opp' };
+  } else if (/from\s+(?:this\s+(?:spirit|ultimate|nexus)|it\b)/i.test(text)) {
+    from = { zone: 'field', side: 'self', target: 'self' };
+  } else if (/from\s+(?:an?\s+|any\s+|each\s+|every\s+|\d+\s+|[a-z]+\s+)?opposing\s+(?:spirits?|ultimates?|nexuses?|field)/i.test(text)) {
+    from = { zone: 'field', side: 'opp' };
+  } else if (/from\s+(?:a\s+|any\s+|each\s+|every\s+)?(?:spirit|ultimate|nexus)\s+you\s+control/i.test(text)) {
+    from = { zone: 'field', side: 'self' };
+  } else if (/from\s+(?:each\s+of\s+them|them|those\s+targets)/i.test(text)) {
+    from = { zone: 'field', side: 'self' };
+  } else if (/\+\s*\d+\s*cores?\s+to/i.test(text)) {
+    from = { zone: 'void' };
+  }
+
+  let to = null;
+  if (/to\s+(?:the\s+)?void/i.test(text)) {
+    to = { zone: 'void' };
+  } else if (/to\s+(?:their\s+|the\s+opposing\s+)?trash/i.test(text)) {
+    to = { zone: 'trash', side: 'opp' };
+  } else if (/to\s+(?:your\s+|the\s+)?trash/i.test(text)) {
+    to = { zone: 'trash', side: 'self' };
+  } else if (/to\s+(?:their\s+|the\s+opposing\s+)?reserve/i.test(text)) {
+    to = { zone: 'reserve', side: 'opp' };
+  } else if (/to\s+(?:your\s+)?reserve/i.test(text)) {
+    to = { zone: 'reserve', side: 'self' };
+  } else if (/to\s+(?:your\s+)?life/i.test(text)) {
+    to = { zone: 'life', side: 'self' };
+  } else if (/to\s+(?:this\s+(?:spirit|ultimate|nexus)|it\b|that\s+target|one\s+of\s+the\s+targets)/i.test(text)) {
+    to = { zone: 'field', side: 'self', target: 'self' };
+  } else if (/to\s+(?:a\s+|any\s+|each\s+|every\s+)?(?:nexus|grandwalker\s+nexus|spirits?|ultimates?)\s+you\s+control/i.test(text)) {
+    to = { zone: 'field', side: 'self' };
+  } else if (/to\s+(?:an?\s+|any\s+|each\s+|every\s+)?opposing\s+(?:spirits?|ultimates?|nexuses?)/i.test(text)) {
+    to = { zone: 'field', side: 'opp' };
+  }
+
+  if (to && to.zone === 'life' && from && from.zone === 'void') {
+    return { op: 'RECOVER_LIFE', count: typeof count === 'number' ? count : 1 };
+  }
+
+  if (!from && !to && !isSoul) {
+    if (/sending|send|put/i.test(text)) {
+      from = { zone: 'field', side: 'self' };
+      to = { zone: 'reserve', side: 'self' };
+    } else {
+      return { op: 'UNSUPPORTED', rawText: text };
+    }
+  }
+
+  const res = { op: isSoul ? 'MOVE_SOUL_CORE' : 'MOVE_CORE', count };
+  if (isSoul) res.isSoulCore = true;
+  if (from) res.from = from;
+  if (to) res.to = to;
+  return res;
+}
+
+function stripUnbalanced(str) {
+  let ob = (str.match(/\[/g) || []).length;
+  let cb = (str.match(/\]/g) || []).length;
+  while (cb > ob && str.endsWith(']')) { str = str.slice(0, -1).trim(); cb--; }
+  let op = (str.match(/\(/g) || []).length;
+  let cp = (str.match(/\)/g) || []).length;
+  while (cp > op && str.endsWith(')')) { str = str.slice(0, -1).trim(); cp--; }
+  return str;
+}
+
+export function parseSummonOp(text, rawClauseText) {
+  const full = (text + ' ' + (rawClauseText || '')).trim();
+
+  // 1. Check if it's self-summon
+  if (/summon\s+(?:this\s+(?:spirit|brave|ultimate|nexus)?\s*card|it)\b/i.test(text)) {
+    let from = 'HAND_OR_BURST';
+    if (/trash/i.test(full)) from = 'TRASH';
+    else if (/removed\s+zone/i.test(full)) from = 'REMOVED';
+    else if (/hand/i.test(full) && !/burst/i.test(full)) from = 'HAND';
+    const isFree = /without\s+paying\s+(?:the\s+)?cost/i.test(full);
+    const costM = full.match(/pay\s+(one|two|three|\d+)\s+cost/i);
+    const costCores = costM ? parseNumber(costM[1]) : 0;
+    return {
+      op: 'SUMMON_THIS_CARD',
+      from,
+      ...(isFree ? { free: true } : {}),
+      ...(costCores ? { costCores } : {})
+    };
+  }
+
+  // 2. From zone
+  let from = 'hand';
+  if (/from\s+(?:the\s+|your\s+)?(?:hand\/trash|hand\s+or\s+trash|trash\/hand)/i.test(full)) {
+    from = 'hand_or_trash';
+  } else if (/from\s+(?:the\s+|their\s+)?opposing\s+trash/i.test(full)) {
+    from = 'trash';
+  } else if (/from\s+(?:(?:the|your|their)\s+)?(?:opposing\s+|either\s+(?:player['’]s\s+)?)?trash\b/i.test(full) || /in\s+(?:your\s+|the\s+)?trash/i.test(full)) {
+    from = 'trash';
+  } else if (/from\s+(?:the\s+|your\s+)?removed\s+zone/i.test(full)) {
+    from = 'removed';
+  } else if (/among\s+(?:the\s+)?revealed\s+cards|from\s+(?:the\s+)?revealed\s+cards|one\s+of\s+them/i.test(full)) {
+    from = 'revealed';
+  } else if (/from\s+(?:the\s+|your\s+)?hand/i.test(full)) {
+    from = 'hand';
+  }
+
+  // 3. Side
+  let side = 'self';
+  if (/opposing\s+trash|opponent['’]s\s+trash/i.test(full)) {
+    side = 'opp';
+  } else if (/either\s+(?:player['’]s\s+)?trash|both\s+trashes/i.test(full)) {
+    side = 'both';
+  }
+
+  // 4. Count & UpTo
+  let count = 1;
+  let upTo = false;
+  if (/any\s+number|as\s+many/i.test(full)) {
+    count = 'ALL';
+    upTo = true;
+  } else {
+    const upToM = full.match(/up\s+to\s+(a|an|one|two|three|four|five|six|\d+)/i);
+    if (upToM) {
+      count = parseNumber(upToM[1]);
+      upTo = true;
+    } else {
+      const cntM = full.match(/summon\s+(a|an|one|two|three|four|five|six|\d+)\b/i);
+      if (cntM) {
+        count = parseNumber(cntM[1]);
+      }
+    }
+  }
+
+  // 5. Free vs Paid
+  const isFree = /without\s+paying\s+(?:the\s+|any\s+|their\s+)?costs?/i.test(full) || /for\s+free/i.test(full);
+  const costM = full.match(/pay\s+(one|two|three|\d+)\s+costs?/i) || full.match(/paying\s+(one|two|three|\d+)\s+cost/i);
+  const costCores = costM ? parseNumber(costM[1]) : 0;
+
+  // 6. Exhausted
+  const exhausted = /in\s+exhausted\s+state|exhausted/i.test(full);
+
+  // 7. Types
+  const types = [];
+  if (/\bspirit\b/i.test(full)) types.push('Spirit');
+  if (/\bultimate\b/i.test(full)) types.push('Ultimate');
+  if (/\bbrave\b/i.test(full)) types.push('Brave');
+  if (/\bnexus\b/i.test(full)) types.push('Nexus');
+  if (types.length === 0) types.push('Spirit');
+
+  // 8. Filters
+  const filter = { types };
+
+  const costLteM = full.match(/cost\s+(\d+)\s+or\s+(?:less|inferior)/i);
+  if (costLteM) filter.costLte = parseInt(costLteM[1], 10);
+
+  const costGteM = full.match(/cost\s+(\d+)\s+or\s+(?:more|superior)/i);
+  if (costGteM) filter.costGte = parseInt(costGteM[1], 10);
+
+  const costExactM = full.match(/cost\s+(\d+)\b(?!\s*or)/i);
+  if (costExactM && !costLteM && !costGteM) filter.costExact = parseInt(costExactM[1], 10);
+
+  // Quotes (names & families)
+  const quotes = [...new Set(extractQuotedTerms(full))];
+  for (const q of quotes) {
+    if (new RegExp(`["“]${q}["”]\\s+family`, 'i').test(full)) {
+      if (!filter.family) filter.family = q;
+      else {
+        if (!filter.familiesAny) filter.familiesAny = [filter.family];
+        filter.familiesAny.push(q);
+      }
+    } else {
+      if (!filter.nameIncludes) filter.nameIncludes = q;
+      else {
+        if (!filter.nameIncludesAny) filter.nameIncludesAny = [filter.nameIncludes];
+        filter.nameIncludesAny.push(q);
+      }
+    }
+  }
+
+  // Colors
+  const colors = parseColors(full);
+  if (colors.length === 1) {
+    filter.color = colors[0];
+  } else if (colors.length > 1) {
+    filter.colorsAny = colors;
+  }
+
+  // Keywords
+  const kwMatch = full.match(/with\s+\[([^\]]+)\]/i);
+  if (kwMatch) {
+    filter.keyword = kwMatch[1].trim();
+  }
+
+  return {
+    op: 'SUMMON',
+    from,
+    side,
+    count,
+    upTo,
+    filter,
+    ...(isFree ? { free: true } : { free: false }),
+    ...(costCores ? { costCores } : {}),
+    ...(exhausted ? { exhausted: true } : {}),
+    isOptional: /^(?:you\s+can\b|can\b)/i.test(text)
+  };
+}
+
+export function parseTrashSalvageOp(text, rawClauseText) {
+  const full = (text + ' ' + (rawClauseText || '')).trim();
+
+  if (/return\s+(?:this\s+(?:spirit|brave|ultimate|nexus)?\s*card|it)\s+from\s+(?:the\s+|your\s+)?trash\s+to\s+(?:the\s+|your\s+)?hand/i.test(full)) {
+    return {
+      op: 'SALVAGE',
+      target: 'this_card',
+      from: 'trash',
+      destination: 'HAND',
+      count: 1,
+      isOptional: /^(?:you\s+can\b|can\b)/i.test(text)
+    };
+  }
+
+  const isTrashSalvage = /(?:choose\s+and\s+)?(?:return|add)\s+.*from\s+(?:(?:the|your|their)\s+)?(?:opposing\s+|either\s+(?:player['’]s\s+)?)?trash\s+to\s+(?:the\s+|your\s+|their\s+|opposing\s+)?(hand|decktop|deckbottom|bottom\s+of\s+(?:your|the|opposing|their)\s+deck|top\s+of\s+(?:your|the|opposing|their)\s+deck)/i.test(full);
+  if (!isTrashSalvage) return null;
+
+  const destM = full.match(/to\s+(?:the\s+|your\s+|their\s+|opposing\s+)?(hand|decktop|deckbottom|bottom\s+of\s+(?:your|the|opposing|their)\s+deck|top\s+of\s+(?:your|the|opposing|their)\s+deck)/i);
+  let destination = 'HAND';
+  if (destM) {
+    const rawDest = destM[1].toLowerCase();
+    if (rawDest.includes('bottom')) destination = 'DECK_BOTTOM';
+    else if (rawDest.includes('top')) destination = 'DECK_TOP';
+    else destination = 'HAND';
+  }
+
+  let side = 'self';
+  if (/opposing\s+trash|opponent['’]s\s+trash/i.test(full)) side = 'opp';
+  else if (/either\s+trash|both\s+trashes/i.test(full)) side = 'both';
+
+  let count = 1;
+  let upTo = false;
+  if (/any\s+number|as\s+many/i.test(full)) {
+    count = 'ALL';
+    upTo = true;
+  } else {
+    const upM = full.match(/up\s+to\s+(a|an|one|two|three|four|five|six|\d+)/i);
+    if (upM) {
+      count = parseNumber(upM[1]);
+      upTo = true;
+    } else {
+      const cntM = full.match(/(?:return|add)\s+(a|an|one|two|three|four|five|six|\d+)\b/i);
+      if (cntM) count = parseNumber(cntM[1]);
+    }
+  }
+
+  const types = [];
+  if (/\bspirit\b/i.test(full)) types.push('Spirit');
+  if (/\bultimate\b/i.test(full)) types.push('Ultimate');
+  if (/\bbrave\b/i.test(full)) types.push('Brave');
+  if (/\bmagic\b/i.test(full)) types.push('Magic');
+  if (/\bnexus\b/i.test(full)) types.push('Nexus');
+
+  const filter = {};
+  if (types.length > 0) filter.types = types;
+
+  const costLteM = full.match(/cost\s+(\d+)\s+or\s+(?:less|inferior)/i);
+  if (costLteM) filter.costLte = parseInt(costLteM[1], 10);
+
+  const costGteM = full.match(/cost\s+(\d+)\s+or\s+(?:more|superior)/i);
+  if (costGteM) filter.costGte = parseInt(costGteM[1], 10);
+
+  const quotes = [...new Set(extractQuotedTerms(full))];
+  for (const q of quotes) {
+    if (new RegExp(`["“]${q}["”]\\s+family`, 'i').test(full)) {
+      if (!filter.family) filter.family = q;
+      else {
+        if (!filter.familiesAny) filter.familiesAny = [filter.family];
+        filter.familiesAny.push(q);
+      }
+    } else {
+      if (!filter.nameIncludes) filter.nameIncludes = q;
+      else {
+        if (!filter.nameIncludesAny) filter.nameIncludesAny = [filter.nameIncludes];
+        filter.nameIncludesAny.push(q);
+      }
+    }
+  }
+
+  const colors = parseColors(full);
+  if (colors.length === 1) filter.color = colors[0];
+  else if (colors.length > 1) filter.colorsAny = colors;
+
+  if (/\bwith\s+\[?mirage(?::[^\]]+)?\]?\s+effects?/i.test(full)) {
+    filter.hasMirage = true;
+  }
+  if (/\bwith\s+\[?burst(?::[^\]]+)?\]?\s+effects?/i.test(full)) {
+    filter.hasBurst = true;
+  }
+  if (/\bwith\s+\[?accel(?::[^\]]+)?\]?\b/i.test(full)) {
+    filter.hasAccel = true;
+  }
+
+  return {
+    op: 'SALVAGE',
+    from: 'trash',
+    destination,
+    side,
+    count,
+    upTo,
+    filter,
+    isOptional: /^(?:you\s+can\b|can\b)/i.test(text)
+  };
+}
+
 export function compileClauseToOp(clause) {
-  let text = (clause.cleanText || clause.rawText || '').trim();
+  const rawClauseText = (typeof clause === 'string' ? clause : (clause?.cleanText || clause?.rawText || '')).trim();
+  const res = compileClauseToOpInner(clause);
+  return enrichHijClauseOp(res, rawClauseText);
+}
+
+function compileClauseToOpInner(clause) {
+  const rawClauseText = (typeof clause === 'string' ? clause : (clause?.cleanText || clause?.rawText || '')).trim();
+  let text = rawClauseText;
   if (!text || /^[.\s█◆■●▲]+$/.test(text)) return null;
+  text = stripUnbalanced(text);
   text = text.replace(/^However,\s*/i, '')
              .replace(/^By\s+/i, '')
              .replace(/^\[[A-Za-z]+\s+Core\]:\s*/i, '')
-             .replace(/^[█◆■●▲\s]+/, '')
+             .replace(/^[,.\s█◆■●▲]+/, '')
+             .replace(/[,.]+[\]\)]+$/, '')
              .trim();
+  text = stripUnbalanced(text);
   if (!text || /^[.\s]+$/.test(text)) return null;
+
+  const relComp = parseRelativeComparison(rawClauseText);
+
+  if (/placing\s+(?:up\s+to\s+)?(?:one|two|three|\d+)\s+cards?\s+from\s+your\s+decktop\s+onto\s+the\s+Field\s+facedown\s+and\s+putting/i.test(text)) {
+    return { op: 'BUNSHIN_SUMMON', upTo: /up\s+to/i.test(text), facedown: true };
+  }
+
+  // Early Relative Comparison Special Clauses
+  if (relComp) {
+    // Relative comparison BLOCKED condition (e.g. BS19-011, BS26-008)
+    if (/when\s+blocked\s+by/i.test(rawClauseText) || /if\s+that\s+spirit\s+is\s+blocked\s+by/i.test(rawClauseText)) {
+      return {
+        op: 'CONDITION',
+        condition: 'BLOCKED_BY_COMPARISON',
+        filter: {
+          side: 'opp',
+          types: parseTypes(rawClauseText),
+          filters: {
+            comparison: relComp
+          }
+        }
+      };
+    }
+
+    // Relative comparison EXHAUSTED_BLOCK (e.g. BATTLE-SPIRITS-A8040)
+    if (/can\s+block\s+opposing\s+spirits/i.test(rawClauseText)) {
+      return {
+        op: 'EXHAUSTED_BLOCK',
+        target: 'self',
+        filter: {
+          side: 'opp',
+          types: ['Spirit'],
+          filters: {
+            comparison: relComp
+          }
+        }
+      };
+    }
+
+    // Relative comparison OPPOSING_ATTACKS trigger (e.g. PC11-X03)
+    if (/when\s+an\s+opposing\s+spirit\/ultimate\s+with.*attacks/i.test(rawClauseText)) {
+      return {
+        op: 'TRIGGER_CONDITION',
+        trigger: 'OPPOSING_ATTACKS',
+        filter: {
+          side: 'opp',
+          types: ['Spirit', 'Ultimate'],
+          filters: {
+            comparison: relComp
+          }
+        }
+      };
+    }
+
+    // Relative comparison GRANT_ABILITY (e.g. BS10-X06)
+    if (/give\s+all\s+your.*the\s+effect/i.test(rawClauseText)) {
+      return {
+        op: 'GRANT_ABILITY',
+        target: { side: 'self', types: ['Spirit'] },
+        grantedOp: {
+          op: 'DESTROY',
+          count: 1,
+          target: {
+            side: 'opp',
+            types: ['Spirit'],
+            filters: {
+              comparison: relComp
+            }
+          }
+        }
+      };
+    }
+  }
 
   // 1. DRAW
   // "draw a card", "draw two cards", "draw 3 cards", "For each card discarded by this effect, draw a card"
@@ -373,6 +860,36 @@ export function compileClauseToOp(clause) {
       }
     };
   }
+  // Relative comparison DESTROY / BANISH (DEF-REL-TARGET-01)
+  if (relComp && /(?:by\s+)?(?:destroying|destroy|banish)\s+/i.test(rawClauseText)) {
+    m = rawClauseText.match(/(?:by\s+)?(?:destroying|destroy|banish)\s+(all|every|any\s+number\s+of|up\s+to\s+\w+|an?|one|two|three|four|\d+)?\s*(opposing\s+)?(?:exhausted\s+)?(spirits?\/ultimates?|spirits?\/nexuses?|spirit\/nexus|spirit\/ultimate|spirits?|ultimates?|nexuses?|braves?)/i);
+    if (m) {
+      const isCost = /^by\s+destroy/i.test(rawClauseText);
+      const isAll = /all|every/i.test(m[1]);
+      const isUpTo = /up\s+to/i.test(m[1]);
+      const isOpp = Boolean(m[2]) || !rawClauseText.toLowerCase().includes('you control');
+      const types = parseTypes(m[3]);
+      const count = isAll ? 'ALL' : parseNumber(m[1]);
+
+      const filters = { comparison: relComp };
+      if (rawClauseText.toLowerCase().includes('exhausted')) {
+        filters.state = 'EXHAUSTED';
+      }
+
+      return {
+        op: 'DESTROY',
+        count,
+        ...(isUpTo ? { upTo: true } : {}),
+        ...(isCost ? { isCost: true } : {}),
+        target: {
+          side: isOpp ? 'opp' : 'either',
+          types,
+          filters
+        }
+      };
+    }
+  }
+
   // "destroy an opposing Spirit/Nexus"
   m = text.match(/destroy\s+(an?|one|two|three|\d+)?\s*opposing\s+(spirit|nexus|brave|ultimate)/i);
   if (m) {
@@ -387,6 +904,39 @@ export function compileClauseToOp(clause) {
   }
 
   // 5. BOUNCE
+  // Relative comparison BOUNCE (DEF-REL-TARGET-01)
+  if (relComp && /return\s+/i.test(rawClauseText)) {
+    m = rawClauseText.match(/return\s+(all|every|any\s+number\s+of|up\s+to\s+\w+|an?|one|two|three|four|\d+)?\s*(opposing\s+)?(?:exhausted\s+)?(spirits?\/ultimates?|spirits?\/nexuses?|spirit\/nexus|spirit\/ultimate|spirits?|ultimates?|nexuses?|braves?)\s+.*to\s+(?:the\s+)?(hand|bottom\s+of\s+the\s+deck|top\s+of\s+the\s+deck|deckbottom|decktop|deck)/i) ||
+        rawClauseText.match(/return\s+to\s+(?:the\s+)?(hand|bottom\s+of\s+the\s+deck|top\s+of\s+the\s+deck|deckbottom|decktop|deck)\s+(all|every|any\s+number\s+of|up\s+to\s+\w+|an?|one|two|\d+)?\s*(opposing\s+)?(?:exhausted\s+)?(spirits?\/ultimates?|spirits?\/nexuses?|spirit\/nexus|spirit\/ultimate|spirits?|ultimates?|nexuses?|braves?)/i);
+    if (m) {
+      const destStr = (m[4] && ['hand','bottom','top','deck'].some(d => m[4].toLowerCase().includes(d)) ? m[4] : m[1] || 'hand').toLowerCase();
+      const countStr = m[4] && ['hand','bottom','top','deck'].some(d => m[4].toLowerCase().includes(d)) ? m[1] : m[2];
+      const oppStr = m[4] && ['hand','bottom','top','deck'].some(d => m[4].toLowerCase().includes(d)) ? m[2] : m[3];
+      const typeStr = m[4] && ['hand','bottom','top','deck'].some(d => m[4].toLowerCase().includes(d)) ? m[3] : m[4];
+
+      const isAll = /all|every/i.test(countStr);
+      const isOpp = Boolean(oppStr) || !rawClauseText.toLowerCase().includes('you control');
+      const types = parseTypes(typeStr);
+      const count = isAll ? 'ALL' : parseNumber(countStr);
+      const dest = destStr.includes('bottom') ? 'DECK_BOTTOM' :
+                   destStr.includes('top') ? 'DECK_TOP' :
+                   destStr.includes('deck') ? 'DECK' : 'HAND';
+
+      return {
+        op: 'BOUNCE',
+        count,
+        target: {
+          side: isOpp ? 'opp' : 'either',
+          types,
+          filters: {
+            comparison: relComp
+          }
+        },
+        destination: dest
+      };
+    }
+  }
+
   // "return an opposing Spirit to the hand / deck"
   m = text.match(/return\s+(an?|one|two|\d+)?\s*opposing\s+(spirit|ultimate)\s+to\s+(?:the\s+)?(hand|bottom of the deck|top of the deck|deck)/i);
   if (m) {
@@ -402,10 +952,34 @@ export function compileClauseToOp(clause) {
   }
 
   // 6. EXHAUST
+  // Relative comparison EXHAUST / HEAVY EXHAUST (DEF-REL-TARGET-01)
+  if (relComp && /(?:heavy\s+exhaust|exhaust)\s+/i.test(rawClauseText)) {
+    m = rawClauseText.match(/(heavy\s+exhaust|exhaust)\s+(all|every|any\s+number\s+of|an?|one|two|\d+)?\s*(opposing\s+)?(?:exhausted\s+)?(spirits?\/nexuses?|spirits?\/ultimates?|spirit\/nexus|spirit\/ultimate|spirits?|ultimates?|nexuses?)/i);
+    if (m) {
+      const isHeavy = m[1].toLowerCase().includes('heavy');
+      const isAll = /all|every/i.test(m[2]);
+      const isOpp = Boolean(m[3]) || !rawClauseText.toLowerCase().includes('you control');
+      const types = parseTypes(m[4]);
+      const count = isAll ? 'ALL' : parseNumber(m[2]);
+      return {
+        op: 'EXHAUST',
+        count,
+        ...(isHeavy ? { isHeavy: true } : {}),
+        target: {
+          side: isOpp ? 'opp' : 'either',
+          types,
+          filters: {
+            comparison: relComp
+          }
+        }
+      };
+    }
+  }
   if (/^exhaust\s+it$/i.test(text.trim())) {
     return { op: 'EXHAUST', target: 'PREVIOUS_TARGET' };
   }
-  if (/by\s+exhausting\s+this\s+nexus/i.test(text)) {
+  if (/^(?:you\s+can\s+)?exhaust\s+this\s+(?:nexus|spirit|ultimate)/i.test(text.trim()) ||
+      /by\s+exhausting\s+this\s+(?:nexus|spirit|ultimate)/i.test(text.trim())) {
     return { op: 'EXHAUST', target: 'self' };
   }
   // "Select 1 color. Then, exhaust all unexhausted spirits with the selected color"
@@ -496,14 +1070,26 @@ export function compileClauseToOp(clause) {
   }
 
   // 9. BP_DEBUFF
-  // "give an opposing Spirit -N BP", "give it -N BP", "opposing Spirit gets -N BP"
-  m = text.match(/(?:give\s+(?:an?\s+opposing\s+(?:spirit|ultimate)|it)|opposing\s+(?:spirit|ultimate)\s+gets?)\s*-(\d+)\s*bp/i);
+  // "give an opposing Spirit -N BP", "give it -N BP", "opposing Spirit gets -N BP", "give all opposing Spirits/Ultimates -N BP"
+  m = text.match(/(?:give\s+(?:(all|an?|one|two|three|\d+)\s+(?:battling\s+)?opposing\s+(?:battling\s+)?(spirits?(?:\/ultimates?)?|ultimates?)|it)|(all\s+)?(?:battling\s+)?opposing\s+(?:battling\s+)?(spirits?(?:\/ultimates?)?|ultimates?)\s+gets?)\s*-(\d+)\s*bp/i);
   if (m) {
+    const isIt = /\bit\b/i.test(text);
+    const qtyWord = m[1] || (m[3] ? 'all' : null);
+    const typeStr = m[2] || m[4] || 'Spirit';
+    const isAll = Boolean(qtyWord && /^(all|every)$/i.test(qtyWord));
+    const count = (!isAll && qtyWord) ? parseNumber(qtyWord) : undefined;
+    const isBattling = /\bbattling\b/i.test(text);
+    const targetObj = isIt ? 'PREVIOUS_TARGET' : {
+      side: 'opp',
+      types: parseTypes(typeStr),
+      ...(isBattling ? { state: 'BATTLING' } : {})
+    };
     return {
       op: 'BP_DEBUFF',
-      amount: parseInt(m[1], 10),
-      target: text.includes('it') ? 'PREVIOUS_TARGET' : { side: 'opp' },
-      duration: clause.duration || 'THIS_TURN'
+      amount: parseInt(m[5], 10),
+      ...(isAll ? { all: true } : (count && count > 1 ? { count } : {})),
+      target: targetObj,
+      duration: clause.duration || (/during\s+this\s+battle/i.test(text) ? 'DURING_THIS_BATTLE' : 'THIS_TURN')
     };
   }
 
@@ -627,6 +1213,25 @@ export function compileClauseToOp(clause) {
   }
 
   // 19f. TARGET
+  if (relComp && /target\s+/i.test(rawClauseText)) {
+    m = rawClauseText.match(/target\s+(an?|one|two|\d+)?\s*(opposing\s+)?(?:exhausted\s+)?(spirits?\/ultimates?|spirits?\/nexuses?|spirit\/nexus|spirit\/ultimate|spirits?|ultimates?|nexuses?|braves?)/i);
+    if (m) {
+      const isOpp = Boolean(m[2]) || !rawClauseText.toLowerCase().includes('you control');
+      const types = parseTypes(m[3]);
+      const count = parseNumber(m[1]);
+      return {
+        op: 'TARGET',
+        count,
+        target: {
+          side: isOpp ? 'opp' : 'either',
+          types,
+          filters: {
+            comparison: relComp
+          }
+        }
+      };
+    }
+  }
   m = text.match(/target\s+an\s+opposing\s+(spirit|ultimate|nexus)/i);
   if (m) {
     return { op: 'TARGET', target: { side: 'opp', types: parseTypes(m[1]) } };
@@ -652,8 +1257,12 @@ export function compileClauseToOp(clause) {
   }
 
   // 19j. UNPREVENTABLE
-  if (/This effect can't be prevented by opposing effects/i.test(text)) {
-    return { op: 'UNPREVENTABLE' };
+  if (/(?:can'?t|cannot)\s+be\s+prevented/i.test(text)) {
+    return {
+      op: 'UNSUPPORTED',
+      unhandledClause: text,
+      reason: 'UNSUPPORTED_EFFECT_PROTECTION: effect cannot be prevented by opposing effects'
+    };
   }
 
   // 19k. ADVENT COST & STACKING
@@ -720,8 +1329,24 @@ export function compileClauseToOp(clause) {
   }
 
   // 21. CANNOT ATTACK / BLOCK / UNBLOCKABLE
+  // Relative comparison UNBLOCKABLE (DEF-REL-TARGET-01)
+  if (relComp && /can'?t\s+be\s+blocked/i.test(rawClauseText)) {
+    m = rawClauseText.match(/can'?t\s+be\s+blocked\s+by\s+(opposing\s+)?(?:exhausted\s+)?(spirits?\/ultimates?|spirits?\/nexuses?|spirit\/nexus|spirit\/ultimate|spirits?|ultimates?|nexuses?)/i);
+    const types = m ? parseTypes(m[2]) : ['Spirit'];
+    return {
+      op: 'UNBLOCKABLE',
+      target: 'self',
+      filter: {
+        side: 'opp',
+        types,
+        filters: {
+          comparison: relComp
+        }
+      }
+    };
+  }
   // "This Spirit can't be blocked by Green Spirits"
-  m = text.match(/this\s+spirit\s+can't\s+be\s+blocked\s+by\s+([A-Za-z]+)\s+spirits/i);
+  m = text.match(/this\s+spirit\s+can't\s+be\s+blocked\s+by\s+(Red|Purple|Green|White|Yellow|Blue)\s+spirits/i);
   if (m) {
     return {
       op: 'UNBLOCKABLE',
@@ -778,24 +1403,13 @@ export function compileClauseToOp(clause) {
   }
 
   // 21b. SALVAGE & TRASH RECOVERY
-  // "Choose and return a Spirit card from the Trash to your Hand", "return a Spirit card from your Trash to your Hand"
-  m = text.match(/(?:choose\s+and\s+)?return\s+(a|an|one|two|\d+)?\s*(?:target\s+)?([A-Za-z]+)?\s*(?:family\s+)?(spirit|magic|nexus|brave)?\s*cards?\s+from\s+(?:the\s+|your\s+)?trash\s+to\s+(?:your\s+)?hand/i);
-  if (m) {
-    return {
-      op: 'SALVAGE',
-      count: parseNumber(m[1]),
-      family: m[2] && !['spirit', 'magic', 'nexus', 'brave'].includes(m[2].toLowerCase()) ? m[2] : null,
-      targetType: m[3] ? capitalize(m[3]) : 'Spirit',
-      destination: 'HAND'
-    };
-  }
-  if (/return\s+all\s+magic\s+cards\s+you\s+used\s+during\s+this\s+battle\s+to\s+the\s+hand/i.test(text)) {
-    return {
-      op: 'SALVAGE',
-      targetType: 'Magic',
-      filter: 'USED_THIS_BATTLE',
-      destination: 'HAND'
-    };
+  // "Choose and return a Spirit card from the Trash to your Hand", "return a Cost 3 or less Spirit card from your Trash to your Hand",
+  // "add a Magic card from your Trash to your Hand", "return this card from the Trash to the Hand"
+  if (/(?:choose\s+and\s+)?(?:return|add)\s+.*from\s+(?:(?:the|your|their)\s+)?(?:opposing\s+|either\s+(?:player['’]s\s+)?)?trash\s+to\s+(?:the\s+|your\s+|their\s+|opposing\s+)?(?:hand|decktop|deckbottom|bottom\s+of\s+(?:your|the|opposing|their)\s+deck|top\s+of\s+(?:your|the|opposing|their)\s+deck)/i.test(text) ||
+      /(?:choose\s+and\s+)?(?:return|add)\s+(?:this\s+(?:spirit|brave|ultimate|nexus)?\s*card|it)\s+from\s+(?:the\s+|your\s+)?trash\s+to\s+(?:the\s+|your\s+)?hand/i.test(text) ||
+      /return\s+all\s+magic\s+cards\s+you\s+used\s+during\s+this\s+battle\s+to\s+the\s+hand/i.test(text)) {
+    const sal = parseTrashSalvageOp(text, rawClauseText);
+    if (sal) return sal;
   }
 
   // 21c. DECK DISCARD RULES & MILL BY LEVEL
@@ -842,7 +1456,18 @@ export function compileClauseToOp(clause) {
   m = text.match(/\(While\s+you\s+have\s+a\s+([A-Za-z]+)\s+symbol,\s*the\s+following\s+effect\s+activates\s+next\.?\)/i) ||
       text.match(/^\[?Rush:\s*([^\]]+)\]?/i);
   if (m) {
-    return { op: 'KEYWORD_ABILITY', keyword: 'Rush', condition: { colorSymbol: capitalize(m[1].trim()) } };
+    const col = capitalize(m[1].trim());
+    return {
+      op: 'KEYWORD_ABILITY',
+      keyword: 'Rush',
+      condition: {
+        kind: 'STRUCTURED_CONDITION',
+        type: 'COLOR_SYMBOL',
+        side: 'self',
+        color: col.toLowerCase(),
+        colorSymbol: col
+      }
+    };
   }
   m = text.match(/^\[?Brave Symbol\s*\+\s*(\d+)\]?/i);
   if (m) {
@@ -948,8 +1573,20 @@ export function compileClauseToOp(clause) {
   }
 
   // 29. SUMMON THIS CARD (Burst / Flash / Self)
-  if (/summon this (?:spirit|brave|ultimate|nexus)?\s*card/i.test(text)) {
-    return { op: 'SUMMON_THIS_CARD', from: 'HAND_OR_BURST' };
+  if (/summon\s+(?:this\s+(?:spirit|brave|ultimate|nexus)?\s*card|it)\b/i.test(text)) {
+    let from = 'HAND_OR_BURST';
+    if (/trash/i.test(text)) from = 'TRASH';
+    else if (/removed\s+zone/i.test(text)) from = 'REMOVED';
+    else if (/hand/i.test(text) && !/burst/i.test(text)) from = 'HAND';
+    const isFree = /without\s+paying\s+(?:the\s+)?cost/i.test(text);
+    const costM = text.match(/pay\s+(one|two|three|\d+)\s+cost/i);
+    const costCores = costM ? parseNumber(costM[1]) : 0;
+    return {
+      op: 'SUMMON_THIS_CARD',
+      from,
+      ...(isFree ? { free: true } : {}),
+      ...(costCores ? { costCores } : {})
+    };
   }
 
   // 30. TARGET SELECTION & CHOOSER CLAUSES
@@ -1329,6 +1966,9 @@ export function compileClauseToOp(clause) {
   if (/all nexuses can't be destroyed/i.test(text) || /your \w+ nexuses can't be destroyed/i.test(text)) {
     return { op: 'CONTINUOUS_RULE', rule: 'NEXUS_INDESTRUCTIBLE' };
   }
+  if (/^a\s+spirit\s+you\s+control\s+can['’]?t\s+be\s+destroyed$/i.test(text)) {
+    return { op: 'INDESTRUCTIBLE', target: { side: 'self', types: ['Spirit'] } };
+  }
   if (/spirits with only one core on them can't attack\/block/i.test(text)) {
     return { op: 'CONTINUOUS_RULE', rule: 'ONE_CORE_CANNOT_ATTACK_BLOCK' };
   }
@@ -1537,7 +2177,14 @@ export function compileClauseToOp(clause) {
     return { op: 'EXHAUST', count: 1, target: { side: 'self', types: ['Spirit'] }, isCost: true };
   }
   if (/when your nexuses are destroyed, by sending a core from your field\/reserve to your trash/i.test(text)) {
-    return { op: 'REPLACEMENT_EFFECT', trigger: 'NEXUS_DESTROYED' };
+    return {
+      op: 'REPLACEMENT_EFFECT',
+      trigger: 'NEXUS_DESTROYED',
+      replaces: 'NEXUS_DESTRUCTION',
+      replacementZone: 'field',
+      side: 'self',
+      cost: { op: 'MOVE_CORE', count: 1, from: 'field_or_reserve', to: 'trash', side: 'self' }
+    };
   }
   if (/when the opponents? uses? a magic effect, you can negate that effect/i.test(text) || /each time your opponent plays a spell, negate that effect/i.test(text)) {
     return { op: 'NEGATE_MAGIC' };
@@ -1790,7 +2437,7 @@ export function compileClauseToOp(clause) {
   }
 
   // B. Core Movement & Core Placement
-  if (/put(?:ting)?\s+.*cores?\s+from\s+(?:the\s+)?void/i.test(text) ||
+  if (/put(?:ting)?\s+.*cores?\s+from/i.test(text) ||
       /send(?:ing)?\s+.*cores?\s+from/i.test(text) ||
       /move(?:ing)?\s+.*cores?\s+from/i.test(text) ||
       /cores?\s+to\s+your\s+trash/i.test(text) ||
@@ -1816,10 +2463,45 @@ export function compileClauseToOp(clause) {
       /put any number of cores from/i.test(text) ||
       /opponent sends a core/i.test(text)) {
     const isCost = /^by\s+/i.test(text);
-    return { op: 'MOVE_CORE', isCost };
+    const res = parseCoreMovement(text);
+    if (res && res.op !== 'UNSUPPORTED') {
+      if (isCost) res.isCost = true;
+      return res;
+    }
+    return { op: 'MOVE_CORE', count: 1, isCost };
   }
 
   // C. Destruction & Bouncing
+  const zeroBpRepM = text.match(/opposing\s+cost\s+(\d+)\s+or\s+less\s+spirits?\s+that\s+are\s+destroyed\s+at\s+0\s*bp\s+are\s+returned\s+to\s+(?:the\s+)?(deckbottom|decktop|hand).*instead\s+of\s+being\s+sent\s+to\s+(?:the\s+)?trash/i);
+  if (zeroBpRepM) {
+    const zRaw = zeroBpRepM[2].toLowerCase();
+    const repZone = zRaw.includes('bottom') ? 'deck_bottom' : (zRaw.includes('top') ? 'deck_top' : 'hand');
+    return {
+      op: 'REPLACEMENT_EFFECT',
+      replaces: 'DESTRUCTION',
+      replacementZone: repZone,
+      side: 'opp',
+      filter: { type: 'Spirit', maxCost: parseInt(zeroBpRepM[1], 10), zeroBp: true }
+    };
+  }
+  const oppHandBounceM = text.match(/(?:the\s+)?opponent\s+returns?\s+(an?|one|two|three|\d+)\s+cards?\s+from\s+(?:their|the)\s+hand\s+to\s+(?:the\s+)?(deckbottom|decktop|bottom\s+of\s+(?:their|the)\s+deck|top\s+of\s+(?:their|the)\s+deck)/i);
+  if (oppHandBounceM) {
+    const isBottom = oppHandBounceM[2].toLowerCase().includes('bottom');
+    return {
+      op: 'BOUNCE',
+      count: parseNumber(oppHandBounceM[1]),
+      target: { side: 'opp', zone: 'hand' },
+      destination: isBottom ? 'DECK_BOTTOM' : 'DECK_TOP'
+    };
+  }
+  if (/^return\s+this\s+(?:spirit|ultimate|brave|card)\s+to\s+(?:the\s+)?(deckbottom|decktop|bottom\s+of\s+(?:your|the)\s+deck|top\s+of\s+(?:your|the)\s+deck)$/i.test(text)) {
+    const isBottom = /bottom/i.test(text);
+    return {
+      op: 'BOUNCE',
+      target: 'self',
+      destination: isBottom ? 'DECK_BOTTOM' : 'DECK_TOP'
+    };
+  }
   if (/destroy(?:ing|s)?\b/i.test(text)) {
     return { op: 'DESTROY', count: 1, target: { side: 'either' }, isCost: /^by\s+/i.test(text) };
   }
@@ -1889,7 +2571,7 @@ export function compileClauseToOp(clause) {
       /you can summon one of them/i.test(text) ||
       /this spirit card.*summoned/i.test(text) ||
       /summon\b/i.test(text)) {
-    return { op: 'SUMMON', free: true };
+    return parseSummonOp(text, rawClauseText);
   }
   if (/play.*spell.*without paying/i.test(text) ||
       /use.*magic.*without paying/i.test(text) ||
@@ -1899,56 +2581,514 @@ export function compileClauseToOp(clause) {
   }
 
   // F. Exhaust & Refresh
-  if (/exhaust/i.test(text)) {
-    return { op: 'EXHAUST', target: { side: 'either' } };
-  }
-  if (/refresh/i.test(text)) {
-    return { op: 'REFRESH', target: { side: 'either' } };
-  }
-
-  // G. Keywords & Reminders (2009-2012)
-  if (/\[armor/i.test(text) || /\[curse\]/i.test(text) || /\[clash\]/i.test(text) || /\[crush\]/i.test(text) || /\[brilliance\]/i.test(text) || /brilliance/i.test(text) || /high speed/i.test(text) || /crush/i.test(text) || /ultimates (?:don't have to|can also) block/i.test(text) || /burst/i.test(text) || /brave/i.test(text) || /tribute/i.test(text) || /immortality/i.test(text) || /consecutive blade/i.test(text) || /charge/i.test(text) || /rush/i.test(text) || /unsheathe/i.test(text) || /whirlwind/i.test(text) || /spellbind/i.test(text) || /bombardment/i.test(text) || /pursuit/i.test(text) || /opponent.*(?:moves|decides how).*cores?.*separat/i.test(text)) {
-    return { op: 'KEYWORD_RULE' };
-  }
-
-  // H. Continuous Rules, Modifiers, Combat Rules
-  if (/additional.*cost/i.test(text) || /cost reduction/i.test(text) || /reduction cost/i.test(text) || /must pay the cost from the reserve/i.test(text) || /cost/i.test(text)) {
-    return { op: 'COST_MODIFIER' };
-  }
-  if (/treated as/i.test(text) || /treated/i.test(text) || /treat this spirit as being/i.test(text) || /cores?\s*=\s*(?:lv\d+|the highest)/i.test(text) || /for your spirits with no printed effects, if there is/i.test(text) || /x is its current lv minus \d+/i.test(text) || /count it as \w+ spirits/i.test(text) || /treat/i.test(text)) {
-    return { op: 'TREAT_RULE' };
-  }
-  if (/return them to your hand/i.test(text) || /move it to your hand instead/i.test(text)) {
-    return { op: 'REPLACEMENT_EFFECT' };
-  }
-  if (/give it an extra symbol/i.test(text) || /give.*symbol/i.test(text) || /symbol/i.test(text) || /give.*additional color/i.test(text)) {
-    return { op: 'ADD_SYMBOL' };
-  }
-  if (/opened magic card can be used as if it were in your hand/i.test(text)) {
-    return { op: 'CONTINUOUS_RULE' };
-  }
-  if (/return them to the field, exhausted/i.test(text) || /returns to your field, exhausted/i.test(text) || /remains on your field/i.test(text) || /remains on the field/i.test(text)) {
+  if (/remains? on (?:your|the) field,?\s*exhausted/i.test(text) || /returns? to (?:your|the) field,?\s*exhausted/i.test(text)) {
     return { op: 'RESURRECT' };
-  }
-  if (/if not, return them/i.test(text) || /return the rest to the bottom/i.test(text)) {
-    return { op: 'RETURN_REMAINING' };
-  }
-  if (/select 1 of them and move it to your hand/i.test(text) || /add.*to.*hand/i.test(text)) {
-    return { op: 'ADD_TO_HAND' };
-  }
-  if (/can't be blocked/i.test(text) || /cannot be blocked/i.test(text) || /unblockable/i.test(text)) {
-    return { op: 'UNBLOCKABLE' };
-  }
-  if (/can't be destroyed/i.test(text) || /cannot be destroyed/i.test(text)) {
-    return { op: 'INDESTRUCTIBLE' };
   }
   if (/cannot be exhausted/i.test(text) || /can't be exhausted/i.test(text)) {
     return { op: 'CANNOT_BE_EXHAUSTED' };
   }
-  if (/can't attack/i.test(text) || /can't block/i.test(text) || /can't be/i.test(text) || /must attack if possible/i.test(text)) {
+  if (/cannot refresh/i.test(text) || /can't refresh/i.test(text) || /doesn't refresh/i.test(text)) {
+    const opp = /opposing|opponent/i.test(text);
+    return { op: 'CANNOT_REFRESH', target: { side: opp ? 'opp' : 'self' } };
+  }
+  if (/exhaust/i.test(text)) {
+    if (/^(?:you\s+can\s+)?exhaust\s+this\s+(?:nexus|spirit|ultimate)/i.test(text.trim()) ||
+        /by\s+exhausting\s+this\s+(?:nexus|spirit|ultimate)/i.test(text.trim())) {
+      return { op: 'EXHAUST', target: 'self' };
+    }
+    let side = 'opp';
+    if (/your\s+(?:spirits?|ultimates?|nexuses?)|this\s+(?:spirit|nexus|ultimate)|friendly\s+spirit/i.test(text)) side = 'self';
+    else if (/both\s+players'?\s+(?:spirits?|ultimates?)|all\s+spirits/i.test(text)) side = 'both';
+    let count = 1;
+    if (/all\s+opposing|all\s+your|all\s+spirits|every\s+opposing/i.test(text)) count = 'ALL';
+    else {
+      const cMatch = text.match(/exhaust\s+(?:up\s+to\s+)?(a|an|one|two|three|four|five|\d+)/i);
+      if (cMatch) count = parseNumber(cMatch[1]);
+    }
+    const target = { side, types: /ultimate/i.test(text) ? ['Spirit', 'Ultimate'] : (/nexus/i.test(text) ? ['Nexus'] : ['Spirit']) };
+    if (/this\s+(?:spirit|nexus|ultimate)/i.test(text)) target.card = 'SELF';
+    return { op: 'EXHAUST', count, target };
+  }
+  if (/refresh/i.test(text)) {
+    let side = 'self';
+    if (/opposing\s+(?:spirits?|ultimates?|nexuses?)|opponent's\s+spirits?/i.test(text)) side = 'opp';
+    else if (/both\s+players'?\s+(?:spirits?|ultimates?)|all\s+spirits/i.test(text)) side = 'both';
+    let count = 1;
+    if (/all\s+opposing|all\s+your|all\s+spirits|every\s+friendly/i.test(text)) count = 'ALL';
+    else {
+      const cMatch = text.match(/refresh\s+(?:up\s+to\s+)?(a|an|one|two|three|four|five|\d+)/i);
+      if (cMatch) count = parseNumber(cMatch[1]);
+    }
+    const target = { side, types: /ultimate/i.test(text) ? ['Spirit', 'Ultimate'] : (/nexus/i.test(text) ? ['Nexus'] : ['Spirit']) };
+    if (/this\s+spirit/i.test(text) || /^refresh$/i.test(text.trim())) target.card = 'SELF';
+    return { op: 'REFRESH', count, target };
+  }
+
+  // F.5 High-precision rules that mention bracketed keywords (must precede generic [Keyword] fallback)
+  if (/can\s+only\s+be\s+prevented\s+by|cannot\s+be\s+prevented\s+except\s+by/i.test(text)) {
+    return { op: 'PIERCING_RULE' };
+  }
+  if (/can\s+\[(?:Ultra\s+)?Contract\s+Advent\]\s+from\s+(?:the\s+)?(?:Removed\s+Zone|Trash)/i.test(text)) {
+    return { op: 'ADVENT_RULE_MODIFIER' };
+  }
+  if (/placing\s+(?:up\s+to\s+)?(?:one|two|three|\d+)\s+cards?\s+from\s+your\s+decktop\s+onto\s+the\s+Field\s+facedown\s+and\s+putting/i.test(text)) {
+    return { op: 'BUNSHIN_SUMMON', upTo: /up\s+to/i.test(text), facedown: true };
+  }
+  if (/Main\s+Step\s+doesn['’]t\s+occur\s+for/i.test(text)) {
+    const rSide = /opponent|opposing/i.test(text) ? 'opp' : (/either|both/i.test(text) ? 'both' : 'self');
+    return { op: 'RESTRICT_MAIN_STEP', side: rSide, duration: /next\s+turn/i.test(text) ? 'NEXT_TURN' : 'THIS_TURN' };
+  }
+  if (/^Reveal\s+(?:all\s+cards\s+in\s+)?(?:the\s+opposing|the\s+opponent['’]s|your)\s+Hand\.?$/i.test(text.trim())) {
+    const hSide = /opposing|opponent/i.test(text) ? 'opp' : 'self';
+    return { op: 'REVEAL_HAND', side: hSide, target: 'HAND' };
+  }
+
+  // F.6 High-precision rules that mention bracketed keywords/names (must precede generic [Keyword] fallback)
+  const actEffMatch = text.match(/(?:you\s+can\s+)?(?:immediately\s+)?activate\s+(?:this\s+(?:spirit|ultimate|nexus|brave|card)'s|its|your)\s+\[([^\]]+)\]/i);
+  if (actEffMatch) {
+    return { op: 'ACTIVATE_EFFECT_ACTION', keyword: actEffMatch[1].trim(), side: 'self' };
+  }
+  if (/when\s+(?:the\s+opponent|either\s+player|you)\s+uses?\s+(?:a\s+)?magic/i.test(text)) {
+    const wSide = /opponent|opposing/i.test(text) ? 'opp' : (/either/i.test(text) ? 'both' : 'self');
+    return { op: 'TRIGGERED_WATCHER', watchEvent: 'USE_MAGIC', side: wSide };
+  }
+  if (/you\s+can\s+put\s+any\s+(?:number|amount)\s+(?:of\s+copies\s+)?of\s+.*in\s+(?:your\s+)?deck/i.test(text)) {
+    return { op: 'DECK_BUILDING_RULE', maxCopies: 'UNLIMITED', rule: 'UNLIMITED_COPIES' };
+  }
+  if (/both\s+players\s+can\s+only\s+\[advent\]/i.test(text) ||
+      /you\s+can\s+(?:also\s+)?\[advent\]\s+.*(?:onto\s+this|from\s+(?:the\s+)?trash)/i.test(text) ||
+      /this\s+card\s+can\s+(?:also\s+)?\[advent\]/i.test(text)) {
+    return { op: 'ADVENT_RULE' };
+  }
+  if (/give\s+this\s+spirit\s+\[shiny\s+hearts\]\s+and\s+\[absolutes\]/i.test(text)) {
+    return { op: 'ADD_FAMILY', families: ['Shiny Hearts', 'Absolutes'] };
+  }
+  if (/\[grand\s+skill\].*gets?\s+[+-]\d+/i.test(text)) {
+    return { op: 'GRANDWALKER_ACTION' };
+  }
+
+  // G. Keywords & Reminders
+  const kwBracketMatch = text.match(/\[([A-Za-z0-9\s:_-]+)\]/);
+  if (kwBracketMatch && !/^soul\s+core$/i.test(kwBracketMatch[1].trim()) && !/all\s+\[.*?\]\s+spirits/i.test(text)) {
+    return { op: 'KEYWORD_RULE', keyword: kwBracketMatch[1].trim() };
+  }
+  const namedKeywords = [
+    'Curse', 'Clash', 'Crush', 'Brilliance', 'High Speed', 'Burst',
+    'Brave', 'Tribute', 'Immortality', 'Consecutive Blade', 'Charge',
+    'Rush', 'Unsheathe', 'Whirlwind', 'Spellbind', 'Bombardment', 'Pursuit'
+  ];
+  for (const nkw of namedKeywords) {
+    const re = new RegExp(`\\b${nkw}\\b`, 'i');
+    if (re.test(text)) {
+      return { op: 'KEYWORD_RULE', keyword: nkw };
+    }
+  }
+
+  // H. Continuous Rules, Modifiers, Combat Rules
+  if (/(?:without paying (?:the )?cost|for free)/i.test(text)) {
+    return { op: 'COST_MODIFIER', free: true };
+  }
+  let mCost = text.match(/cost (?:of [^,]+ )?becomes? (\d+)/i)
+    || text.match(/(?:this card.*?is|becomes?)\s+cost\s*(\d+)/i)
+    || text.match(/treat (?:this card|it) as cost (\d+)/i);
+  if (mCost) {
+    return { op: 'COST_MODIFIER', setCost: parseInt(mCost[1], 10) };
+  }
+  mCost = text.match(/(?:decrease|reduce) (?:the )?cost (?:of [^,]+ )?by (\d+)/i)
+    || text.match(/reduce(?:s)?\s+(?:its\s+)?cost\s+by\s+(\w+|\d+)/i)
+    || text.match(/(?:cost.*?gets?\s+-(\d+)|gets?\s+-(\d+)\s+cost)/i);
+  if (mCost) {
+    return { op: 'COST_MODIFIER', delta: -parseNumber(mCost[1] || mCost[2]) };
+  }
+  mCost = text.match(/(?:increase) (?:the )?cost (?:of [^,]+ )?by \+?(\d+)/i)
+    || text.match(/(?:cost\s*\+(\d+)|increase(?:s)?\s+(?:its|this\s+\w+'s)?\s*cost\s+by\s+\+?(\w+|\d+)|cost\s+increases?\s+by\s+\+?(\w+|\d+))/i);
+  if (mCost) {
+    return { op: 'COST_MODIFIER', delta: parseNumber(mCost[1] || mCost[2] || mCost[3]) };
+  }
+  if (/treat\s+(?:all\s+)?(?:the\s+)?reduction(?:\s+symbols)?.*?(?:as\s+(?:being\s+)?|being\s+)(?:fulfilled|filled)/i.test(text)) {
+    return { op: 'COST_MODIFIER', fulfillReduction: 'ALL' };
+  }
+  if (/must pay (?:the )?cost from (?:the )?reserve/i.test(text)) {
+    return { op: 'COST_MODIFIER', payFrom: 'reserve' };
+  }
+  if (/additional.*cost/i.test(text) || /cost reduction/i.test(text) || /reduction cost/i.test(text)) {
+    return { op: 'COST_MODIFIER', delta: 1 };
+  }
+
+  // PAY_COST
+  let mPay = text.match(/(?:by\s+)?paying\s+(?:up\s+to\s+)?(\w+|\d+)\s+costs?/i) || text.match(/unless (?:they|the opponent) pay (?:the |an? )?(\w+|\d+)?\s*cost/i);
+  if (mPay) {
+    return { op: 'PAY_COST', count: mPay[1] ? parseNumber(mPay[1]) : 1, isCost: true };
+  }
+
+  // RUSH_CONDITION
+  if (/\(?while you have [^)]+ symbols?, the following effects?\s+activate[s]?\s+next\)?/i.test(text)) {
+    return { op: 'RUSH_CONDITION' };
+  }
+
+  // ACTIVATE_BURST
+  let mBurst = text.match(/immediately activate one of your (?:[a-zA-Z\/]+\s+)?soul bursts?/i);
+  if (mBurst) {
+    return { op: 'ACTIVATE_BURST', burstType: 'SOUL_BURST', color: mBurst[1] ? capitalize(mBurst[1]) : null };
+  }
+
+  // TREAT_RULE
+  let mTreat = text.match(/(?:during this turn,\s*)?treat(?:ed)?\s+.*?as\s+(?:being\s+)?(?:at\s+|on\s+)?(?:lv\.?\s*(\d+)|level\s*(\d+))/i);
+  if (mTreat) {
+    const lvl = parseInt(mTreat[1] || mTreat[2], 10);
+    return { op: 'TREAT_RULE', treatAs: 'LEVEL', level: lvl };
+  }
+  if (/cores?\s*=\s*(?:lv\d+|the highest)/i.test(text) || /treat(?:ed)?\s+.*?as\s+(?:being\s+)?(?:on|at)\s+(?:their|its)?\s*highest\s+(?:lvs?|levels?)/i.test(text)) {
+    return { op: 'TREAT_RULE', treatAs: 'LEVEL', level: 'HIGHEST' };
+  }
+  if (/treat(?:ed)?\s+.*?as\s+(?:being\s+)?(?:on|at)\s+(?:their|its)?\s*lowest\s+(?:lvs?|levels?)/i.test(text)) {
+    return { op: 'TREAT_RULE', treatAs: 'LEVEL', level: 'LOWEST' };
+  }
+  let mTreatLvHigher = text.match(/treat(?:ed)?\s+.*as\s+(?:being\s+)?(\w+|\d+)\s+(?:lv|level)\s+higher/i);
+  if (mTreatLvHigher) {
+    return { op: 'TREAT_RULE', treatAs: 'LEVEL_BOOST', amount: parseNumber(mTreatLvHigher[1]) || 1 };
+  }
+  if (/treat(?:ed)?\s+.*as\s+(?:being\s+)?colorless/i.test(text) || /color\s+is\s+treated\s+as\s+colorless/i.test(text)) {
+    return { op: 'TREAT_RULE', treatAs: 'COLORLESS' };
+  }
+  mTreat = text.match(/treat(?:ed)?\s+(?:this\s+\w+\s+)?as\s+(?:being\s+)?(red|purple|green|white|yellow|blue)/i);
+  if (mTreat) {
+    return { op: 'TREAT_RULE', treatAs: 'COLOR', color: capitalize(mTreat[1]) };
+  }
+  mTreat = text.match(/treat(?:ed)?\s+(?:this\s+\w+\s+)?as\s+(?:being\s+)?(?:a\s+)?(nexus|spirit|ultimate|magic)/i);
+  if (mTreat) {
+    return { op: 'TREAT_RULE', treatAs: 'TYPE', cardType: capitalize(mTreat[1]) };
+  }
+  mTreat = text.match(/(?:count it|treat(?:ed)?\s+.*?)\s+as\s+(\w+)\s+spirits/i);
+  if (mTreat) {
+    return { op: 'TREAT_RULE', treatAs: 'COUNT', count: parseNumber(mTreat[1]) };
+  }
+  let mTreatCost = text.match(/treat(?:ed)?\s+.*?as\s+(?:cost\s*(\d+)|being\s+cost\s*(\d+))/i);
+  if (mTreatCost) {
+    return { op: 'TREAT_RULE', treatAs: 'COST', cost: parseInt(mTreatCost[1] || mTreatCost[2], 10) };
+  }
+  let mTreatName = text.match(/(?:is\s+also\s+treated\s+as|treat(?:ed)?\s+as\s+(?:being\s+)?(?:exactly[-\s]named\s+)?(?:named\s+)?)[“"]([^"”]+)[”"](?:-named)?/i);
+  if (mTreatName) {
+    return { op: 'TREAT_RULE', treatAs: 'NAME', name: mTreatName[1].trim() };
+  }
+  if (/treat(?:ed)?\s+.*as\s+having\s+\[?soul\s+core\]?/i.test(text)) {
+    return { op: 'TREAT_RULE', treatAs: 'SOUL_CORE' };
+  }
+  if (/treat\s+.*as\s+(?:not being blocked|if it weren't blocked|not having been blocked)/i.test(text) || /treat this spirit as not being blocked/i.test(text)) {
+    return { op: 'TREAT_RULE', treatAs: 'UNBLOCKED' };
+  }
+  if (/treating\s+(?:your\s+)?\[?soul\s+core\]?\s+as\s+being\s+sent\s+to\s+the\s+trash/i.test(text)) {
+    return { op: 'TREAT_RULE', treatAs: 'SOUL_CORE_SPENT' };
+  }
+  let mTreatLife = text.match(/treat(?:ing)?\s+(?:your\s+)?life\s+as\s+(\w+|\d+)/i);
+  if (mTreatLife) {
+    return { op: 'TREAT_RULE', treatAs: 'LIFE', count: parseNumber(mTreatLife[1]) };
+  }
+  if (/treat\s+.*?cost.*?as\s+(?:zero|0)/i.test(text)) {
+    return { op: 'TREAT_RULE', treatAs: 'COST', cost: 0 };
+  }
+  if (/treat the cost.*the same as your life/i.test(text) || /cost.*(?:is|becomes?)\s+(?:the\s+)?same\s+(?:number\s+as|as)\s+your\s+(?:life|lives)/i.test(text)) {
+    return { op: 'COST_MODIFIER', dynamic: 'LIFE' };
+  }
+  let mCostIncBy = text.match(/cost.*?is increased by \+?(\d+)/i);
+  if (mCostIncBy) {
+    return { op: 'COST_MODIFIER', delta: parseInt(mCostIncBy[1], 10) };
+  }
+  if (/reduce the cost with symbols of cards in your trash/i.test(text)) {
+    return { op: 'COST_MODIFIER', useTrashSymbols: true };
+  }
+  if (/must be paid or moved from your reserve/i.test(text)) {
+    return { op: 'COST_MODIFIER', payFrom: 'reserve' };
+  }
+  if (/treat (?:it|the hit) as (?:a )?guard/i.test(text)) {
+    return { op: 'TRIGGER_GUARD_MODIFIER' };
+  }
+  let mLvCost = text.match(/increase the lv cost.*by \+?(\d+)/i);
+  if (mLvCost) {
+    return { op: 'LEVEL_COST_MODIFIER', delta: parseInt(mLvCost[1], 10) };
+  }
+  let mLvCostMinus = text.match(/lv\d+\s+cost.*?get\s+-(\d+)/i);
+  if (mLvCostMinus) {
+    return { op: 'LEVEL_COST_MODIFIER', delta: -parseInt(mLvCostMinus[1], 10) };
+  }
+  let mTreatBp = text.match(/treat\s+.*bp\s+.*?as\s+(\d+)\s*(?:bp)?/i);
+  if (mTreatBp) {
+    return { op: 'BP_OR_LEVEL_MODIFIER', setBp: parseInt(mTreatBp[1], 10) };
+  }
+
+  if (/it discards? -?(\d+) card/i.test(text) || /discards? -?(\d+) card from (?:their|opposing)?\s*deck/i.test(text)) {
+    return { op: 'MILL_DECK', count: 1, side: 'opp' };
+  }
+  if (/become the same as this spirit/i.test(text)) {
+    return { op: 'COPY_STATS', target: 'SELF' };
+  }
+  if (/opposing (?:ultimates|spirits) don't have to block/i.test(text)) {
+    return { op: 'COMBAT_RESTRICTION', restriction: 'NO_MANDATORY_BLOCK' };
+  }
+  if (/braves can't remain on the field with this effect/i.test(text)) {
+    return { op: 'RESTRICTION', restriction: 'PREVENT_BRAVE_REMAIN' };
+  }
+  if (/also activates its.*mirage effects/i.test(text)) {
+    return { op: 'ACTIVATE_MIRAGE' };
+  }
+  if (/choose a family/i.test(text)) {
+    return { op: 'CHOOSE_FAMILY' };
+  }
+  if (/can't use reduction symbols to reduce costs/i.test(text)) {
+    return { op: 'RESTRICTION', restriction: 'PREVENT_REDUCTION_SYMBOLS', side: 'opp' };
+  }
+  if (/change the "one symbol" of this effect to "two symbols"/i.test(text)) {
+    return { op: 'MODIFY_EFFECT_SYMBOLS', count: 2 };
+  }
+  if (/switch this spirit (?:with|and) .* in (?:the|your) hand/i.test(text)) {
+    return { op: 'SWITCH_SPIRIT_WITH_HAND' };
+  }
+  if (/are banished, instead of being sent to the trash/i.test(text)) {
+    return { op: 'REPLACEMENT_EFFECT', to: 'banished' };
+  }
+  if (/separate any amount of braved braves/i.test(text)) {
+    return { op: 'SEPARATE_BRAVE' };
+  }
+  if (/treat (?:it|this card) as a "cost: \d+.*?spirit/i.test(text)) {
+    return { op: 'TREAT_RULE', treatAs: 'TEMPORARY_SPIRIT' };
+  }
+  if (/if you don't control any .*? family spirit, discard this card/i.test(text)) {
+    return { op: 'DISCARD_CARD' };
+  }
+  if (/swap any number of cards in your hand with/i.test(text)) {
+    return { op: 'SWAP_HAND_CARDS' };
+  }
+  if (/can exchange with/i.test(text) || /change places with/i.test(text)) {
+    return { op: 'EXCHANGE_CARD', target: 'HAND_OR_TRASH' };
+  }
+  if (/target a cost/i.test(text)) {
+    return { op: 'TARGET_CONSTRAINT', target: 'COST' };
+  }
+  let mLimitInc = text.match(/increase the limit of this.*by \+?(\d+)/i);
+  if (mLimitInc) {
+    return { op: 'MODIFY_EFFECT_LIMIT', delta: parseInt(mLimitInc[1], 10) };
+  }
+  let mLifeDmgInc = text.match(/increase the amount of life to be reduced by \+?(\d+)/i);
+  if (mLifeDmgInc) {
+    return { op: 'MODIFY_DAMAGE', delta: parseInt(mLifeDmgInc[1], 10) };
+  }
+  if (/stack this (?:card|spirit).*from (?:the|your) hand onto/i.test(text)) {
+    return { op: 'ADVENT_STACK' };
+  }
+  if (/opponent can't set bursts/i.test(text)) {
+    return { op: 'RESTRICTION', restriction: 'PREVENT_BURST_SET', side: 'opp' };
+  }
+  if (/are sent to the opposing trash instead/i.test(text)) {
+    return { op: 'REDIRECT_CORE_DESTINATION', to: { zone: 'trash', side: 'opp' } };
+  }
+  if (/as pre-advent cards under this spirit/i.test(text)) {
+    return { op: 'MOVE_CARD', to: 'underneath', target: 'self' };
+  }
+  if (/targets an opposing.*for each/i.test(text)) {
+    return { op: 'TARGET_SELECT', forEach: true };
+  }
+  if (/can only (?:activate bursts or )?use magic cards? (?:that shares?|with|of) the same color as the symbols/i.test(text)) {
+    return { op: 'RESTRICTION', restriction: 'SAME_COLOR_MAGIC', side: 'opp' };
+  }
+  if (/putting.*cards from your hand.*to (?:your )?removed zone/i.test(text) || /revealing.*spirit cards.*putting them onto.*removed zone/i.test(text)) {
+    return { op: 'MOVE_CARD', from: 'hand', to: 'removed_zone', isCost: true };
+  }
+  if (/can't control any braves in spirit condition/i.test(text)) {
+    return { op: 'RESTRICTION', restriction: 'PREVENT_SPIRIT_BRAVE_CONTROL' };
+  }
+  if (/opponent decides how the cores are moved in the separation/i.test(text)) {
+    return { op: 'COMBAT_RULE', rule: 'OPPONENT_DECIDES_BRAVE_SEPARATION_CORES' };
+  }
+  if (/ultimate trigger activates for a number of additional times/i.test(text)) {
+    return { op: 'MODIFY_TRIGGER_COUNT' };
+  }
+  let mHvy = text.match(/give\s+.*:?\s*\[(heavy armor:[^\]]+)\]?/i);
+  if (mHvy) {
+    return { op: 'GRANT_KEYWORD', keyword: mHvy[1] };
+  }
+  if (/put a card from your decktop face-down underneath this spirit/i.test(text)) {
+    return { op: 'MOVE_CARD', from: 'decktop', to: 'underneath', target: 'self' };
+  }
+
+  if (/return them to your hand/i.test(text) || /move it to your hand instead/i.test(text)) {
+    return { op: 'REPLACEMENT_EFFECT' };
+  }
+
+  // SYMBOL MODIFIERS
+  if (/symbol.*(?:fixed (?:as|at) (?:zero|0)|(?:zero|0) symbols?|becomes? (?:zero|0))/i.test(text) || /every grandwalker nexus has zero symbols/i.test(text)) {
+    return { op: 'SET_SYMBOL', count: 0, side: 'opp' };
+  }
+  let mSetSym = text.match(/symbols?.*?(?:become|becomes?)\s+(one|two|three|\d+)\s+(?:symbols?|(red|purple|green|white|yellow|blue)\s*symbols?)/i);
+  if (mSetSym) {
+    return { op: 'SET_SYMBOL', count: parseNumber(mSetSym[1]), color: mSetSym[2] ? capitalize(mSetSym[2]) : 'Same' };
+  }
+  let mSym = text.match(/(?:give|grant|gain[s]?)\s+.*?(a|an|one|two|three|four|\d+)?\s*(?:extra|additional)?\s*(red|purple|green|white|yellow|blue)?\s*symbols?/i);
+  if (mSym) {
+    const color = mSym[2] ? capitalize(mSym[2]) : 'Same';
+    const count = mSym[1] ? parseNumber(mSym[1]) : 1;
+    return { op: 'ADD_SYMBOL', color, count, side: 'self' };
+  }
+  if (/give it an extra symbol/i.test(text)) {
+    return { op: 'ADD_SYMBOL', color: 'Same', count: 1, side: 'self' };
+  }
+
+  if (/(?:by\s+)?discarding\s+(?:one\s+of\s+your\s+)?bursts?/i.test(text)) {
+    return { op: 'DISCARD_BURST', count: 1, side: 'self', isCost: true };
+  }
+  if (/reveal\s+(?:one\s+of\s+your\s+)?bursts?/i.test(text)) {
+    return { op: 'REVEAL_BURST', count: 1, side: 'self' };
+  }
+
+  if (/when you pay the cost to use a magic card/i.test(text)) {
+    return { op: 'TRIGGER_CONDITION', condition: 'WHEN_PAY_COST_FOR_MAGIC' };
+  }
+  if (/target either cost \d+ or \d+/i.test(text) || /^cost \d+ or (?:less|more)$/i.test(text.trim())) {
+    return { op: 'TARGET_CONSTRAINT' };
+  }
+  if (/can'?t\s+be\s+destroyed/i.test(text) || /cannot\s+be\s+destroyed/i.test(text)) {
+    // 1. Target determination
+    let target = null;
+    if (/\bit\s+can'?t\s+be\s+destroyed/i.test(text) || /\bit\s+cannot\s+be\s+destroyed/i.test(text)) {
+      target = 'target';
+    } else if (/this\s+spirit\s+and\s+(?:all\s+)?your\s+(?:exactly-named\s+)?((?:"[^"]+"\s*[/,]\s*)*"[^"]+")/i.test(text)) {
+      const m = text.match(/this\s+spirit\s+and\s+(?:all\s+)?your\s+(?:exactly-named\s+)?((?:"[^"]+"\s*[/,]\s*)*"[^"]+")/i);
+      const names = m[1].match(/"([^"]+)"/g).map(s => s.replace(/"/g, ''));
+      target = { side: 'self', types: ['Spirit'], names, includeSelf: true };
+    } else if (/this\s+spirit\s+and\s+(?:every|all)\s+"([^"]+)"\s+family\s+nexus(?:es)?\s+you\s+control/i.test(text)) {
+      const m = text.match(/this\s+spirit\s+and\s+(?:every|all)\s+"([^"]+)"\s+family\s+nexus(?:es)?\s+you\s+control/i);
+      target = { side: 'self', types: ['Nexus'], family: m[1], includeSelf: true };
+    } else if (/(?:all\s+)?your\s+"([^"]+)"(?:-named)?\s+grandwalker\s+nexuses/i.test(text)) {
+      const m = text.match(/(?:all\s+)?your\s+"([^"]+)"(?:-named)?\s+grandwalker\s+nexuses/i);
+      target = { side: 'self', types: ['Grandwalker Nexus', 'Nexus'], name: m[1] };
+    } else if (/your\s+((?:"[^"]+"\s*[/,]\s*)+"[^"]+")\s+family\s+spirits(?:\/ultimates)?/i.test(text)) {
+      const m = text.match(/your\s+((?:"[^"]+"\s*[/,]\s*)+"[^"]+")\s+family\s+spirits(\/ultimates)?/i);
+      const families = m[1].match(/"([^"]+)"/g).map(s => s.replace(/"/g, ''));
+      const types = m[2] ? ['Spirit', 'Ultimate'] : ['Spirit'];
+      target = { side: 'self', types, families };
+    } else if (/your\s+([A-Za-z]+)\s+"([^"]+)"\s+family\s+spirits(?:\/ultimates)?/i.test(text)) {
+      const m = text.match(/your\s+([A-Za-z]+)\s+"([^"]+)"\s+family\s+spirits(\/ultimates)?/i);
+      const types = m[3] ? ['Spirit', 'Ultimate'] : ['Spirit'];
+      target = { side: 'self', types, color: m[1], family: m[2] };
+    } else if (/your\s+"([^"]+)"\s+family\s+spirits\/ultimates/i.test(text)) {
+      const m = text.match(/your\s+"([^"]+)"\s+family\s+spirits\/ultimates/i);
+      target = { side: 'self', types: ['Spirit', 'Ultimate'], family: m[1] };
+    } else if (/your\s+"([^"]+)"\s+family\s+spirits/i.test(text)) {
+      const m = text.match(/your\s+"([^"]+)"\s+family\s+spirits/i);
+      target = { side: 'self', types: ['Spirit'], family: m[1] };
+    } else if (/your\s+"([^"]+)"-named\s+spirits/i.test(text)) {
+      const m = text.match(/your\s+"([^"]+)"-named\s+spirits/i);
+      target = { side: 'self', types: ['Spirit'], name: m[1] };
+    } else if (/all\s+\[([a-zA-Z]+)\]\s+spirits\s+you\s+control/i.test(text)) {
+      const m = text.match(/all\s+\[([a-zA-Z]+)\]\s+spirits\s+you\s+control/i);
+      target = { side: 'self', types: ['Spirit'], family: m[1] };
+    } else if (/all\s+your\s+nexuses/i.test(text)) {
+      target = { side: 'self', types: ['Nexus'] };
+    } else if (/all\s+your\s+spirits/i.test(text)) {
+      target = { side: 'self', types: ['Spirit'] };
+    } else if (/besides\s+your\s+(?:exactly-named\s+)?"([^"]+)",\s*all\s+"([^"]+)"-named\s+nexuses\s+and\s+(?:exactly-named\s+)?"([^"]+)"\s+you\s+control/i.test(text)) {
+      const m = text.match(/besides\s+your\s+(?:exactly-named\s+)?"([^"]+)",\s*all\s+"([^"]+)"-named\s+nexuses\s+and\s+(?:exactly-named\s+)?"([^"]+)"\s+you\s+control/i);
+      target = {
+        side: 'self',
+        names: [m[2], m[3]],
+        excludeNames: [m[1]]
+      };
+    } else if (/besides\s+your/i.test(text)) {
+      return {
+        op: 'UNSUPPORTED',
+        unhandledClause: text,
+        reason: 'UNSUPPORTED_TARGET_PATTERN: complex exception targeting'
+      };
+    } else if (/this\s+(?:spirit|nexus|ultimate|magic|card)/i.test(text) ||
+               /^(?:also,\s*)?(?:during\s+this\s+(?:battle|turn),\s*)?(?:this\s+)?(?:spirit|nexus|ultimate)?\s*can'?t\s+be\s+destroyed/i.test(text) ||
+               /^(?:also,\s*)?(?:during\s+this\s+(?:battle|turn),\s*)?(?:this\s+)?(?:spirit|nexus|ultimate)?\s*cannot\s+be\s+destroyed/i.test(text)) {
+      target = 'self';
+    } else {
+      const targetMatch = text.match(/^(?:.*,\s*)?(.*?)can'?t\s+be\s+destroyed/i) || text.match(/^(?:.*,\s*)?(.*?)cannot\s+be\s+destroyed/i);
+      return {
+        op: 'UNSUPPORTED',
+        unhandledClause: text,
+        reason: `UNSUPPORTED_TARGET_PATTERN: ${targetMatch ? targetMatch[1].trim() : text}`
+      };
+    }
+
+    // 2. Duration determination
+    let duration = null;
+    if (/during\s+this\s+turn/i.test(text) || clause?.duration === 'DURING_THIS_TURN') {
+      duration = 'THIS_TURN';
+    } else if (/during\s+this\s+battle/i.test(text) || clause?.duration === 'DURING_THIS_BATTLE') {
+      duration = 'THIS_BATTLE';
+    } else if (/until\s+your\s+next\s+start\s+step/i.test(text) || clause?.duration === 'UNTIL_NEXT_START_STEP') {
+      duration = 'UNTIL_NEXT_START_STEP';
+    } else if (clause?.duration) {
+      duration = clause.duration.replace(/^DURING_/, '');
+    }
+
+    // 3. Cause determination (by)
+    let by = null;
+    if (/can'?t\s+be\s+destroyed\s+(?:by|via)\s+(?:bp\s+comparison|comparing\s+bp)/i.test(text) ||
+        /cannot\s+be\s+destroyed\s+(?:by|via)\s+(?:bp\s+comparison|comparing\s+bp)/i.test(text)) {
+      by = ['BP_COMPARISON'];
+    } else if (/can'?t\s+be\s+destroyed\s+by\s+battle/i.test(text) ||
+               /cannot\s+be\s+destroyed\s+by\s+battle/i.test(text)) {
+      by = ['BATTLE'];
+    } else {
+      const mSpecific = text.match(/can'?t\s+be\s+destroyed\s+by\s+opposing\s+((?:[a-zA-Z/]+\s+)+)effects?/i) ||
+                        text.match(/cannot\s+be\s+destroyed\s+by\s+opposing\s+((?:[a-zA-Z/]+\s+)+)effects?/i);
+      if (mSpecific && !/^(?:all\s+)?$/i.test(mSpecific[1].trim())) {
+        const rawTypes = mSpecific[1].split(/[\s/]+/).map(t => t.trim().toUpperCase()).filter(Boolean);
+        const validTypes = rawTypes.map(t => {
+          if (t === 'SPIRIT' || t === 'SPIRITS') return 'OPPOSING_SPIRITS';
+          if (t === 'NEXUS' || t === 'NEXUSES') return 'OPPOSING_NEXUSES';
+          if (t === 'MAGIC') return 'OPPOSING_MAGIC';
+          if (t === 'BRAVE' || t === 'BRAVES') return 'OPPOSING_BRAVES';
+          if (t === 'ULTIMATE' || t === 'ULTIMATES') return 'OPPOSING_ULTIMATES';
+          return null;
+        }).filter(Boolean);
+        if (validTypes.length > 0) {
+          by = validTypes;
+        }
+      }
+
+      if (!by) {
+        if (/can'?t\s+be\s+destroyed\s+by\s+opposing\s+effects?/i.test(text) ||
+            /cannot\s+be\s+destroyed\s+by\s+opposing\s+effects?/i.test(text)) {
+          by = ['OPPOSING_EFFECTS'];
+        } else if (/can'?t\s+be\s+destroyed\s+by\s+the\s+opponent/i.test(text) ||
+                   /cannot\s+be\s+destroyed\s+by\s+the\s+opponent/i.test(text)) {
+          by = ['OPPONENT'];
+        } else if (/can'?t\s+be\s+destroyed\s+by\s+effects?/i.test(text) ||
+                   /cannot\s+be\s+destroyed\s+by\s+effects?/i.test(text) ||
+                   /due\s+to\s+opposing\s+effects/i.test(text)) {
+          by = ['EFFECTS'];
+        }
+      }
+    }
+
+    if (!by) {
+      const unhandledBy = text.match(/can'?t\s+be\s+destroyed\s+(?:by|due\s+to)\s+([^,.]+)/i) ||
+                          text.match(/cannot\s+be\s+destroyed\s+(?:by|due\s+to)\s+([^,.]+)/i);
+      if (unhandledBy) {
+        return {
+          op: 'UNSUPPORTED',
+          unhandledClause: text,
+          reason: `UNSUPPORTED_DESTRUCTION_CAUSE: ${unhandledBy[1].trim()}`
+        };
+      }
+      by = ['ALL'];
+    }
+
+    const res = { op: 'INDESTRUCTIBLE', by, target };
+    if (duration) res.duration = duration;
+    return res;
+  }
+
+  if (/ignore the (?:summoning|advent) conditions?/i.test(text) || /ignore the conditions?/i.test(text)) {
+    return { op: 'IGNORE_CONDITIONS' };
+  }
+  if (/can't attack/i.test(text) || /can't block/i.test(text) || /can't be/i.test(text) || /must attack if possible/i.test(text) || /can only attack once per turn/i.test(text)) {
     return { op: 'COMBAT_RESTRICTION' };
   }
-  if (/can target and attack/i.test(text) || /must block with/i.test(text) || /instead of comparing bp, compare the number of core/i.test(text) || /both spirits are destroyed/i.test(text) || /target and attack/i.test(text) || /end the attack step/i.test(text) || /compare lv instead of bp/i.test(text) || /compare the total amount of cores/i.test(text)) {
+  if (/can target and attack/i.test(text) || /must block with/i.test(text) || /instead of comparing bp, compare the number of core/i.test(text) || /both spirits are destroyed/i.test(text) || /target and attack/i.test(text) || /end the attack step/i.test(text) || /compare lv instead of bp/i.test(text) || /instead of comparing bp, compare lv/i.test(text) || /compare the total amount of cores/i.test(text)) {
     return { op: 'COMBAT_RULE' };
   }
   if (/end (?:the|opposing)?\s*main step/i.test(text) || /main step ends/i.test(text)) {
@@ -1960,8 +3100,14 @@ export function compileClauseToOp(clause) {
   if (/change the target/i.test(text)) {
     return { op: 'REDIRECT_TARGET' };
   }
-  if (/give.*family/i.test(text) || /gains the families/i.test(text) || /family/i.test(text)) {
-    return { op: 'GRANT_FAMILY' };
+
+  // GRANT_FAMILY
+  let mFam = text.match(/(?:this\s+card|this\s+spirit)\s+has\s+(?:the\s+)?(?:famil(?:y|ies)(?:\s*:\s*)?)?["']?([^"']+)["']?\s+famil(?:y|ies)/i)
+    || text.match(/(?:give|grant|gain[s]?)\s+.*?(?:the\s+)?famil(?:y|ies)\s*:\s*(.+)/i)
+    || text.match(/(?:give|grant|gain[s]?)\s+.*?(?:the\s+)?["']?([^"']+)["']?\s+famil(?:y|ies)/i)
+    || text.match(/(?:also\s+)?treated\s+as\s+(?:a\s+)?["']?([^"']+)["']?\s+famil(?:y|ies)/i);
+  if (mFam) {
+    return { op: 'GRANT_FAMILY', family: mFam[1].replace(/["']/g, '').trim(), side: 'self' };
   }
   if (/give.*characteristic/i.test(text)) {
     return { op: 'GRANT_CHARACTERISTIC' };
@@ -1999,7 +3145,7 @@ export function compileClauseToOp(clause) {
   if (/activate the \(when (?:summoned|destroyed)\) effect/i.test(text)) {
     return { op: 'ACTIVATE_TRIGGER' };
   }
-  if (/can only reduce.*life by one/i.test(text) || /life.*can only be reduced by one/i.test(text) || /life can only be reduced by up to one/i.test(text)) {
+  if (/can only reduce.*life by (?:a total of )?one/i.test(text) || /life.*can only be reduced by (?:a total of |up to )?one/i.test(text)) {
     return { op: 'DAMAGE_CAP' };
   }
   if (/life won't become zero/i.test(text) || /attack can't reduce your life/i.test(text) || /neither player's life would be reduced/i.test(text)) {
@@ -2036,7 +3182,7 @@ export function compileClauseToOp(clause) {
   if (/^target\s+a\s+lv\.?$/i.test(text)) {
     return { op: 'CHOOSE_LEVEL' };
   }
-  if (/lose\s+all\s+effects,\s*and\s*can't\s+gain\s+new\s+ones/i.test(text) ||
+  if (/lose\s+(?:all|their)\s+effects,?\s*and\s*can't\s+gain\s+(?:any\s+)?new\s+ones/i.test(text) ||
       /spirits\s+of\s+the\s+targeted\s+lv\s+lose\s+all\s+effects/i.test(text)) {
     return { op: 'LOSE_EFFECTS' };
   }
@@ -2098,7 +3244,7 @@ export function compileClauseToOp(clause) {
     return { op: 'CORE_LOCK' };
   }
   if (/cores\s+on\s+your\s+destroyed\s+spirits\s+are\s+sent\s+to\s+this\s+spirit/i.test(text)) {
-    return { op: 'REPLACEMENT_EFFECT' };
+    return { op: 'REPLACEMENT_EFFECT', replaces: 'DESTROYED_SPIRIT_CORES', replacementZone: 'field', target: 'SELF', side: 'self' };
   }
   if (/put\s+this\s+card\s+onto\s+your\s+field/i.test(text)) {
     return { op: 'OPEN_ZONE' };
@@ -2205,7 +3351,7 @@ export function compileClauseToOp(clause) {
   }
   if (/cores\s+that\s+this\s+effect\s+would\s+send\s+to\s+the\s+reserve\s+are\s+sent\s+to\s+the\s+void\s+instead/i.test(text) ||
       /core\s+from\s+the\s+opposing\s+life\s+is\s+sent\s+to\s+the\s+void\s+instead/i.test(text)) {
-    return { op: 'REPLACEMENT_EFFECT' };
+    return { op: 'REPLACEMENT_EFFECT', replaces: 'LIFE_CORE', replacementZone: 'void', side: 'opp' };
   }
   if (/discard\s+a\s+card\s+from\s+the\s+opposing\s+removed\s+zone/i.test(text)) {
     return { op: 'DISCARD_REMOVED' };
@@ -2239,15 +3385,29 @@ export function compileClauseToOp(clause) {
     return { op: 'RECOVER_LIFE' };
   }
   if (/the\s+opponent\s+sends\s+all\s+cores\s+from\s+.*spirits\s+they\s+control\s+to\s+their\s+reserve/i.test(text)) {
-    return { op: 'MOVE_CORE' };
+    return {
+      op: 'MOVE_CORE',
+      count: 'ALL',
+      from: { zone: 'field', side: 'opp', types: ['Spirit'] },
+      to: { zone: 'reserve', side: 'opp' },
+      chooser: 'opp'
+    };
   }
 
   // Void cores restriction / replacement
   if (/neither\s+player\s+can\s+add\s+cores\s+from\s+the\s+void/i.test(text)) {
     return { op: 'RESTRICTION' };
   }
-  if (/when\s+either\s+player\s+add\s+cores\s+from\s+the\s+void.*send\s+all\s+those\s+added\s+cores\s+back\s+to\s+the\s+void/i.test(text) ||
-      /when\s+the\s+opponent\s+would\s+increase\s+cores\s+from\s+the\s+void/i.test(text)) {
+  if (/when\s+either\s+player\s+add\s+cores\s+from\s+the\s+void.*send\s+all\s+those\s+added\s+cores\s+back\s+to\s+the\s+void/i.test(text)) {
+    return { op: 'REPLACEMENT_EFFECT', replaces: 'CORE_ADDITION', replacementZone: 'void', side: 'both' };
+  }
+  if (/when\s+the\s+opponent\s+would\s+increase\s+cores\s+from\s+the\s+void/i.test(text)) {
+    if (/to\s+your\s+life\s+instead/i.test(text)) {
+      return { op: 'REPLACEMENT_EFFECT', replaces: 'CORE_ADDITION', replacementZone: 'life', side: 'self' };
+    }
+    if (/to\s+this\s+spirit\s+instead/i.test(text)) {
+      return { op: 'REPLACEMENT_EFFECT', replaces: 'CORE_ADDITION', replacementZone: 'field', target: 'SELF', side: 'self' };
+    }
     return { op: 'REPLACEMENT_EFFECT' };
   }
 
@@ -2365,9 +3525,25 @@ export function compileClauseToOp(clause) {
   if (/(?:by\s+)?exchanging\s+the\s+\[?soul\s+core\]?.*on\s+your\s+life\s+with\s+one\s+of\s+the\s+cores\s+on\s+this\s+spirit/i.test(text)) {
     return { op: 'EXCHANGE_CORE' };
   }
-  if (/(?:by\s+)?sending\s+(?:two\s+cores\s+or\s+the\s+\[?soul\s+core\]?|either\s+two\s+cores\s+or\s+a\s+\[?soul\s+core\]?)\s+(?:on|from)\s+this\s+spirit\s+to\s+your\s+(?:reserve|trash)/i.test(text) ||
-      /(?:by\s+)?sending\s+(?:one\s+of\s+your\s+lives|two\s+cores)\s+to\s+(?:the\s+)?trash/i.test(text)) {
-    return { op: 'MOVE_CORE' };
+  if (/(?:by\s+)?sending\s+(?:two\s+cores\s+or\s+the\s+\[?soul\s+core\]?|either\s+two\s+cores\s+or\s+a\s+\[?soul\s+core\]?)\s+(?:on|from)\s+this\s+spirit\s+to\s+your\s+(?:reserve|trash)/i.test(text)) {
+    const toTrash = /trash/i.test(text);
+    return {
+      op: 'MOVE_CORE',
+      count: 2,
+      from: { zone: 'field', side: 'self', target: 'self' },
+      to: { zone: toTrash ? 'trash' : 'reserve', side: 'self' },
+      allowSoulCore: true,
+      isCost: true
+    };
+  }
+  if (/(?:by\s+)?sending\s+(?:one\s+of\s+your\s+lives|two\s+cores)\s+to\s+(?:the\s+)?trash/i.test(text)) {
+    return {
+      op: 'MOVE_CORE',
+      count: 2,
+      from: { zone: 'field', side: 'self' },
+      to: { zone: 'trash', side: 'self' },
+      isCost: true
+    };
   }
   if (/(?:by\s+)?drawing\s+\d+\s+cards?/i.test(text)) {
     return { op: 'DRAW' };
@@ -2391,10 +3567,35 @@ export function compileClauseToOp(clause) {
   if (/send\s+every\s+core,\s*besides\s+soul\s+core,\s*from\s+your\s+trash\s+to\s+your\s+spirits/i.test(text)) {
     return { op: 'MOVE_CORE', freely: true };
   }
-  if (/the\s+opponent\s+sends\s+(\d+|[a-z]+)\s+cores\s+from\s+(?:any\s+of\s+)?their\s+(?:spirits\/ultimates|spirits?|one\s+of\s+their\s+spirits\/ultimates)\s+to\s+(?:the\s+|their\s+)?(?:trash|reserve)/i.test(text) ||
-      /the\s+opponent\s+sends\s+all\s+cores\s+from\s+one\s+of\s+their\s+spirits\/ultimates\s+to\s+their\s+reserve/i.test(text) ||
-      /send\s+three\s+cores\s+each\s+from\s+every\s+opposing\s+spirit\s+to\s+the\s+reserve/i.test(text)) {
-    return { op: 'MOVE_CORE' };
+  if (/the\s+opponent\s+sends\s+(\d+|[a-z]+)\s+cores\s+from\s+(?:any\s+of\s+)?their\s+(?:spirits\/ultimates|spirits?|one\s+of\s+their\s+spirits\/ultimates)\s+to\s+(?:the\s+|their\s+)?(?:trash|reserve)/i.test(text)) {
+    const mCount = text.match(/the\s+opponent\s+sends\s+(\d+|[a-z]+)\s+cores/i);
+    const count = mCount ? parseNumber(mCount[1]) : 1;
+    const toTrash = /trash/i.test(text);
+    return {
+      op: 'MOVE_CORE',
+      count,
+      from: { zone: 'field', side: 'opp' },
+      to: { zone: toTrash ? 'trash' : 'reserve', side: 'opp' },
+      chooser: 'opp'
+    };
+  }
+  if (/the\s+opponent\s+sends\s+all\s+cores\s+from\s+one\s+of\s+their\s+spirits\/ultimates\s+to\s+their\s+reserve/i.test(text)) {
+    return {
+      op: 'MOVE_CORE',
+      count: 'ALL',
+      from: { zone: 'field', side: 'opp' },
+      to: { zone: 'reserve', side: 'opp' },
+      chooser: 'opp'
+    };
+  }
+  if (/send\s+three\s+cores\s+each\s+from\s+every\s+opposing\s+spirit\s+to\s+the\s+reserve/i.test(text)) {
+    return {
+      op: 'MOVE_CORE',
+      count: 3,
+      forEachTarget: true,
+      from: { zone: 'field', side: 'opp', types: ['Spirit'] },
+      to: { zone: 'reserve', side: 'opp' }
+    };
   }
   if (/move\s+cores\s+among\s+the\s+targeted\s+spirits\/ultimates\s+in\s+any\s+way\s+you\s+like/i.test(text)) {
     return { op: 'MOVE_CORE', freely: true };
@@ -2402,10 +3603,15 @@ export function compileClauseToOp(clause) {
   if (/the\s+cores\s+on\s+the\s+opposing\s+spirits.*are\s+sent\s+to\s+void/i.test(text)) {
     return { op: 'SEND_CORE_TO_VOID' };
   }
-  if (/when\s+a\s+player\s+would\s+increase\s+core\s+from\s+the\s+void.*instead\s+of\s+the\s+void/i.test(text) ||
-      /when\s+the\s+opposing\s+life\s+is\s+reduced,\s*the\s+core\s+.*is\s+sent\s+to\s+the\s+(?:trash|void)\s+(?:instead\s+of|rather\s+than)\s+the\s+reserve/i.test(text) ||
-      /cores\s+sent\s+to\s+the\s+opposing\s+reserve.*are\s+sent\s+to\s+opposing\s+trash\s+instead/i.test(text) ||
+  const lifeRepMatch = text.match(/when\s+the\s+opposing\s+life\s+is\s+reduced,\s*the\s+core\s+.*is\s+sent\s+to\s+the\s+(trash|void)\s+(?:instead\s+of|rather\s+than)\s+the\s+reserve/i);
+  if (lifeRepMatch) {
+    return { op: 'REPLACEMENT_EFFECT', replaces: 'LIFE_CORE', replacementZone: lifeRepMatch[1].toLowerCase(), side: 'opp' };
+  }
+  if (/cores\s+sent\s+to\s+the\s+opposing\s+reserve.*are\s+sent\s+to\s+opposing\s+trash\s+instead/i.test(text) ||
       /cores\s+are\s+sent\s+to\s+the\s+opposing\s+trash\s+instead/i.test(text)) {
+    return { op: 'REPLACEMENT_EFFECT', replaces: 'LIFE_CORE', replacementZone: 'trash', side: 'opp' };
+  }
+  if (/when\s+a\s+player\s+would\s+increase\s+core\s+from\s+the\s+void.*instead\s+of\s+the\s+void/i.test(text)) {
     return { op: 'REPLACEMENT_EFFECT' };
   }
   if (/the\s+bp\s+of\s+every\s+opposing\s+spirit\/ultimate\s+becomes\s+0/i.test(text) ||
@@ -2490,7 +3696,7 @@ export function compileClauseToOp(clause) {
   }
   if (/send\s+(\d+|[a-z]+)\s+cards\s+from\s+your\s+decktop\s+to\s+(?:the\s+)?trash/i.test(text)) {
     const sMatch = text.match(/send\s+(\d+|[a-z]+)\s+cards/i);
-    return { op: 'MILL', count: sMatch ? parseNumber(sMatch[1]) : 1 };
+    return { op: 'MILL', count: sMatch ? parseNumber(sMatch[1]) : 1, side: 'self' };
   }
 
   // Hand & Discard Ops
@@ -2634,7 +3840,7 @@ export function compileClauseToOp(clause) {
     return { op: 'RESTRICTION' };
   }
   if (/send\s+one\s+of\s+the\s+cores\s+besides\s+your\s+deck\s+to\s+the\s+void\s+or\s+a\s+nexus\s+you\s+control/i.test(text)) {
-    return { op: 'MOVE_CORE' };
+    return { op: 'MOVE_CORE', count: 1, from: { zone: 'deck_side' }, to: { zone: 'choice_void_or_nexus' } };
   }
   if (/target(?:ed)?\s+(?:an?|one)\s+.*(?:spirit|ultimate|brave|nexus)/i.test(text) ||
       /target\s+a\s+type\s+of\s+card/i.test(text) ||
@@ -2807,7 +4013,7 @@ export function compileClauseToOp(clause) {
     return { op: 'RETRIEVE_CORES' };
   }
   if (/you\s+can\s+send\s+the\s+\[soul\s+core\]\s+from\s+this\s+spirit\s+to\s+your\s+attacking\s+spirit/i.test(text)) {
-    return { op: 'MOVE_CORE' };
+    return { op: 'MOVE_SOUL_CORE', count: 1, from: { zone: 'field', side: 'self', target: 'self' }, to: { zone: 'field', side: 'self', target: 'attacking' } };
   }
   if (/when\s+this\s+card\s+is\s+revealed\s+from\s+the\s+deck,\s*you\s+can\s+use\s+its\s+\[accel\]/i.test(text)) {
     return { op: 'USE_ACCEL' };
@@ -2917,15 +4123,30 @@ export function compileClauseToOp(clause) {
 
   // Soul Core moves
   if (/put\s+every\s+core,\s*(?:other\s+than|besides)\s+\[soul\s+core\],\s*from\s+your\s+trash\s+onto\s+this\s+spirit/i.test(text) ||
-      /put\s+every\s+core\s+from\s+the\s+trash\s+to\s+this\s+spirit/i.test(text) ||
-      /the\s+opponent\s+can't\s+send\s+\[soul\s+core\]\s+to\s+their\s+trash/i.test(text) ||
-      /send\s+\[soul\s+core\]\s+from\s+the\s+opposing\s+field\/reserve\s+to\s+their\s+trash/i.test(text) ||
-      /send\s+the\s+\[soul\s+core\]\s+from\s+your\s+trash\s+to\s+a\s+"[^"]+"\s+you\s+control/i.test(text) ||
-      /send\s+the\s+\[soul\s+core\]\s+from\s+your\s+reserve\s+to\s+your\s+"[^"]+"(?:\/"[^"]+")*-named\s+spirit/i.test(text) ||
-      /(?:you\s+can\s+)?send\s+the\s+\[soul\s+core\]\s+from\s+your\s+reserve\s+to\s+your\s+"[^"]+"(?:\/"[^"]+")*-named\s+spirit/i.test(text) ||
-      /(?:you\s+can\s+)?either\s+send\s+the\s+\[soul\s+core\]\s+from\s+your\s+reserve\s+to\s+any\s+spirit\s+you\s+control,\s*or\s+send\s+(?:\d+|[a-z]+)\s+cores,\s*besides\s+\[soul\s+core\],\s*from\s+your\s+trash\s+to\s+any\s+spirits\s+you\s+control/i.test(text) ||
-      /(?:by\s+)?sending\s+\[soul\s+core\]\s+from\s+a\s+"[^"]+"-named\s+spirit\s+you\s+control\s+to\s+this\s+spirit/i.test(text)) {
-    return { op: 'MOVE_CORE' };
+      /put\s+every\s+core\s+from\s+the\s+trash\s+to\s+this\s+spirit/i.test(text)) {
+    return { op: 'MOVE_CORE', count: 'ALL', from: { zone: 'trash', side: 'self' }, to: { zone: 'field', side: 'self', target: 'self' } };
+  }
+  if (/the\s+opponent\s+can't\s+send\s+\[soul\s+core\]\s+to\s+their\s+trash/i.test(text)) {
+    return { op: 'RESTRICTION', kind: 'PREVENT_SOUL_CORE_TRASH', side: 'opp' };
+  }
+  if (/send\s+\[soul\s+core\]\s+from\s+the\s+opposing\s+field\/reserve\s+to\s+their\s+trash/i.test(text)) {
+    return { op: 'MOVE_SOUL_CORE', count: 1, from: { zone: 'field_or_reserve', side: 'opp' }, to: { zone: 'trash', side: 'opp' } };
+  }
+  if (/send\s+the\s+\[soul\s+core\]\s+from\s+your\s+trash\s+to\s+a\s+"([^"]+)"\s+you\s+control/i.test(text)) {
+    const mName = text.match(/"([^"]+)"/);
+    return { op: 'MOVE_SOUL_CORE', count: 1, from: { zone: 'trash', side: 'self' }, to: { zone: 'field', side: 'self', name: mName ? mName[1] : null } };
+  }
+  if (/send\s+the\s+\[soul\s+core\]\s+from\s+your\s+reserve\s+to\s+your\s+"([^"]+)"(?:\/"([^"]+)")*-named\s+spirit/i.test(text) ||
+      /(?:you\s+can\s+)?send\s+the\s+\[soul\s+core\]\s+from\s+your\s+reserve\s+to\s+your\s+"([^"]+)"(?:\/"([^"]+)")*-named\s+spirit/i.test(text)) {
+    const mName = text.match(/"([^"]+)"/);
+    return { op: 'MOVE_SOUL_CORE', count: 1, from: { zone: 'reserve', side: 'self' }, to: { zone: 'field', side: 'self', name: mName ? mName[1] : null } };
+  }
+  if (/(?:you\s+can\s+)?either\s+send\s+the\s+\[soul\s+core\]\s+from\s+your\s+reserve\s+to\s+any\s+spirit\s+you\s+control,\s*or\s+send\s+(?:\d+|[a-z]+)\s+cores,\s*besides\s+\[soul\s+core\],\s*from\s+your\s+trash\s+to\s+any\s+spirits\s+you\s+control/i.test(text)) {
+    return { op: 'MOVE_CORE', count: 1, choice: 'SOUL_FROM_RESERVE_OR_CORES_FROM_TRASH' };
+  }
+  if (/(?:by\s+)?sending\s+\[soul\s+core\]\s+from\s+a\s+"([^"]+)"-named\s+spirit\s+you\s+control\s+to\s+this\s+spirit/i.test(text)) {
+    const mName = text.match(/"([^"]+)"/);
+    return { op: 'MOVE_SOUL_CORE', count: 1, from: { zone: 'field', side: 'self', name: mName ? mName[1] : null }, to: { zone: 'field', side: 'self', target: 'self' }, isCost: true };
   }
 
   // Destinations
@@ -3004,7 +4225,7 @@ export function compileClauseToOp(clause) {
   }
   if (/reveal\s+one\s+card\s+from\s+the\s+opposing\s+decktop/i.test(text) ||
       /look\s+at\s+the\s+top\s+(?:\d+|[a-z]+)\s+cards\s+of\s+your\s+deck/i.test(text)) {
-    return { op: 'REVEAL_CARDS' };
+    return extractRevealCardParams(text);
   }
   if (/give\s+all\s+your\s+spirits:\s*"\(when\s+attacks\)\s+opposing\s+spirits\/ultimates\s+must\s+block,\s*if\s+possible/i.test(text)) {
     return { op: 'GRANT_EFFECT' };
@@ -3135,7 +4356,7 @@ export function compileClauseToOp(clause) {
       /(?:you\s+can\s+)?put\s+a\s+core\s+from\s+the\s+trash\s+to\s+this\s+spirit/i.test(text) ||
       /send\s+(?:\d+|[a-z]+)\s+cores\s+each\s+from\s+(?:\d+|[a-z]+)\s+opposing\s+spirits\s+to\s+the\s+reserve/i.test(text) ||
       /(?:by\s+)?sending\s+up\s+to\s+(?:\d+|[a-z]+)\s+cores/i.test(text)) {
-    return { op: 'MOVE_CORE' };
+    return parseCoreMovement(text);
   }
 
   // Trash & Destinations
@@ -3166,8 +4387,10 @@ export function compileClauseToOp(clause) {
 
   // Deck look / reveal
   if (/(?:you\s+can\s+)?look\s+at\s+(?:the\s+contents\s+of\s+a\s+card|one\s+card)\s+from\s+your\s+decktop/i.test(text) ||
-      /(?:you\s+can\s+)?reveal\s+a\s+card\s+from\s+the\s+decktop/i.test(text) ||
-      /remaining\s+cards?\s+is\s+discarded/i.test(text)) {
+      /(?:you\s+can\s+)?reveal\s+a\s+card\s+from\s+the\s+decktop/i.test(text)) {
+    return extractRevealCardParams(text);
+  }
+  if (/remaining\s+cards?\s+is\s+discarded/i.test(text)) {
     return { op: 'REVEAL_CARDS' };
   }
 
@@ -3311,7 +4534,7 @@ export function compileClauseToOp(clause) {
       /(?:when\s+not\s+blocked,\s*)?(?:you\s+can\s+)?put\s+(?:a|\d+|[a-z]+)\s+cores?\s+from\s+this\s+spirit,\s*other\s+than\s+\[soul\s+core\],\s*to\s+your\s+life/i.test(text) ||
       /put\s+a\s+core\s+(?:from|form)\s+the\s+void\s+to\s+(?:this\s+spirit|your\s+life)/i.test(text) ||
       /(?:you\s+can\s+)?\+\d+\s+core\s+to\s+this\s+nexus/i.test(text)) {
-    return { op: 'MOVE_CORE' };
+    return parseCoreMovement(text);
   }
   if (/the\s+opponent\s+can't\s+move\s+cores/i.test(text) ||
       /unless\s+they\s+send\s+.*to\s+the\s+trash,\s*they\s+can't\s+use\s+it/i.test(text) ||
@@ -3414,15 +4637,17 @@ export function compileClauseToOp(clause) {
   if (/(?:put|send)\s+.*to\s+(?:the|your)\s+remo(?:v|z)ed\s+zone/i.test(text)) {
     return { op: 'REMOVED_ZONE_ACTION' };
   }
+  if (/cores\s+that\s+would\s+send\s+to\s+the\s+trash\s+to\s+your\s+reserve/i.test(text) ||
+      /the\s+cores\s+to\s+be\s+sent\s+to\s+reserve.*are\s+sent\s+to\s+the\s+trash\s+instead/i.test(text) ||
+      /cores\s+on\s+(?:the\s+|opposing\s+)?spirits?.*are\s+sent\s+to\s+the\s+trash\s+instead\s+of\s+(?:the\s+)?reserve/i.test(text)) {
+    return { op: 'REPLACEMENT_EFFECT', replacement: 'CORE_DESTINATION_TRASH', side: 'opp' };
+  }
   if (/put\s+1~3\s+cores/i.test(text) ||
       /(?:you\s+can\s+)?put\s+(?:\d+|[a-z]+)\s+cores\s+from\s+your\s+.*grandwalker\s+nexuses\s+to\s+this\s+spirit/i.test(text) ||
       /(?:you\s+can\s+)?\+[123]\s+cores?\s+to\s+/i.test(text) ||
       /by\s+sending\s+either\s+two\s+cores/i.test(text) ||
-      /sending\s+either\s+two\s+cores/i.test(text) ||
-      /cores\s+that\s+would\s+send\s+to\s+the\s+trash\s+to\s+your\s+reserve/i.test(text) ||
-      /the\s+cores\s+to\s+be\s+sent\s+to\s+reserve.*are\s+sent\s+to\s+the\s+trash\s+instead/i.test(text) ||
-      /cores\s+on\s+(?:the\s+|opposing\s+)?spirits?.*are\s+sent\s+to\s+the\s+trash\s+instead\s+of\s+(?:the\s+)?reserve/i.test(text)) {
-    return { op: 'MOVE_CORE' };
+      /sending\s+either\s+two\s+cores/i.test(text)) {
+    return parseCoreMovement(text);
   }
   if (/the\s+opponent\s+sends\s+cores.*until\s+only\s+one\s+core\s+remains/i.test(text) ||
       /this\s+effect\s+can't\s+bring\s+the\s+cores\s+on\s+opposing\s+spirits\s+to\s+less\s+than\s+one/i.test(text) ||
@@ -3745,11 +4970,11 @@ export function compileClauseToOp(clause) {
 
   // Field / Deck / Hand Placements & Reveals
   if (/reveal\s+.*cards?\s+from\s+(?:each|both)\s+players?\'?s?\s+decktop/i.test(text)) {
-    return { op: 'REVEAL_CARDS' };
+    return extractRevealCardParams(text);
   }
   if (/reveal\s+.*cards?\s+from\s+(?:your\s+)?(?:hand|decktop|the\s+decktop)/i.test(text) ||
       /you\s+can\s+\d+\s+cards\s+from\s+your\s+decktop/i.test(text)) {
-    return { op: 'REVEAL_CARDS' };
+    return extractRevealCardParams(text);
   }
   if (/reveal\s+.*cards?\s+(?:with|by)\s+the\s+\[contract\s+field\]/i.test(text)) {
     return { op: 'REVEAL_CARDS' };
@@ -3784,12 +5009,10 @@ export function compileClauseToOp(clause) {
       /besides\s+\[soul\s+core\],\s*send\s+up\s+to\s+one\s+core/i.test(text) ||
       /put\s+up\s+to\s+.*cores,\s*besides\s+\[soul\s+core\].*from\s+your\s+trash\s+to\s+/i.test(text) ||
       /send\s+(?:up\s+to\s+)?(?:\d+|\d+~\d+|a|an|one|two|three|\d+)?\s*cores?,\s*besides\s+\[soul\s+core\].*to\s+(?:the\s+)?(?:reserve|trash|field|it|that\s+target|any|your\s+"[^"]+"|"[^"]+")/i.test(text) ||
-      /send\s+any\s+number\s+of\s+cores,\s*up\s+to\s+one\s+core\s+for\s+every\s+.*from\s+an\s+opposing\s+spirit\s+to\s+the\s+reserve/i.test(text)) {
-    return { op: 'MOVE_CORE' };
-  }
-  if (/put\s+up\s+to\s+.*cores\s+from\s+your\s+trash\s+to\s+this\s+spirit/i.test(text) ||
+      /send\s+any\s+number\s+of\s+cores,\s*up\s+to\s+one\s+core\s+for\s+every\s+.*from\s+an\s+opposing\s+spirit\s+to\s+the\s+reserve/i.test(text) ||
+      /put\s+up\s+to\s+.*cores\s+from\s+your\s+trash\s+to\s+this\s+spirit/i.test(text) ||
       /send\s+up\s+to\s+one\s+core\s+per\s+number\s+of\s+counters\s+you\s+have/i.test(text)) {
-    return { op: 'MOVE_CORE' };
+    return parseCoreMovement(text);
   }
   if (/send\s+(?:\d+|[a-z]+)\s+opposing\s+live\s+to\s+the\s+reserve/i.test(text)) {
     return { op: 'REDUCE_LIFE' };
@@ -3846,10 +5069,11 @@ export function compileClauseToOp(clause) {
     return { op: 'MILL' };
   }
   if (/send\s+all\s+(?:but\s+one\s+of\s+the\s+cores|the\s+cores)/i.test(text)) {
-    return { op: 'MOVE_CORE' };
+    const leaveOne = /but\s+one/i.test(text);
+    return { op: 'MOVE_CORE', count: 'ALL', minCoresRemaining: leaveOne ? 1 : 0 };
   }
   if (/you\s+can\s+put\s+(?:as\s+many|any\s+amount\s+of)\s+cores\s+from/i.test(text)) {
-    return { op: 'MOVE_CORE' };
+    return parseCoreMovement(text);
   }
   if (/(?:cards\s+cannot\s+be\s+discarded\s+from|neither\s+player's\s+decks\s+can\s+be\s+discarded)/i.test(text)) {
     return { op: 'DECK_IMMUNITY' };
@@ -3864,7 +5088,7 @@ export function compileClauseToOp(clause) {
     return { op: 'MILL' };
   }
   if (/when\s+your\s+spirit\s+with\s+"holy\s+life"\s+is\s+blocked/i.test(text)) {
-    return { op: 'MOVE_CORE' };
+    return { op: 'RECOVER_LIFE', count: 1, condition: 'HOLY_LIFE_BLOCKED' };
   }
   if (/target\s+1\s+color/i.test(text)) {
     return { op: 'TARGET_CARD' };
@@ -3883,9 +5107,8 @@ export function compileClauseToOp(clause) {
       /put\s+the\s+core\s+to\s+this\s+spirit\s+instead/i.test(text) ||
       /send\s+(?:up\s+to\s+)?a\s+total\s+of\s+.*cores?,\s*besides\s+\[soul\s+core\]/i.test(text) ||
       /put\s+.*cores?\s+other\s+than\s+\[soul\s+core\].*from\s+your\s+trash\s+to/i.test(text) ||
-      /take\s+.*cores?\s+from\s+the\s+void\s+and\s+put\s+beside\s+your\s+deck/i.test(text) ||
-      /these\s+cores\s+can\s+only\s+be\s+used\s+for\s+this\s+effect/i.test(text)) {
-    return { op: 'MOVE_CORE' };
+      /take\s+.*cores?\s+from\s+the\s+void\s+and\s+put\s+beside\s+your\s+deck/i.test(text)) {
+    return parseCoreMovement(text);
   }
   if (/change\s+the\s+text\s+of\s+curse/i.test(text) ||
       /ice\s+wall\s+effect\s+activate/i.test(text) ||
@@ -4030,11 +5253,657 @@ export function compileClauseToOp(clause) {
     return { op: 'BP_OR_LEVEL_MODIFIER' };
   }
 
+  // Header / Timing block leftovers
+  if (/^\(?\[?(?:when braved|cost \d+(?:\/\d+)*).*\(when (?:attacks|battles|blocks)\)?\]?$/i.test(text) ||
+      /^\[when braved on the (?:left|right|left\/right)\]/i.test(text) ||
+      /^\(?\(?when braved attacks\)?\)?$/i.test(text) ||
+      /^\(?\(when your "[^"]+" family spirit attacks\)\)?$/i.test(text)) {
+    return { op: 'HEADER' };
+  }
+
+  // 1. SYMBOLS
+  if (/(?:fixed (?:as|at)|has|have|becomes?|beceom)\s+(?:having\s+)?(?:zero|0)\s+symbols?/i.test(text) ||
+      /(?:zero|0)\s+symbols?/i.test(text) ||
+      /beceom\s+(?:zero|0)/i.test(text)) {
+    return { op: 'SET_SYMBOL', count: 0, side: /opposing|opponent/i.test(text) ? 'opp' : 'self' };
+  }
+  let mSymSet = text.match(/(?:symbols?.*?(?:become|becomes?|beceom|fixed (?:as|at)(?: being| having)?)\s+(one|two|three|four|five|\d+)\s*(?:(red|purple|green|white|yellow|blue|god|ultimate)\s*symbols?|symbols?)|\b(one|two|three|four|five|\d+)\s*(red|purple|green|white|yellow|blue|god|ultimate)\s*symbols?\b)/i);
+  if (mSymSet) {
+    const cnt = parseNumber(mSymSet[1] || mSymSet[3]);
+    const col = mSymSet[2] || mSymSet[4];
+    return { op: 'SET_SYMBOL', count: cnt, color: col ? capitalize(col) : 'Same', side: /opposing/i.test(text) ? 'opp' : 'self' };
+  }
+  if (/(?:symbols?.*?(?:treated|treated as)|treat.*symbols? as)\s*(both players' symbols|god symbols|your symbols|being on the field)/i.test(text)) {
+    return { op: 'TREAT_SYMBOL', symbolType: /god/i.test(text) ? 'God' : /both players/i.test(text) ? 'BOTH_PLAYERS' : /being on the field/i.test(text) ? 'FIELD' : 'SELF' };
+  }
+  if (/(?:loses?|lose)\s+.*?(?:symbols?|symbol)/i.test(text)) {
+    return { op: 'LOSE_SYMBOL', count: 1, side: /opposing/i.test(text) ? 'opp' : 'self' };
+  }
+  let mSymExt = text.match(/(?:gets?|add)\s+(?:an?\s+)?extra\s+(?:(red|purple|green|white|yellow|blue)\s+)?(?:reduction\s+)?symbols?/i);
+  if (mSymExt) {
+    return { op: 'ADD_SYMBOL', color: mSymExt[1] ? capitalize(mSymExt[1]) : 'Same', count: 1, side: 'self' };
+  }
+  if (/\(?while you have\s+.*?(?:symbols?|symbol).*?following effect/i.test(text)) {
+    return { op: 'CHAIN_CONDITION', symbols: parseColors(text) };
+  }
+  if (/fulfill.*reduction symbols?|reduction symbols?.*(?:fulfilled|can't reduce|fixed at zero|to reduce)|can't use reduction symbols|no reduction symbols|target a symbol|symbols can't increase|use (?:the\s+)?symbols (?:of|from|in).*?(?:trash|soul state|reductions?)|ex symbol banished|purple ex symbol|add this spirit's symbols|add all of that spirit's bp and symbols|magic cards with the same color as symbols|if you control any purple symbol|make symbols zero|you choose the symbol|originally is fixed as having two symbols|make the ultimate symbols.*become|fill one of its reduction symbols|symbol\s*-[1-9]|adds?\s*\+[1-9]\s*symbols?|treat.*having no symbols/i.test(text)) {
+    return { op: 'SYMBOL_RULE', side: /opposing/i.test(text) ? 'opp' : 'self' };
+  }
+
+  // 2. COSTS & LEVEL COSTS
+  let mCostMod = text.match(/(?:this card in hand|the cost of this card in hand|this card's cost in hand|this card|this spirit card in your hand|this card in (?:your )?hand\/removed zone|this card in removed zone|this face-up card in your deck)\s+(?:gets|is decreased by|is increased by|is changed to|is|becomes?|at cost)\s*(?:cost\s+)?([+-]?\d+)/i)
+    || text.match(/(?:this card in your hand|this card in your hand\/removed zone)\s+is\s+cost\s*(\d+)/i)
+    || text.match(/the cost of .*? is changed to\s*(\d+)/i)
+    || text.match(/during.*this card is cost\s*(\d+)/i);
+  if (mCostMod) {
+    const val = parseInt(mCostMod[1], 10);
+    return { op: 'COST_MODIFIER', setCost: isNaN(val) ? undefined : val, side: /opposing/i.test(text) ? 'opp' : 'self' };
+  }
+  let mCostDec = text.match(/(?:decrease|decreases|decrease its cost by|reduce.*cost.*by|gets?)\s*([+-]?\d+)(?:\s*cost)?/i)
+    || text.match(/reduce\s+the\s+cost.*?(?:by|-)\s*([+-]?\d+)/i);
+  if (mCostDec) {
+    const val = parseInt(mCostDec[1], 10);
+    return { op: 'COST_MODIFIER', delta: isNaN(val) ? -1 : val, side: 'self' };
+  }
+  let mCostInc = text.match(/(?:increase|increases|increase the cost of.*?by|is increased by|cost\s*\+[1-9]|\+[1-9]\s*cost)\s*\+?(\d+)?/i);
+  if (mCostInc) {
+    const val = parseInt(mCostInc[1] || '1', 10);
+    return { op: 'COST_MODIFIER', delta: isNaN(val) ? 1 : val, side: /opposing/i.test(text) ? 'opp' : 'self' };
+  }
+  if (/(?:increase|give).*?(?:l(?:evel|v)\s*costs?|\+[1-9]\s*lv\s*cost)|level\s+costs?.*increase/i.test(text)) {
+    return { op: 'LEVEL_COST_MODIFIER', delta: 1, side: /opposing/i.test(text) ? 'opp' : 'self' };
+  }
+  let mLvCostSet = text.match(/lv\s*(\d+)\s*cost.*?becomes?\s*(\d+|one|two|zero|0)/i);
+  if (mLvCostSet) {
+    return { op: 'LEVEL_COST_MODIFIER', level: parseInt(mLvCostSet[1], 10), cost: parseNumber(mLvCostSet[2]) };
+  }
+  if (/the cost to be paid.*?becomes?\s*(\d+|one|two)|cost is 0/i.test(text)) {
+    return { op: 'COST_MODIFIER', setCost: /0|zero/i.test(text) ? 0 : 1 };
+  }
+  let mPayCost = text.match(/(?:can\s+)?pay\s+(one|two|three|\d+)\s*(?:extra\s+)?costs?/i);
+  if (mPayCost || /pay -1 cost/i.test(text)) {
+    return { op: 'PAY_COST', amount: mPayCost ? parseNumber(mPayCost[1]) : 1 };
+  }
+  if (/(?:you|the opponent)\s+(?:can\s+)?chooses?\s+(?:a\s+)?cost|target a cost/i.test(text)) {
+    return { op: 'CHOOSE_COST', side: /opponent/i.test(text) ? 'opp' : 'self' };
+  }
+  let mLim = text.match(/increase\s+(?:the\s+)?(?:cost\s+limit|upper limit|limit).*?(?:by|\+)\s*\+?(\d+)/i);
+  if (mLim) {
+    return { op: 'EFFECT_PARAMETER_MODIFIER', parameter: 'COST_LIMIT', delta: parseNumber(mLim[1]) };
+  }
+  if (/ignore\s+the\s+cost\s+of\s+braves?/i.test(text)) {
+    return { op: 'IGNORE_BRAVE_COST' };
+  }
+  if (/accel:\s*cost|for each cost of the spirit card|cost \d+ or (?:more|less) spirits\/ultimates|costs of cards in the opposing|at the start of either attack step, you can pay|can pay one cost to use this card|cost of this card in hand gets|this card's cost in hand gets|the cost of cards in opposing hand is increased|neither player can use cards with a cost|hand can only be increased by one per turn via cost|the attacks of cost \d+ or less spirits can't reduce|attacks? from opposing cost \d+ or less spirits can't decrease|this card in trash can be summoned when your cost|discard (?:a|an opposing) cost \d+ or less|cost \d+ or more|cost 9 pre-advent cards|cost 6 or less spirit card in the opposing trash|the opponent can't pay costs|can't pay the cost from the reserve|the cost of this spirit and (?:the )?cores.*must be paid|this card's cost becomes the same as|its cost becomes the same as|treat.*costs? as being paid|use cores from the opposing reserve\/nexuses.*to pay|pay the entire cost by using|reduce\s+the\s+cost\s+with\s+symbols/i.test(text)) {
+    return { op: 'COST_RULE', side: /opposing/i.test(text) ? 'opp' : 'self' };
+  }
+
+  // 3. BURSTS & KEYWORDS
+  let mActBurst = text.match(/(?:you can\s+)?(?:immediately\s+)?activate\s+(?:one\s+of\s+)?(?:your\s+)?(?:set\s+)?(?:(".*?"|[\w\s/-]+?)\s+family\s+)?bursts?/i);
+  if (mActBurst || /(?:you can\s+)?immediately activate one of.*bursts/i.test(text)) {
+    return { op: 'ACTIVATE_BURST', family: mActBurst && mActBurst[1] ? mActBurst[1].replace(/"/g, '').trim() : null, side: 'self' };
+  }
+  if (/(?:doesn't|don't)\s+trigger\s+opposing\s+bursts/i.test(text)) {
+    return { op: 'CANNOT_TRIGGER_BURST', side: 'opp' };
+  }
+  let mActKw = text.match(/(?:you can\s+)?(?:immediately\s+)?activate\s+(?:this|its|this card's|this spirit's|one of this.*?)?\s*\[(contract skill|accel|reborn|rebirth|shamanism|enchain|war catalyze|grandphosis|exchange)/i);
+  if (mActKw) {
+    return { op: 'ACTIVATE_KEYWORD', keyword: capitalize(mActKw[1]), side: 'self' };
+  }
+  if (/activaet\s+a\s+\(when\s+summoned\)\s+effect|also activates its.*mirage effects|all the (?:when blocks|\(when blocks\)) effects.*activate at (?:when attacks|\(when attacks\)?)|neither player can activate \[rebirth|can also be the target of this spirit's \[show up|you choose the steps of your \[enchain|opponent can't \[(?:advent|trigger counter)|the opponent can't use \[trigger counter|when summoned from the deck, you can activate|replaced with \[exchange|effect of opposing ".*?" family braves can only be activated once per turn|you can flip the target/i.test(text)) {
+    return { op: 'KEYWORD_RULE', side: /opposing|opponent/i.test(text) ? 'opp' : 'self' };
+  }
+
+  // 4. TREAT RULES
+  let mTrLv = text.match(/(?:treated|treat).*?(?:at|as being on|as being at|in)\s*(?:its|their)?\s*(highest|lowest)\s*l(?:evel|v)s?/i);
+  if (mTrLv) {
+    return { op: 'TREAT_RULE', treatAs: 'LEVEL', value: mTrLv[1].toUpperCase(), side: /opposing/i.test(text) ? 'opp' : 'self' };
+  }
+  let mTrLvNum = text.match(/(?:treated|treat).*?(?:as being on|as being at|as)\s*(?:being\s+)?(?:\[\s*)?lv\s*(\d+)/i);
+  if (mTrLvNum) {
+    return { op: 'TREAT_RULE', treatAs: 'LEVEL', value: parseInt(mTrLvNum[1], 10), side: /opposing/i.test(text) ? 'opp' : 'self' };
+  }
+  if (/treat.*?(?:as if you were never blocked|as not (?:being )?blocked)/i.test(text)) {
+    return { op: 'TREAT_RULE', treatAs: 'UNBLOCKED' };
+  }
+  if (/treat(?:ing)?.*?(?:as having no color|colorless)/i.test(text)) {
+    return { op: 'TREAT_RULE', treatAs: 'COLORLESS' };
+  }
+  if (/treat(?:ed)?\s+this\s+spirit\s+as\s+a\s*.*?\s*spirit\s+as\s+well\s+as|treated as a?\s*(?:green\/white|red\/purple|blue|green|white|yellow|purple)\s*spirit|is also treated as a\s*(?:green\/white|red\/purple|blue|green|white|yellow|purple)\s*spirit/i.test(text)) {
+    return { op: 'TREAT_RULE', treatAs: 'COLOR', colors: parseColors(text) };
+  }
+  let mTrName = text.match(/treated as (?:being named|having)?\s*"([^"]+)"(?:\s*in name)?/i)
+    || text.match(/treat this spirit as having "([^"]+)" in name/i)
+    || text.match(/treat one of the spirits.*as having the same name/i);
+  if (mTrName) {
+    return { op: 'TREAT_RULE', treatAs: 'NAME', name: mTrName[1] || 'SAME_AS_TRASH' };
+  }
+  if (/treat(?:ing)?\s*(?:this spirit as having the|your)?\s*\[soul core\]/i.test(text)) {
+    return { op: 'TREAT_RULE', treatAs: 'SOUL_CORE' };
+  }
+  let mTrCnt = text.match(/(?:treat your number of counters as|opposing counter is treated as)\s*(\d+|six)/i);
+  if (mTrCnt) {
+    return { op: 'TREAT_RULE', treatAs: 'COUNTER', count: parseNumber(mTrCnt[1]) };
+  }
+  if (/treated as (two|\d+)\s*spirits/i.test(text)) {
+    return { op: 'TREAT_RULE', treatAs: 'COUNT', count: 2 };
+  }
+  if (/treat all of this card's reduction as filled/i.test(text)) {
+    return { op: 'TREAT_RULE', treatAs: 'REDUCTION_FILLED' };
+  }
+  if (/treat this spirit as being summoned twice|is also treated as an? ".*?" effect/i.test(text)) {
+    return { op: 'TREAT_RULE', treatAs: 'GENERIC' };
+  }
+
+  // 5. CORE / ZONE / CARDS
+  if (/(?:braves?|spirits?|ultimates?|nexuses?)\s+can't\s+remain\s+on\s+the\s+field/i.test(text)) {
+    return { op: 'CANNOT_REMAIN_ON_FIELD', types: parseTypes(text) };
+  }
+  if (/they can remain on (?:the\s+)?field/i.test(text)) {
+    return { op: 'REMAIN_ON_FIELD' };
+  }
+  if (/cores?.*cannot be removed/i.test(text) || /number of cores.*cannot become less than/i.test(text)) {
+    return { op: 'PROTECT_CORES', side: 'self' };
+  }
+  if (/cores?.*(?:sent|would be sent).*to the (?:reserve|trash|void).*instead|sent to the (?:trash|void),?\s*(?:not|instead of)\s*(?:the\s+)?(?:reserve|trash)/i.test(text)) {
+    return { op: 'REDIRECT_CORE', destination: /void/i.test(text) ? 'void' : 'trash' };
+  }
+  if (/the opponent decides how to move the cores/i.test(text)) {
+    return { op: 'CORE_SEPARATION_RULE', side: 'opp' };
+  }
+  if (/these cores can only be used for this effect/i.test(text)) {
+    return { op: 'CORE_USAGE_RESTRICTION', target: 'self' };
+  }
+  if (/this effect sends (two|\d+) cores each to reserve instead|send\s+(?:up\s+to\s+)?(a|one|two|three|\d+)\s+cores?(?:,\s*besides\s*\[soul core\],)?\s*from\s+your\s+(?:trash|field|reserve)\s+to|send\s+(three|\d+)\s+cores\s+each\s+from\s+(?:three|\d+)\s+opposing\s+spirits\s+to\s+the\s+reserve|add (one|\d+) core from the void to this spirit for every|send(?:ing)?\s+(?:either\s+|up to\s+)?(two|three|\d+)\s+cores?|sending your \[soul core|put two cores instead|the core put by this effect can be|send a number of cores equal to the cost|send a core.*to any "Contractor Ra-Harakhti"/i.test(text)) {
+    return parseCoreMovement(text);
+  }
+
+  // 6. SWITCH / DISCARD / SHOW / COPY
+  if (/(?:switch|swap|replace)\s+(?:a|any|one|two|\d+)?\s*.*?(?:with|from)/i.test(text) ||
+      /either discard this card,? or (?:replace|switch)/i.test(text) ||
+      /cannot be switched from the field/i.test(text)) {
+    return { op: 'SWITCH_CARD', side: 'self' };
+  }
+  if (/discard\s+(?:a|one|\d+)?\s*.*from the opposing removed zone|discard\s+(?:this card|one of your set mirage)\s+from the (?:removed zone|set mirage)|discard one of your set mirage|among them, discard|discarding either a|discard cards from your deck until|for each ".*?" family card in your removed zone, this "opposing deck banishing effect"|deck can be discarded|moves \d+ cards from the top of their deck into their trash|increase the "opposing deck discarding\/banishing effects"/i.test(text)) {
+    return { op: 'DISCARD_ZONE', side: /opposing/i.test(text) ? 'opp' : 'self' };
+  }
+  let mBanish = text.match(/(?:you can\s+)?banish\s+(one|two|three|four|\d+)\s+.*cards? in (?:your )?trash/i)
+    || text.match(/banishing\s+(one|two|three|four|\d+)\s+.*card from your hand/i);
+  if (mBanish) {
+    return { op: 'BANISH_CARD', count: parseNumber(mBanish[1]), zone: /hand/i.test(text) ? 'HAND' : 'TRASH', isCost: true };
+  }
+  if (/(?:you can\s+)?show\s+(?:up to\s+)?(a|one|two|\d+)?\s*.*cards?.*to the opponent|showing to the opponent|flipping two of your|send (?:a|up to two)\s*".*?" family cards? to the trash|revealing one cost \d+.*putting it on your field/i.test(text)) {
+    return { op: 'REVEAL_AND_SHOW', side: 'self' };
+  }
+  if (/this spirit gains every effect of a cost/i.test(text)) {
+    return { op: 'COPY_EFFECT', side: 'self' };
+  }
+
+  // 7. FAMILY / NAMES
+  if (/(?:this cards?|this spirit)\s+has\s+(?:the\s+)?".*?" family|this card\/spirit has ".*?" family|this card in trash has the ".*?" family|all of your ".*?" attribute spirits gain the following effect/i.test(text)) {
+    const famM = text.match(/"([^"]+)"\s*(?:family|attribute)/i);
+    return { op: 'GRANT_FAMILY', family: famM ? famM[1] : null, side: 'self' };
+  }
+  if (/the ".*?" family text written on this spirit's effect is changed to/i.test(text)) {
+    return { op: 'CHANGE_FAMILY_TEXT', side: 'self' };
+  }
+
+  // 8. COMBAT / BP / STEP / RESTRICTION
+  if (/after the step ends.*extra attack step occurs/i.test(text)) {
+    return { op: 'EXTRA_STEP', step: 'ATTACK_STEP' };
+  }
+  if (/attack step doesn't occur on the next opposing turn/i.test(text)) {
+    return { op: 'SKIP_STEP', step: 'ATTACK_STEP', side: 'opp' };
+  }
+  let mBpBf = text.match(/every red ".*?" family spirit you control gains \+\s*(\d+)\s*bp/i);
+  if (mBpBf) {
+    return { op: 'BP_BUFF', amount: parseNumber(mBpBf[1]), target: { side: 'self' } };
+  }
+  if (/ultimates don't have to block|opposing ultimates don't have to block/i.test(text)) {
+    return { op: 'COMBAT_RULE', rule: 'OPTIONAL_BLOCK' };
+  }
+  if (/when comparing bp.*instead of comparing bp|when your ".*?"-named spirit compares bp|you can compare the bp of|both battles conclude at the same time|separate them if they are already braved/i.test(text)) {
+    return { op: 'COMBAT_RULE', rule: 'COMPARE_BP' };
+  }
+  if (/when three cards are put, immediately attack/i.test(text)) {
+    return { op: 'ATTACK_DECLARATION', side: 'self' };
+  }
+  if (/unless the opponent (?:pays|sends).*they can't use|when the opponent would use.*unless.*can't use|can't use.*unless they pay|(?:can't use|neither player can use)\s+cards with an? (?:even|odd) number cost|neither player can use cost \d+ or less magic effects|this card can only be used if there are|this card can only be used if you control|when you use a ".*?" family magic card|when your ".*?" family spirit has left the field|the opponent can't use non-".*?" family spirit cards|your ".*?" family "deck-revealing effects" reveal \+\d+ card|your life can only be decreased by \d+ per turn|you can set up to two mirages|add a ".*?" family card from your trash to underneath this spirit/i.test(text)) {
+    return { op: 'PLAY_RESTRICTION', side: /opposing|opponent/i.test(text) ? 'opp' : 'self' };
+  }
+
+  // 9. HEADERS
+  if (/^\(?\[?(?:cost \d+.*|diva & cost|armed machine|evil shadow|purple &|purple\/white|when braved|\[when braved|\{cost).*$/i.test(text)) {
+    return { op: 'HEADER' };
+  }
+
   // If unrecognized, return generic unsupported clause for compiler tracking
   return {
     op: 'UNSUPPORTED',
     rawText: text
   };
+}
+
+function extractFirstNumber(text, fallback = 1) {
+  const m = String(text || '').match(/\b(one|two|three|four|five|six|seven|eight|nine|ten|\d+)\b/i);
+  return m ? parseNumber(m[1]) : fallback;
+}
+
+function extractQuotedTerms(text) {
+  return [...String(text || '').matchAll(/"([^"]+)"/g)].map(m => m[1]);
+}
+
+function extractBracketTerm(text) {
+  const m = String(text || '').match(/\[([^\]]+)\]/);
+  return m ? m[1].trim() : null;
+}
+
+export function enrichHijClauseOp(res, rawText) {
+  const enriched = enrichHijClauseOpInner(res, rawText);
+  if (!enriched || typeof enriched !== 'object' || !enriched.op) return enriched;
+  if (isIncompleteOpObject(enriched)) {
+    const rec = recoverExplicitOpParameters(enriched, rawText);
+    if (rec.recovered && rec.params) {
+      return { ...enriched, ...rec.params };
+    }
+  }
+  return enriched;
+}
+
+function enrichHijClauseOpInner(res, rawText) {
+  if (!res || typeof res !== 'object' || !res.op) return res;
+  const text = String(rawText || '').trim();
+  const op = String(res.op);
+  const side = /both\s+players|neither\s+player/i.test(text) ? 'both' : (/opposing|opponent/i.test(text) ? 'opp' : 'self');
+  const cols = parseColors(text);
+  const quotes = extractQuotedTerms(text);
+  const bracket = extractBracketTerm(text);
+
+  switch (op) {
+    case 'ACTIVATE_EFFECT_ACTION': {
+      const timingM = text.match(/\((When[^)]+|During[^)]+)\)/i);
+      const out = { ...res };
+      if (!out.keyword && bracket) out.keyword = bracket;
+      if (!out.timing && timingM) out.timing = timingM[1].toUpperCase().replace(/[^A-Z0-9]+/g, '_');
+      if (!out.action && !out.keyword && !out.timing) out.action = /ultimate\s+trigger/i.test(text) ? 'ULTIMATE_TRIGGER' : 'ACTIVATE_EFFECT';
+      if (out.side === undefined) out.side = side;
+      return out;
+    }
+    case 'ACTIVATE_EFFECT_SPECIAL':
+      return { per: /counter/i.test(text) ? 'counters' : (/pre-advent/i.test(text) ? 'pre_advent' : 'condition'), threshold: extractFirstNumber(text, 1), mode: /more/i.test(text) ? 'repeat' : 'special', ...res };
+    case 'ACTIVATE_TRIGGER': {
+      const tm = text.match(/\((When\s+Summoned|When\s+Attacks|When\s+Blocked|When\s+Destroyed|When\s+Advents)\)/i);
+      return { trigger: tm ? tm[1].toUpperCase().replace(/\s+/g, '_') : (/bunshin/i.test(text) ? 'BUNSHIN' : 'WHEN_SUMMONED'), side, ...res };
+    }
+    case 'TRIGGERED_WATCHER':
+      return { watchEvent: /magic/i.test(text) ? 'USE_MAGIC' : (/summon/i.test(text) ? 'ON_SUMMON' : (/attack/i.test(text) ? 'WHEN_ATTACKS' : 'ON_EVENT')), side, ...res };
+    case 'TRIGGER_CONDITION':
+      return { event: /soul\s+core/i.test(text) ? 'SOUL_CORE_MOVED' : (/attacks/i.test(text) ? 'OPPOSING_ATTACKS' : 'CUSTOM_TRIGGER'), side, ...res };
+    case 'TRIGGER_COUNTER':
+      return { counterTiming: 'BEFORE_WHEN_ATTACKS', when: /ultimate\s+trigger/i.test(text) ? 'ULTIMATE_TRIGGER_HIT' : 'TRIGGER_HIT', zone: 'hand', ...res };
+    case 'CROSS_TRIGGER':
+      return { lifeThreshold: /three|3/i.test(text) ? 3 : extractFirstNumber(text, 3), triggerMode: 'CROSS_ULTIMATE_TRIGGER', ...res };
+    case 'BRAVE_EFFECT_ACTIVATION':
+      return { when: 'WHEN_BRAVED', timing: 'WHEN_BRAVED', ...res };
+    case 'ACTIVATE_KEYWORD':
+      return { keyword: res.keyword || bracket || 'Dragonshot', ...res };
+    case 'ON_BP_DESTROY':
+      return { whoseDestroyed: /only\s+the\s+opposing/i.test(text) ? 'opp_only' : 'opp', when: 'BP_COMPARISON_DESTROY', ...res };
+    case 'CONTRACT_ADVENT_RULE':
+      return { zone: /soul\s+state/i.test(text) ? 'soul' : 'hand', adventType: 'CONTRACT_ADVENT', rule: 'ALLOW_CONTRACT_ADVENT', ...res };
+    case 'ADVENT_RULE_MODIFIER':
+      return {
+        fromZone: /removed/i.test(text) ? 'removed' : (/trash/i.test(text) ? 'grave' : 'hand'),
+        adventType: /ultra\s+contract/i.test(text) ? 'ULTRA_CONTRACT_ADVENT' : (/contract/i.test(text) ? 'CONTRACT_ADVENT' : (/mani/i.test(text) ? 'MANI' : 'ADVENT')),
+        ignoreCondition: /ignoring/i.test(text),
+        ...res
+      };
+    case 'ADVENT_RULE':
+      return { when: /accel/i.test(text) ? 'AFTER_ACCEL' : 'WHEN_ELIGIBLE', fromZone: /trash/i.test(text) ? 'grave' : 'hand', adventType: 'ADVENT', ...res };
+    case 'ADVENT':
+    case 'ADVENT_COST':
+    case 'STACK_CARD':
+      return { from: /removed/i.test(text) ? 'removed' : (/trash/i.test(text) ? 'grave' : 'hand'), target: 'TARGET', ...res };
+    case 'PUT_UNDERNEATH':
+    case 'ATTACH_CARD_UNDERNEATH':
+    case 'ATTACH_CARD': {
+      const fromSide = /opposing\s+decktop|opponent['’]s\s+(?:deck|hand|trash)/i.test(text) ? 'opp' : 'self';
+      let underTarget = quotes[0] ? { name: quotes[0] } : 'SELF';
+      if (/under\s+(?:any|one\s+of)\s+(?:the\s+)?opposing\s+Spirits?(?:\/Ultimates?)?/i.test(text)) {
+        underTarget = { side: 'opp', types: /ultimate/i.test(text) ? ['Spirit', 'Ultimate'] : ['Spirit'] };
+      } else if (/under\s+(?:any|one\s+of)\s+(?:the\s+)?opposing\s+Ultimates?/i.test(text)) {
+        underTarget = { side: 'opp', types: ['Ultimate'] };
+      }
+      return {
+        from: /decktop/i.test(text) ? 'decktop' : (/trash/i.test(text) ? 'grave' : (/hand/i.test(text) ? 'hand' : 'field')),
+        fromSide,
+        count: extractFirstNumber(text, 1),
+        target: underTarget,
+        facedown: /face-?down/i.test(text),
+        ...res
+      };
+    }
+    case 'ATTACH_PRE_ADVENT_CARD':
+      return { from: /hand/i.test(text) ? 'hand' : 'field', target: 'SELF', count: extractFirstNumber(text, 1), upTo: /any\s+number|as\s+many/i.test(text), ...res };
+    case 'CARD_UNDERNEATH':
+      return { action: /discard/i.test(text) ? 'discard' : 'put', from: /hand/i.test(text) ? 'hand' : (/decktop/i.test(text) ? 'decktop' : 'underneath'), target: 'SELF', count: extractFirstNumber(text, 1), facedown: /face-?down/i.test(text), ...res };
+    case 'DISCARD_UNDERNEATH_COST':
+      return { count: extractFirstNumber(text, 1), facedownOnly: /face-?down/i.test(text), target: quotes[0] ? { name: quotes[0] } : 'SELF', ...res };
+    case 'SWAP_CARD':
+    case 'SWITCH_CARD':
+      return { from: 'hand', target: quotes[0] ? { side: 'self', name: quotes[0] } : 'TARGET', ...res };
+    case 'SWAP_CARDS':
+      return { from: 'revealed', to: 'hand', count: /any\s+number/i.test(text) ? 99 : extractFirstNumber(text, 1), filter: cols[0] ? { color: cols[0] } : { any: true }, ...res };
+    case 'MIRAGE_OPERATION':
+      return { action: /discard/i.test(text) ? 'discard' : (/flip/i.test(text) ? 'flip' : 'set'), side, ...res };
+    case 'DISCARD_MIRAGE_COST':
+      return { count: 1, zone: 'mirage', side: 'self', ...res };
+    case 'COPY_EFFECT': {
+      const tm = text.match(/\((When\s+Summoned|When\s+Attacks|When\s+Blocked|When\s+Destroyed|When\s+Advents)\)/i);
+      return { source: 'self', timing: tm ? tm[1].toUpperCase().replace(/\s+/g, '_') : 'ANY', target: 'SELF', ...res };
+    }
+    case 'COPY_PRE_ADVENT_EFFECT':
+      return { filter: quotes[0] ? { name: quotes[0] } : {}, ignoreLevels: /ignoring\s+levels/i.test(text), scope: /every|all/i.test(text) ? 'all' : 'one', ...res };
+    case 'COPY_ABILITY':
+      return { abilityType: /armor/i.test(text) ? 'keyword' : 'effect', keyword: bracket || (/ultra\s+armor/i.test(text) ? 'Ultra Armor' : 'Armor'), filter: quotes[0] ? { name: quotes[0] } : {}, ...res };
+    case 'MULTIPLY_EFFECT':
+      return { per: 'controlled_spirits', multiplier: 1, filter: cols[0] ? { color: cols[0], type: 'Spirit' } : { type: 'Spirit' }, ...res };
+    case 'MODIFY_DESTINATION':
+    case 'BANISH_DESTINATION_RULE':
+      return { destination: /banish|removed/i.test(text) ? 'removed' : (/bottom/i.test(text) ? 'deck_bottom' : 'hand'), replaces: /deplete/i.test(text) ? 'DESTROYED_OR_DEPLETED' : 'DESTRUCTION', ...res };
+    case 'REDIRECT_TARGET':
+    case 'CHANGE_TARGET': {
+      const bpM = text.match(/(\d+)\s*(?:BP\s+)?or\s+less/i);
+      return { bpMax: bpM ? parseInt(bpM[1], 10) : 5000, mode: /other\s+than\s+this/i.test(text) ? 'change_target' : 'modify_bp_limit', newTarget: /single\s+spirit\s+you\s+control/i.test(text) ? { side: 'self', types: ['Spirit'] } : null, excludeSelf: /other\s+than\s+this/i.test(text), ...res };
+    }
+    case 'REDIRECT_CORE_DESTINATION':
+      return { fromZone: /life/i.test(text) ? 'life' : 'field', destination: /void/i.test(text) ? 'void' : 'grave', cause: 'effect', side, ...res };
+    case 'LIFE_OR_CORE_MODIFICATION':
+      return { count: extractFirstNumber(text, 1), fromZone: /life|lives/i.test(text) ? 'life' : 'field', destination: /void/i.test(text) ? 'void' : 'grave', side, upTo: /up\s+to/i.test(text), ...res };
+    case 'LOOK_HAND':
+    case 'LOOK_AT_HAND':
+      return { side: /opposing|opponent/i.test(text) ? 'opp' : 'self', target: 'HAND', ...res };
+    case 'LOOK_AT_DECK':
+    case 'LOOK_DECKTOP':
+      return { count: extractFirstNumber(text, 1), position: 'top', ...res };
+    case 'REVEAL_INTERACTION':
+      return { onRevealBy: 'self', destination: /field/i.test(text) ? 'field' : 'hand', action: /discard/i.test(text) ? 'discard' : 'put', ...res };
+    case 'DISCARD_ZONE':
+    case 'DISCARD_FIELD':
+      return { zone: /mirage/i.test(text) ? 'mirage' : (/removed/i.test(text) ? 'removed' : (/hand/i.test(text) ? 'hand' : 'field')), cardType: /magic/i.test(text) ? 'Magic' : (/nexus/i.test(text) ? 'Nexus' : 'Spirit'), side, count: extractFirstNumber(text, 1), ...res };
+    case 'DISCARD_AMONG':
+      return { color: cols[0] || null, count: extractFirstNumber(text, 1), filter: cols[0] ? { color: cols[0] } : { any: true }, ...res };
+    case 'DISCARD_FIELD_MAGIC':
+    case 'DISCARD_FROM_FIELD_COST':
+      return { family: bracket || 'Song', count: extractFirstNumber(text, 1), cardType: 'Magic', side, ...res };
+    case 'SEND_TO_TRASH':
+      return { target: 'SELF', from: 'field', count: extractFirstNumber(text, 1), ...res };
+    case 'PUT_CARD_ON_FIELD':
+    case 'PUT_FACEDOWN_FIELD':
+      return { from: /decktop/i.test(text) ? 'decktop' : 'hand', cardType: /magic/i.test(text) ? 'Magic' : 'Spirit', family: bracket || null, filter: bracket ? { family: bracket } : { any: true }, count: extractFirstNumber(text, 1), facedown: /facedown|face-?down/i.test(text) || op === 'PUT_FACEDOWN_FIELD', ...res };
+    case 'USE_FROM_HAND':
+      return { cardType: /magic/i.test(text) ? 'Magic' : 'Any', timing: /flash/i.test(text) ? 'FLASH' : 'MAIN', filter: cols[0] ? { color: cols[0] } : { any: true }, ...res };
+    case 'CAST_FROM_TRASH':
+    case 'CAST_FROM_DECK':
+      return { requiredCard: quotes[0] || null, zone: op === 'CAST_FROM_DECK' ? 'deck' : 'grave', scope: 'self', ...res };
+    case 'LIMIT_DECK_DISCARD':
+      return { maxPerTurn: extractFirstNumber(text, 5), targetSide: 'self', ...res };
+    case 'CHOOSE_BLOCKER':
+    case 'CHOOSE_BATTLE_TARGET':
+      return { when: 'WHEN_BLOCKED', mode: 'choose_battle_target', target: { side: 'opp', types: ['Spirit', 'Ultimate'] }, ...res };
+    case 'FORCE_ATTACK':
+      return { side: /opponent|opposing/i.test(text) ? 'opp' : 'self', minAttacks: 1, ...res };
+    case 'PIERCING_RULE':
+      return { allowedPrevention: /heavy\s+armor/i.test(text) ? ['Heavy Armor', 'Ultra Armor'] : ['Armor', 'Heavy Armor', 'Ultra Armor'], effectType: 'destroy', ...res };
+    case 'BATTLE_RULE_MODIFIER':
+      return { rule: /neither.*destroyed|would\s+be\s+destroyed/i.test(text) ? 'NO_BP_DESTRUCTION' : (/lv1/i.test(text) ? 'USE_LV1_BP' : 'INVERT_BP_COMPARISON'), mode: 'battle_rule', ...res };
+    case 'BATTLE_MODIFIER':
+    case 'ATTACK_RULE_MODIFIER':
+    case 'BATTLE_MULTIPLE':
+      return { maxBattles: extractFirstNumber(text, 2), maxTargets: extractFirstNumber(text, 2), rule: /simultaneous/i.test(text) ? 'SIMULTANEOUS_ATTACK' : 'CONSECUTIVE_BATTLES', ...res };
+    case 'GLOBAL_RESTRICTION':
+      return { restriction: /gain\s+cores\s+from\s+the\s+void/i.test(text) ? 'CANNOT_GAIN_CORES_FROM_VOID' : 'GLOBAL_RESTRICTION', side: 'both', ...res };
+    case 'DECK_BUILDING_RULE':
+    case 'DECK_CONSTRUCTION_RULE':
+    case 'DECK_RULE':
+      return { maxCopies: /any\s+number|any\s+amount|as\s+many/i.test(text) ? 'UNLIMITED' : extractFirstNumber(text, 1), rule: /any\s+number|any\s+amount/i.test(text) ? 'UNLIMITED_COPIES' : 'COPY_LIMIT', ...res };
+    case 'GAIN_TEAM':
+    case 'TEAM_RULE':
+      return { allTeams: /every\s+team|all\s+teams/i.test(text), scope: 'all', ...res };
+    case 'BUNSHIN_SUMMON':
+    case 'CREATE_BUNSHIN':
+      return { count: extractFirstNumber(text, 1), from: 'decktop', coresMin: 1, ...res };
+    case 'TARGET_FAMILY':
+    case 'CHOOSE_FAMILY':
+      return { families: quotes.length > 0 ? quotes : ['Target Family'], mode: 'choose_family', count: 1, ...res };
+    case 'ACTIVATE_SOUL_DRIVE':
+      return { target: { side: 'self', types: ['Ultimate'] }, scope: 'self_ultimate', ...res };
+    case 'RETRIEVE_CORES':
+      return { count: extractFirstNumber(text, 1), from: 'grave', to: /reserve/i.test(text) ? 'reserve' : 'field', excludeSoulCore: /besides|other\s+than/i.test(text), upTo: /up\s+to/i.test(text), ...res };
+    case 'SYMBOL_MODIFIER':
+      return { cardType: 'Magic', color: cols[0] || 'Yellow', symbols: { [cols[0] || 'Yellow']: 1 }, ...res };
+    case 'COUNT_MODIFIER':
+    case 'COUNT_AS_MULTIPLE':
+      return { multiplier: extractFirstNumber(text, 2), countAs: extractFirstNumber(text, 2), cardType: /nexus/i.test(text) ? 'Nexus' : 'Spirit', ...res };
+    case 'BP_FORMULA': {
+      const multM = text.match(/x\s*(\d+)/i);
+      return { per: 'cores_on_spirit', multiplier: multM ? parseInt(multM[1], 10) : 10000, ...res };
+    }
+    case 'SPECIAL_WIN':
+      return { winner: 'self', reason: 'SPECIAL_WIN_CONDITION', ...res };
+    case 'LOSE_EFFECTS':
+      return { target: { side: 'opp', types: ['Spirit'] }, cannotGainNew: /can't\s+gain|cannot\s+gain/i.test(text), scope: 'target', ...res };
+    case 'ADD_FAMILY':
+      return { families: quotes.length > 0 ? quotes : (bracket ? [bracket] : ['Custom Family']), ...res };
+    case 'SELECT_TARGET':
+      return { target: { side: /opposing|opp/i.test(text) ? 'opp' : 'self', types: ['Spirit'], excludeSelf: /another/i.test(text) }, ...res };
+    case 'SUMMON_MULTI':
+      return { from: /hand/i.test(text) ? 'hand' : 'grave', filter: quotes[0] ? { family: quotes[0] } : { types: ['Spirit'] }, count: 99, ...res };
+    case 'SWAP_CORES':
+      return { target: { side: 'both', types: ['Spirit', 'Ultimate'], count: 2 }, ...res };
+    case 'TREAT_NAME':
+      return { treatedAsName: quotes[0] || 'Arcana', cost: extractFirstNumber(text, 2), ...res };
+    case 'TREAT_COST':
+      return { treatedCost: extractFirstNumber(text, 2), cost: extractFirstNumber(text, 2), ...res };
+    case 'TREAT_CORE_COUNT':
+      return { target: { side: 'self', types: ['Nexus'] }, from: 'self', mode: 'match_source_cores', ...res };
+    case 'TRIGGERED_BUFF':
+    case 'TRIGGERED_ACTION':
+      return { trigger: 'CUSTOM_EVENT', amount: extractFirstNumber(text, 2000), action: 'triggered_effect', ...res };
+    case 'NEGATE_MAGIC':
+      return { scope: 'battle', timing: 'BATTLE_PHASE', ...res };
+    case 'TAKE_CONTROL':
+      return { target: { side: 'opp', types: ['Spirit'] }, filter: { cost: extractFirstNumber(text, 6) }, duration: 'THIS_TURN', ...res };
+    case 'RETURN_CONTROL':
+      return { state: /exhausted/i.test(text) ? 'exhausted' : 'refreshed', timing: 'END_OF_TURN', ...res };
+    case 'CONTROL_RULE':
+    case 'CORE_LOCK':
+      return { target: 'SELF', coreOwner: 'original', coresLocked: true, ...res };
+    case 'REVEAL_FROM_HAND_COST':
+      return { handTrigger: 'OPPONENT_HAND_USE', count: 1, side: 'opp', ...res };
+    case 'SEARCH_DECK':
+      return { filter: { any: true }, destination: 'hand', count: extractFirstNumber(text, 1), ...res };
+    case 'CHOOSE_LEVEL':
+      return { levels: [1, 2, 3], minLevel: 1, ...res };
+    case 'OPPONENT_CHOICE':
+      return { options: ['OPTION_A', 'OPTION_B'], ...res };
+    case 'RETURN_DECK_BOTTOM':
+    case 'BOUNCE_TO_DECKBOTTOM':
+      return { from: 'revealed', target: 'SELF', count: extractFirstNumber(text, 1), ...res };
+    case 'DISCARD_HAND_MAX':
+      return { triggerCount: extractFirstNumber(text, 4), targetCount: 3, side: 'both', ...res };
+    case 'EXCHANGE_CORE':
+      return { from: 'life', to: 'self', ...res };
+    case 'SCHEDULED_DESTROY':
+      return { timing: 'END_STEP', target: 'SUMMONED_BY_EFFECT', ...res };
+    case 'SEPARATE_BRAVE':
+      return { filter: quotes[0] ? { name: quotes[0] } : {}, target: 'SELF', ...res };
+    case 'PAY_COST':
+      return { source: 'field', cost: 1, ...res };
+    case 'LOSE_IMMUNITY':
+      return { colors: cols, loseAll: cols.length === 0, target: { side: 'self', types: ['Spirit'] }, ...res };
+    case 'USE_ACCEL':
+      return { onReveal: 'DECK', cardType: 'Spirit', ...res };
+    case 'TIMING_MODIFIER':
+      return { timing: 'END_OF_ATTACK', when: 'END_OF_ATTACK', ...res };
+    case 'HEADER':
+      return { timing: 'OPPOSING_TURN', keyword: bracket || 'Custom', ...res };
+    case 'CARD_PLAY_PERMISSION':
+      return { timing: 'START_OPPOSING_ATTACK_STEP', cardType: 'Magic', from: 'hand', ...res };
+    case 'MODIFY_ADVENT_CONDITION':
+      return { modifiedAdcon: bracket || 'Custom', targetFilter: quotes[0] ? { name: quotes[0] } : {}, ...res };
+    case 'BEFORE_ADVENT_TRIGGER':
+      return { targetFilter: quotes[0] ? { name: quotes[0] } : {}, timing: 'WHEN_ADVENTS', ...res };
+    case 'COPY_TRIGGER':
+      return { timing: 'WHEN_ATTACKS', maxPerAttack: 1, scope: 'other_ultimate', ...res };
+    case 'EXPAND_TARGETS':
+      return { fromScope: 'one', toScope: 'all', ...res };
+    case 'ENHANCE_KEYWORD':
+      return { keyword: bracket || 'Windstorm', targetDelta: 1, ...res };
+    case 'GRANT_EFFECT':
+      return { target: { side: 'self', types: ['Spirit'] }, effect: quotes[0] || text, ...res };
+    case 'SEND_CORES_TO_VOID':
+      return { side: 'opp', zone: /nexus/i.test(text) ? 'field' : 'reserve', leaveCount: 4, count: extractFirstNumber(text, 1), ...res };
+    case 'VARIABLE_PAYMENT_EFFECT':
+      return { tiers: { 1: 'TIER_1' }, amount: extractFirstNumber(text, 1), ...res };
+    case 'TOKEN_DEPLOYMENT': {
+      const out = { ...res };
+      if (!out.tokenName && (quotes[0] || bracket)) out.tokenName = quotes[0] || bracket;
+      const cnt = extractFirstNumber(text, null);
+      if (out.count === undefined && cnt !== null) out.count = cnt;
+      if (out.side === undefined) out.side = side;
+      if (out.optional === undefined && /you\s+can/i.test(text)) out.optional = true;
+      return out;
+    }
+    case 'DECK_OR_HAND_ACTION':
+    case 'DECK_ACTION': {
+      const out = { ...res };
+      if (!out.action) {
+        if (/\breveal\b/i.test(text)) out.action = 'reveal';
+        else if (/\blook\s+at\b/i.test(text)) out.action = 'look';
+        else if (/\bdiscard\b/i.test(text)) out.action = 'discard';
+        else if (/\bsend\b.*\bto\s+(?:the\s+)?trash\b/i.test(text)) out.action = 'send_to_trash';
+        else if (/\b(?:return|remturn)\b.*\bdeckbottom\b/i.test(text)) out.action = 'return_deckbottom';
+        else if (/\bput(?:ting)?\b.*\bremoved\s+zone\b/i.test(text)) out.action = 'banish';
+        else if (/\bdraw\b/i.test(text)) out.action = 'draw';
+      }
+      if (!out.from) {
+        if (/decktop|top\s+card|\bdeck\b/i.test(text)) out.from = /decktop|top\s+card/i.test(text) ? 'decktop' : 'deck';
+        else if (/\bhand\b/i.test(text)) out.from = 'hand';
+        else if (/removed\s+zone/i.test(text)) out.from = 'removed';
+        else if (/\btrash\b/i.test(text) && !/to\s+(?:the\s+)?trash/i.test(text)) out.from = 'grave';
+      }
+      if (!out.to) {
+        if (/to\s+(?:the\s+)?trash/i.test(text)) out.to = 'grave';
+        else if (/deckbottom|bottom\s+of\s+the\s+deck/i.test(text)) out.to = 'deck_bottom';
+        else if (/removed\s+zone/i.test(text) && !/in\s+the\s+(?:opposing\s+)?removed\s+zone/i.test(text)) out.to = 'removed';
+        else if (/to\s+(?:your\s+)?hand/i.test(text)) out.to = 'hand';
+      }
+      if (out.side === undefined) out.side = side;
+      if (/\bany\s+number\b|\bevery\b|\ball\b/i.test(text)) {
+        if (out.all === undefined && /\bevery\b|\ball\b/i.test(text)) out.all = true;
+        if (out.upTo === undefined && /\bany\s+number\b/i.test(text)) out.upTo = true;
+      } else {
+        const cnt = extractFirstNumber(text, null);
+        if (out.count === undefined && cnt !== null) out.count = cnt;
+      }
+      if (!out.filter) {
+        const f = {};
+        if (/\bmagic\b/i.test(text)) f.type = 'Magic';
+        else if (/\bspirit\b/i.test(text)) f.type = 'Spirit';
+        else if (/\bnexus\b/i.test(text)) f.type = 'Nexus';
+        else if (/\bbrave\b/i.test(text)) f.type = 'Brave';
+        if (cols.length > 0) f.color = cols[0];
+        if (quotes[0]) f.family = quotes[0];
+        if (/face-?up/i.test(text)) f.faceUp = true;
+        if (Object.keys(f).length > 0) out.filter = f;
+      }
+      if (/\bdiscard\s+it\b/i.test(text) && !out.target) out.target = 'PREVIOUS_TARGET';
+      if (out.isCost === undefined && /^by\s+/i.test(text)) out.isCost = true;
+      return out;
+    }
+    case 'COUNT_OPERATION': {
+      const out = { ...res };
+      if (!out.action) {
+        if (/lives?\s+to\s+the\s+void/i.test(text)) out.action = 'SEND_LIFE_TO_VOID';
+        else if (/lives?\s+to\s+the\s+reserve/i.test(text)) out.action = 'SEND_LIFE_TO_RESERVE';
+        else if (/cores?\s+to\s+the\s+void/i.test(text)) out.action = 'SEND_CORE_TO_VOID';
+        else if (/cores?\s+to\s+the\s+reserve/i.test(text)) out.action = 'SEND_CORE_TO_RESERVE';
+      }
+      if (!out.to) {
+        if (/\bvoid\b/i.test(text)) out.to = 'void';
+        else if (/\breserve\b/i.test(text)) out.to = 'reserve';
+      }
+      if (out.side === undefined) out.side = side;
+      const cnt = extractFirstNumber(text, null);
+      if (out.count === undefined && cnt !== null) out.count = cnt;
+      if (out.upTo === undefined && /up\s+to/i.test(text)) out.upTo = true;
+      return out;
+    }
+    case 'MODIFY_EFFECT': {
+      const out = { ...res };
+      if (!out.to && /critical\s+hit/i.test(text)) out.to = 'CRITICAL_HIT';
+      const revM = text.match(/reveals?\s+(one|two|three|four|five|six|seven|eight|nine|ten|\d+)\s+cards?\s+instead/i);
+      if (revM && out.newCount === undefined) {
+        out.targetEffect = 'reveal';
+        out.newCount = extractFirstNumber(revM[1], null);
+      }
+      const sumM = text.match(/to\s+be\s+summoned.*\bto\s+(one|two|three|four|five|\d+)\b/i);
+      if (sumM && out.newCount === undefined) {
+        out.targetEffect = 'summon';
+        out.newCount = extractFirstNumber(sumM[1], null);
+      }
+      if (out.side === undefined) out.side = side;
+      return out;
+    }
+    case 'MODIFY_EFFECT_VALUE': {
+      const out = { ...res };
+      const deltaM = text.match(/([+-]\d+)|by\s+([+-]?\d+)/i);
+      if (deltaM && out.delta === undefined) out.delta = parseInt(deltaM[1] || deltaM[2], 10);
+      if (!out.targetEffect) {
+        if (/core/i.test(text)) out.targetEffect = 'core_removal';
+        else if (/deck\s+discard|discard/i.test(text)) out.targetEffect = 'deck_discard';
+        else if (/banish/i.test(text)) out.targetEffect = 'banish';
+        else if (/bp/i.test(text)) out.targetEffect = 'bp_burn';
+      }
+      if (/for\s+each\s+counter/i.test(text) && !out.per) out.per = 'counters';
+      return out;
+    }
+    case 'REVEAL_CARDS': {
+      const out = { ...res };
+      if (!out.from) out.from = /decktop|top\s+.*\s+deck/i.test(text) ? 'decktop' : (/hand/i.test(text) ? 'hand' : 'deck');
+      if (out.side === undefined) out.side = side;
+      const cnt = extractFirstNumber(text, null);
+      if (out.count === undefined && cnt !== null) out.count = cnt;
+      if (out.reveal === undefined) out.reveal = !/^look\s+at/i.test(text);
+      if (/for\s+each/i.test(text) && !out.per) out.per = 'matching_cards';
+      return out;
+    }
+    case 'REPLACEMENT_EFFECT': {
+      const out = { ...res };
+      if (!out.replaces) {
+        if (/destroy/i.test(text)) out.replaces = 'DESTROY';
+        else if (/leave\s+the\s+field/i.test(text)) out.replaces = 'LEAVE_FIELD';
+        else if (/life/i.test(text)) out.replaces = 'LIFE_LOSS';
+      }
+      if (out.side === undefined) out.side = side;
+      if (out.optional === undefined && /you\s+can/i.test(text)) out.optional = true;
+      return out;
+    }
+    default:
+      return res;
+  }
+}
+
+export function parseColors(text) {
+  if (!text) return [];
+  const colors = [];
+  for (const c of ['Red', 'Purple', 'Green', 'White', 'Yellow', 'Blue']) {
+    if (new RegExp('\\b' + c + '\\b', 'i').test(text)) {
+      colors.push(c);
+    }
+  }
+  return colors;
 }
 
 function parseTypes(typeStr) {

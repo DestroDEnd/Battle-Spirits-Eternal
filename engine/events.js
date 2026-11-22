@@ -37,25 +37,25 @@ export class EventBus {
   }
 
   async emit(event) {
+    if (!event || typeof event !== 'object') {
+      throw new Error('[EventBus] Invalid event object passed to emit()');
+    }
     const enriched = {
       timestamp: Date.now(),
       cause: 'rule',
       by: 'self',
-      ...event
+      ...event,
+      type: event.type
     };
 
     this.history.push(enriched);
 
-    const handlers = this.listeners.get(event.type) || [];
+    const handlers = this.listeners.get(enriched.type) || [];
     const allHandlers = this.listeners.get('*') || [];
     
     // Execute registered handlers sequentially
     for (const handler of [...handlers, ...allHandlers]) {
-      try {
-        await handler(enriched);
-      } catch (err) {
-        console.error(`[EventBus] Error in handler for ${event.type}:`, err);
-      }
+      await handler(enriched);
     }
 
     return enriched;

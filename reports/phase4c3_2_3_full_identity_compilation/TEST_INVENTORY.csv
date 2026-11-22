@@ -1,0 +1,295 @@
+suite,test_id,description,status,duration_ms
+"Compiler/Data","Phase 1 Data Integrity","cards_index.json validation","PASS",183.3218
+"Compiler/Data","Phase 1 Data Integrity","cards_detailed.json validation","PASS",280.8327
+"Compiler/Data","Phase 1 Data Integrity","Sharded effects directory validation","PASS",1442.718
+"Compiler/Data","Phase 2 Compiler","Chakrambat (BS01-010)","PASS",15.4214
+"Compiler/Data","Phase 2 Compiler - Birgoyle (BATTLE-SPIRITS-A27","Or connector)","PASS",50.0935
+"Compiler/Data","Phase 2 Compiler - Evil Flame (BS38-067","Burst + Flash)","PASS",10.5067
+"Compiler/Data","Phase 2 Compiler","The Makai Holy Grail (BATTLE-SPIRITS-A2302)","PASS",3.9266
+"Compiler/Data","Phase 2 Compiler","The SacredEmperor Siegfrieden XV (BS66-XV02)","PASS",24.8885
+"Compiler/Data","Phase 2 Compiler - The EarthDeitySword Gaianohoko (SD28-X02","Burst lock)","PASS",2.3301
+"Compiler/Data","Phase 2 Compiler","The PartnerDemonLord Javad (SD65-CX01)","PASS",3.5967
+"Compiler/Data","Phase 2 Compiler","Evil Draw (BATTLE-SPIRITS-A4233)","PASS",1.9252
+"Compiler/Data","Phase 2 Compiler","The TwinkleDragonEmperor New-Siegfried (BS40-X01)","PASS",2.9193
+"Compiler/Data","Phase 2 Compiler","The MakaiSoldier Curse Swordsman (SD41-004)","PASS",0.8374
+"Compiler/Data","Phase 2 Compiler","Gran-Dolbalkan (BS01-094)","PASS",2.3924
+"TC-COL","TC-COL-01","Descriptor A compiled in complete isolation","PASS",4.1528
+"TC-COL","TC-COL-02","Descriptor B compiled in complete isolation","PASS",0.5078
+"TC-COL","TC-COL-03","Sequential compilation: A compiled, then B compiled","PASS",1.0001
+"TC-COL","TC-COL-04","Reverse sequential compilation: B compiled, then A compiled","PASS",0.7777
+"TC-COL","TC-COL-05","Three descriptors: A, B, C compiled in arbitrary permutations","PASS",7.3514
+"TC-COL","TC-COL-06","Full database batch compilation across 514 shards","PASS",3094.1589
+"TC-COL","TC-COL-07","Incremental compilation of single modified card in isolation","PASS",0.5985
+"TC-COL","TC-COL-08","Cross-environment serialization invariance (RFC 8785 canonical bytes)","PASS",3.1418
+"TC-COL","TC-COL-10","Forced primary SHA-256 collision using injectable mock hash","PASS",0.6223
+"TC-COL","TC-COL-11","Forced dual collision in both primary and secondary mock hashes","PASS",0.946
+"TC-COL","TC-COL-12","Existing persistent IDs remain unchanged after new colliding descriptor appears","PASS",0.4337
+"TC-ID","TC-ID-01","Deterministic 256-bit SHA-256 digest over RFC 8785 canonical JSON across 100 runs","PASS",2.7553
+"TC-ID","TC-ID-02","JSON object-key ordering changes preserve identity under RFC 8785","PASS",0.3965
+"TC-ID","TC-ID-03","Meaningful execution clause-order changes alter physical identity","PASS",0.3309
+"TC-ID","TC-ID-04","Cosmetic whitespace and formatting invariance","PASS",0.423
+"TC-ID","TC-ID-05","Reprint semantic equivalence across differing set codes and printings","PASS",0.5057
+"TC-COND","TC-COND-01","Two different condition expressions with identical headers produce different descriptors and IDs","PASS",6.9506
+"TC-COND","TC-COND-02","Equivalent condition expressions with harmless formatting differences produce identical identities","PASS",0.771
+"TC-COND","TC-COND-03","Condition blocks and ordinary executable abilities do not collide","PASS",0.8552
+"TC-COND","TC-COND-04","Compiler integration via compileCard preserves distinct condition identities","PASS",41.1683
+"TC-INST","TC-INST-01","Two identical abilities on one card receive distinct physical IDs and shared semantic ID","PASS",3.2109
+"TC-INST","TC-INST-02","Two identical abilities on different cards receive distinct physical IDs and shared semantic ID","PASS",4.4173
+"TC-INST","TC-INST-03","The same card compiled in isolation and in a batch produces 100% identical IDs","PASS",36.1986
+"TC-INST","TC-INST-04","Ability order changes where underlying abilities are distinct preserve individual IDs","PASS",1.3147
+"TC-INST","TC-INST-05","Repeated compilation of the same card produces 100% identical IDs and benign registry matches","PASS",1.9467
+"TC-INST","TC-INST-06","Incremental compilation after an unrelated card is added preserves existing IDs","PASS",208.5254
+"TC-RFC","TC-RFC-01","Nested object key ordering (strict UTF-16 code unit order)","PASS",6.015
+"TC-RFC","TC-RFC-02","Arrays and nested arrays preserve order","PASS",0.7655
+"TC-RFC","TC-RFC-03","Negative zero (-0) serialized as 0","PASS",0.3197
+"TC-RFC","TC-RFC-04","Floating-point serialization edge cases","PASS",0.2601
+"TC-RFC","TC-RFC-05","Non-finite numbers (NaN, Infinity, -Infinity) explicitly throw TypeError","PASS",0.7572
+"TC-RFC","TC-RFC-06","Undefined object properties explicitly throw TypeError (no silent omission)","PASS",0.1885
+"TC-RFC","TC-RFC-07","Undefined array elements explicitly throw TypeError (no silent conversion to null)","PASS",0.1575
+"TC-RFC","TC-RFC-08","Functions and symbols explicitly throw TypeError","PASS",0.276
+"TC-RFC","TC-RFC-09","BigInt explicitly throws TypeError","PASS",0.2248
+"TC-RFC","TC-RFC-10","Sparse arrays with unassigned holes explicitly throw TypeError","PASS",0.2963
+"TC-RFC","TC-RFC-11","Lone high surrogates explicitly throw TypeError","PASS",0.225
+"TC-RFC","TC-RFC-12","Lone low surrogates explicitly throw TypeError","PASS",0.1523
+"TC-RFC","TC-RFC-13","Valid supplementary Unicode characters (surrogate pairs) properly serialized","PASS",0.1159
+"TC-RFC","TC-RFC-14","Japanese characters and emoji preserved as literal UTF-8 in strings","PASS",0.1334
+"TC-RFC","TC-RFC-15","Known RFC 8785 canonicalization test vectors","PASS",0.1873
+"TC-PIPE","TC-PIPE-01","Standard ability compilation derives ID post-keyword binding","PASS",3.2304
+"TC-PIPE","TC-PIPE-02","Condition block compilation derives ID post-binding","PASS",2.1691
+"TC-PIPE","TC-PIPE-03","Overridden card compilation derives ID post-binding","PASS",0.635
+"TC-PIPE","TC-PIPE-04","Keyword-bound ability compilation: bound keyword abilityId matches physicalId","PASS",0.7331
+"TC-PIPE","TC-PIPE-05","Compilation where keyword binding does not modify ability","PASS",1.3957
+"TC-PIPE","TC-PIPE-06","Repeated compilation of same source card through applicable paths","PASS",1.908
+"TC-COMPAT","TC-COMPAT-01","Compiled abilities preserve legacyId, physicalId, semanticId, and id === physicalId","PASS",1.7313
+"TC-COMPAT","TC-COMPAT-02","Engine activation accepts both physicalId and legacyId","PASS",0.3748
+"TC-COMPAT","TC-COMPAT-03","Keyword bindings preserve abilityId matching physicalId with legacyAbilityId fallback","PASS",3.2942
+"TC-REG","TC-REG-01","Repeated registration of the same descriptor returns status MATCH","PASS",0.2864
+"TC-REG","TC-REG-02","Same physical ID with mismatched descriptor throws FatalCollisionError","PASS",0.5852
+"TC-REG","TC-REG-03","Failed registration followed by valid registration keeps registry intact","PASS",0.3176
+"TC-REG","TC-REG-04","Independent compilation sessions reset registry cleanly via clear()","PASS",0.1423
+"TC-REG","TC-REG-05","Atomic snapshot and rollback upon exception during compilation","PASS",0.3827
+"TC-REG","TC-REG-06","Duplicate ability instances register cleanly as separate entries without collision","PASS",2.9169
+"TC-SEM","TC-SEM-01","Identical operation ASTs with different harmless wording produce identical semantic IDs","PASS",8.9899
+"TC-SEM","TC-SEM-02","Different operation parameters produce different semantic IDs","PASS",0.9885
+"TC-SEM","TC-SEM-03","Different targets produce different semantic IDs","PASS",0.8228
+"TC-SEM","TC-SEM-04","Different durations produce different semantic IDs","PASS",0.4389
+"TC-SEM","TC-SEM-05","Different costs produce different semantic IDs","PASS",0.4006
+"TC-SEM","TC-SEM-06","Different conditions produce different semantic IDs","PASS",0.4799
+"TC-SEM","TC-SEM-07","Different clause ordering produces different semantic IDs","PASS",0.4389
+"TC-SEM","TC-SEM-08","Unsupported text remains part of identity when no structured operation is available","PASS",0.3918
+"TC-SEM","TC-SEM-09","Partially compiled clauses preserve both structured representation and unparsed remainder","PASS",0.3092
+"TC-SEM","TC-SEM-10","Physical IDs remain distinct across different canonical card numbers even when semantic IDs match","PASS",1.3163
+"TC-RFCVAL","TC-RFCVAL-01","Symbol-keyed properties rejected explicitly","PASS",0.7201
+"TC-RFCVAL","TC-RFCVAL-02","Date objects rejected explicitly","PASS",0.3025
+"TC-RFCVAL","TC-RFCVAL-03","Map and Set rejected explicitly","PASS",0.6595
+"TC-RFCVAL","TC-RFCVAL-04","Typed arrays and ArrayBuffer rejected explicitly","PASS",0.2838
+"TC-RFCVAL","TC-RFCVAL-05","Class instances (non-plain objects) rejected explicitly","PASS",0.2579
+"TC-RFCVAL","TC-RFCVAL-06","Circular references in objects and arrays rejected explicitly","PASS",0.4009
+"TC-RFCVAL","TC-RFCVAL-07","Nested unsupported values inside operation ASTs rejected by sanitizeAstNode","PASS",0.2805
+"TC-RFCVAL","TC-RFCVAL-08","Nested unsupported values inside condition ASTs rejected by sanitizeAstNode","PASS",0.22
+"TC-RFCVAL","TC-RFCVAL-09","Valid plain objects and arrays properly serialized","PASS",2.6306
+"TC-RFCVAL","TC-RFCVAL-10","Every vector loaded from RFC8785_TEST_VECTORS.json executed and verified","PASS",2.4991
+"TC-ACT","TC-ACT-01","Actual engine activateAbility() succeeds using new physical ID","PASS",65.345
+"TC-ACT","TC-ACT-02","Actual engine activateAbility() succeeds using legacy ID (#a0)","PASS",4.811
+"TC-ACT","TC-ACT-03","Actual engine activateAbility() returns ABILITY_NOT_FOUND on unknown ID","PASS",1.5011
+"TC-ACT","TC-ACT-04","Actual engine activateAbility() targets specific requested ability (#a1 vs #a0)","PASS",2.096
+"TC-ACT","TC-ACT-05","Actual engine activateAbility() correctly dispatches when multiple abilities exist on same card","PASS",9.9948
+"TC-ACT","TC-ACT-06","Actual engine activateAbility() functions with real card compiled via compileCard","PASS",2.2551
+"TC-ACT","TC-ACT-07","Duplicate identical ability instances do not cause accidental activation of wrong instance","PASS",2.2538
+"TC-CONDNORM","TC-CONDNORM-01","Harmless whitespace variation normalizes to identical descriptor","PASS",0.7157
+"TC-CONDNORM","TC-CONDNORM-02","Meaningful punctuation variation is preserved and produces different descriptors","PASS",0.1948
+"TC-CONDNORM","TC-CONDNORM-03","Different numeric thresholds produce different descriptors","PASS",0.1244
+"TC-CONDNORM","TC-CONDNORM-04","Different comparison operators produce different descriptors","PASS",0.1365
+"TC-CONDNORM","TC-CONDNORM-05","Different card-type requirements produce different descriptors","PASS",0.1208
+"TC-CONDNORM","TC-CONDNORM-06","Different logical connectors produce different descriptors","PASS",0.2532
+"TC-CONDNORM","TC-CONDNORM-07","Different condition types produce different conditionTypes and descriptors","PASS",0.2707
+"TC-CONDNORM","TC-CONDNORM-08","Unsupported condition expressions preserved as normalized text fallback","PASS",0.2806
+"TC-CONDNORM","TC-CONDNORM-09","Explicit labeling of condition descriptor as CONDITION_TEXT_FALLBACK","PASS",0.1263
+"TC-CONDNORM","TC-CONDNORM-10","Actual compiled condition-block identity verified via compileCard()","PASS",2.5802
+"TC-ARR","TC-ARR-01","Array with a symbol-keyed property explicitly throws TypeError","PASS",3.2151
+"TC-ARR","TC-ARR-02","Array with a named metadata property explicitly throws TypeError","PASS",0.5249
+"TC-ARR","TC-ARR-03","Array with unexpected numeric-looking property explicitly throws TypeError","PASS",4.2876
+"TC-ARR","TC-ARR-04","Array with an accessor property (getter/setter) throws TypeError without invoking getter","PASS",0.8098
+"TC-ARR","TC-ARR-05","Array with a non-enumerable unexpected property explicitly throws TypeError","PASS",0.6378
+"TC-ARR","TC-ARR-06","Valid dense arrays serialize and sanitize correctly","PASS",1.4276
+"TC-ARR","TC-ARR-07","Valid nested arrays preserve hierarchy and element order","PASS",0.4371
+"TC-ARR","TC-ARR-08","Sparse arrays with holes explicitly throw TypeError","PASS",0.4145
+"TC-ARR","TC-ARR-09","Arrays containing unsupported nested values explicitly throw TypeError","PASS",0.4358
+"TC-ARR","TC-ARR-10","Arrays with valid supplementary Unicode strings properly serialize and sanitize","PASS",0.3532
+"TC-ARR","TC-ARR-11","sanitizeAstNode rejects arrays with unexpected own properties in nested ASTs","PASS",0.3448
+"TC-SORT","TC-SORT-01","Mixed-case keyword names sort deterministically by UTF-16 code units","PASS",0.7661
+"TC-SORT","TC-SORT-02","Uppercase and lowercase combinations sort strictly by code unit order","PASS",0.2552
+"TC-SORT","TC-SORT-03","Punctuation in keyword names sorts deterministically","PASS",0.2131
+"TC-SORT","TC-SORT-04","Non-ASCII accented keyword names sort deterministically","PASS",0.3332
+"TC-SORT","TC-SORT-05","Japanese characters in keyword names sort deterministically","PASS",0.1879
+"TC-SORT","TC-SORT-06","Supplementary Unicode characters in keywords sort deterministically","PASS",0.1512
+"TC-SORT","TC-SORT-07","Keyword parameter ordering when keyword names are identical","PASS",0.2842
+"TC-SORT","TC-SORT-08","UTF-16 code-unit comparator verification across known ordering vectors","PASS",0.239
+"TC-SORT","TC-SORT-09","Stable identities across repeated compilation regardless of initial keyword order","PASS",1.8412
+"TC-SORT","TC-SORT-10","Meaningful clause execution order is preserved (clauses are NOT sorted)","PASS",0.5458
+"TC-ACT","TC-ACT-01","First activation succeeds and consumes the physical ability limit","PASS",28.8942
+"TC-ACT","TC-ACT-02","Second activation of the same physical ability is rejected","PASS",1.7254
+"TC-ACT","TC-ACT-03","A second physical copy of the same card can independently activate its ordinary once-per-turn ability","PASS",4.2792
+"TC-ACT","TC-ACT-04","Two distinct abilities on the same physical card maintain separate counters","PASS",2.2381
+"TC-ACT","TC-ACT-05","A new physical placement receives the correct new restriction identity","PASS",1.7174
+"TC-ACT","TC-ACT-06","First qualifying Same Name activation succeeds","PASS",1.4445
+"TC-ACT","TC-ACT-07","Another physical copy with the same semantic ability is blocked for the same player","PASS",1.5367
+"TC-ACT","TC-ACT-08","A different semantic ability on the same named card is not incorrectly blocked","PASS",1.4341
+"TC-ACT","TC-ACT-09","The opponent has an independent Same Name restriction scope","PASS",1.5792
+"TC-ACT","TC-ACT-10","Equivalent abilities with different physical placement IDs share the intended restriction","PASS",1.4152
+"TC-ACT","TC-ACT-11","Failed declaration before commitment does not consume a limit","PASS",2.3801
+"TC-ACT","TC-ACT-12","Unpayable cost before commitment does not consume a limit","PASS",2.5856
+"TC-ACT","TC-ACT-13","Cancelled target selection before commitment does not consume a limit","PASS",6.8763
+"TC-ACT","TC-ACT-14","Successful commitment consumes the limit exactly once","PASS",0.7247
+"TC-ACT","TC-ACT-15","Negation after commitment does not refund the limit","PASS",0.8962
+"TC-ACT","TC-ACT-16","Resolution failure after commitment does not refund the limit","PASS",0.7716
+"TC-ACT","TC-ACT-17","Duplicate commitment callback does not double-consume","PASS",3.7346
+"TC-ACT","TC-ACT-18","Declining an optional ability does not consume the limit","PASS",1.3609
+"TC-ACT","TC-ACT-19","Accepting an optional ability follows the normal commitment process","PASS",1.1253
+"TC-ACT","TC-ACT-20","FALSE prerequisite follows established skip behavior without consumption before commitment","PASS",3.2174
+"TC-ACT","TC-ACT-21","UNSUPPORTED prerequisite blocks safely and reports unsupported evaluation","PASS",1.7698
+"TC-ACT","TC-ACT-22","TURN restriction resets at the correct turn boundary","PASS",1.3688
+"TC-ACT","TC-ACT-23","STEP restriction resets only at its correct step boundary","PASS",0.9609
+"TC-ACT","TC-ACT-24","BATTLE restriction resets at battle end","PASS",2.0489
+"TC-ACT","TC-ACT-25","ATTACK restriction resets at attack end","PASS",4.3908
+"TC-ACT","TC-ACT-26","One player reset does not clear the opponent independent counters","PASS",1.3706
+"TC-ACT","TC-ACT-27","Duplicate lifecycle events do not create incorrect counter state","PASS",1.53
+"TC-ACT","TC-ACT-28","JSON serialization and restoration preserve authoritative restriction state","PASS",1.2122
+"TC-ACT","TC-ACT-29","Restored state still blocks an already-used activation","PASS",1.4058
+"TC-ACT","TC-ACT-30","Legacy abilityUses mirror remains synchronized","PASS",0.9047
+"TC-ACT","TC-ACT-31","Legacy activation entry point enforces the same restriction","PASS",3.4937
+"TC-ACT","TC-ACT-32","Modern restriction state survives supported legacy conversion","PASS",0.9445
+"TC-ACT","TC-ACT-33","Missing or malformed identity is rejected safely","PASS",0.6477
+"TC-ACT","TC-ACT-34","Unknown restriction type is not treated as unrestricted","PASS",0.4133
+"TC-ACT","TC-ACT-35","Existing golden compiler and engine regression tests remain unchanged and pass","PASS",4.5075
+"TC-ACT","TC-ACT-FIX-01","Resolver halts immediately when commitActivation fails due to LIMIT_REACHED; operations are never executed","PASS",0.769
+"TC-ACT","TC-ACT-FIX-02","Multi-clause ability with commit failure in clause 1 does not execute clause 2 or subsequent clauses","PASS",5.5263
+"TC-ACT","TC-ACT-FIX-03","Resolver halts and returns INVALID_IDENTITY when ability lacks valid physicalId/semanticId","PASS",0.5499
+"TC-ACT","TC-ACT-FIX-04","Resolver halts and returns UNSUPPORTED_RESTRICTION when restriction type is unsupported","PASS",0.5456
+"TC-ACT","TC-ACT-FIX-05","Resolver halts and returns INVALID_RESTRICTION_STATE when restriction state is corrupted","PASS",1.1585
+"TC-ACT","TC-ACT-FIX-06","Real concurrent game.activateAbility calls with async barrier: only winning activation commits and pays costs","PASS",2.5052
+"TC-ACT","TC-ACT-FIX-06B","Failed cost payment or prompt decline releases reservation and leaves zero costs paid","PASS",5.4843
+"TC-ACT","TC-ACT-FIX-06C","Exception during ability resolution cleans up active reservation without leaks","PASS",2.0578
+"TC-ACT","TC-ACT-FIX-06D","Post-commit effect failure or negation does not refund costs or release committed limit","PASS",1.0161
+"TC-ACT","TC-ACT-FIX-07","Target prompt cancellation prior to commitment leaves limit intact and counter at 0","PASS",1.5286
+"TC-ACT","TC-ACT-FIX-08","Unavailable/invalid targets before commitment abort resolution without consuming limit","PASS",0.7304
+"TC-ACT","TC-ACT-FIX-09","Valid target selection triggers commitment exactly once before target operation effects execute","PASS",1.0203
+"TC-ACT","TC-ACT-FIX-10","Multi-target selection commits once upon valid candidate selection","PASS",1.0197
+"TC-ACT","TC-ACT-FIX-11","Post-commit negation (EFFECT_NEGATED) aborts effect execution but preserves consumed activation limit","PASS",0.5543
+"TC-ACT","TC-ACT-FIX-12","game.endAttack() clears ATTACK-scoped counters while BATTLE-scoped counters remain intact","PASS",0.6472
+"TC-ACT","TC-ACT-FIX-13","game.endBattle() clears BATTLE-scoped counters and THIS_BATTLE modifiers while ATTACK-scoped counters remain intact","PASS",0.3904
+"TC-ACT","TC-ACT-FIX-14","Unblocked attack (resolveDirectHit) concludes combat resetting both ATTACK and BATTLE counters while preserving TURN and GAME counters","PASS",0.5205
+"TC-ACT","TC-ACT-FIX-15","Ending battle does not reset turn-scoped or game-scoped restrictions","PASS",0.2632
+"TC-ACT","TC-ACT-FIX-16","Repeated or redundant endAttack/endBattle calls are idempotent and do not corrupt state","PASS",0.2428
+"TC-ACT","TC-ACT-FIX-17","Unknown string containing ""TURN"" (e.g. ""MY_TURN_SPECIAL"") is rejected as UNKNOWN/UNSUPPORTED_RESTRICTION","PASS",0.1018
+"TC-ACT","TC-ACT-FIX-18","Unknown string containing ""GAME"" (e.g. ""GAME_OVER"") is rejected as UNKNOWN/UNSUPPORTED_RESTRICTION","PASS",0.082
+"TC-ACT","TC-ACT-FIX-19","Canonical restriction mapping accepts explicit aliases correctly","PASS",0.0881
+"TC-ACT","TC-ACT-FIX-20","Non-string or empty restriction types are rejected safely without throws","PASS",0.083
+"TC-ACT","TC-ACT-FIX-21","Restriction with maxLimit <= 0 or non-integer is rejected as unsupported/invalid","PASS",0.1714
+"TC-ACT","TC-ACT-FIX-22","Valid canonical types map deterministically to TURN, GAME, BATTLE, ATTACK scopes","PASS",0.1909
+"TC-ACT","TC-ACT-FIX-23","State validation rejects negative counter values","PASS",0.1177
+"TC-ACT","TC-ACT-FIX-24","State validation rejects non-integer / fractional counter values","PASS",0.1066
+"TC-ACT","TC-ACT-FIX-25","State validation rejects NaN or Infinity counter values","PASS",0.1132
+"TC-ACT","TC-ACT-FIX-26","State validation rejects malformed counters object (non-plain object, array, or null)","PASS",0.0871
+"TC-ACT","TC-ACT-FIX-27","evaluateRestriction and commitRestriction return INVALID_RESTRICTION_STATE without silently repairing state into unrestricted","PASS",1.5683
+"TC-ACT","TC-ACT-FIX-28","Valid serialized state survives round-trip validation and restoration","PASS",1.0118
+"TC-ACT","TC-ACT-FIX-29","Legacy turn:cardId:abilityId format is mirrored and synced into authoritative counters without data loss","PASS",0.269
+"TC-ACT","TC-ACT-FIX-30","Legacy cardId_abilityId format is mirrored and synced into authoritative counters","PASS",0.1415
+"TC-ACT","TC-ACT-FIX-31","Ambiguous legacy keys are safely isolated in meta._ambiguousLegacy without overwriting authoritative counters","PASS",0.1987
+"TC-ACT","TC-ACT-FIX-32","Synchronized legacy state cannot bypass or decrement modern authoritative restriction limits","PASS",1.1073
+"TC-ACT","TC-ACT-FIX-33","State validation rejects arrays, class instances, and objects with non-plain prototypes","PASS",0.3982
+"TC-ACT","TC-ACT-FIX-34","State validation enforces explicit metadata schema and rejects unknown type or scope","PASS",0.2057
+"TC-ACT","TC-ACT-FIX-35","State validation rejects contradictory type and scope pairs","PASS",0.1479
+"TC-ACT","TC-ACT-FIX-36","State validation verifies reservations as finite non-negative integers","PASS",0.2546
+"TC-ACT","TC-ACT-FIX-37","undefined initializes default restriction state, while explicit null is rejected","PASS",0.4637
+"TC-RES","TC-RES-LIFE-01","Activation A reserves capacity, lifecycle reset occurs, and A handle becomes invalid","PASS",0.6637
+"TC-RES","TC-RES-LIFE-02","After A is invalidated, activation B reserves the same key. Releasing A must not decrement B reservation (real engine)","PASS",1.1815
+"TC-RES","TC-RES-LIFE-03","After A is invalidated, calling commit() on A must fail without changing counters or reservations","PASS",0.4751
+"TC-RES","TC-RES-LIFE-04","Repeated release() calls on an invalidated handle do not mutate current reservation state","PASS",0.6709
+"TC-RES","TC-RES-LIFE-05","A stale handle from an earlier lifecycle cannot affect a new lifecycle using the same restriction key (real engine)","PASS",0.9365
+"TC-RES","TC-RES-LIFE-06","An ATTACK reset does not invalidate a BATTLE reservation","PASS",0.3775
+"TC-RES","TC-RES-LIFE-07","A BATTLE reset does not invalidate a TURN reservation","PASS",0.4812
+"TC-RES","TC-RES-LIFE-08","A TURN reset invalidates only appropriate TURN reservations and preserves GAME reservations","PASS",0.7691
+"TC-RES","TC-RES-LIFE-09","Competing game.activateAbility requests remain safe when lifecycle transition occurs while paused at prompt (real engine)","PASS",2.245
+"TC-RES","TC-RES-LIFE-10","No reservation leaks remain after all activations and lifecycle transitions complete","PASS",1.3428
+"TC-META","TC-META-01","Empty ordinary metadata record is rejected","PASS",0.279
+"TC-META","TC-META-02","Missing metadata type is rejected","PASS",0.2146
+"TC-META","TC-META-03","Missing metadata scope is rejected","PASS",2.076
+"TC-META","TC-META-04","Missing metadata limit is rejected","PASS",0.4678
+"TC-META","TC-META-05","Unknown metadata type is rejected","PASS",0.1958
+"TC-META","TC-META-06","Unknown metadata scope is rejected","PASS",0.1444
+"TC-META","TC-META-07","Contradictory type/scope pair is rejected","PASS",0.1218
+"TC-META","TC-META-08","Invalid restriction key is rejected","PASS",0.1279
+"TC-META","TC-META-09","Malformed reservation record is rejected","PASS",0.1423
+"TC-META","TC-META-10","Reservation ID mismatch is rejected","PASS",0.1452
+"TC-META","TC-META-11","Reservation counter inconsistent with active reservation records is rejected","PASS",0.1663
+"TC-META","TC-META-12","Active reservation referencing missing or contradictory restriction metadata is rejected","PASS",0.2311
+"TC-META","TC-META-13","Duplicate reservation IDs are rejected","PASS",0.1278
+"TC-META","TC-META-14","Invalid lifecycle generation is rejected","PASS",0.2117
+"TC-META","TC-META-15","Valid _ambiguousLegacy metadata remains accepted according to its documented schema","PASS",0.1873
+"TC-META","TC-META-16","Valid reservation state survives JSON serialization and restoration","PASS",0.4629
+"TC-META","TC-META-17","Validation rejects malformed state without mutating it","PASS",0.1559
+"TC-META","TC-META-18","Existing valid legacy-compatible state remains accepted","PASS",0.2988
+"TC-META","TC-META-19","Positive reservation counter with no _reservations namespace is rejected","PASS",0.1291
+"TC-META","TC-META-20","Empty _reservations namespace with positive reservation counter is rejected","PASS",0.1109
+"TC-META","TC-META-21","Active reservation record with missing reservation counter is rejected","PASS",0.1401
+"TC-META","TC-META-22","Empty reservation dictionaries with no active reservations remain valid","PASS",0.4112
+"TC-META","TC-META-23","Multiple active reservation records for one key must exactly match the counter","PASS",0.2282
+"TC-META","TC-META-24","Reservation generation equal to current scope generation is accepted","PASS",0.139
+"TC-META","TC-META-25","Reservation with stale generation is rejected","PASS",0.2577
+"TC-META","TC-META-26","Reservation with future generation is rejected","PASS",0.1809
+"TC-META","TC-META-27","Missing scope generation follows the documented initialization policy (defaults to 1)","PASS",0.1622
+"TC-META","TC-META-28","JSON-restored stale reservation cannot block or authorize a new activation","PASS",0.4781
+"TC-META","TC-META-29","Missing reservation status is rejected","PASS",0.16
+"TC-META","TC-META-30","Explicit ACTIVE status is accepted","PASS",0.1128
+"TC-META","TC-META-31","Unknown or finalized status in active reservation namespace is rejected","PASS",0.2798
+"TC-META","TC-META-32","Unknown _generations metadata namespace is rejected","PASS",0.0942
+"TC-RES","TC-RES-LIFE-11","Exported releaseReservation releases a current valid reservation","PASS",0.4713
+"TC-RES","TC-RES-LIFE-12","Exported releaseReservation rejects a stale reservation","PASS",0.3004
+"TC-RES","TC-RES-LIFE-13","Releasing an old reservation cannot decrement a newer reservation on the same key","PASS",0.1904
+"TC-RES","TC-RES-LIFE-14","Repeated exported release is idempotent","PASS",0.3453
+"TC-RES","TC-RES-LIFE-15","Exported release preserves unrelated reservations and lifecycle scopes","PASS",0.1781
+"TC-RES","TC-RES-FINAL-01","Release succeeds for valid reservation and decrements counter exactly once","PASS",0.3368
+"TC-RES","TC-RES-FINAL-02","Release rejects missing counter without deleting record (meta._reservations[resId] remains)","PASS",0.3106
+"TC-RES","TC-RES-FINAL-03","Release rejects zero counter without mutating record or counter","PASS",0.2791
+"TC-RES","TC-RES-FINAL-04","Release rejects counter/active-record count mismatch without mutating state","PASS",0.247
+"TC-RES","TC-RES-FINAL-05","Commit rejects missing counter without consuming usage limit (real production path: game.activateAbility())","PASS",0.5023
+"TC-RES","TC-RES-FINAL-06","Commit rejects zero counter without consuming usage limit","PASS",0.2866
+"TC-RES","TC-RES-FINAL-07","Commit rejects counter/active-record count mismatch without consuming usage limit (real production path)","PASS",0.2776
+"TC-RES","TC-RES-FINAL-08","Valid commit converts exactly one active reservation into one committed usage","PASS",0.2714
+"TC-RES","TC-RES-FINAL-09","Failed finalization preserves unrelated reservations","PASS",0.4825
+"TC-RES","TC-RES-FINAL-10","Repeated release or commit cannot double-finalize reservation","PASS",0.3661
+"TC-RES","TC-RES-FINAL-11","Stale reservation handles remain unable to mutate newer lifecycle reservations","PASS",0.3652
+"TC-RES","TC-RES-FINAL-12","Actual game.activateAbility() works correctly under valid concurrent activation (real engine)","PASS",0.6704
+"TC-RES","TC-RES-COMMIT-COUNTER-01","Missing committed counter is treated as zero and valid commit succeeds","PASS",0.2999
+"TC-RES","TC-RES-COMMIT-COUNTER-02","Negative committed counter is rejected with zero mutation","PASS",0.9543
+"TC-RES","TC-RES-COMMIT-COUNTER-03","Fractional committed counter is rejected with zero mutation","PASS",2.7057
+"TC-RES","TC-RES-COMMIT-COUNTER-04","NaN and Infinity are rejected with zero mutation","PASS",0.6515
+"TC-RES","TC-RES-COMMIT-COUNTER-05","String and null committed counters are rejected with zero mutation","PASS",0.5052
+"TC-RES","TC-RES-COMMIT-COUNTER-06","Malformed counters container is rejected with zero mutation","PASS",0.4531
+"TC-RES","TC-RES-COMMIT-COUNTER-07","Valid positive committed counter increments exactly once","PASS",0.401
+"TC-RES","TC-RES-COMMIT-COUNTER-08","Real game.activateAbility() path rejects corrupted committed-counter state without consuming the reservation or paying costs","PASS",0.8441
+"TC-RES","TC-RES-CONTEXT-01","Valid plain context with no _committedKeys commits successfully and creates a Set","PASS",0.3806
+"TC-RES","TC-RES-CONTEXT-02","Existing valid Set is updated exactly once","PASS",0.35
+"TC-RES","TC-RES-CONTEXT-03","Plain object _committedKeys is rejected with zero state mutation","PASS",0.5452
+"TC-RES","TC-RES-CONTEXT-04","Array _committedKeys is rejected with zero state mutation","PASS",0.4404
+"TC-RES","TC-RES-CONTEXT-05","Set-like object with has() but no genuine Set implementation is rejected with zero state mutation","PASS",0.4187
+"TC-RES","TC-RES-CONTEXT-06","Frozen context is rejected safely with zero state mutation","PASS",0.434
+"TC-RES","TC-RES-CONTEXT-07","Non-writable isCommitted is rejected with zero state mutation","PASS",0.4527
+"TC-RES","TC-RES-CONTEXT-08","Null context follows the documented supported behavior","PASS",0.4366
+"TC-RES","TC-RES-CONTEXT-09","Duplicate commit remains rejected without changing counters or reservation state","PASS",0.4042
+"TC-RES","TC-RES-CONTEXT-FINAL-01","Genuine Set with an overridden throwing add() is rejected before mutation","PASS",0.4135
+"TC-RES","TC-RES-CONTEXT-FINAL-02","Genuine Set with an overridden throwing has() is rejected before mutation","PASS",0.4892
+"TC-RES","TC-RES-CONTEXT-FINAL-03","Accessor setter for isCommitted is rejected before mutation","PASS",0.4793
+"TC-RES","TC-RES-CONTEXT-FINAL-04","Throwing getter for _committedKeys is rejected without invoking it","PASS",0.4953
+"TC-RES","TC-RES-CONTEXT-FINAL-05","Throwing getter for sourceCard is rejected before mutation","PASS",0.5282
+"TC-RES","TC-RES-CONTEXT-FINAL-06","Throwing getter for sourceStack is rejected before mutation","PASS",0.4511
+"TC-RES","TC-RES-CONTEXT-FINAL-07","Valid ordinary context with no Set still commits successfully","PASS",0.4355
+"TC-RES","TC-RES-CONTEXT-FINAL-08","Valid context with a normal Set commits exactly once","PASS",0.4339
+"TC-RES","TC-RES-CONTEXT-FINAL-09","Invalid context leaves reservation records, reservation counters, committed counters, metadata, and abilityUses unchanged","PASS",1.2712
+"TC-RES","TC-RES-CONTEXT-FINAL-10","Actual game.activateAbility() integration path remains correct for valid and invalid contexts","PASS",1.2094
+"TC-RES","TC-RES-PROXY-ORDER-01","Context Proxy with a throwing getPrototypeOf trap is rejected without throwing","PASS",1.9244
+"TC-RES","TC-RES-PROXY-ORDER-02","Context Proxy with a side-effecting getPrototypeOf trap is rejected without invoking the trap","PASS",0.9611
+"TC-RES","TC-RES-PROXY-ORDER-03","Context Proxy rejection leaves reservation records, reservation counters, committed counters, metadata, and abilityUses unchanged","PASS",0.7578
+"TC-RES","TC-RES-PROXY-ORDER-04","Direct isAssignableContextProperty() call with a Proxy rejects it without invoking Proxy traps","PASS",0.3123
+"TC-RES","TC-RES-PROXY-ORDER-05","Ordinary valid plain-object contexts still commit successfully","PASS",0.5312

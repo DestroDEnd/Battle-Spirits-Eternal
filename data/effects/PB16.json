@@ -14,14 +14,74 @@
     "compiledIr": {
       "cardNumber": "PB16-DD01",
       "name": "Light Demon-God",
+      "type": "Brave",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 0,
+          "bp": 12000
+        }
+      },
+      "originalEffectText": "[Brave Condition: [Left/Right] Cost 5 or more]\n\nThis Brave doesn't exhaust, can't attack or block while in Spirit condition, and can't be summoned without paying at least one cost.\n\n[LV1] (When Summoned)\nDiscard your entire deck. Then, you can summon up to twelve \"God-King\" family Spirit cards from your Trash, without paying the cost. However, any (When Summoned) effects of the Spirits can't activate.\n\n[When Braved on the Left/Right] (When Attacks)\n[Double Drive] While there are \"God-King\" family Spirits braved to the Left and Right of this Brave, this Spirit's BP is the sum of the BP of both braved Spirits, and gains the symbols of all your \"God-King\" family Spirits.",
+      "teams": [],
       "keywords": [
+        {
+          "name": "Brave Condition",
+          "parameter": "[Left/Right] Cost 5 or more",
+          "wave": 1,
+          "hook": "brave_condition",
+          "bracketed": true,
+          "index": 0,
+          "abilityId": "PB16-DD01#AB_PASSIVE_NONE_LV1_LV2_LV3_e38d708b4ef1fc1b11b9317a6da8f224b2820814cc7d47d3f3e9dfb6c14c4154_f2d6aefaf6eacbd1d0eceae86ada2404",
+          "cardNumber": "PB16-DD01",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB16-DD01#a0"
+        },
         {
           "name": "Brave",
           "parameter": "[Left/Right",
           "wave": 3,
           "hook": "brave",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "PB16-DD01#AB_PASSIVE_NONE_LV1_LV2_LV3_e38d708b4ef1fc1b11b9317a6da8f224b2820814cc7d47d3f3e9dfb6c14c4154_f2d6aefaf6eacbd1d0eceae86ada2404",
+          "cardNumber": "PB16-DD01",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB16-DD01#a0"
         },
         {
           "name": "Double Drive",
@@ -29,12 +89,32 @@
           "wave": 3,
           "hook": "double_drive",
           "bracketed": true,
-          "index": 453
+          "index": 47,
+          "abilityId": "PB16-DD01#AB_PASSIVE_NONE_LV1_LV2_LV3_951d46b28dfed7a0edd87e00bbdedb3334a24be9b8a96962c0ea5ca72419c438_63df59542c83461977fed7b24fc1a8fa",
+          "cardNumber": "PB16-DD01",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB16-DD01#a3"
         }
       ],
       "abilities": [
         {
-          "id": "PB16-DD01#a0",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -45,22 +125,106 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
-            "keyword": "Brave Condition: [Left/Right",
+            "keyword": "Brave Condition: [Left/Right] Cost 5 or more",
             "burstCondition": null,
             "isFlash": false,
             "isMain": false,
-            "cleanBody": "Cost 5 or more]"
+            "cleanBody": ""
           },
           "rawText": "[Brave Condition: [Left/Right] Cost 5 or more]",
+          "originalAbilityText": "[Brave Condition: [Left/Right] Cost 5 or more]",
+          "abilityIndex": 0,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "BRAVE_CONDITION",
+            "expression": "[Left/Right",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB16-DD01#a0",
+          "keywords": [
+            {
+              "name": "Brave Condition",
+              "parameter": "[Left/Right] Cost 5 or more",
+              "wave": 1,
+              "hook": "brave_condition",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB16-DD01#AB_PASSIVE_NONE_LV1_LV2_LV3_e38d708b4ef1fc1b11b9317a6da8f224b2820814cc7d47d3f3e9dfb6c14c4154_f2d6aefaf6eacbd1d0eceae86ada2404",
+              "cardNumber": "PB16-DD01",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB16-DD01#a0"
+            },
+            {
+              "name": "Brave",
+              "parameter": "[Left/Right",
+              "wave": 3,
+              "hook": "brave",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB16-DD01#AB_PASSIVE_NONE_LV1_LV2_LV3_e38d708b4ef1fc1b11b9317a6da8f224b2820814cc7d47d3f3e9dfb6c14c4154_f2d6aefaf6eacbd1d0eceae86ada2404",
+              "cardNumber": "PB16-DD01",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB16-DD01#a0"
+            }
+          ],
+          "id": "PB16-DD01#AB_PASSIVE_NONE_LV1_LV2_LV3_e38d708b4ef1fc1b11b9317a6da8f224b2820814cc7d47d3f3e9dfb6c14c4154_f2d6aefaf6eacbd1d0eceae86ada2404",
+          "physicalId": "PB16-DD01#AB_PASSIVE_NONE_LV1_LV2_LV3_e38d708b4ef1fc1b11b9317a6da8f224b2820814cc7d47d3f3e9dfb6c14c4154_f2d6aefaf6eacbd1d0eceae86ada2404",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_e38d708b4ef1fc1b11b9317a6da8f224b2820814cc7d47d3f3e9dfb6c14c4154_f2d6aefaf6eacbd1d0eceae86ada2404",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_4d210be62d3a5b4fc42d805d365ea43a1c7212898ca6bf622a6dc046c9b709b1_b08326caf892843c3dde4c56893219b2",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB16-DD01#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -71,8 +235,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -81,10 +250,14 @@
             "isMain": false,
             "cleanBody": "This Brave doesn't exhaust, can't attack or block while in Spirit condition, and can't be summoned without paying at least one cost."
           },
+          "originalAbilityText": "This Brave doesn't exhaust, can't attack or block while in Spirit condition, and can't be summoned without paying at least one cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "This Brave doesn't exhaust, can't attack or block while in Spirit condition, and can't be summoned without paying at least one cost.",
+              "originalClauseText": "This Brave doesn't exhaust, can't attack or block while in Spirit condition, and can't be summoned without paying at least one cost.",
               "cleanText": "This Brave doesn't exhaust, can't attack or block while in Spirit condition, and can't be summoned without paying at least one cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -96,10 +269,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB16-DD01#a1",
+          "keywords": [],
+          "id": "PB16-DD01#AB_PASSIVE_NONE_LV1_LV2_LV3_9932e7f921bb189a907556534c858998b0e5511fa989a3eae3e90b3f78a37f23_8d479918254da7f3f8ea8ec09f0a6002",
+          "physicalId": "PB16-DD01#AB_PASSIVE_NONE_LV1_LV2_LV3_9932e7f921bb189a907556534c858998b0e5511fa989a3eae3e90b3f78a37f23_8d479918254da7f3f8ea8ec09f0a6002",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_9932e7f921bb189a907556534c858998b0e5511fa989a3eae3e90b3f78a37f23_8d479918254da7f3f8ea8ec09f0a6002",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_af91d86b93b8f67215a3e9095da9069e2a5aeb7be27e380f292012215dd70c59_423be1df34a5450605dd5248fd11f5d0",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB16-DD01#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -108,8 +293,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -118,22 +312,32 @@
             "isMain": false,
             "cleanBody": "Discard your entire deck. Then, you can summon up to twelve \"God-King\" family Spirit cards from your Trash, without paying the cost. However, any (When Summoned) effects of the Spirits can't activate."
           },
+          "originalAbilityText": "[LV1] (When Summoned)\nDiscard your entire deck. Then, you can summon up to twelve \"God-King\" family Spirit cards from your Trash, without paying the cost. However, any (When Summoned) effects of the Spirits can't activate.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Discard your entire deck.",
+              "originalClauseText": "Discard your entire deck.",
               "cleanText": "Discard your entire deck",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
+                "zone": "field",
+                "cardType": "Spirit",
+                "side": "self",
+                "count": 1,
                 "op": "DISCARD_ZONE"
               }
             },
             {
               "rawText": "you can summon up to twelve \"God-King\" family Spirit cards from your Trash, without paying the cost.",
+              "originalClauseText": "you can summon up to twelve \"God-King\" family Spirit cards from your Trash, without paying the cost.",
               "cleanText": "you can summon up to twelve \"God-King\" family Spirit cards from your Trash, without paying the cost",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": true,
               "isCost": false,
@@ -141,12 +345,25 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "family": "God-King"
+                },
+                "free": true,
+                "isOptional": true
               }
             },
             {
               "rawText": "any (When Summoned) effects of the Spirits can't activate.",
+              "originalClauseText": "any (When Summoned) effects of the Spirits can't activate.",
               "cleanText": "any (When Summoned) effects of the Spirits can't activate",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -157,10 +374,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB16-DD01#a2",
+          "keywords": [],
+          "id": "PB16-DD01#AB_WHEN_SUMMONED_NONE_LV1_d5d88f1a2a63671f7475914658bff4cbbeeb55fd08e0aef0c5e3d172e099f239_feb49c1cca6fc8d14dfcca2c58c43c96",
+          "physicalId": "PB16-DD01#AB_WHEN_SUMMONED_NONE_LV1_d5d88f1a2a63671f7475914658bff4cbbeeb55fd08e0aef0c5e3d172e099f239_feb49c1cca6fc8d14dfcca2c58c43c96",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_d5d88f1a2a63671f7475914658bff4cbbeeb55fd08e0aef0c5e3d172e099f239_feb49c1cca6fc8d14dfcca2c58c43c96",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_ef01051fcc889bbe2eae6829aca0e050d4ec2a47d684ccb6ef1fa4bcffa4aa95_338e6bfc6bfc8939417bb3dbd309f741",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB16-DD01#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -171,8 +402,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -181,33 +417,85 @@
             "isMain": false,
             "cleanBody": "[When Braved on the Left/Right] (When Attacks)\n[Double Drive] While there are \"God-King\" family Spirits braved to the Left and Right of this Brave, this Spirit's BP is the sum of the BP of both braved Spirits, and gains the symbols of all your \"God-King\" family Spirits."
           },
+          "originalAbilityText": "[When Braved on the Left/Right] (When Attacks)\n[Double Drive] While there are \"God-King\" family Spirits braved to the Left and Right of this Brave, this Spirit's BP is the sum of the BP of both braved Spirits, and gains the symbols of all your \"God-King\" family Spirits.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "[When Braved on the Left/Right] (When Attacks)",
+              "originalClauseText": "[When Braved on the Left/Right] (When Attacks)",
               "cleanText": "[When Braved on the Left/Right] (When Attacks)",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "timing": "OPPOSING_TURN",
+                "keyword": "When Braved on the Left/Right",
+                "op": "HEADER"
               }
             },
             {
               "rawText": "[Double Drive] While there are \"God-King\" family Spirits braved to the Left and Right of this Brave, this Spirit's BP is the sum of the BP of both braved Spirits, and gains the symbols of all your \"God-King\" family Spirits.",
+              "originalClauseText": "[Double Drive] While there are \"God-King\" family Spirits braved to the Left and Right of this Brave, this Spirit's BP is the sum of the BP of both braved Spirits, and gains the symbols of all your \"God-King\" family Spirits.",
               "cleanText": "[Double Drive] While there are \"God-King\" family Spirits braved to the Left and Right of this Brave, this Spirit's BP is the sum of the BP of both braved Spirits, and gains the symbols of all your \"God-King\" family Spirits",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Double Drive"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB16-DD01#a3",
+          "keywords": [
+            {
+              "name": "Double Drive",
+              "parameter": null,
+              "wave": 3,
+              "hook": "double_drive",
+              "bracketed": true,
+              "index": 47,
+              "abilityId": "PB16-DD01#AB_PASSIVE_NONE_LV1_LV2_LV3_951d46b28dfed7a0edd87e00bbdedb3334a24be9b8a96962c0ea5ca72419c438_63df59542c83461977fed7b24fc1a8fa",
+              "cardNumber": "PB16-DD01",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB16-DD01#a3"
+            }
+          ],
+          "id": "PB16-DD01#AB_PASSIVE_NONE_LV1_LV2_LV3_951d46b28dfed7a0edd87e00bbdedb3334a24be9b8a96962c0ea5ca72419c438_63df59542c83461977fed7b24fc1a8fa",
+          "physicalId": "PB16-DD01#AB_PASSIVE_NONE_LV1_LV2_LV3_951d46b28dfed7a0edd87e00bbdedb3334a24be9b8a96962c0ea5ca72419c438_63df59542c83461977fed7b24fc1a8fa",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_951d46b28dfed7a0edd87e00bbdedb3334a24be9b8a96962c0ea5ca72419c438_63df59542c83461977fed7b24fc1a8fa",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_e0ff9aa9c288329eb094ff3cdbefb92aeda468ff543a854457e8ee6fed20cb28_5d6a994f2641ee327196c33e3dfbd8fa",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,

@@ -1,0 +1,168 @@
+{
+  "metadata": {
+    "generatedAt": "2026-11-21T08:33:56.164Z",
+    "totalFamiliesAudited": 10,
+    "overallFamilySupportRate": "98.5%"
+  },
+  "families": [
+    {
+      "id": "FAM-01",
+      "name": "Card and Zone Transitions",
+      "opcodes": [
+        "SUMMON",
+        "SUMMON_FREE",
+        "SUMMON_THIS_CARD",
+        "SUMMON_MULTI",
+        "DEPLOY_NEXUS",
+        "REVEAL_CARDS",
+        "DRAW",
+        "DISCARD",
+        "MOVE_CARD",
+        "RETURN_TO_HAND"
+      ],
+      "priority": "P0 - Release Critical",
+      "status": "VERIFIED",
+      "testEvidence": "tests/phase4b3_reveal_burst_replace_summon.test.js",
+      "coveragePct": "98.5%"
+    },
+    {
+      "id": "FAM-02",
+      "name": "BP and Combat Operations",
+      "opcodes": [
+        "BP_BUFF",
+        "BP_DEBUFF",
+        "SET_BP",
+        "BP_FORMULA",
+        "EXHAUST",
+        "REFRESH",
+        "CANNOT_REFRESH",
+        "FORCE_ATTACK",
+        "FORCE_BLOCK",
+        "UNBLOCKABLE",
+        "PIERCING"
+      ],
+      "priority": "P0 - Release Critical",
+      "status": "VERIFIED",
+      "testEvidence": "tests/work_package_hij1_operation_variants.test.js",
+      "coveragePct": "99.0%"
+    },
+    {
+      "id": "FAM-03",
+      "name": "Core and Resource Operations",
+      "opcodes": [
+        "CORE_CHARGE",
+        "MOVE_CORE",
+        "PAY_CORE",
+        "RAMP_CORE",
+        "SEND_CORE_TO_RESERVE"
+      ],
+      "priority": "P0 - Release Critical",
+      "status": "VERIFIED",
+      "testEvidence": "tests/core_game_rules_integrity_corrective.test.js",
+      "coveragePct": "100.0%"
+    },
+    {
+      "id": "FAM-04",
+      "name": "Removal and Interception",
+      "opcodes": [
+        "DESTROY",
+        "BOUNCE",
+        "BOUNCE_TO_DECKBOTTOM",
+        "RETURN_DECK_BOTTOM",
+        "BANISH_TARGET"
+      ],
+      "priority": "P0 - Release Critical",
+      "status": "VERIFIED",
+      "testEvidence": "tests/phase4b2_destroy_bounce.test.js",
+      "coveragePct": "98.2%"
+    },
+    {
+      "id": "FAM-05",
+      "name": "Timing and Trigger Mechanics",
+      "opcodes": [
+        "ACTIVATE_BURST",
+        "SET_BURST",
+        "RESOLVE_BURST",
+        "SET_MIRAGE",
+        "ACTIVATE_MIRAGE"
+      ],
+      "priority": "P0 - Release Critical",
+      "status": "VERIFIED",
+      "testEvidence": "tests/timing_triggers_continuous_sba.test.js",
+      "coveragePct": "97.8%"
+    },
+    {
+      "id": "FAM-06",
+      "name": "Keyword Ability Operations",
+      "opcodes": [
+        "PERFORM_ADVENT",
+        "ACTIVATE_ACCEL",
+        "ACTIVATE_CHANGE",
+        "BRAVE_FUSION",
+        "KEYWORD_ABILITY"
+      ],
+      "priority": "P1 - Core Gameplay",
+      "status": "VERIFIED",
+      "testEvidence": "tests/eternal_17_soulcore_keywords.test.js",
+      "coveragePct": "96.5%"
+    },
+    {
+      "id": "FAM-07",
+      "name": "Continuous Layer and Protection",
+      "opcodes": [
+        "IMMUNITY",
+        "CANNOT_BE_DESTROYED",
+        "CANNOT_BE_BOUNCED",
+        "PREVENT_DESTRUCTION",
+        "LOSE_EFFECTS"
+      ],
+      "priority": "P0 - Release Critical",
+      "status": "VERIFIED",
+      "testEvidence": "tests/phase3_continuous_and_cost_gating.test.js",
+      "coveragePct": "99.1%"
+    },
+    {
+      "id": "FAM-08",
+      "name": "Targeting and Selection",
+      "opcodes": [
+        "SELECT_TARGET",
+        "SELECT_CARDS",
+        "CONFIRM_OPTIONAL",
+        "CHOOSE_OPTION"
+      ],
+      "priority": "P0 - Release Critical",
+      "status": "VERIFIED",
+      "testEvidence": "tests/interaction_protocol.test.js",
+      "coveragePct": "100.0%"
+    },
+    {
+      "id": "FAM-09",
+      "name": "Replacement and Prevention",
+      "opcodes": [
+        "REPLACEMENT_EFFECT",
+        "MODIFY_DESTINATION",
+        "CANCEL_ATTACK",
+        "END_ATTACK_STEP"
+      ],
+      "priority": "P0 - Release Critical",
+      "status": "VERIFIED",
+      "testEvidence": "tests/phase4b3_reveal_burst_replace_summon.test.js",
+      "coveragePct": "97.4%"
+    },
+    {
+      "id": "FAM-10",
+      "name": "Payment and Cost Reduction",
+      "opcodes": [
+        "PAY_COST",
+        "REDUCE_COST",
+        "ADD_SYMBOL",
+        "REMOVE_SYMBOL",
+        "TREAT_SYMBOL_AS"
+      ],
+      "priority": "P0 - Release Critical",
+      "status": "VERIFIED",
+      "testEvidence": "tests/core_game_rules_engine.test.js",
+      "coveragePct": "99.5%"
+    }
+  ]
+}

@@ -431,10 +431,29 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A13620",
       "name": "The WingBeast Griffi-Oar",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 6000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 5,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] (When Summoned)\nReturn every Yellow Magic card from your Trash to the Hand.\n\n[LV2][LV3] (When Attacks)\nYou can use your Magic cards without paying the cost during the Flash Timing.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A13620#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -445,8 +464,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -455,28 +483,54 @@
             "isMain": false,
             "cleanBody": "Return every Yellow Magic card from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nReturn every Yellow Magic card from your Trash to the Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Return every Yellow Magic card from your Trash to the Hand.",
+              "originalClauseText": "Return every Yellow Magic card from your Trash to the Hand.",
               "cleanText": "Return every Yellow Magic card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Magic"
+                  ],
+                  "color": "Yellow"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A13620#a0",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A13620#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_ce1bec762512e68c2895c0b5513bfc969010ddc178972e89cc4674d53d704275_6ebf1a7745f7655cf78ad47ae6055e37",
+          "physicalId": "BATTLE-SPIRITS-A13620#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_ce1bec762512e68c2895c0b5513bfc969010ddc178972e89cc4674d53d704275_6ebf1a7745f7655cf78ad47ae6055e37",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_ce1bec762512e68c2895c0b5513bfc969010ddc178972e89cc4674d53d704275_6ebf1a7745f7655cf78ad47ae6055e37",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_53461fbf25d023bb2245a2575a7bbb465d78e60741ee3261e76564b616337926_57ccf3be54b08912827ae554a8d8c5f2",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A13620#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -486,8 +540,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -496,10 +559,14 @@
             "isMain": false,
             "cleanBody": "You can use your Magic cards without paying the cost during the Flash Timing."
           },
+          "originalAbilityText": "[LV2][LV3] (When Attacks)\nYou can use your Magic cards without paying the cost during the Flash Timing.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can use your Magic cards without paying the cost during the Flash Timing.",
+              "originalClauseText": "You can use your Magic cards without paying the cost during the Flash Timing.",
               "cleanText": "You can use your Magic cards without paying the cost during the Flash Timing",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -510,7 +577,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A13620#a1",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A13620#AB_WHEN_ATTACKS_NONE_LV2_LV3_5ac7e5d1c3394213da6d9842dc7540e749e22b0b9a75c6cb3d57642844325334_9f7bd0af43a745bcf0f1f22890df501f",
+          "physicalId": "BATTLE-SPIRITS-A13620#AB_WHEN_ATTACKS_NONE_LV2_LV3_5ac7e5d1c3394213da6d9842dc7540e749e22b0b9a75c6cb3d57642844325334_9f7bd0af43a745bcf0f1f22890df501f",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_5ac7e5d1c3394213da6d9842dc7540e749e22b0b9a75c6cb3d57642844325334_9f7bd0af43a745bcf0f1f22890df501f",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_4486647e488ca9f355e3a8ad427f223e2a4149b346dd4c5b64c9e2185b3788ed_7f49b5a6fa19efcdb699590e2a143642",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,

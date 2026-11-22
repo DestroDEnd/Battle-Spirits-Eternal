@@ -24,10 +24,29 @@
     "compiledIr": {
       "cardNumber": "PB39-X01",
       "name": "The OracleTwentyOneBirds 3 The-Penpress",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 9000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 13000
+        }
+      },
+      "originalEffectText": "This card/Spirit is also treated as \"Pentan\".\n\n[LV1][LV2][LV3] (When Summoned)\n(Once per Turn: Same Name) You can discard three cards from your decktop. Then, you can return two \"Song Bird\" family cards, besides any \"The-Penpress\", from your Trash to the Hand.\n\n[LV2][LV3] (Your Attack Step)\nAll your \"Pentan\"/\"Empereur\"/\"Penpress\" can't be blocked by opposing LV2/LV3 Spirits and opposing LV4/LV5 Ultimates.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "PB39-X01#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -38,8 +57,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -48,24 +72,42 @@
             "isMain": false,
             "cleanBody": "This card/Spirit is also treated as \"Pentan\"."
           },
+          "originalAbilityText": "This card/Spirit is also treated as \"Pentan\".",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "This card/Spirit is also treated as \"Pentan\".",
+              "originalClauseText": "This card/Spirit is also treated as \"Pentan\".",
               "cleanText": "This card/Spirit is also treated as \"Pentan\"",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "TREAT_RULE",
+                "treatAs": "NAME",
+                "name": "Pentan"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB39-X01#a0",
+          "keywords": [],
+          "id": "PB39-X01#AB_PASSIVE_NONE_LV1_LV2_LV3_02ddfa364ce456950b3cf8578d76d43b3f62c273cd2faf1a34b3f50dd61f907d_fbe3b1d911bd4d7bab017c9901091983",
+          "physicalId": "PB39-X01#AB_PASSIVE_NONE_LV1_LV2_LV3_02ddfa364ce456950b3cf8578d76d43b3f62c273cd2faf1a34b3f50dd61f907d_fbe3b1d911bd4d7bab017c9901091983",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_02ddfa364ce456950b3cf8578d76d43b3f62c273cd2faf1a34b3f50dd61f907d_fbe3b1d911bd4d7bab017c9901091983",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_bb38266a88a90d804566d6f1e442fda28b8922cbb3b76f07362ba9a7a5bae05e_a3636ded77ce33cab9192ce3d031b6e7",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB39-X01#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -76,8 +118,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
             "limit": "ONCE_PER_TURN_SAME_NAME",
             "cantStack": false,
             "keyword": null,
@@ -86,10 +139,14 @@
             "isMain": false,
             "cleanBody": "You can discard three cards from your decktop. Then, you can return two \"Song Bird\" family cards, besides any \"The-Penpress\", from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\n(Once per Turn: Same Name) You can discard three cards from your decktop. Then, you can return two \"Song Bird\" family cards, besides any \"The-Penpress\", from your Trash to the Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can discard three cards from your decktop.",
+              "originalClauseText": "You can discard three cards from your decktop.",
               "cleanText": "You can discard three cards from your decktop",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -102,25 +159,49 @@
             },
             {
               "rawText": "you can return two \"Song Bird\" family cards, besides any \"The-Penpress\", from your Trash to the Hand.",
+              "originalClauseText": "you can return two \"Song Bird\" family cards, besides any \"The-Penpress\", from your Trash to the Hand.",
               "cleanText": "you can return two \"Song Bird\" family cards, besides any \"The-Penpress\", from your Trash to the Hand",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
-                "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
+                "count": 2,
+                "upTo": false,
+                "filter": {
+                  "family": "Song Bird",
+                  "nameIncludes": "The-Penpress"
+                },
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB39-X01#a1",
+          "keywords": [],
+          "id": "PB39-X01#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_ef981ae8dad51f69d9467996b21e78f89d09541bd6091e19526f16a01a6038d8_caf0f131889a452132abed40c7d37ec5",
+          "physicalId": "PB39-X01#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_ef981ae8dad51f69d9467996b21e78f89d09541bd6091e19526f16a01a6038d8_caf0f131889a452132abed40c7d37ec5",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_ef981ae8dad51f69d9467996b21e78f89d09541bd6091e19526f16a01a6038d8_caf0f131889a452132abed40c7d37ec5",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_b06570b96a17adff442e43d0478590a6f0f4ab401e5886266d15807965d9675e_2844c010e351d9616a1a1d67ab80e686",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB39-X01#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -130,8 +211,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -140,21 +230,40 @@
             "isMain": false,
             "cleanBody": "All your \"Pentan\"/\"Empereur\"/\"Penpress\" can't be blocked by opposing LV2/LV3 Spirits and opposing LV4/LV5 Ultimates."
           },
+          "originalAbilityText": "[LV2][LV3] (Your Attack Step)\nAll your \"Pentan\"/\"Empereur\"/\"Penpress\" can't be blocked by opposing LV2/LV3 Spirits and opposing LV4/LV5 Ultimates.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "All your \"Pentan\"/\"Empereur\"/\"Penpress\" can't be blocked by opposing LV2/LV3 Spirits and opposing LV4/LV5 Ultimates.",
+              "originalClauseText": "All your \"Pentan\"/\"Empereur\"/\"Penpress\" can't be blocked by opposing LV2/LV3 Spirits and opposing LV4/LV5 Ultimates.",
               "cleanText": "All your \"Pentan\"/\"Empereur\"/\"Penpress\" can't be blocked by opposing LV2/LV3 Spirits and opposing LV4/LV5 Ultimates",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "UNBLOCKABLE"
+                "op": "COMBAT_RESTRICTION"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB39-X01#a2",
+          "keywords": [],
+          "id": "PB39-X01#AB_ATTACK_STEP_NONE_LV2_LV3_73ceec0cb64527c6db0c04b116726dfdf296ce76067a0355bffa2641a1f5b8c7_307768e23244d123aaa7b5f153a9f62a",
+          "physicalId": "PB39-X01#AB_ATTACK_STEP_NONE_LV2_LV3_73ceec0cb64527c6db0c04b116726dfdf296ce76067a0355bffa2641a1f5b8c7_307768e23244d123aaa7b5f153a9f62a",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_73ceec0cb64527c6db0c04b116726dfdf296ce76067a0355bffa2641a1f5b8c7_307768e23244d123aaa7b5f153a9f62a",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_LV3_b36943941e92e4ea100783c0571b1f86c7ceebd111baafcd2aadbe39941fe90a_ba141257217219ae2584a3c623229d50",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -795,6 +904,21 @@
     "compiledIr": {
       "cardNumber": "PB39-001",
       "name": "The Gentleman Pentan",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 6000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: Pen Contract, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents/Attacks)\nYour counter +1. Then, during this turn, give an opposing Spirit/Ultimate -5000 BP. When it is brought to 0 BP by this effect, you can return it to the deckbottom.\n\n[During OC] [LV1][LV2] (When Attacks)\nDuring this turn, an opposing Spirit/Ultimate can't block.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -802,12 +926,32 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "PB39-001#AB_FLASH_NONE_LV1_LV2_LV3_6ad1edd2b6b3002852cd6ec0ceb27d660c1dfd9cb313fb65f51282a47179c301_6e7ad2cb5cb779b45b667becd405ede4",
+          "cardNumber": "PB39-001",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PB39-001#a0"
         }
       ],
       "abilities": [
         {
-          "id": "PB39-001#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -818,8 +962,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: Pen Contract, (Your Turn)",
@@ -828,10 +979,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: Pen Contract, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -853,7 +1008,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -871,10 +1028,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB39-001#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "Pen Contract, (Your Turn)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB39-001#AB_FLASH_NONE_LV1_LV2_LV3_6ad1edd2b6b3002852cd6ec0ceb27d660c1dfd9cb313fb65f51282a47179c301_6e7ad2cb5cb779b45b667becd405ede4",
+              "cardNumber": "PB39-001",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PB39-001#a0"
+            }
+          ],
+          "id": "PB39-001#AB_FLASH_NONE_LV1_LV2_LV3_6ad1edd2b6b3002852cd6ec0ceb27d660c1dfd9cb313fb65f51282a47179c301_6e7ad2cb5cb779b45b667becd405ede4",
+          "physicalId": "PB39-001#AB_FLASH_NONE_LV1_LV2_LV3_6ad1edd2b6b3002852cd6ec0ceb27d660c1dfd9cb313fb65f51282a47179c301_6e7ad2cb5cb779b45b667becd405ede4",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_6ad1edd2b6b3002852cd6ec0ceb27d660c1dfd9cb313fb65f51282a47179c301_6e7ad2cb5cb779b45b667becd405ede4",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_89f50450403b5a9b736a3d824b3ef4f2e6b1db150554fcc68ae6df466bc7347d_b58d9e56b51f30ea97d1a44256b4d898",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB39-001#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -884,8 +1085,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Advents/Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -894,10 +1106,14 @@
             "isMain": false,
             "cleanBody": "Your counter +1. Then, during this turn, give an opposing Spirit/Ultimate -5000 BP. When it is brought to 0 BP by this effect, you can return it to the deckbottom."
           },
+          "originalAbilityText": "[LV1][LV2] (When Advents/Attacks)\nYour counter +1. Then, during this turn, give an opposing Spirit/Ultimate -5000 BP. When it is brought to 0 BP by this effect, you can return it to the deckbottom.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Your counter +1.",
+              "originalClauseText": "Your counter +1.",
               "cleanText": "Your counter +1",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -910,7 +1126,9 @@
             },
             {
               "rawText": "during this turn, give an opposing Spirit/Ultimate -5000 BP.",
+              "originalClauseText": "during this turn, give an opposing Spirit/Ultimate -5000 BP.",
               "cleanText": "give an opposing Spirit/Ultimate -5000 BP",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -918,12 +1136,22 @@
               "duration": "DURING_THIS_TURN",
               "op": {
                 "op": "BP_DEBUFF",
-                "amount": 5000
+                "amount": 5000,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit",
+                    "Ultimate"
+                  ]
+                },
+                "duration": "DURING_THIS_TURN"
               }
             },
             {
               "rawText": "When it is brought to 0 BP by this effect, you can return it to the deckbottom.",
+              "originalClauseText": "When it is brought to 0 BP by this effect, you can return it to the deckbottom.",
               "cleanText": "When it is brought to 0 BP by this effect, you can return it to the deckbottom",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -938,10 +1166,25 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB39-001#a1",
+          "keywords": [],
+          "id": "PB39-001#AB_WHEN_ADVENTS_NONE_LV1_LV2_27c25e51ac21e6e7228e701981ac52135500add3be44ba0bb82f7a5202e362ce_1961f497bcb9cc91e8218dad2d338788",
+          "physicalId": "PB39-001#AB_WHEN_ADVENTS_NONE_LV1_LV2_27c25e51ac21e6e7228e701981ac52135500add3be44ba0bb82f7a5202e362ce_1961f497bcb9cc91e8218dad2d338788",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_27c25e51ac21e6e7228e701981ac52135500add3be44ba0bb82f7a5202e362ce_1961f497bcb9cc91e8218dad2d338788",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_364a8ac65b97bd16a7b956c1acdeae5a3f78e58d79bb5feb58441c81bf1fe0ee_23c35b4a76382388ee9b10956ce68ab1",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB39-001#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -953,8 +1196,17 @@
               "During OC"
             ],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -963,10 +1215,14 @@
             "isMain": false,
             "cleanBody": "During this turn, an opposing Spirit/Ultimate can't block."
           },
+          "originalAbilityText": "[During OC] [LV1][LV2] (When Attacks)\nDuring this turn, an opposing Spirit/Ultimate can't block.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "During this turn, an opposing Spirit/Ultimate can't block.",
+              "originalClauseText": "During this turn, an opposing Spirit/Ultimate can't block.",
               "cleanText": "an opposing Spirit/Ultimate can't block",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -977,7 +1233,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB39-001#a2",
+          "keywords": [],
+          "id": "PB39-001#AB_WHEN_ATTACKS_NONE_LV1_LV2_7ed9ac5a65ad48eae2d2cdc11fcb6b921de55dff42f81a0322f39ae833a624c8_05c4873c7004e0be768acad061d37e2c",
+          "physicalId": "PB39-001#AB_WHEN_ATTACKS_NONE_LV1_LV2_7ed9ac5a65ad48eae2d2cdc11fcb6b921de55dff42f81a0322f39ae833a624c8_05c4873c7004e0be768acad061d37e2c",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_7ed9ac5a65ad48eae2d2cdc11fcb6b921de55dff42f81a0322f39ae833a624c8_05c4873c7004e0be768acad061d37e2c",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_c1d94b48948d79fb1e826dff8bab79a1886cdc072d15c46154f2e95371473858_edbedb579586aa37c5f23a2b6d43a931",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
@@ -1005,6 +1276,21 @@
     "compiledIr": {
       "cardNumber": "PB39-X02",
       "name": "The God Pentan",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 8000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 13000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: Pen Contract & C6 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] Flash - (Either Attack Step)\nYou can add a \"Pentan\" Spirit/Ultimate you control to underneath this Spirit as a pre-advent card. When you've done so, refresh this Spirit, and return an opposing Spirit/Ultimate to the deckbottom.\n\n[During OC & During Advent] [LV1][LV2] (Either Attack Step)\nWhen this Spirit would leave the Field due to the opponent, by summoning a \"Song Bird\" family card among this Spirit's pre-advent cards without paying the cost, it remains on the Field, exhausted.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -1012,12 +1298,32 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "PB39-X02#AB_FLASH_NONE_LV1_LV2_LV3_e0d291ef5bd02a209571ebdc355be006c6e66864b85c6522ffd2676c183cac7a_6f1787afe11620f7232788c2b5a68803",
+          "cardNumber": "PB39-X02",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PB39-X02#a0"
         }
       ],
       "abilities": [
         {
-          "id": "PB39-X02#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1028,8 +1334,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: Pen Contract & C6 or more, (Your Turn)",
@@ -1038,10 +1351,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: Pen Contract & C6 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1063,7 +1380,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1081,10 +1400,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB39-X02#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "Pen Contract & C6 or more, (Your Turn)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB39-X02#AB_FLASH_NONE_LV1_LV2_LV3_e0d291ef5bd02a209571ebdc355be006c6e66864b85c6522ffd2676c183cac7a_6f1787afe11620f7232788c2b5a68803",
+              "cardNumber": "PB39-X02",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PB39-X02#a0"
+            }
+          ],
+          "id": "PB39-X02#AB_FLASH_NONE_LV1_LV2_LV3_e0d291ef5bd02a209571ebdc355be006c6e66864b85c6522ffd2676c183cac7a_6f1787afe11620f7232788c2b5a68803",
+          "physicalId": "PB39-X02#AB_FLASH_NONE_LV1_LV2_LV3_e0d291ef5bd02a209571ebdc355be006c6e66864b85c6522ffd2676c183cac7a_6f1787afe11620f7232788c2b5a68803",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_e0d291ef5bd02a209571ebdc355be006c6e66864b85c6522ffd2676c183cac7a_6f1787afe11620f7232788c2b5a68803",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_2223ee54e20b7d2901cbd00431cb64369f951e301a80701cb87147c29a595a80_509858cdac759866480ecf67280b3a6e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB39-X02#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1094,8 +1457,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1104,22 +1476,32 @@
             "isMain": false,
             "cleanBody": "You can add a \"Pentan\" Spirit/Ultimate you control to underneath this Spirit as a pre-advent card. When you've done so, refresh this Spirit, and return an opposing Spirit/Ultimate to the deckbottom."
           },
+          "originalAbilityText": "[LV1][LV2] Flash - (Either Attack Step)\nYou can add a \"Pentan\" Spirit/Ultimate you control to underneath this Spirit as a pre-advent card. When you've done so, refresh this Spirit, and return an opposing Spirit/Ultimate to the deckbottom.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can add a \"Pentan\" Spirit/Ultimate you control to underneath this Spirit as a pre-advent card.",
+              "originalClauseText": "You can add a \"Pentan\" Spirit/Ultimate you control to underneath this Spirit as a pre-advent card.",
               "cleanText": "You can add a \"Pentan\" Spirit/Ultimate you control to underneath this Spirit as a pre-advent card",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
+                "from": "field",
+                "target": "SELF",
+                "count": 1,
+                "upTo": false,
                 "op": "ATTACH_PRE_ADVENT_CARD"
               }
             },
             {
               "rawText": "refresh this Spirit",
+              "originalClauseText": "refresh this Spirit",
               "cleanText": "refresh this Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1132,7 +1514,9 @@
             },
             {
               "rawText": "return an opposing Spirit/Ultimate to the deckbottom.",
+              "originalClauseText": "return an opposing Spirit/Ultimate to the deckbottom.",
               "cleanText": "return an opposing Spirit/Ultimate to the deckbottom",
+              "clauseIndex": 2,
               "link": "also",
               "isOptional": false,
               "isCost": false,
@@ -1147,10 +1531,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB39-X02#a1",
+          "keywords": [],
+          "id": "PB39-X02#AB_ATTACK_STEP_NONE_LV1_LV2_072f26e491ef550285ddc000710306f6fa84c35f0d3c28675cf982bf438afa44_7a542a8edc82e36bfa2efc5294d38fc2",
+          "physicalId": "PB39-X02#AB_ATTACK_STEP_NONE_LV1_LV2_072f26e491ef550285ddc000710306f6fa84c35f0d3c28675cf982bf438afa44_7a542a8edc82e36bfa2efc5294d38fc2",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_072f26e491ef550285ddc000710306f6fa84c35f0d3c28675cf982bf438afa44_7a542a8edc82e36bfa2efc5294d38fc2",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_05454c3469c3fa087fb165d2e620668201576158eac2fb1d86383c698ae71f4f_0984d33574bb41da3486217d35882bf9",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB39-X02#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1162,8 +1560,17 @@
               "During OC & During Advent"
             ],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1172,24 +1579,40 @@
             "isMain": false,
             "cleanBody": "When this Spirit would leave the Field due to the opponent, by summoning a \"Song Bird\" family card among this Spirit's pre-advent cards without paying the cost, it remains on the Field, exhausted."
           },
+          "originalAbilityText": "[During OC & During Advent] [LV1][LV2] (Either Attack Step)\nWhen this Spirit would leave the Field due to the opponent, by summoning a \"Song Bird\" family card among this Spirit's pre-advent cards without paying the cost, it remains on the Field, exhausted.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When this Spirit would leave the Field due to the opponent, by summoning a \"Song Bird\" family card among this Spirit's pre-advent cards without paying the cost, it remains on the Field, exhausted.",
+              "originalClauseText": "When this Spirit would leave the Field due to the opponent, by summoning a \"Song Bird\" family card among this Spirit's pre-advent cards without paying the cost, it remains on the Field, exhausted.",
               "cleanText": "When this Spirit would leave the Field due to the opponent, by summoning a \"Song Bird\" family card among this Spirit's pre-advent cards without paying the cost, it remains on the Field, exhausted",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "EXHAUST",
-                "target": {
-                  "side": "either"
-                }
+                "op": "RESURRECT"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB39-X02#a2",
+          "keywords": [],
+          "id": "PB39-X02#AB_ATTACK_STEP_NONE_LV1_LV2_c9bd369f119d26b0c4e711b1dd5fb8c38129db3884aca4f634eef43d04a3897e_43822a5aa39777a80aaaeb59cc6b1e6a",
+          "physicalId": "PB39-X02#AB_ATTACK_STEP_NONE_LV1_LV2_c9bd369f119d26b0c4e711b1dd5fb8c38129db3884aca4f634eef43d04a3897e_43822a5aa39777a80aaaeb59cc6b1e6a",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_c9bd369f119d26b0c4e711b1dd5fb8c38129db3884aca4f634eef43d04a3897e_43822a5aa39777a80aaaeb59cc6b1e6a",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_4a37b98a2dec9a3ab913ac0e37f598a99455539891d50169a33574c448f1fecb_49f967824a08105724bc720a281282db",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
@@ -1217,6 +1640,21 @@
     "compiledIr": {
       "cardNumber": "PB39-002",
       "name": "The President Pentan",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: Pen Contract & C3 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents)\nDraw two cards. Then, by discarding up to two cards from your Hand, for each card discarded, return an opposing Spirit/Ultimate that is at its highest LV to the deckbottom.\n\n[During OC] [LV1][LV2] Flash - (When Attacks)\nDuring this turn, this Spirit can't be blocked by opposing Spirits/Ultimates with the lowest LV.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -1224,12 +1662,32 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "PB39-002#AB_FLASH_NONE_LV1_LV2_LV3_c721945dbdae043877c9d22353dd67612baae0357b084f08bcde6b36e11826c6_34cab881118be5f94340c2df614b549d",
+          "cardNumber": "PB39-002",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PB39-002#a0"
         }
       ],
       "abilities": [
         {
-          "id": "PB39-002#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1240,8 +1698,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: Pen Contract & C3 or more, (Either Attack Step)",
@@ -1250,10 +1715,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: Pen Contract & C3 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1275,7 +1744,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1293,10 +1764,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB39-002#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "Pen Contract & C3 or more, (Either Attack Step)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB39-002#AB_FLASH_NONE_LV1_LV2_LV3_c721945dbdae043877c9d22353dd67612baae0357b084f08bcde6b36e11826c6_34cab881118be5f94340c2df614b549d",
+              "cardNumber": "PB39-002",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PB39-002#a0"
+            }
+          ],
+          "id": "PB39-002#AB_FLASH_NONE_LV1_LV2_LV3_c721945dbdae043877c9d22353dd67612baae0357b084f08bcde6b36e11826c6_34cab881118be5f94340c2df614b549d",
+          "physicalId": "PB39-002#AB_FLASH_NONE_LV1_LV2_LV3_c721945dbdae043877c9d22353dd67612baae0357b084f08bcde6b36e11826c6_34cab881118be5f94340c2df614b549d",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_c721945dbdae043877c9d22353dd67612baae0357b084f08bcde6b36e11826c6_34cab881118be5f94340c2df614b549d",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_aceed445cf447b4d7f63a6d9bb1424414ece13c3a168512ad63e4fbba8c19107_cdd4a1ea084e43400d6ce32380d70d3f",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB39-002#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1306,8 +1821,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS"
+            ],
             "timingLabel": "When Advents",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1316,10 +1840,14 @@
             "isMain": false,
             "cleanBody": "Draw two cards. Then, by discarding up to two cards from your Hand, for each card discarded, return an opposing Spirit/Ultimate that is at its highest LV to the deckbottom."
           },
+          "originalAbilityText": "[LV1][LV2] (When Advents)\nDraw two cards. Then, by discarding up to two cards from your Hand, for each card discarded, return an opposing Spirit/Ultimate that is at its highest LV to the deckbottom.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Draw two cards.",
+              "originalClauseText": "Draw two cards.",
               "cleanText": "Draw two cards",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1333,9 +1861,27 @@
               }
             },
             {
-              "rawText": "by discarding up to two cards from your Hand, for each card discarded, return an opposing Spirit/Ultimate that is at its highest LV to the deckbottom.",
-              "cleanText": "by discarding up to two cards from your Hand, for each card discarded, return an opposing Spirit/Ultimate that is at its highest LV to the deckbottom",
+              "rawText": "By discarding up to two cards from your Hand",
+              "originalClauseText": "By discarding up to two cards from your Hand",
+              "cleanText": "By discarding up to two cards from your Hand",
+              "clauseIndex": 1,
               "link": "then",
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_HAND",
+                "chooser": "self",
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "for each card discarded, return an opposing Spirit/Ultimate that is at its highest LV to the deckbottom.",
+              "originalClauseText": "for each card discarded, return an opposing Spirit/Ultimate that is at its highest LV to the deckbottom.",
+              "cleanText": "for each card discarded, return an opposing Spirit/Ultimate that is at its highest LV to the deckbottom",
+              "clauseIndex": 2,
+              "link": "byDoing",
               "isOptional": false,
               "isCost": false,
               "condition": null,
@@ -1349,10 +1895,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB39-002#a1",
+          "keywords": [],
+          "id": "PB39-002#AB_WHEN_ADVENTS_NONE_LV1_LV2_2f8456d15e779469371a1e76d9f69149487bf82f8668fd73d949a0d6073dabeb_ad2ad43a01fe21a5100fb5d718bdd6e1",
+          "physicalId": "PB39-002#AB_WHEN_ADVENTS_NONE_LV1_LV2_2f8456d15e779469371a1e76d9f69149487bf82f8668fd73d949a0d6073dabeb_ad2ad43a01fe21a5100fb5d718bdd6e1",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_2f8456d15e779469371a1e76d9f69149487bf82f8668fd73d949a0d6073dabeb_ad2ad43a01fe21a5100fb5d718bdd6e1",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_9a327cad8c754573f70f9dd456f81b5a6ba65a8bdc1617437bcd8a15fe6b1969_6e60bf0e61ef123b8b5c8c6bdcfd7f45",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB39-002#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1364,8 +1924,17 @@
               "During OC"
             ],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1374,10 +1943,14 @@
             "isMain": false,
             "cleanBody": "During this turn, this Spirit can't be blocked by opposing Spirits/Ultimates with the lowest LV."
           },
+          "originalAbilityText": "[During OC] [LV1][LV2] Flash - (When Attacks)\nDuring this turn, this Spirit can't be blocked by opposing Spirits/Ultimates with the lowest LV.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "During this turn, this Spirit can't be blocked by opposing Spirits/Ultimates with the lowest LV.",
+              "originalClauseText": "During this turn, this Spirit can't be blocked by opposing Spirits/Ultimates with the lowest LV.",
               "cleanText": "this Spirit can't be blocked by opposing Spirits/Ultimates with the lowest LV",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1385,15 +1958,29 @@
               "duration": "DURING_THIS_TURN",
               "op": {
                 "op": "UNBLOCKABLE",
-                "target": "self",
-                "blockedByColor": "Opposing"
+                "target": "self"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB39-002#a2",
+          "keywords": [],
+          "id": "PB39-002#AB_WHEN_ATTACKS_NONE_LV1_LV2_758bf2c801bdecddd9dc80af18aaf0c4f84e8f8604618d5f3bdd0e05390d4e28_24a6822ddbd0003d1b758704e6671f14",
+          "physicalId": "PB39-002#AB_WHEN_ATTACKS_NONE_LV1_LV2_758bf2c801bdecddd9dc80af18aaf0c4f84e8f8604618d5f3bdd0e05390d4e28_24a6822ddbd0003d1b758704e6671f14",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_758bf2c801bdecddd9dc80af18aaf0c4f84e8f8604618d5f3bdd0e05390d4e28_24a6822ddbd0003d1b758704e6671f14",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_4a56d00474a054cd5d9cc181e58627eea221d9f98d0e33f021114cfc43d3e0b7_9f25f65e52ba524d3e48cd3dd1559f94",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
-      "compiledClausesCount": 5,
+      "compiledClausesCount": 6,
       "unsupportedClausesCount": 0,
       "isFullySupported": true
     }

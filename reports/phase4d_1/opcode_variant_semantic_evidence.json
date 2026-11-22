@@ -1,0 +1,4638 @@
+{
+  "metadata": {
+    "generatedAt": "2026-11-21T09:55:30.542Z",
+    "totalOpcodesAudited": 288,
+    "statusCounts": {
+      "SEMANTICALLY_VERIFIED": 35,
+      "INTEGRATION_VERIFIED": 120,
+      "HANDLER_PRESENT": 133,
+      "COMPILER_ONLY": 0,
+      "NOT_IMPLEMENTED": 0,
+      "BLOCKED_UNSUPPORTED_DEPENDENCY": 0
+    }
+  },
+  "opcodes": [
+    {
+      "opcode": "TREAT_RULE",
+      "totalCorpusClauses": 1170,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-TREAT_RULE-1795254928688-285",
+        "timestamp": "2026-11-21T09:55:28.688Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "COMBAT_RESTRICTION",
+      "totalCorpusClauses": 657,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-COMBAT_RESTRICTION-1795254928688-289",
+        "timestamp": "2026-11-21T09:55:28.688Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "TARGET_SELECT",
+      "totalCorpusClauses": 43,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "SWAP_CORES",
+      "totalCorpusClauses": 2,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-SWAP_CORES-1795254928693-336",
+        "timestamp": "2026-11-21T09:55:28.693Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "SUMMON",
+      "totalCorpusClauses": 2035,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 16,
+      "testSuitesVerified": [
+        "../tests/real_card_semantic_validation.test.js",
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-SUMMON-1795254927609-1",
+        "timestamp": "2026-11-21T09:55:27.609Z",
+        "cardId": "CP14-X01R",
+        "testSuite": "../tests/real_card_semantic_validation.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "ctrlHand": {
+            "from": 2,
+            "to": 1,
+            "delta": -1
+          },
+          "ctrlField": {
+            "from": 1,
+            "to": 2,
+            "delta": 1
+          },
+          "ctrlReserve": {
+            "from": 8,
+            "to": 7,
+            "delta": -1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "ADD_SYMBOL",
+      "totalCorpusClauses": 787,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-ADD_SYMBOL-1795254928683-258",
+        "timestamp": "2026-11-21T09:55:28.683Z",
+        "cardId": "BS24-030",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "DRAW",
+      "totalCorpusClauses": 2981,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 62,
+      "testSuitesVerified": [
+        "../tests/timing_triggers_continuous_sba.test.js",
+        "../tests/phase3_continuous_and_cost_gating.test.js",
+        "../tests/playable_engine_local_match.test.js",
+        "../tests/public_release_e2e_match.test.js",
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-DRAW-1795254927838-7",
+        "timestamp": "2026-11-21T09:55:27.838Z",
+        "cardId": "P19-05",
+        "testSuite": "../tests/timing_triggers_continuous_sba.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "ctrlHand": {
+            "from": 0,
+            "to": 1,
+            "delta": 1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "BP_BUFF",
+      "totalCorpusClauses": 1955,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 49,
+      "testSuitesVerified": [
+        "../tests/work_package_hij1_operation_variants.test.js",
+        "../tests/core_game_rules_integrity_corrective.test.js",
+        "../tests/runtime_activation_limits.test.js",
+        "../tests/work_package_c_ops_conditions_compiler.test.js",
+        "../tests/public_release_e2e_match.test.js",
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-BP_BUFF-1795254927802-2",
+        "timestamp": "2026-11-21T09:55:27.802Z",
+        "cardId": "CP14-X14R",
+        "testSuite": "../tests/work_package_hij1_operation_variants.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "MOVE_CORE",
+      "totalCorpusClauses": 6917,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 30,
+      "testSuitesVerified": [
+        "../tests/core_game_rules_engine.test.js",
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-MOVE_CORE-1795254927819-4",
+        "timestamp": "2026-11-21T09:55:27.819Z",
+        "cardId": "BATTLE-SPIRITS-A7434",
+        "testSuite": "../tests/core_game_rules_engine.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "COST_MODIFIER",
+      "totalCorpusClauses": 1578,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 3,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-COST_MODIFIER-1795254928491-166",
+        "timestamp": "2026-11-21T09:55:28.491Z",
+        "cardId": "BS08-057",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "BOUNCE",
+      "totalCorpusClauses": 3721,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 14,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-BOUNCE-1795254928154-30",
+        "timestamp": "2026-11-21T09:55:28.154Z",
+        "cardId": "26RBS01-X14",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "ctrlHand": {
+            "from": 0,
+            "to": 1,
+            "delta": 1
+          },
+          "ctrlField": {
+            "from": 1,
+            "to": 0,
+            "delta": -1
+          },
+          "ctrlReserve": {
+            "from": 3,
+            "to": 6,
+            "delta": 3
+          }
+        }
+      }
+    },
+    {
+      "opcode": "MOVE_SOUL_CORE",
+      "totalCorpusClauses": 165,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-MOVE_SOUL_CORE-1795254928690-303",
+        "timestamp": "2026-11-21T09:55:28.690Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "REVEAL_DECKTOP",
+      "totalCorpusClauses": 1146,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-REVEAL_DECKTOP-1795254928637-220",
+        "timestamp": "2026-11-21T09:55:28.637Z",
+        "cardId": "SD01-034",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "DESTROY",
+      "totalCorpusClauses": 4294,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 23,
+      "testSuitesVerified": [
+        "../tests/timing_triggers_continuous_sba.test.js",
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-DESTROY-1795254927835-6",
+        "timestamp": "2026-11-21T09:55:27.835Z",
+        "cardId": "P16-02",
+        "testSuite": "../tests/timing_triggers_continuous_sba.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "oppField": {
+            "from": 2,
+            "to": 1,
+            "delta": -1
+          },
+          "oppReserve": {
+            "from": 3,
+            "to": 4,
+            "delta": 1
+          },
+          "oppGrave": {
+            "from": 0,
+            "to": 1,
+            "delta": 1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "KEYWORD_RULE",
+      "totalCorpusClauses": 1674,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-KEYWORD_RULE-1795254928688-282",
+        "timestamp": "2026-11-21T09:55:28.688Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "DECK_BUILDING_RULE",
+      "totalCorpusClauses": 24,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 7,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-DECK_BUILDING_RULE-1795254928461-140",
+        "timestamp": "2026-11-21T09:55:28.461Z",
+        "cardId": "P15-17",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "TREAT_COLOR_SYMBOL",
+      "totalCorpusClauses": 124,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "TARGET_ATTACK",
+      "totalCorpusClauses": 171,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-TARGET_ATTACK-1795254928690-301",
+        "timestamp": "2026-11-21T09:55:28.690Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "GAIN_FAMILY",
+      "totalCorpusClauses": 10,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "SUMMON_THIS_CARD",
+      "totalCorpusClauses": 746,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-SUMMON_THIS_CARD-1795254928689-293",
+        "timestamp": "2026-11-21T09:55:28.689Z",
+        "cardId": "SELF-SUM-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "ctrlHand": {
+            "from": 1,
+            "to": 0,
+            "delta": -1
+          },
+          "ctrlField": {
+            "from": 1,
+            "to": 2,
+            "delta": 1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "EXHAUST",
+      "totalCorpusClauses": 1950,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 23,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-EXHAUST-1795254928180-39",
+        "timestamp": "2026-11-21T09:55:28.180Z",
+        "cardId": "26RBS02-X08",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "RESTRICTION",
+      "totalCorpusClauses": 123,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "TARGET",
+      "totalCorpusClauses": 265,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-TARGET-1795254928689-295",
+        "timestamp": "2026-11-21T09:55:28.689Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "MILL_DECK",
+      "totalCorpusClauses": 755,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 5,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-MILL_DECK-1795254928677-249",
+        "timestamp": "2026-11-21T09:55:28.677Z",
+        "cardId": "BS03-116",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "oppGrave": {
+            "from": 0,
+            "to": 1,
+            "delta": 1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "TARGET_CARD",
+      "totalCorpusClauses": 293,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-TARGET_CARD-1795254928690-296",
+        "timestamp": "2026-11-21T09:55:28.690Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "RULE_OR_TEXT_MODIFIER",
+      "totalCorpusClauses": 25,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "CARD_RULE_MODIFIER",
+      "totalCorpusClauses": 106,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "REFRESH",
+      "totalCorpusClauses": 2089,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 5,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-REFRESH-1795254928320-91",
+        "timestamp": "2026-11-21T09:55:28.320Z",
+        "cardId": "BATTLE-SPIRITS-A2246",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "DEPLOY_NEXUS",
+      "totalCorpusClauses": 463,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "FORCE_BLOCK",
+      "totalCorpusClauses": 151,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-FORCE_BLOCK-1795254928690-302",
+        "timestamp": "2026-11-21T09:55:28.690Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "SET_RESTRICTION",
+      "totalCorpusClauses": 350,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-SET_RESTRICTION-1795254928675-244",
+        "timestamp": "2026-11-21T09:55:28.675Z",
+        "cardId": "BS01-018",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "GRANT_FAMILY",
+      "totalCorpusClauses": 573,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 2,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-GRANT_FAMILY-1795254928676-247",
+        "timestamp": "2026-11-21T09:55:28.676Z",
+        "cardId": "BS02-082",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "FORMAT_MARKER",
+      "totalCorpusClauses": 36,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-FORMAT_MARKER-1795254928908-448",
+        "timestamp": "2026-11-21T09:55:28.908Z",
+        "cardId": "OP-SRC",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "ADD_TO_HAND",
+      "totalCorpusClauses": 981,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-ADD_TO_HAND-1795254928647-221",
+        "timestamp": "2026-11-21T09:55:28.647Z",
+        "cardId": "SD01-034",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "ctrlHand": {
+            "from": 6,
+            "to": 7,
+            "delta": 1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "RETURN_REMAINING_TO_DECK",
+      "totalCorpusClauses": 30,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-RETURN_REMAINING_TO_DECK-1795254928647-222",
+        "timestamp": "2026-11-21T09:55:28.647Z",
+        "cardId": "SD01-034",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "CAST_MAGIC_FREE",
+      "totalCorpusClauses": 76,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-CAST_MAGIC_FREE-1795254928909-456",
+        "timestamp": "2026-11-21T09:55:28.909Z",
+        "cardId": null,
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "ctrlGrave": {
+            "from": 0,
+            "to": 1,
+            "delta": 1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "RETURN_REVEALED_BOTTOM",
+      "totalCorpusClauses": 333,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "TRIGGERED_WATCHER",
+      "totalCorpusClauses": 29,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 8,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-TRIGGERED_WATCHER-1795254928380-120",
+        "timestamp": "2026-11-21T09:55:28.380Z",
+        "cardId": "BS29-X01",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "BP_DEBUFF",
+      "totalCorpusClauses": 491,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-BP_DEBUFF-1795254928684-260",
+        "timestamp": "2026-11-21T09:55:28.684Z",
+        "cardId": "BS38-074",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "REDIRECT_TARGET",
+      "totalCorpusClauses": 21,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 6,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-REDIRECT_TARGET-1795254928487-160",
+        "timestamp": "2026-11-21T09:55:28.487Z",
+        "cardId": "BS04-054",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "DISCARD_AMONG",
+      "totalCorpusClauses": 9,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "ACTIVATE_EFFECT_ACTION",
+      "totalCorpusClauses": 59,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-ACTIVATE_EFFECT_ACTION-1795254928170-35",
+        "timestamp": "2026-11-21T09:55:28.170Z",
+        "cardId": "26RBS02-023",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "ctrlHand": {
+            "from": 0,
+            "to": 1,
+            "delta": 1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "REDIRECT_CORE_DESTINATION",
+      "totalCorpusClauses": 14,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 2,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-REDIRECT_CORE_DESTINATION-1795254928476-148",
+        "timestamp": "2026-11-21T09:55:28.476Z",
+        "cardId": "SJ13-03",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "UNBLOCKABLE",
+      "totalCorpusClauses": 424,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 7,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-UNBLOCKABLE-1795254928467-142",
+        "timestamp": "2026-11-21T09:55:28.467Z",
+        "cardId": "26RCB01-X05",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "RECOVER_LIFE",
+      "totalCorpusClauses": 268,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 2,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-RECOVER_LIFE-1795254928684-259",
+        "timestamp": "2026-11-21T09:55:28.684Z",
+        "cardId": "BS24-043",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "DISCARD_HAND",
+      "totalCorpusClauses": 864,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 3,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-DISCARD_HAND-1795254928671-236",
+        "timestamp": "2026-11-21T09:55:28.671Z",
+        "cardId": "SD01-031",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "oppHand": {
+            "from": 5,
+            "to": 4,
+            "delta": -1
+          },
+          "oppGrave": {
+            "from": 0,
+            "to": 1,
+            "delta": 1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "NEGATE_EFFECT",
+      "totalCorpusClauses": 247,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-NEGATE_EFFECT-1795254928690-297",
+        "timestamp": "2026-11-21T09:55:28.690Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "INDESTRUCTIBLE",
+      "totalCorpusClauses": 149,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "SELECT_TARGET",
+      "totalCorpusClauses": 3,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-SELECT_TARGET-1795254928694-355",
+        "timestamp": "2026-11-21T09:55:28.694Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "BATTLE_RULE_MODIFIER",
+      "totalCorpusClauses": 8,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-BATTLE_RULE_MODIFIER-1795254928466-141",
+        "timestamp": "2026-11-21T09:55:28.466Z",
+        "cardId": "26RBS02-054",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "TOKEN_DEPLOYMENT",
+      "totalCorpusClauses": 35,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 4,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-TOKEN_DEPLOYMENT-1795254928686-263",
+        "timestamp": "2026-11-21T09:55:28.686Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": false,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "DAMAGE_CAP",
+      "totalCorpusClauses": 77,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "RETRIEVE_CORES",
+      "totalCorpusClauses": 5,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-RETRIEVE_CORES-1795254928256-60",
+        "timestamp": "2026-11-21T09:55:28.256Z",
+        "cardId": "26RSD01-006",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "REVEAL_HAND",
+      "totalCorpusClauses": 8,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "DISCARD_REVEALED",
+      "totalCorpusClauses": 456,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "SALVAGE",
+      "totalCorpusClauses": 137,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "CHOOSE_COLOR",
+      "totalCorpusClauses": 116,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "CHOOSE_BLOCKER",
+      "totalCorpusClauses": 17,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-CHOOSE_BLOCKER-1795254928694-343",
+        "timestamp": "2026-11-21T09:55:28.694Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "COMPARE_BP",
+      "totalCorpusClauses": 13,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "ON_BP_DESTROY",
+      "totalCorpusClauses": 7,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "SUMMON_RESERVE_ONLY",
+      "totalCorpusClauses": 260,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "SUMMON_FREE",
+      "totalCorpusClauses": 835,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 16,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-SUMMON_FREE-1795254928357-115",
+        "timestamp": "2026-11-21T09:55:28.357Z",
+        "cardId": "BS14-049",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "ctrlHand": {
+            "from": 2,
+            "to": 1,
+            "delta": -1
+          },
+          "ctrlField": {
+            "from": 1,
+            "to": 2,
+            "delta": 1
+          },
+          "ctrlReserve": {
+            "from": 8,
+            "to": 7,
+            "delta": -1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "ADVENT_PAY",
+      "totalCorpusClauses": 176,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-ADVENT_PAY-1795254928689-292",
+        "timestamp": "2026-11-21T09:55:28.689Z",
+        "cardId": "ADV-P1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "ctrlHand": {
+            "from": 1,
+            "to": 0,
+            "delta": -1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "IMMUNITY",
+      "totalCorpusClauses": 858,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-IMMUNITY-1795254928668-231",
+        "timestamp": "2026-11-21T09:55:28.668Z",
+        "cardId": "SD01-020",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "PLAY_CONDITION",
+      "totalCorpusClauses": 63,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "UNPREVENTABLE",
+      "totalCorpusClauses": 131,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-UNPREVENTABLE-1795254928908-449",
+        "timestamp": "2026-11-21T09:55:28.908Z",
+        "cardId": "OP-SRC",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "DECK_CONSTRUCTION_RULE",
+      "totalCorpusClauses": 6,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 3,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-DECK_CONSTRUCTION_RULE-1795254928473-146",
+        "timestamp": "2026-11-21T09:55:28.473Z",
+        "cardId": "P21-G02",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "COMBAT_RULE",
+      "totalCorpusClauses": 260,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-COMBAT_RULE-1795254928688-290",
+        "timestamp": "2026-11-21T09:55:28.688Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "ADVENT_STACK",
+      "totalCorpusClauses": 908,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-ADVENT_STACK-1795254928689-291",
+        "timestamp": "2026-11-21T09:55:28.689Z",
+        "cardId": "ADV-S1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "ctrlHand": {
+            "from": 1,
+            "to": 0,
+            "delta": -1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "LIFE_OR_CORE_MODIFICATION",
+      "totalCorpusClauses": 10,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "SET_SYMBOL",
+      "totalCorpusClauses": 41,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "REMOVED_ZONE_ACTION",
+      "totalCorpusClauses": 113,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "ADD_COUNTER",
+      "totalCorpusClauses": 625,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 2,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-ADD_COUNTER-1795254928688-286",
+        "timestamp": "2026-11-21T09:55:28.688Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "MODIFY_DESTINATION",
+      "totalCorpusClauses": 21,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-MODIFY_DESTINATION-1795254928590-193",
+        "timestamp": "2026-11-21T09:55:28.590Z",
+        "cardId": "BSC37-008",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "SEND_TO_VOID",
+      "totalCorpusClauses": 19,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "OPEN_ZONE",
+      "totalCorpusClauses": 302,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-OPEN_ZONE-1795254928689-294",
+        "timestamp": "2026-11-21T09:55:28.689Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "BANISH_TRASH",
+      "totalCorpusClauses": 51,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "ACTIVATE_SOUL_DRIVE",
+      "totalCorpusClauses": 4,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-ACTIVATE_SOUL_DRIVE-1795254928688-281",
+        "timestamp": "2026-11-21T09:55:28.688Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "GLOBAL_RESTRICTION",
+      "totalCorpusClauses": 13,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 3,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-GLOBAL_RESTRICTION-1795254928483-150",
+        "timestamp": "2026-11-21T09:55:28.483Z",
+        "cardId": "BRAVE-TIGER",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "RESURRECT",
+      "totalCorpusClauses": 41,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "AWAKEN_CORE_MOVE",
+      "totalCorpusClauses": 23,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "CONTINUOUS_RULE",
+      "totalCorpusClauses": 506,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 7,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-CONTINUOUS_RULE-1795254928484-151",
+        "timestamp": "2026-11-21T09:55:28.484Z",
+        "cardId": "BATTLE-SPIRITS-A161",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "END_BATTLE",
+      "totalCorpusClauses": 52,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "KEYWORD_ACTION",
+      "totalCorpusClauses": 63,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "END_ATTACK_STEP",
+      "totalCorpusClauses": 3,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "ADD_COLOR",
+      "totalCorpusClauses": 27,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "COMPARE_LV_INSTEAD_OF_BP",
+      "totalCorpusClauses": 5,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "TREAT_NAME",
+      "totalCorpusClauses": 2,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-TREAT_NAME-1795254928698-377",
+        "timestamp": "2026-11-21T09:55:28.698Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "PREVENT_WHEN_SUMMONED",
+      "totalCorpusClauses": 76,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "DECK_OR_HAND_ACTION",
+      "totalCorpusClauses": 233,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-DECK_OR_HAND_ACTION-1795254928908-444",
+        "timestamp": "2026-11-21T09:55:28.908Z",
+        "cardId": null,
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": false,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "RESTRICT_MAIN_STEP",
+      "totalCorpusClauses": 11,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "SYMBOL_MODIFIER",
+      "totalCorpusClauses": 4,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-SYMBOL_MODIFIER-1795254928487-159",
+        "timestamp": "2026-11-21T09:55:28.487Z",
+        "cardId": "BS02-085",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "TREAT_AS_MAX_LEVEL",
+      "totalCorpusClauses": 2,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "GRANT_ABILITY",
+      "totalCorpusClauses": 8,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "TREAT_LEVEL",
+      "totalCorpusClauses": 18,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "TRIGGERED_BUFF",
+      "totalCorpusClauses": 2,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-TRIGGERED_BUFF-1795254928698-380",
+        "timestamp": "2026-11-21T09:55:28.698Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "TREAT_COST",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-TREAT_COST-1795254928698-376",
+        "timestamp": "2026-11-21T09:55:28.698Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "REMAIN_ON_FIELD_EXHAUSTED",
+      "totalCorpusClauses": 12,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "NEGATE_MAGIC",
+      "totalCorpusClauses": 2,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-NEGATE_MAGIC-1795254928694-353",
+        "timestamp": "2026-11-21T09:55:28.694Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "LIMIT_ONCE_PER_TURN",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-LIMIT_ONCE_PER_TURN-1795254928697-368",
+        "timestamp": "2026-11-21T09:55:28.697Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "TAKE_CONTROL",
+      "totalCorpusClauses": 2,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "CONTROL_RULE",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "RETURN_CONTROL",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "SUMMON_MULTI",
+      "totalCorpusClauses": 3,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-SUMMON_MULTI-1795254928697-370",
+        "timestamp": "2026-11-21T09:55:28.697Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "ctrlHand": {
+            "from": 2,
+            "to": 1,
+            "delta": -1
+          },
+          "ctrlField": {
+            "from": 2,
+            "to": 3,
+            "delta": 1
+          },
+          "ctrlReserve": {
+            "from": 4,
+            "to": 3,
+            "delta": -1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "ACTIVATE_TRIGGER",
+      "totalCorpusClauses": 18,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "TREAT_CORE_COUNT",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-TREAT_CORE_COUNT-1795254928698-375",
+        "timestamp": "2026-11-21T09:55:28.698Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "REPLACEMENT_EFFECT",
+      "totalCorpusClauses": 14,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-REPLACEMENT_EFFECT-1795254928687-274",
+        "timestamp": "2026-11-21T09:55:28.687Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "TARGET_FAMILY",
+      "totalCorpusClauses": 8,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-TARGET_FAMILY-1795254928698-372",
+        "timestamp": "2026-11-21T09:55:28.698Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "CONTINUE_BATTLE",
+      "totalCorpusClauses": 105,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 2,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-CONTINUE_BATTLE-1795254928908-450",
+        "timestamp": "2026-11-21T09:55:28.908Z",
+        "cardId": null,
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": false,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "MAGIC_RESTRICTION",
+      "totalCorpusClauses": 25,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "LIMIT_DECK_DISCARD",
+      "totalCorpusClauses": 3,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 2,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-LIMIT_DECK_DISCARD-1795254928488-161",
+        "timestamp": "2026-11-21T09:55:28.488Z",
+        "cardId": "BS04-082",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "SET_HAND_COST",
+      "totalCorpusClauses": 24,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "REFRESH_BY_EXHAUSTING_NEXUS",
+      "totalCorpusClauses": 66,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-REFRESH_BY_EXHAUSTING_NEXUS-1795254928683-257",
+        "timestamp": "2026-11-21T09:55:28.683Z",
+        "cardId": "BS10-054",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": false,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "PREVENT_LIFE_LOSS",
+      "totalCorpusClauses": 38,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "ENHANCE_KEYWORD",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "LOOK_HAND",
+      "totalCorpusClauses": 21,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-LOOK_HAND-1795254928398-126",
+        "timestamp": "2026-11-21T09:55:28.398Z",
+        "cardId": "BS32-053",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "LOSE_EFFECTS",
+      "totalCorpusClauses": 9,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-LOSE_EFFECTS-1795254928503-170",
+        "timestamp": "2026-11-21T09:55:28.503Z",
+        "cardId": "BS30-063",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "TREAT_AS_VANILLA",
+      "totalCorpusClauses": 2,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-TREAT_AS_VANILLA-1795254928698-374",
+        "timestamp": "2026-11-21T09:55:28.698Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "END_MAIN_STEP",
+      "totalCorpusClauses": 9,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "ACTIVATE_FLASH",
+      "totalCorpusClauses": 178,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-ACTIVATE_FLASH-1795254928690-300",
+        "timestamp": "2026-11-21T09:55:28.690Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "ACTIVATE_CARD_EFFECT",
+      "totalCorpusClauses": 33,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "EXHAUSTED_BLOCK",
+      "totalCorpusClauses": 107,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "DISCARD_BURST",
+      "totalCorpusClauses": 102,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "ACTIVATE_BURST",
+      "totalCorpusClauses": 13,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "CHOOSE_LEVEL",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-CHOOSE_LEVEL-1795254928697-359",
+        "timestamp": "2026-11-21T09:55:28.697Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "SWITCH_BP",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-SWITCH_BP-1795254928694-348",
+        "timestamp": "2026-11-21T09:55:28.694Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "FORCE_ATTACK",
+      "totalCorpusClauses": 9,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 2,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-FORCE_ATTACK-1795254928493-167",
+        "timestamp": "2026-11-21T09:55:28.493Z",
+        "cardId": "BS18-029",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "KEYWORD_ABILITY",
+      "totalCorpusClauses": 404,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-KEYWORD_ABILITY-1795254928688-283",
+        "timestamp": "2026-11-21T09:55:28.688Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "DISCARD_CARD",
+      "totalCorpusClauses": 6,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "DISCARD_PRE_ADVENT",
+      "totalCorpusClauses": 37,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "DECREASE_BP_EFFECT",
+      "totalCorpusClauses": 13,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "CORE_LOCK",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-CORE_LOCK-1795254928697-361",
+        "timestamp": "2026-11-21T09:55:28.697Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "BURST_LOCK",
+      "totalCorpusClauses": 32,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "OPPONENT_CHOICE",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-OPPONENT_CHOICE-1795254928697-360",
+        "timestamp": "2026-11-21T09:55:28.697Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "BUNSHIN_SUMMON",
+      "totalCorpusClauses": 11,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-BUNSHIN_SUMMON-1795254928688-280",
+        "timestamp": "2026-11-21T09:55:28.688Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "ctrlField": {
+            "from": 1,
+            "to": 2,
+            "delta": 1
+          },
+          "ctrlReserve": {
+            "from": 3,
+            "to": 2,
+            "delta": -1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "MODIFY_EFFECT",
+      "totalCorpusClauses": 81,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 3,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-MODIFY_EFFECT-1795254928687-271",
+        "timestamp": "2026-11-21T09:55:28.687Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": false,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "DISCARD_REMOVED",
+      "totalCorpusClauses": 5,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "EXTRA_TURN",
+      "totalCorpusClauses": 14,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "PUT_UNDERNEATH",
+      "totalCorpusClauses": 24,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "CORE_CHARGE_ADD",
+      "totalCorpusClauses": 141,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "TRIGGER_COUNTER",
+      "totalCorpusClauses": 13,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "BOOST_LIFE",
+      "totalCorpusClauses": 3,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "MODIFY_KEYWORD",
+      "totalCorpusClauses": 6,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "COPY_ABILITY",
+      "totalCorpusClauses": 4,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-COPY_ABILITY-1795254928694-344",
+        "timestamp": "2026-11-21T09:55:28.694Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "ACTIVATE_KEYWORD",
+      "totalCorpusClauses": 3,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "DISCARD_REMAINING",
+      "totalCorpusClauses": 57,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "SKIP_STEP",
+      "totalCorpusClauses": 4,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "GUARD_TRIGGER",
+      "totalCorpusClauses": 2,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-GUARD_TRIGGER-1795254928694-350",
+        "timestamp": "2026-11-21T09:55:28.694Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "CROSS_TRIGGER",
+      "totalCorpusClauses": 10,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "COPY_TRIGGER",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-COPY_TRIGGER-1795254928694-346",
+        "timestamp": "2026-11-21T09:55:28.694Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "PREVENT_LOSS",
+      "totalCorpusClauses": 8,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "MILL",
+      "totalCorpusClauses": 6,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 2,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-MILL-1795254928488-162",
+        "timestamp": "2026-11-21T09:55:28.488Z",
+        "cardId": "OPP-MILLER",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "oppGrave": {
+            "from": 0,
+            "to": 5,
+            "delta": 5
+          }
+        }
+      }
+    },
+    {
+      "opcode": "SET_BP",
+      "totalCorpusClauses": 5,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "COUNT_AS_MULTIPLE",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-COUNT_AS_MULTIPLE-1795254928697-362",
+        "timestamp": "2026-11-21T09:55:28.697Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "COMPARE_LEVELS",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "LOOK_DECKTOP",
+      "totalCorpusClauses": 2,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-LOOK_DECKTOP-1795254928692-317",
+        "timestamp": "2026-11-21T09:55:28.692Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "RETURN_DECK_BOTTOM",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-RETURN_DECK_BOTTOM-1795254928692-328",
+        "timestamp": "2026-11-21T09:55:28.692Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "REMOVE_FROM_GAME",
+      "totalCorpusClauses": 10,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "FLIP_BUNSHIN",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "SET_LEVEL",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "EXPAND_TARGETS",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-EXPAND_TARGETS-1795254928694-349",
+        "timestamp": "2026-11-21T09:55:28.694Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "CREATE_BUNSHIN",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-CREATE_BUNSHIN-1795254928697-363",
+        "timestamp": "2026-11-21T09:55:28.697Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "ctrlField": {
+            "from": 1,
+            "to": 2,
+            "delta": 1
+          },
+          "ctrlReserve": {
+            "from": 5,
+            "to": 4,
+            "delta": -1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "BATTLE_MULTIPLE",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-BATTLE_MULTIPLE-1795254928693-339",
+        "timestamp": "2026-11-21T09:55:28.693Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "TRIGGER_CONDITION",
+      "totalCorpusClauses": 17,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "EXCHANGE_BP",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-EXCHANGE_BP-1795254928694-347",
+        "timestamp": "2026-11-21T09:55:28.694Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "CARD_PLAY_PERMISSION",
+      "totalCorpusClauses": 2,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-CARD_PLAY_PERMISSION-1795254928696-357",
+        "timestamp": "2026-11-21T09:55:28.696Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "SWAP_CARD",
+      "totalCorpusClauses": 10,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "DISCARD_HAND_MAX",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-DISCARD_HAND_MAX-1795254928692-326",
+        "timestamp": "2026-11-21T09:55:28.692Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "ctrlHand": {
+            "from": 7,
+            "to": 3,
+            "delta": -4
+          },
+          "ctrlGrave": {
+            "from": 1,
+            "to": 5,
+            "delta": 4
+          }
+        }
+      }
+    },
+    {
+      "opcode": "SEAL_MOVE",
+      "totalCorpusClauses": 7,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "EXCHANGE_CORE",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-EXCHANGE_CORE-1795254928693-335",
+        "timestamp": "2026-11-21T09:55:28.693Z",
+        "cardId": "EX-ST",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "ADVENT",
+      "totalCorpusClauses": 24,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-ADVENT-1795254928688-276",
+        "timestamp": "2026-11-21T09:55:28.688Z",
+        "cardId": "ADV-CARD-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "ctrlHand": {
+            "from": 1,
+            "to": 0,
+            "delta": -1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "FLASH_PRIORITY",
+      "totalCorpusClauses": 6,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "ATTACH_PRE_ADVENT_CARD",
+      "totalCorpusClauses": 9,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "TARGET_CARDS",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "MODIFY_ADVENT_CONDITION",
+      "totalCorpusClauses": 2,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "ADVENT_RULE",
+      "totalCorpusClauses": 16,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 2,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-ADVENT_RULE-1795254928524-174",
+        "timestamp": "2026-11-21T09:55:28.524Z",
+        "cardId": "BATTLE-SPIRITS-A7749",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "MODIFY_LIFE",
+      "totalCorpusClauses": 24,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "SCHEDULED_DESTROY",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-SCHEDULED_DESTROY-1795254928694-354",
+        "timestamp": "2026-11-21T09:55:28.694Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "GRANDWALKER_PROTECTION",
+      "totalCorpusClauses": 160,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-GRANDWALKER_PROTECTION-1795254928690-304",
+        "timestamp": "2026-11-21T09:55:28.690Z",
+        "cardId": "GW-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "GRANDWALKER_CORE_RULE",
+      "totalCorpusClauses": 159,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-GRANDWALKER_CORE_RULE-1795254928690-305",
+        "timestamp": "2026-11-21T09:55:28.690Z",
+        "cardId": "GW-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "CORE_CHARGE_TRIGGER",
+      "totalCorpusClauses": 131,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "GRANDWALKER_ACTION",
+      "totalCorpusClauses": 123,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "DECK_ACTION",
+      "totalCorpusClauses": 50,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 4,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-DECK_ACTION-1795254928686-267",
+        "timestamp": "2026-11-21T09:55:28.686Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": false,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "IGNORE_CONDITIONS",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-IGNORE_CONDITIONS-1795254928697-366",
+        "timestamp": "2026-11-21T09:55:28.697Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "NON_STACKABLE",
+      "totalCorpusClauses": 2,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-NON_STACKABLE-1795254928697-369",
+        "timestamp": "2026-11-21T09:55:28.697Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "BANISH_SOUL_CORE_VOID",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-BANISH_SOUL_CORE_VOID-1795254928692-316",
+        "timestamp": "2026-11-21T09:55:28.692Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "CHOOSE_TARGETS",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "BANISH_HAND",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "REMAIN_ON_FIELD",
+      "totalCorpusClauses": 42,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "REVEAL_CARDS",
+      "totalCorpusClauses": 18,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "BANISH",
+      "totalCorpusClauses": 25,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "PROTECTION",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "BANISH_DECK",
+      "totalCorpusClauses": 14,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "SET_BURST",
+      "totalCorpusClauses": 40,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "COPY_EFFECT",
+      "totalCorpusClauses": 29,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "DISCARD",
+      "totalCorpusClauses": 20,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "GRANT_EFFECT",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-GRANT_EFFECT-1795254928697-365",
+        "timestamp": "2026-11-21T09:55:28.697Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "PAY_LIFE",
+      "totalCorpusClauses": 5,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "ATTACH_CARD",
+      "totalCorpusClauses": 2,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "COUNT_OPERATION",
+      "totalCorpusClauses": 79,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 4,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-COUNT_OPERATION-1795254928686-265",
+        "timestamp": "2026-11-21T09:55:28.686Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": false,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "DISCARD_FIELD",
+      "totalCorpusClauses": 6,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-DISCARD_FIELD-1795254928692-329",
+        "timestamp": "2026-11-21T09:55:28.692Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "oppField": {
+            "from": 1,
+            "to": 0,
+            "delta": -1
+          },
+          "oppReserve": {
+            "from": 6,
+            "to": 8,
+            "delta": 2
+          },
+          "oppGrave": {
+            "from": 0,
+            "to": 1,
+            "delta": 1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "REBIRTH_FLIP",
+      "totalCorpusClauses": 196,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-REBIRTH_FLIP-1795254928690-298",
+        "timestamp": "2026-11-21T09:55:28.690Z",
+        "cardId": "REB-1-B",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "END_TURN",
+      "totalCorpusClauses": 14,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "GRANT_BRAVE_SYMBOLS",
+      "totalCorpusClauses": 53,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "MULTIPLY_EFFECT",
+      "totalCorpusClauses": 3,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-MULTIPLY_EFFECT-1795254928694-352",
+        "timestamp": "2026-11-21T09:55:28.694Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "ACTIVATE_REBIRTH",
+      "totalCorpusClauses": 7,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-ACTIVATE_REBIRTH-1795254928691-306",
+        "timestamp": "2026-11-21T09:55:28.691Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "USE_FROM_HAND",
+      "totalCorpusClauses": 7,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-USE_FROM_HAND-1795254928692-325",
+        "timestamp": "2026-11-21T09:55:28.692Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "ctrlHand": {
+            "from": 6,
+            "to": 5,
+            "delta": -1
+          },
+          "ctrlGrave": {
+            "from": 0,
+            "to": 1,
+            "delta": 1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "BP_FORMULA",
+      "totalCorpusClauses": 3,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "MODIFY_EFFECT_VALUE",
+      "totalCorpusClauses": 34,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-MODIFY_EFFECT_VALUE-1795254928687-273",
+        "timestamp": "2026-11-21T09:55:28.687Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "OPPONENT_RESTRICTION",
+      "totalCorpusClauses": 36,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "IGNORE_LEVELS",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-IGNORE_LEVELS-1795254928697-367",
+        "timestamp": "2026-11-21T09:55:28.697Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "SET_MIRAGE",
+      "totalCorpusClauses": 10,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "DISCARD_MIRAGE_COST",
+      "totalCorpusClauses": 18,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "CARD_UNDERNEATH",
+      "totalCorpusClauses": 8,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-CARD_UNDERNEATH-1795254928691-309",
+        "timestamp": "2026-11-21T09:55:28.691Z",
+        "cardId": "STK-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "ctrlHand": {
+            "from": 1,
+            "to": 0,
+            "delta": -1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "CORE_CHARGE",
+      "totalCorpusClauses": 13,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "END_STEP",
+      "totalCorpusClauses": 3,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-END_STEP-1795254928697-364",
+        "timestamp": "2026-11-21T09:55:28.697Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "BATTLE_MODIFIER",
+      "totalCorpusClauses": 3,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-BATTLE_MODIFIER-1795254928693-338",
+        "timestamp": "2026-11-21T09:55:28.693Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "DISCARD_ZONE",
+      "totalCorpusClauses": 18,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-DISCARD_ZONE-1795254928693-330",
+        "timestamp": "2026-11-21T09:55:28.693Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "oppField": {
+            "from": 1,
+            "to": 0,
+            "delta": -1
+          },
+          "oppReserve": {
+            "from": 8,
+            "to": 9,
+            "delta": 1
+          },
+          "oppGrave": {
+            "from": 1,
+            "to": 2,
+            "delta": 1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "REBIRTH_CORE_PLACEMENT",
+      "totalCorpusClauses": 6,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "ACTIVATE_EFFECT_SPECIAL",
+      "totalCorpusClauses": 24,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "MIRAGE_OPERATION",
+      "totalCorpusClauses": 30,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "STEP_MODIFIER",
+      "totalCorpusClauses": 9,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "CONTRACT_ADVENT_RULE",
+      "totalCorpusClauses": 42,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-CONTRACT_ADVENT_RULE-1795254928687-275",
+        "timestamp": "2026-11-21T09:55:28.687Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "ENTER_SOUL_STATE",
+      "totalCorpusClauses": 6,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-ENTER_SOUL_STATE-1795254928691-311",
+        "timestamp": "2026-11-21T09:55:28.691Z",
+        "cardId": "STK-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "ctrlField": {
+            "from": 2,
+            "to": 1,
+            "delta": -1
+          },
+          "ctrlReserve": {
+            "from": 5,
+            "to": 8,
+            "delta": 3
+          },
+          "ctrlGrave": {
+            "from": 0,
+            "to": 4,
+            "delta": 4
+          }
+        }
+      }
+    },
+    {
+      "opcode": "ATTACH_CARD_UNDERNEATH",
+      "totalCorpusClauses": 19,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "DISCARD_UNDERNEATH_COST",
+      "totalCorpusClauses": 12,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "ADVENT_COST",
+      "totalCorpusClauses": 14,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-ADVENT_COST-1795254928691-307",
+        "timestamp": "2026-11-21T09:55:28.691Z",
+        "cardId": "ADV-C1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "ctrlHand": {
+            "from": 1,
+            "to": 0,
+            "delta": -1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "ADVENT_SOUL_CORE_ACTION",
+      "totalCorpusClauses": 16,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "COPY_PRE_ADVENT_EFFECT",
+      "totalCorpusClauses": 7,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-COPY_PRE_ADVENT_EFFECT-1795254928694-345",
+        "timestamp": "2026-11-21T09:55:28.694Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "SWAP_CARDS",
+      "totalCorpusClauses": 5,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "BRAVE_EFFECT_ACTIVATION",
+      "totalCorpusClauses": 15,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "ADVENT_RULE_MODIFIER",
+      "totalCorpusClauses": 28,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "BANISH_COST",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-BANISH_COST-1795254928692-314",
+        "timestamp": "2026-11-21T09:55:28.692Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "ctrlGrave": {
+            "from": 1,
+            "to": 0,
+            "delta": -1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "PUT_CARD_ON_FIELD",
+      "totalCorpusClauses": 6,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-PUT_CARD_ON_FIELD-1795254928692-320",
+        "timestamp": "2026-11-21T09:55:28.692Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "ctrlHand": {
+            "from": 6,
+            "to": 5,
+            "delta": -1
+          },
+          "ctrlField": {
+            "from": 1,
+            "to": 2,
+            "delta": 1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "BP_OR_LEVEL_MODIFIER",
+      "totalCorpusClauses": 14,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "CAST_FROM_DECK",
+      "totalCorpusClauses": 2,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-CAST_FROM_DECK-1795254928692-323",
+        "timestamp": "2026-11-21T09:55:28.692Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "HEADER",
+      "totalCorpusClauses": 3,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "CAST_FROM_TRASH",
+      "totalCorpusClauses": 6,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-CAST_FROM_TRASH-1795254928692-324",
+        "timestamp": "2026-11-21T09:55:28.692Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "LOOK_AT_DECK",
+      "totalCorpusClauses": 4,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "REBIRTH_ACTION",
+      "totalCorpusClauses": 3,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "PIERCING_RULE",
+      "totalCorpusClauses": 23,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "USE_FROM_SOUL_STATE",
+      "totalCorpusClauses": 3,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-USE_FROM_SOUL_STATE-1795254928691-312",
+        "timestamp": "2026-11-21T09:55:28.691Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "ADD_FAMILY",
+      "totalCorpusClauses": 3,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-ADD_FAMILY-1795254928563-184",
+        "timestamp": "2026-11-21T09:55:28.563Z",
+        "cardId": "BSC16-031",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "SPECIAL_WIN",
+      "totalCorpusClauses": 3,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-SPECIAL_WIN-1795254928698-378",
+        "timestamp": "2026-11-21T09:55:28.698Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "DISCARD_FIELD_MAGIC",
+      "totalCorpusClauses": 7,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "SEND_CORE_TO_VOID",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-SEND_CORE_TO_VOID-1795254928693-333",
+        "timestamp": "2026-11-21T09:55:28.693Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "PUT_FACEDOWN_FIELD",
+      "totalCorpusClauses": 6,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "CHOOSE_BATTLE_TARGET",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-CHOOSE_BATTLE_TARGET-1795254928694-342",
+        "timestamp": "2026-11-21T09:55:28.694Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "COUNT_MODIFIER",
+      "totalCorpusClauses": 4,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 2,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-COUNT_MODIFIER-1795254928571-186",
+        "timestamp": "2026-11-21T09:55:28.571Z",
+        "cardId": "BSC31-CP04",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "GAIN_TEAM",
+      "totalCorpusClauses": 12,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 7,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-GAIN_TEAM-1795254928574-187",
+        "timestamp": "2026-11-21T09:55:28.574Z",
+        "cardId": "BATTLE-SPIRITS-A14695",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "TEAM_RULE",
+      "totalCorpusClauses": 8,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 3,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-TEAM_RULE-1795254928600-195",
+        "timestamp": "2026-11-21T09:55:28.600Z",
+        "cardId": "BATTLE-SPIRITS-A15090",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "REVEAL_FROM_HAND_COST",
+      "totalCorpusClauses": 2,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-REVEAL_FROM_HAND_COST-1795254928692-321",
+        "timestamp": "2026-11-21T09:55:28.692Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "DISCARD_FROM_FIELD_COST",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "DISCARD_COST",
+      "totalCorpusClauses": 4,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "ATTACK_RULE_MODIFIER",
+      "totalCorpusClauses": 2,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-ATTACK_RULE_MODIFIER-1795254928693-337",
+        "timestamp": "2026-11-21T09:55:28.693Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "SHUFFLE_DECK",
+      "totalCorpusClauses": 4,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "WIN_GAME",
+      "totalCorpusClauses": 2,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "BEFORE_ADVENT_TRIGGER",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-BEFORE_ADVENT_TRIGGER-1795254928691-313",
+        "timestamp": "2026-11-21T09:55:28.691Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "CHANGE",
+      "totalCorpusClauses": 104,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-CHANGE-1795254928908-454",
+        "timestamp": "2026-11-21T09:55:28.908Z",
+        "cardId": "CHG-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "DECK_RULE",
+      "totalCorpusClauses": 2,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "DESTROY_ON_BP_ZERO",
+      "totalCorpusClauses": 3,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "GRANT_KEYWORD",
+      "totalCorpusClauses": 2,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "SEND_CORES_TO_VOID",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-SEND_CORES_TO_VOID-1795254928693-332",
+        "timestamp": "2026-11-21T09:55:28.693Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "oppReserve": {
+            "from": 9,
+            "to": 8,
+            "delta": -1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "CHANGE_TARGET",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-CHANGE_TARGET-1795254928693-341",
+        "timestamp": "2026-11-21T09:55:28.693Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "SIMULTANEOUS_BATTLE",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-SIMULTANEOUS_BATTLE-1795254928694-356",
+        "timestamp": "2026-11-21T09:55:28.694Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "VARIABLE_PAYMENT_EFFECT",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-VARIABLE_PAYMENT_EFFECT-1795254928698-381",
+        "timestamp": "2026-11-21T09:55:28.698Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "REVEAL_INTERACTION",
+      "totalCorpusClauses": 4,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-REVEAL_INTERACTION-1795254928692-322",
+        "timestamp": "2026-11-21T09:55:28.692Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "STACK_CARD",
+      "totalCorpusClauses": 10,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-STACK_CARD-1795254928691-308",
+        "timestamp": "2026-11-21T09:55:28.691Z",
+        "cardId": "STK-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "ctrlHand": {
+            "from": 1,
+            "to": 0,
+            "delta": -1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "LIFE_PAY_COST",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "REDUCE_LIFE",
+      "totalCorpusClauses": 2,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "SEPARATE_BRAVE",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-SEPARATE_BRAVE-1795254928691-310",
+        "timestamp": "2026-11-21T09:55:28.691Z",
+        "cardId": "STK-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "ctrlField": {
+            "from": 1,
+            "to": 2,
+            "delta": 1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "DECK_IMMUNITY",
+      "totalCorpusClauses": 5,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "PREVENT_DAMAGE",
+      "totalCorpusClauses": 4,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "SEARCH_DECK",
+      "totalCorpusClauses": 2,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-SEARCH_DECK-1795254928692-319",
+        "timestamp": "2026-11-21T09:55:28.692Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "ctrlHand": {
+            "from": 5,
+            "to": 6,
+            "delta": 1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "PAY_COST",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-PAY_COST-1795254928693-334",
+        "timestamp": "2026-11-21T09:55:28.693Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "BANISH_DESTINATION_RULE",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-BANISH_DESTINATION_RULE-1795254928692-315",
+        "timestamp": "2026-11-21T09:55:28.692Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "SWITCH_CARD",
+      "totalCorpusClauses": 3,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-SWITCH_CARD-1795254928698-371",
+        "timestamp": "2026-11-21T09:55:28.698Z",
+        "cardId": "SW-H",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "LOSE_IMMUNITY",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-LOSE_IMMUNITY-1795254928694-351",
+        "timestamp": "2026-11-21T09:55:28.694Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "TRIGGERED_ACTION",
+      "totalCorpusClauses": 2,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-TRIGGERED_ACTION-1795254928698-379",
+        "timestamp": "2026-11-21T09:55:28.698Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "BOUNCE_TO_DECKBOTTOM",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-BOUNCE_TO_DECKBOTTOM-1795254928692-327",
+        "timestamp": "2026-11-21T09:55:28.692Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "CHOOSE_FAMILY",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-CHOOSE_FAMILY-1795254928697-358",
+        "timestamp": "2026-11-21T09:55:28.697Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "CAN_ATTACK",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-CAN_ATTACK-1795254928693-340",
+        "timestamp": "2026-11-21T09:55:28.693Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "SET_BURST_FROM_HAND",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "REVEAL_BONUS",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "USE_ACCEL",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "HANDLER_PRESENT",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 0,
+      "testSuitesVerified": [],
+      "sampleExecution": null
+    },
+    {
+      "opcode": "SEND_TO_TRASH",
+      "totalCorpusClauses": 4,
+      "evidenceStatus": "SEMANTICALLY_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-SEND_TO_TRASH-1795254928693-331",
+        "timestamp": "2026-11-21T09:55:28.693Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {
+          "ctrlField": {
+            "from": 2,
+            "to": 1,
+            "delta": -1
+          },
+          "ctrlReserve": {
+            "from": 5,
+            "to": 8,
+            "delta": 3
+          },
+          "ctrlGrave": {
+            "from": 5,
+            "to": 6,
+            "delta": 1
+          }
+        }
+      }
+    },
+    {
+      "opcode": "TIMING_MODIFIER",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-TIMING_MODIFIER-1795254928698-373",
+        "timestamp": "2026-11-21T09:55:28.698Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    },
+    {
+      "opcode": "LOOK_AT_HAND",
+      "totalCorpusClauses": 1,
+      "evidenceStatus": "INTEGRATION_VERIFIED",
+      "handlerPresent": true,
+      "productionHandler": "engine/ops/index.js:executeOp",
+      "runtimeExecutionsCaptured": 1,
+      "testSuitesVerified": [
+        "../tests/playable_engine_complete_match.test.js"
+      ],
+      "sampleExecution": {
+        "evidenceId": "EVID-LOOK_AT_HAND-1795254928692-318",
+        "timestamp": "2026-11-21T09:55:28.692Z",
+        "cardId": "SRC-1",
+        "testSuite": "../tests/playable_engine_complete_match.test.js",
+        "executionSuccess": true,
+        "stateDeltas": {}
+      }
+    }
+  ]
+}

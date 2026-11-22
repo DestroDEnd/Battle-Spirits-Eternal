@@ -19,6 +19,21 @@
     "compiledIr": {
       "cardNumber": "P22-14",
       "name": "Victory Bladra",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 5000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: Blade Contract, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents)\nReturn two Cost 3 or less Red-only Spirit cards from your Trash to the Hand.\n\n[During OC] [LV1][LV2] (When Attacks)\nDraw a card.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -26,12 +41,32 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "P22-14#AB_FLASH_NONE_LV1_LV2_LV3_f71ff73c124a34c6b0a25f16ba6178514404f37a978be3933e65da654f9a8dbe_53380be211962c8698740e21af0eb198",
+          "cardNumber": "P22-14",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "P22-14#a0"
         }
       ],
       "abilities": [
         {
-          "id": "P22-14#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -42,8 +77,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: Blade Contract, (Either Attack Step)",
@@ -52,10 +94,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: Blade Contract, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -77,7 +123,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -95,10 +143,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "P22-14#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "Blade Contract, (Either Attack Step)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "P22-14#AB_FLASH_NONE_LV1_LV2_LV3_f71ff73c124a34c6b0a25f16ba6178514404f37a978be3933e65da654f9a8dbe_53380be211962c8698740e21af0eb198",
+              "cardNumber": "P22-14",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "P22-14#a0"
+            }
+          ],
+          "id": "P22-14#AB_FLASH_NONE_LV1_LV2_LV3_f71ff73c124a34c6b0a25f16ba6178514404f37a978be3933e65da654f9a8dbe_53380be211962c8698740e21af0eb198",
+          "physicalId": "P22-14#AB_FLASH_NONE_LV1_LV2_LV3_f71ff73c124a34c6b0a25f16ba6178514404f37a978be3933e65da654f9a8dbe_53380be211962c8698740e21af0eb198",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_f71ff73c124a34c6b0a25f16ba6178514404f37a978be3933e65da654f9a8dbe_53380be211962c8698740e21af0eb198",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_42ff6bb527d780615a924038cd6cab80613efeb86d19dbe4420bd2b5e6c0d147_8953b627af49201c20cd3b00b28baa4a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "P22-14#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -108,8 +200,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS"
+            ],
             "timingLabel": "When Advents",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -118,28 +219,55 @@
             "isMain": false,
             "cleanBody": "Return two Cost 3 or less Red-only Spirit cards from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV1][LV2] (When Advents)\nReturn two Cost 3 or less Red-only Spirit cards from your Trash to the Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Return two Cost 3 or less Red-only Spirit cards from your Trash to the Hand.",
+              "originalClauseText": "Return two Cost 3 or less Red-only Spirit cards from your Trash to the Hand.",
               "cleanText": "Return two Cost 3 or less Red-only Spirit cards from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
-                "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
+                "count": 2,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "costLte": 3,
+                  "color": "Red"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "P22-14#a1",
+          "keywords": [],
+          "id": "P22-14#AB_WHEN_ADVENTS_NONE_LV1_LV2_86164644db758443c027c2797f6724c074bf1d15db9ac84e5abec90cb536023d_00416c5feaad9f096e4c0fdfc76635af",
+          "physicalId": "P22-14#AB_WHEN_ADVENTS_NONE_LV1_LV2_86164644db758443c027c2797f6724c074bf1d15db9ac84e5abec90cb536023d_00416c5feaad9f096e4c0fdfc76635af",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_86164644db758443c027c2797f6724c074bf1d15db9ac84e5abec90cb536023d_00416c5feaad9f096e4c0fdfc76635af",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_20a7a602ddf4d57e696776d1dde89425a54ffa97cc09cd6aa1d4cf8d39c160c4_619d7d26918daf9ad18c3dd78c93e5ee",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "P22-14#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -151,8 +279,17 @@
               "During OC"
             ],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -161,10 +298,14 @@
             "isMain": false,
             "cleanBody": "Draw a card."
           },
+          "originalAbilityText": "[During OC] [LV1][LV2] (When Attacks)\nDraw a card.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Draw a card.",
+              "originalClauseText": "Draw a card.",
               "cleanText": "Draw a card",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -178,7 +319,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "P22-14#a2",
+          "keywords": [],
+          "id": "P22-14#AB_WHEN_ATTACKS_NONE_LV1_LV2_ae5cc2a3126795c42cf9902ca2bcdcc0d0ebf18b3928e68c03f7998759de0537_73c439008f689f0895e7109fe28ea07c",
+          "physicalId": "P22-14#AB_WHEN_ATTACKS_NONE_LV1_LV2_ae5cc2a3126795c42cf9902ca2bcdcc0d0ebf18b3928e68c03f7998759de0537_73c439008f689f0895e7109fe28ea07c",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_ae5cc2a3126795c42cf9902ca2bcdcc0d0ebf18b3928e68c03f7998759de0537_73c439008f689f0895e7109fe28ea07c",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_8e6f59e8f220c9c9e7311fed15e21cd8f72793dd8a12daf507a6a5e81b42c4fa_a71ab213bd82a3f8de6609242a435aec",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,

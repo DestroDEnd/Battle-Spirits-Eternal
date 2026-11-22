@@ -1,0 +1,28 @@
+# Battle Spirits Eternal - Phase 4C.3.2.3 Compiled IR Shards Location Reference
+
+The complete dataset of 514 Intermediate Representation (IR) shards has been compiled using the deterministic physical and semantic ability identity pipeline and atomically promoted to the primary engine database directory.
+
+## Promoted Production Location
+- Path: `data/ir_shards/`
+- Shard File Count: 514 JSON shards
+- Total Card Entries: 15,398
+- Unique Canonical Cards: 14,609
+- Total Compiled Abilities: 36,422
+- Total Conditions: 1,516
+- Total Keyword Bindings: 11,160
+- Total Physical IDs Assigned: 36,422
+- Total Semantic IDs Assigned: 36,422
+- Total Legacy IDs Preserved: 36,422
+- Uncompressed Size: 72.35 MB
+
+## Staging Location
+- Path: `data/ir_shards_staging/`
+- Shard File Count: 514 JSON shards (byte-for-byte identical to promoted dataset)
+
+## Pre-Compilation Backup Location
+- Path: `data/ir_shards_pre_compilation_backup/`
+- Shard File Count: 514 original JSON shards (pre-compilation baseline preserved with SHA-256 hashes recorded in pre_compilation_manifest.json and pre_compilation_inventory.csv)
+
+## Verification & Integrity
+- All 514 shard files, their SHA-256 hashes, card counts, and ability counts are cataloged in `compiled_shard_manifest.json` and `post_compilation_inventory.csv`.
+- Full verification passed with 0 collisions and 100% repeatability across independent compilation runs.

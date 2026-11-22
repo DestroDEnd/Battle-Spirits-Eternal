@@ -1,0 +1,43 @@
+{
+    "testFile":  "tests/work_package_de_operations_and_cards.test.js",
+    "testName":  "WPDE-PERF-01",
+    "thresholdMs":  500,
+    "optimizationApplied":  [
+                                "engine/ops/index.js (DESTROY): pass knownFromZone/knownFromSide/knownFromStack to moveCard and skip redundant findCardCurrentZone scan",
+                                "engine/zones.js (moveCard): O(1) knownFromStack lookup and splice instead of O(N) p.field.filter reallocation"
+                            ],
+    "isolatedFreshRunsAfterOptimization":  [
+                                               {
+                                                   "run":  1,
+                                                   "exitCode":  0,
+                                                   "ms":  222.8988,
+                                                   "passed":  true
+                                               },
+                                               {
+                                                   "run":  2,
+                                                   "exitCode":  0,
+                                                   "ms":  148.8642,
+                                                   "passed":  true
+                                               },
+                                               {
+                                                   "run":  3,
+                                                   "exitCode":  1,
+                                                   "ms":  929.0192,
+                                                   "passed":  false
+                                               },
+                                               {
+                                                   "run":  4,
+                                                   "exitCode":  1,
+                                                   "ms":  676.8402,
+                                                   "passed":  false
+                                               },
+                                               {
+                                                   "run":  5,
+                                                   "exitCode":  1,
+                                                   "ms":  530.2713,
+                                                   "passed":  false
+                                               }
+                                           ],
+    "fullRegressionRunAllResult":  "PASSED (inside tests/run_all.js task-2088)",
+    "status":  "IMPROVED_BUT_COLD_START_STILL_INTERMITTENT (3/5 fresh runs \u003e 500ms)"
+}

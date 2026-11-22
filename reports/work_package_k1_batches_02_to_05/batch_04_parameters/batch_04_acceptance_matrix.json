@@ -1,0 +1,81 @@
+{
+  "batch": "K1-BATCH-04",
+  "title": "Incomplete Parameters Recovery & Fail-Closed Validation",
+  "generatedAt": "2026-11-20T14:32:56.369Z",
+  "overallStatus": "PASSED",
+  "criteria": [
+    {
+      "id": "B4-C1",
+      "criterion": "Explicit non-fabricating parameter recovery module integrated into compiler/clause_patterns.js and engine/ops/index.js",
+      "status": "PASS",
+      "metrics": {
+        "totalIncompleteClauses": 582,
+        "recoveredExplicit": 386,
+        "unrecoverableComplex": 196
+      },
+      "evidence": "engine/parameter_recovery.js; compiler/clause_patterns.js; engine/ops/index.js"
+    },
+    {
+      "id": "B4-C2",
+      "criterion": "Real shard cards execute real state mutations cleanly while bare stubs keep MISSING_* and unrecoverable prose fails closed with UNRECOVERABLE_COMPLEX",
+      "status": "PASS",
+      "evidence": "tests/work_package_k1_batch_04_parameters.test.js (K1B4-01, K1B4-02, K1B4-03)"
+    },
+    {
+      "id": "B4-C3",
+      "criterion": "Zero regression across existing golden compiler, HIJ2 comparator, WPC ops/conditions, and HIJ operations suites",
+      "status": "PASS",
+      "testCounts": {
+        "passed": 32,
+        "failed": 0
+      }
+    },
+    {
+      "id": "B4-C4",
+      "criterion": "Central ledger updated in-place classifying all Batch 04 entries (RESOLVED_VERIFIED vs EXPLICIT_UNRECOVERABLE_BLOCKED) with zero deleted records",
+      "status": "PASS",
+      "metrics": {
+        "updatedCount": 566,
+        "totalRecords": 18031,
+        "summary": {
+          "byBatch": {
+            "K1-BATCH-05": 12427,
+            "K1-BATCH-03": 823,
+            "K1-BATCH-01_CARRY_FORWARD": 2593,
+            "K1-BATCH-02": 1380,
+            "K1-BATCH-04": 566,
+            "K1-BATCH-05_EXCLUSION": 14,
+            "MANUAL_REVIEW_QUEUE": 228
+          },
+          "byStatus": {
+            "HANDLER_PRESENT": 13203,
+            "UNVERIFIED": 2441,
+            "PARTIALLY_VERIFIED": 186,
+            "RESOLVED_VERIFIED": 917,
+            "PARSED_FAILURE": 848,
+            "EXPLICIT_UNRECOVERABLE_BLOCKED": 194,
+            "SOURCE_CORRECTION_REQUIRED": 14,
+            "MANUAL_REVIEW_REQUIRED": 228
+          },
+          "byBatchAndStatus": {
+            "K1-BATCH-05::HANDLER_PRESENT": 12397,
+            "K1-BATCH-03::HANDLER_PRESENT": 806,
+            "K1-BATCH-01_CARRY_FORWARD::UNVERIFIED": 2441,
+            "K1-BATCH-03::PARTIALLY_VERIFIED": 4,
+            "K1-BATCH-02::RESOLVED_VERIFIED": 532,
+            "K1-BATCH-02::PARSED_FAILURE": 848,
+            "K1-BATCH-04::RESOLVED_VERIFIED": 372,
+            "K1-BATCH-04::EXPLICIT_UNRECOVERABLE_BLOCKED": 194,
+            "K1-BATCH-01_CARRY_FORWARD::PARTIALLY_VERIFIED": 152,
+            "K1-BATCH-05::PARTIALLY_VERIFIED": 30,
+            "K1-BATCH-03::RESOLVED_VERIFIED": 13,
+            "K1-BATCH-05_EXCLUSION::SOURCE_CORRECTION_REQUIRED": 14,
+            "MANUAL_REVIEW_QUEUE::MANUAL_REVIEW_REQUIRED": 228
+          }
+        },
+        "ledgerRecovered": 372,
+        "ledgerBlocked": 194
+      }
+    }
+  ]
+}

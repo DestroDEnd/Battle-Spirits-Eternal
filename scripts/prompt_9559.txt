@@ -1,0 +1,185 @@
+<USER_REQUEST>
+# Phase 4C.3.2.3 — Full 514-Shard Identity Compilation & Validation
+
+## Objective
+
+Execute the previously deferred full-database compilation test `TC-COL-06` using the accepted Phase 4C.3.2.1 identity implementation and the accepted Phase 4C.3.2.2 activation-limit enforcement.
+
+The database currently contains 514 IR shards. Compile and validate the complete dataset using deterministic physical and semantic ability identities.
+
+This phase is a controlled compiler/data migration and validation task. It is not a new identity architecture or runtime implementation phase.
+
+## 1. Mandatory preflight
+
+Before modifying any generated data:
+
+1. Inspect the current compiler identity implementation and confirm it uses the accepted deterministic identity algorithm.
+2. Confirm RFC 8785 canonical serialization, SHA-256 primary digest, SHA-512 secondary digest, collision registry, and deterministic keyword ordering remain intact.
+3. Confirm physical ability IDs and semantic IDs are generated after keyword binding.
+4. Confirm the compiler preserves legacy IDs for compatibility.
+5. Inventory all 514 IR shards and record:
+   - Shard filenames
+   - Card counts
+   - Ability counts
+   - Existing identity fields
+   - Existing compilation errors or malformed records
+6. Record SHA-256 hashes of all original shard files before compilation.
+7. Verify that the output directory and source directory are correctly distinguished.
+
+If any preflight requirement fails, STOP and report the exact blocker. Do not attempt to repair unrelated compiler architecture during this phase.
+
+## 2. Full database compilation
+
+Compile all 514 shards through the production compiler pipeline.
+
+Requirements:
+
+- Use the actual production `compileCard()` or established batch-compilation entry point.
+- Do not implement a separate identity-generation path for batch compilation.
+- Do not generate IDs from card names, array positions, regex matches, or registration order.
+- Preserve canonical card numbers and physical ability-instance distinctions.
+- Preserve semantic equivalence across different printings where appropriate.
+- Preserve execution clause ordering.
+- Preserve unsupported text fallbacks and partially compiled clauses.
+- Preserve legacy identifiers.
+- Do not silently discard abilities, condition blocks, keyword bindings, or unsupported clauses.
+- Do not silently skip malformed cards.
+
+Compilation must be deterministic and repeatable.
+
+## 3. Collision and identity validation
+
+Run the full collision registry across the entire compiled database.
+
+Verify:
+
+1. No duplicate physical IDs exist for distinct physical ability instances.
+2. Identical ability instances on the same card retain distinct physical IDs.
+3. Equivalent abilities across different printings retain the intended shared semantic identity.
+4. Different execution semantics produce different semantic identities.
+5. Forced primary digest collisions are detected.
+6. Forced dual-digest collisions produce a fatal collision error.
+7. Existing persistent IDs do not change merely because unrelated cards are added.
+8. Repeated full compilation produces identical IDs and canonical output.
+9. Incremental compilation of a modified card does not alter unrelated cards' identities.
+10. The compiler does not silently resolve a genuine descriptor collision by appending registration-order suffixes.
+
+Any unexpected collision, identity mutation, or nondeterministic output must be treated as a compilation failure.
+
+## 4. Data integrity validation
+
+Compare the compiled output against the original dataset.
+
+Report:
+
+- Total shards discovered and processed.
+- Total canonical cards discovered and compiled.
+- Total abilities discovered and compiled.
+- Total condition blocks discovered and compiled.
+- Total keyword bindings discovered and preserved.
+- Total records with physical IDs.
+- Total records with semantic IDs.
+- Total records retaining legacy IDs.
+- Total compilation errors.
+- Total skipped records.
+- Total malformed records.
+- Total collision registry entries.
+- Total duplicate physical IDs.
+- Total duplicate semantic IDs, distinguishing legitimate equivalence from incorrect collisions.
+
+Do not assume the historical count of 14,609 cards is necessarily the current count. Reconcile against the actual dataset and explain any difference.
+
+Do not change card verification statuses in this phase.
+
+## 5. Atomic output and recovery
+
+Treat this as a potentially destructive data migration.
+
+- Never overwrite original shard files before the complete compilation and validation succeed.
+- Compile into a separate staging directory.
+- Retain the original dataset and its pre-compilation hashes.
+- Validate every generated shard before promotion.
+- If validation fails, retain the failed staging output for diagnosis and leave the original dataset untouched.
+- Promote the compiled output only after all required integrity checks pass.
+- Record the exact output directory and promotion result.
+- Do not leave a partially promoted dataset.
+
+## 6. Required tests
+
+Execute the existing compiler and identity test suites without deleting or weakening any existing tests.
+
+Specifically execute:
+
+- `TC-COL-01` through `TC-COL-12`, including the previously blocked `TC-COL-06`.
+- All `TC-ID` tests.
+- All `TC-INST` tests.
+- All `TC-SEM` tests.
+- All `TC-RFC` and `TC-RFCVAL` tests.
+- All `TC-PIPE` tests.
+- All `TC-COMPAT` tests.
+- All `TC-REG` tests.
+- All condition identity and normalization tests.
+- All relevant golden compiler and data integrity tests.
+
+Also add full-database integration assertions proving that every processed shard has the expected identity fields and that a second compilation produces identical canonical output.
+
+Report discovered, executed, passed, failed, skipped, and blocked counts separately. Do not describe a test as passed if it was merely specified or discovered.
+
+## 7. Strict scope restrictions
+
+Do not:
+
+- Modify runtime activation-limit enforcement.
+- Modify `engine/restrictions.js` unless a direct compilation blocker is demonstrated.
+- Implement additional Battle Spirits effect operations.
+- Reclassify cards as FULLY_SUPPORTED, PARTIAL, or NEEDS_MANUAL_REVIEW.
+- Rewrite card text or source data.
+- Change the identity algorithm or digest format.
+- Remove legacy compatibility fields.
+- Start a new compiler architecture redesign.
+
+If a defect is discovered, document it and stop the affected operation rather than introducing an unrelated fix.
+
+## 8. Required handoff — exactly two deliverables
+
+1. `phase4c3_2_3_full_identity_compilation_report.md`
+2. `phase4c3_2_3_full_identity_compilation_handoff.zip`
+
+The ZIP must contain:
+
+- Final compiled shard output or a clearly documented reference to the promoted output location.
+- Original and compiled shard manifests.
+- Pre- and post-compilation SHA-256 inventories.
+- Collision registry report.
+- Identity validation report.
+- Full test execution logs.
+- Test inventory.
+- Compilation error and skipped-record inventory.
+- Recovery/promotion record.
+
+The report must include:
+- Preflight results.
+- Exact counts reconciled against the real dataset.
+- Full compilation results.
+- Collision validation results.
+- Determinism and repeatability results.
+- Test totals and exit codes.
+- Files changed and their hashes.
+- Any unresolved defects or limitations.
+- Explicit confirmation that runtime activation logic and card verification statuses were not changed.
+
+Keep the handoff minimal. Do not request or deliver individual supplementary files outside the report and ZIP.
+
+## 9. Completion rule
+
+A successful compilation is not automatically proof that every card effect is correctly implemented. This phase validates database compilation and identity integrity only.
+
+If all checks pass, report Phase 4C.3.2.3 as complete and wait for independent review.
+
+If any required check fails, do not promote the staging output and do not claim completion.
+
+**Do not begin the next phase. Stop after producing the two deliverables and wait for review.**
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-11-17T09:25:45+05:30.
+</ADDITIONAL_METADATA>

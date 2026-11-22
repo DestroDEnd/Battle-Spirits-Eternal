@@ -62,6 +62,7 @@ test('Engine Core - Flow Controller Turn 1 step skips for Player 1', async () =>
   assert.equal(game.state.activePlayer, 'opponent');
 
   // Opponent Turn 2: START -> CORE (not skipped!)
+  game.state.players.opponent.voidCores.normal = 1;
   nextStep = await game.advanceStep();
   assert.equal(nextStep, 'CORE');
   assert.equal(game.state.players.opponent.reserve.normal, 4); // 3 initial + 1 from core step

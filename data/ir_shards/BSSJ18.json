@@ -1,1 +1,336 @@
-{"BSSJ18-02":{"cardNumber":"BSSJ18-02","name":"Execeed-Bereft","keywords":[{"name":"Seal","parameter":"Pyroxene Seal","wave":2,"hook":"seal","bracketed":true,"index":219}],"abilities":[{"id":"BSSJ18-02#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Draw a card."},"clauses":[{"rawText":"Draw a card.","cleanText":"Draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]},{"id":"BSSJ18-02#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can target and attack an opposing Spirit. When you've done so, at the end of the blocked battle, send an opposing Life to their Reserve."},"clauses":[{"rawText":"You can target and attack an opposing Spirit.","cleanText":"You can target and attack an opposing Spirit","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"TARGET_ATTACK","target":{"side":"opp","types":["Spirit"]}}},{"rawText":"at the end of the blocked battle, send an opposing Life to their Reserve.","cleanText":"at the end of the blocked battle, send an opposing Life to their Reserve","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"life","side":"opp"},"to":{"zone":"reserve","side":"opp"}}}],"unsupported":[]},{"id":"BSSJ18-02#a2","type":"ABILITY","header":{"levels":[3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Seal: Pyroxene Seal","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"By sending the [Soul Core] from this Spirit to your Life, during this battle, treat this Spirit as Cost 6."},"clauses":[{"rawText":"By sending the [Soul Core] from this Spirit to your Life","cleanText":"By sending the [Soul Core] from this Spirit to your Life","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_SOUL_CORE"}},{"rawText":"during this battle, treat this Spirit as Cost 6.","cleanText":"treat this Spirit as Cost 6","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_BATTLE","op":{"op":"COST_MODIFIER"}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"BSSJ18-07":{"cardNumber":"BSSJ18-07","name":"The UltimateGodKing Mugen-Gale-Phoenix","keywords":[],"abilities":[{"id":"BSSJ18-07#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Advent: Winged Beast & Cost 6 or more (Either Attack Step)","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, stack this from your hand onto your target spirit."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"stack this from your hand onto your target spirit.","cleanText":"stack this from your hand onto your target spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_STACK","from":"HAND","target":{"side":"self","types":["Spirit"]}}}],"unsupported":[]},{"id":"BSSJ18-07#a1","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Summon Condition: Controlling at least one Red/Green Spirit"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Summon Condition: Controlling at least one Red/Green Spirit]","clauses":[],"unsupported":[]},{"id":"BSSJ18-07#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Double Ultimate Trigger [LV3][LV4][LV5][LV6] (When Advents/Attacks) For each Ultimate Trigger that hits, this Ultimate gains an extra Green symbol. *Double Hit*: Also, when both Ultimate Triggers hit, once per turn, this Ultimate refreshes."},"clauses":[{"rawText":"Double Ultimate Trigger [LV3][LV4][LV5][LV6] (When Advents/Attacks) For each Ultimate Trigger that hits, this Ultimate gains an extra Green symbol. *Double Hit*: Also, when both Ultimate Triggers hit, once per turn, this Ultimate refreshes.","cleanText":"Double Ultimate Trigger [LV3][LV4][LV5][LV6] (When Advents/Attacks) For each Ultimate Trigger that hits, this Ultimate gains an extra Green symbol. *Double Hit*: Also, when both Ultimate Triggers hit, once per turn, this Ultimate refreshes","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":"self"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "BSSJ18-02": {
+    "cardNumber": "BSSJ18-02",
+    "name": "Execeed-Bereft",
+    "keywords": [
+      {
+        "name": "Seal",
+        "parameter": "Pyroxene Seal",
+        "wave": 2,
+        "hook": "seal",
+        "bracketed": true,
+        "index": 219
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BSSJ18-02#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_93f4de1681851b872cae8d2e1df51acddab122457220d9d11a7fed20531f3d16_53db5755a5b3db47974df422d0fe1c57",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw a card.",
+            "cleanText": "Draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "BSSJ18-02#a0",
+        "physicalId": "BSSJ18-02#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_93f4de1681851b872cae8d2e1df51acddab122457220d9d11a7fed20531f3d16_53db5755a5b3db47974df422d0fe1c57",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_93f4de1681851b872cae8d2e1df51acddab122457220d9d11a7fed20531f3d16_53db5755a5b3db47974df422d0fe1c57"
+      },
+      {
+        "id": "BSSJ18-02#AB_WHEN_ATTACKS_NONE_LV2_LV3_0db68162a92ea2ad33745861d26028cd7ca9feeaf20793e6cf529a85ce548708_a8fcfa67d1417ad36ad33b0b86221d3e",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can target and attack an opposing Spirit. When you've done so, at the end of the blocked battle, send an opposing Life to their Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "You can target and attack an opposing Spirit.",
+            "cleanText": "You can target and attack an opposing Spirit",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TARGET_ATTACK",
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "at the end of the blocked battle, send an opposing Life to their Reserve.",
+            "cleanText": "at the end of the blocked battle, send an opposing Life to their Reserve",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "life",
+                "side": "opp"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "opp"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "BSSJ18-02#a1",
+        "physicalId": "BSSJ18-02#AB_WHEN_ATTACKS_NONE_LV2_LV3_0db68162a92ea2ad33745861d26028cd7ca9feeaf20793e6cf529a85ce548708_a8fcfa67d1417ad36ad33b0b86221d3e",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_0db68162a92ea2ad33745861d26028cd7ca9feeaf20793e6cf529a85ce548708_a8fcfa67d1417ad36ad33b0b86221d3e"
+      },
+      {
+        "id": "BSSJ18-02#AB_WHEN_ATTACKS_NONE_LV3_f9c5faad7228f241886ba886955d794a0e319cb5b8caae0dff2bca53424d1d51_feaf9c1ec4c095c195a4d46f294c306c",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Seal: Pyroxene Seal",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By sending the [Soul Core] from this Spirit to your Life, during this battle, treat this Spirit as Cost 6."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending the [Soul Core] from this Spirit to your Life",
+            "cleanText": "By sending the [Soul Core] from this Spirit to your Life",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_SOUL_CORE"
+            }
+          },
+          {
+            "rawText": "during this battle, treat this Spirit as Cost 6.",
+            "cleanText": "treat this Spirit as Cost 6",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_BATTLE",
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "BSSJ18-02#a2",
+        "physicalId": "BSSJ18-02#AB_WHEN_ATTACKS_NONE_LV3_f9c5faad7228f241886ba886955d794a0e319cb5b8caae0dff2bca53424d1d51_feaf9c1ec4c095c195a4d46f294c306c",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV3_f9c5faad7228f241886ba886955d794a0e319cb5b8caae0dff2bca53424d1d51_feaf9c1ec4c095c195a4d46f294c306c"
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BSSJ18-07": {
+    "cardNumber": "BSSJ18-07",
+    "name": "The UltimateGodKing Mugen-Gale-Phoenix",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BSSJ18-07#AB_FLASH_NONE_LV1_LV2_LV3_962991cea3146652750c763fa41cd656f2e0fc0b7fa2da705353248cfd938472_5f23d9ce3b79fdc8085dc2c7cd9448c9",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Advent: Winged Beast & Cost 6 or more (Either Attack Step)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, stack this from your hand onto your target spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "stack this from your hand onto your target spirit.",
+            "cleanText": "stack this from your hand onto your target spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_STACK",
+              "from": "HAND",
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "BSSJ18-07#a0",
+        "physicalId": "BSSJ18-07#AB_FLASH_NONE_LV1_LV2_LV3_962991cea3146652750c763fa41cd656f2e0fc0b7fa2da705353248cfd938472_5f23d9ce3b79fdc8085dc2c7cd9448c9",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_962991cea3146652750c763fa41cd656f2e0fc0b7fa2da705353248cfd938472_5f23d9ce3b79fdc8085dc2c7cd9448c9"
+      },
+      {
+        "id": "BSSJ18-07#AB_PASSIVE_NONE_LV1_LV2_LV3_bb011fb985bd986d476f17a6e5718a665f895e95567d22957d29e929c1920487_0ee11cab767d2874415d75358a2761a6",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Summon Condition: Controlling at least one Red/Green Spirit"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Summon Condition: Controlling at least one Red/Green Spirit]",
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "BSSJ18-07#a1",
+        "physicalId": "BSSJ18-07#AB_PASSIVE_NONE_LV1_LV2_LV3_bb011fb985bd986d476f17a6e5718a665f895e95567d22957d29e929c1920487_0ee11cab767d2874415d75358a2761a6",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_bb011fb985bd986d476f17a6e5718a665f895e95567d22957d29e929c1920487_0ee11cab767d2874415d75358a2761a6"
+      },
+      {
+        "id": "BSSJ18-07#AB_PASSIVE_NONE_LV1_LV2_LV3_d47008dbcc5ca5c15b335b12097401e2e6e11c71bdd837f3e03e387e01679962_e0ba513680bf954d13d817cb37080ea4",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Double Ultimate Trigger [LV3][LV4][LV5][LV6] (When Advents/Attacks) For each Ultimate Trigger that hits, this Ultimate gains an extra Green symbol. *Double Hit*: Also, when both Ultimate Triggers hit, once per turn, this Ultimate refreshes."
+        },
+        "clauses": [
+          {
+            "rawText": "Double Ultimate Trigger [LV3][LV4][LV5][LV6] (When Advents/Attacks) For each Ultimate Trigger that hits, this Ultimate gains an extra Green symbol. *Double Hit*: Also, when both Ultimate Triggers hit, once per turn, this Ultimate refreshes.",
+            "cleanText": "Double Ultimate Trigger [LV3][LV4][LV5][LV6] (When Advents/Attacks) For each Ultimate Trigger that hits, this Ultimate gains an extra Green symbol. *Double Hit*: Also, when both Ultimate Triggers hit, once per turn, this Ultimate refreshes",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "BSSJ18-07#a2",
+        "physicalId": "BSSJ18-07#AB_PASSIVE_NONE_LV1_LV2_LV3_d47008dbcc5ca5c15b335b12097401e2e6e11c71bdd837f3e03e387e01679962_e0ba513680bf954d13d817cb37080ea4",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_d47008dbcc5ca5c15b335b12097401e2e6e11c71bdd837f3e03e387e01679962_e0ba513680bf954d13d817cb37080ea4"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

@@ -1,0 +1,56 @@
+[
+  {
+    "id": "INT-01",
+    "scenario": "Mandatory Target Selection",
+    "protocol": "TARGET_SELECTION",
+    "constraints": "min=1, max=1, optional=false",
+    "testedBehavior": "Must choose legal candidate; decline rejected with MANDATORY_TARGET_DECLINED.",
+    "status": "VERIFIED_PASS",
+    "suite": "tests/interaction_protocol.test.js::INTERACTION-02"
+  },
+  {
+    "id": "INT-02",
+    "scenario": "Optional Target Selection",
+    "protocol": "TARGET_SELECTION",
+    "constraints": "min=0, max=1, optional=true",
+    "testedBehavior": "User can decline; targeting context cleared gracefully; downstream resolves.",
+    "status": "VERIFIED_PASS",
+    "suite": "tests/interaction_protocol.test.js::INTERACTION-02"
+  },
+  {
+    "id": "INT-03",
+    "scenario": "Multiple Up-To Selection",
+    "protocol": "TARGET_SELECTION",
+    "constraints": "min=0, max=3, upTo=true",
+    "testedBehavior": "Allows 0, 1, 2, or 3 selections; validates subset of candidate pool.",
+    "status": "VERIFIED_PASS",
+    "suite": "tests/interaction_protocol.test.js::INTERACTION-02"
+  },
+  {
+    "id": "INT-04",
+    "scenario": "Or-Branch Choice",
+    "protocol": "CHOOSE_OR_BRANCH",
+    "constraints": "options=[branch1, branch2]",
+    "testedBehavior": "User picks branch; only selected branch resolves; unchosen marked declined.",
+    "status": "VERIFIED_PASS",
+    "suite": "tests/work_package_hij1_conditions_truth_table.test.js"
+  },
+  {
+    "id": "INT-05",
+    "scenario": "Combat Blocker Choice",
+    "protocol": "BLOCK_CHOICE",
+    "constraints": "blockerCandidates=[spirit1, ...]",
+    "testedBehavior": "Defending player selects ready spirit to block or passes to take life damage.",
+    "status": "VERIFIED_PASS",
+    "suite": "tests/playable_engine_complete_match.test.js::COMPLETE-MATCH-01"
+  },
+  {
+    "id": "INT-06",
+    "scenario": "Stale and Duplicate Response Rejection",
+    "protocol": "ALL_INTERACTIONS",
+    "constraints": "duplicate submission check",
+    "testedBehavior": "Duplicate or stale interaction ID returns error; prevents double resolution.",
+    "status": "VERIFIED_PASS",
+    "suite": "tests/interaction_protocol.test.js::INTERACTION-04"
+  }
+]

@@ -24,10 +24,29 @@
     "compiledIr": {
       "cardNumber": "P15-19",
       "name": "Spirit Santa",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 4000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 5000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] (When Attacks)\nBy sending [Soul Core] (Soul Core) on this Spirit to your Trash, each player reveals a card from their decktop. If that card is a Spirit card, the opponent, and then you, can summon it without paying the cost. If not summoning, or if it's another card, return it to the deckbottom.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "P15-19#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -38,8 +57,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -48,10 +76,14 @@
             "isMain": false,
             "cleanBody": "By sending [Soul Core] (Soul Core) on this Spirit to your Trash, each player reveals a card from their decktop. If that card is a Spirit card, the opponent, and then you, can summon it without paying the cost. If not summoning, or if it's another card, return it to the deckbottom."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Attacks)\nBy sending [Soul Core] (Soul Core) on this Spirit to your Trash, each player reveals a card from their decktop. If that card is a Spirit card, the opponent, and then you, can summon it without paying the cost. If not summoning, or if it's another card, return it to the deckbottom.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending [Soul Core] (Soul Core) on this Spirit to your Trash",
+              "originalClauseText": "By sending [Soul Core] (Soul Core) on this Spirit to your Trash",
               "cleanText": "By sending [Soul Core] (Soul Core) on this Spirit to your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -63,7 +95,9 @@
             },
             {
               "rawText": "each player reveals a card from their decktop.",
+              "originalClauseText": "each player reveals a card from their decktop.",
               "cleanText": "each player reveals a card from their decktop",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -76,20 +110,25 @@
             },
             {
               "rawText": "If that card is a Spirit card, the opponent, and then you, can summon it without paying the cost.",
+              "originalClauseText": "If that card is a Spirit card, the opponent, and then you, can summon it without paying the cost.",
               "cleanText": "the opponent, and then you, can summon it without paying the cost",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": "If that card is a Spirit card",
               "duration": null,
               "op": {
-                "op": "SUMMON",
+                "op": "SUMMON_THIS_CARD",
+                "from": "HAND_OR_BURST",
                 "free": true
               }
             },
             {
               "rawText": "If not summoning, or if it's another card, return it to the deckbottom.",
+              "originalClauseText": "If not summoning, or if it's another card, return it to the deckbottom.",
               "cleanText": "or if it's another card, return it to the deckbottom",
+              "clauseIndex": 3,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -104,7 +143,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "P15-19#a0",
+          "keywords": [],
+          "id": "P15-19#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_f48145fb9bf0800658fd42bcf9594a61a0610205eaa6f36958ce5c03a7dea060_ffaf0a038ad319917ba27c6d47145421",
+          "physicalId": "P15-19#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_f48145fb9bf0800658fd42bcf9594a61a0610205eaa6f36958ce5c03a7dea060_ffaf0a038ad319917ba27c6d47145421",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_f48145fb9bf0800658fd42bcf9594a61a0610205eaa6f36958ce5c03a7dea060_ffaf0a038ad319917ba27c6d47145421",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_faf2b1b3e3a6700f090998bb5957f756542a180b5d721821d340dac283c3691f_ebc9fcee7e2354998c08cc7bb35b381d",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,

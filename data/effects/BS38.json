@@ -547,14 +547,39 @@
     "compiledIr": {
       "cardNumber": "BS38-CP04",
       "name": "Departed Soul",
+      "type": "Magic",
+      "levels": {},
+      "originalEffectText": "[Soul Burst] (After your Ultimate is depleted/destroyed by the opponent)\nYou can summon an Ultimate card that was depleted/destroyed when this Burst activates from your Trash, without paying the cost. If this Burst was activated via [Catalyze], instead, destroy an opposing exhausted Spirit/Ultimate. Then, by paying the cost, activate this card's Flash effect.\n\n[Flash]\nSend two cores from any opposing Spirits/Ultimatess to the Reserve.",
+      "teams": [],
       "keywords": [
         {
-          "name": "Burst",
-          "parameter": "s",
+          "name": "Soul Burst",
+          "parameter": null,
           "wave": 2,
           "hook": "burst",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "BS38-CP04#AB_BURST_NONE_LV1_LV2_LV3_2b70877636c565a97c77537a9aca9d7dac15de9a36102fb1e2fe6fc0c5d1b958_032c942ac9f130b292dab56de3f27f18",
+          "cardNumber": "BS38-CP04",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "BURST",
+          "timingLabel": "Soul Burst",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": "AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT",
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BS38-CP04#a0"
         },
         {
           "name": "Catalyze",
@@ -562,12 +587,32 @@
           "wave": 2,
           "hook": "catalyze",
           "bracketed": true,
-          "index": 231
+          "index": 160,
+          "abilityId": "BS38-CP04#AB_BURST_NONE_LV1_LV2_LV3_2b70877636c565a97c77537a9aca9d7dac15de9a36102fb1e2fe6fc0c5d1b958_032c942ac9f130b292dab56de3f27f18",
+          "cardNumber": "BS38-CP04",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "BURST",
+          "timingLabel": "Soul Burst",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": "AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT",
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BS38-CP04#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BS38-CP04#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -578,20 +623,31 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "BURST",
-            "timingLabel": "Burst",
+            "timings": [],
+            "timingLabel": "Soul Burst",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
-            "keyword": null,
+            "keyword": "Soul Burst",
             "burstCondition": "AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT",
             "isFlash": false,
             "isMain": false,
             "cleanBody": "You can summon an Ultimate card that was depleted/destroyed when this Burst activates from your Trash, without paying the cost. If this Burst was activated via [Catalyze], instead, destroy an opposing exhausted Spirit/Ultimate. Then, by paying the cost, activate this card's Flash effect."
           },
+          "originalAbilityText": "[Soul Burst] (After your Ultimate is depleted/destroyed by the opponent)\nYou can summon an Ultimate card that was depleted/destroyed when this Burst activates from your Trash, without paying the cost. If this Burst was activated via [Catalyze], instead, destroy an opposing exhausted Spirit/Ultimate. Then, by paying the cost, activate this card's Flash effect.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "You can summon an Ultimate card that was depleted/destroyed when this Burst activates from your Trash, without paying the cost.",
+              "originalClauseText": "You can summon an Ultimate card that was depleted/destroyed when this Burst activates from your Trash, without paying the cost.",
               "cleanText": "You can summon an Ultimate card that was depleted/destroyed when this Burst activates from your Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -599,12 +655,24 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Ultimate"
+                  ]
+                },
+                "free": true,
+                "isOptional": true
               }
             },
             {
               "rawText": "If this Burst was activated via [Catalyze], instead, destroy an opposing exhausted Spirit/Ultimate.",
+              "originalClauseText": "If this Burst was activated via [Catalyze], instead, destroy an opposing exhausted Spirit/Ultimate.",
               "cleanText": "destroy an opposing exhausted Spirit/Ultimate",
+              "clauseIndex": 1,
               "link": "instead",
               "isOptional": false,
               "isCost": false,
@@ -626,7 +694,9 @@
             },
             {
               "rawText": "by paying the cost, activate this card's Flash effect.",
+              "originalClauseText": "by paying the cost, activate this card's Flash effect.",
               "cleanText": "by paying the cost, activate this card's Flash effect",
+              "clauseIndex": 2,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -637,10 +707,83 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS38-CP04#a0",
+          "keywords": [
+            {
+              "name": "Soul Burst",
+              "parameter": null,
+              "wave": 2,
+              "hook": "burst",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BS38-CP04#AB_BURST_NONE_LV1_LV2_LV3_2b70877636c565a97c77537a9aca9d7dac15de9a36102fb1e2fe6fc0c5d1b958_032c942ac9f130b292dab56de3f27f18",
+              "cardNumber": "BS38-CP04",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "BURST",
+              "timingLabel": "Soul Burst",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": "AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT",
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BS38-CP04#a0"
+            },
+            {
+              "name": "Catalyze",
+              "parameter": null,
+              "wave": 2,
+              "hook": "catalyze",
+              "bracketed": true,
+              "index": 160,
+              "abilityId": "BS38-CP04#AB_BURST_NONE_LV1_LV2_LV3_2b70877636c565a97c77537a9aca9d7dac15de9a36102fb1e2fe6fc0c5d1b958_032c942ac9f130b292dab56de3f27f18",
+              "cardNumber": "BS38-CP04",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "BURST",
+              "timingLabel": "Soul Burst",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": "AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT",
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BS38-CP04#a0"
+            }
+          ],
+          "id": "BS38-CP04#AB_BURST_NONE_LV1_LV2_LV3_2b70877636c565a97c77537a9aca9d7dac15de9a36102fb1e2fe6fc0c5d1b958_032c942ac9f130b292dab56de3f27f18",
+          "physicalId": "BS38-CP04#AB_BURST_NONE_LV1_LV2_LV3_2b70877636c565a97c77537a9aca9d7dac15de9a36102fb1e2fe6fc0c5d1b958_032c942ac9f130b292dab56de3f27f18",
+          "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_2b70877636c565a97c77537a9aca9d7dac15de9a36102fb1e2fe6fc0c5d1b958_032c942ac9f130b292dab56de3f27f18",
+          "semanticIdV3": "SEM3#AB_BURST_NONE_LV1_LV2_LV3_33047579837a18666620507a232200d2178e0b3755377cb77c21778e91220572_e0af626b876ca325be5be0120f1d9f93",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS38-CP04#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -651,8 +794,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -661,10 +811,14 @@
             "isMain": false,
             "cleanBody": "Send two cores from any opposing Spirits/Ultimatess to the Reserve."
           },
+          "originalAbilityText": "[Flash]\nSend two cores from any opposing Spirits/Ultimatess to the Reserve.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Send two cores from any opposing Spirits/Ultimatess to the Reserve.",
+              "originalClauseText": "Send two cores from any opposing Spirits/Ultimatess to the Reserve.",
               "cleanText": "Send two cores from any opposing Spirits/Ultimatess to the Reserve",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -672,11 +826,30 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 2,
+                "from": {
+                  "zone": "field",
+                  "side": "opp"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS38-CP04#a1",
+          "keywords": [],
+          "id": "BS38-CP04#AB_FLASH_NONE_LV1_LV2_LV3_213cd60f2d0f55baf9a7e5288ffeb07906a485d85abf1a8b350ace8438c3a8b7_b57c5f07491718651edb268ee6af9b7f",
+          "physicalId": "BS38-CP04#AB_FLASH_NONE_LV1_LV2_LV3_213cd60f2d0f55baf9a7e5288ffeb07906a485d85abf1a8b350ace8438c3a8b7_b57c5f07491718651edb268ee6af9b7f",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_213cd60f2d0f55baf9a7e5288ffeb07906a485d85abf1a8b350ace8438c3a8b7_b57c5f07491718651edb268ee6af9b7f",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_8d6d4be77cea9c9cddb92111e8ccf3efac39fb9e44599a15dbcfbde990d27956_392ba20f9bb2c11d7def8baf1083ef81",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -693,10 +866,13 @@
     "compiledIr": {
       "cardNumber": "BS38-075",
       "name": "Drafting Call",
+      "type": "Magic",
+      "levels": {},
+      "originalEffectText": "[During Seal] This Magic card in Hand is treated as Cost 3.\n\n[Flash]\nYou can summon a \"Drifting Spirit\" family Spirit card from your Trash, without paying the cost. However, any (When Summoned) effects can't activate. When a Cost 2/3 Spirit was summoned by this effect, return an opposing Spirit/Ultimate to the Hand.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BS38-075#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -709,8 +885,13 @@
               "During Seal"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -719,24 +900,42 @@
             "isMain": false,
             "cleanBody": "This Magic card in Hand is treated as Cost 3."
           },
+          "originalAbilityText": "[During Seal] This Magic card in Hand is treated as Cost 3.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "This Magic card in Hand is treated as Cost 3.",
+              "originalClauseText": "This Magic card in Hand is treated as Cost 3.",
               "cleanText": "This Magic card in Hand is treated as Cost 3",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "COST_MODIFIER"
+                "op": "TREAT_RULE",
+                "treatAs": "COST",
+                "cost": 3
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS38-075#a0",
+          "keywords": [],
+          "id": "BS38-075#AB_PASSIVE_NONE_LV1_LV2_LV3_e11cd266fac97e597e082a701b1640b1728d0423f77aa079ef87293f801cfde6_0a698e7f4def4c8ca4bbaaffa6f08abf",
+          "physicalId": "BS38-075#AB_PASSIVE_NONE_LV1_LV2_LV3_e11cd266fac97e597e082a701b1640b1728d0423f77aa079ef87293f801cfde6_0a698e7f4def4c8ca4bbaaffa6f08abf",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_e11cd266fac97e597e082a701b1640b1728d0423f77aa079ef87293f801cfde6_0a698e7f4def4c8ca4bbaaffa6f08abf",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_859cbef6019b34135fd78c4efd82a56c3ed522b8436c4c404a6154c968281c53_ea86e298f6bb6a7ec141d7fe366eda97",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS38-075#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -747,8 +946,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -757,10 +963,14 @@
             "isMain": false,
             "cleanBody": "You can summon a \"Drifting Spirit\" family Spirit card from your Trash, without paying the cost. However, any (When Summoned) effects can't activate. When a Cost 2/3 Spirit was summoned by this effect, return an opposing Spirit/Ultimate to the Hand."
           },
+          "originalAbilityText": "[Flash]\nYou can summon a \"Drifting Spirit\" family Spirit card from your Trash, without paying the cost. However, any (When Summoned) effects can't activate. When a Cost 2/3 Spirit was summoned by this effect, return an opposing Spirit/Ultimate to the Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can summon a \"Drifting Spirit\" family Spirit card from your Trash, without paying the cost.",
+              "originalClauseText": "You can summon a \"Drifting Spirit\" family Spirit card from your Trash, without paying the cost.",
               "cleanText": "You can summon a \"Drifting Spirit\" family Spirit card from your Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -768,12 +978,25 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "family": "Drifting Spirit"
+                },
+                "free": true,
+                "isOptional": true
               }
             },
             {
               "rawText": "any (When Summoned) effects can't activate.",
+              "originalClauseText": "any (When Summoned) effects can't activate.",
               "cleanText": "any (When Summoned) effects can't activate",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -785,7 +1008,9 @@
             },
             {
               "rawText": "When a Cost 2/3 Spirit was summoned by this effect, return an opposing Spirit/Ultimate to the Hand.",
+              "originalClauseText": "When a Cost 2/3 Spirit was summoned by this effect, return an opposing Spirit/Ultimate to the Hand.",
               "cleanText": "When a Cost 2/3 Spirit was summoned by this effect, return an opposing Spirit/Ultimate to the Hand",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -800,7 +1025,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS38-075#a1",
+          "keywords": [],
+          "id": "BS38-075#AB_FLASH_NONE_LV1_LV2_LV3_888a888d3679aff84c2252e25f333a6ede379cb0da309a1e5181f168d1e8e4e5_6a4272204298dd6ef1a5030ccaf1b92c",
+          "physicalId": "BS38-075#AB_FLASH_NONE_LV1_LV2_LV3_888a888d3679aff84c2252e25f333a6ede379cb0da309a1e5181f168d1e8e4e5_6a4272204298dd6ef1a5030ccaf1b92c",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_888a888d3679aff84c2252e25f333a6ede379cb0da309a1e5181f168d1e8e4e5_6a4272204298dd6ef1a5030ccaf1b92c",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_cbdeb49cbc8e49f69fc809bc9d8981d5509dd5f658619891b04b77d875587ce0_4e3368032d8da2e4859831bc6fd0beb7",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -2311,10 +2551,29 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A6525",
       "name": "Melofuurin",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 4000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 3,
+          "bp": 5000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] (When Attacks/Blocks)\nAt the end of battle, destroy this Spirit.\n\n[LV2][LV3] (When Destroyed)\nReturn a \"God-King\" family Spirit card from your Trash to the Hand.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A6525#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2325,8 +2584,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timings": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
             "timingLabel": "When Attacks/Blocks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2335,10 +2605,14 @@
             "isMain": false,
             "cleanBody": "At the end of battle, destroy this Spirit."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Attacks/Blocks)\nAt the end of battle, destroy this Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "At the end of battle, destroy this Spirit.",
+              "originalClauseText": "At the end of battle, destroy this Spirit.",
               "cleanText": "At the end of battle, destroy this Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2351,10 +2625,25 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A6525#a0",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A6525#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_8ce509e8875e2bfacec68e6bff0b236b2ca5b42e9c6c8f4462d06c4239d6a29e_1d8241aa4de1b23bab65743e5c126b68",
+          "physicalId": "BATTLE-SPIRITS-A6525#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_8ce509e8875e2bfacec68e6bff0b236b2ca5b42e9c6c8f4462d06c4239d6a29e_1d8241aa4de1b23bab65743e5c126b68",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_8ce509e8875e2bfacec68e6bff0b236b2ca5b42e9c6c8f4462d06c4239d6a29e_1d8241aa4de1b23bab65743e5c126b68",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_15bbf2c3138455ed0a7d0b96a293e0736be387b2d694b095f9d92ea974fe72a7_ab2d0af85ab1de1dd7251e014899b359",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A6525#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2364,8 +2653,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_DESTROYED",
+            "timings": [
+              "WHEN_DESTROYED"
+            ],
             "timingLabel": "When Destroyed",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2374,25 +2672,52 @@
             "isMain": false,
             "cleanBody": "Return a \"God-King\" family Spirit card from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV2][LV3] (When Destroyed)\nReturn a \"God-King\" family Spirit card from your Trash to the Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Return a \"God-King\" family Spirit card from your Trash to the Hand.",
+              "originalClauseText": "Return a \"God-King\" family Spirit card from your Trash to the Hand.",
               "cleanText": "Return a \"God-King\" family Spirit card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "family": "God-King"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A6525#a1",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A6525#AB_WHEN_DESTROYED_NONE_LV2_LV3_e6e58755adcd30982c3b717762320da793707923e6eb995aa9b0db55772500dc_3d8cd62eef5f0d3eace7159092e6d896",
+          "physicalId": "BATTLE-SPIRITS-A6525#AB_WHEN_DESTROYED_NONE_LV2_LV3_e6e58755adcd30982c3b717762320da793707923e6eb995aa9b0db55772500dc_3d8cd62eef5f0d3eace7159092e6d896",
+          "semanticId": "SEM#AB_WHEN_DESTROYED_NONE_LV2_LV3_e6e58755adcd30982c3b717762320da793707923e6eb995aa9b0db55772500dc_3d8cd62eef5f0d3eace7159092e6d896",
+          "semanticIdV3": "SEM3#AB_WHEN_DESTROYED_NONE_LV2_LV3_337717a5c7070e5967b7ddf0885fe6045e4c3164584e9d200674a85e1821de5f_43fd12596e4772c0b77d3c708bacdd82",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -4720,10 +5045,59 @@
     "compiledIr": {
       "cardNumber": "BS38-048",
       "name": "The BlazeUltimateSky Flame Tiger",
-      "keywords": [],
+      "type": "Ultimate",
+      "levels": {
+        "LV3": {
+          "level": 3,
+          "cost": 1,
+          "bp": 9000
+        },
+        "LV4": {
+          "level": 4,
+          "cost": 3,
+          "bp": 12000
+        },
+        "LV5": {
+          "level": 5,
+          "cost": 6,
+          "bp": 20000
+        }
+      },
+      "originalEffectText": "[Summon Condition: You control one or more Cost 1 or more Spirit]\n\n[uhand: Red/Blue [LV3][LV4][LV5]]\n\n[LV4][LV5] [Catl: All Color] (When Attacks)\nBy sending [Soul Core](Soul Core) from this Ultimate to your Trash, immediately activate one of your Soul Bursts.",
+      "teams": [],
+      "keywords": [
+        {
+          "name": "U-Hand",
+          "parameter": "Red/Blue",
+          "wave": 1,
+          "hook": "u_hand",
+          "bracketed": true,
+          "index": 0,
+          "abilityId": "BS38-048#AB_PASSIVE_NONE_LV3_LV4_LV5_199c0dfa5da8b2094ff6a719f3ad5438366477868ff4ff3853ceb6d6c99b0c59_0c1d5bcf1ad7f0009424d5fc65eff01b",
+          "cardNumber": "BS38-048",
+          "levels": [
+            3,
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BS38-048#a1"
+        }
+      ],
       "abilities": [
         {
-          "id": "BS38-048#a0",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -4736,8 +5110,13 @@
               "Summon Condition: You control one or more Cost 1 or more Spirit"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4747,11 +5126,31 @@
             "cleanBody": ""
           },
           "rawText": "[Summon Condition: You control one or more Cost 1 or more Spirit]",
+          "originalAbilityText": "[Summon Condition: You control one or more Cost 1 or more Spirit]",
+          "abilityIndex": 0,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "SUMMON_CONDITION",
+            "expression": "You control one or more Cost 1 or more Spirit",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS38-048#a0",
+          "keywords": [],
+          "id": "BS38-048#AB_PASSIVE_NONE_LV1_LV2_LV3_f8837146468ba496156c2244da982ed6f819e6c1c0ef7c1fa36d28f53c421296_0eaae0d177a7f0e7b97c5d40ed3e8c74",
+          "physicalId": "BS38-048#AB_PASSIVE_NONE_LV1_LV2_LV3_f8837146468ba496156c2244da982ed6f819e6c1c0ef7c1fa36d28f53c421296_0eaae0d177a7f0e7b97c5d40ed3e8c74",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_f8837146468ba496156c2244da982ed6f819e6c1c0ef7c1fa36d28f53c421296_0eaae0d177a7f0e7b97c5d40ed3e8c74",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_cfd4d1e6871bae72ae03089e9287b3e86da723edd915e82e666a1a230f5bf83f_e8b5321817f552c724a84d6f55b274c6",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS38-048#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4762,8 +5161,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "U-Hand: Red/Blue",
@@ -4772,11 +5176,55 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "originalAbilityText": "[uhand: Red/Blue [LV3][LV4][LV5]]",
+          "abilityIndex": 1,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS38-048#a1",
+          "keywords": [
+            {
+              "name": "U-Hand",
+              "parameter": "Red/Blue",
+              "wave": 1,
+              "hook": "u_hand",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BS38-048#AB_PASSIVE_NONE_LV3_LV4_LV5_199c0dfa5da8b2094ff6a719f3ad5438366477868ff4ff3853ceb6d6c99b0c59_0c1d5bcf1ad7f0009424d5fc65eff01b",
+              "cardNumber": "BS38-048",
+              "levels": [
+                3,
+                4,
+                5
+              ],
+              "levelExplicit": true,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BS38-048#a1"
+            }
+          ],
+          "id": "BS38-048#AB_PASSIVE_NONE_LV3_LV4_LV5_199c0dfa5da8b2094ff6a719f3ad5438366477868ff4ff3853ceb6d6c99b0c59_0c1d5bcf1ad7f0009424d5fc65eff01b",
+          "physicalId": "BS38-048#AB_PASSIVE_NONE_LV3_LV4_LV5_199c0dfa5da8b2094ff6a719f3ad5438366477868ff4ff3853ceb6d6c99b0c59_0c1d5bcf1ad7f0009424d5fc65eff01b",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV3_LV4_LV5_199c0dfa5da8b2094ff6a719f3ad5438366477868ff4ff3853ceb6d6c99b0c59_0c1d5bcf1ad7f0009424d5fc65eff01b",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV3_LV4_LV5_683636074d0b87dec9865ccabda7e8ee133eab6ff8b3d421892603a8ca8b5a8c_53507f55dad063e0d79763f4f6315d4e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS38-048#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4786,8 +5234,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4796,10 +5253,14 @@
             "isMain": false,
             "cleanBody": "By sending [Soul Core](Soul Core) from this Ultimate to your Trash, immediately activate one of your Soul Bursts."
           },
+          "originalAbilityText": "[LV4][LV5] [Catl: All Color] (When Attacks)\nBy sending [Soul Core](Soul Core) from this Ultimate to your Trash, immediately activate one of your Soul Bursts.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "By sending [Soul Core] from this Ultimate to your Trash",
+              "originalClauseText": "By sending [Soul Core] from this Ultimate to your Trash",
               "cleanText": "By sending [Soul Core] from this Ultimate to your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -4821,18 +5282,37 @@
             },
             {
               "rawText": "immediately activate one of your Soul Bursts.",
+              "originalClauseText": "immediately activate one of your Soul Bursts.",
               "cleanText": "immediately activate one of your Soul Bursts",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "ACTIVATE_BURST",
+                "burstType": "SOUL_BURST",
+                "color": null
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS38-048#a2",
+          "keywords": [],
+          "id": "BS38-048#AB_WHEN_ATTACKS_NONE_LV4_LV5_b395d5c4e155e842040c36fe9d476fb1e971709c8fd1eba4e0aa481fa0cad8c4_7219b1a8dba85c4b23a69c8061a96004",
+          "physicalId": "BS38-048#AB_WHEN_ATTACKS_NONE_LV4_LV5_b395d5c4e155e842040c36fe9d476fb1e971709c8fd1eba4e0aa481fa0cad8c4_7219b1a8dba85c4b23a69c8061a96004",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV4_LV5_b395d5c4e155e842040c36fe9d476fb1e971709c8fd1eba4e0aa481fa0cad8c4_7219b1a8dba85c4b23a69c8061a96004",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV4_LV5_12d8bea23ff0ddf680d2c8560e1d19d4fe0ad3161c35612c140424176b014f1c_52754b87e92f46127ee5b0a7a5ca86fd",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -4999,19 +5479,80 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A9265",
       "name": "The DarkUltimateSky Spinel Dragon",
+      "type": "Ultimate",
+      "levels": {
+        "LV3": {
+          "level": 3,
+          "cost": 1,
+          "bp": 8000
+        },
+        "LV4": {
+          "level": 4,
+          "cost": 3,
+          "bp": 12000
+        }
+      },
+      "originalEffectText": "[Summon Condition: You control one or more Cost 1 or more Spirit]\n\n[uhand: Purple/White [LV3][LV4]]\n\n[Ultimate Trigger: [LV4] (When Attacks/Blocks)]\nWhen Ultimate Trigger hits, send all cores from the opposing Reserve to their Trash.\n[utb]",
+      "teams": [],
       "keywords": [
         {
+          "name": "U-Hand",
+          "parameter": "Purple/White",
+          "wave": 1,
+          "hook": "u_hand",
+          "bracketed": true,
+          "index": 0,
+          "abilityId": "BATTLE-SPIRITS-A9265#AB_PASSIVE_NONE_LV3_LV4_368218c1a0f789bddea54a47376dabfb1894a09aa0e8fe13a0d3bbcb1d2aa3ad_57fe0f0fa66d4ebb1165c91ab30293df",
+          "cardNumber": "BATTLE-SPIRITS-A9265",
+          "levels": [
+            3,
+            4
+          ],
+          "levelExplicit": true,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "B",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BATTLE-SPIRITS-A9265#a1"
+        },
+        {
           "name": "Ultimate Trigger",
-          "parameter": "[LV4",
+          "parameter": null,
           "wave": 3,
           "hook": "ultimate_trigger",
           "bracketed": true,
-          "index": 101
+          "index": 0,
+          "abilityId": "BATTLE-SPIRITS-A9265#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV4_534fc1d5857b7ae59ed6c527830aa16d1a263599e5d614b85a48fc81288d6c0b_e195b611bffbb18f13cd45d9c15f83bb",
+          "cardNumber": "BATTLE-SPIRITS-A9265",
+          "levels": [
+            4
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS_OR_BLOCKS",
+          "timingLabel": "When Attacks/Blocks",
+          "timingStep": "ANY",
+          "face": "B",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BATTLE-SPIRITS-A9265#a2"
         }
       ],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A9265#a0",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -5024,8 +5565,13 @@
               "Summon Condition: You control one or more Cost 1 or more Spirit"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -5035,11 +5581,31 @@
             "cleanBody": ""
           },
           "rawText": "[Summon Condition: You control one or more Cost 1 or more Spirit]",
+          "originalAbilityText": "[Summon Condition: You control one or more Cost 1 or more Spirit]",
+          "abilityIndex": 0,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "SUMMON_CONDITION",
+            "expression": "You control one or more Cost 1 or more Spirit",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A9265#a0",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A9265#AB_PASSIVE_NONE_LV1_LV2_LV3_f8837146468ba496156c2244da982ed6f819e6c1c0ef7c1fa36d28f53c421296_0eaae0d177a7f0e7b97c5d40ed3e8c74",
+          "physicalId": "BATTLE-SPIRITS-A9265#AB_PASSIVE_NONE_LV1_LV2_LV3_f8837146468ba496156c2244da982ed6f819e6c1c0ef7c1fa36d28f53c421296_0eaae0d177a7f0e7b97c5d40ed3e8c74",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_f8837146468ba496156c2244da982ed6f819e6c1c0ef7c1fa36d28f53c421296_0eaae0d177a7f0e7b97c5d40ed3e8c74",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_cfd4d1e6871bae72ae03089e9287b3e86da723edd915e82e666a1a230f5bf83f_e8b5321817f552c724a84d6f55b274c6",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A9265#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -5049,8 +5615,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "U-Hand: Purple/White",
@@ -5059,11 +5630,54 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "originalAbilityText": "[uhand: Purple/White [LV3][LV4]]",
+          "abilityIndex": 1,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A9265#a1",
+          "keywords": [
+            {
+              "name": "U-Hand",
+              "parameter": "Purple/White",
+              "wave": 1,
+              "hook": "u_hand",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BATTLE-SPIRITS-A9265#AB_PASSIVE_NONE_LV3_LV4_368218c1a0f789bddea54a47376dabfb1894a09aa0e8fe13a0d3bbcb1d2aa3ad_57fe0f0fa66d4ebb1165c91ab30293df",
+              "cardNumber": "BATTLE-SPIRITS-A9265",
+              "levels": [
+                3,
+                4
+              ],
+              "levelExplicit": true,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "B",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BATTLE-SPIRITS-A9265#a1"
+            }
+          ],
+          "id": "BATTLE-SPIRITS-A9265#AB_PASSIVE_NONE_LV3_LV4_368218c1a0f789bddea54a47376dabfb1894a09aa0e8fe13a0d3bbcb1d2aa3ad_57fe0f0fa66d4ebb1165c91ab30293df",
+          "physicalId": "BATTLE-SPIRITS-A9265#AB_PASSIVE_NONE_LV3_LV4_368218c1a0f789bddea54a47376dabfb1894a09aa0e8fe13a0d3bbcb1d2aa3ad_57fe0f0fa66d4ebb1165c91ab30293df",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV3_LV4_368218c1a0f789bddea54a47376dabfb1894a09aa0e8fe13a0d3bbcb1d2aa3ad_57fe0f0fa66d4ebb1165c91ab30293df",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV3_LV4_62224b05ef1dbd3b25e9e5aaf66f6782f3b3df0f0d137bc5d400ec521febbb34_6096e501cc299233dea18ee390623afe",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A9265#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -5072,8 +5686,15 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timings": [],
             "timingLabel": "When Attacks/Blocks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS_OR_BLOCKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Ultimate Trigger",
@@ -5082,10 +5703,14 @@
             "isMain": false,
             "cleanBody": "When Ultimate Trigger hits, send all cores from the opposing Reserve to their Trash."
           },
+          "originalAbilityText": "[Ultimate Trigger: [LV4] (When Attacks/Blocks)]\nWhen Ultimate Trigger hits, send all cores from the opposing Reserve to their Trash.\n[utb]",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When Ultimate Trigger hits, send all cores from the opposing Reserve to their Trash.",
+              "originalClauseText": "When Ultimate Trigger hits, send all cores from the opposing Reserve to their Trash.",
               "cleanText": "When Ultimate Trigger hits, send all cores from the opposing Reserve to their Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -5105,7 +5730,50 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A9265#a2",
+          "keywords": [
+            {
+              "name": "Ultimate Trigger",
+              "parameter": null,
+              "wave": 3,
+              "hook": "ultimate_trigger",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BATTLE-SPIRITS-A9265#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV4_534fc1d5857b7ae59ed6c527830aa16d1a263599e5d614b85a48fc81288d6c0b_e195b611bffbb18f13cd45d9c15f83bb",
+              "cardNumber": "BATTLE-SPIRITS-A9265",
+              "levels": [
+                4
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS_OR_BLOCKS",
+              "timingLabel": "When Attacks/Blocks",
+              "timingStep": "ANY",
+              "face": "B",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BATTLE-SPIRITS-A9265#a2"
+            }
+          ],
+          "id": "BATTLE-SPIRITS-A9265#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV4_534fc1d5857b7ae59ed6c527830aa16d1a263599e5d614b85a48fc81288d6c0b_e195b611bffbb18f13cd45d9c15f83bb",
+          "physicalId": "BATTLE-SPIRITS-A9265#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV4_534fc1d5857b7ae59ed6c527830aa16d1a263599e5d614b85a48fc81288d6c0b_e195b611bffbb18f13cd45d9c15f83bb",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV4_534fc1d5857b7ae59ed6c527830aa16d1a263599e5d614b85a48fc81288d6c0b_e195b611bffbb18f13cd45d9c15f83bb",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV4_d0e4ed97f9f6ea0fa2d7089da9cbc7ec471ea49264208de3066ed431db43abdb_50195707f2d6cfd67f22a40a46c97109",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS_OR_BLOCKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 1,
@@ -6149,14 +6817,55 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A10331",
       "name": "The GoldClown Golden Ham",
+      "type": "Ultimate",
+      "levels": {
+        "LV3": {
+          "level": 3,
+          "cost": 1,
+          "bp": 10000
+        },
+        "LV4": {
+          "level": 4,
+          "cost": 3,
+          "bp": 15000
+        },
+        "LV5": {
+          "level": 5,
+          "cost": 5,
+          "bp": 18000
+        }
+      },
+      "originalEffectText": "[Summon Condition: You control one or more Cost 2 or higher Spirits]\n\n[Double Ultimate Trigger: [LV3][LV4][LV5] (When Attacks)]\nFor each Trigger hit, you can summon one \"Drifting Spirit\" family Spirit card from your Hand/Trash, without paying the cost. [Double Hit] When it hits twice, also, this Ultimate can't be blocked.\n[wutb]",
+      "teams": [],
       "keywords": [
         {
           "name": "Double Ultimate Trigger",
-          "parameter": "[LV3",
+          "parameter": null,
           "wave": 3,
           "hook": "ultimate_trigger",
           "bracketed": true,
-          "index": 70
+          "index": 0,
+          "abilityId": "BATTLE-SPIRITS-A10331#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_08a6a7f853012820bc215ccd6d68b3bb3a9f748dca17101987a864305c5a1d10_c6a1b1f8a0ae5ebed89103c5d4a6beb1",
+          "cardNumber": "BATTLE-SPIRITS-A10331",
+          "levels": [
+            3,
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "B",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BATTLE-SPIRITS-A10331#a1"
         },
         {
           "name": "Double Hit",
@@ -6164,12 +6873,32 @@
           "wave": 3,
           "hook": "double_hit",
           "bracketed": true,
-          "index": 253
+          "index": 125,
+          "abilityId": "BATTLE-SPIRITS-A10331#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_08a6a7f853012820bc215ccd6d68b3bb3a9f748dca17101987a864305c5a1d10_c6a1b1f8a0ae5ebed89103c5d4a6beb1",
+          "cardNumber": "BATTLE-SPIRITS-A10331",
+          "levels": [
+            3,
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "B",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BATTLE-SPIRITS-A10331#a1"
         }
       ],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A10331#a0",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -6182,8 +6911,13 @@
               "Summon Condition: You control one or more Cost 2 or higher Spirits"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -6193,11 +6927,31 @@
             "cleanBody": ""
           },
           "rawText": "[Summon Condition: You control one or more Cost 2 or higher Spirits]",
+          "originalAbilityText": "[Summon Condition: You control one or more Cost 2 or higher Spirits]",
+          "abilityIndex": 0,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "SUMMON_CONDITION",
+            "expression": "You control one or more Cost 2 or higher Spirits",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A10331#a0",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A10331#AB_PASSIVE_NONE_LV1_LV2_LV3_8ba2f6c00417ca9e088a2eb577b44cd93cfea4779660d344551adb2afbb21d6e_d0b31438fa7f3aefaedae0b8710a0dff",
+          "physicalId": "BATTLE-SPIRITS-A10331#AB_PASSIVE_NONE_LV1_LV2_LV3_8ba2f6c00417ca9e088a2eb577b44cd93cfea4779660d344551adb2afbb21d6e_d0b31438fa7f3aefaedae0b8710a0dff",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_8ba2f6c00417ca9e088a2eb577b44cd93cfea4779660d344551adb2afbb21d6e_d0b31438fa7f3aefaedae0b8710a0dff",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_0e87111317f58da9badf1256247c6b2772a5fd0df117f2e8e734e1d285814c3c_4216b86c9c5493c2f6ddc532206f9518",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A10331#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -6208,8 +6962,15 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Double Ultimate Trigger",
@@ -6218,10 +6979,14 @@
             "isMain": false,
             "cleanBody": "For each Trigger hit, you can summon one \"Drifting Spirit\" family Spirit card from your Hand/Trash, without paying the cost. [Double Hit] When it hits twice, also, this Ultimate can't be blocked."
           },
+          "originalAbilityText": "[Double Ultimate Trigger: [LV3][LV4][LV5] (When Attacks)]\nFor each Trigger hit, you can summon one \"Drifting Spirit\" family Spirit card from your Hand/Trash, without paying the cost. [Double Hit] When it hits twice, also, this Ultimate can't be blocked.\n[wutb]",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "For each Trigger hit, you can summon one \"Drifting Spirit\" family Spirit card from your Hand/Trash, without paying the cost.",
+              "originalClauseText": "For each Trigger hit, you can summon one \"Drifting Spirit\" family Spirit card from your Hand/Trash, without paying the cost.",
               "cleanText": "For each Trigger hit, you can summon one \"Drifting Spirit\" family Spirit card from your Hand/Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -6229,23 +6994,111 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand_or_trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "family": "Drifting Spirit"
+                },
+                "free": true,
+                "isOptional": false
               }
             },
             {
               "rawText": "[Double Hit] When it hits twice, also, this Ultimate can't be blocked.",
+              "originalClauseText": "[Double Hit] When it hits twice, also, this Ultimate can't be blocked.",
               "cleanText": "[Double Hit] When it hits twice, also, this Ultimate can't be blocked",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "UNBLOCKABLE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Double Hit"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A10331#a1",
+          "keywords": [
+            {
+              "name": "Double Ultimate Trigger",
+              "parameter": null,
+              "wave": 3,
+              "hook": "ultimate_trigger",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BATTLE-SPIRITS-A10331#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_08a6a7f853012820bc215ccd6d68b3bb3a9f748dca17101987a864305c5a1d10_c6a1b1f8a0ae5ebed89103c5d4a6beb1",
+              "cardNumber": "BATTLE-SPIRITS-A10331",
+              "levels": [
+                3,
+                4,
+                5
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "B",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BATTLE-SPIRITS-A10331#a1"
+            },
+            {
+              "name": "Double Hit",
+              "parameter": null,
+              "wave": 3,
+              "hook": "double_hit",
+              "bracketed": true,
+              "index": 125,
+              "abilityId": "BATTLE-SPIRITS-A10331#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_08a6a7f853012820bc215ccd6d68b3bb3a9f748dca17101987a864305c5a1d10_c6a1b1f8a0ae5ebed89103c5d4a6beb1",
+              "cardNumber": "BATTLE-SPIRITS-A10331",
+              "levels": [
+                3,
+                4,
+                5
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "B",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BATTLE-SPIRITS-A10331#a1"
+            }
+          ],
+          "id": "BATTLE-SPIRITS-A10331#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_08a6a7f853012820bc215ccd6d68b3bb3a9f748dca17101987a864305c5a1d10_c6a1b1f8a0ae5ebed89103c5d4a6beb1",
+          "physicalId": "BATTLE-SPIRITS-A10331#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_08a6a7f853012820bc215ccd6d68b3bb3a9f748dca17101987a864305c5a1d10_c6a1b1f8a0ae5ebed89103c5d4a6beb1",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_08a6a7f853012820bc215ccd6d68b3bb3a9f748dca17101987a864305c5a1d10_c6a1b1f8a0ae5ebed89103c5d4a6beb1",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_d54b56320a30e3ff88a37479e7227f6a50a0eeb70ad221d9fa6c53fa191b49ab_47a0a8c1b965855dd4cd72bad44edd4e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -7083,6 +7936,26 @@
     "compiledIr": {
       "cardNumber": "BS38-051",
       "name": "The HellsoilSorcerer Denial",
+      "type": "Ultimate",
+      "levels": {
+        "LV3": {
+          "level": 3,
+          "cost": 1,
+          "bp": 10000
+        },
+        "LV4": {
+          "level": 4,
+          "cost": 2,
+          "bp": 12000
+        },
+        "LV5": {
+          "level": 5,
+          "cost": 4,
+          "bp": 16000
+        }
+      },
+      "originalEffectText": "[Summon Condition: Your Life is at three or less]\n\n[LV3][LV4][LV5] (When Summoned)\n[Soul Drive] If you banish the [Soul Core](Soul Core) on your Reserve from the game, send all cores from an opposing Spirit/Ultimate to the Reserve. For each core sent by this effect, you can summon one Purple Spirit card from your Trash without paying the cost.\n\n[LV4][LV5] (When Attacks)\nDestroy an opposing exhausted Spirit.",
+      "teams": [],
       "keywords": [
         {
           "name": "Soul Drive",
@@ -7090,12 +7963,32 @@
           "wave": 3,
           "hook": "soul_drive",
           "bracketed": true,
-          "index": 83
+          "index": 0,
+          "abilityId": "BS38-051#AB_WHEN_SUMMONED_NONE_LV3_LV4_LV5_c56a49439ce5870ec6480029e7c19b9f0dd208146d475798a19f8e02ac9fdb2b_0233e106486cf34c4cd037b5a9462b0a",
+          "cardNumber": "BS38-051",
+          "levels": [
+            3,
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BS38-051#a1"
         }
       ],
       "abilities": [
         {
-          "id": "BS38-051#a0",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -7108,8 +8001,13 @@
               "Summon Condition: Your Life is at three or less"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -7119,11 +8017,31 @@
             "cleanBody": ""
           },
           "rawText": "[Summon Condition: Your Life is at three or less]",
+          "originalAbilityText": "[Summon Condition: Your Life is at three or less]",
+          "abilityIndex": 0,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "SUMMON_CONDITION",
+            "expression": "Your Life is at three or less",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS38-051#a0",
+          "keywords": [],
+          "id": "BS38-051#AB_PASSIVE_NONE_LV1_LV2_LV3_9d4fbce8d24552ee06f35cd030408a481901107cef6d46ce0817199e91375d53_a7d1e80ca2512f4b58269284b66710e8",
+          "physicalId": "BS38-051#AB_PASSIVE_NONE_LV1_LV2_LV3_9d4fbce8d24552ee06f35cd030408a481901107cef6d46ce0817199e91375d53_a7d1e80ca2512f4b58269284b66710e8",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_9d4fbce8d24552ee06f35cd030408a481901107cef6d46ce0817199e91375d53_a7d1e80ca2512f4b58269284b66710e8",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_4e0b588afd64c400078b39399168a599f01bd41a8365f8e69d33b2d91450071d_07036ee9c6c401a971a3997a9b144826",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS38-051#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -7134,8 +8052,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Soul Drive",
@@ -7144,10 +8071,14 @@
             "isMain": false,
             "cleanBody": "If you banish the [Soul Core](Soul Core) on your Reserve from the game, send all cores from an opposing Spirit/Ultimate to the Reserve. For each core sent by this effect, you can summon one Purple Spirit card from your Trash without paying the cost."
           },
+          "originalAbilityText": "[LV3][LV4][LV5] (When Summoned)\n[Soul Drive] If you banish the [Soul Core](Soul Core) on your Reserve from the game, send all cores from an opposing Spirit/Ultimate to the Reserve. For each core sent by this effect, you can summon one Purple Spirit card from your Trash without paying the cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "If you banish the [Soul Core] on your Reserve from the game, send all cores from an opposing Spirit/Ultimate to the Reserve.",
+              "originalClauseText": "If you banish the [Soul Core] on your Reserve from the game, send all cores from an opposing Spirit/Ultimate to the Reserve.",
               "cleanText": "send all cores from an opposing Spirit/Ultimate to the Reserve",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -7155,12 +8086,18 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": "ALL",
+                "from": {
+                  "zone": "field",
+                  "side": "opp"
+                }
               }
             },
             {
               "rawText": "For each core sent by this effect, you can summon one Purple Spirit card from your Trash without paying the cost.",
+              "originalClauseText": "For each core sent by this effect, you can summon one Purple Spirit card from your Trash without paying the cost.",
               "cleanText": "For each core sent by this effect, you can summon one Purple Spirit card from your Trash without paying the cost",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -7168,14 +8105,69 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "color": "Purple"
+                },
+                "free": true,
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS38-051#a1",
+          "keywords": [
+            {
+              "name": "Soul Drive",
+              "parameter": null,
+              "wave": 3,
+              "hook": "soul_drive",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BS38-051#AB_WHEN_SUMMONED_NONE_LV3_LV4_LV5_c56a49439ce5870ec6480029e7c19b9f0dd208146d475798a19f8e02ac9fdb2b_0233e106486cf34c4cd037b5a9462b0a",
+              "cardNumber": "BS38-051",
+              "levels": [
+                3,
+                4,
+                5
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_SUMMONED",
+              "timingLabel": "When Summoned",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BS38-051#a1"
+            }
+          ],
+          "id": "BS38-051#AB_WHEN_SUMMONED_NONE_LV3_LV4_LV5_c56a49439ce5870ec6480029e7c19b9f0dd208146d475798a19f8e02ac9fdb2b_0233e106486cf34c4cd037b5a9462b0a",
+          "physicalId": "BS38-051#AB_WHEN_SUMMONED_NONE_LV3_LV4_LV5_c56a49439ce5870ec6480029e7c19b9f0dd208146d475798a19f8e02ac9fdb2b_0233e106486cf34c4cd037b5a9462b0a",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV3_LV4_LV5_c56a49439ce5870ec6480029e7c19b9f0dd208146d475798a19f8e02ac9fdb2b_0233e106486cf34c4cd037b5a9462b0a",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV3_LV4_LV5_4450df3c324c3be7b63973b0927a2a5c1d76d4dbf3faac05ef3ec16d2b95523f_95a01ece515a3c4c62020a1d3d1a990d",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS38-051#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -7185,8 +8177,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -7195,10 +8196,14 @@
             "isMain": false,
             "cleanBody": "Destroy an opposing exhausted Spirit."
           },
+          "originalAbilityText": "[LV4][LV5] (When Attacks)\nDestroy an opposing exhausted Spirit.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Destroy an opposing exhausted Spirit.",
+              "originalClauseText": "Destroy an opposing exhausted Spirit.",
               "cleanText": "Destroy an opposing exhausted Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -7219,7 +8224,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS38-051#a2",
+          "keywords": [],
+          "id": "BS38-051#AB_WHEN_ATTACKS_NONE_LV4_LV5_f32ea966b660b64721cd18adb21851e46c38e14b5449213fc2a123045c77b35e_cebfaece40d688aa2187cda7f339c7df",
+          "physicalId": "BS38-051#AB_WHEN_ATTACKS_NONE_LV4_LV5_f32ea966b660b64721cd18adb21851e46c38e14b5449213fc2a123045c77b35e_cebfaece40d688aa2187cda7f339c7df",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV4_LV5_f32ea966b660b64721cd18adb21851e46c38e14b5449213fc2a123045c77b35e_cebfaece40d688aa2187cda7f339c7df",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV4_LV5_8bb8bde00ef714cdfd8cae7eceed1fce097a8c1e92e399a35f88a8f985e2c880_852b4f4a9d771c92bc01cab8e6b0ec01",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -8580,14 +9600,49 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A10772",
       "name": "The Hellsoil FourDemonLord Magnamiser",
+      "type": "Ultimate",
+      "levels": {
+        "LV3": {
+          "level": 3,
+          "cost": 1,
+          "bp": 14000
+        },
+        "LV4": {
+          "level": 4,
+          "cost": 3,
+          "bp": 25000
+        }
+      },
+      "originalEffectText": "[Summon Condition: You control one or more Cost 3 or higher Spirit/Ultimate]\n\n[Triple Ultimate Trigger: [LV3][LV4] (When Attacks)]\nFor each Ultimate-Trigger hit, send two cores from any opposing Spirits/Ultimates to the Trash.\n\n[Double Hit] When it hits twice or more, send an opposing Life to the Trash.\n\n[Triple Hit] When it hits thrice, discard two random cards from the opposing Hand.\n[tutb]",
+      "teams": [],
       "keywords": [
         {
           "name": "Triple Ultimate Trigger",
-          "parameter": "[LV3",
+          "parameter": null,
           "wave": 3,
           "hook": "ultimate_trigger",
           "bracketed": true,
-          "index": 78
+          "index": 0,
+          "abilityId": "BATTLE-SPIRITS-A10772#AB_WHEN_ATTACKS_NONE_LV3_LV4_eb19c8593f12ba76f26c2db895fdc067231f9ff10fe787bf9e241ab1d970d9cf_b8d06604a2ff0bac2ff494335cc8e38c",
+          "cardNumber": "BATTLE-SPIRITS-A10772",
+          "levels": [
+            3,
+            4
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "B",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BATTLE-SPIRITS-A10772#a1"
         },
         {
           "name": "Double Hit",
@@ -8595,7 +9650,28 @@
           "wave": 3,
           "hook": "double_hit",
           "bracketed": true,
-          "index": 228
+          "index": 0,
+          "abilityId": "BATTLE-SPIRITS-A10772#AB_PASSIVE_NONE_LV1_LV2_LV3_f0e1a704cae297a9b029b2c90b1c20ea0df88aaed7dffb88c7f2b5512d107409_7441654135602b4a1bc87f025b565813",
+          "cardNumber": "BATTLE-SPIRITS-A10772",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "B",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BATTLE-SPIRITS-A10772#a2"
         },
         {
           "name": "Triple Hit",
@@ -8603,12 +9679,32 @@
           "wave": 3,
           "hook": "triple_hit",
           "bracketed": true,
-          "index": 306
+          "index": 0,
+          "abilityId": "BATTLE-SPIRITS-A10772#AB_PASSIVE_NONE_LV1_LV2_LV3_6825969875fa4b6faca5e08c5836ed5bf032b2cdf5706688229be658646839c7_5e1d034ac4e816b94c69ef434e2170bc",
+          "cardNumber": "BATTLE-SPIRITS-A10772",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "B",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BATTLE-SPIRITS-A10772#a3"
         }
       ],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A10772#a0",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -8621,8 +9717,13 @@
               "Summon Condition: You control one or more Cost 3 or higher Spirit/Ultimate"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -8632,11 +9733,31 @@
             "cleanBody": ""
           },
           "rawText": "[Summon Condition: You control one or more Cost 3 or higher Spirit/Ultimate]",
+          "originalAbilityText": "[Summon Condition: You control one or more Cost 3 or higher Spirit/Ultimate]",
+          "abilityIndex": 0,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "SUMMON_CONDITION",
+            "expression": "You control one or more Cost 3 or higher Spirit/Ultimate",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A10772#a0",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A10772#AB_PASSIVE_NONE_LV1_LV2_LV3_5491202da731fa732c49620acaa9615841fb57d9ac1005e7b58cfc370d01c146_641b2ab4b5f26a05a310542a96bffb08",
+          "physicalId": "BATTLE-SPIRITS-A10772#AB_PASSIVE_NONE_LV1_LV2_LV3_5491202da731fa732c49620acaa9615841fb57d9ac1005e7b58cfc370d01c146_641b2ab4b5f26a05a310542a96bffb08",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_5491202da731fa732c49620acaa9615841fb57d9ac1005e7b58cfc370d01c146_641b2ab4b5f26a05a310542a96bffb08",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_651d0968d90f0d39424de614acbf12d6ad475203cda6fd781791d27fb39b392f_e2b64323587d6cf38500d14698cec2a7",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A10772#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -8646,8 +9767,15 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Triple Ultimate Trigger",
@@ -8656,10 +9784,14 @@
             "isMain": false,
             "cleanBody": "For each Ultimate-Trigger hit, send two cores from any opposing Spirits/Ultimates to the Trash."
           },
+          "originalAbilityText": "[Triple Ultimate Trigger: [LV3][LV4] (When Attacks)]\nFor each Ultimate-Trigger hit, send two cores from any opposing Spirits/Ultimates to the Trash.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "For each Ultimate-Trigger hit, send two cores from any opposing Spirits/Ultimates to the Trash.",
+              "originalClauseText": "For each Ultimate-Trigger hit, send two cores from any opposing Spirits/Ultimates to the Trash.",
               "cleanText": "For each Ultimate-Trigger hit, send two cores from any opposing Spirits/Ultimates to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -8667,14 +9799,65 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 2,
+                "from": {
+                  "zone": "field",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A10772#a1",
+          "keywords": [
+            {
+              "name": "Triple Ultimate Trigger",
+              "parameter": null,
+              "wave": 3,
+              "hook": "ultimate_trigger",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BATTLE-SPIRITS-A10772#AB_WHEN_ATTACKS_NONE_LV3_LV4_eb19c8593f12ba76f26c2db895fdc067231f9ff10fe787bf9e241ab1d970d9cf_b8d06604a2ff0bac2ff494335cc8e38c",
+              "cardNumber": "BATTLE-SPIRITS-A10772",
+              "levels": [
+                3,
+                4
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "B",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BATTLE-SPIRITS-A10772#a1"
+            }
+          ],
+          "id": "BATTLE-SPIRITS-A10772#AB_WHEN_ATTACKS_NONE_LV3_LV4_eb19c8593f12ba76f26c2db895fdc067231f9ff10fe787bf9e241ab1d970d9cf_b8d06604a2ff0bac2ff494335cc8e38c",
+          "physicalId": "BATTLE-SPIRITS-A10772#AB_WHEN_ATTACKS_NONE_LV3_LV4_eb19c8593f12ba76f26c2db895fdc067231f9ff10fe787bf9e241ab1d970d9cf_b8d06604a2ff0bac2ff494335cc8e38c",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV3_LV4_eb19c8593f12ba76f26c2db895fdc067231f9ff10fe787bf9e241ab1d970d9cf_b8d06604a2ff0bac2ff494335cc8e38c",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV3_LV4_1276b97fddbc41d14c0bf65cb6dc7c0752e48fabbb3434f079ab1cd01423bd64_b783a081f7d6c81f3e7dde6485bd0bd9",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A10772#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -8685,8 +9868,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Double Hit",
@@ -8695,10 +9883,14 @@
             "isMain": false,
             "cleanBody": "When it hits twice or more, send an opposing Life to the Trash."
           },
+          "originalAbilityText": "[Double Hit] When it hits twice or more, send an opposing Life to the Trash.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When it hits twice or more, send an opposing Life to the Trash.",
+              "originalClauseText": "When it hits twice or more, send an opposing Life to the Trash.",
               "cleanText": "When it hits twice or more, send an opposing Life to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -8706,14 +9898,60 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A10772#a2",
+          "keywords": [
+            {
+              "name": "Double Hit",
+              "parameter": null,
+              "wave": 3,
+              "hook": "double_hit",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BATTLE-SPIRITS-A10772#AB_PASSIVE_NONE_LV1_LV2_LV3_f0e1a704cae297a9b029b2c90b1c20ea0df88aaed7dffb88c7f2b5512d107409_7441654135602b4a1bc87f025b565813",
+              "cardNumber": "BATTLE-SPIRITS-A10772",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "B",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BATTLE-SPIRITS-A10772#a2"
+            }
+          ],
+          "id": "BATTLE-SPIRITS-A10772#AB_PASSIVE_NONE_LV1_LV2_LV3_f0e1a704cae297a9b029b2c90b1c20ea0df88aaed7dffb88c7f2b5512d107409_7441654135602b4a1bc87f025b565813",
+          "physicalId": "BATTLE-SPIRITS-A10772#AB_PASSIVE_NONE_LV1_LV2_LV3_f0e1a704cae297a9b029b2c90b1c20ea0df88aaed7dffb88c7f2b5512d107409_7441654135602b4a1bc87f025b565813",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_f0e1a704cae297a9b029b2c90b1c20ea0df88aaed7dffb88c7f2b5512d107409_7441654135602b4a1bc87f025b565813",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_862e89f41ad6ffb20b6b65137156b96e03dd8cd60e6d656d703ff9ceeed04b8d_a2db8505afde409f605d4c7b635a8c0e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A10772#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -8724,8 +9962,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Triple Hit",
@@ -8734,10 +9977,14 @@
             "isMain": false,
             "cleanBody": "When it hits thrice, discard two random cards from the opposing Hand."
           },
+          "originalAbilityText": "[Triple Hit] When it hits thrice, discard two random cards from the opposing Hand.\n[tutb]",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "When it hits thrice, discard two random cards from the opposing Hand.",
+              "originalClauseText": "When it hits thrice, discard two random cards from the opposing Hand.",
               "cleanText": "When it hits thrice, discard two random cards from the opposing Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -8750,7 +9997,50 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A10772#a3",
+          "keywords": [
+            {
+              "name": "Triple Hit",
+              "parameter": null,
+              "wave": 3,
+              "hook": "triple_hit",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BATTLE-SPIRITS-A10772#AB_PASSIVE_NONE_LV1_LV2_LV3_6825969875fa4b6faca5e08c5836ed5bf032b2cdf5706688229be658646839c7_5e1d034ac4e816b94c69ef434e2170bc",
+              "cardNumber": "BATTLE-SPIRITS-A10772",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "B",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BATTLE-SPIRITS-A10772#a3"
+            }
+          ],
+          "id": "BATTLE-SPIRITS-A10772#AB_PASSIVE_NONE_LV1_LV2_LV3_6825969875fa4b6faca5e08c5836ed5bf032b2cdf5706688229be658646839c7_5e1d034ac4e816b94c69ef434e2170bc",
+          "physicalId": "BATTLE-SPIRITS-A10772#AB_PASSIVE_NONE_LV1_LV2_LV3_6825969875fa4b6faca5e08c5836ed5bf032b2cdf5706688229be658646839c7_5e1d034ac4e816b94c69ef434e2170bc",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_6825969875fa4b6faca5e08c5836ed5bf032b2cdf5706688229be658646839c7_5e1d034ac4e816b94c69ef434e2170bc",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_d45a4a59d1ff604748b5451ab166bad4e864f6b8060114a01027125ef9c4f5d6_4d95e95b4c8b7a9b91cde1f8bdb84194",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -9726,6 +11016,26 @@
     "compiledIr": {
       "cardNumber": "ALPINE-BIT",
       "name": "The Second's WhiteKnight Alpine-Bit",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 7000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 6,
+          "bp": 12000
+        }
+      },
+      "originalEffectText": "Flash - [High Speed]\nThis card in Hand can be summoned by paying the cost with cores in the Reserve. In this case, cores to be put on this Spirit must also be from the Reserve.\n\n[LV1][LV2][LV3] (Either Attack Step)\nWhen your Spirit with High Speed/Swift-named effects attacks/blocks, send any number of cores from your Trash to your Reserve/Green Spirits. This effect can only be used once per turn.",
+      "teams": [],
       "keywords": [
         {
           "name": "High Speed",
@@ -9733,12 +11043,32 @@
           "wave": 2,
           "hook": "high_speed",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "ALPINE-BIT#AB_FLASH_NONE_LV1_LV2_LV3_3f01bade6c02c981f49d8bed4548cc040577e4e631f48c0bc81870acc612a01b_d2e4a2549e4a8ff497c4ba80c4baff76",
+          "cardNumber": "ALPINE-BIT",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "ALPINE-BIT#a0"
         }
       ],
       "abilities": [
         {
-          "id": "ALPINE-BIT#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -9749,8 +11079,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "High Speed",
@@ -9759,10 +11096,14 @@
             "isMain": false,
             "cleanBody": "This card in Hand can be summoned by paying the cost with cores in the Reserve. In this case, cores to be put on this Spirit must also be from the Reserve."
           },
+          "originalAbilityText": "Flash - [High Speed]\nThis card in Hand can be summoned by paying the cost with cores in the Reserve. In this case, cores to be put on this Spirit must also be from the Reserve.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "This card in Hand can be summoned by paying the cost with cores in the Reserve.",
+              "originalClauseText": "This card in Hand can be summoned by paying the cost with cores in the Reserve.",
               "cleanText": "This card in Hand can be summoned by paying the cost with cores in the Reserve",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -9774,7 +11115,9 @@
             },
             {
               "rawText": "In this case, cores to be put on this Spirit must also be from the Reserve.",
+              "originalClauseText": "In this case, cores to be put on this Spirit must also be from the Reserve.",
               "cleanText": "In this case, cores to be put on this Spirit must also be from the Reserve",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -9785,10 +11128,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "ALPINE-BIT#a0",
+          "keywords": [
+            {
+              "name": "High Speed",
+              "parameter": null,
+              "wave": 2,
+              "hook": "high_speed",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "ALPINE-BIT#AB_FLASH_NONE_LV1_LV2_LV3_3f01bade6c02c981f49d8bed4548cc040577e4e631f48c0bc81870acc612a01b_d2e4a2549e4a8ff497c4ba80c4baff76",
+              "cardNumber": "ALPINE-BIT",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "ALPINE-BIT#a0"
+            }
+          ],
+          "id": "ALPINE-BIT#AB_FLASH_NONE_LV1_LV2_LV3_3f01bade6c02c981f49d8bed4548cc040577e4e631f48c0bc81870acc612a01b_d2e4a2549e4a8ff497c4ba80c4baff76",
+          "physicalId": "ALPINE-BIT#AB_FLASH_NONE_LV1_LV2_LV3_3f01bade6c02c981f49d8bed4548cc040577e4e631f48c0bc81870acc612a01b_d2e4a2549e4a8ff497c4ba80c4baff76",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_3f01bade6c02c981f49d8bed4548cc040577e4e631f48c0bc81870acc612a01b_d2e4a2549e4a8ff497c4ba80c4baff76",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_2d72fe490c55138b0da9da2f5b84f5062ecd10848ba85a69aaa1a9974db5f4ed_eb20996f2c3a688b7a5b2f32c050906e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "ALPINE-BIT#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -9799,8 +11186,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -9809,10 +11207,14 @@
             "isMain": false,
             "cleanBody": "When your Spirit with High Speed/Swift-named effects attacks/blocks, send any number of cores from your Trash to your Reserve/Green Spirits."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (Either Attack Step)\nWhen your Spirit with High Speed/Swift-named effects attacks/blocks, send any number of cores from your Trash to your Reserve/Green Spirits. This effect can only be used once per turn.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When your Spirit with High Speed/Swift-named effects attacks/blocks, send any number of cores from your Trash to your Reserve/Green Spirits.",
+              "originalClauseText": "When your Spirit with High Speed/Swift-named effects attacks/blocks, send any number of cores from your Trash to your Reserve/Green Spirits.",
               "cleanText": "When your Spirit with High Speed/Swift-named effects attacks/blocks, send any number of cores from your Trash to your Reserve/Green Spirits",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -9820,11 +11222,36 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "trash",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "ALPINE-BIT#a1",
+          "keywords": [],
+          "id": "ALPINE-BIT#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_3fa1632e4dead22f114eb7c48ebffae10d3287d25f63ad88d652566cf83ef155_8d8b8527e70e1b138b69eb2352364363",
+          "physicalId": "ALPINE-BIT#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_3fa1632e4dead22f114eb7c48ebffae10d3287d25f63ad88d652566cf83ef155_8d8b8527e70e1b138b69eb2352364363",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_3fa1632e4dead22f114eb7c48ebffae10d3287d25f63ad88d652566cf83ef155_8d8b8527e70e1b138b69eb2352364363",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_7f4a6ae67f5399e1880df0edc6aa1f5e29a4545845147f591d93ede9f9453f4f_62424b8fefb79a917512865c5de5976f",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -11127,6 +12554,21 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A13050",
       "name": "The Third's Clown Trapeze Mouse",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 1000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 5000
+        }
+      },
+      "originalEffectText": "When you [Seal: Seal], you can summon this Spirit card from your Hand/Trash, without paying the cost.\n\n[LV1][LV2] (When Depleted/Destroyed by the Opponent)\nBesides [The Third's Clown Trapeze Mouse], you can summon up to two \"Drifting Spirit\" family Spirit cards from your Hand/Trash, without paying the cost.",
+      "teams": [],
       "keywords": [
         {
           "name": "Seal",
@@ -11134,12 +12576,32 @@
           "wave": 2,
           "hook": "seal",
           "bracketed": true,
-          "index": 9
+          "index": 9,
+          "abilityId": "BATTLE-SPIRITS-A13050#AB_PASSIVE_NONE_LV1_LV2_LV3_2736f0f5290ea7c6ebfef17faff9ca1771c6fa52c65d5ee9d5137305484da95b_f96c94c480021ee39c680e66b1a08838",
+          "cardNumber": "BATTLE-SPIRITS-A13050",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "B",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BATTLE-SPIRITS-A13050#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A13050#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -11150,8 +12612,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -11160,10 +12627,14 @@
             "isMain": false,
             "cleanBody": "When you [Seal: Seal], you can summon this Spirit card from your Hand/Trash, without paying the cost."
           },
+          "originalAbilityText": "When you [Seal: Seal], you can summon this Spirit card from your Hand/Trash, without paying the cost.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When you [Seal: Seal], you can summon this Spirit card from your Hand/Trash, without paying the cost.",
+              "originalClauseText": "When you [Seal: Seal], you can summon this Spirit card from your Hand/Trash, without paying the cost.",
               "cleanText": "When you [Seal: Seal], you can summon this Spirit card from your Hand/Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -11171,14 +12642,57 @@
               "duration": null,
               "op": {
                 "op": "SUMMON_THIS_CARD",
-                "from": "HAND_OR_BURST"
+                "from": "TRASH",
+                "free": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A13050#a0",
+          "keywords": [
+            {
+              "name": "Seal",
+              "parameter": "Seal",
+              "wave": 2,
+              "hook": "seal",
+              "bracketed": true,
+              "index": 9,
+              "abilityId": "BATTLE-SPIRITS-A13050#AB_PASSIVE_NONE_LV1_LV2_LV3_2736f0f5290ea7c6ebfef17faff9ca1771c6fa52c65d5ee9d5137305484da95b_f96c94c480021ee39c680e66b1a08838",
+              "cardNumber": "BATTLE-SPIRITS-A13050",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "B",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BATTLE-SPIRITS-A13050#a0"
+            }
+          ],
+          "id": "BATTLE-SPIRITS-A13050#AB_PASSIVE_NONE_LV1_LV2_LV3_2736f0f5290ea7c6ebfef17faff9ca1771c6fa52c65d5ee9d5137305484da95b_f96c94c480021ee39c680e66b1a08838",
+          "physicalId": "BATTLE-SPIRITS-A13050#AB_PASSIVE_NONE_LV1_LV2_LV3_2736f0f5290ea7c6ebfef17faff9ca1771c6fa52c65d5ee9d5137305484da95b_f96c94c480021ee39c680e66b1a08838",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_2736f0f5290ea7c6ebfef17faff9ca1771c6fa52c65d5ee9d5137305484da95b_f96c94c480021ee39c680e66b1a08838",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_d9989d05648d6dba2bc3d154f30da92161ec51755481229344bf5bb4c57c9885_10e90b3fd1aee92fe99739b7c9bbd866",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A13050#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -11187,9 +12701,19 @@
             ],
             "levelExplicit": true,
             "prefixes": [],
-            "timing": "STEP_RESTRICTED",
+            "timing": "WHEN_DESTROYED",
+            "timings": [
+              "WHEN_DESTROYED"
+            ],
             "timingLabel": "When Depleted/Destroyed by the Opponent",
             "timingStep": "ANY",
+            "timingCause": "OPPONENT",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_DEPLETED",
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -11198,10 +12722,14 @@
             "isMain": false,
             "cleanBody": "Besides [The Third's Clown Trapeze Mouse], you can summon up to two \"Drifting Spirit\" family Spirit cards from your Hand/Trash, without paying the cost."
           },
+          "originalAbilityText": "[LV1][LV2] (When Depleted/Destroyed by the Opponent)\nBesides [The Third's Clown Trapeze Mouse], you can summon up to two \"Drifting Spirit\" family Spirit cards from your Hand/Trash, without paying the cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Besides [The Third's Clown Trapeze Mouse], you can summon up to two \"Drifting Spirit\" family Spirit cards from your Hand/Trash, without paying the cost.",
+              "originalClauseText": "Besides [The Third's Clown Trapeze Mouse], you can summon up to two \"Drifting Spirit\" family Spirit cards from your Hand/Trash, without paying the cost.",
               "cleanText": "Besides [The Third's Clown Trapeze Mouse], you can summon up to two \"Drifting Spirit\" family Spirit cards from your Hand/Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -11209,11 +12737,38 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand_or_trash",
+                "side": "self",
+                "count": 2,
+                "upTo": true,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "family": "Drifting Spirit"
+                },
+                "free": true,
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A13050#a1",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A13050#AB_WHEN_DESTROYED_NONE_LV1_LV2_0b32538788faf0ffb919b1064c2354be01c1228aa7d3dbcfaaafc7419d44c11d_aefae9ba50a96787ea9a67d06f683f98",
+          "physicalId": "BATTLE-SPIRITS-A13050#AB_WHEN_DESTROYED_NONE_LV1_LV2_0b32538788faf0ffb919b1064c2354be01c1228aa7d3dbcfaaafc7419d44c11d_aefae9ba50a96787ea9a67d06f683f98",
+          "semanticId": "SEM#AB_WHEN_DESTROYED_NONE_LV1_LV2_0b32538788faf0ffb919b1064c2354be01c1228aa7d3dbcfaaafc7419d44c11d_aefae9ba50a96787ea9a67d06f683f98",
+          "semanticIdV3": "SEM3#AB_WHEN_DESTROYED_NONE_LV1_LV2_b3fde766cc34a332a88d5d043e73cada09b2a951cb6fbf0070880162cde7b17c_db7c4b29367b39458ec2b3bdd530d414",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "OPPONENT",
+            "timingTriggers": [
+              "WHEN_DEPLETED",
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -12087,10 +13642,29 @@
     "compiledIr": {
       "cardNumber": "ULTIMATE-MURAMASA",
       "name": "Ultimate-Muramasa-Dragon",
+      "type": "Ultimate",
+      "levels": {
+        "LV3": {
+          "level": 3,
+          "cost": 1,
+          "bp": 10000
+        },
+        "LV4": {
+          "level": 4,
+          "cost": 3,
+          "bp": 15000
+        },
+        "LV5": {
+          "level": 5,
+          "cost": 5,
+          "bp": 18000
+        }
+      },
+      "originalEffectText": "[Summon Condition: You have a Burst set]\n\n[LV3][LV4][LV5] [Catl: All Color] (When Attacks)\nBy sending [Soul Core](Soul Core) from this Ultimate to your Trash, immediately activate one of your Soul Bursts. After the Burst activates, set a card with Burst effects from your Hand, and this Ultimate refreshes.\n\n[LV4][LV5] (When Attacks)\nYou can send the Soul Core from your Trash to this Ultimate.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "ULTIMATE-MURAMASA#a0",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -12103,8 +13677,13 @@
               "Summon Condition: You have a Burst set"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -12114,11 +13693,31 @@
             "cleanBody": ""
           },
           "rawText": "[Summon Condition: You have a Burst set]",
+          "originalAbilityText": "[Summon Condition: You have a Burst set]",
+          "abilityIndex": 0,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "SUMMON_CONDITION",
+            "expression": "You have a Burst set",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "ULTIMATE-MURAMASA#a0",
+          "keywords": [],
+          "id": "ULTIMATE-MURAMASA#AB_PASSIVE_NONE_LV1_LV2_LV3_a419a63652280eaf0832ee35a4996d2e08b0be5383354a41cc5f6c20cc4b7f5d_dd2fc32179921bc532b5f407da54a7dc",
+          "physicalId": "ULTIMATE-MURAMASA#AB_PASSIVE_NONE_LV1_LV2_LV3_a419a63652280eaf0832ee35a4996d2e08b0be5383354a41cc5f6c20cc4b7f5d_dd2fc32179921bc532b5f407da54a7dc",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_a419a63652280eaf0832ee35a4996d2e08b0be5383354a41cc5f6c20cc4b7f5d_dd2fc32179921bc532b5f407da54a7dc",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_63cb442c0b4f5a430accd5ac702efe4bd2b5ac209b5ddcbf51b971e88875cc82_c9dadbcea89648d6edd9a4ca7a0acb60",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "ULTIMATE-MURAMASA#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -12129,8 +13728,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -12139,10 +13747,14 @@
             "isMain": false,
             "cleanBody": "By sending [Soul Core](Soul Core) from this Ultimate to your Trash, immediately activate one of your Soul Bursts. After the Burst activates, set a card with Burst effects from your Hand, and this Ultimate refreshes."
           },
+          "originalAbilityText": "[LV3][LV4][LV5] [Catl: All Color] (When Attacks)\nBy sending [Soul Core](Soul Core) from this Ultimate to your Trash, immediately activate one of your Soul Bursts. After the Burst activates, set a card with Burst effects from your Hand, and this Ultimate refreshes.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "By sending [Soul Core] from this Ultimate to your Trash",
+              "originalClauseText": "By sending [Soul Core] from this Ultimate to your Trash",
               "cleanText": "By sending [Soul Core] from this Ultimate to your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -12164,19 +13776,25 @@
             },
             {
               "rawText": "immediately activate one of your Soul Bursts.",
+              "originalClauseText": "immediately activate one of your Soul Bursts.",
               "cleanText": "immediately activate one of your Soul Bursts",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "ACTIVATE_BURST",
+                "burstType": "SOUL_BURST",
+                "color": null
               }
             },
             {
               "rawText": "After the Burst activates, set a card with Burst effects from your Hand, and this Ultimate refreshes.",
+              "originalClauseText": "After the Burst activates, set a card with Burst effects from your Hand, and this Ultimate refreshes.",
               "cleanText": "After the Burst activates, set a card with Burst effects from your Hand, and this Ultimate refreshes",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -12188,10 +13806,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "ULTIMATE-MURAMASA#a1",
+          "keywords": [],
+          "id": "ULTIMATE-MURAMASA#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_2d2afd08292fe50936d8914704f0077da9a22b253ddaa93aac23056da53fc863_57c00ba92304bed35ccba5445294258a",
+          "physicalId": "ULTIMATE-MURAMASA#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_2d2afd08292fe50936d8914704f0077da9a22b253ddaa93aac23056da53fc863_57c00ba92304bed35ccba5445294258a",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_2d2afd08292fe50936d8914704f0077da9a22b253ddaa93aac23056da53fc863_57c00ba92304bed35ccba5445294258a",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_5068e97d26b6e31796aa9daeba51471136800829b82f14009c27a7357ca87aef_77d3046d7471399747f5b8af44659150",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "ULTIMATE-MURAMASA#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -12201,8 +13833,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -12211,10 +13852,14 @@
             "isMain": false,
             "cleanBody": "You can send the Soul Core from your Trash to this Ultimate."
           },
+          "originalAbilityText": "[LV4][LV5] (When Attacks)\nYou can send the Soul Core from your Trash to this Ultimate.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "You can send the Soul Core from your Trash to this Ultimate.",
+              "originalClauseText": "You can send the Soul Core from your Trash to this Ultimate.",
               "cleanText": "You can send the Soul Core from your Trash to this Ultimate",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -12235,7 +13880,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "ULTIMATE-MURAMASA#a2",
+          "keywords": [],
+          "id": "ULTIMATE-MURAMASA#AB_WHEN_ATTACKS_NONE_LV4_LV5_0ca2dff43ee2376dde00e570308a273d7b83cf877a5de0aa7755d7a4427eaf88_d3f54b8aa9d4016071c2bc0033c5ffe2",
+          "physicalId": "ULTIMATE-MURAMASA#AB_WHEN_ATTACKS_NONE_LV4_LV5_0ca2dff43ee2376dde00e570308a273d7b83cf877a5de0aa7755d7a4427eaf88_d3f54b8aa9d4016071c2bc0033c5ffe2",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV4_LV5_0ca2dff43ee2376dde00e570308a273d7b83cf877a5de0aa7755d7a4427eaf88_d3f54b8aa9d4016071c2bc0033c5ffe2",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV4_LV5_422826de0ec4b4af6aa3ffef2e999375aae9ae0da5c9610b1c8208ed6711dab3_dcda035fc563e62aca8fe92330a9d187",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,

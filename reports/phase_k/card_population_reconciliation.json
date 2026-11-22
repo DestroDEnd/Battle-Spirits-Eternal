@@ -1,0 +1,36 @@
+{
+  "metadata": {
+    "reconciliationTimestamp": "2026-11-21T11:33:17.528Z",
+    "project": "Battle Spirits Eternal (BSP)",
+    "milestone": "Phase K Work Package C"
+  },
+  "canonicalCounts": {
+    "detailedCards": 14443,
+    "uniqueShardCards": 14609,
+    "physicalShardInstances": 15398,
+    "sqliteCards": 14443,
+    "sqliteCardsV2": 14611,
+    "compiledAbilities": 34855,
+    "compiledClauses": 49318,
+    "uniqueOpcodes": 288
+  },
+  "populationReconciliationFormulas": {
+    "formula1_detailed_to_shards": "14443 (detailed) - 22 (detailed-only) + 188 (shards-only) = 14609 (unique shard cards)",
+    "formula2_shards_to_instances": "14609 (unique shard cards) + 789 (reprint instances) = 15398 (physical shard instances)",
+    "formula3_shards_to_sqlite_v2": "14609 (unique shard cards) + 2 (synthetic composite cards) = 14611 (sqlite cards_v2)"
+  },
+  "discrepancyClassifications": {
+    "detailedOnlyCount": 22,
+    "detailedOnlyRationale": "Legacy scraped Japanese entries with missing physical card numbers or unparseable raw placeholder strings, excluded from IR shard generation to prevent compiler corruption.",
+    "shardsOnlyCount": 188,
+    "shardsOnlyRationale": "Official promotional releases, collaboration sets (Digimon, Kamen Rider, Gundam, Evangelion, Ultraman), and specialty tournament distributions compiled directly into set shards.",
+    "reprintDuplicatesCount": 789,
+    "reprintDuplicatesRationale": "Canonical Battle Spirits reprints sharing the identical canonical card number (e.g. BS01-001 reprinted in BSC22 with alternate art), preserved physically per release set shard.",
+    "sqliteCardsV2ExtraCount": 2,
+    "sqliteCardsV2ExtraCards": [
+      "BATTLE-SPIRITS-A13741",
+      "BATTLE-SPIRITS-A13799"
+    ],
+    "sqliteCardsV2ExtraRationale": "Synthetic composite IDs introduced during legacy database migration, mapping to canonical cards without modifying gameplay."
+  }
+}

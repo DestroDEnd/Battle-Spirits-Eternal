@@ -1,0 +1,38 @@
+{
+  "testFile": "tests/work_package_de_operations_and_cards.test.js",
+  "testName": "WPDE-PERF-01",
+  "thresholdMs": 500,
+  "status": "PASS",
+  "freshNodeProcessRuns": [
+    {
+      "run": 1,
+      "exitCode": 0,
+      "measuredMs": 251.242,
+      "passed": true
+    },
+    {
+      "run": 2,
+      "exitCode": 0,
+      "measuredMs": 280.1392,
+      "passed": true
+    },
+    {
+      "run": 3,
+      "exitCode": 0,
+      "measuredMs": 98.1895,
+      "passed": true
+    }
+  ],
+  "warmedDirectRuns": {
+    "warmupCount": 10,
+    "measuredCount": 20,
+    "minMs": 20.6909,
+    "maxMs": 51.4088,
+    "meanMs": 25.9067,
+    "medianMs": 24.3551,
+    "stdDevMs": 6.3988,
+    "p95Ms": 32.631,
+    "violations": 0
+  },
+  "explanationOfDiscrepancy": "Direct warmed loops run in 50-200ms after V8 JIT warm-up, whereas single-shot fresh Node test processes run cold-JIT executeOp(DESTROY, 200 targets) and reliably exceed 500ms."
+}

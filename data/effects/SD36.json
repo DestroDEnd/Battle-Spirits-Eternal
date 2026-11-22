@@ -590,19 +590,59 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A9517",
       "name": "The DragonEvilEmperor Evilfried",
+      "type": "Ultimate",
+      "levels": {
+        "LV3": {
+          "level": 3,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV4": {
+          "level": 4,
+          "cost": 3,
+          "bp": 9000
+        },
+        "LV5": {
+          "level": 5,
+          "cost": 4,
+          "bp": 12000
+        }
+      },
+      "originalEffectText": "[Summon Condition: You control one or more Cost 1 or higher Spirits/Ultimates]\n\n[Ultimate Trigger: [LV3][LV4][LV5] (When Summoned)]\nWhen Ultimate Trigger hits, send all cores from your Trash to this Ultimate.\n[utb]\n\n[LV4][LV5] (When Attacks)\nBy destroying an opposing Spirit with a BP equal or inferior to this Ultimate's, draw a card.",
+      "teams": [],
       "keywords": [
         {
           "name": "Ultimate Trigger",
-          "parameter": "[LV3",
+          "parameter": null,
           "wave": 3,
           "hook": "ultimate_trigger",
           "bracketed": true,
-          "index": 80
+          "index": 0,
+          "abilityId": "BATTLE-SPIRITS-A9517#AB_WHEN_SUMMONED_NONE_LV3_LV4_LV5_bba7d80dfb31e175b0c9a7c4004b7a46c3ab11c662dfd4914dd8a622bbdbd025_b8b75d2cafd924cfe4f5c3c7c77c868e",
+          "cardNumber": "BATTLE-SPIRITS-A9517",
+          "levels": [
+            3,
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "face": "B",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BATTLE-SPIRITS-A9517#a1"
         }
       ],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A9517#a0",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -615,8 +655,13 @@
               "Summon Condition: You control one or more Cost 1 or higher Spirits/Ultimates"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -626,11 +671,31 @@
             "cleanBody": ""
           },
           "rawText": "[Summon Condition: You control one or more Cost 1 or higher Spirits/Ultimates]",
+          "originalAbilityText": "[Summon Condition: You control one or more Cost 1 or higher Spirits/Ultimates]",
+          "abilityIndex": 0,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "SUMMON_CONDITION",
+            "expression": "You control one or more Cost 1 or higher Spirits/Ultimates",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A9517#a0",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A9517#AB_PASSIVE_NONE_LV1_LV2_LV3_b333a365d0c79ee73df9739754b12a1224aa588861298fe055f94d730e5076d9_955d6b529f125718caa1894b9c702f4e",
+          "physicalId": "BATTLE-SPIRITS-A9517#AB_PASSIVE_NONE_LV1_LV2_LV3_b333a365d0c79ee73df9739754b12a1224aa588861298fe055f94d730e5076d9_955d6b529f125718caa1894b9c702f4e",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_b333a365d0c79ee73df9739754b12a1224aa588861298fe055f94d730e5076d9_955d6b529f125718caa1894b9c702f4e",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_6a18c86dd9eded8968c3a6e688106b6fd6514b34efa674361291f237592f830e_63e97f3c183690195f95dfb80b7dd383",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A9517#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -641,8 +706,15 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Ultimate Trigger",
@@ -651,10 +723,14 @@
             "isMain": false,
             "cleanBody": "When Ultimate Trigger hits, send all cores from your Trash to this Ultimate."
           },
+          "originalAbilityText": "[Ultimate Trigger: [LV3][LV4][LV5] (When Summoned)]\nWhen Ultimate Trigger hits, send all cores from your Trash to this Ultimate.\n[utb]",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When Ultimate Trigger hits, send all cores from your Trash to this Ultimate.",
+              "originalClauseText": "When Ultimate Trigger hits, send all cores from your Trash to this Ultimate.",
               "cleanText": "When Ultimate Trigger hits, send all cores from your Trash to this Ultimate",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -662,14 +738,67 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": "ALL",
+                "from": {
+                  "zone": "trash",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A9517#a1",
+          "keywords": [
+            {
+              "name": "Ultimate Trigger",
+              "parameter": null,
+              "wave": 3,
+              "hook": "ultimate_trigger",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BATTLE-SPIRITS-A9517#AB_WHEN_SUMMONED_NONE_LV3_LV4_LV5_bba7d80dfb31e175b0c9a7c4004b7a46c3ab11c662dfd4914dd8a622bbdbd025_b8b75d2cafd924cfe4f5c3c7c77c868e",
+              "cardNumber": "BATTLE-SPIRITS-A9517",
+              "levels": [
+                3,
+                4,
+                5
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_SUMMONED",
+              "timingLabel": "When Summoned",
+              "timingStep": "ANY",
+              "face": "B",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BATTLE-SPIRITS-A9517#a1"
+            }
+          ],
+          "id": "BATTLE-SPIRITS-A9517#AB_WHEN_SUMMONED_NONE_LV3_LV4_LV5_bba7d80dfb31e175b0c9a7c4004b7a46c3ab11c662dfd4914dd8a622bbdbd025_b8b75d2cafd924cfe4f5c3c7c77c868e",
+          "physicalId": "BATTLE-SPIRITS-A9517#AB_WHEN_SUMMONED_NONE_LV3_LV4_LV5_bba7d80dfb31e175b0c9a7c4004b7a46c3ab11c662dfd4914dd8a622bbdbd025_b8b75d2cafd924cfe4f5c3c7c77c868e",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV3_LV4_LV5_bba7d80dfb31e175b0c9a7c4004b7a46c3ab11c662dfd4914dd8a622bbdbd025_b8b75d2cafd924cfe4f5c3c7c77c868e",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV3_LV4_LV5_40cda34130fbdbaf9d726362ec7a56c313cddc42f7bf0c9c2e830dfba85137cd_70a7ab80068df31dc1753f730a5c0f88",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A9517#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -679,8 +808,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -689,10 +827,14 @@
             "isMain": false,
             "cleanBody": "By destroying an opposing Spirit with a BP equal or inferior to this Ultimate's, draw a card."
           },
+          "originalAbilityText": "[LV4][LV5] (When Attacks)\nBy destroying an opposing Spirit with a BP equal or inferior to this Ultimate's, draw a card.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "By destroying an opposing Spirit with a BP equal or inferior to this Ultimate's",
+              "originalClauseText": "By destroying an opposing Spirit with a BP equal or inferior to this Ultimate's",
               "cleanText": "By destroying an opposing Spirit with a BP equal or inferior to this Ultimate's",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -701,15 +843,27 @@
               "op": {
                 "op": "DESTROY",
                 "count": 1,
+                "isCost": true,
                 "target": {
-                  "side": "either"
-                },
-                "isCost": false
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "comparison": {
+                      "property": "BP",
+                      "operator": "LTE",
+                      "reference": "self"
+                    }
+                  }
+                }
               }
             },
             {
               "rawText": "draw a card.",
+              "originalClauseText": "draw a card.",
               "cleanText": "draw a card",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -723,7 +877,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A9517#a2",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A9517#AB_WHEN_ATTACKS_NONE_LV4_LV5_c24cf1f68599d6231ed356c46575b74d9eefd925215f4c01cb855287c1c9d8e6_21c9a5fe9f723bfd12b3b8765adb5004",
+          "physicalId": "BATTLE-SPIRITS-A9517#AB_WHEN_ATTACKS_NONE_LV4_LV5_c24cf1f68599d6231ed356c46575b74d9eefd925215f4c01cb855287c1c9d8e6_21c9a5fe9f723bfd12b3b8765adb5004",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV4_LV5_c24cf1f68599d6231ed356c46575b74d9eefd925215f4c01cb855287c1c9d8e6_21c9a5fe9f723bfd12b3b8765adb5004",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV4_LV5_52857c0c04a8057f8a5ee0a799374f695e58c2199fa90af46f38cb7db15a1f78_3024bdfeae6588d769e2ec3af5cad9a9",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,

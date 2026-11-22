@@ -1,1 +1,135 @@
-{"ESBIAN-ANGELIA":{"cardNumber":"ESBIAN-ANGELIA","name":"The EarthAngelia Moridiel","keywords":[],"abilities":[{"id":"ESBIAN-ANGELIA#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can reveal the four cards from your decktop. Add every \"Ramdiel\"-named Spirit card among them to your Hand. Remaining cards are returned to your decktop in any order."},"clauses":[{"rawText":"You can reveal the four cards from your decktop.","cleanText":"You can reveal the four cards from your decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DECK_ACTION"}},{"rawText":"Add every \"Ramdiel\"-named Spirit card among them to your Hand.","cleanText":"Add every \"Ramdiel\"-named Spirit card among them to your Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_TO_HAND"}},{"rawText":"Remaining cards are returned to your decktop in any order.","cleanText":"Remaining cards are returned to your decktop in any order","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]},{"id":"ESBIAN-ANGELIA#a1","type":"ABILITY","header":{"levels":[3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"During this turn, one opposing Spirit gets -10000 BP. A Spirit whose BP is brought to 0 by this effect is destroyed."},"clauses":[{"rawText":"During this turn, one opposing Spirit gets -10000 BP.","cleanText":"one opposing Spirit gets -10000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"BP_DEBUFF","amount":10000,"target":"PREVIOUS_TARGET","duration":"DURING_THIS_TURN"}},{"rawText":"A Spirit whose BP is brought to 0 by this effect is destroyed.","cleanText":"A Spirit whose BP is brought to 0 by this effect is destroyed","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY_ON_BP_ZERO"}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "ESBIAN-ANGELIA": {
+    "cardNumber": "ESBIAN-ANGELIA",
+    "name": "The EarthAngelia Moridiel",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "ESBIAN-ANGELIA#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_85e082555b86c42950240002b262a3ff86cb7548ac6b1328e0a8868133569407_ab89c873f5afafe962c55c6dc87eabf6",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can reveal the four cards from your decktop. Add every \"Ramdiel\"-named Spirit card among them to your Hand. Remaining cards are returned to your decktop in any order."
+        },
+        "clauses": [
+          {
+            "rawText": "You can reveal the four cards from your decktop.",
+            "cleanText": "You can reveal the four cards from your decktop",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DECK_ACTION"
+            }
+          },
+          {
+            "rawText": "Add every \"Ramdiel\"-named Spirit card among them to your Hand.",
+            "cleanText": "Add every \"Ramdiel\"-named Spirit card among them to your Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          },
+          {
+            "rawText": "Remaining cards are returned to your decktop in any order.",
+            "cleanText": "Remaining cards are returned to your decktop in any order",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "ESBIAN-ANGELIA#a0",
+        "physicalId": "ESBIAN-ANGELIA#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_85e082555b86c42950240002b262a3ff86cb7548ac6b1328e0a8868133569407_ab89c873f5afafe962c55c6dc87eabf6",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_85e082555b86c42950240002b262a3ff86cb7548ac6b1328e0a8868133569407_ab89c873f5afafe962c55c6dc87eabf6"
+      },
+      {
+        "id": "ESBIAN-ANGELIA#AB_WHEN_ATTACKS_NONE_LV3_7c2ab1ea458d58127cff2ece039b2f58a5ff98ccec85849998d8e17d556ae42e_ceb1e25d50dee72199df24adb1e58922",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "During this turn, one opposing Spirit gets -10000 BP. A Spirit whose BP is brought to 0 by this effect is destroyed."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, one opposing Spirit gets -10000 BP.",
+            "cleanText": "one opposing Spirit gets -10000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 10000,
+              "target": "PREVIOUS_TARGET",
+              "duration": "DURING_THIS_TURN"
+            }
+          },
+          {
+            "rawText": "A Spirit whose BP is brought to 0 by this effect is destroyed.",
+            "cleanText": "A Spirit whose BP is brought to 0 by this effect is destroyed",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY_ON_BP_ZERO"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "ESBIAN-ANGELIA#a1",
+        "physicalId": "ESBIAN-ANGELIA#AB_WHEN_ATTACKS_NONE_LV3_7c2ab1ea458d58127cff2ece039b2f58a5ff98ccec85849998d8e17d556ae42e_ceb1e25d50dee72199df24adb1e58922",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV3_7c2ab1ea458d58127cff2ece039b2f58a5ff98ccec85849998d8e17d556ae42e_ceb1e25d50dee72199df24adb1e58922"
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

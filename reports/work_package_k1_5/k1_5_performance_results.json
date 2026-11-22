@@ -1,0 +1,122 @@
+{
+  "package": "K.1.5",
+  "generatedAt": "2026-11-20T11:22:58.543Z",
+  "thresholdMs": 500,
+  "environment": {
+    "nodeVersion": "v24.16.0",
+    "platform": "win32",
+    "arch": "x64",
+    "cpuModel": "11th Gen Intel(R) Core(TM) i3-1115G4 @ 3.00GHz",
+    "cpuCount": 4,
+    "totalMemMb": 7991
+  },
+  "bottleneckFixed": "Eliminated unconditional O(N^2) computeFieldSymbols scan inside calculateEffectiveCost and added per-side symbol caching in engine/selectors.js + engine/payment.js + fast-path field cleanup in engine/zones.js",
+  "coldFreshProcessRuns": [
+    {
+      "run": 1,
+      "exitCode": 0,
+      "pass": 9,
+      "fail": 0,
+      "wpdePerf01Ms": 36.3106,
+      "fullFileMs": 1108.6404,
+      "wallClockMs": 1364
+    },
+    {
+      "run": 2,
+      "exitCode": 0,
+      "pass": 9,
+      "fail": 0,
+      "wpdePerf01Ms": 34.7194,
+      "fullFileMs": 1192.4649,
+      "wallClockMs": 1430
+    },
+    {
+      "run": 3,
+      "exitCode": 0,
+      "pass": 9,
+      "fail": 0,
+      "wpdePerf01Ms": 49.9222,
+      "fullFileMs": 1201.6868,
+      "wallClockMs": 1432
+    },
+    {
+      "run": 4,
+      "exitCode": 0,
+      "pass": 9,
+      "fail": 0,
+      "wpdePerf01Ms": 52.7273,
+      "fullFileMs": 1191.2229,
+      "wallClockMs": 1470
+    },
+    {
+      "run": 5,
+      "exitCode": 0,
+      "pass": 9,
+      "fail": 0,
+      "wpdePerf01Ms": 30.6503,
+      "fullFileMs": 1041.4192,
+      "wallClockMs": 1283
+    }
+  ],
+  "coldWpdePerf01Stats": {
+    "count": 5,
+    "meanMs": 40.866,
+    "medianMs": 36.3106,
+    "minMs": 30.6503,
+    "maxMs": 52.7273
+  },
+  "coldThresholdViolations": 0,
+  "coldFullFileStats": {
+    "count": 5,
+    "meanMs": 1147.0868,
+    "medianMs": 1191.2229,
+    "minMs": 1041.4192,
+    "maxMs": 1201.6868
+  },
+  "warmInProcessRuns": {
+    "iterations": 20,
+    "thresholdMs": 500,
+    "samplesMs": [
+      3.7537,
+      3.8369,
+      2.8654,
+      3.392,
+      1.4162,
+      1.796,
+      4.1028,
+      1.9239,
+      1.8517,
+      4.1629,
+      4.1668,
+      2.9924,
+      1.3159,
+      1.6114,
+      4.4525,
+      0.7367,
+      0.6266,
+      0.8771,
+      0.9879,
+      1.997
+    ],
+    "stats": {
+      "count": 20,
+      "meanMs": 2.4433,
+      "medianMs": 1.9605,
+      "minMs": 0.6266,
+      "maxMs": 4.4525
+    }
+  },
+  "verifiedSuitesExecution": {
+    "name": "run_verified_suites_all",
+    "command": "node scripts/run_verified_suites.mjs --all",
+    "exitCode": 0,
+    "durationMs": 59285
+  },
+  "fullRegressionExecution": {
+    "name": "run_all",
+    "command": "node tests/run_all.js",
+    "exitCode": 0,
+    "durationMs": 190603
+  },
+  "gatePassed": true
+}

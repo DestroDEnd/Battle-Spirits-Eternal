@@ -1,0 +1,469 @@
+{
+  "inventoryVersion": "1.0.0",
+  "generatedAt": "2026-11-21T07:18:23.058Z",
+  "totalFamilies": 10,
+  "totalOpcodesAudited": 288,
+  "totalVariantsAudited": 316,
+  "effectFamilies": {
+    "CARD_AND_ZONE_OPERATIONS": {
+      "name": "Card and Zone Operations",
+      "description": "Movement of cards across physical and logical zones (field, hand, trash, deck, burst, void, remove).",
+      "primaryOpcodes": [
+        "SUMMON",
+        "SUMMON_FREE",
+        "SUMMON_THIS_CARD",
+        "SUMMON_MULTI",
+        "DEPLOY_NEXUS",
+        "DESTROY",
+        "BOUNCE",
+        "BOUNCE_TO_DECKBOTTOM",
+        "RETURN_DECK_BOTTOM",
+        "ADD_TO_HAND",
+        "REMOVE_FROM_GAME",
+        "RESURRECT",
+        "PUT_CARD_ON_FIELD",
+        "SEND_TO_VOID",
+        "SEND_TO_TRASH",
+        "BANISH",
+        "BANISH_TRASH",
+        "BANISH_HAND",
+        "BANISH_DECK",
+        "ATTACH_CARD",
+        "ATTACH_CARD_UNDERNEATH",
+        "ATTACH_PRE_ADVENT_CARD",
+        "SEPARATE_BRAVE",
+        "STACK_CARD"
+      ],
+      "sharedDependencies": [
+        "engine/zones.js::moveCard",
+        "engine/sba.js::checkStateBasedActions",
+        "engine/selectors.js::executeTargeting",
+        "engine/continuous.js::isTargetProtectedFrom"
+      ],
+      "contract": {
+        "acceptedSchema": {
+          "op": "string",
+          "count": "number?",
+          "side": "string?",
+          "destination": "string?",
+          "target": "object?",
+          "filter": "object?",
+          "free": "boolean?",
+          "optional": "boolean?"
+        },
+        "targetingContract": "Targeting may be explicit (prior TARGET clause) or inline via selector/filter. Protection from destruction/bounce must be checked via continuous layer.",
+        "conditionContract": "Pre-flight zone availability and side restrictions enforced via structured conditions.",
+        "timingContract": "Evaluated at activation timing (WHEN_SUMMONED, FLASH, MAIN, etc.) or triggered on game events.",
+        "costContract": "Non-cost unless marked isCost: true. Free summons bypass payment plan.",
+        "mutationContract": "Card instance transferred between state.players[side] arrays; stack representations created/dissolved.",
+        "eventContract": "Emits SUMMONED, DESTROYED, BOUNCED, or CARD_MOVED events.",
+        "failureBehavior": "Fail-closed: if destination invalid or target illegal, operation produces NO_OP_BY_RULE without state alteration.",
+        "atomicity": "Atomic: partial moves fail together or execute up-to specified bounds."
+      }
+    },
+    "CORE_AND_RESOURCE_OPERATIONS": {
+      "name": "Core and Resource Operations",
+      "description": "Conservation and movement of normal cores, Soul Core, Life, and Reserve values.",
+      "primaryOpcodes": [
+        "MOVE_CORE",
+        "MOVE_SOUL_CORE",
+        "SWAP_CORES",
+        "EXCHANGE_CORE",
+        "RETRIEVE_CORES",
+        "CORE_CHARGE",
+        "PAY_COST",
+        "COST_MODIFIER",
+        "SEND_CORES_TO_VOID",
+        "SEND_CORE_TO_VOID",
+        "BANISH_SOUL_CORE_VOID",
+        "BOOST_LIFE",
+        "SEND_LIFE_TO_VOID",
+        "RECOVER_LIFE",
+        "CORE_LOCK"
+      ],
+      "sharedDependencies": [
+        "engine/zones.js::moveCore",
+        "engine/payment.js::calculateEffectiveCost",
+        "engine/payment.js::payCost",
+        "engine/sba.js::checkStateBasedActions"
+      ],
+      "contract": {
+        "acceptedSchema": {
+          "op": "string",
+          "count": "number | string",
+          "from": "string | object",
+          "to": "string | object",
+          "isSoulCore": "boolean?",
+          "side": "string?",
+          "optional": "boolean?"
+        },
+        "targetingContract": "Source and destination stacks or zones must be legal; Soul Core movement strictly tracked.",
+        "conditionContract": "Source must possess sufficient cores (normal + soulCore) prior to movement.",
+        "timingContract": "Instantaneous during clause execution; triggers SBA if stack reduced to 0 cores.",
+        "costContract": "When clause isCost === true, exact required core count must be moved or whole ability aborts.",
+        "mutationContract": "Direct mutation of core numbers in reserve, field stacks, trash, void, or life.",
+        "eventContract": "Emits CORE_MOVED, LIFE_REDUCED, or SOUL_CORE_MOVED events.",
+        "failureBehavior": "Aborts ability activation if cost payment; produces no-op if optional or unfulfillable.",
+        "atomicity": "Strictly conserved: sum of reserve + field + trash + life + void cores remains invariant."
+      }
+    },
+    "DECK_AND_HAND_OPERATIONS": {
+      "name": "Deck and Hand Operations",
+      "description": "Drawing, milling, revealing, searching, and manipulating card orders.",
+      "primaryOpcodes": [
+        "DRAW",
+        "MILL",
+        "REVEAL_DECKTOP",
+        "LOOK_AT_DECK",
+        "LOOK_DECKTOP",
+        "LOOK_AT_HAND",
+        "DISCARD",
+        "DISCARD_ZONE",
+        "DISCARD_HAND_MAX",
+        "DISCARD_FIELD",
+        "SALVAGE",
+        "SEARCH_DECK",
+        "RETURN_DECK_BOTTOM",
+        "DECK_OR_HAND_ACTION",
+        "DECK_ACTION"
+      ],
+      "sharedDependencies": [
+        "engine/zones.js::moveCard",
+        "engine/events.js::EventBus",
+        "engine/continuous.js::isActionRestricted"
+      ],
+      "contract": {
+        "acceptedSchema": {
+          "op": "string",
+          "count": "number?",
+          "side": "string?",
+          "filter": "object?",
+          "destination": "string?",
+          "toHand": "boolean?",
+          "optional": "boolean?"
+        },
+        "targetingContract": "Selection from deck or hand via InteractionController prompt.",
+        "conditionContract": "Subject to CANNOT_DRAW, CANNOT_MILL, or HAND_SIZE restrictions.",
+        "timingContract": "Executed sequentially in clause order.",
+        "costContract": "Discarding from hand can serve as activation cost.",
+        "mutationContract": "Card references moved between deck/hand/trash arrays.",
+        "eventContract": "Emits DRAWN, MILLED, CARDS_REVEALED, or DISCARDED events.",
+        "failureBehavior": "Deck out during mandatory draw triggers game loss in SBA; empty searches cleanly return empty sets.",
+        "atomicity": "Revealed cards not added to hand return to deck bottom or trash deterministically."
+      }
+    },
+    "BP_AND_COMBAT_OPERATIONS": {
+      "name": "BP and Combat Operations",
+      "description": "BP modifications, battle state alterations, exhaustion, refresh, and combat constraints.",
+      "primaryOpcodes": [
+        "BP_BUFF",
+        "BP_DEBUFF",
+        "SET_BP",
+        "BP_FORMULA",
+        "EXCHANGE_BP",
+        "SWITCH_BP",
+        "EXHAUST",
+        "REFRESH",
+        "CANNOT_REFRESH",
+        "FORCE_ATTACK",
+        "FORCE_BLOCK",
+        "CHOOSE_BLOCKER",
+        "CHOOSE_BATTLE_TARGET",
+        "TARGET_ATTACK",
+        "PIERCING",
+        "UNBLOCKABLE",
+        "BATTLE_MODIFIER",
+        "BATTLE_RULE_MODIFIER",
+        "SIMULTANEOUS_BATTLE"
+      ],
+      "sharedDependencies": [
+        "engine/continuous.js::computeEffectiveBP",
+        "engine/continuous.js::canAttack",
+        "engine/continuous.js::canBlock",
+        "engine/continuous.js::pruneExpiredModifiers",
+        "engine/sba.js::checkStateBasedActions"
+      ],
+      "contract": {
+        "acceptedSchema": {
+          "op": "string",
+          "value": "number | string?",
+          "duration": "string?",
+          "target": "object?",
+          "side": "string?",
+          "formula": "string?"
+        },
+        "targetingContract": "Targets active spirit stacks or allied/opposing field cards.",
+        "conditionContract": "Target must be on field and match filter criteria.",
+        "timingContract": "Applies as continuous modifier or immediate state toggle (EXHAUST/REFRESH).",
+        "costContract": "Exhausting self can serve as activation cost.",
+        "mutationContract": "State modifier registered in state.modifiers with duration and timestamp.",
+        "eventContract": "Emits BP_CHANGED, SPIRIT_EXHAUSTED, SPIRIT_REFRESHED, or COMBAT_STATE_CHANGED.",
+        "failureBehavior": "If target left field, modifier applies to null stack and is pruned on next recalculation.",
+        "atomicity": "BP debuff reaching <= 0 triggers destruction in subsequent SBA pass."
+      }
+    },
+    "TARGETING_AND_DECISION_OPERATIONS": {
+      "name": "Targeting and Decision Operations",
+      "description": "Explicit selection of cards, colors, levels, families, and branches via InteractionController.",
+      "primaryOpcodes": [
+        "TARGET",
+        "TARGET_SELECT",
+        "TARGET_CARD",
+        "SELECT_TARGET",
+        "TARGET_CARDS",
+        "CHOOSE_TARGETS",
+        "CHANGE_TARGET",
+        "REDIRECT_TARGET",
+        "EXPAND_TARGETS",
+        "CHOOSE_COLOR",
+        "CHOOSE_LEVEL",
+        "CHOOSE_FAMILY",
+        "OPPONENT_CHOICE"
+      ],
+      "sharedDependencies": [
+        "engine/selectors.js::executeTargeting",
+        "engine/interaction.js::InteractionController",
+        "engine/prompt_manager.js::PromptManager"
+      ],
+      "contract": {
+        "acceptedSchema": {
+          "op": "string",
+          "count": "number?",
+          "side": "string?",
+          "types": "array?",
+          "filters": "object?",
+          "optional": "boolean?",
+          "upTo": "boolean?",
+          "mode": "string?"
+        },
+        "targetingContract": "Filters legal candidates from state zones honoring Armor and immunity.",
+        "conditionContract": "Mandatory choices must have >= 1 legal candidate or clause fails; optional can decline.",
+        "timingContract": "Dispatches asynchronous interactive prompt; pauses execution until Promise resolves.",
+        "costContract": "Targeting itself is non-cost; chosen target can be consumed by downstream cost.",
+        "mutationContract": "Sets context.previousTarget, context.previousTargets, and context.selectedTargets.",
+        "eventContract": "Emits TARGET_SELECTED, COLOR_CHOSEN, or INTERACTION_DISPATCHED.",
+        "failureBehavior": "Optional decline sets declined: true and clears targeting context.",
+        "atomicity": "Selection bounds strictly validated against candidate count."
+      }
+    },
+    "CONDITIONS_AND_RESTRICTIONS": {
+      "name": "Conditions and Restrictions",
+      "description": "Action limitations, immunities, protections, and once-per-turn budget enforcement.",
+      "primaryOpcodes": [
+        "PLAY_CONDITION",
+        "RESTRICTION",
+        "GLOBAL_RESTRICTION",
+        "COMBAT_RESTRICTION",
+        "IMMUNITY",
+        "INDESTRUCTIBLE",
+        "NEGATE_EFFECT",
+        "NEGATE_MAGIC",
+        "PREVENT_DAMAGE",
+        "PREVENT_LIFE_LOSS",
+        "LIMIT_ONCE_PER_TURN",
+        "NON_STACKABLE",
+        "IGNORE_CONDITIONS",
+        "LOSE_IMMUNITY",
+        "DECK_IMMUNITY"
+      ],
+      "sharedDependencies": [
+        "engine/restrictions.js::reserveRestriction",
+        "engine/restrictions.js::commitRestriction",
+        "engine/continuous.js::isActionRestricted",
+        "engine/conditions.js::evaluateStructuredCondition"
+      ],
+      "contract": {
+        "acceptedSchema": {
+          "op": "string",
+          "type": "string?",
+          "rule": "string?",
+          "scope": "string?",
+          "duration": "string?",
+          "side": "string?"
+        },
+        "targetingContract": "Applies globally or targets specific card instances/types.",
+        "conditionContract": "Evaluates state predicates (colors, levels, core counts, turn history).",
+        "timingContract": "Checked before activation and dynamically checked at resolution time.",
+        "costContract": "Budget restrictions (Once per turn) consumed at Stage 4 Atomic Commit.",
+        "mutationContract": "Registers active restrictions in state.restrictions and modifiers in state.modifiers.",
+        "eventContract": "Emits RESTRICTION_APPLIED, ACTIVATION_COMMITTED, or EFFECT_NEGATED.",
+        "failureBehavior": "Violated restrictions fail-fast and reject activation or operation execution.",
+        "atomicity": "Two-phase reservation guarantees atomic rollback if execution aborts before commitment."
+      }
+    },
+    "CONTINUOUS_TIMING_AND_TRIGGER_OPERATIONS": {
+      "name": "Continuous, Timing, and Trigger Operations",
+      "description": "Persistent rules, trigger listeners, step/turn enders, and continuous modifier layers.",
+      "primaryOpcodes": [
+        "CONTINUOUS_RULE",
+        "REPLACEMENT_EFFECT",
+        "TRIGGERED_WATCHER",
+        "TRIGGER_CONDITION",
+        "ACTIVATE_TRIGGER",
+        "TRIGGERED_ACTION",
+        "TRIGGERED_BUFF",
+        "TIMING_MODIFIER",
+        "STEP_MODIFIER",
+        "END_STEP",
+        "END_TURN",
+        "SCHEDULED_DESTROY",
+        "COPY_TRIGGER"
+      ],
+      "sharedDependencies": [
+        "engine/triggers.js::TriggerQueueManager",
+        "engine/windows.js::TimingWindowManager",
+        "engine/continuous.js::pruneExpiredModifiers",
+        "engine/flow.js::FlowController"
+      ],
+      "contract": {
+        "acceptedSchema": {
+          "op": "string",
+          "trigger": "string?",
+          "duration": "string?",
+          "effect": "object?",
+          "condition": "string?"
+        },
+        "targetingContract": "Listens for game events and queries matching card instances.",
+        "conditionContract": "Evaluates trigger conditions when relevant event is dispatched.",
+        "timingContract": "Continuous modifiers active while card remains on field; triggers enqueue on event bus.",
+        "costContract": "Continuous effects have no cost; triggered abilities may require costs.",
+        "mutationContract": "Registers watchers in event bus or continuous modifier pipeline.",
+        "eventContract": "Emits TRIGGER_QUEUED, STEP_ENDED, or TURN_ENDED.",
+        "failureBehavior": "Unsupported continuous rules log diagnostics without corrupting state.",
+        "atomicity": "Pruned deterministically at scope boundaries (STEP, BATTLE, TURN)."
+      }
+    },
+    "SPECIALIZED_MECHANICS": {
+      "name": "Specialized Mechanics",
+      "description": "Complex signature mechanics: Advent, Burst, Mirage, Rebirth, Grandwalker, Bunshin, and Contract.",
+      "primaryOpcodes": [
+        "ADVENT",
+        "ADVENT_COST",
+        "ADVENT_PAY",
+        "ADVENT_RULE",
+        "ADVENT_RULE_MODIFIER",
+        "ADVENT_SOUL_CORE_ACTION",
+        "ADVENT_STACK",
+        "CONTRACT_ADVENT_RULE",
+        "BEFORE_ADVENT_TRIGGER",
+        "ACTIVATE_BURST",
+        "ACTIVATE_REBIRTH",
+        "REBIRTH_FLIP",
+        "ACTIVATE_SOUL_DRIVE",
+        "MIRAGE_SET",
+        "ENTER_SOUL_STATE",
+        "USE_FROM_SOUL_STATE",
+        "BUNSHIN_SUMMON",
+        "CREATE_BUNSHIN",
+        "TOKEN_DEPLOYMENT",
+        "GRANDWALKER_CORE_RULE",
+        "GRANDWALKER_PROTECTION"
+      ],
+      "sharedDependencies": [
+        "engine/prerequisites.js::parseAdventDeclaration",
+        "engine/prerequisites.js::evaluateAdventCondition",
+        "engine/prerequisites.js::setMirageFromHand",
+        "engine/zones.js::moveCore",
+        "engine/zones.js::moveCard"
+      ],
+      "contract": {
+        "acceptedSchema": {
+          "op": "string",
+          "condition": "object | string?",
+          "targetStack": "string?",
+          "soulCoreDestination": "string?",
+          "burstTrigger": "string?"
+        },
+        "targetingContract": "Advent targets compatible base spirit; Mirage sets into designated mirage slot.",
+        "conditionContract": "Prerequisites (card level, color, family, Soul Core) evaluated via parseAdventDeclaration.",
+        "timingContract": "Advent in Main/Attack Flash; Burst in Burst Window; Mirage in Main Step.",
+        "costContract": "Soul Core movement to trash/field required for Advent; Mirage cost paid as magic/nexus.",
+        "mutationContract": "Constructs multi-card stack with pre-advent cards; flips dual-sided cards for Rebirth.",
+        "eventContract": "Emits ADVENTS, BURST_ACTIVATED, REBIRTH_PERFORMED, or MIRAGE_SET.",
+        "failureBehavior": "Invalid base spirit or unmet prerequisite prevents advent/mirage action.",
+        "atomicity": "Card stack and core movement committed as a single atomic unit."
+      }
+    },
+    "KEYWORD_ABILITIES": {
+      "name": "Keyword Abilities",
+      "description": "Named game keywords and ability triggers (Clash, Armor, Heavy Armor, Rush, Confront, Tribute, etc.).",
+      "primaryOpcodes": [
+        "ACTIVATE_KEYWORD",
+        "KEYWORD_RULE",
+        "KEYWORD_ABILITY",
+        "GRANT_KEYWORD",
+        "GAIN_KEYWORD",
+        "TREAT_KEYWORD",
+        "REMOVE_KEYWORD"
+      ],
+      "sharedDependencies": [
+        "engine/keywords/index.js::createDefaultKeywordRegistry",
+        "engine/continuous.js::getActiveStackKeywords",
+        "engine/continuous.js::isImmune"
+      ],
+      "contract": {
+        "acceptedSchema": {
+          "op": "string",
+          "keyword": "string",
+          "hook": "string?",
+          "params": "object?",
+          "duration": "string?"
+        },
+        "targetingContract": "Applies to card stack or grants keyword to specified targets.",
+        "conditionContract": "Subject to level requirements and color prerequisites (e.g. Rush).",
+        "timingContract": "Hooks into combat flow, attack declaration, blocking, or damage step.",
+        "costContract": "Cost determined by specific keyword definition.",
+        "mutationContract": "Registers keyword in active keyword registry or stack continuous cache.",
+        "eventContract": "Emits KEYWORD_TRIGGERED or KEYWORD_RESOLVED.",
+        "failureBehavior": "Unknown keywords produce UNHANDLED_KEYWORD diagnostic without crash.",
+        "atomicity": "Synchronous keyword hooks resolve immediately during combat step."
+      }
+    },
+    "SYSTEM_AND_ATTRIBUTE_OPERATIONS": {
+      "name": "System and Attribute Operations",
+      "description": "Card attributes, colors, symbols, families, copy effects, and engine administration.",
+      "primaryOpcodes": [
+        "ADD_COLOR",
+        "ADD_SYMBOL",
+        "ADD_FAMILY",
+        "ADD_COUNTER",
+        "TREAT_AS_VANILLA",
+        "TREAT_CORE_COUNT",
+        "TREAT_COST",
+        "TREAT_RULE",
+        "GAIN_TEAM",
+        "TEAM_RULE",
+        "COPY_ABILITY",
+        "COPY_PRE_ADVENT_EFFECT",
+        "MULTIPLY_EFFECT",
+        "GRANT_EFFECT",
+        "VARIABLE_PAYMENT_EFFECT",
+        "COUNT_OPERATION",
+        "COUNT_AS_MULTIPLE"
+      ],
+      "sharedDependencies": [
+        "engine/continuous.js::computeColors",
+        "engine/continuous.js::computeSymbols",
+        "engine/prerequisites.js::hasTeam",
+        "engine/restrictions.js::RESTRICTION_STATUS"
+      ],
+      "contract": {
+        "acceptedSchema": {
+          "op": "string",
+          "attribute": "string?",
+          "value": "any",
+          "duration": "string?",
+          "target": "object?"
+        },
+        "targetingContract": "Modifies attributes of self or target field stacks.",
+        "conditionContract": "Evaluates whether target matches recipient requirements.",
+        "timingContract": "Applies as continuous modifier or immediate attribute rewrite.",
+        "costContract": "Non-cost operation.",
+        "mutationContract": "Modifies symbol/color/family arrays or continuous modifier registry.",
+        "eventContract": "Emits COLOR_ADDED, SYMBOL_ADDED, or FAMILY_ADDED.",
+        "failureBehavior": "Missing attribute specification produces MISSING_IR_PARAMETERS.",
+        "atomicity": "Reverts automatically upon duration expiry."
+      }
+    }
+  }
+}

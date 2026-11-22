@@ -24,6 +24,26 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A70",
       "name": "The SkyDragonEmperor Siegfried-Horus",
+      "type": "Ultimate",
+      "levels": {
+        "LV3": {
+          "level": 3,
+          "cost": 1,
+          "bp": 14000
+        },
+        "LV4": {
+          "level": 4,
+          "cost": 2,
+          "bp": 17000
+        },
+        "LV5": {
+          "level": 5,
+          "cost": 6,
+          "bp": 26000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: Green & Cost 6 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Ultimate.\n\n[Summon Condition: You control one or more Winged Beast Spirit/Ultimate]\n\nWhen summoning this revealed card, ignore the Summon Condition.\n\n[LV3][LV4][LV5] (When Summoned/Advents)\nPut three core from the Void to this Ultimate. Also, if it's your turn, refresh one Green Ultimate you control.\n\n[LV4][LV5] (When Depleted/Destroyed by the Opponent)\nYou can pay one cost to summon one of this Ultimate's pre-Advent cards.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -31,12 +51,32 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "BATTLE-SPIRITS-A70#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_8cb7e6ad0676b7a68b4fc0e1dcd3155258ac63f7efed0202bc822f25660684d2_a7d38db3ab0d816725dbcb8c3de7c943",
+          "cardNumber": "BATTLE-SPIRITS-A70",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "B",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "BATTLE-SPIRITS-A70#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A70#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -47,8 +87,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: Green & Cost 6 or more",
@@ -57,10 +106,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from your Hand onto your target Ultimate."
           },
+          "originalAbilityText": "Flash - [Advent: Green & Cost 6 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Ultimate.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -82,21 +135,70 @@
             },
             {
               "rawText": "stack this from your Hand onto your target Ultimate.",
+              "originalClauseText": "stack this from your Hand onto your target Ultimate.",
               "cleanText": "stack this from your Hand onto your target Ultimate",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
+                "when": "WHEN_ELIGIBLE",
+                "fromZone": "hand",
+                "adventType": "ADVENT",
                 "op": "ADVENT_RULE"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A70#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "Green & Cost 6 or more",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BATTLE-SPIRITS-A70#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_8cb7e6ad0676b7a68b4fc0e1dcd3155258ac63f7efed0202bc822f25660684d2_a7d38db3ab0d816725dbcb8c3de7c943",
+              "cardNumber": "BATTLE-SPIRITS-A70",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "B",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "BATTLE-SPIRITS-A70#a0"
+            }
+          ],
+          "id": "BATTLE-SPIRITS-A70#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_8cb7e6ad0676b7a68b4fc0e1dcd3155258ac63f7efed0202bc822f25660684d2_a7d38db3ab0d816725dbcb8c3de7c943",
+          "physicalId": "BATTLE-SPIRITS-A70#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_8cb7e6ad0676b7a68b4fc0e1dcd3155258ac63f7efed0202bc822f25660684d2_a7d38db3ab0d816725dbcb8c3de7c943",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_8cb7e6ad0676b7a68b4fc0e1dcd3155258ac63f7efed0202bc822f25660684d2_a7d38db3ab0d816725dbcb8c3de7c943",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1dcc11ae3c570174a2ec45eb68605f1a043ed112fd5721980d148516f42da455_af22d1dee9ce7aca3b61b13132b734b7",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A70#a1",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -109,8 +211,13 @@
               "Summon Condition: You control one or more Winged Beast Spirit/Ultimate"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -120,11 +227,31 @@
             "cleanBody": ""
           },
           "rawText": "[Summon Condition: You control one or more Winged Beast Spirit/Ultimate]",
+          "originalAbilityText": "[Summon Condition: You control one or more Winged Beast Spirit/Ultimate]",
+          "abilityIndex": 1,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "SUMMON_CONDITION",
+            "expression": "You control one or more Winged Beast Spirit/Ultimate",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A70#a1",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A70#AB_PASSIVE_NONE_LV1_LV2_LV3_c6b9d1867ec2380006d2dd7882a852afd32161b2ff645214934624e5e6cbefe3_714f1faa57414d46f1861701ae25a7ff",
+          "physicalId": "BATTLE-SPIRITS-A70#AB_PASSIVE_NONE_LV1_LV2_LV3_c6b9d1867ec2380006d2dd7882a852afd32161b2ff645214934624e5e6cbefe3_714f1faa57414d46f1861701ae25a7ff",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_c6b9d1867ec2380006d2dd7882a852afd32161b2ff645214934624e5e6cbefe3_714f1faa57414d46f1861701ae25a7ff",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_646aceb0ec3de3be219bab4dc343973de8f3551a95e089901161f8dbff2f9053_dd3deb6571db3a31d26cd5eb4dae7abe",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A70#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -135,8 +262,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -145,10 +277,14 @@
             "isMain": false,
             "cleanBody": "When summoning this revealed card, ignore the Summon Condition."
           },
+          "originalAbilityText": "When summoning this revealed card, ignore the Summon Condition.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When summoning this revealed card, ignore the Summon Condition.",
+              "originalClauseText": "When summoning this revealed card, ignore the Summon Condition.",
               "cleanText": "When summoning this revealed card, ignore the Summon Condition",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -156,14 +292,36 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "free": false,
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A70#a2",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A70#AB_PASSIVE_NONE_LV1_LV2_LV3_173a349c57223269495b8336b9f7f79654b9cb75ebf342c3d9b95cb6fe6d329c_4c8412ab1e78748c01930c38d75b11bd",
+          "physicalId": "BATTLE-SPIRITS-A70#AB_PASSIVE_NONE_LV1_LV2_LV3_173a349c57223269495b8336b9f7f79654b9cb75ebf342c3d9b95cb6fe6d329c_4c8412ab1e78748c01930c38d75b11bd",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_173a349c57223269495b8336b9f7f79654b9cb75ebf342c3d9b95cb6fe6d329c_4c8412ab1e78748c01930c38d75b11bd",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_7c953dc052fb0de28719a0b68a76344c7bbc49ff9718a8d8675a30d93d505394_729e0f38919e0361c7c5005c8c5f6b9f",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A70#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -173,21 +331,45 @@
             ],
             "levelExplicit": true,
             "prefixes": [],
-            "timing": "WHEN_SUMMONED",
-            "timingLabel": "When Summoned/Advents",
+            "timing": "PASSIVE",
+            "timings": [],
+            "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
             "burstCondition": null,
             "isFlash": false,
             "isMain": false,
-            "cleanBody": "Put three core from the Void to this Ultimate. Also, if it's your turn, refresh one Green Ultimate you control."
+            "cleanBody": "(When Summoned/Advents)\nPut three core from the Void to this Ultimate. Also, if it's your turn, refresh one Green Ultimate you control."
           },
+          "originalAbilityText": "[LV3][LV4][LV5] (When Summoned/Advents)\nPut three core from the Void to this Ultimate. Also, if it's your turn, refresh one Green Ultimate you control.",
+          "abilityIndex": 3,
           "clauses": [
             {
+              "rawText": "(When Summoned/Advents)",
+              "originalClauseText": "(When Summoned/Advents)",
+              "cleanText": "(When Summoned/Advents)",
+              "clauseIndex": 0,
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "UNSUPPORTED",
+                "rawText": "(When Summoned/Advents)"
+              }
+            },
+            {
               "rawText": "Put three core from the Void to this Ultimate.",
+              "originalClauseText": "Put three core from the Void to this Ultimate.",
               "cleanText": "Put three core from the Void to this Ultimate",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -207,7 +389,9 @@
             },
             {
               "rawText": "if it's your turn, refresh one Green Ultimate you control.",
+              "originalClauseText": "if it's your turn, refresh one Green Ultimate you control.",
               "cleanText": "refresh one Green Ultimate you control",
+              "clauseIndex": 2,
               "link": "also",
               "isOptional": false,
               "isCost": false,
@@ -215,16 +399,35 @@
               "duration": null,
               "op": {
                 "op": "REFRESH",
+                "count": 1,
                 "target": {
-                  "side": "either"
+                  "side": "self",
+                  "types": [
+                    "Spirit",
+                    "Ultimate"
+                  ]
                 }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "(When Summoned/Advents)"
+          ],
+          "legacyId": "BATTLE-SPIRITS-A70#a3",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A70#AB_PASSIVE_NONE_LV3_LV4_LV5_b62c7b92ac7a3edaf70aba3493555ad57c08d00eed57fefc05647280046dad78_baa4f7f42454367cfe94ca63bac6053a",
+          "physicalId": "BATTLE-SPIRITS-A70#AB_PASSIVE_NONE_LV3_LV4_LV5_b62c7b92ac7a3edaf70aba3493555ad57c08d00eed57fefc05647280046dad78_baa4f7f42454367cfe94ca63bac6053a",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV3_LV4_LV5_b62c7b92ac7a3edaf70aba3493555ad57c08d00eed57fefc05647280046dad78_baa4f7f42454367cfe94ca63bac6053a",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV3_LV4_LV5_f6db2f529a5082373219a195784c33954b4d0b82c2946f685c449c21ff7bf0db_b72538c3ab40aa7e0c1616b881907639",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A70#a4",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -233,9 +436,19 @@
             ],
             "levelExplicit": true,
             "prefixes": [],
-            "timing": "STEP_RESTRICTED",
+            "timing": "WHEN_DESTROYED",
+            "timings": [
+              "WHEN_DESTROYED"
+            ],
             "timingLabel": "When Depleted/Destroyed by the Opponent",
             "timingStep": "ANY",
+            "timingCause": "OPPONENT",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_DEPLETED",
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -244,10 +457,14 @@
             "isMain": false,
             "cleanBody": "You can pay one cost to summon one of this Ultimate's pre-Advent cards."
           },
+          "originalAbilityText": "[LV4][LV5] (When Depleted/Destroyed by the Opponent)\nYou can pay one cost to summon one of this Ultimate's pre-Advent cards.",
+          "abilityIndex": 4,
           "clauses": [
             {
               "rawText": "You can pay one cost to summon one of this Ultimate's pre-Advent cards.",
+              "originalClauseText": "You can pay one cost to summon one of this Ultimate's pre-Advent cards.",
               "cleanText": "You can pay one cost to summon one of this Ultimate's pre-Advent cards",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -255,16 +472,43 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Ultimate"
+                  ]
+                },
+                "free": false,
+                "costCores": 1,
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A70#a4",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A70#AB_WHEN_DESTROYED_NONE_LV4_LV5_5e181e7859ec56b64918f9023657b91a4fe08de13373c9bee1b1736f7cfc1862_f7319eaa49e3245206ef4bc93e5b983e",
+          "physicalId": "BATTLE-SPIRITS-A70#AB_WHEN_DESTROYED_NONE_LV4_LV5_5e181e7859ec56b64918f9023657b91a4fe08de13373c9bee1b1736f7cfc1862_f7319eaa49e3245206ef4bc93e5b983e",
+          "semanticId": "SEM#AB_WHEN_DESTROYED_NONE_LV4_LV5_5e181e7859ec56b64918f9023657b91a4fe08de13373c9bee1b1736f7cfc1862_f7319eaa49e3245206ef4bc93e5b983e",
+          "semanticIdV3": "SEM3#AB_WHEN_DESTROYED_NONE_LV4_LV5_5d76bd515af1d1d55fae88885b4f16fc7564e6311a44b8d2b39858af0cf214b7_1eba7b7a525a851374b19b4f4bc04b11",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "OPPONENT",
+            "timingTriggers": [
+              "WHEN_DEPLETED",
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
-      "unsupportedClausesCount": 0,
-      "isFullySupported": true
+      "unsupportedClausesCount": 1,
+      "isFullySupported": false
     }
   },
   "BATTLE-SPIRITS-A77": {
@@ -292,6 +536,26 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A77",
       "name": "The DestroyerDragonEmperor Siegfried-Rudra",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 10000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 12000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 5,
+          "bp": 16000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit/Ultimate.\n\n[LV1][LV2][LV3] (When Advents)\nSend three cores each from five opposing Spirits/Ultimates to the Reserve, and effects of the depleted Spirits/Ultimates can't activate.\n\n[LV2][LV3] (When Attacks)\nUnless the opponent destroys five Spirits/Ultimates they control, they can't block.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -299,12 +563,32 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "BATTLE-SPIRITS-A77#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_bce1765e51fde565c2e7181f98b0699fb879178a072979767fab5d30f0d54f87_a8b342cee60437cca99546e4556424ab",
+          "cardNumber": "BATTLE-SPIRITS-A77",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "B",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "BATTLE-SPIRITS-A77#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A77#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -315,8 +599,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: Cost 5 or more",
@@ -325,10 +618,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit/Ultimate."
           },
+          "originalAbilityText": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit/Ultimate.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -350,7 +647,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit/Ultimate.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit/Ultimate.",
               "cleanText": "stack this from the Hand onto your target Spirit/Ultimate",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -368,10 +667,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A77#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "Cost 5 or more",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BATTLE-SPIRITS-A77#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_bce1765e51fde565c2e7181f98b0699fb879178a072979767fab5d30f0d54f87_a8b342cee60437cca99546e4556424ab",
+              "cardNumber": "BATTLE-SPIRITS-A77",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "B",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "BATTLE-SPIRITS-A77#a0"
+            }
+          ],
+          "id": "BATTLE-SPIRITS-A77#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_bce1765e51fde565c2e7181f98b0699fb879178a072979767fab5d30f0d54f87_a8b342cee60437cca99546e4556424ab",
+          "physicalId": "BATTLE-SPIRITS-A77#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_bce1765e51fde565c2e7181f98b0699fb879178a072979767fab5d30f0d54f87_a8b342cee60437cca99546e4556424ab",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_bce1765e51fde565c2e7181f98b0699fb879178a072979767fab5d30f0d54f87_a8b342cee60437cca99546e4556424ab",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_d156ac502d26f731f613cac84d0123a2aabafe004ce8ee7a821e8d8c0eae06a5_f9a9a376e902a52591204148eb5accc3",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A77#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -382,8 +725,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS"
+            ],
             "timingLabel": "When Advents",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -392,10 +744,14 @@
             "isMain": false,
             "cleanBody": "Send three cores each from five opposing Spirits/Ultimates to the Reserve, and effects of the depleted Spirits/Ultimates can't activate."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Advents)\nSend three cores each from five opposing Spirits/Ultimates to the Reserve, and effects of the depleted Spirits/Ultimates can't activate.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Send three cores each from five opposing Spirits/Ultimates to the Reserve, and effects of the depleted Spirits/Ultimates can't activate.",
+              "originalClauseText": "Send three cores each from five opposing Spirits/Ultimates to the Reserve, and effects of the depleted Spirits/Ultimates can't activate.",
               "cleanText": "Send three cores each from five opposing Spirits/Ultimates to the Reserve, and effects of the depleted Spirits/Ultimates can't activate",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -406,10 +762,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A77#a1",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A77#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_d6127530f29887a4a4c46518b259b1bd4cb9b48261af32c37f8f1820ee5267e5_42c396692f56c4ea7b6999c91fefbcdf",
+          "physicalId": "BATTLE-SPIRITS-A77#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_d6127530f29887a4a4c46518b259b1bd4cb9b48261af32c37f8f1820ee5267e5_42c396692f56c4ea7b6999c91fefbcdf",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_d6127530f29887a4a4c46518b259b1bd4cb9b48261af32c37f8f1820ee5267e5_42c396692f56c4ea7b6999c91fefbcdf",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_787385114d3f74bc311924ad19b28c68d94a5970773f175fc8cf2637def2e5f2_28356b5ac77d3cce0efd61feeb6caa99",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A77#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -419,8 +789,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -429,10 +808,14 @@
             "isMain": false,
             "cleanBody": "Unless the opponent destroys five Spirits/Ultimates they control, they can't block."
           },
+          "originalAbilityText": "[LV2][LV3] (When Attacks)\nUnless the opponent destroys five Spirits/Ultimates they control, they can't block.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Unless the opponent destroys five Spirits/Ultimates they control, they can't block.",
+              "originalClauseText": "Unless the opponent destroys five Spirits/Ultimates they control, they can't block.",
               "cleanText": "Unless the opponent destroys five Spirits/Ultimates they control, they can't block",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -448,7 +831,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A77#a2",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A77#AB_WHEN_ATTACKS_NONE_LV2_LV3_d932d5e231d7d1b421a79d93c04d5b0e7186e41fe0026b0d37f20bb3735fcc9f_269c4a3b8102a2a3ea19dfb241f96e2c",
+          "physicalId": "BATTLE-SPIRITS-A77#AB_WHEN_ATTACKS_NONE_LV2_LV3_d932d5e231d7d1b421a79d93c04d5b0e7186e41fe0026b0d37f20bb3735fcc9f_269c4a3b8102a2a3ea19dfb241f96e2c",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_d932d5e231d7d1b421a79d93c04d5b0e7186e41fe0026b0d37f20bb3735fcc9f_269c4a3b8102a2a3ea19dfb241f96e2c",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_b71009e1e27e02ca4249ef4663e20d32f3b58768f7a5fc2284196d99d1c42807_49f02ffa1bc699eff08a602330011782",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -481,6 +879,26 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A90",
       "name": "The HieroglyphDragonEmperor Jehutic-Siegfried",
+      "type": "Ultimate",
+      "levels": {
+        "LV3": {
+          "level": 3,
+          "cost": 1,
+          "bp": 15000
+        },
+        "LV4": {
+          "level": 4,
+          "cost": 2,
+          "bp": 20000
+        },
+        "LV5": {
+          "level": 5,
+          "cost": 5,
+          "bp": 25000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: White & Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Ultimate.\n\n[Summon Condition: You control one or more Armed Machine Spirit/Ultimate]\n\n[LV3][LV4][LV5] (When Advents)\nYou can discard cards from your deck until a \"Saga\"/\"Exalted Sword\" family card is discarded. When you've done so, you can pay one cost to summon that card.\n\n[During Brave] [LV4][LV5] Flash - (When Attacks/Blocks)\nBy returning five \"Armed Machine\" family cards from your Trash to the deckbottom in any order, this Ultimate refreshes.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -488,12 +906,32 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "BATTLE-SPIRITS-A90#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_8bd91cb2979cab379fe74eb6f27e941eeafc532e046aeeda0b930370ed3ad73c_3e31d474000c4f8d048def4697276505",
+          "cardNumber": "BATTLE-SPIRITS-A90",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "B",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "BATTLE-SPIRITS-A90#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A90#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -504,8 +942,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: White & Cost 5 or more",
@@ -514,10 +961,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from your Hand onto your target Ultimate."
           },
+          "originalAbilityText": "Flash - [Advent: White & Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Ultimate.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -539,21 +990,70 @@
             },
             {
               "rawText": "stack this from your Hand onto your target Ultimate.",
+              "originalClauseText": "stack this from your Hand onto your target Ultimate.",
               "cleanText": "stack this from your Hand onto your target Ultimate",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
+                "when": "WHEN_ELIGIBLE",
+                "fromZone": "hand",
+                "adventType": "ADVENT",
                 "op": "ADVENT_RULE"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A90#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "White & Cost 5 or more",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BATTLE-SPIRITS-A90#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_8bd91cb2979cab379fe74eb6f27e941eeafc532e046aeeda0b930370ed3ad73c_3e31d474000c4f8d048def4697276505",
+              "cardNumber": "BATTLE-SPIRITS-A90",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "B",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "BATTLE-SPIRITS-A90#a0"
+            }
+          ],
+          "id": "BATTLE-SPIRITS-A90#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_8bd91cb2979cab379fe74eb6f27e941eeafc532e046aeeda0b930370ed3ad73c_3e31d474000c4f8d048def4697276505",
+          "physicalId": "BATTLE-SPIRITS-A90#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_8bd91cb2979cab379fe74eb6f27e941eeafc532e046aeeda0b930370ed3ad73c_3e31d474000c4f8d048def4697276505",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_8bd91cb2979cab379fe74eb6f27e941eeafc532e046aeeda0b930370ed3ad73c_3e31d474000c4f8d048def4697276505",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_951ce53f53c02432e702472bf9b739f10058218e4ad9b6bfc67ab749ccbe41e4_063f0cf838467db6dbfada36d4cd981c",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A90#a1",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -566,8 +1066,13 @@
               "Summon Condition: You control one or more Armed Machine Spirit/Ultimate"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -577,11 +1082,31 @@
             "cleanBody": ""
           },
           "rawText": "[Summon Condition: You control one or more Armed Machine Spirit/Ultimate]",
+          "originalAbilityText": "[Summon Condition: You control one or more Armed Machine Spirit/Ultimate]",
+          "abilityIndex": 1,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "SUMMON_CONDITION",
+            "expression": "You control one or more Armed Machine Spirit/Ultimate",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A90#a1",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A90#AB_PASSIVE_NONE_LV1_LV2_LV3_1afdb8bb2459223cb105fbf5a5545ea05aa83191fbafabb553311db2eb496396_8619c7c6bff41b1cb35abf430b4c0658",
+          "physicalId": "BATTLE-SPIRITS-A90#AB_PASSIVE_NONE_LV1_LV2_LV3_1afdb8bb2459223cb105fbf5a5545ea05aa83191fbafabb553311db2eb496396_8619c7c6bff41b1cb35abf430b4c0658",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_1afdb8bb2459223cb105fbf5a5545ea05aa83191fbafabb553311db2eb496396_8619c7c6bff41b1cb35abf430b4c0658",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_a98c95eef0152106834518cb2d9fca349704c1fc7ec1de1dcfd894e1969bcba5_4779dd3b8587717e0526bcaa5d94190e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A90#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -592,8 +1117,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS"
+            ],
             "timingLabel": "When Advents",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -602,22 +1136,32 @@
             "isMain": false,
             "cleanBody": "You can discard cards from your deck until a \"Saga\"/\"Exalted Sword\" family card is discarded. When you've done so, you can pay one cost to summon that card."
           },
+          "originalAbilityText": "[LV3][LV4][LV5] (When Advents)\nYou can discard cards from your deck until a \"Saga\"/\"Exalted Sword\" family card is discarded. When you've done so, you can pay one cost to summon that card.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "You can discard cards from your deck until a \"Saga\"/\"Exalted Sword\" family card is discarded.",
+              "originalClauseText": "You can discard cards from your deck until a \"Saga\"/\"Exalted Sword\" family card is discarded.",
               "cleanText": "You can discard cards from your deck until a \"Saga\"/\"Exalted Sword\" family card is discarded",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "GRANT_FAMILY"
+                "zone": "field",
+                "cardType": "Spirit",
+                "side": "self",
+                "count": 1,
+                "op": "DISCARD_ZONE"
               }
             },
             {
               "rawText": "you can pay one cost to summon that card.",
+              "originalClauseText": "you can pay one cost to summon that card.",
               "cleanText": "you can pay one cost to summon that card",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": true,
               "isCost": false,
@@ -625,14 +1169,39 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "free": false,
+                "costCores": 1,
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A90#a2",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A90#AB_WHEN_ADVENTS_NONE_LV3_LV4_LV5_1125effca7477c4b040ef92959997b0c7807b4eb46c6be11d5d51a1dee0fe6ce_8d9d140433dae171451f7d7826a3a31c",
+          "physicalId": "BATTLE-SPIRITS-A90#AB_WHEN_ADVENTS_NONE_LV3_LV4_LV5_1125effca7477c4b040ef92959997b0c7807b4eb46c6be11d5d51a1dee0fe6ce_8d9d140433dae171451f7d7826a3a31c",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV3_LV4_LV5_1125effca7477c4b040ef92959997b0c7807b4eb46c6be11d5d51a1dee0fe6ce_8d9d140433dae171451f7d7826a3a31c",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV3_LV4_LV5_e10b497f3e5d83cb7d223dbca8c23ee10d123e174de7117263e4d79ddb1c70e0_2d7c0b8be166b02419fa82607a0a5fe7",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A90#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -644,8 +1213,21 @@
               "During Brave"
             ],
             "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timings": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
             "timingLabel": "When Attacks/Blocks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [
+              "WHILE_BRAVED"
+            ],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -654,10 +1236,14 @@
             "isMain": false,
             "cleanBody": "By returning five \"Armed Machine\" family cards from your Trash to the deckbottom in any order, this Ultimate refreshes."
           },
+          "originalAbilityText": "[During Brave] [LV4][LV5] Flash - (When Attacks/Blocks)\nBy returning five \"Armed Machine\" family cards from your Trash to the deckbottom in any order, this Ultimate refreshes.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "By returning five \"Armed Machine\" family cards from your Trash to the deckbottom in any order",
+              "originalClauseText": "By returning five \"Armed Machine\" family cards from your Trash to the deckbottom in any order",
               "cleanText": "By returning five \"Armed Machine\" family cards from your Trash to the deckbottom in any order",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -673,7 +1259,9 @@
             },
             {
               "rawText": "this Ultimate refreshes.",
+              "originalClauseText": "this Ultimate refreshes.",
               "cleanText": "this Ultimate refreshes",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -685,7 +1273,25 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A90#a3",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A90#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV4_LV5_c6de929821c6ec131e6c3c73a3f6d34c59fa19cecc039dc5a8824cb51bcb8a84_d2efdfcd248749b0837d93f0876c8199",
+          "physicalId": "BATTLE-SPIRITS-A90#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV4_LV5_c6de929821c6ec131e6c3c73a3f6d34c59fa19cecc039dc5a8824cb51bcb8a84_d2efdfcd248749b0837d93f0876c8199",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV4_LV5_c6de929821c6ec131e6c3c73a3f6d34c59fa19cecc039dc5a8824cb51bcb8a84_d2efdfcd248749b0837d93f0876c8199",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV4_LV5_1bc87ceee28b6f89e8d6677fff83866319cd64bde57a91b91381e5aea5ffd307_c99600cad884c6e7a306d0afe93c9e2f",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [
+              "WHILE_BRAVED"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
@@ -718,10 +1324,59 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A99",
       "name": "The CreationDragonEmperor Generator-Siegfried",
-      "keywords": [],
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 10000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 12000
+        }
+      },
+      "originalEffectText": "Flash - Advent: Red & Cost 3 or more (Either Attack Step)\nBy sending your [Soul Core] to the Trash, stack this from your hand onto your target spirit.\n\n[LV1][LV2][LV3] (When Advents/Attacks) During this turn, every \"Creation\" family Spirit you control gains an extra Red symbol.\n\n[LV2][LV3]Flash - (Either Attack Step) Once per turn, by either discarding a card from your hand, or one of this Spirit's pre-Advent cards, refresh this Spirit and up to three of your \"Creation\" family Spirits.",
+      "teams": [],
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "Red & Cost 3 or more (Either Attack Step)",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 0,
+          "abilityId": "BATTLE-SPIRITS-A99#AB_FLASH_NONE_LV1_LV2_LV3_c1c35324230fef23364b207ad9d4c426f82ea9ed6e517355fdfb98fd53bf3796_6944c2035d4520f40d51125d3a7cdfe8",
+          "cardNumber": "BATTLE-SPIRITS-A99",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "B",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "BATTLE-SPIRITS-A99#a0"
+        }
+      ],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A99#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -732,8 +1387,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: Red & Cost 3 or more (Either Attack Step)",
@@ -742,10 +1404,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from your hand onto your target spirit."
           },
+          "originalAbilityText": "Flash - Advent: Red & Cost 3 or more (Either Attack Step)\nBy sending your [Soul Core] to the Trash, stack this from your hand onto your target spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -767,7 +1433,9 @@
             },
             {
               "rawText": "stack this from your hand onto your target spirit.",
+              "originalClauseText": "stack this from your hand onto your target spirit.",
               "cleanText": "stack this from your hand onto your target spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -785,10 +1453,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A99#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "Red & Cost 3 or more (Either Attack Step)",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BATTLE-SPIRITS-A99#AB_FLASH_NONE_LV1_LV2_LV3_c1c35324230fef23364b207ad9d4c426f82ea9ed6e517355fdfb98fd53bf3796_6944c2035d4520f40d51125d3a7cdfe8",
+              "cardNumber": "BATTLE-SPIRITS-A99",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "B",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "BATTLE-SPIRITS-A99#a0"
+            }
+          ],
+          "id": "BATTLE-SPIRITS-A99#AB_FLASH_NONE_LV1_LV2_LV3_c1c35324230fef23364b207ad9d4c426f82ea9ed6e517355fdfb98fd53bf3796_6944c2035d4520f40d51125d3a7cdfe8",
+          "physicalId": "BATTLE-SPIRITS-A99#AB_FLASH_NONE_LV1_LV2_LV3_c1c35324230fef23364b207ad9d4c426f82ea9ed6e517355fdfb98fd53bf3796_6944c2035d4520f40d51125d3a7cdfe8",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_c1c35324230fef23364b207ad9d4c426f82ea9ed6e517355fdfb98fd53bf3796_6944c2035d4520f40d51125d3a7cdfe8",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_9f97190e1a3c5bf78871eefed2869dad673dfccf70e7630543f13d7200b17bdb_d005d19844bfab989f7f4944bedbd5bc",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A99#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -799,8 +1511,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Advents/Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -809,24 +1532,46 @@
             "isMain": false,
             "cleanBody": "During this turn, every \"Creation\" family Spirit you control gains an extra Red symbol."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Advents/Attacks) During this turn, every \"Creation\" family Spirit you control gains an extra Red symbol.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "During this turn, every \"Creation\" family Spirit you control gains an extra Red symbol.",
+              "originalClauseText": "During this turn, every \"Creation\" family Spirit you control gains an extra Red symbol.",
               "cleanText": "every \"Creation\" family Spirit you control gains an extra Red symbol",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": "DURING_THIS_TURN",
               "op": {
-                "op": "ADD_SYMBOL"
+                "op": "ADD_SYMBOL",
+                "color": "Red",
+                "count": 1,
+                "side": "self"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A99#a1",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A99#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_87a8975c458b3db9fad929ff6c588084750116d5f75b1edc0344309fcd6be72f_4b1a8a6d6edc5a5d26e9317a934baa35",
+          "physicalId": "BATTLE-SPIRITS-A99#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_87a8975c458b3db9fad929ff6c588084750116d5f75b1edc0344309fcd6be72f_4b1a8a6d6edc5a5d26e9317a934baa35",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_87a8975c458b3db9fad929ff6c588084750116d5f75b1edc0344309fcd6be72f_4b1a8a6d6edc5a5d26e9317a934baa35",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_150fd94c9a3b5561ca00050f6771539a3eadd8ceb6ca21d7440314f61b37b9d7_85de53925003bfd826066594490a7588",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A99#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -836,8 +1581,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -846,10 +1602,14 @@
             "isMain": false,
             "cleanBody": "by either discarding a card from your hand, or one of this Spirit's pre-Advent cards, refresh this Spirit and up to three of your \"Creation\" family Spirits."
           },
+          "originalAbilityText": "[LV2][LV3]Flash - (Either Attack Step) Once per turn, by either discarding a card from your hand, or one of this Spirit's pre-Advent cards, refresh this Spirit and up to three of your \"Creation\" family Spirits.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "By either discarding a card from your hand",
+              "originalClauseText": "By either discarding a card from your hand",
               "cleanText": "By either discarding a card from your hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -865,7 +1625,9 @@
             },
             {
               "rawText": "or one of this Spirit's pre-Advent cards, refresh this Spirit and up to three of your \"Creation\" family Spirits.",
+              "originalClauseText": "or one of this Spirit's pre-Advent cards, refresh this Spirit and up to three of your \"Creation\" family Spirits.",
               "cleanText": "or one of this Spirit's pre-Advent cards, refresh this Spirit and up to three of your \"Creation\" family Spirits",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -877,7 +1639,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A99#a2",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A99#AB_ATTACK_STEP_NONE_LV2_LV3_10ca1692018eb30d6eeccc23e1f6f198ff20fc1acb400de6f7af7945d8a8e460_a8be56b8f7b5dd0a2093fc9fb04df12f",
+          "physicalId": "BATTLE-SPIRITS-A99#AB_ATTACK_STEP_NONE_LV2_LV3_10ca1692018eb30d6eeccc23e1f6f198ff20fc1acb400de6f7af7945d8a8e460_a8be56b8f7b5dd0a2093fc9fb04df12f",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_10ca1692018eb30d6eeccc23e1f6f198ff20fc1acb400de6f7af7945d8a8e460_a8be56b8f7b5dd0a2093fc9fb04df12f",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_LV3_c79484bcda3829c607a8f1af0aee2160bf277bb57bf645f9827a0e29282981aa_be01683a885116f01f49e92dc338ed8b",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -910,10 +1689,59 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A107",
       "name": "The GrandflowerDragonEmperor Siegfried-Aphrodite",
-      "keywords": [],
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 8000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 11000
+        }
+      },
+      "originalEffectText": "Flash - Advent: Yellow & Cost 3 or more (Your Turn)\nBy sending your [Soul Core] to the Trash, stack this from your hand onto your target spirit.\n\nBy sending one or more cores from your Reserve to a Magic card on your field, this card can Advent on it.\n\n[LV1][LV2][LV3] (When Attacks) You can immediately use the Main/Flash effect of a \"Fairy\" family Magic card on your Hand or this Spirit's pre-Advent cards without paying the cost. After that effect resolves, if you have at least three Magic cards on your Field, send an opposing Life to the Reserve.",
+      "teams": [],
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "Yellow & Cost 3 or more (Your Turn)",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 0,
+          "abilityId": "BATTLE-SPIRITS-A107#AB_FLASH_NONE_LV1_LV2_LV3_235a0aa8a04e8250a9d952b8674d91fca1a75899944a72dc709cca4a00bece4a_b0310fb4f3a2755fb3a37e2575e7f136",
+          "cardNumber": "BATTLE-SPIRITS-A107",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "B",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "BATTLE-SPIRITS-A107#a0"
+        }
+      ],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A107#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -924,8 +1752,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: Yellow & Cost 3 or more (Your Turn)",
@@ -934,10 +1769,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from your hand onto your target spirit."
           },
+          "originalAbilityText": "Flash - Advent: Yellow & Cost 3 or more (Your Turn)\nBy sending your [Soul Core] to the Trash, stack this from your hand onto your target spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -959,7 +1798,9 @@
             },
             {
               "rawText": "stack this from your hand onto your target spirit.",
+              "originalClauseText": "stack this from your hand onto your target spirit.",
               "cleanText": "stack this from your hand onto your target spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -977,10 +1818,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A107#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "Yellow & Cost 3 or more (Your Turn)",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BATTLE-SPIRITS-A107#AB_FLASH_NONE_LV1_LV2_LV3_235a0aa8a04e8250a9d952b8674d91fca1a75899944a72dc709cca4a00bece4a_b0310fb4f3a2755fb3a37e2575e7f136",
+              "cardNumber": "BATTLE-SPIRITS-A107",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "B",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "BATTLE-SPIRITS-A107#a0"
+            }
+          ],
+          "id": "BATTLE-SPIRITS-A107#AB_FLASH_NONE_LV1_LV2_LV3_235a0aa8a04e8250a9d952b8674d91fca1a75899944a72dc709cca4a00bece4a_b0310fb4f3a2755fb3a37e2575e7f136",
+          "physicalId": "BATTLE-SPIRITS-A107#AB_FLASH_NONE_LV1_LV2_LV3_235a0aa8a04e8250a9d952b8674d91fca1a75899944a72dc709cca4a00bece4a_b0310fb4f3a2755fb3a37e2575e7f136",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_235a0aa8a04e8250a9d952b8674d91fca1a75899944a72dc709cca4a00bece4a_b0310fb4f3a2755fb3a37e2575e7f136",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_0f43710b5c6776d0e4c6537b791067ab5152ca578939c0f6cf347b2a93873c29_466642869dec9ccc5f8f8c77bf59455e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A107#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -991,8 +1876,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1001,10 +1891,14 @@
             "isMain": false,
             "cleanBody": "By sending one or more cores from your Reserve to a Magic card on your field, this card can Advent on it."
           },
+          "originalAbilityText": "By sending one or more cores from your Reserve to a Magic card on your field, this card can Advent on it.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "By sending one or more cores from your Reserve to a Magic card on your field",
+              "originalClauseText": "By sending one or more cores from your Reserve to a Magic card on your field",
               "cleanText": "By sending one or more cores from your Reserve to a Magic card on your field",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1012,26 +1906,47 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "reserve",
+                  "side": "self"
+                }
               }
             },
             {
               "rawText": "this card can Advent on it.",
+              "originalClauseText": "this card can Advent on it.",
               "cleanText": "this card can Advent on it",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
+                "when": "WHEN_ELIGIBLE",
+                "fromZone": "hand",
+                "adventType": "ADVENT",
                 "op": "ADVENT_RULE"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A107#a1",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A107#AB_PASSIVE_NONE_LV1_LV2_LV3_4dcaee5bc4371461f7f4fa44e861b2c4f746e5160e879c910c17eb3d5a48d8d4_21d948244c700b70f3a09cc95770d43b",
+          "physicalId": "BATTLE-SPIRITS-A107#AB_PASSIVE_NONE_LV1_LV2_LV3_4dcaee5bc4371461f7f4fa44e861b2c4f746e5160e879c910c17eb3d5a48d8d4_21d948244c700b70f3a09cc95770d43b",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_4dcaee5bc4371461f7f4fa44e861b2c4f746e5160e879c910c17eb3d5a48d8d4_21d948244c700b70f3a09cc95770d43b",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_278c24848189f56a07eed85e84b17ef871394ac85c61d5fc6aec793fd218bb8c_1ba949fe15b22d36f1458e755a8bad83",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A107#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1042,8 +1957,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1052,10 +1976,14 @@
             "isMain": false,
             "cleanBody": "You can immediately use the Main/Flash effect of a \"Fairy\" family Magic card on your Hand or this Spirit's pre-Advent cards without paying the cost. After that effect resolves, if you have at least three Magic cards on your Field, send an opposing Life to the Reserve."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Attacks) You can immediately use the Main/Flash effect of a \"Fairy\" family Magic card on your Hand or this Spirit's pre-Advent cards without paying the cost. After that effect resolves, if you have at least three Magic cards on your Field, send an opposing Life to the Reserve.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "You can immediately use the Main/Flash effect of a \"Fairy\" family Magic card on your Hand or this Spirit's pre-Advent cards without paying the cost.",
+              "originalClauseText": "You can immediately use the Main/Flash effect of a \"Fairy\" family Magic card on your Hand or this Spirit's pre-Advent cards without paying the cost.",
               "cleanText": "You can immediately use the Main/Flash effect of a \"Fairy\" family Magic card on your Hand or this Spirit's pre-Advent cards without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1067,7 +1995,9 @@
             },
             {
               "rawText": "if you have at least three Magic cards on your Field, send an opposing Life to the Reserve.",
+              "originalClauseText": "if you have at least three Magic cards on your Field, send an opposing Life to the Reserve.",
               "cleanText": "send an opposing Life to the Reserve",
+              "clauseIndex": 1,
               "link": "afterResolves",
               "isOptional": false,
               "isCost": false,
@@ -1075,11 +2005,34 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A107#a2",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A107#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_92f8fd3df0becb22dbd484e5d11348531f819966d858c69423fe4dfc0900bece_cf50652b9a39d437329c6713b646648b",
+          "physicalId": "BATTLE-SPIRITS-A107#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_92f8fd3df0becb22dbd484e5d11348531f819966d858c69423fe4dfc0900bece_cf50652b9a39d437329c6713b646648b",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_92f8fd3df0becb22dbd484e5d11348531f819966d858c69423fe4dfc0900bece_cf50652b9a39d437329c6713b646648b",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_353acfdcf39ed2eacb36d03960ebae1074ccd4fbf27023ef9ac282f5750cda22_37db64ad8d398a7aca97938ff2db14d5",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
@@ -1299,10 +2252,24 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A1456",
       "name": "The HieroglyphSoldier Defender-Gelef",
+      "type": "Ultimate",
+      "levels": {
+        "LV3": {
+          "level": 3,
+          "cost": 1,
+          "bp": 13000
+        },
+        "LV4": {
+          "level": 4,
+          "cost": 2,
+          "bp": 15000
+        }
+      },
+      "originalEffectText": "[Summon Condition: Your Life at two or more]\n\nWhen you have used a White Magic card from your Hand/activated a White Magic card Burst, after that effect resolves, you can pay one cost to summon this card from your Hand. When you've done so, refresh three \"Armed Machine\" family Ultimates you control.\n\n[LV4] (Your Attack Step)\nWhile there are three or more White-only Magic cards in your Trash, every White Ultimate you control gains an extra White symbol. This effect doesn't stack.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A1456#a0",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -1315,8 +2282,13 @@
               "Summon Condition: Your Life at two or more"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1326,11 +2298,31 @@
             "cleanBody": ""
           },
           "rawText": "[Summon Condition: Your Life at two or more]",
+          "originalAbilityText": "[Summon Condition: Your Life at two or more]",
+          "abilityIndex": 0,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "SUMMON_CONDITION",
+            "expression": "Your Life at two or more",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A1456#a0",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A1456#AB_PASSIVE_NONE_LV1_LV2_LV3_c18533018400ce5834b9c673bb571fe53631e215fcd9e6b047aef6989bdaf93a_9cb8af2bf90b766bf8e31a67a3d3a76c",
+          "physicalId": "BATTLE-SPIRITS-A1456#AB_PASSIVE_NONE_LV1_LV2_LV3_c18533018400ce5834b9c673bb571fe53631e215fcd9e6b047aef6989bdaf93a_9cb8af2bf90b766bf8e31a67a3d3a76c",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_c18533018400ce5834b9c673bb571fe53631e215fcd9e6b047aef6989bdaf93a_9cb8af2bf90b766bf8e31a67a3d3a76c",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_c2383ca9a4736334dfac83c8765bc9730b6c1994e34cfe7ead9c8f583acb434a_772bd4e92abefc65693804b6e15fadba",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A1456#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1341,8 +2333,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1351,22 +2348,29 @@
             "isMain": false,
             "cleanBody": "When you have used a White Magic card from your Hand/activated a White Magic card Burst, after that effect resolves, you can pay one cost to summon this card from your Hand. When you've done so, refresh three \"Armed Machine\" family Ultimates you control."
           },
+          "originalAbilityText": "When you have used a White Magic card from your Hand/activated a White Magic card Burst, after that effect resolves, you can pay one cost to summon this card from your Hand. When you've done so, refresh three \"Armed Machine\" family Ultimates you control.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When you have used a White Magic card from your Hand/activated a White Magic card Burst",
+              "originalClauseText": "When you have used a White Magic card from your Hand/activated a White Magic card Burst",
               "cleanText": "When you have used a White Magic card from your Hand/activated a White Magic card Burst",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Burst"
               }
             },
             {
               "rawText": "you can pay one cost to summon this card from your Hand.",
+              "originalClauseText": "you can pay one cost to summon this card from your Hand.",
               "cleanText": "you can pay one cost to summon this card from your Hand",
+              "clauseIndex": 1,
               "link": "afterResolves",
               "isOptional": true,
               "isCost": false,
@@ -1374,12 +2378,15 @@
               "duration": null,
               "op": {
                 "op": "SUMMON_THIS_CARD",
-                "from": "HAND_OR_BURST"
+                "from": "HAND",
+                "costCores": 1
               }
             },
             {
               "rawText": "refresh three \"Armed Machine\" family Ultimates you control.",
+              "originalClauseText": "refresh three \"Armed Machine\" family Ultimates you control.",
               "cleanText": "refresh three \"Armed Machine\" family Ultimates you control",
+              "clauseIndex": 2,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1387,16 +2394,33 @@
               "duration": null,
               "op": {
                 "op": "REFRESH",
+                "count": 3,
                 "target": {
-                  "side": "either"
+                  "side": "self",
+                  "types": [
+                    "Spirit",
+                    "Ultimate"
+                  ]
                 }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A1456#a1",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A1456#AB_PASSIVE_NONE_LV1_LV2_LV3_03c3f1a264fd4f131f9933e411983433e1ca93061c6b0d17a2b179f7fb6e7e7b_3f1b16930bf027bd77e95c8d14f3e450",
+          "physicalId": "BATTLE-SPIRITS-A1456#AB_PASSIVE_NONE_LV1_LV2_LV3_03c3f1a264fd4f131f9933e411983433e1ca93061c6b0d17a2b179f7fb6e7e7b_3f1b16930bf027bd77e95c8d14f3e450",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_03c3f1a264fd4f131f9933e411983433e1ca93061c6b0d17a2b179f7fb6e7e7b_3f1b16930bf027bd77e95c8d14f3e450",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_11753cca2a01f848f7714945f2b591fa18389826ed960793b4c3cb9bb23fedb8_1856f7a9d05db52fedf0c60f610c3858",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A1456#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1405,8 +2429,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "CANT_STACK"
+            ],
             "limit": null,
             "cantStack": true,
             "keyword": null,
@@ -1415,21 +2450,45 @@
             "isMain": false,
             "cleanBody": "While there are three or more White-only Magic cards in your Trash, every White Ultimate you control gains an extra White symbol."
           },
+          "originalAbilityText": "[LV4] (Your Attack Step)\nWhile there are three or more White-only Magic cards in your Trash, every White Ultimate you control gains an extra White symbol. This effect doesn't stack.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "While there are three or more White-only Magic cards in your Trash, every White Ultimate you control gains an extra White symbol.",
+              "originalClauseText": "While there are three or more White-only Magic cards in your Trash, every White Ultimate you control gains an extra White symbol.",
               "cleanText": "every White Ultimate you control gains an extra White symbol",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": "While there are three or more White-only Magic cards in your Trash",
               "duration": null,
               "op": {
-                "op": "ADD_SYMBOL"
+                "op": "ADD_SYMBOL",
+                "color": "White",
+                "count": 1,
+                "side": "self"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A1456#a2",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A1456#AB_ATTACK_STEP_NONE_LV4_0b9b80e2806336a51b9bac4ebb96778c3221eac8db036cde27e75b7129249407_2c48042544091a339c55d1223d853c38",
+          "physicalId": "BATTLE-SPIRITS-A1456#AB_ATTACK_STEP_NONE_LV4_0b9b80e2806336a51b9bac4ebb96778c3221eac8db036cde27e75b7129249407_2c48042544091a339c55d1223d853c38",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV4_0b9b80e2806336a51b9bac4ebb96778c3221eac8db036cde27e75b7129249407_2c48042544091a339c55d1223d853c38",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV4_6438ebd642c4e45b29f66eb7c7f577600e688d6aa4b6487a0c9e29cb02e7bd10_aa032c95c9dcd74ad8ac8e4ce1b378e1",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "CANT_STACK"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -2133,10 +3192,29 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A10496",
       "name": "The GrandsnakeKing Snefel",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 5000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 8000
+        }
+      },
+      "originalEffectText": "When this card is discarded by an opposing \"deck discarding\" effect, you can summon it without paying the cost. Also, during this game, cards can't be discarded from your deck due to opposing \"deck discarding\" effects.\n\n[LV1][LV2][LV3] (When Summoned)\nYou can pay one cost to summon a Saga Brave card from your Hand/Trash. When you've done so, discard a card from the opposing Removed Zone, and draw a card.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A10496#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2147,8 +3225,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2157,23 +3240,30 @@
             "isMain": false,
             "cleanBody": "When this card is discarded by an opposing \"deck discarding\" effect, you can summon it without paying the cost. Also, during this game, cards can't be discarded from your deck due to opposing \"deck discarding\" effects."
           },
+          "originalAbilityText": "When this card is discarded by an opposing \"deck discarding\" effect, you can summon it without paying the cost. Also, during this game, cards can't be discarded from your deck due to opposing \"deck discarding\" effects.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When this card is discarded by an opposing \"deck discarding\" effect, you can summon it without paying the cost.",
+              "originalClauseText": "When this card is discarded by an opposing \"deck discarding\" effect, you can summon it without paying the cost.",
               "cleanText": "When this card is discarded by an opposing \"deck discarding\" effect, you can summon it without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "SUMMON",
+                "op": "SUMMON_THIS_CARD",
+                "from": "HAND_OR_BURST",
                 "free": true
               }
             },
             {
               "rawText": "during this game, cards can't be discarded from your deck due to opposing \"deck discarding\" effects.",
+              "originalClauseText": "during this game, cards can't be discarded from your deck due to opposing \"deck discarding\" effects.",
               "cleanText": "during this game, cards can't be discarded from your deck due to opposing \"deck discarding\" effects",
+              "clauseIndex": 1,
               "link": "also",
               "isOptional": false,
               "isCost": false,
@@ -2185,10 +3275,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A10496#a0",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A10496#AB_PASSIVE_NONE_LV1_LV2_LV3_746d525b26c0151e4d403989ab430e489cbbeb82804c8bdcb2dcbcbfdaf67e98_f74359cfef6fa20ea14cf94af2e800af",
+          "physicalId": "BATTLE-SPIRITS-A10496#AB_PASSIVE_NONE_LV1_LV2_LV3_746d525b26c0151e4d403989ab430e489cbbeb82804c8bdcb2dcbcbfdaf67e98_f74359cfef6fa20ea14cf94af2e800af",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_746d525b26c0151e4d403989ab430e489cbbeb82804c8bdcb2dcbcbfdaf67e98_f74359cfef6fa20ea14cf94af2e800af",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_7ad7cabf2430eeceb028142271cb1b947a6907c68d0acac46c28af01ede9d924_e8932a52bb2464874f8d45c019c67250",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A10496#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2199,8 +3301,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2209,10 +3320,14 @@
             "isMain": false,
             "cleanBody": "You can pay one cost to summon a Saga Brave card from your Hand/Trash. When you've done so, discard a card from the opposing Removed Zone, and draw a card."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nYou can pay one cost to summon a Saga Brave card from your Hand/Trash. When you've done so, discard a card from the opposing Removed Zone, and draw a card.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can pay one cost to summon a Saga Brave card from your Hand/Trash.",
+              "originalClauseText": "You can pay one cost to summon a Saga Brave card from your Hand/Trash.",
               "cleanText": "You can pay one cost to summon a Saga Brave card from your Hand/Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -2220,12 +3335,25 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand_or_trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Brave"
+                  ]
+                },
+                "free": false,
+                "costCores": 1,
+                "isOptional": true
               }
             },
             {
               "rawText": "discard a card from the opposing Removed Zone",
+              "originalClauseText": "discard a card from the opposing Removed Zone",
               "cleanText": "discard a card from the opposing Removed Zone",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -2237,7 +3365,9 @@
             },
             {
               "rawText": "draw a card.",
+              "originalClauseText": "draw a card.",
               "cleanText": "draw a card",
+              "clauseIndex": 2,
               "link": "also",
               "isOptional": false,
               "isCost": false,
@@ -2251,7 +3381,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A10496#a1",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A10496#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_8d04346116689041129a5e3f8e23753ad4b8d94f4f98b74081ecab681b80c9fd_6b2977812a6347f38ab3f88965b25988",
+          "physicalId": "BATTLE-SPIRITS-A10496#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_8d04346116689041129a5e3f8e23753ad4b8d94f4f98b74081ecab681b80c9fd_6b2977812a6347f38ab3f88965b25988",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_8d04346116689041129a5e3f8e23753ad4b8d94f4f98b74081ecab681b80c9fd_6b2977812a6347f38ab3f88965b25988",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_4f3f323a83604c2eec7f7a5681221f8d87a08a4b1e6195a577f417c6762e5ec2_fc5bad41399ebc8699f9b8e3de802ad7",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -3024,10 +4169,29 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A11611",
       "name": "The OldKingDragon Ma-Dura -Humanoid Form-",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 7000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 5,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "When this card is discarded via an opposing \"Deck Discarding effect\", you can summon it without paying the cost. Also, during this game, cards can't be discarded from your deck via opposing \"Deck Discarding effects\".\n\n[LV1][LV2][LV3] (When Summoned)\nReturn either a Red Spirit card, or a \"Brahma\" Nexus card from your Trash to the Hand. If that card has \"Creation\" family, instead of returning it to the Hand, you can summon it.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A11611#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3038,8 +4202,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3048,23 +4217,30 @@
             "isMain": false,
             "cleanBody": "When this card is discarded via an opposing \"Deck Discarding effect\", you can summon it without paying the cost. Also, during this game, cards can't be discarded from your deck via opposing \"Deck Discarding effects\"."
           },
+          "originalAbilityText": "When this card is discarded via an opposing \"Deck Discarding effect\", you can summon it without paying the cost. Also, during this game, cards can't be discarded from your deck via opposing \"Deck Discarding effects\".",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When this card is discarded via an opposing \"Deck Discarding effect\", you can summon it without paying the cost.",
+              "originalClauseText": "When this card is discarded via an opposing \"Deck Discarding effect\", you can summon it without paying the cost.",
               "cleanText": "When this card is discarded via an opposing \"Deck Discarding effect\", you can summon it without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "SUMMON",
+                "op": "SUMMON_THIS_CARD",
+                "from": "HAND_OR_BURST",
                 "free": true
               }
             },
             {
               "rawText": "during this game, cards can't be discarded from your deck via opposing \"Deck Discarding effects\".",
+              "originalClauseText": "during this game, cards can't be discarded from your deck via opposing \"Deck Discarding effects\".",
               "cleanText": "during this game, cards can't be discarded from your deck via opposing \"Deck Discarding effects\"",
+              "clauseIndex": 1,
               "link": "also",
               "isOptional": false,
               "isCost": false,
@@ -3076,10 +4252,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A11611#a0",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A11611#AB_PASSIVE_NONE_LV1_LV2_LV3_746d525b26c0151e4d403989ab430e489cbbeb82804c8bdcb2dcbcbfdaf67e98_f74359cfef6fa20ea14cf94af2e800af",
+          "physicalId": "BATTLE-SPIRITS-A11611#AB_PASSIVE_NONE_LV1_LV2_LV3_746d525b26c0151e4d403989ab430e489cbbeb82804c8bdcb2dcbcbfdaf67e98_f74359cfef6fa20ea14cf94af2e800af",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_746d525b26c0151e4d403989ab430e489cbbeb82804c8bdcb2dcbcbfdaf67e98_f74359cfef6fa20ea14cf94af2e800af",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_7ad7cabf2430eeceb028142271cb1b947a6907c68d0acac46c28af01ede9d924_e8932a52bb2464874f8d45c019c67250",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A11611#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3090,8 +4278,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3100,41 +4297,69 @@
             "isMain": false,
             "cleanBody": "Return either a Red Spirit card, or a \"Brahma\" Nexus card from your Trash to the Hand. If that card has \"Creation\" family, instead of returning it to the Hand, you can summon it."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nReturn either a Red Spirit card, or a \"Brahma\" Nexus card from your Trash to the Hand. If that card has \"Creation\" family, instead of returning it to the Hand, you can summon it.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Return either a Red Spirit card, or a \"Brahma\" Nexus card from your Trash to the Hand.",
+              "originalClauseText": "Return either a Red Spirit card, or a \"Brahma\" Nexus card from your Trash to the Hand.",
               "cleanText": "Return either a Red Spirit card, or a \"Brahma\" Nexus card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit",
+                    "Nexus"
+                  ],
+                  "nameIncludes": "Brahma",
+                  "color": "Red"
+                },
+                "isOptional": false
               }
             },
             {
               "rawText": "If that card has \"Creation\" family, instead of returning it to the Hand, you can summon it.",
+              "originalClauseText": "If that card has \"Creation\" family, instead of returning it to the Hand, you can summon it.",
               "cleanText": "instead of returning it to the Hand, you can summon it",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": "If that card has \"Creation\" family",
               "duration": null,
               "op": {
-                "op": "BOUNCE",
-                "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "op": "SUMMON_THIS_CARD",
+                "from": "HAND"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A11611#a1",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A11611#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a59ec7e19f46a4cb0fdcb72a6d3d096be006a2a127596ec60bc893e075fa13a0_1df46fbe8fb2ea77822b97bfdb2bd13a",
+          "physicalId": "BATTLE-SPIRITS-A11611#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a59ec7e19f46a4cb0fdcb72a6d3d096be006a2a127596ec60bc893e075fa13a0_1df46fbe8fb2ea77822b97bfdb2bd13a",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a59ec7e19f46a4cb0fdcb72a6d3d096be006a2a127596ec60bc893e075fa13a0_1df46fbe8fb2ea77822b97bfdb2bd13a",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_88eae9a29d233850e11230834d178a0e20d7f3ee00752a5f52ee01886be573e2_339f768943c220b1f8a2b24c027c7139",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -3352,10 +4577,24 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A12654",
       "name": "The StarTravelerDragon Chronic Dragon",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 5000
+        }
+      },
+      "originalEffectText": "[LV1][LV2] (When Summoned)\nReturn a Saga Brave card from your Trash to the Hand.\n\n[LV2] Flash - (Either Attack Step)\nIf you control any Saga Brave, by paying two costs, destroy an opposing 6000 BP or less Spirit/Ultimate.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A12654#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3365,8 +4604,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3375,28 +4623,53 @@
             "isMain": false,
             "cleanBody": "Return a Saga Brave card from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned)\nReturn a Saga Brave card from your Trash to the Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Return a Saga Brave card from your Trash to the Hand.",
+              "originalClauseText": "Return a Saga Brave card from your Trash to the Hand.",
               "cleanText": "Return a Saga Brave card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Brave"
+                  ]
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A12654#a0",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A12654#AB_WHEN_SUMMONED_NONE_LV1_LV2_9c78d6c078c7e81d689f4dc429c4cea6709dfde4ca4834396bfcb219a2003646_3739a7df820dbfa4d6b2cd1f1c821d3f",
+          "physicalId": "BATTLE-SPIRITS-A12654#AB_WHEN_SUMMONED_NONE_LV1_LV2_9c78d6c078c7e81d689f4dc429c4cea6709dfde4ca4834396bfcb219a2003646_3739a7df820dbfa4d6b2cd1f1c821d3f",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_9c78d6c078c7e81d689f4dc429c4cea6709dfde4ca4834396bfcb219a2003646_3739a7df820dbfa4d6b2cd1f1c821d3f",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_70fb08a70639173e68ecedad5626743e7c07607f38c91a2c5c8dd762da30377f_a22b9a596e3ce6df9abc9dafba46ec47",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A12654#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3405,8 +4678,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3415,10 +4697,14 @@
             "isMain": false,
             "cleanBody": "If you control any Saga Brave, by paying two costs, destroy an opposing 6000 BP or less Spirit/Ultimate."
           },
+          "originalAbilityText": "[LV2] Flash - (Either Attack Step)\nIf you control any Saga Brave, by paying two costs, destroy an opposing 6000 BP or less Spirit/Ultimate.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "If you control any Saga Brave, by paying two costs, destroy an opposing 6000 BP or less Spirit/Ultimate.",
+              "originalClauseText": "If you control any Saga Brave, by paying two costs, destroy an opposing 6000 BP or less Spirit/Ultimate.",
               "cleanText": "by paying two costs, destroy an opposing 6000 BP or less Spirit/Ultimate",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -3439,7 +4725,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A12654#a1",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A12654#AB_ATTACK_STEP_NONE_LV2_deb89b74a91ab6a0cb73d04b4dea82556e4fb556ba847ec12a67fc616aa40df7_267daee369743ec5fe2b1991a9d11f10",
+          "physicalId": "BATTLE-SPIRITS-A12654#AB_ATTACK_STEP_NONE_LV2_deb89b74a91ab6a0cb73d04b4dea82556e4fb556ba847ec12a67fc616aa40df7_267daee369743ec5fe2b1991a9d11f10",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_deb89b74a91ab6a0cb73d04b4dea82556e4fb556ba847ec12a67fc616aa40df7_267daee369743ec5fe2b1991a9d11f10",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_6109150994656d13bfa8e1198f71cea4f26407ba9168ec72c230b8fc8aa70ab2_2f2bbcb640d4255e097753e6d0dbdc03",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,

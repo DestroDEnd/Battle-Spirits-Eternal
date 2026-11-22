@@ -285,6 +285,26 @@
     "compiledIr": {
       "cardNumber": "BS23-005",
       "name": "The MeteorSwordMaster Shootingstar",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 6000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 8000
+        }
+      },
+      "originalEffectText": "When your \"Shining-Dragon\"-named Spirit is summoned, return this Spirit card from the Trash to your Hand.\n\n[LV1][LV2][LV3] [Unsheathe] (When Summoned)\nYou can summon an \"Exalted Sword\" family Brave card that can brave with this Spirit from your Hand, without paying the cost.\n\n[When Braved] [LV2][LV3] (When Battles)\nDestroy an opposing 4000 BP or less Spirit.",
+      "teams": [],
       "keywords": [
         {
           "name": "Unsheathe",
@@ -292,12 +312,32 @@
           "wave": 4,
           "hook": "unsheathe",
           "bracketed": true,
-          "index": 123
+          "index": 0,
+          "abilityId": "BS23-005#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a6f1de807c88bf3e2467d4f413d7c1ec7ed87eb2554e569cc60668b3c7c58fec_102a98c797f163f0f2922fe9440e152b",
+          "cardNumber": "BS23-005",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BS23-005#a1"
         }
       ],
       "abilities": [
         {
-          "id": "BS23-005#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -308,8 +348,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -318,10 +363,14 @@
             "isMain": false,
             "cleanBody": "When your \"Shining-Dragon\"-named Spirit is summoned, return this Spirit card from the Trash to your Hand."
           },
+          "originalAbilityText": "When your \"Shining-Dragon\"-named Spirit is summoned, return this Spirit card from the Trash to your Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When your \"Shining-Dragon\"-named Spirit is summoned, return this Spirit card from the Trash to your Hand.",
+              "originalClauseText": "When your \"Shining-Dragon\"-named Spirit is summoned, return this Spirit card from the Trash to your Hand.",
               "cleanText": "When your \"Shining-Dragon\"-named Spirit is summoned, return this Spirit card from the Trash to your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -329,17 +378,30 @@
               "duration": null,
               "op": {
                 "op": "SALVAGE",
+                "target": "this_card",
+                "from": "trash",
+                "destination": "HAND",
                 "count": 1,
-                "family": "this",
-                "targetType": "Spirit",
-                "destination": "HAND"
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS23-005#a0",
+          "keywords": [],
+          "id": "BS23-005#AB_PASSIVE_NONE_LV1_LV2_LV3_007b0118cb6c46572d4a1cc83694211a7c1eb56d493bf4b4e32209240a8b14a9_275658c6147f6bd1286657474f98be88",
+          "physicalId": "BS23-005#AB_PASSIVE_NONE_LV1_LV2_LV3_007b0118cb6c46572d4a1cc83694211a7c1eb56d493bf4b4e32209240a8b14a9_275658c6147f6bd1286657474f98be88",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_007b0118cb6c46572d4a1cc83694211a7c1eb56d493bf4b4e32209240a8b14a9_275658c6147f6bd1286657474f98be88",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_61f7a7b1e4d9056da4ccc7910730c9b6bc6168a7af7b9c87113b8e725a11d6d5_f09884d091013a489fa642d816c4166e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS23-005#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -350,8 +412,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Unsheathe",
@@ -360,10 +431,14 @@
             "isMain": false,
             "cleanBody": "You can summon an \"Exalted Sword\" family Brave card that can brave with this Spirit from your Hand, without paying the cost."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] [Unsheathe] (When Summoned)\nYou can summon an \"Exalted Sword\" family Brave card that can brave with this Spirit from your Hand, without paying the cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can summon an \"Exalted Sword\" family Brave card that can brave with this Spirit from your Hand, without paying the cost.",
+              "originalClauseText": "You can summon an \"Exalted Sword\" family Brave card that can brave with this Spirit from your Hand, without paying the cost.",
               "cleanText": "You can summon an \"Exalted Sword\" family Brave card that can brave with this Spirit from your Hand, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -371,14 +446,70 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit",
+                    "Brave"
+                  ],
+                  "family": "Exalted Sword"
+                },
+                "free": true,
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS23-005#a1",
+          "keywords": [
+            {
+              "name": "Unsheathe",
+              "parameter": null,
+              "wave": 4,
+              "hook": "unsheathe",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BS23-005#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a6f1de807c88bf3e2467d4f413d7c1ec7ed87eb2554e569cc60668b3c7c58fec_102a98c797f163f0f2922fe9440e152b",
+              "cardNumber": "BS23-005",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_SUMMONED",
+              "timingLabel": "When Summoned",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BS23-005#a1"
+            }
+          ],
+          "id": "BS23-005#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a6f1de807c88bf3e2467d4f413d7c1ec7ed87eb2554e569cc60668b3c7c58fec_102a98c797f163f0f2922fe9440e152b",
+          "physicalId": "BS23-005#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a6f1de807c88bf3e2467d4f413d7c1ec7ed87eb2554e569cc60668b3c7c58fec_102a98c797f163f0f2922fe9440e152b",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a6f1de807c88bf3e2467d4f413d7c1ec7ed87eb2554e569cc60668b3c7c58fec_102a98c797f163f0f2922fe9440e152b",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a9024e33c16621c734a3e4bd53345a42cc4668a2c949ed32f67ff5218ac33796_cdb69035d47cfac625d89b3bb493c174",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS23-005#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -390,8 +521,19 @@
               "When Braved"
             ],
             "timing": "WHEN_BATTLES",
+            "timings": [
+              "WHEN_BATTLES"
+            ],
             "timingLabel": "When Battles",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_BATTLES"
+            ],
+            "activationRestrictions": [
+              "WHILE_BRAVED"
+            ],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -400,10 +542,14 @@
             "isMain": false,
             "cleanBody": "Destroy an opposing 4000 BP or less Spirit."
           },
+          "originalAbilityText": "[When Braved] [LV2][LV3] (When Battles)\nDestroy an opposing 4000 BP or less Spirit.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Destroy an opposing 4000 BP or less Spirit.",
+              "originalClauseText": "Destroy an opposing 4000 BP or less Spirit.",
               "cleanText": "Destroy an opposing 4000 BP or less Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -424,7 +570,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS23-005#a2",
+          "keywords": [],
+          "id": "BS23-005#AB_WHEN_BATTLES_NONE_LV2_LV3_4e042e18a4b9db974d78a522d189e3e3ac557850e13803ba418960300bf58559_76495cce93adb8b6d4cd9ac557ae02fa",
+          "physicalId": "BS23-005#AB_WHEN_BATTLES_NONE_LV2_LV3_4e042e18a4b9db974d78a522d189e3e3ac557850e13803ba418960300bf58559_76495cce93adb8b6d4cd9ac557ae02fa",
+          "semanticId": "SEM#AB_WHEN_BATTLES_NONE_LV2_LV3_4e042e18a4b9db974d78a522d189e3e3ac557850e13803ba418960300bf58559_76495cce93adb8b6d4cd9ac557ae02fa",
+          "semanticIdV3": "SEM3#AB_WHEN_BATTLES_NONE_LV2_LV3_c083a76991ed50cfd39ce3628700517e3cb01e9bce8a798606ec566a5f1cf900_1df01d22b794049c9ec43dcdb740baec",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_BATTLES"
+            ],
+            "activationRestrictions": [
+              "WHILE_BRAVED"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -1483,6 +1646,26 @@
     "compiledIr": {
       "cardNumber": "BS23-014",
       "name": "Bone-Ceros",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 5000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 5,
+          "bp": 8000
+        }
+      },
+      "originalEffectText": "[LV2][LV3] (When Destroyed)\nYou can summon a \"Fencer\" family Spirit card from your Trash.\n[Rush: Red]\n(While you have a Red symbol, the following effect activates next)\n[Red Core]: Draw a card.",
+      "teams": [],
       "keywords": [
         {
           "name": "Rush",
@@ -1490,12 +1673,31 @@
           "wave": 2,
           "hook": "rush",
           "bracketed": true,
-          "index": 90
+          "index": 62,
+          "abilityId": "BS23-014#AB_WHEN_DESTROYED_NONE_LV2_LV3_a14a13c808374d73d5bc06c0b243adfecae6961977eded3475844c8bc6ad6efa_81c37cc18bba3df952ed04783ca9e3d0",
+          "cardNumber": "BS23-014",
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_DESTROYED",
+          "timingLabel": "When Destroyed",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BS23-014#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BS23-014#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1505,8 +1707,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_DESTROYED",
+            "timings": [
+              "WHEN_DESTROYED"
+            ],
             "timingLabel": "When Destroyed",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1515,10 +1726,14 @@
             "isMain": false,
             "cleanBody": "You can summon a \"Fencer\" family Spirit card from your Trash.\n[Rush: Red]\n(While you have a Red symbol, the following effect activates next)\n[Red Core]: Draw a card."
           },
+          "originalAbilityText": "[LV2][LV3] (When Destroyed)\nYou can summon a \"Fencer\" family Spirit card from your Trash.\n[Rush: Red]\n(While you have a Red symbol, the following effect activates next)\n[Red Core]: Draw a card.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "You can summon a \"Fencer\" family Spirit card from your Trash.",
+              "originalClauseText": "You can summon a \"Fencer\" family Spirit card from your Trash.",
               "cleanText": "You can summon a \"Fencer\" family Spirit card from your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1526,12 +1741,25 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "family": "Fencer"
+                },
+                "free": false,
+                "isOptional": true
               }
             },
             {
               "rawText": "[Rush: Red]",
+              "originalClauseText": "[Rush: Red]",
               "cleanText": "[Rush: Red]",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1541,13 +1769,19 @@
                 "op": "KEYWORD_ABILITY",
                 "keyword": "Rush",
                 "condition": {
+                  "kind": "STRUCTURED_CONDITION",
+                  "type": "COLOR_SYMBOL",
+                  "side": "self",
+                  "color": "red",
                   "colorSymbol": "Red"
                 }
               }
             },
             {
               "rawText": "(While you have a Red symbol, the following effect activates next)",
+              "originalClauseText": "(While you have a Red symbol, the following effect activates next)",
               "cleanText": "(While you have a Red symbol, the following effect activates next)",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1557,13 +1791,19 @@
                 "op": "KEYWORD_ABILITY",
                 "keyword": "Rush",
                 "condition": {
+                  "kind": "STRUCTURED_CONDITION",
+                  "type": "COLOR_SYMBOL",
+                  "side": "self",
+                  "color": "red",
                   "colorSymbol": "Red"
                 }
               }
             },
             {
               "rawText": "Draw a card.",
+              "originalClauseText": "Draw a card.",
               "cleanText": "Draw a card",
+              "clauseIndex": 3,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1577,7 +1817,51 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS23-014#a0",
+          "keywords": [
+            {
+              "name": "Rush",
+              "parameter": "Red",
+              "wave": 2,
+              "hook": "rush",
+              "bracketed": true,
+              "index": 62,
+              "abilityId": "BS23-014#AB_WHEN_DESTROYED_NONE_LV2_LV3_a14a13c808374d73d5bc06c0b243adfecae6961977eded3475844c8bc6ad6efa_81c37cc18bba3df952ed04783ca9e3d0",
+              "cardNumber": "BS23-014",
+              "levels": [
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_DESTROYED",
+              "timingLabel": "When Destroyed",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BS23-014#a0"
+            }
+          ],
+          "id": "BS23-014#AB_WHEN_DESTROYED_NONE_LV2_LV3_a14a13c808374d73d5bc06c0b243adfecae6961977eded3475844c8bc6ad6efa_81c37cc18bba3df952ed04783ca9e3d0",
+          "physicalId": "BS23-014#AB_WHEN_DESTROYED_NONE_LV2_LV3_a14a13c808374d73d5bc06c0b243adfecae6961977eded3475844c8bc6ad6efa_81c37cc18bba3df952ed04783ca9e3d0",
+          "semanticId": "SEM#AB_WHEN_DESTROYED_NONE_LV2_LV3_a14a13c808374d73d5bc06c0b243adfecae6961977eded3475844c8bc6ad6efa_81c37cc18bba3df952ed04783ca9e3d0",
+          "semanticIdV3": "SEM3#AB_WHEN_DESTROYED_NONE_LV2_LV3_77a4e818be275479c8a046dd9d2cc0c666622d8f43aeaf00b8194815fcc81c5f_015f60aff3ec2c351174ef7d5ca6adde",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -2168,6 +2452,10 @@
     "compiledIr": {
       "cardNumber": "BS23-073",
       "name": "Dino Reborn",
+      "type": "Magic",
+      "levels": {},
+      "originalEffectText": "[Main]\nReturn up to two \"Fencer\"/\"Terra Dragon\" family Spirit cards from the Trash to your Hand.\n[Rush: Green]\n(While you have a Green symbol, the following effect activates next)\n[Green Core]: The opponent exhausts two Spirits they control.\n\n[Flash]\nDuring this turn, give a Spirit +2000 BP.",
+      "teams": [],
       "keywords": [
         {
           "name": "Rush",
@@ -2175,12 +2463,32 @@
           "wave": 2,
           "hook": "rush",
           "bracketed": true,
-          "index": 97
+          "index": 90,
+          "abilityId": "BS23-073#AB_MAIN_NONE_LV1_LV2_LV3_8b55fdedb54427748388bdf1b8a1fa1a5c6f5df8c8be67a5a3469aae403e8bad_edbef7253cb5b3e4b7129f1597ca320f",
+          "cardNumber": "BS23-073",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": true,
+          "legacyAbilityId": "BS23-073#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BS23-073#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2191,8 +2499,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "MAIN",
+            "timings": [],
             "timingLabel": "Main",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "MAIN"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2201,26 +2516,41 @@
             "isMain": true,
             "cleanBody": "Return up to two \"Fencer\"/\"Terra Dragon\" family Spirit cards from the Trash to your Hand.\n[Rush: Green]\n(While you have a Green symbol, the following effect activates next)\n[Green Core]: The opponent exhausts two Spirits they control."
           },
+          "originalAbilityText": "[Main]\nReturn up to two \"Fencer\"/\"Terra Dragon\" family Spirit cards from the Trash to your Hand.\n[Rush: Green]\n(While you have a Green symbol, the following effect activates next)\n[Green Core]: The opponent exhausts two Spirits they control.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Return up to two \"Fencer\"/\"Terra Dragon\" family Spirit cards from the Trash to your Hand.",
+              "originalClauseText": "Return up to two \"Fencer\"/\"Terra Dragon\" family Spirit cards from the Trash to your Hand.",
               "cleanText": "Return up to two \"Fencer\"/\"Terra Dragon\" family Spirit cards from the Trash to your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
-                "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
+                "count": 2,
+                "upTo": true,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "Fencer",
+                  "family": "Terra Dragon"
+                },
+                "isOptional": false
               }
             },
             {
               "rawText": "[Rush: Green]",
+              "originalClauseText": "[Rush: Green]",
               "cleanText": "[Rush: Green]",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2230,13 +2560,19 @@
                 "op": "KEYWORD_ABILITY",
                 "keyword": "Rush",
                 "condition": {
+                  "kind": "STRUCTURED_CONDITION",
+                  "type": "COLOR_SYMBOL",
+                  "side": "self",
+                  "color": "green",
                   "colorSymbol": "Green"
                 }
               }
             },
             {
               "rawText": "(While you have a Green symbol, the following effect activates next)",
+              "originalClauseText": "(While you have a Green symbol, the following effect activates next)",
               "cleanText": "(While you have a Green symbol, the following effect activates next)",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2246,13 +2582,19 @@
                 "op": "KEYWORD_ABILITY",
                 "keyword": "Rush",
                 "condition": {
+                  "kind": "STRUCTURED_CONDITION",
+                  "type": "COLOR_SYMBOL",
+                  "side": "self",
+                  "color": "green",
                   "colorSymbol": "Green"
                 }
               }
             },
             {
               "rawText": "The opponent exhausts two Spirits they control.",
+              "originalClauseText": "The opponent exhausts two Spirits they control.",
               "cleanText": "The opponent exhausts two Spirits they control",
+              "clauseIndex": 3,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2271,10 +2613,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS23-073#a0",
+          "keywords": [
+            {
+              "name": "Rush",
+              "parameter": "Green",
+              "wave": 2,
+              "hook": "rush",
+              "bracketed": true,
+              "index": 90,
+              "abilityId": "BS23-073#AB_MAIN_NONE_LV1_LV2_LV3_8b55fdedb54427748388bdf1b8a1fa1a5c6f5df8c8be67a5a3469aae403e8bad_edbef7253cb5b3e4b7129f1597ca320f",
+              "cardNumber": "BS23-073",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "MAIN",
+              "timingLabel": "Main",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": true,
+              "legacyAbilityId": "BS23-073#a0"
+            }
+          ],
+          "id": "BS23-073#AB_MAIN_NONE_LV1_LV2_LV3_8b55fdedb54427748388bdf1b8a1fa1a5c6f5df8c8be67a5a3469aae403e8bad_edbef7253cb5b3e4b7129f1597ca320f",
+          "physicalId": "BS23-073#AB_MAIN_NONE_LV1_LV2_LV3_8b55fdedb54427748388bdf1b8a1fa1a5c6f5df8c8be67a5a3469aae403e8bad_edbef7253cb5b3e4b7129f1597ca320f",
+          "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_8b55fdedb54427748388bdf1b8a1fa1a5c6f5df8c8be67a5a3469aae403e8bad_edbef7253cb5b3e4b7129f1597ca320f",
+          "semanticIdV3": "SEM3#AB_MAIN_NONE_LV1_LV2_LV3_3b2c2be5c48938e3cc7e47500544bd6a06d2156876118deaaf8dbba394e15544_7bdbd3ec52982882332af29942945101",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "MAIN"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS23-073#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2285,8 +2671,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2295,10 +2688,14 @@
             "isMain": false,
             "cleanBody": "During this turn, give a Spirit +2000 BP."
           },
+          "originalAbilityText": "[Flash]\nDuring this turn, give a Spirit +2000 BP.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "During this turn, give a Spirit +2000 BP.",
+              "originalClauseText": "During this turn, give a Spirit +2000 BP.",
               "cleanText": "give a Spirit +2000 BP",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2312,7 +2709,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS23-073#a1",
+          "keywords": [],
+          "id": "BS23-073#AB_FLASH_NONE_LV1_LV2_LV3_312728364e0dd1278a91ade4941e9c76a1cfee4a99ba6683f601bdea052419f7_26ec665af8b01b221c31ec2814e6f925",
+          "physicalId": "BS23-073#AB_FLASH_NONE_LV1_LV2_LV3_312728364e0dd1278a91ade4941e9c76a1cfee4a99ba6683f601bdea052419f7_26ec665af8b01b221c31ec2814e6f925",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_312728364e0dd1278a91ade4941e9c76a1cfee4a99ba6683f601bdea052419f7_26ec665af8b01b221c31ec2814e6f925",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_6737cfeaaf9e8ce12b0b5f595f625251f115ed6e8fedf7da8833df359b8e78a8_20d093cafe8778e8775972e748506883",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -4549,10 +4961,29 @@
     "compiledIr": {
       "cardNumber": "BS23-X05",
       "name": "The ArcAngelia Avrielle",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 6000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 3,
+          "bp": 9000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] (Your Main Step)\nWhen summoning a Brave card from your Hand/Removed Zone, by sending a core from your Reserve to your Trash, summon it without paying the cost. However, any (When Summoned) effects of the Brave can't activate.\n\n[When Braved] [LV2][LV3] (When Brave Attacks)\nDuring this turn, give an opposing Spirit -5000 BP. Or, during this turn, give three opposing Spirits -3000 BP. During this battle, when the BP of opposing Spirit is brought to 0, destroy every Spirit that has its BP brought to 0.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BS23-X05#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4563,8 +4994,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "MAIN_STEP",
+            "timings": [
+              "MAIN_STEP"
+            ],
             "timingLabel": "Your Main Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "MAIN_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4573,23 +5013,30 @@
             "isMain": false,
             "cleanBody": "When summoning a Brave card from your Hand/Removed Zone, by sending a core from your Reserve to your Trash, summon it without paying the cost. However, any (When Summoned) effects of the Brave can't activate."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (Your Main Step)\nWhen summoning a Brave card from your Hand/Removed Zone, by sending a core from your Reserve to your Trash, summon it without paying the cost. However, any (When Summoned) effects of the Brave can't activate.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When summoning a Brave card from your Hand/Removed Zone, by sending a core from your Reserve to your Trash, summon it without paying the cost.",
+              "originalClauseText": "When summoning a Brave card from your Hand/Removed Zone, by sending a core from your Reserve to your Trash, summon it without paying the cost.",
               "cleanText": "When summoning a Brave card from your Hand/Removed Zone, by sending a core from your Reserve to your Trash, summon it without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "MOVE_CORE",
-                "isCost": true
+                "op": "SUMMON_THIS_CARD",
+                "from": "TRASH",
+                "free": true
               }
             },
             {
               "rawText": "any (When Summoned) effects of the Brave can't activate.",
+              "originalClauseText": "any (When Summoned) effects of the Brave can't activate.",
               "cleanText": "any (When Summoned) effects of the Brave can't activate",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -4600,10 +5047,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS23-X05#a0",
+          "keywords": [],
+          "id": "BS23-X05#AB_MAIN_STEP_NONE_LV1_LV2_LV3_5884fc27cc7deeb22dd94581c88b6d34cbd0dc4c6a9dc8b9fdfa4d4b01ee71c2_1f80142dbd3f2a906bc1db4b92bc1c33",
+          "physicalId": "BS23-X05#AB_MAIN_STEP_NONE_LV1_LV2_LV3_5884fc27cc7deeb22dd94581c88b6d34cbd0dc4c6a9dc8b9fdfa4d4b01ee71c2_1f80142dbd3f2a906bc1db4b92bc1c33",
+          "semanticId": "SEM#AB_MAIN_STEP_NONE_LV1_LV2_LV3_5884fc27cc7deeb22dd94581c88b6d34cbd0dc4c6a9dc8b9fdfa4d4b01ee71c2_1f80142dbd3f2a906bc1db4b92bc1c33",
+          "semanticIdV3": "SEM3#AB_MAIN_STEP_NONE_LV1_LV2_LV3_2a61541174fa0c4f5f2888fd935825f9c9ce20c5d2883def2afd5ac9bd1c2710_eb288d0a580eb8e446affda043d4577f",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "MAIN_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS23-X05#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4615,8 +5076,19 @@
               "When Braved"
             ],
             "timing": "WHEN_BRAVE_ATTACKS",
+            "timings": [
+              "WHEN_BRAVE_ATTACKS"
+            ],
             "timingLabel": "When Brave Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_BRAVE_ATTACKS"
+            ],
+            "activationRestrictions": [
+              "WHILE_BRAVED"
+            ],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4625,10 +5097,14 @@
             "isMain": false,
             "cleanBody": "During this turn, give an opposing Spirit -5000 BP. Or, during this turn, give three opposing Spirits -3000 BP. During this battle, when the BP of opposing Spirit is brought to 0, destroy every Spirit that has its BP brought to 0."
           },
+          "originalAbilityText": "[When Braved] [LV2][LV3] (When Brave Attacks)\nDuring this turn, give an opposing Spirit -5000 BP. Or, during this turn, give three opposing Spirits -3000 BP. During this battle, when the BP of opposing Spirit is brought to 0, destroy every Spirit that has its BP brought to 0.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "During this turn, give an opposing Spirit -5000 BP.",
+              "originalClauseText": "During this turn, give an opposing Spirit -5000 BP.",
               "cleanText": "give an opposing Spirit -5000 BP",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -4637,13 +5113,20 @@
               "op": {
                 "op": "BP_DEBUFF",
                 "amount": 5000,
-                "target": "PREVIOUS_TARGET",
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
                 "duration": "DURING_THIS_TURN"
               }
             },
             {
               "rawText": "during this turn, give three opposing Spirits -3000 BP.",
+              "originalClauseText": "during this turn, give three opposing Spirits -3000 BP.",
               "cleanText": "give three opposing Spirits -3000 BP",
+              "clauseIndex": 1,
               "link": "or",
               "isOptional": false,
               "isCost": false,
@@ -4651,12 +5134,22 @@
               "duration": "DURING_THIS_TURN",
               "op": {
                 "op": "BP_DEBUFF",
-                "amount": 3000
+                "amount": 3000,
+                "count": 3,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "duration": "DURING_THIS_TURN"
               }
             },
             {
               "rawText": "During this battle, when the BP of opposing Spirit is brought to 0, destroy every Spirit that has its BP brought to 0.",
+              "originalClauseText": "During this battle, when the BP of opposing Spirit is brought to 0, destroy every Spirit that has its BP brought to 0.",
               "cleanText": "when the BP of opposing Spirit is brought to 0, destroy every Spirit that has its BP brought to 0",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -4672,7 +5165,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS23-X05#a1",
+          "keywords": [],
+          "id": "BS23-X05#AB_WHEN_BRAVE_ATTACKS_NONE_LV2_LV3_7417eb6ed3837df69b307cf828f9587a1787bc56f362b8fd48772282e6423226_11f0182dbaf212823b7a6ade7b237778",
+          "physicalId": "BS23-X05#AB_WHEN_BRAVE_ATTACKS_NONE_LV2_LV3_7417eb6ed3837df69b307cf828f9587a1787bc56f362b8fd48772282e6423226_11f0182dbaf212823b7a6ade7b237778",
+          "semanticId": "SEM#AB_WHEN_BRAVE_ATTACKS_NONE_LV2_LV3_7417eb6ed3837df69b307cf828f9587a1787bc56f362b8fd48772282e6423226_11f0182dbaf212823b7a6ade7b237778",
+          "semanticIdV3": "SEM3#AB_WHEN_BRAVE_ATTACKS_NONE_LV2_LV3_4b9a05d33d206bf01756a145e71069ece015e9292489c2b09c873e3b3fa2fcb5_7d9870997da9c5294423ea82097f5097",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_BRAVE_ATTACKS"
+            ],
+            "activationRestrictions": [
+              "WHILE_BRAVED"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -5751,6 +6261,10 @@
     "compiledIr": {
       "cardNumber": "BS23-067",
       "name": "The Eternal Deity Capital",
+      "type": "Nexus",
+      "levels": {},
+      "originalEffectText": "[LV1][LV2] (When Deployed)\nReturn all Cost 8 or more Red Spirit cards from your Trash to the Hand.\n\n[LV2] (Your Attack Step)\nGive all your Cost 8 or more Spirits: \"[Clash] (When Attacks) The opponent must block if possible.\"",
+      "teams": [],
       "keywords": [
         {
           "name": "Clash",
@@ -5758,12 +6272,30 @@
           "wave": 1,
           "hook": "clash",
           "bracketed": true,
-          "index": 164
+          "index": 39,
+          "abilityId": "BS23-067#AB_ATTACK_STEP_NONE_LV2_a011ecd49349aa368ddd752178a3f1080aff16202127943c09c94a68897414cf_8df300c68c50754d44c802013a7552e0",
+          "cardNumber": "BS23-067",
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BS23-067#a1"
         }
       ],
       "abilities": [
         {
-          "id": "BS23-067#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -5773,8 +6305,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_DEPLOYED",
+            "timings": [
+              "WHEN_DEPLOYED"
+            ],
             "timingLabel": "When Deployed",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_DEPLOYED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -5783,28 +6324,55 @@
             "isMain": false,
             "cleanBody": "Return all Cost 8 or more Red Spirit cards from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV1][LV2] (When Deployed)\nReturn all Cost 8 or more Red Spirit cards from your Trash to the Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Return all Cost 8 or more Red Spirit cards from your Trash to the Hand.",
+              "originalClauseText": "Return all Cost 8 or more Red Spirit cards from your Trash to the Hand.",
               "cleanText": "Return all Cost 8 or more Red Spirit cards from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "costGte": 8,
+                  "color": "Red"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS23-067#a0",
+          "keywords": [],
+          "id": "BS23-067#AB_WHEN_DEPLOYED_NONE_LV1_LV2_b0953719ed5e8ceb39e89d35f8ef365ad488afe3662fa4d530843dbe005c6b71_2cdbcf7e4360c295355ca8ae4f404bf9",
+          "physicalId": "BS23-067#AB_WHEN_DEPLOYED_NONE_LV1_LV2_b0953719ed5e8ceb39e89d35f8ef365ad488afe3662fa4d530843dbe005c6b71_2cdbcf7e4360c295355ca8ae4f404bf9",
+          "semanticId": "SEM#AB_WHEN_DEPLOYED_NONE_LV1_LV2_b0953719ed5e8ceb39e89d35f8ef365ad488afe3662fa4d530843dbe005c6b71_2cdbcf7e4360c295355ca8ae4f404bf9",
+          "semanticIdV3": "SEM3#AB_WHEN_DEPLOYED_NONE_LV1_LV2_47eeef01b36855e8f5f40471f8ea3efd06648c03689e06265ec4ea94f03d9cf1_a52b1c398d8e3820a4fff4da64420eca",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_DEPLOYED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS23-067#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -5813,8 +6381,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -5823,10 +6400,14 @@
             "isMain": false,
             "cleanBody": "Give all your Cost 8 or more Spirits: \"[Clash] (When Attacks) The opponent must block if possible.\""
           },
+          "originalAbilityText": "[LV2] (Your Attack Step)\nGive all your Cost 8 or more Spirits: \"[Clash] (When Attacks) The opponent must block if possible.\"",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Give all your Cost 8 or more Spirits: \"[Clash] (When Attacks) The opponent must block if possible.\"",
+              "originalClauseText": "Give all your Cost 8 or more Spirits: \"[Clash] (When Attacks) The opponent must block if possible.\"",
               "cleanText": "Give all your Cost 8 or more Spirits: \"[Clash] (When Attacks) The opponent must block if possible.\"",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -5838,7 +6419,50 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS23-067#a1",
+          "keywords": [
+            {
+              "name": "Clash",
+              "parameter": null,
+              "wave": 1,
+              "hook": "clash",
+              "bracketed": true,
+              "index": 39,
+              "abilityId": "BS23-067#AB_ATTACK_STEP_NONE_LV2_a011ecd49349aa368ddd752178a3f1080aff16202127943c09c94a68897414cf_8df300c68c50754d44c802013a7552e0",
+              "cardNumber": "BS23-067",
+              "levels": [
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Your Attack Step",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BS23-067#a1"
+            }
+          ],
+          "id": "BS23-067#AB_ATTACK_STEP_NONE_LV2_a011ecd49349aa368ddd752178a3f1080aff16202127943c09c94a68897414cf_8df300c68c50754d44c802013a7552e0",
+          "physicalId": "BS23-067#AB_ATTACK_STEP_NONE_LV2_a011ecd49349aa368ddd752178a3f1080aff16202127943c09c94a68897414cf_8df300c68c50754d44c802013a7552e0",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_a011ecd49349aa368ddd752178a3f1080aff16202127943c09c94a68897414cf_8df300c68c50754d44c802013a7552e0",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_2955508c014e2662d54b3a624d679fc85b4c337624a19624ad0bafa23452b46f_41f76ee03435c0d9c14b55f792dcf9c0",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -6407,6 +7031,26 @@
     "compiledIr": {
       "cardNumber": "BS23-016",
       "name": "The GrimReaperSwordMaster Darkness-Mare",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 6000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 9000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] [Unsheathe] (When Summoned)\nYou can summon an \"Exalted Sword\" family Brave card that can brave with this Spirit from your Hand, without paying the cost.\n\n[LV1][LV2][LV3] (When Attacks)\nYou can summon a Cost 0/3 Purple Spirit card from your Trash, without paying the cost.\n\n[When Braved] [LV2][LV3] (When Attacks)\nDestroy a Brave on an opposing Brave Spirit.",
+      "teams": [],
       "keywords": [
         {
           "name": "Unsheathe",
@@ -6414,12 +7058,32 @@
           "wave": 4,
           "hook": "unsheathe",
           "bracketed": true,
-          "index": 16
+          "index": 0,
+          "abilityId": "BS23-016#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a6f1de807c88bf3e2467d4f413d7c1ec7ed87eb2554e569cc60668b3c7c58fec_102a98c797f163f0f2922fe9440e152b",
+          "cardNumber": "BS23-016",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BS23-016#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BS23-016#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -6430,8 +7094,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Unsheathe",
@@ -6440,10 +7113,14 @@
             "isMain": false,
             "cleanBody": "You can summon an \"Exalted Sword\" family Brave card that can brave with this Spirit from your Hand, without paying the cost."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] [Unsheathe] (When Summoned)\nYou can summon an \"Exalted Sword\" family Brave card that can brave with this Spirit from your Hand, without paying the cost.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "You can summon an \"Exalted Sword\" family Brave card that can brave with this Spirit from your Hand, without paying the cost.",
+              "originalClauseText": "You can summon an \"Exalted Sword\" family Brave card that can brave with this Spirit from your Hand, without paying the cost.",
               "cleanText": "You can summon an \"Exalted Sword\" family Brave card that can brave with this Spirit from your Hand, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -6451,14 +7128,70 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit",
+                    "Brave"
+                  ],
+                  "family": "Exalted Sword"
+                },
+                "free": true,
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS23-016#a0",
+          "keywords": [
+            {
+              "name": "Unsheathe",
+              "parameter": null,
+              "wave": 4,
+              "hook": "unsheathe",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BS23-016#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a6f1de807c88bf3e2467d4f413d7c1ec7ed87eb2554e569cc60668b3c7c58fec_102a98c797f163f0f2922fe9440e152b",
+              "cardNumber": "BS23-016",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_SUMMONED",
+              "timingLabel": "When Summoned",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BS23-016#a0"
+            }
+          ],
+          "id": "BS23-016#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a6f1de807c88bf3e2467d4f413d7c1ec7ed87eb2554e569cc60668b3c7c58fec_102a98c797f163f0f2922fe9440e152b",
+          "physicalId": "BS23-016#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a6f1de807c88bf3e2467d4f413d7c1ec7ed87eb2554e569cc60668b3c7c58fec_102a98c797f163f0f2922fe9440e152b",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a6f1de807c88bf3e2467d4f413d7c1ec7ed87eb2554e569cc60668b3c7c58fec_102a98c797f163f0f2922fe9440e152b",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a9024e33c16621c734a3e4bd53345a42cc4668a2c949ed32f67ff5218ac33796_cdb69035d47cfac625d89b3bb493c174",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS23-016#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -6469,8 +7202,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -6479,10 +7221,14 @@
             "isMain": false,
             "cleanBody": "You can summon a Cost 0/3 Purple Spirit card from your Trash, without paying the cost."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Attacks)\nYou can summon a Cost 0/3 Purple Spirit card from your Trash, without paying the cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can summon a Cost 0/3 Purple Spirit card from your Trash, without paying the cost.",
+              "originalClauseText": "You can summon a Cost 0/3 Purple Spirit card from your Trash, without paying the cost.",
               "cleanText": "You can summon a Cost 0/3 Purple Spirit card from your Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -6490,14 +7236,40 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "costExact": 0,
+                  "color": "Purple"
+                },
+                "free": true,
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS23-016#a1",
+          "keywords": [],
+          "id": "BS23-016#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_c3c32e453b6bb66bc401d040139867c34c40c19c389f0c6deb86bce61dc4337d_5450d67a0ce3a395b021a71f25dec0b5",
+          "physicalId": "BS23-016#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_c3c32e453b6bb66bc401d040139867c34c40c19c389f0c6deb86bce61dc4337d_5450d67a0ce3a395b021a71f25dec0b5",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_c3c32e453b6bb66bc401d040139867c34c40c19c389f0c6deb86bce61dc4337d_5450d67a0ce3a395b021a71f25dec0b5",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_cbf6dc17310c04d5e7bc817f8816e471742ef6cc965ce4235f47f78f952db7ea_d0dd0cda280b943ad66b2ae7b23070a0",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS23-016#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -6509,8 +7281,19 @@
               "When Braved"
             ],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [
+              "WHILE_BRAVED"
+            ],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -6519,10 +7302,14 @@
             "isMain": false,
             "cleanBody": "Destroy a Brave on an opposing Brave Spirit."
           },
+          "originalAbilityText": "[When Braved] [LV2][LV3] (When Attacks)\nDestroy a Brave on an opposing Brave Spirit.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Destroy a Brave on an opposing Brave Spirit.",
+              "originalClauseText": "Destroy a Brave on an opposing Brave Spirit.",
               "cleanText": "Destroy a Brave on an opposing Brave Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -6540,7 +7327,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS23-016#a2",
+          "keywords": [],
+          "id": "BS23-016#AB_WHEN_ATTACKS_NONE_LV2_LV3_c5e5d04ac3b7cb5ee1ab059c061b70cb1c76eed58227c42580677e8267ab52fd_f89de035de7bce4e8f87277f55abe085",
+          "physicalId": "BS23-016#AB_WHEN_ATTACKS_NONE_LV2_LV3_c5e5d04ac3b7cb5ee1ab059c061b70cb1c76eed58227c42580677e8267ab52fd_f89de035de7bce4e8f87277f55abe085",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_c5e5d04ac3b7cb5ee1ab059c061b70cb1c76eed58227c42580677e8267ab52fd_f89de035de7bce4e8f87277f55abe085",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_fd6e5848abae4fe1c68cc6769facae36aad57ede84da129bd0f4c1854a953fb8_c29598187b243290d6763196976ed3cb",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [
+              "WHILE_BRAVED"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -8282,10 +9086,13 @@
     "compiledIr": {
       "cardNumber": "BS23-068",
       "name": "The Underground Empire of Lies",
+      "type": "Nexus",
+      "levels": {},
+      "originalEffectText": "[LV1][LV2] (Your End Step)\nYou can return an \"Aldius\"-named Spirit card from your Trash to the Hand.\n\n[LV2] (Your Main Step)\nWhen you're summoning a Purple Spirit card with an original cost of 10 or more from your Hand, treat it as Cost 6.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BS23-068#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -8295,8 +9102,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "END_OF_TURN",
+            "timings": [
+              "END_OF_TURN"
+            ],
             "timingLabel": "Your End Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "END_OF_TURN"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -8305,28 +9121,54 @@
             "isMain": false,
             "cleanBody": "You can return an \"Aldius\"-named Spirit card from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV1][LV2] (Your End Step)\nYou can return an \"Aldius\"-named Spirit card from your Trash to the Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "You can return an \"Aldius\"-named Spirit card from your Trash to the Hand.",
+              "originalClauseText": "You can return an \"Aldius\"-named Spirit card from your Trash to the Hand.",
               "cleanText": "You can return an \"Aldius\"-named Spirit card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "Aldius"
+                },
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS23-068#a0",
+          "keywords": [],
+          "id": "BS23-068#AB_END_OF_TURN_NONE_LV1_LV2_110656b2d7a698a63141893e26fe4f41752c6e1911fc86731575f2f54c90cc95_41eb29666480c7d7fe72e77ab8803983",
+          "physicalId": "BS23-068#AB_END_OF_TURN_NONE_LV1_LV2_110656b2d7a698a63141893e26fe4f41752c6e1911fc86731575f2f54c90cc95_41eb29666480c7d7fe72e77ab8803983",
+          "semanticId": "SEM#AB_END_OF_TURN_NONE_LV1_LV2_110656b2d7a698a63141893e26fe4f41752c6e1911fc86731575f2f54c90cc95_41eb29666480c7d7fe72e77ab8803983",
+          "semanticIdV3": "SEM3#AB_END_OF_TURN_NONE_LV1_LV2_8131f40188a6713ba6c4b1a63a7a8600cd9427394b7bd40e08d32f49ff1f47b7_56d9b1b50c1fb72a58619bf291eebd19",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "END_OF_TURN"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BS23-068#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -8335,8 +9177,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "MAIN_STEP",
+            "timings": [
+              "MAIN_STEP"
+            ],
             "timingLabel": "Your Main Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "MAIN_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -8345,10 +9196,14 @@
             "isMain": false,
             "cleanBody": "When you're summoning a Purple Spirit card with an original cost of 10 or more from your Hand, treat it as Cost 6."
           },
+          "originalAbilityText": "[LV2] (Your Main Step)\nWhen you're summoning a Purple Spirit card with an original cost of 10 or more from your Hand, treat it as Cost 6.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When you're summoning a Purple Spirit card with an original cost of 10 or more from your Hand, treat it as Cost 6.",
+              "originalClauseText": "When you're summoning a Purple Spirit card with an original cost of 10 or more from your Hand, treat it as Cost 6.",
               "cleanText": "When you're summoning a Purple Spirit card with an original cost of 10 or more from your Hand, treat it as Cost 6",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -8356,11 +9211,38 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "costExact": 6,
+                  "color": "Purple"
+                },
+                "free": false,
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BS23-068#a1",
+          "keywords": [],
+          "id": "BS23-068#AB_MAIN_STEP_NONE_LV2_2918005262c2b5a266bdf9f89dcaf761d3e15eeb3253c2d1b56524287d77b980_c6870b6b4afdc77aedd71dee2fbe86d6",
+          "physicalId": "BS23-068#AB_MAIN_STEP_NONE_LV2_2918005262c2b5a266bdf9f89dcaf761d3e15eeb3253c2d1b56524287d77b980_c6870b6b4afdc77aedd71dee2fbe86d6",
+          "semanticId": "SEM#AB_MAIN_STEP_NONE_LV2_2918005262c2b5a266bdf9f89dcaf761d3e15eeb3253c2d1b56524287d77b980_c6870b6b4afdc77aedd71dee2fbe86d6",
+          "semanticIdV3": "SEM3#AB_MAIN_STEP_NONE_LV2_1f291b15055ac6fbcdd9a7bf464052545cf1e7fa237922bb0d26b26d4b508cc7_cc54b051c0e4d71a1219d4aba568b9e0",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "MAIN_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,

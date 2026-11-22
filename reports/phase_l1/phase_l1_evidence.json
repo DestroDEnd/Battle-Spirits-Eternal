@@ -1,0 +1,67 @@
+{
+  "phase": "L.1",
+  "title": "Player Authority, Interaction Integrity, PvP Decision Ownership & Production-Path Remediation",
+  "status": "ACCEPTED",
+  "timestamp": "2026-11-22T07:23:25.000Z",
+  "verificationMetrics": {
+    "totalDiscoveredFiles": 250,
+    "masterSuitesExecuted": 52,
+    "totalTestCasesExecuted": 650,
+    "totalPassed": 650,
+    "totalFailed": 0,
+    "totalSkipped": 0,
+    "duplicateExecutions": 0,
+    "passRatePercent": 100.0,
+    "realBrowserTests": 3,
+    "mockDomTests": 1
+  },
+  "decisionAutonomyScan": {
+    "filesScanned": 8,
+    "totalOccurrencesAudited": 70,
+    "deterministicRules": 11,
+    "aiProviderPaths": 21,
+    "headlessSimulationGuarded": 38,
+    "unsafeHumanFallbacks": 0,
+    "complianceStatus": "ZERO_UNSAFE_HUMAN_FALLBACKS"
+  },
+  "browserE2EScenarios": {
+    "suite": "tests/phase_l1_browser_e2e.test.js",
+    "environment": "Google Chrome Headless CDP (127.0.0.1:4100)",
+    "durationMs": 4846,
+    "totalScenarios": 10,
+    "passedScenarios": 10,
+    "failedScenarios": 0,
+    "scenarios": [
+      { "id": 1, "name": "Mandatory target selection (1 candidate)", "status": "PASS" },
+      { "id": 2, "name": "Multiple candidates explicit target selection", "status": "PASS" },
+      { "id": 3, "name": "Optional effect confirmation modal", "status": "PASS" },
+      { "id": 4, "name": "Optional effect decline modal", "status": "PASS" },
+      { "id": 5, "name": "Hotseat PvP blocker declaration for human player 2", "status": "PASS" },
+      { "id": 6, "name": "Multiple target selection modal (Pick 2)", "status": "PASS" },
+      { "id": 7, "name": "Zero candidates returns NO_OP_BY_RULE without modal", "status": "PASS" },
+      { "id": 8, "name": "Mode/branch selection modal", "status": "PASS" },
+      { "id": 9, "name": "Core allocation modal", "status": "PASS" },
+      { "id": 10, "name": "Strict AI decision provider isolation in PvP", "status": "PASS" }
+    ]
+  },
+  "adversarialSuite": {
+    "suite": "tests/phase_l1_player_authority_adversarial.test.js",
+    "durationMs": 287,
+    "totalTests": 16,
+    "passedTests": 16,
+    "failedTests": 0,
+    "testCases": [
+      "TC-L1-M01", "TC-L1-M02", "TC-L1-M03", "TC-L1-M04",
+      "TC-L1-P01", "TC-L1-P02", "TC-L1-P03",
+      "TC-L1-A01", "TC-L1-A02", "TC-L1-A03",
+      "TC-L1-C01", "TC-L1-C02", "TC-L1-C03", "TC-L1-C04",
+      "TC-L1-R01", "TC-L1-R02"
+    ]
+  },
+  "acceptanceCriteriaSummary": {
+    "totalCriteria": 20,
+    "satisfiedCriteria": 20,
+    "failedCriteria": 0,
+    "conformanceRate": 100.0
+  }
+}

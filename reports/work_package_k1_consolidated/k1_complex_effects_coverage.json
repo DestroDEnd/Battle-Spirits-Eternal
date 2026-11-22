@@ -1,0 +1,74 @@
+{
+  "generatedAt": "2026-11-21T02:11:23.664Z",
+  "batch": "K1-BATCH-05",
+  "blockedCards": [
+    {
+      "cardNumber": "26RBS02-083",
+      "cardName": "The GiantHero Titus",
+      "issue": "0-BP destruction replacement redirection to deck bottom",
+      "status": "RESOLVED_VERIFIED",
+      "mechanism": "Pre-exit bpAtDestroy evaluation in commitStackExit/moveCard redirecting card to DECK_BOTTOM before reserve core deduction."
+    },
+    {
+      "cardNumber": "26RDB01-024",
+      "cardName": "The PhantomDragonLord Deathless-Gigas",
+      "issue": "Opposing hand card bounce to deck bottom",
+      "status": "RESOLVED_VERIFIED",
+      "mechanism": "BOUNCE op supporting target.zone: 'hand' with destination: 'DECK_BOTTOM'."
+    },
+    {
+      "cardNumber": "26RSD07-001",
+      "cardName": "The BraveLord Dragon",
+      "issue": "Self-bounce to deck bottom with specific timing and cost condition",
+      "status": "RESOLVED_VERIFIED",
+      "mechanism": "Compilation of self-bounce op with destination: 'DECK_BOTTOM' and side: 'self'."
+    },
+    {
+      "cardNumber": "BS27-082",
+      "cardName": "Judgment Call",
+      "issue": "BP debuff with BATTLING state filter during combat",
+      "status": "RESOLVED_VERIFIED",
+      "mechanism": "Compilation of BP_DEBUFF with stateFilter: ['BATTLING'] and resolution in computeEffectiveBP."
+    }
+  ],
+  "driftCards": [
+    {
+      "cardNumber": "BS19-X05",
+      "cardName": "The DragonEmperor Siegfried",
+      "issue": "Drift in timing representations across WHEN_BATTLES, PASSIVE, and ATTACK_STEP",
+      "status": "RESOLVED_VERIFIED",
+      "mechanism": "Compiler timing normalization aligned with production resolver execution."
+    },
+    {
+      "cardNumber": "BS33-069",
+      "cardName": "The SkyEmperor Behemoth",
+      "issue": "Drift in BURST, WHEN_DEPLOYED, and ATTACK_STEP timing combinations",
+      "status": "RESOLVED_VERIFIED",
+      "mechanism": "Standardized Burst condition parser and header timing extraction."
+    }
+  ],
+  "replacementPreventionMechanics": [
+    {
+      "mechanism": "REMAIN_ON_FIELD",
+      "description": "When a spirit is destroyed, keeps it on field in exhausted/refreshed state; validated in commitStackExit."
+    },
+    {
+      "mechanism": "UNPREVENTABLE",
+      "description": "Effects marked unpreventable: true bypass all replacement and destruction prevention modifiers."
+    },
+    {
+      "mechanism": "LIFE_TO_RESERVE",
+      "description": "Redirects damage core from life to void/trash instead of reserve."
+    },
+    {
+      "mechanism": "ANTI_LOOP_GUARDS",
+      "description": "Prevents recursive cascading of the same replacement handler via _replacementApplied flags."
+    }
+  ],
+  "batch01CarryForward": {
+    "totalClauses": 2593,
+    "status": "RESOLVED_VERIFIED",
+    "polarityNarrowing": "2,540 clauses safely narrowed from 'either' to 'opp' or 'self' via narrowEitherSideFromClause",
+    "destinationResolution": "53 clauses with 'destination: DECK' safely resolved to 'deck_top' or 'deck_bottom' based on clause evidence"
+  }
+}

@@ -392,6 +392,21 @@
     "compiledIr": {
       "cardNumber": "CB31-017",
       "name": "Kamen Rider Blade Jack Form ［3］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 6000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: \"Kamen Rider Blade\", (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Summoned/Advents)\nYou can put a \"Kamen\" family card from your Hand onto your Removed Zone. When you've done so, draw a card.\n\n[During OC] [LV1][LV2] (When Attacks)\nDuring this turn, give an opposing Spirit -5000 BP, and return it to the deckbottom when it is brought to 0 BP.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -399,12 +414,32 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "CB31-017#AB_FLASH_NONE_LV1_LV2_LV3_ccc34e946336a7f8894bbe4b08536a48a074e15e92ec16e023f753389def536a_0dc2009c7b07eb3b9098f237e52da215",
+          "cardNumber": "CB31-017",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "CB31-017#a0"
         }
       ],
       "abilities": [
         {
-          "id": "CB31-017#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -415,8 +450,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: \"Kamen Rider Blade\", (Your Turn)",
@@ -425,10 +467,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: \"Kamen Rider Blade\", (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -450,7 +496,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -468,10 +516,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-017#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "\"Kamen Rider Blade\", (Your Turn)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "CB31-017#AB_FLASH_NONE_LV1_LV2_LV3_ccc34e946336a7f8894bbe4b08536a48a074e15e92ec16e023f753389def536a_0dc2009c7b07eb3b9098f237e52da215",
+              "cardNumber": "CB31-017",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "CB31-017#a0"
+            }
+          ],
+          "id": "CB31-017#AB_FLASH_NONE_LV1_LV2_LV3_ccc34e946336a7f8894bbe4b08536a48a074e15e92ec16e023f753389def536a_0dc2009c7b07eb3b9098f237e52da215",
+          "physicalId": "CB31-017#AB_FLASH_NONE_LV1_LV2_LV3_ccc34e946336a7f8894bbe4b08536a48a074e15e92ec16e023f753389def536a_0dc2009c7b07eb3b9098f237e52da215",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_ccc34e946336a7f8894bbe4b08536a48a074e15e92ec16e023f753389def536a_0dc2009c7b07eb3b9098f237e52da215",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_1c63db25c561cd6c13abf8fba10e1d65da05c4a65c6b8a1aef4ae949c5fa1b09_662239edf3a1f4ddf818239a386e699c",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-017#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -480,21 +572,45 @@
             ],
             "levelExplicit": true,
             "prefixes": [],
-            "timing": "WHEN_SUMMONED",
-            "timingLabel": "When Summoned/Advents",
+            "timing": "PASSIVE",
+            "timings": [],
+            "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
             "burstCondition": null,
             "isFlash": false,
             "isMain": false,
-            "cleanBody": "You can put a \"Kamen\" family card from your Hand onto your Removed Zone. When you've done so, draw a card."
+            "cleanBody": "(When Summoned/Advents)\nYou can put a \"Kamen\" family card from your Hand onto your Removed Zone. When you've done so, draw a card."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned/Advents)\nYou can put a \"Kamen\" family card from your Hand onto your Removed Zone. When you've done so, draw a card.",
+          "abilityIndex": 1,
           "clauses": [
             {
+              "rawText": "(When Summoned/Advents)",
+              "originalClauseText": "(When Summoned/Advents)",
+              "cleanText": "(When Summoned/Advents)",
+              "clauseIndex": 0,
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "UNSUPPORTED",
+                "rawText": "(When Summoned/Advents)"
+              }
+            },
+            {
               "rawText": "You can put a \"Kamen\" family card from your Hand onto your Removed Zone.",
+              "originalClauseText": "You can put a \"Kamen\" family card from your Hand onto your Removed Zone.",
               "cleanText": "You can put a \"Kamen\" family card from your Hand onto your Removed Zone",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -508,7 +624,9 @@
             },
             {
               "rawText": "draw a card.",
+              "originalClauseText": "draw a card.",
               "cleanText": "draw a card",
+              "clauseIndex": 2,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -522,10 +640,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "(When Summoned/Advents)"
+          ],
+          "legacyId": "CB31-017#a1",
+          "keywords": [],
+          "id": "CB31-017#AB_PASSIVE_NONE_LV1_LV2_0cbb18a1c9731696ab14bac82192117e8cd12797c0004d64e50d1fad296e2b4f_7008b42e8bbd524a284e6f8b03dc32cb",
+          "physicalId": "CB31-017#AB_PASSIVE_NONE_LV1_LV2_0cbb18a1c9731696ab14bac82192117e8cd12797c0004d64e50d1fad296e2b4f_7008b42e8bbd524a284e6f8b03dc32cb",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_0cbb18a1c9731696ab14bac82192117e8cd12797c0004d64e50d1fad296e2b4f_7008b42e8bbd524a284e6f8b03dc32cb",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_c7171b53dd9b56a3346d3f0a904b7985ff58b4968cb7cbba944f0ee93604d8fa_dcc35f4138c47f4c0b9889db1f9b147a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-017#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -537,8 +669,17 @@
               "During OC"
             ],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -547,10 +688,14 @@
             "isMain": false,
             "cleanBody": "During this turn, give an opposing Spirit -5000 BP, and return it to the deckbottom when it is brought to 0 BP."
           },
+          "originalAbilityText": "[During OC] [LV1][LV2] (When Attacks)\nDuring this turn, give an opposing Spirit -5000 BP, and return it to the deckbottom when it is brought to 0 BP.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "During this turn, give an opposing Spirit -5000 BP",
+              "originalClauseText": "During this turn, give an opposing Spirit -5000 BP",
               "cleanText": "give an opposing Spirit -5000 BP",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -559,13 +704,20 @@
               "op": {
                 "op": "BP_DEBUFF",
                 "amount": 5000,
-                "target": "PREVIOUS_TARGET",
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
                 "duration": "DURING_THIS_TURN"
               }
             },
             {
               "rawText": "return it to the deckbottom when it is brought to 0 BP.",
+              "originalClauseText": "return it to the deckbottom when it is brought to 0 BP.",
               "cleanText": "return it to the deckbottom when it is brought to 0 BP",
+              "clauseIndex": 1,
               "link": "also",
               "isOptional": false,
               "isCost": false,
@@ -580,12 +732,27 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-017#a2",
+          "keywords": [],
+          "id": "CB31-017#AB_WHEN_ATTACKS_NONE_LV1_LV2_345f15b0952214038615a12a46d093f880b7dd774486e152ea2f305731075a7b_7c75e9165fd98948cf67160783779303",
+          "physicalId": "CB31-017#AB_WHEN_ATTACKS_NONE_LV1_LV2_345f15b0952214038615a12a46d093f880b7dd774486e152ea2f305731075a7b_7c75e9165fd98948cf67160783779303",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_345f15b0952214038615a12a46d093f880b7dd774486e152ea2f305731075a7b_7c75e9165fd98948cf67160783779303",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_3f6af5b387d6a99cc23c6bc5b7c3fe0b07715b0d9bd61059163f46039ce3a74d_27ea6e8274624940a6e2b689fe33a643",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
-      "unsupportedClausesCount": 0,
-      "isFullySupported": true
+      "unsupportedClausesCount": 1,
+      "isFullySupported": false
     }
   },
   "CB31-X04": {
@@ -608,6 +775,21 @@
     "compiledIr": {
       "cardNumber": "CB31-X04",
       "name": "Kamen Rider Blade King Form ［3］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 8000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 12000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: \"Kamen Rider Blade\" & C6 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Attacks)\nDuring this turn, you can give up to two opposing Spirits/Ultimates -20000 BP, and return them to the deckbottom when they reach 0 BP.\n\n[During OC & During Advent] [LV1][LV2] (When Attacks)\nFor every four counters you have, this Spirit gains an extra Yellow symbol. Also, when this Spirit would leave the Field due to opposing effects, by discarding two cards from your Removed Zone, it remains on the Field, exhausted.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -615,12 +797,32 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "CB31-X04#AB_FLASH_NONE_LV1_LV2_LV3_7f603175fbab007b686e6bdc4186c28351955a55b2a12b6ae40409ce040e9c31_87fc252cfe6d56e258cdeb1d4f35ea39",
+          "cardNumber": "CB31-X04",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "CB31-X04#a0"
         }
       ],
       "abilities": [
         {
-          "id": "CB31-X04#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -631,8 +833,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: \"Kamen Rider Blade\" & C6 or more, (Your Turn)",
@@ -641,10 +850,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: \"Kamen Rider Blade\" & C6 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -666,7 +879,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -684,10 +899,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-X04#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "\"Kamen Rider Blade\" & C6 or more, (Your Turn)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "CB31-X04#AB_FLASH_NONE_LV1_LV2_LV3_7f603175fbab007b686e6bdc4186c28351955a55b2a12b6ae40409ce040e9c31_87fc252cfe6d56e258cdeb1d4f35ea39",
+              "cardNumber": "CB31-X04",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "CB31-X04#a0"
+            }
+          ],
+          "id": "CB31-X04#AB_FLASH_NONE_LV1_LV2_LV3_7f603175fbab007b686e6bdc4186c28351955a55b2a12b6ae40409ce040e9c31_87fc252cfe6d56e258cdeb1d4f35ea39",
+          "physicalId": "CB31-X04#AB_FLASH_NONE_LV1_LV2_LV3_7f603175fbab007b686e6bdc4186c28351955a55b2a12b6ae40409ce040e9c31_87fc252cfe6d56e258cdeb1d4f35ea39",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_7f603175fbab007b686e6bdc4186c28351955a55b2a12b6ae40409ce040e9c31_87fc252cfe6d56e258cdeb1d4f35ea39",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_80c2e890ef8bb94575fc9a7938b66951b0082c27f6bd97d010dcf967e6d04af6_4fb563e7a4cb99a8c9b0a15c6502c5b1",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-X04#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -697,8 +956,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -707,10 +975,14 @@
             "isMain": false,
             "cleanBody": "During this turn, you can give up to two opposing Spirits/Ultimates -20000 BP, and return them to the deckbottom when they reach 0 BP."
           },
+          "originalAbilityText": "[LV1][LV2] (When Attacks)\nDuring this turn, you can give up to two opposing Spirits/Ultimates -20000 BP, and return them to the deckbottom when they reach 0 BP.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "During this turn, you can give up to two opposing Spirits/Ultimates -20000 BP",
+              "originalClauseText": "During this turn, you can give up to two opposing Spirits/Ultimates -20000 BP",
               "cleanText": "you can give up to two opposing Spirits/Ultimates -20000 BP",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -723,7 +995,9 @@
             },
             {
               "rawText": "return them to the deckbottom when they reach 0 BP.",
+              "originalClauseText": "return them to the deckbottom when they reach 0 BP.",
               "cleanText": "return them to the deckbottom when they reach 0 BP",
+              "clauseIndex": 1,
               "link": "also",
               "isOptional": false,
               "isCost": false,
@@ -738,10 +1012,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-X04#a1",
+          "keywords": [],
+          "id": "CB31-X04#AB_WHEN_ATTACKS_NONE_LV1_LV2_4c7bc81bd735c1756b15025c6f7bcd7df4de2cd332d6900efe298922ab885826_b4beda28b2fd21057792188c03b744a4",
+          "physicalId": "CB31-X04#AB_WHEN_ATTACKS_NONE_LV1_LV2_4c7bc81bd735c1756b15025c6f7bcd7df4de2cd332d6900efe298922ab885826_b4beda28b2fd21057792188c03b744a4",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_4c7bc81bd735c1756b15025c6f7bcd7df4de2cd332d6900efe298922ab885826_b4beda28b2fd21057792188c03b744a4",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_e3af35cfbe2f81657f72333bae2a0ffc58ed63cee6e27f8f5a3ecfbeae43ec90_2329f1314c9f3fe887c33a4a46b163c2",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-X04#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -753,8 +1041,17 @@
               "During OC & During Advent"
             ],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -763,36 +1060,57 @@
             "isMain": false,
             "cleanBody": "For every four counters you have, this Spirit gains an extra Yellow symbol. Also, when this Spirit would leave the Field due to opposing effects, by discarding two cards from your Removed Zone, it remains on the Field, exhausted."
           },
+          "originalAbilityText": "[During OC & During Advent] [LV1][LV2] (When Attacks)\nFor every four counters you have, this Spirit gains an extra Yellow symbol. Also, when this Spirit would leave the Field due to opposing effects, by discarding two cards from your Removed Zone, it remains on the Field, exhausted.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "For every four counters you have, this Spirit gains an extra Yellow symbol.",
+              "originalClauseText": "For every four counters you have, this Spirit gains an extra Yellow symbol.",
               "cleanText": "For every four counters you have, this Spirit gains an extra Yellow symbol",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "ADD_SYMBOL"
+                "op": "ADD_SYMBOL",
+                "color": "Yellow",
+                "count": 1,
+                "side": "self"
               }
             },
             {
               "rawText": "when this Spirit would leave the Field due to opposing effects, by discarding two cards from your Removed Zone, it remains on the Field, exhausted.",
+              "originalClauseText": "when this Spirit would leave the Field due to opposing effects, by discarding two cards from your Removed Zone, it remains on the Field, exhausted.",
               "cleanText": "when this Spirit would leave the Field due to opposing effects, by discarding two cards from your Removed Zone, it remains on the Field, exhausted",
+              "clauseIndex": 1,
               "link": "also",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "EXHAUST",
-                "target": {
-                  "side": "either"
-                }
+                "op": "RESURRECT"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-X04#a2",
+          "keywords": [],
+          "id": "CB31-X04#AB_WHEN_ATTACKS_NONE_LV1_LV2_25fb82479d0783e23cc56860c148685bd5f6aab7b096fe02ab244e9bdfcd3455_d5fb3f5081abab08306389522c543642",
+          "physicalId": "CB31-X04#AB_WHEN_ATTACKS_NONE_LV1_LV2_25fb82479d0783e23cc56860c148685bd5f6aab7b096fe02ab244e9bdfcd3455_d5fb3f5081abab08306389522c543642",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_25fb82479d0783e23cc56860c148685bd5f6aab7b096fe02ab244e9bdfcd3455_d5fb3f5081abab08306389522c543642",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_94d88b040ab08ca8b7a23f3818ed380cf2b7ee87efc79e62e909cd3ca54a9779_c57d1e4c79a9ce479f683b5951fe728f",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
@@ -820,6 +1138,21 @@
     "compiledIr": {
       "cardNumber": "CB31-019",
       "name": "Kamen Rider Gaim Jimber Lemon Arms ［2］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 8000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: \"Kamen Rider Gaim\" & C1 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Summoned/Advents)\nYour counter +1. Then, draw a card from the deckbottom. If you have seven counters or more, this effect draws +1 card.\n\n[During OC] [LV1][LV2] (When Attacks)\nWhen this Spirit's attack reduces the opposing Life, your counters +2, and you can send the Soul Core from your Trash to this Spirit.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -827,12 +1160,32 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "CB31-019#AB_FLASH_NONE_LV1_LV2_LV3_24a88789efaddb7c01ad29ee93522192a862d3ff3cabc039211ac7ab123540b5_7b3ce49de3afe82e0bee395adb3f2ab7",
+          "cardNumber": "CB31-019",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "CB31-019#a0"
         }
       ],
       "abilities": [
         {
-          "id": "CB31-019#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -843,8 +1196,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: \"Kamen Rider Gaim\" & C1 or more, (Your Turn)",
@@ -853,10 +1213,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: \"Kamen Rider Gaim\" & C1 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -878,7 +1242,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -896,10 +1262,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-019#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "\"Kamen Rider Gaim\" & C1 or more, (Your Turn)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "CB31-019#AB_FLASH_NONE_LV1_LV2_LV3_24a88789efaddb7c01ad29ee93522192a862d3ff3cabc039211ac7ab123540b5_7b3ce49de3afe82e0bee395adb3f2ab7",
+              "cardNumber": "CB31-019",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "CB31-019#a0"
+            }
+          ],
+          "id": "CB31-019#AB_FLASH_NONE_LV1_LV2_LV3_24a88789efaddb7c01ad29ee93522192a862d3ff3cabc039211ac7ab123540b5_7b3ce49de3afe82e0bee395adb3f2ab7",
+          "physicalId": "CB31-019#AB_FLASH_NONE_LV1_LV2_LV3_24a88789efaddb7c01ad29ee93522192a862d3ff3cabc039211ac7ab123540b5_7b3ce49de3afe82e0bee395adb3f2ab7",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_24a88789efaddb7c01ad29ee93522192a862d3ff3cabc039211ac7ab123540b5_7b3ce49de3afe82e0bee395adb3f2ab7",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_084bf1a77caf629905566fc52cf831ce01167e579b003f54ed6c1eb40f86c10a_77121df9ae0d0ad0d4485792832fa01d",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-019#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -908,21 +1318,45 @@
             ],
             "levelExplicit": true,
             "prefixes": [],
-            "timing": "WHEN_SUMMONED",
-            "timingLabel": "When Summoned/Advents",
+            "timing": "PASSIVE",
+            "timings": [],
+            "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
             "burstCondition": null,
             "isFlash": false,
             "isMain": false,
-            "cleanBody": "Your counter +1. Then, draw a card from the deckbottom. If you have seven counters or more, this effect draws +1 card."
+            "cleanBody": "(When Summoned/Advents)\nYour counter +1. Then, draw a card from the deckbottom. If you have seven counters or more, this effect draws +1 card."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned/Advents)\nYour counter +1. Then, draw a card from the deckbottom. If you have seven counters or more, this effect draws +1 card.",
+          "abilityIndex": 1,
           "clauses": [
             {
+              "rawText": "(When Summoned/Advents)",
+              "originalClauseText": "(When Summoned/Advents)",
+              "cleanText": "(When Summoned/Advents)",
+              "clauseIndex": 0,
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "UNSUPPORTED",
+                "rawText": "(When Summoned/Advents)"
+              }
+            },
+            {
               "rawText": "Your counter +1.",
+              "originalClauseText": "Your counter +1.",
               "cleanText": "Your counter +1",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -935,7 +1369,9 @@
             },
             {
               "rawText": "draw a card from the deckbottom.",
+              "originalClauseText": "draw a card from the deckbottom.",
               "cleanText": "draw a card from the deckbottom",
+              "clauseIndex": 2,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -950,21 +1386,41 @@
             },
             {
               "rawText": "If you have seven counters or more, this effect draws +1 card.",
+              "originalClauseText": "If you have seven counters or more, this effect draws +1 card.",
               "cleanText": "this effect draws +1 card",
+              "clauseIndex": 3,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": "If you have seven counters or more",
               "duration": null,
               "op": {
-                "op": "MODIFY_EFFECT"
+                "op": "MODIFY_EFFECT",
+                "side": "self",
+                "param": "count",
+                "delta": 1,
+                "targetEffect": "draw"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "(When Summoned/Advents)"
+          ],
+          "legacyId": "CB31-019#a1",
+          "keywords": [],
+          "id": "CB31-019#AB_PASSIVE_NONE_LV1_LV2_1ca1ddf12b5870acdb6e4f7ad3466445f95c19ef899a1a45e7634669d56f220e_7edefc7f2c669670d6568d9532bb59a3",
+          "physicalId": "CB31-019#AB_PASSIVE_NONE_LV1_LV2_1ca1ddf12b5870acdb6e4f7ad3466445f95c19ef899a1a45e7634669d56f220e_7edefc7f2c669670d6568d9532bb59a3",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_1ca1ddf12b5870acdb6e4f7ad3466445f95c19ef899a1a45e7634669d56f220e_7edefc7f2c669670d6568d9532bb59a3",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_38505994ea0cc12e2cd3dc3923bc19e5437ed179dd78d4fd3d3f5fea5973a091_b8d71f30a291e45f20c6fc803ce6ac8c",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-019#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -976,8 +1432,17 @@
               "During OC"
             ],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -986,10 +1451,14 @@
             "isMain": false,
             "cleanBody": "When this Spirit's attack reduces the opposing Life, your counters +2, and you can send the Soul Core from your Trash to this Spirit."
           },
+          "originalAbilityText": "[During OC] [LV1][LV2] (When Attacks)\nWhen this Spirit's attack reduces the opposing Life, your counters +2, and you can send the Soul Core from your Trash to this Spirit.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When this Spirit's attack reduces the opposing Life, your counters +2, and you can send the Soul Core from your Trash to this Spirit.",
+              "originalClauseText": "When this Spirit's attack reduces the opposing Life, your counters +2, and you can send the Soul Core from your Trash to this Spirit.",
               "cleanText": "When this Spirit's attack reduces the opposing Life, your counters +2, and you can send the Soul Core from your Trash to this Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1010,12 +1479,27 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-019#a2",
+          "keywords": [],
+          "id": "CB31-019#AB_WHEN_ATTACKS_NONE_LV1_LV2_41f0ba47da2dc341cb7d2d7a9eb370a7fc027a79c7653d1e187fa54226f3ee63_60cd89a0cbd1e5e57b5420c7a9796843",
+          "physicalId": "CB31-019#AB_WHEN_ATTACKS_NONE_LV1_LV2_41f0ba47da2dc341cb7d2d7a9eb370a7fc027a79c7653d1e187fa54226f3ee63_60cd89a0cbd1e5e57b5420c7a9796843",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_41f0ba47da2dc341cb7d2d7a9eb370a7fc027a79c7653d1e187fa54226f3ee63_60cd89a0cbd1e5e57b5420c7a9796843",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_52c88b1d08fe3cf2a13b60f495b7aa75f278e4a5c8381a2b40cd47cd31613d27_503970e7db053acb8d9962a42c12279d",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
-      "unsupportedClausesCount": 0,
-      "isFullySupported": true
+      "unsupportedClausesCount": 1,
+      "isFullySupported": false
     }
   },
   "CB31-021": {
@@ -1038,6 +1522,21 @@
     "compiledIr": {
       "cardNumber": "CB31-021",
       "name": "Kamen Rider Gaim Kachidoki Arms ［3］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 7000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: \"Kamen Rider Gaim\" & C4 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents/Attacks)\nDuring this turn, give an opposing Spirit/Ultimate -12000 BP. When it is brought to 0 BP via this effect, return it to the deckbottom, and once per turn, you can return an \"Arms\" from your Trash to the Hand.\n\n[During OC] [LV1][LV2] (Either Attack Step)\nWhen this Spirit would activate any \"BP -\" effect, change its target to all.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -1045,12 +1544,32 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "CB31-021#AB_FLASH_NONE_LV1_LV2_LV3_4e7cbc7e256152ef44a71c6704abdd80c3f12603f60358bc1d5b6c231450ce9b_d9e2d12412b3dc6de845a34264887071",
+          "cardNumber": "CB31-021",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "CB31-021#a0"
         }
       ],
       "abilities": [
         {
-          "id": "CB31-021#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1061,8 +1580,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: \"Kamen Rider Gaim\" & C4 or more, (Either Attack Step)",
@@ -1071,10 +1597,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: \"Kamen Rider Gaim\" & C4 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1096,7 +1626,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1114,10 +1646,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-021#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "\"Kamen Rider Gaim\" & C4 or more, (Either Attack Step)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "CB31-021#AB_FLASH_NONE_LV1_LV2_LV3_4e7cbc7e256152ef44a71c6704abdd80c3f12603f60358bc1d5b6c231450ce9b_d9e2d12412b3dc6de845a34264887071",
+              "cardNumber": "CB31-021",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "CB31-021#a0"
+            }
+          ],
+          "id": "CB31-021#AB_FLASH_NONE_LV1_LV2_LV3_4e7cbc7e256152ef44a71c6704abdd80c3f12603f60358bc1d5b6c231450ce9b_d9e2d12412b3dc6de845a34264887071",
+          "physicalId": "CB31-021#AB_FLASH_NONE_LV1_LV2_LV3_4e7cbc7e256152ef44a71c6704abdd80c3f12603f60358bc1d5b6c231450ce9b_d9e2d12412b3dc6de845a34264887071",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_4e7cbc7e256152ef44a71c6704abdd80c3f12603f60358bc1d5b6c231450ce9b_d9e2d12412b3dc6de845a34264887071",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_7cd95b010c7b70879749deda26075c6a2e94ef6880e91720111b5f74a15be067_f5a804ee7c22ddae8f658d6963b0cb95",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-021#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1127,8 +1703,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Advents/Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1137,10 +1724,14 @@
             "isMain": false,
             "cleanBody": "During this turn, give an opposing Spirit/Ultimate -12000 BP. When it is brought to 0 BP via this effect, return it to the deckbottom, and once per turn, you can return an \"Arms\" from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV1][LV2] (When Advents/Attacks)\nDuring this turn, give an opposing Spirit/Ultimate -12000 BP. When it is brought to 0 BP via this effect, return it to the deckbottom, and once per turn, you can return an \"Arms\" from your Trash to the Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "During this turn, give an opposing Spirit/Ultimate -12000 BP.",
+              "originalClauseText": "During this turn, give an opposing Spirit/Ultimate -12000 BP.",
               "cleanText": "give an opposing Spirit/Ultimate -12000 BP",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1148,30 +1739,60 @@
               "duration": "DURING_THIS_TURN",
               "op": {
                 "op": "BP_DEBUFF",
-                "amount": 12000
+                "amount": 12000,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit",
+                    "Ultimate"
+                  ]
+                },
+                "duration": "DURING_THIS_TURN"
               }
             },
             {
               "rawText": "When it is brought to 0 BP via this effect, return it to the deckbottom, and once per turn, you can return an \"Arms\" from your Trash to the Hand.",
+              "originalClauseText": "When it is brought to 0 BP via this effect, return it to the deckbottom, and once per turn, you can return an \"Arms\" from your Trash to the Hand.",
               "cleanText": "When it is brought to 0 BP via this effect, return it to the deckbottom, and once per turn, you can return an \"Arms\" from your Trash to the Hand",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "DECK_BOTTOM",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "nameIncludes": "Arms"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-021#a1",
+          "keywords": [],
+          "id": "CB31-021#AB_WHEN_ADVENTS_NONE_LV1_LV2_e4a92b30e7337824f28ca64c209a219e80aee8ce3851bef41dfc73842a46d484_439bb9db02f3c080a7d34fedee2f4cfc",
+          "physicalId": "CB31-021#AB_WHEN_ADVENTS_NONE_LV1_LV2_e4a92b30e7337824f28ca64c209a219e80aee8ce3851bef41dfc73842a46d484_439bb9db02f3c080a7d34fedee2f4cfc",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_e4a92b30e7337824f28ca64c209a219e80aee8ce3851bef41dfc73842a46d484_439bb9db02f3c080a7d34fedee2f4cfc",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_71c53ff0988755091288f1745e5149a3ed6bbe74e0967210774b5169c9c1dabf_25984b4aa057b142429c012575f0091e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-021#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1183,8 +1804,17 @@
               "During OC"
             ],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1193,21 +1823,42 @@
             "isMain": false,
             "cleanBody": "When this Spirit would activate any \"BP -\" effect, change its target to all."
           },
+          "originalAbilityText": "[During OC] [LV1][LV2] (Either Attack Step)\nWhen this Spirit would activate any \"BP -\" effect, change its target to all.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When this Spirit would activate any \"BP -\" effect, change its target to all.",
+              "originalClauseText": "When this Spirit would activate any \"BP -\" effect, change its target to all.",
               "cleanText": "When this Spirit would activate any \"BP -\" effect, change its target to all",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "ACTIVATE_EFFECT_ACTION"
+                "op": "ACTIVATE_EFFECT_ACTION",
+                "action": "ACTIVATE_EFFECT",
+                "side": "self"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-021#a2",
+          "keywords": [],
+          "id": "CB31-021#AB_ATTACK_STEP_NONE_LV1_LV2_d737c210a1d085a877ee18f5e9d7b2a919486b4e1dd8176ee3db0e88b7ef6bbb_450c2848829b3bf18f1095e4d061c9f4",
+          "physicalId": "CB31-021#AB_ATTACK_STEP_NONE_LV1_LV2_d737c210a1d085a877ee18f5e9d7b2a919486b4e1dd8176ee3db0e88b7ef6bbb_450c2848829b3bf18f1095e4d061c9f4",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_d737c210a1d085a877ee18f5e9d7b2a919486b4e1dd8176ee3db0e88b7ef6bbb_450c2848829b3bf18f1095e4d061c9f4",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_7ab62b85a6ecf55bcf8da1aed4eb12beb11094d6c5a4ebf0dbbc83c1550420c6_641c6be6231cc96804c1c8987719c9f1",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -1235,6 +1886,21 @@
     "compiledIr": {
       "cardNumber": "CB31-X05",
       "name": "Kamen Rider Gaim Kiwami Arms ［2］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 10000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 15000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: \"Kamen Rider Gaim\" & C7 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[During Advent] [LV1][LV2] (When Advents/Attacks)\nYou can return an opposing Spirit/Ultimate to the deckbottom. This effect can only be prevented by [Heavy Armor]/[Ultra Heavy Armor].\n\n[During OC & During Advent] [LV1][LV2] (Your Attack Step)\nWhen the opposing Life is reduced by the attack of your \"Kamen\" family Spirit, send an opposing Life to the Reserve.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -1242,7 +1908,28 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "CB31-X05#AB_FLASH_NONE_LV1_LV2_LV3_38c9e6c487b44c0f89fac3af25be1c30915b2d3629216e7e911b269ed517871f_6dc9bce16579475588442f6e36278126",
+          "cardNumber": "CB31-X05",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "CB31-X05#a0"
         },
         {
           "name": "Heavy Armor",
@@ -1250,7 +1937,29 @@
           "wave": 1,
           "hook": "heavy_armor",
           "bracketed": true,
-          "index": 314
+          "index": 99,
+          "abilityId": "CB31-X05#AB_WHEN_ADVENTS_NONE_LV1_LV2_852d62bc24b851570f77459e8fbce6223fd67add326988824dff1fda7c2ee591_330167a15e0e5af658fb1c0aaef555be",
+          "cardNumber": "CB31-X05",
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ADVENTS",
+          "timingLabel": "When Advents/Attacks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [
+            "During Advent"
+          ],
+          "isSoulState": false,
+          "duringAdvent": true,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "CB31-X05#a1"
         },
         {
           "name": "Ultra Heavy Armor",
@@ -1258,12 +1967,33 @@
           "wave": 1,
           "hook": "ultra_heavy_armor",
           "bracketed": true,
-          "index": 328
+          "index": 113,
+          "abilityId": "CB31-X05#AB_WHEN_ADVENTS_NONE_LV1_LV2_852d62bc24b851570f77459e8fbce6223fd67add326988824dff1fda7c2ee591_330167a15e0e5af658fb1c0aaef555be",
+          "cardNumber": "CB31-X05",
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ADVENTS",
+          "timingLabel": "When Advents/Attacks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [
+            "During Advent"
+          ],
+          "isSoulState": false,
+          "duringAdvent": true,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "CB31-X05#a1"
         }
       ],
       "abilities": [
         {
-          "id": "CB31-X05#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1274,8 +2004,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: \"Kamen Rider Gaim\" & C7 or more, (Your Turn)",
@@ -1284,10 +2021,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: \"Kamen Rider Gaim\" & C7 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1309,7 +2050,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1327,10 +2070,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-X05#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "\"Kamen Rider Gaim\" & C7 or more, (Your Turn)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "CB31-X05#AB_FLASH_NONE_LV1_LV2_LV3_38c9e6c487b44c0f89fac3af25be1c30915b2d3629216e7e911b269ed517871f_6dc9bce16579475588442f6e36278126",
+              "cardNumber": "CB31-X05",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "CB31-X05#a0"
+            }
+          ],
+          "id": "CB31-X05#AB_FLASH_NONE_LV1_LV2_LV3_38c9e6c487b44c0f89fac3af25be1c30915b2d3629216e7e911b269ed517871f_6dc9bce16579475588442f6e36278126",
+          "physicalId": "CB31-X05#AB_FLASH_NONE_LV1_LV2_LV3_38c9e6c487b44c0f89fac3af25be1c30915b2d3629216e7e911b269ed517871f_6dc9bce16579475588442f6e36278126",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_38c9e6c487b44c0f89fac3af25be1c30915b2d3629216e7e911b269ed517871f_6dc9bce16579475588442f6e36278126",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_e79caa1632195217eaea2294bae260826529a4b7ef1e407d4598246db899bf5f_70b893ccb70db46ea137d927d33c5bca",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-X05#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1342,8 +2129,19 @@
               "During Advent"
             ],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Advents/Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1352,10 +2150,14 @@
             "isMain": false,
             "cleanBody": "You can return an opposing Spirit/Ultimate to the deckbottom. This effect can only be prevented by [Heavy Armor]/[Ultra Heavy Armor]."
           },
+          "originalAbilityText": "[During Advent] [LV1][LV2] (When Advents/Attacks)\nYou can return an opposing Spirit/Ultimate to the deckbottom. This effect can only be prevented by [Heavy Armor]/[Ultra Heavy Armor].",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can return an opposing Spirit/Ultimate to the deckbottom.",
+              "originalClauseText": "You can return an opposing Spirit/Ultimate to the deckbottom.",
               "cleanText": "You can return an opposing Spirit/Ultimate to the deckbottom",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1371,21 +2173,104 @@
             },
             {
               "rawText": "This effect can only be prevented by [Heavy Armor]/[Ultra Heavy Armor].",
+              "originalClauseText": "This effect can only be prevented by [Heavy Armor]/[Ultra Heavy Armor].",
               "cleanText": "This effect can only be prevented by [Heavy Armor]/[Ultra Heavy Armor]",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
+                "allowedPrevention": [
+                  "Heavy Armor",
+                  "Ultra Armor"
+                ],
+                "effectType": "destroy",
                 "op": "PIERCING_RULE"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-X05#a1",
+          "keywords": [
+            {
+              "name": "Heavy Armor",
+              "parameter": null,
+              "wave": 1,
+              "hook": "heavy_armor",
+              "bracketed": true,
+              "index": 99,
+              "abilityId": "CB31-X05#AB_WHEN_ADVENTS_NONE_LV1_LV2_852d62bc24b851570f77459e8fbce6223fd67add326988824dff1fda7c2ee591_330167a15e0e5af658fb1c0aaef555be",
+              "cardNumber": "CB31-X05",
+              "levels": [
+                1,
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ADVENTS",
+              "timingLabel": "When Advents/Attacks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [
+                "During Advent"
+              ],
+              "isSoulState": false,
+              "duringAdvent": true,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "CB31-X05#a1"
+            },
+            {
+              "name": "Ultra Heavy Armor",
+              "parameter": null,
+              "wave": 1,
+              "hook": "ultra_heavy_armor",
+              "bracketed": true,
+              "index": 113,
+              "abilityId": "CB31-X05#AB_WHEN_ADVENTS_NONE_LV1_LV2_852d62bc24b851570f77459e8fbce6223fd67add326988824dff1fda7c2ee591_330167a15e0e5af658fb1c0aaef555be",
+              "cardNumber": "CB31-X05",
+              "levels": [
+                1,
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ADVENTS",
+              "timingLabel": "When Advents/Attacks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [
+                "During Advent"
+              ],
+              "isSoulState": false,
+              "duringAdvent": true,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "CB31-X05#a1"
+            }
+          ],
+          "id": "CB31-X05#AB_WHEN_ADVENTS_NONE_LV1_LV2_852d62bc24b851570f77459e8fbce6223fd67add326988824dff1fda7c2ee591_330167a15e0e5af658fb1c0aaef555be",
+          "physicalId": "CB31-X05#AB_WHEN_ADVENTS_NONE_LV1_LV2_852d62bc24b851570f77459e8fbce6223fd67add326988824dff1fda7c2ee591_330167a15e0e5af658fb1c0aaef555be",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_852d62bc24b851570f77459e8fbce6223fd67add326988824dff1fda7c2ee591_330167a15e0e5af658fb1c0aaef555be",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_a4a22a26e40a5329ee93af1f53a24e8d9372c4966b4205853a911f8709a5b727_1bb8ef7da6b071b4fa202ff1d0caa0d9",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-X05#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1397,8 +2282,17 @@
               "During OC & During Advent"
             ],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1407,10 +2301,14 @@
             "isMain": false,
             "cleanBody": "When the opposing Life is reduced by the attack of your \"Kamen\" family Spirit, send an opposing Life to the Reserve."
           },
+          "originalAbilityText": "[During OC & During Advent] [LV1][LV2] (Your Attack Step)\nWhen the opposing Life is reduced by the attack of your \"Kamen\" family Spirit, send an opposing Life to the Reserve.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When the opposing Life is reduced by the attack of your \"Kamen\" family Spirit, send an opposing Life to the Reserve.",
+              "originalClauseText": "When the opposing Life is reduced by the attack of your \"Kamen\" family Spirit, send an opposing Life to the Reserve.",
               "cleanText": "When the opposing Life is reduced by the attack of your \"Kamen\" family Spirit, send an opposing Life to the Reserve",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1418,11 +2316,34 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-X05#a2",
+          "keywords": [],
+          "id": "CB31-X05#AB_ATTACK_STEP_NONE_LV1_LV2_e55f3069f50a5f4fbe9b100ad97a54a7c6a400ac4e026a237df0a7f9218e9ba1_42fc7a30c9b97e506da54599eb58f76b",
+          "physicalId": "CB31-X05#AB_ATTACK_STEP_NONE_LV1_LV2_e55f3069f50a5f4fbe9b100ad97a54a7c6a400ac4e026a237df0a7f9218e9ba1_42fc7a30c9b97e506da54599eb58f76b",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_e55f3069f50a5f4fbe9b100ad97a54a7c6a400ac4e026a237df0a7f9218e9ba1_42fc7a30c9b97e506da54599eb58f76b",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_e498089dd153716b106e8ceda8f5e67cd33a5113178bb2bda252897c75a5ff6b_f859b5450d619834cdc6ac870e677e2b",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -2321,6 +3242,21 @@
     "compiledIr": {
       "cardNumber": "CB31-X01",
       "name": "Kamen Rider Kabuto Hyper Form ［3］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 8000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 13000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: \"Kamen Rider Kabuto\" & C6 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents/Attacks)\nYou can destroy an opposing Spirit/Ultimate with the highest BP. Then, once per turn, if you have seven counters or more, you can pay one cost to summon a \"Gatack\" from your Hand.\n\n[During OC & During Advent] [LV1][LV2] (When Attacks)\nWhen the opponent would use Flash effects, it can't be used unless the opponent send a core from their Life to the Trash, and pay three extra costs.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -2328,12 +3264,32 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "CB31-X01#AB_FLASH_NONE_LV1_LV2_LV3_4fec167740da13a5c7d36eda8745384062ee96f9e57c4bb2b8554abfec5a6376_3fbe3d848ed548193f7b798a9d3e81d8",
+          "cardNumber": "CB31-X01",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "CB31-X01#a0"
         }
       ],
       "abilities": [
         {
-          "id": "CB31-X01#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2344,8 +3300,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: \"Kamen Rider Kabuto\" & C6 or more, (Your Turn)",
@@ -2354,10 +3317,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: \"Kamen Rider Kabuto\" & C6 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -2379,7 +3346,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -2397,10 +3366,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-X01#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "\"Kamen Rider Kabuto\" & C6 or more, (Your Turn)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "CB31-X01#AB_FLASH_NONE_LV1_LV2_LV3_4fec167740da13a5c7d36eda8745384062ee96f9e57c4bb2b8554abfec5a6376_3fbe3d848ed548193f7b798a9d3e81d8",
+              "cardNumber": "CB31-X01",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "CB31-X01#a0"
+            }
+          ],
+          "id": "CB31-X01#AB_FLASH_NONE_LV1_LV2_LV3_4fec167740da13a5c7d36eda8745384062ee96f9e57c4bb2b8554abfec5a6376_3fbe3d848ed548193f7b798a9d3e81d8",
+          "physicalId": "CB31-X01#AB_FLASH_NONE_LV1_LV2_LV3_4fec167740da13a5c7d36eda8745384062ee96f9e57c4bb2b8554abfec5a6376_3fbe3d848ed548193f7b798a9d3e81d8",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_4fec167740da13a5c7d36eda8745384062ee96f9e57c4bb2b8554abfec5a6376_3fbe3d848ed548193f7b798a9d3e81d8",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_7a19a40a5b3e2deeebabc3c71472dc65fe5c36776146f0ed30f371c3164c43c4_bc0dac25ad649185cd825a35d1f3ecfa",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-X01#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2410,8 +3423,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Advents/Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2420,10 +3444,14 @@
             "isMain": false,
             "cleanBody": "You can destroy an opposing Spirit/Ultimate with the highest BP. Then, once per turn, if you have seven counters or more, you can pay one cost to summon a \"Gatack\" from your Hand."
           },
+          "originalAbilityText": "[LV1][LV2] (When Advents/Attacks)\nYou can destroy an opposing Spirit/Ultimate with the highest BP. Then, once per turn, if you have seven counters or more, you can pay one cost to summon a \"Gatack\" from your Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can destroy an opposing Spirit/Ultimate with the highest BP.",
+              "originalClauseText": "You can destroy an opposing Spirit/Ultimate with the highest BP.",
               "cleanText": "You can destroy an opposing Spirit/Ultimate with the highest BP",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -2442,7 +3470,9 @@
             },
             {
               "rawText": "once per turn, if you have seven counters or more, you can pay one cost to summon a \"Gatack\" from your Hand.",
+              "originalClauseText": "once per turn, if you have seven counters or more, you can pay one cost to summon a \"Gatack\" from your Hand.",
               "cleanText": "once per turn, if you have seven counters or more, you can pay one cost to summon a \"Gatack\" from your Hand",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": true,
               "isCost": false,
@@ -2450,14 +3480,41 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "Gatack"
+                },
+                "free": false,
+                "costCores": 1,
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-X01#a1",
+          "keywords": [],
+          "id": "CB31-X01#AB_WHEN_ADVENTS_NONE_LV1_LV2_9b724d9b7ca425d0cefa1f52a4a2d114bad9c431f7f62b5328bb80c297ba4504_7b50c1cb16cfc9bba3188fdfcc238762",
+          "physicalId": "CB31-X01#AB_WHEN_ADVENTS_NONE_LV1_LV2_9b724d9b7ca425d0cefa1f52a4a2d114bad9c431f7f62b5328bb80c297ba4504_7b50c1cb16cfc9bba3188fdfcc238762",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_9b724d9b7ca425d0cefa1f52a4a2d114bad9c431f7f62b5328bb80c297ba4504_7b50c1cb16cfc9bba3188fdfcc238762",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_bb095714e9864cc63002d3ee5267cd898bc6c2ed87d3f1a3511bb8edd12c42df_689e8c2e2d3826162b73862197774ae7",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-X01#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2469,8 +3526,17 @@
               "During OC & During Advent"
             ],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2479,10 +3545,14 @@
             "isMain": false,
             "cleanBody": "When the opponent would use Flash effects, it can't be used unless the opponent send a core from their Life to the Trash, and pay three extra costs."
           },
+          "originalAbilityText": "[During OC & During Advent] [LV1][LV2] (When Attacks)\nWhen the opponent would use Flash effects, it can't be used unless the opponent send a core from their Life to the Trash, and pay three extra costs.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When the opponent would use Flash effects, it can't be used unless the opponent send a core from their Life to the Trash, and pay three extra costs.",
+              "originalClauseText": "When the opponent would use Flash effects, it can't be used unless the opponent send a core from their Life to the Trash, and pay three extra costs.",
               "cleanText": "When the opponent would use Flash effects, it can't be used unless the opponent send a core from their Life to the Trash, and pay three extra costs",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2490,11 +3560,34 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "life",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-X01#a2",
+          "keywords": [],
+          "id": "CB31-X01#AB_WHEN_ATTACKS_NONE_LV1_LV2_b14ddf966cc33ddf9866984cae5cdc789bfed08a0caefe6dc1c8d945df6af52a_c14d6fb5ba464bd044b0b5b7ba635f64",
+          "physicalId": "CB31-X01#AB_WHEN_ATTACKS_NONE_LV1_LV2_b14ddf966cc33ddf9866984cae5cdc789bfed08a0caefe6dc1c8d945df6af52a_c14d6fb5ba464bd044b0b5b7ba635f64",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_b14ddf966cc33ddf9866984cae5cdc789bfed08a0caefe6dc1c8d945df6af52a_c14d6fb5ba464bd044b0b5b7ba635f64",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_9459d55033caa4a9997fb12065941691195d8dc6e562a154a9212c8c3cd28aaf_0b263183a820326c7b85fa26779d575a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -2522,6 +3615,21 @@
     "compiledIr": {
       "cardNumber": "CB31-005",
       "name": "Kamen Rider Kabuto Rider Form ［4］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 6000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: \"Kamen Rider Kabuto\", (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Attacks)\nYour counter +1. Then, you can destroy an opposing 5000 BP or less Spirit.\n\n[During OC] [LV1][LV2] (When Attacks)\nWhen not blocked, you can destroy an opposing one-symbol Spirit/Ultimate.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -2529,12 +3637,32 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "CB31-005#AB_FLASH_NONE_LV1_LV2_LV3_4ff131726f4e14c0e8a462834e8a8bcca54f38d537f583f0f823da4d81fcf941_007264611eb92851005f1662e1073305",
+          "cardNumber": "CB31-005",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "CB31-005#a0"
         }
       ],
       "abilities": [
         {
-          "id": "CB31-005#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2545,8 +3673,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: \"Kamen Rider Kabuto\", (Your Turn)",
@@ -2555,10 +3690,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: \"Kamen Rider Kabuto\", (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -2580,7 +3719,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -2598,10 +3739,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-005#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "\"Kamen Rider Kabuto\", (Your Turn)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "CB31-005#AB_FLASH_NONE_LV1_LV2_LV3_4ff131726f4e14c0e8a462834e8a8bcca54f38d537f583f0f823da4d81fcf941_007264611eb92851005f1662e1073305",
+              "cardNumber": "CB31-005",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "CB31-005#a0"
+            }
+          ],
+          "id": "CB31-005#AB_FLASH_NONE_LV1_LV2_LV3_4ff131726f4e14c0e8a462834e8a8bcca54f38d537f583f0f823da4d81fcf941_007264611eb92851005f1662e1073305",
+          "physicalId": "CB31-005#AB_FLASH_NONE_LV1_LV2_LV3_4ff131726f4e14c0e8a462834e8a8bcca54f38d537f583f0f823da4d81fcf941_007264611eb92851005f1662e1073305",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_4ff131726f4e14c0e8a462834e8a8bcca54f38d537f583f0f823da4d81fcf941_007264611eb92851005f1662e1073305",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_62d5248ed0a459a1403c487c478e9851309ec3a823ee155725b91999a6bcf3e4_88039844a5cf84d70eddea6e12735185",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-005#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2611,8 +3796,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2621,10 +3815,14 @@
             "isMain": false,
             "cleanBody": "Your counter +1. Then, you can destroy an opposing 5000 BP or less Spirit."
           },
+          "originalAbilityText": "[LV1][LV2] (When Attacks)\nYour counter +1. Then, you can destroy an opposing 5000 BP or less Spirit.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Your counter +1.",
+              "originalClauseText": "Your counter +1.",
               "cleanText": "Your counter +1",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2637,7 +3835,9 @@
             },
             {
               "rawText": "you can destroy an opposing 5000 BP or less Spirit.",
+              "originalClauseText": "you can destroy an opposing 5000 BP or less Spirit.",
               "cleanText": "you can destroy an opposing 5000 BP or less Spirit",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": true,
               "isCost": false,
@@ -2658,10 +3858,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-005#a1",
+          "keywords": [],
+          "id": "CB31-005#AB_WHEN_ATTACKS_NONE_LV1_LV2_960a15ea9452eab861a87a96e666a143fc28c4dcfec03d6ae5fa76f2ec7d32c5_9c71aec40257e2a6d81caf99586f86af",
+          "physicalId": "CB31-005#AB_WHEN_ATTACKS_NONE_LV1_LV2_960a15ea9452eab861a87a96e666a143fc28c4dcfec03d6ae5fa76f2ec7d32c5_9c71aec40257e2a6d81caf99586f86af",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_960a15ea9452eab861a87a96e666a143fc28c4dcfec03d6ae5fa76f2ec7d32c5_9c71aec40257e2a6d81caf99586f86af",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_126bc6684d7f902fd10f1114e4715ff54a70592c4e89958f04b8483b83fcfeff_0266769814b79fdc603a128fdde51a1c",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-005#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2673,8 +3887,17 @@
               "During OC"
             ],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2683,10 +3906,14 @@
             "isMain": false,
             "cleanBody": "When not blocked, you can destroy an opposing one-symbol Spirit/Ultimate."
           },
+          "originalAbilityText": "[During OC] [LV1][LV2] (When Attacks)\nWhen not blocked, you can destroy an opposing one-symbol Spirit/Ultimate.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When not blocked, you can destroy an opposing one-symbol Spirit/Ultimate.",
+              "originalClauseText": "When not blocked, you can destroy an opposing one-symbol Spirit/Ultimate.",
               "cleanText": "When not blocked, you can destroy an opposing one-symbol Spirit/Ultimate",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -2707,7 +3934,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-005#a2",
+          "keywords": [],
+          "id": "CB31-005#AB_WHEN_ATTACKS_NONE_LV1_LV2_ed85311c3771b404a5111e279b2bf609e9ecd306876536b4ac62df2e26711027_6042f7f41a13a3886a5b2c7648d5c69b",
+          "physicalId": "CB31-005#AB_WHEN_ATTACKS_NONE_LV1_LV2_ed85311c3771b404a5111e279b2bf609e9ecd306876536b4ac62df2e26711027_6042f7f41a13a3886a5b2c7648d5c69b",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_ed85311c3771b404a5111e279b2bf609e9ecd306876536b4ac62df2e26711027_6042f7f41a13a3886a5b2c7648d5c69b",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_16675edae516688dbc7bab1cd41011e1d65b091e25366ba3a61a9b81e2cc45ea_3e4268944d8cbf6cf1530d1cccdaf0d8",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -3114,6 +4356,21 @@
     "compiledIr": {
       "cardNumber": "CB31-006",
       "name": "Kamen Rider Kabuto Rider Form ［5］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 8000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: \"Kamen Rider Kabuto\" & C3 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents/Attacks)\nYou can destroy an opposing 10000 BP or less Spirit. For each counter you have, increase the limit of this \"BP Destruction effect\" by +1000.\n\n[During OC] [LV1][LV2] (When Attacks)\nDestroy an opposing Nexus, and when you couldn't destroy, send five cores from an opposing Grandwalker Nexus to the Void.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -3121,12 +4378,32 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "CB31-006#AB_FLASH_NONE_LV1_LV2_LV3_0695f69148d6282d743b390e82bcb65a25f4bc0e13e019bec53dd7003989ad77_f1219fd654797cf30bef9f6d4a7f692f",
+          "cardNumber": "CB31-006",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "CB31-006#a0"
         }
       ],
       "abilities": [
         {
-          "id": "CB31-006#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3137,8 +4414,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: \"Kamen Rider Kabuto\" & C3 or more, (Either Attack Step)",
@@ -3147,10 +4431,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: \"Kamen Rider Kabuto\" & C3 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -3172,7 +4460,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -3190,10 +4480,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-006#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "\"Kamen Rider Kabuto\" & C3 or more, (Either Attack Step)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "CB31-006#AB_FLASH_NONE_LV1_LV2_LV3_0695f69148d6282d743b390e82bcb65a25f4bc0e13e019bec53dd7003989ad77_f1219fd654797cf30bef9f6d4a7f692f",
+              "cardNumber": "CB31-006",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "CB31-006#a0"
+            }
+          ],
+          "id": "CB31-006#AB_FLASH_NONE_LV1_LV2_LV3_0695f69148d6282d743b390e82bcb65a25f4bc0e13e019bec53dd7003989ad77_f1219fd654797cf30bef9f6d4a7f692f",
+          "physicalId": "CB31-006#AB_FLASH_NONE_LV1_LV2_LV3_0695f69148d6282d743b390e82bcb65a25f4bc0e13e019bec53dd7003989ad77_f1219fd654797cf30bef9f6d4a7f692f",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_0695f69148d6282d743b390e82bcb65a25f4bc0e13e019bec53dd7003989ad77_f1219fd654797cf30bef9f6d4a7f692f",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_529a4fd1fd9d1679152f65defbb7d6f11889666405953206da3c01e6f7ee0329_19bdb09de4b83a1d082452cdec9836db",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-006#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3203,8 +4537,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Advents/Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3213,10 +4558,14 @@
             "isMain": false,
             "cleanBody": "You can destroy an opposing 10000 BP or less Spirit. For each counter you have, increase the limit of this \"BP Destruction effect\" by +1000."
           },
+          "originalAbilityText": "[LV1][LV2] (When Advents/Attacks)\nYou can destroy an opposing 10000 BP or less Spirit. For each counter you have, increase the limit of this \"BP Destruction effect\" by +1000.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can destroy an opposing 10000 BP or less Spirit.",
+              "originalClauseText": "You can destroy an opposing 10000 BP or less Spirit.",
               "cleanText": "You can destroy an opposing 10000 BP or less Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -3238,7 +4587,9 @@
             },
             {
               "rawText": "For each counter you have, increase the limit of this \"BP Destruction effect\" by +1000.",
+              "originalClauseText": "For each counter you have, increase the limit of this \"BP Destruction effect\" by +1000.",
               "cleanText": "For each counter you have, increase the limit of this \"BP Destruction effect\" by +1000",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -3253,10 +4604,25 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-006#a1",
+          "keywords": [],
+          "id": "CB31-006#AB_WHEN_ADVENTS_NONE_LV1_LV2_e4e62c4546312d58ff7011d61551ca8129de0ffd03d3797b03ec22004631e0ce_673a3072317abcea2b847aec28cfda39",
+          "physicalId": "CB31-006#AB_WHEN_ADVENTS_NONE_LV1_LV2_e4e62c4546312d58ff7011d61551ca8129de0ffd03d3797b03ec22004631e0ce_673a3072317abcea2b847aec28cfda39",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_e4e62c4546312d58ff7011d61551ca8129de0ffd03d3797b03ec22004631e0ce_673a3072317abcea2b847aec28cfda39",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_d1bafedb20ad064c8216e43ebbf43b5c09dd6b842178abe9a3cc6a7d0eb3eece_b6b8b86d07dfcbec6255e55e8242bda8",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-006#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3268,8 +4634,17 @@
               "During OC"
             ],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3278,10 +4653,14 @@
             "isMain": false,
             "cleanBody": "Destroy an opposing Nexus, and when you couldn't destroy, send five cores from an opposing Grandwalker Nexus to the Void."
           },
+          "originalAbilityText": "[During OC] [LV1][LV2] (When Attacks)\nDestroy an opposing Nexus, and when you couldn't destroy, send five cores from an opposing Grandwalker Nexus to the Void.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Destroy an opposing Nexus, and when you couldn't destroy, send five cores from an opposing Grandwalker Nexus to the Void.",
+              "originalClauseText": "Destroy an opposing Nexus, and when you couldn't destroy, send five cores from an opposing Grandwalker Nexus to the Void.",
               "cleanText": "Destroy an opposing Nexus, and when you couldn't destroy, send five cores from an opposing Grandwalker Nexus to the Void",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -3299,7 +4678,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-006#a2",
+          "keywords": [],
+          "id": "CB31-006#AB_WHEN_ATTACKS_NONE_LV1_LV2_6c5cf6421801cec8ead133f46684bc542c8e04fcd043483e3a15e14cfe68da5d_43f7ae3d5f8478343e8496b90d6e18c0",
+          "physicalId": "CB31-006#AB_WHEN_ATTACKS_NONE_LV1_LV2_6c5cf6421801cec8ead133f46684bc542c8e04fcd043483e3a15e14cfe68da5d_43f7ae3d5f8478343e8496b90d6e18c0",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_6c5cf6421801cec8ead133f46684bc542c8e04fcd043483e3a15e14cfe68da5d_43f7ae3d5f8478343e8496b90d6e18c0",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_d392f693ae242a7f0727b0fa3b0e7c88de19e32da7c7ebdbe83895c9880d5532_7f38bbc8a1b4b32ea84dac84ecec3e5f",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -3706,19 +5100,29 @@
     "compiledIr": {
       "cardNumber": "CB31-003",
       "name": "Kamen Rider TheBee Rider Form ［2］",
-      "keywords": [
-        {
-          "name": "Burst",
-          "parameter": "After an opposing Spirit's (When Summoned) effect resolves",
-          "wave": 2,
-          "hook": "burst",
-          "bracketed": true,
-          "index": 113
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 7000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 5,
+          "bp": 10000
         }
-      ],
+      },
+      "originalEffectText": "If there are three or more \"Kamen\" family cards in your Trash, this set card is unaffected by opposing effects.\n\n[Burst: After an opposing Spirit's (When Summoned) effect resolves]\nDestroy an opposing 15000 BP or less Spirit/Ultimate. After this effect resolves, summon this card without paying the cost.\n\n[LV2][LV3] (When Attacks)\nYour counter +1. Then, destroy an opposing Spirit with a BP equal or inferior to this Spirit's.",
+      "teams": [],
+      "keywords": [],
       "abilities": [
         {
-          "id": "CB31-003#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3729,8 +5133,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3739,10 +5148,14 @@
             "isMain": false,
             "cleanBody": "If there are three or more \"Kamen\" family cards in your Trash, this set card is unaffected by opposing effects."
           },
+          "originalAbilityText": "If there are three or more \"Kamen\" family cards in your Trash, this set card is unaffected by opposing effects.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "If there are three or more \"Kamen\" family cards in your Trash, this set card is unaffected by opposing effects.",
+              "originalClauseText": "If there are three or more \"Kamen\" family cards in your Trash, this set card is unaffected by opposing effects.",
               "cleanText": "this set card is unaffected by opposing effects",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -3754,10 +5167,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-003#a0",
+          "keywords": [],
+          "id": "CB31-003#AB_PASSIVE_NONE_LV1_LV2_LV3_1876a425f1370ec10703f19b007c480c3bdcd94a8cef28665aaaf2f2bd07e405_d69eeb83b5e8f54e1bc37e9c541c4cb8",
+          "physicalId": "CB31-003#AB_PASSIVE_NONE_LV1_LV2_LV3_1876a425f1370ec10703f19b007c480c3bdcd94a8cef28665aaaf2f2bd07e405_d69eeb83b5e8f54e1bc37e9c541c4cb8",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_1876a425f1370ec10703f19b007c480c3bdcd94a8cef28665aaaf2f2bd07e405_d69eeb83b5e8f54e1bc37e9c541c4cb8",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_39ac14d167dfc502dcc6bc872577ae32f35baeae97c2047250ab1312f7d19062_d76d4fab6012952bd8e59bcb54a45659",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-003#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3768,8 +5193,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "BURST",
+            "timings": [],
             "timingLabel": "Burst",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3778,10 +5210,14 @@
             "isMain": false,
             "cleanBody": "Destroy an opposing 15000 BP or less Spirit/Ultimate. After this effect resolves, summon this card without paying the cost."
           },
+          "originalAbilityText": "[Burst: After an opposing Spirit's (When Summoned) effect resolves]\nDestroy an opposing 15000 BP or less Spirit/Ultimate. After this effect resolves, summon this card without paying the cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Destroy an opposing 15000 BP or less Spirit/Ultimate.",
+              "originalClauseText": "Destroy an opposing 15000 BP or less Spirit/Ultimate.",
               "cleanText": "Destroy an opposing 15000 BP or less Spirit/Ultimate",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -3803,7 +5239,9 @@
             },
             {
               "rawText": "summon this card without paying the cost.",
+              "originalClauseText": "summon this card without paying the cost.",
               "cleanText": "summon this card without paying the cost",
+              "clauseIndex": 1,
               "link": "afterResolves",
               "isOptional": false,
               "isCost": false,
@@ -3816,10 +5254,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-003#a1",
+          "keywords": [],
+          "id": "CB31-003#AB_BURST_NONE_LV1_LV2_LV3_6ac77fb267c3fd14dd317d6977c956242fdb1d78a9d58664cafe04ecb3eda1f1_04f9eca670c5c5d16e94020a2a40e983",
+          "physicalId": "CB31-003#AB_BURST_NONE_LV1_LV2_LV3_6ac77fb267c3fd14dd317d6977c956242fdb1d78a9d58664cafe04ecb3eda1f1_04f9eca670c5c5d16e94020a2a40e983",
+          "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_6ac77fb267c3fd14dd317d6977c956242fdb1d78a9d58664cafe04ecb3eda1f1_04f9eca670c5c5d16e94020a2a40e983",
+          "semanticIdV3": "SEM3#AB_BURST_NONE_LV1_LV2_LV3_62c89ce8963ae625eeff2281d57eeb3c670d6a61ea917854265d2a927c82d9e2_743053d721849636f30bf20224eb92f5",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-003#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3829,8 +5281,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3839,10 +5300,14 @@
             "isMain": false,
             "cleanBody": "Your counter +1. Then, destroy an opposing Spirit with a BP equal or inferior to this Spirit's."
           },
+          "originalAbilityText": "[LV2][LV3] (When Attacks)\nYour counter +1. Then, destroy an opposing Spirit with a BP equal or inferior to this Spirit's.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Your counter +1.",
+              "originalClauseText": "Your counter +1.",
               "cleanText": "Your counter +1",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -3855,7 +5320,9 @@
             },
             {
               "rawText": "destroy an opposing Spirit with a BP equal or inferior to this Spirit's.",
+              "originalClauseText": "destroy an opposing Spirit with a BP equal or inferior to this Spirit's.",
               "cleanText": "destroy an opposing Spirit with a BP equal or inferior to this Spirit's",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -3868,12 +5335,34 @@
                   "side": "opp",
                   "types": [
                     "Spirit"
-                  ]
+                  ],
+                  "filters": {
+                    "comparison": {
+                      "property": "BP",
+                      "operator": "LTE",
+                      "reference": "self"
+                    }
+                  }
                 }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-003#a2",
+          "keywords": [],
+          "id": "CB31-003#AB_WHEN_ATTACKS_NONE_LV2_LV3_b4cb9b25e7d861bfe5950536c950fc531710bffab407d328d6a9e73904918ead_bd366441d3d50700d21112b788112281",
+          "physicalId": "CB31-003#AB_WHEN_ATTACKS_NONE_LV2_LV3_b4cb9b25e7d861bfe5950536c950fc531710bffab407d328d6a9e73904918ead_bd366441d3d50700d21112b788112281",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_b4cb9b25e7d861bfe5950536c950fc531710bffab407d328d6a9e73904918ead_bd366441d3d50700d21112b788112281",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_e98f613bf5ef612af708151a46b104e5c6d9c53d9467a6d1785d4b05750bb4b3_de574c798f046da908d870befaa8f6d3",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -3901,6 +5390,21 @@
     "compiledIr": {
       "cardNumber": "CB31-X02",
       "name": "Kamen Rider W CycloneJokerGoldXtreme［3］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 10000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 13000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: \"Kamen Rider W\" & C7 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[During Advent] [LV1][LV2] (When Attacks)\nHeavy exhaust two opposing Spirits/Ultimates. When this effect couldn't heavy exhaust, during this battle, the opponent can't use cards with a cost equal or inferior to the number of cards in the opposing Hand.\n\n[During OC] [LV1][LV2] Flash - (Either Attack Step)\nBy banishing two cards from the opposing Trash, refresh this Spirit.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -3908,12 +5412,32 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "CB31-X02#AB_FLASH_NONE_LV1_LV2_LV3_f4c09bb96dea904ff6c0d1c10b226947e612b725171fb6f8550576260f679394_c13847d3855ce4b47c30897972403f22",
+          "cardNumber": "CB31-X02",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "CB31-X02#a0"
         }
       ],
       "abilities": [
         {
-          "id": "CB31-X02#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3924,8 +5448,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: \"Kamen Rider W\" & C7 or more, (Your Turn)",
@@ -3934,10 +5465,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: \"Kamen Rider W\" & C7 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -3959,7 +5494,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -3977,10 +5514,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-X02#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "\"Kamen Rider W\" & C7 or more, (Your Turn)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "CB31-X02#AB_FLASH_NONE_LV1_LV2_LV3_f4c09bb96dea904ff6c0d1c10b226947e612b725171fb6f8550576260f679394_c13847d3855ce4b47c30897972403f22",
+              "cardNumber": "CB31-X02",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "CB31-X02#a0"
+            }
+          ],
+          "id": "CB31-X02#AB_FLASH_NONE_LV1_LV2_LV3_f4c09bb96dea904ff6c0d1c10b226947e612b725171fb6f8550576260f679394_c13847d3855ce4b47c30897972403f22",
+          "physicalId": "CB31-X02#AB_FLASH_NONE_LV1_LV2_LV3_f4c09bb96dea904ff6c0d1c10b226947e612b725171fb6f8550576260f679394_c13847d3855ce4b47c30897972403f22",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_f4c09bb96dea904ff6c0d1c10b226947e612b725171fb6f8550576260f679394_c13847d3855ce4b47c30897972403f22",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_d9210632a567085cf3aafe668b1ea8b09b6c8b088a5cda79008e51ad6017b97f_fa6a51c0177434b353464123a68833bb",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-X02#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3992,8 +5573,17 @@
               "During Advent"
             ],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4002,10 +5592,14 @@
             "isMain": false,
             "cleanBody": "Heavy exhaust two opposing Spirits/Ultimates. When this effect couldn't heavy exhaust, during this battle, the opponent can't use cards with a cost equal or inferior to the number of cards in the opposing Hand."
           },
+          "originalAbilityText": "[During Advent] [LV1][LV2] (When Attacks)\nHeavy exhaust two opposing Spirits/Ultimates. When this effect couldn't heavy exhaust, during this battle, the opponent can't use cards with a cost equal or inferior to the number of cards in the opposing Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Heavy exhaust two opposing Spirits/Ultimates.",
+              "originalClauseText": "Heavy exhaust two opposing Spirits/Ultimates.",
               "cleanText": "Heavy exhaust two opposing Spirits/Ultimates",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -4025,7 +5619,9 @@
             },
             {
               "rawText": "When this effect couldn't heavy exhaust, during this battle, the opponent can't use cards with a cost equal or inferior to the number of cards in the opposing Hand.",
+              "originalClauseText": "When this effect couldn't heavy exhaust, during this battle, the opponent can't use cards with a cost equal or inferior to the number of cards in the opposing Hand.",
               "cleanText": "When this effect couldn't heavy exhaust, during this battle, the opponent can't use cards with a cost equal or inferior to the number of cards in the opposing Hand",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -4033,16 +5629,34 @@
               "duration": "DURING_THIS_BATTLE",
               "op": {
                 "op": "EXHAUST",
+                "count": 1,
                 "target": {
-                  "side": "either"
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
                 }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-X02#a1",
+          "keywords": [],
+          "id": "CB31-X02#AB_WHEN_ATTACKS_NONE_LV1_LV2_fac6470a6210188e59a0ec4621697951eba75363369442269a7f5a45e8b21c1d_0764de6434a95c8b3c482ca5957321dc",
+          "physicalId": "CB31-X02#AB_WHEN_ATTACKS_NONE_LV1_LV2_fac6470a6210188e59a0ec4621697951eba75363369442269a7f5a45e8b21c1d_0764de6434a95c8b3c482ca5957321dc",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_fac6470a6210188e59a0ec4621697951eba75363369442269a7f5a45e8b21c1d_0764de6434a95c8b3c482ca5957321dc",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_268eca330bb07f4284ab9a4bc66cc1b65fd2a44f34ab19bd9ff2b6f8adbd46c6_d2d2ce7c0a31b53d5420fe495117bcc5",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-X02#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4054,8 +5668,17 @@
               "During OC"
             ],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4064,10 +5687,14 @@
             "isMain": false,
             "cleanBody": "By banishing two cards from the opposing Trash, refresh this Spirit."
           },
+          "originalAbilityText": "[During OC] [LV1][LV2] Flash - (Either Attack Step)\nBy banishing two cards from the opposing Trash, refresh this Spirit.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "By banishing two cards from the opposing Trash",
+              "originalClauseText": "By banishing two cards from the opposing Trash",
               "cleanText": "By banishing two cards from the opposing Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -4079,7 +5706,9 @@
             },
             {
               "rawText": "refresh this Spirit.",
+              "originalClauseText": "refresh this Spirit.",
               "cleanText": "refresh this Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -4091,7 +5720,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-X02#a2",
+          "keywords": [],
+          "id": "CB31-X02#AB_ATTACK_STEP_NONE_LV1_LV2_a14a9fab8c3293f8c0d0bc4cf858b3fe422afa1302f82b30aa08b46bde2c751f_573851a5625b1d73bef13308eda27cb6",
+          "physicalId": "CB31-X02#AB_ATTACK_STEP_NONE_LV1_LV2_a14a9fab8c3293f8c0d0bc4cf858b3fe422afa1302f82b30aa08b46bde2c751f_573851a5625b1d73bef13308eda27cb6",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_a14a9fab8c3293f8c0d0bc4cf858b3fe422afa1302f82b30aa08b46bde2c751f_573851a5625b1d73bef13308eda27cb6",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_b8629d28a79f27d33f63e2f52bb00dd9b3a828a7f0bedb138c368df763c88eb4_16fa9d9af04cd024b2fb87dcfe7c3d8b",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
@@ -4119,6 +5763,21 @@
     "compiledIr": {
       "cardNumber": "CB31-014",
       "name": "Kamen Rider W CycloneJokerXtreme ［4］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 7000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: \"Kamen Rider W\" & C3 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n(Once per Turn: Same Name) If you have six counters or more, you can [Contract Advent] this card from the Hand, treating your [Soul Core] as being sent to the Trash.\n\n[LV1][LV2] (When Advents)\nReturn up to two opposing exhausted Spirits/Ultimates to the Hand or deckbottom.\n\n[During OC] [LV1][LV2] (When Attacks/Blocks)\nHeavy exhaust an opposing Spirit/Ultimate.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -4126,7 +5785,28 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "CB31-014#AB_FLASH_NONE_LV1_LV2_LV3_b57b845222de05256b1c0d9d3aaf6bc679e127fa07b92bfee8aa9c6d191c109c_bca4f846c0df0f20c2606c606ebacba8",
+          "cardNumber": "CB31-014",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "CB31-014#a0"
         },
         {
           "name": "Contract Advent",
@@ -4134,12 +5814,32 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 240
+          "index": 42,
+          "abilityId": "CB31-014#AB_PASSIVE_NONE_LV1_LV2_LV3_59e737992ea7fa7d3fbd0ebd89e360c3d88c1f04cbad8882cebf708f341f4d1d_67957c18a2564805b34363e33444f868",
+          "cardNumber": "CB31-014",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "CB31-014#a1"
         }
       ],
       "abilities": [
         {
-          "id": "CB31-014#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4150,8 +5850,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: \"Kamen Rider W\" & C3 or more, (Either Attack Step)",
@@ -4160,10 +5867,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: \"Kamen Rider W\" & C3 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -4185,7 +5896,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -4203,10 +5916,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-014#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "\"Kamen Rider W\" & C3 or more, (Either Attack Step)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "CB31-014#AB_FLASH_NONE_LV1_LV2_LV3_b57b845222de05256b1c0d9d3aaf6bc679e127fa07b92bfee8aa9c6d191c109c_bca4f846c0df0f20c2606c606ebacba8",
+              "cardNumber": "CB31-014",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "CB31-014#a0"
+            }
+          ],
+          "id": "CB31-014#AB_FLASH_NONE_LV1_LV2_LV3_b57b845222de05256b1c0d9d3aaf6bc679e127fa07b92bfee8aa9c6d191c109c_bca4f846c0df0f20c2606c606ebacba8",
+          "physicalId": "CB31-014#AB_FLASH_NONE_LV1_LV2_LV3_b57b845222de05256b1c0d9d3aaf6bc679e127fa07b92bfee8aa9c6d191c109c_bca4f846c0df0f20c2606c606ebacba8",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_b57b845222de05256b1c0d9d3aaf6bc679e127fa07b92bfee8aa9c6d191c109c_bca4f846c0df0f20c2606c606ebacba8",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_1cf8c2e1781829ed190d20c967455121055fb58052d08ca9e09171c9bd9fc546_b6311d32e047dac9842c808fa87843f6",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-014#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4217,8 +5974,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
             "limit": "ONCE_PER_TURN_SAME_NAME",
             "cantStack": false,
             "keyword": null,
@@ -4227,24 +5991,73 @@
             "isMain": false,
             "cleanBody": "If you have six counters or more, you can [Contract Advent] this card from the Hand, treating your [Soul Core] as being sent to the Trash."
           },
+          "originalAbilityText": "(Once per Turn: Same Name) If you have six counters or more, you can [Contract Advent] this card from the Hand, treating your [Soul Core] as being sent to the Trash.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "If you have six counters or more, you can [Contract Advent] this card from the Hand, treating your [Soul Core] as being sent to the Trash.",
+              "originalClauseText": "If you have six counters or more, you can [Contract Advent] this card from the Hand, treating your [Soul Core] as being sent to the Trash.",
               "cleanText": "you can [Contract Advent] this card from the Hand, treating your [Soul Core] as being sent to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": "If you have six counters or more",
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Contract Advent"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-014#a1",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": null,
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 42,
+              "abilityId": "CB31-014#AB_PASSIVE_NONE_LV1_LV2_LV3_59e737992ea7fa7d3fbd0ebd89e360c3d88c1f04cbad8882cebf708f341f4d1d_67957c18a2564805b34363e33444f868",
+              "cardNumber": "CB31-014",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": "ONCE_PER_TURN_SAME_NAME",
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "CB31-014#a1"
+            }
+          ],
+          "id": "CB31-014#AB_PASSIVE_NONE_LV1_LV2_LV3_59e737992ea7fa7d3fbd0ebd89e360c3d88c1f04cbad8882cebf708f341f4d1d_67957c18a2564805b34363e33444f868",
+          "physicalId": "CB31-014#AB_PASSIVE_NONE_LV1_LV2_LV3_59e737992ea7fa7d3fbd0ebd89e360c3d88c1f04cbad8882cebf708f341f4d1d_67957c18a2564805b34363e33444f868",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_59e737992ea7fa7d3fbd0ebd89e360c3d88c1f04cbad8882cebf708f341f4d1d_67957c18a2564805b34363e33444f868",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_e57f68e9ee03400c14157980c5ba17628107dcb9f5009fdef9645a76fce1bffe_75ce7c02235b7e50c9d3feea08d9479b",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-014#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4254,8 +6067,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS"
+            ],
             "timingLabel": "When Advents",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4264,10 +6086,14 @@
             "isMain": false,
             "cleanBody": "Return up to two opposing exhausted Spirits/Ultimates to the Hand or deckbottom."
           },
+          "originalAbilityText": "[LV1][LV2] (When Advents)\nReturn up to two opposing exhausted Spirits/Ultimates to the Hand or deckbottom.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Return up to two opposing exhausted Spirits/Ultimates to the Hand or deckbottom.",
+              "originalClauseText": "Return up to two opposing exhausted Spirits/Ultimates to the Hand or deckbottom.",
               "cleanText": "Return up to two opposing exhausted Spirits/Ultimates to the Hand or deckbottom",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -4282,10 +6108,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-014#a2",
+          "keywords": [],
+          "id": "CB31-014#AB_WHEN_ADVENTS_NONE_LV1_LV2_a91f2418045f1a1928a083bac9b534bc2054c0af3bb20758ce00a599270be5b1_e1f749cd27aaf60602cec8d7ad1e5d55",
+          "physicalId": "CB31-014#AB_WHEN_ADVENTS_NONE_LV1_LV2_a91f2418045f1a1928a083bac9b534bc2054c0af3bb20758ce00a599270be5b1_e1f749cd27aaf60602cec8d7ad1e5d55",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_a91f2418045f1a1928a083bac9b534bc2054c0af3bb20758ce00a599270be5b1_e1f749cd27aaf60602cec8d7ad1e5d55",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_721603a2ffa5355344274632ad09161aeed6d4ea47abc5fc499472e2b5aa1101_a256161ce5da673ad03231881b7ceb94",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-014#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4297,8 +6137,19 @@
               "During OC"
             ],
             "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timings": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
             "timingLabel": "When Attacks/Blocks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4307,10 +6158,14 @@
             "isMain": false,
             "cleanBody": "Heavy exhaust an opposing Spirit/Ultimate."
           },
+          "originalAbilityText": "[During OC] [LV1][LV2] (When Attacks/Blocks)\nHeavy exhaust an opposing Spirit/Ultimate.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "Heavy exhaust an opposing Spirit/Ultimate.",
+              "originalClauseText": "Heavy exhaust an opposing Spirit/Ultimate.",
               "cleanText": "Heavy exhaust an opposing Spirit/Ultimate",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -4329,7 +6184,23 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-014#a3",
+          "keywords": [],
+          "id": "CB31-014#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_b9a52675ed2101041f6a932bd02fce23a9bf3eff3ad1d0397b4108b17978e56b_5401f061fa9d27004e045d5c844b5e03",
+          "physicalId": "CB31-014#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_b9a52675ed2101041f6a932bd02fce23a9bf3eff3ad1d0397b4108b17978e56b_5401f061fa9d27004e045d5c844b5e03",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_b9a52675ed2101041f6a932bd02fce23a9bf3eff3ad1d0397b4108b17978e56b_5401f061fa9d27004e045d5c844b5e03",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_4e57947b113f35ccd44f8ce170813457685e603c77036e0a1bbee480d57b75db_e4d8ef396d3f126d3a5302917cb73428",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -4844,6 +6715,21 @@
     "compiledIr": {
       "cardNumber": "CB31-010",
       "name": "Kamen Rider W HeatMetal ［3］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 6000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: \"Kamen Rider W\", (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Attacks)\nYour counter +1, and put a core from the Void to any of your Spirit. Then, if the opposing Hand is four or more, exhaust an opposing Spirit.\n\n[During OC] [LV1][LV2] (When Attacks)\nDuring this battle, the opponent can't activate Burst effects.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -4851,12 +6737,32 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "CB31-010#AB_FLASH_NONE_LV1_LV2_LV3_a896ba5e3e5814b3b5ad55c504599edee4e042f708cf4805e67181567efd62e9_75ee648be56cb53153af7e8c25ef3434",
+          "cardNumber": "CB31-010",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "CB31-010#a0"
         }
       ],
       "abilities": [
         {
-          "id": "CB31-010#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4867,8 +6773,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: \"Kamen Rider W\", (Your Turn)",
@@ -4877,10 +6790,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: \"Kamen Rider W\", (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -4902,7 +6819,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -4920,10 +6839,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-010#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "\"Kamen Rider W\", (Your Turn)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "CB31-010#AB_FLASH_NONE_LV1_LV2_LV3_a896ba5e3e5814b3b5ad55c504599edee4e042f708cf4805e67181567efd62e9_75ee648be56cb53153af7e8c25ef3434",
+              "cardNumber": "CB31-010",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "CB31-010#a0"
+            }
+          ],
+          "id": "CB31-010#AB_FLASH_NONE_LV1_LV2_LV3_a896ba5e3e5814b3b5ad55c504599edee4e042f708cf4805e67181567efd62e9_75ee648be56cb53153af7e8c25ef3434",
+          "physicalId": "CB31-010#AB_FLASH_NONE_LV1_LV2_LV3_a896ba5e3e5814b3b5ad55c504599edee4e042f708cf4805e67181567efd62e9_75ee648be56cb53153af7e8c25ef3434",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_a896ba5e3e5814b3b5ad55c504599edee4e042f708cf4805e67181567efd62e9_75ee648be56cb53153af7e8c25ef3434",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_40c8da51bb6dc4b665d83488a337616b5b4d58c8dee879c5861647ac10c202d0_f3da9bff8144933ac1b3a6f6f0da58b1",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-010#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4933,8 +6896,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4943,10 +6915,14 @@
             "isMain": false,
             "cleanBody": "Your counter +1, and put a core from the Void to any of your Spirit. Then, if the opposing Hand is four or more, exhaust an opposing Spirit."
           },
+          "originalAbilityText": "[LV1][LV2] (When Attacks)\nYour counter +1, and put a core from the Void to any of your Spirit. Then, if the opposing Hand is four or more, exhaust an opposing Spirit.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Your counter +1",
+              "originalClauseText": "Your counter +1",
               "cleanText": "Your counter +1",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -4959,7 +6935,9 @@
             },
             {
               "rawText": "put a core from the Void to any of your Spirit.",
+              "originalClauseText": "put a core from the Void to any of your Spirit.",
               "cleanText": "put a core from the Void to any of your Spirit",
+              "clauseIndex": 1,
               "link": "also",
               "isOptional": false,
               "isCost": false,
@@ -4967,12 +6945,17 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                }
               }
             },
             {
               "rawText": "if the opposing Hand is four or more, exhaust an opposing Spirit.",
+              "originalClauseText": "if the opposing Hand is four or more, exhaust an opposing Spirit.",
               "cleanText": "exhaust an opposing Spirit",
+              "clauseIndex": 2,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -4991,10 +6974,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-010#a1",
+          "keywords": [],
+          "id": "CB31-010#AB_WHEN_ATTACKS_NONE_LV1_LV2_4291625e151c14860ada587330de4967ccfb751e3d13761286cd1db757c250da_e480578815e0c500d23387ffe0b137b0",
+          "physicalId": "CB31-010#AB_WHEN_ATTACKS_NONE_LV1_LV2_4291625e151c14860ada587330de4967ccfb751e3d13761286cd1db757c250da_e480578815e0c500d23387ffe0b137b0",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_4291625e151c14860ada587330de4967ccfb751e3d13761286cd1db757c250da_e480578815e0c500d23387ffe0b137b0",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_5278455cf52b9fb08a12cefa30f78db0992900a922799b36606f96198aab4735_3c84317d92a1c3793f4630688a5a64c6",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-010#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -5006,8 +7003,17 @@
               "During OC"
             ],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -5016,21 +7022,41 @@
             "isMain": false,
             "cleanBody": "During this battle, the opponent can't activate Burst effects."
           },
+          "originalAbilityText": "[During OC] [LV1][LV2] (When Attacks)\nDuring this battle, the opponent can't activate Burst effects.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "During this battle, the opponent can't activate Burst effects.",
+              "originalClauseText": "During this battle, the opponent can't activate Burst effects.",
               "cleanText": "the opponent can't activate Burst effects",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": "DURING_THIS_BATTLE",
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Burst"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-010#a2",
+          "keywords": [],
+          "id": "CB31-010#AB_WHEN_ATTACKS_NONE_LV1_LV2_c40c3c4990587fd73fdeeabbff63bd5cd8f36842492b13065433c2707a735ef0_61666f1234591afa028ad0b120816df5",
+          "physicalId": "CB31-010#AB_WHEN_ATTACKS_NONE_LV1_LV2_c40c3c4990587fd73fdeeabbff63bd5cd8f36842492b13065433c2707a735ef0_61666f1234591afa028ad0b120816df5",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_c40c3c4990587fd73fdeeabbff63bd5cd8f36842492b13065433c2707a735ef0_61666f1234591afa028ad0b120816df5",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_09258d22bf0c8e7da632f6f643b5f5a4f07ac5f245025f6f990b6d9b11644bea_f59c4cefc599ea248f2649bf7806c261",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
@@ -5058,6 +7084,21 @@
     "compiledIr": {
       "cardNumber": "CB31-012",
       "name": "Kamen Rider W LunaTrigger ［3］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 8000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: \"Kamen Rider W\" & C1 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Summoned/Advents)\nYou can discard your entire Hand. When this effect discards any \"Kamen\" family card, draw a card for each card in the opposing Hand + Removed Zone.\n\n[During OC] [LV1][LV2] (When Attacks)\nYour counter +1. Also, during this battle, the opponent can't activate Burst effects.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -5065,12 +7106,32 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "CB31-012#AB_FLASH_NONE_LV1_LV2_LV3_29213035177219a3341f8fe1ca7eb07647c504dec0da2c64609fb59cb3844251_3d34a8daefb6ea6519d014eb1f084d6a",
+          "cardNumber": "CB31-012",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "CB31-012#a0"
         }
       ],
       "abilities": [
         {
-          "id": "CB31-012#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -5081,8 +7142,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: \"Kamen Rider W\" & C1 or more, (Your Turn)",
@@ -5091,10 +7159,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: \"Kamen Rider W\" & C1 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -5116,7 +7188,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -5134,10 +7208,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-012#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "\"Kamen Rider W\" & C1 or more, (Your Turn)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "CB31-012#AB_FLASH_NONE_LV1_LV2_LV3_29213035177219a3341f8fe1ca7eb07647c504dec0da2c64609fb59cb3844251_3d34a8daefb6ea6519d014eb1f084d6a",
+              "cardNumber": "CB31-012",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "CB31-012#a0"
+            }
+          ],
+          "id": "CB31-012#AB_FLASH_NONE_LV1_LV2_LV3_29213035177219a3341f8fe1ca7eb07647c504dec0da2c64609fb59cb3844251_3d34a8daefb6ea6519d014eb1f084d6a",
+          "physicalId": "CB31-012#AB_FLASH_NONE_LV1_LV2_LV3_29213035177219a3341f8fe1ca7eb07647c504dec0da2c64609fb59cb3844251_3d34a8daefb6ea6519d014eb1f084d6a",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_29213035177219a3341f8fe1ca7eb07647c504dec0da2c64609fb59cb3844251_3d34a8daefb6ea6519d014eb1f084d6a",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_c6f2abdc67bf8ab345852af327712cda6b83adde750d4f4c9ff25f6c82850393_eb549be35447c1817bbe08cbf309957f",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-012#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -5146,21 +7264,45 @@
             ],
             "levelExplicit": true,
             "prefixes": [],
-            "timing": "WHEN_SUMMONED",
-            "timingLabel": "When Summoned/Advents",
+            "timing": "PASSIVE",
+            "timings": [],
+            "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
             "burstCondition": null,
             "isFlash": false,
             "isMain": false,
-            "cleanBody": "You can discard your entire Hand. When this effect discards any \"Kamen\" family card, draw a card for each card in the opposing Hand + Removed Zone."
+            "cleanBody": "(When Summoned/Advents)\nYou can discard your entire Hand. When this effect discards any \"Kamen\" family card, draw a card for each card in the opposing Hand + Removed Zone."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned/Advents)\nYou can discard your entire Hand. When this effect discards any \"Kamen\" family card, draw a card for each card in the opposing Hand + Removed Zone.",
+          "abilityIndex": 1,
           "clauses": [
             {
+              "rawText": "(When Summoned/Advents)",
+              "originalClauseText": "(When Summoned/Advents)",
+              "cleanText": "(When Summoned/Advents)",
+              "clauseIndex": 0,
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "UNSUPPORTED",
+                "rawText": "(When Summoned/Advents)"
+              }
+            },
+            {
               "rawText": "You can discard your entire Hand.",
+              "originalClauseText": "You can discard your entire Hand.",
               "cleanText": "You can discard your entire Hand",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -5174,7 +7316,9 @@
             },
             {
               "rawText": "When this effect discards any \"Kamen\" family card, draw a card for each card in the opposing Hand + Removed Zone.",
+              "originalClauseText": "When this effect discards any \"Kamen\" family card, draw a card for each card in the opposing Hand + Removed Zone.",
               "cleanText": "When this effect discards any \"Kamen\" family card, draw a card for each card in the opposing Hand + Removed Zone",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -5188,10 +7332,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "(When Summoned/Advents)"
+          ],
+          "legacyId": "CB31-012#a1",
+          "keywords": [],
+          "id": "CB31-012#AB_PASSIVE_NONE_LV1_LV2_8eb837a5fb6c8d3cabb04f4db3089bc30c1ebed00bce7289edd74915417503a4_dd3a286315a109752f5f45a7a5bc9260",
+          "physicalId": "CB31-012#AB_PASSIVE_NONE_LV1_LV2_8eb837a5fb6c8d3cabb04f4db3089bc30c1ebed00bce7289edd74915417503a4_dd3a286315a109752f5f45a7a5bc9260",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_8eb837a5fb6c8d3cabb04f4db3089bc30c1ebed00bce7289edd74915417503a4_dd3a286315a109752f5f45a7a5bc9260",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_2c7fee47c64837e3994977f0f5f5086be988a424e4664550019e248114cf3d23_b42f9be94d95d1dcb5b74cbad76acf0a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CB31-012#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -5203,8 +7361,17 @@
               "During OC"
             ],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -5213,10 +7380,14 @@
             "isMain": false,
             "cleanBody": "Your counter +1. Also, during this battle, the opponent can't activate Burst effects."
           },
+          "originalAbilityText": "[During OC] [LV1][LV2] (When Attacks)\nYour counter +1. Also, during this battle, the opponent can't activate Burst effects.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Your counter +1.",
+              "originalClauseText": "Your counter +1.",
               "cleanText": "Your counter +1",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -5229,23 +7400,41 @@
             },
             {
               "rawText": "during this battle, the opponent can't activate Burst effects.",
+              "originalClauseText": "during this battle, the opponent can't activate Burst effects.",
               "cleanText": "the opponent can't activate Burst effects",
+              "clauseIndex": 1,
               "link": "also",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": "DURING_THIS_BATTLE",
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Burst"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CB31-012#a2",
+          "keywords": [],
+          "id": "CB31-012#AB_WHEN_ATTACKS_NONE_LV1_LV2_1928538e027ebcb073942ca5910405be73c27e4fd739acb2b44bbb67981a4122_6d6b443d3ca48b547081c4cd879cb8c1",
+          "physicalId": "CB31-012#AB_WHEN_ATTACKS_NONE_LV1_LV2_1928538e027ebcb073942ca5910405be73c27e4fd739acb2b44bbb67981a4122_6d6b443d3ca48b547081c4cd879cb8c1",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_1928538e027ebcb073942ca5910405be73c27e4fd739acb2b44bbb67981a4122_6d6b443d3ca48b547081c4cd879cb8c1",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_4cb219ccc6ff7ec507258d3b06c346192f8b331fb3f66c8d6602120419c35886_f29e1e1115a911617605f8b259bd8bda",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
-      "unsupportedClausesCount": 0,
-      "isFullySupported": true
+      "unsupportedClausesCount": 1,
+      "isFullySupported": false
     }
   },
   "CB31-022": {

@@ -454,10 +454,24 @@
     "compiledIr": {
       "cardNumber": "26RCB01-031",
       "name": "Dragreder (26RCB01-031)",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 5000
+        }
+      },
+      "originalEffectText": "[LV1-2]When Summoned\nIf all your Spirits/Nexuses have the \"RYUKI\" family, put a core from the Void to your Trash.\n\n[LV2] Your Attack Step Once Per Turn\nWhen your \"Kamen Rider Ryuki\" attacks, you can target one of your attacking Spirits. During this battle, it gains +2000 BP. Then, if it's Cost 8, during this battle, it has two White symbols. Its symbols can't be increased except via this effect.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "26RCB01-031#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -467,8 +481,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -477,10 +500,14 @@
             "isMain": false,
             "cleanBody": "If all your Spirits/Nexuses have the \"RYUKI\" family, put a core from the Void to your Trash."
           },
+          "originalAbilityText": "[LV1-2]When Summoned\nIf all your Spirits/Nexuses have the \"RYUKI\" family, put a core from the Void to your Trash.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "If all your Spirits/Nexuses have the \"RYUKI\" family, put a core from the Void to your Trash.",
+              "originalClauseText": "If all your Spirits/Nexuses have the \"RYUKI\" family, put a core from the Void to your Trash.",
               "cleanText": "put a core from the Void to your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -499,10 +526,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RCB01-031#a0",
+          "keywords": [],
+          "id": "26RCB01-031#AB_WHEN_SUMMONED_NONE_LV1_LV2_646eb08aa1d067f35427278a4055c5b659ba3d956ecd28e8d3281d3fad2bc684_7da0383b42034d7981df7bb9221a859e",
+          "physicalId": "26RCB01-031#AB_WHEN_SUMMONED_NONE_LV1_LV2_646eb08aa1d067f35427278a4055c5b659ba3d956ecd28e8d3281d3fad2bc684_7da0383b42034d7981df7bb9221a859e",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_646eb08aa1d067f35427278a4055c5b659ba3d956ecd28e8d3281d3fad2bc684_7da0383b42034d7981df7bb9221a859e",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_3938b129bcf2d0029fc56a6de5d99688acbb4b4cb1fe89b01261a328a0a52693_2cd1efac812a08ded49c917b653480af",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "26RCB01-031#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -511,8 +552,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -521,10 +573,14 @@
             "isMain": false,
             "cleanBody": "When your \"Kamen Rider Ryuki\" attacks, you can target one of your attacking Spirits. During this battle, it gains +2000 BP. Then, if it's Cost 8, during this battle, it has two White symbols. Its symbols can't be increased except via this effect."
           },
+          "originalAbilityText": "[LV2] Your Attack Step Once Per Turn\nWhen your \"Kamen Rider Ryuki\" attacks, you can target one of your attacking Spirits. During this battle, it gains +2000 BP. Then, if it's Cost 8, during this battle, it has two White symbols. Its symbols can't be increased except via this effect.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When your \"Kamen Rider Ryuki\" attacks, you can target one of your attacking Spirits.",
+              "originalClauseText": "When your \"Kamen Rider Ryuki\" attacks, you can target one of your attacking Spirits.",
               "cleanText": "When your \"Kamen Rider Ryuki\" attacks, you can target one of your attacking Spirits",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -536,7 +592,9 @@
             },
             {
               "rawText": "During this battle, it gains +2000 BP.",
+              "originalClauseText": "During this battle, it gains +2000 BP.",
               "cleanText": "it gains +2000 BP",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -552,30 +610,54 @@
             },
             {
               "rawText": "if it's Cost 8, during this battle, it has two White symbols.",
+              "originalClauseText": "if it's Cost 8, during this battle, it has two White symbols.",
               "cleanText": "during this battle, it has two White symbols",
+              "clauseIndex": 2,
               "link": "then",
               "isOptional": false,
               "isCost": false,
               "condition": "if it's Cost 8",
               "duration": "DURING_THIS_BATTLE",
               "op": {
-                "op": "ADD_SYMBOL"
+                "op": "SET_SYMBOL",
+                "count": 2,
+                "color": "White",
+                "side": "self"
               }
             },
             {
               "rawText": "Its symbols can't be increased except via this effect.",
+              "originalClauseText": "Its symbols can't be increased except via this effect.",
               "cleanText": "Its symbols can't be increased except via this effect",
+              "clauseIndex": 3,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "ADD_SYMBOL"
+                "op": "COMBAT_RESTRICTION"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RCB01-031#a1",
+          "keywords": [],
+          "id": "26RCB01-031#AB_ATTACK_STEP_NONE_LV2_1ad1a2b82288629e0e3bdf16c828e8722fa4e6b1d1c8e46de8d37ed35e7d3290_3bacb71cfdb644e3535fb173b9f93504",
+          "physicalId": "26RCB01-031#AB_ATTACK_STEP_NONE_LV2_1ad1a2b82288629e0e3bdf16c828e8722fa4e6b1d1c8e46de8d37ed35e7d3290_3bacb71cfdb644e3535fb173b9f93504",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_1ad1a2b82288629e0e3bdf16c828e8722fa4e6b1d1c8e46de8d37ed35e7d3290_3bacb71cfdb644e3535fb173b9f93504",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_25b40c4da19cacfb8bc30b8f597e86e47c2bc77b3997d2421b172559123a7dc5_131888f3b4380d1708095d33d4d53b76",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -5975,10 +6057,19 @@
     "compiledIr": {
       "cardNumber": "26RCB01-009",
       "name": "Kamen Rider Zangetsu Melon Arms (26RCB01-009)",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        }
+      },
+      "originalEffectText": "[LV1-2]When Summoned\nIf you control any exhausted \"GAIM\" family Spirit, you can target a \"GAIM\" & \"Kamen\" family Spirit card with a different name to this Spirit's in your Trash. Return it to the Hand.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "26RCB01-009#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -5988,8 +6079,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -5998,22 +6098,28 @@
             "isMain": false,
             "cleanBody": "If you control any exhausted \"GAIM\" family Spirit, you can target a \"GAIM\" & \"Kamen\" family Spirit card with a different name to this Spirit's in your Trash. Return it to the Hand."
           },
+          "originalAbilityText": "[LV1-2]When Summoned\nIf you control any exhausted \"GAIM\" family Spirit, you can target a \"GAIM\" & \"Kamen\" family Spirit card with a different name to this Spirit's in your Trash. Return it to the Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "If you control any exhausted \"GAIM\" family Spirit, you can target a \"GAIM\" & \"Kamen\" family Spirit card with a different name to this Spirit's in your Trash.",
+              "originalClauseText": "If you control any exhausted \"GAIM\" family Spirit, you can target a \"GAIM\" & \"Kamen\" family Spirit card with a different name to this Spirit's in your Trash.",
               "cleanText": "you can target a \"GAIM\" & \"Kamen\" family Spirit card with a different name to this Spirit's in your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": "If you control any exhausted \"GAIM\" family Spirit",
               "duration": null,
               "op": {
-                "op": "GRANT_FAMILY"
+                "op": "TARGET_CARD"
               }
             },
             {
               "rawText": "Return it to the Hand.",
+              "originalClauseText": "Return it to the Hand.",
               "cleanText": "Return it to the Hand",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -6026,7 +6132,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RCB01-009#a0",
+          "keywords": [],
+          "id": "26RCB01-009#AB_WHEN_SUMMONED_NONE_LV1_LV2_5d1e309bc922404a1a6db7ad3d76c04677d57e2d1fb907d3a165138cef059558_62da1ce4cfd1c0d278839882b1aa5a17",
+          "physicalId": "26RCB01-009#AB_WHEN_SUMMONED_NONE_LV1_LV2_5d1e309bc922404a1a6db7ad3d76c04677d57e2d1fb907d3a165138cef059558_62da1ce4cfd1c0d278839882b1aa5a17",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_5d1e309bc922404a1a6db7ad3d76c04677d57e2d1fb907d3a165138cef059558_62da1ce4cfd1c0d278839882b1aa5a17",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_ec8340eb521145276b81a84b1d72043c7214eabe74d030e3c77a16a795bfa10c_2af747b50980fe01f284f32cfa5feb97",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -6914,10 +7035,13 @@
     "compiledIr": {
       "cardNumber": "26RCB01-057",
       "name": "Sakura Hurricane",
+      "type": "Nexus",
+      "levels": {},
+      "originalEffectText": "[LV1-2] Your Attack StepCSOPT\nWhen the BP of your \"GAIM\" family Spirit is increased due to your \"BP+\" Flash effects, if your Hand is four or less, you can draw a card.\n\n[LV2] True ReleaseYour End Step\nYou can target one of your \"Kamen Rider Gaim\". Send up to two cores, besides [Soul Core], from your Trash to it.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "26RCB01-057#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -6927,8 +7051,20 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "CANT_STACK",
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": true,
             "keyword": null,
@@ -6937,10 +7073,14 @@
             "isMain": false,
             "cleanBody": "When the BP of your \"GAIM\" family Spirit is increased due to your \"BP+\" Flash effects, if your Hand is four or less, you can draw a card."
           },
+          "originalAbilityText": "[LV1-2] Your Attack StepCSOPT\nWhen the BP of your \"GAIM\" family Spirit is increased due to your \"BP+\" Flash effects, if your Hand is four or less, you can draw a card.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When the BP of your \"GAIM\" family Spirit is increased due to your \"BP+\" Flash effects, if your Hand is four or less, you can draw a card.",
+              "originalClauseText": "When the BP of your \"GAIM\" family Spirit is increased due to your \"BP+\" Flash effects, if your Hand is four or less, you can draw a card.",
               "cleanText": "When the BP of your \"GAIM\" family Spirit is increased due to your \"BP+\" Flash effects, if your Hand is four or less, you can draw a card",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -6954,10 +7094,27 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RCB01-057#a0",
+          "keywords": [],
+          "id": "26RCB01-057#AB_ATTACK_STEP_NONE_LV1_LV2_cabfef18c50831ab2dac8c2f96a6c8a8d4c2a91f9da4a33c8529bf1f8af10c18_c344f32b617afa99038165a58d58504b",
+          "physicalId": "26RCB01-057#AB_ATTACK_STEP_NONE_LV1_LV2_cabfef18c50831ab2dac8c2f96a6c8a8d4c2a91f9da4a33c8529bf1f8af10c18_c344f32b617afa99038165a58d58504b",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_cabfef18c50831ab2dac8c2f96a6c8a8d4c2a91f9da4a33c8529bf1f8af10c18_c344f32b617afa99038165a58d58504b",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_f42bcd21f34e5dab862e13dcc77cf065b1be902f54d2667b130645442ed56635_11cc180c540f4d6025fe35a0c06a034a",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "CANT_STACK",
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "26RCB01-057#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -6968,8 +7125,17 @@
               "True Release"
             ],
             "timing": "END_OF_TURN",
+            "timings": [
+              "END_OF_TURN"
+            ],
             "timingLabel": "Your End Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "END_OF_TURN"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -6978,10 +7144,14 @@
             "isMain": false,
             "cleanBody": "You can target one of your \"Kamen Rider Gaim\". Send up to two cores, besides [Soul Core], from your Trash to it."
           },
+          "originalAbilityText": "[LV2] True ReleaseYour End Step\nYou can target one of your \"Kamen Rider Gaim\". Send up to two cores, besides [Soul Core], from your Trash to it.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can target one of your \"Kamen Rider Gaim\".",
+              "originalClauseText": "You can target one of your \"Kamen Rider Gaim\".",
               "cleanText": "You can target one of your \"Kamen Rider Gaim\"",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -6993,18 +7163,45 @@
             },
             {
               "rawText": "Send up to two cores, besides [Soul Core], from your Trash to it.",
+              "originalClauseText": "Send up to two cores, besides [Soul Core], from your Trash to it.",
               "cleanText": "Send up to two cores, besides [Soul Core], from your Trash to it",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "MOVE_CORE"
+                "op": "MOVE_CORE",
+                "count": 2,
+                "from": {
+                  "zone": "trash",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RCB01-057#a1",
+          "keywords": [],
+          "id": "26RCB01-057#AB_END_OF_TURN_NONE_LV2_08d7f0847a7393a9547562d41452b23e8c631722e72a1325a3047ba2704949ac_fb51961c0ccd7d954695d685196c8844",
+          "physicalId": "26RCB01-057#AB_END_OF_TURN_NONE_LV2_08d7f0847a7393a9547562d41452b23e8c631722e72a1325a3047ba2704949ac_fb51961c0ccd7d954695d685196c8844",
+          "semanticId": "SEM#AB_END_OF_TURN_NONE_LV2_08d7f0847a7393a9547562d41452b23e8c631722e72a1325a3047ba2704949ac_fb51961c0ccd7d954695d685196c8844",
+          "semanticIdV3": "SEM3#AB_END_OF_TURN_NONE_LV2_dbb41ea61d7d818e4284c6f513bc2f7b97d8f8ca1649b2960c74cb0b485fdd29_deb25553fdc45c2ee61b6a07ffcd30e7",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "END_OF_TURN"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,

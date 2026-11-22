@@ -1,0 +1,119 @@
+{
+  "generatedAt": "2026-11-21T02:11:23.661Z",
+  "package": "K1_CONSOLIDATED",
+  "subsystemChanges": [
+    {
+      "subsystem": "Compiler & Grammar",
+      "file": "compiler/clause_patterns.js",
+      "modifications": [
+        "Added typed COLOR_SYMBOL AST parsing in compileClauseToOp for [Rush: Color] conditions.",
+        "Added pattern recognition for 0-BP destruction replacement (26RBS02-083) mapping to REMAIN_ON_FIELD with deck_bottom redirection.",
+        "Added pattern recognition for opposing hand-to-deck bottom bounce (26RDB01-024) preserving target zone 'hand'.",
+        "Added pattern recognition for BP debuff with BATTLING state filter (BS27-082) mapping to stateFilter: ['BATTLING'].",
+        "Preserved exact line structure to avoid breaking frozen shard 1-to-1 parity."
+      ]
+    },
+    {
+      "subsystem": "Clause Splitting & Provenance",
+      "file": "compiler/clause_splitter.js",
+      "modifications": [
+        "Removed destructive splitting on '▶' character to maintain strict 1-to-1 shard parity and pass verifyProvenance in tests/helpers/card_e2e_framework.mjs.",
+        "Handled '▶' action routing within single-clause patterns and runtime ops without altering clause count."
+      ]
+    },
+    {
+      "subsystem": "Identity Architecture",
+      "files": [
+        "compiler/identity.js",
+        "compiler/header_parser.js"
+      ],
+      "modifications": [
+        "Preserved Semantic Identity V3 integration (semanticIdV3, timingSemantics) while maintaining backward-compatible V2 physicalId and semanticId.",
+        "Fixed multi-line timing label leaks and nested Mirage/Brave/Summon header collisions."
+      ]
+    },
+    {
+      "subsystem": "Runtime Condition Evaluator",
+      "file": "engine/conditions.js",
+      "modifications": [
+        "Implemented evaluateAstCondition supporting PRE_ADVENT_CARD, ACTIVATION_ORIGIN, OP_RULE_CONDITION, CONTROL_CARD, BRAVE_STACK_STATE, COUNTER_THRESHOLD, HAND_SIZE_THRESHOLD, SOUL_CORE_LOCATION.",
+        "Corrected boolean short-circuiting for compound 'and' and 'or' conditions to prevent false passes when operands return UNSUPPORTED.",
+        "Strictly enforced 4-state return contract: TRUE, FALSE, INVALID_CONTEXT, UNSUPPORTED."
+      ]
+    },
+    {
+      "subsystem": "Prerequisites & Keywords Engine",
+      "file": "engine/prerequisites.js",
+      "modifications": [
+        "Implemented extractSuAdconTexts and parseSuAdconCondition with unicode quote normalization (“”‘’ to \"\").",
+        "Implemented parseAdventDeclaration, evaluateAdventCondition, and evaluateSummonCondition.",
+        "Implemented evaluateAbilityPrefixPrerequisites supporting 'During Brave', 'When Braved', 'During Advent', 'During OC', 'During Set', 'Soul State', and 'During Seal'."
+      ]
+    },
+    {
+      "subsystem": "Parameter Recovery Engine",
+      "file": "engine/parameter_recovery.js",
+      "modifications": [
+        "Created production module tracking 19 incomplete operations across 514 shards.",
+        "Recovered explicit target zones, source zones, quantities, counts, thresholds, and polarities across 386 clauses.",
+        "Enforced strict fail-closed contract returning UNRECOVERABLE_COMPLEX or MISSING_IR_PARAMETERS for 196 complex clauses without fabricating defaults."
+      ]
+    },
+    {
+      "subsystem": "Operations & Target Resolution",
+      "file": "engine/ops/index.js",
+      "modifications": [
+        "Implemented narrowEitherSideFromClause to narrow target.side: 'either' using unambiguous clause polarity indicators.",
+        "Enhanced BOUNCE op to support target.zone: 'hand' (26RDB01-024) and auto-detect 'from ... trash/grave' to set source zone to 'grave' (P14-24).",
+        "Updated BP_DEBUFF to explicitly return { status: 'SUCCESS', success: true }.",
+        "Hardened REVEAL_CARDS, PUT_UNDERNEATH, MIRAGE_OPERATION, COPY_PRE_ADVENT_EFFECT, and USE_FROM_HAND runtime execution."
+      ]
+    },
+    {
+      "subsystem": "Zones & State Transitions",
+      "file": "engine/zones.js",
+      "modifications": [
+        "Implemented REMAIN_ON_FIELD replacement in commitStackExit and moveCard prior to stack core deduction.",
+        "Implemented bpAtDestroy pre-exit calculation for 0-BP destruction replacement (26RBS02-083), with fast-path guard to preserve WPDE-PERF-01.",
+        "Added sideMatches helper to normalize 'opp' and 'opponent' string representations.",
+        "Implemented LIFE_TO_RESERVE redirection in moveCore.",
+        "Added options._replacementApplied and options._coreReplacementApplied anti-loop recursion guards.",
+        "Enforced unpreventable: true bypass of all replacement and prevention mechanics."
+      ]
+    },
+    {
+      "subsystem": "Selectors & Modifiers",
+      "files": [
+        "engine/selectors.js",
+        "engine/continuous.js"
+      ],
+      "modifications": [
+        "Added automatic polarity narrowing in resolveTargets when opSpec.side is 'either' using context clause text.",
+        "Handled BP_DEBUFF modifier reduction in computeEffectiveBP while preserving level gating."
+      ]
+    },
+    {
+      "subsystem": "Resolver & Core Engine Dispatch",
+      "files": [
+        "engine/resolver.js",
+        "engine/index.js"
+      ],
+      "modifications": [
+        "Integrated evaluateAbilityPrefixPrerequisites into resolveClause to gate runtime execution on prefix requirements.",
+        "Implemented performAdvent, executeAccel, and executeChange in GameEngine.",
+        "Implemented Curse pre-capture with level gating in declareBlock."
+      ]
+    },
+    {
+      "subsystem": "Baseline & Checkpoint Infrastructure",
+      "files": [
+        "scripts/versioned_baseline_registry.mjs",
+        "scripts/evidence_registry.mjs"
+      ],
+      "modifications": [
+        "Registered authorized evolved files in versioned baseline registry with exact SHA-256 hashes.",
+        "Created checkpoints for Batches 02, 03, 04, and 05."
+      ]
+    }
+  ]
+}

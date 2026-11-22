@@ -46,6 +46,7 @@ describe('SD01 Card Effects & Mechanics Regression Suite', () => {
       // Execute via engine game flow
       const game = createGame();
       const state = game.state;
+      state.players.player.voidCores.normal = 10;
       state.players.player.life = 5;
 
       // Execute Blizzard Wall's clause op
@@ -70,6 +71,7 @@ describe('SD01 Card Effects & Mechanics Regression Suite', () => {
 
       const game = createGame();
       const state = game.state;
+      state.players.player.voidCores.normal = 10;
       const initialReserve = state.players.player.reserve.normal;
 
       await executeOp(state, clauses[0].op, { controller: 'player' });
@@ -182,6 +184,7 @@ describe('SD01 Card Effects & Mechanics Regression Suite', () => {
       // Now test combat simulation in engine
       const game = createGame();
       const state = game.state;
+      state.players.player.voidCores.normal = 10;
 
       // Player field: Balam (SD01-011, 3000 BP)
       const balamCard = createCardInstance({

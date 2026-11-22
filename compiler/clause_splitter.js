@@ -67,7 +67,7 @@ function splitLineIntoClauses(line) {
   }
 
   // Strip Rush / Color core condition prefixes like [Purple Core]: or [Blue Core]:
-  line = line.replace(/^\[[A-Za-z]+\s+Core\]:\s*/i, '');
+  line = line.replace(/^\[[A-Za-z]+\s+Core\]:\s*/i, '').replace(/^█\s*/, '');
 
   // Patterns that define a new connected clause
   // Tokenize by punctuation and keywords
@@ -127,6 +127,16 @@ function splitLineIntoClauses(line) {
       clean = clean.replace(/^(?:When you've done so|When you do so|If you do|By doing so),\s*/i, '');
     }
 
+    // Check if clean starts with "By [action]ing ..., [effect]" (excluding standard "By paying the cost, activate...")
+    const cleanByMatch = clean.match(/^By\s+([^,]+),\s*(.*)$/i);
+    if (cleanByMatch && !/^by\s+paying\s+(?:the\s+)?cost\b/i.test(cleanByMatch[0])) {
+      const costText = `By ${cleanByMatch[1].trim()}`;
+      const restText = cleanByMatch[2].trim();
+      clauses.push(buildClause(costText, link, false, null, true));
+      clauses.push(buildClause(restText, 'byDoing'));
+      continue;
+    }
+
     // Check ", after (this|that|the) effect resolves, " within sentence
     const afterMatch = clean.match(/^(.*?),\s*after (?:this|that|the) effect resolves,\s*(.*)$/i);
     if (afterMatch) {
@@ -155,6 +165,14 @@ function splitLineIntoClauses(line) {
         clauses.push(buildClause(clean, link || 'instead'));
         continue;
       }
+    }
+
+    // Check ", and when (destroys|returned|exhausts), " within sentence
+    const whenActionMatch = clean.match(/^(.*?),\s*and when (?:destroys|returned|exhausts),\s*(.*)$/i);
+    if (whenActionMatch) {
+      clauses.push(buildClause(whenActionMatch[1], link));
+      clauses.push(buildClause(whenActionMatch[2], 'ifYouDo'));
+      continue;
     }
 
     // Check for "and" connecting distinct actions: e.g. "..., and refresh this Spirit."

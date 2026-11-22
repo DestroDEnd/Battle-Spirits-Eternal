@@ -1,0 +1,55 @@
+{
+  "canonical_id": "WIKI-089",
+  "canonical_name": "Catalyze",
+  "aliases": [
+    "起導",
+    "Kidou"
+  ],
+  "wiki_url": "https://battle-spirits.fandom.com/wiki/Catalyze",
+  "official_definition": "Catalyze: [Color] (When Attacks) By sending 20px(Soul Core) from this Spirit to your trash, immediately activate your set [Color] Soul Burst.",
+  "ownership_rules": {
+    "native_syntax": "Ability block header contains [Catalyze] or [Catalyze: Param]",
+    "prose_exclusion": "Mentions inside body clauses (\"with [Catalyze]\", \"give [Catalyze]\") classified as REFERENCES or GRANTED, never NATIVE."
+  },
+  "activation_conditions": {
+    "timing": "WHEN_ATTACKS",
+    "timing_step": "ANY",
+    "required_zone": "FIELD",
+    "soul_core_required": true
+  },
+  "timing": "WHEN_ATTACKS",
+  "costs": {
+    "description": "Soul Core to Trash",
+    "payment_destination": "TRASH"
+  },
+  "targets": {
+    "eligibility": "FRIENDLY_FIELD",
+    "selection_type": "AUTOMATIC_RULES"
+  },
+  "player_decisions": "DETERMINISTIC_RULES_RESOLUTION",
+  "restrictions": {
+    "once_per_turn": false,
+    "cant_stack": false,
+    "same_name": false
+  },
+  "resolution": {
+    "description": "Mutates game state as specified by official effect text.",
+    "destination_zone": "FIELD"
+  },
+  "interactions": {
+    "armor_immunity_applicable": true,
+    "replacement_effect": false
+  },
+  "variants": [],
+  "official_examples": [
+    "BS34-034",
+    "BS34-055",
+    "BS32-X06"
+  ],
+  "unresolved_rules": [],
+  "implementation_status": "CORPUS_REPRESENTED",
+  "evidence_references": [
+    "WIKI: https://battle-spirits.fandom.com/wiki/Catalyze",
+    "CORPUS_NATIVE_COUNT: 3"
+  ]
+}

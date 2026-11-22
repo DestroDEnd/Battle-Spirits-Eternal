@@ -250,6 +250,26 @@
     "compiledIr": {
       "cardNumber": "PC12-X03",
       "name": "Evangelion Unit-00 Kai",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 7000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 9000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 14000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] (When Summoned)\n(Once per Turn: Same Name) You can summon/deploy one \"NERV\" family card with reduction symbols of two colors or more from your Hand/Trash, without paying the cost. If it's the Attack Step, change the \"one\" written on this effect to \"up to two\".\n\n[LV1][LV2][LV3] [A.T. Field] (When Attacks/Blocks)\nThis Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.\n\n[LV2][LV3] (When Attacka)\nSend every core from an opposing Spirit/Ultimate to the Reserve. This effect can only be prevented by [Heavy Armor]/[Ultra Heavy Armor].",
+      "teams": [],
       "keywords": [
         {
           "name": "A.T. Field",
@@ -257,7 +277,28 @@
           "wave": 3,
           "hook": "at_field",
           "bracketed": true,
-          "index": 294
+          "index": 0,
+          "abilityId": "PC12-X03#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+          "cardNumber": "PC12-X03",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS_OR_BLOCKS",
+          "timingLabel": "When Attacks/Blocks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PC12-X03#a1"
         },
         {
           "name": "Heavy Armor",
@@ -265,7 +306,27 @@
           "wave": 1,
           "hook": "heavy_armor",
           "bracketed": true,
-          "index": 565
+          "index": 102,
+          "abilityId": "PC12-X03#AB_WHEN_ATTACKS_NONE_LV2_LV3_1e3ed8c12a5ee267fc198384c79ae14cf38565bc4533d4c99990b06e07877741_4d45da04ed6d079379d32e816cf6a6ed",
+          "cardNumber": "PC12-X03",
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PC12-X03#a2"
         },
         {
           "name": "Ultra Heavy Armor",
@@ -273,12 +334,31 @@
           "wave": 1,
           "hook": "ultra_heavy_armor",
           "bracketed": true,
-          "index": 579
+          "index": 116,
+          "abilityId": "PC12-X03#AB_WHEN_ATTACKS_NONE_LV2_LV3_1e3ed8c12a5ee267fc198384c79ae14cf38565bc4533d4c99990b06e07877741_4d45da04ed6d079379d32e816cf6a6ed",
+          "cardNumber": "PC12-X03",
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PC12-X03#a2"
         }
       ],
       "abilities": [
         {
-          "id": "PC12-X03#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -289,8 +369,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
             "limit": "ONCE_PER_TURN_SAME_NAME",
             "cantStack": false,
             "keyword": null,
@@ -299,10 +390,14 @@
             "isMain": false,
             "cleanBody": "You can summon/deploy one \"NERV\" family card with reduction symbols of two colors or more from your Hand/Trash, without paying the cost. If it's the Attack Step, change the \"one\" written on this effect to \"up to two\"."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\n(Once per Turn: Same Name) You can summon/deploy one \"NERV\" family card with reduction symbols of two colors or more from your Hand/Trash, without paying the cost. If it's the Attack Step, change the \"one\" written on this effect to \"up to two\".",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "You can summon/deploy one \"NERV\" family card with reduction symbols of two colors or more from your Hand/Trash, without paying the cost.",
+              "originalClauseText": "You can summon/deploy one \"NERV\" family card with reduction symbols of two colors or more from your Hand/Trash, without paying the cost.",
               "cleanText": "You can summon/deploy one \"NERV\" family card with reduction symbols of two colors or more from your Hand/Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -315,7 +410,9 @@
             },
             {
               "rawText": "If it's the Attack Step, change the \"one\" written on this effect to \"up to two\".",
+              "originalClauseText": "If it's the Attack Step, change the \"one\" written on this effect to \"up to two\".",
               "cleanText": "change the \"one\" written on this effect to \"up to two\"",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -326,10 +423,26 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC12-X03#a0",
+          "keywords": [],
+          "id": "PC12-X03#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a1dae4d3ad3304b5e22ec6e3e8ad3fe013b365b765a664bfecb581c1001c01dc_66da43f17c0893bf5f1fcb7f65a221c6",
+          "physicalId": "PC12-X03#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a1dae4d3ad3304b5e22ec6e3e8ad3fe013b365b765a664bfecb581c1001c01dc_66da43f17c0893bf5f1fcb7f65a221c6",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a1dae4d3ad3304b5e22ec6e3e8ad3fe013b365b765a664bfecb581c1001c01dc_66da43f17c0893bf5f1fcb7f65a221c6",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_33a74330bb31b4aff333890a4cf7d6b9f094a08e3b8dc77e448ba9455485c6e9_a68010994374bcb2cd564f374bf10091",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC12-X03#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -340,8 +453,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timings": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
             "timingLabel": "When Attacks/Blocks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "A.T. Field",
@@ -350,10 +474,14 @@
             "isMain": false,
             "cleanBody": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] [A.T. Field] (When Attacks/Blocks)\nThis Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.",
+              "originalClauseText": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.",
               "cleanText": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -365,10 +493,55 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC12-X03#a1",
+          "keywords": [
+            {
+              "name": "A.T. Field",
+              "parameter": null,
+              "wave": 3,
+              "hook": "at_field",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PC12-X03#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+              "cardNumber": "PC12-X03",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS_OR_BLOCKS",
+              "timingLabel": "When Attacks/Blocks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PC12-X03#a1"
+            }
+          ],
+          "id": "PC12-X03#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+          "physicalId": "PC12-X03#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_0c4f046ee5a8d8e01b6c6ff64a6b95460112ad5c93dce1e127368e6d123182df_38fe13e5a00948f574e9455c3c508e06",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC12-X03#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -378,8 +551,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -388,10 +570,14 @@
             "isMain": false,
             "cleanBody": "Send every core from an opposing Spirit/Ultimate to the Reserve. This effect can only be prevented by [Heavy Armor]/[Ultra Heavy Armor]."
           },
+          "originalAbilityText": "[LV2][LV3] (When Attacka)\nSend every core from an opposing Spirit/Ultimate to the Reserve. This effect can only be prevented by [Heavy Armor]/[Ultra Heavy Armor].",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Send every core from an opposing Spirit/Ultimate to the Reserve.",
+              "originalClauseText": "Send every core from an opposing Spirit/Ultimate to the Reserve.",
               "cleanText": "Send every core from an opposing Spirit/Ultimate to the Reserve",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -399,23 +585,106 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": "ALL",
+                "from": {
+                  "zone": "field",
+                  "side": "opp"
+                }
               }
             },
             {
               "rawText": "This effect can only be prevented by [Heavy Armor]/[Ultra Heavy Armor].",
+              "originalClauseText": "This effect can only be prevented by [Heavy Armor]/[Ultra Heavy Armor].",
               "cleanText": "This effect can only be prevented by [Heavy Armor]/[Ultra Heavy Armor]",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
+                "allowedPrevention": [
+                  "Heavy Armor",
+                  "Ultra Armor"
+                ],
+                "effectType": "destroy",
                 "op": "PIERCING_RULE"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC12-X03#a2",
+          "keywords": [
+            {
+              "name": "Heavy Armor",
+              "parameter": null,
+              "wave": 1,
+              "hook": "heavy_armor",
+              "bracketed": true,
+              "index": 102,
+              "abilityId": "PC12-X03#AB_WHEN_ATTACKS_NONE_LV2_LV3_1e3ed8c12a5ee267fc198384c79ae14cf38565bc4533d4c99990b06e07877741_4d45da04ed6d079379d32e816cf6a6ed",
+              "cardNumber": "PC12-X03",
+              "levels": [
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PC12-X03#a2"
+            },
+            {
+              "name": "Ultra Heavy Armor",
+              "parameter": null,
+              "wave": 1,
+              "hook": "ultra_heavy_armor",
+              "bracketed": true,
+              "index": 116,
+              "abilityId": "PC12-X03#AB_WHEN_ATTACKS_NONE_LV2_LV3_1e3ed8c12a5ee267fc198384c79ae14cf38565bc4533d4c99990b06e07877741_4d45da04ed6d079379d32e816cf6a6ed",
+              "cardNumber": "PC12-X03",
+              "levels": [
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PC12-X03#a2"
+            }
+          ],
+          "id": "PC12-X03#AB_WHEN_ATTACKS_NONE_LV2_LV3_1e3ed8c12a5ee267fc198384c79ae14cf38565bc4533d4c99990b06e07877741_4d45da04ed6d079379d32e816cf6a6ed",
+          "physicalId": "PC12-X03#AB_WHEN_ATTACKS_NONE_LV2_LV3_1e3ed8c12a5ee267fc198384c79ae14cf38565bc4533d4c99990b06e07877741_4d45da04ed6d079379d32e816cf6a6ed",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_1e3ed8c12a5ee267fc198384c79ae14cf38565bc4533d4c99990b06e07877741_4d45da04ed6d079379d32e816cf6a6ed",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_dfdd03b92e81fc167a6e6133e9b600d393ccb7d6c393d672073a14fa4e1bf520_d19e3347ff39c53f2c17746ef524b269",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -448,6 +717,26 @@
     "compiledIr": {
       "cardNumber": "PC12-X02",
       "name": "Evangelion Unit-01",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 8000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 5,
+          "bp": 16000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] (When Summoned)\nTreat this Spirit's color as colorless, and you can destroy three opposing Spirits/Ultimates with two cores or less on them. Then, if it’s the Attack Step, besides the [Soul Core], send up to two cores from your Trash to any of your Spirits.\n\n[LV1][LV2][LV3] [A.T. Field] (When Attacks/Blocks)\nThis Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.\n\n[LV2][LV3] (Your Attack Step)\n(Can’t Stack) When the attack of your originally Cost 6 or more “Evangelion” reduces the opposing Life, send an opposing Life to the Trash.",
+      "teams": [],
       "keywords": [
         {
           "name": "A.T. Field",
@@ -455,12 +744,32 @@
           "wave": 3,
           "hook": "at_field",
           "bracketed": true,
-          "index": 291
+          "index": 0,
+          "abilityId": "PC12-X02#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+          "cardNumber": "PC12-X02",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS_OR_BLOCKS",
+          "timingLabel": "When Attacks/Blocks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PC12-X02#a1"
         }
       ],
       "abilities": [
         {
-          "id": "PC12-X02#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -471,8 +780,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -481,10 +799,14 @@
             "isMain": false,
             "cleanBody": "Treat this Spirit's color as colorless, and you can destroy three opposing Spirits/Ultimates with two cores or less on them. Then, if it’s the Attack Step, besides the [Soul Core], send up to two cores from your Trash to any of your Spirits."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nTreat this Spirit's color as colorless, and you can destroy three opposing Spirits/Ultimates with two cores or less on them. Then, if it’s the Attack Step, besides the [Soul Core], send up to two cores from your Trash to any of your Spirits.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Treat this Spirit's color as colorless, and you can destroy three opposing Spirits/Ultimates with two cores or less on them.",
+              "originalClauseText": "Treat this Spirit's color as colorless, and you can destroy three opposing Spirits/Ultimates with two cores or less on them.",
               "cleanText": "Treat this Spirit's color as colorless, and you can destroy three opposing Spirits/Ultimates with two cores or less on them",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -503,22 +825,43 @@
             },
             {
               "rawText": "if it's the Attack Step, besides the [Soul Core], send up to two cores from your Trash to any of your Spirits.",
+              "originalClauseText": "if it's the Attack Step, besides the [Soul Core], send up to two cores from your Trash to any of your Spirits.",
               "cleanText": "besides the [Soul Core], send up to two cores from your Trash to any of your Spirits",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": false,
               "isCost": false,
               "condition": "if it's the Attack Step",
               "duration": null,
               "op": {
-                "op": "MOVE_CORE",
-                "isCost": false
+                "op": "MOVE_SOUL_CORE",
+                "count": 2,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC12-X02#a0",
+          "keywords": [],
+          "id": "PC12-X02#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_8a2a0ab27ed9ad18b21752599d5c4776e37e5b4c67375f7fdf8a72aaef05002d_4cb20b97bdb0bfba24290293462c0210",
+          "physicalId": "PC12-X02#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_8a2a0ab27ed9ad18b21752599d5c4776e37e5b4c67375f7fdf8a72aaef05002d_4cb20b97bdb0bfba24290293462c0210",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_8a2a0ab27ed9ad18b21752599d5c4776e37e5b4c67375f7fdf8a72aaef05002d_4cb20b97bdb0bfba24290293462c0210",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_7cf905b8583b3004cffc1ffbd4c86f9b2fe285ae20d6317468e3470a629428a6_fa2e65e3e01a18e2e4da711d4bce5395",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC12-X02#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -529,8 +872,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timings": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
             "timingLabel": "When Attacks/Blocks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "A.T. Field",
@@ -539,10 +893,14 @@
             "isMain": false,
             "cleanBody": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] [A.T. Field] (When Attacks/Blocks)\nThis Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.",
+              "originalClauseText": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.",
               "cleanText": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -554,10 +912,55 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC12-X02#a1",
+          "keywords": [
+            {
+              "name": "A.T. Field",
+              "parameter": null,
+              "wave": 3,
+              "hook": "at_field",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PC12-X02#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+              "cardNumber": "PC12-X02",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS_OR_BLOCKS",
+              "timingLabel": "When Attacks/Blocks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PC12-X02#a1"
+            }
+          ],
+          "id": "PC12-X02#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+          "physicalId": "PC12-X02#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_98d5167a516a1a5bf1474f9febc9966a6e192c3cee9d49b13c20277354034ab6_861a92f9bd54a3d5d29bb92425c33562",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_0c4f046ee5a8d8e01b6c6ff64a6b95460112ad5c93dce1e127368e6d123182df_38fe13e5a00948f574e9455c3c508e06",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC12-X02#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -567,8 +970,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -577,10 +989,14 @@
             "isMain": false,
             "cleanBody": "(Can’t Stack) When the attack of your originally Cost 6 or more “Evangelion” reduces the opposing Life, send an opposing Life to the Trash."
           },
+          "originalAbilityText": "[LV2][LV3] (Your Attack Step)\n(Can’t Stack) When the attack of your originally Cost 6 or more “Evangelion” reduces the opposing Life, send an opposing Life to the Trash.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "(Can't Stack) When the attack of your originally Cost 6 or more \"Evangelion\" reduces the opposing Life, send an opposing Life to the Trash.",
+              "originalClauseText": "(Can't Stack) When the attack of your originally Cost 6 or more \"Evangelion\" reduces the opposing Life, send an opposing Life to the Trash.",
               "cleanText": "(Can't Stack) When the attack of your originally Cost 6 or more \"Evangelion\" reduces the opposing Life, send an opposing Life to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -588,11 +1004,30 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC12-X02#a2",
+          "keywords": [],
+          "id": "PC12-X02#AB_ATTACK_STEP_NONE_LV2_LV3_e735b2fc3e3ae83180f9ac43527dc8e92ab0e2c52b2ce625f5eb3f487a724186_d2184cffcd249e011538c5987ca2cf92",
+          "physicalId": "PC12-X02#AB_ATTACK_STEP_NONE_LV2_LV3_e735b2fc3e3ae83180f9ac43527dc8e92ab0e2c52b2ce625f5eb3f487a724186_d2184cffcd249e011538c5987ca2cf92",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_e735b2fc3e3ae83180f9ac43527dc8e92ab0e2c52b2ce625f5eb3f487a724186_d2184cffcd249e011538c5987ca2cf92",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_LV3_17407811a502107743ab87713ea4ffd70280e1b9e71523f58c93837a9154c437_2d577e20afad48faa8faa4c927b530c9",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -1057,10 +1492,13 @@
     "compiledIr": {
       "cardNumber": "PC12-005",
       "name": "Moment and Heart Together",
+      "type": "Magic",
+      "levels": {},
+      "originalEffectText": "(Once per turn: same name) During either Attack Step, when your \"Evangelion\" with reduction symbols of two or more colors is summoned, you can return this card from your Trash to the Hand.\n\n[Flash]\nDuring this turn, you can attack simultaneously with two \"Evangelion\" that have the same cost. The opponent can block one of them, but the other can't be blocked (Both battles conclude at the same time).",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "PC12-005#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1071,8 +1509,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
             "limit": "ONCE_PER_TURN_SAME_NAME",
             "cantStack": false,
             "keyword": null,
@@ -1081,28 +1526,47 @@
             "isMain": false,
             "cleanBody": "During either Attack Step, when your \"Evangelion\" with reduction symbols of two or more colors is summoned, you can return this card from your Trash to the Hand."
           },
+          "originalAbilityText": "(Once per turn: same name) During either Attack Step, when your \"Evangelion\" with reduction symbols of two or more colors is summoned, you can return this card from your Trash to the Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "During either Attack Step, when your \"Evangelion\" with reduction symbols of two or more colors is summoned, you can return this card from your Trash to the Hand.",
+              "originalClauseText": "During either Attack Step, when your \"Evangelion\" with reduction symbols of two or more colors is summoned, you can return this card from your Trash to the Hand.",
               "cleanText": "During either Attack Step, when your \"Evangelion\" with reduction symbols of two or more colors is summoned, you can return this card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "target": "this_card",
+                "from": "trash",
+                "destination": "HAND",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC12-005#a0",
+          "keywords": [],
+          "id": "PC12-005#AB_PASSIVE_NONE_LV1_LV2_LV3_f18bfef355280a2a6e23d094f70c642bc0106264bef44623d5d48e95bb7b3dde_67bd426e94ee9e819297c48a773d5f62",
+          "physicalId": "PC12-005#AB_PASSIVE_NONE_LV1_LV2_LV3_f18bfef355280a2a6e23d094f70c642bc0106264bef44623d5d48e95bb7b3dde_67bd426e94ee9e819297c48a773d5f62",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_f18bfef355280a2a6e23d094f70c642bc0106264bef44623d5d48e95bb7b3dde_67bd426e94ee9e819297c48a773d5f62",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_261022734181f9189f7943a08e01d61661addabe65c9b3ff3d6bf1f96b66bd79_41aaabf855b66bb04c5ee3d50d144d82",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC12-005#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1113,8 +1577,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1123,33 +1594,57 @@
             "isMain": false,
             "cleanBody": "During this turn, you can attack simultaneously with two \"Evangelion\" that have the same cost. The opponent can block one of them, but the other can't be blocked (Both battles conclude at the same time)."
           },
+          "originalAbilityText": "[Flash]\nDuring this turn, you can attack simultaneously with two \"Evangelion\" that have the same cost. The opponent can block one of them, but the other can't be blocked (Both battles conclude at the same time).",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "During this turn, you can attack simultaneously with two \"Evangelion\" that have the same cost.",
+              "originalClauseText": "During this turn, you can attack simultaneously with two \"Evangelion\" that have the same cost.",
               "cleanText": "you can attack simultaneously with two \"Evangelion\" that have the same cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": "DURING_THIS_TURN",
               "op": {
-                "op": "COST_MODIFIER"
+                "maxBattles": 2,
+                "maxTargets": 2,
+                "rule": "SIMULTANEOUS_ATTACK",
+                "op": "ATTACK_RULE_MODIFIER"
               }
             },
             {
               "rawText": "The opponent can block one of them, but the other can't be blocked (Both battles conclude at the same time).",
+              "originalClauseText": "The opponent can block one of them, but the other can't be blocked (Both battles conclude at the same time).",
               "cleanText": "The opponent can block one of them, but the other can't be blocked (Both battles conclude at the same time)",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "UNBLOCKABLE"
+                "op": "COMBAT_RESTRICTION"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC12-005#a1",
+          "keywords": [],
+          "id": "PC12-005#AB_FLASH_NONE_LV1_LV2_LV3_f369562b96bae0b9cea4e3ca492865ee474188c4b9d64dc89d9f43b781f104f2_6be8800a5418a73bd7011b6e56e16c04",
+          "physicalId": "PC12-005#AB_FLASH_NONE_LV1_LV2_LV3_f369562b96bae0b9cea4e3ca492865ee474188c4b9d64dc89d9f43b781f104f2_6be8800a5418a73bd7011b6e56e16c04",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_f369562b96bae0b9cea4e3ca492865ee474188c4b9d64dc89d9f43b781f104f2_6be8800a5418a73bd7011b6e56e16c04",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_44eb243a7c05af82cb4667bbfbd5dfe34c3376156b82fa0b72673f9c2855872f_9e537390da8efc91e97272fd3688f403",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,

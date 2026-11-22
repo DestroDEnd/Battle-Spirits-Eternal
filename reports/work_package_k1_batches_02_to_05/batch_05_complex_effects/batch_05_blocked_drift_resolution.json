@@ -1,0 +1,56 @@
+{
+  "generatedAt": "2026-11-20T15:11:01.645Z",
+  "batch": "K1-BATCH-05",
+  "blockedCards": [
+    {
+      "cardNumber": "26RBS02-083",
+      "cardName": "The DragonHero Lord-Dragon-Fighter",
+      "issue": "0-BP destruction replacement syntax and early core deduction timing in commitStackExit",
+      "resolution": "compiler/clause_patterns.js parses 0-BP destruction replacement; engine/zones.js captures bpAtDestroy before core deduction and redirects to deckbottom",
+      "test": "tests/work_package_k1_batch_05_complex_effects.test.js",
+      "status": "RESOLVED_VERIFIED"
+    },
+    {
+      "cardNumber": "26RDB01-024",
+      "cardName": "The Magician's Flute",
+      "issue": "Opposing hand bounce targeting zone: hand with destination: DECK_BOTTOM",
+      "resolution": "compiler emits target: { side: opp, zone: hand }, destination: DECK_BOTTOM; engine/ops/index.js BOUNCE intercepts hand-zone bounce and moves from hand to deck bottom",
+      "test": "tests/work_package_k1_batch_05_complex_effects.test.js",
+      "status": "RESOLVED_VERIFIED"
+    },
+    {
+      "cardNumber": "26RSD07-001",
+      "cardName": "CODE Zeroider",
+      "issue": "Cost-effect arrow ▶ was not split into cost + effect clauses",
+      "resolution": "compiler/clause_splitter.js splits on ▶; clause 1 bounces self to deckbottom, clause 2 deploys nexus/spirit",
+      "test": "tests/work_package_k1_batch_05_complex_effects.test.js",
+      "status": "RESOLVED_VERIFIED"
+    },
+    {
+      "cardNumber": "BS27-082",
+      "cardName": "Burst Break",
+      "issue": "BATTLING state filter on opposing Ultimate during battle with negative BP",
+      "resolution": "compiler/clause_patterns.js widens BP_DEBUFF to capture BATTLING state and Ultimate types; engine/ops/index.js registers BP_DEBUFF modifier",
+      "test": "tests/work_package_k1_batch_05_complex_effects.test.js",
+      "status": "RESOLVED_VERIFIED"
+    }
+  ],
+  "driftCards": [
+    {
+      "cardNumber": "BS19-X05",
+      "cardName": "The WhiteSnakeEmperor Algol",
+      "issue": "Potential drift in compiler AST timing mapping for WHEN_BATTLES, PASSIVE, ATTACK_STEP",
+      "resolution": "Full compilation & ability timing structure verified without syntax errors; runtime execution verified",
+      "test": "tests/work_package_k1_batch_05_complex_effects.test.js",
+      "status": "RESOLVED_VERIFIED"
+    },
+    {
+      "cardNumber": "BS33-069",
+      "cardName": "The WhiteDragonHorse Skanda",
+      "issue": "Potential drift in BURST / WHEN_DEPLOYED nexus deployment and indestructible clause mapping",
+      "resolution": "Full compilation & ability timing structure verified without syntax errors; runtime execution verified",
+      "test": "tests/work_package_k1_batch_05_complex_effects.test.js",
+      "status": "RESOLVED_VERIFIED"
+    }
+  ]
+}

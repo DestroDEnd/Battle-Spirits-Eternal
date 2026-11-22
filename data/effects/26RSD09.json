@@ -874,10 +874,24 @@
     "compiledIr": {
       "cardNumber": "26RSD09-X01",
       "name": "The HundredEyes Boreowl",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 6000
+        }
+      },
+      "originalEffectText": "[LV1-2] When Summoned\nYou can reveal three cards from your decktop. Among them, add a \"Purgatory Wings\" family Spirit card with a card name different from this Spirit's to the Hand. Return any remaining cards to the deckbottom in any order. If [Soul Core] was used to pay for the summon cost, add two cards to Hand instead.\n\n[LV2]Your Attack Step\nIf the [Soul Core] is in your Trash, all your Spirits gain +1000 BP.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "26RSD09-X01#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -887,8 +901,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -897,10 +920,14 @@
             "isMain": false,
             "cleanBody": "You can reveal three cards from your decktop. Among them, add a \"Purgatory Wings\" family Spirit card with a card name different from this Spirit's to the Hand. Return any remaining cards to the deckbottom in any order. If [Soul Core] was used to pay for the summon cost, add two cards to Hand instead."
           },
+          "originalAbilityText": "[LV1-2] When Summoned\nYou can reveal three cards from your decktop. Among them, add a \"Purgatory Wings\" family Spirit card with a card name different from this Spirit's to the Hand. Return any remaining cards to the deckbottom in any order. If [Soul Core] was used to pay for the summon cost, add two cards to Hand instead.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "You can reveal three cards from your decktop.",
+              "originalClauseText": "You can reveal three cards from your decktop.",
               "cleanText": "You can reveal three cards from your decktop",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -913,19 +940,24 @@
             },
             {
               "rawText": "Among them, add a \"Purgatory Wings\" family Spirit card with a card name different from this Spirit's to the Hand.",
+              "originalClauseText": "Among them, add a \"Purgatory Wings\" family Spirit card with a card name different from this Spirit's to the Hand.",
               "cleanText": "Among them, add a \"Purgatory Wings\" family Spirit card with a card name different from this Spirit's to the Hand",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "ADD_TO_HAND"
+                "op": "UNSUPPORTED",
+                "rawText": "Among them, add a \"Purgatory Wings\" family Spirit card with a card name different from this Spirit's to the Hand"
               }
             },
             {
               "rawText": "Return any remaining cards to the deckbottom in any order.",
+              "originalClauseText": "Return any remaining cards to the deckbottom in any order.",
               "cleanText": "Return any remaining cards to the deckbottom in any order",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -937,7 +969,9 @@
             },
             {
               "rawText": "If [Soul Core] was used to pay for the summon cost, add two cards to Hand instead.",
+              "originalClauseText": "If [Soul Core] was used to pay for the summon cost, add two cards to Hand instead.",
               "cleanText": "add two cards to Hand instead",
+              "clauseIndex": 3,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -949,10 +983,26 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "Among them, add a \"Purgatory Wings\" family Spirit card with a card name different from this Spirit's to the Hand."
+          ],
+          "legacyId": "26RSD09-X01#a0",
+          "keywords": [],
+          "id": "26RSD09-X01#AB_WHEN_SUMMONED_NONE_LV1_LV2_ad19673966e368d0b8020b2ff82f408cc6f7286295323991a39528b1dda3e3fa_b66e60a0cf644a8d441d718902da0213",
+          "physicalId": "26RSD09-X01#AB_WHEN_SUMMONED_NONE_LV1_LV2_ad19673966e368d0b8020b2ff82f408cc6f7286295323991a39528b1dda3e3fa_b66e60a0cf644a8d441d718902da0213",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_ad19673966e368d0b8020b2ff82f408cc6f7286295323991a39528b1dda3e3fa_b66e60a0cf644a8d441d718902da0213",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_5a913342c1ca2f8f53b5d3197d9d0c8608fa96ce29b1d569e541e0ae7f382406_6ac131ce7004eb3ad42ec54484b8c98e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "26RSD09-X01#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -961,8 +1011,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -971,10 +1030,14 @@
             "isMain": false,
             "cleanBody": "If the [Soul Core] is in your Trash, all your Spirits gain +1000 BP."
           },
+          "originalAbilityText": "[LV2]Your Attack Step\nIf the [Soul Core] is in your Trash, all your Spirits gain +1000 BP.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "If the [Soul Core] is in your Trash, all your Spirits gain +1000 BP.",
+              "originalClauseText": "If the [Soul Core] is in your Trash, all your Spirits gain +1000 BP.",
               "cleanText": "all your Spirits gain +1000 BP",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -990,12 +1053,27 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RSD09-X01#a1",
+          "keywords": [],
+          "id": "26RSD09-X01#AB_ATTACK_STEP_NONE_LV2_bb54e0d29a170ef31b016669d82092acf4ebc6b746736983bc1c1f2915422c16_516bb10739c17bb1b996ef62c62136bc",
+          "physicalId": "26RSD09-X01#AB_ATTACK_STEP_NONE_LV2_bb54e0d29a170ef31b016669d82092acf4ebc6b746736983bc1c1f2915422c16_516bb10739c17bb1b996ef62c62136bc",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_bb54e0d29a170ef31b016669d82092acf4ebc6b746736983bc1c1f2915422c16_516bb10739c17bb1b996ef62c62136bc",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_b34637e2dd176985f52eb723cdcae50fcfd4611252bff237c0d66002520fb3cd_2b8f7f4daf6280682a8b71aeb9877d17",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
-      "compiledClausesCount": 5,
-      "unsupportedClausesCount": 0,
-      "isFullySupported": true
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 1,
+      "isFullySupported": false
     }
   },
   "26RSD09-X02": {
@@ -1264,10 +1342,24 @@
     "compiledIr": {
       "cardNumber": "26RSD09-007",
       "name": "The ThreeTreasures Cornix",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 5000
+        }
+      },
+      "originalEffectText": "[LV1-2]When Summoned\nYou can target a Cost 4 or less \"Red Cloud\" family Spirit card in your Trash. Return it to your Hand.\n\n[LV2]When Attacks\nTarget an opposing 3000 BP or less Spirit. Destroy it. If the [Soul Core] is in your Trash, the targeting BP becomes 4000 or less instead.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "26RSD09-007#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1277,8 +1369,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1287,22 +1388,29 @@
             "isMain": false,
             "cleanBody": "You can target a Cost 4 or less \"Red Cloud\" family Spirit card in your Trash. Return it to your Hand."
           },
+          "originalAbilityText": "[LV1-2]When Summoned\nYou can target a Cost 4 or less \"Red Cloud\" family Spirit card in your Trash. Return it to your Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "You can target a Cost 4 or less \"Red Cloud\" family Spirit card in your Trash.",
+              "originalClauseText": "You can target a Cost 4 or less \"Red Cloud\" family Spirit card in your Trash.",
               "cleanText": "You can target a Cost 4 or less \"Red Cloud\" family Spirit card in your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "COST_MODIFIER"
+                "op": "TARGET_CONSTRAINT",
+                "target": "COST"
               }
             },
             {
               "rawText": "Return it to your Hand.",
+              "originalClauseText": "Return it to your Hand.",
               "cleanText": "Return it to your Hand",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1317,10 +1425,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RSD09-007#a0",
+          "keywords": [],
+          "id": "26RSD09-007#AB_WHEN_SUMMONED_NONE_LV1_LV2_41fd7ed179c60712f42fb7dd8b8106a0f85334c09ce69c2995dc58d0c9968af2_e5070b8d5da3b02a08ffeb415bc7dec7",
+          "physicalId": "26RSD09-007#AB_WHEN_SUMMONED_NONE_LV1_LV2_41fd7ed179c60712f42fb7dd8b8106a0f85334c09ce69c2995dc58d0c9968af2_e5070b8d5da3b02a08ffeb415bc7dec7",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_41fd7ed179c60712f42fb7dd8b8106a0f85334c09ce69c2995dc58d0c9968af2_e5070b8d5da3b02a08ffeb415bc7dec7",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_c5026fe97cb3c2e330595e3c79f91136598089daaee75036ab35085336e47b13_eed2e95ade54950cacbc600ce132b14f",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "26RSD09-007#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1329,8 +1451,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1339,10 +1470,14 @@
             "isMain": false,
             "cleanBody": "Target an opposing 3000 BP or less Spirit. Destroy it. If the [Soul Core] is in your Trash, the targeting BP becomes 4000 or less instead."
           },
+          "originalAbilityText": "[LV2]When Attacks\nTarget an opposing 3000 BP or less Spirit. Destroy it. If the [Soul Core] is in your Trash, the targeting BP becomes 4000 or less instead.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Target an opposing 3000 BP or less Spirit.",
+              "originalClauseText": "Target an opposing 3000 BP or less Spirit.",
               "cleanText": "Target an opposing 3000 BP or less Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1354,7 +1489,9 @@
             },
             {
               "rawText": "Destroy it.",
+              "originalClauseText": "Destroy it.",
               "cleanText": "Destroy it",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1367,7 +1504,9 @@
             },
             {
               "rawText": "If the [Soul Core] is in your Trash, the targeting BP becomes 4000 or less instead.",
+              "originalClauseText": "If the [Soul Core] is in your Trash, the targeting BP becomes 4000 or less instead.",
               "cleanText": "the targeting BP becomes 4000 or less instead",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1378,7 +1517,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RSD09-007#a1",
+          "keywords": [],
+          "id": "26RSD09-007#AB_WHEN_ATTACKS_NONE_LV2_e95a6e9d96d263be29d0829d7c00a01664749429714f6f5efa1e8b3137c1bb5a_dc60f173dad39c6415dfd4c63714150c",
+          "physicalId": "26RSD09-007#AB_WHEN_ATTACKS_NONE_LV2_e95a6e9d96d263be29d0829d7c00a01664749429714f6f5efa1e8b3137c1bb5a_dc60f173dad39c6415dfd4c63714150c",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_e95a6e9d96d263be29d0829d7c00a01664749429714f6f5efa1e8b3137c1bb5a_dc60f173dad39c6415dfd4c63714150c",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_d4769e4c3f950b0db0e7a41f5b4ec997f650321a20869a59a36574002ee05f2f_5f42b8eefe74c4624b7af2ddd0d7017e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,

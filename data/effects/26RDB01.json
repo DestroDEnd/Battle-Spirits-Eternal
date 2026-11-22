@@ -19,6 +19,23 @@
     "compiledIr": {
       "cardNumber": "26RDB01-021",
       "name": "［Retsu Hero Origin］Seina Ryumin",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 5000
+        }
+      },
+      "originalEffectText": "[teams: Green Wave Twilight Gothic]\n\nFlash - Opposing Attack Step\nYou can summon this card from the Hand using cores from the Reserve to pay for the summon cost and putting onto it.\n\n[LV1-2] When Summoned\nIf you control any exhausted [Green Wave] Spirit, send up to two cores, besides [Soul Core], from your Trash to this Spirit.",
+      "teams": [
+        "Green Wave Twilight Gothic"
+      ],
       "keywords": [
         {
           "name": "Team",
@@ -26,13 +43,36 @@
           "wave": 5,
           "hook": "team",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "26RDB01-021#AB_PASSIVE_NONE_LV1_LV2_LV3_f3177324676bb286195eb2207348e6a5ded552fa6b9ee12639357c2ff03fd335_624a506a97225b2e0939f2f9a35f4ec5",
+          "cardNumber": "26RDB01-021",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "26RDB01-021#a0"
         }
       ],
       "abilities": [
         {
-          "id": "26RDB01-021#a0",
-          "type": "ABILITY",
+          "type": "TEAM_RESTRICTION",
+          "teams": [
+            "Green Wave Twilight Gothic"
+          ],
           "header": {
             "levels": [
               1,
@@ -42,8 +82,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -52,11 +97,56 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "rawText": "[teams: Green Wave Twilight Gothic]",
+          "originalAbilityText": "[teams: Green Wave Twilight Gothic]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RDB01-021#a0",
+          "keywords": [
+            {
+              "name": "Team",
+              "parameter": "Green Wave Twilight Gothic",
+              "wave": 5,
+              "hook": "team",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "26RDB01-021#AB_PASSIVE_NONE_LV1_LV2_LV3_f3177324676bb286195eb2207348e6a5ded552fa6b9ee12639357c2ff03fd335_624a506a97225b2e0939f2f9a35f4ec5",
+              "cardNumber": "26RDB01-021",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "26RDB01-021#a0"
+            }
+          ],
+          "id": "26RDB01-021#AB_PASSIVE_NONE_LV1_LV2_LV3_f3177324676bb286195eb2207348e6a5ded552fa6b9ee12639357c2ff03fd335_624a506a97225b2e0939f2f9a35f4ec5",
+          "physicalId": "26RDB01-021#AB_PASSIVE_NONE_LV1_LV2_LV3_f3177324676bb286195eb2207348e6a5ded552fa6b9ee12639357c2ff03fd335_624a506a97225b2e0939f2f9a35f4ec5",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_f3177324676bb286195eb2207348e6a5ded552fa6b9ee12639357c2ff03fd335_624a506a97225b2e0939f2f9a35f4ec5",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_31197f4037cda0d085469b5dd7540552c6fc5d6c942ee86e74db74f48b0bc7d0_5b8ac01350833cc1712974938bc48a4c",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "26RDB01-021#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -67,8 +157,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Opposing Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "OPPONENT",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -77,10 +176,14 @@
             "isMain": false,
             "cleanBody": "You can summon this card from the Hand using cores from the Reserve to pay for the summon cost and putting onto it."
           },
+          "originalAbilityText": "Flash - Opposing Attack Step\nYou can summon this card from the Hand using cores from the Reserve to pay for the summon cost and putting onto it.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can summon this card from the Hand using cores from the Reserve to pay for the summon cost and putting onto it.",
+              "originalClauseText": "You can summon this card from the Hand using cores from the Reserve to pay for the summon cost and putting onto it.",
               "cleanText": "You can summon this card from the Hand using cores from the Reserve to pay for the summon cost and putting onto it",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -88,14 +191,28 @@
               "duration": null,
               "op": {
                 "op": "SUMMON_THIS_CARD",
-                "from": "HAND_OR_BURST"
+                "from": "HAND"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RDB01-021#a1",
+          "keywords": [],
+          "id": "26RDB01-021#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_84c6002e162b4ab982ab9a37bb74321deba1d622eebec9fb7ee4babe603b3e66_ea09bb0ff02cad5cf021e13fcfa0efd8",
+          "physicalId": "26RDB01-021#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_84c6002e162b4ab982ab9a37bb74321deba1d622eebec9fb7ee4babe603b3e66_ea09bb0ff02cad5cf021e13fcfa0efd8",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_84c6002e162b4ab982ab9a37bb74321deba1d622eebec9fb7ee4babe603b3e66_ea09bb0ff02cad5cf021e13fcfa0efd8",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_847cce90b33a4cd17a16e8396d2056049f34a3b8bc5f44fe27e79d5ed875cf57_e4cf44bfc7158b4dd2ea5fa18331dd90",
+          "timingSemantics": {
+            "timingOwner": "OPPONENT",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "26RDB01-021#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -105,8 +222,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -115,21 +241,45 @@
             "isMain": false,
             "cleanBody": "If you control any exhausted [Green Wave] Spirit, send up to two cores, besides [Soul Core], from your Trash to this Spirit."
           },
+          "originalAbilityText": "[LV1-2] When Summoned\nIf you control any exhausted [Green Wave] Spirit, send up to two cores, besides [Soul Core], from your Trash to this Spirit.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "If you control any exhausted [Green Wave] Spirit, send up to two cores, besides [Soul Core], from your Trash to this Spirit.",
+              "originalClauseText": "If you control any exhausted [Green Wave] Spirit, send up to two cores, besides [Soul Core], from your Trash to this Spirit.",
               "cleanText": "send up to two cores, besides [Soul Core], from your Trash to this Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": "If you control any exhausted [Green Wave] Spirit",
               "duration": null,
               "op": {
+                "count": 2,
+                "from": "grave",
+                "to": "field",
+                "excludeSoulCore": true,
+                "upTo": true,
                 "op": "RETRIEVE_CORES"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RDB01-021#a2",
+          "keywords": [],
+          "id": "26RDB01-021#AB_WHEN_SUMMONED_NONE_LV1_LV2_ce93617fb155592e4c93e88383316095d33774aefecd38099344fcff5dcb69b2_aa64ebbe586da6eb27215b6ff4c12077",
+          "physicalId": "26RDB01-021#AB_WHEN_SUMMONED_NONE_LV1_LV2_ce93617fb155592e4c93e88383316095d33774aefecd38099344fcff5dcb69b2_aa64ebbe586da6eb27215b6ff4c12077",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_ce93617fb155592e4c93e88383316095d33774aefecd38099344fcff5dcb69b2_aa64ebbe586da6eb27215b6ff4c12077",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_9ecdb2f0733f012b838a812b0e3d0f5470a28e4177e5aa3e86a96add08d27fc3_0a8188dac84b10b4a7a48672d9a53d94",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -1195,6 +1345,12 @@
     "compiledIr": {
       "cardNumber": "26RDB01-061",
       "name": "Great Success",
+      "type": "Magic",
+      "levels": {},
+      "originalEffectText": "[team: Blue Beat]\n\n[Main]\nTarget a [Blue Beat] Nexus card in your Trash. Return it to the Hand. If there's [Soul Core] in your Reserve, instead, change the target to any [Blue Beat] Spirit card/Nexus card.\n\n[Flash]\nTarget one of your Spirits. During this turn, give it +3000 BP.",
+      "teams": [
+        "Blue Beat"
+      ],
       "keywords": [
         {
           "name": "Team",
@@ -1202,13 +1358,36 @@
           "wave": 5,
           "hook": "team",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "26RDB01-061#AB_PASSIVE_NONE_LV1_LV2_LV3_763c99010f91698748b6334478b0f13ec726bd8019bbf06bc32201f067cd3d02_b160e8bc082d059407c98426178bf0d1",
+          "cardNumber": "26RDB01-061",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "26RDB01-061#a0"
         }
       ],
       "abilities": [
         {
-          "id": "26RDB01-061#a0",
-          "type": "ABILITY",
+          "type": "TEAM_RESTRICTION",
+          "teams": [
+            "Blue Beat"
+          ],
           "header": {
             "levels": [
               1,
@@ -1218,8 +1397,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1228,11 +1412,56 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "rawText": "[team: Blue Beat]",
+          "originalAbilityText": "[team: Blue Beat]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RDB01-061#a0",
+          "keywords": [
+            {
+              "name": "Team",
+              "parameter": "Blue Beat",
+              "wave": 5,
+              "hook": "team",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "26RDB01-061#AB_PASSIVE_NONE_LV1_LV2_LV3_763c99010f91698748b6334478b0f13ec726bd8019bbf06bc32201f067cd3d02_b160e8bc082d059407c98426178bf0d1",
+              "cardNumber": "26RDB01-061",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "26RDB01-061#a0"
+            }
+          ],
+          "id": "26RDB01-061#AB_PASSIVE_NONE_LV1_LV2_LV3_763c99010f91698748b6334478b0f13ec726bd8019bbf06bc32201f067cd3d02_b160e8bc082d059407c98426178bf0d1",
+          "physicalId": "26RDB01-061#AB_PASSIVE_NONE_LV1_LV2_LV3_763c99010f91698748b6334478b0f13ec726bd8019bbf06bc32201f067cd3d02_b160e8bc082d059407c98426178bf0d1",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_763c99010f91698748b6334478b0f13ec726bd8019bbf06bc32201f067cd3d02_b160e8bc082d059407c98426178bf0d1",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_48ab4faa2c4ac6981e56a7c51ff9b90c8bb21492f9075fe2ed5c5b1c531a284c_e87edff5f929d28203509701ae816fa8",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "26RDB01-061#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1243,8 +1472,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "MAIN",
+            "timings": [],
             "timingLabel": "Main",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "MAIN"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1253,22 +1489,29 @@
             "isMain": true,
             "cleanBody": "Target a [Blue Beat] Nexus card in your Trash. Return it to the Hand. If there's [Soul Core] in your Reserve, instead, change the target to any [Blue Beat] Spirit card/Nexus card."
           },
+          "originalAbilityText": "[Main]\nTarget a [Blue Beat] Nexus card in your Trash. Return it to the Hand. If there's [Soul Core] in your Reserve, instead, change the target to any [Blue Beat] Spirit card/Nexus card.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Target a [Blue Beat] Nexus card in your Trash.",
+              "originalClauseText": "Target a [Blue Beat] Nexus card in your Trash.",
               "cleanText": "Target a [Blue Beat] Nexus card in your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TARGET_CARD"
+                "op": "KEYWORD_RULE",
+                "keyword": "Blue Beat"
               }
             },
             {
               "rawText": "Return it to the Hand.",
+              "originalClauseText": "Return it to the Hand.",
               "cleanText": "Return it to the Hand",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1282,21 +1525,38 @@
             },
             {
               "rawText": "If there's [Soul Core] in your Reserve, instead, change the target to any [Blue Beat] Spirit card/Nexus card.",
+              "originalClauseText": "If there's [Soul Core] in your Reserve, instead, change the target to any [Blue Beat] Spirit card/Nexus card.",
               "cleanText": "change the target to any [Blue Beat] Spirit card/Nexus card",
+              "clauseIndex": 2,
               "link": "instead",
               "isOptional": false,
               "isCost": false,
               "condition": "If there's [Soul Core] in your Reserve",
               "duration": null,
               "op": {
-                "op": "REDIRECT_TARGET"
+                "op": "KEYWORD_RULE",
+                "keyword": "Blue Beat"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RDB01-061#a1",
+          "keywords": [],
+          "id": "26RDB01-061#AB_MAIN_NONE_LV1_LV2_LV3_1a9799cd42588f535629d1c4b591a922e06ee8a132be6deb53c346fdc7c41791_abd11b924c3e230df9395c6a839e8cf2",
+          "physicalId": "26RDB01-061#AB_MAIN_NONE_LV1_LV2_LV3_1a9799cd42588f535629d1c4b591a922e06ee8a132be6deb53c346fdc7c41791_abd11b924c3e230df9395c6a839e8cf2",
+          "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_1a9799cd42588f535629d1c4b591a922e06ee8a132be6deb53c346fdc7c41791_abd11b924c3e230df9395c6a839e8cf2",
+          "semanticIdV3": "SEM3#AB_MAIN_NONE_LV1_LV2_LV3_b469399747872592a3cb4f937a56fcbafbed1df944c146531bd0d721a97c30db_6408e5da5aeb3050b0e0afbddb4c1a33",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "MAIN"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "26RDB01-061#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1307,8 +1567,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1317,10 +1584,14 @@
             "isMain": false,
             "cleanBody": "Target one of your Spirits. During this turn, give it +3000 BP."
           },
+          "originalAbilityText": "[Flash]\nTarget one of your Spirits. During this turn, give it +3000 BP.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Target one of your Spirits.",
+              "originalClauseText": "Target one of your Spirits.",
               "cleanText": "Target one of your Spirits",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1332,7 +1603,9 @@
             },
             {
               "rawText": "During this turn, give it +3000 BP.",
+              "originalClauseText": "During this turn, give it +3000 BP.",
               "cleanText": "give it +3000 BP",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1346,7 +1619,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RDB01-061#a2",
+          "keywords": [],
+          "id": "26RDB01-061#AB_FLASH_NONE_LV1_LV2_LV3_677ae4b3f22d4a4e6cad3d99fe91933044ffef5e951124fc03a156256db138cd_029f0670a8aafdcc5a07f04082bde577",
+          "physicalId": "26RDB01-061#AB_FLASH_NONE_LV1_LV2_LV3_677ae4b3f22d4a4e6cad3d99fe91933044ffef5e951124fc03a156256db138cd_029f0670a8aafdcc5a07f04082bde577",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_677ae4b3f22d4a4e6cad3d99fe91933044ffef5e951124fc03a156256db138cd_029f0670a8aafdcc5a07f04082bde577",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_a93b2965d613c4574f8494aaad7b0a2e45e1401836ed62e4643732fddde233ef_a8ab508291daede9f696643b77ad52fc",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -3197,19 +3485,24 @@
     "compiledIr": {
       "cardNumber": "26RDB01-032",
       "name": "［Black Heaven Origin］Nei-Lanetail",
-      "keywords": [
-        {
-          "name": "Team",
-          "parameter": "Yellow Rise Twilight Gothic",
-          "wave": 5,
-          "hook": "team",
-          "bracketed": true,
-          "index": 7
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 7000
         }
-      ],
+      },
+      "originalEffectText": "Legacy\n[teams: Yellow Rise Twilight Gothic]\n\nFlash - Opposing Attack Step\nIf there is any \"Sword Eye\" family card in your Trash, you can summon this card from the Hand. You can only use this effect of the same card name once per turn.\n\n[LV2] Opposing Attack Step [Invoke: Flash]Once Per Turn\nTarget an opposing Spirit. During this turn, give it -2000 BP. Then, if it has 0 BP, destroy it.",
+      "teams": [],
+      "keywords": [],
       "abilities": [
         {
-          "id": "26RDB01-032#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3220,8 +3513,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3230,10 +3528,14 @@
             "isMain": false,
             "cleanBody": "Legacy"
           },
+          "originalAbilityText": "Legacy\n[teams: Yellow Rise Twilight Gothic]",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Legacy",
+              "originalClauseText": "Legacy",
               "cleanText": "Legacy",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -3245,10 +3547,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RDB01-032#a0",
+          "keywords": [],
+          "id": "26RDB01-032#AB_PASSIVE_NONE_LV1_LV2_LV3_3e98c1eed1664cafb1de68f476f12a2fff592434936e71dc90bb1c0e8290bdf3_247e751da16265c9185ab65c83e96959",
+          "physicalId": "26RDB01-032#AB_PASSIVE_NONE_LV1_LV2_LV3_3e98c1eed1664cafb1de68f476f12a2fff592434936e71dc90bb1c0e8290bdf3_247e751da16265c9185ab65c83e96959",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_3e98c1eed1664cafb1de68f476f12a2fff592434936e71dc90bb1c0e8290bdf3_247e751da16265c9185ab65c83e96959",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_f8565fffa31ad0c799b5ae229b0ab49431c90f652629317c69188b98e05c6010_45d9bd7428d73f8718b3ef6fa0b8bd4c",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "26RDB01-032#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3259,8 +3573,19 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Opposing Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "OPPONENT",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
             "limit": "ONCE_PER_TURN_SAME_NAME",
             "cantStack": false,
             "keyword": null,
@@ -3269,10 +3594,14 @@
             "isMain": false,
             "cleanBody": "If there is any \"Sword Eye\" family card in your Trash, you can summon this card from the Hand."
           },
+          "originalAbilityText": "Flash - Opposing Attack Step\nIf there is any \"Sword Eye\" family card in your Trash, you can summon this card from the Hand. You can only use this effect of the same card name once per turn.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "If there is any \"Sword Eye\" family card in your Trash, you can summon this card from the Hand.",
+              "originalClauseText": "If there is any \"Sword Eye\" family card in your Trash, you can summon this card from the Hand.",
               "cleanText": "you can summon this card from the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -3280,14 +3609,30 @@
               "duration": null,
               "op": {
                 "op": "SUMMON_THIS_CARD",
-                "from": "HAND_OR_BURST"
+                "from": "HAND"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RDB01-032#a1",
+          "keywords": [],
+          "id": "26RDB01-032#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_9d2c6c79a584b71f6bcd70e24ea3e76e1f4c011c81d51d27680ca2dfd5b4dd35_ab18c5ba56dc0635c5ca6ee82dd13968",
+          "physicalId": "26RDB01-032#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_9d2c6c79a584b71f6bcd70e24ea3e76e1f4c011c81d51d27680ca2dfd5b4dd35_ab18c5ba56dc0635c5ca6ee82dd13968",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_9d2c6c79a584b71f6bcd70e24ea3e76e1f4c011c81d51d27680ca2dfd5b4dd35_ab18c5ba56dc0635c5ca6ee82dd13968",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_fb2609875bea13102d8212806ebaccafe36a3df20fae228e0963fe1a2d333c29_3876b5edfa59569a61625fa591f0fab2",
+          "timingSemantics": {
+            "timingOwner": "OPPONENT",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "26RDB01-032#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3296,8 +3641,20 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [
+              "ATTACK_STEP",
+              "FLASH"
+            ],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "OPPONENT",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -3306,10 +3663,14 @@
             "isMain": false,
             "cleanBody": "Target an opposing Spirit. During this turn, give it -2000 BP. Then, if it has 0 BP, destroy it."
           },
+          "originalAbilityText": "[LV2] Opposing Attack Step [Invoke: Flash]Once Per Turn\nTarget an opposing Spirit. During this turn, give it -2000 BP. Then, if it has 0 BP, destroy it.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Target an opposing Spirit.",
+              "originalClauseText": "Target an opposing Spirit.",
               "cleanText": "Target an opposing Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -3327,7 +3688,9 @@
             },
             {
               "rawText": "During this turn, give it -2000 BP.",
+              "originalClauseText": "During this turn, give it -2000 BP.",
               "cleanText": "give it -2000 BP",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -3342,7 +3705,9 @@
             },
             {
               "rawText": "if it has 0 BP, destroy it.",
+              "originalClauseText": "if it has 0 BP, destroy it.",
               "cleanText": "destroy it",
+              "clauseIndex": 2,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -3354,7 +3719,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RDB01-032#a2",
+          "keywords": [],
+          "id": "26RDB01-032#AB_FLASH_NONE_LV2_727d2889bdf3d15763dc47e1387fadd868198ec9340699793b2282fb1ca75981_e651b19143a140636193c59bb565de9b",
+          "physicalId": "26RDB01-032#AB_FLASH_NONE_LV2_727d2889bdf3d15763dc47e1387fadd868198ec9340699793b2282fb1ca75981_e651b19143a140636193c59bb565de9b",
+          "semanticId": "SEM#AB_FLASH_NONE_LV2_727d2889bdf3d15763dc47e1387fadd868198ec9340699793b2282fb1ca75981_e651b19143a140636193c59bb565de9b",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV2_51e35aa05e7975dcd79040bef272cabf2281e1a3b5b0e0e693dd3aefe3affeaf_a739f510b5dbcd59b90284482bbcc077",
+          "timingSemantics": {
+            "timingOwner": "OPPONENT",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -3802,6 +4184,23 @@
     "compiledIr": {
       "cardNumber": "26RDB01-013",
       "name": "［Burning Origin］Banri-Sora",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 8000
+        }
+      },
+      "originalEffectText": "[teams: Red Stella Hyakka Ryouran]\n\n[LV1-2]When Summoned\nIf you control two or more exhausted [Red Stella] Spirits, target up to two opposing 5000 BP or less Spirits. Destroy them. For each Spirit destroyed, send a core, besides [Soul Core], from your Trash to this Spirit.",
+      "teams": [
+        "Red Stella Hyakka Ryouran"
+      ],
       "keywords": [
         {
           "name": "Team",
@@ -3809,13 +4208,36 @@
           "wave": 5,
           "hook": "team",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "26RDB01-013#AB_PASSIVE_NONE_LV1_LV2_LV3_ec544f387306e267e750d9a42897b8280021554bcb3758606821e69773b571a1_02e319666bb6cbad487377f8d5b1e2e7",
+          "cardNumber": "26RDB01-013",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "26RDB01-013#a0"
         }
       ],
       "abilities": [
         {
-          "id": "26RDB01-013#a0",
-          "type": "ABILITY",
+          "type": "TEAM_RESTRICTION",
+          "teams": [
+            "Red Stella Hyakka Ryouran"
+          ],
           "header": {
             "levels": [
               1,
@@ -3825,8 +4247,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3835,11 +4262,56 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "rawText": "[teams: Red Stella Hyakka Ryouran]",
+          "originalAbilityText": "[teams: Red Stella Hyakka Ryouran]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RDB01-013#a0",
+          "keywords": [
+            {
+              "name": "Team",
+              "parameter": "Red Stella Hyakka Ryouran",
+              "wave": 5,
+              "hook": "team",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "26RDB01-013#AB_PASSIVE_NONE_LV1_LV2_LV3_ec544f387306e267e750d9a42897b8280021554bcb3758606821e69773b571a1_02e319666bb6cbad487377f8d5b1e2e7",
+              "cardNumber": "26RDB01-013",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "26RDB01-013#a0"
+            }
+          ],
+          "id": "26RDB01-013#AB_PASSIVE_NONE_LV1_LV2_LV3_ec544f387306e267e750d9a42897b8280021554bcb3758606821e69773b571a1_02e319666bb6cbad487377f8d5b1e2e7",
+          "physicalId": "26RDB01-013#AB_PASSIVE_NONE_LV1_LV2_LV3_ec544f387306e267e750d9a42897b8280021554bcb3758606821e69773b571a1_02e319666bb6cbad487377f8d5b1e2e7",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_ec544f387306e267e750d9a42897b8280021554bcb3758606821e69773b571a1_02e319666bb6cbad487377f8d5b1e2e7",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_fe71ae8c4ddaa8012fd7a1faba69623ec38f1563ac40ba944e83d54d09b905e4_83bf33fa473168e4a2aae4df785503fc",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "26RDB01-013#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3849,8 +4321,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3859,10 +4340,14 @@
             "isMain": false,
             "cleanBody": "If you control two or more exhausted [Red Stella] Spirits, target up to two opposing 5000 BP or less Spirits. Destroy them. For each Spirit destroyed, send a core, besides [Soul Core], from your Trash to this Spirit."
           },
+          "originalAbilityText": "[LV1-2]When Summoned\nIf you control two or more exhausted [Red Stella] Spirits, target up to two opposing 5000 BP or less Spirits. Destroy them. For each Spirit destroyed, send a core, besides [Soul Core], from your Trash to this Spirit.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "If you control two or more exhausted [Red Stella] Spirits, target up to two opposing 5000 BP or less Spirits.",
+              "originalClauseText": "If you control two or more exhausted [Red Stella] Spirits, target up to two opposing 5000 BP or less Spirits.",
               "cleanText": "target up to two opposing 5000 BP or less Spirits",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -3874,7 +4359,9 @@
             },
             {
               "rawText": "Destroy them.",
+              "originalClauseText": "Destroy them.",
               "cleanText": "Destroy them",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -3891,18 +4378,45 @@
             },
             {
               "rawText": "For each Spirit destroyed, send a core, besides [Soul Core], from your Trash to this Spirit.",
+              "originalClauseText": "For each Spirit destroyed, send a core, besides [Soul Core], from your Trash to this Spirit.",
               "cleanText": "For each Spirit destroyed, send a core, besides [Soul Core], from your Trash to this Spirit",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "MOVE_CORE"
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "trash",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RDB01-013#a1",
+          "keywords": [],
+          "id": "26RDB01-013#AB_WHEN_SUMMONED_NONE_LV1_LV2_1f8e8067794ec85461481eb90146b86221a798804f80165bcc3d962fe0220476_fc116f78c777659223043f6f52f1beb3",
+          "physicalId": "26RDB01-013#AB_WHEN_SUMMONED_NONE_LV1_LV2_1f8e8067794ec85461481eb90146b86221a798804f80165bcc3d962fe0220476_fc116f78c777659223043f6f52f1beb3",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_1f8e8067794ec85461481eb90146b86221a798804f80165bcc3d962fe0220476_fc116f78c777659223043f6f52f1beb3",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_5c1ff014c0187973457e1e5329035110fc04a219415e5babe1a99d9270127290_ed49ec32d83ebf3975959dcc03598dae",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -3925,19 +4439,19 @@
     "compiledIr": {
       "cardNumber": "26RDB01-X05",
       "name": "［Chromatic Shine］Rei-Ohba",
-      "keywords": [
-        {
-          "name": "Team",
-          "parameter": "Yellow Rise Shiny Hearts",
-          "wave": 5,
-          "hook": "team",
-          "bracketed": true,
-          "index": 7
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 8000
         }
-      ],
+      },
+      "originalEffectText": "Legacy\n[teams: Yellow Rise Shiny Hearts]\n\n[LV1-2] When Summoned\nYou can discard a \"Sword Eye\" family Magic card from your Hand. If discarded, target an opposing Spirit. During this turn, give it -7000 BP. Then, if it has 0 BP, destroy it.\n\n[LV2] True ReleaseDuring Attack\nWhen this Spirit's attack would reduce the opposing Life, if there are two or more \"Sword Eye\" family Magic cards in your Trash, reduce +1 Life.",
+      "teams": [],
+      "keywords": [],
       "abilities": [
         {
-          "id": "26RDB01-X05#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3948,8 +4462,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3958,10 +4477,14 @@
             "isMain": false,
             "cleanBody": "Legacy"
           },
+          "originalAbilityText": "Legacy\n[teams: Yellow Rise Shiny Hearts]",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Legacy",
+              "originalClauseText": "Legacy",
               "cleanText": "Legacy",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -3973,10 +4496,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RDB01-X05#a0",
+          "keywords": [],
+          "id": "26RDB01-X05#AB_PASSIVE_NONE_LV1_LV2_LV3_3e98c1eed1664cafb1de68f476f12a2fff592434936e71dc90bb1c0e8290bdf3_247e751da16265c9185ab65c83e96959",
+          "physicalId": "26RDB01-X05#AB_PASSIVE_NONE_LV1_LV2_LV3_3e98c1eed1664cafb1de68f476f12a2fff592434936e71dc90bb1c0e8290bdf3_247e751da16265c9185ab65c83e96959",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_3e98c1eed1664cafb1de68f476f12a2fff592434936e71dc90bb1c0e8290bdf3_247e751da16265c9185ab65c83e96959",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_f8565fffa31ad0c799b5ae229b0ab49431c90f652629317c69188b98e05c6010_45d9bd7428d73f8718b3ef6fa0b8bd4c",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "26RDB01-X05#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3986,8 +4521,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3996,10 +4540,14 @@
             "isMain": false,
             "cleanBody": "You can discard a \"Sword Eye\" family Magic card from your Hand. If discarded, target an opposing Spirit. During this turn, give it -7000 BP. Then, if it has 0 BP, destroy it."
           },
+          "originalAbilityText": "[LV1-2] When Summoned\nYou can discard a \"Sword Eye\" family Magic card from your Hand. If discarded, target an opposing Spirit. During this turn, give it -7000 BP. Then, if it has 0 BP, destroy it.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can discard a \"Sword Eye\" family Magic card from your Hand.",
+              "originalClauseText": "You can discard a \"Sword Eye\" family Magic card from your Hand.",
               "cleanText": "You can discard a \"Sword Eye\" family Magic card from your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -4013,7 +4561,9 @@
             },
             {
               "rawText": "If discarded, target an opposing Spirit.",
+              "originalClauseText": "If discarded, target an opposing Spirit.",
               "cleanText": "target an opposing Spirit",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -4031,7 +4581,9 @@
             },
             {
               "rawText": "During this turn, give it -7000 BP.",
+              "originalClauseText": "During this turn, give it -7000 BP.",
               "cleanText": "give it -7000 BP",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -4046,7 +4598,9 @@
             },
             {
               "rawText": "if it has 0 BP, destroy it.",
+              "originalClauseText": "if it has 0 BP, destroy it.",
               "cleanText": "destroy it",
+              "clauseIndex": 3,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -4058,10 +4612,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RDB01-X05#a1",
+          "keywords": [],
+          "id": "26RDB01-X05#AB_WHEN_SUMMONED_NONE_LV1_LV2_b80e7f649633ca76668edd95d648cb2483f0b537e43b987b295fe32f902077a6_3624e90d51e119bf3bb72be9ed1d8c74",
+          "physicalId": "26RDB01-X05#AB_WHEN_SUMMONED_NONE_LV1_LV2_b80e7f649633ca76668edd95d648cb2483f0b537e43b987b295fe32f902077a6_3624e90d51e119bf3bb72be9ed1d8c74",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_b80e7f649633ca76668edd95d648cb2483f0b537e43b987b295fe32f902077a6_3624e90d51e119bf3bb72be9ed1d8c74",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_2a24892963f76d6f9076ed88755c5aeaf9944d47e4bd9d7673b56fca77a9a03c_589a99bfe708bf93973783f0c5da47fe",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "26RDB01-X05#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4072,8 +4640,17 @@
               "True Release"
             ],
             "timing": "STEP_RESTRICTED",
+            "timings": [
+              "STEP_RESTRICTED"
+            ],
             "timingLabel": "During Attack",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "STEP_RESTRICTED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4082,21 +4659,40 @@
             "isMain": false,
             "cleanBody": "When this Spirit's attack would reduce the opposing Life, if there are two or more \"Sword Eye\" family Magic cards in your Trash, reduce +1 Life."
           },
+          "originalAbilityText": "[LV2] True ReleaseDuring Attack\nWhen this Spirit's attack would reduce the opposing Life, if there are two or more \"Sword Eye\" family Magic cards in your Trash, reduce +1 Life.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When this Spirit's attack would reduce the opposing Life, if there are two or more \"Sword Eye\" family Magic cards in your Trash, reduce +1 Life.",
+              "originalClauseText": "When this Spirit's attack would reduce the opposing Life, if there are two or more \"Sword Eye\" family Magic cards in your Trash, reduce +1 Life.",
               "cleanText": "When this Spirit's attack would reduce the opposing Life, if there are two or more \"Sword Eye\" family Magic cards in your Trash, reduce +1 Life",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "GRANT_FAMILY"
+                "op": "CARD_RULE_MODIFIER"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RDB01-X05#a2",
+          "keywords": [],
+          "id": "26RDB01-X05#AB_STEP_RESTRICTED_NONE_LV2_812a5ee6ddbf0227e9784b8515cf69b0e044b50a205882cd45e3fdf6fd7b9520_412da709d488341a5b14bfcf7cf3db94",
+          "physicalId": "26RDB01-X05#AB_STEP_RESTRICTED_NONE_LV2_812a5ee6ddbf0227e9784b8515cf69b0e044b50a205882cd45e3fdf6fd7b9520_412da709d488341a5b14bfcf7cf3db94",
+          "semanticId": "SEM#AB_STEP_RESTRICTED_NONE_LV2_812a5ee6ddbf0227e9784b8515cf69b0e044b50a205882cd45e3fdf6fd7b9520_412da709d488341a5b14bfcf7cf3db94",
+          "semanticIdV3": "SEM3#AB_STEP_RESTRICTED_NONE_LV2_f5c7ef6c5aab2227f8d973eb3b518e40b5ea2b1d93050eaac001b300c8694af7_04549a7f79d4bc66ec290ab50143de32",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "STEP_RESTRICTED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
@@ -5209,6 +5805,23 @@
     "compiledIr": {
       "cardNumber": "26RDB01-034",
       "name": "［Dragon Origin］Rias Urovorun",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 2000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 3000
+        }
+      },
+      "originalEffectText": "[teams: Blue Beat Pretty Animals]\n\n[LV1-2] When Summoned\nIf all your Spirits/Nexuses have [Blue Beat], put a core from the Void to your Trash.",
+      "teams": [
+        "Blue Beat Pretty Animals"
+      ],
       "keywords": [
         {
           "name": "Team",
@@ -5216,13 +5829,36 @@
           "wave": 5,
           "hook": "team",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "26RDB01-034#AB_PASSIVE_NONE_LV1_LV2_LV3_1f4987905fce251adb073d543226de52a98c7b04708923882325983c1736ed99_843c2d706a30c217df1e421defd6803e",
+          "cardNumber": "26RDB01-034",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "26RDB01-034#a0"
         }
       ],
       "abilities": [
         {
-          "id": "26RDB01-034#a0",
-          "type": "ABILITY",
+          "type": "TEAM_RESTRICTION",
+          "teams": [
+            "Blue Beat Pretty Animals"
+          ],
           "header": {
             "levels": [
               1,
@@ -5232,8 +5868,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -5242,11 +5883,56 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "rawText": "[teams: Blue Beat Pretty Animals]",
+          "originalAbilityText": "[teams: Blue Beat Pretty Animals]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RDB01-034#a0",
+          "keywords": [
+            {
+              "name": "Team",
+              "parameter": "Blue Beat Pretty Animals",
+              "wave": 5,
+              "hook": "team",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "26RDB01-034#AB_PASSIVE_NONE_LV1_LV2_LV3_1f4987905fce251adb073d543226de52a98c7b04708923882325983c1736ed99_843c2d706a30c217df1e421defd6803e",
+              "cardNumber": "26RDB01-034",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "26RDB01-034#a0"
+            }
+          ],
+          "id": "26RDB01-034#AB_PASSIVE_NONE_LV1_LV2_LV3_1f4987905fce251adb073d543226de52a98c7b04708923882325983c1736ed99_843c2d706a30c217df1e421defd6803e",
+          "physicalId": "26RDB01-034#AB_PASSIVE_NONE_LV1_LV2_LV3_1f4987905fce251adb073d543226de52a98c7b04708923882325983c1736ed99_843c2d706a30c217df1e421defd6803e",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_1f4987905fce251adb073d543226de52a98c7b04708923882325983c1736ed99_843c2d706a30c217df1e421defd6803e",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_854994538d07e6a62da931d07f25a5cba7f8404eeb57ddb1a7218316762d34dc_56ca280753d501e982299583d2b5a465",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "26RDB01-034#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -5256,8 +5942,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -5266,10 +5961,14 @@
             "isMain": false,
             "cleanBody": "If all your Spirits/Nexuses have [Blue Beat], put a core from the Void to your Trash."
           },
+          "originalAbilityText": "[LV1-2] When Summoned\nIf all your Spirits/Nexuses have [Blue Beat], put a core from the Void to your Trash.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "If all your Spirits/Nexuses have [Blue Beat], put a core from the Void to your Trash.",
+              "originalClauseText": "If all your Spirits/Nexuses have [Blue Beat], put a core from the Void to your Trash.",
               "cleanText": "put a core from the Void to your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -5288,7 +5987,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RDB01-034#a1",
+          "keywords": [],
+          "id": "26RDB01-034#AB_WHEN_SUMMONED_NONE_LV1_LV2_c5c165a246ff34119dca60af749c3238548bc779706a523961a53e21b2dab1bf_1fd40e2600cd77ff3017b10d6168c678",
+          "physicalId": "26RDB01-034#AB_WHEN_SUMMONED_NONE_LV1_LV2_c5c165a246ff34119dca60af749c3238548bc779706a523961a53e21b2dab1bf_1fd40e2600cd77ff3017b10d6168c678",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_c5c165a246ff34119dca60af749c3238548bc779706a523961a53e21b2dab1bf_1fd40e2600cd77ff3017b10d6168c678",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_b8039bb4f7dd47235bcbaccba9dfd70a7bd9044e2d377cf77594e960cbefe690_e099c6901ff43e6618b735a05437081b",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 1,
@@ -7261,6 +7975,18 @@
     "compiledIr": {
       "cardNumber": "26RDB01-X01",
       "name": "［Roaring Wind Origin］Valdina Gaiya",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        }
+      },
+      "originalEffectText": "[team: Red Stella]\n\n[LV1-2] [Clash]During Attack\nOpposing Spirits must block if possible.\n\n[LV2]True Release Your Attack StepOnce Per Turn\nWhen your [Red Stella] Spirit is blocked by an opposing 5000 BP or less Spirit, you can target a [Red Stella] card in your Trash. Return it to the Hand.",
+      "teams": [
+        "Red Stella"
+      ],
       "keywords": [
         {
           "name": "Team",
@@ -7268,7 +7994,28 @@
           "wave": 5,
           "hook": "team",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "26RDB01-X01#AB_PASSIVE_NONE_LV1_LV2_LV3_49c71f68357d75ce265e1175ce756c6f34507bd48852d6a6dc17340ad88fdde4_5b45dcdccd0e0673e5f827d86fec927d",
+          "cardNumber": "26RDB01-X01",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "26RDB01-X01#a0"
         },
         {
           "name": "Clash",
@@ -7276,13 +8023,35 @@
           "wave": 1,
           "hook": "clash",
           "bracketed": true,
-          "index": 28
+          "index": 0,
+          "abilityId": "26RDB01-X01#AB_STEP_RESTRICTED_NONE_LV1_LV2_c65de2bf240b0b329adf159ff4cca6fb3c85512dbd593057a24759a237318206_7880980039bdcf9a18aad96ca6c0b333",
+          "cardNumber": "26RDB01-X01",
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "STEP_RESTRICTED",
+          "timingLabel": "During Attack",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "26RDB01-X01#a1"
         }
       ],
       "abilities": [
         {
-          "id": "26RDB01-X01#a0",
-          "type": "ABILITY",
+          "type": "TEAM_RESTRICTION",
+          "teams": [
+            "Red Stella"
+          ],
           "header": {
             "levels": [
               1,
@@ -7292,8 +8061,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -7302,11 +8076,56 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "rawText": "[team: Red Stella]",
+          "originalAbilityText": "[team: Red Stella]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RDB01-X01#a0",
+          "keywords": [
+            {
+              "name": "Team",
+              "parameter": "Red Stella",
+              "wave": 5,
+              "hook": "team",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "26RDB01-X01#AB_PASSIVE_NONE_LV1_LV2_LV3_49c71f68357d75ce265e1175ce756c6f34507bd48852d6a6dc17340ad88fdde4_5b45dcdccd0e0673e5f827d86fec927d",
+              "cardNumber": "26RDB01-X01",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "26RDB01-X01#a0"
+            }
+          ],
+          "id": "26RDB01-X01#AB_PASSIVE_NONE_LV1_LV2_LV3_49c71f68357d75ce265e1175ce756c6f34507bd48852d6a6dc17340ad88fdde4_5b45dcdccd0e0673e5f827d86fec927d",
+          "physicalId": "26RDB01-X01#AB_PASSIVE_NONE_LV1_LV2_LV3_49c71f68357d75ce265e1175ce756c6f34507bd48852d6a6dc17340ad88fdde4_5b45dcdccd0e0673e5f827d86fec927d",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_49c71f68357d75ce265e1175ce756c6f34507bd48852d6a6dc17340ad88fdde4_5b45dcdccd0e0673e5f827d86fec927d",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_c4915fa516c0df911c06570a43158c38177ad759741fc72b08a5ad30aa72f977_ce45d112817225f8de1de1d4fe781e9d",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "26RDB01-X01#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -7316,8 +8135,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "STEP_RESTRICTED",
+            "timings": [
+              "STEP_RESTRICTED"
+            ],
             "timingLabel": "During Attack",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "STEP_RESTRICTED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Clash",
@@ -7326,10 +8154,14 @@
             "isMain": false,
             "cleanBody": "Opposing Spirits must block if possible."
           },
+          "originalAbilityText": "[LV1-2] [Clash]During Attack\nOpposing Spirits must block if possible.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Opposing Spirits must block if possible.",
+              "originalClauseText": "Opposing Spirits must block if possible.",
               "cleanText": "Opposing Spirits must block if possible",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -7341,10 +8173,53 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RDB01-X01#a1",
+          "keywords": [
+            {
+              "name": "Clash",
+              "parameter": null,
+              "wave": 1,
+              "hook": "clash",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "26RDB01-X01#AB_STEP_RESTRICTED_NONE_LV1_LV2_c65de2bf240b0b329adf159ff4cca6fb3c85512dbd593057a24759a237318206_7880980039bdcf9a18aad96ca6c0b333",
+              "cardNumber": "26RDB01-X01",
+              "levels": [
+                1,
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "STEP_RESTRICTED",
+              "timingLabel": "During Attack",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "26RDB01-X01#a1"
+            }
+          ],
+          "id": "26RDB01-X01#AB_STEP_RESTRICTED_NONE_LV1_LV2_c65de2bf240b0b329adf159ff4cca6fb3c85512dbd593057a24759a237318206_7880980039bdcf9a18aad96ca6c0b333",
+          "physicalId": "26RDB01-X01#AB_STEP_RESTRICTED_NONE_LV1_LV2_c65de2bf240b0b329adf159ff4cca6fb3c85512dbd593057a24759a237318206_7880980039bdcf9a18aad96ca6c0b333",
+          "semanticId": "SEM#AB_STEP_RESTRICTED_NONE_LV1_LV2_c65de2bf240b0b329adf159ff4cca6fb3c85512dbd593057a24759a237318206_7880980039bdcf9a18aad96ca6c0b333",
+          "semanticIdV3": "SEM3#AB_STEP_RESTRICTED_NONE_LV1_LV2_ce306293752a9af81a96c3a13d36be30275aad3a3276c48afefb3fcd23d324d1_8bea66a1f747a772e647bea787f67a95",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "STEP_RESTRICTED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "26RDB01-X01#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -7355,8 +8230,19 @@
               "True Release"
             ],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -7365,22 +8251,29 @@
             "isMain": false,
             "cleanBody": "When your [Red Stella] Spirit is blocked by an opposing 5000 BP or less Spirit, you can target a [Red Stella] card in your Trash. Return it to the Hand."
           },
+          "originalAbilityText": "[LV2]True Release Your Attack StepOnce Per Turn\nWhen your [Red Stella] Spirit is blocked by an opposing 5000 BP or less Spirit, you can target a [Red Stella] card in your Trash. Return it to the Hand.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When your [Red Stella] Spirit is blocked by an opposing 5000 BP or less Spirit, you can target a [Red Stella] card in your Trash.",
+              "originalClauseText": "When your [Red Stella] Spirit is blocked by an opposing 5000 BP or less Spirit, you can target a [Red Stella] card in your Trash.",
               "cleanText": "When your [Red Stella] Spirit is blocked by an opposing 5000 BP or less Spirit, you can target a [Red Stella] card in your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TARGET_CARD"
+                "op": "KEYWORD_RULE",
+                "keyword": "Red Stella"
               }
             },
             {
               "rawText": "Return it to the Hand.",
+              "originalClauseText": "Return it to the Hand.",
               "cleanText": "Return it to the Hand",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -7393,7 +8286,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RDB01-X01#a2",
+          "keywords": [],
+          "id": "26RDB01-X01#AB_ATTACK_STEP_NONE_LV2_f9d7e13ce43d3a21ef52a0fa510e13d2a53f7592b02736cd808b569715cdc63d_687ecea8bff8709eccbd80e8dcda463d",
+          "physicalId": "26RDB01-X01#AB_ATTACK_STEP_NONE_LV2_f9d7e13ce43d3a21ef52a0fa510e13d2a53f7592b02736cd808b569715cdc63d_687ecea8bff8709eccbd80e8dcda463d",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_f9d7e13ce43d3a21ef52a0fa510e13d2a53f7592b02736cd808b569715cdc63d_687ecea8bff8709eccbd80e8dcda463d",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_6afe4212d33093d1725f07fd0e3c31225a4476d628b9c70607861c862d12eeb4_f71d8db82800e0c744405a22cf8d41e7",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -8337,6 +9247,23 @@
     "compiledIr": {
       "cardNumber": "26RDB01-002",
       "name": "［Star Rabbit Origin］Rabbey Darling",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 2000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 4000
+        }
+      },
+      "originalEffectText": "[teams: Red Stella Shiny Hearts]\n\n[LV1-2] When Summoned\nIf all your Spirits/Nexuses have [Red Stella], send a core, besides [Soul Core], from your Trash to this Spirit. Then, target one of your exhausted [Red Stella] Spirits. Send a core, besides [Soul Core], from your Trash to it.\n\n[LV2]Your End Step\nYou can target one of your [Red Stella] Spirits. Refresh it.",
+      "teams": [
+        "Red Stella Shiny Hearts"
+      ],
       "keywords": [
         {
           "name": "Team",
@@ -8344,13 +9271,36 @@
           "wave": 5,
           "hook": "team",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "26RDB01-002#AB_PASSIVE_NONE_LV1_LV2_LV3_76e3f746afae15c97acb7b91f2256cb3d181f011f16c5f8a0bc7774fa480ea0f_868bf03bdfd5fbfb4b782efdbff16681",
+          "cardNumber": "26RDB01-002",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "26RDB01-002#a0"
         }
       ],
       "abilities": [
         {
-          "id": "26RDB01-002#a0",
-          "type": "ABILITY",
+          "type": "TEAM_RESTRICTION",
+          "teams": [
+            "Red Stella Shiny Hearts"
+          ],
           "header": {
             "levels": [
               1,
@@ -8360,8 +9310,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -8370,11 +9325,56 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "rawText": "[teams: Red Stella Shiny Hearts]",
+          "originalAbilityText": "[teams: Red Stella Shiny Hearts]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RDB01-002#a0",
+          "keywords": [
+            {
+              "name": "Team",
+              "parameter": "Red Stella Shiny Hearts",
+              "wave": 5,
+              "hook": "team",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "26RDB01-002#AB_PASSIVE_NONE_LV1_LV2_LV3_76e3f746afae15c97acb7b91f2256cb3d181f011f16c5f8a0bc7774fa480ea0f_868bf03bdfd5fbfb4b782efdbff16681",
+              "cardNumber": "26RDB01-002",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "26RDB01-002#a0"
+            }
+          ],
+          "id": "26RDB01-002#AB_PASSIVE_NONE_LV1_LV2_LV3_76e3f746afae15c97acb7b91f2256cb3d181f011f16c5f8a0bc7774fa480ea0f_868bf03bdfd5fbfb4b782efdbff16681",
+          "physicalId": "26RDB01-002#AB_PASSIVE_NONE_LV1_LV2_LV3_76e3f746afae15c97acb7b91f2256cb3d181f011f16c5f8a0bc7774fa480ea0f_868bf03bdfd5fbfb4b782efdbff16681",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_76e3f746afae15c97acb7b91f2256cb3d181f011f16c5f8a0bc7774fa480ea0f_868bf03bdfd5fbfb4b782efdbff16681",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_e4d8b60e853236455aa83170c5881213f9022c6e849835299dafcb385a883220_5d8bd66055084881f54fb5562ddf3b31",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "26RDB01-002#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -8384,8 +9384,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -8394,22 +9403,38 @@
             "isMain": false,
             "cleanBody": "If all your Spirits/Nexuses have [Red Stella], send a core, besides [Soul Core], from your Trash to this Spirit. Then, target one of your exhausted [Red Stella] Spirits. Send a core, besides [Soul Core], from your Trash to it."
           },
+          "originalAbilityText": "[LV1-2] When Summoned\nIf all your Spirits/Nexuses have [Red Stella], send a core, besides [Soul Core], from your Trash to this Spirit. Then, target one of your exhausted [Red Stella] Spirits. Send a core, besides [Soul Core], from your Trash to it.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "If all your Spirits/Nexuses have [Red Stella], send a core, besides [Soul Core], from your Trash to this Spirit.",
+              "originalClauseText": "If all your Spirits/Nexuses have [Red Stella], send a core, besides [Soul Core], from your Trash to this Spirit.",
               "cleanText": "send a core, besides [Soul Core], from your Trash to this Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": "If all your Spirits/Nexuses have [Red Stella]",
               "duration": null,
               "op": {
-                "op": "MOVE_CORE"
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "trash",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                }
               }
             },
             {
               "rawText": "target one of your exhausted [Red Stella] Spirits.",
+              "originalClauseText": "target one of your exhausted [Red Stella] Spirits.",
               "cleanText": "target one of your exhausted [Red Stella] Spirits",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -8417,28 +9442,58 @@
               "duration": null,
               "op": {
                 "op": "EXHAUST",
+                "count": 1,
                 "target": {
-                  "side": "either"
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
                 }
               }
             },
             {
               "rawText": "Send a core, besides [Soul Core], from your Trash to it.",
+              "originalClauseText": "Send a core, besides [Soul Core], from your Trash to it.",
               "cleanText": "Send a core, besides [Soul Core], from your Trash to it",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "MOVE_CORE"
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "trash",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RDB01-002#a1",
+          "keywords": [],
+          "id": "26RDB01-002#AB_WHEN_SUMMONED_NONE_LV1_LV2_2ea48eed7b09b5e3e2bcdabf42f0e8a54bb87f84eab20dc38f813b7737c40ea6_cc218bbfe090c59285c3e6657680c279",
+          "physicalId": "26RDB01-002#AB_WHEN_SUMMONED_NONE_LV1_LV2_2ea48eed7b09b5e3e2bcdabf42f0e8a54bb87f84eab20dc38f813b7737c40ea6_cc218bbfe090c59285c3e6657680c279",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_2ea48eed7b09b5e3e2bcdabf42f0e8a54bb87f84eab20dc38f813b7737c40ea6_cc218bbfe090c59285c3e6657680c279",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_551b3584815481e70eddd7fe62fdb0c608ed23bc1d78669819124846439a5b08_30b45b5fc6fd3d8892093a96efb12faf",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "26RDB01-002#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -8447,8 +9502,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "END_OF_TURN",
+            "timings": [
+              "END_OF_TURN"
+            ],
             "timingLabel": "Your End Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "END_OF_TURN"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -8457,22 +9521,29 @@
             "isMain": false,
             "cleanBody": "You can target one of your [Red Stella] Spirits. Refresh it."
           },
+          "originalAbilityText": "[LV2]Your End Step\nYou can target one of your [Red Stella] Spirits. Refresh it.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "You can target one of your [Red Stella] Spirits.",
+              "originalClauseText": "You can target one of your [Red Stella] Spirits.",
               "cleanText": "You can target one of your [Red Stella] Spirits",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TARGET_CARD"
+                "op": "KEYWORD_RULE",
+                "keyword": "Red Stella"
               }
             },
             {
               "rawText": "Refresh it.",
+              "originalClauseText": "Refresh it.",
               "cleanText": "Refresh it",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -8484,7 +9555,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RDB01-002#a2",
+          "keywords": [],
+          "id": "26RDB01-002#AB_END_OF_TURN_NONE_LV2_e3e2936421914477b26412ec40a74f8e7ef4c9b94887b9c86bc327a021105a7a_c7e30d8d3f5638fec91477f2e5379deb",
+          "physicalId": "26RDB01-002#AB_END_OF_TURN_NONE_LV2_e3e2936421914477b26412ec40a74f8e7ef4c9b94887b9c86bc327a021105a7a_c7e30d8d3f5638fec91477f2e5379deb",
+          "semanticId": "SEM#AB_END_OF_TURN_NONE_LV2_e3e2936421914477b26412ec40a74f8e7ef4c9b94887b9c86bc327a021105a7a_c7e30d8d3f5638fec91477f2e5379deb",
+          "semanticIdV3": "SEM3#AB_END_OF_TURN_NONE_LV2_0584adfec90b51d7312ee097782194d12ac0c68969900c62cbcd7484770a89ed_2fc2f6553a386a27f12849f628919e38",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "END_OF_TURN"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,

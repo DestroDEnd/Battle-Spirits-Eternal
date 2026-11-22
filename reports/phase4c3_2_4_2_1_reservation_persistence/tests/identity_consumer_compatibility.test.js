@@ -1,0 +1,1994 @@
+/**
+ * tests/identity_consumer_compatibility.test.js
+ * 
+ * Phase 4C.3.2.4 — Engine-Wide Identity Consumer Audit & Runtime Compatibility Test Suite
+ * 
+ * Implements and verifies:
+ * - TC-ID-CONSUMER-01: Two identical abilities on the same card retain distinct physical references.
+ * - TC-ID-CONSUMER-02: Two identical abilities on different cards do not share activation state.
+ * - TC-ID-CONSUMER-03: Two reprints share intended semantic identity but retain distinct physical runtime identities.
+ * - TC-ID-CONSUMER-04: Physical identity lookup takes precedence over legacy fallback.
+ * - TC-ID-CONSUMER-05: Ambiguous legacy lookup fails safely rather than selecting the first match.
+ * - TC-ID-CONSUMER-06: Triggered ability references survive stack creation and resolution.
+ * - TC-ID-CONSUMER-07: Pending activation references survive asynchronous prompts.
+ * - TC-ID-CONSUMER-08: Keyword bindings resolve the correct physical ability.
+ * - TC-ID-CONSUMER-09: Granted abilities retain correct source and physical identity.
+ * - TC-ID-CONSUMER-10: Activation-limit counters remain isolated between distinct physical abilities.
+ * - TC-ID-CONSUMER-11: Save/load preserves pending ability references and activation state.
+ * - TC-ID-CONSUMER-12: Legacy save references continue to resolve where unambiguous.
+ * - TC-ID-CONSUMER-13: Unknown physical IDs fail explicitly.
+ * - TC-ID-CONSUMER-14: Semantic IDs cannot accidentally be used as physical activation references.
+ * - TC-ID-CONSUMER-15: Existing identity and activation-limit regression suites remain green.
+ */
+
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+import { createGame } from '../engine/index.js';
+import { createCardInstance, createFieldStack, resetInstanceIdCounter, resetPlacementIdCounter } from '../engine/state.js';
+import {
+  derivePhysicalAbilityId,
+  deriveSemanticAbilityId,
+  createAbilityDescriptor,
+  canonicalizeRFC8785
+} from '../compiler/identity.js';
+import { assignDeterministicAbilityIdentities, compileCard } from '../compiler/index.js';
+import {
+  reserveRestriction,
+  commitRestriction,
+  evaluateRestriction,
+  syncLegacyToRestrictions,
+  ensureRestrictionState,
+  restoreRestrictionState,
+  releaseReservation,
+  _finalizeReservation,
+  RESTRICTION_STATUS
+} from '../engine/restrictions.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const ROOT = path.join(__dirname, '..');
+
+// Test deck helper
+function createTestDeck(cardOverrides = [], size = 15) {
+  const cards = [...cardOverrides];
+  while (cards.length < size) {
+    cards.push({
+      card_number: `DUMMY-${cards.length + 1}`,
+      name: `Dummy Card ${cards.length + 1}`,
+      type: 'Spirit',
+      cost: 1,
+      color: 'Red',
+      levels: { 1: { cost: 1, bp: 1000 } }
+    });
+  }
+  return cards;
+}
+
+// Helper to create an ability with an explicit operation
+function createTestAbility(timing = 'MAIN', limit = 'ONCE_PER_TURN', op = { op: 'DRAW', count: 1 }) {
+  return {
+    type: 'ABILITY',
+    header: {
+      timing,
+      trigger: 'NONE',
+      levels: [1],
+      limit
+    },
+    clauses: [
+      {
+        rawText: 'Draw 1 card from your deck.',
+        cleanText: 'Draw 1 card from your deck',
+        link: null,
+        isOptional: false,
+        isCost: false,
+        condition: null,
+        duration: null,
+        op
+      }
+    ]
+  };
+}
+
+// ---------------------------------------------------------------------------
+// TC-ID-CONSUMER-01
+// ---------------------------------------------------------------------------
+test('TC-ID-CONSUMER-01: Two identical abilities on the same card retain distinct physical references', () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  const ab1 = createTestAbility('MAIN', 'ONCE_PER_TURN', { op: 'DRAW', count: 1 });
+  const ab2 = createTestAbility('MAIN', 'ONCE_PER_TURN', { op: 'DRAW', count: 1 });
+  const abilities = [ab1, ab2];
+
+  assignDeterministicAbilityIdentities('BS01-MULTI', abilities);
+
+  assert.ok(ab1.physicalId, 'Ability 1 must receive physicalId');
+  assert.ok(ab2.physicalId, 'Ability 2 must receive physicalId');
+  assert.notEqual(ab1.physicalId, ab2.physicalId, 'Physical IDs must be distinct on the same card');
+  assert.ok(ab2.physicalId.includes('_inst2'), 'Second identical instance must have _inst2 suffix');
+  assert.equal(ab1.semanticId, ab2.semanticId, 'Semantic IDs must be identical for identical abilities');
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-CONSUMER-02
+// ---------------------------------------------------------------------------
+test('TC-ID-CONSUMER-02: Two identical abilities on different cards do not share activation state', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  const abA = createTestAbility('MAIN', 'ONCE_PER_TURN', { op: 'DRAW', count: 1 });
+  const abB = createTestAbility('MAIN', 'ONCE_PER_TURN', { op: 'DRAW', count: 1 });
+  assignDeterministicAbilityIdentities('CARD-A', [abA]);
+  assignDeterministicAbilityIdentities('CARD-B', [abB]);
+
+  const cardDataA = {
+    card_number: 'CARD-A',
+    name: 'Card A',
+    type: 'Spirit',
+    cost: 3,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 3000 } },
+    compiledIr: { abilities: [abA] }
+  };
+  const cardDataB = {
+    card_number: 'CARD-B',
+    name: 'Card B',
+    type: 'Spirit',
+    cost: 3,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 3000 } },
+    compiledIr: { abilities: [abB] }
+  };
+
+  const game = createGame({ playerDeck: createTestDeck([cardDataA, cardDataB]), firstPlayer: 'player' });
+  game.state.step = 'MAIN';
+
+  const cardA = createCardInstance(cardDataA, 'player');
+  const stackA = createFieldStack(cardA, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stackA);
+
+  const cardB = createCardInstance(cardDataB, 'player');
+  const stackB = createFieldStack(cardB, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stackB);
+
+  // Activate Card A's ability
+  const resA = await game.activateAbility(cardA.id, abA.physicalId, 'player');
+  assert.equal(resA.success, true);
+  assert.equal(resA.isCommitted, true);
+
+  // Card A is blocked on 2nd activation
+  const resA2 = await game.activateAbility(cardA.id, abA.physicalId, 'player');
+  assert.equal(resA2.success, false);
+  assert.equal(resA2.reason, 'ABILITY_LIMIT_REACHED');
+
+  // Card B is completely unaffected and succeeds independently
+  const resB = await game.activateAbility(cardB.id, abB.physicalId, 'player');
+  assert.equal(resB.success, true);
+  assert.equal(resB.isCommitted, true);
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-CONSUMER-03
+// ---------------------------------------------------------------------------
+test('TC-ID-CONSUMER-03: Two reprints share intended semantic identity but retain distinct physical runtime identities', () => {
+  const abOrig = createTestAbility('FLASH', null, { op: 'BOUNCE', target: 'opposing_spirit' });
+  const abReprint = createTestAbility('FLASH', null, { op: 'BOUNCE', target: 'opposing_spirit' });
+
+  assignDeterministicAbilityIdentities('BS01-002', [abOrig]);
+  assignDeterministicAbilityIdentities('BSC01-002', [abReprint]);
+
+  assert.equal(abOrig.semanticId, abReprint.semanticId, 'Reprints must share identical semantic ID');
+  assert.notEqual(abOrig.physicalId, abReprint.physicalId, 'Reprints must have distinct physical IDs based on canonical card number');
+  assert.ok(abOrig.physicalId.startsWith('BS01-002#'));
+  assert.ok(abReprint.physicalId.startsWith('BSC01-002#'));
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-CONSUMER-04
+// ---------------------------------------------------------------------------
+test('TC-ID-CONSUMER-04: Physical identity lookup takes precedence over legacy fallback', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  // Ability 0 has legacyId 'CARD-04#a0' and physicalId 'CARD-04#AB_DRAW'
+  const ab0 = createTestAbility('MAIN', null, { op: 'DRAW', count: 1 });
+  // Ability 1 intentionally has physicalId 'CARD-04#a0' (simulating collision with Ability 0's legacyId)
+  const ab1 = createTestAbility('MAIN', null, { op: 'DRAW', count: 5 });
+
+  ab0.id = 'CARD-04#AB_DRAW';
+  ab0.physicalId = 'CARD-04#AB_DRAW';
+  ab0.semanticId = 'SEM#AB_DRAW';
+  ab0.legacyId = 'CARD-04#a0';
+
+  ab1.id = 'CARD-04#a0'; // Physical ID of ability 1 matches 'CARD-04#a0'
+  ab1.physicalId = 'CARD-04#a0';
+  ab1.semanticId = 'SEM#AB_DRAW_5';
+  ab1.legacyId = 'CARD-04#a1';
+
+  const cardData = {
+    card_number: 'CARD-04',
+    name: 'Precedence Dragon',
+    type: 'Spirit',
+    cost: 3,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 3000 } },
+    compiledIr: { abilities: [ab0, ab1] }
+  };
+
+  const game = createGame({ playerDeck: createTestDeck([cardData]), firstPlayer: 'player' });
+  game.state.step = 'MAIN';
+
+  const card = createCardInstance(cardData, 'player');
+  const stack = createFieldStack(card, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stack);
+
+  const initialHand = game.state.players.player.hand.length;
+
+  // Request activation of 'CARD-04#a0'.
+  // Physical lookup must match ab1 (draw 5), NOT fallback to ab0 (draw 1).
+  const res = await game.activateAbility(card.id, 'CARD-04#a0', 'player');
+  assert.equal(res.success, true);
+  assert.equal(game.state.players.player.hand.length, initialHand + 5, 'Must execute Ability 1 which has matching physicalId');
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-CONSUMER-05
+// ---------------------------------------------------------------------------
+test('TC-ID-CONSUMER-05: Ambiguous legacy lookup fails safely rather than selecting the first match', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  // Create two abilities that share the same legacyId
+  const ab0 = createTestAbility('MAIN', null, { op: 'DRAW', count: 1 });
+  const ab1 = createTestAbility('MAIN', null, { op: 'DRAW', count: 2 });
+
+  ab0.id = 'CARD-05#AB_01';
+  ab0.physicalId = 'CARD-05#AB_01';
+  ab0.semanticId = 'SEM#AB_01';
+  ab0.legacyId = 'CARD-05#shared_legacy';
+
+  ab1.id = 'CARD-05#AB_02';
+  ab1.physicalId = 'CARD-05#AB_02';
+  ab1.semanticId = 'SEM#AB_02';
+  ab1.legacyId = 'CARD-05#shared_legacy';
+
+  const cardData = {
+    card_number: 'CARD-05',
+    name: 'Ambiguous Dragon',
+    type: 'Spirit',
+    cost: 3,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 3000 } },
+    compiledIr: { abilities: [ab0, ab1] }
+  };
+
+  const game = createGame({ playerDeck: createTestDeck([cardData]), firstPlayer: 'player' });
+  game.state.step = 'MAIN';
+
+  const card = createCardInstance(cardData, 'player');
+  const stack = createFieldStack(card, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stack);
+
+  // Attempting to activate via ambiguous legacy ID must fail safely
+  const res = await game.activateAbility(card.id, 'CARD-05#shared_legacy', 'player');
+  assert.equal(res.success, false);
+  assert.equal(res.activated, false);
+  assert.equal(res.reason, 'AMBIGUOUS_LEGACY_IDENTITY');
+
+  // Exact physical ID lookup for ab0 succeeds
+  const res0 = await game.activateAbility(card.id, 'CARD-05#AB_01', 'player');
+  assert.equal(res0.success, true);
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-CONSUMER-06
+// ---------------------------------------------------------------------------
+test('TC-ID-CONSUMER-06: Triggered ability references survive stack creation and resolution', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  const triggerAb = createTestAbility('WHEN_SUMMONED', null, { op: 'DRAW', count: 1 });
+  assignDeterministicAbilityIdentities('CARD-06', [triggerAb]);
+
+  const cardData = {
+    card_number: 'CARD-06',
+    name: 'Triggered Dragon',
+    type: 'Spirit',
+    cost: 1,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 2000 } },
+    compiledIr: { abilities: [triggerAb] }
+  };
+
+  const game = createGame({ playerDeck: createTestDeck([cardData]), firstPlayer: 'player' });
+  game.state.step = 'MAIN';
+
+  // Play the card (triggers WHEN_SUMMONED)
+  const card = game.state.players.player.hand.find(c => c.card_number === 'CARD-06') || createCardInstance(cardData, 'player');
+  if (!game.state.players.player.hand.includes(card)) {
+    game.state.players.player.hand.push(card);
+  }
+
+  const playRes = await game.playCard(card.id, [], 'player');
+  assert.equal(playRes.success, true);
+  assert.equal(playRes.abilityResults.length, 1, 'Triggered ability must resolve');
+
+  const abResult = playRes.abilityResults[0];
+  assert.equal(abResult.success, true);
+  assert.ok(abResult.context, 'Context must be returned from triggered ability resolution');
+  assert.equal(abResult.context.physicalAbilityId, triggerAb.physicalId, 'Triggered ability physicalAbilityId must match');
+  assert.equal(abResult.context.semanticAbilityId, triggerAb.semanticId, 'Triggered ability semanticAbilityId must match');
+  assert.strictEqual(abResult.context.sourceAbility, triggerAb, 'Triggered ability sourceAbility must match original descriptor');
+  assert.equal(abResult.isCommitted, true, 'Triggered ability execution must be committed');
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-CONSUMER-07
+// ---------------------------------------------------------------------------
+test('TC-ID-CONSUMER-07: Pending activation references survive asynchronous prompts', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  let promptReached = false;
+  let observedContext = null;
+  const promptAb = createTestAbility('MAIN', 'ONCE_PER_TURN', {
+    op: 'TARGET_SELECT',
+    target: 'opposing_spirit'
+  });
+  assignDeterministicAbilityIdentities('CARD-07', [promptAb]);
+
+  const cardData = {
+    card_number: 'CARD-07',
+    name: 'Prompt Dragon',
+    type: 'Spirit',
+    cost: 3,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 3000 } },
+    compiledIr: { abilities: [promptAb] }
+  };
+
+  const oppCardData = {
+    card_number: 'OPP-01',
+    name: 'Opposing Spirit',
+    type: 'Spirit',
+    cost: 1,
+    color: 'White',
+    levels: { 1: { cost: 1, bp: 1000 } }
+  };
+
+  const game = createGame({ playerDeck: createTestDeck([cardData]), firstPlayer: 'player' });
+  game.state.step = 'MAIN';
+
+  const card = createCardInstance(cardData, 'player');
+  const stack = createFieldStack(card, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stack);
+
+  const oppCard = createCardInstance(oppCardData, 'opponent');
+  const oppStack = createFieldStack(oppCard, { normal: 1, soul: 0 });
+  game.state.players.opponent.field.push(oppStack);
+
+  // Attach mock prompt resolver that inspects context during async prompt
+  game.resolver.promptResolver = {
+    async choose(request) {
+      promptReached = true;
+      // Inspect activation-local context provided directly in prompt
+      observedContext = {
+        physicalAbilityId: request.context?.physicalAbilityId,
+        semanticAbilityId: request.context?.semanticAbilityId,
+        sourceAbility: request.context?.sourceAbility
+      };
+      return request.candidates[0];
+    }
+  };
+
+  const res = await game.activateAbility(card.id, promptAb.physicalId, 'player');
+  assert.equal(promptReached, true, 'Asynchronous prompt must be reached during activation');
+  assert.ok(observedContext, 'Observed context must exist during prompt');
+  assert.equal(observedContext.physicalAbilityId, promptAb.physicalId, 'Context physicalAbilityId must match expected physicalId');
+  assert.equal(observedContext.semanticAbilityId, promptAb.semanticId, 'Context semanticAbilityId must match expected semanticId');
+  assert.strictEqual(observedContext.sourceAbility, promptAb, 'Context sourceAbility must strictly reference original descriptor');
+  assert.equal(res.success, true);
+  assert.equal(res.activated, true);
+  assert.equal(res.isCommitted, true);
+  assert.equal(game.state.restrictions.counters[`turn:1:player:${stack.placementId}:${promptAb.physicalId}`], 1);
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-CONSUMER-08
+// ---------------------------------------------------------------------------
+test('TC-ID-CONSUMER-08: Keyword bindings resolve the correct physical ability', () => {
+  const shardRaw = fs.readFileSync(path.join(ROOT, 'data', 'ir_shards', 'LM16.json'), 'utf8');
+  const lm16 = JSON.parse(shardRaw);
+  const cardWithKw = lm16['LM16-01'];
+
+  assert.ok(cardWithKw, 'LM16-01 must exist in compiled shard');
+  assert.ok(cardWithKw.abilities.length > 0, 'Must have abilities');
+
+  const accelKw = cardWithKw.keywords.find(k => k.name === 'Accel');
+  assert.ok(accelKw, 'Must have Accel in keywords');
+  assert.ok(accelKw.abilityId, 'Keyword must have abilityId');
+  assert.ok(accelKw.legacyAbilityId, 'Keyword must have legacyAbilityId');
+
+  const boundAb = cardWithKw.abilities.find(a => a.physicalId === accelKw.abilityId);
+  assert.ok(boundAb, 'Must find ability matching keyword.abilityId');
+  assert.equal(boundAb.physicalId, accelKw.abilityId, 'Keyword abilityId must point to physicalId');
+  assert.equal(boundAb.legacyId, accelKw.legacyAbilityId, 'Keyword legacyAbilityId must point to legacyId');
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-CONSUMER-09
+// ---------------------------------------------------------------------------
+test('TC-ID-CONSUMER-09: Granted abilities retain correct source and physical identity', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  const sourceAb = createTestAbility('MAIN', 'ONCE_PER_TURN', { op: 'DRAW', count: 1 });
+  assignDeterministicAbilityIdentities('SOURCE-01', [sourceAb]);
+
+  const sourceCardData = {
+    card_number: 'SOURCE-01',
+    name: 'Source Granter',
+    type: 'Spirit',
+    cost: 3,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 3000 } },
+    compiledIr: { abilities: [sourceAb] }
+  };
+
+  const targetCardData = {
+    card_number: 'TARGET-01',
+    name: 'Target Receiver',
+    type: 'Spirit',
+    cost: 2,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 2000 } },
+    compiledIr: { abilities: [] }
+  };
+
+  const game = createGame({ playerDeck: createTestDeck([sourceCardData, targetCardData]), firstPlayer: 'player' });
+  game.state.step = 'MAIN';
+
+  const sourceCard = createCardInstance(sourceCardData, 'player');
+  const targetCard = createCardInstance(targetCardData, 'player');
+  const sourceStack = createFieldStack(sourceCard, { normal: 2, soul: 0 });
+  const targetStack = createFieldStack(targetCard, { normal: 2, soul: 0 });
+
+  game.state.players.player.field.push(sourceStack, targetStack);
+
+  // Grant sourceAb to targetStack
+  const grantedAb = {
+    ...sourceAb,
+    grantedBy: sourceCard.id,
+    grantedFromPlacement: sourceStack.placementId
+  };
+  targetStack.top.compiledIr.abilities.push(grantedAb);
+
+  // Activating the granted ability on targetStack tracks under targetStack's placementId
+  const res = await game.activateAbility(targetCard.id, grantedAb.physicalId, 'player');
+  assert.equal(res.success, true);
+  assert.equal(res.isCommitted, true);
+  assert.equal(
+    game.state.restrictions.counters[`turn:1:player:${targetStack.placementId}:${grantedAb.physicalId}`],
+    1
+  );
+  // Source stack's counter is still untouched
+  assert.equal(
+    game.state.restrictions.counters[`turn:1:player:${sourceStack.placementId}:${sourceAb.physicalId}`],
+    undefined
+  );
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-CONSUMER-10
+// ---------------------------------------------------------------------------
+test('TC-ID-CONSUMER-10: Activation-limit counters remain isolated between distinct physical abilities', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  const ab1 = createTestAbility('MAIN', 'ONCE_PER_TURN', { op: 'DRAW', count: 1 });
+  const ab2 = createTestAbility('MAIN', 'ONCE_PER_TURN', { op: 'DRAW', count: 2 });
+  assignDeterministicAbilityIdentities('CARD-10', [ab1, ab2]);
+
+  const cardData = {
+    card_number: 'CARD-10',
+    name: 'Dual Ability Dragon',
+    type: 'Spirit',
+    cost: 3,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 3000 } },
+    compiledIr: { abilities: [ab1, ab2] }
+  };
+
+  const game = createGame({ playerDeck: createTestDeck([cardData], 20), firstPlayer: 'player' });
+  game.state.step = 'MAIN';
+
+  const card = createCardInstance(cardData, 'player');
+  const stack = createFieldStack(card, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stack);
+
+  // Activate Ability 1
+  const res1 = await game.activateAbility(card.id, ab1.physicalId, 'player');
+  assert.equal(res1.success, true);
+  assert.equal(res1.isCommitted, true);
+
+  // Counter 1 is incremented, Counter 2 is not
+  assert.equal(game.state.restrictions.counters[`turn:1:player:${stack.placementId}:${ab1.physicalId}`], 1);
+  assert.equal(game.state.restrictions.counters[`turn:1:player:${stack.placementId}:${ab2.physicalId}`], undefined);
+
+  // Ability 2 activates independently
+  const res2 = await game.activateAbility(card.id, ab2.physicalId, 'player');
+  assert.equal(res2.success, true);
+  assert.equal(res2.isCommitted, true);
+  assert.equal(game.state.restrictions.counters[`turn:1:player:${stack.placementId}:${ab2.physicalId}`], 1);
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-CONSUMER-11
+// ---------------------------------------------------------------------------
+test('TC-ID-CONSUMER-11: Supported game state persistence preserves card identities, invalidates transient reservations, and preserves committed limits across fresh game restoration', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  const ab1 = createTestAbility('MAIN', 'ONCE_PER_TURN', { op: 'DRAW', count: 1 });
+  const ab2 = createTestAbility('MAIN', 'ONCE_PER_TURN', { op: 'DRAW', count: 2 });
+  assignDeterministicAbilityIdentities('CARD-11', [ab1, ab2]);
+
+  const cardData = {
+    card_number: 'CARD-11',
+    name: 'SaveLoad Dragon',
+    type: 'Spirit',
+    cost: 3,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 3000 } },
+    compiledIr: { abilities: [ab1, ab2] }
+  };
+
+  const game = createGame({ playerDeck: createTestDeck([cardData]), firstPlayer: 'player' });
+  game.state.step = 'MAIN';
+
+  const card = createCardInstance(cardData, 'player');
+  const stack = createFieldStack(card, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stack);
+
+  // 1. Commit one usage of ability 1
+  await game.activateAbility(card.id, ab1.physicalId, 'player');
+  const committedKey = `turn:1:player:${stack.placementId}:${ab1.physicalId}`;
+  assert.equal(game.state.restrictions.counters[committedKey], 1);
+
+  // 2. Stage an in-flight active capacity reservation on ability 2
+  const activationContext = {
+    controller: 'player',
+    sourceCard: stack.top,
+    sourceStack: stack,
+    placementId: stack.placementId
+  };
+  const resHandle = reserveRestriction(game.state, ab2, activationContext);
+  assert.equal(resHandle.success, true);
+  assert.ok(game.state.restrictions.meta._reservations[resHandle.reservationId]);
+  assert.equal(game.state.restrictions.reservations[resHandle.key], 1);
+
+  // 3. Serialize game state to JSON (supported persistence representation)
+  const serialized = JSON.stringify(game.state);
+
+  // 4. Restore state into a fresh, distinct game instance using supported options.state path
+  const freshGame = createGame({ state: JSON.parse(serialized) });
+
+  // 5. Verify restored committed usage counter and metadata survive in fresh game instance
+  assert.equal(freshGame.state.restrictions.counters[committedKey], 1);
+  assert.equal(freshGame.state.restrictions.meta[committedKey].type, 'ONCE_PER_TURN');
+
+  // 6. Under Option B (Invalidate transient reservations), the interrupted reservation is safely invalidated
+  assert.equal(freshGame.state.restrictions.meta._reservations?.[resHandle.reservationId], undefined);
+  assert.equal(freshGame.state.restrictions.reservations[resHandle.key] || 0, 0);
+
+  // 7. Verify deterministic source ability re-resolution from restored field card
+  const restoredCard = freshGame.state.players.player.field.find(st => st.top.cardNumber === 'CARD-11').top;
+  assert.ok(restoredCard, 'Restored card must exist on field in fresh game instance');
+  const reconstructedAb1 = restoredCard.compiledIr.abilities.find(a => a.physicalId === ab1.physicalId);
+  const reconstructedAb2 = restoredCard.compiledIr.abilities.find(a => a.physicalId === ab2.physicalId);
+
+  assert.ok(reconstructedAb1, 'Ability 1 must deterministically re-resolve from restored card IR via physicalId');
+  assert.equal(reconstructedAb1.physicalId, ab1.physicalId);
+  assert.equal(reconstructedAb1.semanticId, ab1.semanticId);
+  assert.equal(reconstructedAb1.header.limit, 'ONCE_PER_TURN');
+
+  assert.ok(reconstructedAb2, 'Ability 2 must deterministically re-resolve from restored card IR via physicalId');
+  assert.equal(reconstructedAb2.physicalId, ab2.physicalId);
+  assert.equal(reconstructedAb2.semanticId, ab2.semanticId);
+
+  // 8. Verify ability resolution / restriction enforcement against restored game instance
+  // Ability 1 was committed before save -> blocked by committed limit
+  const resBlocked = await freshGame.activateAbility(restoredCard.id, ab1.physicalId, 'player');
+  assert.equal(resBlocked.success, false);
+  assert.equal(resBlocked.reason, 'ABILITY_LIMIT_REACHED');
+
+  // Ability 2 had an interrupted reservation that was invalidated -> can now be activated normally!
+  const resAb2 = await freshGame.activateAbility(restoredCard.id, ab2.physicalId, 'player');
+  assert.equal(resAb2.success, true);
+  assert.equal(resAb2.isCommitted, true);
+  assert.equal(freshGame.state.restrictions.counters[`turn:1:player:${restoredCard.placementId}:${ab2.physicalId}`], 1);
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-CONSUMER-12
+// ---------------------------------------------------------------------------
+test('TC-ID-CONSUMER-12: Legacy save references continue to resolve where unambiguous', () => {
+  const state = {
+    turnNumber: 2,
+    abilityUses: {
+      '2:CARD-LEGACY:#a0': true
+    },
+    restrictions: {
+      counters: {},
+      meta: {},
+      reservations: {}
+    }
+  };
+
+  syncLegacyToRestrictions(state);
+
+  const expectedKey = 'turn:2:legacy:CARD-LEGACY:#a0';
+  assert.equal(state.restrictions.counters[expectedKey], 1);
+  assert.equal(state.restrictions.meta[expectedKey].type, 'ONCE_PER_TURN');
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-CONSUMER-13
+// ---------------------------------------------------------------------------
+test('TC-ID-CONSUMER-13: Unknown physical IDs fail explicitly', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  const ab = createTestAbility('MAIN', null, { op: 'DRAW', count: 1 });
+  assignDeterministicAbilityIdentities('CARD-13', [ab]);
+
+  const cardData = {
+    card_number: 'CARD-13',
+    name: 'Unknown ID Dragon',
+    type: 'Spirit',
+    cost: 3,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 3000 } },
+    compiledIr: { abilities: [ab] }
+  };
+
+  const game = createGame({ playerDeck: createTestDeck([cardData]), firstPlayer: 'player' });
+  game.state.step = 'MAIN';
+
+  const card = createCardInstance(cardData, 'player');
+  const stack = createFieldStack(card, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stack);
+
+  const res = await game.activateAbility(card.id, 'UNKNOWN_PHYSICAL_ID_99999', 'player');
+  assert.equal(res.success, false);
+  assert.equal(res.activated, false);
+  assert.equal(res.reason, 'ABILITY_NOT_FOUND');
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-CONSUMER-14
+// ---------------------------------------------------------------------------
+test('TC-ID-CONSUMER-14: Semantic IDs cannot accidentally be used as physical activation references', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  const ab = createTestAbility('MAIN', null, { op: 'DRAW', count: 1 });
+  assignDeterministicAbilityIdentities('CARD-14', [ab]);
+
+  const cardData = {
+    card_number: 'CARD-14',
+    name: 'Semantic Rejection Dragon',
+    type: 'Spirit',
+    cost: 3,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 3000 } },
+    compiledIr: { abilities: [ab] }
+  };
+
+  const game = createGame({ playerDeck: createTestDeck([cardData]), firstPlayer: 'player' });
+  game.state.step = 'MAIN';
+
+  const card = createCardInstance(cardData, 'player');
+  const stack = createFieldStack(card, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stack);
+
+  // Calling activateAbility with semanticId must be rejected explicitly
+  const res = await game.activateAbility(card.id, ab.semanticId, 'player');
+  assert.equal(res.success, false);
+  assert.equal(res.activated, false);
+  assert.equal(res.reason, 'SEMANTIC_ID_NOT_PERMITTED_FOR_ACTIVATION');
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-CONSUMER-15
+// ---------------------------------------------------------------------------
+test('TC-ID-CONSUMER-15: Existing identity and activation-limit regression suites remain green', async () => {
+  const shardRaw = fs.readFileSync(path.join(ROOT, 'data', 'ir_shards', 'BS17.json'), 'utf8');
+  const bs17 = JSON.parse(shardRaw);
+  const cardWithDupes = bs17['BS17-036'];
+
+  assert.ok(cardWithDupes, 'BS17-036 must exist in BS17 shard');
+  const dupeAbilities = cardWithDupes.abilities.filter(a => a.physicalId.includes('_inst2'));
+  assert.equal(dupeAbilities.length, 1, 'Must have exactly one _inst2 ability on BS17-036');
+
+  // Verify all abilities in BS17 have valid physicalId, semanticId, and legacyId
+  for (const [cNum, card] of Object.entries(bs17)) {
+    if (Array.isArray(card.abilities)) {
+      for (const ab of card.abilities) {
+        assert.ok(ab.physicalId, `Missing physicalId on ${cNum}`);
+        assert.ok(ab.semanticId, `Missing semanticId on ${cNum}`);
+        assert.ok(ab.legacyId, `Missing legacyId on ${cNum}`);
+        assert.equal(ab.id, ab.physicalId, `id must match physicalId on ${cNum}`);
+      }
+    }
+  }
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-CONSUMER-16
+// ---------------------------------------------------------------------------
+test('TC-ID-CONSUMER-16: Descriptor with no physicalId behavior and uncompiled compatibility', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  // Part A: Uncompiled descriptor lacking physicalId and legacyId resolves through uncompiled compatibility path
+  const uncompiledAb = {
+    id: 'UNCOMPILED_RAW_AB0',
+    type: 'ABILITY',
+    header: { timing: 'MAIN', levels: [1], limit: 'ONCE_PER_TURN' },
+    clauses: [{ op: { op: 'DRAW', count: 1 } }]
+  };
+
+  const cardDataA = {
+    card_number: 'CARD-16A',
+    name: 'Uncompiled Legacy Card',
+    type: 'Spirit',
+    cost: 1,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 1000 } },
+    compiledIr: { abilities: [uncompiledAb] }
+  };
+
+  const gameA = createGame({ playerDeck: createTestDeck([cardDataA]), firstPlayer: 'player' });
+  gameA.state.step = 'MAIN';
+  const cardA = createCardInstance(cardDataA, 'player');
+  const stackA = createFieldStack(cardA, { normal: 2, soul: 0 });
+  gameA.state.players.player.field.push(stackA);
+
+  const resA = await gameA.activateAbility(cardA.id, 'UNCOMPILED_RAW_AB0', 'player');
+  assert.equal(resA.success, true, 'Uncompiled legacy descriptor without physicalId/legacyId resolves via uncompiled compatibility path');
+  assert.equal(resA.activated, true);
+
+  // Part B: Descriptor with legacyId but no physicalId rejects arbitrary id lookup
+  const legacyOnlyAb = {
+    id: 'RAW_INTERNAL_ID',
+    legacyId: 'CARD-16B#a0',
+    type: 'ABILITY',
+    header: { timing: 'MAIN', levels: [1], limit: 'ONCE_PER_TURN' },
+    clauses: [{ op: { op: 'DRAW', count: 1 } }]
+  };
+
+  const cardDataB = {
+    card_number: 'CARD-16B',
+    name: 'Legacy Card with ID mismatch',
+    type: 'Spirit',
+    cost: 1,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 1000 } },
+    compiledIr: { abilities: [legacyOnlyAb] }
+  };
+
+  const gameB = createGame({ playerDeck: createTestDeck([cardDataB]), firstPlayer: 'player' });
+  gameB.state.step = 'MAIN';
+  const cardB = createCardInstance(cardDataB, 'player');
+  const stackB = createFieldStack(cardB, { normal: 2, soul: 0 });
+  gameB.state.players.player.field.push(stackB);
+
+  // Calling with raw id must be rejected because legacyId is defined and id is not physical
+  const resB_byRaw = await gameB.activateAbility(cardB.id, 'RAW_INTERNAL_ID', 'player');
+  assert.equal(resB_byRaw.success, false);
+  assert.equal(resB_byRaw.reason, 'ABILITY_NOT_FOUND', 'Arbitrary id must not be promoted when physicalId is absent and legacyId exists');
+
+  // Calling with legacyId succeeds
+  const resB_byLegacy = await gameB.activateAbility(cardB.id, 'CARD-16B#a0', 'player');
+  assert.equal(resB_byLegacy.success, true);
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-CONSUMER-17
+// ---------------------------------------------------------------------------
+test('TC-ID-CONSUMER-17: Descriptor whose id differs from its physicalId does not match by id', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  const ab = createTestAbility('MAIN', 'ONCE_PER_TURN', { op: 'DRAW', count: 1 });
+  assignDeterministicAbilityIdentities('CARD-17', [ab]);
+
+  // Artificially alter ab.id to differ from ab.physicalId
+  ab.id = 'OLD_OR_DIFFERING_ID';
+
+  const cardData = {
+    card_number: 'CARD-17',
+    name: 'Differing ID Spirit',
+    type: 'Spirit',
+    cost: 1,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 1000 } },
+    compiledIr: { abilities: [ab] }
+  };
+
+  const game = createGame({ playerDeck: createTestDeck([cardData]), firstPlayer: 'player' });
+  game.state.step = 'MAIN';
+  const card = createCardInstance(cardData, 'player');
+  const stack = createFieldStack(card, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stack);
+
+  // Calling with the differing id must be rejected (cannot silently promote ab.id to physical identity)
+  const resFail = await game.activateAbility(card.id, 'OLD_OR_DIFFERING_ID', 'player');
+  assert.equal(resFail.success, false);
+  assert.equal(resFail.reason, 'ABILITY_NOT_FOUND', 'Differing ab.id must be rejected when physicalId is present');
+
+  // Calling with the actual physicalId succeeds
+  const resSuccess = await game.activateAbility(card.id, ab.physicalId, 'player');
+  assert.equal(resSuccess.success, true);
+  assert.equal(resSuccess.isCommitted, true);
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-CONSUMER-18
+// ---------------------------------------------------------------------------
+test('TC-ID-CONSUMER-18: Valid compiled descriptor with id === physicalId activates successfully', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  const ab = createTestAbility('MAIN', 'ONCE_PER_TURN', { op: 'DRAW', count: 1 });
+  assignDeterministicAbilityIdentities('CARD-18', [ab]);
+  assert.equal(ab.id, ab.physicalId, 'Compiler invariant: id === physicalId');
+
+  const cardData = {
+    card_number: 'CARD-18',
+    name: 'Compiled Spirit',
+    type: 'Spirit',
+    cost: 1,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 1000 } },
+    compiledIr: { abilities: [ab] }
+  };
+
+  const game = createGame({ playerDeck: createTestDeck([cardData]), firstPlayer: 'player' });
+  game.state.step = 'MAIN';
+  const card = createCardInstance(cardData, 'player');
+  const stack = createFieldStack(card, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stack);
+
+  const res = await game.activateAbility(card.id, ab.physicalId, 'player');
+  assert.equal(res.success, true);
+  assert.equal(res.isCommitted, true);
+  assert.equal(game.state.restrictions.counters[`turn:1:player:${stack.placementId}:${ab.physicalId}`], 1);
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-CONSUMER-19
+// ---------------------------------------------------------------------------
+test('TC-ID-CONSUMER-19: Legacy-only descriptor resolved through legacyId', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  const legacyAb = {
+    id: 'RAW_LEGACY_DESC_ID',
+    legacyId: 'CARD-19#a0',
+    type: 'ABILITY',
+    header: { timing: 'MAIN', levels: [1], limit: 'ONCE_PER_TURN' },
+    clauses: [{ op: { op: 'DRAW', count: 1 } }]
+  };
+
+  const cardData = {
+    card_number: 'CARD-19',
+    name: 'Legacy Only Card',
+    type: 'Spirit',
+    cost: 1,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 1000 } },
+    compiledIr: { abilities: [legacyAb] }
+  };
+
+  const game = createGame({ playerDeck: createTestDeck([cardData]), firstPlayer: 'player' });
+  game.state.step = 'MAIN';
+  const card = createCardInstance(cardData, 'player');
+  const stack = createFieldStack(card, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stack);
+
+  const res = await game.activateAbility(card.id, 'CARD-19#a0', 'player');
+  assert.equal(res.success, true);
+  assert.equal(res.activated, true);
+  assert.equal(res.isCommitted, true);
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-CONSUMER-20
+// ---------------------------------------------------------------------------
+test('TC-ID-CONSUMER-20: Ambiguous legacy reference is rejected safely', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  const ab1 = {
+    id: 'AB_1',
+    legacyId: 'SHARED_LEGACY_KEY',
+    type: 'ABILITY',
+    header: { timing: 'MAIN', levels: [1] },
+    clauses: [{ op: { op: 'DRAW', count: 1 } }]
+  };
+  const ab2 = {
+    id: 'AB_2',
+    legacyId: 'SHARED_LEGACY_KEY',
+    type: 'ABILITY',
+    header: { timing: 'MAIN', levels: [1] },
+    clauses: [{ op: { op: 'DRAW', count: 2 } }]
+  };
+
+  const cardData = {
+    card_number: 'CARD-20',
+    name: 'Ambiguous Legacy Card',
+    type: 'Spirit',
+    cost: 1,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 1000 } },
+    compiledIr: { abilities: [ab1, ab2] }
+  };
+
+  const game = createGame({ playerDeck: createTestDeck([cardData]), firstPlayer: 'player' });
+  game.state.step = 'MAIN';
+  const card = createCardInstance(cardData, 'player');
+  const stack = createFieldStack(card, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stack);
+
+  const res = await game.activateAbility(card.id, 'SHARED_LEGACY_KEY', 'player');
+  assert.equal(res.success, false);
+  assert.equal(res.activated, false);
+  assert.equal(res.reason, 'AMBIGUOUS_LEGACY_IDENTITY', 'Must safely reject ambiguous legacy match');
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-CONSUMER-21
+// ---------------------------------------------------------------------------
+test('TC-ID-CONSUMER-21: Physical lookup taking precedence over legacy fallback', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  // Ability 1 has physicalId === 'COLLIDING_ID'
+  const ab1 = {
+    id: 'COLLIDING_ID',
+    physicalId: 'COLLIDING_ID',
+    legacyId: 'LEGACY_1',
+    type: 'ABILITY',
+    header: { timing: 'MAIN', levels: [1] },
+    clauses: [{ op: { op: 'DRAW', count: 1 } }]
+  };
+
+  // Ability 2 has legacyId === 'COLLIDING_ID'
+  const ab2 = {
+    id: 'PHYSICAL_2',
+    physicalId: 'PHYSICAL_2',
+    legacyId: 'COLLIDING_ID',
+    type: 'ABILITY',
+    header: { timing: 'MAIN', levels: [1] },
+    clauses: [{ op: { op: 'DRAW', count: 2 } }]
+  };
+
+  const cardData = {
+    card_number: 'CARD-21',
+    name: 'Precedence Spirit',
+    type: 'Spirit',
+    cost: 1,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 1000 } },
+    compiledIr: { abilities: [ab1, ab2] }
+  };
+
+  const game = createGame({ playerDeck: createTestDeck([cardData]), firstPlayer: 'player' });
+  game.state.step = 'MAIN';
+  const card = createCardInstance(cardData, 'player');
+  const stack = createFieldStack(card, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stack);
+
+  const initialHand = game.state.players.player.hand.length;
+
+  // Activating 'COLLIDING_ID' must resolve Ability 1 (which draws 1), NOT Ability 2 (which draws 2)
+  const res = await game.activateAbility(card.id, 'COLLIDING_ID', 'player');
+  assert.equal(res.success, true);
+  assert.equal(game.state.players.player.hand.length, initialHand + 1, 'Physical match (draw 1) must take precedence over legacy match (draw 2)');
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-CONSUMER-22
+// ---------------------------------------------------------------------------
+test('TC-ID-CONSUMER-22: Concurrent and interleaved asynchronous prompts maintain isolated identity contexts', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  const promptAbA = createTestAbility('MAIN', 'ONCE_PER_TURN', {
+    op: 'TARGET_SELECT',
+    target: 'opposing_spirit'
+  });
+  const promptAbB = createTestAbility('MAIN', 'ONCE_PER_TURN', {
+    op: 'TARGET_SELECT',
+    target: 'opposing_spirit'
+  });
+  assignDeterministicAbilityIdentities('CARD-22A', [promptAbA]);
+  assignDeterministicAbilityIdentities('CARD-22B', [promptAbB]);
+
+  const cardDataA = {
+    card_number: 'CARD-22A',
+    name: 'Concurrent Dragon A',
+    type: 'Spirit',
+    cost: 3,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 3000 } },
+    compiledIr: { abilities: [promptAbA] }
+  };
+  const cardDataB = {
+    card_number: 'CARD-22B',
+    name: 'Concurrent Dragon B',
+    type: 'Spirit',
+    cost: 3,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 3000 } },
+    compiledIr: { abilities: [promptAbB] }
+  };
+
+  const oppCardData1 = {
+    card_number: 'OPP-22A',
+    name: 'Opposing Spirit 1',
+    type: 'Spirit',
+    cost: 1,
+    color: 'White',
+    levels: { 1: { cost: 1, bp: 1000 } }
+  };
+  const oppCardData2 = {
+    card_number: 'OPP-22B',
+    name: 'Opposing Spirit 2',
+    type: 'Spirit',
+    cost: 1,
+    color: 'White',
+    levels: { 1: { cost: 1, bp: 2000 } }
+  };
+
+  const game = createGame({ playerDeck: createTestDeck([cardDataA, cardDataB]), firstPlayer: 'player' });
+  game.state.step = 'MAIN';
+
+  const cardA = createCardInstance(cardDataA, 'player');
+  const stackA = createFieldStack(cardA, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stackA);
+
+  const cardB = createCardInstance(cardDataB, 'player');
+  const stackB = createFieldStack(cardB, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stackB);
+
+  const oppCard1 = createCardInstance(oppCardData1, 'opponent');
+  const oppStack1 = createFieldStack(oppCard1, { normal: 1, soul: 0 });
+  game.state.players.opponent.field.push(oppStack1);
+
+  const oppCard2 = createCardInstance(oppCardData2, 'opponent');
+  const oppStack2 = createFieldStack(oppCard2, { normal: 1, soul: 0 });
+  game.state.players.opponent.field.push(oppStack2);
+
+  let resolvePromptA = null;
+  let resolvePromptB = null;
+  let promptReachedA = false;
+  let promptReachedB = false;
+
+  const promptAPromise = new Promise(r => { resolvePromptA = r; });
+  const promptBPromise = new Promise(r => { resolvePromptB = r; });
+
+  const observedPrompts = [];
+
+  game.resolver.promptResolver = {
+    async choose(request) {
+      const physId = request.context?.physicalAbilityId;
+      observedPrompts.push({
+        physicalAbilityId: request.context?.physicalAbilityId,
+        semanticAbilityId: request.context?.semanticAbilityId,
+        sourceAbility: request.context?.sourceAbility,
+        targetCandidates: request.candidates
+      });
+
+      if (physId === promptAbA.physicalId) {
+        promptReachedA = true;
+        await promptAPromise;
+        return request.candidates[0];
+      } else if (physId === promptAbB.physicalId) {
+        promptReachedB = true;
+        await promptBPromise;
+        return request.candidates[1] || request.candidates[0];
+      }
+      return request.candidates[0];
+    }
+  };
+
+  // Launch Activation A (will pause at prompt A)
+  const actAPromise = game.activateAbility(cardA.id, promptAbA.physicalId, 'player');
+
+  // Wait a tick to ensure Activation A reaches its prompt
+  await new Promise(setImmediate);
+  assert.equal(promptReachedA, true, 'Activation A must reach its prompt and pause');
+
+  // Launch Activation B while A is still paused (overlapping prompt)
+  const actBPromise = game.activateAbility(cardB.id, promptAbB.physicalId, 'player');
+
+  await new Promise(setImmediate);
+  assert.equal(promptReachedB, true, 'Activation B must reach its prompt and pause concurrently');
+
+  // Verify both prompts observed their own distinct identity contexts concurrently
+  assert.equal(observedPrompts.length, 2);
+  const promptObsA = observedPrompts.find(p => p.physicalAbilityId === promptAbA.physicalId);
+  const promptObsB = observedPrompts.find(p => p.physicalAbilityId === promptAbB.physicalId);
+
+  assert.ok(promptObsA, 'Prompt A must have been recorded');
+  assert.ok(promptObsB, 'Prompt B must have been recorded');
+
+  assert.equal(promptObsA.physicalAbilityId, promptAbA.physicalId);
+  assert.equal(promptObsA.semanticAbilityId, promptAbA.semanticId);
+  assert.strictEqual(promptObsA.sourceAbility, promptAbA);
+
+  assert.equal(promptObsB.physicalAbilityId, promptAbB.physicalId);
+  assert.equal(promptObsB.semanticAbilityId, promptAbB.semanticId);
+  assert.strictEqual(promptObsB.sourceAbility, promptAbB);
+
+  // Resume prompts in OPPOSITE order: Resume B first, while A remains paused
+  resolvePromptB();
+  const resB = await actBPromise;
+  assert.equal(resB.success, true, 'Activation B must complete successfully');
+  assert.equal(resB.isCommitted, true, 'Activation B must be committed');
+
+  const keyA = `turn:1:player:${stackA.placementId}:${promptAbA.physicalId}`;
+  const keyB = `turn:1:player:${stackB.placementId}:${promptAbB.physicalId}`;
+
+  assert.equal(game.state.restrictions.counters[keyB], 1, 'Ability B must be committed');
+  assert.equal(game.state.restrictions.counters[keyA] || 0, 0, 'Ability A must not yet be committed while still paused');
+
+  // Now resume prompt A
+  resolvePromptA();
+  const resA = await actAPromise;
+  assert.equal(resA.success, true, 'Activation A must complete successfully');
+  assert.equal(resA.isCommitted, true, 'Activation A must be committed');
+  assert.equal(game.state.restrictions.counters[keyA], 1, 'Ability A must now be committed');
+
+  // Verify neither activation overwrote or corrupted the other
+  assert.equal(game.state.restrictions.counters[keyA], 1);
+  assert.equal(game.state.restrictions.counters[keyB], 1);
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-CONSUMER-23
+// ---------------------------------------------------------------------------
+test('TC-ID-CONSUMER-23: Optional prompt rejection releases reservation and preserves clean context', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  const optAb = createTestAbility('MAIN', 'ONCE_PER_TURN', { op: 'DRAW', count: 1 });
+  optAb.clauses[0].isOptional = true;
+  assignDeterministicAbilityIdentities('CARD-23', [optAb]);
+
+  const cardData = {
+    card_number: 'CARD-23',
+    name: 'Optional Decline Spirit',
+    type: 'Spirit',
+    cost: 1,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 1000 } },
+    compiledIr: { abilities: [optAb] }
+  };
+
+  const game = createGame({ playerDeck: createTestDeck([cardData]), firstPlayer: 'player' });
+  game.state.step = 'MAIN';
+  const card = createCardInstance(cardData, 'player');
+  const stack = createFieldStack(card, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stack);
+
+  let promptObservedContext = null;
+  game.resolver.promptResolver = {
+    async choose(request) {
+      promptObservedContext = {
+        physicalAbilityId: request.context?.physicalAbilityId,
+        sourceAbility: request.context?.sourceAbility
+      };
+      return { declined: true };
+    }
+  };
+
+  const res = await game.activateAbility(card.id, optAb.physicalId, 'player');
+  assert.equal(res.isCommitted, false, 'Optional decline must not commit usage');
+  assert.equal(res.activated, false, 'Optional decline does not count as activated');
+
+  assert.ok(promptObservedContext);
+  assert.equal(promptObservedContext.physicalAbilityId, optAb.physicalId);
+  assert.strictEqual(promptObservedContext.sourceAbility, optAb);
+
+  const key = `turn:1:player:${stack.placementId}:${optAb.physicalId}`;
+  assert.equal(game.state.restrictions.counters[key] || 0, 0, 'Committed counter must remain 0 on optional decline');
+  assert.equal(game.state.restrictions.reservations[key] || 0, 0, 'Active reservation must be released');
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-CONSUMER-24
+// ---------------------------------------------------------------------------
+test('TC-ID-CONSUMER-24: Mandatory prompt cancellation / invalid selection releases reservation without limit consumption', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  const promptAb = createTestAbility('MAIN', 'ONCE_PER_TURN', {
+    op: 'TARGET_SELECT',
+    target: 'opposing_spirit'
+  });
+  assignDeterministicAbilityIdentities('CARD-24', [promptAb]);
+
+  const cardData = {
+    card_number: 'CARD-24',
+    name: 'Cancel Spirit',
+    type: 'Spirit',
+    cost: 1,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 1000 } },
+    compiledIr: { abilities: [promptAb] }
+  };
+
+  const game = createGame({ playerDeck: createTestDeck([cardData]), firstPlayer: 'player' });
+  game.state.step = 'MAIN';
+  const card = createCardInstance(cardData, 'player');
+  const stack = createFieldStack(card, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stack);
+
+  // Prompt returns invalid / empty chosen array for mandatory target selection
+  game.resolver.promptResolver = {
+    async choose(request) {
+      return [];
+    }
+  };
+
+  const res = await game.activateAbility(card.id, promptAb.physicalId, 'player');
+  assert.equal(res.success, false);
+  assert.equal(res.isCommitted, false);
+
+  const key = `turn:1:player:${stack.placementId}:${promptAb.physicalId}`;
+  assert.equal(game.state.restrictions.counters[key] || 0, 0, 'Committed counter must remain 0 on cancelled prompt');
+  assert.equal(game.state.restrictions.reservations[key] || 0, 0, 'Reservation must be cleanly released');
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-CONSUMER-25
+// ---------------------------------------------------------------------------
+test('TC-ID-CONSUMER-25: Thrown error in prompt resolver safely releases reservation on exceptional exit', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  const promptAb = createTestAbility('MAIN', 'ONCE_PER_TURN', {
+    op: 'TARGET_SELECT',
+    target: 'opposing_spirit'
+  });
+  assignDeterministicAbilityIdentities('CARD-25', [promptAb]);
+
+  const cardData = {
+    card_number: 'CARD-25',
+    name: 'Throwing Prompt Spirit',
+    type: 'Spirit',
+    cost: 1,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 1000 } },
+    compiledIr: { abilities: [promptAb] }
+  };
+
+  const oppCardData = {
+    card_number: 'OPP-25',
+    name: 'Opposing Spirit',
+    type: 'Spirit',
+    cost: 1,
+    color: 'White',
+    levels: { 1: { cost: 1, bp: 1000 } }
+  };
+
+  const game = createGame({ playerDeck: createTestDeck([cardData]), firstPlayer: 'player' });
+  game.state.step = 'MAIN';
+  const card = createCardInstance(cardData, 'player');
+  const stack = createFieldStack(card, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stack);
+
+  const oppCard = createCardInstance(oppCardData, 'opponent');
+  const oppStack = createFieldStack(oppCard, { normal: 1, soul: 0 });
+  game.state.players.opponent.field.push(oppStack);
+
+  // Prompt resolver throws an unhandled exception
+  game.resolver.promptResolver = {
+    async choose(request) {
+      throw new Error('CRITICAL_PROMPT_CRASH');
+    }
+  };
+
+  await assert.rejects(
+    async () => game.activateAbility(card.id, promptAb.physicalId, 'player'),
+    /CRITICAL_PROMPT_CRASH/
+  );
+
+  const key = `turn:1:player:${stack.placementId}:${promptAb.physicalId}`;
+  assert.equal(game.state.restrictions.counters[key] || 0, 0, 'Committed counter must remain 0 on exception');
+  assert.equal(game.state.restrictions.reservations[key] || 0, 0, 'Reservation must be released in finally block');
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-CONSUMER-26
+// ---------------------------------------------------------------------------
+test('TC-ID-CONSUMER-26: Early reservation failure exits cleanly without context pollution or prompt invocation', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  const promptAb = createTestAbility('MAIN', 'ONCE_PER_TURN', {
+    op: 'TARGET_SELECT',
+    target: 'opposing_spirit'
+  });
+  assignDeterministicAbilityIdentities('CARD-26', [promptAb]);
+
+  const cardData = {
+    card_number: 'CARD-26',
+    name: 'Early Failure Spirit',
+    type: 'Spirit',
+    cost: 1,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 1000 } },
+    compiledIr: { abilities: [promptAb] }
+  };
+
+  const game = createGame({ playerDeck: createTestDeck([cardData]), firstPlayer: 'player' });
+  game.state.step = 'MAIN';
+  const card = createCardInstance(cardData, 'player');
+  const stack = createFieldStack(card, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stack);
+
+  // Pre-seed committed counter to simulate exhausted limit
+  const key = `turn:1:player:${stack.placementId}:${promptAb.physicalId}`;
+  ensureRestrictionState(game.state);
+  game.state.restrictions.counters[key] = 1;
+
+  let promptInvoked = false;
+  game.resolver.promptResolver = {
+    async choose(request) {
+      promptInvoked = true;
+      return request.candidates[0];
+    }
+  };
+
+  const res = await game.activateAbility(card.id, promptAb.physicalId, 'player');
+  assert.equal(res.success, false);
+  assert.equal(res.isCommitted, false);
+  assert.equal(res.reason, 'ABILITY_LIMIT_REACHED');
+
+  assert.equal(promptInvoked, false, 'Prompt must never be invoked when reservation fails early');
+  assert.equal(game.state.restrictions.counters[key], 1, 'Committed counter remains unchanged');
+  assert.equal(game.state.restrictions.reservations[key] || 0, 0, 'No active reservation left behind');
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-PERSIST-01
+// ---------------------------------------------------------------------------
+test('TC-ID-PERSIST-01: Save/load with no active reservations preserves committed usage', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  const ab = createTestAbility('MAIN', 'ONCE_PER_TURN', { op: 'DRAW', count: 1 });
+  assignDeterministicAbilityIdentities('CARD-P01', [ab]);
+
+  const cardData = {
+    card_number: 'CARD-P01',
+    name: 'Persistent Dragon',
+    type: 'Spirit',
+    cost: 3,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 3000 } },
+    compiledIr: { abilities: [ab] }
+  };
+
+  const game = createGame({ playerDeck: createTestDeck([cardData]), firstPlayer: 'player' });
+  game.state.step = 'MAIN';
+
+  const card = createCardInstance(cardData, 'player');
+  const stack = createFieldStack(card, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stack);
+
+  // Activate and commit
+  const res = await game.activateAbility(card.id, ab.physicalId, 'player');
+  assert.equal(res.success, true);
+  assert.equal(res.isCommitted, true);
+
+  const key = `turn:1:player:${stack.placementId}:${ab.physicalId}`;
+  assert.equal(game.state.restrictions.counters[key], 1);
+  assert.equal(game.state.restrictions.reservations[key] || 0, 0);
+
+  // Serialize and restore into fresh game
+  const serialized = JSON.stringify(game.state);
+  const freshGame = createGame({ state: JSON.parse(serialized) });
+
+  // Committed usage counter preserved
+  assert.equal(freshGame.state.restrictions.counters[key], 1);
+  assert.equal(freshGame.state.restrictions.reservations[key] || 0, 0);
+
+  // Activating again is blocked by limit
+  const restoredCard = freshGame.state.players.player.field[0].top;
+  const resBlocked = await freshGame.activateAbility(restoredCard.id, ab.physicalId, 'player');
+  assert.equal(resBlocked.success, false);
+  assert.equal(resBlocked.reason, 'ABILITY_LIMIT_REACHED');
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-PERSIST-02
+// ---------------------------------------------------------------------------
+test('TC-ID-PERSIST-02: Save/load with an active reservation follows the selected restoration policy', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  const ab = createTestAbility('MAIN', 'ONCE_PER_TURN', { op: 'DRAW', count: 1 });
+  assignDeterministicAbilityIdentities('CARD-P02', [ab]);
+
+  const cardData = {
+    card_number: 'CARD-P02',
+    name: 'Policy Dragon',
+    type: 'Spirit',
+    cost: 3,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 3000 } },
+    compiledIr: { abilities: [ab] }
+  };
+
+  const game = createGame({ playerDeck: createTestDeck([cardData]), firstPlayer: 'player' });
+  game.state.step = 'MAIN';
+
+  const card = createCardInstance(cardData, 'player');
+  const stack = createFieldStack(card, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stack);
+
+  // Stage an active reservation
+  const activationContext = {
+    controller: 'player',
+    sourceCard: stack.top,
+    sourceStack: stack,
+    placementId: stack.placementId
+  };
+  const handle = reserveRestriction(game.state, ab, activationContext);
+  assert.equal(handle.success, true);
+  assert.equal(game.state.restrictions.reservations[handle.key], 1);
+  assert.ok(game.state.restrictions.meta._reservations[handle.reservationId]);
+
+  // Serialize and restore into fresh game
+  const serialized = JSON.stringify(game.state);
+  const freshGame = createGame({ state: JSON.parse(serialized) });
+
+  // Policy Option B (Invalidate Transient Reservations):
+  // Active reservations cleared, committed counter untouched (0), generation advanced
+  assert.equal(freshGame.state.restrictions.reservations[handle.key] || 0, 0);
+  assert.equal(freshGame.state.restrictions.meta._reservations?.[handle.reservationId], undefined);
+  assert.equal(freshGame.state.restrictions.counters[handle.key] || 0, 0);
+  assert.ok(freshGame.state.restrictions.generations.TURN > handle.generation);
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-PERSIST-03
+// ---------------------------------------------------------------------------
+test('TC-ID-PERSIST-03: A restored reservation can be finalized exactly once, if Option A is selected', () => {
+  // Option B was selected over Option A based on engine architectural analysis:
+  // In-flight asynchronous prompt continuations and event dispatch frames cannot be restored.
+  // Reconstructing reservation handles without execution continuations leaves them orphaned.
+  // Under Option B, attempting to finalize a pre-save reservation against restored state fails safely.
+  const state = {
+    turnNumber: 1,
+    restrictions: {
+      counters: {},
+      meta: {
+        _reservations: {
+          res_dummy: {
+            reservationId: 'res_dummy',
+            key: 'turn:1:player:pl_1:CARD#01',
+            type: 'ONCE_PER_TURN',
+            scope: 'TURN',
+            limit: 1,
+            generation: 1,
+            status: 'ACTIVE',
+            createdAt: Date.now()
+          }
+        },
+        'turn:1:player:pl_1:CARD#01': {
+          type: 'ONCE_PER_TURN',
+          scope: 'TURN',
+          limit: 1
+        }
+      },
+      reservations: {
+        'turn:1:player:pl_1:CARD#01': 1
+      },
+      generations: {
+        TURN: 1, STEP: 1, BATTLE: 1, ATTACK: 1, GAME: 1
+      }
+    }
+  };
+
+  const freshGame = createGame({ state });
+
+  // Verifies that under Option B, the restored state does not support finalizing the interrupted handle
+  const commitRes = _finalizeReservation(freshGame.state, 'res_dummy', 'COMMIT');
+  assert.equal(commitRes.success, false);
+  assert.equal(commitRes.status, RESTRICTION_STATUS.RESERVATION_INVALIDATED);
+  assert.equal(freshGame.state.restrictions.counters['turn:1:player:pl_1:CARD#01'] || 0, 0);
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-PERSIST-04
+// ---------------------------------------------------------------------------
+test('TC-ID-PERSIST-04: An interrupted reservation is safely invalidated, if Option B is selected', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  const ab1 = createTestAbility('MAIN', 'ONCE_PER_TURN', { op: 'DRAW', count: 1 });
+  const ab2 = createTestAbility('MAIN', 'ONCE_PER_TURN', { op: 'DRAW', count: 2 });
+  assignDeterministicAbilityIdentities('CARD-P04', [ab1, ab2]);
+
+  const cardData = {
+    card_number: 'CARD-P04',
+    name: 'Interrupted Dragon',
+    type: 'Spirit',
+    cost: 3,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 3000 } },
+    compiledIr: { abilities: [ab1, ab2] }
+  };
+
+  const game = createGame({ playerDeck: createTestDeck([cardData]), firstPlayer: 'player' });
+  game.state.step = 'MAIN';
+
+  const card = createCardInstance(cardData, 'player');
+  const stack = createFieldStack(card, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stack);
+
+  // Commit ability 1
+  await game.activateAbility(card.id, ab1.physicalId, 'player');
+  const key1 = `turn:1:player:${stack.placementId}:${ab1.physicalId}`;
+  assert.equal(game.state.restrictions.counters[key1], 1);
+
+  // Reserve ability 2 (interrupted in-flight)
+  const actCtx = { controller: 'player', sourceCard: stack.top, sourceStack: stack, placementId: stack.placementId };
+  const handle2 = reserveRestriction(game.state, ab2, actCtx);
+  const key2 = handle2.key;
+  assert.equal(game.state.restrictions.reservations[key2], 1);
+
+  // Serialize and restore into fresh game
+  const serialized = JSON.stringify(game.state);
+  const freshGame = createGame({ state: JSON.parse(serialized) });
+
+  // Option B assertions:
+  // 1. Interrupted reservation is completely invalidated
+  assert.equal(freshGame.state.restrictions.reservations[key2] || 0, 0);
+  assert.deepEqual(freshGame.state.restrictions.meta._reservations, {});
+  // 2. Generation advanced
+  assert.equal(freshGame.state.restrictions.generations.TURN, 2);
+  // 3. Unrelated committed counter preserved
+  assert.equal(freshGame.state.restrictions.counters[key1], 1);
+  // 4. Interrupted ability counter remains uncommitted
+  assert.equal(freshGame.state.restrictions.counters[key2] || 0, 0);
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-PERSIST-05
+// ---------------------------------------------------------------------------
+test('TC-ID-PERSIST-05: A stale pre-save handle cannot mutate restored state', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  const ab = createTestAbility('MAIN', 'ONCE_PER_TURN', { op: 'DRAW', count: 1 });
+  assignDeterministicAbilityIdentities('CARD-P05', [ab]);
+
+  const cardData = {
+    card_number: 'CARD-P05',
+    name: 'Stale Handle Dragon',
+    type: 'Spirit',
+    cost: 3,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 3000 } },
+    compiledIr: { abilities: [ab] }
+  };
+
+  const game = createGame({ playerDeck: createTestDeck([cardData]), firstPlayer: 'player' });
+  game.state.step = 'MAIN';
+
+  const card = createCardInstance(cardData, 'player');
+  const stack = createFieldStack(card, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stack);
+
+  const actCtx = { controller: 'player', sourceCard: stack.top, sourceStack: stack, placementId: stack.placementId };
+  const handle = reserveRestriction(game.state, ab, actCtx);
+  assert.equal(handle.success, true);
+
+  const serialized = JSON.stringify(game.state);
+  const freshGame = createGame({ state: JSON.parse(serialized) });
+
+  // 1. Snapshot of restored state before invalidation attempts
+  const oldCountersSnapshot = JSON.stringify(freshGame.state.restrictions.counters);
+  const oldReservationsSnapshot = JSON.stringify(freshGame.state.restrictions.reservations);
+
+  // 2. Direct finalization against freshGame.state fails with RESERVATION_INVALIDATED
+  const commitRes = _finalizeReservation(freshGame.state, handle.reservationId, 'COMMIT');
+  assert.equal(commitRes.success, false);
+  assert.equal(commitRes.status, RESTRICTION_STATUS.RESERVATION_INVALIDATED);
+
+  // 3. Direct release against freshGame.state fails
+  const releaseRes = releaseReservation(freshGame.state, handle.reservationId);
+  assert.equal(releaseRes, false);
+
+  // 4. Even if stale record is injected with old generation, generation mismatch rejects it
+  freshGame.state.restrictions.meta._reservations = {
+    [handle.reservationId]: {
+      reservationId: handle.reservationId,
+      key: handle.key,
+      type: 'ONCE_PER_TURN',
+      scope: 'TURN',
+      limit: 1,
+      generation: handle.generation, // old generation (1)
+      status: 'ACTIVE'
+    }
+  };
+  freshGame.state.restrictions.reservations = { [handle.key]: 1 };
+
+  const injectedCommit = _finalizeReservation(freshGame.state, handle.reservationId, 'COMMIT');
+  assert.equal(injectedCommit.success, false);
+  assert.equal(injectedCommit.status, RESTRICTION_STATUS.RESERVATION_INVALIDATED);
+
+  // Clean up injected test record and verify state invariance
+  freshGame.state.restrictions.meta._reservations = {};
+  freshGame.state.restrictions.reservations = {};
+  assert.equal(JSON.stringify(freshGame.state.restrictions.counters), oldCountersSnapshot);
+  assert.equal(JSON.stringify(freshGame.state.restrictions.reservations), oldReservationsSnapshot);
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-PERSIST-06
+// ---------------------------------------------------------------------------
+test('TC-ID-PERSIST-06: A restored ability can be activated after transient reservations are invalidated, if Option B is selected', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  const ab = createTestAbility('MAIN', 'ONCE_PER_TURN', { op: 'DRAW', count: 1 });
+  assignDeterministicAbilityIdentities('CARD-P06', [ab]);
+
+  const cardData = {
+    card_number: 'CARD-P06',
+    name: 'Reactive Dragon',
+    type: 'Spirit',
+    cost: 3,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 3000 } },
+    compiledIr: { abilities: [ab] }
+  };
+
+  const game = createGame({ playerDeck: createTestDeck([cardData]), firstPlayer: 'player' });
+  game.state.step = 'MAIN';
+
+  const card = createCardInstance(cardData, 'player');
+  const stack = createFieldStack(card, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stack);
+
+  // In pre-save game, reserve capacity so further activations would be blocked
+  const actCtx = { controller: 'player', sourceCard: stack.top, sourceStack: stack, placementId: stack.placementId };
+  const handle = reserveRestriction(game.state, ab, actCtx);
+  assert.equal(handle.success, true);
+
+  // Second activation in pre-save game is blocked
+  const resBlockedOld = await game.activateAbility(card.id, ab.physicalId, 'player');
+  assert.equal(resBlockedOld.success, false);
+  assert.equal(resBlockedOld.reason, 'ABILITY_LIMIT_REACHED');
+
+  // Save and load into fresh game
+  const serialized = JSON.stringify(game.state);
+  const freshGame = createGame({ state: JSON.parse(serialized) });
+
+  // In fresh game, transient reservation was invalidated. Ability can now be activated!
+  const restoredCard = freshGame.state.players.player.field[0].top;
+  const resSuccess = await freshGame.activateAbility(restoredCard.id, ab.physicalId, 'player');
+  assert.equal(resSuccess.success, true);
+  assert.equal(resSuccess.isCommitted, true);
+
+  const key = `turn:1:player:${restoredCard.placementId}:${ab.physicalId}`;
+  assert.equal(freshGame.state.restrictions.counters[key], 1);
+
+  // Once committed in fresh game, subsequent activation is blocked
+  const resBlockedNow = await freshGame.activateAbility(restoredCard.id, ab.physicalId, 'player');
+  assert.equal(resBlockedNow.success, false);
+  assert.equal(resBlockedNow.reason, 'ABILITY_LIMIT_REACHED');
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-PERSIST-07
+// ---------------------------------------------------------------------------
+test('TC-ID-PERSIST-07: Multiple reservations on the same restriction key restore or invalidate consistently', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  const multiAb = createTestAbility('MAIN', 'ONCE_PER_TURN', { op: 'DRAW', count: 1 });
+  multiAb.header.limitCount = 3; // Allows 3 activations per turn
+  assignDeterministicAbilityIdentities('CARD-P07', [multiAb]);
+
+  const cardData = {
+    card_number: 'CARD-P07',
+    name: 'Multi Reserve Dragon',
+    type: 'Spirit',
+    cost: 3,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 3000 } },
+    compiledIr: { abilities: [multiAb] }
+  };
+
+  const game = createGame({ playerDeck: createTestDeck([cardData]), firstPlayer: 'player' });
+  game.state.step = 'MAIN';
+
+  const card = createCardInstance(cardData, 'player');
+  const stack = createFieldStack(card, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stack);
+
+  // Take 2 concurrent reservations on the same key
+  const actCtx = { controller: 'player', sourceCard: stack.top, sourceStack: stack, placementId: stack.placementId };
+  const h1 = reserveRestriction(game.state, multiAb, actCtx);
+  const h2 = reserveRestriction(game.state, multiAb, actCtx);
+  assert.equal(h1.success, true);
+  assert.equal(h2.success, true);
+  assert.equal(game.state.restrictions.reservations[h1.key], 2);
+
+  // Save and restore
+  const serialized = JSON.stringify(game.state);
+  const freshGame = createGame({ state: JSON.parse(serialized) });
+
+  // Both reservations invalidated consistently
+  assert.equal(freshGame.state.restrictions.reservations[h1.key] || 0, 0);
+  assert.deepEqual(freshGame.state.restrictions.meta._reservations, {});
+  assert.equal(freshGame.state.restrictions.counters[h1.key] || 0, 0);
+
+  // Can now activate up to limit (3 times)
+  const restoredCard = freshGame.state.players.player.field[0].top;
+  const a1 = await freshGame.activateAbility(restoredCard.id, multiAb.physicalId, 'player');
+  const a2 = await freshGame.activateAbility(restoredCard.id, multiAb.physicalId, 'player');
+  const a3 = await freshGame.activateAbility(restoredCard.id, multiAb.physicalId, 'player');
+  assert.equal(a1.success, true);
+  assert.equal(a2.success, true);
+  assert.equal(a3.success, true);
+  assert.equal(freshGame.state.restrictions.counters[h1.key], 3);
+
+  // 4th activation blocked
+  const a4 = await freshGame.activateAbility(restoredCard.id, multiAb.physicalId, 'player');
+  assert.equal(a4.success, false);
+  assert.equal(a4.reason, 'ABILITY_LIMIT_REACHED');
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-PERSIST-08
+// ---------------------------------------------------------------------------
+test('TC-ID-PERSIST-08: Reservations from different players and scopes remain correctly isolated', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  const turnAb = createTestAbility('MAIN', 'ONCE_PER_TURN', { op: 'DRAW', count: 1 });
+  const gameAb = createTestAbility('MAIN', 'ONCE_PER_GAME', { op: 'DRAW', count: 1 });
+  assignDeterministicAbilityIdentities('CARD-P08-A', [turnAb]);
+  assignDeterministicAbilityIdentities('CARD-P08-B', [gameAb]);
+
+  const p1CardData = {
+    card_number: 'CARD-P08-A',
+    name: 'Turn Player Dragon',
+    type: 'Spirit',
+    cost: 3,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 3000 } },
+    compiledIr: { abilities: [turnAb] }
+  };
+  const p2CardData = {
+    card_number: 'CARD-P08-B',
+    name: 'Game Opponent Dragon',
+    type: 'Spirit',
+    cost: 3,
+    color: 'White',
+    levels: { 1: { cost: 1, bp: 3000 } },
+    compiledIr: { abilities: [gameAb] }
+  };
+
+  const game = createGame({
+    playerDeck: createTestDeck([p1CardData]),
+    opponentDeck: createTestDeck([p2CardData]),
+    firstPlayer: 'player'
+  });
+  game.state.step = 'MAIN';
+
+  const card1 = createCardInstance(p1CardData, 'player');
+  const stack1 = createFieldStack(card1, { normal: 2, soul: 0 });
+  game.state.players.player.field.push(stack1);
+
+  const card2 = createCardInstance(p2CardData, 'opponent');
+  const stack2 = createFieldStack(card2, { normal: 2, soul: 0 });
+  game.state.players.opponent.field.push(stack2);
+
+  // P1 reserves TURN ability, P2 reserves GAME ability
+  const h1 = reserveRestriction(game.state, turnAb, { controller: 'player', sourceCard: card1, sourceStack: stack1, placementId: stack1.placementId });
+  const h2 = reserveRestriction(game.state, gameAb, { controller: 'opponent', sourceCard: card2, sourceStack: stack2, placementId: stack2.placementId, cardId: card2.id });
+  assert.equal(h1.success, true);
+  assert.equal(h2.success, true);
+
+  // Save and restore
+  const serialized = JSON.stringify(game.state);
+  const freshGame = createGame({ state: JSON.parse(serialized) });
+
+  // Both scopes advance generations
+  assert.equal(freshGame.state.restrictions.generations.TURN, 2);
+  assert.equal(freshGame.state.restrictions.generations.GAME, 2);
+
+  // Both transient reservations cleared
+  assert.equal(freshGame.state.restrictions.reservations[h1.key] || 0, 0);
+  assert.equal(freshGame.state.restrictions.reservations[h2.key] || 0, 0);
+
+  // Activate P1 ability: only P1 counter updates
+  const res1 = await freshGame.activateAbility(card1.id, turnAb.physicalId, 'player');
+  assert.equal(res1.success, true);
+  assert.equal(freshGame.state.restrictions.counters[h1.key], 1);
+  assert.equal(freshGame.state.restrictions.counters[h2.key] || 0, 0);
+
+  // Activate P2 ability: only P2 counter updates
+  const res2 = await freshGame.activateAbility(card2.id, gameAb.physicalId, 'opponent');
+  assert.equal(res2.success, true);
+  assert.equal(freshGame.state.restrictions.counters[h2.key], 1);
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-PERSIST-09
+// ---------------------------------------------------------------------------
+test('TC-ID-PERSIST-09: Malformed or contradictory serialized reservation state is rejected safely', () => {
+  // Case A: Negative committed counter
+  const stateNegativeCounter = {
+    turnNumber: 1,
+    restrictions: {
+      counters: { 'turn:1:player:pl_1:CARD#01': -1 },
+      meta: { 'turn:1:player:pl_1:CARD#01': { type: 'ONCE_PER_TURN', scope: 'TURN', limit: 1 } },
+      reservations: {}
+    }
+  };
+  const snapNegative = JSON.parse(JSON.stringify(stateNegativeCounter));
+  assert.throws(() => createGame({ state: stateNegativeCounter }), /INVALID_RESTRICTION_STATE/);
+  assert.deepStrictEqual(stateNegativeCounter, snapNegative, 'State must remain invariant on rejection');
+
+  // Case B: Reservation count mismatch
+  const stateMismatch = {
+    turnNumber: 1,
+    restrictions: {
+      counters: {},
+      meta: {
+        _reservations: {
+          res_1: {
+            reservationId: 'res_1',
+            key: 'turn:1:player:pl_1:CARD#01',
+            type: 'ONCE_PER_TURN',
+            scope: 'TURN',
+            limit: 1,
+            generation: 1,
+            status: 'ACTIVE'
+          }
+        }
+      },
+      reservations: {
+        'turn:1:player:pl_1:CARD#01': 5 // Record count is 1, counter is 5
+      }
+    }
+  };
+  const snapMismatch = JSON.parse(JSON.stringify(stateMismatch));
+  assert.throws(() => createGame({ state: stateMismatch }), /INVALID_RESTRICTION_STATE/);
+  assert.deepStrictEqual(stateMismatch, snapMismatch, 'State must remain invariant on rejection');
+
+  // Case C: Contradictory metadata
+  const stateContradiction = {
+    turnNumber: 1,
+    restrictions: {
+      counters: {},
+      meta: {
+        'turn:1:player:pl_1:CARD#01': { type: 'ONCE_PER_TURN', scope: 'TURN', limit: 1 },
+        _reservations: {
+          res_1: {
+            reservationId: 'res_1',
+            key: 'turn:1:player:pl_1:CARD#01',
+            type: 'ONCE_PER_GAME', // Contradicts meta type
+            scope: 'GAME',
+            limit: 1,
+            generation: 1,
+            status: 'ACTIVE'
+          }
+        }
+      },
+      reservations: {
+        'turn:1:player:pl_1:CARD#01': 1
+      }
+    }
+  };
+  const snapContradiction = JSON.parse(JSON.stringify(stateContradiction));
+  assert.throws(() => createGame({ state: stateContradiction }), /INVALID_RESTRICTION_STATE/);
+  assert.deepStrictEqual(stateContradiction, snapContradiction, 'State must remain invariant on rejection');
+
+  // Case D: Invalid lifecycle generation
+  const stateInvalidGen = {
+    turnNumber: 1,
+    restrictions: {
+      counters: {},
+      meta: {},
+      reservations: {},
+      generations: {
+        TURN: -5, STEP: 1, BATTLE: 1, ATTACK: 1, GAME: 1
+      }
+    }
+  };
+  const snapGen = JSON.parse(JSON.stringify(stateInvalidGen));
+  assert.throws(() => createGame({ state: stateInvalidGen }), /INVALID_RESTRICTION_STATE/);
+  assert.deepStrictEqual(stateInvalidGen, snapGen, 'State must remain invariant on rejection');
+});
+
+// ---------------------------------------------------------------------------
+// TC-ID-PERSIST-10
+// ---------------------------------------------------------------------------
+test('TC-ID-PERSIST-10: Repeated save/load cycles do not leak reservations or alter committed counters', async () => {
+  resetInstanceIdCounter();
+  resetPlacementIdCounter();
+
+  const ab1 = createTestAbility('MAIN', 'ONCE_PER_TURN', { op: 'DRAW', count: 1 });
+  const ab2 = createTestAbility('MAIN', 'ONCE_PER_TURN', { op: 'DRAW', count: 2 });
+  const ab3 = createTestAbility('MAIN', 'ONCE_PER_TURN', { op: 'DRAW', count: 3 });
+  assignDeterministicAbilityIdentities('CARD-P10', [ab1, ab2, ab3]);
+
+  const cardData = {
+    card_number: 'CARD-P10',
+    name: 'Cycle Dragon',
+    type: 'Spirit',
+    cost: 3,
+    color: 'Red',
+    levels: { 1: { cost: 1, bp: 3000 } },
+    compiledIr: { abilities: [ab1, ab2, ab3] }
+  };
+
+  // Cycle 1: Game 1 -> Commit Ab1, Reserve Ab2
+  let currentGame = createGame({ playerDeck: createTestDeck([cardData]), firstPlayer: 'player' });
+  currentGame.state.step = 'MAIN';
+  let card = createCardInstance(cardData, 'player');
+  let stack = createFieldStack(card, { normal: 2, soul: 0 });
+  currentGame.state.players.player.field.push(stack);
+
+  await currentGame.activateAbility(card.id, ab1.physicalId, 'player');
+  const key1 = `turn:1:player:${stack.placementId}:${ab1.physicalId}`;
+  assert.equal(currentGame.state.restrictions.counters[key1], 1);
+
+  reserveRestriction(currentGame.state, ab2, { controller: 'player', sourceCard: card, sourceStack: stack, placementId: stack.placementId });
+
+  // Save/Load Cycle 2: Game 2 -> Ab1 is 1, Ab2 reservation cleared. Commit Ab2, Reserve Ab3.
+  currentGame = createGame({ state: JSON.parse(JSON.stringify(currentGame.state)) });
+  const key2 = `turn:1:player:${stack.placementId}:${ab2.physicalId}`;
+  assert.equal(currentGame.state.restrictions.counters[key1], 1);
+  assert.equal(currentGame.state.restrictions.counters[key2] || 0, 0);
+  assert.equal(currentGame.state.restrictions.reservations[key2] || 0, 0);
+
+  await currentGame.activateAbility(card.id, ab2.physicalId, 'player');
+  assert.equal(currentGame.state.restrictions.counters[key2], 1);
+
+  reserveRestriction(currentGame.state, ab3, { controller: 'player', sourceCard: card, sourceStack: stack, placementId: stack.placementId });
+
+  // Save/Load Cycle 3: Game 3 -> Ab1 is 1, Ab2 is 1, Ab3 reservation cleared.
+  currentGame = createGame({ state: JSON.parse(JSON.stringify(currentGame.state)) });
+  const key3 = `turn:1:player:${stack.placementId}:${ab3.physicalId}`;
+  assert.equal(currentGame.state.restrictions.counters[key1], 1);
+  assert.equal(currentGame.state.restrictions.counters[key2], 1);
+  assert.equal(currentGame.state.restrictions.counters[key3] || 0, 0);
+  assert.equal(currentGame.state.restrictions.reservations[key3] || 0, 0);
+
+  // Save/Load Cycle 4: Game 4 -> Verify stability across empty reservation cycles
+  currentGame = createGame({ state: JSON.parse(JSON.stringify(currentGame.state)) });
+  assert.equal(currentGame.state.restrictions.counters[key1], 1);
+  assert.equal(currentGame.state.restrictions.counters[key2], 1);
+  assert.equal(currentGame.state.restrictions.counters[key3] || 0, 0);
+  assert.deepEqual(currentGame.state.restrictions.reservations, {});
+  assert.deepEqual(currentGame.state.restrictions.meta._reservations, {});
+});

@@ -1,1 +1,212 @@
-{"SIEGWURM-NOVA":{"cardNumber":"SIEGWURM-NOVA","name":"The SupernovaDragon Siegwurm-Nova X","keywords":[{"name":"Advent","parameter":"Astral Dragon & Cost 6 or more","wave":2,"hook":"advent","bracketed":true,"index":8},{"name":"Advent","parameter":null,"wave":2,"hook":"advent","bracketed":true,"index":198},{"name":"Unleash","parameter":"4, Super","wave":2,"hook":"unleash","bracketed":true,"index":304}],"abilities":[{"id":"SIEGWURM-NOVA#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step)","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Advent: Astral Dragon & Cost 6 or more","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending [Soul Core] to your Trash, stack this from your Hand onto your target Spirit."},"clauses":[{"rawText":"By sending [Soul Core] to your Trash","cleanText":"By sending [Soul Core] to your Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"stack this from your Hand onto your target Spirit.","cleanText":"stack this from your Hand onto your target Spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_STACK","from":"HAND","target":{"side":"self","types":["Spirit"]}}}],"unsupported":[]},{"id":"SIEGWURM-NOVA#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ADVENTS","timingLabel":"When Advents","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When [Advent] onto a \"Superstar\" family Spirit, put cores from the Void to your Life until your Life is five."},"clauses":[{"rawText":"When [Advent] onto a \"Superstar\" family Spirit, put cores from the Void to your Life until your Life is five.","cleanText":"When [Advent] onto a \"Superstar\" family Spirit, put cores from the Void to your Life until your Life is five","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"RECOVER_LIFE","count":1}}],"unsupported":[]},{"id":"SIEGWURM-NOVA#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":["Unleash: 4, Super"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy any number of opposing Spirits up to a total of 15000 BP. Also, by sending four cores from your Red/Purple Grandwalker Nexuses to this Spirit, send up to two opposing Lives to the Void."},"clauses":[{"rawText":"Destroy any number of opposing Spirits up to a total of 15000 BP.","cleanText":"Destroy any number of opposing Spirits up to a total of 15000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","mode":"TOTAL_BP_LTE","maxTotalBp":15000,"target":{"side":"opp","types":["Spirit"]}}},{"rawText":"by sending four cores from your Red/Purple Grandwalker Nexuses to this Spirit, send up to two opposing Lives to the Void.","cleanText":"by sending four cores from your Red/Purple Grandwalker Nexuses to this Spirit, send up to two opposing Lives to the Void","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "SIEGWURM-NOVA": {
+    "cardNumber": "SIEGWURM-NOVA",
+    "name": "The SupernovaDragon Siegwurm-Nova X",
+    "keywords": [
+      {
+        "name": "Advent",
+        "parameter": "Astral Dragon & Cost 6 or more",
+        "wave": 2,
+        "hook": "advent",
+        "bracketed": true,
+        "index": 8
+      },
+      {
+        "name": "Advent",
+        "parameter": null,
+        "wave": 2,
+        "hook": "advent",
+        "bracketed": true,
+        "index": 198
+      },
+      {
+        "name": "Unleash",
+        "parameter": "4, Super",
+        "wave": 2,
+        "hook": "unleash",
+        "bracketed": true,
+        "index": 304
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SIEGWURM-NOVA#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_17b09d435a7a3ebf91c0c436d46c66572597bfb1dbf1415f76b9c1b157573c52_de39ace8bc16bdaf25fa14ab293442c4",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Advent: Astral Dragon & Cost 6 or more",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending [Soul Core] to your Trash, stack this from your Hand onto your target Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending [Soul Core] to your Trash",
+            "cleanText": "By sending [Soul Core] to your Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "stack this from your Hand onto your target Spirit.",
+            "cleanText": "stack this from your Hand onto your target Spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_STACK",
+              "from": "HAND",
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SIEGWURM-NOVA#a0",
+        "physicalId": "SIEGWURM-NOVA#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_17b09d435a7a3ebf91c0c436d46c66572597bfb1dbf1415f76b9c1b157573c52_de39ace8bc16bdaf25fa14ab293442c4",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_17b09d435a7a3ebf91c0c436d46c66572597bfb1dbf1415f76b9c1b157573c52_de39ace8bc16bdaf25fa14ab293442c4"
+      },
+      {
+        "id": "SIEGWURM-NOVA#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_a45c5cb4245cdebfed0068b1bfc35858a573e1de072dc4ac66cca2b134a6cf8e_800e22f49f96ac9980978d0322051d40",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ADVENTS",
+          "timingLabel": "When Advents",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When [Advent] onto a \"Superstar\" family Spirit, put cores from the Void to your Life until your Life is five."
+        },
+        "clauses": [
+          {
+            "rawText": "When [Advent] onto a \"Superstar\" family Spirit, put cores from the Void to your Life until your Life is five.",
+            "cleanText": "When [Advent] onto a \"Superstar\" family Spirit, put cores from the Void to your Life until your Life is five",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "RECOVER_LIFE",
+              "count": 1
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SIEGWURM-NOVA#a1",
+        "physicalId": "SIEGWURM-NOVA#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_a45c5cb4245cdebfed0068b1bfc35858a573e1de072dc4ac66cca2b134a6cf8e_800e22f49f96ac9980978d0322051d40",
+        "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_a45c5cb4245cdebfed0068b1bfc35858a573e1de072dc4ac66cca2b134a6cf8e_800e22f49f96ac9980978d0322051d40"
+      },
+      {
+        "id": "SIEGWURM-NOVA#AB_WHEN_ATTACKS_NONE_LV2_LV3_b37ce622aab4f5b7c4f4b0a4f64338ab933ade2662090b81140dba08cd7e6b8e_48f0b6a7ec78937765eeedd2297243b2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Unleash: 4, Super"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy any number of opposing Spirits up to a total of 15000 BP. Also, by sending four cores from your Red/Purple Grandwalker Nexuses to this Spirit, send up to two opposing Lives to the Void."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy any number of opposing Spirits up to a total of 15000 BP.",
+            "cleanText": "Destroy any number of opposing Spirits up to a total of 15000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "mode": "TOTAL_BP_LTE",
+              "maxTotalBp": 15000,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "by sending four cores from your Red/Purple Grandwalker Nexuses to this Spirit, send up to two opposing Lives to the Void.",
+            "cleanText": "by sending four cores from your Red/Purple Grandwalker Nexuses to this Spirit, send up to two opposing Lives to the Void",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "SIEGWURM-NOVA#a2",
+        "physicalId": "SIEGWURM-NOVA#AB_WHEN_ATTACKS_NONE_LV2_LV3_b37ce622aab4f5b7c4f4b0a4f64338ab933ade2662090b81140dba08cd7e6b8e_48f0b6a7ec78937765eeedd2297243b2",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_b37ce622aab4f5b7c4f4b0a4f64338ab933ade2662090b81140dba08cd7e6b8e_48f0b6a7ec78937765eeedd2297243b2"
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

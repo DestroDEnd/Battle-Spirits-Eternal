@@ -2102,27 +2102,58 @@
     "compiledIr": {
       "cardNumber": "LM14-06",
       "name": "Ultimate-Saviour-Baby",
+      "type": "Ultimate",
+      "levels": {
+        "LV3": {
+          "level": 3,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV4": {
+          "level": 4,
+          "cost": 3,
+          "bp": 7000
+        },
+        "LV5": {
+          "level": 5,
+          "cost": 5,
+          "bp": 9000
+        }
+      },
+      "originalEffectText": "[Summon Condition: You control one or more Red Spirits/Ultimates]\n\n[Burst: After your Life is reduced]\nSummon this Ultimate card.\n\n[LV3][LV4][LV5] (When Summoned)\nDuring this turn, all your Ultimates are treated as Cost 6.\n\n[Ultimate Trigger: [LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, return a Red card with Burst effects from your Trash to the Hand.\n[utb]",
+      "teams": [],
       "keywords": [
         {
-          "name": "Burst",
-          "parameter": "After your Life is reduced",
-          "wave": 2,
-          "hook": "burst",
-          "bracketed": true,
-          "index": 67
-        },
-        {
           "name": "Ultimate Trigger",
-          "parameter": "[LV4",
+          "parameter": null,
           "wave": 3,
           "hook": "ultimate_trigger",
           "bracketed": true,
-          "index": 224
+          "index": 0,
+          "abilityId": "LM14-06#AB_WHEN_ATTACKS_NONE_LV4_LV5_ee38e81a00fef77fe802573da5f9ec6c05eab204e01db8fe85bfac9d40d53266_23309841ff44845abdcc367d92c014b4",
+          "cardNumber": "LM14-06",
+          "levels": [
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "LM14-06#a3"
         }
       ],
       "abilities": [
         {
-          "id": "LM14-06#a0",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -2135,8 +2166,13 @@
               "Summon Condition: You control one or more Red Spirits/Ultimates"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2146,11 +2182,31 @@
             "cleanBody": ""
           },
           "rawText": "[Summon Condition: You control one or more Red Spirits/Ultimates]",
+          "originalAbilityText": "[Summon Condition: You control one or more Red Spirits/Ultimates]",
+          "abilityIndex": 0,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "SUMMON_CONDITION",
+            "expression": "You control one or more Red Spirits/Ultimates",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "LM14-06#a0",
+          "keywords": [],
+          "id": "LM14-06#AB_PASSIVE_NONE_LV1_LV2_LV3_b9e9d54225b359154064482438a9d0831551d30e44a75420a8f74f61f027f7c9_161fb4a761f5b06d3f73bcd35067f5a3",
+          "physicalId": "LM14-06#AB_PASSIVE_NONE_LV1_LV2_LV3_b9e9d54225b359154064482438a9d0831551d30e44a75420a8f74f61f027f7c9_161fb4a761f5b06d3f73bcd35067f5a3",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_b9e9d54225b359154064482438a9d0831551d30e44a75420a8f74f61f027f7c9_161fb4a761f5b06d3f73bcd35067f5a3",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_026400a395d844aed5b56c9b9325cae0919aa3d7c253ea07beb82adac73f70f0_0c22298c77c66499afd3ac46bd60da5c",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "LM14-06#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2161,8 +2217,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "BURST",
+            "timings": [],
             "timingLabel": "Burst",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2171,10 +2234,14 @@
             "isMain": false,
             "cleanBody": "Summon this Ultimate card."
           },
+          "originalAbilityText": "[Burst: After your Life is reduced]\nSummon this Ultimate card.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Summon this Ultimate card.",
+              "originalClauseText": "Summon this Ultimate card.",
               "cleanText": "Summon this Ultimate card",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2186,10 +2253,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "LM14-06#a1",
+          "keywords": [],
+          "id": "LM14-06#AB_BURST_NONE_LV1_LV2_LV3_1e39304a58260d95a9608ae7f4c18f6652932e0ba2f18803084f0eaf00c47aed_b96e77ca49ed7b1b2ee3865cd02cbeef",
+          "physicalId": "LM14-06#AB_BURST_NONE_LV1_LV2_LV3_1e39304a58260d95a9608ae7f4c18f6652932e0ba2f18803084f0eaf00c47aed_b96e77ca49ed7b1b2ee3865cd02cbeef",
+          "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_1e39304a58260d95a9608ae7f4c18f6652932e0ba2f18803084f0eaf00c47aed_b96e77ca49ed7b1b2ee3865cd02cbeef",
+          "semanticIdV3": "SEM3#AB_BURST_NONE_LV1_LV2_LV3_b35fe616759df5dde79aee72ac8440433daab1ae52d1e02a849f49505e1161b2_92426b5060c06d78b15d5827b6c68828",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "LM14-06#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2200,8 +2281,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2210,24 +2300,44 @@
             "isMain": false,
             "cleanBody": "During this turn, all your Ultimates are treated as Cost 6."
           },
+          "originalAbilityText": "[LV3][LV4][LV5] (When Summoned)\nDuring this turn, all your Ultimates are treated as Cost 6.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "During this turn, all your Ultimates are treated as Cost 6.",
+              "originalClauseText": "During this turn, all your Ultimates are treated as Cost 6.",
               "cleanText": "all your Ultimates are treated as Cost 6",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": "DURING_THIS_TURN",
               "op": {
-                "op": "COST_MODIFIER"
+                "op": "TREAT_RULE",
+                "treatAs": "COST",
+                "cost": 6
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "LM14-06#a2",
+          "keywords": [],
+          "id": "LM14-06#AB_WHEN_SUMMONED_NONE_LV3_LV4_LV5_fe3275fc00fea9069aa21420ba3485993d8e70c79d6c137ef50ab23dae1d4467_677d492e024f898f5e2ead411c93118a",
+          "physicalId": "LM14-06#AB_WHEN_SUMMONED_NONE_LV3_LV4_LV5_fe3275fc00fea9069aa21420ba3485993d8e70c79d6c137ef50ab23dae1d4467_677d492e024f898f5e2ead411c93118a",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV3_LV4_LV5_fe3275fc00fea9069aa21420ba3485993d8e70c79d6c137ef50ab23dae1d4467_677d492e024f898f5e2ead411c93118a",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV3_LV4_LV5_a418611b3d71431dc543b108114a284bfa67b3b4b3b2427c012120a531a2f820_5218e350d830c43aa389daf0c7565180",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "LM14-06#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2237,8 +2347,15 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Ultimate Trigger",
@@ -2247,25 +2364,82 @@
             "isMain": false,
             "cleanBody": "When Ultimate Trigger hits, return a Red card with Burst effects from your Trash to the Hand."
           },
+          "originalAbilityText": "[Ultimate Trigger: [LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, return a Red card with Burst effects from your Trash to the Hand.\n[utb]",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "When Ultimate Trigger hits, return a Red card with Burst effects from your Trash to the Hand.",
+              "originalClauseText": "When Ultimate Trigger hits, return a Red card with Burst effects from your Trash to the Hand.",
               "cleanText": "When Ultimate Trigger hits, return a Red card with Burst effects from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Ultimate"
+                  ],
+                  "color": "Red",
+                  "hasBurst": true
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "LM14-06#a3",
+          "keywords": [
+            {
+              "name": "Ultimate Trigger",
+              "parameter": null,
+              "wave": 3,
+              "hook": "ultimate_trigger",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "LM14-06#AB_WHEN_ATTACKS_NONE_LV4_LV5_ee38e81a00fef77fe802573da5f9ec6c05eab204e01db8fe85bfac9d40d53266_23309841ff44845abdcc367d92c014b4",
+              "cardNumber": "LM14-06",
+              "levels": [
+                4,
+                5
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "LM14-06#a3"
+            }
+          ],
+          "id": "LM14-06#AB_WHEN_ATTACKS_NONE_LV4_LV5_ee38e81a00fef77fe802573da5f9ec6c05eab204e01db8fe85bfac9d40d53266_23309841ff44845abdcc367d92c014b4",
+          "physicalId": "LM14-06#AB_WHEN_ATTACKS_NONE_LV4_LV5_ee38e81a00fef77fe802573da5f9ec6c05eab204e01db8fe85bfac9d40d53266_23309841ff44845abdcc367d92c014b4",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV4_LV5_ee38e81a00fef77fe802573da5f9ec6c05eab204e01db8fe85bfac9d40d53266_23309841ff44845abdcc367d92c014b4",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV4_LV5_5d52029b93a5d346e5d44876f1eb9209e3e71c650f185048947fbbdc93346540_0cd64de8cf82c427c6d11e724080c159",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,

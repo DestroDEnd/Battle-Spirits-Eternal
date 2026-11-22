@@ -394,10 +394,29 @@
     "compiledIr": {
       "cardNumber": "BSC20-014",
       "name": "Fuurin",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 2000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 3000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 3,
+          "bp": 4000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] (When Destroyed by the Opponent)\nReturn a Magic card from your Trash to the Hand.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BSC20-014#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -408,8 +427,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_DESTROYED",
+            "timings": [
+              "WHEN_DESTROYED"
+            ],
             "timingLabel": "When Destroyed by the Opponent",
             "timingStep": "ANY",
+            "timingCause": "OPPONENT",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -418,10 +446,14 @@
             "isMain": false,
             "cleanBody": "Return a Magic card from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Destroyed by the Opponent)\nReturn a Magic card from your Trash to the Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Return a Magic card from your Trash to the Hand.",
+              "originalClauseText": "Return a Magic card from your Trash to the Hand.",
               "cleanText": "Return a Magic card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -429,12 +461,36 @@
               "duration": null,
               "op": {
                 "op": "SALVAGE",
-                "cardType": "Magic",
-                "count": 1
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Magic"
+                  ]
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC20-014#a0",
+          "keywords": [],
+          "id": "BSC20-014#AB_WHEN_DESTROYED_NONE_LV1_LV2_LV3_ca4833b4353ce6002503a2abc499f7cf821cfc0b2d7b274721d89cf88caffd47_e6986cad3ff9562184b77e81d01ecd85",
+          "physicalId": "BSC20-014#AB_WHEN_DESTROYED_NONE_LV1_LV2_LV3_ca4833b4353ce6002503a2abc499f7cf821cfc0b2d7b274721d89cf88caffd47_e6986cad3ff9562184b77e81d01ecd85",
+          "semanticId": "SEM#AB_WHEN_DESTROYED_NONE_LV1_LV2_LV3_ca4833b4353ce6002503a2abc499f7cf821cfc0b2d7b274721d89cf88caffd47_e6986cad3ff9562184b77e81d01ecd85",
+          "semanticIdV3": "SEM3#AB_WHEN_DESTROYED_NONE_LV1_LV2_LV3_9b7256a279f4ab3dfb3ef16928d6e4f7b42328e02d796e46ca46a3ed296fa4b8_e0d79004e85851c5fb569b40b0249c0b",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "OPPONENT",
+            "timingTriggers": [
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 1,
@@ -2092,10 +2148,29 @@
     "compiledIr": {
       "cardNumber": "BSC20-006",
       "name": "The Necromancer Mumei",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 6000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 5,
+          "bp": 9000
+        }
+      },
+      "originalEffectText": "Flash - (Either Attack Step)\nBy using [Soul Core] (Soul Core) as part of the summon cost, summon this Spirit card from your Trash.\n\n[LV1][LV2][LV3] (When Summoned)\nDestroy an opposing exhausted 10000 BP or less Spirit.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BSC20-006#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2106,8 +2181,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2116,10 +2200,14 @@
             "isMain": false,
             "cleanBody": "By using [Soul Core] (Soul Core) as part of the summon cost, summon this Spirit card from your Trash."
           },
+          "originalAbilityText": "Flash - (Either Attack Step)\nBy using [Soul Core] (Soul Core) as part of the summon cost, summon this Spirit card from your Trash.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By using [Soul Core] (Soul Core) as part of the summon cost",
+              "originalClauseText": "By using [Soul Core] (Soul Core) as part of the summon cost",
               "cleanText": "By using [Soul Core] (Soul Core) as part of the summon cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -2127,12 +2215,24 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "free": false,
+                "isOptional": false
               }
             },
             {
               "rawText": "summon this Spirit card from your Trash.",
+              "originalClauseText": "summon this Spirit card from your Trash.",
               "cleanText": "summon this Spirit card from your Trash",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -2140,14 +2240,28 @@
               "duration": null,
               "op": {
                 "op": "SUMMON_THIS_CARD",
-                "from": "HAND_OR_BURST"
+                "from": "TRASH"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC20-006#a0",
+          "keywords": [],
+          "id": "BSC20-006#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_410fc37424109ed62d99432c1c0229cb04405d1be6342834c2bc3c7cf7963ac1_7169589c37fbf10e1b6c7b52ca0899ea",
+          "physicalId": "BSC20-006#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_410fc37424109ed62d99432c1c0229cb04405d1be6342834c2bc3c7cf7963ac1_7169589c37fbf10e1b6c7b52ca0899ea",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_410fc37424109ed62d99432c1c0229cb04405d1be6342834c2bc3c7cf7963ac1_7169589c37fbf10e1b6c7b52ca0899ea",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1eb2dcad52d857c16614ae47e456d339d6ec81d065629cd9c36a64f7d60eb658_742bed5bbc61c4bfacbaf866ae25a657",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC20-006#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2158,8 +2272,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2168,10 +2291,14 @@
             "isMain": false,
             "cleanBody": "Destroy an opposing exhausted 10000 BP or less Spirit."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nDestroy an opposing exhausted 10000 BP or less Spirit.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Destroy an opposing exhausted 10000 BP or less Spirit.",
+              "originalClauseText": "Destroy an opposing exhausted 10000 BP or less Spirit.",
               "cleanText": "Destroy an opposing exhausted 10000 BP or less Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2187,7 +2314,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC20-006#a1",
+          "keywords": [],
+          "id": "BSC20-006#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_b051f456b08a5b16e777ad399c357890fa8b2286490aad52dcbc42abacb1b97d_cc1e86f3670fa52cb7fdfe80d52b8627",
+          "physicalId": "BSC20-006#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_b051f456b08a5b16e777ad399c357890fa8b2286490aad52dcbc42abacb1b97d_cc1e86f3670fa52cb7fdfe80d52b8627",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_b051f456b08a5b16e777ad399c357890fa8b2286490aad52dcbc42abacb1b97d_cc1e86f3670fa52cb7fdfe80d52b8627",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_9cdc7e39f18f01367a26d4bc34c807d86a6817e8f609a8246f969b00aadd5a95_c242f895eac567dd3ffa7bcce1c4e2f8",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -2220,10 +2362,29 @@
     "compiledIr": {
       "cardNumber": "BSC20-X02",
       "name": "The OgreDeity Basara",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 8000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 12000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] (When Summoned)\nFor each core on this Spirit, send a core from an opposing Spirit/Ultimate to their Reserve. When a Spirit/Ultimate with Soul Core on it was depleted by this effect, send all the cores from the opposing Reserve to their Trash.\n\n[LV2][LV3] (Either Attack Step)\nWhen your Purple Spirits become exhausted, send a core from an opposing Spirit/Ultimate to their Reserve.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BSC20-X02#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2234,8 +2395,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2244,10 +2414,14 @@
             "isMain": false,
             "cleanBody": "For each core on this Spirit, send a core from an opposing Spirit/Ultimate to their Reserve. When a Spirit/Ultimate with Soul Core on it was depleted by this effect, send all the cores from the opposing Reserve to their Trash."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nFor each core on this Spirit, send a core from an opposing Spirit/Ultimate to their Reserve. When a Spirit/Ultimate with Soul Core on it was depleted by this effect, send all the cores from the opposing Reserve to their Trash.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "For each core on this Spirit, send a core from an opposing Spirit/Ultimate to their Reserve.",
+              "originalClauseText": "For each core on this Spirit, send a core from an opposing Spirit/Ultimate to their Reserve.",
               "cleanText": "For each core on this Spirit, send a core from an opposing Spirit/Ultimate to their Reserve",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2255,12 +2429,22 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                }
               }
             },
             {
               "rawText": "When a Spirit/Ultimate with Soul Core on it was depleted by this effect, send all the cores from the opposing Reserve to their Trash.",
+              "originalClauseText": "When a Spirit/Ultimate with Soul Core on it was depleted by this effect, send all the cores from the opposing Reserve to their Trash.",
               "cleanText": "When a Spirit/Ultimate with Soul Core on it was depleted by this effect, send all the cores from the opposing Reserve to their Trash",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2268,14 +2452,36 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": "ALL",
+                "from": {
+                  "zone": "reserve",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "opp"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC20-X02#a0",
+          "keywords": [],
+          "id": "BSC20-X02#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_69bd3524d6a1380c9f00e370b1ef14bc10c8c83bb1cd15f898af3deab0d91526_cd8a4f0ceafc4077962fa0c454f8441d",
+          "physicalId": "BSC20-X02#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_69bd3524d6a1380c9f00e370b1ef14bc10c8c83bb1cd15f898af3deab0d91526_cd8a4f0ceafc4077962fa0c454f8441d",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_69bd3524d6a1380c9f00e370b1ef14bc10c8c83bb1cd15f898af3deab0d91526_cd8a4f0ceafc4077962fa0c454f8441d",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_81f97c9f75e578630fcc89b8db4da07293c32f4dbcba17da8ab2e25a96db3223_0be402938d0cdc7b9118cf85229732e9",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC20-X02#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2285,8 +2491,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2295,10 +2510,14 @@
             "isMain": false,
             "cleanBody": "When your Purple Spirits become exhausted, send a core from an opposing Spirit/Ultimate to their Reserve."
           },
+          "originalAbilityText": "[LV2][LV3] (Either Attack Step)\nWhen your Purple Spirits become exhausted, send a core from an opposing Spirit/Ultimate to their Reserve.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When your Purple Spirits become exhausted, send a core from an opposing Spirit/Ultimate to their Reserve.",
+              "originalClauseText": "When your Purple Spirits become exhausted, send a core from an opposing Spirit/Ultimate to their Reserve.",
               "cleanText": "When your Purple Spirits become exhausted, send a core from an opposing Spirit/Ultimate to their Reserve",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2306,11 +2525,34 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC20-X02#a1",
+          "keywords": [],
+          "id": "BSC20-X02#AB_ATTACK_STEP_NONE_LV2_LV3_5eb832f96562eca3c97a87a3179aa095e59b99d0bab09597b219e838638fabd6_b33216c4bfe108cf6a70a58ae067afa8",
+          "physicalId": "BSC20-X02#AB_ATTACK_STEP_NONE_LV2_LV3_5eb832f96562eca3c97a87a3179aa095e59b99d0bab09597b219e838638fabd6_b33216c4bfe108cf6a70a58ae067afa8",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_5eb832f96562eca3c97a87a3179aa095e59b99d0bab09597b219e838638fabd6_b33216c4bfe108cf6a70a58ae067afa8",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_LV3_1ffca049f56f7eb655e443ab645e4b2f29ff4d4dc4406b8f702e852c0f267d9c_9cc7842118a2b6900b849c29d200693a",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -2605,10 +2847,29 @@
     "compiledIr": {
       "cardNumber": "BSC20-005",
       "name": "The SnakeArtsMagician Zuda",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 2000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 4000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 6000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] (When Summoned)\nWhen [Soul Core](Soul Core) is used to pay the summon cost, draw a card.\n\n[LV2][LV3]\nWhen any Cost 6 or more Spirit is summoned from your Trash, send cores from an opposing Spirit/Ultimate to their Reserve until only one core remains.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BSC20-005#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2619,8 +2880,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2629,10 +2899,14 @@
             "isMain": false,
             "cleanBody": "When [Soul Core](Soul Core) is used to pay the summon cost, draw a card."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nWhen [Soul Core](Soul Core) is used to pay the summon cost, draw a card.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When [Soul Core] is used to pay the summon cost, draw a card.",
+              "originalClauseText": "When [Soul Core] is used to pay the summon cost, draw a card.",
               "cleanText": "When [Soul Core] is used to pay the summon cost, draw a card",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2646,10 +2920,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC20-005#a0",
+          "keywords": [],
+          "id": "BSC20-005#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_c9480b0d65d436af4c5cda97e366605d6654a0b456b9b4b1bae8aa751d7c43a5_8326142e1ed317524227c3a961d978fc",
+          "physicalId": "BSC20-005#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_c9480b0d65d436af4c5cda97e366605d6654a0b456b9b4b1bae8aa751d7c43a5_8326142e1ed317524227c3a961d978fc",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_c9480b0d65d436af4c5cda97e366605d6654a0b456b9b4b1bae8aa751d7c43a5_8326142e1ed317524227c3a961d978fc",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_90e350d4e03aeecf95adb5264dfa03cba5e91c3cf3663f09eedf6b5530f2899f_0082d1acbc57107e9360446e230a3dfc",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC20-005#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2659,8 +2947,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2669,10 +2962,14 @@
             "isMain": false,
             "cleanBody": "When any Cost 6 or more Spirit is summoned from your Trash, send cores from an opposing Spirit/Ultimate to their Reserve until only one core remains."
           },
+          "originalAbilityText": "[LV2][LV3]\nWhen any Cost 6 or more Spirit is summoned from your Trash, send cores from an opposing Spirit/Ultimate to their Reserve until only one core remains.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When any Cost 6 or more Spirit is summoned from your Trash, send cores from an opposing Spirit/Ultimate to their Reserve until only one core remains.",
+              "originalClauseText": "When any Cost 6 or more Spirit is summoned from your Trash, send cores from an opposing Spirit/Ultimate to their Reserve until only one core remains.",
               "cleanText": "When any Cost 6 or more Spirit is summoned from your Trash, send cores from an opposing Spirit/Ultimate to their Reserve until only one core remains",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2680,11 +2977,32 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "trash",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC20-005#a1",
+          "keywords": [],
+          "id": "BSC20-005#AB_PASSIVE_NONE_LV2_LV3_3d9503afc1a33fc89c481dc080dee04a5512b434bcee1edf411fc9f07ca0bb05_e596c147216f91dbf5d9fc262bd98d19",
+          "physicalId": "BSC20-005#AB_PASSIVE_NONE_LV2_LV3_3d9503afc1a33fc89c481dc080dee04a5512b434bcee1edf411fc9f07ca0bb05_e596c147216f91dbf5d9fc262bd98d19",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV2_LV3_3d9503afc1a33fc89c481dc080dee04a5512b434bcee1edf411fc9f07ca0bb05_e596c147216f91dbf5d9fc262bd98d19",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV2_LV3_a00796bfd43c26c2f241ce4be6e07fed53773ed6b358f6590b83d85329fb6ad7_2db4d43bd71d84179f4a8b572cf6060b",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,

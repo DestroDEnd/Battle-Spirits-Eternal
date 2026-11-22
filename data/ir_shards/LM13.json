@@ -1,1 +1,577 @@
-{"LM13-02":{"cardNumber":"LM13-02","name":"The HurricaneDemonBlade Usuba-Hayate","keywords":[{"name":"Brave","parameter":"Cost of 5 or more","wave":3,"hook":"brave","bracketed":true,"index":0},{"name":"High Speed","parameter":null,"wave":2,"hook":"high_speed","bracketed":true,"index":46},{"name":"Charge","parameter":null,"wave":2,"hook":"charge","bracketed":true,"index":287}],"abilities":[{"id":"LM13-02#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Brave Condition: Cost of 5 or more","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Brave Condition: Cost of 5 or more]","clauses":[],"unsupported":[]},{"id":"LM13-02#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"High Speed","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"This Brave card in Hand can be summoned by paying the cost with cores in the Reserve. In this case, cores to be put on this Spirit must also be from the Reserve."},"clauses":[{"rawText":"This Brave card in Hand can be summoned by paying the cost with cores in the Reserve.","cleanText":"This Brave card in Hand can be summoned by paying the cost with cores in the Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_RESERVE_ONLY"}},{"rawText":"In this case, cores to be put on this Spirit must also be from the Reserve.","cleanText":"In this case, cores to be put on this Spirit must also be from the Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_RESERVE_ONLY"}}],"unsupported":[]},{"id":"LM13-02#a2","type":"ABILITY","header":{"levels":[1],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Exhaust an opposing Spirit."},"clauses":[{"rawText":"Exhaust an opposing Spirit.","cleanText":"Exhaust an opposing Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","isHeavy":false,"count":1,"target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]},{"id":"LM13-02#a3","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["When Braved"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Charge","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Increase the number of bodies to be exhausted by your “opponent-targeting exhaustion effects“ by +1."},"clauses":[{"rawText":"Increase the number of bodies to be exhausted by your \"opponent-targeting exhaustion effects\" by +1.","cleanText":"Increase the number of bodies to be exhausted by your \"opponent-targeting exhaustion effects\" by +1","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"LM13-01":{"cardNumber":"LM13-01","name":"The LightAndDarkSacredSword Shining-of-Dark","keywords":[{"name":"Brave","parameter":"Cost 5 or more","wave":3,"hook":"brave","bracketed":true,"index":0},{"name":"Charge","parameter":null,"wave":2,"hook":"charge","bracketed":true,"index":41}],"abilities":[{"id":"LM13-01#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Brave Condition: Cost 5 or more","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Brave Condition: Cost 5 or more]","clauses":[],"unsupported":[]},{"id":"LM13-01#a1","type":"ABILITY","header":{"levels":[1],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Charge","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Increase the limit of your \"BP destruction effects\" by +1000."},"clauses":[{"rawText":"Increase the limit of your \"BP destruction effects\" by +1000.","cleanText":"Increase the limit of your \"BP destruction effects\" by +1000","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BP_BUFF","amount":1000,"target":{"side":"either"}}}],"unsupported":[]},{"id":"LM13-01#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["When Braved"],"timing":"WHEN_BRAVE_ATTACKS","timingLabel":"When Brave Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing 5000 BP or less Spirit. After this effect resolves, you can target and attack an opposing Spirit."},"clauses":[{"rawText":"Destroy an opposing 5000 BP or less Spirit.","cleanText":"Destroy an opposing 5000 BP or less Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"bpLte":5000}}}},{"rawText":"you can target and attack an opposing Spirit.","cleanText":"you can target and attack an opposing Spirit","link":"afterResolves","isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"TARGET_ATTACK","target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"LM13-03":{"cardNumber":"LM13-03","name":"The MidnightSunLightSword Midnight-Solar","keywords":[{"name":"Brave","parameter":"Cost 5 or more","wave":3,"hook":"brave","bracketed":true,"index":0},{"name":"Charge","parameter":null,"wave":2,"hook":"charge","bracketed":true,"index":41},{"name":"Rush","parameter":null,"wave":2,"hook":"rush","bracketed":true,"index":162}],"abilities":[{"id":"LM13-03#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Brave Condition: Cost 5 or more","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Brave Condition: Cost 5 or more]","clauses":[],"unsupported":[]},{"id":"LM13-03#a1","type":"ABILITY","header":{"levels":[1],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Charge","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Increase the number of bodies refreshed by your “Spirit-refreshing effects” by +1."},"clauses":[{"rawText":"Increase the number of bodies refreshed by your \"Spirit-refreshing effects\" by +1.","cleanText":"Increase the number of bodies refreshed by your \"Spirit-refreshing effects\" by +1","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":{"side":"either"}}}],"unsupported":[]},{"id":"LM13-03#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["When Braved"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit's [Rush] activates ignoring the conditions."},"clauses":[{"rawText":"This Spirit's [Rush] activates ignoring the conditions.","cleanText":"This Spirit's [Rush] activates ignoring the conditions","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}}],"unsupported":[]},{"id":"LM13-03#a3","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["When Braved"],"timing":"WHEN_BATTLES","timingLabel":"When Battles","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Refresh a non-Braved Spirit you control."},"clauses":[{"rawText":"Refresh a non-Braved Spirit you control.","cleanText":"Refresh a non-Braved Spirit you control","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "LM13-02": {
+    "cardNumber": "LM13-02",
+    "name": "The HurricaneDemonBlade Usuba-Hayate",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "Cost of 5 or more",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      },
+      {
+        "name": "High Speed",
+        "parameter": null,
+        "wave": 2,
+        "hook": "high_speed",
+        "bracketed": true,
+        "index": 46
+      },
+      {
+        "name": "Charge",
+        "parameter": null,
+        "wave": 2,
+        "hook": "charge",
+        "bracketed": true,
+        "index": 287
+      }
+    ],
+    "abilities": [
+      {
+        "id": "LM13-02#AB_PASSIVE_NONE_LV1_LV2_LV3_d821d97d6a56b662ae753f3c8745bdb15997ac0d2f8f2431319caaf7589ef9af_aff2eb1418f872ffe17e7c289001f317",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: Cost of 5 or more",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Brave Condition: Cost of 5 or more]",
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "LM13-02#a0",
+        "physicalId": "LM13-02#AB_PASSIVE_NONE_LV1_LV2_LV3_d821d97d6a56b662ae753f3c8745bdb15997ac0d2f8f2431319caaf7589ef9af_aff2eb1418f872ffe17e7c289001f317",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_d821d97d6a56b662ae753f3c8745bdb15997ac0d2f8f2431319caaf7589ef9af_aff2eb1418f872ffe17e7c289001f317"
+      },
+      {
+        "id": "LM13-02#AB_FLASH_NONE_LV1_LV2_LV3_8d5656214fafbfffcbf8cc8728c11de76abeab76ef53fa7550a66fa63140de84_3cc2df5005b37dc6b9a2a8141c0e649f",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "High Speed",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "This Brave card in Hand can be summoned by paying the cost with cores in the Reserve. In this case, cores to be put on this Spirit must also be from the Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "This Brave card in Hand can be summoned by paying the cost with cores in the Reserve.",
+            "cleanText": "This Brave card in Hand can be summoned by paying the cost with cores in the Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_RESERVE_ONLY"
+            }
+          },
+          {
+            "rawText": "In this case, cores to be put on this Spirit must also be from the Reserve.",
+            "cleanText": "In this case, cores to be put on this Spirit must also be from the Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_RESERVE_ONLY"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "LM13-02#a1",
+        "physicalId": "LM13-02#AB_FLASH_NONE_LV1_LV2_LV3_8d5656214fafbfffcbf8cc8728c11de76abeab76ef53fa7550a66fa63140de84_3cc2df5005b37dc6b9a2a8141c0e649f",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_8d5656214fafbfffcbf8cc8728c11de76abeab76ef53fa7550a66fa63140de84_3cc2df5005b37dc6b9a2a8141c0e649f"
+      },
+      {
+        "id": "LM13-02#AB_WHEN_SUMMONED_NONE_LV1_73793e3814b036298e1a337ca1e2476bb4d9c0915ae9589ef316885661c4ccd4_10014118774c82b14317c0ee2b58b75f",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Exhaust an opposing Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Exhaust an opposing Spirit.",
+            "cleanText": "Exhaust an opposing Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "isHeavy": false,
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "LM13-02#a2",
+        "physicalId": "LM13-02#AB_WHEN_SUMMONED_NONE_LV1_73793e3814b036298e1a337ca1e2476bb4d9c0915ae9589ef316885661c4ccd4_10014118774c82b14317c0ee2b58b75f",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_73793e3814b036298e1a337ca1e2476bb4d9c0915ae9589ef316885661c4ccd4_10014118774c82b14317c0ee2b58b75f"
+      },
+      {
+        "id": "LM13-02#AB_PASSIVE_NONE_LV1_LV2_LV3_cc78c7f5a5152b4e71d3ed84023cc8c133b0f52399a493b41198bffc792de2fc_8b5e9fdb72de9e0fc3d6cc90a7068a7e",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "When Braved"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Charge",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Increase the number of bodies to be exhausted by your “opponent-targeting exhaustion effects“ by +1."
+        },
+        "clauses": [
+          {
+            "rawText": "Increase the number of bodies to be exhausted by your \"opponent-targeting exhaustion effects\" by +1.",
+            "cleanText": "Increase the number of bodies to be exhausted by your \"opponent-targeting exhaustion effects\" by +1",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "LM13-02#a3",
+        "physicalId": "LM13-02#AB_PASSIVE_NONE_LV1_LV2_LV3_cc78c7f5a5152b4e71d3ed84023cc8c133b0f52399a493b41198bffc792de2fc_8b5e9fdb72de9e0fc3d6cc90a7068a7e",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_cc78c7f5a5152b4e71d3ed84023cc8c133b0f52399a493b41198bffc792de2fc_8b5e9fdb72de9e0fc3d6cc90a7068a7e"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "LM13-01": {
+    "cardNumber": "LM13-01",
+    "name": "The LightAndDarkSacredSword Shining-of-Dark",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "Cost 5 or more",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      },
+      {
+        "name": "Charge",
+        "parameter": null,
+        "wave": 2,
+        "hook": "charge",
+        "bracketed": true,
+        "index": 41
+      }
+    ],
+    "abilities": [
+      {
+        "id": "LM13-01#AB_PASSIVE_NONE_LV1_LV2_LV3_bad661ddeedd4fabf0c3e0d1a0b0f7f46eb6cad4d35cc9301d1f8b9b5b0d4cf3_303175f68ccf142f43b72f0d09e35e3b",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: Cost 5 or more",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Brave Condition: Cost 5 or more]",
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "LM13-01#a0",
+        "physicalId": "LM13-01#AB_PASSIVE_NONE_LV1_LV2_LV3_bad661ddeedd4fabf0c3e0d1a0b0f7f46eb6cad4d35cc9301d1f8b9b5b0d4cf3_303175f68ccf142f43b72f0d09e35e3b",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_bad661ddeedd4fabf0c3e0d1a0b0f7f46eb6cad4d35cc9301d1f8b9b5b0d4cf3_303175f68ccf142f43b72f0d09e35e3b"
+      },
+      {
+        "id": "LM13-01#AB_PASSIVE_NONE_LV1_db81c3c803b17f2ad2adecb36df36acfebded83abe078a5045116034cb8dc3cd_8bc8b0f9fd11a83f01f4bdc8621f1730",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Charge",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Increase the limit of your \"BP destruction effects\" by +1000."
+        },
+        "clauses": [
+          {
+            "rawText": "Increase the limit of your \"BP destruction effects\" by +1000.",
+            "cleanText": "Increase the limit of your \"BP destruction effects\" by +1000",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 1000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "LM13-01#a1",
+        "physicalId": "LM13-01#AB_PASSIVE_NONE_LV1_db81c3c803b17f2ad2adecb36df36acfebded83abe078a5045116034cb8dc3cd_8bc8b0f9fd11a83f01f4bdc8621f1730",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_db81c3c803b17f2ad2adecb36df36acfebded83abe078a5045116034cb8dc3cd_8bc8b0f9fd11a83f01f4bdc8621f1730"
+      },
+      {
+        "id": "LM13-01#AB_WHEN_BRAVE_ATTACKS_NONE_LV1_LV2_LV3_3943bab24981a8e9d110c0d5f4a4aa61df4d860bbf01e4fcc934530028a4e686_281040b0e388ff565306a84505fbc8ac",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "When Braved"
+          ],
+          "timing": "WHEN_BRAVE_ATTACKS",
+          "timingLabel": "When Brave Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing 5000 BP or less Spirit. After this effect resolves, you can target and attack an opposing Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing 5000 BP or less Spirit.",
+            "cleanText": "Destroy an opposing 5000 BP or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 5000
+                }
+              }
+            }
+          },
+          {
+            "rawText": "you can target and attack an opposing Spirit.",
+            "cleanText": "you can target and attack an opposing Spirit",
+            "link": "afterResolves",
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TARGET_ATTACK",
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "LM13-01#a2",
+        "physicalId": "LM13-01#AB_WHEN_BRAVE_ATTACKS_NONE_LV1_LV2_LV3_3943bab24981a8e9d110c0d5f4a4aa61df4d860bbf01e4fcc934530028a4e686_281040b0e388ff565306a84505fbc8ac",
+        "semanticId": "SEM#AB_WHEN_BRAVE_ATTACKS_NONE_LV1_LV2_LV3_3943bab24981a8e9d110c0d5f4a4aa61df4d860bbf01e4fcc934530028a4e686_281040b0e388ff565306a84505fbc8ac"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "LM13-03": {
+    "cardNumber": "LM13-03",
+    "name": "The MidnightSunLightSword Midnight-Solar",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "Cost 5 or more",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      },
+      {
+        "name": "Charge",
+        "parameter": null,
+        "wave": 2,
+        "hook": "charge",
+        "bracketed": true,
+        "index": 41
+      },
+      {
+        "name": "Rush",
+        "parameter": null,
+        "wave": 2,
+        "hook": "rush",
+        "bracketed": true,
+        "index": 162
+      }
+    ],
+    "abilities": [
+      {
+        "id": "LM13-03#AB_PASSIVE_NONE_LV1_LV2_LV3_bad661ddeedd4fabf0c3e0d1a0b0f7f46eb6cad4d35cc9301d1f8b9b5b0d4cf3_303175f68ccf142f43b72f0d09e35e3b",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: Cost 5 or more",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Brave Condition: Cost 5 or more]",
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "LM13-03#a0",
+        "physicalId": "LM13-03#AB_PASSIVE_NONE_LV1_LV2_LV3_bad661ddeedd4fabf0c3e0d1a0b0f7f46eb6cad4d35cc9301d1f8b9b5b0d4cf3_303175f68ccf142f43b72f0d09e35e3b",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_bad661ddeedd4fabf0c3e0d1a0b0f7f46eb6cad4d35cc9301d1f8b9b5b0d4cf3_303175f68ccf142f43b72f0d09e35e3b"
+      },
+      {
+        "id": "LM13-03#AB_PASSIVE_NONE_LV1_bb56f95d573a572689f3716d69ea6bd5facea6e279c3b7e8820ddb0c4fd154bd_4ca943392314fa918af189f0b963c72f",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Charge",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Increase the number of bodies refreshed by your “Spirit-refreshing effects” by +1."
+        },
+        "clauses": [
+          {
+            "rawText": "Increase the number of bodies refreshed by your \"Spirit-refreshing effects\" by +1.",
+            "cleanText": "Increase the number of bodies refreshed by your \"Spirit-refreshing effects\" by +1",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "LM13-03#a1",
+        "physicalId": "LM13-03#AB_PASSIVE_NONE_LV1_bb56f95d573a572689f3716d69ea6bd5facea6e279c3b7e8820ddb0c4fd154bd_4ca943392314fa918af189f0b963c72f",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_bb56f95d573a572689f3716d69ea6bd5facea6e279c3b7e8820ddb0c4fd154bd_4ca943392314fa918af189f0b963c72f"
+      },
+      {
+        "id": "LM13-03#AB_PASSIVE_NONE_LV1_LV2_LV3_530620b8bff897053f0314d9bb29b94df23ea2d57990a7918109d68a2f066026_549368d68d981b78fa4ff531fcf5064d",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "When Braved"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit's [Rush] activates ignoring the conditions."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit's [Rush] activates ignoring the conditions.",
+            "cleanText": "This Spirit's [Rush] activates ignoring the conditions",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "LM13-03#a2",
+        "physicalId": "LM13-03#AB_PASSIVE_NONE_LV1_LV2_LV3_530620b8bff897053f0314d9bb29b94df23ea2d57990a7918109d68a2f066026_549368d68d981b78fa4ff531fcf5064d",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_530620b8bff897053f0314d9bb29b94df23ea2d57990a7918109d68a2f066026_549368d68d981b78fa4ff531fcf5064d"
+      },
+      {
+        "id": "LM13-03#AB_WHEN_BATTLES_NONE_LV1_LV2_LV3_e84ffe4d3f1d410fe8025e4f314afe9ad2735718e6ecfd6eb2bc4cb34cc6afd7_77fe84599cc9d0ed498ac324f57176e1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "When Braved"
+          ],
+          "timing": "WHEN_BATTLES",
+          "timingLabel": "When Battles",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Refresh a non-Braved Spirit you control."
+        },
+        "clauses": [
+          {
+            "rawText": "Refresh a non-Braved Spirit you control.",
+            "cleanText": "Refresh a non-Braved Spirit you control",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "LM13-03#a3",
+        "physicalId": "LM13-03#AB_WHEN_BATTLES_NONE_LV1_LV2_LV3_e84ffe4d3f1d410fe8025e4f314afe9ad2735718e6ecfd6eb2bc4cb34cc6afd7_77fe84599cc9d0ed498ac324f57176e1",
+        "semanticId": "SEM#AB_WHEN_BATTLES_NONE_LV1_LV2_LV3_e84ffe4d3f1d410fe8025e4f314afe9ad2735718e6ecfd6eb2bc4cb34cc6afd7_77fe84599cc9d0ed498ac324f57176e1"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

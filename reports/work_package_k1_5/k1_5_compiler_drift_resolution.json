@@ -1,0 +1,30 @@
+{
+  "package": "K.1.5",
+  "generatedAt": "2026-11-20T11:22:47.738Z",
+  "cards": [
+    {
+      "cardNumber": "BS19-X05",
+      "causeOfDrift": "compiler/overrides/BS19.js stale override had `BP_DEBUFF` wrong count (`count: 1` instead of `2` opposing Spirits) and missing `UNBLOCKED` TREAT_RULE on `#a2`",
+      "fixApplied": "Updated ONLY BS19-X05 override in compiler/overrides/BS19.js without modifying any unrelated card in BS19",
+      "compiledClauseCount": 3,
+      "isFullySupported": true,
+      "regressionTests": [
+        "K1.5-D2",
+        "tests/bs19_card_effects.test.js (14/14 pass)"
+      ],
+      "status": "RESOLVED"
+    },
+    {
+      "cardNumber": "BS33-069",
+      "causeOfDrift": "compiler/clause_patterns.js lacked INDESTRUCTIBLE rule for `\"a Spirit you control can't be destroyed\"`; runtime DEPLOY_NEXUS needed burst-zone self-deploy and SET_LEVEL needed opposing multi-Spirit application",
+      "fixApplied": "Added INDESTRUCTIBLE rule in compiler/clause_patterns.js + DEPLOY_NEXUS burst self-deploy & SET_LEVEL opposing Spirits in engine/ops/index.js",
+      "compiledAbilitiesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true,
+      "regressionTests": [
+        "K1.5-D2"
+      ],
+      "status": "RESOLVED"
+    }
+  ]
+}

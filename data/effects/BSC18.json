@@ -517,6 +517,28 @@
     "compiledIr": {
       "cardNumber": "BSC18-022",
       "name": "Chyu",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 2000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 4000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 5000
+        }
+      },
+      "originalEffectText": "[team: Pretty Animals]\n\n[LV1][LV2][LV3] (When Summoned)\nSummon three \"Private Wear\" family Spirit cards from your Trash, without paying the cost. However, their (When Summoned) effects can't activate.\n\n[LV2][LV3] (Your Attack Step)\nWhen this Spirit is aligned via [My Unit], your attacking Spirit can't be blocked by opposing LV2/LV3 Spirits.",
+      "teams": [
+        "Pretty Animals"
+      ],
       "keywords": [
         {
           "name": "Team",
@@ -524,7 +546,28 @@
           "wave": 5,
           "hook": "team",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "BSC18-022#AB_PASSIVE_NONE_LV1_LV2_LV3_735543132d5720dab8775f9c65447f6375555ea0c8c23b2084cb1276b8cd2b69_cd5df2ad20c2df02f3d23f725ea8b363",
+          "cardNumber": "BSC18-022",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC18-022#a0"
         },
         {
           "name": "My Unit",
@@ -532,13 +575,35 @@
           "wave": 5,
           "hook": "my_unit",
           "bracketed": true,
-          "index": 264
+          "index": 32,
+          "abilityId": "BSC18-022#AB_ATTACK_STEP_NONE_LV2_LV3_26fe4e95f5a83b949afa4ae2ba8dc1cb4c502c1bbcae608a61de8ee205d5de06_f086c7e823d04b8b3ed422d72712e20b",
+          "cardNumber": "BSC18-022",
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC18-022#a2"
         }
       ],
       "abilities": [
         {
-          "id": "BSC18-022#a0",
-          "type": "ABILITY",
+          "type": "TEAM_RESTRICTION",
+          "teams": [
+            "Pretty Animals"
+          ],
           "header": {
             "levels": [
               1,
@@ -548,8 +613,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -558,11 +628,56 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "rawText": "[team: Pretty Animals]",
+          "originalAbilityText": "[team: Pretty Animals]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC18-022#a0",
+          "keywords": [
+            {
+              "name": "Team",
+              "parameter": "Pretty Animals",
+              "wave": 5,
+              "hook": "team",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC18-022#AB_PASSIVE_NONE_LV1_LV2_LV3_735543132d5720dab8775f9c65447f6375555ea0c8c23b2084cb1276b8cd2b69_cd5df2ad20c2df02f3d23f725ea8b363",
+              "cardNumber": "BSC18-022",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC18-022#a0"
+            }
+          ],
+          "id": "BSC18-022#AB_PASSIVE_NONE_LV1_LV2_LV3_735543132d5720dab8775f9c65447f6375555ea0c8c23b2084cb1276b8cd2b69_cd5df2ad20c2df02f3d23f725ea8b363",
+          "physicalId": "BSC18-022#AB_PASSIVE_NONE_LV1_LV2_LV3_735543132d5720dab8775f9c65447f6375555ea0c8c23b2084cb1276b8cd2b69_cd5df2ad20c2df02f3d23f725ea8b363",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_735543132d5720dab8775f9c65447f6375555ea0c8c23b2084cb1276b8cd2b69_cd5df2ad20c2df02f3d23f725ea8b363",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_4430a1e2ca3e15d61c65e76e4ca4df52e799c270ecdab29a877a228b2f489f5d_6002ed6e22a566f27a07efea7293faa0",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC18-022#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -573,8 +688,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -583,10 +707,14 @@
             "isMain": false,
             "cleanBody": "Summon three \"Private Wear\" family Spirit cards from your Trash, without paying the cost. However, their (When Summoned) effects can't activate."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nSummon three \"Private Wear\" family Spirit cards from your Trash, without paying the cost. However, their (When Summoned) effects can't activate.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Summon three \"Private Wear\" family Spirit cards from your Trash, without paying the cost.",
+              "originalClauseText": "Summon three \"Private Wear\" family Spirit cards from your Trash, without paying the cost.",
               "cleanText": "Summon three \"Private Wear\" family Spirit cards from your Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -594,12 +722,25 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 3,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "family": "Private Wear"
+                },
+                "free": true,
+                "isOptional": false
               }
             },
             {
               "rawText": "their (When Summoned) effects can't activate.",
+              "originalClauseText": "their (When Summoned) effects can't activate.",
               "cleanText": "their (When Summoned) effects can't activate",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -610,10 +751,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC18-022#a1",
+          "keywords": [],
+          "id": "BSC18-022#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_7b2dc16eba23d45d37870975df6705c161343a2b58a02937afbaa266d8bbb198_0b312bac26b117e34bb002f10e861986",
+          "physicalId": "BSC18-022#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_7b2dc16eba23d45d37870975df6705c161343a2b58a02937afbaa266d8bbb198_0b312bac26b117e34bb002f10e861986",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_7b2dc16eba23d45d37870975df6705c161343a2b58a02937afbaa266d8bbb198_0b312bac26b117e34bb002f10e861986",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_3a6c0a7112eff6acbd1a2611c820aef3bab93ed0c3070a3221c469d359125b8d_5d695790a39110b3f661a769f3876a74",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC18-022#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -623,8 +778,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -633,21 +797,70 @@
             "isMain": false,
             "cleanBody": "When this Spirit is aligned via [My Unit], your attacking Spirit can't be blocked by opposing LV2/LV3 Spirits."
           },
+          "originalAbilityText": "[LV2][LV3] (Your Attack Step)\nWhen this Spirit is aligned via [My Unit], your attacking Spirit can't be blocked by opposing LV2/LV3 Spirits.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When this Spirit is aligned via [My Unit], your attacking Spirit can't be blocked by opposing LV2/LV3 Spirits.",
+              "originalClauseText": "When this Spirit is aligned via [My Unit], your attacking Spirit can't be blocked by opposing LV2/LV3 Spirits.",
               "cleanText": "When this Spirit is aligned via [My Unit], your attacking Spirit can't be blocked by opposing LV2/LV3 Spirits",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "UNBLOCKABLE"
+                "op": "KEYWORD_RULE",
+                "keyword": "My Unit"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC18-022#a2",
+          "keywords": [
+            {
+              "name": "My Unit",
+              "parameter": null,
+              "wave": 5,
+              "hook": "my_unit",
+              "bracketed": true,
+              "index": 32,
+              "abilityId": "BSC18-022#AB_ATTACK_STEP_NONE_LV2_LV3_26fe4e95f5a83b949afa4ae2ba8dc1cb4c502c1bbcae608a61de8ee205d5de06_f086c7e823d04b8b3ed422d72712e20b",
+              "cardNumber": "BSC18-022",
+              "levels": [
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Your Attack Step",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC18-022#a2"
+            }
+          ],
+          "id": "BSC18-022#AB_ATTACK_STEP_NONE_LV2_LV3_26fe4e95f5a83b949afa4ae2ba8dc1cb4c502c1bbcae608a61de8ee205d5de06_f086c7e823d04b8b3ed422d72712e20b",
+          "physicalId": "BSC18-022#AB_ATTACK_STEP_NONE_LV2_LV3_26fe4e95f5a83b949afa4ae2ba8dc1cb4c502c1bbcae608a61de8ee205d5de06_f086c7e823d04b8b3ed422d72712e20b",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_26fe4e95f5a83b949afa4ae2ba8dc1cb4c502c1bbcae608a61de8ee205d5de06_f086c7e823d04b8b3ed422d72712e20b",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_LV3_797f4c4300e522d6cc15f25b15e5cd0868446a99f816ac43bdd0298d90ff7d78_d92e4bda4bdd153d3315c5d4e2dca9c1",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -664,19 +877,13 @@
     "compiledIr": {
       "cardNumber": "BSC18-041",
       "name": "Costume Change",
-      "keywords": [
-        {
-          "name": "Burst",
-          "parameter": "After your Spirit is Destroyed by the Opponent",
-          "wave": 2,
-          "hook": "burst",
-          "bracketed": true,
-          "index": 0
-        }
-      ],
+      "type": "Magic",
+      "levels": {},
+      "originalEffectText": "[Burst: After your Spirit is Destroyed by the Opponent]\nReturn a \"Diva\" family Spirit card that was destroyed when this Burst activates from your Trash to the Hand. Then, by paying the cost, activate this card's Flash effect.\n\n[Flash]\nSeparate one Brave on one of your Brave Spirits. After this effect resolves, you can summon a Yellow Brave card from your Hand without paying the cost, directly braving it to one \"Diva\" family Spirit you control.",
+      "teams": [],
+      "keywords": [],
       "abilities": [
         {
-          "id": "BSC18-041#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -687,8 +894,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "BURST",
+            "timings": [],
             "timingLabel": "Burst",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -697,26 +911,40 @@
             "isMain": false,
             "cleanBody": "Return a \"Diva\" family Spirit card that was destroyed when this Burst activates from your Trash to the Hand. Then, by paying the cost, activate this card's Flash effect."
           },
+          "originalAbilityText": "[Burst: After your Spirit is Destroyed by the Opponent]\nReturn a \"Diva\" family Spirit card that was destroyed when this Burst activates from your Trash to the Hand. Then, by paying the cost, activate this card's Flash effect.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Return a \"Diva\" family Spirit card that was destroyed when this Burst activates from your Trash to the Hand.",
+              "originalClauseText": "Return a \"Diva\" family Spirit card that was destroyed when this Burst activates from your Trash to the Hand.",
               "cleanText": "Return a \"Diva\" family Spirit card that was destroyed when this Burst activates from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "family": "Diva"
+                },
+                "isOptional": false
               }
             },
             {
               "rawText": "by paying the cost, activate this card's Flash effect.",
+              "originalClauseText": "by paying the cost, activate this card's Flash effect.",
               "cleanText": "by paying the cost, activate this card's Flash effect",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -727,10 +955,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC18-041#a0",
+          "keywords": [],
+          "id": "BSC18-041#AB_BURST_NONE_LV1_LV2_LV3_85b57e49feb1ffc543724473f6d087e8dfee174401a80bd3f52c01e83a490e12_1b817e8734e01da75003612a0bff79d4",
+          "physicalId": "BSC18-041#AB_BURST_NONE_LV1_LV2_LV3_85b57e49feb1ffc543724473f6d087e8dfee174401a80bd3f52c01e83a490e12_1b817e8734e01da75003612a0bff79d4",
+          "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_85b57e49feb1ffc543724473f6d087e8dfee174401a80bd3f52c01e83a490e12_1b817e8734e01da75003612a0bff79d4",
+          "semanticIdV3": "SEM3#AB_BURST_NONE_LV1_LV2_LV3_7e3b95d1a88a0c7f69417506f5432100a4641a54a6b0a84e9628f2e2d6656f91_cc01063dfadca27b6a9786f9a673a2f7",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC18-041#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -741,8 +983,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -751,22 +1000,29 @@
             "isMain": false,
             "cleanBody": "Separate one Brave on one of your Brave Spirits. After this effect resolves, you can summon a Yellow Brave card from your Hand without paying the cost, directly braving it to one \"Diva\" family Spirit you control."
           },
+          "originalAbilityText": "[Flash]\nSeparate one Brave on one of your Brave Spirits. After this effect resolves, you can summon a Yellow Brave card from your Hand without paying the cost, directly braving it to one \"Diva\" family Spirit you control.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Separate one Brave on one of your Brave Spirits.",
+              "originalClauseText": "Separate one Brave on one of your Brave Spirits.",
               "cleanText": "Separate one Brave on one of your Brave Spirits",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Brave"
               }
             },
             {
               "rawText": "you can summon a Yellow Brave card from your Hand without paying the cost, directly braving it to one \"Diva\" family Spirit you control.",
+              "originalClauseText": "you can summon a Yellow Brave card from your Hand without paying the cost, directly braving it to one \"Diva\" family Spirit you control.",
               "cleanText": "you can summon a Yellow Brave card from your Hand without paying the cost, directly braving it to one \"Diva\" family Spirit you control",
+              "clauseIndex": 1,
               "link": "afterResolves",
               "isOptional": true,
               "isCost": false,
@@ -774,11 +1030,39 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit",
+                    "Brave"
+                  ],
+                  "family": "Diva",
+                  "color": "Yellow"
+                },
+                "free": true,
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC18-041#a1",
+          "keywords": [],
+          "id": "BSC18-041#AB_FLASH_NONE_LV1_LV2_LV3_f69794f2eb10a5bbc97d9a4a972bb40bc69ef8598fcc156f507531305d7dfe90_78693242d00c364780aa2e046ad19cf6",
+          "physicalId": "BSC18-041#AB_FLASH_NONE_LV1_LV2_LV3_f69794f2eb10a5bbc97d9a4a972bb40bc69ef8598fcc156f507531305d7dfe90_78693242d00c364780aa2e046ad19cf6",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_f69794f2eb10a5bbc97d9a4a972bb40bc69ef8598fcc156f507531305d7dfe90_78693242d00c364780aa2e046ad19cf6",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_b439c3bb449b98b4b4fe606f3fe9948dff5bd6c28ea7acf5d5531c479570f5dc_439ef4619ef051adf7c934a68b47190b",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -2083,6 +2367,28 @@
     "compiledIr": {
       "cardNumber": "BSC18-026",
       "name": "Nei-Lanetail",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 2000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 4000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 5000
+        }
+      },
+      "originalEffectText": "[team: Twilight Gothic]\n\nWhen your \"Diva\" family Spirits are destroyed by the opponent, you can summon this card from the Hand, without paying the cost.\n\n[LV1][LV2][LV3] (When Summoned)\nYou can return a [Song] Magic card from your Field/Trash to your Hand.",
+      "teams": [
+        "Twilight Gothic"
+      ],
       "keywords": [
         {
           "name": "Team",
@@ -2090,13 +2396,36 @@
           "wave": 5,
           "hook": "team",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "BSC18-026#AB_PASSIVE_NONE_LV1_LV2_LV3_13d02f88879ad828265dcbd6a15aef53790febb85cd2935e9d4a40e11c177d4b_2a77f49b1f4ea62ec14a5dbbee1bb918",
+          "cardNumber": "BSC18-026",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC18-026#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BSC18-026#a0",
-          "type": "ABILITY",
+          "type": "TEAM_RESTRICTION",
+          "teams": [
+            "Twilight Gothic"
+          ],
           "header": {
             "levels": [
               1,
@@ -2106,8 +2435,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2116,11 +2450,56 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "rawText": "[team: Twilight Gothic]",
+          "originalAbilityText": "[team: Twilight Gothic]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC18-026#a0",
+          "keywords": [
+            {
+              "name": "Team",
+              "parameter": "Twilight Gothic",
+              "wave": 5,
+              "hook": "team",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC18-026#AB_PASSIVE_NONE_LV1_LV2_LV3_13d02f88879ad828265dcbd6a15aef53790febb85cd2935e9d4a40e11c177d4b_2a77f49b1f4ea62ec14a5dbbee1bb918",
+              "cardNumber": "BSC18-026",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC18-026#a0"
+            }
+          ],
+          "id": "BSC18-026#AB_PASSIVE_NONE_LV1_LV2_LV3_13d02f88879ad828265dcbd6a15aef53790febb85cd2935e9d4a40e11c177d4b_2a77f49b1f4ea62ec14a5dbbee1bb918",
+          "physicalId": "BSC18-026#AB_PASSIVE_NONE_LV1_LV2_LV3_13d02f88879ad828265dcbd6a15aef53790febb85cd2935e9d4a40e11c177d4b_2a77f49b1f4ea62ec14a5dbbee1bb918",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_13d02f88879ad828265dcbd6a15aef53790febb85cd2935e9d4a40e11c177d4b_2a77f49b1f4ea62ec14a5dbbee1bb918",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_9d76e6d79d8e84d34eae171db46494ea011167c8ee30be960a1854e7fcfb1e9b_f6466ebeec89073dc815f93e7b4f9e26",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC18-026#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2131,8 +2510,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2141,10 +2525,14 @@
             "isMain": false,
             "cleanBody": "When your \"Diva\" family Spirits are destroyed by the opponent, you can summon this card from the Hand, without paying the cost."
           },
+          "originalAbilityText": "When your \"Diva\" family Spirits are destroyed by the opponent, you can summon this card from the Hand, without paying the cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When your \"Diva\" family Spirits are destroyed by the opponent, you can summon this card from the Hand, without paying the cost.",
+              "originalClauseText": "When your \"Diva\" family Spirits are destroyed by the opponent, you can summon this card from the Hand, without paying the cost.",
               "cleanText": "When your \"Diva\" family Spirits are destroyed by the opponent, you can summon this card from the Hand, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -2152,14 +2540,27 @@
               "duration": null,
               "op": {
                 "op": "SUMMON_THIS_CARD",
-                "from": "HAND_OR_BURST"
+                "from": "HAND",
+                "free": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC18-026#a1",
+          "keywords": [],
+          "id": "BSC18-026#AB_PASSIVE_NONE_LV1_LV2_LV3_bc7279814f36e67f4a6482fecb8e4edc19e60447473ed9a3885eb64b2855dd9c_c54ab6235465fd68340f9ae22c9d4ac4",
+          "physicalId": "BSC18-026#AB_PASSIVE_NONE_LV1_LV2_LV3_bc7279814f36e67f4a6482fecb8e4edc19e60447473ed9a3885eb64b2855dd9c_c54ab6235465fd68340f9ae22c9d4ac4",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_bc7279814f36e67f4a6482fecb8e4edc19e60447473ed9a3885eb64b2855dd9c_c54ab6235465fd68340f9ae22c9d4ac4",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_ac32427eb5246fd295dd8fde1806d2aca8b3806566cdd4af67005e8bb78b63b4_9675dd947288f3b83e8f95d24ef31c91",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC18-026#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2170,8 +2571,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2180,10 +2590,14 @@
             "isMain": false,
             "cleanBody": "You can return a [Song] Magic card from your Field/Trash to your Hand."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nYou can return a [Song] Magic card from your Field/Trash to your Hand.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "You can return a [Song] Magic card from your Field/Trash to your Hand.",
+              "originalClauseText": "You can return a [Song] Magic card from your Field/Trash to your Hand.",
               "cleanText": "You can return a [Song] Magic card from your Field/Trash to your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -2198,7 +2612,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC18-026#a2",
+          "keywords": [],
+          "id": "BSC18-026#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_ac59bebdee1da90aaca0ad62fe96867a9f82df9844e0f86e6bcb6febbe3ae4ac_8e05091ac575853ec5967de9c993bca9",
+          "physicalId": "BSC18-026#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_ac59bebdee1da90aaca0ad62fe96867a9f82df9844e0f86e6bcb6febbe3ae4ac_8e05091ac575853ec5967de9c993bca9",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_ac59bebdee1da90aaca0ad62fe96867a9f82df9844e0f86e6bcb6febbe3ae4ac_8e05091ac575853ec5967de9c993bca9",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_073b933bb4bd091b38bdf021f4e9e181765b4c2fd4285ecd308320aa22a89a48_557160d43ad5d3cc27f92d4f529ffffb",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -4218,6 +4647,28 @@
     "compiledIr": {
       "cardNumber": "BSC18-030",
       "name": "［Dark Night Breeze］Seina Ryumin",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 5000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 7,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "[team: Twilight Gothic]\n\n[LV1][LV2][LV3] (When Summoned)\nReturn one opposing Nexus to the Hand.\n\n[LV2][LV3] (Your End Step)\nIf there is any [Song] Magic card on your Field, send all cores from your Trash to your Spirits in any way you like.",
+      "teams": [
+        "Twilight Gothic"
+      ],
       "keywords": [
         {
           "name": "Team",
@@ -4225,13 +4676,36 @@
           "wave": 5,
           "hook": "team",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "BSC18-030#AB_PASSIVE_NONE_LV1_LV2_LV3_13d02f88879ad828265dcbd6a15aef53790febb85cd2935e9d4a40e11c177d4b_2a77f49b1f4ea62ec14a5dbbee1bb918",
+          "cardNumber": "BSC18-030",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC18-030#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BSC18-030#a0",
-          "type": "ABILITY",
+          "type": "TEAM_RESTRICTION",
+          "teams": [
+            "Twilight Gothic"
+          ],
           "header": {
             "levels": [
               1,
@@ -4241,8 +4715,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4251,11 +4730,56 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "rawText": "[team: Twilight Gothic]",
+          "originalAbilityText": "[team: Twilight Gothic]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC18-030#a0",
+          "keywords": [
+            {
+              "name": "Team",
+              "parameter": "Twilight Gothic",
+              "wave": 5,
+              "hook": "team",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC18-030#AB_PASSIVE_NONE_LV1_LV2_LV3_13d02f88879ad828265dcbd6a15aef53790febb85cd2935e9d4a40e11c177d4b_2a77f49b1f4ea62ec14a5dbbee1bb918",
+              "cardNumber": "BSC18-030",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC18-030#a0"
+            }
+          ],
+          "id": "BSC18-030#AB_PASSIVE_NONE_LV1_LV2_LV3_13d02f88879ad828265dcbd6a15aef53790febb85cd2935e9d4a40e11c177d4b_2a77f49b1f4ea62ec14a5dbbee1bb918",
+          "physicalId": "BSC18-030#AB_PASSIVE_NONE_LV1_LV2_LV3_13d02f88879ad828265dcbd6a15aef53790febb85cd2935e9d4a40e11c177d4b_2a77f49b1f4ea62ec14a5dbbee1bb918",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_13d02f88879ad828265dcbd6a15aef53790febb85cd2935e9d4a40e11c177d4b_2a77f49b1f4ea62ec14a5dbbee1bb918",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_9d76e6d79d8e84d34eae171db46494ea011167c8ee30be960a1854e7fcfb1e9b_f6466ebeec89073dc815f93e7b4f9e26",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC18-030#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4266,8 +4790,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4276,10 +4809,14 @@
             "isMain": false,
             "cleanBody": "Return one opposing Nexus to the Hand."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nReturn one opposing Nexus to the Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Return one opposing Nexus to the Hand.",
+              "originalClauseText": "Return one opposing Nexus to the Hand.",
               "cleanText": "Return one opposing Nexus to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -4294,10 +4831,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC18-030#a1",
+          "keywords": [],
+          "id": "BSC18-030#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_30bdb672c3d8910fafe0ac8e26c95209b8ed89565395165a8423560e87c156ff_9e845d30be71edebb2c48debb04bd539",
+          "physicalId": "BSC18-030#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_30bdb672c3d8910fafe0ac8e26c95209b8ed89565395165a8423560e87c156ff_9e845d30be71edebb2c48debb04bd539",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_30bdb672c3d8910fafe0ac8e26c95209b8ed89565395165a8423560e87c156ff_9e845d30be71edebb2c48debb04bd539",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_656da638df930e2999b8320b5c6b6bd0e4f4aa4fb6abb9d5964df605829f527e_fdb0b18c79b4a5984d91940fa6b2776a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC18-030#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4307,8 +4858,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "END_OF_TURN",
+            "timings": [
+              "END_OF_TURN"
+            ],
             "timingLabel": "Your End Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "END_OF_TURN"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4317,10 +4877,14 @@
             "isMain": false,
             "cleanBody": "If there is any [Song] Magic card on your Field, send all cores from your Trash to your Spirits in any way you like."
           },
+          "originalAbilityText": "[LV2][LV3] (Your End Step)\nIf there is any [Song] Magic card on your Field, send all cores from your Trash to your Spirits in any way you like.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "If there is any [Song] Magic card on your Field, send all cores from your Trash to your Spirits in any way you like.",
+              "originalClauseText": "If there is any [Song] Magic card on your Field, send all cores from your Trash to your Spirits in any way you like.",
               "cleanText": "send all cores from your Trash to your Spirits in any way you like",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -4328,11 +4892,30 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": "ALL",
+                "from": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC18-030#a2",
+          "keywords": [],
+          "id": "BSC18-030#AB_END_OF_TURN_NONE_LV2_LV3_098e0bdb3cf02654ef24dcad952ed3b6d7dfbb1d42f9c6b6d56f5086f244a3b4_a73ce5dd225fc8e9c956849a6097d2dd",
+          "physicalId": "BSC18-030#AB_END_OF_TURN_NONE_LV2_LV3_098e0bdb3cf02654ef24dcad952ed3b6d7dfbb1d42f9c6b6d56f5086f244a3b4_a73ce5dd225fc8e9c956849a6097d2dd",
+          "semanticId": "SEM#AB_END_OF_TURN_NONE_LV2_LV3_098e0bdb3cf02654ef24dcad952ed3b6d7dfbb1d42f9c6b6d56f5086f244a3b4_a73ce5dd225fc8e9c956849a6097d2dd",
+          "semanticIdV3": "SEM3#AB_END_OF_TURN_NONE_LV2_LV3_b9ec20901448c4575c4871a0487347c17124628b187c36c1accea01e16ce4543_b91125ac2ee11ad3d256fbcd79336071",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "END_OF_TURN"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -4700,6 +5283,28 @@
     "compiledIr": {
       "cardNumber": "BSC18-008",
       "name": "［Innocent Wave］Millia Sunday",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 5000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 5,
+          "bp": 8000
+        }
+      },
+      "originalEffectText": "[team: Absolutes]\n\n[LV1][LV2][LV3] (When Summoned)\nDiscard a [Song] Magic card on the opposing Field, and send a core from any opposing Spirit to their Reserve.\n\n[LV2][LV3] (Your Attack Step)\nWhen your \"Diva\" family Spirit is destroyed by the opponent, you can summon a Spirit card with a cost lower than the destroyed Spirit from your Trash, without paying the cost. However, any (When Summoned) effects of the Spirit can't activate.",
+      "teams": [
+        "Absolutes"
+      ],
       "keywords": [
         {
           "name": "Team",
@@ -4707,13 +5312,36 @@
           "wave": 5,
           "hook": "team",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "BSC18-008#AB_PASSIVE_NONE_LV1_LV2_LV3_5c50852ea7468d11180c0d7c81102d2b5e5a27bcd9fd2bac14a81f755738879f_fffc0e1db73cc9415c1c61bd92b2da2a",
+          "cardNumber": "BSC18-008",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC18-008#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BSC18-008#a0",
-          "type": "ABILITY",
+          "type": "TEAM_RESTRICTION",
+          "teams": [
+            "Absolutes"
+          ],
           "header": {
             "levels": [
               1,
@@ -4723,8 +5351,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4733,11 +5366,56 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "rawText": "[team: Absolutes]",
+          "originalAbilityText": "[team: Absolutes]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC18-008#a0",
+          "keywords": [
+            {
+              "name": "Team",
+              "parameter": "Absolutes",
+              "wave": 5,
+              "hook": "team",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC18-008#AB_PASSIVE_NONE_LV1_LV2_LV3_5c50852ea7468d11180c0d7c81102d2b5e5a27bcd9fd2bac14a81f755738879f_fffc0e1db73cc9415c1c61bd92b2da2a",
+              "cardNumber": "BSC18-008",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC18-008#a0"
+            }
+          ],
+          "id": "BSC18-008#AB_PASSIVE_NONE_LV1_LV2_LV3_5c50852ea7468d11180c0d7c81102d2b5e5a27bcd9fd2bac14a81f755738879f_fffc0e1db73cc9415c1c61bd92b2da2a",
+          "physicalId": "BSC18-008#AB_PASSIVE_NONE_LV1_LV2_LV3_5c50852ea7468d11180c0d7c81102d2b5e5a27bcd9fd2bac14a81f755738879f_fffc0e1db73cc9415c1c61bd92b2da2a",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_5c50852ea7468d11180c0d7c81102d2b5e5a27bcd9fd2bac14a81f755738879f_fffc0e1db73cc9415c1c61bd92b2da2a",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_bb39912bfdd774ad6d87334f6d1f350ddf27200d8a833bdea994f8f2997f570c_0051b1630dba65b51a9ef22d6e11d8b8",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC18-008#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4748,8 +5426,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4758,23 +5445,29 @@
             "isMain": false,
             "cleanBody": "Discard a [Song] Magic card on the opposing Field, and send a core from any opposing Spirit to their Reserve."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nDiscard a [Song] Magic card on the opposing Field, and send a core from any opposing Spirit to their Reserve.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Discard a [Song] Magic card on the opposing Field",
+              "originalClauseText": "Discard a [Song] Magic card on the opposing Field",
               "cleanText": "Discard a [Song] Magic card on the opposing Field",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "DISCARD_FIELD_MAGIC",
-                "family": "Song"
+                "op": "KEYWORD_RULE",
+                "keyword": "Song"
               }
             },
             {
               "rawText": "send a core from any opposing Spirit to their Reserve.",
+              "originalClauseText": "send a core from any opposing Spirit to their Reserve.",
               "cleanText": "send a core from any opposing Spirit to their Reserve",
+              "clauseIndex": 1,
               "link": "also",
               "isOptional": false,
               "isCost": false,
@@ -4798,10 +5491,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC18-008#a1",
+          "keywords": [],
+          "id": "BSC18-008#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_7e91c201884089cd13b6a7b7a1d60dc9fc9add4886933a71acbf54985907e7c3_912466655a565a46949db05b857620ec",
+          "physicalId": "BSC18-008#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_7e91c201884089cd13b6a7b7a1d60dc9fc9add4886933a71acbf54985907e7c3_912466655a565a46949db05b857620ec",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_7e91c201884089cd13b6a7b7a1d60dc9fc9add4886933a71acbf54985907e7c3_912466655a565a46949db05b857620ec",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_2817c4e31bf9612f81d8315449dff6de6cf93fde387c5b4190a0aef1046fbb3c_244483484f66762dd5fbd34b9a6dd233",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC18-008#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4811,8 +5518,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4821,10 +5537,14 @@
             "isMain": false,
             "cleanBody": "When your \"Diva\" family Spirit is destroyed by the opponent, you can summon a Spirit card with a cost lower than the destroyed Spirit from your Trash, without paying the cost. However, any (When Summoned) effects of the Spirit can't activate."
           },
+          "originalAbilityText": "[LV2][LV3] (Your Attack Step)\nWhen your \"Diva\" family Spirit is destroyed by the opponent, you can summon a Spirit card with a cost lower than the destroyed Spirit from your Trash, without paying the cost. However, any (When Summoned) effects of the Spirit can't activate.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When your \"Diva\" family Spirit is destroyed by the opponent, you can summon a Spirit card with a cost lower than the destroyed Spirit from your Trash, without paying the cost.",
+              "originalClauseText": "When your \"Diva\" family Spirit is destroyed by the opponent, you can summon a Spirit card with a cost lower than the destroyed Spirit from your Trash, without paying the cost.",
               "cleanText": "When your \"Diva\" family Spirit is destroyed by the opponent, you can summon a Spirit card with a cost lower than the destroyed Spirit from your Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -4832,12 +5552,25 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "family": "Diva"
+                },
+                "free": true,
+                "isOptional": false
               }
             },
             {
               "rawText": "any (When Summoned) effects of the Spirit can't activate.",
+              "originalClauseText": "any (When Summoned) effects of the Spirit can't activate.",
               "cleanText": "any (When Summoned) effects of the Spirit can't activate",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -4848,7 +5581,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC18-008#a2",
+          "keywords": [],
+          "id": "BSC18-008#AB_ATTACK_STEP_NONE_LV2_LV3_ded0fb09de0a2c1274fbf94e196474c439c52b10fb13ed5d6bfb61bffcd72559_cbcebae8bad67f83ba3285f4b7d4e20c",
+          "physicalId": "BSC18-008#AB_ATTACK_STEP_NONE_LV2_LV3_ded0fb09de0a2c1274fbf94e196474c439c52b10fb13ed5d6bfb61bffcd72559_cbcebae8bad67f83ba3285f4b7d4e20c",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_ded0fb09de0a2c1274fbf94e196474c439c52b10fb13ed5d6bfb61bffcd72559_cbcebae8bad67f83ba3285f4b7d4e20c",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_LV3_a0cc5938cfd287c7aaf954ac1f4b7ff7c5177b92054af1083daeaf3bcaa8b076_e3e60b5d52507e118a7cf956803a0532",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -7144,19 +7892,59 @@
     "compiledIr": {
       "cardNumber": "BSC18-035",
       "name": "［Ultimate Style］Raquel",
+      "type": "Ultimate",
+      "levels": {
+        "LV3": {
+          "level": 3,
+          "cost": 1,
+          "bp": 11000
+        },
+        "LV4": {
+          "level": 4,
+          "cost": 3,
+          "bp": 13000
+        },
+        "LV5": {
+          "level": 5,
+          "cost": 4,
+          "bp": 15000
+        }
+      },
+      "originalEffectText": "[Summon Condition: You control one or more \"Diva\" family Spirit]\n\n[Ultimate Trigger: [LV3][LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, during this battle, give an opposing Spirit/Ultimate -10000 BP. If that opposing Spirit/Ultimate is brought to 0 BP for the first time this turn, you can summon a \"Diva\" family Spirit card from your Removed Zone/Trash, without paying the cost.\n[utb]",
+      "teams": [],
       "keywords": [
         {
           "name": "Ultimate Trigger",
-          "parameter": "[LV3",
+          "parameter": null,
           "wave": 3,
           "hook": "ultimate_trigger",
           "bracketed": true,
-          "index": 66
+          "index": 0,
+          "abilityId": "BSC18-035#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_64746b48dd8f41f066f1b6a3a8a11a4c983188ac30f06ce88520f0234713be23_3e162890b5ae50429f26090e03667689",
+          "cardNumber": "BSC18-035",
+          "levels": [
+            3,
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC18-035#a1"
         }
       ],
       "abilities": [
         {
-          "id": "BSC18-035#a0",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -7169,8 +7957,13 @@
               "Summon Condition: You control one or more \"Diva\" family Spirit"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -7180,11 +7973,31 @@
             "cleanBody": ""
           },
           "rawText": "[Summon Condition: You control one or more \"Diva\" family Spirit]",
+          "originalAbilityText": "[Summon Condition: You control one or more \"Diva\" family Spirit]",
+          "abilityIndex": 0,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "SUMMON_CONDITION",
+            "expression": "You control one or more \"Diva\" family Spirit",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC18-035#a0",
+          "keywords": [],
+          "id": "BSC18-035#AB_PASSIVE_NONE_LV1_LV2_LV3_2a1df7afb5a4f2ba8c7f11296fce4516a7fdd5a645521c15ae458a0286e3a72e_41130e95f5e8b7a31e176050c4ea14f4",
+          "physicalId": "BSC18-035#AB_PASSIVE_NONE_LV1_LV2_LV3_2a1df7afb5a4f2ba8c7f11296fce4516a7fdd5a645521c15ae458a0286e3a72e_41130e95f5e8b7a31e176050c4ea14f4",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_2a1df7afb5a4f2ba8c7f11296fce4516a7fdd5a645521c15ae458a0286e3a72e_41130e95f5e8b7a31e176050c4ea14f4",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_4425db76ba91c8d9f84f6b5f7fa7bf97d2150ec9b5b2faa4ebd8ac25cfea69a3_f466fcf67b631e3548bd3591a98d717f",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC18-035#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -7195,8 +8008,15 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Ultimate Trigger",
@@ -7205,10 +8025,14 @@
             "isMain": false,
             "cleanBody": "When Ultimate Trigger hits, during this battle, give an opposing Spirit/Ultimate -10000 BP. If that opposing Spirit/Ultimate is brought to 0 BP for the first time this turn, you can summon a \"Diva\" family Spirit card from your Removed Zone/Trash, without paying the cost."
           },
+          "originalAbilityText": "[Ultimate Trigger: [LV3][LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, during this battle, give an opposing Spirit/Ultimate -10000 BP. If that opposing Spirit/Ultimate is brought to 0 BP for the first time this turn, you can summon a \"Diva\" family Spirit card from your Removed Zone/Trash, without paying the cost.\n[utb]",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When Ultimate Trigger hits, during this battle, give an opposing Spirit/Ultimate -10000 BP.",
+              "originalClauseText": "When Ultimate Trigger hits, during this battle, give an opposing Spirit/Ultimate -10000 BP.",
               "cleanText": "When Ultimate Trigger hits, during this battle, give an opposing Spirit/Ultimate -10000 BP",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -7216,12 +8040,22 @@
               "duration": "DURING_THIS_BATTLE",
               "op": {
                 "op": "BP_DEBUFF",
-                "amount": 10000
+                "amount": 10000,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit",
+                    "Ultimate"
+                  ]
+                },
+                "duration": "DURING_THIS_BATTLE"
               }
             },
             {
               "rawText": "If that opposing Spirit/Ultimate is brought to 0 BP for the first time this turn, you can summon a \"Diva\" family Spirit card from your Removed Zone/Trash, without paying the cost.",
+              "originalClauseText": "If that opposing Spirit/Ultimate is brought to 0 BP for the first time this turn, you can summon a \"Diva\" family Spirit card from your Removed Zone/Trash, without paying the cost.",
               "cleanText": "you can summon a \"Diva\" family Spirit card from your Removed Zone/Trash, without paying the cost",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -7229,11 +8063,67 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "removed",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "family": "Diva"
+                },
+                "free": true,
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC18-035#a1",
+          "keywords": [
+            {
+              "name": "Ultimate Trigger",
+              "parameter": null,
+              "wave": 3,
+              "hook": "ultimate_trigger",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC18-035#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_64746b48dd8f41f066f1b6a3a8a11a4c983188ac30f06ce88520f0234713be23_3e162890b5ae50429f26090e03667689",
+              "cardNumber": "BSC18-035",
+              "levels": [
+                3,
+                4,
+                5
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC18-035#a1"
+            }
+          ],
+          "id": "BSC18-035#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_64746b48dd8f41f066f1b6a3a8a11a4c983188ac30f06ce88520f0234713be23_3e162890b5ae50429f26090e03667689",
+          "physicalId": "BSC18-035#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_64746b48dd8f41f066f1b6a3a8a11a4c983188ac30f06ce88520f0234713be23_3e162890b5ae50429f26090e03667689",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_64746b48dd8f41f066f1b6a3a8a11a4c983188ac30f06ce88520f0234713be23_3e162890b5ae50429f26090e03667689",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV3_LV4_LV5_d508fbb8392fe38a2c8ea0b7092988531470aefb34b2d331b2309c3e6885947a_88f2682f6b06e88d6b2cda510f5da542",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,

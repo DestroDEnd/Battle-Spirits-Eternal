@@ -230,27 +230,107 @@
     "compiledIr": {
       "cardNumber": "BSC21-009",
       "name": "Himetsuruichimonji",
+      "type": "Brave",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        }
+      },
+      "originalEffectText": "[Brave Condition: Cost 4 or more]\n\nThis card doesn't count towards the total number of Braves that your exactly-named \"The SwordsSaintPrincess Tsuru\" can brave with.\n\n[Soul Burst] (After your Life is reduced)\nReturn a Yellow card from your Trash to the Hand. After this effect resolves, summon this Brave card without paying the cost.",
+      "teams": [],
       "keywords": [
+        {
+          "name": "Brave Condition",
+          "parameter": "Cost 4 or more",
+          "wave": 1,
+          "hook": "brave_condition",
+          "bracketed": true,
+          "index": 0,
+          "abilityId": "BSC21-009#AB_PASSIVE_NONE_LV1_LV2_LV3_ab439b797e96b89e9c1f060d091c9ddb56f01f0841bdf997790a327c4a06e9af_b4382f074bc7cc5dc3a58927b1d62f37",
+          "cardNumber": "BSC21-009",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC21-009#a0"
+        },
         {
           "name": "Brave",
           "parameter": "Cost 4 or more",
           "wave": 3,
           "hook": "brave",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "BSC21-009#AB_PASSIVE_NONE_LV1_LV2_LV3_ab439b797e96b89e9c1f060d091c9ddb56f01f0841bdf997790a327c4a06e9af_b4382f074bc7cc5dc3a58927b1d62f37",
+          "cardNumber": "BSC21-009",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC21-009#a0"
         },
         {
-          "name": "Burst",
-          "parameter": "s",
+          "name": "Soul Burst",
+          "parameter": null,
           "wave": 2,
           "hook": "burst",
           "bracketed": true,
-          "index": 167
+          "index": 0,
+          "abilityId": "BSC21-009#AB_BURST_NONE_LV1_LV2_LV3_8efaccf49ec7bd5cf20666e520c558c86b015c5754cf36e17118d1070ea193ed_0de3c602c84725a39476295a13573b05",
+          "cardNumber": "BSC21-009",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "BURST",
+          "timingLabel": "Soul Burst",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC21-009#a2"
         }
       ],
       "abilities": [
         {
-          "id": "BSC21-009#a0",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -261,8 +341,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Brave Condition: Cost 4 or more",
@@ -272,11 +357,90 @@
             "cleanBody": ""
           },
           "rawText": "[Brave Condition: Cost 4 or more]",
+          "originalAbilityText": "[Brave Condition: Cost 4 or more]",
+          "abilityIndex": 0,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "BRAVE_CONDITION",
+            "expression": "Cost 4 or more",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC21-009#a0",
+          "keywords": [
+            {
+              "name": "Brave Condition",
+              "parameter": "Cost 4 or more",
+              "wave": 1,
+              "hook": "brave_condition",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC21-009#AB_PASSIVE_NONE_LV1_LV2_LV3_ab439b797e96b89e9c1f060d091c9ddb56f01f0841bdf997790a327c4a06e9af_b4382f074bc7cc5dc3a58927b1d62f37",
+              "cardNumber": "BSC21-009",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC21-009#a0"
+            },
+            {
+              "name": "Brave",
+              "parameter": "Cost 4 or more",
+              "wave": 3,
+              "hook": "brave",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC21-009#AB_PASSIVE_NONE_LV1_LV2_LV3_ab439b797e96b89e9c1f060d091c9ddb56f01f0841bdf997790a327c4a06e9af_b4382f074bc7cc5dc3a58927b1d62f37",
+              "cardNumber": "BSC21-009",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC21-009#a0"
+            }
+          ],
+          "id": "BSC21-009#AB_PASSIVE_NONE_LV1_LV2_LV3_ab439b797e96b89e9c1f060d091c9ddb56f01f0841bdf997790a327c4a06e9af_b4382f074bc7cc5dc3a58927b1d62f37",
+          "physicalId": "BSC21-009#AB_PASSIVE_NONE_LV1_LV2_LV3_ab439b797e96b89e9c1f060d091c9ddb56f01f0841bdf997790a327c4a06e9af_b4382f074bc7cc5dc3a58927b1d62f37",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_ab439b797e96b89e9c1f060d091c9ddb56f01f0841bdf997790a327c4a06e9af_b4382f074bc7cc5dc3a58927b1d62f37",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_1c5caa0370c63e02d43e538e32ec10598cce83096cdd2ddd65881c3fcae831fa_7d288edb0e73bb4c9e5b70a21c5c361e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC21-009#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -287,8 +451,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -297,24 +466,41 @@
             "isMain": false,
             "cleanBody": "This card doesn't count towards the total number of Braves that your exactly-named \"The SwordsSaintPrincess Tsuru\" can brave with."
           },
+          "originalAbilityText": "This card doesn't count towards the total number of Braves that your exactly-named \"The SwordsSaintPrincess Tsuru\" can brave with.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "This card doesn't count towards the total number of Braves that your exactly-named \"The SwordsSaintPrincess Tsuru\" can brave with.",
+              "originalClauseText": "This card doesn't count towards the total number of Braves that your exactly-named \"The SwordsSaintPrincess Tsuru\" can brave with.",
               "cleanText": "This card doesn't count towards the total number of Braves that your exactly-named \"The SwordsSaintPrincess Tsuru\" can brave with",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Brave"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC21-009#a1",
+          "keywords": [],
+          "id": "BSC21-009#AB_PASSIVE_NONE_LV1_LV2_LV3_e7b83c337ed0405cae2e293d6d4e98945191aab86f4618b11242f7935bd6a65e_bdd21e7a300f0a476370f64a35e67bd8",
+          "physicalId": "BSC21-009#AB_PASSIVE_NONE_LV1_LV2_LV3_e7b83c337ed0405cae2e293d6d4e98945191aab86f4618b11242f7935bd6a65e_bdd21e7a300f0a476370f64a35e67bd8",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_e7b83c337ed0405cae2e293d6d4e98945191aab86f4618b11242f7935bd6a65e_bdd21e7a300f0a476370f64a35e67bd8",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_32a5e773a6d52c4d9111f10631ea71d49946ea0481823f973f65ea1293d7544a_3bb0cfd669e0ed6dd1f9af39ba7d0768",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC21-009#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -325,36 +511,54 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "BURST",
-            "timingLabel": "Burst",
+            "timings": [],
+            "timingLabel": "Soul Burst",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
-            "keyword": null,
+            "keyword": "Soul Burst",
             "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
             "isFlash": false,
             "isMain": false,
             "cleanBody": "Return a Yellow card from your Trash to the Hand. After this effect resolves, summon this Brave card without paying the cost."
           },
+          "originalAbilityText": "[Soul Burst] (After your Life is reduced)\nReturn a Yellow card from your Trash to the Hand. After this effect resolves, summon this Brave card without paying the cost.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Return a Yellow card from your Trash to the Hand.",
+              "originalClauseText": "Return a Yellow card from your Trash to the Hand.",
               "cleanText": "Return a Yellow card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "color": "Yellow"
+                },
+                "isOptional": false
               }
             },
             {
               "rawText": "summon this Brave card without paying the cost.",
+              "originalClauseText": "summon this Brave card without paying the cost.",
               "cleanText": "summon this Brave card without paying the cost",
+              "clauseIndex": 1,
               "link": "afterResolves",
               "isOptional": false,
               "isCost": false,
@@ -362,11 +566,57 @@
               "duration": null,
               "op": {
                 "op": "SUMMON_THIS_CARD",
-                "from": "HAND_OR_BURST"
+                "from": "HAND_OR_BURST",
+                "free": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC21-009#a2",
+          "keywords": [
+            {
+              "name": "Soul Burst",
+              "parameter": null,
+              "wave": 2,
+              "hook": "burst",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC21-009#AB_BURST_NONE_LV1_LV2_LV3_8efaccf49ec7bd5cf20666e520c558c86b015c5754cf36e17118d1070ea193ed_0de3c602c84725a39476295a13573b05",
+              "cardNumber": "BSC21-009",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "BURST",
+              "timingLabel": "Soul Burst",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC21-009#a2"
+            }
+          ],
+          "id": "BSC21-009#AB_BURST_NONE_LV1_LV2_LV3_8efaccf49ec7bd5cf20666e520c558c86b015c5754cf36e17118d1070ea193ed_0de3c602c84725a39476295a13573b05",
+          "physicalId": "BSC21-009#AB_BURST_NONE_LV1_LV2_LV3_8efaccf49ec7bd5cf20666e520c558c86b015c5754cf36e17118d1070ea193ed_0de3c602c84725a39476295a13573b05",
+          "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_8efaccf49ec7bd5cf20666e520c558c86b015c5754cf36e17118d1070ea193ed_0de3c602c84725a39476295a13573b05",
+          "semanticIdV3": "SEM3#AB_BURST_NONE_LV1_LV2_LV3_d7fb3f1b00d982d0c5fd34c8e719cdd591a7614a6384b00c00feb91d9aba344f_9b84b5261a8af85fd9e7bfcf31e9bc0b",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -389,19 +639,78 @@
     "compiledIr": {
       "cardNumber": "BSC21-011",
       "name": "Ookurikara",
+      "type": "Brave",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        }
+      },
+      "originalEffectText": "[Brave Condition: Cost 4 or more Spirit/Ultimate]\n\nWhen your Cost 8 Ultimate is summoned, return this Brave card from your Trash to the Hand.\n\n[When Braved]\nTreat this Brave as Cost 2.",
+      "teams": [],
       "keywords": [
+        {
+          "name": "Brave Condition",
+          "parameter": "Cost 4 or more Spirit/Ultimate",
+          "wave": 1,
+          "hook": "brave_condition",
+          "bracketed": true,
+          "index": 0,
+          "abilityId": "BSC21-011#AB_PASSIVE_NONE_LV1_LV2_LV3_53a88dae86b44287afbb025edffba5ff83886596799ca1539fc2b10d1b2080f8_65af1a594c0cbca5cf48a0b19f4fc180",
+          "cardNumber": "BSC21-011",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC21-011#a0"
+        },
         {
           "name": "Brave",
           "parameter": "Cost 4 or more Spirit/Ultimate",
           "wave": 3,
           "hook": "brave",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "BSC21-011#AB_PASSIVE_NONE_LV1_LV2_LV3_53a88dae86b44287afbb025edffba5ff83886596799ca1539fc2b10d1b2080f8_65af1a594c0cbca5cf48a0b19f4fc180",
+          "cardNumber": "BSC21-011",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC21-011#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BSC21-011#a0",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -412,8 +721,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Brave Condition: Cost 4 or more Spirit/Ultimate",
@@ -423,11 +737,90 @@
             "cleanBody": ""
           },
           "rawText": "[Brave Condition: Cost 4 or more Spirit/Ultimate]",
+          "originalAbilityText": "[Brave Condition: Cost 4 or more Spirit/Ultimate]",
+          "abilityIndex": 0,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "BRAVE_CONDITION",
+            "expression": "Cost 4 or more Spirit/Ultimate",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC21-011#a0",
+          "keywords": [
+            {
+              "name": "Brave Condition",
+              "parameter": "Cost 4 or more Spirit/Ultimate",
+              "wave": 1,
+              "hook": "brave_condition",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC21-011#AB_PASSIVE_NONE_LV1_LV2_LV3_53a88dae86b44287afbb025edffba5ff83886596799ca1539fc2b10d1b2080f8_65af1a594c0cbca5cf48a0b19f4fc180",
+              "cardNumber": "BSC21-011",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC21-011#a0"
+            },
+            {
+              "name": "Brave",
+              "parameter": "Cost 4 or more Spirit/Ultimate",
+              "wave": 3,
+              "hook": "brave",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC21-011#AB_PASSIVE_NONE_LV1_LV2_LV3_53a88dae86b44287afbb025edffba5ff83886596799ca1539fc2b10d1b2080f8_65af1a594c0cbca5cf48a0b19f4fc180",
+              "cardNumber": "BSC21-011",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC21-011#a0"
+            }
+          ],
+          "id": "BSC21-011#AB_PASSIVE_NONE_LV1_LV2_LV3_53a88dae86b44287afbb025edffba5ff83886596799ca1539fc2b10d1b2080f8_65af1a594c0cbca5cf48a0b19f4fc180",
+          "physicalId": "BSC21-011#AB_PASSIVE_NONE_LV1_LV2_LV3_53a88dae86b44287afbb025edffba5ff83886596799ca1539fc2b10d1b2080f8_65af1a594c0cbca5cf48a0b19f4fc180",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_53a88dae86b44287afbb025edffba5ff83886596799ca1539fc2b10d1b2080f8_65af1a594c0cbca5cf48a0b19f4fc180",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_df5c1081bb45d5f7c794820faed8115ac657e98499727c522446b57a2bffa301_8718c990a21d2b519a7603481ef3818a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC21-011#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -438,8 +831,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -448,28 +846,45 @@
             "isMain": false,
             "cleanBody": "When your Cost 8 Ultimate is summoned, return this Brave card from your Trash to the Hand."
           },
+          "originalAbilityText": "When your Cost 8 Ultimate is summoned, return this Brave card from your Trash to the Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When your Cost 8 Ultimate is summoned, return this Brave card from your Trash to the Hand.",
+              "originalClauseText": "When your Cost 8 Ultimate is summoned, return this Brave card from your Trash to the Hand.",
               "cleanText": "When your Cost 8 Ultimate is summoned, return this Brave card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "target": "this_card",
+                "from": "trash",
+                "destination": "HAND",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC21-011#a1",
+          "keywords": [],
+          "id": "BSC21-011#AB_PASSIVE_NONE_LV1_LV2_LV3_007b0118cb6c46572d4a1cc83694211a7c1eb56d493bf4b4e32209240a8b14a9_275658c6147f6bd1286657474f98be88",
+          "physicalId": "BSC21-011#AB_PASSIVE_NONE_LV1_LV2_LV3_007b0118cb6c46572d4a1cc83694211a7c1eb56d493bf4b4e32209240a8b14a9_275658c6147f6bd1286657474f98be88",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_007b0118cb6c46572d4a1cc83694211a7c1eb56d493bf4b4e32209240a8b14a9_275658c6147f6bd1286657474f98be88",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_61f7a7b1e4d9056da4ccc7910730c9b6bc6168a7af7b9c87113b8e725a11d6d5_f09884d091013a489fa642d816c4166e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC21-011#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -482,8 +897,15 @@
               "When Braved"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "WHILE_BRAVED"
+            ],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -492,21 +914,41 @@
             "isMain": false,
             "cleanBody": "Treat this Brave as Cost 2."
           },
+          "originalAbilityText": "[When Braved]\nTreat this Brave as Cost 2.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Treat this Brave as Cost 2.",
+              "originalClauseText": "Treat this Brave as Cost 2.",
               "cleanText": "Treat this Brave as Cost 2",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Brave"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC21-011#a2",
+          "keywords": [],
+          "id": "BSC21-011#AB_PASSIVE_NONE_LV1_LV2_LV3_e7b83c337ed0405cae2e293d6d4e98945191aab86f4618b11242f7935bd6a65e_bdd21e7a300f0a476370f64a35e67bd8",
+          "physicalId": "BSC21-011#AB_PASSIVE_NONE_LV1_LV2_LV3_e7b83c337ed0405cae2e293d6d4e98945191aab86f4618b11242f7935bd6a65e_bdd21e7a300f0a476370f64a35e67bd8",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_e7b83c337ed0405cae2e293d6d4e98945191aab86f4618b11242f7935bd6a65e_bdd21e7a300f0a476370f64a35e67bd8",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_c1b39baa8521fa6566c571f74fc20eccee6b832c28229038ba86542094a80608_dc95b1a72df6570fd2200d97ff2c8744",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "WHILE_BRAVED"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -691,10 +1133,24 @@
     "compiledIr": {
       "cardNumber": "BSC21-002",
       "name": "The CleverMachineSwordMaster Ryoudan'ou",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 7000
+        }
+      },
+      "originalEffectText": "[LV1][LV2] [Catl: All Color] (When Attacks)\nBy sending [Soul Core](Soul Core) from this Spirit to your Trash, immediately activate one of your Soul Bursts. After the Burst activates, discard an opposing Burst.\n\n[LV2] (When Attacks)\nYou can summon an \"Exalted Sword\" family Brave card from your Hand, without paying the cost.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BSC21-002#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -704,8 +1160,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -714,10 +1179,14 @@
             "isMain": false,
             "cleanBody": "By sending [Soul Core](Soul Core) from this Spirit to your Trash, immediately activate one of your Soul Bursts. After the Burst activates, discard an opposing Burst."
           },
+          "originalAbilityText": "[LV1][LV2] [Catl: All Color] (When Attacks)\nBy sending [Soul Core](Soul Core) from this Spirit to your Trash, immediately activate one of your Soul Bursts. After the Burst activates, discard an opposing Burst.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending [Soul Core] from this Spirit to your Trash",
+              "originalClauseText": "By sending [Soul Core] from this Spirit to your Trash",
               "cleanText": "By sending [Soul Core] from this Spirit to your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -739,19 +1208,25 @@
             },
             {
               "rawText": "immediately activate one of your Soul Bursts.",
+              "originalClauseText": "immediately activate one of your Soul Bursts.",
               "cleanText": "immediately activate one of your Soul Bursts",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "ACTIVATE_BURST",
+                "burstType": "SOUL_BURST",
+                "color": null
               }
             },
             {
               "rawText": "After the Burst activates, discard an opposing Burst.",
+              "originalClauseText": "After the Burst activates, discard an opposing Burst.",
               "cleanText": "After the Burst activates, discard an opposing Burst",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -763,10 +1238,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC21-002#a0",
+          "keywords": [],
+          "id": "BSC21-002#AB_WHEN_ATTACKS_NONE_LV1_LV2_507c3f35bc16879d315399cfadedaffa5b96f09fa754e9fa91029c1b0538d31e_627155ca59775b55341f046918ff74c9",
+          "physicalId": "BSC21-002#AB_WHEN_ATTACKS_NONE_LV1_LV2_507c3f35bc16879d315399cfadedaffa5b96f09fa754e9fa91029c1b0538d31e_627155ca59775b55341f046918ff74c9",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_507c3f35bc16879d315399cfadedaffa5b96f09fa754e9fa91029c1b0538d31e_627155ca59775b55341f046918ff74c9",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_4c577bc474168f3046cefd9bb6349b1c56a1bf57e90855e138e497a5f50f53dc_ab83a5002cf6e397828fa3adaa88acb7",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC21-002#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -775,8 +1264,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -785,10 +1283,14 @@
             "isMain": false,
             "cleanBody": "You can summon an \"Exalted Sword\" family Brave card from your Hand, without paying the cost."
           },
+          "originalAbilityText": "[LV2] (When Attacks)\nYou can summon an \"Exalted Sword\" family Brave card from your Hand, without paying the cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can summon an \"Exalted Sword\" family Brave card from your Hand, without paying the cost.",
+              "originalClauseText": "You can summon an \"Exalted Sword\" family Brave card from your Hand, without paying the cost.",
               "cleanText": "You can summon an \"Exalted Sword\" family Brave card from your Hand, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -796,11 +1298,37 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Brave"
+                  ],
+                  "family": "Exalted Sword"
+                },
+                "free": true,
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC21-002#a1",
+          "keywords": [],
+          "id": "BSC21-002#AB_WHEN_ATTACKS_NONE_LV2_4443ede6aef0dff783640d2893a88c0c535f4908b9f1082246bb3c5db6c16f22_a11bd93680bb83fd164c09b3ebc7228f",
+          "physicalId": "BSC21-002#AB_WHEN_ATTACKS_NONE_LV2_4443ede6aef0dff783640d2893a88c0c535f4908b9f1082246bb3c5db6c16f22_a11bd93680bb83fd164c09b3ebc7228f",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_4443ede6aef0dff783640d2893a88c0c535f4908b9f1082246bb3c5db6c16f22_a11bd93680bb83fd164c09b3ebc7228f",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_02a2ba38a519d6d50da0d22b4b9c55b418b0b4d86a28ce67b1971b44834ed629_07fef03bf3c6bbdbc3b341b6aac2ea17",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -997,27 +1525,107 @@
     "compiledIr": {
       "cardNumber": "BSC21-X04",
       "name": "The GroundDeityBlade Ootenta",
+      "type": "Brave",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 6000
+        }
+      },
+      "originalEffectText": "[Brave Condition: Cost 5 or more]\n\n[Soul Burst] (After an opposing Spirit/Ultimate attacks)\nReturn an opposing 15000 BP or less Spirit to the Hand. After this effect resolves, summon this Brave card without paying the cost.\n\n[When Braved] Flash - (When Attacks)\nOnce per turn, send the [Soul Core](Soul Core) from your Trash to this Spirit. When you've done so, return an opposing Spirit/Ultimate to the Hand.",
+      "teams": [],
       "keywords": [
+        {
+          "name": "Brave Condition",
+          "parameter": "Cost 5 or more",
+          "wave": 1,
+          "hook": "brave_condition",
+          "bracketed": true,
+          "index": 0,
+          "abilityId": "BSC21-X04#AB_PASSIVE_NONE_LV1_LV2_LV3_80f3124d1a7701793dcdd02ad9d3954d330c9079f3903e27a5a3d315601ba727_97eaf36aa2c51d494a6f43fb4596d9b4",
+          "cardNumber": "BSC21-X04",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC21-X04#a0"
+        },
         {
           "name": "Brave",
           "parameter": "Cost 5 or more",
           "wave": 3,
           "hook": "brave",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "BSC21-X04#AB_PASSIVE_NONE_LV1_LV2_LV3_80f3124d1a7701793dcdd02ad9d3954d330c9079f3903e27a5a3d315601ba727_97eaf36aa2c51d494a6f43fb4596d9b4",
+          "cardNumber": "BSC21-X04",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC21-X04#a0"
         },
         {
-          "name": "Burst",
-          "parameter": "s",
+          "name": "Soul Burst",
+          "parameter": null,
           "wave": 2,
           "hook": "burst",
           "bracketed": true,
-          "index": 35
+          "index": 0,
+          "abilityId": "BSC21-X04#AB_BURST_NONE_LV1_LV2_LV3_b202a780f64dec40ee329f785903817d8a6330a52ee14d28af4b5e2cc5d9e83f_02385db88a52908e3744f950fc1c3d38",
+          "cardNumber": "BSC21-X04",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "BURST",
+          "timingLabel": "Soul Burst",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": "AFTER_OPPONENT_ATTACK",
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC21-X04#a1"
         }
       ],
       "abilities": [
         {
-          "id": "BSC21-X04#a0",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -1028,8 +1636,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Brave Condition: Cost 5 or more",
@@ -1039,11 +1652,90 @@
             "cleanBody": ""
           },
           "rawText": "[Brave Condition: Cost 5 or more]",
+          "originalAbilityText": "[Brave Condition: Cost 5 or more]",
+          "abilityIndex": 0,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "BRAVE_CONDITION",
+            "expression": "Cost 5 or more",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC21-X04#a0",
+          "keywords": [
+            {
+              "name": "Brave Condition",
+              "parameter": "Cost 5 or more",
+              "wave": 1,
+              "hook": "brave_condition",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC21-X04#AB_PASSIVE_NONE_LV1_LV2_LV3_80f3124d1a7701793dcdd02ad9d3954d330c9079f3903e27a5a3d315601ba727_97eaf36aa2c51d494a6f43fb4596d9b4",
+              "cardNumber": "BSC21-X04",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC21-X04#a0"
+            },
+            {
+              "name": "Brave",
+              "parameter": "Cost 5 or more",
+              "wave": 3,
+              "hook": "brave",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC21-X04#AB_PASSIVE_NONE_LV1_LV2_LV3_80f3124d1a7701793dcdd02ad9d3954d330c9079f3903e27a5a3d315601ba727_97eaf36aa2c51d494a6f43fb4596d9b4",
+              "cardNumber": "BSC21-X04",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC21-X04#a0"
+            }
+          ],
+          "id": "BSC21-X04#AB_PASSIVE_NONE_LV1_LV2_LV3_80f3124d1a7701793dcdd02ad9d3954d330c9079f3903e27a5a3d315601ba727_97eaf36aa2c51d494a6f43fb4596d9b4",
+          "physicalId": "BSC21-X04#AB_PASSIVE_NONE_LV1_LV2_LV3_80f3124d1a7701793dcdd02ad9d3954d330c9079f3903e27a5a3d315601ba727_97eaf36aa2c51d494a6f43fb4596d9b4",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_80f3124d1a7701793dcdd02ad9d3954d330c9079f3903e27a5a3d315601ba727_97eaf36aa2c51d494a6f43fb4596d9b4",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_ded42053e10624ec8ee9533f80346fa6171340cf73d7cf0abca6663d1bd5ed66_3d3614c995f585602458be3df0bc6aa7",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC21-X04#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1054,20 +1746,31 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "BURST",
-            "timingLabel": "Burst",
+            "timings": [],
+            "timingLabel": "Soul Burst",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
-            "keyword": null,
+            "keyword": "Soul Burst",
             "burstCondition": "AFTER_OPPONENT_ATTACK",
             "isFlash": false,
             "isMain": false,
             "cleanBody": "Return an opposing 15000 BP or less Spirit to the Hand. After this effect resolves, summon this Brave card without paying the cost."
           },
+          "originalAbilityText": "[Soul Burst] (After an opposing Spirit/Ultimate attacks)\nReturn an opposing 15000 BP or less Spirit to the Hand. After this effect resolves, summon this Brave card without paying the cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Return an opposing 15000 BP or less Spirit to the Hand.",
+              "originalClauseText": "Return an opposing 15000 BP or less Spirit to the Hand.",
               "cleanText": "Return an opposing 15000 BP or less Spirit to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1083,7 +1786,9 @@
             },
             {
               "rawText": "summon this Brave card without paying the cost.",
+              "originalClauseText": "summon this Brave card without paying the cost.",
               "cleanText": "summon this Brave card without paying the cost",
+              "clauseIndex": 1,
               "link": "afterResolves",
               "isOptional": false,
               "isCost": false,
@@ -1091,14 +1796,59 @@
               "duration": null,
               "op": {
                 "op": "SUMMON_THIS_CARD",
-                "from": "HAND_OR_BURST"
+                "from": "HAND_OR_BURST",
+                "free": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC21-X04#a1",
+          "keywords": [
+            {
+              "name": "Soul Burst",
+              "parameter": null,
+              "wave": 2,
+              "hook": "burst",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC21-X04#AB_BURST_NONE_LV1_LV2_LV3_b202a780f64dec40ee329f785903817d8a6330a52ee14d28af4b5e2cc5d9e83f_02385db88a52908e3744f950fc1c3d38",
+              "cardNumber": "BSC21-X04",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "BURST",
+              "timingLabel": "Soul Burst",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": "AFTER_OPPONENT_ATTACK",
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC21-X04#a1"
+            }
+          ],
+          "id": "BSC21-X04#AB_BURST_NONE_LV1_LV2_LV3_b202a780f64dec40ee329f785903817d8a6330a52ee14d28af4b5e2cc5d9e83f_02385db88a52908e3744f950fc1c3d38",
+          "physicalId": "BSC21-X04#AB_BURST_NONE_LV1_LV2_LV3_b202a780f64dec40ee329f785903817d8a6330a52ee14d28af4b5e2cc5d9e83f_02385db88a52908e3744f950fc1c3d38",
+          "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_b202a780f64dec40ee329f785903817d8a6330a52ee14d28af4b5e2cc5d9e83f_02385db88a52908e3744f950fc1c3d38",
+          "semanticIdV3": "SEM3#AB_BURST_NONE_LV1_LV2_LV3_ca71f77f7a2fa17fe69ab0b6341f5e1229ff206fa49d7794a4a249d1c6b50812_9cb09d4e8fb511644a49ceae73f5ecf2",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC21-X04#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1111,8 +1861,20 @@
               "When Braved"
             ],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN",
+              "WHILE_BRAVED"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -1121,10 +1883,14 @@
             "isMain": false,
             "cleanBody": "send the [Soul Core](Soul Core) from your Trash to this Spirit. When you've done so, return an opposing Spirit/Ultimate to the Hand."
           },
+          "originalAbilityText": "[When Braved] Flash - (When Attacks)\nOnce per turn, send the [Soul Core](Soul Core) from your Trash to this Spirit. When you've done so, return an opposing Spirit/Ultimate to the Hand.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "send the [Soul Core] from your Trash to this Spirit.",
+              "originalClauseText": "send the [Soul Core] from your Trash to this Spirit.",
               "cleanText": "send the [Soul Core] from your Trash to this Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1146,7 +1912,9 @@
             },
             {
               "rawText": "return an opposing Spirit/Ultimate to the Hand.",
+              "originalClauseText": "return an opposing Spirit/Ultimate to the Hand.",
               "cleanText": "return an opposing Spirit/Ultimate to the Hand",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1161,7 +1929,25 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC21-X04#a2",
+          "keywords": [],
+          "id": "BSC21-X04#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_7ed9ec40ac85ba247a65d32b51386d6ea3b4531e4916173cd6eb8c06e3984c7d_f38e546fa12bd556553ffd7700b71b46",
+          "physicalId": "BSC21-X04#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_7ed9ec40ac85ba247a65d32b51386d6ea3b4531e4916173cd6eb8c06e3984c7d_f38e546fa12bd556553ffd7700b71b46",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_7ed9ec40ac85ba247a65d32b51386d6ea3b4531e4916173cd6eb8c06e3984c7d_f38e546fa12bd556553ffd7700b71b46",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_e94e0878b153a93149b5f1f6d18688ef19949bd0215a52265568a6d468667531_01710065c2f9c44ed439ece36e3e63ef",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN",
+              "WHILE_BRAVED"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -1357,10 +2143,29 @@
     "compiledIr": {
       "cardNumber": "BSC21-X03",
       "name": "The SwordMasterPrincess Tsuru",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 6000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 3,
+          "bp": 8000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] (When Summoned)\nYou can reveal up to five cards from your decktop. Add all cards with Burst effects among them to the Hand. Discard any remaining cards.\n\n[LV2][LV3] [Catl: All Color] (When Attacks)\nBy sending [Soul Core] from this Spirit to your Trash, immediately activate one of your Soul Bursts. After that Burst activates, this Spirit can't be blocked by opposing Spirits with a cost equal or inferior to this Spirit's.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BSC21-X03#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1371,8 +2176,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1381,10 +2195,14 @@
             "isMain": false,
             "cleanBody": "You can reveal up to five cards from your decktop. Add all cards with Burst effects among them to the Hand. Discard any remaining cards."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nYou can reveal up to five cards from your decktop. Add all cards with Burst effects among them to the Hand. Discard any remaining cards.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "You can reveal up to five cards from your decktop.",
+              "originalClauseText": "You can reveal up to five cards from your decktop.",
               "cleanText": "You can reveal up to five cards from your decktop",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1398,19 +2216,24 @@
             },
             {
               "rawText": "Add all cards with Burst effects among them to the Hand.",
+              "originalClauseText": "Add all cards with Burst effects among them to the Hand.",
               "cleanText": "Add all cards with Burst effects among them to the Hand",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Burst"
               }
             },
             {
               "rawText": "Discard any remaining cards.",
+              "originalClauseText": "Discard any remaining cards.",
               "cleanText": "Discard any remaining cards",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1421,10 +2244,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC21-X03#a0",
+          "keywords": [],
+          "id": "BSC21-X03#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_24190afa07e40194826dd58a199613db759e755696af1d7b797e5c58599fbb13_e61826909a25e77491cbc1f232b52a10",
+          "physicalId": "BSC21-X03#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_24190afa07e40194826dd58a199613db759e755696af1d7b797e5c58599fbb13_e61826909a25e77491cbc1f232b52a10",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_24190afa07e40194826dd58a199613db759e755696af1d7b797e5c58599fbb13_e61826909a25e77491cbc1f232b52a10",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_daaa57d1a6f67a2882c45ea8637768ebe3380fce07bf4686db1c7c414ba0a3f7_18ab0c5395bc65c7d4db92ac747ed0c3",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC21-X03#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1434,8 +2271,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1444,10 +2290,14 @@
             "isMain": false,
             "cleanBody": "By sending [Soul Core] from this Spirit to your Trash, immediately activate one of your Soul Bursts. After that Burst activates, this Spirit can't be blocked by opposing Spirits with a cost equal or inferior to this Spirit's."
           },
+          "originalAbilityText": "[LV2][LV3] [Catl: All Color] (When Attacks)\nBy sending [Soul Core] from this Spirit to your Trash, immediately activate one of your Soul Bursts. After that Burst activates, this Spirit can't be blocked by opposing Spirits with a cost equal or inferior to this Spirit's.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "By sending [Soul Core] from this Spirit to your Trash",
+              "originalClauseText": "By sending [Soul Core] from this Spirit to your Trash",
               "cleanText": "By sending [Soul Core] from this Spirit to your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1469,19 +2319,25 @@
             },
             {
               "rawText": "immediately activate one of your Soul Bursts.",
+              "originalClauseText": "immediately activate one of your Soul Bursts.",
               "cleanText": "immediately activate one of your Soul Bursts",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "ACTIVATE_BURST",
+                "burstType": "SOUL_BURST",
+                "color": null
               }
             },
             {
               "rawText": "After that Burst activates, this Spirit can't be blocked by opposing Spirits with a cost equal or inferior to this Spirit's.",
+              "originalClauseText": "After that Burst activates, this Spirit can't be blocked by opposing Spirits with a cost equal or inferior to this Spirit's.",
               "cleanText": "After that Burst activates, this Spirit can't be blocked by opposing Spirits with a cost equal or inferior to this Spirit's",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1490,11 +2346,38 @@
               "op": {
                 "op": "UNBLOCKABLE",
                 "target": "self",
-                "blockedByColor": "Opposing"
+                "filter": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "comparison": {
+                      "property": "COST",
+                      "operator": "LTE",
+                      "reference": "effect_card"
+                    }
+                  }
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC21-X03#a1",
+          "keywords": [],
+          "id": "BSC21-X03#AB_WHEN_ATTACKS_NONE_LV2_LV3_3d359350db780ea2ade99e762acaaf6b26beef1af0081f6619bb1076e9910bb6_e66386f13dcea7345e0b2c9c35404ae8",
+          "physicalId": "BSC21-X03#AB_WHEN_ATTACKS_NONE_LV2_LV3_3d359350db780ea2ade99e762acaaf6b26beef1af0081f6619bb1076e9910bb6_e66386f13dcea7345e0b2c9c35404ae8",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_3d359350db780ea2ade99e762acaaf6b26beef1af0081f6619bb1076e9910bb6_e66386f13dcea7345e0b2c9c35404ae8",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_44d601db2c9919e55664c2deb444dad6ff70a9921010f5bbb8a9cab05fb61596_24303ba9dc6ba1b22cadffa223b50654",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
@@ -1678,10 +2561,29 @@
     "compiledIr": {
       "cardNumber": "BSC21-003",
       "name": "The SwordMasterWisdomKing Shura",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 7000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] (When Summoned)\nYou can summon an \"Exalted Sword\" family Brave card from your Hand, without paying the cost.\n\n[LV2][LV3] [Catl: All Color] (When Attacks)\nBy sending [Soul Core](Soul Core) from this Spirit to your Trash, immediately activate one of your Soul Bursts.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BSC21-003#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1692,8 +2594,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1702,10 +2613,14 @@
             "isMain": false,
             "cleanBody": "You can summon an \"Exalted Sword\" family Brave card from your Hand, without paying the cost."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nYou can summon an \"Exalted Sword\" family Brave card from your Hand, without paying the cost.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "You can summon an \"Exalted Sword\" family Brave card from your Hand, without paying the cost.",
+              "originalClauseText": "You can summon an \"Exalted Sword\" family Brave card from your Hand, without paying the cost.",
               "cleanText": "You can summon an \"Exalted Sword\" family Brave card from your Hand, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1713,14 +2628,39 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Brave"
+                  ],
+                  "family": "Exalted Sword"
+                },
+                "free": true,
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC21-003#a0",
+          "keywords": [],
+          "id": "BSC21-003#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_e773818f31ff4e21e97e0ed662e05eab85994d62f701e51c8b508478bbfa4046_1346719458de0601375cf19e99c5a4ba",
+          "physicalId": "BSC21-003#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_e773818f31ff4e21e97e0ed662e05eab85994d62f701e51c8b508478bbfa4046_1346719458de0601375cf19e99c5a4ba",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_e773818f31ff4e21e97e0ed662e05eab85994d62f701e51c8b508478bbfa4046_1346719458de0601375cf19e99c5a4ba",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_cd3fbf979c33fd166e3b52d737d84c49b31b6328b560674b4f55fc62d1fe354e_852eb0de7bca2dec204b3ee032be0585",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC21-003#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1730,8 +2670,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1740,10 +2689,14 @@
             "isMain": false,
             "cleanBody": "By sending [Soul Core](Soul Core) from this Spirit to your Trash, immediately activate one of your Soul Bursts."
           },
+          "originalAbilityText": "[LV2][LV3] [Catl: All Color] (When Attacks)\nBy sending [Soul Core](Soul Core) from this Spirit to your Trash, immediately activate one of your Soul Bursts.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "By sending [Soul Core] from this Spirit to your Trash",
+              "originalClauseText": "By sending [Soul Core] from this Spirit to your Trash",
               "cleanText": "By sending [Soul Core] from this Spirit to your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1765,18 +2718,37 @@
             },
             {
               "rawText": "immediately activate one of your Soul Bursts.",
+              "originalClauseText": "immediately activate one of your Soul Bursts.",
               "cleanText": "immediately activate one of your Soul Bursts",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "ACTIVATE_BURST",
+                "burstType": "SOUL_BURST",
+                "color": null
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC21-003#a1",
+          "keywords": [],
+          "id": "BSC21-003#AB_WHEN_ATTACKS_NONE_LV2_LV3_dec0c8f9841efc49fe4d810f8de6db15a74abd03391a1ef3e67acdf03b65e224_3ad8737a02cc99cbc772dd393d9db16b",
+          "physicalId": "BSC21-003#AB_WHEN_ATTACKS_NONE_LV2_LV3_dec0c8f9841efc49fe4d810f8de6db15a74abd03391a1ef3e67acdf03b65e224_3ad8737a02cc99cbc772dd393d9db16b",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_dec0c8f9841efc49fe4d810f8de6db15a74abd03391a1ef3e67acdf03b65e224_3ad8737a02cc99cbc772dd393d9db16b",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_759cb981bbfdcd834f1beacb6afd614e0dbe24ed8572c12638b235e5e1bb9acb_a10c28f40b9490209044ca94dc1c515b",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -1809,10 +2781,29 @@
     "compiledIr": {
       "cardNumber": "BSC21-001",
       "name": "The SwordMasterWraith Eaglen",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 7000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 5,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] (When Summoned\nYou can summon an \"Exalted Sword\" family Brave card from your Trash, without paying the cost.\n\n[LV2][LV3] [Catl: All Color] (When Attacks)\nBy sending [Soul Core](Soul Core) from this Spirit to your Trash, immediately activate one of your Soul Bursts.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BSC21-001#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1823,8 +2814,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1833,10 +2833,14 @@
             "isMain": false,
             "cleanBody": "You can summon an \"Exalted Sword\" family Brave card from your Trash, without paying the cost."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned\nYou can summon an \"Exalted Sword\" family Brave card from your Trash, without paying the cost.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "You can summon an \"Exalted Sword\" family Brave card from your Trash, without paying the cost.",
+              "originalClauseText": "You can summon an \"Exalted Sword\" family Brave card from your Trash, without paying the cost.",
               "cleanText": "You can summon an \"Exalted Sword\" family Brave card from your Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1844,14 +2848,39 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Brave"
+                  ],
+                  "family": "Exalted Sword"
+                },
+                "free": true,
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC21-001#a0",
+          "keywords": [],
+          "id": "BSC21-001#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a96b9b1d24d7cc156f8c5799b1463a7e59e6b0e8da4551a54c676d1a7e28152a_5057460d9f2a4f4e5675fb0e9e1a6841",
+          "physicalId": "BSC21-001#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a96b9b1d24d7cc156f8c5799b1463a7e59e6b0e8da4551a54c676d1a7e28152a_5057460d9f2a4f4e5675fb0e9e1a6841",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a96b9b1d24d7cc156f8c5799b1463a7e59e6b0e8da4551a54c676d1a7e28152a_5057460d9f2a4f4e5675fb0e9e1a6841",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_7beaa6607a9792b6cf32e7ec2c13617023601d23865e9948770754a89a0c3e6b_3c2e6f267f297fbeacf9077126a82cac",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC21-001#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1861,8 +2890,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1871,10 +2909,14 @@
             "isMain": false,
             "cleanBody": "By sending [Soul Core](Soul Core) from this Spirit to your Trash, immediately activate one of your Soul Bursts."
           },
+          "originalAbilityText": "[LV2][LV3] [Catl: All Color] (When Attacks)\nBy sending [Soul Core](Soul Core) from this Spirit to your Trash, immediately activate one of your Soul Bursts.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "By sending [Soul Core] from this Spirit to your Trash",
+              "originalClauseText": "By sending [Soul Core] from this Spirit to your Trash",
               "cleanText": "By sending [Soul Core] from this Spirit to your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1896,18 +2938,37 @@
             },
             {
               "rawText": "immediately activate one of your Soul Bursts.",
+              "originalClauseText": "immediately activate one of your Soul Bursts.",
               "cleanText": "immediately activate one of your Soul Bursts",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "ACTIVATE_BURST",
+                "burstType": "SOUL_BURST",
+                "color": null
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC21-001#a1",
+          "keywords": [],
+          "id": "BSC21-001#AB_WHEN_ATTACKS_NONE_LV2_LV3_dec0c8f9841efc49fe4d810f8de6db15a74abd03391a1ef3e67acdf03b65e224_3ad8737a02cc99cbc772dd393d9db16b",
+          "physicalId": "BSC21-001#AB_WHEN_ATTACKS_NONE_LV2_LV3_dec0c8f9841efc49fe4d810f8de6db15a74abd03391a1ef3e67acdf03b65e224_3ad8737a02cc99cbc772dd393d9db16b",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_dec0c8f9841efc49fe4d810f8de6db15a74abd03391a1ef3e67acdf03b65e224_3ad8737a02cc99cbc772dd393d9db16b",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_759cb981bbfdcd834f1beacb6afd614e0dbe24ed8572c12638b235e5e1bb9acb_a10c28f40b9490209044ca94dc1c515b",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,

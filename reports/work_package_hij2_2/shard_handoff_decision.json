@@ -1,0 +1,29 @@
+{
+  "generatedAt": "2026-11-19T14:22:10.083Z",
+  "decision": "OPTION_A_SOURCE_AND_EVIDENCE_HANDOFF",
+  "summary": "work_package_hij2_handoff.zip was intentionally constructed as a source-code and evidence package excluding data/ir_shards/*.json. The 150 J.2-modified shards (143 from migrate_hij2_shards.mjs + 7 additional shards from targeted MOVE_CORE/EXHAUST sync) remain in the workspace under data/ir_shards/ and are pinned by SHA-256 and byte size in data/per_shard_validation_inventory.json and changed_shard_manifest.json.",
+  "archiveAnalyzed": "reports/work_package_hij2/work_package_hij2_handoff.zip",
+  "archiveContainsShards": false,
+  "requiredExternalDataDependencies": [
+    "data/ir_shards/*.json (514 shards)",
+    "data/cards_detailed.json",
+    "data/cards_index.json",
+    "data/per_shard_validation_inventory.json"
+  ],
+  "reproducibilityAndVerificationSteps": [
+    "1. Verify workspace data/ir_shards/ against data/per_shard_validation_inventory.json and reports/work_package_hij2_1/changed_shard_manifest.json.",
+    "2. Run `node scripts/validate_514_shards_exhaustive.mjs` (verifies all 514 shards, 15,398 cards, 36,422 abilities, 34,855 unique physicalIds, 18,496 unique semanticIds, 0 collisions).",
+    "3. Run `node --test tests/data_audit.test.js` (verifies cards_index.json, cards_detailed.json, and 514 IR shards)."
+  ],
+  "originalInventoryReference": "data/per_shard_validation_inventory.json (pre-J.2 baseline recorded in reports/work_package_hij2/baseline_inventory.json)",
+  "migratedInventoryReference": "data/per_shard_validation_inventory.json + reports/work_package_hij2_1/changed_shard_manifest.json",
+  "auditedInHij2_2At": "2026-11-19T14:41:47.603Z",
+  "auditStatus": "VERIFIED_VALID",
+  "sourceAndEvidenceArchiveBoundary": "The source-and-evidence ZIP (work_package_hij2_handoff.zip / work_package_hij2_2_handoff.zip) intentionally excludes data/ir_shards/*.json, data/cards_detailed.json, and data/cards_index.json and is NOT a standalone game/data distribution.",
+  "externalDataDependency": {
+    "irShards": "data/ir_shards/*.json (514 files)",
+    "detailedDb": "data/cards_detailed.json",
+    "indexDb": "data/cards_index.json",
+    "inventory": "data/per_shard_validation_inventory.json"
+  }
+}

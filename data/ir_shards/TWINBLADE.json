@@ -1,1 +1,134 @@
-{"TWINBLADE-DRAGON":{"cardNumber":"TWINBLADE-DRAGON","name":"TwinBlade-Dragon","keywords":[],"abilities":[{"id":"TWINBLADE-DRAGON#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Draw a card. If you have a Burst set, also, destroy an opposing 4000 BP or less Spirit."},"clauses":[{"rawText":"Draw a card.","cleanText":"Draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}},{"rawText":"If you have a Burst set, also, destroy an opposing 4000 BP or less Spirit.","cleanText":"also, destroy an opposing 4000 BP or less Spirit","link":null,"isOptional":false,"isCost":false,"condition":"If you have a Burst set","duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"bpLte":4000}}}}],"unsupported":[]},{"id":"TWINBLADE-DRAGON#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By discarding one of your Bursts, during this turn, give one of your Spirits +5000 BP."},"clauses":[{"rawText":"By discarding one of your Bursts","cleanText":"By discarding one of your Bursts","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}},{"rawText":"during this turn, give one of your Spirits +5000 BP.","cleanText":"give one of your Spirits +5000 BP","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"BP_BUFF","amount":5000,"target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "TWINBLADE-DRAGON": {
+    "cardNumber": "TWINBLADE-DRAGON",
+    "name": "TwinBlade-Dragon",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "TWINBLADE-DRAGON#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_09716e47e23327a3f704e1b3b3d402c681dd5b966410bb02a4d53866124d4b18_bfd080764643ebe98d1ca3e4c48f4077",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Draw a card. If you have a Burst set, also, destroy an opposing 4000 BP or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw a card.",
+            "cleanText": "Draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "If you have a Burst set, also, destroy an opposing 4000 BP or less Spirit.",
+            "cleanText": "also, destroy an opposing 4000 BP or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If you have a Burst set",
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 4000
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "TWINBLADE-DRAGON#a0",
+        "physicalId": "TWINBLADE-DRAGON#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_09716e47e23327a3f704e1b3b3d402c681dd5b966410bb02a4d53866124d4b18_bfd080764643ebe98d1ca3e4c48f4077",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_09716e47e23327a3f704e1b3b3d402c681dd5b966410bb02a4d53866124d4b18_bfd080764643ebe98d1ca3e4c48f4077"
+      },
+      {
+        "id": "TWINBLADE-DRAGON#AB_ATTACK_STEP_NONE_LV2_LV3_08de95c8ab063968efcf823ed5fb706dfa6052bfff83856d290fe5b095070a42_0a82367a8856b4411e9870121d4dc158",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By discarding one of your Bursts, during this turn, give one of your Spirits +5000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "By discarding one of your Bursts",
+            "cleanText": "By discarding one of your Bursts",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          },
+          {
+            "rawText": "during this turn, give one of your Spirits +5000 BP.",
+            "cleanText": "give one of your Spirits +5000 BP",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 5000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "TWINBLADE-DRAGON#a1",
+        "physicalId": "TWINBLADE-DRAGON#AB_ATTACK_STEP_NONE_LV2_LV3_08de95c8ab063968efcf823ed5fb706dfa6052bfff83856d290fe5b095070a42_0a82367a8856b4411e9870121d4dc158",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_08de95c8ab063968efcf823ed5fb706dfa6052bfff83856d290fe5b095070a42_0a82367a8856b4411e9870121d4dc158"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

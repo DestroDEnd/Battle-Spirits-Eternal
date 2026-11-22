@@ -24,10 +24,29 @@
     "compiledIr": {
       "cardNumber": "CP14-X01R",
       "name": "The ImmortalDragon Eternal-Dragonis",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 7000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 9000
+        }
+      },
+      "originalEffectText": "When this Spirit card is sent to the Trash via opposing Ultimate Trigger/\"Deck Discarding effect\", you can summon it without paying the cost.\n\n[LV3] (When Attacks)\nWhile you or the opponent controls any Ultimate, this Spirit gains an extra Red symbol.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "CP14-X01R#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -38,8 +57,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -48,25 +72,42 @@
             "isMain": false,
             "cleanBody": "When this Spirit card is sent to the Trash via opposing Ultimate Trigger/\"Deck Discarding effect\", you can summon it without paying the cost."
           },
+          "originalAbilityText": "When this Spirit card is sent to the Trash via opposing Ultimate Trigger/\"Deck Discarding effect\", you can summon it without paying the cost.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When this Spirit card is sent to the Trash via opposing Ultimate Trigger/\"Deck Discarding effect\", you can summon it without paying the cost.",
+              "originalClauseText": "When this Spirit card is sent to the Trash via opposing Ultimate Trigger/\"Deck Discarding effect\", you can summon it without paying the cost.",
               "cleanText": "When this Spirit card is sent to the Trash via opposing Ultimate Trigger/\"Deck Discarding effect\", you can summon it without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "SUMMON",
+                "op": "SUMMON_THIS_CARD",
+                "from": "TRASH",
                 "free": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CP14-X01R#a0",
+          "keywords": [],
+          "id": "CP14-X01R#AB_PASSIVE_NONE_LV1_LV2_LV3_72ca6add6ffd153f61ec3d383ba69491b43fe5f755b4e9f217b0a771dd9cda57_a6a37fded2b6c2489066fe51f6054b7e",
+          "physicalId": "CP14-X01R#AB_PASSIVE_NONE_LV1_LV2_LV3_72ca6add6ffd153f61ec3d383ba69491b43fe5f755b4e9f217b0a771dd9cda57_a6a37fded2b6c2489066fe51f6054b7e",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_72ca6add6ffd153f61ec3d383ba69491b43fe5f755b4e9f217b0a771dd9cda57_a6a37fded2b6c2489066fe51f6054b7e",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_9315216cac57c12354e43140586b2a9b5751a046031cc830a4d6bc437b7d7083_92e70b36f683e7fe52d58ade89b63a6d",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "CP14-X01R#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -75,8 +116,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -85,21 +135,43 @@
             "isMain": false,
             "cleanBody": "While you or the opponent controls any Ultimate, this Spirit gains an extra Red symbol."
           },
+          "originalAbilityText": "[LV3] (When Attacks)\nWhile you or the opponent controls any Ultimate, this Spirit gains an extra Red symbol.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "While you or the opponent controls any Ultimate, this Spirit gains an extra Red symbol.",
+              "originalClauseText": "While you or the opponent controls any Ultimate, this Spirit gains an extra Red symbol.",
               "cleanText": "this Spirit gains an extra Red symbol",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": "While you or the opponent controls any Ultimate",
               "duration": null,
               "op": {
-                "op": "ADD_SYMBOL"
+                "op": "ADD_SYMBOL",
+                "color": "Red",
+                "count": 1,
+                "side": "self"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "CP14-X01R#a1",
+          "keywords": [],
+          "id": "CP14-X01R#AB_WHEN_ATTACKS_NONE_LV3_72b65a35199f58aae50daf7ab5ae6261adb659003e3a65cef4592a734a55edf7_bca6d05aac201b4296eab19de5fe2db7",
+          "physicalId": "CP14-X01R#AB_WHEN_ATTACKS_NONE_LV3_72b65a35199f58aae50daf7ab5ae6261adb659003e3a65cef4592a734a55edf7_bca6d05aac201b4296eab19de5fe2db7",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV3_72b65a35199f58aae50daf7ab5ae6261adb659003e3a65cef4592a734a55edf7_bca6d05aac201b4296eab19de5fe2db7",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV3_287308a26f8eaf0d8cb0bb7772a6d11ca6079ec0606d1fa89eff2bb7ced4ded5_79e16ceb54d32296690d1342da77a8ce",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,

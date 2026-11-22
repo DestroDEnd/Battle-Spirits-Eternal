@@ -421,10 +421,29 @@
     "compiledIr": {
       "cardNumber": "PC11-001",
       "name": "Jet Jaguar -ver. JA02-",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 6000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 5,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] (When Summoned)\nYou can reveal four cards from your decktop. From among them, you can deploy a \"WILLE\" family Nexus card without paying the cost, and add a \"WILLE\" family card to the Hand. Return any remaining cards to the deckbottom.\n\n[LV2][LV3] (Start of Your Attack Step)\nBesides [Soul Core], you can send up to five cores from your Trash to any of your \"WILLE\" family Spirits/Nexuses. Then, you can discard a \"WILLE\" family card from your Hand. When you've done so, discard an opposing Burst.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "PC11-001#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -435,8 +454,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -445,10 +473,14 @@
             "isMain": false,
             "cleanBody": "You can reveal four cards from your decktop. From among them, you can deploy a \"WILLE\" family Nexus card without paying the cost, and add a \"WILLE\" family card to the Hand. Return any remaining cards to the deckbottom."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nYou can reveal four cards from your decktop. From among them, you can deploy a \"WILLE\" family Nexus card without paying the cost, and add a \"WILLE\" family card to the Hand. Return any remaining cards to the deckbottom.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "You can reveal four cards from your decktop.",
+              "originalClauseText": "You can reveal four cards from your decktop.",
               "cleanText": "You can reveal four cards from your decktop",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -461,7 +493,9 @@
             },
             {
               "rawText": "From among them, you can deploy a \"WILLE\" family Nexus card without paying the cost",
+              "originalClauseText": "From among them, you can deploy a \"WILLE\" family Nexus card without paying the cost",
               "cleanText": "From among them, you can deploy a \"WILLE\" family Nexus card without paying the cost",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -474,19 +508,24 @@
             },
             {
               "rawText": "add a \"WILLE\" family card to the Hand.",
+              "originalClauseText": "add a \"WILLE\" family card to the Hand.",
               "cleanText": "add a \"WILLE\" family card to the Hand",
+              "clauseIndex": 2,
               "link": "also",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "ADD_TO_HAND"
+                "op": "UNSUPPORTED",
+                "rawText": "add a \"WILLE\" family card to the Hand"
               }
             },
             {
               "rawText": "Return any remaining cards to the deckbottom.",
+              "originalClauseText": "Return any remaining cards to the deckbottom.",
               "cleanText": "Return any remaining cards to the deckbottom",
+              "clauseIndex": 3,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -497,10 +536,26 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "add a \"WILLE\" family card to the Hand."
+          ],
+          "legacyId": "PC11-001#a0",
+          "keywords": [],
+          "id": "PC11-001#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_f956978fec681c6d50318be688a6f46fce77e97c73dccb4832bad0e1fcdecea3_50233f75c49bdb61e7e64f9a6815af6a",
+          "physicalId": "PC11-001#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_f956978fec681c6d50318be688a6f46fce77e97c73dccb4832bad0e1fcdecea3_50233f75c49bdb61e7e64f9a6815af6a",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_f956978fec681c6d50318be688a6f46fce77e97c73dccb4832bad0e1fcdecea3_50233f75c49bdb61e7e64f9a6815af6a",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_da5d464ea121cc6c21e70d78f3a3a3cfdeac694928060247ff8b8e548539a985_2784f7a0a3b83fecd5f4535d0d1bacb4",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC11-001#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -510,8 +565,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "START_OF_ATTACK_STEP",
+            "timings": [
+              "START_OF_ATTACK_STEP"
+            ],
             "timingLabel": "Start of Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "START_OF_ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -520,10 +584,14 @@
             "isMain": false,
             "cleanBody": "Besides [Soul Core], you can send up to five cores from your Trash to any of your \"WILLE\" family Spirits/Nexuses. Then, you can discard a \"WILLE\" family card from your Hand. When you've done so, discard an opposing Burst."
           },
+          "originalAbilityText": "[LV2][LV3] (Start of Your Attack Step)\nBesides [Soul Core], you can send up to five cores from your Trash to any of your \"WILLE\" family Spirits/Nexuses. Then, you can discard a \"WILLE\" family card from your Hand. When you've done so, discard an opposing Burst.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Besides [Soul Core], you can send up to five cores from your Trash to any of your \"WILLE\" family Spirits/Nexuses.",
+              "originalClauseText": "Besides [Soul Core], you can send up to five cores from your Trash to any of your \"WILLE\" family Spirits/Nexuses.",
               "cleanText": "Besides [Soul Core], you can send up to five cores from your Trash to any of your \"WILLE\" family Spirits/Nexuses",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -531,12 +599,18 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 5,
+                "from": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             },
             {
               "rawText": "you can discard a \"WILLE\" family card from your Hand.",
+              "originalClauseText": "you can discard a \"WILLE\" family card from your Hand.",
               "cleanText": "you can discard a \"WILLE\" family card from your Hand",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": true,
               "isCost": false,
@@ -550,7 +624,9 @@
             },
             {
               "rawText": "discard an opposing Burst.",
+              "originalClauseText": "discard an opposing Burst.",
               "cleanText": "discard an opposing Burst",
+              "clauseIndex": 2,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -562,12 +638,27 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC11-001#a1",
+          "keywords": [],
+          "id": "PC11-001#AB_START_OF_ATTACK_STEP_NONE_LV2_LV3_7fedb93f42b1b04dea2f8cb2f86b5f7b7204e67276e1b446d09f330e2454bc5a_0ff4af9bdea5107a565f1a00c5fbffe6",
+          "physicalId": "PC11-001#AB_START_OF_ATTACK_STEP_NONE_LV2_LV3_7fedb93f42b1b04dea2f8cb2f86b5f7b7204e67276e1b446d09f330e2454bc5a_0ff4af9bdea5107a565f1a00c5fbffe6",
+          "semanticId": "SEM#AB_START_OF_ATTACK_STEP_NONE_LV2_LV3_7fedb93f42b1b04dea2f8cb2f86b5f7b7204e67276e1b446d09f330e2454bc5a_0ff4af9bdea5107a565f1a00c5fbffe6",
+          "semanticIdV3": "SEM3#AB_START_OF_ATTACK_STEP_NONE_LV2_LV3_dd89da07b4dde5587cae8e2c360b6686bd82b85b0bebb697ea62ffddfdc2a574_0ac4fd2f2a4cf47d9b774d5df890f53b",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "START_OF_ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
-      "compiledClausesCount": 7,
-      "unsupportedClausesCount": 0,
-      "isFullySupported": true
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 1,
+      "isFullySupported": false
     }
   },
   "PC11-004": {
@@ -1118,10 +1209,29 @@
     "compiledIr": {
       "cardNumber": "PC11-003",
       "name": "Type-3 Kiryu (Modified) High Mobility Type - Evangelion Production Model Unit-02 Specification -",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 9000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 5,
+          "bp": 14000
+        }
+      },
+      "originalEffectText": "Flash - (Opposing Attack Step)\nIf you or the opponent control any \"Godzilla\"/\"Apostle\", you can summon this card from the Hand, without paying the cost.\n\n[LV1][LV2][LV3] (When Summoned)\nDestroy an opposing 15000 BP or less Spirit. By discarding a card from your Hand, increase the limit of this \"BP Destruction effect\" by +10000.\n\n[LV2][LV3] (When Blocks)\nThis Spirit refreshes. Or, besides [Soul Core], send up to two cores from your Trash to this Spirit.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "PC11-003#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1132,8 +1242,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Opposing Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "OPPONENT",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1142,10 +1261,14 @@
             "isMain": false,
             "cleanBody": "If you or the opponent control any \"Godzilla\"/\"Apostle\", you can summon this card from the Hand, without paying the cost."
           },
+          "originalAbilityText": "Flash - (Opposing Attack Step)\nIf you or the opponent control any \"Godzilla\"/\"Apostle\", you can summon this card from the Hand, without paying the cost.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "If you or the opponent control any \"Godzilla\"/\"Apostle\", you can summon this card from the Hand, without paying the cost.",
+              "originalClauseText": "If you or the opponent control any \"Godzilla\"/\"Apostle\", you can summon this card from the Hand, without paying the cost.",
               "cleanText": "you can summon this card from the Hand, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1153,14 +1276,29 @@
               "duration": null,
               "op": {
                 "op": "SUMMON_THIS_CARD",
-                "from": "HAND_OR_BURST"
+                "from": "HAND",
+                "free": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC11-003#a0",
+          "keywords": [],
+          "id": "PC11-003#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b16b7df8a78d2dcb1b3c152ddf890af448958c619ac5a08beaf28659e2b5fc3d_c4631856d9cabc6d92112e7b0f17542b",
+          "physicalId": "PC11-003#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b16b7df8a78d2dcb1b3c152ddf890af448958c619ac5a08beaf28659e2b5fc3d_c4631856d9cabc6d92112e7b0f17542b",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b16b7df8a78d2dcb1b3c152ddf890af448958c619ac5a08beaf28659e2b5fc3d_c4631856d9cabc6d92112e7b0f17542b",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_7bc56ef8cffe5d1f9f76e3dc98ec4228ba232363892da7b8faa2538d91f88acc_6924f4b9aa2f713fee766cfb80cb0ff3",
+          "timingSemantics": {
+            "timingOwner": "OPPONENT",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC11-003#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1171,8 +1309,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1181,10 +1328,14 @@
             "isMain": false,
             "cleanBody": "Destroy an opposing 15000 BP or less Spirit. By discarding a card from your Hand, increase the limit of this \"BP Destruction effect\" by +10000."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nDestroy an opposing 15000 BP or less Spirit. By discarding a card from your Hand, increase the limit of this \"BP Destruction effect\" by +10000.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Destroy an opposing 15000 BP or less Spirit.",
+              "originalClauseText": "Destroy an opposing 15000 BP or less Spirit.",
               "cleanText": "Destroy an opposing 15000 BP or less Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1205,11 +1356,13 @@
               }
             },
             {
-              "rawText": "By discarding a card from your Hand, increase the limit of this \"BP Destruction effect\" by +10000.",
-              "cleanText": "By discarding a card from your Hand, increase the limit of this \"BP Destruction effect\" by +10000",
+              "rawText": "By discarding a card from your Hand",
+              "originalClauseText": "By discarding a card from your Hand",
+              "cleanText": "By discarding a card from your Hand",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
-              "isCost": false,
+              "isCost": true,
               "condition": null,
               "duration": null,
               "op": {
@@ -1219,12 +1372,44 @@
                 "filter": null,
                 "chooser": "self"
               }
+            },
+            {
+              "rawText": "increase the limit of this \"BP Destruction effect\" by +10000.",
+              "originalClauseText": "increase the limit of this \"BP Destruction effect\" by +10000.",
+              "cleanText": "increase the limit of this \"BP Destruction effect\" by +10000",
+              "clauseIndex": 2,
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 10000,
+                "target": {
+                  "side": "either"
+                }
+              }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC11-003#a1",
+          "keywords": [],
+          "id": "PC11-003#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_0b08bb1e9cd144f77a581729cd6162eb2dc7ffff2ea36520b5d04728ab036d65_0dcfec98107776986ee14de72d277902",
+          "physicalId": "PC11-003#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_0b08bb1e9cd144f77a581729cd6162eb2dc7ffff2ea36520b5d04728ab036d65_0dcfec98107776986ee14de72d277902",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_0b08bb1e9cd144f77a581729cd6162eb2dc7ffff2ea36520b5d04728ab036d65_0dcfec98107776986ee14de72d277902",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_16123af7ca33e5ac7e2c06c7e9b0c0c394a95ebd4353c0979e8d3d525283c9ea_90620308a037ba711bdf1691a6e74ea7",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC11-003#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1234,8 +1419,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_BLOCKS",
+            "timings": [
+              "WHEN_BLOCKS"
+            ],
             "timingLabel": "When Blocks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1244,10 +1438,14 @@
             "isMain": false,
             "cleanBody": "This Spirit refreshes. Or, besides [Soul Core], send up to two cores from your Trash to this Spirit."
           },
+          "originalAbilityText": "[LV2][LV3] (When Blocks)\nThis Spirit refreshes. Or, besides [Soul Core], send up to two cores from your Trash to this Spirit.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "This Spirit refreshes.",
+              "originalClauseText": "This Spirit refreshes.",
               "cleanText": "This Spirit refreshes",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1260,7 +1458,9 @@
             },
             {
               "rawText": "besides [Soul Core], send up to two cores from your Trash to this Spirit.",
+              "originalClauseText": "besides [Soul Core], send up to two cores from your Trash to this Spirit.",
               "cleanText": "besides [Soul Core], send up to two cores from your Trash to this Spirit",
+              "clauseIndex": 1,
               "link": "or",
               "isOptional": false,
               "isCost": false,
@@ -1268,14 +1468,38 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 2,
+                "from": {
+                  "zone": "trash",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC11-003#a2",
+          "keywords": [],
+          "id": "PC11-003#AB_WHEN_BLOCKS_NONE_LV2_LV3_a9ee752cebe801bee2651d9eb08b279652376ef2bde8267a49344c634c04ea06_66eb7447ebd007370d30df4ee6e9cac5",
+          "physicalId": "PC11-003#AB_WHEN_BLOCKS_NONE_LV2_LV3_a9ee752cebe801bee2651d9eb08b279652376ef2bde8267a49344c634c04ea06_66eb7447ebd007370d30df4ee6e9cac5",
+          "semanticId": "SEM#AB_WHEN_BLOCKS_NONE_LV2_LV3_a9ee752cebe801bee2651d9eb08b279652376ef2bde8267a49344c634c04ea06_66eb7447ebd007370d30df4ee6e9cac5",
+          "semanticIdV3": "SEM3#AB_WHEN_BLOCKS_NONE_LV2_LV3_5e60f458dac0d410b005afe79724e92e24015fcd2b0d3c31aa4b2dc89f542d9a_9675d6a493b9553ccfe0b841abe225b4",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
-      "compiledClausesCount": 5,
+      "compiledClausesCount": 6,
       "unsupportedClausesCount": 0,
       "isFullySupported": true
     }

@@ -1,0 +1,129 @@
+{
+  "timestamp": "2026-11-22T06:30:24.077Z",
+  "totalFilesScanned": 7,
+  "totalFindings": 12,
+  "findingsByPattern": {
+    "AUTO_SLICE_FALLBACK": 11,
+    "SILENT_FIELD_ZERO_FALLBACK": 1
+  },
+  "findingsBySeverity": {
+    "HIGH": 1,
+    "MEDIUM": 11,
+    "LOW": 0
+  },
+  "findingsByFile": {
+    "engine/ops/index.js": 10,
+    "engine/resolver.js": 1,
+    "battle_arena.js": 1
+  },
+  "findings": [
+    {
+      "file": "engine/ops/index.js",
+      "line": 1104,
+      "column": 22,
+      "patternId": "AUTO_SLICE_FALLBACK",
+      "description": "Autonomous slicing of candidates/pool to count without prompt validation",
+      "severity": "MEDIUM",
+      "snippet": "let chosen = pool.slice(0, want);"
+    },
+    {
+      "file": "engine/ops/index.js",
+      "line": 1636,
+      "column": 44,
+      "patternId": "AUTO_SLICE_FALLBACK",
+      "description": "Autonomous slicing of candidates/pool to count without prompt validation",
+      "severity": "MEDIUM",
+      "snippet": "if (!selected.length) selected = candidates.slice(0, groupCount);"
+    },
+    {
+      "file": "engine/ops/index.js",
+      "line": 1680,
+      "column": 20,
+      "patternId": "AUTO_SLICE_FALLBACK",
+      "description": "Autonomous slicing of candidates/pool to count without prompt validation",
+      "severity": "MEDIUM",
+      "snippet": "chosen = matching.slice(0, count);"
+    },
+    {
+      "file": "engine/ops/index.js",
+      "line": 1683,
+      "column": 18,
+      "patternId": "AUTO_SLICE_FALLBACK",
+      "description": "Autonomous slicing of candidates/pool to count without prompt validation",
+      "severity": "MEDIUM",
+      "snippet": "chosen = matching.slice(0, count);"
+    },
+    {
+      "file": "engine/ops/index.js",
+      "line": 2096,
+      "column": 20,
+      "patternId": "AUTO_SLICE_FALLBACK",
+      "description": "Autonomous slicing of candidates/pool to count without prompt validation",
+      "severity": "MEDIUM",
+      "snippet": "chosen = matching.slice(0, count);"
+    },
+    {
+      "file": "engine/ops/index.js",
+      "line": 2099,
+      "column": 18,
+      "patternId": "AUTO_SLICE_FALLBACK",
+      "description": "Autonomous slicing of candidates/pool to count without prompt validation",
+      "severity": "MEDIUM",
+      "snippet": "chosen = matching.slice(0, count);"
+    },
+    {
+      "file": "engine/ops/index.js",
+      "line": 3047,
+      "column": 13,
+      "patternId": "SILENT_FIELD_ZERO_FALLBACK",
+      "description": "Silent fallback to field[0] when target is unspecified",
+      "severity": "HIGH",
+      "snippet": "const targetStack = sourceStack || p.field.find(s => s.isReborn || (s.top && s.top.isReborn)) || p.field[0] || null;"
+    },
+    {
+      "file": "engine/ops/index.js",
+      "line": 3921,
+      "column": 22,
+      "patternId": "AUTO_SLICE_FALLBACK",
+      "description": "Autonomous slicing of candidates/pool to count without prompt validation",
+      "severity": "MEDIUM",
+      "snippet": "const toMove = matching.slice(0, count);"
+    },
+    {
+      "file": "engine/ops/index.js",
+      "line": 4137,
+      "column": 68,
+      "patternId": "AUTO_SLICE_FALLBACK",
+      "description": "Autonomous slicing of candidates/pool to count without prompt validation",
+      "severity": "MEDIUM",
+      "snippet": "const chosen = (op.count === 'ALL' || op.all) ? matching : matching.slice(0, count);"
+    },
+    {
+      "file": "engine/ops/index.js",
+      "line": 4259,
+      "column": 22,
+      "patternId": "AUTO_SLICE_FALLBACK",
+      "description": "Autonomous slicing of candidates/pool to count without prompt validation",
+      "severity": "MEDIUM",
+      "snippet": "const chosen = pool.slice(0, limitCount);"
+    },
+    {
+      "file": "engine/resolver.js",
+      "line": 783,
+      "column": 21,
+      "patternId": "AUTO_SLICE_FALLBACK",
+      "description": "Autonomous slicing of candidates/pool to count without prompt validation",
+      "severity": "MEDIUM",
+      "snippet": "return prompt.candidates.slice(0, count);"
+    },
+    {
+      "file": "battle_arena.js",
+      "line": 2015,
+      "column": 26,
+      "patternId": "AUTO_SLICE_FALLBACK",
+      "description": "Autonomous slicing of candidates/pool to count without prompt validation",
+      "severity": "MEDIUM",
+      "snippet": "const selected = candidates.slice(0, count).map(c => c.candidateId || c.uid || c.id);"
+    }
+  ]
+}

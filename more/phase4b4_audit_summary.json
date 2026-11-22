@@ -1,0 +1,60 @@
+{
+  "generatedAt": "2026-11-14T10:42:01.927Z",
+  "phase": "4B.4A",
+  "inventoryTotals": {
+    "totalUniqueCards": 14609,
+    "totalRawShardRecords": 15398,
+    "totalCompiledCards": 14609,
+    "cardsWithAbilities": 14235,
+    "cardsWithZeroAbilities": 374,
+    "cardsWithClauses": 14226,
+    "cardsWithZeroClauses": 383,
+    "totalUniqueOperations": 288,
+    "totalUniqueConditions": 2526,
+    "totalVanillaCards": 374
+  },
+  "statusDistribution": {
+    "current": {
+      "VERIFIED": 746,
+      "PARTIAL": 5632,
+      "NEEDS_MANUAL_REVIEW": 8050,
+      "UNIMPLEMENTED": 181
+    },
+    "proposed": {
+      "FULLY_SUPPORTED": 462,
+      "PARTIAL": 10288,
+      "NEEDS_MANUAL_REVIEW": 3829,
+      "UNIMPLEMENTED": 30
+    },
+    "netChanges": {
+      "fullySupportedChange": -284,
+      "partialChange": 4656,
+      "needsManualReviewChange": -4221,
+      "unimplementedChange": -151
+    }
+  },
+  "verificationCoverage": {
+    "cardsWithDirectTestEvidence": 757,
+    "cardsWithStateMutationAssertions": 2130,
+    "percentageFullySupported": "3.16%",
+    "percentagePartial": "70.42%",
+    "percentageNeedsManualReview": "26.21%",
+    "percentageUnimplemented": "0.21%"
+  },
+  "operationCoverage": {
+    "handledOpsCount": 125,
+    "dummyNoopOpsCount": 26,
+    "explicitUnsupportedOpsCount": 26,
+    "totalUniqueShardOps": 288
+  },
+  "reconciliationWithHistoricalReports": {
+    "phase1Inspected": 14609,
+    "phase1Verified": 746,
+    "phase1Partial": 5632,
+    "phase1NeedsManualReview": 8050,
+    "phase1Unimplemented": 181,
+    "phase3TotalCards": 14609,
+    "phase4b3AuditedShardRecords": 15398,
+    "reconciliationNotes": "The 15,398 count in Phase 4B.3 report represents raw shard entries across all 514 JSON shard files. When deduped by canonical cardNumber, exactly 14,609 unique cards exist, which matches the Phase 1, Phase 3, and Phase 4 shard manifest and status files with 100% fidelity. Detailed cards count (14,423) is from the legacy cards_detailed.json database, which lacks 188 modern promotional and collaboration cards present in the compiled IR shards."
+  }
+}

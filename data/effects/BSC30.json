@@ -24,6 +24,26 @@
     "compiledIr": {
       "cardNumber": "BSC30-X01",
       "name": "The SengokuCommander Siegfried-Kai",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 7000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 10000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 5,
+          "bp": 14000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Summoned/Advents)\nDestroy every opposing 15000 BP or less Spirit/Ultimate. After this effect resolves, if the opponent controls any 15000 BP or less Spirit/Ultimate, during this turn, this Spirit can't be blocked, and for each of those Spirit/Ultimate, this Spirit gains an extra Red symbol.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -31,12 +51,32 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "BSC30-X01#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_bce1765e51fde565c2e7181f98b0699fb879178a072979767fab5d30f0d54f87_a8b342cee60437cca99546e4556424ab",
+          "cardNumber": "BSC30-X01",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "BSC30-X01#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BSC30-X01#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -47,8 +87,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: Cost 5 or more",
@@ -57,10 +106,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -82,7 +135,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -100,10 +155,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-X01#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "Cost 5 or more",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC30-X01#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_bce1765e51fde565c2e7181f98b0699fb879178a072979767fab5d30f0d54f87_a8b342cee60437cca99546e4556424ab",
+              "cardNumber": "BSC30-X01",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "BSC30-X01#a0"
+            }
+          ],
+          "id": "BSC30-X01#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_bce1765e51fde565c2e7181f98b0699fb879178a072979767fab5d30f0d54f87_a8b342cee60437cca99546e4556424ab",
+          "physicalId": "BSC30-X01#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_bce1765e51fde565c2e7181f98b0699fb879178a072979767fab5d30f0d54f87_a8b342cee60437cca99546e4556424ab",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_bce1765e51fde565c2e7181f98b0699fb879178a072979767fab5d30f0d54f87_a8b342cee60437cca99546e4556424ab",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_d156ac502d26f731f613cac84d0123a2aabafe004ce8ee7a821e8d8c0eae06a5_f9a9a376e902a52591204148eb5accc3",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC30-X01#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -113,21 +212,45 @@
             ],
             "levelExplicit": true,
             "prefixes": [],
-            "timing": "WHEN_SUMMONED",
-            "timingLabel": "When Summoned/Advents",
+            "timing": "PASSIVE",
+            "timings": [],
+            "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
             "burstCondition": null,
             "isFlash": false,
             "isMain": false,
-            "cleanBody": "Destroy every opposing 15000 BP or less Spirit/Ultimate. After this effect resolves, if the opponent controls any 15000 BP or less Spirit/Ultimate, during this turn, this Spirit can't be blocked, and for each of those Spirit/Ultimate, this Spirit gains an extra Red symbol."
+            "cleanBody": "(When Summoned/Advents)\nDestroy every opposing 15000 BP or less Spirit/Ultimate. After this effect resolves, if the opponent controls any 15000 BP or less Spirit/Ultimate, during this turn, this Spirit can't be blocked, and for each of those Spirit/Ultimate, this Spirit gains an extra Red symbol."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned/Advents)\nDestroy every opposing 15000 BP or less Spirit/Ultimate. After this effect resolves, if the opponent controls any 15000 BP or less Spirit/Ultimate, during this turn, this Spirit can't be blocked, and for each of those Spirit/Ultimate, this Spirit gains an extra Red symbol.",
+          "abilityIndex": 1,
           "clauses": [
             {
+              "rawText": "(When Summoned/Advents)",
+              "originalClauseText": "(When Summoned/Advents)",
+              "cleanText": "(When Summoned/Advents)",
+              "clauseIndex": 0,
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "UNSUPPORTED",
+                "rawText": "(When Summoned/Advents)"
+              }
+            },
+            {
               "rawText": "Destroy every opposing 15000 BP or less Spirit/Ultimate.",
+              "originalClauseText": "Destroy every opposing 15000 BP or less Spirit/Ultimate.",
               "cleanText": "Destroy every opposing 15000 BP or less Spirit/Ultimate",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -144,7 +267,9 @@
             },
             {
               "rawText": "if the opponent controls any 15000 BP or less Spirit/Ultimate, during this turn, this Spirit can't be blocked, and for each of those Spirit/Ultimate, this Spirit gains an extra Red symbol.",
+              "originalClauseText": "if the opponent controls any 15000 BP or less Spirit/Ultimate, during this turn, this Spirit can't be blocked, and for each of those Spirit/Ultimate, this Spirit gains an extra Red symbol.",
               "cleanText": "during this turn, this Spirit can't be blocked, and for each of those Spirit/Ultimate, this Spirit gains an extra Red symbol",
+              "clauseIndex": 2,
               "link": "afterResolves",
               "isOptional": false,
               "isCost": false,
@@ -156,12 +281,27 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "(When Summoned/Advents)"
+          ],
+          "legacyId": "BSC30-X01#a1",
+          "keywords": [],
+          "id": "BSC30-X01#AB_PASSIVE_NONE_LV1_LV2_LV3_88f7a0391b2ca0b61cde07edb3c7822602461e6226333941db3e8c6dd2bc8f0c_65bcba28a9ff0d69f58d72949b94e7ce",
+          "physicalId": "BSC30-X01#AB_PASSIVE_NONE_LV1_LV2_LV3_88f7a0391b2ca0b61cde07edb3c7822602461e6226333941db3e8c6dd2bc8f0c_65bcba28a9ff0d69f58d72949b94e7ce",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_88f7a0391b2ca0b61cde07edb3c7822602461e6226333941db3e8c6dd2bc8f0c_65bcba28a9ff0d69f58d72949b94e7ce",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_11bba3aa0cf202bace04e3ccc410e932611b5ce32aaa71c32a552eec70d88cdc_85066de6973edd9e232439c8dcd9c689",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
-      "unsupportedClausesCount": 0,
-      "isFullySupported": true
+      "unsupportedClausesCount": 1,
+      "isFullySupported": false
     }
   },
   "BSC30-005": {
@@ -640,6 +780,21 @@
     "compiledIr": {
       "cardNumber": "BSC30-X03",
       "name": "The GenjiCommander Muryou",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 10000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 14000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: White & Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit.\n\nDuring the (Opposing End Step), you can stack this Spirit card from the Hand onto your Spirit via [Advent].\n\n[LV1][LV2] (When Advents)\nReturn two opposing Spirits to the Hand.\n\n[LV1][LV2] (Opposing End Step)\nIf your Life wasn't reduced this turn, return every opposing Nexus to the decktop, in any order.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -647,7 +802,28 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "BSC30-X03#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_d01bda36e0c267ad5ecc38c00cb730e77860b25ff2878b0b1b90be0f1d8bbe2a_a327a665cdd249245f74b461d29cad45",
+          "cardNumber": "BSC30-X03",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "BSC30-X03#a0"
         },
         {
           "name": "Advent",
@@ -655,12 +831,32 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 256
+          "index": 98,
+          "abilityId": "BSC30-X03#AB_PASSIVE_NONE_LV1_LV2_LV3_90ccb5ae329a592aa2cadc1a15a375f1159253cfdfba1ffefa8a69115486ec63_4d6fee371ce4da6e1bb25892e28b7bee",
+          "cardNumber": "BSC30-X03",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC30-X03#a1"
         }
       ],
       "abilities": [
         {
-          "id": "BSC30-X03#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -671,8 +867,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: White & Cost 5 or more",
@@ -681,10 +886,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Advent: White & Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -706,7 +915,9 @@
             },
             {
               "rawText": "stack this from your Hand onto your target Spirit.",
+              "originalClauseText": "stack this from your Hand onto your target Spirit.",
               "cleanText": "stack this from your Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -724,10 +935,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-X03#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "White & Cost 5 or more",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC30-X03#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_d01bda36e0c267ad5ecc38c00cb730e77860b25ff2878b0b1b90be0f1d8bbe2a_a327a665cdd249245f74b461d29cad45",
+              "cardNumber": "BSC30-X03",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "BSC30-X03#a0"
+            }
+          ],
+          "id": "BSC30-X03#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_d01bda36e0c267ad5ecc38c00cb730e77860b25ff2878b0b1b90be0f1d8bbe2a_a327a665cdd249245f74b461d29cad45",
+          "physicalId": "BSC30-X03#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_d01bda36e0c267ad5ecc38c00cb730e77860b25ff2878b0b1b90be0f1d8bbe2a_a327a665cdd249245f74b461d29cad45",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_d01bda36e0c267ad5ecc38c00cb730e77860b25ff2878b0b1b90be0f1d8bbe2a_a327a665cdd249245f74b461d29cad45",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_09c4fb0ca41d6b6097252750f23869ff9466d5f7a78f0a35322a3e34493d9583_1b0d9727c2761728d3cf7343902ae2f6",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC30-X03#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -738,8 +993,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -748,24 +1008,71 @@
             "isMain": false,
             "cleanBody": "During the (Opposing End Step), you can stack this Spirit card from the Hand onto your Spirit via [Advent]."
           },
+          "originalAbilityText": "During the (Opposing End Step), you can stack this Spirit card from the Hand onto your Spirit via [Advent].",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "During the (Opposing End Step), you can stack this Spirit card from the Hand onto your Spirit via [Advent].",
+              "originalClauseText": "During the (Opposing End Step), you can stack this Spirit card from the Hand onto your Spirit via [Advent].",
               "cleanText": "During the (Opposing End Step), you can stack this Spirit card from the Hand onto your Spirit via [Advent]",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "ADVENT"
+                "op": "KEYWORD_RULE",
+                "keyword": "Advent"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-X03#a1",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": null,
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 98,
+              "abilityId": "BSC30-X03#AB_PASSIVE_NONE_LV1_LV2_LV3_90ccb5ae329a592aa2cadc1a15a375f1159253cfdfba1ffefa8a69115486ec63_4d6fee371ce4da6e1bb25892e28b7bee",
+              "cardNumber": "BSC30-X03",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC30-X03#a1"
+            }
+          ],
+          "id": "BSC30-X03#AB_PASSIVE_NONE_LV1_LV2_LV3_90ccb5ae329a592aa2cadc1a15a375f1159253cfdfba1ffefa8a69115486ec63_4d6fee371ce4da6e1bb25892e28b7bee",
+          "physicalId": "BSC30-X03#AB_PASSIVE_NONE_LV1_LV2_LV3_90ccb5ae329a592aa2cadc1a15a375f1159253cfdfba1ffefa8a69115486ec63_4d6fee371ce4da6e1bb25892e28b7bee",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_90ccb5ae329a592aa2cadc1a15a375f1159253cfdfba1ffefa8a69115486ec63_4d6fee371ce4da6e1bb25892e28b7bee",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_51352c1385290ed2e4bf234060eaa6f5a52c65742c77f60280fe32aeb39c0919_a273bd68ffff6ba42525cb10914b3280",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC30-X03#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -775,8 +1082,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS"
+            ],
             "timingLabel": "When Advents",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -785,10 +1101,14 @@
             "isMain": false,
             "cleanBody": "Return two opposing Spirits to the Hand."
           },
+          "originalAbilityText": "[LV1][LV2] (When Advents)\nReturn two opposing Spirits to the Hand.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Return two opposing Spirits to the Hand.",
+              "originalClauseText": "Return two opposing Spirits to the Hand.",
               "cleanText": "Return two opposing Spirits to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -803,10 +1123,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-X03#a2",
+          "keywords": [],
+          "id": "BSC30-X03#AB_WHEN_ADVENTS_NONE_LV1_LV2_a91f2418045f1a1928a083bac9b534bc2054c0af3bb20758ce00a599270be5b1_e1f749cd27aaf60602cec8d7ad1e5d55",
+          "physicalId": "BSC30-X03#AB_WHEN_ADVENTS_NONE_LV1_LV2_a91f2418045f1a1928a083bac9b534bc2054c0af3bb20758ce00a599270be5b1_e1f749cd27aaf60602cec8d7ad1e5d55",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_a91f2418045f1a1928a083bac9b534bc2054c0af3bb20758ce00a599270be5b1_e1f749cd27aaf60602cec8d7ad1e5d55",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_721603a2ffa5355344274632ad09161aeed6d4ea47abc5fc499472e2b5aa1101_a256161ce5da673ad03231881b7ceb94",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC30-X03#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -816,8 +1150,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "END_OF_TURN",
+            "timings": [
+              "END_OF_TURN"
+            ],
             "timingLabel": "Opposing End Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "OPPONENT",
+            "timingTriggers": [
+              "END_OF_TURN"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -826,10 +1169,14 @@
             "isMain": false,
             "cleanBody": "If your Life wasn't reduced this turn, return every opposing Nexus to the decktop, in any order."
           },
+          "originalAbilityText": "[LV1][LV2] (Opposing End Step)\nIf your Life wasn't reduced this turn, return every opposing Nexus to the decktop, in any order.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "If your Life wasn't reduced this turn, return every opposing Nexus to the decktop, in any order.",
+              "originalClauseText": "If your Life wasn't reduced this turn, return every opposing Nexus to the decktop, in any order.",
               "cleanText": "return every opposing Nexus to the decktop, in any order",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -844,7 +1191,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-X03#a3",
+          "keywords": [],
+          "id": "BSC30-X03#AB_END_OF_TURN_NONE_LV1_LV2_d0d879b838716996483217cd31adff7e69f19e57206984feb21235be49605ba6_850f5db0fa3d6a8e3ccc6ac267ffa5d1",
+          "physicalId": "BSC30-X03#AB_END_OF_TURN_NONE_LV1_LV2_d0d879b838716996483217cd31adff7e69f19e57206984feb21235be49605ba6_850f5db0fa3d6a8e3ccc6ac267ffa5d1",
+          "semanticId": "SEM#AB_END_OF_TURN_NONE_LV1_LV2_d0d879b838716996483217cd31adff7e69f19e57206984feb21235be49605ba6_850f5db0fa3d6a8e3ccc6ac267ffa5d1",
+          "semanticIdV3": "SEM3#AB_END_OF_TURN_NONE_LV1_LV2_add61184082baa2f13660fcd57f30c7d2f39fbee4539c4ace0dafb4b45bdb893_9fcc3be3c8c22c00478030f72737f340",
+          "timingSemantics": {
+            "timingOwner": "OPPONENT",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "END_OF_TURN"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -877,6 +1239,26 @@
     "compiledIr": {
       "cardNumber": "BSC30-004",
       "name": "The MakaiDemonBlade Agon",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 2000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 3000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 5000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: Purple] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Summoned/Advents)\nDraw a card. Also, if this Spirit was [advented], draw a card, and destroy an opposing exhausted Spirit.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -884,7 +1266,28 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "BSC30-004#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_231daa56f6656d528b618c3f6c5d04f6652b1b38b06b60c307016da1be52a629_935ca76292d53e0ac1f786743e449afd",
+          "cardNumber": "BSC30-004",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "BSC30-004#a0"
         },
         {
           "name": "Advent",
@@ -892,12 +1295,32 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 219
+          "index": 62,
+          "abilityId": "BSC30-004#AB_PASSIVE_NONE_LV1_LV2_LV3_82f5acf1c935e151b66a73c41a1c13bbea76ef912a570ab520411b56b50940a9_82adbfac1627205113ba9176a209ab51",
+          "cardNumber": "BSC30-004",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC30-004#a1"
         }
       ],
       "abilities": [
         {
-          "id": "BSC30-004#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -908,8 +1331,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: Purple",
@@ -918,10 +1350,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Advent: Purple] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -943,7 +1379,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -961,10 +1399,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-004#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "Purple",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC30-004#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_231daa56f6656d528b618c3f6c5d04f6652b1b38b06b60c307016da1be52a629_935ca76292d53e0ac1f786743e449afd",
+              "cardNumber": "BSC30-004",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "BSC30-004#a0"
+            }
+          ],
+          "id": "BSC30-004#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_231daa56f6656d528b618c3f6c5d04f6652b1b38b06b60c307016da1be52a629_935ca76292d53e0ac1f786743e449afd",
+          "physicalId": "BSC30-004#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_231daa56f6656d528b618c3f6c5d04f6652b1b38b06b60c307016da1be52a629_935ca76292d53e0ac1f786743e449afd",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_231daa56f6656d528b618c3f6c5d04f6652b1b38b06b60c307016da1be52a629_935ca76292d53e0ac1f786743e449afd",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_36592bf1743c6ef2670be54fa16e9cb49496d83bfa176b8ed64303a21a238d1e_88fa1596be0f2211939796a6c6fc7f6e",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC30-004#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -974,21 +1456,45 @@
             ],
             "levelExplicit": true,
             "prefixes": [],
-            "timing": "WHEN_SUMMONED",
-            "timingLabel": "When Summoned/Advents",
+            "timing": "PASSIVE",
+            "timings": [],
+            "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
             "burstCondition": null,
             "isFlash": false,
             "isMain": false,
-            "cleanBody": "Draw a card. Also, if this Spirit was [advented], draw a card, and destroy an opposing exhausted Spirit."
+            "cleanBody": "(When Summoned/Advents)\nDraw a card. Also, if this Spirit was [advented], draw a card, and destroy an opposing exhausted Spirit."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned/Advents)\nDraw a card. Also, if this Spirit was [advented], draw a card, and destroy an opposing exhausted Spirit.",
+          "abilityIndex": 1,
           "clauses": [
             {
+              "rawText": "(When Summoned/Advents)",
+              "originalClauseText": "(When Summoned/Advents)",
+              "cleanText": "(When Summoned/Advents)",
+              "clauseIndex": 0,
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "UNSUPPORTED",
+                "rawText": "(When Summoned/Advents)"
+              }
+            },
+            {
               "rawText": "Draw a card.",
+              "originalClauseText": "Draw a card.",
               "cleanText": "Draw a card",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1003,7 +1509,9 @@
             },
             {
               "rawText": "if this Spirit was [advented], draw a card",
+              "originalClauseText": "if this Spirit was [advented], draw a card",
               "cleanText": "draw a card",
+              "clauseIndex": 2,
               "link": "also",
               "isOptional": false,
               "isCost": false,
@@ -1018,7 +1526,9 @@
             },
             {
               "rawText": "destroy an opposing exhausted Spirit.",
+              "originalClauseText": "destroy an opposing exhausted Spirit.",
               "cleanText": "destroy an opposing exhausted Spirit",
+              "clauseIndex": 3,
               "link": "also",
               "isOptional": false,
               "isCost": false,
@@ -1039,12 +1549,57 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "(When Summoned/Advents)"
+          ],
+          "legacyId": "BSC30-004#a1",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": null,
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 62,
+              "abilityId": "BSC30-004#AB_PASSIVE_NONE_LV1_LV2_LV3_82f5acf1c935e151b66a73c41a1c13bbea76ef912a570ab520411b56b50940a9_82adbfac1627205113ba9176a209ab51",
+              "cardNumber": "BSC30-004",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC30-004#a1"
+            }
+          ],
+          "id": "BSC30-004#AB_PASSIVE_NONE_LV1_LV2_LV3_82f5acf1c935e151b66a73c41a1c13bbea76ef912a570ab520411b56b50940a9_82adbfac1627205113ba9176a209ab51",
+          "physicalId": "BSC30-004#AB_PASSIVE_NONE_LV1_LV2_LV3_82f5acf1c935e151b66a73c41a1c13bbea76ef912a570ab520411b56b50940a9_82adbfac1627205113ba9176a209ab51",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_82f5acf1c935e151b66a73c41a1c13bbea76ef912a570ab520411b56b50940a9_82adbfac1627205113ba9176a209ab51",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_6e03067d6787852744084555c4501faa7b09696bdd0e867aa455a84d789fec6d_5c45b6c5e5a7f0bdbc435e0151235757",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
-      "unsupportedClausesCount": 0,
-      "isFullySupported": true
+      "unsupportedClausesCount": 1,
+      "isFullySupported": false
     }
   },
   "BSC30-019": {
@@ -1243,6 +1798,26 @@
     "compiledIr": {
       "cardNumber": "BSC30-007",
       "name": "The MakaiWarrior Shikijou",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 6000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 9000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: Cost 2 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents/Attacks)\nYou can destroy an opposing \"God-King\"/\"Ten Crown\" family Spirit. When you've done so, refresh this Spirit.\n\n[During Advent] [LV2][LV3] (Either Attack Step)\nThis Spirit's color is treated as colorless.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -1250,12 +1825,32 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "BSC30-007#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c0f8158ee3e77a19d284a9c9bca6b29b4162930f0981122d1866ba28b83669d4_6765a51fc85447f5e9e6c6ad94867e7a",
+          "cardNumber": "BSC30-007",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "BSC30-007#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BSC30-007#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1266,8 +1861,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: Cost 2 or more",
@@ -1276,10 +1880,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Advent: Cost 2 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1301,7 +1909,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1319,10 +1929,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-007#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "Cost 2 or more",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC30-007#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c0f8158ee3e77a19d284a9c9bca6b29b4162930f0981122d1866ba28b83669d4_6765a51fc85447f5e9e6c6ad94867e7a",
+              "cardNumber": "BSC30-007",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "BSC30-007#a0"
+            }
+          ],
+          "id": "BSC30-007#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c0f8158ee3e77a19d284a9c9bca6b29b4162930f0981122d1866ba28b83669d4_6765a51fc85447f5e9e6c6ad94867e7a",
+          "physicalId": "BSC30-007#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c0f8158ee3e77a19d284a9c9bca6b29b4162930f0981122d1866ba28b83669d4_6765a51fc85447f5e9e6c6ad94867e7a",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c0f8158ee3e77a19d284a9c9bca6b29b4162930f0981122d1866ba28b83669d4_6765a51fc85447f5e9e6c6ad94867e7a",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_bf36e76973c2e8f12c5fa876d0f292022b24b83e4d04d0e7e301102491f59c3c_ce1fee2a868c2f31bbc2ae875c590f1e",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC30-007#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1333,8 +1987,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Advents/Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1343,10 +2008,14 @@
             "isMain": false,
             "cleanBody": "You can destroy an opposing \"God-King\"/\"Ten Crown\" family Spirit. When you've done so, refresh this Spirit."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Advents/Attacks)\nYou can destroy an opposing \"God-King\"/\"Ten Crown\" family Spirit. When you've done so, refresh this Spirit.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can destroy an opposing \"God-King\"/\"Ten Crown\" family Spirit.",
+              "originalClauseText": "You can destroy an opposing \"God-King\"/\"Ten Crown\" family Spirit.",
               "cleanText": "You can destroy an opposing \"God-King\"/\"Ten Crown\" family Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1363,7 +2032,9 @@
             },
             {
               "rawText": "refresh this Spirit.",
+              "originalClauseText": "refresh this Spirit.",
               "cleanText": "refresh this Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1375,10 +2046,25 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-007#a1",
+          "keywords": [],
+          "id": "BSC30-007#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_f99dcc3cb027f865ef657f29509c36b0e49a4270c05f5cd3188d116257d61bb7_a59f483614256ea6827f0b2fd370ee97",
+          "physicalId": "BSC30-007#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_f99dcc3cb027f865ef657f29509c36b0e49a4270c05f5cd3188d116257d61bb7_a59f483614256ea6827f0b2fd370ee97",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_f99dcc3cb027f865ef657f29509c36b0e49a4270c05f5cd3188d116257d61bb7_a59f483614256ea6827f0b2fd370ee97",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_4b7bfd826490a939ad133669c99c948057db7a3be7b5aa027b61d2b5443921d2_58d862b94006940b2a6742750dd249fb",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC30-007#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1390,8 +2076,17 @@
               "During Advent"
             ],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1400,21 +2095,41 @@
             "isMain": false,
             "cleanBody": "This Spirit's color is treated as colorless."
           },
+          "originalAbilityText": "[During Advent] [LV2][LV3] (Either Attack Step)\nThis Spirit's color is treated as colorless.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "This Spirit's color is treated as colorless.",
+              "originalClauseText": "This Spirit's color is treated as colorless.",
               "cleanText": "This Spirit's color is treated as colorless",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "TREAT_RULE",
+                "treatAs": "COLORLESS"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-007#a2",
+          "keywords": [],
+          "id": "BSC30-007#AB_ATTACK_STEP_NONE_LV2_LV3_622402ae99c34655f8764dedf90346017bb1981ab1e95d0f34988a404fe6338a_1b16b0d412f24e745448a782824114de",
+          "physicalId": "BSC30-007#AB_ATTACK_STEP_NONE_LV2_LV3_622402ae99c34655f8764dedf90346017bb1981ab1e95d0f34988a404fe6338a_1b16b0d412f24e745448a782824114de",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_622402ae99c34655f8764dedf90346017bb1981ab1e95d0f34988a404fe6338a_1b16b0d412f24e745448a782824114de",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_LV3_8122d756c1e55c6de7e0e56da1715d09cc9e2a7c57041184d29bfb4210c6006b_8b83f76249078c36c15d83a3b2022b1c",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -1565,6 +2280,21 @@
     "compiledIr": {
       "cardNumber": "BSC30-X02",
       "name": "The 1stGenerationArmoredMothHead KuwagaOkina",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 12000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: Ninja Gale] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this card from your Hand onto your target Spirit.\n\nWhen this Spirit card is revealed from the deck, you can add it to the Hand.\n\n[During Advent] [LV1][LV2]\nWhen any player would summon a Spirit card/Ultimate card without the \"Ninja Gale\" family, it is summoned in exhausted state.\n\n[LV2] Flash - (Either Attack Step)\nOnce per turn, by returning an opposing exhausted Spirit/Ultimate to the Hand, refresh this Spirit.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -1572,12 +2302,32 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "BSC30-X02#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_8bc69c1b8d1683800b3794dca69019bd4e460ec9e641d67fbf51ec2822379325_6b9953829f657573b9c873e3fb091f8c",
+          "cardNumber": "BSC30-X02",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "BSC30-X02#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BSC30-X02#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1588,8 +2338,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: Ninja Gale",
@@ -1598,10 +2357,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this card from your Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Advent: Ninja Gale] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this card from your Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1623,21 +2386,67 @@
             },
             {
               "rawText": "stack this card from your Hand onto your target Spirit.",
+              "originalClauseText": "stack this card from your Hand onto your target Spirit.",
               "cleanText": "stack this card from your Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "ADVENT"
+                "op": "ADVENT_STACK"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-X02#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "Ninja Gale",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC30-X02#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_8bc69c1b8d1683800b3794dca69019bd4e460ec9e641d67fbf51ec2822379325_6b9953829f657573b9c873e3fb091f8c",
+              "cardNumber": "BSC30-X02",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "BSC30-X02#a0"
+            }
+          ],
+          "id": "BSC30-X02#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_8bc69c1b8d1683800b3794dca69019bd4e460ec9e641d67fbf51ec2822379325_6b9953829f657573b9c873e3fb091f8c",
+          "physicalId": "BSC30-X02#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_8bc69c1b8d1683800b3794dca69019bd4e460ec9e641d67fbf51ec2822379325_6b9953829f657573b9c873e3fb091f8c",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_8bc69c1b8d1683800b3794dca69019bd4e460ec9e641d67fbf51ec2822379325_6b9953829f657573b9c873e3fb091f8c",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1f8dcbbe7b57297e24b53fbea82b8e566746c1ce8e75271d6e6260b9a4838f79_d4a955f6223efcf62c0f449c424cc21b",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC30-X02#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1648,8 +2457,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1658,10 +2472,14 @@
             "isMain": false,
             "cleanBody": "When this Spirit card is revealed from the deck, you can add it to the Hand."
           },
+          "originalAbilityText": "When this Spirit card is revealed from the deck, you can add it to the Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When this Spirit card is revealed from the deck, you can add it to the Hand.",
+              "originalClauseText": "When this Spirit card is revealed from the deck, you can add it to the Hand.",
               "cleanText": "When this Spirit card is revealed from the deck, you can add it to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1672,10 +2490,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-X02#a1",
+          "keywords": [],
+          "id": "BSC30-X02#AB_PASSIVE_NONE_LV1_LV2_LV3_950a35712229737ccd60e1e4d7180e794cf3968e856b14c2044cf03859c40017_8053f7eeb51f8c8f6ce580259d35ade2",
+          "physicalId": "BSC30-X02#AB_PASSIVE_NONE_LV1_LV2_LV3_950a35712229737ccd60e1e4d7180e794cf3968e856b14c2044cf03859c40017_8053f7eeb51f8c8f6ce580259d35ade2",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_950a35712229737ccd60e1e4d7180e794cf3968e856b14c2044cf03859c40017_8053f7eeb51f8c8f6ce580259d35ade2",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_9620538c88c2c092eb86399125589236078b05e043f23b128b725158a0a2c1a9_2e7db71c3e1010230eea86b09a137e33",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC30-X02#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1687,8 +2517,13 @@
               "During Advent"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1697,10 +2532,14 @@
             "isMain": false,
             "cleanBody": "When any player would summon a Spirit card/Ultimate card without the \"Ninja Gale\" family, it is summoned in exhausted state."
           },
+          "originalAbilityText": "[During Advent] [LV1][LV2]\nWhen any player would summon a Spirit card/Ultimate card without the \"Ninja Gale\" family, it is summoned in exhausted state.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When any player would summon a Spirit card/Ultimate card without the \"Ninja Gale\" family, it is summoned in exhausted state.",
+              "originalClauseText": "When any player would summon a Spirit card/Ultimate card without the \"Ninja Gale\" family, it is summoned in exhausted state.",
               "cleanText": "When any player would summon a Spirit card/Ultimate card without the \"Ninja Gale\" family, it is summoned in exhausted state",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1708,14 +2547,39 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit",
+                    "Ultimate"
+                  ],
+                  "family": "Ninja Gale"
+                },
+                "free": false,
+                "exhausted": true,
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-X02#a2",
+          "keywords": [],
+          "id": "BSC30-X02#AB_PASSIVE_NONE_LV1_LV2_cc777a5e2683754c95cb4cdb1d6ade4317c22e29f17eff07adc3d292706d1910_67e4eaeb8111c61bd7c8fae4e2a2123f",
+          "physicalId": "BSC30-X02#AB_PASSIVE_NONE_LV1_LV2_cc777a5e2683754c95cb4cdb1d6ade4317c22e29f17eff07adc3d292706d1910_67e4eaeb8111c61bd7c8fae4e2a2123f",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_cc777a5e2683754c95cb4cdb1d6ade4317c22e29f17eff07adc3d292706d1910_67e4eaeb8111c61bd7c8fae4e2a2123f",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_877c241320af67b743554f97a4ea037068ab73669a080fe366542b467b5911bc_d83068581baa224f2f827075d6ff0744",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC30-X02#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1724,8 +2588,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -1734,10 +2609,14 @@
             "isMain": false,
             "cleanBody": "by returning an opposing exhausted Spirit/Ultimate to the Hand, refresh this Spirit."
           },
+          "originalAbilityText": "[LV2] Flash - (Either Attack Step)\nOnce per turn, by returning an opposing exhausted Spirit/Ultimate to the Hand, refresh this Spirit.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "By returning an opposing exhausted Spirit/Ultimate to the Hand",
+              "originalClauseText": "By returning an opposing exhausted Spirit/Ultimate to the Hand",
               "cleanText": "By returning an opposing exhausted Spirit/Ultimate to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1753,7 +2632,9 @@
             },
             {
               "rawText": "refresh this Spirit.",
+              "originalClauseText": "refresh this Spirit.",
               "cleanText": "refresh this Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1765,7 +2646,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-X02#a3",
+          "keywords": [],
+          "id": "BSC30-X02#AB_ATTACK_STEP_NONE_LV2_9f51a4cbd3e1ca2c34c7ea46db17554ca43e51920809af45ac852f3dd0123c9b_4fba08ecdec3cac9431e76ed4ba46b37",
+          "physicalId": "BSC30-X02#AB_ATTACK_STEP_NONE_LV2_9f51a4cbd3e1ca2c34c7ea46db17554ca43e51920809af45ac852f3dd0123c9b_4fba08ecdec3cac9431e76ed4ba46b37",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_9f51a4cbd3e1ca2c34c7ea46db17554ca43e51920809af45ac852f3dd0123c9b_4fba08ecdec3cac9431e76ed4ba46b37",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_441044b0f18f8a4064d69d6f5b7e3ee6fecae3816443879b73de95e85a7a2c34_7723d9860640872e910bcad16e9b9140",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
@@ -1793,10 +2691,24 @@
     "compiledIr": {
       "cardNumber": "BSC30-010",
       "name": "The 9thGenerationArmoredMothHead ScarletKuwaga",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 7000
+        }
+      },
+      "originalEffectText": "[LV1][LV2] (When Depleted/Destroyed by the Opponent)\nYou can reveal three cards from your decktop. You can summon \"Ninja Gale\"/\"Shellman\"/\"War Dragon\" family Spirit cards among them, one from each family, without paying the cost. Return any remaining cards to the deckbottom in any order.\n\n[LV2] (Your End Step)\nYou can refresh a \"Ninja Gale\" family Spirit you control. When you've done so, send the [Soul Core] from your Trash to any of your Spirits.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BSC30-010#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1805,9 +2717,19 @@
             ],
             "levelExplicit": true,
             "prefixes": [],
-            "timing": "STEP_RESTRICTED",
+            "timing": "WHEN_DESTROYED",
+            "timings": [
+              "WHEN_DESTROYED"
+            ],
             "timingLabel": "When Depleted/Destroyed by the Opponent",
             "timingStep": "ANY",
+            "timingCause": "OPPONENT",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_DEPLETED",
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1816,10 +2738,14 @@
             "isMain": false,
             "cleanBody": "You can reveal three cards from your decktop. You can summon \"Ninja Gale\"/\"Shellman\"/\"War Dragon\" family Spirit cards among them, one from each family, without paying the cost. Return any remaining cards to the deckbottom in any order."
           },
+          "originalAbilityText": "[LV1][LV2] (When Depleted/Destroyed by the Opponent)\nYou can reveal three cards from your decktop. You can summon \"Ninja Gale\"/\"Shellman\"/\"War Dragon\" family Spirit cards among them, one from each family, without paying the cost. Return any remaining cards to the deckbottom in any order.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "You can reveal three cards from your decktop.",
+              "originalClauseText": "You can reveal three cards from your decktop.",
               "cleanText": "You can reveal three cards from your decktop",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1832,7 +2758,9 @@
             },
             {
               "rawText": "You can summon \"Ninja Gale\"/\"Shellman\"/\"War Dragon\" family Spirit cards among them, one from each family, without paying the cost.",
+              "originalClauseText": "You can summon \"Ninja Gale\"/\"Shellman\"/\"War Dragon\" family Spirit cards among them, one from each family, without paying the cost.",
               "cleanText": "You can summon \"Ninja Gale\"/\"Shellman\"/\"War Dragon\" family Spirit cards among them, one from each family, without paying the cost",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1840,12 +2768,30 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "Ninja Gale",
+                  "nameIncludesAny": [
+                    "Ninja Gale",
+                    "Shellman"
+                  ],
+                  "family": "War Dragon"
+                },
+                "free": true,
+                "isOptional": true
               }
             },
             {
               "rawText": "Return any remaining cards to the deckbottom in any order.",
+              "originalClauseText": "Return any remaining cards to the deckbottom in any order.",
               "cleanText": "Return any remaining cards to the deckbottom in any order",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1856,10 +2802,25 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-010#a0",
+          "keywords": [],
+          "id": "BSC30-010#AB_WHEN_DESTROYED_NONE_LV1_LV2_df68ccb2fc7749f1ceddbf343e849a31dc63da3bb48994f7dbff128185157f8a_6561e970e053a703263615163f61d67d",
+          "physicalId": "BSC30-010#AB_WHEN_DESTROYED_NONE_LV1_LV2_df68ccb2fc7749f1ceddbf343e849a31dc63da3bb48994f7dbff128185157f8a_6561e970e053a703263615163f61d67d",
+          "semanticId": "SEM#AB_WHEN_DESTROYED_NONE_LV1_LV2_df68ccb2fc7749f1ceddbf343e849a31dc63da3bb48994f7dbff128185157f8a_6561e970e053a703263615163f61d67d",
+          "semanticIdV3": "SEM3#AB_WHEN_DESTROYED_NONE_LV1_LV2_d57577e0153206dec614c947608b40fb6de8bf1b687bcb4f07817df8cb38b580_fba54a84f0048536061769998e30b187",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "OPPONENT",
+            "timingTriggers": [
+              "WHEN_DEPLETED",
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC30-010#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1868,8 +2829,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "END_OF_TURN",
+            "timings": [
+              "END_OF_TURN"
+            ],
             "timingLabel": "Your End Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "END_OF_TURN"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1878,10 +2848,14 @@
             "isMain": false,
             "cleanBody": "You can refresh a \"Ninja Gale\" family Spirit you control. When you've done so, send the [Soul Core] from your Trash to any of your Spirits."
           },
+          "originalAbilityText": "[LV2] (Your End Step)\nYou can refresh a \"Ninja Gale\" family Spirit you control. When you've done so, send the [Soul Core] from your Trash to any of your Spirits.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can refresh a \"Ninja Gale\" family Spirit you control.",
+              "originalClauseText": "You can refresh a \"Ninja Gale\" family Spirit you control.",
               "cleanText": "You can refresh a \"Ninja Gale\" family Spirit you control",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1889,14 +2863,20 @@
               "duration": null,
               "op": {
                 "op": "REFRESH",
+                "count": 1,
                 "target": {
-                  "side": "either"
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
                 }
               }
             },
             {
               "rawText": "send the [Soul Core] from your Trash to any of your Spirits.",
+              "originalClauseText": "send the [Soul Core] from your Trash to any of your Spirits.",
               "cleanText": "send the [Soul Core] from your Trash to any of your Spirits",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1907,7 +2887,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-010#a1",
+          "keywords": [],
+          "id": "BSC30-010#AB_END_OF_TURN_NONE_LV2_4bc766f37a845b6d91de2d4260d6673bf54da676e250ac45d489bdcb80d35d5d_a8f2abd3b7af85bd827face433f4a715",
+          "physicalId": "BSC30-010#AB_END_OF_TURN_NONE_LV2_4bc766f37a845b6d91de2d4260d6673bf54da676e250ac45d489bdcb80d35d5d_a8f2abd3b7af85bd827face433f4a715",
+          "semanticId": "SEM#AB_END_OF_TURN_NONE_LV2_4bc766f37a845b6d91de2d4260d6673bf54da676e250ac45d489bdcb80d35d5d_a8f2abd3b7af85bd827face433f4a715",
+          "semanticIdV3": "SEM3#AB_END_OF_TURN_NONE_LV2_beb94644160f667fb1537151a5b3ac1700185a76d25ede7cea2a085fee591ae6_8c686706730e470ab88dc8ab65f98414",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "END_OF_TURN"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -1940,6 +2935,26 @@
     "compiledIr": {
       "cardNumber": "BSC30-015",
       "name": "The Advent Douji",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 5000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 6000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: Fighting Spirit] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nDestroy an opposing Cost 5 or less Spirit. For each pre-advent card of this Spirit, this effect destroys +1 cost. After this effect resolves, you can stack a Blue Spirit card from your Hand onto this Spirit via [Advent], treating [Soul Core] as being sent to the Trash.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -1947,7 +2962,28 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "BSC30-015#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1cd57186872547f559ff1a94c0f70ccc8a5471e83d62f622e7a3551d5895ab38_4f12969983ce472ebe9676c12795dcec",
+          "cardNumber": "BSC30-015",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "BSC30-015#a0"
         },
         {
           "name": "Advent",
@@ -1955,12 +2991,32 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 392
+          "index": 211,
+          "abilityId": "BSC30-015#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_fe23f1930267fcbd03452866bcd062fab1a28251e770bd54298e726150068d79_1529ae7376996522cff99f868a35d07e",
+          "cardNumber": "BSC30-015",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ADVENTS",
+          "timingLabel": "When Advents",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC30-015#a1"
         }
       ],
       "abilities": [
         {
-          "id": "BSC30-015#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1971,8 +3027,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: Fighting Spirit",
@@ -1981,10 +3046,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Advent: Fighting Spirit] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -2006,7 +3075,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -2024,10 +3095,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-015#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "Fighting Spirit",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC30-015#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1cd57186872547f559ff1a94c0f70ccc8a5471e83d62f622e7a3551d5895ab38_4f12969983ce472ebe9676c12795dcec",
+              "cardNumber": "BSC30-015",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "BSC30-015#a0"
+            }
+          ],
+          "id": "BSC30-015#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1cd57186872547f559ff1a94c0f70ccc8a5471e83d62f622e7a3551d5895ab38_4f12969983ce472ebe9676c12795dcec",
+          "physicalId": "BSC30-015#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1cd57186872547f559ff1a94c0f70ccc8a5471e83d62f622e7a3551d5895ab38_4f12969983ce472ebe9676c12795dcec",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1cd57186872547f559ff1a94c0f70ccc8a5471e83d62f622e7a3551d5895ab38_4f12969983ce472ebe9676c12795dcec",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_7e5efa5b891e11a31ddf15e721b15b853f5df474287c9ee8c44b6af9bce36c26_9c148850f1e367ea43b1e41fa47f7d40",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC30-015#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2038,8 +3153,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS"
+            ],
             "timingLabel": "When Advents",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2048,10 +3172,14 @@
             "isMain": false,
             "cleanBody": "Destroy an opposing Cost 5 or less Spirit. For each pre-advent card of this Spirit, this effect destroys +1 cost. After this effect resolves, you can stack a Blue Spirit card from your Hand onto this Spirit via [Advent], treating [Soul Core] as being sent to the Trash."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Advents)\nDestroy an opposing Cost 5 or less Spirit. For each pre-advent card of this Spirit, this effect destroys +1 cost. After this effect resolves, you can stack a Blue Spirit card from your Hand onto this Spirit via [Advent], treating [Soul Core] as being sent to the Trash.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Destroy an opposing Cost 5 or less Spirit.",
+              "originalClauseText": "Destroy an opposing Cost 5 or less Spirit.",
               "cleanText": "Destroy an opposing Cost 5 or less Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2073,7 +3201,9 @@
             },
             {
               "rawText": "For each pre-advent card of this Spirit, this effect destroys +1 cost.",
+              "originalClauseText": "For each pre-advent card of this Spirit, this effect destroys +1 cost.",
               "cleanText": "For each pre-advent card of this Spirit, this effect destroys +1 cost",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2090,18 +3220,66 @@
             },
             {
               "rawText": "you can stack a Blue Spirit card from your Hand onto this Spirit via [Advent], treating [Soul Core] as being sent to the Trash.",
+              "originalClauseText": "you can stack a Blue Spirit card from your Hand onto this Spirit via [Advent], treating [Soul Core] as being sent to the Trash.",
               "cleanText": "you can stack a Blue Spirit card from your Hand onto this Spirit via [Advent], treating [Soul Core] as being sent to the Trash",
+              "clauseIndex": 2,
               "link": "afterResolves",
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Advent"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-015#a1",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": null,
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 211,
+              "abilityId": "BSC30-015#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_fe23f1930267fcbd03452866bcd062fab1a28251e770bd54298e726150068d79_1529ae7376996522cff99f868a35d07e",
+              "cardNumber": "BSC30-015",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ADVENTS",
+              "timingLabel": "When Advents",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC30-015#a1"
+            }
+          ],
+          "id": "BSC30-015#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_fe23f1930267fcbd03452866bcd062fab1a28251e770bd54298e726150068d79_1529ae7376996522cff99f868a35d07e",
+          "physicalId": "BSC30-015#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_fe23f1930267fcbd03452866bcd062fab1a28251e770bd54298e726150068d79_1529ae7376996522cff99f868a35d07e",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_fe23f1930267fcbd03452866bcd062fab1a28251e770bd54298e726150068d79_1529ae7376996522cff99f868a35d07e",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_322833cd1721361b15b404903343c7a5b454fb2d3d8622d986c7f4489b9a7da4_03d65963072fb90817811ecc222fe230",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -2134,6 +3312,26 @@
     "compiledIr": {
       "cardNumber": "BSC30-017",
       "name": "The Advent Wisdom King",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 7000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 8000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: Fighting Spirit & Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nDestroy an opposing Cost 8 or less Spirit. For each pre-advent card of this Spirit, this effect destroys +1 cost. After this effect resolves, you can stack a Blue Spirit card from your Hand onto this Spirit via [Advent], treating [Soul Core] as being sent to the Trash.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -2141,7 +3339,28 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "BSC30-017#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_d886102f8a10de3b3cebfbcbe2679f91d1971bb7a25970dba9300be60689a93c_c2011bf3b76208ad6a27dc34db48d0cf",
+          "cardNumber": "BSC30-017",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "BSC30-017#a0"
         },
         {
           "name": "Advent",
@@ -2149,12 +3368,32 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 409
+          "index": 211,
+          "abilityId": "BSC30-017#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_b176e8bd9d917faa97acd2f96a68da461bfc2dd4fe284ce7a00fec2ccd4d8d82_678ff0d99d00d1493062655d0c882d1b",
+          "cardNumber": "BSC30-017",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ADVENTS",
+          "timingLabel": "When Advents",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC30-017#a1"
         }
       ],
       "abilities": [
         {
-          "id": "BSC30-017#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2165,8 +3404,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: Fighting Spirit & Cost 5 or more",
@@ -2175,10 +3423,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Advent: Fighting Spirit & Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -2200,7 +3452,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -2218,10 +3472,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-017#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "Fighting Spirit & Cost 5 or more",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC30-017#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_d886102f8a10de3b3cebfbcbe2679f91d1971bb7a25970dba9300be60689a93c_c2011bf3b76208ad6a27dc34db48d0cf",
+              "cardNumber": "BSC30-017",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "BSC30-017#a0"
+            }
+          ],
+          "id": "BSC30-017#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_d886102f8a10de3b3cebfbcbe2679f91d1971bb7a25970dba9300be60689a93c_c2011bf3b76208ad6a27dc34db48d0cf",
+          "physicalId": "BSC30-017#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_d886102f8a10de3b3cebfbcbe2679f91d1971bb7a25970dba9300be60689a93c_c2011bf3b76208ad6a27dc34db48d0cf",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_d886102f8a10de3b3cebfbcbe2679f91d1971bb7a25970dba9300be60689a93c_c2011bf3b76208ad6a27dc34db48d0cf",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1b7063134f377ef03c2007129c1a50cc6417308011a82823fae5d64dc1aa1950_f9457280e98836dd92c1bdf0b7963010",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC30-017#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2232,8 +3530,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS"
+            ],
             "timingLabel": "When Advents",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2242,10 +3549,14 @@
             "isMain": false,
             "cleanBody": "Destroy an opposing Cost 8 or less Spirit. For each pre-advent card of this Spirit, this effect destroys +1 cost. After this effect resolves, you can stack a Blue Spirit card from your Hand onto this Spirit via [Advent], treating [Soul Core] as being sent to the Trash."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Advents)\nDestroy an opposing Cost 8 or less Spirit. For each pre-advent card of this Spirit, this effect destroys +1 cost. After this effect resolves, you can stack a Blue Spirit card from your Hand onto this Spirit via [Advent], treating [Soul Core] as being sent to the Trash.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Destroy an opposing Cost 8 or less Spirit.",
+              "originalClauseText": "Destroy an opposing Cost 8 or less Spirit.",
               "cleanText": "Destroy an opposing Cost 8 or less Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2267,7 +3578,9 @@
             },
             {
               "rawText": "For each pre-advent card of this Spirit, this effect destroys +1 cost.",
+              "originalClauseText": "For each pre-advent card of this Spirit, this effect destroys +1 cost.",
               "cleanText": "For each pre-advent card of this Spirit, this effect destroys +1 cost",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2284,18 +3597,66 @@
             },
             {
               "rawText": "you can stack a Blue Spirit card from your Hand onto this Spirit via [Advent], treating [Soul Core] as being sent to the Trash.",
+              "originalClauseText": "you can stack a Blue Spirit card from your Hand onto this Spirit via [Advent], treating [Soul Core] as being sent to the Trash.",
               "cleanText": "you can stack a Blue Spirit card from your Hand onto this Spirit via [Advent], treating [Soul Core] as being sent to the Trash",
+              "clauseIndex": 2,
               "link": "afterResolves",
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Advent"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-017#a1",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": null,
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 211,
+              "abilityId": "BSC30-017#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_b176e8bd9d917faa97acd2f96a68da461bfc2dd4fe284ce7a00fec2ccd4d8d82_678ff0d99d00d1493062655d0c882d1b",
+              "cardNumber": "BSC30-017",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ADVENTS",
+              "timingLabel": "When Advents",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC30-017#a1"
+            }
+          ],
+          "id": "BSC30-017#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_b176e8bd9d917faa97acd2f96a68da461bfc2dd4fe284ce7a00fec2ccd4d8d82_678ff0d99d00d1493062655d0c882d1b",
+          "physicalId": "BSC30-017#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_b176e8bd9d917faa97acd2f96a68da461bfc2dd4fe284ce7a00fec2ccd4d8d82_678ff0d99d00d1493062655d0c882d1b",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_b176e8bd9d917faa97acd2f96a68da461bfc2dd4fe284ce7a00fec2ccd4d8d82_678ff0d99d00d1493062655d0c882d1b",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_ac497107856b303d2d20a12e68f115861165f6f78370b3ce1b88fd4412b77e96_4d7b40e32576595500f4c59f8015ab6a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -2507,6 +3868,26 @@
     "compiledIr": {
       "cardNumber": "BSC30-001",
       "name": "The CatalyzeMusha Hokushin",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 7000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 9000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: Red & Cost 2 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] [Tw Catl: Red] (When Advents)\nImmediately activate one of your Red Soul Bursts. After the Burst activates, you can set a card with Burst effects from your Hand.\n\n[LV2][LV3] (When Attacks)\nDraw a card.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -2514,12 +3895,61 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "BSC30-001#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c2ad4c5cecd0a81cdec025d1a5b44bae46ef323e0608edb5a5d33149081940a3_f1683a46dea7252b77e5e51d246824b6",
+          "cardNumber": "BSC30-001",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "BSC30-001#a0"
+        },
+        {
+          "name": "Tw Catl",
+          "parameter": "Red",
+          "wave": 1,
+          "hook": "tw_catl",
+          "bracketed": true,
+          "index": 0,
+          "abilityId": "BSC30-001#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_3283240da35e72b362d3d26a17cdce6892b24ecc9ed71ca81a205641c4cd2bc3_5d5368608fcd820b01aac9d07a35a9f0",
+          "cardNumber": "BSC30-001",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ADVENTS",
+          "timingLabel": "When Advents",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC30-001#a1"
         }
       ],
       "abilities": [
         {
-          "id": "BSC30-001#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2530,8 +3960,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: Red & Cost 2 or more",
@@ -2540,10 +3979,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Advent: Red & Cost 2 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -2565,7 +4008,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -2583,10 +4028,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-001#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "Red & Cost 2 or more",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC30-001#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c2ad4c5cecd0a81cdec025d1a5b44bae46ef323e0608edb5a5d33149081940a3_f1683a46dea7252b77e5e51d246824b6",
+              "cardNumber": "BSC30-001",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "BSC30-001#a0"
+            }
+          ],
+          "id": "BSC30-001#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c2ad4c5cecd0a81cdec025d1a5b44bae46ef323e0608edb5a5d33149081940a3_f1683a46dea7252b77e5e51d246824b6",
+          "physicalId": "BSC30-001#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c2ad4c5cecd0a81cdec025d1a5b44bae46ef323e0608edb5a5d33149081940a3_f1683a46dea7252b77e5e51d246824b6",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c2ad4c5cecd0a81cdec025d1a5b44bae46ef323e0608edb5a5d33149081940a3_f1683a46dea7252b77e5e51d246824b6",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_410b84959a60e50fe6ff4a5fa626b3c9a3e84c92570f9f970fc0fa4d8f619faa_63dac802b4248387e5b8162b65e9ee79",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC30-001#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2597,8 +4086,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS"
+            ],
             "timingLabel": "When Advents",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Tw Catl: Red",
@@ -2607,36 +4105,89 @@
             "isMain": false,
             "cleanBody": "Immediately activate one of your Red Soul Bursts. After the Burst activates, you can set a card with Burst effects from your Hand."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] [Tw Catl: Red] (When Advents)\nImmediately activate one of your Red Soul Bursts. After the Burst activates, you can set a card with Burst effects from your Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Immediately activate one of your Red Soul Bursts.",
+              "originalClauseText": "Immediately activate one of your Red Soul Bursts.",
               "cleanText": "Immediately activate one of your Red Soul Bursts",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "ACTIVATE_BURST",
+                "burstType": "SOUL_BURST",
+                "color": null
               }
             },
             {
               "rawText": "After the Burst activates, you can set a card with Burst effects from your Hand.",
+              "originalClauseText": "After the Burst activates, you can set a card with Burst effects from your Hand.",
               "cleanText": "After the Burst activates, you can set a card with Burst effects from your Hand",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Burst"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-001#a1",
+          "keywords": [
+            {
+              "name": "Tw Catl",
+              "parameter": "Red",
+              "wave": 1,
+              "hook": "tw_catl",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC30-001#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_3283240da35e72b362d3d26a17cdce6892b24ecc9ed71ca81a205641c4cd2bc3_5d5368608fcd820b01aac9d07a35a9f0",
+              "cardNumber": "BSC30-001",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ADVENTS",
+              "timingLabel": "When Advents",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC30-001#a1"
+            }
+          ],
+          "id": "BSC30-001#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_3283240da35e72b362d3d26a17cdce6892b24ecc9ed71ca81a205641c4cd2bc3_5d5368608fcd820b01aac9d07a35a9f0",
+          "physicalId": "BSC30-001#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_3283240da35e72b362d3d26a17cdce6892b24ecc9ed71ca81a205641c4cd2bc3_5d5368608fcd820b01aac9d07a35a9f0",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_3283240da35e72b362d3d26a17cdce6892b24ecc9ed71ca81a205641c4cd2bc3_5d5368608fcd820b01aac9d07a35a9f0",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_485cced045b2cd0cfb3707d0f438c2066f6d5d948ffc3c3d3a7b0f80cf3db5d6_d4faa3e0fd073c108f22036df6970179",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC30-001#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2646,8 +4197,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2656,10 +4216,14 @@
             "isMain": false,
             "cleanBody": "Draw a card."
           },
+          "originalAbilityText": "[LV2][LV3] (When Attacks)\nDraw a card.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Draw a card.",
+              "originalClauseText": "Draw a card.",
               "cleanText": "Draw a card",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2673,7 +4237,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-001#a2",
+          "keywords": [],
+          "id": "BSC30-001#AB_WHEN_ATTACKS_NONE_LV2_LV3_05714c7b8a7c4dbadcb77829102b421081c1b508184f8cdf4f7f72001530f2bd_c5e5a63e7ae76955e000eddfee94526a",
+          "physicalId": "BSC30-001#AB_WHEN_ATTACKS_NONE_LV2_LV3_05714c7b8a7c4dbadcb77829102b421081c1b508184f8cdf4f7f72001530f2bd_c5e5a63e7ae76955e000eddfee94526a",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_05714c7b8a7c4dbadcb77829102b421081c1b508184f8cdf4f7f72001530f2bd_c5e5a63e7ae76955e000eddfee94526a",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_c112d9f54ffd508e3f55af07ae89ed18fbdd0aca0e288846f80ead31480aee85_3e69c75b4cf04c728014c001ffc9be50",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -2706,19 +4285,59 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A9927",
       "name": "The FlowerMonarch Chikaya",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 7000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 9000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 3,
+          "bp": 13000
+        }
+      },
+      "originalEffectText": "[Soul Burst] (After an opposing Spirit/Ultimate attacks)\nSummon this Spirit card without paying the cost. Then, send a core, besides [Soul Core] from your Trash to your Life, and you can set a card with Burst effects from your Hand.\n\n[LV2][LV3] [catl: All Color] (When Attacks/Blocks)\nBy sending [Soul Core] from this Spirit to your Trash, immediately activate one of your Soul Bursts. After the Burst activates, return an opposing Spirit/Ultimate to the deckbottom.",
+      "teams": [],
       "keywords": [
         {
-          "name": "Burst",
-          "parameter": "s",
+          "name": "Soul Burst",
+          "parameter": null,
           "wave": 2,
           "hook": "burst",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "BATTLE-SPIRITS-A9927#AB_BURST_NONE_LV1_LV2_LV3_c5c6d5fc88ddb6f1cf1758c78b8405ea24ae9f1acf515e5ab2cc93b2918c0017_62242e538b4f41a4b2f42f3768ed70a5",
+          "cardNumber": "BATTLE-SPIRITS-A9927",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "BURST",
+          "timingLabel": "Soul Burst",
+          "timingStep": "ANY",
+          "face": "B",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": "AFTER_OPPONENT_ATTACK",
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BATTLE-SPIRITS-A9927#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A9927#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2729,20 +4348,31 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "BURST",
-            "timingLabel": "Burst",
+            "timings": [],
+            "timingLabel": "Soul Burst",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
-            "keyword": null,
+            "keyword": "Soul Burst",
             "burstCondition": "AFTER_OPPONENT_ATTACK",
             "isFlash": false,
             "isMain": false,
             "cleanBody": "Summon this Spirit card without paying the cost. Then, send a core, besides [Soul Core] from your Trash to your Life, and you can set a card with Burst effects from your Hand."
           },
+          "originalAbilityText": "[Soul Burst] (After an opposing Spirit/Ultimate attacks)\nSummon this Spirit card without paying the cost. Then, send a core, besides [Soul Core] from your Trash to your Life, and you can set a card with Burst effects from your Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Summon this Spirit card without paying the cost.",
+              "originalClauseText": "Summon this Spirit card without paying the cost.",
               "cleanText": "Summon this Spirit card without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2755,21 +4385,68 @@
             },
             {
               "rawText": "send a core, besides [Soul Core] from your Trash to your Life, and you can set a card with Burst effects from your Hand.",
+              "originalClauseText": "send a core, besides [Soul Core] from your Trash to your Life, and you can set a card with Burst effects from your Hand.",
               "cleanText": "send a core, besides [Soul Core] from your Trash to your Life, and you can set a card with Burst effects from your Hand",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Burst"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A9927#a0",
+          "keywords": [
+            {
+              "name": "Soul Burst",
+              "parameter": null,
+              "wave": 2,
+              "hook": "burst",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BATTLE-SPIRITS-A9927#AB_BURST_NONE_LV1_LV2_LV3_c5c6d5fc88ddb6f1cf1758c78b8405ea24ae9f1acf515e5ab2cc93b2918c0017_62242e538b4f41a4b2f42f3768ed70a5",
+              "cardNumber": "BATTLE-SPIRITS-A9927",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "BURST",
+              "timingLabel": "Soul Burst",
+              "timingStep": "ANY",
+              "face": "B",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": "AFTER_OPPONENT_ATTACK",
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BATTLE-SPIRITS-A9927#a0"
+            }
+          ],
+          "id": "BATTLE-SPIRITS-A9927#AB_BURST_NONE_LV1_LV2_LV3_c5c6d5fc88ddb6f1cf1758c78b8405ea24ae9f1acf515e5ab2cc93b2918c0017_62242e538b4f41a4b2f42f3768ed70a5",
+          "physicalId": "BATTLE-SPIRITS-A9927#AB_BURST_NONE_LV1_LV2_LV3_c5c6d5fc88ddb6f1cf1758c78b8405ea24ae9f1acf515e5ab2cc93b2918c0017_62242e538b4f41a4b2f42f3768ed70a5",
+          "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_c5c6d5fc88ddb6f1cf1758c78b8405ea24ae9f1acf515e5ab2cc93b2918c0017_62242e538b4f41a4b2f42f3768ed70a5",
+          "semanticIdV3": "SEM3#AB_BURST_NONE_LV1_LV2_LV3_d0bb710b94c1bb5c708ef316ddabcb02cc8b328641f27d02c6680780ffdb5007_b28e3bfc7f8e7cea074cd88f9c3db03d",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A9927#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2779,8 +4456,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timings": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
             "timingLabel": "When Attacks/Blocks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2789,10 +4477,14 @@
             "isMain": false,
             "cleanBody": "By sending [Soul Core] from this Spirit to your Trash, immediately activate one of your Soul Bursts. After the Burst activates, return an opposing Spirit/Ultimate to the deckbottom."
           },
+          "originalAbilityText": "[LV2][LV3] [catl: All Color] (When Attacks/Blocks)\nBy sending [Soul Core] from this Spirit to your Trash, immediately activate one of your Soul Bursts. After the Burst activates, return an opposing Spirit/Ultimate to the deckbottom.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "By sending [Soul Core] from this Spirit to your Trash",
+              "originalClauseText": "By sending [Soul Core] from this Spirit to your Trash",
               "cleanText": "By sending [Soul Core] from this Spirit to your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -2814,19 +4506,25 @@
             },
             {
               "rawText": "immediately activate one of your Soul Bursts.",
+              "originalClauseText": "immediately activate one of your Soul Bursts.",
               "cleanText": "immediately activate one of your Soul Bursts",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "ACTIVATE_BURST",
+                "burstType": "SOUL_BURST",
+                "color": null
               }
             },
             {
               "rawText": "After the Burst activates, return an opposing Spirit/Ultimate to the deckbottom.",
+              "originalClauseText": "After the Burst activates, return an opposing Spirit/Ultimate to the deckbottom.",
               "cleanText": "After the Burst activates, return an opposing Spirit/Ultimate to the deckbottom",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2841,7 +4539,23 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A9927#a1",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A9927#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV2_LV3_a2104340c73d2a5697bcd6a95a8241b8bc9dac7072111bd21bdbe3cb25858380_a4a1276852efffd78f938ae3954bb8db",
+          "physicalId": "BATTLE-SPIRITS-A9927#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV2_LV3_a2104340c73d2a5697bcd6a95a8241b8bc9dac7072111bd21bdbe3cb25858380_a4a1276852efffd78f938ae3954bb8db",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV2_LV3_a2104340c73d2a5697bcd6a95a8241b8bc9dac7072111bd21bdbe3cb25858380_a4a1276852efffd78f938ae3954bb8db",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV2_LV3_b3d8dfb81c401b61e631fd89a1e491ef82f37dd1854428fd435eca2f92bb44b3_fb9dda651f5ea14505945f34195d7ad8",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -3207,6 +4921,26 @@
     "compiledIr": {
       "cardNumber": "BSC30-006",
       "name": "The MakaiFistOgre Namu",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 5000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 6000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: Cost 2 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nSend a core from any opposing Spirits to their Reserve. After this effect resolves, you can stack a Purple card from your Hand onto this Spirit via [Advent], treating Soul Core as being sent to the Trash.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -3214,7 +4948,28 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "BSC30-006#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c0f8158ee3e77a19d284a9c9bca6b29b4162930f0981122d1866ba28b83669d4_6765a51fc85447f5e9e6c6ad94867e7a",
+          "cardNumber": "BSC30-006",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "BSC30-006#a0"
         },
         {
           "name": "Advent",
@@ -3222,12 +4977,32 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 328
+          "index": 148,
+          "abilityId": "BSC30-006#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_3a44ccb2c5871e0d7138e92b410fe7cb10cc34246164d4834024a3b6f1e0f075_e6856fc904cde97f3dd1f4b225e922ee",
+          "cardNumber": "BSC30-006",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ADVENTS",
+          "timingLabel": "When Advents",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC30-006#a1"
         }
       ],
       "abilities": [
         {
-          "id": "BSC30-006#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3238,8 +5013,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: Cost 2 or more",
@@ -3248,10 +5032,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Advent: Cost 2 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -3273,7 +5061,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -3291,10 +5081,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-006#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "Cost 2 or more",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC30-006#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c0f8158ee3e77a19d284a9c9bca6b29b4162930f0981122d1866ba28b83669d4_6765a51fc85447f5e9e6c6ad94867e7a",
+              "cardNumber": "BSC30-006",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "BSC30-006#a0"
+            }
+          ],
+          "id": "BSC30-006#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c0f8158ee3e77a19d284a9c9bca6b29b4162930f0981122d1866ba28b83669d4_6765a51fc85447f5e9e6c6ad94867e7a",
+          "physicalId": "BSC30-006#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c0f8158ee3e77a19d284a9c9bca6b29b4162930f0981122d1866ba28b83669d4_6765a51fc85447f5e9e6c6ad94867e7a",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_c0f8158ee3e77a19d284a9c9bca6b29b4162930f0981122d1866ba28b83669d4_6765a51fc85447f5e9e6c6ad94867e7a",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_bf36e76973c2e8f12c5fa876d0f292022b24b83e4d04d0e7e301102491f59c3c_ce1fee2a868c2f31bbc2ae875c590f1e",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC30-006#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3305,8 +5139,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS"
+            ],
             "timingLabel": "When Advents",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3315,10 +5158,14 @@
             "isMain": false,
             "cleanBody": "Send a core from any opposing Spirits to their Reserve. After this effect resolves, you can stack a Purple card from your Hand onto this Spirit via [Advent], treating Soul Core as being sent to the Trash."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Advents)\nSend a core from any opposing Spirits to their Reserve. After this effect resolves, you can stack a Purple card from your Hand onto this Spirit via [Advent], treating Soul Core as being sent to the Trash.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Send a core from any opposing Spirits to their Reserve.",
+              "originalClauseText": "Send a core from any opposing Spirits to their Reserve.",
               "cleanText": "Send a core from any opposing Spirits to their Reserve",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -3343,18 +5190,66 @@
             },
             {
               "rawText": "you can stack a Purple card from your Hand onto this Spirit via [Advent], treating Soul Core as being sent to the Trash.",
+              "originalClauseText": "you can stack a Purple card from your Hand onto this Spirit via [Advent], treating Soul Core as being sent to the Trash.",
               "cleanText": "you can stack a Purple card from your Hand onto this Spirit via [Advent], treating Soul Core as being sent to the Trash",
+              "clauseIndex": 1,
               "link": "afterResolves",
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Advent"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-006#a1",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": null,
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 148,
+              "abilityId": "BSC30-006#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_3a44ccb2c5871e0d7138e92b410fe7cb10cc34246164d4834024a3b6f1e0f075_e6856fc904cde97f3dd1f4b225e922ee",
+              "cardNumber": "BSC30-006",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ADVENTS",
+              "timingLabel": "When Advents",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC30-006#a1"
+            }
+          ],
+          "id": "BSC30-006#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_3a44ccb2c5871e0d7138e92b410fe7cb10cc34246164d4834024a3b6f1e0f075_e6856fc904cde97f3dd1f4b225e922ee",
+          "physicalId": "BSC30-006#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_3a44ccb2c5871e0d7138e92b410fe7cb10cc34246164d4834024a3b6f1e0f075_e6856fc904cde97f3dd1f4b225e922ee",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_3a44ccb2c5871e0d7138e92b410fe7cb10cc34246164d4834024a3b6f1e0f075_e6856fc904cde97f3dd1f4b225e922ee",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_f1908c078dfe9af7a8884411d6dec3fab4c0d29d8b8bdcea584c807d3b5340d3_1a91ba077f1b5a8fd396b78aeaed2da2",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -3524,22 +5419,103 @@
     "compiledIr": {
       "cardNumber": "BSC30-023",
       "name": "The PrincessGun -Miyabi-",
+      "type": "Brave",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        }
+      },
+      "originalEffectText": "[Brave Condition: Cost 4 or more]\n\n[Soul Burst] (After your Spirit is depleted/destroyed by the Opponent)\nSummon a Cost 5 or less Yellow Spirit card from your Trash, without paying the cost. After this effect resolves, summon this card without paying the cost.\n\n[LV1] [Reload]\nYou can [Advent] onto this Spirit-condition Brave. When you [Advent] onto this Brave, you can brave this pre-Advent card to that Spirit.",
+      "teams": [],
       "keywords": [
+        {
+          "name": "Brave Condition",
+          "parameter": "Cost 4 or more",
+          "wave": 1,
+          "hook": "brave_condition",
+          "bracketed": true,
+          "index": 0,
+          "abilityId": "BSC30-023#AB_PASSIVE_NONE_LV1_LV2_LV3_ab439b797e96b89e9c1f060d091c9ddb56f01f0841bdf997790a327c4a06e9af_b4382f074bc7cc5dc3a58927b1d62f37",
+          "cardNumber": "BSC30-023",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC30-023#a0"
+        },
         {
           "name": "Brave",
           "parameter": "Cost 4 or more",
           "wave": 3,
           "hook": "brave",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "BSC30-023#AB_PASSIVE_NONE_LV1_LV2_LV3_ab439b797e96b89e9c1f060d091c9ddb56f01f0841bdf997790a327c4a06e9af_b4382f074bc7cc5dc3a58927b1d62f37",
+          "cardNumber": "BSC30-023",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC30-023#a0"
         },
         {
-          "name": "Burst",
-          "parameter": "s",
+          "name": "Soul Burst",
+          "parameter": null,
           "wave": 2,
           "hook": "burst",
           "bracketed": true,
-          "index": 35
+          "index": 0,
+          "abilityId": "BSC30-023#AB_BURST_NONE_LV1_LV2_LV3_bbe45f3188d3b3695e388ac11e30c9d7d560e1fb62989839179487023895ff1e_58dd11e454b49ddd51953730f50fb938",
+          "cardNumber": "BSC30-023",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "BURST",
+          "timingLabel": "Soul Burst",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": "AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT",
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC30-023#a1"
         },
         {
           "name": "Reload",
@@ -3547,7 +5523,26 @@
           "wave": 3,
           "hook": "reload",
           "bracketed": true,
-          "index": 266
+          "index": 0,
+          "abilityId": "BSC30-023#AB_PASSIVE_NONE_LV1_369f267014cd864471e08f614dfe6139832529f91ac021c8e4c16dc29ee53d23_6477063df22243cd4537efa7bc003947",
+          "cardNumber": "BSC30-023",
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC30-023#a2"
         },
         {
           "name": "Advent",
@@ -3555,7 +5550,26 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 283
+          "index": 8,
+          "abilityId": "BSC30-023#AB_PASSIVE_NONE_LV1_369f267014cd864471e08f614dfe6139832529f91ac021c8e4c16dc29ee53d23_6477063df22243cd4537efa7bc003947",
+          "cardNumber": "BSC30-023",
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC30-023#a2"
         },
         {
           "name": "Advent",
@@ -3563,12 +5577,30 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 335
+          "index": 60,
+          "abilityId": "BSC30-023#AB_PASSIVE_NONE_LV1_369f267014cd864471e08f614dfe6139832529f91ac021c8e4c16dc29ee53d23_6477063df22243cd4537efa7bc003947",
+          "cardNumber": "BSC30-023",
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC30-023#a2"
         }
       ],
       "abilities": [
         {
-          "id": "BSC30-023#a0",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -3579,8 +5611,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Brave Condition: Cost 4 or more",
@@ -3590,11 +5627,90 @@
             "cleanBody": ""
           },
           "rawText": "[Brave Condition: Cost 4 or more]",
+          "originalAbilityText": "[Brave Condition: Cost 4 or more]",
+          "abilityIndex": 0,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "BRAVE_CONDITION",
+            "expression": "Cost 4 or more",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-023#a0",
+          "keywords": [
+            {
+              "name": "Brave Condition",
+              "parameter": "Cost 4 or more",
+              "wave": 1,
+              "hook": "brave_condition",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC30-023#AB_PASSIVE_NONE_LV1_LV2_LV3_ab439b797e96b89e9c1f060d091c9ddb56f01f0841bdf997790a327c4a06e9af_b4382f074bc7cc5dc3a58927b1d62f37",
+              "cardNumber": "BSC30-023",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC30-023#a0"
+            },
+            {
+              "name": "Brave",
+              "parameter": "Cost 4 or more",
+              "wave": 3,
+              "hook": "brave",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC30-023#AB_PASSIVE_NONE_LV1_LV2_LV3_ab439b797e96b89e9c1f060d091c9ddb56f01f0841bdf997790a327c4a06e9af_b4382f074bc7cc5dc3a58927b1d62f37",
+              "cardNumber": "BSC30-023",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC30-023#a0"
+            }
+          ],
+          "id": "BSC30-023#AB_PASSIVE_NONE_LV1_LV2_LV3_ab439b797e96b89e9c1f060d091c9ddb56f01f0841bdf997790a327c4a06e9af_b4382f074bc7cc5dc3a58927b1d62f37",
+          "physicalId": "BSC30-023#AB_PASSIVE_NONE_LV1_LV2_LV3_ab439b797e96b89e9c1f060d091c9ddb56f01f0841bdf997790a327c4a06e9af_b4382f074bc7cc5dc3a58927b1d62f37",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_ab439b797e96b89e9c1f060d091c9ddb56f01f0841bdf997790a327c4a06e9af_b4382f074bc7cc5dc3a58927b1d62f37",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_1c5caa0370c63e02d43e538e32ec10598cce83096cdd2ddd65881c3fcae831fa_7d288edb0e73bb4c9e5b70a21c5c361e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC30-023#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3605,20 +5721,31 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "BURST",
-            "timingLabel": "Burst",
+            "timings": [],
+            "timingLabel": "Soul Burst",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
-            "keyword": null,
+            "keyword": "Soul Burst",
             "burstCondition": "AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT",
             "isFlash": false,
             "isMain": false,
             "cleanBody": "Summon a Cost 5 or less Yellow Spirit card from your Trash, without paying the cost. After this effect resolves, summon this card without paying the cost."
           },
+          "originalAbilityText": "[Soul Burst] (After your Spirit is depleted/destroyed by the Opponent)\nSummon a Cost 5 or less Yellow Spirit card from your Trash, without paying the cost. After this effect resolves, summon this card without paying the cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Summon a Cost 5 or less Yellow Spirit card from your Trash, without paying the cost.",
+              "originalClauseText": "Summon a Cost 5 or less Yellow Spirit card from your Trash, without paying the cost.",
               "cleanText": "Summon a Cost 5 or less Yellow Spirit card from your Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -3626,12 +5753,26 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "costLte": 5,
+                  "color": "Yellow"
+                },
+                "free": true,
+                "isOptional": false
               }
             },
             {
               "rawText": "summon this card without paying the cost.",
+              "originalClauseText": "summon this card without paying the cost.",
               "cleanText": "summon this card without paying the cost",
+              "clauseIndex": 1,
               "link": "afterResolves",
               "isOptional": false,
               "isCost": false,
@@ -3644,10 +5785,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-023#a1",
+          "keywords": [
+            {
+              "name": "Soul Burst",
+              "parameter": null,
+              "wave": 2,
+              "hook": "burst",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC30-023#AB_BURST_NONE_LV1_LV2_LV3_bbe45f3188d3b3695e388ac11e30c9d7d560e1fb62989839179487023895ff1e_58dd11e454b49ddd51953730f50fb938",
+              "cardNumber": "BSC30-023",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "BURST",
+              "timingLabel": "Soul Burst",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": "AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT",
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC30-023#a1"
+            }
+          ],
+          "id": "BSC30-023#AB_BURST_NONE_LV1_LV2_LV3_bbe45f3188d3b3695e388ac11e30c9d7d560e1fb62989839179487023895ff1e_58dd11e454b49ddd51953730f50fb938",
+          "physicalId": "BSC30-023#AB_BURST_NONE_LV1_LV2_LV3_bbe45f3188d3b3695e388ac11e30c9d7d560e1fb62989839179487023895ff1e_58dd11e454b49ddd51953730f50fb938",
+          "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_bbe45f3188d3b3695e388ac11e30c9d7d560e1fb62989839179487023895ff1e_58dd11e454b49ddd51953730f50fb938",
+          "semanticIdV3": "SEM3#AB_BURST_NONE_LV1_LV2_LV3_12b01bcbcdd9aa95690b387593c4403c502aef2f3ff503eb6edff5b5f1fef214_adb7d43fe5b343537fbea0ace9416109",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC30-023#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3656,8 +5841,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Reload",
@@ -3666,33 +5856,138 @@
             "isMain": false,
             "cleanBody": "You can [Advent] onto this Spirit-condition Brave. When you [Advent] onto this Brave, you can brave this pre-Advent card to that Spirit."
           },
+          "originalAbilityText": "[LV1] [Reload]\nYou can [Advent] onto this Spirit-condition Brave. When you [Advent] onto this Brave, you can brave this pre-Advent card to that Spirit.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "You can [Advent] onto this Spirit-condition Brave.",
+              "originalClauseText": "You can [Advent] onto this Spirit-condition Brave.",
               "cleanText": "You can [Advent] onto this Spirit-condition Brave",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "when": "WHEN_ELIGIBLE",
+                "fromZone": "hand",
+                "adventType": "ADVENT",
+                "op": "ADVENT_RULE"
               }
             },
             {
               "rawText": "When you [Advent] onto this Brave, you can brave this pre-Advent card to that Spirit.",
+              "originalClauseText": "When you [Advent] onto this Brave, you can brave this pre-Advent card to that Spirit.",
               "cleanText": "When you [Advent] onto this Brave, you can brave this pre-Advent card to that Spirit",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Advent"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-023#a2",
+          "keywords": [
+            {
+              "name": "Reload",
+              "parameter": null,
+              "wave": 3,
+              "hook": "reload",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC30-023#AB_PASSIVE_NONE_LV1_369f267014cd864471e08f614dfe6139832529f91ac021c8e4c16dc29ee53d23_6477063df22243cd4537efa7bc003947",
+              "cardNumber": "BSC30-023",
+              "levels": [
+                1
+              ],
+              "levelExplicit": true,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC30-023#a2"
+            },
+            {
+              "name": "Advent",
+              "parameter": null,
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 8,
+              "abilityId": "BSC30-023#AB_PASSIVE_NONE_LV1_369f267014cd864471e08f614dfe6139832529f91ac021c8e4c16dc29ee53d23_6477063df22243cd4537efa7bc003947",
+              "cardNumber": "BSC30-023",
+              "levels": [
+                1
+              ],
+              "levelExplicit": true,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC30-023#a2"
+            },
+            {
+              "name": "Advent",
+              "parameter": null,
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 60,
+              "abilityId": "BSC30-023#AB_PASSIVE_NONE_LV1_369f267014cd864471e08f614dfe6139832529f91ac021c8e4c16dc29ee53d23_6477063df22243cd4537efa7bc003947",
+              "cardNumber": "BSC30-023",
+              "levels": [
+                1
+              ],
+              "levelExplicit": true,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC30-023#a2"
+            }
+          ],
+          "id": "BSC30-023#AB_PASSIVE_NONE_LV1_369f267014cd864471e08f614dfe6139832529f91ac021c8e4c16dc29ee53d23_6477063df22243cd4537efa7bc003947",
+          "physicalId": "BSC30-023#AB_PASSIVE_NONE_LV1_369f267014cd864471e08f614dfe6139832529f91ac021c8e4c16dc29ee53d23_6477063df22243cd4537efa7bc003947",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_369f267014cd864471e08f614dfe6139832529f91ac021c8e4c16dc29ee53d23_6477063df22243cd4537efa7bc003947",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_11095d4df1873e21430938e65428105557b7a653cf2d42dbcbade122601d451d_1c7565e41f4d1d7ebcdcfb54fdc91bc0",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -3725,6 +6020,26 @@
     "compiledIr": {
       "cardNumber": "BSC30-014",
       "name": "The SengokuPrincess Hibana",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 5000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 3,
+          "bp": 7000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: Yellow & Cost 2 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] [Tw Catl: Yellow] (When Advents)\nImmediately activate one of your Yellow Soul Bursts. After that Burst activates, you can set a card with Burst effects from your Hand.\n\n[LV2][LV3] (When Attacks)\nDuring this turn, give an opposing Spirit -5000 BP. Destroy the Spirit that has its BP brought to 0 by this effect.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -3732,12 +6047,61 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "BSC30-014#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_be8c440ec98e5dedfa7ac1bb7acb3c82ab214f733068bf550d9554e0809c6997_facccb258b11b4502a0bd83da35d7c05",
+          "cardNumber": "BSC30-014",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "BSC30-014#a0"
+        },
+        {
+          "name": "Tw Catl",
+          "parameter": "Yellow",
+          "wave": 1,
+          "hook": "tw_catl",
+          "bracketed": true,
+          "index": 0,
+          "abilityId": "BSC30-014#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_8842ce21a6a8671d3c0a142d8bafe892f47cb5e3e4708187bfba51e6dca34e9f_765241bcc169bf60a317718dcc05353e",
+          "cardNumber": "BSC30-014",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ADVENTS",
+          "timingLabel": "When Advents",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC30-014#a1"
         }
       ],
       "abilities": [
         {
-          "id": "BSC30-014#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3748,8 +6112,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: Yellow & Cost 2 or more",
@@ -3758,10 +6131,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Advent: Yellow & Cost 2 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -3783,7 +6160,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -3801,10 +6180,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-014#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "Yellow & Cost 2 or more",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC30-014#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_be8c440ec98e5dedfa7ac1bb7acb3c82ab214f733068bf550d9554e0809c6997_facccb258b11b4502a0bd83da35d7c05",
+              "cardNumber": "BSC30-014",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "BSC30-014#a0"
+            }
+          ],
+          "id": "BSC30-014#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_be8c440ec98e5dedfa7ac1bb7acb3c82ab214f733068bf550d9554e0809c6997_facccb258b11b4502a0bd83da35d7c05",
+          "physicalId": "BSC30-014#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_be8c440ec98e5dedfa7ac1bb7acb3c82ab214f733068bf550d9554e0809c6997_facccb258b11b4502a0bd83da35d7c05",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_be8c440ec98e5dedfa7ac1bb7acb3c82ab214f733068bf550d9554e0809c6997_facccb258b11b4502a0bd83da35d7c05",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_d9f72d108efd113d66e4f53568f43e2f7d891b854959b331e2c553cbdb33ec38_7781057b3a5b408f4062ce3140ed37e6",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC30-014#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3815,8 +6238,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS"
+            ],
             "timingLabel": "When Advents",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Tw Catl: Yellow",
@@ -3825,36 +6257,89 @@
             "isMain": false,
             "cleanBody": "Immediately activate one of your Yellow Soul Bursts. After that Burst activates, you can set a card with Burst effects from your Hand."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] [Tw Catl: Yellow] (When Advents)\nImmediately activate one of your Yellow Soul Bursts. After that Burst activates, you can set a card with Burst effects from your Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Immediately activate one of your Yellow Soul Bursts.",
+              "originalClauseText": "Immediately activate one of your Yellow Soul Bursts.",
               "cleanText": "Immediately activate one of your Yellow Soul Bursts",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "ACTIVATE_BURST",
+                "burstType": "SOUL_BURST",
+                "color": null
               }
             },
             {
               "rawText": "After that Burst activates, you can set a card with Burst effects from your Hand.",
+              "originalClauseText": "After that Burst activates, you can set a card with Burst effects from your Hand.",
               "cleanText": "After that Burst activates, you can set a card with Burst effects from your Hand",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Burst"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-014#a1",
+          "keywords": [
+            {
+              "name": "Tw Catl",
+              "parameter": "Yellow",
+              "wave": 1,
+              "hook": "tw_catl",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC30-014#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_8842ce21a6a8671d3c0a142d8bafe892f47cb5e3e4708187bfba51e6dca34e9f_765241bcc169bf60a317718dcc05353e",
+              "cardNumber": "BSC30-014",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ADVENTS",
+              "timingLabel": "When Advents",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC30-014#a1"
+            }
+          ],
+          "id": "BSC30-014#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_8842ce21a6a8671d3c0a142d8bafe892f47cb5e3e4708187bfba51e6dca34e9f_765241bcc169bf60a317718dcc05353e",
+          "physicalId": "BSC30-014#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_8842ce21a6a8671d3c0a142d8bafe892f47cb5e3e4708187bfba51e6dca34e9f_765241bcc169bf60a317718dcc05353e",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_8842ce21a6a8671d3c0a142d8bafe892f47cb5e3e4708187bfba51e6dca34e9f_765241bcc169bf60a317718dcc05353e",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_91624079bbeb492edacd3614e88d84fa523f022570b22b029619e8381855dbfb_119c2fb69a00661302e674803c4171fa",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC30-014#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3864,8 +6349,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -3874,10 +6368,14 @@
             "isMain": false,
             "cleanBody": "During this turn, give an opposing Spirit -5000 BP. Destroy the Spirit that has its BP brought to 0 by this effect."
           },
+          "originalAbilityText": "[LV2][LV3] (When Attacks)\nDuring this turn, give an opposing Spirit -5000 BP. Destroy the Spirit that has its BP brought to 0 by this effect.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "During this turn, give an opposing Spirit -5000 BP.",
+              "originalClauseText": "During this turn, give an opposing Spirit -5000 BP.",
               "cleanText": "give an opposing Spirit -5000 BP",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -3886,13 +6384,20 @@
               "op": {
                 "op": "BP_DEBUFF",
                 "amount": 5000,
-                "target": "PREVIOUS_TARGET",
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
                 "duration": "DURING_THIS_TURN"
               }
             },
             {
               "rawText": "Destroy the Spirit that has its BP brought to 0 by this effect.",
+              "originalClauseText": "Destroy the Spirit that has its BP brought to 0 by this effect.",
               "cleanText": "Destroy the Spirit that has its BP brought to 0 by this effect",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -3908,7 +6413,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-014#a2",
+          "keywords": [],
+          "id": "BSC30-014#AB_WHEN_ATTACKS_NONE_LV2_LV3_618cbc2138ce8ed792cf8d4dc758ca670d72e8c374c714633dd48c00e266fbf0_0fd4cd437019c123c2c6a0ac0d01ba53",
+          "physicalId": "BSC30-014#AB_WHEN_ATTACKS_NONE_LV2_LV3_618cbc2138ce8ed792cf8d4dc758ca670d72e8c374c714633dd48c00e266fbf0_0fd4cd437019c123c2c6a0ac0d01ba53",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_618cbc2138ce8ed792cf8d4dc758ca670d72e8c374c714633dd48c00e266fbf0_0fd4cd437019c123c2c6a0ac0d01ba53",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_85bb1402a328e18db2243ce594c263666470d6bdde19f9d5edbb6c2001d79f98_149e9329d112452a0c714abcb058edfd",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
@@ -3941,6 +6461,26 @@
     "compiledIr": {
       "cardNumber": "BSC30-013",
       "name": "The SengokuPrincess Nagisa",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 4000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 3,
+          "bp": 5000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: Cost 1 or more] ((Opposing Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[Soul Burst] (After your Spirit is Depleted/Destroyed by the Opponent)\nSummon this Spirit card without paying the cost.\n\n[LV1][LV2][LV3] (When Summoned/Advents)\nDuring this turn, your Life can't be reduced by the attack of opposing Spirits/Ultimates with two or more symbols.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -3948,20 +6488,61 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "BSC30-013#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1c35059310aa4fafebe15702993e25ca7f46267db5879cb0af06bc9c0fe62484_9f32414abe8a9e0062c8d20066a82f8d",
+          "cardNumber": "BSC30-013",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Opposing Attack Step)",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "BSC30-013#a0"
         },
         {
-          "name": "Burst",
-          "parameter": "s",
+          "name": "Soul Burst",
+          "parameter": null,
           "wave": 2,
           "hook": "burst",
           "bracketed": true,
-          "index": 151
+          "index": 0,
+          "abilityId": "BSC30-013#AB_BURST_NONE_LV1_LV2_LV3_d71005f9caffd7bfb3faf31ecd21be086f4b42758af371ec9afb6a61d0f9f5a9_6e9fa5b6bb4dce85ffa62e93347b68a5",
+          "cardNumber": "BSC30-013",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "BURST",
+          "timingLabel": "Soul Burst",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": "AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT",
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC30-013#a1"
         }
       ],
       "abilities": [
         {
-          "id": "BSC30-013#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -3972,8 +6553,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Opposing Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "OPPONENT",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: Cost 1 or more",
@@ -3982,10 +6572,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Advent: Cost 1 or more] ((Opposing Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -4007,7 +6601,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -4025,10 +6621,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-013#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "Cost 1 or more",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC30-013#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1c35059310aa4fafebe15702993e25ca7f46267db5879cb0af06bc9c0fe62484_9f32414abe8a9e0062c8d20066a82f8d",
+              "cardNumber": "BSC30-013",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Opposing Attack Step)",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "BSC30-013#a0"
+            }
+          ],
+          "id": "BSC30-013#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1c35059310aa4fafebe15702993e25ca7f46267db5879cb0af06bc9c0fe62484_9f32414abe8a9e0062c8d20066a82f8d",
+          "physicalId": "BSC30-013#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1c35059310aa4fafebe15702993e25ca7f46267db5879cb0af06bc9c0fe62484_9f32414abe8a9e0062c8d20066a82f8d",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_1c35059310aa4fafebe15702993e25ca7f46267db5879cb0af06bc9c0fe62484_9f32414abe8a9e0062c8d20066a82f8d",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_393846320139b3a6f3dcc7d26d97ebfb851dd4c7df96faa67bf48b26d5e5cbbd_b151ab32ae1ad635334ac4ad303da387",
+          "timingSemantics": {
+            "timingOwner": "OPPONENT",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC30-013#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4039,20 +6679,31 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "BURST",
-            "timingLabel": "Burst",
+            "timings": [],
+            "timingLabel": "Soul Burst",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
-            "keyword": null,
+            "keyword": "Soul Burst",
             "burstCondition": "AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT",
             "isFlash": false,
             "isMain": false,
             "cleanBody": "Summon this Spirit card without paying the cost."
           },
+          "originalAbilityText": "[Soul Burst] (After your Spirit is Depleted/Destroyed by the Opponent)\nSummon this Spirit card without paying the cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Summon this Spirit card without paying the cost.",
+              "originalClauseText": "Summon this Spirit card without paying the cost.",
               "cleanText": "Summon this Spirit card without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -4064,10 +6715,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-013#a1",
+          "keywords": [
+            {
+              "name": "Soul Burst",
+              "parameter": null,
+              "wave": 2,
+              "hook": "burst",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC30-013#AB_BURST_NONE_LV1_LV2_LV3_d71005f9caffd7bfb3faf31ecd21be086f4b42758af371ec9afb6a61d0f9f5a9_6e9fa5b6bb4dce85ffa62e93347b68a5",
+              "cardNumber": "BSC30-013",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "BURST",
+              "timingLabel": "Soul Burst",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": "AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT",
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC30-013#a1"
+            }
+          ],
+          "id": "BSC30-013#AB_BURST_NONE_LV1_LV2_LV3_d71005f9caffd7bfb3faf31ecd21be086f4b42758af371ec9afb6a61d0f9f5a9_6e9fa5b6bb4dce85ffa62e93347b68a5",
+          "physicalId": "BSC30-013#AB_BURST_NONE_LV1_LV2_LV3_d71005f9caffd7bfb3faf31ecd21be086f4b42758af371ec9afb6a61d0f9f5a9_6e9fa5b6bb4dce85ffa62e93347b68a5",
+          "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_d71005f9caffd7bfb3faf31ecd21be086f4b42758af371ec9afb6a61d0f9f5a9_6e9fa5b6bb4dce85ffa62e93347b68a5",
+          "semanticIdV3": "SEM3#AB_BURST_NONE_LV1_LV2_LV3_89ead92ae380abf877071d6d215b1926c33d3752f4dd7f41ea11f5c6004075c0_e09fb5664511fc1157ae76b8b03c3d8d",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC30-013#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4077,37 +6772,76 @@
             ],
             "levelExplicit": true,
             "prefixes": [],
-            "timing": "WHEN_SUMMONED",
-            "timingLabel": "When Summoned/Advents",
+            "timing": "PASSIVE",
+            "timings": [],
+            "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
             "burstCondition": null,
             "isFlash": false,
             "isMain": false,
-            "cleanBody": "During this turn, your Life can't be reduced by the attack of opposing Spirits/Ultimates with two or more symbols."
+            "cleanBody": "(When Summoned/Advents)\nDuring this turn, your Life can't be reduced by the attack of opposing Spirits/Ultimates with two or more symbols."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned/Advents)\nDuring this turn, your Life can't be reduced by the attack of opposing Spirits/Ultimates with two or more symbols.",
+          "abilityIndex": 2,
           "clauses": [
             {
+              "rawText": "(When Summoned/Advents)",
+              "originalClauseText": "(When Summoned/Advents)",
+              "cleanText": "(When Summoned/Advents)",
+              "clauseIndex": 0,
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "UNSUPPORTED",
+                "rawText": "(When Summoned/Advents)"
+              }
+            },
+            {
               "rawText": "During this turn, your Life can't be reduced by the attack of opposing Spirits/Ultimates with two or more symbols.",
+              "originalClauseText": "During this turn, your Life can't be reduced by the attack of opposing Spirits/Ultimates with two or more symbols.",
               "cleanText": "your Life can't be reduced by the attack of opposing Spirits/Ultimates with two or more symbols",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": "DURING_THIS_TURN",
               "op": {
-                "op": "ADD_SYMBOL"
+                "op": "COMBAT_RESTRICTION"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "(When Summoned/Advents)"
+          ],
+          "legacyId": "BSC30-013#a2",
+          "keywords": [],
+          "id": "BSC30-013#AB_PASSIVE_NONE_LV1_LV2_LV3_417c7471c652894f533808510a02f42de91c75ceea8e8df4734d3afed797d287_df7df2fbf326c78e989e26775eec742e",
+          "physicalId": "BSC30-013#AB_PASSIVE_NONE_LV1_LV2_LV3_417c7471c652894f533808510a02f42de91c75ceea8e8df4734d3afed797d287_df7df2fbf326c78e989e26775eec742e",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_417c7471c652894f533808510a02f42de91c75ceea8e8df4734d3afed797d287_df7df2fbf326c78e989e26775eec742e",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_cebe92bcf54258625588c3994c8b3282217a35d28d4dba1a775c40b1a5f1c312_9b149fb14593605a80fa33dd87e8b013",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
-      "unsupportedClausesCount": 0,
-      "isFullySupported": true
+      "unsupportedClausesCount": 1,
+      "isFullySupported": false
     }
   },
   "BSC30-003": {
@@ -4563,10 +7297,24 @@
     "compiledIr": {
       "cardNumber": "BSC30-008",
       "name": "The WindDemon Tsubakura-Crow",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 2000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 3000
+        }
+      },
+      "originalEffectText": "When this Spirit card is discarded by opposing \"deck discarding effects\", send an opposing Life to their Trash. If this effect is activated during (Opposing Main Step), this effect sends +1 core to the Trash.\n\n[LV1][LV2] (When Summoned)\nPut a core from the Void to this Spirit.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BSC30-008#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4577,8 +7325,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4587,10 +7340,14 @@
             "isMain": false,
             "cleanBody": "When this Spirit card is discarded by opposing \"deck discarding effects\", send an opposing Life to their Trash. If this effect is activated during (Opposing Main Step), this effect sends +1 core to the Trash."
           },
+          "originalAbilityText": "When this Spirit card is discarded by opposing \"deck discarding effects\", send an opposing Life to their Trash. If this effect is activated during (Opposing Main Step), this effect sends +1 core to the Trash.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When this Spirit card is discarded by opposing \"deck discarding effects\", send an opposing Life to their Trash.",
+              "originalClauseText": "When this Spirit card is discarded by opposing \"deck discarding effects\", send an opposing Life to their Trash.",
               "cleanText": "When this Spirit card is discarded by opposing \"deck discarding effects\", send an opposing Life to their Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -4598,26 +7355,48 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "to": {
+                  "zone": "trash",
+                  "side": "opp"
+                }
               }
             },
             {
               "rawText": "If this effect is activated during (Opposing Main Step), this effect sends +1 core to the Trash.",
+              "originalClauseText": "If this effect is activated during (Opposing Main Step), this effect sends +1 core to the Trash.",
               "cleanText": "this effect sends +1 core to the Trash",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": "If this effect is activated during (Opposing Main Step)",
               "duration": null,
               "op": {
-                "op": "MODIFY_EFFECT"
+                "op": "MODIFY_EFFECT",
+                "side": "self",
+                "param": "cores",
+                "delta": 1,
+                "targetEffect": "core_operation"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-008#a0",
+          "keywords": [],
+          "id": "BSC30-008#AB_PASSIVE_NONE_LV1_LV2_LV3_2d94ee5572f74bd4e5278e918ba681a5503ba05aad36791ddb3c609fe1e04c24_d17c7ea6121a4059860b55843a978802",
+          "physicalId": "BSC30-008#AB_PASSIVE_NONE_LV1_LV2_LV3_2d94ee5572f74bd4e5278e918ba681a5503ba05aad36791ddb3c609fe1e04c24_d17c7ea6121a4059860b55843a978802",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_2d94ee5572f74bd4e5278e918ba681a5503ba05aad36791ddb3c609fe1e04c24_d17c7ea6121a4059860b55843a978802",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_541c9b75c94bc7c681bf3511370981dc3c6fe0213af8866e20fee53239bad979_977e98a56aa8c66e3dc7a76083177d27",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC30-008#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4627,8 +7406,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4637,10 +7425,14 @@
             "isMain": false,
             "cleanBody": "Put a core from the Void to this Spirit."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned)\nPut a core from the Void to this Spirit.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Put a core from the Void to this Spirit.",
+              "originalClauseText": "Put a core from the Void to this Spirit.",
               "cleanText": "Put a core from the Void to this Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -4659,7 +7451,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC30-008#a1",
+          "keywords": [],
+          "id": "BSC30-008#AB_WHEN_SUMMONED_NONE_LV1_LV2_76b9e75d6e55f198913af175b8938021181ff53a13bcfcf360ef682f220972a5_6946d3534258b72bef3d4a8755046c6c",
+          "physicalId": "BSC30-008#AB_WHEN_SUMMONED_NONE_LV1_LV2_76b9e75d6e55f198913af175b8938021181ff53a13bcfcf360ef682f220972a5_6946d3534258b72bef3d4a8755046c6c",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_76b9e75d6e55f198913af175b8938021181ff53a13bcfcf360ef682f220972a5_6946d3534258b72bef3d4a8755046c6c",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_cbd0d581f3afaed98bebdc265eaf247706a8fdb5fab1334e3c6a41c58d4d3a80_0735f14c24711edc50b603f900ca52fc",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,

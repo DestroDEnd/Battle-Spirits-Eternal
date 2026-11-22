@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BattleSpiritsOpcodeSemanticEvidenceSchema",
+  "description": "Schema for runtime semantic evidence entries proving actual production engine opcode execution and state mutations.",
+  "type": "object",
+  "required": [
+    "evidenceId",
+    "timestamp",
+    "opcode",
+    "evidenceStatus",
+    "executionSuccess"
+  ],
+  "properties": {
+    "evidenceId": {
+      "type": "string",
+      "pattern": "^EVID-[A-Z0-9_]+-[0-9]+-[0-9]+$"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "opcode": {
+      "type": "string"
+    },
+    "variant": {
+      "type": "string"
+    },
+    "cardId": {
+      "type": ["string", "null"]
+    },
+    "abilityId": {
+      "type": ["string", "null"]
+    },
+    "clauseId": {
+      "type": ["string", "null"]
+    },
+    "testSuite": {
+      "type": ["string", "null"]
+    },
+    "testCase": {
+      "type": ["string", "null"]
+    },
+    "productionHandler": {
+      "type": "string"
+    },
+    "inputParams": {
+      "type": "object"
+    },
+    "preconditions": {
+      "type": "object"
+    },
+    "expectedOutcome": {
+      "type": ["object", "string", "null"]
+    },
+    "actualOutcome": {
+      "type": ["object", "string", "null"]
+    },
+    "stateDeltas": {
+      "type": "object"
+    },
+    "durationMs": {
+      "type": "number"
+    },
+    "executionSuccess": {
+      "type": "boolean"
+    },
+    "evidenceStatus": {
+      "type": "string",
+      "enum": [
+        "NOT_IMPLEMENTED",
+        "COMPILER_ONLY",
+        "HANDLER_PRESENT",
+        "INTEGRATION_VERIFIED",
+        "SEMANTICALLY_VERIFIED",
+        "BLOCKED_UNSUPPORTED_DEPENDENCY"
+      ]
+    },
+    "rejectionReason": {
+      "type": ["string", "null"]
+    }
+  }
+}

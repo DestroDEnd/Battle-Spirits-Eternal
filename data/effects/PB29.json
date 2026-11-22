@@ -331,6 +331,28 @@
     "compiledIr": {
       "cardNumber": "PB29-004",
       "name": "［Green Star Coord］Toudou Yurika",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 7000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 3,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "[team: STAR ANIS]\n\n[LV1][LV2][LV3] (When Summoned)\nBesides \"Toudou Yurika\", you can return a [STAR ANIS] Spirit card from your Trash to the Hand. When you've done so, send three cores from an opposing Spirit to the Reserve.\n\n[LV3] (When Attacks)\nIf your Life is five or less, besides [Soul Core], send a core from your Trash to your Life.",
+      "teams": [
+        "STAR ANIS"
+      ],
       "keywords": [
         {
           "name": "Team",
@@ -338,13 +360,36 @@
           "wave": 5,
           "hook": "team",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "PB29-004#AB_PASSIVE_NONE_LV1_LV2_LV3_12494d05e844bee01c0ad1fbaf0aa35f7771f9284cfd8f1c93dfef97fb218bd2_92f0f2eec78f65ec00f6b7969b2d3271",
+          "cardNumber": "PB29-004",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB29-004#a0"
         }
       ],
       "abilities": [
         {
-          "id": "PB29-004#a0",
-          "type": "ABILITY",
+          "type": "TEAM_RESTRICTION",
+          "teams": [
+            "STAR ANIS"
+          ],
           "header": {
             "levels": [
               1,
@@ -354,8 +399,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -364,11 +414,56 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "rawText": "[team: STAR ANIS]",
+          "originalAbilityText": "[team: STAR ANIS]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB29-004#a0",
+          "keywords": [
+            {
+              "name": "Team",
+              "parameter": "STAR ANIS",
+              "wave": 5,
+              "hook": "team",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB29-004#AB_PASSIVE_NONE_LV1_LV2_LV3_12494d05e844bee01c0ad1fbaf0aa35f7771f9284cfd8f1c93dfef97fb218bd2_92f0f2eec78f65ec00f6b7969b2d3271",
+              "cardNumber": "PB29-004",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB29-004#a0"
+            }
+          ],
+          "id": "PB29-004#AB_PASSIVE_NONE_LV1_LV2_LV3_12494d05e844bee01c0ad1fbaf0aa35f7771f9284cfd8f1c93dfef97fb218bd2_92f0f2eec78f65ec00f6b7969b2d3271",
+          "physicalId": "PB29-004#AB_PASSIVE_NONE_LV1_LV2_LV3_12494d05e844bee01c0ad1fbaf0aa35f7771f9284cfd8f1c93dfef97fb218bd2_92f0f2eec78f65ec00f6b7969b2d3271",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_12494d05e844bee01c0ad1fbaf0aa35f7771f9284cfd8f1c93dfef97fb218bd2_92f0f2eec78f65ec00f6b7969b2d3271",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_31319672abde160eb7371f4601211febaa6f8498b2b9865c64171d26109cca05_5cb9613130fc0b3e9a0d67b765910fbc",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB29-004#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -379,8 +474,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -389,26 +493,40 @@
             "isMain": false,
             "cleanBody": "Besides \"Toudou Yurika\", you can return a [STAR ANIS] Spirit card from your Trash to the Hand. When you've done so, send three cores from an opposing Spirit to the Reserve."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nBesides \"Toudou Yurika\", you can return a [STAR ANIS] Spirit card from your Trash to the Hand. When you've done so, send three cores from an opposing Spirit to the Reserve.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Besides \"Toudou Yurika\", you can return a [STAR ANIS] Spirit card from your Trash to the Hand.",
+              "originalClauseText": "Besides \"Toudou Yurika\", you can return a [STAR ANIS] Spirit card from your Trash to the Hand.",
               "cleanText": "Besides \"Toudou Yurika\", you can return a [STAR ANIS] Spirit card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "Toudou Yurika"
+                },
+                "isOptional": false
               }
             },
             {
               "rawText": "send three cores from an opposing Spirit to the Reserve.",
+              "originalClauseText": "send three cores from an opposing Spirit to the Reserve.",
               "cleanText": "send three cores from an opposing Spirit to the Reserve",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -432,10 +550,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB29-004#a1",
+          "keywords": [],
+          "id": "PB29-004#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_216d4cb1b032092e69993057976620d36cc33f3a0ac9eb7710fc075d8b36e698_92f55644af7a12592ef45d5a501b9db4",
+          "physicalId": "PB29-004#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_216d4cb1b032092e69993057976620d36cc33f3a0ac9eb7710fc075d8b36e698_92f55644af7a12592ef45d5a501b9db4",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_216d4cb1b032092e69993057976620d36cc33f3a0ac9eb7710fc075d8b36e698_92f55644af7a12592ef45d5a501b9db4",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_dedd5357a3ab00dccff38dba39765dff08cdb9f748d4dd9b984544dac41c4122_5cfa3679946115df0366ca97b84d7419",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB29-004#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -444,8 +576,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -454,10 +595,14 @@
             "isMain": false,
             "cleanBody": "If your Life is five or less, besides [Soul Core], send a core from your Trash to your Life."
           },
+          "originalAbilityText": "[LV3] (When Attacks)\nIf your Life is five or less, besides [Soul Core], send a core from your Trash to your Life.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "If your Life is five or less, besides [Soul Core], send a core from your Trash to your Life.",
+              "originalClauseText": "If your Life is five or less, besides [Soul Core], send a core from your Trash to your Life.",
               "cleanText": "besides [Soul Core], send a core from your Trash to your Life",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -465,11 +610,34 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "trash",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "life",
+                  "side": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB29-004#a2",
+          "keywords": [],
+          "id": "PB29-004#AB_WHEN_ATTACKS_NONE_LV3_2ef35f14d58c3eca72e12ae86c99a5d8ec7663f5810a69b39bead52d6c66756a_55d9e73a5e4380e266bed2775853ae85",
+          "physicalId": "PB29-004#AB_WHEN_ATTACKS_NONE_LV3_2ef35f14d58c3eca72e12ae86c99a5d8ec7663f5810a69b39bead52d6c66756a_55d9e73a5e4380e266bed2775853ae85",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV3_2ef35f14d58c3eca72e12ae86c99a5d8ec7663f5810a69b39bead52d6c66756a_55d9e73a5e4380e266bed2775853ae85",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV3_a1847c0eeb32b8deca647a40a9f8e17598e398b61b4a28dc1651f8980ea0afec_ee1178e8acbdf2d27f83401fc62cd35e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -502,19 +670,59 @@
     "compiledIr": {
       "cardNumber": "PB29-010",
       "name": "［Hagoromo Princess Coord］Fujiwara Miyabi",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 4000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 7000
+        }
+      },
+      "originalEffectText": "Flash - [Accel: Cost 4 ([Yellow Core][Yellow Core])]\nYou can summon a Cost 4 or less “Idol” family Spirit card from your Trash, without paying the cost. After this effect resolves, put this card face-up onto the Removed Zone.\n\n[LV2][LV3] (When Attacks/Blocks)\nBesides “Fujiwara Miyabi”, refresh an “Idol” family Spirit you control. When this effect refreshes “Kurisu Kokone”, put a core from the Void to any of your Spirits.",
+      "teams": [],
       "keywords": [
         {
-          "name": "Accel",
-          "parameter": "Cost 4 ([Yellow Core",
-          "wave": 2,
-          "hook": "accel",
+          "name": "Yellow Core",
+          "parameter": null,
+          "wave": 1,
+          "hook": "yellow_core",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "PB29-010#AB_FLASH_NONE_LV1_LV2_LV3_3fcaec5b442f6d7bdb4406cf77bd907330043a3aa564ed3cca3b0ebdbad33ca3_876098229960bb67efca86897db3478a",
+          "cardNumber": "PB29-010",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PB29-010#a0"
         }
       ],
       "abilities": [
         {
-          "id": "PB29-010#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -525,8 +733,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Yellow Core",
@@ -535,10 +750,14 @@
             "isMain": false,
             "cleanBody": "You can summon a Cost 4 or less “Idol” family Spirit card from your Trash, without paying the cost. After this effect resolves, put this card face-up onto the Removed Zone."
           },
+          "originalAbilityText": "Flash - [Accel: Cost 4 ([Yellow Core][Yellow Core])]\nYou can summon a Cost 4 or less “Idol” family Spirit card from your Trash, without paying the cost. After this effect resolves, put this card face-up onto the Removed Zone.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "You can summon a Cost 4 or less \"Idol\" family Spirit card from your Trash, without paying the cost.",
+              "originalClauseText": "You can summon a Cost 4 or less \"Idol\" family Spirit card from your Trash, without paying the cost.",
               "cleanText": "You can summon a Cost 4 or less \"Idol\" family Spirit card from your Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -546,12 +765,26 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "costLte": 4,
+                  "family": "Idol"
+                },
+                "free": true,
+                "isOptional": true
               }
             },
             {
               "rawText": "put this card face-up onto the Removed Zone.",
+              "originalClauseText": "put this card face-up onto the Removed Zone.",
               "cleanText": "put this card face-up onto the Removed Zone",
+              "clauseIndex": 1,
               "link": "afterResolves",
               "isOptional": false,
               "isCost": false,
@@ -562,10 +795,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB29-010#a0",
+          "keywords": [
+            {
+              "name": "Yellow Core",
+              "parameter": null,
+              "wave": 1,
+              "hook": "yellow_core",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB29-010#AB_FLASH_NONE_LV1_LV2_LV3_3fcaec5b442f6d7bdb4406cf77bd907330043a3aa564ed3cca3b0ebdbad33ca3_876098229960bb67efca86897db3478a",
+              "cardNumber": "PB29-010",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PB29-010#a0"
+            }
+          ],
+          "id": "PB29-010#AB_FLASH_NONE_LV1_LV2_LV3_3fcaec5b442f6d7bdb4406cf77bd907330043a3aa564ed3cca3b0ebdbad33ca3_876098229960bb67efca86897db3478a",
+          "physicalId": "PB29-010#AB_FLASH_NONE_LV1_LV2_LV3_3fcaec5b442f6d7bdb4406cf77bd907330043a3aa564ed3cca3b0ebdbad33ca3_876098229960bb67efca86897db3478a",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_3fcaec5b442f6d7bdb4406cf77bd907330043a3aa564ed3cca3b0ebdbad33ca3_876098229960bb67efca86897db3478a",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_8ec4e028d31e81b09f6367fb403e49f8b89ac844aebe23f78053f31be40a0efd_711662c1538eff91a38af23a3f8134f6",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB29-010#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -575,8 +852,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timings": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
             "timingLabel": "When Attacks/Blocks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -585,10 +873,14 @@
             "isMain": false,
             "cleanBody": "Besides “Fujiwara Miyabi”, refresh an “Idol” family Spirit you control. When this effect refreshes “Kurisu Kokone”, put a core from the Void to any of your Spirits."
           },
+          "originalAbilityText": "[LV2][LV3] (When Attacks/Blocks)\nBesides “Fujiwara Miyabi”, refresh an “Idol” family Spirit you control. When this effect refreshes “Kurisu Kokone”, put a core from the Void to any of your Spirits.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Besides \"Fujiwara Miyabi\", refresh an \"Idol\" family Spirit you control.",
+              "originalClauseText": "Besides \"Fujiwara Miyabi\", refresh an \"Idol\" family Spirit you control.",
               "cleanText": "Besides \"Fujiwara Miyabi\", refresh an \"Idol\" family Spirit you control",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -596,14 +888,20 @@
               "duration": null,
               "op": {
                 "op": "REFRESH",
+                "count": 1,
                 "target": {
-                  "side": "either"
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
                 }
               }
             },
             {
               "rawText": "When this effect refreshes \"Kurisu Kokone\", put a core from the Void to any of your Spirits.",
+              "originalClauseText": "When this effect refreshes \"Kurisu Kokone\", put a core from the Void to any of your Spirits.",
               "cleanText": "When this effect refreshes \"Kurisu Kokone\", put a core from the Void to any of your Spirits",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -611,11 +909,30 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB29-010#a1",
+          "keywords": [],
+          "id": "PB29-010#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV2_LV3_67e222ff1e4de6c83e1a1dbf9862df3f0da244c4fd1f2132c550edb2774b3251_dacacdb293bd5dbcdda565de90fb5ffb",
+          "physicalId": "PB29-010#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV2_LV3_67e222ff1e4de6c83e1a1dbf9862df3f0da244c4fd1f2132c550edb2774b3251_dacacdb293bd5dbcdda565de90fb5ffb",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV2_LV3_67e222ff1e4de6c83e1a1dbf9862df3f0da244c4fd1f2132c550edb2774b3251_dacacdb293bd5dbcdda565de90fb5ffb",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV2_LV3_f0e374687f9e0b95c1f85cb88600dd0914dceaa9179715c9d62ff1656005ebb0_2a135e25ec14ed8fb183139e1faacd45",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_BLOCKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -1432,6 +1749,28 @@
     "compiledIr": {
       "cardNumber": "PB29-008",
       "name": "［Red Star Coord］Kanzaki Mizuki",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 7000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 11000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 3,
+          "bp": 13000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: [STAR ANIS]] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit.\n\n[team: STAR ANIS]\n\n[LV1][LV2][LV3] (When Advents)\nYou can summon one of this Spirit's \"Idol\" family pre-advent cards, without paying the cost.\n\n[LV2][LV3]\nEvery Cost 6 \"Idol\" family you control gains an extra Yellow symbol.",
+      "teams": [
+        "STAR ANIS"
+      ],
       "keywords": [
         {
           "name": "Advent",
@@ -1439,7 +1778,28 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "PB29-008#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_76b9bc5d438ec9926d4cf77e478cbcc6d265153da29e7f052cc365c4f6ee042f_3c82c5fad44816a77622fb987e5df10f",
+          "cardNumber": "PB29-008",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PB29-008#a0"
         },
         {
           "name": "Team",
@@ -1447,12 +1807,32 @@
           "wave": 5,
           "hook": "team",
           "bracketed": true,
-          "index": 147
+          "index": 0,
+          "abilityId": "PB29-008#AB_PASSIVE_NONE_LV1_LV2_LV3_12494d05e844bee01c0ad1fbaf0aa35f7771f9284cfd8f1c93dfef97fb218bd2_92f0f2eec78f65ec00f6b7969b2d3271",
+          "cardNumber": "PB29-008",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB29-008#a1"
         }
       ],
       "abilities": [
         {
-          "id": "PB29-008#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1463,8 +1843,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: [STAR ANIS",
@@ -1473,10 +1862,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Advent: [STAR ANIS]] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1498,7 +1891,9 @@
             },
             {
               "rawText": "stack this from your Hand onto your target Spirit.",
+              "originalClauseText": "stack this from your Hand onto your target Spirit.",
               "cleanText": "stack this from your Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1516,11 +1911,58 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB29-008#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "[STAR ANIS",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB29-008#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_76b9bc5d438ec9926d4cf77e478cbcc6d265153da29e7f052cc365c4f6ee042f_3c82c5fad44816a77622fb987e5df10f",
+              "cardNumber": "PB29-008",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PB29-008#a0"
+            }
+          ],
+          "id": "PB29-008#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_76b9bc5d438ec9926d4cf77e478cbcc6d265153da29e7f052cc365c4f6ee042f_3c82c5fad44816a77622fb987e5df10f",
+          "physicalId": "PB29-008#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_76b9bc5d438ec9926d4cf77e478cbcc6d265153da29e7f052cc365c4f6ee042f_3c82c5fad44816a77622fb987e5df10f",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_76b9bc5d438ec9926d4cf77e478cbcc6d265153da29e7f052cc365c4f6ee042f_3c82c5fad44816a77622fb987e5df10f",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_0a107d04adc6552c5950118eef68d6b477b8fe1f817298ed5b0ce086b693cf3b_dea37e13687c4bb7f0c84ca4b000de10",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB29-008#a1",
-          "type": "ABILITY",
+          "type": "TEAM_RESTRICTION",
+          "teams": [
+            "STAR ANIS"
+          ],
           "header": {
             "levels": [
               1,
@@ -1530,8 +1972,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1540,11 +1987,56 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "rawText": "[team: STAR ANIS]",
+          "originalAbilityText": "[team: STAR ANIS]",
+          "abilityIndex": 1,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB29-008#a1",
+          "keywords": [
+            {
+              "name": "Team",
+              "parameter": "STAR ANIS",
+              "wave": 5,
+              "hook": "team",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB29-008#AB_PASSIVE_NONE_LV1_LV2_LV3_12494d05e844bee01c0ad1fbaf0aa35f7771f9284cfd8f1c93dfef97fb218bd2_92f0f2eec78f65ec00f6b7969b2d3271",
+              "cardNumber": "PB29-008",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB29-008#a1"
+            }
+          ],
+          "id": "PB29-008#AB_PASSIVE_NONE_LV1_LV2_LV3_12494d05e844bee01c0ad1fbaf0aa35f7771f9284cfd8f1c93dfef97fb218bd2_92f0f2eec78f65ec00f6b7969b2d3271",
+          "physicalId": "PB29-008#AB_PASSIVE_NONE_LV1_LV2_LV3_12494d05e844bee01c0ad1fbaf0aa35f7771f9284cfd8f1c93dfef97fb218bd2_92f0f2eec78f65ec00f6b7969b2d3271",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_12494d05e844bee01c0ad1fbaf0aa35f7771f9284cfd8f1c93dfef97fb218bd2_92f0f2eec78f65ec00f6b7969b2d3271",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_31319672abde160eb7371f4601211febaa6f8498b2b9865c64171d26109cca05_5cb9613130fc0b3e9a0d67b765910fbc",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB29-008#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1555,8 +2047,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS"
+            ],
             "timingLabel": "When Advents",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1565,10 +2066,14 @@
             "isMain": false,
             "cleanBody": "You can summon one of this Spirit's \"Idol\" family pre-advent cards, without paying the cost."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Advents)\nYou can summon one of this Spirit's \"Idol\" family pre-advent cards, without paying the cost.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "You can summon one of this Spirit's \"Idol\" family pre-advent cards, without paying the cost.",
+              "originalClauseText": "You can summon one of this Spirit's \"Idol\" family pre-advent cards, without paying the cost.",
               "cleanText": "You can summon one of this Spirit's \"Idol\" family pre-advent cards, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1576,14 +2081,39 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "family": "Idol"
+                },
+                "free": true,
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB29-008#a2",
+          "keywords": [],
+          "id": "PB29-008#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_78eee1610d39e4007898510a6d4beb898179e870d7cc471beecc1984ca8c9ea8_33c612dcec9ef07365266730734499f0",
+          "physicalId": "PB29-008#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_78eee1610d39e4007898510a6d4beb898179e870d7cc471beecc1984ca8c9ea8_33c612dcec9ef07365266730734499f0",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_78eee1610d39e4007898510a6d4beb898179e870d7cc471beecc1984ca8c9ea8_33c612dcec9ef07365266730734499f0",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_664b9c038804319f7a56a679af1e64bf748cbd79b045104ce58a79de966c254c_9160a06b1aea2bab572468c3605a4521",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB29-008#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1593,8 +2123,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1603,21 +2138,41 @@
             "isMain": false,
             "cleanBody": "Every Cost 6 \"Idol\" family you control gains an extra Yellow symbol."
           },
+          "originalAbilityText": "[LV2][LV3]\nEvery Cost 6 \"Idol\" family you control gains an extra Yellow symbol.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "Every Cost 6 \"Idol\" family you control gains an extra Yellow symbol.",
+              "originalClauseText": "Every Cost 6 \"Idol\" family you control gains an extra Yellow symbol.",
               "cleanText": "Every Cost 6 \"Idol\" family you control gains an extra Yellow symbol",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "COST_MODIFIER"
+                "op": "ADD_SYMBOL",
+                "color": "Yellow",
+                "count": 1,
+                "side": "self"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB29-008#a3",
+          "keywords": [],
+          "id": "PB29-008#AB_PASSIVE_NONE_LV2_LV3_b50492584ba08b48a7cd30ce63efd2636f7bfd259b1e3f179d3d2384c02c4d3f_d5e6f8fe9966910007b7a8aa4655ddca",
+          "physicalId": "PB29-008#AB_PASSIVE_NONE_LV2_LV3_b50492584ba08b48a7cd30ce63efd2636f7bfd259b1e3f179d3d2384c02c4d3f_d5e6f8fe9966910007b7a8aa4655ddca",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV2_LV3_b50492584ba08b48a7cd30ce63efd2636f7bfd259b1e3f179d3d2384c02c4d3f_d5e6f8fe9966910007b7a8aa4655ddca",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV2_LV3_71b796ef1fcb8c02ee39b590bce52f7a19b8b68b82aaedd12c9428899abf1bc3_7eafeb80e61beb1400c6c3b2139f3e53",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,

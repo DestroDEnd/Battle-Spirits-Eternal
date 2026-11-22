@@ -24,6 +24,26 @@
     "compiledIr": {
       "cardNumber": "PB44-011",
       "name": "［Blooming Coord］Kitaouji Sakura ［2］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 6000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 8000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] [Starlight Appeal] (When Summoned)\nUntil your next Main Step, this Spirit is unaffected by opposing effects. Then, you can send a core from this Spirit to the Trash. When you've done so, send the [Soul Core] from your Trash to any of your \"Idol\" family Spirit.\n\n[LV2][LV3]\nYour Cost 4 or less \"Idol\" family Spirits are unaffected by opposing Spirit/Nexus effects.",
+      "teams": [],
       "keywords": [
         {
           "name": "Starlight Appeal",
@@ -31,12 +51,32 @@
           "wave": 5,
           "hook": "appeal",
           "bracketed": true,
-          "index": 16
+          "index": 0,
+          "abilityId": "PB44-011#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_e5b3bd2d40b0e29b1712b90d1f039269a440e897ac391d44f8450c5142095bbe_e6d269adff13cfbfa42bb23497979166",
+          "cardNumber": "PB44-011",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB44-011#a0"
         }
       ],
       "abilities": [
         {
-          "id": "PB44-011#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -47,8 +87,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Starlight Appeal",
@@ -57,10 +106,14 @@
             "isMain": false,
             "cleanBody": "Until your next Main Step, this Spirit is unaffected by opposing effects. Then, you can send a core from this Spirit to the Trash. When you've done so, send the [Soul Core] from your Trash to any of your \"Idol\" family Spirit."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] [Starlight Appeal] (When Summoned)\nUntil your next Main Step, this Spirit is unaffected by opposing effects. Then, you can send a core from this Spirit to the Trash. When you've done so, send the [Soul Core] from your Trash to any of your \"Idol\" family Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Until your next Main Step, this Spirit is unaffected by opposing effects.",
+              "originalClauseText": "Until your next Main Step, this Spirit is unaffected by opposing effects.",
               "cleanText": "Until your next Main Step, this Spirit is unaffected by opposing effects",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -73,7 +126,9 @@
             },
             {
               "rawText": "you can send a core from this Spirit to the Trash.",
+              "originalClauseText": "you can send a core from this Spirit to the Trash.",
               "cleanText": "you can send a core from this Spirit to the Trash",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": true,
               "isCost": false,
@@ -81,26 +136,87 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             },
             {
               "rawText": "send the [Soul Core] from your Trash to any of your \"Idol\" family Spirit.",
+              "originalClauseText": "send the [Soul Core] from your Trash to any of your \"Idol\" family Spirit.",
               "cleanText": "send the [Soul Core] from your Trash to any of your \"Idol\" family Spirit",
+              "clauseIndex": 2,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "GRANT_FAMILY"
+                "op": "MOVE_SOUL_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB44-011#a0",
+          "keywords": [
+            {
+              "name": "Starlight Appeal",
+              "parameter": null,
+              "wave": 5,
+              "hook": "appeal",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB44-011#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_e5b3bd2d40b0e29b1712b90d1f039269a440e897ac391d44f8450c5142095bbe_e6d269adff13cfbfa42bb23497979166",
+              "cardNumber": "PB44-011",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_SUMMONED",
+              "timingLabel": "When Summoned",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB44-011#a0"
+            }
+          ],
+          "id": "PB44-011#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_e5b3bd2d40b0e29b1712b90d1f039269a440e897ac391d44f8450c5142095bbe_e6d269adff13cfbfa42bb23497979166",
+          "physicalId": "PB44-011#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_e5b3bd2d40b0e29b1712b90d1f039269a440e897ac391d44f8450c5142095bbe_e6d269adff13cfbfa42bb23497979166",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_e5b3bd2d40b0e29b1712b90d1f039269a440e897ac391d44f8450c5142095bbe_e6d269adff13cfbfa42bb23497979166",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_53687800b321ee0f69d2b6b0ea9f65dad204da8c96b35dff0028f06293fe62a0_be48147ec506afb2908ed2821556b838",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB44-011#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -110,8 +226,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -120,10 +241,14 @@
             "isMain": false,
             "cleanBody": "Your Cost 4 or less \"Idol\" family Spirits are unaffected by opposing Spirit/Nexus effects."
           },
+          "originalAbilityText": "[LV2][LV3]\nYour Cost 4 or less \"Idol\" family Spirits are unaffected by opposing Spirit/Nexus effects.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Your Cost 4 or less \"Idol\" family Spirits are unaffected by opposing Spirit/Nexus effects.",
+              "originalClauseText": "Your Cost 4 or less \"Idol\" family Spirits are unaffected by opposing Spirit/Nexus effects.",
               "cleanText": "Your Cost 4 or less \"Idol\" family Spirits are unaffected by opposing Spirit/Nexus effects",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -135,7 +260,20 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB44-011#a1",
+          "keywords": [],
+          "id": "PB44-011#AB_PASSIVE_NONE_LV2_LV3_3332fb106cf682e4041bb5c77d05318d8e55edae1831660f80acecc467406cee_01b55004c6a5fa339113f238d0e2644c",
+          "physicalId": "PB44-011#AB_PASSIVE_NONE_LV2_LV3_3332fb106cf682e4041bb5c77d05318d8e55edae1831660f80acecc467406cee_01b55004c6a5fa339113f238d0e2644c",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV2_LV3_3332fb106cf682e4041bb5c77d05318d8e55edae1831660f80acecc467406cee_01b55004c6a5fa339113f238d0e2644c",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV2_LV3_743a58d6deeb1c10a748726604a5034e37cead60d2be2c6c974647924303fcdb_71307668ae65de763efe89e78bc6bbb2",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -168,27 +306,58 @@
     "compiledIr": {
       "cardNumber": "PB44-008",
       "name": "［Goth Magic Coord］Toudou Yurika ［2］",
-      "keywords": [
-        {
-          "name": "Burst",
-          "parameter": "After an opposing Spirit's (When Summoned) effect resolves",
-          "wave": 2,
-          "hook": "burst",
-          "bracketed": true,
-          "index": 0
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
         },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 7000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "[Burst: After an opposing Spirit's (When Summoned) effect resolves]\nSummon this card without paying the cost.\n\n[LV1][LV2][LV3] (When Summoned)\nYour counter +1, and send two cores from any opposing Spirits to the Reserve.\n\n[LV2][LV3] [Starlight Appeal] (When Attacks)\nSend two cores from an opposing Spirit to the Trash. Then, you can send a core from this Spirit to the Trash. When you've done so, put a core from the Void to your Life.",
+      "teams": [],
+      "keywords": [
         {
           "name": "Starlight Appeal",
           "parameter": null,
           "wave": 5,
           "hook": "appeal",
           "bracketed": true,
-          "index": 233
+          "index": 0,
+          "abilityId": "PB44-008#AB_WHEN_ATTACKS_NONE_LV2_LV3_e4b1d832c82fe76cd3b150346e25142dd1849808fc93861ceb71e1e425aba706_1cd634f8277a223804ae262116c18f3a",
+          "cardNumber": "PB44-008",
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB44-008#a2"
         }
       ],
       "abilities": [
         {
-          "id": "PB44-008#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -199,8 +368,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "BURST",
+            "timings": [],
             "timingLabel": "Burst",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -209,10 +385,14 @@
             "isMain": false,
             "cleanBody": "Summon this card without paying the cost."
           },
+          "originalAbilityText": "[Burst: After an opposing Spirit's (When Summoned) effect resolves]\nSummon this card without paying the cost.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Summon this card without paying the cost.",
+              "originalClauseText": "Summon this card without paying the cost.",
               "cleanText": "Summon this card without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -225,10 +405,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB44-008#a0",
+          "keywords": [],
+          "id": "PB44-008#AB_BURST_NONE_LV1_LV2_LV3_7caafca438b32bfd0552bd8c1bfb38bc0ab45bc3c16d683a3624a60055d9a113_7b7835a964a7dca0f5f8db5b55118080",
+          "physicalId": "PB44-008#AB_BURST_NONE_LV1_LV2_LV3_7caafca438b32bfd0552bd8c1bfb38bc0ab45bc3c16d683a3624a60055d9a113_7b7835a964a7dca0f5f8db5b55118080",
+          "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_7caafca438b32bfd0552bd8c1bfb38bc0ab45bc3c16d683a3624a60055d9a113_7b7835a964a7dca0f5f8db5b55118080",
+          "semanticIdV3": "SEM3#AB_BURST_NONE_LV1_LV2_LV3_fd1d6321e3e560603fc4a862866d3da52936c8e195c5be78f0afb0a279567bc4_c6b317d7f6a7cf4bfd2596c6897b98f6",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB44-008#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -239,8 +433,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -249,10 +452,14 @@
             "isMain": false,
             "cleanBody": "Your counter +1, and send two cores from any opposing Spirits to the Reserve."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nYour counter +1, and send two cores from any opposing Spirits to the Reserve.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Your counter +1",
+              "originalClauseText": "Your counter +1",
               "cleanText": "Your counter +1",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -265,7 +472,9 @@
             },
             {
               "rawText": "send two cores from any opposing Spirits to the Reserve.",
+              "originalClauseText": "send two cores from any opposing Spirits to the Reserve.",
               "cleanText": "send two cores from any opposing Spirits to the Reserve",
+              "clauseIndex": 1,
               "link": "also",
               "isOptional": false,
               "isCost": false,
@@ -273,14 +482,32 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 2,
+                "from": {
+                  "zone": "field",
+                  "side": "opp"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB44-008#a1",
+          "keywords": [],
+          "id": "PB44-008#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_2c9a66bba0ef29780e1ea17c2f76e8ee60ad783769b39e0c2772c7010a5d194a_b3d55bfef8c77ba364eb28c6910d6427",
+          "physicalId": "PB44-008#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_2c9a66bba0ef29780e1ea17c2f76e8ee60ad783769b39e0c2772c7010a5d194a_b3d55bfef8c77ba364eb28c6910d6427",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_2c9a66bba0ef29780e1ea17c2f76e8ee60ad783769b39e0c2772c7010a5d194a_b3d55bfef8c77ba364eb28c6910d6427",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_e39a820fd9d7ee239f2d12da43ee2aed9939221d33c9f66cf8a560ba3853f42a_9e42548a98f35a922cf553bc372b1b25",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB44-008#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -290,8 +517,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Starlight Appeal",
@@ -300,10 +536,14 @@
             "isMain": false,
             "cleanBody": "Send two cores from an opposing Spirit to the Trash. Then, you can send a core from this Spirit to the Trash. When you've done so, put a core from the Void to your Life."
           },
+          "originalAbilityText": "[LV2][LV3] [Starlight Appeal] (When Attacks)\nSend two cores from an opposing Spirit to the Trash. Then, you can send a core from this Spirit to the Trash. When you've done so, put a core from the Void to your Life.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Send two cores from an opposing Spirit to the Trash.",
+              "originalClauseText": "Send two cores from an opposing Spirit to the Trash.",
               "cleanText": "Send two cores from an opposing Spirit to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -328,7 +568,9 @@
             },
             {
               "rawText": "you can send a core from this Spirit to the Trash.",
+              "originalClauseText": "you can send a core from this Spirit to the Trash.",
               "cleanText": "you can send a core from this Spirit to the Trash",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": true,
               "isCost": false,
@@ -336,12 +578,23 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             },
             {
               "rawText": "put a core from the Void to your Life.",
+              "originalClauseText": "put a core from the Void to your Life.",
               "cleanText": "put a core from the Void to your Life",
+              "clauseIndex": 2,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -353,7 +606,51 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB44-008#a2",
+          "keywords": [
+            {
+              "name": "Starlight Appeal",
+              "parameter": null,
+              "wave": 5,
+              "hook": "appeal",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB44-008#AB_WHEN_ATTACKS_NONE_LV2_LV3_e4b1d832c82fe76cd3b150346e25142dd1849808fc93861ceb71e1e425aba706_1cd634f8277a223804ae262116c18f3a",
+              "cardNumber": "PB44-008",
+              "levels": [
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB44-008#a2"
+            }
+          ],
+          "id": "PB44-008#AB_WHEN_ATTACKS_NONE_LV2_LV3_e4b1d832c82fe76cd3b150346e25142dd1849808fc93861ceb71e1e425aba706_1cd634f8277a223804ae262116c18f3a",
+          "physicalId": "PB44-008#AB_WHEN_ATTACKS_NONE_LV2_LV3_e4b1d832c82fe76cd3b150346e25142dd1849808fc93861ceb71e1e425aba706_1cd634f8277a223804ae262116c18f3a",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_e4b1d832c82fe76cd3b150346e25142dd1849808fc93861ceb71e1e425aba706_1cd634f8277a223804ae262116c18f3a",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_aa17ed3be37d20856e6371c567bb99175c526b8e9d7fcc1ac094dd358b7668ba_e104d3772cd00ba23f3c36add2798bc1",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
@@ -381,6 +678,21 @@
     "compiledIr": {
       "cardNumber": "PB44-X02",
       "name": "［Lilac Fairy Coord］Hoshimiya Ichigo ［2］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 8000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 15000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: \"Hoshimiya Ichigo\" & C6 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] [Starlight Appeal] (When Advents/Attacks)\nYou can return an opposing Spirit to the decktop. Then, you can send a core from this Spirit to the Trash. When you've done so, you can summon an \"Idol\" family Spirit card from your Hand, without paying the cost.\n\n[During OC & During Advent] [LV1][LV2] (Your Turn)\nEvery \"Hoshimiya Ichigo\"/\"Kiriya Aoi\"/\"Shibuki Ran\" you control gains an extra Yellow symbol, and is unaffected by opposing effects.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -388,7 +700,28 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "PB44-X02#AB_FLASH_NONE_LV1_LV2_LV3_84ab5ab8d973df7815fe21f3ff78b147b6f81a10b5ffe42f26966db40f702d5d_305e11edd461aa914841b4ce77150571",
+          "cardNumber": "PB44-X02",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PB44-X02#a0"
         },
         {
           "name": "Starlight Appeal",
@@ -396,12 +729,31 @@
           "wave": 5,
           "hook": "appeal",
           "bracketed": true,
-          "index": 176
+          "index": 0,
+          "abilityId": "PB44-X02#AB_WHEN_ADVENTS_NONE_LV1_LV2_967b0a5d0f18ab5bd3e95829c6753ebc298d302877630f15c93421e04ac7cb0a_d9485932ad8dca62735be62e455b28e7",
+          "cardNumber": "PB44-X02",
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ADVENTS",
+          "timingLabel": "When Advents/Attacks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB44-X02#a1"
         }
       ],
       "abilities": [
         {
-          "id": "PB44-X02#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -412,8 +764,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: \"Hoshimiya Ichigo\" & C6 or more, (Your Turn)",
@@ -422,10 +781,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: \"Hoshimiya Ichigo\" & C6 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -447,7 +810,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -465,10 +830,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB44-X02#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "\"Hoshimiya Ichigo\" & C6 or more, (Your Turn)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB44-X02#AB_FLASH_NONE_LV1_LV2_LV3_84ab5ab8d973df7815fe21f3ff78b147b6f81a10b5ffe42f26966db40f702d5d_305e11edd461aa914841b4ce77150571",
+              "cardNumber": "PB44-X02",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PB44-X02#a0"
+            }
+          ],
+          "id": "PB44-X02#AB_FLASH_NONE_LV1_LV2_LV3_84ab5ab8d973df7815fe21f3ff78b147b6f81a10b5ffe42f26966db40f702d5d_305e11edd461aa914841b4ce77150571",
+          "physicalId": "PB44-X02#AB_FLASH_NONE_LV1_LV2_LV3_84ab5ab8d973df7815fe21f3ff78b147b6f81a10b5ffe42f26966db40f702d5d_305e11edd461aa914841b4ce77150571",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_84ab5ab8d973df7815fe21f3ff78b147b6f81a10b5ffe42f26966db40f702d5d_305e11edd461aa914841b4ce77150571",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_0c621e6c18d5fdadce4d4e1938d168b2c7e70a33d9162de796afff88c908235b_6035ef589ad75cfcc62369d1e8c9e374",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB44-X02#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -478,8 +887,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Advents/Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Starlight Appeal",
@@ -488,10 +908,14 @@
             "isMain": false,
             "cleanBody": "You can return an opposing Spirit to the decktop. Then, you can send a core from this Spirit to the Trash. When you've done so, you can summon an \"Idol\" family Spirit card from your Hand, without paying the cost."
           },
+          "originalAbilityText": "[LV1][LV2] [Starlight Appeal] (When Advents/Attacks)\nYou can return an opposing Spirit to the decktop. Then, you can send a core from this Spirit to the Trash. When you've done so, you can summon an \"Idol\" family Spirit card from your Hand, without paying the cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can return an opposing Spirit to the decktop.",
+              "originalClauseText": "You can return an opposing Spirit to the decktop.",
               "cleanText": "You can return an opposing Spirit to the decktop",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -511,7 +935,9 @@
             },
             {
               "rawText": "you can send a core from this Spirit to the Trash.",
+              "originalClauseText": "you can send a core from this Spirit to the Trash.",
               "cleanText": "you can send a core from this Spirit to the Trash",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": true,
               "isCost": false,
@@ -519,12 +945,23 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             },
             {
               "rawText": "you can summon an \"Idol\" family Spirit card from your Hand, without paying the cost.",
+              "originalClauseText": "you can summon an \"Idol\" family Spirit card from your Hand, without paying the cost.",
               "cleanText": "you can summon an \"Idol\" family Spirit card from your Hand, without paying the cost",
+              "clauseIndex": 2,
               "link": "byDoing",
               "isOptional": true,
               "isCost": false,
@@ -532,14 +969,69 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "family": "Idol"
+                },
+                "free": true,
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB44-X02#a1",
+          "keywords": [
+            {
+              "name": "Starlight Appeal",
+              "parameter": null,
+              "wave": 5,
+              "hook": "appeal",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB44-X02#AB_WHEN_ADVENTS_NONE_LV1_LV2_967b0a5d0f18ab5bd3e95829c6753ebc298d302877630f15c93421e04ac7cb0a_d9485932ad8dca62735be62e455b28e7",
+              "cardNumber": "PB44-X02",
+              "levels": [
+                1,
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ADVENTS",
+              "timingLabel": "When Advents/Attacks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB44-X02#a1"
+            }
+          ],
+          "id": "PB44-X02#AB_WHEN_ADVENTS_NONE_LV1_LV2_967b0a5d0f18ab5bd3e95829c6753ebc298d302877630f15c93421e04ac7cb0a_d9485932ad8dca62735be62e455b28e7",
+          "physicalId": "PB44-X02#AB_WHEN_ADVENTS_NONE_LV1_LV2_967b0a5d0f18ab5bd3e95829c6753ebc298d302877630f15c93421e04ac7cb0a_d9485932ad8dca62735be62e455b28e7",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_967b0a5d0f18ab5bd3e95829c6753ebc298d302877630f15c93421e04ac7cb0a_d9485932ad8dca62735be62e455b28e7",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_fb6d679774950392ab52addd564ba95fc64a7d421f6e4396d809595baf200169_efd3b560c27893af3217a80177a2b3dd",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB44-X02#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -551,8 +1043,17 @@
               "During OC & During Advent"
             ],
             "timing": "TURN_TRIGGER",
+            "timings": [
+              "TURN_TRIGGER"
+            ],
             "timingLabel": "Your Turn",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "TURN_TRIGGER"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -561,10 +1062,14 @@
             "isMain": false,
             "cleanBody": "Every \"Hoshimiya Ichigo\"/\"Kiriya Aoi\"/\"Shibuki Ran\" you control gains an extra Yellow symbol, and is unaffected by opposing effects."
           },
+          "originalAbilityText": "[During OC & During Advent] [LV1][LV2] (Your Turn)\nEvery \"Hoshimiya Ichigo\"/\"Kiriya Aoi\"/\"Shibuki Ran\" you control gains an extra Yellow symbol, and is unaffected by opposing effects.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Every \"Hoshimiya Ichigo\"/\"Kiriya Aoi\"/\"Shibuki Ran\" you control gains an extra Yellow symbol, and is unaffected by opposing effects.",
+              "originalClauseText": "Every \"Hoshimiya Ichigo\"/\"Kiriya Aoi\"/\"Shibuki Ran\" you control gains an extra Yellow symbol, and is unaffected by opposing effects.",
               "cleanText": "Every \"Hoshimiya Ichigo\"/\"Kiriya Aoi\"/\"Shibuki Ran\" you control gains an extra Yellow symbol, and is unaffected by opposing effects",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -576,7 +1081,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB44-X02#a2",
+          "keywords": [],
+          "id": "PB44-X02#AB_TURN_TRIGGER_NONE_LV1_LV2_5582a28f73ecfa7c69aa4eaa7557cbdb29e212397b49104bc12fd8f17f38605c_7dbf48b78af2df43fa342a6901db8d56",
+          "physicalId": "PB44-X02#AB_TURN_TRIGGER_NONE_LV1_LV2_5582a28f73ecfa7c69aa4eaa7557cbdb29e212397b49104bc12fd8f17f38605c_7dbf48b78af2df43fa342a6901db8d56",
+          "semanticId": "SEM#AB_TURN_TRIGGER_NONE_LV1_LV2_5582a28f73ecfa7c69aa4eaa7557cbdb29e212397b49104bc12fd8f17f38605c_7dbf48b78af2df43fa342a6901db8d56",
+          "semanticIdV3": "SEM3#AB_TURN_TRIGGER_NONE_LV1_LV2_f0fb9b3920bd46f128ae5f7b7aeb8aec9e7acd29da83644ab90b640492f0b29f_82ebb0710fbde86f8bbb102f4b5b4b66",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "TURN_TRIGGER"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
@@ -604,6 +1124,21 @@
     "compiledIr": {
       "cardNumber": "PB44-003",
       "name": "［Mermaid Pisces Coord］Hoshimiya Ichigo ［2］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 7000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: \"Hoshimiya Ichigo\" & C2 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents/Attacks)\nYou can return two opposing 10000 BP or less Spirits to the deckbottom. If you have four counters or more, the \"10000 BP or less\" written in this effect changes to \"15000 BP or less\".\n\n[During OC & During Advent] [LV1][LV2] [Starlight Appeal]\nWhen your \"Hoshimiya Ichigo\"/\"Kiriya Aoi\"/\"Shibuki Ran\" would leave the Field due to the opponent, you can send a core from this Spirit to the Trash. When you've done so, all those targets remain on the Field, exhausted.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -611,7 +1146,28 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "PB44-003#AB_FLASH_NONE_LV1_LV2_LV3_e47ba8db5bae5771ea6d9899e69b21a92ecade0cb7e9801b164a03ef259ac396_ca655a5ccafde93a09fb8b798367a61c",
+          "cardNumber": "PB44-003",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PB44-003#a0"
         },
         {
           "name": "Starlight Appeal",
@@ -619,12 +1175,33 @@
           "wave": 5,
           "hook": "appeal",
           "bracketed": true,
-          "index": 432
+          "index": 0,
+          "abilityId": "PB44-003#AB_PASSIVE_NONE_LV1_LV2_01251cd0b9a16d199d211f487d26a764abc15fd5ab6807598b409c665984f938_0664532c3020a6a02762f575b63babb9",
+          "cardNumber": "PB44-003",
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [
+            "During OC & During Advent"
+          ],
+          "isSoulState": false,
+          "duringAdvent": true,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB44-003#a2"
         }
       ],
       "abilities": [
         {
-          "id": "PB44-003#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -635,8 +1212,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: \"Hoshimiya Ichigo\" & C2 or more, (Either Attack Step)",
@@ -645,10 +1229,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: \"Hoshimiya Ichigo\" & C2 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -670,7 +1258,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -688,10 +1278,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB44-003#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "\"Hoshimiya Ichigo\" & C2 or more, (Either Attack Step)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB44-003#AB_FLASH_NONE_LV1_LV2_LV3_e47ba8db5bae5771ea6d9899e69b21a92ecade0cb7e9801b164a03ef259ac396_ca655a5ccafde93a09fb8b798367a61c",
+              "cardNumber": "PB44-003",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PB44-003#a0"
+            }
+          ],
+          "id": "PB44-003#AB_FLASH_NONE_LV1_LV2_LV3_e47ba8db5bae5771ea6d9899e69b21a92ecade0cb7e9801b164a03ef259ac396_ca655a5ccafde93a09fb8b798367a61c",
+          "physicalId": "PB44-003#AB_FLASH_NONE_LV1_LV2_LV3_e47ba8db5bae5771ea6d9899e69b21a92ecade0cb7e9801b164a03ef259ac396_ca655a5ccafde93a09fb8b798367a61c",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_e47ba8db5bae5771ea6d9899e69b21a92ecade0cb7e9801b164a03ef259ac396_ca655a5ccafde93a09fb8b798367a61c",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_65ac3c228d3eb35df40cf0895f75fd1aa436ea9477ea60afbffb317962c1389a_3006beb096e26d0c8b874937475a17e8",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB44-003#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -701,8 +1335,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Advents/Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -711,10 +1356,14 @@
             "isMain": false,
             "cleanBody": "You can return two opposing 10000 BP or less Spirits to the deckbottom. If you have four counters or more, the \"10000 BP or less\" written in this effect changes to \"15000 BP or less\"."
           },
+          "originalAbilityText": "[LV1][LV2] (When Advents/Attacks)\nYou can return two opposing 10000 BP or less Spirits to the deckbottom. If you have four counters or more, the \"10000 BP or less\" written in this effect changes to \"15000 BP or less\".",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can return two opposing 10000 BP or less Spirits to the deckbottom.",
+              "originalClauseText": "You can return two opposing 10000 BP or less Spirits to the deckbottom.",
               "cleanText": "You can return two opposing 10000 BP or less Spirits to the deckbottom",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -730,7 +1379,9 @@
             },
             {
               "rawText": "If you have four counters or more, the \"10000 BP or less\" written in this effect changes to \"15000 BP or less\".",
+              "originalClauseText": "If you have four counters or more, the \"10000 BP or less\" written in this effect changes to \"15000 BP or less\".",
               "cleanText": "the \"10000 BP or less\" written in this effect changes to \"15000 BP or less\"",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -741,10 +1392,25 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB44-003#a1",
+          "keywords": [],
+          "id": "PB44-003#AB_WHEN_ADVENTS_NONE_LV1_LV2_e77ff6641b2069b85b56bef7c91a17a0e6e6a43bb8f88444b21adc96bb40c2c8_690f1a35791f08cdbe8dd29a0b9bc9de",
+          "physicalId": "PB44-003#AB_WHEN_ADVENTS_NONE_LV1_LV2_e77ff6641b2069b85b56bef7c91a17a0e6e6a43bb8f88444b21adc96bb40c2c8_690f1a35791f08cdbe8dd29a0b9bc9de",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_e77ff6641b2069b85b56bef7c91a17a0e6e6a43bb8f88444b21adc96bb40c2c8_690f1a35791f08cdbe8dd29a0b9bc9de",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_d6e91b613d10a79361a2cb9f59eedb79d2080522ca4810e1583e1119a3023f35_23735f0f4013f0fc261c7573448a5735",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS",
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB44-003#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -756,8 +1422,13 @@
               "During OC & During Advent"
             ],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Starlight Appeal",
@@ -766,10 +1437,14 @@
             "isMain": false,
             "cleanBody": "When your \"Hoshimiya Ichigo\"/\"Kiriya Aoi\"/\"Shibuki Ran\" would leave the Field due to the opponent, you can send a core from this Spirit to the Trash. When you've done so, all those targets remain on the Field, exhausted."
           },
+          "originalAbilityText": "[During OC & During Advent] [LV1][LV2] [Starlight Appeal]\nWhen your \"Hoshimiya Ichigo\"/\"Kiriya Aoi\"/\"Shibuki Ran\" would leave the Field due to the opponent, you can send a core from this Spirit to the Trash. When you've done so, all those targets remain on the Field, exhausted.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When your \"Hoshimiya Ichigo\"/\"Kiriya Aoi\"/\"Shibuki Ran\" would leave the Field due to the opponent, you can send a core from this Spirit to the Trash.",
+              "originalClauseText": "When your \"Hoshimiya Ichigo\"/\"Kiriya Aoi\"/\"Shibuki Ran\" would leave the Field due to the opponent, you can send a core from this Spirit to the Trash.",
               "cleanText": "When your \"Hoshimiya Ichigo\"/\"Kiriya Aoi\"/\"Shibuki Ran\" would leave the Field due to the opponent, you can send a core from this Spirit to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -777,26 +1452,78 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             },
             {
               "rawText": "all those targets remain on the Field, exhausted.",
+              "originalClauseText": "all those targets remain on the Field, exhausted.",
               "cleanText": "all those targets remain on the Field, exhausted",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "EXHAUST",
-                "target": {
-                  "side": "either"
-                }
+                "op": "RESURRECT"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB44-003#a2",
+          "keywords": [
+            {
+              "name": "Starlight Appeal",
+              "parameter": null,
+              "wave": 5,
+              "hook": "appeal",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB44-003#AB_PASSIVE_NONE_LV1_LV2_01251cd0b9a16d199d211f487d26a764abc15fd5ab6807598b409c665984f938_0664532c3020a6a02762f575b63babb9",
+              "cardNumber": "PB44-003",
+              "levels": [
+                1,
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [
+                "During OC & During Advent"
+              ],
+              "isSoulState": false,
+              "duringAdvent": true,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB44-003#a2"
+            }
+          ],
+          "id": "PB44-003#AB_PASSIVE_NONE_LV1_LV2_01251cd0b9a16d199d211f487d26a764abc15fd5ab6807598b409c665984f938_0664532c3020a6a02762f575b63babb9",
+          "physicalId": "PB44-003#AB_PASSIVE_NONE_LV1_LV2_01251cd0b9a16d199d211f487d26a764abc15fd5ab6807598b409c665984f938_0664532c3020a6a02762f575b63babb9",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_01251cd0b9a16d199d211f487d26a764abc15fd5ab6807598b409c665984f938_0664532c3020a6a02762f575b63babb9",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_4b0ce5be62f7fec013a2bbf4e2aee10de9ea50b673b6ee5e6ceaaeb318a4b1f7_09c61d9bb1c99f017e0aca641dc48000",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
@@ -829,6 +1556,26 @@
     "compiledIr": {
       "cardNumber": "PB44-005",
       "name": "［Milky Way Cosmic Coord］Kiriya Aoi ［2］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 7000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 9000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] [Starlight Appeal] (When Summoned)\nYou can draw a card. Then, you can send a core from this Spirit to the Trash, When you've done so, draw a card.\n\n[LV2][LV3]\nWhen you would activate the \"send cores from this Spirit to the Trash\" effect of [Starlight Appeal], you can activate it, treating as if a core is sent to the Trash.\n\n[LV3] (When Attacks)\nThis Spirit can't be blocked.",
+      "teams": [],
       "keywords": [
         {
           "name": "Starlight Appeal",
@@ -836,7 +1583,28 @@
           "wave": 5,
           "hook": "appeal",
           "bracketed": true,
-          "index": 16
+          "index": 0,
+          "abilityId": "PB44-005#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_44b8fd3f2d7a6af0820741ab75862204dc461cfe57122939fa3f0a05f88082aa_a7ec4b7bc7e0139232ead7bc388d6842",
+          "cardNumber": "PB44-005",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB44-005#a0"
         },
         {
           "name": "Starlight Appeal",
@@ -844,12 +1612,31 @@
           "wave": 5,
           "hook": "appeal",
           "bracketed": true,
-          "index": 256
+          "index": 81,
+          "abilityId": "PB44-005#AB_PASSIVE_NONE_LV2_LV3_0e3a2e72c67ba658ab6ebfd1978624e64d42e2832e71331b5c9984171b2d067b_72fb304b478c75baa20cd461d93dd71b",
+          "cardNumber": "PB44-005",
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB44-005#a1"
         }
       ],
       "abilities": [
         {
-          "id": "PB44-005#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -860,8 +1647,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Starlight Appeal",
@@ -870,10 +1666,14 @@
             "isMain": false,
             "cleanBody": "You can draw a card. Then, you can send a core from this Spirit to the Trash, When you've done so, draw a card."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] [Starlight Appeal] (When Summoned)\nYou can draw a card. Then, you can send a core from this Spirit to the Trash, When you've done so, draw a card.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "You can draw a card.",
+              "originalClauseText": "You can draw a card.",
               "cleanText": "You can draw a card",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -888,7 +1688,9 @@
             },
             {
               "rawText": "you can send a core from this Spirit to the Trash, When you've done so, draw a card.",
+              "originalClauseText": "you can send a core from this Spirit to the Trash, When you've done so, draw a card.",
               "cleanText": "you can send a core from this Spirit to the Trash, When you've done so, draw a card",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": true,
               "isCost": false,
@@ -902,10 +1704,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB44-005#a0",
+          "keywords": [
+            {
+              "name": "Starlight Appeal",
+              "parameter": null,
+              "wave": 5,
+              "hook": "appeal",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB44-005#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_44b8fd3f2d7a6af0820741ab75862204dc461cfe57122939fa3f0a05f88082aa_a7ec4b7bc7e0139232ead7bc388d6842",
+              "cardNumber": "PB44-005",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_SUMMONED",
+              "timingLabel": "When Summoned",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB44-005#a0"
+            }
+          ],
+          "id": "PB44-005#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_44b8fd3f2d7a6af0820741ab75862204dc461cfe57122939fa3f0a05f88082aa_a7ec4b7bc7e0139232ead7bc388d6842",
+          "physicalId": "PB44-005#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_44b8fd3f2d7a6af0820741ab75862204dc461cfe57122939fa3f0a05f88082aa_a7ec4b7bc7e0139232ead7bc388d6842",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_44b8fd3f2d7a6af0820741ab75862204dc461cfe57122939fa3f0a05f88082aa_a7ec4b7bc7e0139232ead7bc388d6842",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_fc96580c6fc8247061fe9ee41ac58c1b247a0cc94693939935fd6d89bdb462a3_bec61e927d6f9fc3c48d2cd924acfa4f",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB44-005#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -915,8 +1761,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -925,10 +1776,14 @@
             "isMain": false,
             "cleanBody": "When you would activate the \"send cores from this Spirit to the Trash\" effect of [Starlight Appeal], you can activate it, treating as if a core is sent to the Trash."
           },
+          "originalAbilityText": "[LV2][LV3]\nWhen you would activate the \"send cores from this Spirit to the Trash\" effect of [Starlight Appeal], you can activate it, treating as if a core is sent to the Trash.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When you would activate the \"send cores from this Spirit to the Trash\" effect of [Starlight Appeal], you can activate it, treating as if a core is sent to the Trash.",
+              "originalClauseText": "When you would activate the \"send cores from this Spirit to the Trash\" effect of [Starlight Appeal], you can activate it, treating as if a core is sent to the Trash.",
               "cleanText": "When you would activate the \"send cores from this Spirit to the Trash\" effect of [Starlight Appeal], you can activate it, treating as if a core is sent to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -936,14 +1791,64 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB44-005#a1",
+          "keywords": [
+            {
+              "name": "Starlight Appeal",
+              "parameter": null,
+              "wave": 5,
+              "hook": "appeal",
+              "bracketed": true,
+              "index": 81,
+              "abilityId": "PB44-005#AB_PASSIVE_NONE_LV2_LV3_0e3a2e72c67ba658ab6ebfd1978624e64d42e2832e71331b5c9984171b2d067b_72fb304b478c75baa20cd461d93dd71b",
+              "cardNumber": "PB44-005",
+              "levels": [
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB44-005#a1"
+            }
+          ],
+          "id": "PB44-005#AB_PASSIVE_NONE_LV2_LV3_0e3a2e72c67ba658ab6ebfd1978624e64d42e2832e71331b5c9984171b2d067b_72fb304b478c75baa20cd461d93dd71b",
+          "physicalId": "PB44-005#AB_PASSIVE_NONE_LV2_LV3_0e3a2e72c67ba658ab6ebfd1978624e64d42e2832e71331b5c9984171b2d067b_72fb304b478c75baa20cd461d93dd71b",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV2_LV3_0e3a2e72c67ba658ab6ebfd1978624e64d42e2832e71331b5c9984171b2d067b_72fb304b478c75baa20cd461d93dd71b",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV2_LV3_591d9db6157c0332a8393e76e833d3f5aae5e7ccdec83a10adab21143e4802b2_4ccab9cd069711d59c9e12943c9d1f37",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB44-005#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -952,8 +1857,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -962,10 +1876,14 @@
             "isMain": false,
             "cleanBody": "This Spirit can't be blocked."
           },
+          "originalAbilityText": "[LV3] (When Attacks)\nThis Spirit can't be blocked.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "This Spirit can't be blocked.",
+              "originalClauseText": "This Spirit can't be blocked.",
               "cleanText": "This Spirit can't be blocked",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -977,7 +1895,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB44-005#a2",
+          "keywords": [],
+          "id": "PB44-005#AB_WHEN_ATTACKS_NONE_LV3_f58e9697a8990f196f48759292d04c58d9bd533f7d2d36eaa0e2f96e2d6eb32d_7e00d59c574636dc822afc1f788c4c6a",
+          "physicalId": "PB44-005#AB_WHEN_ATTACKS_NONE_LV3_f58e9697a8990f196f48759292d04c58d9bd533f7d2d36eaa0e2f96e2d6eb32d_7e00d59c574636dc822afc1f788c4c6a",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV3_f58e9697a8990f196f48759292d04c58d9bd533f7d2d36eaa0e2f96e2d6eb32d_7e00d59c574636dc822afc1f788c4c6a",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV3_af7ee9b86e1978a77eed2fe6a8da98b49529e13a6bcf23717de7e0fd6aafb1d3_09df37626c8242663f3fde133eec98cd",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -1010,6 +1943,26 @@
     "compiledIr": {
       "cardNumber": "PB44-010",
       "name": "［Pierrot Carnival Coord］Ichinose Kaede ［2］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 5000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 9000
+        }
+      },
+      "originalEffectText": "When your Spirit [advents], you can summon this card from the Hand by paying one cost.\n\n[LV1][LV2][LV3] (When Summoned)\nYou can reveal four cards from your decktop. Among them, add an \"Idol\" family card to your Hand. Return any remaining cards to either the decktop or deckbottom.\n\n[LV2][LV3] [Starlight Appeal] (When Attacks)\nDraw a card. Then, you can send a core from this Spirit to the Trash. When you've done so, your counter +2.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -1017,7 +1970,28 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 17
+          "index": 17,
+          "abilityId": "PB44-010#AB_PASSIVE_NONE_LV1_LV2_LV3_fa679cbb93748107d849071d36e82548fe4defbca3476d3ffe9da0167a0e6d9a_86d7a1e428fb409ddc78768972f71398",
+          "cardNumber": "PB44-010",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB44-010#a0"
         },
         {
           "name": "Starlight Appeal",
@@ -1025,12 +1999,31 @@
           "wave": 5,
           "hook": "appeal",
           "bracketed": true,
-          "index": 293
+          "index": 0,
+          "abilityId": "PB44-010#AB_WHEN_ATTACKS_NONE_LV2_LV3_4acca238f740cd2e8e66f2ff16e1f0a6964e72e427e270c55b9ceb3706b55f46_ece755e43f7852cfcfb6bee0433ca236",
+          "cardNumber": "PB44-010",
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB44-010#a2"
         }
       ],
       "abilities": [
         {
-          "id": "PB44-010#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1041,8 +2034,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1051,10 +2049,14 @@
             "isMain": false,
             "cleanBody": "When your Spirit [advents], you can summon this card from the Hand by paying one cost."
           },
+          "originalAbilityText": "When your Spirit [advents], you can summon this card from the Hand by paying one cost.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When your Spirit [advents], you can summon this card from the Hand by paying one cost.",
+              "originalClauseText": "When your Spirit [advents], you can summon this card from the Hand by paying one cost.",
               "cleanText": "When your Spirit [advents], you can summon this card from the Hand by paying one cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1062,14 +2064,56 @@
               "duration": null,
               "op": {
                 "op": "SUMMON_THIS_CARD",
-                "from": "HAND_OR_BURST"
+                "from": "HAND"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB44-010#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": null,
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 17,
+              "abilityId": "PB44-010#AB_PASSIVE_NONE_LV1_LV2_LV3_fa679cbb93748107d849071d36e82548fe4defbca3476d3ffe9da0167a0e6d9a_86d7a1e428fb409ddc78768972f71398",
+              "cardNumber": "PB44-010",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB44-010#a0"
+            }
+          ],
+          "id": "PB44-010#AB_PASSIVE_NONE_LV1_LV2_LV3_fa679cbb93748107d849071d36e82548fe4defbca3476d3ffe9da0167a0e6d9a_86d7a1e428fb409ddc78768972f71398",
+          "physicalId": "PB44-010#AB_PASSIVE_NONE_LV1_LV2_LV3_fa679cbb93748107d849071d36e82548fe4defbca3476d3ffe9da0167a0e6d9a_86d7a1e428fb409ddc78768972f71398",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_fa679cbb93748107d849071d36e82548fe4defbca3476d3ffe9da0167a0e6d9a_86d7a1e428fb409ddc78768972f71398",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_4df4aca57f64126ba60e2c471373060f43414898a9b9622c6e3117f7cd787466_062d07e53a9a54096605a7a21d687ba3",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB44-010#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1080,8 +2124,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1090,10 +2143,14 @@
             "isMain": false,
             "cleanBody": "You can reveal four cards from your decktop. Among them, add an \"Idol\" family card to your Hand. Return any remaining cards to either the decktop or deckbottom."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nYou can reveal four cards from your decktop. Among them, add an \"Idol\" family card to your Hand. Return any remaining cards to either the decktop or deckbottom.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can reveal four cards from your decktop.",
+              "originalClauseText": "You can reveal four cards from your decktop.",
               "cleanText": "You can reveal four cards from your decktop",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1106,19 +2163,24 @@
             },
             {
               "rawText": "Among them, add an \"Idol\" family card to your Hand.",
+              "originalClauseText": "Among them, add an \"Idol\" family card to your Hand.",
               "cleanText": "Among them, add an \"Idol\" family card to your Hand",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "ADD_TO_HAND"
+                "op": "UNSUPPORTED",
+                "rawText": "Among them, add an \"Idol\" family card to your Hand"
               }
             },
             {
               "rawText": "Return any remaining cards to either the decktop or deckbottom.",
+              "originalClauseText": "Return any remaining cards to either the decktop or deckbottom.",
               "cleanText": "Return any remaining cards to either the decktop or deckbottom",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1133,10 +2195,26 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "Among them, add an \"Idol\" family card to your Hand."
+          ],
+          "legacyId": "PB44-010#a1",
+          "keywords": [],
+          "id": "PB44-010#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_77fc90d809789a4f4d2194e901c1a59ef2c5273ef9aa2d906635a9dd241a644c_538778624822a166a5392ce09bf5f7f9",
+          "physicalId": "PB44-010#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_77fc90d809789a4f4d2194e901c1a59ef2c5273ef9aa2d906635a9dd241a644c_538778624822a166a5392ce09bf5f7f9",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_77fc90d809789a4f4d2194e901c1a59ef2c5273ef9aa2d906635a9dd241a644c_538778624822a166a5392ce09bf5f7f9",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_55fa0e24ffd93d7206ee3ebbc7afaba71bba5f916ec6426a4c3f4c2deaf93ee9_9a39c7a5ecdc81b294b2bf01786ac5ba",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB44-010#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1146,8 +2224,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Starlight Appeal",
@@ -1156,10 +2243,14 @@
             "isMain": false,
             "cleanBody": "Draw a card. Then, you can send a core from this Spirit to the Trash. When you've done so, your counter +2."
           },
+          "originalAbilityText": "[LV2][LV3] [Starlight Appeal] (When Attacks)\nDraw a card. Then, you can send a core from this Spirit to the Trash. When you've done so, your counter +2.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Draw a card.",
+              "originalClauseText": "Draw a card.",
               "cleanText": "Draw a card",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1174,7 +2265,9 @@
             },
             {
               "rawText": "you can send a core from this Spirit to the Trash.",
+              "originalClauseText": "you can send a core from this Spirit to the Trash.",
               "cleanText": "you can send a core from this Spirit to the Trash",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": true,
               "isCost": false,
@@ -1182,12 +2275,23 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             },
             {
               "rawText": "your counter +2.",
+              "originalClauseText": "your counter +2.",
               "cleanText": "your counter +2",
+              "clauseIndex": 2,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1199,12 +2303,56 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB44-010#a2",
+          "keywords": [
+            {
+              "name": "Starlight Appeal",
+              "parameter": null,
+              "wave": 5,
+              "hook": "appeal",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB44-010#AB_WHEN_ATTACKS_NONE_LV2_LV3_4acca238f740cd2e8e66f2ff16e1f0a6964e72e427e270c55b9ceb3706b55f46_ece755e43f7852cfcfb6bee0433ca236",
+              "cardNumber": "PB44-010",
+              "levels": [
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB44-010#a2"
+            }
+          ],
+          "id": "PB44-010#AB_WHEN_ATTACKS_NONE_LV2_LV3_4acca238f740cd2e8e66f2ff16e1f0a6964e72e427e270c55b9ceb3706b55f46_ece755e43f7852cfcfb6bee0433ca236",
+          "physicalId": "PB44-010#AB_WHEN_ATTACKS_NONE_LV2_LV3_4acca238f740cd2e8e66f2ff16e1f0a6964e72e427e270c55b9ceb3706b55f46_ece755e43f7852cfcfb6bee0433ca236",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_4acca238f740cd2e8e66f2ff16e1f0a6964e72e427e270c55b9ceb3706b55f46_ece755e43f7852cfcfb6bee0433ca236",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_ed1b5684f62eee421ee6d3caaeed277800d4d0349f6f66ce85048e08e090312e_5063bf80068ee93531a0d2878d7ebf37",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
-      "compiledClausesCount": 7,
-      "unsupportedClausesCount": 0,
-      "isFullySupported": true
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 1,
+      "isFullySupported": false
     }
   },
   "PB44-002": {
@@ -1227,6 +2375,21 @@
     "compiledIr": {
       "cardNumber": "PB44-002",
       "name": "［Pink Stage Coord］Hoshimiya Ichigo",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 7000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: \"Hoshimiya Ichigo\", (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] [Starlight Appeal] (When Summoned/Advents)\nYou can return an opposing 7000 BP or less Spirit to the deckbottom. Then, you can send a core from this Spirit to the Trash. When you've done so, your counter +1, and put a core from the Void to this Spirit.\n\n[During OC] [LV1][LV2] (When Attacks)\nReturn an opposing 10000 BP or less Spirit to the deckbottom.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -1234,7 +2397,28 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "PB44-002#AB_FLASH_NONE_LV1_LV2_LV3_15abab2682d2ac86721968591a0b0cc9ce2390a0d91ba385a1a22888939a7de3_cd3f3d7d522daac3193cc382aa9586ec",
+          "cardNumber": "PB44-002",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PB44-002#a0"
         },
         {
           "name": "Starlight Appeal",
@@ -1242,12 +2426,31 @@
           "wave": 5,
           "hook": "appeal",
           "bracketed": true,
-          "index": 163
+          "index": 0,
+          "abilityId": "PB44-002#AB_PASSIVE_NONE_LV1_LV2_243f72442ff52a5d6e5ccf8fd46bd4e0c9c8715f131c3395afdaaa728dedad95_60f3b8ceb2d4f977658deb9dfb088205",
+          "cardNumber": "PB44-002",
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB44-002#a1"
         }
       ],
       "abilities": [
         {
-          "id": "PB44-002#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1258,8 +2461,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: \"Hoshimiya Ichigo\", (Your Turn)",
@@ -1268,10 +2478,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: \"Hoshimiya Ichigo\", (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1293,7 +2507,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1311,10 +2527,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB44-002#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "\"Hoshimiya Ichigo\", (Your Turn)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB44-002#AB_FLASH_NONE_LV1_LV2_LV3_15abab2682d2ac86721968591a0b0cc9ce2390a0d91ba385a1a22888939a7de3_cd3f3d7d522daac3193cc382aa9586ec",
+              "cardNumber": "PB44-002",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PB44-002#a0"
+            }
+          ],
+          "id": "PB44-002#AB_FLASH_NONE_LV1_LV2_LV3_15abab2682d2ac86721968591a0b0cc9ce2390a0d91ba385a1a22888939a7de3_cd3f3d7d522daac3193cc382aa9586ec",
+          "physicalId": "PB44-002#AB_FLASH_NONE_LV1_LV2_LV3_15abab2682d2ac86721968591a0b0cc9ce2390a0d91ba385a1a22888939a7de3_cd3f3d7d522daac3193cc382aa9586ec",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_15abab2682d2ac86721968591a0b0cc9ce2390a0d91ba385a1a22888939a7de3_cd3f3d7d522daac3193cc382aa9586ec",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_098d8b8ead9d97e2514efc8254d7b4804db516058fa38bd4ef3f4498ccbc7e58_f2f003a9492eb14dccba23ef272c1e46",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB44-002#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1323,21 +2583,45 @@
             ],
             "levelExplicit": true,
             "prefixes": [],
-            "timing": "WHEN_SUMMONED",
-            "timingLabel": "When Summoned/Advents",
+            "timing": "PASSIVE",
+            "timings": [],
+            "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Starlight Appeal",
             "burstCondition": null,
             "isFlash": false,
             "isMain": false,
-            "cleanBody": "You can return an opposing 7000 BP or less Spirit to the deckbottom. Then, you can send a core from this Spirit to the Trash. When you've done so, your counter +1, and put a core from the Void to this Spirit."
+            "cleanBody": "(When Summoned/Advents)\nYou can return an opposing 7000 BP or less Spirit to the deckbottom. Then, you can send a core from this Spirit to the Trash. When you've done so, your counter +1, and put a core from the Void to this Spirit."
           },
+          "originalAbilityText": "[LV1][LV2] [Starlight Appeal] (When Summoned/Advents)\nYou can return an opposing 7000 BP or less Spirit to the deckbottom. Then, you can send a core from this Spirit to the Trash. When you've done so, your counter +1, and put a core from the Void to this Spirit.",
+          "abilityIndex": 1,
           "clauses": [
             {
+              "rawText": "(When Summoned/Advents)",
+              "originalClauseText": "(When Summoned/Advents)",
+              "cleanText": "(When Summoned/Advents)",
+              "clauseIndex": 0,
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "UNSUPPORTED",
+                "rawText": "(When Summoned/Advents)"
+              }
+            },
+            {
               "rawText": "You can return an opposing 7000 BP or less Spirit to the deckbottom.",
+              "originalClauseText": "You can return an opposing 7000 BP or less Spirit to the deckbottom.",
               "cleanText": "You can return an opposing 7000 BP or less Spirit to the deckbottom",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1353,7 +2637,9 @@
             },
             {
               "rawText": "you can send a core from this Spirit to the Trash.",
+              "originalClauseText": "you can send a core from this Spirit to the Trash.",
               "cleanText": "you can send a core from this Spirit to the Trash",
+              "clauseIndex": 2,
               "link": "then",
               "isOptional": true,
               "isCost": false,
@@ -1361,12 +2647,23 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             },
             {
               "rawText": "your counter +1",
+              "originalClauseText": "your counter +1",
               "cleanText": "your counter +1",
+              "clauseIndex": 3,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1379,7 +2676,9 @@
             },
             {
               "rawText": "put a core from the Void to this Spirit.",
+              "originalClauseText": "put a core from the Void to this Spirit.",
               "cleanText": "put a core from the Void to this Spirit",
+              "clauseIndex": 4,
               "link": "also",
               "isOptional": false,
               "isCost": false,
@@ -1398,10 +2697,53 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "(When Summoned/Advents)"
+          ],
+          "legacyId": "PB44-002#a1",
+          "keywords": [
+            {
+              "name": "Starlight Appeal",
+              "parameter": null,
+              "wave": 5,
+              "hook": "appeal",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB44-002#AB_PASSIVE_NONE_LV1_LV2_243f72442ff52a5d6e5ccf8fd46bd4e0c9c8715f131c3395afdaaa728dedad95_60f3b8ceb2d4f977658deb9dfb088205",
+              "cardNumber": "PB44-002",
+              "levels": [
+                1,
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB44-002#a1"
+            }
+          ],
+          "id": "PB44-002#AB_PASSIVE_NONE_LV1_LV2_243f72442ff52a5d6e5ccf8fd46bd4e0c9c8715f131c3395afdaaa728dedad95_60f3b8ceb2d4f977658deb9dfb088205",
+          "physicalId": "PB44-002#AB_PASSIVE_NONE_LV1_LV2_243f72442ff52a5d6e5ccf8fd46bd4e0c9c8715f131c3395afdaaa728dedad95_60f3b8ceb2d4f977658deb9dfb088205",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_243f72442ff52a5d6e5ccf8fd46bd4e0c9c8715f131c3395afdaaa728dedad95_60f3b8ceb2d4f977658deb9dfb088205",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_65971a83d2bfd46d62e188b18c23eaea91a88be66128feb5be21d6ced3a8df7d_5fc65cd674378fed8fa7737e3c00971d",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB44-002#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1413,8 +2755,17 @@
               "During OC"
             ],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1423,10 +2774,14 @@
             "isMain": false,
             "cleanBody": "Return an opposing 10000 BP or less Spirit to the deckbottom."
           },
+          "originalAbilityText": "[During OC] [LV1][LV2] (When Attacks)\nReturn an opposing 10000 BP or less Spirit to the deckbottom.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Return an opposing 10000 BP or less Spirit to the deckbottom.",
+              "originalClauseText": "Return an opposing 10000 BP or less Spirit to the deckbottom.",
               "cleanText": "Return an opposing 10000 BP or less Spirit to the deckbottom",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1441,12 +2796,27 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB44-002#a2",
+          "keywords": [],
+          "id": "PB44-002#AB_WHEN_ATTACKS_NONE_LV1_LV2_9f197cf64daca3907cd1521579a244990190e4bc5e167114b7b6e1df84522148_705e38e39db28a71c50e4322d2962ade",
+          "physicalId": "PB44-002#AB_WHEN_ATTACKS_NONE_LV1_LV2_9f197cf64daca3907cd1521579a244990190e4bc5e167114b7b6e1df84522148_705e38e39db28a71c50e4322d2962ade",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_9f197cf64daca3907cd1521579a244990190e4bc5e167114b7b6e1df84522148_705e38e39db28a71c50e4322d2962ade",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_2d58d1c970b9d05367c7f6422834b482fd3ee0dde6b7ac22932457bea175d1d3_e3392f5f1904825020923801f6b8a3ba",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 7,
-      "unsupportedClausesCount": 0,
-      "isFullySupported": true
+      "unsupportedClausesCount": 1,
+      "isFullySupported": false
     }
   },
   "PB44-007": {
@@ -1474,6 +2844,26 @@
     "compiledIr": {
       "cardNumber": "PB44-007",
       "name": "［Rose Bonbon Coord］Shibuki Ran ［2］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 8000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 5,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] [Starlight Appeal] (When Summoned/Attacks)\nDuring this turn, give an opposing Spirit -12000 BP, and destroy it if it is brought to 0 BP. Then, you can send a core from this Spirit to the Trash. When you've done so, return an \"Idol\" family card from your Trash to the Hand.\n\n[LV2][LV3] (Your Attack Step)\nWhile you control any Cost 5 or more \"Hoshimiya Ichigo\"/\"Kiriya Aoi\", effects of every opposing Nexus/Grandwalker Nexus can't activate.",
+      "teams": [],
       "keywords": [
         {
           "name": "Starlight Appeal",
@@ -1481,12 +2871,32 @@
           "wave": 5,
           "hook": "appeal",
           "bracketed": true,
-          "index": 16
+          "index": 0,
+          "abilityId": "PB44-007#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_12138ee609c8d18f38a688251de7a20182117f57226aca874e48eda4c2ae318d_45abeb0d46363eb0b129014ceee497a7",
+          "cardNumber": "PB44-007",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned/Attacks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB44-007#a0"
         }
       ],
       "abilities": [
         {
-          "id": "PB44-007#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1497,8 +2907,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED",
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Summoned/Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Starlight Appeal",
@@ -1507,10 +2928,14 @@
             "isMain": false,
             "cleanBody": "During this turn, give an opposing Spirit -12000 BP, and destroy it if it is brought to 0 BP. Then, you can send a core from this Spirit to the Trash. When you've done so, return an \"Idol\" family card from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] [Starlight Appeal] (When Summoned/Attacks)\nDuring this turn, give an opposing Spirit -12000 BP, and destroy it if it is brought to 0 BP. Then, you can send a core from this Spirit to the Trash. When you've done so, return an \"Idol\" family card from your Trash to the Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "During this turn, give an opposing Spirit -12000 BP",
+              "originalClauseText": "During this turn, give an opposing Spirit -12000 BP",
               "cleanText": "give an opposing Spirit -12000 BP",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1519,13 +2944,20 @@
               "op": {
                 "op": "BP_DEBUFF",
                 "amount": 12000,
-                "target": "PREVIOUS_TARGET",
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
                 "duration": "DURING_THIS_TURN"
               }
             },
             {
               "rawText": "destroy it if it is brought to 0 BP.",
+              "originalClauseText": "destroy it if it is brought to 0 BP.",
               "cleanText": "destroy it if it is brought to 0 BP",
+              "clauseIndex": 1,
               "link": "also",
               "isOptional": false,
               "isCost": false,
@@ -1542,7 +2974,9 @@
             },
             {
               "rawText": "you can send a core from this Spirit to the Trash.",
+              "originalClauseText": "you can send a core from this Spirit to the Trash.",
               "cleanText": "you can send a core from this Spirit to the Trash",
+              "clauseIndex": 2,
               "link": "then",
               "isOptional": true,
               "isCost": false,
@@ -1550,30 +2984,91 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             },
             {
               "rawText": "return an \"Idol\" family card from your Trash to the Hand.",
+              "originalClauseText": "return an \"Idol\" family card from your Trash to the Hand.",
               "cleanText": "return an \"Idol\" family card from your Trash to the Hand",
+              "clauseIndex": 3,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "family": "Idol"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB44-007#a0",
+          "keywords": [
+            {
+              "name": "Starlight Appeal",
+              "parameter": null,
+              "wave": 5,
+              "hook": "appeal",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB44-007#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_12138ee609c8d18f38a688251de7a20182117f57226aca874e48eda4c2ae318d_45abeb0d46363eb0b129014ceee497a7",
+              "cardNumber": "PB44-007",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_SUMMONED",
+              "timingLabel": "When Summoned/Attacks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB44-007#a0"
+            }
+          ],
+          "id": "PB44-007#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_12138ee609c8d18f38a688251de7a20182117f57226aca874e48eda4c2ae318d_45abeb0d46363eb0b129014ceee497a7",
+          "physicalId": "PB44-007#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_12138ee609c8d18f38a688251de7a20182117f57226aca874e48eda4c2ae318d_45abeb0d46363eb0b129014ceee497a7",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_12138ee609c8d18f38a688251de7a20182117f57226aca874e48eda4c2ae318d_45abeb0d46363eb0b129014ceee497a7",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_b2e5e540a26c9fca3cf63be48d77ec220c6fbd99d9a8a96534bd5f640f9c03cd_06e9ee3401f516dd931eb88694995bbf",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS",
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB44-007#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1583,8 +3078,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1593,10 +3097,14 @@
             "isMain": false,
             "cleanBody": "While you control any Cost 5 or more \"Hoshimiya Ichigo\"/\"Kiriya Aoi\", effects of every opposing Nexus/Grandwalker Nexus can't activate."
           },
+          "originalAbilityText": "[LV2][LV3] (Your Attack Step)\nWhile you control any Cost 5 or more \"Hoshimiya Ichigo\"/\"Kiriya Aoi\", effects of every opposing Nexus/Grandwalker Nexus can't activate.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "While you control any Cost 5 or more \"Hoshimiya Ichigo\"/\"Kiriya Aoi\", effects of every opposing Nexus/Grandwalker Nexus can't activate.",
+              "originalClauseText": "While you control any Cost 5 or more \"Hoshimiya Ichigo\"/\"Kiriya Aoi\", effects of every opposing Nexus/Grandwalker Nexus can't activate.",
               "cleanText": "effects of every opposing Nexus/Grandwalker Nexus can't activate",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1607,7 +3115,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB44-007#a1",
+          "keywords": [],
+          "id": "PB44-007#AB_ATTACK_STEP_NONE_LV2_LV3_7bb12912f33f1f73970fc7bd87f6d4f8ffc3625b3dddad2c53a53476f88221e2_3e1ce85595900c5df573c439d7068b62",
+          "physicalId": "PB44-007#AB_ATTACK_STEP_NONE_LV2_LV3_7bb12912f33f1f73970fc7bd87f6d4f8ffc3625b3dddad2c53a53476f88221e2_3e1ce85595900c5df573c439d7068b62",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_7bb12912f33f1f73970fc7bd87f6d4f8ffc3625b3dddad2c53a53476f88221e2_3e1ce85595900c5df573c439d7068b62",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_LV3_805282f4afc59bfa55b0312d587c5999f6383e07f678aa2cdf09d178b034a117_73f8bc981b2c8ff60b49dc1ce61ad6f6",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -1635,6 +3158,21 @@
     "compiledIr": {
       "cardNumber": "PB44-X01",
       "name": "［Star Festival Coord］Hoshimiya Ichigo",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "Flash - [Contract Advent: \"Hoshimiya Ichigo\" & C4 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Summoned/Advents)\nReturn opposing LV1/LV2 Spirits, one of each, to the deckbottom.\n\n[During OC] [LV1][LV2] [Starlight Appeal] (When Attacks)\n(Once per Turn: Same Name) You can send a core from this Spirit to the Trash. When you've done so, put a core from the Void to your \"Hoshimiya Ichigo\"/\"Kiriya Aoi\"/\"Shibuki Ran\", one of each.",
+      "teams": [],
       "keywords": [
         {
           "name": "Contract Advent",
@@ -1642,7 +3180,28 @@
           "wave": 2,
           "hook": "contract_advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "PB44-X01#AB_FLASH_NONE_LV1_LV2_LV3_113fb40ae9e6aa96cde2a1acddb09ee9cac44dd88c85694ac6eaacd665639c74_d4c19ab0109c2bb16c64b43928219a47",
+          "cardNumber": "PB44-X01",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PB44-X01#a0"
         },
         {
           "name": "Starlight Appeal",
@@ -1650,12 +3209,33 @@
           "wave": 5,
           "hook": "appeal",
           "bracketed": true,
-          "index": 298
+          "index": 0,
+          "abilityId": "PB44-X01#AB_WHEN_ATTACKS_NONE_LV1_LV2_4a685b1c43e79e00f23cc892d5a8faa57a547aeeb50191f6cacdc2ad428912cd_3c33373b537d9c8fb58bc57f4d2a2330",
+          "cardNumber": "PB44-X01",
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [
+            "During OC"
+          ],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB44-X01#a2"
         }
       ],
       "abilities": [
         {
-          "id": "PB44-X01#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1666,8 +3246,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Contract Advent: \"Hoshimiya Ichigo\" & C4 or more, (Either Attack Step)",
@@ -1676,10 +3263,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Contract Advent: \"Hoshimiya Ichigo\" & C4 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1701,7 +3292,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1719,10 +3312,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB44-X01#a0",
+          "keywords": [
+            {
+              "name": "Contract Advent",
+              "parameter": "\"Hoshimiya Ichigo\" & C4 or more, (Either Attack Step)",
+              "wave": 2,
+              "hook": "contract_advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB44-X01#AB_FLASH_NONE_LV1_LV2_LV3_113fb40ae9e6aa96cde2a1acddb09ee9cac44dd88c85694ac6eaacd665639c74_d4c19ab0109c2bb16c64b43928219a47",
+              "cardNumber": "PB44-X01",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PB44-X01#a0"
+            }
+          ],
+          "id": "PB44-X01#AB_FLASH_NONE_LV1_LV2_LV3_113fb40ae9e6aa96cde2a1acddb09ee9cac44dd88c85694ac6eaacd665639c74_d4c19ab0109c2bb16c64b43928219a47",
+          "physicalId": "PB44-X01#AB_FLASH_NONE_LV1_LV2_LV3_113fb40ae9e6aa96cde2a1acddb09ee9cac44dd88c85694ac6eaacd665639c74_d4c19ab0109c2bb16c64b43928219a47",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_113fb40ae9e6aa96cde2a1acddb09ee9cac44dd88c85694ac6eaacd665639c74_d4c19ab0109c2bb16c64b43928219a47",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_f92648d1898e8742f0f1b9cfb7015b7da33ae59bba62b2c88202e6c5a6eb5031_5ffda51ab4b580ab6ab87f947feec303",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB44-X01#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1731,21 +3368,45 @@
             ],
             "levelExplicit": true,
             "prefixes": [],
-            "timing": "WHEN_SUMMONED",
-            "timingLabel": "When Summoned/Advents",
+            "timing": "PASSIVE",
+            "timings": [],
+            "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
             "burstCondition": null,
             "isFlash": false,
             "isMain": false,
-            "cleanBody": "Return opposing LV1/LV2 Spirits, one of each, to the deckbottom."
+            "cleanBody": "(When Summoned/Advents)\nReturn opposing LV1/LV2 Spirits, one of each, to the deckbottom."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned/Advents)\nReturn opposing LV1/LV2 Spirits, one of each, to the deckbottom.",
+          "abilityIndex": 1,
           "clauses": [
             {
+              "rawText": "(When Summoned/Advents)",
+              "originalClauseText": "(When Summoned/Advents)",
+              "cleanText": "(When Summoned/Advents)",
+              "clauseIndex": 0,
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "UNSUPPORTED",
+                "rawText": "(When Summoned/Advents)"
+              }
+            },
+            {
               "rawText": "Return opposing LV1/LV2 Spirits, one of each, to the deckbottom.",
+              "originalClauseText": "Return opposing LV1/LV2 Spirits, one of each, to the deckbottom.",
               "cleanText": "Return opposing LV1/LV2 Spirits, one of each, to the deckbottom",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1760,10 +3421,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "(When Summoned/Advents)"
+          ],
+          "legacyId": "PB44-X01#a1",
+          "keywords": [],
+          "id": "PB44-X01#AB_PASSIVE_NONE_LV1_LV2_555ba5a3612f5319a28c1d91960ffee0d960f3df104e43fd44d339b86d14d397_0ee34f6ef2e4d4652bb1c3f7abc17dc9",
+          "physicalId": "PB44-X01#AB_PASSIVE_NONE_LV1_LV2_555ba5a3612f5319a28c1d91960ffee0d960f3df104e43fd44d339b86d14d397_0ee34f6ef2e4d4652bb1c3f7abc17dc9",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_555ba5a3612f5319a28c1d91960ffee0d960f3df104e43fd44d339b86d14d397_0ee34f6ef2e4d4652bb1c3f7abc17dc9",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_3364fe1cc1c9187bdf4271282b5b67d47deb1d8f0747114268a279f78d57784c_69abdad37992c1c121f74a2f03a85d79",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB44-X01#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1775,8 +3450,19 @@
               "During OC"
             ],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
             "limit": "ONCE_PER_TURN_SAME_NAME",
             "cantStack": false,
             "keyword": "Starlight Appeal",
@@ -1785,10 +3471,14 @@
             "isMain": false,
             "cleanBody": "You can send a core from this Spirit to the Trash. When you've done so, put a core from the Void to your \"Hoshimiya Ichigo\"/\"Kiriya Aoi\"/\"Shibuki Ran\", one of each."
           },
+          "originalAbilityText": "[During OC] [LV1][LV2] [Starlight Appeal] (When Attacks)\n(Once per Turn: Same Name) You can send a core from this Spirit to the Trash. When you've done so, put a core from the Void to your \"Hoshimiya Ichigo\"/\"Kiriya Aoi\"/\"Shibuki Ran\", one of each.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "You can send a core from this Spirit to the Trash.",
+              "originalClauseText": "You can send a core from this Spirit to the Trash.",
               "cleanText": "You can send a core from this Spirit to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1796,12 +3486,23 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             },
             {
               "rawText": "put a core from the Void to your \"Hoshimiya Ichigo\"/\"Kiriya Aoi\"/\"Shibuki Ran\", one of each.",
+              "originalClauseText": "put a core from the Void to your \"Hoshimiya Ichigo\"/\"Kiriya Aoi\"/\"Shibuki Ran\", one of each.",
               "cleanText": "put a core from the Void to your \"Hoshimiya Ichigo\"/\"Kiriya Aoi\"/\"Shibuki Ran\", one of each",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1809,16 +3510,67 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB44-X01#a2",
+          "keywords": [
+            {
+              "name": "Starlight Appeal",
+              "parameter": null,
+              "wave": 5,
+              "hook": "appeal",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB44-X01#AB_WHEN_ATTACKS_NONE_LV1_LV2_4a685b1c43e79e00f23cc892d5a8faa57a547aeeb50191f6cacdc2ad428912cd_3c33373b537d9c8fb58bc57f4d2a2330",
+              "cardNumber": "PB44-X01",
+              "levels": [
+                1,
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [
+                "During OC"
+              ],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": "ONCE_PER_TURN_SAME_NAME",
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB44-X01#a2"
+            }
+          ],
+          "id": "PB44-X01#AB_WHEN_ATTACKS_NONE_LV1_LV2_4a685b1c43e79e00f23cc892d5a8faa57a547aeeb50191f6cacdc2ad428912cd_3c33373b537d9c8fb58bc57f4d2a2330",
+          "physicalId": "PB44-X01#AB_WHEN_ATTACKS_NONE_LV1_LV2_4a685b1c43e79e00f23cc892d5a8faa57a547aeeb50191f6cacdc2ad428912cd_3c33373b537d9c8fb58bc57f4d2a2330",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_4a685b1c43e79e00f23cc892d5a8faa57a547aeeb50191f6cacdc2ad428912cd_3c33373b537d9c8fb58bc57f4d2a2330",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_9d6f912cca672a55dd1ee943b3b7f3ee6294259a0e79dc9007c21e4904980633_fb70c98f43f628350946e5f7c0faee49",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
-      "unsupportedClausesCount": 0,
-      "isFullySupported": true
+      "unsupportedClausesCount": 1,
+      "isFullySupported": false
     }
   },
   "PB44-006": {
@@ -1841,6 +3593,21 @@
     "compiledIr": {
       "cardNumber": "PB44-006",
       "name": "［Starlight Academy Uniform - Summer Uniform］Shibuki Ran",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 4000
+        }
+      },
+      "originalEffectText": "[LV1][LV2] (When Summoned)\n(Once per Turn: Same Name) You can return an \"Idol\" family Spirit card/Nexus card from your Trash to the Hand. When you've done so, your counter +1.\n\n[LV2] [Aikatsu On Stage] (When Attacks)\nYou can put a \"Stage Style\" family \"Shibuki Ran\" from your Hand onto the Removed Zone. When you've done so, return this Spirit to your Hand, and summon the card you put onto the Removed Zone, without paying the cost.",
+      "teams": [],
       "keywords": [
         {
           "name": "Aikatsu On Stage",
@@ -1848,12 +3615,30 @@
           "wave": 5,
           "hook": "on_stage",
           "bracketed": true,
-          "index": 183
+          "index": 0,
+          "abilityId": "PB44-006#AB_WHEN_ATTACKS_NONE_LV2_d5e9017647e54b5b2c782aed7739f8e0f814ed97b179e787e703e6bf92e885de_10baba11e97018f0a7355455747a4368",
+          "cardNumber": "PB44-006",
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB44-006#a1"
         }
       ],
       "abilities": [
         {
-          "id": "PB44-006#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1863,8 +3648,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
             "limit": "ONCE_PER_TURN_SAME_NAME",
             "cantStack": false,
             "keyword": null,
@@ -1873,26 +3669,41 @@
             "isMain": false,
             "cleanBody": "You can return an \"Idol\" family Spirit card/Nexus card from your Trash to the Hand. When you've done so, your counter +1."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned)\n(Once per Turn: Same Name) You can return an \"Idol\" family Spirit card/Nexus card from your Trash to the Hand. When you've done so, your counter +1.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "You can return an \"Idol\" family Spirit card/Nexus card from your Trash to the Hand.",
+              "originalClauseText": "You can return an \"Idol\" family Spirit card/Nexus card from your Trash to the Hand.",
               "cleanText": "You can return an \"Idol\" family Spirit card/Nexus card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit",
+                    "Nexus"
+                  ],
+                  "family": "Idol"
+                },
+                "isOptional": true
               }
             },
             {
               "rawText": "your counter +1.",
+              "originalClauseText": "your counter +1.",
               "cleanText": "your counter +1",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1904,10 +3715,26 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB44-006#a0",
+          "keywords": [],
+          "id": "PB44-006#AB_WHEN_SUMMONED_NONE_LV1_LV2_83add6beaf82d8c8fbc72e074d0c488a40fcf9145d345316c866231845e049dc_730b418ae597bf65726472b4a3c871a0",
+          "physicalId": "PB44-006#AB_WHEN_SUMMONED_NONE_LV1_LV2_83add6beaf82d8c8fbc72e074d0c488a40fcf9145d345316c866231845e049dc_730b418ae597bf65726472b4a3c871a0",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_83add6beaf82d8c8fbc72e074d0c488a40fcf9145d345316c866231845e049dc_730b418ae597bf65726472b4a3c871a0",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_cc36bb2fac857105d4a97850e33799f0551a28889bb18c246ea4107f7ed9cc79_83916a1e281a1c30a4e3cc8d8f6c59a0",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB44-006#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1916,8 +3743,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Aikatsu On Stage",
@@ -1926,22 +3762,35 @@
             "isMain": false,
             "cleanBody": "You can put a \"Stage Style\" family \"Shibuki Ran\" from your Hand onto the Removed Zone. When you've done so, return this Spirit to your Hand, and summon the card you put onto the Removed Zone, without paying the cost."
           },
+          "originalAbilityText": "[LV2] [Aikatsu On Stage] (When Attacks)\nYou can put a \"Stage Style\" family \"Shibuki Ran\" from your Hand onto the Removed Zone. When you've done so, return this Spirit to your Hand, and summon the card you put onto the Removed Zone, without paying the cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can put a \"Stage Style\" family \"Shibuki Ran\" from your Hand onto the Removed Zone.",
+              "originalClauseText": "You can put a \"Stage Style\" family \"Shibuki Ran\" from your Hand onto the Removed Zone.",
               "cleanText": "You can put a \"Stage Style\" family \"Shibuki Ran\" from your Hand onto the Removed Zone",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "DECK_OR_HAND_ACTION"
+                "op": "DECK_OR_HAND_ACTION",
+                "action": "banish",
+                "from": "hand",
+                "to": "removed",
+                "side": "self",
+                "filter": {
+                  "family": "Stage Style"
+                }
               }
             },
             {
               "rawText": "return this Spirit to your Hand",
+              "originalClauseText": "return this Spirit to your Hand",
               "cleanText": "return this Spirit to your Hand",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1954,18 +3803,67 @@
             },
             {
               "rawText": "summon the card you put onto the Removed Zone, without paying the cost.",
+              "originalClauseText": "summon the card you put onto the Removed Zone, without paying the cost.",
               "cleanText": "summon the card you put onto the Removed Zone, without paying the cost",
+              "clauseIndex": 2,
               "link": "also",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "DECK_OR_HAND_ACTION"
+                "op": "DECK_OR_HAND_ACTION",
+                "action": "banish",
+                "from": "removed",
+                "to": "removed",
+                "side": "self"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB44-006#a1",
+          "keywords": [
+            {
+              "name": "Aikatsu On Stage",
+              "parameter": null,
+              "wave": 5,
+              "hook": "on_stage",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB44-006#AB_WHEN_ATTACKS_NONE_LV2_d5e9017647e54b5b2c782aed7739f8e0f814ed97b179e787e703e6bf92e885de_10baba11e97018f0a7355455747a4368",
+              "cardNumber": "PB44-006",
+              "levels": [
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB44-006#a1"
+            }
+          ],
+          "id": "PB44-006#AB_WHEN_ATTACKS_NONE_LV2_d5e9017647e54b5b2c782aed7739f8e0f814ed97b179e787e703e6bf92e885de_10baba11e97018f0a7355455747a4368",
+          "physicalId": "PB44-006#AB_WHEN_ATTACKS_NONE_LV2_d5e9017647e54b5b2c782aed7739f8e0f814ed97b179e787e703e6bf92e885de_10baba11e97018f0a7355455747a4368",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_d5e9017647e54b5b2c782aed7739f8e0f814ed97b179e787e703e6bf92e885de_10baba11e97018f0a7355455747a4368",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_275193cd404647871fd680d39418d25a40782de9dbca39f8567b802e1a757da7_ffa4a83c426f71fdf67cef5bbafd45cc",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,
@@ -2298,6 +4196,26 @@
     "compiledIr": {
       "cardNumber": "PB44-009",
       "name": "［Tropical Basket Coord］Arisugawa Otome ［2］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 6000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 3,
+          "bp": 8000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] (When Summoned)\n(Once per Turn: Same Name) Put a core from the Void to your other \"Idol\" family Spirit. If you have four counters or more, this effect puts +1 core.\n\n[LV3] [Starlight Appeal] (When Attacks)\nYou can send a core from this Spirit to the Trash. When you've done so, besides any \"Arisugawa Otome\", you can summon/deploy an \"Idol\" family card from your Hand, without paying the cost.",
+      "teams": [],
       "keywords": [
         {
           "name": "Starlight Appeal",
@@ -2305,12 +4223,30 @@
           "wave": 5,
           "hook": "appeal",
           "bracketed": true,
-          "index": 188
+          "index": 0,
+          "abilityId": "PB44-009#AB_WHEN_ATTACKS_NONE_LV3_f2692002718b0e08ee00f38794153a43872638e6badcd4183af74d84cfe1e780_76865c2d89e3e0353f5d95af42306774",
+          "cardNumber": "PB44-009",
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB44-009#a1"
         }
       ],
       "abilities": [
         {
-          "id": "PB44-009#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2321,8 +4257,19 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
             "limit": "ONCE_PER_TURN_SAME_NAME",
             "cantStack": false,
             "keyword": null,
@@ -2331,10 +4278,14 @@
             "isMain": false,
             "cleanBody": "Put a core from the Void to your other \"Idol\" family Spirit. If you have four counters or more, this effect puts +1 core."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\n(Once per Turn: Same Name) Put a core from the Void to your other \"Idol\" family Spirit. If you have four counters or more, this effect puts +1 core.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Put a core from the Void to your other \"Idol\" family Spirit.",
+              "originalClauseText": "Put a core from the Void to your other \"Idol\" family Spirit.",
               "cleanText": "Put a core from the Void to your other \"Idol\" family Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2342,26 +4293,49 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                }
               }
             },
             {
               "rawText": "If you have four counters or more, this effect puts +1 core.",
+              "originalClauseText": "If you have four counters or more, this effect puts +1 core.",
               "cleanText": "this effect puts +1 core",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": "If you have four counters or more",
               "duration": null,
               "op": {
-                "op": "MODIFY_EFFECT_VALUE"
+                "op": "MODIFY_EFFECT_VALUE",
+                "delta": 1,
+                "targetEffect": "core_removal"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB44-009#a0",
+          "keywords": [],
+          "id": "PB44-009#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_6a30c06c64e20daf516d36425a3e15a0bed58e4b8b08d2dc6275f4bf0e4754e7_b19a57be65d13157ed4cc883e916f0c8",
+          "physicalId": "PB44-009#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_6a30c06c64e20daf516d36425a3e15a0bed58e4b8b08d2dc6275f4bf0e4754e7_b19a57be65d13157ed4cc883e916f0c8",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_6a30c06c64e20daf516d36425a3e15a0bed58e4b8b08d2dc6275f4bf0e4754e7_b19a57be65d13157ed4cc883e916f0c8",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_e6e7315aa6c4f378bc38e12da590313ae02bc3ec442b7c4b64ca1bc8cfc9e077_8e9d39e2a9934d3432ee13f375e9042c",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN_SAME_NAME"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB44-009#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2370,8 +4344,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Starlight Appeal",
@@ -2380,10 +4363,14 @@
             "isMain": false,
             "cleanBody": "You can send a core from this Spirit to the Trash. When you've done so, besides any \"Arisugawa Otome\", you can summon/deploy an \"Idol\" family card from your Hand, without paying the cost."
           },
+          "originalAbilityText": "[LV3] [Starlight Appeal] (When Attacks)\nYou can send a core from this Spirit to the Trash. When you've done so, besides any \"Arisugawa Otome\", you can summon/deploy an \"Idol\" family card from your Hand, without paying the cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can send a core from this Spirit to the Trash.",
+              "originalClauseText": "You can send a core from this Spirit to the Trash.",
               "cleanText": "You can send a core from this Spirit to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -2391,12 +4378,23 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             },
             {
               "rawText": "besides any \"Arisugawa Otome\", you can summon/deploy an \"Idol\" family card from your Hand, without paying the cost.",
+              "originalClauseText": "besides any \"Arisugawa Otome\", you can summon/deploy an \"Idol\" family card from your Hand, without paying the cost.",
               "cleanText": "besides any \"Arisugawa Otome\", you can summon/deploy an \"Idol\" family card from your Hand, without paying the cost",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": true,
               "isCost": false,
@@ -2408,7 +4406,50 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB44-009#a1",
+          "keywords": [
+            {
+              "name": "Starlight Appeal",
+              "parameter": null,
+              "wave": 5,
+              "hook": "appeal",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB44-009#AB_WHEN_ATTACKS_NONE_LV3_f2692002718b0e08ee00f38794153a43872638e6badcd4183af74d84cfe1e780_76865c2d89e3e0353f5d95af42306774",
+              "cardNumber": "PB44-009",
+              "levels": [
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB44-009#a1"
+            }
+          ],
+          "id": "PB44-009#AB_WHEN_ATTACKS_NONE_LV3_f2692002718b0e08ee00f38794153a43872638e6badcd4183af74d84cfe1e780_76865c2d89e3e0353f5d95af42306774",
+          "physicalId": "PB44-009#AB_WHEN_ATTACKS_NONE_LV3_f2692002718b0e08ee00f38794153a43872638e6badcd4183af74d84cfe1e780_76865c2d89e3e0353f5d95af42306774",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV3_f2692002718b0e08ee00f38794153a43872638e6badcd4183af74d84cfe1e780_76865c2d89e3e0353f5d95af42306774",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV3_85162069029cb2eaf72791a574e64885e9d9fc9da78fe1054597c9a0293e6ab9_ed0ef5cb8640807c1c3b810c95ad8e09",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,

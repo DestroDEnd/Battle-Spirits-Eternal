@@ -1035,6 +1035,26 @@
     "compiledIr": {
       "cardNumber": "SD52-X01",
       "name": "Freedom Gundam",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 9000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 13000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: White & Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Summoned/Advents)\nNegate the effects of all opposing Spirits, and return two opposing Spirits to the deckbottom in any order.\n\n[LV1][LV2][LV3] Cost 7 or less\nThis Spirit is unaffected by opposing Cost 7 or less effects.\n\n[LV2][LV3] (When Attacks)\nAt the end of battle, send an opposing Life to the Trash.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -1042,12 +1062,32 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "SD52-X01#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_d01bda36e0c267ad5ecc38c00cb730e77860b25ff2878b0b1b90be0f1d8bbe2a_a327a665cdd249245f74b461d29cad45",
+          "cardNumber": "SD52-X01",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "SD52-X01#a0"
         }
       ],
       "abilities": [
         {
-          "id": "SD52-X01#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1058,8 +1098,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: White & Cost 5 or more",
@@ -1068,10 +1117,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Advent: White & Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1093,7 +1146,9 @@
             },
             {
               "rawText": "stack this from your Hand onto your target Spirit.",
+              "originalClauseText": "stack this from your Hand onto your target Spirit.",
               "cleanText": "stack this from your Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1111,10 +1166,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD52-X01#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "White & Cost 5 or more",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "SD52-X01#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_d01bda36e0c267ad5ecc38c00cb730e77860b25ff2878b0b1b90be0f1d8bbe2a_a327a665cdd249245f74b461d29cad45",
+              "cardNumber": "SD52-X01",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "SD52-X01#a0"
+            }
+          ],
+          "id": "SD52-X01#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_d01bda36e0c267ad5ecc38c00cb730e77860b25ff2878b0b1b90be0f1d8bbe2a_a327a665cdd249245f74b461d29cad45",
+          "physicalId": "SD52-X01#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_d01bda36e0c267ad5ecc38c00cb730e77860b25ff2878b0b1b90be0f1d8bbe2a_a327a665cdd249245f74b461d29cad45",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_d01bda36e0c267ad5ecc38c00cb730e77860b25ff2878b0b1b90be0f1d8bbe2a_a327a665cdd249245f74b461d29cad45",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_09c4fb0ca41d6b6097252750f23869ff9466d5f7a78f0a35322a3e34493d9583_1b0d9727c2761728d3cf7343902ae2f6",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD52-X01#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1124,21 +1223,45 @@
             ],
             "levelExplicit": true,
             "prefixes": [],
-            "timing": "WHEN_SUMMONED",
-            "timingLabel": "When Summoned/Advents",
+            "timing": "PASSIVE",
+            "timings": [],
+            "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
             "burstCondition": null,
             "isFlash": false,
             "isMain": false,
-            "cleanBody": "Negate the effects of all opposing Spirits, and return two opposing Spirits to the deckbottom in any order."
+            "cleanBody": "(When Summoned/Advents)\nNegate the effects of all opposing Spirits, and return two opposing Spirits to the deckbottom in any order."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned/Advents)\nNegate the effects of all opposing Spirits, and return two opposing Spirits to the deckbottom in any order.",
+          "abilityIndex": 1,
           "clauses": [
             {
+              "rawText": "(When Summoned/Advents)",
+              "originalClauseText": "(When Summoned/Advents)",
+              "cleanText": "(When Summoned/Advents)",
+              "clauseIndex": 0,
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "UNSUPPORTED",
+                "rawText": "(When Summoned/Advents)"
+              }
+            },
+            {
               "rawText": "Negate the effects of all opposing Spirits",
+              "originalClauseText": "Negate the effects of all opposing Spirits",
               "cleanText": "Negate the effects of all opposing Spirits",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1150,7 +1273,9 @@
             },
             {
               "rawText": "return two opposing Spirits to the deckbottom in any order.",
+              "originalClauseText": "return two opposing Spirits to the deckbottom in any order.",
               "cleanText": "return two opposing Spirits to the deckbottom in any order",
+              "clauseIndex": 2,
               "link": "also",
               "isOptional": false,
               "isCost": false,
@@ -1165,10 +1290,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "(When Summoned/Advents)"
+          ],
+          "legacyId": "SD52-X01#a1",
+          "keywords": [],
+          "id": "SD52-X01#AB_PASSIVE_NONE_LV1_LV2_LV3_5c807de0f9487cdbf02a98115be86588547ad3836f2f16d8cc462b8d39c9e4ac_f3008c0be9c3f0ff56ebec1fd332259e",
+          "physicalId": "SD52-X01#AB_PASSIVE_NONE_LV1_LV2_LV3_5c807de0f9487cdbf02a98115be86588547ad3836f2f16d8cc462b8d39c9e4ac_f3008c0be9c3f0ff56ebec1fd332259e",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_5c807de0f9487cdbf02a98115be86588547ad3836f2f16d8cc462b8d39c9e4ac_f3008c0be9c3f0ff56ebec1fd332259e",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_e1879695a60fc6bf7f536e54636d0a3308f421e1b2a2806dbb0370361763624e_51af59db6cdb2de006b7f42c0d6e0bef",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD52-X01#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1179,8 +1318,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1189,36 +1333,54 @@
             "isMain": false,
             "cleanBody": "Cost 7 or less\nThis Spirit is unaffected by opposing Cost 7 or less effects."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] Cost 7 or less\nThis Spirit is unaffected by opposing Cost 7 or less effects.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Cost 7 or less",
+              "originalClauseText": "Cost 7 or less",
               "cleanText": "Cost 7 or less",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "COST_MODIFIER"
+                "op": "TARGET_CONSTRAINT"
               }
             },
             {
               "rawText": "This Spirit is unaffected by opposing Cost 7 or less effects.",
+              "originalClauseText": "This Spirit is unaffected by opposing Cost 7 or less effects.",
               "cleanText": "This Spirit is unaffected by opposing Cost 7 or less effects",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "COST_MODIFIER"
+                "op": "IMMUNITY"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD52-X01#a2",
+          "keywords": [],
+          "id": "SD52-X01#AB_PASSIVE_NONE_LV1_LV2_LV3_889b58e1adff77320b80a48fefd71a43aa861df6b2f0832c871cba3c5958723e_03aeb0d1121d5911cb60af61979ba066",
+          "physicalId": "SD52-X01#AB_PASSIVE_NONE_LV1_LV2_LV3_889b58e1adff77320b80a48fefd71a43aa861df6b2f0832c871cba3c5958723e_03aeb0d1121d5911cb60af61979ba066",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_889b58e1adff77320b80a48fefd71a43aa861df6b2f0832c871cba3c5958723e_03aeb0d1121d5911cb60af61979ba066",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_1ab8ee5b197ea3663e6948cce6c90387fb9d934105bd4f2e347609ef96b80224_8ee4fa3155219350c173f86f6a7a1569",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD52-X01#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1228,8 +1390,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1238,10 +1409,14 @@
             "isMain": false,
             "cleanBody": "At the end of battle, send an opposing Life to the Trash."
           },
+          "originalAbilityText": "[LV2][LV3] (When Attacks)\nAt the end of battle, send an opposing Life to the Trash.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "At the end of battle, send an opposing Life to the Trash.",
+              "originalClauseText": "At the end of battle, send an opposing Life to the Trash.",
               "cleanText": "At the end of battle, send an opposing Life to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1249,16 +1424,35 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD52-X01#a3",
+          "keywords": [],
+          "id": "SD52-X01#AB_WHEN_ATTACKS_NONE_LV2_LV3_59a410c97ecc4fdd39efb43f3f2fb8f166dec296e76634d1f900b940f579049d_3fd5b25bcd5cf1c1ae81511085dfdd28",
+          "physicalId": "SD52-X01#AB_WHEN_ATTACKS_NONE_LV2_LV3_59a410c97ecc4fdd39efb43f3f2fb8f166dec296e76634d1f900b940f579049d_3fd5b25bcd5cf1c1ae81511085dfdd28",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_59a410c97ecc4fdd39efb43f3f2fb8f166dec296e76634d1f900b940f579049d_3fd5b25bcd5cf1c1ae81511085dfdd28",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_46ef5f9af079db4b92a468280187d901f8a636a309750ccf51c83897eb96e404_863af17bb9dd8c07c88aaed1c34bb790",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 7,
-      "unsupportedClausesCount": 0,
-      "isFullySupported": true
+      "unsupportedClausesCount": 1,
+      "isFullySupported": false
     }
   },
   "SD52-015": {
@@ -1428,6 +1622,21 @@
     "compiledIr": {
       "cardNumber": "SD52-X01-A5223",
       "name": "Justice Gundam",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 4,
+          "bp": 13000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: White & Cost 5 or more] ((Your Turn))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit.\n\n[LV1][LV2][LV3] Cost 7 or less\nThis Spirit is unaffected by opposing Cost 7 or less effects.\n\n[LV2][LV3] (When Attacks)\nReturn the opposing blocking Spirit to the deckbottom. Then, once per turn, this Spirit can refresh.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -1435,12 +1644,32 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "SD52-X01-A5223#AB_TURN_TRIGGER_NONE_LV1_LV2_LV3_8079749b03cf55f5893ff4b45ab1b25cf0e641ef0dd5438fafd19975d8040afc_73eeaae11ed49581f976fb4e23aa60bf",
+          "cardNumber": "SD52-X01-A5223",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "TURN_TRIGGER",
+          "timingLabel": "Your Turn",
+          "timingStep": "ANY",
+          "face": "B",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "SD52-X01-A5223#a0"
         }
       ],
       "abilities": [
         {
-          "id": "SD52-X01-A5223#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1451,8 +1680,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "TURN_TRIGGER",
+            "timings": [
+              "TURN_TRIGGER"
+            ],
             "timingLabel": "Your Turn",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "TURN_TRIGGER"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: White & Cost 5 or more",
@@ -1461,10 +1699,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Advent: White & Cost 5 or more] ((Your Turn))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -1486,7 +1728,9 @@
             },
             {
               "rawText": "stack this from your Hand onto your target Spirit.",
+              "originalClauseText": "stack this from your Hand onto your target Spirit.",
               "cleanText": "stack this from your Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -1504,10 +1748,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD52-X01-A5223#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "White & Cost 5 or more",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "SD52-X01-A5223#AB_TURN_TRIGGER_NONE_LV1_LV2_LV3_8079749b03cf55f5893ff4b45ab1b25cf0e641ef0dd5438fafd19975d8040afc_73eeaae11ed49581f976fb4e23aa60bf",
+              "cardNumber": "SD52-X01-A5223",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "TURN_TRIGGER",
+              "timingLabel": "Your Turn",
+              "timingStep": "ANY",
+              "face": "B",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "SD52-X01-A5223#a0"
+            }
+          ],
+          "id": "SD52-X01-A5223#AB_TURN_TRIGGER_NONE_LV1_LV2_LV3_8079749b03cf55f5893ff4b45ab1b25cf0e641ef0dd5438fafd19975d8040afc_73eeaae11ed49581f976fb4e23aa60bf",
+          "physicalId": "SD52-X01-A5223#AB_TURN_TRIGGER_NONE_LV1_LV2_LV3_8079749b03cf55f5893ff4b45ab1b25cf0e641ef0dd5438fafd19975d8040afc_73eeaae11ed49581f976fb4e23aa60bf",
+          "semanticId": "SEM#AB_TURN_TRIGGER_NONE_LV1_LV2_LV3_8079749b03cf55f5893ff4b45ab1b25cf0e641ef0dd5438fafd19975d8040afc_73eeaae11ed49581f976fb4e23aa60bf",
+          "semanticIdV3": "SEM3#AB_TURN_TRIGGER_NONE_LV1_LV2_LV3_cc83febf5557ebc3383a5b30a04f23ce1e74b6640069b1dce00924ab1e6e0f11_f05f0a24045f77129c39ccb2cb9e8a80",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "TURN_TRIGGER"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD52-X01-A5223#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1518,8 +1806,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1528,36 +1821,54 @@
             "isMain": false,
             "cleanBody": "Cost 7 or less\nThis Spirit is unaffected by opposing Cost 7 or less effects."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] Cost 7 or less\nThis Spirit is unaffected by opposing Cost 7 or less effects.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Cost 7 or less",
+              "originalClauseText": "Cost 7 or less",
               "cleanText": "Cost 7 or less",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "COST_MODIFIER"
+                "op": "TARGET_CONSTRAINT"
               }
             },
             {
               "rawText": "This Spirit is unaffected by opposing Cost 7 or less effects.",
+              "originalClauseText": "This Spirit is unaffected by opposing Cost 7 or less effects.",
               "cleanText": "This Spirit is unaffected by opposing Cost 7 or less effects",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "COST_MODIFIER"
+                "op": "IMMUNITY"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD52-X01-A5223#a1",
+          "keywords": [],
+          "id": "SD52-X01-A5223#AB_PASSIVE_NONE_LV1_LV2_LV3_889b58e1adff77320b80a48fefd71a43aa861df6b2f0832c871cba3c5958723e_03aeb0d1121d5911cb60af61979ba066",
+          "physicalId": "SD52-X01-A5223#AB_PASSIVE_NONE_LV1_LV2_LV3_889b58e1adff77320b80a48fefd71a43aa861df6b2f0832c871cba3c5958723e_03aeb0d1121d5911cb60af61979ba066",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_889b58e1adff77320b80a48fefd71a43aa861df6b2f0832c871cba3c5958723e_03aeb0d1121d5911cb60af61979ba066",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_1ab8ee5b197ea3663e6948cce6c90387fb9d934105bd4f2e347609ef96b80224_8ee4fa3155219350c173f86f6a7a1569",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "SD52-X01-A5223#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1567,8 +1878,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1577,10 +1897,14 @@
             "isMain": false,
             "cleanBody": "Return the opposing blocking Spirit to the deckbottom. Then, once per turn, this Spirit can refresh."
           },
+          "originalAbilityText": "[LV2][LV3] (When Attacks)\nReturn the opposing blocking Spirit to the deckbottom. Then, once per turn, this Spirit can refresh.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Return the opposing blocking Spirit to the deckbottom.",
+              "originalClauseText": "Return the opposing blocking Spirit to the deckbottom.",
               "cleanText": "Return the opposing blocking Spirit to the deckbottom",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1596,7 +1920,9 @@
             },
             {
               "rawText": "once per turn, this Spirit can refresh.",
+              "originalClauseText": "once per turn, this Spirit can refresh.",
               "cleanText": "once per turn, this Spirit can refresh",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -1608,7 +1934,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD52-X01-A5223#a2",
+          "keywords": [],
+          "id": "SD52-X01-A5223#AB_WHEN_ATTACKS_NONE_LV2_LV3_9e6553a1dcf9a5f84c66d99ba0e58db2e81e549ece9dba3732c2d5294d3e4574_85c19dbce620689e039082a95b15fcbb",
+          "physicalId": "SD52-X01-A5223#AB_WHEN_ATTACKS_NONE_LV2_LV3_9e6553a1dcf9a5f84c66d99ba0e58db2e81e549ece9dba3732c2d5294d3e4574_85c19dbce620689e039082a95b15fcbb",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_9e6553a1dcf9a5f84c66d99ba0e58db2e81e549ece9dba3732c2d5294d3e4574_85c19dbce620689e039082a95b15fcbb",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_6d8508fc6654ac6b65dea55959875c01e46c4599157fca3077e7b995bc1a4a99_bf097deed49e5cb1391a03fbf7f912b8",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,
@@ -2698,10 +3039,13 @@
     "compiledIr": {
       "cardNumber": "SD52-016",
       "name": "The Descending Sword",
+      "type": "Magic",
+      "levels": {},
+      "originalEffectText": "[Flash]\nReturn an opposing Spirit to the Hand. Then, if there is any \"MS\" family Spirit card in your Trash, during this turn, the attacks of opposing Cost 4 or more Spirits/Ultimates can't reduce your Life.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "SD52-016#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2712,8 +3056,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2722,10 +3073,14 @@
             "isMain": false,
             "cleanBody": "Return an opposing Spirit to the Hand. Then, if there is any \"MS\" family Spirit card in your Trash, during this turn, the attacks of opposing Cost 4 or more Spirits/Ultimates can't reduce your Life."
           },
+          "originalAbilityText": "[Flash]\nReturn an opposing Spirit to the Hand. Then, if there is any \"MS\" family Spirit card in your Trash, during this turn, the attacks of opposing Cost 4 or more Spirits/Ultimates can't reduce your Life.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Return an opposing Spirit to the Hand.",
+              "originalClauseText": "Return an opposing Spirit to the Hand.",
               "cleanText": "Return an opposing Spirit to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -2745,18 +3100,35 @@
             },
             {
               "rawText": "if there is any \"MS\" family Spirit card in your Trash, during this turn, the attacks of opposing Cost 4 or more Spirits/Ultimates can't reduce your Life.",
+              "originalClauseText": "if there is any \"MS\" family Spirit card in your Trash, during this turn, the attacks of opposing Cost 4 or more Spirits/Ultimates can't reduce your Life.",
               "cleanText": "during this turn, the attacks of opposing Cost 4 or more Spirits/Ultimates can't reduce your Life",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": false,
               "isCost": false,
               "condition": "if there is any \"MS\" family Spirit card in your Trash",
               "duration": "DURING_THIS_TURN",
               "op": {
-                "op": "COST_MODIFIER"
+                "op": "PREVENT_DAMAGE"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "SD52-016#a0",
+          "keywords": [],
+          "id": "SD52-016#AB_FLASH_NONE_LV1_LV2_LV3_bc70f18ac113af7224fef4f251a230e30b116c3f221a32bc914a4051fcfa4775_8f153b78af74f6ed5a5de5a608a07e31",
+          "physicalId": "SD52-016#AB_FLASH_NONE_LV1_LV2_LV3_bc70f18ac113af7224fef4f251a230e30b116c3f221a32bc914a4051fcfa4775_8f153b78af74f6ed5a5de5a608a07e31",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_bc70f18ac113af7224fef4f251a230e30b116c3f221a32bc914a4051fcfa4775_8f153b78af74f6ed5a5de5a608a07e31",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_a852851d0aee546b26c7c66f45d01d15f3a1a0fe5278cc9067ad053fc8b2a095_bf82d4bab04864d9c22f4a12f8c93cac",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,

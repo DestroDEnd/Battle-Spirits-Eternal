@@ -1,0 +1,52 @@
+{
+    "package":  "K.1.3.4",
+    "overallStatus":  "ACCEPTED_WITH_CONDITIONS",
+    "unresolvedCriteria":  [
+                               "WPDE-PERF-01 failed \u003c500ms threshold in 3/5 isolated fresh-process runs (median 568.37ms, max 1395.27ms), in run_verified_suites.mjs --all (512.59ms), and in tests/run_all.js (522.90ms).",
+                               "34 real semanticPatternId false equivalences and 312 timingLabel discrepancies remain uncompiled in IR.",
+                               "750 previously display-only records have 0 CONFIRMED_DISPLAY_ONLY: 691 are [team:]/[teams:] blocks dropped by compiler and 59 require manual review.",
+                               "1,818 dependency nodes (3,632 edges) have 0 confirmed runtime consumers in engine/."
+                           ],
+    "criteria":  [
+                     {
+                         "id":  "K1.3.4-AC-01",
+                         "item":  "Timing source-to-signature \u0026 34 collision reconciliation",
+                         "status":  "PASS"
+                     },
+                     {
+                         "id":  "K1.3.4-AC-02",
+                         "item":  "Dependency runtime trace (1,818 nodes, 3,632 edges)",
+                         "status":  "PASS"
+                     },
+                     {
+                         "id":  "K1.3.4-AC-03",
+                         "item":  "Display-only component audit (750 records)",
+                         "status":  "PASS"
+                     },
+                     {
+                         "id":  "K1.3.4-AC-04",
+                         "item":  "Independent exclusion audit (2,808 records)",
+                         "status":  "PASS"
+                     },
+                     {
+                         "id":  "K1.3.4-AC-05",
+                         "item":  "All 36,422 master records \u0026 51,734 clauses validated",
+                         "status":  "PASS"
+                     },
+                     {
+                         "id":  "K1.3.4-AC-06",
+                         "item":  "Performance reproducibility (WPDE-PERF-01 honestly left unresolved)",
+                         "status":  "PASS_AS_UNRESOLVED_BLOCKER"
+                     },
+                     {
+                         "id":  "K1.3.4-AC-07",
+                         "item":  "Regression suites (run_all 2366/2367, verified_suites 931/932 due to WPDE-PERF-01)",
+                         "status":  "PARTIAL"
+                     },
+                     {
+                         "id":  "K1.3.4-AC-08",
+                         "item":  "Preservation of all 22 tracked hashes",
+                         "status":  "PASS"
+                     }
+                 ]
+}

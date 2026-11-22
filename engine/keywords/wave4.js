@@ -562,11 +562,25 @@ export const LeapKeyword = {
       const opp = state.players[oppSide];
       const exhaustedUnits = (opp?.field || []).filter(st => st.state === 'EXHAUSTED');
       if (exhaustedUnits.length > 0) {
-        const target = exhaustedUnits[0];
-        await commitStackExit(state, target, 'hand', { cause: 'leap', by: ownerSide }, game.events);
-        if (opp.life > 0) {
-          opp.life -= 1;
-          opp.reserve.normal = (opp.reserve.normal || 0) + 1;
+        let target = null;
+        if (resolver?.promptResolver?.choose) {
+          const chosen = await resolver.promptResolver.choose({
+            type: 'SELECT_LEAP_BOUNCE',
+            title: '[Leap]: Choose 1 opposing exhausted Spirit or Ultimate to return to Hand',
+            candidates: exhaustedUnits,
+            chooser: ownerSide
+          });
+          const selected = Array.isArray(chosen) ? chosen[0] : (chosen?.selected ? chosen.selected[0] : chosen?.stack || chosen);
+          target = selected && exhaustedUnits.find(st => st.id === (selected.id || selected) || st === selected);
+        } else {
+          target = exhaustedUnits[0];
+        }
+        if (target) {
+          await commitStackExit(state, target, 'hand', { cause: 'leap', by: ownerSide }, game.events);
+          if (opp.life > 0) {
+            opp.life -= 1;
+            opp.reserve.normal = (opp.reserve.normal || 0) + 1;
+          }
         }
       }
     }
@@ -971,4 +985,7 @@ export function registerWave4Keywords(registry) {
   registry.register({ ...EvilLightKeyword, id: 'Type: Field' });
   registry.register({ ...EvilLightKeyword, id: 'Type: Flower' });
   registry.register({ ...EvilLightKeyword, id: 'Type: Vision' });
+  registry.register({ ...SpellbindKeyword, id: 'True Spellbind' });
+  registry.register({ ...PlunderKeyword, id: 'True Plunder' });
+  registry.register({ ...KagemushaKeyword, id: 'Twinkle Body Substitution' });
 }

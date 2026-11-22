@@ -1,0 +1,23 @@
+{
+  "totalRegistrationAttempts": 36422,
+  "successfulNewRegistrations": 34855,
+  "exactDescriptorMatches": 1567,
+  "reprintDuplicateMatches": 1567,
+  "duplicatePhysicalCollisions": 0,
+  "uniquePhysicalIds": 34855,
+  "uniqueSemanticIds": 18476,
+  "sharedSemanticEquivalences": 2997,
+  "semanticMismatches": 0,
+  "abilitiesWithInstanceIndex": 58,
+  "legacyIdsPreserved": 36422,
+  "registrySizeBeforeCleanup": 34855,
+  "registrySizeAfterCleanup": 0,
+  "registryAccountingExplanation": {
+    "totalAttempts": "36,422 total abilities registered across 514 shards.",
+    "uniqueEntries": "34,855 unique physical ability IDs registered in globalCollisionRegistry.",
+    "reprintMatches": "1,567 benign reprint duplicate registrations (matching canonical descriptor).",
+    "fatalCollisions": "0 duplicate physical ID collisions on differing descriptors.",
+    "cleanupReason": "The registry is an in-memory collision detection cache used during compilation and verification. Calling .clear() resets the cache between compilation runs to prevent test coupling; persistent identities are serialized into the JSON shard files.",
+    "affectsPersistentIds": false
+  }
+}

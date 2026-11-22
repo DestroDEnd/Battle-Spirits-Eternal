@@ -24,6 +24,26 @@
     "compiledIr": {
       "cardNumber": "BSC31-CP04",
       "name": "The DashingYatagarasuTwinkle Magoichi",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 7000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 8000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 3,
+          "bp": 9000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: Diva] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nYou can summon a pre-advent card from underneath this Spirit in exhausted state without paying the cost. However, any (When Summoned) effects of the summoned Spirit can't activate.\n\n[LV1][LV2][LV3]\nWhen counting the number of Spirits for your Spirit effects, count this Spirit as two Spirits.\n\n[LV2][LV3] (Opposing Attack Step)\nDepending on the number of \"Diva\" family Spirits you control, activate the following effects:\nThree or more: Your Life can't be reduced by the attacks of opposing Spirits with two symbols or more.\nSix or more: The opponent can't use cards from their Hand.",
+      "teams": [],
       "keywords": [
         {
           "name": "Advent",
@@ -31,12 +51,32 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "BSC31-CP04#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_5f5eeed7daf6d9cc7ad732404e12fdca60e13f9d2142d288c8bdf349926dfb9a_6751f14b9c2e5bf030fb4eeb1d8387ab",
+          "cardNumber": "BSC31-CP04",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "BSC31-CP04#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BSC31-CP04#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -47,8 +87,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: Diva",
@@ -57,10 +106,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Advent: Diva] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -82,7 +135,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -100,10 +155,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-CP04#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "Diva",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC31-CP04#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_5f5eeed7daf6d9cc7ad732404e12fdca60e13f9d2142d288c8bdf349926dfb9a_6751f14b9c2e5bf030fb4eeb1d8387ab",
+              "cardNumber": "BSC31-CP04",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "BSC31-CP04#a0"
+            }
+          ],
+          "id": "BSC31-CP04#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_5f5eeed7daf6d9cc7ad732404e12fdca60e13f9d2142d288c8bdf349926dfb9a_6751f14b9c2e5bf030fb4eeb1d8387ab",
+          "physicalId": "BSC31-CP04#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_5f5eeed7daf6d9cc7ad732404e12fdca60e13f9d2142d288c8bdf349926dfb9a_6751f14b9c2e5bf030fb4eeb1d8387ab",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_5f5eeed7daf6d9cc7ad732404e12fdca60e13f9d2142d288c8bdf349926dfb9a_6751f14b9c2e5bf030fb4eeb1d8387ab",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_aac89fc6afcc3c721f42b0e4f8d28825564f3ba581aaa4836decbfd141c4c58e_e378ef05ff12642793de149baa89ad0e",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC31-CP04#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -114,8 +213,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS"
+            ],
             "timingLabel": "When Advents",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -124,10 +232,14 @@
             "isMain": false,
             "cleanBody": "You can summon a pre-advent card from underneath this Spirit in exhausted state without paying the cost. However, any (When Summoned) effects of the summoned Spirit can't activate."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Advents)\nYou can summon a pre-advent card from underneath this Spirit in exhausted state without paying the cost. However, any (When Summoned) effects of the summoned Spirit can't activate.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can summon a pre-advent card from underneath this Spirit in exhausted state without paying the cost.",
+              "originalClauseText": "You can summon a pre-advent card from underneath this Spirit in exhausted state without paying the cost.",
               "cleanText": "You can summon a pre-advent card from underneath this Spirit in exhausted state without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -135,12 +247,25 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "free": true,
+                "exhausted": true,
+                "isOptional": true
               }
             },
             {
               "rawText": "any (When Summoned) effects of the summoned Spirit can't activate.",
+              "originalClauseText": "any (When Summoned) effects of the summoned Spirit can't activate.",
               "cleanText": "any (When Summoned) effects of the summoned Spirit can't activate",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -151,10 +276,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-CP04#a1",
+          "keywords": [],
+          "id": "BSC31-CP04#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_7c0a042731c111cc8e8e7b6cbadcfdb6ea679360c1a6742295875b16e343d883_4c96c8215339d4fe95697f3c1f428915",
+          "physicalId": "BSC31-CP04#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_7c0a042731c111cc8e8e7b6cbadcfdb6ea679360c1a6742295875b16e343d883_4c96c8215339d4fe95697f3c1f428915",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_7c0a042731c111cc8e8e7b6cbadcfdb6ea679360c1a6742295875b16e343d883_4c96c8215339d4fe95697f3c1f428915",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_808d7f057a21cf19ee4e85cc8dd2d0bd0759f026210dad0013452d20f79b7b65_524df80b2c8d73fda8e074a5f891a76a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC31-CP04#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -165,8 +304,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -175,24 +319,43 @@
             "isMain": false,
             "cleanBody": "When counting the number of Spirits for your Spirit effects, count this Spirit as two Spirits."
           },
+          "originalAbilityText": "[LV1][LV2][LV3]\nWhen counting the number of Spirits for your Spirit effects, count this Spirit as two Spirits.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When counting the number of Spirits for your Spirit effects, count this Spirit as two Spirits.",
+              "originalClauseText": "When counting the number of Spirits for your Spirit effects, count this Spirit as two Spirits.",
               "cleanText": "When counting the number of Spirits for your Spirit effects, count this Spirit as two Spirits",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
+                "multiplier": 2,
+                "countAs": 2,
+                "cardType": "Spirit",
                 "op": "COUNT_MODIFIER"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-CP04#a2",
+          "keywords": [],
+          "id": "BSC31-CP04#AB_PASSIVE_NONE_LV1_LV2_LV3_9064021b1a318d63131165edd1c9a0ff3c815a43bd2238853f8d7541a9f9cd90_a993441b04e35ead0e9cffb6cbc4129d",
+          "physicalId": "BSC31-CP04#AB_PASSIVE_NONE_LV1_LV2_LV3_9064021b1a318d63131165edd1c9a0ff3c815a43bd2238853f8d7541a9f9cd90_a993441b04e35ead0e9cffb6cbc4129d",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_9064021b1a318d63131165edd1c9a0ff3c815a43bd2238853f8d7541a9f9cd90_a993441b04e35ead0e9cffb6cbc4129d",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_a7ffc2c17a2a3250f88fbd2d1203f4af1e95488be57f84d8232d6931daf830b6_2fbbae95ded2156d8a853c229b1101ab",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC31-CP04#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -202,8 +365,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Opposing Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "OPPONENT",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -212,34 +384,44 @@
             "isMain": false,
             "cleanBody": "Depending on the number of \"Diva\" family Spirits you control, activate the following effects:\nThree or more: Your Life can't be reduced by the attacks of opposing Spirits with two symbols or more.\nSix or more: The opponent can't use cards from their Hand."
           },
+          "originalAbilityText": "[LV2][LV3] (Opposing Attack Step)\nDepending on the number of \"Diva\" family Spirits you control, activate the following effects:\nThree or more: Your Life can't be reduced by the attacks of opposing Spirits with two symbols or more.\nSix or more: The opponent can't use cards from their Hand.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "Depending on the number of \"Diva\" family Spirits you control, activate the following effects:",
+              "originalClauseText": "Depending on the number of \"Diva\" family Spirits you control, activate the following effects:",
               "cleanText": "Depending on the number of \"Diva\" family Spirits you control, activate the following effects:",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "GRANT_FAMILY"
+                "op": "ACTIVATE_EFFECT_ACTION",
+                "action": "ACTIVATE_EFFECT",
+                "side": "self"
               }
             },
             {
               "rawText": "Three or more: Your Life can't be reduced by the attacks of opposing Spirits with two symbols or more.",
+              "originalClauseText": "Three or more: Your Life can't be reduced by the attacks of opposing Spirits with two symbols or more.",
               "cleanText": "Three or more: Your Life can't be reduced by the attacks of opposing Spirits with two symbols or more",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "ADD_SYMBOL"
+                "op": "COMBAT_RESTRICTION"
               }
             },
             {
               "rawText": "Six or more: The opponent can't use cards from their Hand.",
+              "originalClauseText": "Six or more: The opponent can't use cards from their Hand.",
               "cleanText": "Six or more: The opponent can't use cards from their Hand",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -250,7 +432,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-CP04#a3",
+          "keywords": [],
+          "id": "BSC31-CP04#AB_ATTACK_STEP_NONE_LV2_LV3_103d1a43357974c7b1eaea71e75b49f2e0728fdd0a5bbe0577e479f8d495bba5_3e20f690b304637b2e7e56252012ff6c",
+          "physicalId": "BSC31-CP04#AB_ATTACK_STEP_NONE_LV2_LV3_103d1a43357974c7b1eaea71e75b49f2e0728fdd0a5bbe0577e479f8d495bba5_3e20f690b304637b2e7e56252012ff6c",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_103d1a43357974c7b1eaea71e75b49f2e0728fdd0a5bbe0577e479f8d495bba5_3e20f690b304637b2e7e56252012ff6c",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_LV3_01de11d52375d724e778d55d8d8d9fa0813eea4052f9543d44c93e902f3d0c48_efad532620fc05e413a91d75e01096b7",
+          "timingSemantics": {
+            "timingOwner": "OPPONENT",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 8,
@@ -377,6 +574,23 @@
     "compiledIr": {
       "cardNumber": "BSC31-010",
       "name": "［Diva Hero］Banri-Zell",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 13000
+        }
+      },
+      "originalEffectText": "[teams: Shiny Hearts Hyakka Ryouran]\n\n[LV1][LV2][LV3] (When Summoned)\nWhen summoned by an effect, destroy an opposing 20000 BP or less Spirit/Ultimate.\n\n[LV2][LV3] [catl: All Color] (When Attacks)\nBy sending [Soul Core] from this Spirit to your Trash, immediately activate one of your Soul Bursts. After the Burst activates, send an opposing Life to their Reserve.",
+      "teams": [
+        "Shiny Hearts Hyakka Ryouran"
+      ],
       "keywords": [
         {
           "name": "Team",
@@ -384,13 +598,36 @@
           "wave": 5,
           "hook": "team",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "BSC31-010#AB_PASSIVE_NONE_LV1_LV2_LV3_e883d7a63cb9f1d9ee9d8eda060d6d94f14a786d41b8466afcee832110d66e4f_af7f850981b5cc7c2af8ba3574523314",
+          "cardNumber": "BSC31-010",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC31-010#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BSC31-010#a0",
-          "type": "ABILITY",
+          "type": "TEAM_RESTRICTION",
+          "teams": [
+            "Shiny Hearts Hyakka Ryouran"
+          ],
           "header": {
             "levels": [
               1,
@@ -400,8 +637,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -410,11 +652,56 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "rawText": "[teams: Shiny Hearts Hyakka Ryouran]",
+          "originalAbilityText": "[teams: Shiny Hearts Hyakka Ryouran]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-010#a0",
+          "keywords": [
+            {
+              "name": "Team",
+              "parameter": "Shiny Hearts Hyakka Ryouran",
+              "wave": 5,
+              "hook": "team",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC31-010#AB_PASSIVE_NONE_LV1_LV2_LV3_e883d7a63cb9f1d9ee9d8eda060d6d94f14a786d41b8466afcee832110d66e4f_af7f850981b5cc7c2af8ba3574523314",
+              "cardNumber": "BSC31-010",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC31-010#a0"
+            }
+          ],
+          "id": "BSC31-010#AB_PASSIVE_NONE_LV1_LV2_LV3_e883d7a63cb9f1d9ee9d8eda060d6d94f14a786d41b8466afcee832110d66e4f_af7f850981b5cc7c2af8ba3574523314",
+          "physicalId": "BSC31-010#AB_PASSIVE_NONE_LV1_LV2_LV3_e883d7a63cb9f1d9ee9d8eda060d6d94f14a786d41b8466afcee832110d66e4f_af7f850981b5cc7c2af8ba3574523314",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_e883d7a63cb9f1d9ee9d8eda060d6d94f14a786d41b8466afcee832110d66e4f_af7f850981b5cc7c2af8ba3574523314",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_b0d8aed6c41436e187d6bb22cea1827bd92985f1a68ab2adad4cda9a409bb29e_c6c1d532f82353a7bce9be32b12d68f1",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC31-010#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -425,8 +712,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When summoned by an effect",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -435,10 +731,14 @@
             "isMain": false,
             "cleanBody": "destroy an opposing 20000 BP or less Spirit/Ultimate."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nWhen summoned by an effect, destroy an opposing 20000 BP or less Spirit/Ultimate.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "destroy an opposing 20000 BP or less Spirit/Ultimate.",
+              "originalClauseText": "destroy an opposing 20000 BP or less Spirit/Ultimate.",
               "cleanText": "destroy an opposing 20000 BP or less Spirit/Ultimate",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -459,10 +759,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-010#a1",
+          "keywords": [],
+          "id": "BSC31-010#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_9db22a72025584e078fb2813e9d5b95178b151dbb23753dc8707925743349855_237cece35cc3d24e387d35ca812b3ab1",
+          "physicalId": "BSC31-010#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_9db22a72025584e078fb2813e9d5b95178b151dbb23753dc8707925743349855_237cece35cc3d24e387d35ca812b3ab1",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_9db22a72025584e078fb2813e9d5b95178b151dbb23753dc8707925743349855_237cece35cc3d24e387d35ca812b3ab1",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_7db538a223a4d8a00dd149987a19ed57f47413b4cb74e87de9ce97d47f8da60e_df68c156a7a6d67bfaa3676e4c49d972",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC31-010#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -472,8 +786,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -482,10 +805,14 @@
             "isMain": false,
             "cleanBody": "By sending [Soul Core] from this Spirit to your Trash, immediately activate one of your Soul Bursts. After the Burst activates, send an opposing Life to their Reserve."
           },
+          "originalAbilityText": "[LV2][LV3] [catl: All Color] (When Attacks)\nBy sending [Soul Core] from this Spirit to your Trash, immediately activate one of your Soul Bursts. After the Burst activates, send an opposing Life to their Reserve.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "By sending [Soul Core] from this Spirit to your Trash",
+              "originalClauseText": "By sending [Soul Core] from this Spirit to your Trash",
               "cleanText": "By sending [Soul Core] from this Spirit to your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -507,19 +834,25 @@
             },
             {
               "rawText": "immediately activate one of your Soul Bursts.",
+              "originalClauseText": "immediately activate one of your Soul Bursts.",
               "cleanText": "immediately activate one of your Soul Bursts",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "ACTIVATE_BURST",
+                "burstType": "SOUL_BURST",
+                "color": null
               }
             },
             {
               "rawText": "After the Burst activates, send an opposing Life to their Reserve.",
+              "originalClauseText": "After the Burst activates, send an opposing Life to their Reserve.",
               "cleanText": "After the Burst activates, send an opposing Life to their Reserve",
+              "clauseIndex": 2,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -539,7 +872,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-010#a2",
+          "keywords": [],
+          "id": "BSC31-010#AB_WHEN_ATTACKS_NONE_LV2_LV3_5052d62b7fc0a2c2a154621b28bc72d7e8535587b9e2ba9f8f762c4a6833f89f_5d5738429ea22b16e80add391c556ff0",
+          "physicalId": "BSC31-010#AB_WHEN_ATTACKS_NONE_LV2_LV3_5052d62b7fc0a2c2a154621b28bc72d7e8535587b9e2ba9f8f762c4a6833f89f_5d5738429ea22b16e80add391c556ff0",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_5052d62b7fc0a2c2a154621b28bc72d7e8535587b9e2ba9f8f762c4a6833f89f_5d5738429ea22b16e80add391c556ff0",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_e8b85ca4bed7fd189b7cf3fdbd618dfae5ede856cb37ec3e0c4b9e15dbbb2be7_aa7b4209808f709b6a8cb6edaf69b567",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -896,10 +1244,29 @@
     "compiledIr": {
       "cardNumber": "BSC31-CP02",
       "name": "KamenJoshi's Rock Moe Princess, Moa",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 5000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 3,
+          "bp": 8000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3] (When Summoned)\nIf your Life is at three or less, put a core from the Void to your Life, and send two cores from any opposing Spirits/Ultimates to their Reserve.\n\n[LV2][LV3] (When Destroyed by the Opponent)\nBy sending a core from your Trash to your Reserve, this Spirit remains on the Field in the same condition.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BSC31-CP02#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -910,8 +1277,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -920,10 +1296,14 @@
             "isMain": false,
             "cleanBody": "If your Life is at three or less, put a core from the Void to your Life, and send two cores from any opposing Spirits/Ultimates to their Reserve."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nIf your Life is at three or less, put a core from the Void to your Life, and send two cores from any opposing Spirits/Ultimates to their Reserve.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "If your Life is at three or less, put a core from the Void to your Life",
+              "originalClauseText": "If your Life is at three or less, put a core from the Void to your Life",
               "cleanText": "put a core from the Void to your Life",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -936,7 +1316,9 @@
             },
             {
               "rawText": "send two cores from any opposing Spirits/Ultimates to their Reserve.",
+              "originalClauseText": "send two cores from any opposing Spirits/Ultimates to their Reserve.",
               "cleanText": "send two cores from any opposing Spirits/Ultimates to their Reserve",
+              "clauseIndex": 1,
               "link": "also",
               "isOptional": false,
               "isCost": false,
@@ -944,14 +1326,36 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 2,
+                "from": {
+                  "zone": "field",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-CP02#a0",
+          "keywords": [],
+          "id": "BSC31-CP02#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a890d1ac238660ab9ee9c678a14a469c312b628fcffd6d5df77a083b2a029c86_a12a7d5a127534cd1f57cc1b35f4751f",
+          "physicalId": "BSC31-CP02#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a890d1ac238660ab9ee9c678a14a469c312b628fcffd6d5df77a083b2a029c86_a12a7d5a127534cd1f57cc1b35f4751f",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a890d1ac238660ab9ee9c678a14a469c312b628fcffd6d5df77a083b2a029c86_a12a7d5a127534cd1f57cc1b35f4751f",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_ad86f22d5c7997a5c04c16e19c7e3c4e90946ca945ca0582bc280f3f1ea79b67_254f36241e20c0cc49c1b7eefb1139a6",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC31-CP02#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -961,8 +1365,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_DESTROYED",
+            "timings": [
+              "WHEN_DESTROYED"
+            ],
             "timingLabel": "When Destroyed by the Opponent",
             "timingStep": "ANY",
+            "timingCause": "OPPONENT",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -971,10 +1384,14 @@
             "isMain": false,
             "cleanBody": "By sending a core from your Trash to your Reserve, this Spirit remains on the Field in the same condition."
           },
+          "originalAbilityText": "[LV2][LV3] (When Destroyed by the Opponent)\nBy sending a core from your Trash to your Reserve, this Spirit remains on the Field in the same condition.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "By sending a core from your Trash to your Reserve",
+              "originalClauseText": "By sending a core from your Trash to your Reserve",
               "cleanText": "By sending a core from your Trash to your Reserve",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -982,28 +1399,56 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "trash",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "self"
+                }
               }
             },
             {
               "rawText": "this Spirit remains on the Field in the same condition.",
+              "originalClauseText": "this Spirit remains on the Field in the same condition.",
               "cleanText": "this Spirit remains on the Field in the same condition",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "RESURRECT"
+                "op": "UNSUPPORTED",
+                "rawText": "this Spirit remains on the Field in the same condition"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [
+            "this Spirit remains on the Field in the same condition."
+          ],
+          "legacyId": "BSC31-CP02#a1",
+          "keywords": [],
+          "id": "BSC31-CP02#AB_WHEN_DESTROYED_NONE_LV2_LV3_c576cd361f0fc5801b0ecee682efd9141b60558ef876b4dcd7bed344e5f05354_61f1ec03b3d2b4e8241e794eb5580972",
+          "physicalId": "BSC31-CP02#AB_WHEN_DESTROYED_NONE_LV2_LV3_c576cd361f0fc5801b0ecee682efd9141b60558ef876b4dcd7bed344e5f05354_61f1ec03b3d2b4e8241e794eb5580972",
+          "semanticId": "SEM#AB_WHEN_DESTROYED_NONE_LV2_LV3_c576cd361f0fc5801b0ecee682efd9141b60558ef876b4dcd7bed344e5f05354_61f1ec03b3d2b4e8241e794eb5580972",
+          "semanticIdV3": "SEM3#AB_WHEN_DESTROYED_NONE_LV2_LV3_dc403b5d4bf1465149f83ae9efaf8e426cf90eeb649d7bdd9a63c67eb2d3b038_57980cf8a9f37e85d044a4562bc231c6",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "OPPONENT",
+            "timingTriggers": [
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
-      "compiledClausesCount": 4,
-      "unsupportedClausesCount": 0,
-      "isFullySupported": true
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 1,
+      "isFullySupported": false
     }
   },
   "BSC31-049": {
@@ -2737,6 +3182,23 @@
     "compiledIr": {
       "cardNumber": "BSC31-017",
       "name": "［Academy Uniform］Amedis Sognac",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 2000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 3000
+        }
+      },
+      "originalEffectText": "[team: Absolutes]\n\nWhen your [Double Vivid] Spirit is summoned by paying costs, return this Spirit card from your Trash to the Hand.\n\n[LV2] (When Attacks)\nBy returning this Spirit to the deckbottom, summon a \"Amedis Sognac\" from your Trash, without paying the cost.",
+      "teams": [
+        "Absolutes"
+      ],
       "keywords": [
         {
           "name": "Team",
@@ -2744,13 +3206,36 @@
           "wave": 5,
           "hook": "team",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "BSC31-017#AB_PASSIVE_NONE_LV1_LV2_LV3_5c50852ea7468d11180c0d7c81102d2b5e5a27bcd9fd2bac14a81f755738879f_fffc0e1db73cc9415c1c61bd92b2da2a",
+          "cardNumber": "BSC31-017",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC31-017#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BSC31-017#a0",
-          "type": "ABILITY",
+          "type": "TEAM_RESTRICTION",
+          "teams": [
+            "Absolutes"
+          ],
           "header": {
             "levels": [
               1,
@@ -2760,8 +3245,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2770,11 +3260,56 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "rawText": "[team: Absolutes]",
+          "originalAbilityText": "[team: Absolutes]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-017#a0",
+          "keywords": [
+            {
+              "name": "Team",
+              "parameter": "Absolutes",
+              "wave": 5,
+              "hook": "team",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC31-017#AB_PASSIVE_NONE_LV1_LV2_LV3_5c50852ea7468d11180c0d7c81102d2b5e5a27bcd9fd2bac14a81f755738879f_fffc0e1db73cc9415c1c61bd92b2da2a",
+              "cardNumber": "BSC31-017",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC31-017#a0"
+            }
+          ],
+          "id": "BSC31-017#AB_PASSIVE_NONE_LV1_LV2_LV3_5c50852ea7468d11180c0d7c81102d2b5e5a27bcd9fd2bac14a81f755738879f_fffc0e1db73cc9415c1c61bd92b2da2a",
+          "physicalId": "BSC31-017#AB_PASSIVE_NONE_LV1_LV2_LV3_5c50852ea7468d11180c0d7c81102d2b5e5a27bcd9fd2bac14a81f755738879f_fffc0e1db73cc9415c1c61bd92b2da2a",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_5c50852ea7468d11180c0d7c81102d2b5e5a27bcd9fd2bac14a81f755738879f_fffc0e1db73cc9415c1c61bd92b2da2a",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_bb39912bfdd774ad6d87334f6d1f350ddf27200d8a833bdea994f8f2997f570c_0051b1630dba65b51a9ef22d6e11d8b8",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC31-017#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2785,8 +3320,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2795,28 +3335,45 @@
             "isMain": false,
             "cleanBody": "When your [Double Vivid] Spirit is summoned by paying costs, return this Spirit card from your Trash to the Hand."
           },
+          "originalAbilityText": "When your [Double Vivid] Spirit is summoned by paying costs, return this Spirit card from your Trash to the Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When your [Double Vivid] Spirit is summoned by paying costs, return this Spirit card from your Trash to the Hand.",
+              "originalClauseText": "When your [Double Vivid] Spirit is summoned by paying costs, return this Spirit card from your Trash to the Hand.",
               "cleanText": "When your [Double Vivid] Spirit is summoned by paying costs, return this Spirit card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "target": "this_card",
+                "from": "trash",
+                "destination": "HAND",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-017#a1",
+          "keywords": [],
+          "id": "BSC31-017#AB_PASSIVE_NONE_LV1_LV2_LV3_007b0118cb6c46572d4a1cc83694211a7c1eb56d493bf4b4e32209240a8b14a9_275658c6147f6bd1286657474f98be88",
+          "physicalId": "BSC31-017#AB_PASSIVE_NONE_LV1_LV2_LV3_007b0118cb6c46572d4a1cc83694211a7c1eb56d493bf4b4e32209240a8b14a9_275658c6147f6bd1286657474f98be88",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_007b0118cb6c46572d4a1cc83694211a7c1eb56d493bf4b4e32209240a8b14a9_275658c6147f6bd1286657474f98be88",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_61f7a7b1e4d9056da4ccc7910730c9b6bc6168a7af7b9c87113b8e725a11d6d5_f09884d091013a489fa642d816c4166e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC31-017#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -2825,8 +3382,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -2835,10 +3401,14 @@
             "isMain": false,
             "cleanBody": "By returning this Spirit to the deckbottom, summon a \"Amedis Sognac\" from your Trash, without paying the cost."
           },
+          "originalAbilityText": "[LV2] (When Attacks)\nBy returning this Spirit to the deckbottom, summon a \"Amedis Sognac\" from your Trash, without paying the cost.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "By returning this Spirit to the deckbottom",
+              "originalClauseText": "By returning this Spirit to the deckbottom",
               "cleanText": "By returning this Spirit to the deckbottom",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -2854,7 +3424,9 @@
             },
             {
               "rawText": "summon a \"Amedis Sognac\" from your Trash, without paying the cost.",
+              "originalClauseText": "summon a \"Amedis Sognac\" from your Trash, without paying the cost.",
               "cleanText": "summon a \"Amedis Sognac\" from your Trash, without paying the cost",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -2862,11 +3434,37 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "Amedis Sognac"
+                },
+                "free": true,
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-017#a2",
+          "keywords": [],
+          "id": "BSC31-017#AB_WHEN_ATTACKS_NONE_LV2_b43cedcdbd4ba196d16ca1071bda94f6294c6db2df607eaee486c7a45972d757_c92592ee624adf7f41b4050b0ff08749",
+          "physicalId": "BSC31-017#AB_WHEN_ATTACKS_NONE_LV2_b43cedcdbd4ba196d16ca1071bda94f6294c6db2df607eaee486c7a45972d757_c92592ee624adf7f41b4050b0ff08749",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_b43cedcdbd4ba196d16ca1071bda94f6294c6db2df607eaee486c7a45972d757_c92592ee624adf7f41b4050b0ff08749",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_6daab47dcb18b9e9490064a820f05453bbca86af8337e5b8936cf959059af010_99e273f4490d55fd85fc26fffea77c0d",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -4776,6 +5374,28 @@
     "compiledIr": {
       "cardNumber": "BSC31-X03",
       "name": "［Academy Uniform］Diana Fleur",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 7000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 3,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "[team: Twilight Gothic]\n\n(Can't Stack) When a [Song] Magic card is put onto your Field, you can summon this card from the Hand/Trash, without paying the cost. This effect doesn't stack.\n\n[LV1][LV2][LV3] (When Summoned)\nDestroy an opposing braved Brave. Then, destroy an opposing 7000 BP or less Spirit/Ultimate.\n\n[LV3] (When Attacks)\nDestroy an opposing exhausted Spirit.",
+      "teams": [
+        "Twilight Gothic"
+      ],
       "keywords": [
         {
           "name": "Team",
@@ -4783,13 +5403,36 @@
           "wave": 5,
           "hook": "team",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "BSC31-X03#AB_PASSIVE_NONE_LV1_LV2_LV3_13d02f88879ad828265dcbd6a15aef53790febb85cd2935e9d4a40e11c177d4b_2a77f49b1f4ea62ec14a5dbbee1bb918",
+          "cardNumber": "BSC31-X03",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC31-X03#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BSC31-X03#a0",
-          "type": "ABILITY",
+          "type": "TEAM_RESTRICTION",
+          "teams": [
+            "Twilight Gothic"
+          ],
           "header": {
             "levels": [
               1,
@@ -4799,8 +5442,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4809,11 +5457,56 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "rawText": "[team: Twilight Gothic]",
+          "originalAbilityText": "[team: Twilight Gothic]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-X03#a0",
+          "keywords": [
+            {
+              "name": "Team",
+              "parameter": "Twilight Gothic",
+              "wave": 5,
+              "hook": "team",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC31-X03#AB_PASSIVE_NONE_LV1_LV2_LV3_13d02f88879ad828265dcbd6a15aef53790febb85cd2935e9d4a40e11c177d4b_2a77f49b1f4ea62ec14a5dbbee1bb918",
+              "cardNumber": "BSC31-X03",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC31-X03#a0"
+            }
+          ],
+          "id": "BSC31-X03#AB_PASSIVE_NONE_LV1_LV2_LV3_13d02f88879ad828265dcbd6a15aef53790febb85cd2935e9d4a40e11c177d4b_2a77f49b1f4ea62ec14a5dbbee1bb918",
+          "physicalId": "BSC31-X03#AB_PASSIVE_NONE_LV1_LV2_LV3_13d02f88879ad828265dcbd6a15aef53790febb85cd2935e9d4a40e11c177d4b_2a77f49b1f4ea62ec14a5dbbee1bb918",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_13d02f88879ad828265dcbd6a15aef53790febb85cd2935e9d4a40e11c177d4b_2a77f49b1f4ea62ec14a5dbbee1bb918",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_9d76e6d79d8e84d34eae171db46494ea011167c8ee30be960a1854e7fcfb1e9b_f6466ebeec89073dc815f93e7b4f9e26",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC31-X03#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4824,8 +5517,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "CANT_STACK"
+            ],
             "limit": null,
             "cantStack": true,
             "keyword": null,
@@ -4834,10 +5534,14 @@
             "isMain": false,
             "cleanBody": "When a [Song] Magic card is put onto your Field, you can summon this card from the Hand/Trash, without paying the cost."
           },
+          "originalAbilityText": "(Can't Stack) When a [Song] Magic card is put onto your Field, you can summon this card from the Hand/Trash, without paying the cost. This effect doesn't stack.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When a [Song] Magic card is put onto your Field, you can summon this card from the Hand/Trash, without paying the cost.",
+              "originalClauseText": "When a [Song] Magic card is put onto your Field, you can summon this card from the Hand/Trash, without paying the cost.",
               "cleanText": "When a [Song] Magic card is put onto your Field, you can summon this card from the Hand/Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -4845,14 +5549,29 @@
               "duration": null,
               "op": {
                 "op": "SUMMON_THIS_CARD",
-                "from": "HAND_OR_BURST"
+                "from": "TRASH",
+                "free": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-X03#a1",
+          "keywords": [],
+          "id": "BSC31-X03#AB_PASSIVE_NONE_LV1_LV2_LV3_321af73c4548c095021645c0383bc7e2b6260c20c4404aa1ea448cf2eadf72b1_325b79f38490584e7626c2057910c5a6",
+          "physicalId": "BSC31-X03#AB_PASSIVE_NONE_LV1_LV2_LV3_321af73c4548c095021645c0383bc7e2b6260c20c4404aa1ea448cf2eadf72b1_325b79f38490584e7626c2057910c5a6",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_321af73c4548c095021645c0383bc7e2b6260c20c4404aa1ea448cf2eadf72b1_325b79f38490584e7626c2057910c5a6",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_90bb4a138796456d4409f26ec81f11be4eac7b103b18a8a2e1a9494adf659fc8_7c61ca27914ab13c036c137cab902f8d",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [
+              "CANT_STACK"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC31-X03#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4863,8 +5582,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4873,10 +5601,14 @@
             "isMain": false,
             "cleanBody": "Destroy an opposing braved Brave. Then, destroy an opposing 7000 BP or less Spirit/Ultimate."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nDestroy an opposing braved Brave. Then, destroy an opposing 7000 BP or less Spirit/Ultimate.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Destroy an opposing braved Brave.",
+              "originalClauseText": "Destroy an opposing braved Brave.",
               "cleanText": "Destroy an opposing braved Brave",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -4895,7 +5627,9 @@
             },
             {
               "rawText": "destroy an opposing 7000 BP or less Spirit/Ultimate.",
+              "originalClauseText": "destroy an opposing 7000 BP or less Spirit/Ultimate.",
               "cleanText": "destroy an opposing 7000 BP or less Spirit/Ultimate",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -4916,10 +5650,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-X03#a2",
+          "keywords": [],
+          "id": "BSC31-X03#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_73a997bc60bea7aecf780ae1565ef70600694755f4a341dab8f97a422977e609_1ecda195da2866478b4c310d4de77744",
+          "physicalId": "BSC31-X03#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_73a997bc60bea7aecf780ae1565ef70600694755f4a341dab8f97a422977e609_1ecda195da2866478b4c310d4de77744",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_73a997bc60bea7aecf780ae1565ef70600694755f4a341dab8f97a422977e609_1ecda195da2866478b4c310d4de77744",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a7bff0f5ebe555ad6b2541d3e06b8b34fe0ec860c9b259891dc23f6c1319ad0e_53348fe07943d6ae63c7dc44b3569e8a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC31-X03#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -4928,8 +5676,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -4938,10 +5695,14 @@
             "isMain": false,
             "cleanBody": "Destroy an opposing exhausted Spirit."
           },
+          "originalAbilityText": "[LV3] (When Attacks)\nDestroy an opposing exhausted Spirit.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "Destroy an opposing exhausted Spirit.",
+              "originalClauseText": "Destroy an opposing exhausted Spirit.",
               "cleanText": "Destroy an opposing exhausted Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -4962,7 +5723,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-X03#a3",
+          "keywords": [],
+          "id": "BSC31-X03#AB_WHEN_ATTACKS_NONE_LV3_dd294518905e38051d244f3c59ea3fca24529bba8a7989630f39529e6f0c59fb_e86eb4f7401ae3df2dc780f8784a6033",
+          "physicalId": "BSC31-X03#AB_WHEN_ATTACKS_NONE_LV3_dd294518905e38051d244f3c59ea3fca24529bba8a7989630f39529e6f0c59fb_e86eb4f7401ae3df2dc780f8784a6033",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV3_dd294518905e38051d244f3c59ea3fca24529bba8a7989630f39529e6f0c59fb_e86eb4f7401ae3df2dc780f8784a6033",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV3_7c8c10b05451800a09bc86ae077792412e83e3686aa995b7d61a034b87142cb8_e723beabb5cff5e90bd9ee191bdec354",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -5818,6 +6594,28 @@
     "compiledIr": {
       "cardNumber": "BSC31-039",
       "name": "［Academy Uniform］Mou-Chuchu",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 1000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 2000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 3,
+          "bp": 3000
+        }
+      },
+      "originalEffectText": "[teams: Pretty Animals Shiny Hearts]\n\n[LV1][LV2][LV3] (When Summoned)\nReturn \"Formulia Execeeda\" and \"Gail Fenique\", one of each, from your Trash to the Hand.\n\n[LV3] Flash - (Either Attack Step)\nYou can switch this Spirit with one non-\"School Style\" family \"Mou-Chuchu\" in your Hand in the same state.",
+      "teams": [
+        "Pretty Animals Shiny Hearts"
+      ],
       "keywords": [
         {
           "name": "Team",
@@ -5825,13 +6623,36 @@
           "wave": 5,
           "hook": "team",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "BSC31-039#AB_PASSIVE_NONE_LV1_LV2_LV3_556ebe825e314b4cdf7934ab5b6088e11b5b9637ecb7bce50f68f02c3af80190_63eb85a90bf43ab2386f9c920d21c19b",
+          "cardNumber": "BSC31-039",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC31-039#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BSC31-039#a0",
-          "type": "ABILITY",
+          "type": "TEAM_RESTRICTION",
+          "teams": [
+            "Pretty Animals Shiny Hearts"
+          ],
           "header": {
             "levels": [
               1,
@@ -5841,8 +6662,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -5851,11 +6677,56 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "rawText": "[teams: Pretty Animals Shiny Hearts]",
+          "originalAbilityText": "[teams: Pretty Animals Shiny Hearts]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-039#a0",
+          "keywords": [
+            {
+              "name": "Team",
+              "parameter": "Pretty Animals Shiny Hearts",
+              "wave": 5,
+              "hook": "team",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC31-039#AB_PASSIVE_NONE_LV1_LV2_LV3_556ebe825e314b4cdf7934ab5b6088e11b5b9637ecb7bce50f68f02c3af80190_63eb85a90bf43ab2386f9c920d21c19b",
+              "cardNumber": "BSC31-039",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC31-039#a0"
+            }
+          ],
+          "id": "BSC31-039#AB_PASSIVE_NONE_LV1_LV2_LV3_556ebe825e314b4cdf7934ab5b6088e11b5b9637ecb7bce50f68f02c3af80190_63eb85a90bf43ab2386f9c920d21c19b",
+          "physicalId": "BSC31-039#AB_PASSIVE_NONE_LV1_LV2_LV3_556ebe825e314b4cdf7934ab5b6088e11b5b9637ecb7bce50f68f02c3af80190_63eb85a90bf43ab2386f9c920d21c19b",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_556ebe825e314b4cdf7934ab5b6088e11b5b9637ecb7bce50f68f02c3af80190_63eb85a90bf43ab2386f9c920d21c19b",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_fad5bf94fd0b091ca8e0560f50dadae24cea85a8274364c465435d627f370db0_e557f8133ce68b6b0ac687307cd78f4b",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC31-039#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -5866,8 +6737,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -5876,28 +6756,55 @@
             "isMain": false,
             "cleanBody": "Return \"Formulia Execeeda\" and \"Gail Fenique\", one of each, from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nReturn \"Formulia Execeeda\" and \"Gail Fenique\", one of each, from your Trash to the Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Return \"Formulia Execeeda\" and \"Gail Fenique\", one of each, from your Trash to the Hand.",
+              "originalClauseText": "Return \"Formulia Execeeda\" and \"Gail Fenique\", one of each, from your Trash to the Hand.",
               "cleanText": "Return \"Formulia Execeeda\" and \"Gail Fenique\", one of each, from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "nameIncludes": "Formulia Execeeda",
+                  "nameIncludesAny": [
+                    "Formulia Execeeda",
+                    "Gail Fenique"
+                  ]
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-039#a1",
+          "keywords": [],
+          "id": "BSC31-039#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_59c15b2e7361c54d195f393e195dd3611004b758799ec4e21bb10b86f9e42752_6f8c5eaa4403fd4bb96a931682b974b3",
+          "physicalId": "BSC31-039#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_59c15b2e7361c54d195f393e195dd3611004b758799ec4e21bb10b86f9e42752_6f8c5eaa4403fd4bb96a931682b974b3",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_59c15b2e7361c54d195f393e195dd3611004b758799ec4e21bb10b86f9e42752_6f8c5eaa4403fd4bb96a931682b974b3",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_d2c3ac03bca54e354c738271696013f4cb1d2e4f2ec66c13814bef886ffbfa17_f2a31515524ae34f3317c5a861d2e802",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC31-039#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -5906,8 +6813,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -5916,21 +6832,40 @@
             "isMain": false,
             "cleanBody": "You can switch this Spirit with one non-\"School Style\" family \"Mou-Chuchu\" in your Hand in the same state."
           },
+          "originalAbilityText": "[LV3] Flash - (Either Attack Step)\nYou can switch this Spirit with one non-\"School Style\" family \"Mou-Chuchu\" in your Hand in the same state.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "You can switch this Spirit with one non-\"School Style\" family \"Mou-Chuchu\" in your Hand in the same state.",
+              "originalClauseText": "You can switch this Spirit with one non-\"School Style\" family \"Mou-Chuchu\" in your Hand in the same state.",
               "cleanText": "You can switch this Spirit with one non-\"School Style\" family \"Mou-Chuchu\" in your Hand in the same state",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "GRANT_FAMILY"
+                "op": "SWITCH_SPIRIT_WITH_HAND"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-039#a2",
+          "keywords": [],
+          "id": "BSC31-039#AB_ATTACK_STEP_NONE_LV3_4c8eda16b04896f0c5b7fe70edad78b91636a9a3bf72d1c238b2e2d9e818e95a_86e698cecefba53999312229c81d91f7",
+          "physicalId": "BSC31-039#AB_ATTACK_STEP_NONE_LV3_4c8eda16b04896f0c5b7fe70edad78b91636a9a3bf72d1c238b2e2d9e818e95a_86e698cecefba53999312229c81d91f7",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV3_4c8eda16b04896f0c5b7fe70edad78b91636a9a3bf72d1c238b2e2d9e818e95a_86e698cecefba53999312229c81d91f7",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV3_d694aa77f85d8002e1e3a26597f8c3de471b8a110979fa36202631ca8b6dddf2_26a45829697dcd25dcef4227f2d46f93",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -9817,6 +10752,23 @@
     "compiledIr": {
       "cardNumber": "BSC31-023",
       "name": "［Summer Holiday］Nei-Lanetail",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 2000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 3000
+        }
+      },
+      "originalEffectText": "[teams: Twilight Gothic Sacred Swords]\n\n[LV1][LV2] (Your Attack Step)\nWhen this Spirit is aligned by [My Unit], once per turn, return a \"Private Wear\" family Spirit card from your Trash to the Hand.\n\n[LV2] (When Destroyed by Opponent)\nYou can summon one \"Nei-Lanetail\" from your Hand, without paying the cost.",
+      "teams": [
+        "Twilight Gothic Sacred Swords"
+      ],
       "keywords": [
         {
           "name": "Team",
@@ -9824,7 +10776,28 @@
           "wave": 5,
           "hook": "team",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "BSC31-023#AB_PASSIVE_NONE_LV1_LV2_LV3_be481933ea7969220268ccefa2da85d329a140efcf88f5bdbd81244a6fe9ec49_490906cd35750b6fb4aa8f59260b3b74",
+          "cardNumber": "BSC31-023",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC31-023#a0"
         },
         {
           "name": "My Unit",
@@ -9832,13 +10805,35 @@
           "wave": 5,
           "hook": "my_unit",
           "bracketed": true,
-          "index": 101
+          "index": 31,
+          "abilityId": "BSC31-023#AB_ATTACK_STEP_NONE_LV1_LV2_f681c7b279cda91150588f721a654516f8eca27489dae300e42feb33cbd531f0_8a15287809b0e0d193c13bc8948b5cc0",
+          "cardNumber": "BSC31-023",
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC31-023#a1"
         }
       ],
       "abilities": [
         {
-          "id": "BSC31-023#a0",
-          "type": "ABILITY",
+          "type": "TEAM_RESTRICTION",
+          "teams": [
+            "Twilight Gothic Sacred Swords"
+          ],
           "header": {
             "levels": [
               1,
@@ -9848,8 +10843,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -9858,11 +10858,56 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "rawText": "[teams: Twilight Gothic Sacred Swords]",
+          "originalAbilityText": "[teams: Twilight Gothic Sacred Swords]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-023#a0",
+          "keywords": [
+            {
+              "name": "Team",
+              "parameter": "Twilight Gothic Sacred Swords",
+              "wave": 5,
+              "hook": "team",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC31-023#AB_PASSIVE_NONE_LV1_LV2_LV3_be481933ea7969220268ccefa2da85d329a140efcf88f5bdbd81244a6fe9ec49_490906cd35750b6fb4aa8f59260b3b74",
+              "cardNumber": "BSC31-023",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC31-023#a0"
+            }
+          ],
+          "id": "BSC31-023#AB_PASSIVE_NONE_LV1_LV2_LV3_be481933ea7969220268ccefa2da85d329a140efcf88f5bdbd81244a6fe9ec49_490906cd35750b6fb4aa8f59260b3b74",
+          "physicalId": "BSC31-023#AB_PASSIVE_NONE_LV1_LV2_LV3_be481933ea7969220268ccefa2da85d329a140efcf88f5bdbd81244a6fe9ec49_490906cd35750b6fb4aa8f59260b3b74",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_be481933ea7969220268ccefa2da85d329a140efcf88f5bdbd81244a6fe9ec49_490906cd35750b6fb4aa8f59260b3b74",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_3f2fcff210ba52801f91293199798083be461ec72efbcf92189a18ccb7d575b7_858d937666162b7dc2425b12376e4c6e",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC31-023#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -9872,8 +10917,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -9882,28 +10936,83 @@
             "isMain": false,
             "cleanBody": "When this Spirit is aligned by [My Unit], once per turn, return a \"Private Wear\" family Spirit card from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV1][LV2] (Your Attack Step)\nWhen this Spirit is aligned by [My Unit], once per turn, return a \"Private Wear\" family Spirit card from your Trash to the Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When this Spirit is aligned by [My Unit], once per turn, return a \"Private Wear\" family Spirit card from your Trash to the Hand.",
+              "originalClauseText": "When this Spirit is aligned by [My Unit], once per turn, return a \"Private Wear\" family Spirit card from your Trash to the Hand.",
               "cleanText": "When this Spirit is aligned by [My Unit], once per turn, return a \"Private Wear\" family Spirit card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "family": "Private Wear"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-023#a1",
+          "keywords": [
+            {
+              "name": "My Unit",
+              "parameter": null,
+              "wave": 5,
+              "hook": "my_unit",
+              "bracketed": true,
+              "index": 31,
+              "abilityId": "BSC31-023#AB_ATTACK_STEP_NONE_LV1_LV2_f681c7b279cda91150588f721a654516f8eca27489dae300e42feb33cbd531f0_8a15287809b0e0d193c13bc8948b5cc0",
+              "cardNumber": "BSC31-023",
+              "levels": [
+                1,
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Your Attack Step",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC31-023#a1"
+            }
+          ],
+          "id": "BSC31-023#AB_ATTACK_STEP_NONE_LV1_LV2_f681c7b279cda91150588f721a654516f8eca27489dae300e42feb33cbd531f0_8a15287809b0e0d193c13bc8948b5cc0",
+          "physicalId": "BSC31-023#AB_ATTACK_STEP_NONE_LV1_LV2_f681c7b279cda91150588f721a654516f8eca27489dae300e42feb33cbd531f0_8a15287809b0e0d193c13bc8948b5cc0",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_f681c7b279cda91150588f721a654516f8eca27489dae300e42feb33cbd531f0_8a15287809b0e0d193c13bc8948b5cc0",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_9de07a325332a3ec5744875631112bf8df3a5b68aec936017a80e91de5516c32_f2bdc722d564b4841297a487fcff4f91",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC31-023#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -9912,8 +11021,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_DESTROYED",
+            "timings": [
+              "WHEN_DESTROYED"
+            ],
             "timingLabel": "When Destroyed by Opponent",
             "timingStep": "ANY",
+            "timingCause": "OPPONENT",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -9922,10 +11040,14 @@
             "isMain": false,
             "cleanBody": "You can summon one \"Nei-Lanetail\" from your Hand, without paying the cost."
           },
+          "originalAbilityText": "[LV2] (When Destroyed by Opponent)\nYou can summon one \"Nei-Lanetail\" from your Hand, without paying the cost.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "You can summon one \"Nei-Lanetail\" from your Hand, without paying the cost.",
+              "originalClauseText": "You can summon one \"Nei-Lanetail\" from your Hand, without paying the cost.",
               "cleanText": "You can summon one \"Nei-Lanetail\" from your Hand, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -9933,11 +11055,37 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "Nei-Lanetail"
+                },
+                "free": true,
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-023#a2",
+          "keywords": [],
+          "id": "BSC31-023#AB_WHEN_DESTROYED_NONE_LV2_72a23b06e5c2b526834089ae229eebc8430ec61b61448e820af0aab350734513_f73706d3d4f35a5dd858a64f6c229184",
+          "physicalId": "BSC31-023#AB_WHEN_DESTROYED_NONE_LV2_72a23b06e5c2b526834089ae229eebc8430ec61b61448e820af0aab350734513_f73706d3d4f35a5dd858a64f6c229184",
+          "semanticId": "SEM#AB_WHEN_DESTROYED_NONE_LV2_72a23b06e5c2b526834089ae229eebc8430ec61b61448e820af0aab350734513_f73706d3d4f35a5dd858a64f6c229184",
+          "semanticIdV3": "SEM3#AB_WHEN_DESTROYED_NONE_LV2_dfeb5d734ff8435c0e318e09abb78c6494b01cf6927fa03f0e5a176e3db97817_aadb6572302a1f32a762c22a033d87c9",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "OPPONENT",
+            "timingTriggers": [
+              "WHEN_DESTROYED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -10813,6 +11961,28 @@
     "compiledIr": {
       "cardNumber": "BSC31-X06",
       "name": "［Summer Holiday］Trickster",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 4000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 3,
+          "bp": 6000
+        }
+      },
+      "originalEffectText": "[team: Legendoll]\n\n[LV1][LV2][LV3] (When Summoned)\nBesides any exactly-named \"［Summer Holiday］Trickster\", you can summon up to three \"Private Wear\" family Spirit cards from your Trash, without paying the cost.\n\n[LV2][LV3] (Your Attack Step)\nWhen your \"Private Wear\" family Spirits would compare BP, by discarding a card from your Hand, treat the attack as not being blocked without comparing BP.",
+      "teams": [
+        "Legendoll"
+      ],
       "keywords": [
         {
           "name": "Team",
@@ -10820,13 +11990,36 @@
           "wave": 5,
           "hook": "team",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "BSC31-X06#AB_PASSIVE_NONE_LV1_LV2_LV3_c618b1f3caa33b43c464fb89db4f51ea230a47bba3c46c318c7d7f96b0d9e8fa_fcec00fea366161be3efc54fde8f1d90",
+          "cardNumber": "BSC31-X06",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC31-X06#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BSC31-X06#a0",
-          "type": "ABILITY",
+          "type": "TEAM_RESTRICTION",
+          "teams": [
+            "Legendoll"
+          ],
           "header": {
             "levels": [
               1,
@@ -10836,8 +12029,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -10846,11 +12044,56 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "rawText": "[team: Legendoll]",
+          "originalAbilityText": "[team: Legendoll]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-X06#a0",
+          "keywords": [
+            {
+              "name": "Team",
+              "parameter": "Legendoll",
+              "wave": 5,
+              "hook": "team",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC31-X06#AB_PASSIVE_NONE_LV1_LV2_LV3_c618b1f3caa33b43c464fb89db4f51ea230a47bba3c46c318c7d7f96b0d9e8fa_fcec00fea366161be3efc54fde8f1d90",
+              "cardNumber": "BSC31-X06",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC31-X06#a0"
+            }
+          ],
+          "id": "BSC31-X06#AB_PASSIVE_NONE_LV1_LV2_LV3_c618b1f3caa33b43c464fb89db4f51ea230a47bba3c46c318c7d7f96b0d9e8fa_fcec00fea366161be3efc54fde8f1d90",
+          "physicalId": "BSC31-X06#AB_PASSIVE_NONE_LV1_LV2_LV3_c618b1f3caa33b43c464fb89db4f51ea230a47bba3c46c318c7d7f96b0d9e8fa_fcec00fea366161be3efc54fde8f1d90",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_c618b1f3caa33b43c464fb89db4f51ea230a47bba3c46c318c7d7f96b0d9e8fa_fcec00fea366161be3efc54fde8f1d90",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_e4d1e2f5480f6a946485ec63a9bb02ababdeaed739d229f5eb2ec4020b60f3d4_26f4b1d3e3e4b065e6cebaafe818268a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC31-X06#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -10861,8 +12104,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -10871,10 +12123,14 @@
             "isMain": false,
             "cleanBody": "Besides any exactly-named \"［Summer Holiday］Trickster\", you can summon up to three \"Private Wear\" family Spirit cards from your Trash, without paying the cost."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nBesides any exactly-named \"［Summer Holiday］Trickster\", you can summon up to three \"Private Wear\" family Spirit cards from your Trash, without paying the cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Besides any exactly-named \"［Summer Holiday］Trickster\", you can summon up to three \"Private Wear\" family Spirit cards from your Trash, without paying the cost.",
+              "originalClauseText": "Besides any exactly-named \"［Summer Holiday］Trickster\", you can summon up to three \"Private Wear\" family Spirit cards from your Trash, without paying the cost.",
               "cleanText": "Besides any exactly-named \"［Summer Holiday］Trickster\", you can summon up to three \"Private Wear\" family Spirit cards from your Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -10882,14 +12138,40 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 3,
+                "upTo": true,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "［Summer Holiday］Trickster",
+                  "family": "Private Wear"
+                },
+                "free": true,
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-X06#a1",
+          "keywords": [],
+          "id": "BSC31-X06#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_5e645825828cabfb9e7778a161504649638afa146c237db5fdb2e15a72f87c2d_af3273a4803c546df67ce29ad0aac146",
+          "physicalId": "BSC31-X06#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_5e645825828cabfb9e7778a161504649638afa146c237db5fdb2e15a72f87c2d_af3273a4803c546df67ce29ad0aac146",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_5e645825828cabfb9e7778a161504649638afa146c237db5fdb2e15a72f87c2d_af3273a4803c546df67ce29ad0aac146",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_714fe5a9e837cf5d1a2bf1b36892cd7d6933c1e2530c9e5f35b841f71eb44276_f4f4f93ac161c571eaab51b104fccea6",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC31-X06#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -10899,8 +12181,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -10909,10 +12200,14 @@
             "isMain": false,
             "cleanBody": "When your \"Private Wear\" family Spirits would compare BP, by discarding a card from your Hand, treat the attack as not being blocked without comparing BP."
           },
+          "originalAbilityText": "[LV2][LV3] (Your Attack Step)\nWhen your \"Private Wear\" family Spirits would compare BP, by discarding a card from your Hand, treat the attack as not being blocked without comparing BP.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When your \"Private Wear\" family Spirits would compare BP, by discarding a card from your Hand, treat the attack as not being blocked without comparing BP.",
+              "originalClauseText": "When your \"Private Wear\" family Spirits would compare BP, by discarding a card from your Hand, treat the attack as not being blocked without comparing BP.",
               "cleanText": "When your \"Private Wear\" family Spirits would compare BP, by discarding a card from your Hand, treat the attack as not being blocked without comparing BP",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -10927,7 +12222,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-X06#a2",
+          "keywords": [],
+          "id": "BSC31-X06#AB_ATTACK_STEP_NONE_LV2_LV3_7bc684d147a216fd9e92730032929bb6b9ef2bc79e9cc7bd69e7c5137acc4edb_637338d79f9319b9312650f8d65cbca0",
+          "physicalId": "BSC31-X06#AB_ATTACK_STEP_NONE_LV2_LV3_7bc684d147a216fd9e92730032929bb6b9ef2bc79e9cc7bd69e7c5137acc4edb_637338d79f9319b9312650f8d65cbca0",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_7bc684d147a216fd9e92730032929bb6b9ef2bc79e9cc7bd69e7c5137acc4edb_637338d79f9319b9312650f8d65cbca0",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_LV3_4cc6ef7ebedfb51dbeb0390446d7e962313d1efec8a30566aa372eea28de4bab_15159cc9d4d0d3108ef0fd6ef2f19bf5",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -10960,6 +12270,28 @@
     "compiledIr": {
       "cardNumber": "BSC31-047",
       "name": "［Twinkle Song Angelia］Sophia",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 4000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 6000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 3,
+          "bp": 8000
+        }
+      },
+      "originalEffectText": "Flash - [Advent: Cost 3 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[team: Legendoll]\n\n[LV1][LV2][LV3] (When Advents)\nYou can summon a Cost 6 or less \"Diva\"/\"Divine Spirit\" family Spirit card from your Hand, without paying the cost. Return an opposing Spirit/Ultimate with a cost equal or inferior to that of the Spirit summoned by this effect to the Hand.",
+      "teams": [
+        "Legendoll"
+      ],
       "keywords": [
         {
           "name": "Advent",
@@ -10967,7 +12299,28 @@
           "wave": 2,
           "hook": "advent",
           "bracketed": true,
-          "index": 8
+          "index": 0,
+          "abilityId": "BSC31-047#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_dd609a7ebd027099f10302f03ab984fc6cc554b585885be803bbfce805813a8a_4ade3bab8f050d75883c56906718b4ea",
+          "cardNumber": "BSC31-047",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "BSC31-047#a0"
         },
         {
           "name": "Team",
@@ -10975,12 +12328,32 @@
           "wave": 5,
           "hook": "team",
           "bracketed": true,
-          "index": 149
+          "index": 0,
+          "abilityId": "BSC31-047#AB_PASSIVE_NONE_LV1_LV2_LV3_c618b1f3caa33b43c464fb89db4f51ea230a47bba3c46c318c7d7f96b0d9e8fa_fcec00fea366161be3efc54fde8f1d90",
+          "cardNumber": "BSC31-047",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BSC31-047#a1"
         }
       ],
       "abilities": [
         {
-          "id": "BSC31-047#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -10991,8 +12364,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step)",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Advent: Cost 3 or more",
@@ -11001,10 +12383,14 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
           },
+          "originalAbilityText": "Flash - [Advent: Cost 3 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] to the Trash",
+              "originalClauseText": "By sending your [Soul Core] to the Trash",
               "cleanText": "By sending your [Soul Core] to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -11026,7 +12412,9 @@
             },
             {
               "rawText": "stack this from the Hand onto your target Spirit.",
+              "originalClauseText": "stack this from the Hand onto your target Spirit.",
               "cleanText": "stack this from the Hand onto your target Spirit",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -11044,11 +12432,58 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-047#a0",
+          "keywords": [
+            {
+              "name": "Advent",
+              "parameter": "Cost 3 or more",
+              "wave": 2,
+              "hook": "advent",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC31-047#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_dd609a7ebd027099f10302f03ab984fc6cc554b585885be803bbfce805813a8a_4ade3bab8f050d75883c56906718b4ea",
+              "cardNumber": "BSC31-047",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step)",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "BSC31-047#a0"
+            }
+          ],
+          "id": "BSC31-047#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_dd609a7ebd027099f10302f03ab984fc6cc554b585885be803bbfce805813a8a_4ade3bab8f050d75883c56906718b4ea",
+          "physicalId": "BSC31-047#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_dd609a7ebd027099f10302f03ab984fc6cc554b585885be803bbfce805813a8a_4ade3bab8f050d75883c56906718b4ea",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_dd609a7ebd027099f10302f03ab984fc6cc554b585885be803bbfce805813a8a_4ade3bab8f050d75883c56906718b4ea",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_348f3eb2cf0af0e6b399ef87ee1018e96e32638180e7545ebe4f4ac52294f683_969aafca58340d23cc4b3a2987060381",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC31-047#a1",
-          "type": "ABILITY",
+          "type": "TEAM_RESTRICTION",
+          "teams": [
+            "Legendoll"
+          ],
           "header": {
             "levels": [
               1,
@@ -11058,8 +12493,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -11068,11 +12508,56 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "rawText": "[team: Legendoll]",
+          "originalAbilityText": "[team: Legendoll]",
+          "abilityIndex": 1,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-047#a1",
+          "keywords": [
+            {
+              "name": "Team",
+              "parameter": "Legendoll",
+              "wave": 5,
+              "hook": "team",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BSC31-047#AB_PASSIVE_NONE_LV1_LV2_LV3_c618b1f3caa33b43c464fb89db4f51ea230a47bba3c46c318c7d7f96b0d9e8fa_fcec00fea366161be3efc54fde8f1d90",
+              "cardNumber": "BSC31-047",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BSC31-047#a1"
+            }
+          ],
+          "id": "BSC31-047#AB_PASSIVE_NONE_LV1_LV2_LV3_c618b1f3caa33b43c464fb89db4f51ea230a47bba3c46c318c7d7f96b0d9e8fa_fcec00fea366161be3efc54fde8f1d90",
+          "physicalId": "BSC31-047#AB_PASSIVE_NONE_LV1_LV2_LV3_c618b1f3caa33b43c464fb89db4f51ea230a47bba3c46c318c7d7f96b0d9e8fa_fcec00fea366161be3efc54fde8f1d90",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_c618b1f3caa33b43c464fb89db4f51ea230a47bba3c46c318c7d7f96b0d9e8fa_fcec00fea366161be3efc54fde8f1d90",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_e4d1e2f5480f6a946485ec63a9bb02ababdeaed739d229f5eb2ec4020b60f3d4_26f4b1d3e3e4b065e6cebaafe818268a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BSC31-047#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -11083,8 +12568,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ADVENTS",
+            "timings": [
+              "WHEN_ADVENTS"
+            ],
             "timingLabel": "When Advents",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -11093,10 +12587,14 @@
             "isMain": false,
             "cleanBody": "You can summon a Cost 6 or less \"Diva\"/\"Divine Spirit\" family Spirit card from your Hand, without paying the cost. Return an opposing Spirit/Ultimate with a cost equal or inferior to that of the Spirit summoned by this effect to the Hand."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Advents)\nYou can summon a Cost 6 or less \"Diva\"/\"Divine Spirit\" family Spirit card from your Hand, without paying the cost. Return an opposing Spirit/Ultimate with a cost equal or inferior to that of the Spirit summoned by this effect to the Hand.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "You can summon a Cost 6 or less \"Diva\"/\"Divine Spirit\" family Spirit card from your Hand, without paying the cost.",
+              "originalClauseText": "You can summon a Cost 6 or less \"Diva\"/\"Divine Spirit\" family Spirit card from your Hand, without paying the cost.",
               "cleanText": "You can summon a Cost 6 or less \"Diva\"/\"Divine Spirit\" family Spirit card from your Hand, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -11104,12 +12602,27 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "costLte": 6,
+                  "nameIncludes": "Diva",
+                  "family": "Divine Spirit"
+                },
+                "free": true,
+                "isOptional": true
               }
             },
             {
               "rawText": "Return an opposing Spirit/Ultimate with a cost equal or inferior to that of the Spirit summoned by this effect to the Hand.",
+              "originalClauseText": "Return an opposing Spirit/Ultimate with a cost equal or inferior to that of the Spirit summoned by this effect to the Hand.",
               "cleanText": "Return an opposing Spirit/Ultimate with a cost equal or inferior to that of the Spirit summoned by this effect to the Hand",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -11119,12 +12632,39 @@
                 "op": "BOUNCE",
                 "count": 1,
                 "target": {
-                  "side": "either"
-                }
+                  "side": "opp",
+                  "types": [
+                    "Spirit",
+                    "Ultimate"
+                  ],
+                  "filters": {
+                    "comparison": {
+                      "property": "COST",
+                      "operator": "LTE",
+                      "reference": "effect_card"
+                    }
+                  }
+                },
+                "destination": "HAND"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BSC31-047#a2",
+          "keywords": [],
+          "id": "BSC31-047#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_9d8af9af485e1fa182b7784b026a6eaf5f6213dbf529cfa3a9ecd1fdc8b7a7bd_741975d0ecd145faa1328b8041b494c6",
+          "physicalId": "BSC31-047#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_9d8af9af485e1fa182b7784b026a6eaf5f6213dbf529cfa3a9ecd1fdc8b7a7bd_741975d0ecd145faa1328b8041b494c6",
+          "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_9d8af9af485e1fa182b7784b026a6eaf5f6213dbf529cfa3a9ecd1fdc8b7a7bd_741975d0ecd145faa1328b8041b494c6",
+          "semanticIdV3": "SEM3#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_4e1b244bb20e9696148f3c3c4dd20c2fc168025fb42f929d0446da3f606c1521_d59fe999520f20197d2db963495e3fef",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ADVENTS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,

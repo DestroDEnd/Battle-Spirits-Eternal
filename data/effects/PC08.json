@@ -500,6 +500,28 @@
     "compiledIr": {
       "cardNumber": "PC08-001",
       "name": "［Magical Garden Coord］Kitaouji Sakura",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 7000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 3,
+          "bp": 9000
+        }
+      },
+      "originalEffectText": "[teams: Powapowa-Puririn STAR ANIS]\n\nFlash - (Opposing Attack Step)\nBy sending your [Soul Core] from your Trash to any of your \"Idol\" & \"Stage Style\" family Spirit, summon this card from the Hand without paying the cost. When you've done so, when this battle ends, end the Attack Step.\n\n[LV2][LV3] (Either Attack Step)\nAll your [Powapowa-Puririn] or [Tristar] Spirits are unaffected by opposing Spirit effects.",
+      "teams": [
+        "Powapowa-Puririn STAR ANIS"
+      ],
       "keywords": [
         {
           "name": "Team",
@@ -507,13 +529,36 @@
           "wave": 5,
           "hook": "team",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "PC08-001#AB_PASSIVE_NONE_LV1_LV2_LV3_4cc534a4fdb21cd8d334cbee970a51da3a0048772ad96f2453b2c935b070519a_d9eca81c79d85319cb11a67dc4f2501e",
+          "cardNumber": "PC08-001",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PC08-001#a0"
         }
       ],
       "abilities": [
         {
-          "id": "PC08-001#a0",
-          "type": "ABILITY",
+          "type": "TEAM_RESTRICTION",
+          "teams": [
+            "Powapowa-Puririn STAR ANIS"
+          ],
           "header": {
             "levels": [
               1,
@@ -523,8 +568,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -533,11 +583,56 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "rawText": "[teams: Powapowa-Puririn STAR ANIS]",
+          "originalAbilityText": "[teams: Powapowa-Puririn STAR ANIS]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC08-001#a0",
+          "keywords": [
+            {
+              "name": "Team",
+              "parameter": "Powapowa-Puririn STAR ANIS",
+              "wave": 5,
+              "hook": "team",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PC08-001#AB_PASSIVE_NONE_LV1_LV2_LV3_4cc534a4fdb21cd8d334cbee970a51da3a0048772ad96f2453b2c935b070519a_d9eca81c79d85319cb11a67dc4f2501e",
+              "cardNumber": "PC08-001",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PC08-001#a0"
+            }
+          ],
+          "id": "PC08-001#AB_PASSIVE_NONE_LV1_LV2_LV3_4cc534a4fdb21cd8d334cbee970a51da3a0048772ad96f2453b2c935b070519a_d9eca81c79d85319cb11a67dc4f2501e",
+          "physicalId": "PC08-001#AB_PASSIVE_NONE_LV1_LV2_LV3_4cc534a4fdb21cd8d334cbee970a51da3a0048772ad96f2453b2c935b070519a_d9eca81c79d85319cb11a67dc4f2501e",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_4cc534a4fdb21cd8d334cbee970a51da3a0048772ad96f2453b2c935b070519a_d9eca81c79d85319cb11a67dc4f2501e",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_1c9ecd4d48905f45be0e54512d42380432356037e700756dd2a9e70bad071585_a930e985e1be05bdd725cb712e344563",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC08-001#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -548,8 +643,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Opposing Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "OPPONENT",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -558,22 +662,28 @@
             "isMain": false,
             "cleanBody": "By sending your [Soul Core] from your Trash to any of your \"Idol\" & \"Stage Style\" family Spirit, summon this card from the Hand without paying the cost. When you've done so, when this battle ends, end the Attack Step."
           },
+          "originalAbilityText": "Flash - (Opposing Attack Step)\nBy sending your [Soul Core] from your Trash to any of your \"Idol\" & \"Stage Style\" family Spirit, summon this card from the Hand without paying the cost. When you've done so, when this battle ends, end the Attack Step.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "By sending your [Soul Core] from your Trash to any of your \"Idol\" & \"Stage Style\" family Spirit",
+              "originalClauseText": "By sending your [Soul Core] from your Trash to any of your \"Idol\" & \"Stage Style\" family Spirit",
               "cleanText": "By sending your [Soul Core] from your Trash to any of your \"Idol\" & \"Stage Style\" family Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "GRANT_FAMILY"
+                "op": "MOVE_SOUL_CORE"
               }
             },
             {
               "rawText": "summon this card from the Hand without paying the cost.",
+              "originalClauseText": "summon this card from the Hand without paying the cost.",
               "cleanText": "summon this card from the Hand without paying the cost",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -587,7 +697,9 @@
             },
             {
               "rawText": "when this battle ends, end the Attack Step.",
+              "originalClauseText": "when this battle ends, end the Attack Step.",
               "cleanText": "when this battle ends, end the Attack Step",
+              "clauseIndex": 2,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -598,10 +710,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC08-001#a1",
+          "keywords": [],
+          "id": "PC08-001#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b7c415ba4bd7a92fbdbc1cf5948833e9ed6e7f485bb308e3b4f3ee7692835719_eea071e0c5f36c65ff49ba32363fdb9f",
+          "physicalId": "PC08-001#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b7c415ba4bd7a92fbdbc1cf5948833e9ed6e7f485bb308e3b4f3ee7692835719_eea071e0c5f36c65ff49ba32363fdb9f",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b7c415ba4bd7a92fbdbc1cf5948833e9ed6e7f485bb308e3b4f3ee7692835719_eea071e0c5f36c65ff49ba32363fdb9f",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_6021732ea540825217491bb6527720478196f5f3bb98ef16d1ae31bc1ce7f045_2bc3dc5eaf4ceb7f62c5758d1182a162",
+          "timingSemantics": {
+            "timingOwner": "OPPONENT",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PC08-001#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -611,8 +737,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -621,10 +756,14 @@
             "isMain": false,
             "cleanBody": "All your [Powapowa-Puririn] or [Tristar] Spirits are unaffected by opposing Spirit effects."
           },
+          "originalAbilityText": "[LV2][LV3] (Either Attack Step)\nAll your [Powapowa-Puririn] or [Tristar] Spirits are unaffected by opposing Spirit effects.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "All your [Powapowa-Puririn] or [Tristar] Spirits are unaffected by opposing Spirit effects.",
+              "originalClauseText": "All your [Powapowa-Puririn] or [Tristar] Spirits are unaffected by opposing Spirit effects.",
               "cleanText": "All your [Powapowa-Puririn] or [Tristar] Spirits are unaffected by opposing Spirit effects",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -636,7 +775,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PC08-001#a2",
+          "keywords": [],
+          "id": "PC08-001#AB_ATTACK_STEP_NONE_LV2_LV3_062232a0ee0b6debe9bef618bf7309396c848dd2a36e2985edd0d244c574576e_3054cd1893d124ea04acd4e9672bf066",
+          "physicalId": "PC08-001#AB_ATTACK_STEP_NONE_LV2_LV3_062232a0ee0b6debe9bef618bf7309396c848dd2a36e2985edd0d244c574576e_3054cd1893d124ea04acd4e9672bf066",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_062232a0ee0b6debe9bef618bf7309396c848dd2a36e2985edd0d244c574576e_3054cd1893d124ea04acd4e9672bf066",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_LV3_e6b6b8bf3a95bafa165a98000eef2d1e8a43a8eca9b36dcc9d70a9bec5e9d16e_66603a0307ce5b8ce957fb3c44ea33b5",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,

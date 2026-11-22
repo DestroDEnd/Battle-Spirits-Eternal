@@ -24,19 +24,29 @@
     "compiledIr": {
       "cardNumber": "PB08-CP02",
       "name": "EX Gomora",
-      "keywords": [
-        {
-          "name": "Burst",
-          "parameter": "After an opposing Spirit/Ultimate attacks",
-          "wave": 2,
-          "hook": "burst",
-          "bracketed": true,
-          "index": 125
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 10000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 13000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 5,
+          "bp": 15000
         }
-      ],
+      },
+      "originalEffectText": "When this card is revealed or sent to the Trash from your deck by your \"Ultraman\"-named effect, you can add it to the Hand.\n\n[Burst: After an opposing Spirit/Ultimate attacks]\nIgnoring the cost and \"BP+\" of Braves, destroy an opposing Cost 7 or less Spirit and an opposing 13000 BP or less Spirit. After this effect resolves, summon this card without paying the cost.\n\n[LV2][LV3]\nThe opponent can't end the Attack Step via effects, and this exhausted Spirit is unaffected by opposing effects.",
+      "teams": [],
+      "keywords": [],
       "abilities": [
         {
-          "id": "PB08-CP02#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -47,8 +57,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -57,10 +72,14 @@
             "isMain": false,
             "cleanBody": "When this card is revealed or sent to the Trash from your deck by your \"Ultraman\"-named effect, you can add it to the Hand."
           },
+          "originalAbilityText": "When this card is revealed or sent to the Trash from your deck by your \"Ultraman\"-named effect, you can add it to the Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When this card is revealed or sent to the Trash from your deck by your \"Ultraman\"-named effect, you can add it to the Hand.",
+              "originalClauseText": "When this card is revealed or sent to the Trash from your deck by your \"Ultraman\"-named effect, you can add it to the Hand.",
               "cleanText": "When this card is revealed or sent to the Trash from your deck by your \"Ultraman\"-named effect, you can add it to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -71,10 +90,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB08-CP02#a0",
+          "keywords": [],
+          "id": "PB08-CP02#AB_PASSIVE_NONE_LV1_LV2_LV3_950a35712229737ccd60e1e4d7180e794cf3968e856b14c2044cf03859c40017_8053f7eeb51f8c8f6ce580259d35ade2",
+          "physicalId": "PB08-CP02#AB_PASSIVE_NONE_LV1_LV2_LV3_950a35712229737ccd60e1e4d7180e794cf3968e856b14c2044cf03859c40017_8053f7eeb51f8c8f6ce580259d35ade2",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_950a35712229737ccd60e1e4d7180e794cf3968e856b14c2044cf03859c40017_8053f7eeb51f8c8f6ce580259d35ade2",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_9620538c88c2c092eb86399125589236078b05e043f23b128b725158a0a2c1a9_2e7db71c3e1010230eea86b09a137e33",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB08-CP02#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -85,8 +116,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "BURST",
+            "timings": [],
             "timingLabel": "Burst",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -95,10 +133,14 @@
             "isMain": false,
             "cleanBody": "Ignoring the cost and \"BP+\" of Braves, destroy an opposing Cost 7 or less Spirit and an opposing 13000 BP or less Spirit. After this effect resolves, summon this card without paying the cost."
           },
+          "originalAbilityText": "[Burst: After an opposing Spirit/Ultimate attacks]\nIgnoring the cost and \"BP+\" of Braves, destroy an opposing Cost 7 or less Spirit and an opposing 13000 BP or less Spirit. After this effect resolves, summon this card without paying the cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Ignoring the cost and \"BP+\" of Braves, destroy an opposing Cost 7 or less Spirit and an opposing 13000 BP or less Spirit.",
+              "originalClauseText": "Ignoring the cost and \"BP+\" of Braves, destroy an opposing Cost 7 or less Spirit and an opposing 13000 BP or less Spirit.",
               "cleanText": "Ignoring the cost and \"BP+\" of Braves, destroy an opposing Cost 7 or less Spirit and an opposing 13000 BP or less Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -120,7 +162,9 @@
             },
             {
               "rawText": "summon this card without paying the cost.",
+              "originalClauseText": "summon this card without paying the cost.",
               "cleanText": "summon this card without paying the cost",
+              "clauseIndex": 1,
               "link": "afterResolves",
               "isOptional": false,
               "isCost": false,
@@ -133,10 +177,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB08-CP02#a1",
+          "keywords": [],
+          "id": "PB08-CP02#AB_BURST_NONE_LV1_LV2_LV3_b0379e4b70287e5f3f5bb757c45945a81cd726af589c0b6cd825bbb93dec7733_ca531b655b4e66fc6953d49d77fb9f6c",
+          "physicalId": "PB08-CP02#AB_BURST_NONE_LV1_LV2_LV3_b0379e4b70287e5f3f5bb757c45945a81cd726af589c0b6cd825bbb93dec7733_ca531b655b4e66fc6953d49d77fb9f6c",
+          "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_b0379e4b70287e5f3f5bb757c45945a81cd726af589c0b6cd825bbb93dec7733_ca531b655b4e66fc6953d49d77fb9f6c",
+          "semanticIdV3": "SEM3#AB_BURST_NONE_LV1_LV2_LV3_ae16a818741f93873a10578825fa4c2ec3b32558570f9a57ec4f1ac5eba2f3a8_6735b228d0e3102df791863dc7e50c7a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB08-CP02#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -146,8 +204,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -156,10 +219,14 @@
             "isMain": false,
             "cleanBody": "The opponent can't end the Attack Step via effects, and this exhausted Spirit is unaffected by opposing effects."
           },
+          "originalAbilityText": "[LV2][LV3]\nThe opponent can't end the Attack Step via effects, and this exhausted Spirit is unaffected by opposing effects.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "The opponent can't end the Attack Step via effects, and this exhausted Spirit is unaffected by opposing effects.",
+              "originalClauseText": "The opponent can't end the Attack Step via effects, and this exhausted Spirit is unaffected by opposing effects.",
               "cleanText": "The opponent can't end the Attack Step via effects, and this exhausted Spirit is unaffected by opposing effects",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -171,7 +238,20 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB08-CP02#a2",
+          "keywords": [],
+          "id": "PB08-CP02#AB_PASSIVE_NONE_LV2_LV3_3332fb106cf682e4041bb5c77d05318d8e55edae1831660f80acecc467406cee_01b55004c6a5fa339113f238d0e2644c",
+          "physicalId": "PB08-CP02#AB_PASSIVE_NONE_LV2_LV3_3332fb106cf682e4041bb5c77d05318d8e55edae1831660f80acecc467406cee_01b55004c6a5fa339113f238d0e2644c",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV2_LV3_3332fb106cf682e4041bb5c77d05318d8e55edae1831660f80acecc467406cee_01b55004c6a5fa339113f238d0e2644c",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV2_LV3_743a58d6deeb1c10a748726604a5034e37cead60d2be2c6c974647924303fcdb_71307668ae65de763efe89e78bc6bbb2",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -194,14 +274,103 @@
     "compiledIr": {
       "cardNumber": "PB08-013",
       "name": "Giga Battle Nizer",
+      "type": "Brave",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        }
+      },
+      "originalEffectText": "[Brave Condition: \"Belial\"/\"Seijin\" & Cost 4 or more<br>\"Personification of Evil Ultraman Belial\"]\n\n[During Spirit Brave] (When Attacks)\nSend two cores from an opposing Spirit to the Reserve, and when depletes, draw a card.\n\n[During Nexus Brave] [Grand Skill: 3] Flash - (Your Attack Step)\n(Once per Turn: Same Name, send three cores from this Nexus to the Void) Summon a \"Kaiju\"/\"Seijin\"/\"Zetton\" from your Trash, without paying the cost.",
+      "teams": [],
       "keywords": [
+        {
+          "name": "Brave Condition",
+          "parameter": "\"Belial\"/\"Seijin\" & Cost 4 or more / \"Personification of Evil Ultraman Belial\"",
+          "wave": 1,
+          "hook": "brave_condition",
+          "bracketed": true,
+          "index": 0,
+          "abilityId": "PB08-013#AB_PASSIVE_NONE_LV1_LV2_LV3_7690977f5922039e653c3ce0363cacd3dc3ef153e52456d06b37fe33148f813b_61c90ae1c9bd4f008d6fd2041dedfecd",
+          "cardNumber": "PB08-013",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB08-013#a0"
+        },
         {
           "name": "Brave",
           "parameter": "\"Belial\"/\"Seijin\" & Cost 4 or more<br>\"Personification of Evil Ultraman Belial\"",
           "wave": 3,
           "hook": "brave",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "PB08-013#AB_PASSIVE_NONE_LV1_LV2_LV3_7690977f5922039e653c3ce0363cacd3dc3ef153e52456d06b37fe33148f813b_61c90ae1c9bd4f008d6fd2041dedfecd",
+          "cardNumber": "PB08-013",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB08-013#a0"
+        },
+        {
+          "name": "During Spirit Brave",
+          "parameter": null,
+          "wave": 1,
+          "hook": "during_spirit_brave",
+          "bracketed": true,
+          "index": 0,
+          "abilityId": "PB08-013#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_4de4778591a630758d10a375aa6ce32280e7684cb304aec75aa2018d126532d8_8e90b0f2ef6f2fe952bf5173f05b8884",
+          "cardNumber": "PB08-013",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB08-013#a1"
         },
         {
           "name": "Grand Skill",
@@ -209,12 +378,65 @@
           "wave": 3,
           "hook": "grand_skill",
           "bracketed": true,
-          "index": 246
+          "index": 0,
+          "abilityId": "PB08-013#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_01f056f4181ed97fa9772f120faeddd2812f7367e40466558d349912f68592f6_adc2eaafe10aefa09ed8094a34012a41",
+          "cardNumber": "PB08-013",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [
+            "Grand Skill: 3"
+          ],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PB08-013#a2"
+        },
+        {
+          "name": "During Nexus Brave",
+          "parameter": null,
+          "wave": 1,
+          "hook": "during_nexus_brave",
+          "bracketed": true,
+          "index": 0,
+          "abilityId": "PB08-013#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_01f056f4181ed97fa9772f120faeddd2812f7367e40466558d349912f68592f6_adc2eaafe10aefa09ed8094a34012a41",
+          "cardNumber": "PB08-013",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [
+            "Grand Skill: 3"
+          ],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PB08-013#a2"
         }
       ],
       "abilities": [
         {
-          "id": "PB08-013#a0",
           "type": "CONDITION",
           "header": {
             "levels": [
@@ -225,22 +447,106 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
-            "keyword": "Brave Condition: \"Belial\"/\"Seijin\" & Cost 4 or more<br>\"Personification of Evil Ultraman Belial\"",
+            "keyword": "Brave Condition: \"Belial\"/\"Seijin\" & Cost 4 or more / \"Personification of Evil Ultraman Belial\"",
             "burstCondition": null,
             "isFlash": false,
             "isMain": false,
             "cleanBody": ""
           },
           "rawText": "[Brave Condition: \"Belial\"/\"Seijin\" & Cost 4 or more<br>\"Personification of Evil Ultraman Belial\"]",
+          "originalAbilityText": "[Brave Condition: \"Belial\"/\"Seijin\" & Cost 4 or more<br>\"Personification of Evil Ultraman Belial\"]",
+          "abilityIndex": 0,
+          "condition": {
+            "type": "CONDITION_TEXT_FALLBACK",
+            "conditionType": "BRAVE_CONDITION",
+            "expression": "\"Belial\"/\"Seijin\" & Cost 4 or more / \"Personification of Evil Ultraman Belial\"",
+            "source": "NORMALIZED_TEXT"
+          },
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB08-013#a0",
+          "keywords": [
+            {
+              "name": "Brave Condition",
+              "parameter": "\"Belial\"/\"Seijin\" & Cost 4 or more / \"Personification of Evil Ultraman Belial\"",
+              "wave": 1,
+              "hook": "brave_condition",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB08-013#AB_PASSIVE_NONE_LV1_LV2_LV3_7690977f5922039e653c3ce0363cacd3dc3ef153e52456d06b37fe33148f813b_61c90ae1c9bd4f008d6fd2041dedfecd",
+              "cardNumber": "PB08-013",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB08-013#a0"
+            },
+            {
+              "name": "Brave",
+              "parameter": "\"Belial\"/\"Seijin\" & Cost 4 or more<br>\"Personification of Evil Ultraman Belial\"",
+              "wave": 3,
+              "hook": "brave",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB08-013#AB_PASSIVE_NONE_LV1_LV2_LV3_7690977f5922039e653c3ce0363cacd3dc3ef153e52456d06b37fe33148f813b_61c90ae1c9bd4f008d6fd2041dedfecd",
+              "cardNumber": "PB08-013",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB08-013#a0"
+            }
+          ],
+          "id": "PB08-013#AB_PASSIVE_NONE_LV1_LV2_LV3_7690977f5922039e653c3ce0363cacd3dc3ef153e52456d06b37fe33148f813b_61c90ae1c9bd4f008d6fd2041dedfecd",
+          "physicalId": "PB08-013#AB_PASSIVE_NONE_LV1_LV2_LV3_7690977f5922039e653c3ce0363cacd3dc3ef153e52456d06b37fe33148f813b_61c90ae1c9bd4f008d6fd2041dedfecd",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_7690977f5922039e653c3ce0363cacd3dc3ef153e52456d06b37fe33148f813b_61c90ae1c9bd4f008d6fd2041dedfecd",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_eefa09b3710aca222045b18351fa0ba7ee0ac061b2cae917b418e84a611596b2_54018fdb950cd0dc4c99623a7835bf47",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB08-013#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -251,8 +557,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "During Spirit Brave",
@@ -261,10 +576,14 @@
             "isMain": false,
             "cleanBody": "Send two cores from an opposing Spirit to the Reserve, and when depletes, draw a card."
           },
+          "originalAbilityText": "[During Spirit Brave] (When Attacks)\nSend two cores from an opposing Spirit to the Reserve, and when depletes, draw a card.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Send two cores from an opposing Spirit to the Reserve, and when depletes, draw a card.",
+              "originalClauseText": "Send two cores from an opposing Spirit to the Reserve, and when depletes, draw a card.",
               "cleanText": "Send two cores from an opposing Spirit to the Reserve, and when depletes, draw a card",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -278,10 +597,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB08-013#a1",
+          "keywords": [
+            {
+              "name": "During Spirit Brave",
+              "parameter": null,
+              "wave": 1,
+              "hook": "during_spirit_brave",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB08-013#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_4de4778591a630758d10a375aa6ce32280e7684cb304aec75aa2018d126532d8_8e90b0f2ef6f2fe952bf5173f05b8884",
+              "cardNumber": "PB08-013",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "WHEN_ATTACKS",
+              "timingLabel": "When Attacks",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB08-013#a1"
+            }
+          ],
+          "id": "PB08-013#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_4de4778591a630758d10a375aa6ce32280e7684cb304aec75aa2018d126532d8_8e90b0f2ef6f2fe952bf5173f05b8884",
+          "physicalId": "PB08-013#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_4de4778591a630758d10a375aa6ce32280e7684cb304aec75aa2018d126532d8_8e90b0f2ef6f2fe952bf5173f05b8884",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_4de4778591a630758d10a375aa6ce32280e7684cb304aec75aa2018d126532d8_8e90b0f2ef6f2fe952bf5173f05b8884",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_e5049ca2338d4d877bf91bae0634a01355e5bad719b2243b46e43b435f588f92_0fb331fc257ea5210fecec7920562415",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB08-013#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -294,8 +657,18 @@
               "Grand Skill: 3"
             ],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "FLASH",
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "During Nexus Brave",
@@ -304,10 +677,14 @@
             "isMain": false,
             "cleanBody": "(Once per Turn: Same Name, send three cores from this Nexus to the Void) Summon a \"Kaiju\"/\"Seijin\"/\"Zetton\" from your Trash, without paying the cost."
           },
+          "originalAbilityText": "[During Nexus Brave] [Grand Skill: 3] Flash - (Your Attack Step)\n(Once per Turn: Same Name, send three cores from this Nexus to the Void) Summon a \"Kaiju\"/\"Seijin\"/\"Zetton\" from your Trash, without paying the cost.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "(Once per Turn: Same Name, send three cores from this Nexus to the Void) Summon a \"Kaiju\"/\"Seijin\"/\"Zetton\" from your Trash, without paying the cost.",
+              "originalClauseText": "(Once per Turn: Same Name, send three cores from this Nexus to the Void) Summon a \"Kaiju\"/\"Seijin\"/\"Zetton\" from your Trash, without paying the cost.",
               "cleanText": "(Once per Turn: Same Name, send three cores from this Nexus to the Void) Summon a \"Kaiju\"/\"Seijin\"/\"Zetton\" from your Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -315,11 +692,96 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 3,
+                "from": {
+                  "zone": "trash",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "void"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB08-013#a2",
+          "keywords": [
+            {
+              "name": "Grand Skill",
+              "parameter": "3",
+              "wave": 3,
+              "hook": "grand_skill",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB08-013#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_01f056f4181ed97fa9772f120faeddd2812f7367e40466558d349912f68592f6_adc2eaafe10aefa09ed8094a34012a41",
+              "cardNumber": "PB08-013",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Your Attack Step",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [
+                "Grand Skill: 3"
+              ],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PB08-013#a2"
+            },
+            {
+              "name": "During Nexus Brave",
+              "parameter": null,
+              "wave": 1,
+              "hook": "during_nexus_brave",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB08-013#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_01f056f4181ed97fa9772f120faeddd2812f7367e40466558d349912f68592f6_adc2eaafe10aefa09ed8094a34012a41",
+              "cardNumber": "PB08-013",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Your Attack Step",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [
+                "Grand Skill: 3"
+              ],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PB08-013#a2"
+            }
+          ],
+          "id": "PB08-013#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_01f056f4181ed97fa9772f120faeddd2812f7367e40466558d349912f68592f6_adc2eaafe10aefa09ed8094a34012a41",
+          "physicalId": "PB08-013#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_01f056f4181ed97fa9772f120faeddd2812f7367e40466558d349912f68592f6_adc2eaafe10aefa09ed8094a34012a41",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_01f056f4181ed97fa9772f120faeddd2812f7367e40466558d349912f68592f6_adc2eaafe10aefa09ed8094a34012a41",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_0e8c672cc3cb158163090026630724895426fbf904747a8d2ec2351c5ecff341_94bfd468171f9589ed23115b7c644876",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
@@ -336,6 +798,10 @@
     "compiledIr": {
       "cardNumber": "PB08-X02",
       "name": "Personification of Evil Ultraman Belial",
+      "type": "Nexus",
+      "levels": {},
+      "originalEffectText": "[Core Charge: (\"Kaiju\"/\"Seijin\"/\"Belial\"/\"Zetton\" & Cost 3 or more) (Purple & Thing & Brave)]\n◆When you summon/advent a target Spirit/Brave, you can +1 core to this Nexus.\n◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus.\n\n[LV1][LV2]\nThis Nexus' symbol is also treated as Red.\n\n2 [LV1][LV2] Flash - (Your Attack Step)\n(Send two cores from this Nexus to the Void) During this turn, this Nexus is also treated as a Spirit with [LV1][LV2] 3000 BP, and can only be destroyed by Grandwalker Nexuses.\n\n[Grand Field] [LV2] Flash - (Either Attack Step)\nOnce per turn, you can discard a \"Kaiju\"/\"Seijin\"/\"Zetton\" Spirit card from your Hand, and destroy an opposing Spirit with a BP equal or inferior to the LV1 BP of the discarded card.",
+      "teams": [],
       "keywords": [
         {
           "name": "Core Charge",
@@ -343,7 +809,58 @@
           "wave": 3,
           "hook": "core_charge",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "PB08-X02#AB_PASSIVE_NONE_LV1_LV2_LV3_9918a52907f3d056a85cd8d14f210f3c3b69c974bee936a9ab79d2134ea3fb55_27a05ad8f6387caef09b95a6197328c7",
+          "cardNumber": "PB08-X02",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "PB08-X02#a0"
+        },
+        {
+          "name": "Grand Skill",
+          "parameter": "2",
+          "wave": 3,
+          "hook": "grand_skill",
+          "bracketed": true,
+          "index": 0,
+          "abilityId": "PB08-X02#AB_ATTACK_STEP_NONE_LV1_LV2_5e33444c82454ebd2dd69ee1da37ff7f342ae31b7b73ea827f7cc2b475f3bf97_3143accd6a2f446675a02dccae11a458",
+          "cardNumber": "PB08-X02",
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [
+            "Grand Skill: 2"
+          ],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PB08-X02#a4"
         },
         {
           "name": "Grand Field",
@@ -351,12 +868,32 @@
           "wave": 3,
           "hook": "grand_field",
           "bracketed": true,
-          "index": 656
+          "index": 0,
+          "abilityId": "PB08-X02#AB_ATTACK_STEP_NONE_LV2_941a48b42be1614ed28f769ce519ede57bc45b5ccd876aa207bfcf97441dfa9e_3b4d8f56cb2c71c4f7c1877434751dbd",
+          "cardNumber": "PB08-X02",
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [
+            "Grand Field"
+          ],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": "ONCE_PER_TURN",
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PB08-X02#a5"
         }
       ],
       "abilities": [
         {
-          "id": "PB08-X02#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -367,8 +904,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Core Charge: (\"Kaiju\"/\"Seijin\"/\"Belial\"/\"Zetton\" & Cost 3 or more) (Purple & Thing & Brave)",
@@ -377,11 +919,55 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "originalAbilityText": "[Core Charge: (\"Kaiju\"/\"Seijin\"/\"Belial\"/\"Zetton\" & Cost 3 or more) (Purple & Thing & Brave)]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB08-X02#a0",
+          "keywords": [
+            {
+              "name": "Core Charge",
+              "parameter": "(\"Kaiju\"/\"Seijin\"/\"Belial\"/\"Zetton\" & Cost 3 or more) (Purple & Thing & Brave)",
+              "wave": 3,
+              "hook": "core_charge",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB08-X02#AB_PASSIVE_NONE_LV1_LV2_LV3_9918a52907f3d056a85cd8d14f210f3c3b69c974bee936a9ab79d2134ea3fb55_27a05ad8f6387caef09b95a6197328c7",
+              "cardNumber": "PB08-X02",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "PB08-X02#a0"
+            }
+          ],
+          "id": "PB08-X02#AB_PASSIVE_NONE_LV1_LV2_LV3_9918a52907f3d056a85cd8d14f210f3c3b69c974bee936a9ab79d2134ea3fb55_27a05ad8f6387caef09b95a6197328c7",
+          "physicalId": "PB08-X02#AB_PASSIVE_NONE_LV1_LV2_LV3_9918a52907f3d056a85cd8d14f210f3c3b69c974bee936a9ab79d2134ea3fb55_27a05ad8f6387caef09b95a6197328c7",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_9918a52907f3d056a85cd8d14f210f3c3b69c974bee936a9ab79d2134ea3fb55_27a05ad8f6387caef09b95a6197328c7",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_80212a00ab8e63a62c50ed1bc2e8a6e387a79108d969b718b9c6a258dc9b377b_f87eac9c4accad33fc70564b114dc0aa",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB08-X02#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -392,8 +978,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -402,10 +993,14 @@
             "isMain": false,
             "cleanBody": "◆When you summon/advent a target Spirit/Brave, you can +1 core to this Nexus."
           },
+          "originalAbilityText": "◆When you summon/advent a target Spirit/Brave, you can +1 core to this Nexus.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "◆When you summon/advent a target Spirit/Brave, you can +1 core to this Nexus.",
+              "originalClauseText": "◆When you summon/advent a target Spirit/Brave, you can +1 core to this Nexus.",
               "cleanText": "When you summon/advent a target Spirit/Brave, you can +1 core to this Nexus",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -413,14 +1008,38 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit",
+                    "Brave",
+                    "Nexus"
+                  ]
+                },
+                "free": false,
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB08-X02#a1",
+          "keywords": [],
+          "id": "PB08-X02#AB_PASSIVE_NONE_LV1_LV2_LV3_10bfddc106feaf48c957ff67db9439bbf3a2ff149c174116d67fb318d39b9925_e8dd603cbb014f674ffee5731c9d8202",
+          "physicalId": "PB08-X02#AB_PASSIVE_NONE_LV1_LV2_LV3_10bfddc106feaf48c957ff67db9439bbf3a2ff149c174116d67fb318d39b9925_e8dd603cbb014f674ffee5731c9d8202",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_10bfddc106feaf48c957ff67db9439bbf3a2ff149c174116d67fb318d39b9925_e8dd603cbb014f674ffee5731c9d8202",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_45b16d75b3a8981c586d0bdc3755583f7ef5104d8e74c14cac08881483252bc7_ad9de74d3907169cf209527de57df30a",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB08-X02#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -431,8 +1050,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -441,10 +1065,14 @@
             "isMain": false,
             "cleanBody": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus."
           },
+          "originalAbilityText": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.",
+              "originalClauseText": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.",
               "cleanText": "When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -457,7 +1085,9 @@
             },
             {
               "rawText": "For each target card among them, +1 core to this Nexus.",
+              "originalClauseText": "For each target card among them, +1 core to this Nexus.",
               "cleanText": "For each target card among them, +1 core to this Nexus",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -469,10 +1099,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB08-X02#a2",
+          "keywords": [],
+          "id": "PB08-X02#AB_PASSIVE_NONE_LV1_LV2_LV3_4bb19fa1966cae3954d0c4101e31ad7e067c35392079f675e3208dc595906003_d61a63d547291fe9ed5807358fd2cc62",
+          "physicalId": "PB08-X02#AB_PASSIVE_NONE_LV1_LV2_LV3_4bb19fa1966cae3954d0c4101e31ad7e067c35392079f675e3208dc595906003_d61a63d547291fe9ed5807358fd2cc62",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_4bb19fa1966cae3954d0c4101e31ad7e067c35392079f675e3208dc595906003_d61a63d547291fe9ed5807358fd2cc62",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_e48b53f45eb1dd1e2b9c80791e8c68205dece127124e07ed4faf7a22a604958b_52e2b5fdf03e27d5b3bf5fb5a961490b",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB08-X02#a3",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -482,8 +1124,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -492,24 +1139,42 @@
             "isMain": false,
             "cleanBody": "This Nexus' symbol is also treated as Red."
           },
+          "originalAbilityText": "[LV1][LV2]\nThis Nexus' symbol is also treated as Red.",
+          "abilityIndex": 3,
           "clauses": [
             {
               "rawText": "This Nexus' symbol is also treated as Red.",
+              "originalClauseText": "This Nexus' symbol is also treated as Red.",
               "cleanText": "This Nexus' symbol is also treated as Red",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "TREAT_RULE",
+                "treatAs": "COLOR",
+                "color": "Red"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB08-X02#a3",
+          "keywords": [],
+          "id": "PB08-X02#AB_PASSIVE_NONE_LV1_LV2_f6aa517d3819341d7a0d22a4720c23107c9f7af91fb79a912d42bcb7f633773d_7da551518550318032c43ecb9b5e5f1f",
+          "physicalId": "PB08-X02#AB_PASSIVE_NONE_LV1_LV2_f6aa517d3819341d7a0d22a4720c23107c9f7af91fb79a912d42bcb7f633773d_7da551518550318032c43ecb9b5e5f1f",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_f6aa517d3819341d7a0d22a4720c23107c9f7af91fb79a912d42bcb7f633773d_7da551518550318032c43ecb9b5e5f1f",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_b90f6d5acc5cec8615b1186a4bc146a33fa46b5fbf41a1d8ac41d21a176dd883_a13ac004595641f2d945a1ba213e1ca5",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB08-X02#a4",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -521,8 +1186,17 @@
               "Grand Skill: 2"
             ],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -531,10 +1205,14 @@
             "isMain": false,
             "cleanBody": "(Send two cores from this Nexus to the Void) During this turn, this Nexus is also treated as a Spirit with [LV1][LV2] 3000 BP, and can only be destroyed by Grandwalker Nexuses."
           },
+          "originalAbilityText": "2 [LV1][LV2] Flash - (Your Attack Step)\n(Send two cores from this Nexus to the Void) During this turn, this Nexus is also treated as a Spirit with [LV1][LV2] 3000 BP, and can only be destroyed by Grandwalker Nexuses.",
+          "abilityIndex": 4,
           "clauses": [
             {
               "rawText": "(Send two cores from this Nexus to the Void) During this turn, this Nexus is also treated as a Spirit with [LV1][LV2] 3000 BP, and can only be destroyed by Grandwalker Nexuses.",
+              "originalClauseText": "(Send two cores from this Nexus to the Void) During this turn, this Nexus is also treated as a Spirit with [LV1][LV2] 3000 BP, and can only be destroyed by Grandwalker Nexuses.",
               "cleanText": "(Send two cores from this Nexus to the Void) During this turn, this Nexus is also treated as a Spirit with [LV1][LV2] 3000 BP, and can only be destroyed by Grandwalker Nexuses",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -542,14 +1220,67 @@
               "duration": "DURING_THIS_TURN",
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 2,
+                "from": {
+                  "zone": "field",
+                  "side": "self",
+                  "target": "self"
+                },
+                "to": {
+                  "zone": "void"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB08-X02#a4",
+          "keywords": [
+            {
+              "name": "Grand Skill",
+              "parameter": "2",
+              "wave": 3,
+              "hook": "grand_skill",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB08-X02#AB_ATTACK_STEP_NONE_LV1_LV2_5e33444c82454ebd2dd69ee1da37ff7f342ae31b7b73ea827f7cc2b475f3bf97_3143accd6a2f446675a02dccae11a458",
+              "cardNumber": "PB08-X02",
+              "levels": [
+                1,
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Your Attack Step",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [
+                "Grand Skill: 2"
+              ],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PB08-X02#a4"
+            }
+          ],
+          "id": "PB08-X02#AB_ATTACK_STEP_NONE_LV1_LV2_5e33444c82454ebd2dd69ee1da37ff7f342ae31b7b73ea827f7cc2b475f3bf97_3143accd6a2f446675a02dccae11a458",
+          "physicalId": "PB08-X02#AB_ATTACK_STEP_NONE_LV1_LV2_5e33444c82454ebd2dd69ee1da37ff7f342ae31b7b73ea827f7cc2b475f3bf97_3143accd6a2f446675a02dccae11a458",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_5e33444c82454ebd2dd69ee1da37ff7f342ae31b7b73ea827f7cc2b475f3bf97_3143accd6a2f446675a02dccae11a458",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_e0b6f9b0f0ed43ce8e659094f1bfc4f8d28b58226dbda213fadb0c0aaa153084_27b08f3e7fbb581e618052d706fdd99b",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB08-X02#a5",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -560,8 +1291,19 @@
               "Grand Field"
             ],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -570,10 +1312,14 @@
             "isMain": false,
             "cleanBody": "you can discard a \"Kaiju\"/\"Seijin\"/\"Zetton\" Spirit card from your Hand, and destroy an opposing Spirit with a BP equal or inferior to the LV1 BP of the discarded card."
           },
+          "originalAbilityText": "[Grand Field] [LV2] Flash - (Either Attack Step)\nOnce per turn, you can discard a \"Kaiju\"/\"Seijin\"/\"Zetton\" Spirit card from your Hand, and destroy an opposing Spirit with a BP equal or inferior to the LV1 BP of the discarded card.",
+          "abilityIndex": 5,
           "clauses": [
             {
               "rawText": "you can discard a \"Kaiju\"/\"Seijin\"/\"Zetton\" Spirit card from your Hand",
+              "originalClauseText": "you can discard a \"Kaiju\"/\"Seijin\"/\"Zetton\" Spirit card from your Hand",
               "cleanText": "you can discard a \"Kaiju\"/\"Seijin\"/\"Zetton\" Spirit card from your Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -587,7 +1333,9 @@
             },
             {
               "rawText": "destroy an opposing Spirit with a BP equal or inferior to the LV1 BP of the discarded card.",
+              "originalClauseText": "destroy an opposing Spirit with a BP equal or inferior to the LV1 BP of the discarded card.",
               "cleanText": "destroy an opposing Spirit with a BP equal or inferior to the LV1 BP of the discarded card",
+              "clauseIndex": 1,
               "link": "also",
               "isOptional": false,
               "isCost": false,
@@ -600,12 +1348,66 @@
                   "side": "opp",
                   "types": [
                     "Spirit"
-                  ]
+                  ],
+                  "filters": {
+                    "comparison": {
+                      "property": "BP",
+                      "operator": "LTE",
+                      "reference": "self"
+                    }
+                  }
                 }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB08-X02#a5",
+          "keywords": [
+            {
+              "name": "Grand Field",
+              "parameter": null,
+              "wave": 3,
+              "hook": "grand_field",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB08-X02#AB_ATTACK_STEP_NONE_LV2_941a48b42be1614ed28f769ce519ede57bc45b5ccd876aa207bfcf97441dfa9e_3b4d8f56cb2c71c4f7c1877434751dbd",
+              "cardNumber": "PB08-X02",
+              "levels": [
+                2
+              ],
+              "levelExplicit": true,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [
+                "Grand Field"
+              ],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": "ONCE_PER_TURN",
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PB08-X02#a5"
+            }
+          ],
+          "id": "PB08-X02#AB_ATTACK_STEP_NONE_LV2_941a48b42be1614ed28f769ce519ede57bc45b5ccd876aa207bfcf97441dfa9e_3b4d8f56cb2c71c4f7c1877434751dbd",
+          "physicalId": "PB08-X02#AB_ATTACK_STEP_NONE_LV2_941a48b42be1614ed28f769ce519ede57bc45b5ccd876aa207bfcf97441dfa9e_3b4d8f56cb2c71c4f7c1877434751dbd",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_941a48b42be1614ed28f769ce519ede57bc45b5ccd876aa207bfcf97441dfa9e_3b4d8f56cb2c71c4f7c1877434751dbd",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_312b29dea2d412d51943e150e52db89e7960fa3c1f251cd3b3976da066d0f824_58c9a6fb807cad0f143aa30feb5ad944",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 7,
@@ -1092,10 +1894,24 @@
     "compiledIr": {
       "cardNumber": "PB08-012",
       "name": "The DarkSeijin Shapley Seijin",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 7000
+        }
+      },
+      "originalEffectText": "[LV1][LV2] (When Summoned)\nYou can pay two costs to summon a \"Kaiju\"-named Spirit card from your Hand/Trash.\n\n[LV1][LV2] (Your Main Step)\nThis Spirit gains an extra Red symbol.\n\n[LV2] (When Attacks)\nSend two cores from any opposing Spirits to the Reserve.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "PB08-012#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1105,8 +1921,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1115,10 +1940,14 @@
             "isMain": false,
             "cleanBody": "You can pay two costs to summon a \"Kaiju\"-named Spirit card from your Hand/Trash."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned)\nYou can pay two costs to summon a \"Kaiju\"-named Spirit card from your Hand/Trash.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "You can pay two costs to summon a \"Kaiju\"-named Spirit card from your Hand/Trash.",
+              "originalClauseText": "You can pay two costs to summon a \"Kaiju\"-named Spirit card from your Hand/Trash.",
               "cleanText": "You can pay two costs to summon a \"Kaiju\"-named Spirit card from your Hand/Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1126,14 +1955,40 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand_or_trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "Kaiju"
+                },
+                "free": false,
+                "costCores": 2,
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB08-012#a0",
+          "keywords": [],
+          "id": "PB08-012#AB_WHEN_SUMMONED_NONE_LV1_LV2_32dc8821e51c239ae21fd3d5ee2be5dcd188eb3ad1450c5ac9c2bcd802f80ba9_9dbbaa943e62c63a7318580b2e6b51aa",
+          "physicalId": "PB08-012#AB_WHEN_SUMMONED_NONE_LV1_LV2_32dc8821e51c239ae21fd3d5ee2be5dcd188eb3ad1450c5ac9c2bcd802f80ba9_9dbbaa943e62c63a7318580b2e6b51aa",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_32dc8821e51c239ae21fd3d5ee2be5dcd188eb3ad1450c5ac9c2bcd802f80ba9_9dbbaa943e62c63a7318580b2e6b51aa",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_176a9c572192bba88386a4353e4a82ccad33506ae27ea2f7d52be3f2689e13f3_bcee034e223186fa190aeb9fa2fff705",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB08-012#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1143,8 +1998,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "MAIN_STEP",
+            "timings": [
+              "MAIN_STEP"
+            ],
             "timingLabel": "Your Main Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "MAIN_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1153,24 +2017,45 @@
             "isMain": false,
             "cleanBody": "This Spirit gains an extra Red symbol."
           },
+          "originalAbilityText": "[LV1][LV2] (Your Main Step)\nThis Spirit gains an extra Red symbol.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "This Spirit gains an extra Red symbol.",
+              "originalClauseText": "This Spirit gains an extra Red symbol.",
               "cleanText": "This Spirit gains an extra Red symbol",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "ADD_SYMBOL"
+                "op": "ADD_SYMBOL",
+                "color": "Red",
+                "count": 1,
+                "side": "self"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB08-012#a1",
+          "keywords": [],
+          "id": "PB08-012#AB_MAIN_STEP_NONE_LV1_LV2_4e2841cd1ec5b24f290646f7714308aab059df38e1665f9623d3ae608a864ed1_b8249d5b55afda651adf413be3202a98",
+          "physicalId": "PB08-012#AB_MAIN_STEP_NONE_LV1_LV2_4e2841cd1ec5b24f290646f7714308aab059df38e1665f9623d3ae608a864ed1_b8249d5b55afda651adf413be3202a98",
+          "semanticId": "SEM#AB_MAIN_STEP_NONE_LV1_LV2_4e2841cd1ec5b24f290646f7714308aab059df38e1665f9623d3ae608a864ed1_b8249d5b55afda651adf413be3202a98",
+          "semanticIdV3": "SEM3#AB_MAIN_STEP_NONE_LV1_LV2_b6843b883ef24d5c660a47ff68a4195e3e57458d7b402f0a81766780c29e2f1e_3d13bee37b94761976e5c4a7a584eaa7",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "MAIN_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB08-012#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1179,8 +2064,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1189,10 +2083,14 @@
             "isMain": false,
             "cleanBody": "Send two cores from any opposing Spirits to the Reserve."
           },
+          "originalAbilityText": "[LV2] (When Attacks)\nSend two cores from any opposing Spirits to the Reserve.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Send two cores from any opposing Spirits to the Reserve.",
+              "originalClauseText": "Send two cores from any opposing Spirits to the Reserve.",
               "cleanText": "Send two cores from any opposing Spirits to the Reserve",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1200,11 +2098,30 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 2,
+                "from": {
+                  "zone": "field",
+                  "side": "opp"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB08-012#a2",
+          "keywords": [],
+          "id": "PB08-012#AB_WHEN_ATTACKS_NONE_LV2_82c18b5383c2f7a0480832c463c9e694fe30e4eafbe650f9cdd9742df156cca5_7b59b86c7fe39211c09602e4eedf1e68",
+          "physicalId": "PB08-012#AB_WHEN_ATTACKS_NONE_LV2_82c18b5383c2f7a0480832c463c9e694fe30e4eafbe650f9cdd9742df156cca5_7b59b86c7fe39211c09602e4eedf1e68",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_82c18b5383c2f7a0480832c463c9e694fe30e4eafbe650f9cdd9742df156cca5_7b59b86c7fe39211c09602e4eedf1e68",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_2e395c26a9db98abb0b34047cec24de8871e3cb2e12434ad9fd164f6a2534a1b_bb0825c1e4d2e73748c48b96ae802b02",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -1397,10 +2314,29 @@
     "compiledIr": {
       "cardNumber": "PB08-011",
       "name": "The EvilAlien Zarab Seijin",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 6000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 8000
+        }
+      },
+      "originalEffectText": "This card/Spirit is also treated as \"Ultraman\"-named.\n\n[LV1][LV2][LV3] (When Summoned)\nDiscard three cards from your decktop. Then, return a \"Kaiju\"/\"Belial\"-named card, or an exactly-named \"Giga Battle Nizer\" from your Trash to the Hand.\n\n[LV3] (When Attacks)\nSend a core from any opposing Spirit to the Trash.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "PB08-011#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1411,8 +2347,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1421,24 +2362,42 @@
             "isMain": false,
             "cleanBody": "This card/Spirit is also treated as \"Ultraman\"-named."
           },
+          "originalAbilityText": "This card/Spirit is also treated as \"Ultraman\"-named.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "This card/Spirit is also treated as \"Ultraman\"-named.",
+              "originalClauseText": "This card/Spirit is also treated as \"Ultraman\"-named.",
               "cleanText": "This card/Spirit is also treated as \"Ultraman\"-named",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TREAT_RULE"
+                "op": "TREAT_RULE",
+                "treatAs": "NAME",
+                "name": "Ultraman"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB08-011#a0",
+          "keywords": [],
+          "id": "PB08-011#AB_PASSIVE_NONE_LV1_LV2_LV3_12edb006a2ea98825cf9ef20262165333d4b6a958b3727897cc0a63e132453f6_a7718ada03d3dbd2add6ef429806b2a7",
+          "physicalId": "PB08-011#AB_PASSIVE_NONE_LV1_LV2_LV3_12edb006a2ea98825cf9ef20262165333d4b6a958b3727897cc0a63e132453f6_a7718ada03d3dbd2add6ef429806b2a7",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_12edb006a2ea98825cf9ef20262165333d4b6a958b3727897cc0a63e132453f6_a7718ada03d3dbd2add6ef429806b2a7",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_711d4fd4c32a5aba9ae2d878b0c6c321be59c771dc133e92a81142aa82a4ad4a_9d22dc7c9145bcba8381d157ef5967bd",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB08-011#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1449,8 +2408,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1459,10 +2427,14 @@
             "isMain": false,
             "cleanBody": "Discard three cards from your decktop. Then, return a \"Kaiju\"/\"Belial\"-named card, or an exactly-named \"Giga Battle Nizer\" from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nDiscard three cards from your decktop. Then, return a \"Kaiju\"/\"Belial\"-named card, or an exactly-named \"Giga Battle Nizer\" from your Trash to the Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Discard three cards from your decktop.",
+              "originalClauseText": "Discard three cards from your decktop.",
               "cleanText": "Discard three cards from your decktop",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1475,25 +2447,51 @@
             },
             {
               "rawText": "return a \"Kaiju\"/\"Belial\"-named card, or an exactly-named \"Giga Battle Nizer\" from your Trash to the Hand.",
+              "originalClauseText": "return a \"Kaiju\"/\"Belial\"-named card, or an exactly-named \"Giga Battle Nizer\" from your Trash to the Hand.",
               "cleanText": "return a \"Kaiju\"/\"Belial\"-named card, or an exactly-named \"Giga Battle Nizer\" from your Trash to the Hand",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "nameIncludes": "Kaiju",
+                  "nameIncludesAny": [
+                    "Kaiju",
+                    "Belial",
+                    "Giga Battle Nizer"
+                  ]
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB08-011#a1",
+          "keywords": [],
+          "id": "PB08-011#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a7f42382fe4ab495e0f77027c8bc1728cc8ce4c5e1f7a7f084726f8934c2f996_43435d5eb3175837b0fe961fa5284189",
+          "physicalId": "PB08-011#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a7f42382fe4ab495e0f77027c8bc1728cc8ce4c5e1f7a7f084726f8934c2f996_43435d5eb3175837b0fe961fa5284189",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a7f42382fe4ab495e0f77027c8bc1728cc8ce4c5e1f7a7f084726f8934c2f996_43435d5eb3175837b0fe961fa5284189",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_5d75505ae7e6f1a089265db5510db23778e5b833c63e5b07aefcce1cbdc6ae04_c727f257191721ae6a680c5701a8e5bd",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB08-011#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1502,8 +2500,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1512,10 +2519,14 @@
             "isMain": false,
             "cleanBody": "Send a core from any opposing Spirit to the Trash."
           },
+          "originalAbilityText": "[LV3] (When Attacks)\nSend a core from any opposing Spirit to the Trash.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "Send a core from any opposing Spirit to the Trash.",
+              "originalClauseText": "Send a core from any opposing Spirit to the Trash.",
               "cleanText": "Send a core from any opposing Spirit to the Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1523,11 +2534,34 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB08-011#a2",
+          "keywords": [],
+          "id": "PB08-011#AB_WHEN_ATTACKS_NONE_LV3_96428337de5a44590c4e4146b696056b40c64ab90736f3a08574a3f9a56bbaa2_ab9cd6c98595e4ddace10930a4873286",
+          "physicalId": "PB08-011#AB_WHEN_ATTACKS_NONE_LV3_96428337de5a44590c4e4146b696056b40c64ab90736f3a08574a3f9a56bbaa2_ab9cd6c98595e4ddace10930a4873286",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV3_96428337de5a44590c4e4146b696056b40c64ab90736f3a08574a3f9a56bbaa2_ab9cd6c98595e4ddace10930a4873286",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV3_83cfe524635b0a06ab2cd48a77f81a534bf4eef4bd303e79ce54ce660b740a11_abd1213d929e3838bb520ce76d4a76c9",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -1555,19 +2589,54 @@
     "compiledIr": {
       "cardNumber": "PB08-003",
       "name": "The SkullKaiju Red King［2］",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 8000
+        }
+      },
+      "originalEffectText": "When this card is revealed from deck by your \"Kaiju\"/\"Seijin\"-named Spirit effect, or sent to the Trash by your exactly-named \"Personification of Evil Ultraman Belia\"'s effect, you can add it to the Hand.\n\nFlash - [Accel: Cost 5 ([Red Core][Red Core][Purple Core][Purple Core])]\nDestroy an opposing 12000 BP or less Spirit, and when destroys, draw a card. After this effect resolves, put this card face-up onto the Removed Zone.",
+      "teams": [],
       "keywords": [
         {
-          "name": "Accel",
-          "parameter": "Cost 5 ([Red Core",
-          "wave": 2,
-          "hook": "accel",
+          "name": "Purple Core",
+          "parameter": null,
+          "wave": 1,
+          "hook": "purple_core",
           "bracketed": true,
-          "index": 214
+          "index": 0,
+          "abilityId": "PB08-003#AB_FLASH_NONE_LV1_LV2_LV3_d1c806920a109b52cbf20c8d49f748f2da4721044044f6290274466883710b3d_8305aa133a3b353a5523dc7adba9e362",
+          "cardNumber": "PB08-003",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": true,
+          "isMain": false,
+          "legacyAbilityId": "PB08-003#a1"
         }
       ],
       "abilities": [
         {
-          "id": "PB08-003#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1578,8 +2647,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1588,10 +2662,14 @@
             "isMain": false,
             "cleanBody": "When this card is revealed from deck by your \"Kaiju\"/\"Seijin\"-named Spirit effect, or sent to the Trash by your exactly-named \"Personification of Evil Ultraman Belia\"'s effect, you can add it to the Hand."
           },
+          "originalAbilityText": "When this card is revealed from deck by your \"Kaiju\"/\"Seijin\"-named Spirit effect, or sent to the Trash by your exactly-named \"Personification of Evil Ultraman Belia\"'s effect, you can add it to the Hand.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "When this card is revealed from deck by your \"Kaiju\"/\"Seijin\"-named Spirit effect, or sent to the Trash by your exactly-named \"Personification of Evil Ultraman Belia\"'s effect, you can add it to the Hand.",
+              "originalClauseText": "When this card is revealed from deck by your \"Kaiju\"/\"Seijin\"-named Spirit effect, or sent to the Trash by your exactly-named \"Personification of Evil Ultraman Belia\"'s effect, you can add it to the Hand.",
               "cleanText": "When this card is revealed from deck by your \"Kaiju\"/\"Seijin\"-named Spirit effect, or sent to the Trash by your exactly-named \"Personification of Evil Ultraman Belia\"'s effect, you can add it to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -1602,10 +2680,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB08-003#a0",
+          "keywords": [],
+          "id": "PB08-003#AB_PASSIVE_NONE_LV1_LV2_LV3_950a35712229737ccd60e1e4d7180e794cf3968e856b14c2044cf03859c40017_8053f7eeb51f8c8f6ce580259d35ade2",
+          "physicalId": "PB08-003#AB_PASSIVE_NONE_LV1_LV2_LV3_950a35712229737ccd60e1e4d7180e794cf3968e856b14c2044cf03859c40017_8053f7eeb51f8c8f6ce580259d35ade2",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_950a35712229737ccd60e1e4d7180e794cf3968e856b14c2044cf03859c40017_8053f7eeb51f8c8f6ce580259d35ade2",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_9620538c88c2c092eb86399125589236078b05e043f23b128b725158a0a2c1a9_2e7db71c3e1010230eea86b09a137e33",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "PB08-003#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1616,8 +2706,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "FLASH",
+            "timings": [],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Purple Core",
@@ -1626,11 +2723,39 @@
             "isMain": false,
             "cleanBody": "Destroy an opposing 12000 BP or less Spirit, and when destroys, draw a card. After this effect resolves, put this card face-up onto the Removed Zone."
           },
+          "originalAbilityText": "Flash - [Accel: Cost 5 ([Red Core][Red Core][Purple Core][Purple Core])]\nDestroy an opposing 12000 BP or less Spirit, and when destroys, draw a card. After this effect resolves, put this card face-up onto the Removed Zone.",
+          "abilityIndex": 1,
           "clauses": [
             {
-              "rawText": "Destroy an opposing 12000 BP or less Spirit, and when destroys, draw a card.",
-              "cleanText": "Destroy an opposing 12000 BP or less Spirit, and when destroys, draw a card",
+              "rawText": "Destroy an opposing 12000 BP or less Spirit",
+              "originalClauseText": "Destroy an opposing 12000 BP or less Spirit",
+              "cleanText": "Destroy an opposing 12000 BP or less Spirit",
+              "clauseIndex": 0,
               "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 12000
+                  }
+                }
+              }
+            },
+            {
+              "rawText": "draw a card.",
+              "originalClauseText": "draw a card.",
+              "cleanText": "draw a card",
+              "clauseIndex": 1,
+              "link": "ifYouDo",
               "isOptional": false,
               "isCost": false,
               "condition": null,
@@ -1644,7 +2769,9 @@
             },
             {
               "rawText": "put this card face-up onto the Removed Zone.",
+              "originalClauseText": "put this card face-up onto the Removed Zone.",
               "cleanText": "put this card face-up onto the Removed Zone",
+              "clauseIndex": 2,
               "link": "afterResolves",
               "isOptional": false,
               "isCost": false,
@@ -1655,10 +2782,55 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "PB08-003#a1",
+          "keywords": [
+            {
+              "name": "Purple Core",
+              "parameter": null,
+              "wave": 1,
+              "hook": "purple_core",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "PB08-003#AB_FLASH_NONE_LV1_LV2_LV3_d1c806920a109b52cbf20c8d49f748f2da4721044044f6290274466883710b3d_8305aa133a3b353a5523dc7adba9e362",
+              "cardNumber": "PB08-003",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "FLASH",
+              "timingLabel": "Flash",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": true,
+              "isMain": false,
+              "legacyAbilityId": "PB08-003#a1"
+            }
+          ],
+          "id": "PB08-003#AB_FLASH_NONE_LV1_LV2_LV3_d1c806920a109b52cbf20c8d49f748f2da4721044044f6290274466883710b3d_8305aa133a3b353a5523dc7adba9e362",
+          "physicalId": "PB08-003#AB_FLASH_NONE_LV1_LV2_LV3_d1c806920a109b52cbf20c8d49f748f2da4721044044f6290274466883710b3d_8305aa133a3b353a5523dc7adba9e362",
+          "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_d1c806920a109b52cbf20c8d49f748f2da4721044044f6290274466883710b3d_8305aa133a3b353a5523dc7adba9e362",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_7133d8877d4c79a8b38639741cb70ba904bfec61cd1f15c4300551d29a823888_75ef832a7c8203c82c2f54c2dbcb31b3",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "FLASH"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
-      "compiledClausesCount": 3,
+      "compiledClausesCount": 4,
       "unsupportedClausesCount": 0,
       "isFullySupported": true
     }

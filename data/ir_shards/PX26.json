@@ -1,1 +1,3408 @@
-{"PX26-02":{"cardNumber":"PX26-02","name":"Pit Reporter, Polish","keywords":[{"name":"Burst","parameter":"s","wave":2,"hook":"burst","bracketed":true,"index":214}],"abilities":[{"id":"PX26-02#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When this card is revealed from the deck by your effect, you can set it."},"clauses":[{"rawText":"When this card is revealed from the deck by your effect, you can set it.","cleanText":"When this card is revealed from the deck by your effect, you can set it","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SET_MIRAGE"}}],"unsupported":[]},{"id":"PX26-02#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":"ONCE_PER_TURN_SAME_NAME","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your \"Bannerace\"/\"Ten Crown\"/\"God-King\" family Spirit attacks, you can immediately activate this set card."},"clauses":[{"rawText":"When your \"Bannerace\"/\"Ten Crown\"/\"God-King\" family Spirit attacks, you can immediately activate this set card.","cleanText":"When your \"Bannerace\"/\"Ten Crown\"/\"God-King\" family Spirit attacks, you can immediately activate this set card","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"GRANT_FAMILY"}}],"unsupported":[]},{"id":"PX26-02#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"BURST","timingLabel":"Burst","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":"AFTER_TRIGGER_CONDITION","isFlash":false,"isMain":false,"cleanBody":"Draw a card, and put a core from the Void to your Reserve. After this effect resolves, summon this card without paying the cost."},"clauses":[{"rawText":"Draw a card","cleanText":"Draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}},{"rawText":"put a core from the Void to your Reserve.","cleanText":"put a core from the Void to your Reserve","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"void"},"to":{"zone":"reserve","side":"self"}}},{"rawText":"summon this card without paying the cost.","cleanText":"summon this card without paying the cost","link":"afterResolves","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_FREE","target":"this_card","from":"BURST"}}],"unsupported":[]},{"id":"PX26-02#a3","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit's symbol is also treated as Red/ Purple/ Green/ White/ Blue."},"clauses":[{"rawText":"This Spirit's symbol is also treated as Red/ Purple/ Green/ White/ Blue.","cleanText":"This Spirit's symbol is also treated as Red/ Purple/ Green/ White/ Blue","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TREAT_RULE"}}],"unsupported":[]}],"compiledClausesCount":6,"unsupportedClausesCount":0,"isFullySupported":true},"PX26-09":{"cardNumber":"PX26-09","name":"Assault Reve","keywords":[{"name":"Contract Advent","parameter":"Artificial Contract & C1 or more, (Your Turn)","wave":2,"hook":"contract_advent","bracketed":true,"index":8}],"abilities":[{"id":"PX26-09#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Contract Advent: Artificial Contract & C1 or more, (Your Turn)","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"stack this from the Hand onto your target Spirit.","cleanText":"stack this from the Hand onto your target Spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_STACK","from":"HAND","target":{"side":"self","types":["Spirit"]}}}],"unsupported":[]},{"id":"PX26-09#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ADVENTS","timingLabel":"When Advents","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can summon one of your \"The Artificial Partner, Reve\" in Soul State/pre-advent condition, without paying the cost. Then, you can deploy a Cost 4 or less Blue-only Nexus card from your Hand/Trash, without paying the cost."},"clauses":[{"rawText":"You can summon one of your \"The Artificial Partner, Reve\" in Soul State/pre-advent condition, without paying the cost.","cleanText":"You can summon one of your \"The Artificial Partner, Reve\" in Soul State/pre-advent condition, without paying the cost","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}},{"rawText":"you can deploy a Cost 4 or less Blue-only Nexus card from your Hand/Trash, without paying the cost.","cleanText":"you can deploy a Cost 4 or less Blue-only Nexus card from your Hand/Trash, without paying the cost","link":"then","isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DEPLOY_NEXUS","free":true}}],"unsupported":[]},{"id":"PX26-09#a2","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":["During OC"],"timing":"WHEN_ATTACKS_OR_BLOCKS","timingLabel":"When Attacks/Blocks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can put a core from the Void to any of your Nexus."},"clauses":[{"rawText":"You can put a core from the Void to any of your Nexus.","cleanText":"You can put a core from the Void to any of your Nexus","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"PX26-15":{"cardNumber":"PX26-15","name":"Chevallese, Camus","keywords":[{"name":"Contract Advent","parameter":"Infernal Contract & C4 or more, (Either Attack Step)","wave":2,"hook":"contract_advent","bracketed":true,"index":8},{"name":"Contract Advent","parameter":null,"wave":2,"hook":"contract_advent","bracketed":true,"index":187}],"abilities":[{"id":"PX26-15#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Contract Advent: Infernal Contract & C4 or more, (Either Attack Step)","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"stack this from the Hand onto your target Spirit.","cleanText":"stack this from the Hand onto your target Spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_STACK","from":"HAND","target":{"side":"self","types":["Spirit"]}}}],"unsupported":[]},{"id":"PX26-15#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This card can [Contract Advent] from the Removed Zone."},"clauses":[{"rawText":"This card can [Contract Advent] from the Removed Zone.","cleanText":"This card can [Contract Advent] from the Removed Zone","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_RULE_MODIFIER"}}],"unsupported":[]},{"id":"PX26-15#a2","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ADVENTS","timingLabel":"When Advents/Attacks","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"you can reveal three cards from your decktop. Among them, you can put a \"Blood Crystal\" family card to the Removed Zone. Discard any remaining cards. Then, you can send a core from an opposing Spirit for each card in your Removed Zone."},"clauses":[{"rawText":"you can reveal three cards from your decktop.","cleanText":"you can reveal three cards from your decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":3}},{"rawText":"Among them, you can put a \"Blood Crystal\" family card to the Removed Zone.","cleanText":"Among them, you can put a \"Blood Crystal\" family card to the Removed Zone","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"GRANT_FAMILY"}},{"rawText":"Discard any remaining cards.","cleanText":"Discard any remaining cards","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DISCARD_REVEALED"}},{"rawText":"you can send a core from an opposing Spirit for each card in your Removed Zone.","cleanText":"you can send a core from an opposing Spirit for each card in your Removed Zone","link":"then","isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]},{"id":"PX26-15#a3","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":["During OC"],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"during this turn, this Spirit can gain an extra Purple symbol for every three cards in your Removed Zone."},"clauses":[{"rawText":"during this turn, this Spirit can gain an extra Purple symbol for every three cards in your Removed Zone.","cleanText":"this Spirit can gain an extra Purple symbol for every three cards in your Removed Zone","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"ADD_SYMBOL"}}],"unsupported":[]}],"compiledClausesCount":8,"unsupportedClausesCount":0,"isFullySupported":true},"PX26-08":{"cardNumber":"PX26-08","name":"HighEvo-Delphyne","keywords":[],"abilities":[{"id":"PX26-08#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Mani: \"Contractor Uranus\" & C3 or more, (Either Attack Step)","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"pay one cost from the target to summon this card from the Hand.","cleanText":"pay one cost from the target to summon this card from the Hand","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_PAY","from":"HAND"}}],"unsupported":[]},{"id":"PX26-08#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"STEP_RESTRICTED","timingLabel":"When Manifests","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can immediately activate one of your set \"Primordial\"/\"Concluser\"/\"Cloudbuilt\" family Bursts."},"clauses":[{"rawText":"You can immediately activate one of your set \"Primordial\"/\"Concluser\"/\"Cloudbuilt\" family Bursts.","cleanText":"You can immediately activate one of your set \"Primordial\"/\"Concluser\"/\"Cloudbuilt\" family Bursts","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}}],"unsupported":[]},{"id":"PX26-08#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"STEP_RESTRICTED","timingLabel":"After Your Burst Activates","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can draw a card from the deckbottom. Then, (Can't Stack) if you have seven counters or more, and it's your Attack Step, you can send an opposing Life to the Reserve."},"clauses":[{"rawText":"You can draw a card from the deckbottom.","cleanText":"You can draw a card from the deckbottom","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}},{"rawText":"(Can't Stack) if you have seven counters or more, and it's your Attack Step, you can send an opposing Life to the Reserve.","cleanText":"(Can't Stack) if you have seven counters or more, and it's your Attack Step, you can send an opposing Life to the Reserve","link":"then","isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"PX26-06":{"cardNumber":"PX26-06","name":"HighEvo-Harpuia","keywords":[{"name":"Mirage","parameter":"Cost 3 ([Yellow Core","wave":2,"hook":"mirage","bracketed":true,"index":0}],"abilities":[{"id":"PX26-06#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Mirage: Cost ([Yellow Core])"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"clauses":[],"unsupported":[]},{"id":"PX26-06#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["During Set"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Change the \"'Primordial'/'Cloudbuilt' family\" written in the \"activate Burst\" effects of your \"Uranus\" Spirits/Grandwalker Nexuses to \"'Primordial'/'Concluser'/'Cloudbuilt' family\"."},"clauses":[{"rawText":"Change the \"'Primordial'/'Cloudbuilt' family\" written in the \"activate Burst\" effects of your \"Uranus\" Spirits/Grandwalker Nexuses to \"'Primordial'/'Concluser'/'Cloudbuilt' family\".","cleanText":"Change the \"'Primordial'/'Cloudbuilt' family\" written in the \"activate Burst\" effects of your \"Uranus\" Spirits/Grandwalker Nexuses to \"'Primordial'/'Concluser'/'Cloudbuilt' family\"","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}}],"unsupported":[]},{"id":"PX26-06#a2","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"If you control any \"Contractor Uranus\", your counter +1, and draw a card from the deckbottom."},"clauses":[{"rawText":"If you control any \"Contractor Uranus\", your counter +1","cleanText":"your counter +1","link":null,"isOptional":false,"isCost":false,"condition":"If you control any \"Contractor Uranus\"","duration":null,"op":{"op":"ADD_COUNTER","count":1}},{"rawText":"draw a card from the deckbottom.","cleanText":"draw a card from the deckbottom","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"PX26-07":{"cardNumber":"PX26-07","name":"HighEvo-Ophiotaurus","keywords":[],"abilities":[{"id":"PX26-07#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":"ONCE_PER_TURN_SAME_NAME","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"After your \"Primordial\"/\"Concluser\"/\"Cloudbuilt\" family Burst activates, you can summon this card from the Hand, without paying the cost."},"clauses":[{"rawText":"After your \"Primordial\"/\"Concluser\"/\"Cloudbuilt\" family Burst activates, you can summon this card from the Hand, without paying the cost.","cleanText":"After your \"Primordial\"/\"Concluser\"/\"Cloudbuilt\" family Burst activates, you can summon this card from the Hand, without paying the cost","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_THIS_CARD","from":"HAND_OR_BURST"}}],"unsupported":[]},{"id":"PX26-07#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":"ONCE_PER_TURN_SAME_NAME","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"If you control any \"Contractor Uranus\", you can return a \"Primordial\" family card from your Trash to the Hand."},"clauses":[{"rawText":"If you control any \"Contractor Uranus\", you can return a \"Primordial\" family card from your Trash to the Hand.","cleanText":"you can return a \"Primordial\" family card from your Trash to the Hand","link":null,"isOptional":true,"isCost":false,"condition":"If you control any \"Contractor Uranus\"","duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]},{"id":"PX26-07#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"By +1 core to one of your \"Contractor Uranus\" Grandwalker Nexuses, your counter +1."},"clauses":[{"rawText":"By +1 core to one of your \"Contractor Uranus\" Grandwalker Nexuses","cleanText":"By +1 core to one of your \"Contractor Uranus\" Grandwalker Nexuses","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"GRANDWALKER_ACTION"}},{"rawText":"your counter +1.","cleanText":"your counter +1","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_COUNTER","count":1}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"PX26-10":{"cardNumber":"PX26-10","name":"Save-Cat","keywords":[],"abilities":[{"id":"PX26-10#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This card/Spirit gains the \"Scarlet Flame\"/ \"Blood Crystal\"/ \"Jade Thunder\"/ \"Silver Zero\"/ \"Golden Cloud\"/ \"Azure Wave\" families."},"clauses":[{"rawText":"This card/Spirit gains the \"Scarlet Flame\"/ \"Blood Crystal\"/ \"Jade Thunder\"/ \"Silver Zero\"/ \"Golden Cloud\"/ \"Azure Wave\" families.","cleanText":"This card/Spirit gains the \"Scarlet Flame\"/ \"Blood Crystal\"/ \"Jade Thunder\"/ \"Silver Zero\"/ \"Golden Cloud\"/ \"Azure Wave\" families","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_FAMILY"}}],"unsupported":[]},{"id":"PX26-10#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned/Attacks","timingStep":"ANY","limit":"ONCE_PER_TURN_SAME_NAME","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Show a \"Divine Attendant\" family Contract Spirit card from your Hand to the opponent, or if you have any \"Divine Attendant\" family Contract Spirit, including those in Removed Zone/Soul State/pre-advent condition, you can reveal three cards from the decktop. Add a card with the same family as this Spirit to the Hand, or put it onto the Removed Zone. Discard any remaining cards. When the number of cards in Hand/Removed Zone increases via this effect, your counter +2."},"clauses":[{"rawText":"Show a \"Divine Attendant\" family Contract Spirit card from your Hand to the opponent, or if you have any \"Divine Attendant\" family Contract Spirit, including those in Removed Zone/Soul State/pre-advent condition, you can reveal three cards from the decktop.","cleanText":"Show a \"Divine Attendant\" family Contract Spirit card from your Hand to the opponent, or if you have any \"Divine Attendant\" family Contract Spirit, including those in Removed Zone/Soul State/pre-advent condition, you can reveal three cards from the decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"GRANT_FAMILY"}},{"rawText":"Add a card with the same family as this Spirit to the Hand, or put it onto the Removed Zone.","cleanText":"Add a card with the same family as this Spirit to the Hand, or put it onto the Removed Zone","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DECK_OR_HAND_ACTION"}},{"rawText":"Discard any remaining cards.","cleanText":"Discard any remaining cards","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DISCARD_REVEALED"}},{"rawText":"When the number of cards in Hand/Removed Zone increases via this effect, your counter +2.","cleanText":"When the number of cards in Hand/Removed Zone increases via this effect, your counter +2","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_COUNTER","count":2}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"PX26-20":{"cardNumber":"PX26-20","name":"Soul Division","keywords":[],"abilities":[{"id":"PX26-20#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When this card is revealed from the deck by your \"Blood Crystal\" family effect, you can add it to the Hand."},"clauses":[{"rawText":"When this card is revealed from the deck by your \"Blood Crystal\" family effect, you can add it to the Hand.","cleanText":"When this card is revealed from the deck by your \"Blood Crystal\" family effect, you can add it to the Hand","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_TO_HAND"}}],"unsupported":[]},{"id":"PX26-20#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"MAIN","timingLabel":"Main","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":true,"cleanBody":"Summon one of your \"The Infernal Partner, Camus\" in Hand/Removed Zone/Soul State/pre-advent condition, without paying the cost. Then, you can activate one of the (When Attacks) effects of a target summoned via this effect."},"clauses":[{"rawText":"Summon one of your \"The Infernal Partner, Camus\" in Hand/Removed Zone/Soul State/pre-advent condition, without paying the cost.","cleanText":"Summon one of your \"The Infernal Partner, Camus\" in Hand/Removed Zone/Soul State/pre-advent condition, without paying the cost","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}},{"rawText":"you can activate one of the (When Attacks) effects of a target summoned via this effect.","cleanText":"you can activate one of the (When Attacks) effects of a target summoned via this effect","link":"then","isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"ACTIVATE_EFFECT_SPECIAL"}}],"unsupported":[]},{"id":"PX26-20#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"Put a \"Camus\" from your Trash to the Removed Zone. When you've done so, send a core from any opposing Spirit to the Reserve."},"clauses":[{"rawText":"Put a \"Camus\" from your Trash to the Removed Zone.","cleanText":"Put a \"Camus\" from your Trash to the Removed Zone","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REMOVED_ZONE_ACTION"}},{"rawText":"send a core from any opposing Spirit to the Reserve.","cleanText":"send a core from any opposing Spirit to the Reserve","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"PX26-19":{"cardNumber":"PX26-19","name":"The Converging Sealed Lands","keywords":[],"abilities":[{"id":"PX26-19#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Mani: terra, \"Contractor Gaia\" & C6 or more, (Either Attack Step)","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, pay one cost from the target to deploy this card from the Hand."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"pay one cost from the target to deploy this card from the Hand.","cleanText":"pay one cost from the target to deploy this card from the Hand","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DEPLOY_NEXUS","free":true}}],"unsupported":[]},{"id":"PX26-19#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_DEPLOYED","timingLabel":"When Deployed/Destroyed","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"if you control any \"Contractor Gaia\", you can destroy an opposing Grandwalker Nexus. Then, for each color of \"Primordial\" family Nexuses you control, besides those of six-color, you can destroy an opposing Spirit."},"clauses":[{"rawText":"if you control any \"Contractor Gaia\", you can destroy an opposing Grandwalker Nexus.","cleanText":"you can destroy an opposing Grandwalker Nexus","link":null,"isOptional":true,"isCost":false,"condition":"if you control any \"Contractor Gaia\"","duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}},{"rawText":"for each color of \"Primordial\" family Nexuses you control, besides those of six-color, you can destroy an opposing Spirit.","cleanText":"for each color of \"Primordial\" family Nexuses you control, besides those of six-color, you can destroy an opposing Spirit","link":"then","isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]},{"id":"PX26-19#a2","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"MAIN_STEP","timingLabel":"Your Main Step","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"by destroying another Nexus you control, summon a \"Primordial\" & \"Reptile Beast\" family Spirit card from your Hand, without paying the cost."},"clauses":[{"rawText":"By destroying another Nexus you control","cleanText":"By destroying another Nexus you control","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}},{"rawText":"summon a \"Primordial\" & \"Reptile Beast\" family Spirit card from your Hand, without paying the cost.","cleanText":"summon a \"Primordial\" & \"Reptile Beast\" family Spirit card from your Hand, without paying the cost","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}}],"unsupported":[]}],"compiledClausesCount":6,"unsupportedClausesCount":0,"isFullySupported":true},"PX26-01":{"cardNumber":"PX26-01","name":"The DivineWorldGuide Vina","keywords":[{"name":"Core Charge","parameter":null,"wave":3,"hook":"core_charge","bracketed":true,"index":267}],"abilities":[{"id":"PX26-01#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Mani: Contract Grandwalker Nexus, (Opposing Attack Step)","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"pay one cost from the target to summon this card from the Hand.","cleanText":"pay one cost from the target to summon this card from the Hand","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_PAY","from":"HAND"}}],"unsupported":[]},{"id":"PX26-01#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When this card is either revealed from the deck by your effect, or sent to the Trash by your [Core Charge], you can add it to the Hand. When you've done so, you can return a card with [Mani] from your Trash to the Hand."},"clauses":[{"rawText":"When this card is either revealed from the deck by your effect, or sent to the Trash by your [Core Charge], you can add it to the Hand.","cleanText":"When this card is either revealed from the deck by your effect, or sent to the Trash by your [Core Charge], you can add it to the Hand","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_TO_HAND"}},{"rawText":"you can return a card with [Mani] from your Trash to the Hand.","cleanText":"you can return a card with [Mani] from your Trash to the Hand","link":"byDoing","isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]},{"id":"PX26-01#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"STEP_RESTRICTED","timingLabel":"When Manifests","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can [UMani] a card from your Hand."},"clauses":[{"rawText":"You can [UMani] a card from your Hand.","cleanText":"You can [UMani] a card from your Hand","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"ACTIVATE_EFFECT_ACTION"}}],"unsupported":[]},{"id":"PX26-01#a3","type":"ABILITY","header":{"levels":[3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"you can refresh a \"Devotee\"/\"Concluser\" family Spirit you control."},"clauses":[{"rawText":"you can refresh a \"Devotee\"/\"Concluser\" family Spirit you control.","cleanText":"you can refresh a \"Devotee\"/\"Concluser\" family Spirit you control","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":6,"unsupportedClausesCount":0,"isFullySupported":true},"PX26-12":{"cardNumber":"PX26-12","name":"The FaultLizard Fault-Geozard","keywords":[],"abilities":[{"id":"PX26-12#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Mani: \"Contractor Gaia\" & C3 or more, (Either Attack Step)","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"pay one cost from the target to summon this card from the Hand.","cleanText":"pay one cost from the target to summon this card from the Hand","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_PAY","from":"HAND"}}],"unsupported":[]},{"id":"PX26-12#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":"ONCE_PER_TURN_SAME_NAME","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"By destroying one of your Nexuses, [Mani] this card from the Hand, treating [Soul Core] as being sent to the Trash."},"clauses":[{"rawText":"By destroying one of your Nexuses","cleanText":"By destroying one of your Nexuses","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}},{"rawText":"[Mani] this card from the Hand, treating [Soul Core] as being sent to the Trash.","cleanText":"[Mani] this card from the Hand, treating [Soul Core] as being sent to the Trash","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TREAT_RULE"}}],"unsupported":[]},{"id":"PX26-12#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"STEP_RESTRICTED","timingLabel":"When Manifests/Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can deploy a \"Primordial\" family Nexus card from your Hand/Trash. You can destroy an opposing Spirit/Ultimate with a number of symbols equal or inferior to the target deployed via this effect."},"clauses":[{"rawText":"You can deploy a \"Primordial\" family Nexus card from your Hand/Trash.","cleanText":"You can deploy a \"Primordial\" family Nexus card from your Hand/Trash","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DEPLOY_NEXUS","free":true}},{"rawText":"You can destroy an opposing Spirit/Ultimate with a number of symbols equal or inferior to the target deployed via this effect.","cleanText":"You can destroy an opposing Spirit/Ultimate with a number of symbols equal or inferior to the target deployed via this effect","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]}],"compiledClausesCount":6,"unsupportedClausesCount":0,"isFullySupported":true},"PX26-14":{"cardNumber":"PX26-14","name":"The HellEvilMarquis Orias","keywords":[],"abilities":[{"id":"PX26-14#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":true,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"While this card is in the Removed Zone, all your originally Cost 7 or more \"Camus\" gain an extra Purple symbol."},"clauses":[{"rawText":"While this card is in the Removed Zone, all your originally Cost 7 or more \"Camus\" gain an extra Purple symbol.","cleanText":"all your originally Cost 7 or more \"Camus\" gain an extra Purple symbol","link":null,"isOptional":false,"isCost":false,"condition":"While this card is in the Removed Zone","duration":null,"op":{"op":"COST_MODIFIER"}}],"unsupported":[]},{"id":"PX26-14#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned/Attacks","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"your counter +1. Then, send up to one core from any opposing Spirit to the Reserve, or send up to three cores from any opposing Grandwalker Nexuses to the Void."},"clauses":[{"rawText":"your counter +1.","cleanText":"your counter +1","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_COUNTER","count":1}},{"rawText":"send up to one core from any opposing Spirit to the Reserve, or send up to three cores from any opposing Grandwalker Nexuses to the Void.","cleanText":"send up to one core from any opposing Spirit to the Reserve, or send up to three cores from any opposing Grandwalker Nexuses to the Void","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"PX26-13":{"cardNumber":"PX26-13","name":"The ReptileRockKing Geoguardin","keywords":[{"name":"Contract Skill","parameter":null,"wave":3,"hook":"contract_skill","bracketed":true,"index":177}],"abilities":[{"id":"PX26-13#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Besides six-color ones, for each color of \"Primordial\" family Nexus you control, the cost of this card in Hand gets -3."},"clauses":[{"rawText":"Besides six-color ones, for each color of \"Primordial\" family Nexus you control, the cost of this card in Hand gets -3.","cleanText":"Besides six-color ones, for each color of \"Primordial\" family Nexus you control, the cost of this card in Hand gets -3","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"COST_MODIFIER"}}],"unsupported":[]},{"id":"PX26-13#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":"ONCE_PER_BATTLE","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"after the [Contract Skill] of your \"Contractor Gaia\" resolves, you can send an opposing Life to the Trash."},"clauses":[{"rawText":"after the [Contract Skill] of your \"Contractor Gaia\" resolves, you can send an opposing Life to the Trash.","cleanText":"after the [Contract Skill] of your \"Contractor Gaia\" resolves, you can send an opposing Life to the Trash","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]},{"id":"PX26-13#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When the opponent would use any card during Flash Timing, they can't use it unless they destroy a Nexus they control."},"clauses":[{"rawText":"When the opponent would use any card during Flash Timing, they can't use it unless they destroy a Nexus they control.","cleanText":"When the opponent would use any card during Flash Timing, they can't use it unless they destroy a Nexus they control","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either","types":["Nexus"]}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"PX26-16":{"cardNumber":"PX26-16","name":"The ScarletZosterHeroBeast Queen-Hippolyte","keywords":[{"name":"Mirage","parameter":"Cost 2 ([Green Core","wave":2,"hook":"mirage","bracketed":true,"index":0}],"abilities":[{"id":"PX26-16#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Mirage: Cost ([Green Core])"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"clauses":[],"unsupported":[]},{"id":"PX26-16#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["During Set"],"timing":"WHEN_SET","timingLabel":"When Set","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"For each card in the opposing Removed Zone, send three cores from any opposing Grandwalker Nexuses to the Void."},"clauses":[{"rawText":"For each card in the opposing Removed Zone, send three cores from any opposing Grandwalker Nexuses to the Void.","cleanText":"For each card in the opposing Removed Zone, send three cores from any opposing Grandwalker Nexuses to the Void","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]},{"id":"PX26-16#a2","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Your counter can +1. Then, if you control any \"Hermes\" Grandwalker Nexus, you can put a card from the opposing Trash to their Removed Zone. Then, if there is any Spirit card/Nexus card in the opposing Removed Zone, you can put two cores from the Void to this Spirit."},"clauses":[{"rawText":"Your counter can +1.","cleanText":"Your counter can +1","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"COUNT_OPERATION"}},{"rawText":"if you control any \"Hermes\" Grandwalker Nexus, you can put a card from the opposing Trash to their Removed Zone.","cleanText":"you can put a card from the opposing Trash to their Removed Zone","link":"then","isOptional":true,"isCost":false,"condition":"if you control any \"Hermes\" Grandwalker Nexus","duration":null,"op":{"op":"REMOVE_FROM_GAME"}},{"rawText":"if there is any Spirit card/Nexus card in the opposing Removed Zone, you can put two cores from the Void to this Spirit.","cleanText":"you can put two cores from the Void to this Spirit","link":"then","isOptional":true,"isCost":false,"condition":"if there is any Spirit card/Nexus card in the opposing Removed Zone","duration":null,"op":{"op":"MOVE_CORE","count":2,"from":{"zone":"void"},"to":{"zone":"field","target":"self"}}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"PX26-05":{"cardNumber":"PX26-05","name":"The SteelKnightKing Kekrops","keywords":[{"name":"Accel","parameter":"Cost 7 ([White Core","wave":2,"hook":"accel","bracketed":true,"index":97},{"name":"Accel","parameter":null,"wave":2,"hook":"accel","bracketed":true,"index":416}],"abilities":[{"id":"PX26-05#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When this card is put onto the Removed Zone, you can summon it without paying the cost."},"clauses":[{"rawText":"When this card is put onto the Removed Zone, you can summon it without paying the cost.","cleanText":"When this card is put onto the Removed Zone, you can summon it without paying the cost","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DECK_OR_HAND_ACTION"}}],"unsupported":[]},{"id":"PX26-05#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":"ONCE_PER_TURN_SAME_NAME","cantStack":false,"keyword":"White Core","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"During this turn, at the end of battle of your \"Steel\", send an opposing Life to the Reserve. After this effect resolves, put this card onto the Removed Zone."},"clauses":[{"rawText":"During this turn, at the end of battle of your \"Steel\", send an opposing Life to the Reserve.","cleanText":"at the end of battle of your \"Steel\", send an opposing Life to the Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"put this card onto the Removed Zone.","cleanText":"put this card onto the Removed Zone","link":"afterResolves","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"OPEN_ZONE"}}],"unsupported":[]},{"id":"PX26-05#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned/Attacks","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"you can activate one of the [Accel] of a \"Steel\" on your Field. However, the target doesn't move from the Field."},"clauses":[{"rawText":"you can activate one of the [Accel] of a \"Steel\" on your Field.","cleanText":"you can activate one of the [Accel] of a \"Steel\" on your Field","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"ACTIVATE_EFFECT_ACTION"}},{"rawText":"the target doesn't move from the Field.","cleanText":"the target doesn't move from the Field","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REMAIN_ON_FIELD"}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"PX26-03":{"cardNumber":"PX26-03","name":"The SteelMaiden001 Linnea","keywords":[{"name":"Core Charge","parameter":null,"wave":3,"hook":"core_charge","bracketed":true,"index":115},{"name":"Accel","parameter":null,"wave":2,"hook":"accel","bracketed":true,"index":161},{"name":"Accel","parameter":"Cost 3 ([White Core","wave":2,"hook":"accel","bracketed":true,"index":198}],"abilities":[{"id":"PX26-03#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"You can summon this card from the Removed Zone."},"clauses":[{"rawText":"You can summon this card from the Removed Zone.","cleanText":"You can summon this card from the Removed Zone","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_THIS_CARD","from":"HAND_OR_BURST"}}],"unsupported":[]},{"id":"PX26-03#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":true,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When this card is sent to the Trash by your [Core Charge], you can activate the following [Accel] by paying one cost."},"clauses":[{"rawText":"When this card is sent to the Trash by your [Core Charge], you can activate the following [Accel] by paying one cost.","cleanText":"When this card is sent to the Trash by your [Core Charge], you can activate the following [Accel] by paying one cost","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}}],"unsupported":[]},{"id":"PX26-03#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Accel: Cost ([White Core","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"If you control any \"Athena\", including those in Soul State, reveal up to two cards from your decktop. You can put any number of \"Athena\"/\"Steel\" among them to the Removed Zone until your Removed Zone has six cards. Return any remaining cards to the deckbottom. Then, (Once per Turn: Same Name) your counters +2. After this effect resolves, put this card onto the Removed Zone."},"clauses":[{"rawText":"If you control any \"Athena\", including those in Soul State, reveal up to two cards from your decktop.","cleanText":"including those in Soul State, reveal up to two cards from your decktop","link":null,"isOptional":false,"isCost":false,"condition":"If you control any \"Athena\"","duration":null,"op":{"op":"REVEAL_DECKTOP","count":2,"upTo":true}},{"rawText":"You can put any number of \"Athena\"/\"Steel\" among them to the Removed Zone until your Removed Zone has six cards.","cleanText":"You can put any number of \"Athena\"/\"Steel\" among them to the Removed Zone until your Removed Zone has six cards","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REMOVED_ZONE_ACTION"}},{"rawText":"Return any remaining cards to the deckbottom.","cleanText":"Return any remaining cards to the deckbottom","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"RETURN_REVEALED_BOTTOM"}},{"rawText":"your counters +2.","cleanText":"your counters +2","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_COUNTER","count":2}},{"rawText":"put this card onto the Removed Zone.","cleanText":"put this card onto the Removed Zone","link":"afterResolves","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"OPEN_ZONE"}}],"unsupported":[]}],"compiledClausesCount":7,"unsupportedClausesCount":0,"isFullySupported":true},"PX26-04":{"cardNumber":"PX26-04","name":"The SteelMaiden014 Theta","keywords":[{"name":"Accel","parameter":"Cost 2 ([White Core","wave":2,"hook":"accel","bracketed":true,"index":216}],"abilities":[{"id":"PX26-04#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your \"Steel\" Spirits/Grandwalker Nexuses would leave the Field due to the opponent, by returning this card from the Removed Zone to the deckbottom, one of those targets remains on the Field, exhausted."},"clauses":[{"rawText":"When your \"Steel\" Spirits/Grandwalker Nexuses would leave the Field due to the opponent, by returning this card from the Removed Zone to the deckbottom, one of those targets remains on the Field, exhausted.","cleanText":"When your \"Steel\" Spirits/Grandwalker Nexuses would leave the Field due to the opponent, by returning this card from the Removed Zone to the deckbottom, one of those targets remains on the Field, exhausted","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]},{"id":"PX26-04#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Accel: Cost ([White Core","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"If you control any \"Athena\", including those in Soul State, your counter +1. When you've done so, you can send two cores from any opposing Grandwalker Nexuses to the Void. After this effect resolves, put this card onto the Removed Zone."},"clauses":[{"rawText":"If you control any \"Athena\", including those in Soul State, your counter +1.","cleanText":"including those in Soul State, your counter +1","link":null,"isOptional":false,"isCost":false,"condition":"If you control any \"Athena\"","duration":null,"op":{"op":"ADD_COUNTER","count":1}},{"rawText":"you can send two cores from any opposing Grandwalker Nexuses to the Void.","cleanText":"you can send two cores from any opposing Grandwalker Nexuses to the Void","link":"byDoing","isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"put this card onto the Removed Zone.","cleanText":"put this card onto the Removed Zone","link":"afterResolves","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"OPEN_ZONE"}}],"unsupported":[]},{"id":"PX26-04#a2","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Your counter +1, and put a core from the Void to your Spirit."},"clauses":[{"rawText":"Your counter +1","cleanText":"Your counter +1","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_COUNTER","count":1}},{"rawText":"put a core from the Void to your Spirit.","cleanText":"put a core from the Void to your Spirit","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":6,"unsupportedClausesCount":0,"isFullySupported":true},"PX26-18":{"cardNumber":"PX26-18","name":"The UltraHeroBeast Orion","keywords":[],"abilities":[{"id":"PX26-18#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Mani: \"Contractor Hermes\" & C4 or more, (Either Attack Step)","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"pay one cost from the target to summon this card from the Hand.","cleanText":"pay one cost from the target to summon this card from the Hand","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_PAY","from":"HAND"}}],"unsupported":[]},{"id":"PX26-18#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":"ONCE_PER_TURN_SAME_NAME","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"While this card is in Hand, when it is discarded by an effect, or any card is put onto the opposing Removed Zone, you can [Mani] this card, treating [Soul Core] as being sent to the Trash."},"clauses":[{"rawText":"While this card is in Hand, when it is discarded by an effect, or any card is put onto the opposing Removed Zone, you can [Mani] this card, treating [Soul Core] as being sent to the Trash.","cleanText":"when it is discarded by an effect, or any card is put onto the opposing Removed Zone, you can [Mani] this card, treating [Soul Core] as being sent to the Trash","link":null,"isOptional":true,"isCost":false,"condition":"While this card is in Hand","duration":null,"op":{"op":"TREAT_RULE"}}],"unsupported":[]},{"id":"PX26-18#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"STEP_RESTRICTED","timingLabel":"When Manifests/Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can send up to two opposing Spirits/Ultimates to the Removed Zone. Then, once per turn, you can refresh one of your \"HeroBeast\"."},"clauses":[{"rawText":"You can send up to two opposing Spirits/Ultimates to the Removed Zone.","cleanText":"You can send up to two opposing Spirits/Ultimates to the Removed Zone","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REMOVED_ZONE_ACTION"}},{"rawText":"once per turn, you can refresh one of your \"HeroBeast\".","cleanText":"once per turn, you can refresh one of your \"HeroBeast\"","link":"then","isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":{"side":"either"}}}],"unsupported":[]},{"id":"PX26-18#a3","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When any card is put onto the opposing Removed Zone, you can send an opposing Life to the Reserve."},"clauses":[{"rawText":"When any card is put onto the opposing Removed Zone, you can send an opposing Life to the Reserve.","cleanText":"When any card is put onto the opposing Removed Zone, you can send an opposing Life to the Reserve","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":6,"unsupportedClausesCount":0,"isFullySupported":true},"PX26-17":{"cardNumber":"PX26-17","name":"The WhiteWingedHeroBeast Bellerophon","keywords":[],"abilities":[{"id":"PX26-17#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Mani: \"Contractor Hermes\", (Your Turn)","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"pay one cost from the target to summon this card from the Hand.","cleanText":"pay one cost from the target to summon this card from the Hand","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_PAY","from":"HAND"}}],"unsupported":[]},{"id":"PX26-17#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned/Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Your counter can +1. Then, once per turn, by discarding a Green-only \"Devotee\"/\"Concluser\" family card from your Hand, put two cores from the Void to this Spirit."},"clauses":[{"rawText":"Your counter can +1.","cleanText":"Your counter can +1","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"COUNT_OPERATION"}},{"rawText":"once per turn, by discarding a Green-only \"Devotee\"/\"Concluser\" family card from your Hand, put two cores from the Void to this Spirit.","cleanText":"once per turn, by discarding a Green-only \"Devotee\"/\"Concluser\" family card from your Hand, put two cores from the Void to this Spirit","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":2,"from":{"zone":"void"},"to":{"zone":"field","target":"self"}}}],"unsupported":[]},{"id":"PX26-17#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"when your \"HeroBeast\" is sent to the Trash from your Hand/Deck, you can put one of the targets to the Removed Zone."},"clauses":[{"rawText":"when your \"HeroBeast\" is sent to the Trash from your Hand/Deck, you can put one of the targets to the Removed Zone.","cleanText":"when your \"HeroBeast\" is sent to the Trash from your Hand/Deck, you can put one of the targets to the Removed Zone","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REMOVED_ZONE_ACTION"}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "PX26-02": {
+    "cardNumber": "PX26-02",
+    "name": "Pit Reporter, Polish",
+    "keywords": [
+      {
+        "name": "Burst",
+        "parameter": "s",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 214
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PX26-02#AB_PASSIVE_NONE_LV1_LV2_LV3_486ca6eafbf736bf391148a2b4c3d5299c3640b409af56687e479cf3f9cd0980_6c7c7c924078370d6705fac80c2a9bad",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this card is revealed from the deck by your effect, you can set it."
+        },
+        "clauses": [
+          {
+            "rawText": "When this card is revealed from the deck by your effect, you can set it.",
+            "cleanText": "When this card is revealed from the deck by your effect, you can set it",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SET_MIRAGE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-02#a0",
+        "physicalId": "PX26-02#AB_PASSIVE_NONE_LV1_LV2_LV3_486ca6eafbf736bf391148a2b4c3d5299c3640b409af56687e479cf3f9cd0980_6c7c7c924078370d6705fac80c2a9bad",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_486ca6eafbf736bf391148a2b4c3d5299c3640b409af56687e479cf3f9cd0980_6c7c7c924078370d6705fac80c2a9bad"
+      },
+      {
+        "id": "PX26-02#AB_PASSIVE_NONE_LV1_LV2_LV3_7d2a3e5a6e79365b6eb997a85c947b76b2562d21c1a91c3235f03e5362191370_f3a319e0b18db605371d8eb6a943c480",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your \"Bannerace\"/\"Ten Crown\"/\"God-King\" family Spirit attacks, you can immediately activate this set card."
+        },
+        "clauses": [
+          {
+            "rawText": "When your \"Bannerace\"/\"Ten Crown\"/\"God-King\" family Spirit attacks, you can immediately activate this set card.",
+            "cleanText": "When your \"Bannerace\"/\"Ten Crown\"/\"God-King\" family Spirit attacks, you can immediately activate this set card",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GRANT_FAMILY"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-02#a1",
+        "physicalId": "PX26-02#AB_PASSIVE_NONE_LV1_LV2_LV3_7d2a3e5a6e79365b6eb997a85c947b76b2562d21c1a91c3235f03e5362191370_f3a319e0b18db605371d8eb6a943c480",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_7d2a3e5a6e79365b6eb997a85c947b76b2562d21c1a91c3235f03e5362191370_f3a319e0b18db605371d8eb6a943c480"
+      },
+      {
+        "id": "PX26-02#AB_BURST_NONE_LV1_LV2_LV3_1ac994afc01120e491760f9de861ebc3d32d42d9bed0507360aa87fc61bc1bd2_19293ab215cff7359bb6e0b4c80cf01f",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "BURST",
+          "timingLabel": "Burst",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": "AFTER_TRIGGER_CONDITION",
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Draw a card, and put a core from the Void to your Reserve. After this effect resolves, summon this card without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw a card",
+            "cleanText": "Draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "put a core from the Void to your Reserve.",
+            "cleanText": "put a core from the Void to your Reserve",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "summon this card without paying the cost.",
+            "cleanText": "summon this card without paying the cost",
+            "link": "afterResolves",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_FREE",
+              "target": "this_card",
+              "from": "BURST"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-02#a2",
+        "physicalId": "PX26-02#AB_BURST_NONE_LV1_LV2_LV3_1ac994afc01120e491760f9de861ebc3d32d42d9bed0507360aa87fc61bc1bd2_19293ab215cff7359bb6e0b4c80cf01f",
+        "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_1ac994afc01120e491760f9de861ebc3d32d42d9bed0507360aa87fc61bc1bd2_19293ab215cff7359bb6e0b4c80cf01f"
+      },
+      {
+        "id": "PX26-02#AB_PASSIVE_NONE_LV2_LV3_fd9f97f6fec9b1e0fef7772985246e601eef6ee75e0336f5246759e6b9e911c3_a3afd511ac78909536dca78de5cb7202",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit's symbol is also treated as Red/ Purple/ Green/ White/ Blue."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit's symbol is also treated as Red/ Purple/ Green/ White/ Blue.",
+            "cleanText": "This Spirit's symbol is also treated as Red/ Purple/ Green/ White/ Blue",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-02#a3",
+        "physicalId": "PX26-02#AB_PASSIVE_NONE_LV2_LV3_fd9f97f6fec9b1e0fef7772985246e601eef6ee75e0336f5246759e6b9e911c3_a3afd511ac78909536dca78de5cb7202",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV2_LV3_fd9f97f6fec9b1e0fef7772985246e601eef6ee75e0336f5246759e6b9e911c3_a3afd511ac78909536dca78de5cb7202"
+      }
+    ],
+    "compiledClausesCount": 6,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX26-09": {
+    "cardNumber": "PX26-09",
+    "name": "Assault Reve",
+    "keywords": [
+      {
+        "name": "Contract Advent",
+        "parameter": "Artificial Contract & C1 or more, (Your Turn)",
+        "wave": 2,
+        "hook": "contract_advent",
+        "bracketed": true,
+        "index": 8
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PX26-09#AB_FLASH_NONE_LV1_LV2_LV3_725813cf76b9be982bf2d240bfcdd5dee9d4ac4c4f888d54aa2b27bdd2189676_ff3783c494c73720cfabf391adbdfa92",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Contract Advent: Artificial Contract & C1 or more, (Your Turn)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "stack this from the Hand onto your target Spirit.",
+            "cleanText": "stack this from the Hand onto your target Spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_STACK",
+              "from": "HAND",
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-09#a0",
+        "physicalId": "PX26-09#AB_FLASH_NONE_LV1_LV2_LV3_725813cf76b9be982bf2d240bfcdd5dee9d4ac4c4f888d54aa2b27bdd2189676_ff3783c494c73720cfabf391adbdfa92",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_725813cf76b9be982bf2d240bfcdd5dee9d4ac4c4f888d54aa2b27bdd2189676_ff3783c494c73720cfabf391adbdfa92"
+      },
+      {
+        "id": "PX26-09#AB_WHEN_ADVENTS_NONE_LV1_LV2_4fd540acc8595f11510cb0dce1434457d029e9c891dcfd1c943c3361bbe725b6_f37a8849fe4729b62dfc620fa09cbae7",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ADVENTS",
+          "timingLabel": "When Advents",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can summon one of your \"The Artificial Partner, Reve\" in Soul State/pre-advent condition, without paying the cost. Then, you can deploy a Cost 4 or less Blue-only Nexus card from your Hand/Trash, without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "You can summon one of your \"The Artificial Partner, Reve\" in Soul State/pre-advent condition, without paying the cost.",
+            "cleanText": "You can summon one of your \"The Artificial Partner, Reve\" in Soul State/pre-advent condition, without paying the cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          },
+          {
+            "rawText": "you can deploy a Cost 4 or less Blue-only Nexus card from your Hand/Trash, without paying the cost.",
+            "cleanText": "you can deploy a Cost 4 or less Blue-only Nexus card from your Hand/Trash, without paying the cost",
+            "link": "then",
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DEPLOY_NEXUS",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-09#a1",
+        "physicalId": "PX26-09#AB_WHEN_ADVENTS_NONE_LV1_LV2_4fd540acc8595f11510cb0dce1434457d029e9c891dcfd1c943c3361bbe725b6_f37a8849fe4729b62dfc620fa09cbae7",
+        "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_4fd540acc8595f11510cb0dce1434457d029e9c891dcfd1c943c3361bbe725b6_f37a8849fe4729b62dfc620fa09cbae7"
+      },
+      {
+        "id": "PX26-09#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_086f427e365a56bba99e150e8ca1e0011bb213d925c6d6c30e733e675516be02_b0ea05caa344e2d65d5e1567ae37a7a7",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "During OC"
+          ],
+          "timing": "WHEN_ATTACKS_OR_BLOCKS",
+          "timingLabel": "When Attacks/Blocks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can put a core from the Void to any of your Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "You can put a core from the Void to any of your Nexus.",
+            "cleanText": "You can put a core from the Void to any of your Nexus",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-09#a2",
+        "physicalId": "PX26-09#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_086f427e365a56bba99e150e8ca1e0011bb213d925c6d6c30e733e675516be02_b0ea05caa344e2d65d5e1567ae37a7a7",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_086f427e365a56bba99e150e8ca1e0011bb213d925c6d6c30e733e675516be02_b0ea05caa344e2d65d5e1567ae37a7a7"
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX26-15": {
+    "cardNumber": "PX26-15",
+    "name": "Chevallese, Camus",
+    "keywords": [
+      {
+        "name": "Contract Advent",
+        "parameter": "Infernal Contract & C4 or more, (Either Attack Step)",
+        "wave": 2,
+        "hook": "contract_advent",
+        "bracketed": true,
+        "index": 8
+      },
+      {
+        "name": "Contract Advent",
+        "parameter": null,
+        "wave": 2,
+        "hook": "contract_advent",
+        "bracketed": true,
+        "index": 187
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PX26-15#AB_FLASH_NONE_LV1_LV2_LV3_a3e3527ced3779743d24ccd3b89ec29879ac518ba99ced841a216dc03b191ed0_8ff57258e6586c3d9d736e59b22c74f9",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Contract Advent: Infernal Contract & C4 or more, (Either Attack Step)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "stack this from the Hand onto your target Spirit.",
+            "cleanText": "stack this from the Hand onto your target Spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_STACK",
+              "from": "HAND",
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-15#a0",
+        "physicalId": "PX26-15#AB_FLASH_NONE_LV1_LV2_LV3_a3e3527ced3779743d24ccd3b89ec29879ac518ba99ced841a216dc03b191ed0_8ff57258e6586c3d9d736e59b22c74f9",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_a3e3527ced3779743d24ccd3b89ec29879ac518ba99ced841a216dc03b191ed0_8ff57258e6586c3d9d736e59b22c74f9"
+      },
+      {
+        "id": "PX26-15#AB_PASSIVE_NONE_LV1_LV2_LV3_cc4f81ca2cc9e151dbc47dc0110ed7b1e431c64aabac422c18ed7b5b06db5608_7a8c5b4f0ee6934b103024d38d3c58d4",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This card can [Contract Advent] from the Removed Zone."
+        },
+        "clauses": [
+          {
+            "rawText": "This card can [Contract Advent] from the Removed Zone.",
+            "cleanText": "This card can [Contract Advent] from the Removed Zone",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_RULE_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-15#a1",
+        "physicalId": "PX26-15#AB_PASSIVE_NONE_LV1_LV2_LV3_cc4f81ca2cc9e151dbc47dc0110ed7b1e431c64aabac422c18ed7b5b06db5608_7a8c5b4f0ee6934b103024d38d3c58d4",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_cc4f81ca2cc9e151dbc47dc0110ed7b1e431c64aabac422c18ed7b5b06db5608_7a8c5b4f0ee6934b103024d38d3c58d4"
+      },
+      {
+        "id": "PX26-15#AB_WHEN_ADVENTS_NONE_LV1_LV2_9251aebb3edddbca16636376a8468b429e8b42aa4603a6ca771b192bd52a0059_0ca94a1ef9bd93a288d9ea16d6479667",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ADVENTS",
+          "timingLabel": "When Advents/Attacks",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "you can reveal three cards from your decktop. Among them, you can put a \"Blood Crystal\" family card to the Removed Zone. Discard any remaining cards. Then, you can send a core from an opposing Spirit for each card in your Removed Zone."
+        },
+        "clauses": [
+          {
+            "rawText": "you can reveal three cards from your decktop.",
+            "cleanText": "you can reveal three cards from your decktop",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 3
+            }
+          },
+          {
+            "rawText": "Among them, you can put a \"Blood Crystal\" family card to the Removed Zone.",
+            "cleanText": "Among them, you can put a \"Blood Crystal\" family card to the Removed Zone",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GRANT_FAMILY"
+            }
+          },
+          {
+            "rawText": "Discard any remaining cards.",
+            "cleanText": "Discard any remaining cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_REVEALED"
+            }
+          },
+          {
+            "rawText": "you can send a core from an opposing Spirit for each card in your Removed Zone.",
+            "cleanText": "you can send a core from an opposing Spirit for each card in your Removed Zone",
+            "link": "then",
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-15#a2",
+        "physicalId": "PX26-15#AB_WHEN_ADVENTS_NONE_LV1_LV2_9251aebb3edddbca16636376a8468b429e8b42aa4603a6ca771b192bd52a0059_0ca94a1ef9bd93a288d9ea16d6479667",
+        "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_9251aebb3edddbca16636376a8468b429e8b42aa4603a6ca771b192bd52a0059_0ca94a1ef9bd93a288d9ea16d6479667"
+      },
+      {
+        "id": "PX26-15#AB_ATTACK_STEP_NONE_LV1_LV2_3a34ab1b43309023b50bffbf3a2377524871b91ba806b434e1402c145bb8dce7_cc9d6c319117cf6abbc1de28ca404986",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "During OC"
+          ],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "during this turn, this Spirit can gain an extra Purple symbol for every three cards in your Removed Zone."
+        },
+        "clauses": [
+          {
+            "rawText": "during this turn, this Spirit can gain an extra Purple symbol for every three cards in your Removed Zone.",
+            "cleanText": "this Spirit can gain an extra Purple symbol for every three cards in your Removed Zone",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "ADD_SYMBOL"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-15#a3",
+        "physicalId": "PX26-15#AB_ATTACK_STEP_NONE_LV1_LV2_3a34ab1b43309023b50bffbf3a2377524871b91ba806b434e1402c145bb8dce7_cc9d6c319117cf6abbc1de28ca404986",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_3a34ab1b43309023b50bffbf3a2377524871b91ba806b434e1402c145bb8dce7_cc9d6c319117cf6abbc1de28ca404986"
+      }
+    ],
+    "compiledClausesCount": 8,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX26-08": {
+    "cardNumber": "PX26-08",
+    "name": "HighEvo-Delphyne",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PX26-08#AB_FLASH_NONE_LV1_LV2_LV3_9a7ca9062f8b78ede0106240ef38d9aad56d3d639ddd105170260a91d933eeaa_6c3b68ebc714af4e1cfbea953c0f7e87",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Mani: \"Contractor Uranus\" & C3 or more, (Either Attack Step)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "pay one cost from the target to summon this card from the Hand.",
+            "cleanText": "pay one cost from the target to summon this card from the Hand",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_PAY",
+              "from": "HAND"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-08#a0",
+        "physicalId": "PX26-08#AB_FLASH_NONE_LV1_LV2_LV3_9a7ca9062f8b78ede0106240ef38d9aad56d3d639ddd105170260a91d933eeaa_6c3b68ebc714af4e1cfbea953c0f7e87",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_9a7ca9062f8b78ede0106240ef38d9aad56d3d639ddd105170260a91d933eeaa_6c3b68ebc714af4e1cfbea953c0f7e87"
+      },
+      {
+        "id": "PX26-08#AB_STEP_RESTRICTED_NONE_LV1_LV2_LV3_f5be06e2ec7462f43cbe1e1f547d1ee6d3beb2038b8aec2c802cbe9c8dfae672_060bf7527471e77f8f1751239957e963",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "STEP_RESTRICTED",
+          "timingLabel": "When Manifests",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can immediately activate one of your set \"Primordial\"/\"Concluser\"/\"Cloudbuilt\" family Bursts."
+        },
+        "clauses": [
+          {
+            "rawText": "You can immediately activate one of your set \"Primordial\"/\"Concluser\"/\"Cloudbuilt\" family Bursts.",
+            "cleanText": "You can immediately activate one of your set \"Primordial\"/\"Concluser\"/\"Cloudbuilt\" family Bursts",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-08#a1",
+        "physicalId": "PX26-08#AB_STEP_RESTRICTED_NONE_LV1_LV2_LV3_f5be06e2ec7462f43cbe1e1f547d1ee6d3beb2038b8aec2c802cbe9c8dfae672_060bf7527471e77f8f1751239957e963",
+        "semanticId": "SEM#AB_STEP_RESTRICTED_NONE_LV1_LV2_LV3_f5be06e2ec7462f43cbe1e1f547d1ee6d3beb2038b8aec2c802cbe9c8dfae672_060bf7527471e77f8f1751239957e963"
+      },
+      {
+        "id": "PX26-08#AB_STEP_RESTRICTED_NONE_LV2_LV3_cf41df79e71a9ad0e49a8b21216c1f41c157f1c0aef9d50964642e4890310936_86b21212655e181883156bbfb4ea9d81",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "STEP_RESTRICTED",
+          "timingLabel": "After Your Burst Activates",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can draw a card from the deckbottom. Then, (Can't Stack) if you have seven counters or more, and it's your Attack Step, you can send an opposing Life to the Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "You can draw a card from the deckbottom.",
+            "cleanText": "You can draw a card from the deckbottom",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "(Can't Stack) if you have seven counters or more, and it's your Attack Step, you can send an opposing Life to the Reserve.",
+            "cleanText": "(Can't Stack) if you have seven counters or more, and it's your Attack Step, you can send an opposing Life to the Reserve",
+            "link": "then",
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-08#a2",
+        "physicalId": "PX26-08#AB_STEP_RESTRICTED_NONE_LV2_LV3_cf41df79e71a9ad0e49a8b21216c1f41c157f1c0aef9d50964642e4890310936_86b21212655e181883156bbfb4ea9d81",
+        "semanticId": "SEM#AB_STEP_RESTRICTED_NONE_LV2_LV3_cf41df79e71a9ad0e49a8b21216c1f41c157f1c0aef9d50964642e4890310936_86b21212655e181883156bbfb4ea9d81"
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX26-06": {
+    "cardNumber": "PX26-06",
+    "name": "HighEvo-Harpuia",
+    "keywords": [
+      {
+        "name": "Mirage",
+        "parameter": "Cost 3 ([Yellow Core",
+        "wave": 2,
+        "hook": "mirage",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PX26-06#AB_PASSIVE_NONE_LV1_LV2_LV3_7e0997c8c8011f070690e5fbd4cd54aff987500f0433e645ad7ac887fe59b290_0f3036d7831fcd6aff12c1d93d9849e1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Mirage: Cost ([Yellow Core])"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "PX26-06#a0",
+        "physicalId": "PX26-06#AB_PASSIVE_NONE_LV1_LV2_LV3_7e0997c8c8011f070690e5fbd4cd54aff987500f0433e645ad7ac887fe59b290_0f3036d7831fcd6aff12c1d93d9849e1",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_7e0997c8c8011f070690e5fbd4cd54aff987500f0433e645ad7ac887fe59b290_0f3036d7831fcd6aff12c1d93d9849e1"
+      },
+      {
+        "id": "PX26-06#AB_PASSIVE_NONE_LV1_LV2_LV3_530620b8bff897053f0314d9bb29b94df23ea2d57990a7918109d68a2f066026_549368d68d981b78fa4ff531fcf5064d",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "During Set"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Change the \"'Primordial'/'Cloudbuilt' family\" written in the \"activate Burst\" effects of your \"Uranus\" Spirits/Grandwalker Nexuses to \"'Primordial'/'Concluser'/'Cloudbuilt' family\"."
+        },
+        "clauses": [
+          {
+            "rawText": "Change the \"'Primordial'/'Cloudbuilt' family\" written in the \"activate Burst\" effects of your \"Uranus\" Spirits/Grandwalker Nexuses to \"'Primordial'/'Concluser'/'Cloudbuilt' family\".",
+            "cleanText": "Change the \"'Primordial'/'Cloudbuilt' family\" written in the \"activate Burst\" effects of your \"Uranus\" Spirits/Grandwalker Nexuses to \"'Primordial'/'Concluser'/'Cloudbuilt' family\"",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-06#a1",
+        "physicalId": "PX26-06#AB_PASSIVE_NONE_LV1_LV2_LV3_530620b8bff897053f0314d9bb29b94df23ea2d57990a7918109d68a2f066026_549368d68d981b78fa4ff531fcf5064d",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_530620b8bff897053f0314d9bb29b94df23ea2d57990a7918109d68a2f066026_549368d68d981b78fa4ff531fcf5064d"
+      },
+      {
+        "id": "PX26-06#AB_WHEN_SUMMONED_NONE_LV1_LV2_63abff1343126f984659e69a2bcd633283bb101856a2799cd7ea50fc50d5f05a_63599054a176438cb4b046adcfe23518",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "If you control any \"Contractor Uranus\", your counter +1, and draw a card from the deckbottom."
+        },
+        "clauses": [
+          {
+            "rawText": "If you control any \"Contractor Uranus\", your counter +1",
+            "cleanText": "your counter +1",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If you control any \"Contractor Uranus\"",
+            "duration": null,
+            "op": {
+              "op": "ADD_COUNTER",
+              "count": 1
+            }
+          },
+          {
+            "rawText": "draw a card from the deckbottom.",
+            "cleanText": "draw a card from the deckbottom",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-06#a2",
+        "physicalId": "PX26-06#AB_WHEN_SUMMONED_NONE_LV1_LV2_63abff1343126f984659e69a2bcd633283bb101856a2799cd7ea50fc50d5f05a_63599054a176438cb4b046adcfe23518",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_63abff1343126f984659e69a2bcd633283bb101856a2799cd7ea50fc50d5f05a_63599054a176438cb4b046adcfe23518"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX26-07": {
+    "cardNumber": "PX26-07",
+    "name": "HighEvo-Ophiotaurus",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PX26-07#AB_PASSIVE_NONE_LV1_LV2_LV3_5b7c90ae4339b723446a84b01d07747095183ba1a7530b8240a5f999c4097ae9_974f6dc5860f510a1d41240ea73c22f4",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "After your \"Primordial\"/\"Concluser\"/\"Cloudbuilt\" family Burst activates, you can summon this card from the Hand, without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "After your \"Primordial\"/\"Concluser\"/\"Cloudbuilt\" family Burst activates, you can summon this card from the Hand, without paying the cost.",
+            "cleanText": "After your \"Primordial\"/\"Concluser\"/\"Cloudbuilt\" family Burst activates, you can summon this card from the Hand, without paying the cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_THIS_CARD",
+              "from": "HAND_OR_BURST"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-07#a0",
+        "physicalId": "PX26-07#AB_PASSIVE_NONE_LV1_LV2_LV3_5b7c90ae4339b723446a84b01d07747095183ba1a7530b8240a5f999c4097ae9_974f6dc5860f510a1d41240ea73c22f4",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_5b7c90ae4339b723446a84b01d07747095183ba1a7530b8240a5f999c4097ae9_974f6dc5860f510a1d41240ea73c22f4"
+      },
+      {
+        "id": "PX26-07#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_19b47e15e70c055703ece74b97c9a9452fb8b1125541abf259ff738646844cb4_80a6bec75713be8e8b10d3f324edadd4",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "If you control any \"Contractor Uranus\", you can return a \"Primordial\" family card from your Trash to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "If you control any \"Contractor Uranus\", you can return a \"Primordial\" family card from your Trash to the Hand.",
+            "cleanText": "you can return a \"Primordial\" family card from your Trash to the Hand",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": "If you control any \"Contractor Uranus\"",
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-07#a1",
+        "physicalId": "PX26-07#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_19b47e15e70c055703ece74b97c9a9452fb8b1125541abf259ff738646844cb4_80a6bec75713be8e8b10d3f324edadd4",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_19b47e15e70c055703ece74b97c9a9452fb8b1125541abf259ff738646844cb4_80a6bec75713be8e8b10d3f324edadd4"
+      },
+      {
+        "id": "PX26-07#AB_WHEN_ATTACKS_NONE_LV2_LV3_5033d0c734bf0877233a9849265e9ba86960bc53300225a402ad4cb1d776e3e5_09ef037b7fd164866108bb28fca3a6cf",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By +1 core to one of your \"Contractor Uranus\" Grandwalker Nexuses, your counter +1."
+        },
+        "clauses": [
+          {
+            "rawText": "By +1 core to one of your \"Contractor Uranus\" Grandwalker Nexuses",
+            "cleanText": "By +1 core to one of your \"Contractor Uranus\" Grandwalker Nexuses",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GRANDWALKER_ACTION"
+            }
+          },
+          {
+            "rawText": "your counter +1.",
+            "cleanText": "your counter +1",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_COUNTER",
+              "count": 1
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-07#a2",
+        "physicalId": "PX26-07#AB_WHEN_ATTACKS_NONE_LV2_LV3_5033d0c734bf0877233a9849265e9ba86960bc53300225a402ad4cb1d776e3e5_09ef037b7fd164866108bb28fca3a6cf",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_5033d0c734bf0877233a9849265e9ba86960bc53300225a402ad4cb1d776e3e5_09ef037b7fd164866108bb28fca3a6cf"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX26-10": {
+    "cardNumber": "PX26-10",
+    "name": "Save-Cat",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PX26-10#AB_PASSIVE_NONE_LV1_LV2_LV3_ab87020bcc9bd45d26b9c8193f10886102fb6a6b1236233fcdc702b028e55ea5_22635278fc710d46799c3ebd87e41e53",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This card/Spirit gains the \"Scarlet Flame\"/ \"Blood Crystal\"/ \"Jade Thunder\"/ \"Silver Zero\"/ \"Golden Cloud\"/ \"Azure Wave\" families."
+        },
+        "clauses": [
+          {
+            "rawText": "This card/Spirit gains the \"Scarlet Flame\"/ \"Blood Crystal\"/ \"Jade Thunder\"/ \"Silver Zero\"/ \"Golden Cloud\"/ \"Azure Wave\" families.",
+            "cleanText": "This card/Spirit gains the \"Scarlet Flame\"/ \"Blood Crystal\"/ \"Jade Thunder\"/ \"Silver Zero\"/ \"Golden Cloud\"/ \"Azure Wave\" families",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_FAMILY"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-10#a0",
+        "physicalId": "PX26-10#AB_PASSIVE_NONE_LV1_LV2_LV3_ab87020bcc9bd45d26b9c8193f10886102fb6a6b1236233fcdc702b028e55ea5_22635278fc710d46799c3ebd87e41e53",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_ab87020bcc9bd45d26b9c8193f10886102fb6a6b1236233fcdc702b028e55ea5_22635278fc710d46799c3ebd87e41e53"
+      },
+      {
+        "id": "PX26-10#AB_WHEN_SUMMONED_NONE_LV1_LV2_7fb21ef5478b5e0bcf0da693fb1a6c18a8f9be595300f370a72e4a7b7ef36ad4_bfc8eb93a78bd57389474b69d98f3c4f",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned/Attacks",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Show a \"Divine Attendant\" family Contract Spirit card from your Hand to the opponent, or if you have any \"Divine Attendant\" family Contract Spirit, including those in Removed Zone/Soul State/pre-advent condition, you can reveal three cards from the decktop. Add a card with the same family as this Spirit to the Hand, or put it onto the Removed Zone. Discard any remaining cards. When the number of cards in Hand/Removed Zone increases via this effect, your counter +2."
+        },
+        "clauses": [
+          {
+            "rawText": "Show a \"Divine Attendant\" family Contract Spirit card from your Hand to the opponent, or if you have any \"Divine Attendant\" family Contract Spirit, including those in Removed Zone/Soul State/pre-advent condition, you can reveal three cards from the decktop.",
+            "cleanText": "Show a \"Divine Attendant\" family Contract Spirit card from your Hand to the opponent, or if you have any \"Divine Attendant\" family Contract Spirit, including those in Removed Zone/Soul State/pre-advent condition, you can reveal three cards from the decktop",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GRANT_FAMILY"
+            }
+          },
+          {
+            "rawText": "Add a card with the same family as this Spirit to the Hand, or put it onto the Removed Zone.",
+            "cleanText": "Add a card with the same family as this Spirit to the Hand, or put it onto the Removed Zone",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DECK_OR_HAND_ACTION"
+            }
+          },
+          {
+            "rawText": "Discard any remaining cards.",
+            "cleanText": "Discard any remaining cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_REVEALED"
+            }
+          },
+          {
+            "rawText": "When the number of cards in Hand/Removed Zone increases via this effect, your counter +2.",
+            "cleanText": "When the number of cards in Hand/Removed Zone increases via this effect, your counter +2",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_COUNTER",
+              "count": 2
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-10#a1",
+        "physicalId": "PX26-10#AB_WHEN_SUMMONED_NONE_LV1_LV2_7fb21ef5478b5e0bcf0da693fb1a6c18a8f9be595300f370a72e4a7b7ef36ad4_bfc8eb93a78bd57389474b69d98f3c4f",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_7fb21ef5478b5e0bcf0da693fb1a6c18a8f9be595300f370a72e4a7b7ef36ad4_bfc8eb93a78bd57389474b69d98f3c4f"
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX26-20": {
+    "cardNumber": "PX26-20",
+    "name": "Soul Division",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PX26-20#AB_PASSIVE_NONE_LV1_LV2_LV3_950a35712229737ccd60e1e4d7180e794cf3968e856b14c2044cf03859c40017_8053f7eeb51f8c8f6ce580259d35ade2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this card is revealed from the deck by your \"Blood Crystal\" family effect, you can add it to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "When this card is revealed from the deck by your \"Blood Crystal\" family effect, you can add it to the Hand.",
+            "cleanText": "When this card is revealed from the deck by your \"Blood Crystal\" family effect, you can add it to the Hand",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-20#a0",
+        "physicalId": "PX26-20#AB_PASSIVE_NONE_LV1_LV2_LV3_950a35712229737ccd60e1e4d7180e794cf3968e856b14c2044cf03859c40017_8053f7eeb51f8c8f6ce580259d35ade2",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_950a35712229737ccd60e1e4d7180e794cf3968e856b14c2044cf03859c40017_8053f7eeb51f8c8f6ce580259d35ade2"
+      },
+      {
+        "id": "PX26-20#AB_MAIN_NONE_LV1_LV2_LV3_c15a31fa136ffe4079955f08357b235886dd2e3bc243668dd6c06e53e9ceccc9_5d64f97c53ff6a416128b16456015e45",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "Summon one of your \"The Infernal Partner, Camus\" in Hand/Removed Zone/Soul State/pre-advent condition, without paying the cost. Then, you can activate one of the (When Attacks) effects of a target summoned via this effect."
+        },
+        "clauses": [
+          {
+            "rawText": "Summon one of your \"The Infernal Partner, Camus\" in Hand/Removed Zone/Soul State/pre-advent condition, without paying the cost.",
+            "cleanText": "Summon one of your \"The Infernal Partner, Camus\" in Hand/Removed Zone/Soul State/pre-advent condition, without paying the cost",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          },
+          {
+            "rawText": "you can activate one of the (When Attacks) effects of a target summoned via this effect.",
+            "cleanText": "you can activate one of the (When Attacks) effects of a target summoned via this effect",
+            "link": "then",
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ACTIVATE_EFFECT_SPECIAL"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-20#a1",
+        "physicalId": "PX26-20#AB_MAIN_NONE_LV1_LV2_LV3_c15a31fa136ffe4079955f08357b235886dd2e3bc243668dd6c06e53e9ceccc9_5d64f97c53ff6a416128b16456015e45",
+        "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_c15a31fa136ffe4079955f08357b235886dd2e3bc243668dd6c06e53e9ceccc9_5d64f97c53ff6a416128b16456015e45"
+      },
+      {
+        "id": "PX26-20#AB_FLASH_NONE_LV1_LV2_LV3_9a0c25ccd4d321d6224716d1aae84f2e5598a897a108fbbb15619574926a8024_27159819dd3d6b2c73ac9cf278b604b5",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Put a \"Camus\" from your Trash to the Removed Zone. When you've done so, send a core from any opposing Spirit to the Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "Put a \"Camus\" from your Trash to the Removed Zone.",
+            "cleanText": "Put a \"Camus\" from your Trash to the Removed Zone",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REMOVED_ZONE_ACTION"
+            }
+          },
+          {
+            "rawText": "send a core from any opposing Spirit to the Reserve.",
+            "cleanText": "send a core from any opposing Spirit to the Reserve",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-20#a2",
+        "physicalId": "PX26-20#AB_FLASH_NONE_LV1_LV2_LV3_9a0c25ccd4d321d6224716d1aae84f2e5598a897a108fbbb15619574926a8024_27159819dd3d6b2c73ac9cf278b604b5",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_9a0c25ccd4d321d6224716d1aae84f2e5598a897a108fbbb15619574926a8024_27159819dd3d6b2c73ac9cf278b604b5"
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX26-19": {
+    "cardNumber": "PX26-19",
+    "name": "The Converging Sealed Lands",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PX26-19#AB_FLASH_NONE_LV1_LV2_LV3_da4619f9608df23b331d171debffa2823577ad6e80a4aad83d4dd988291835e6_832da207df004e93c0b867027206ecb2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Mani: terra, \"Contractor Gaia\" & C6 or more, (Either Attack Step)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, pay one cost from the target to deploy this card from the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "pay one cost from the target to deploy this card from the Hand.",
+            "cleanText": "pay one cost from the target to deploy this card from the Hand",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DEPLOY_NEXUS",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-19#a0",
+        "physicalId": "PX26-19#AB_FLASH_NONE_LV1_LV2_LV3_da4619f9608df23b331d171debffa2823577ad6e80a4aad83d4dd988291835e6_832da207df004e93c0b867027206ecb2",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_da4619f9608df23b331d171debffa2823577ad6e80a4aad83d4dd988291835e6_832da207df004e93c0b867027206ecb2"
+      },
+      {
+        "id": "PX26-19#AB_WHEN_DEPLOYED_NONE_LV1_LV2_9bd88785dd5b6ba2b0bebff20bd3ae094879e8e7263e090a0d14bd8e33694757_92aedfa71e62473974351487d8f66c63",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DEPLOYED",
+          "timingLabel": "When Deployed/Destroyed",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "if you control any \"Contractor Gaia\", you can destroy an opposing Grandwalker Nexus. Then, for each color of \"Primordial\" family Nexuses you control, besides those of six-color, you can destroy an opposing Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "if you control any \"Contractor Gaia\", you can destroy an opposing Grandwalker Nexus.",
+            "cleanText": "you can destroy an opposing Grandwalker Nexus",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": "if you control any \"Contractor Gaia\"",
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "for each color of \"Primordial\" family Nexuses you control, besides those of six-color, you can destroy an opposing Spirit.",
+            "cleanText": "for each color of \"Primordial\" family Nexuses you control, besides those of six-color, you can destroy an opposing Spirit",
+            "link": "then",
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-19#a1",
+        "physicalId": "PX26-19#AB_WHEN_DEPLOYED_NONE_LV1_LV2_9bd88785dd5b6ba2b0bebff20bd3ae094879e8e7263e090a0d14bd8e33694757_92aedfa71e62473974351487d8f66c63",
+        "semanticId": "SEM#AB_WHEN_DEPLOYED_NONE_LV1_LV2_9bd88785dd5b6ba2b0bebff20bd3ae094879e8e7263e090a0d14bd8e33694757_92aedfa71e62473974351487d8f66c63"
+      },
+      {
+        "id": "PX26-19#AB_MAIN_STEP_NONE_LV2_7cdc782678c2ed9b6761480b08b915305bc33ae837c44c3be851538c20f9797e_ef9932d788607bb70ef962d528c3b9ce",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "MAIN_STEP",
+          "timingLabel": "Your Main Step",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "by destroying another Nexus you control, summon a \"Primordial\" & \"Reptile Beast\" family Spirit card from your Hand, without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "By destroying another Nexus you control",
+            "cleanText": "By destroying another Nexus you control",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "summon a \"Primordial\" & \"Reptile Beast\" family Spirit card from your Hand, without paying the cost.",
+            "cleanText": "summon a \"Primordial\" & \"Reptile Beast\" family Spirit card from your Hand, without paying the cost",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-19#a2",
+        "physicalId": "PX26-19#AB_MAIN_STEP_NONE_LV2_7cdc782678c2ed9b6761480b08b915305bc33ae837c44c3be851538c20f9797e_ef9932d788607bb70ef962d528c3b9ce",
+        "semanticId": "SEM#AB_MAIN_STEP_NONE_LV2_7cdc782678c2ed9b6761480b08b915305bc33ae837c44c3be851538c20f9797e_ef9932d788607bb70ef962d528c3b9ce"
+      }
+    ],
+    "compiledClausesCount": 6,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX26-01": {
+    "cardNumber": "PX26-01",
+    "name": "The DivineWorldGuide Vina",
+    "keywords": [
+      {
+        "name": "Core Charge",
+        "parameter": null,
+        "wave": 3,
+        "hook": "core_charge",
+        "bracketed": true,
+        "index": 267
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PX26-01#AB_FLASH_NONE_LV1_LV2_LV3_46ff8e359e1c6e4fab482ec2c64747cd628bfeb11a1f9d74e29faddac2931428_a10200ada59729e4137533ccc54ee2fc",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Mani: Contract Grandwalker Nexus, (Opposing Attack Step)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "pay one cost from the target to summon this card from the Hand.",
+            "cleanText": "pay one cost from the target to summon this card from the Hand",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_PAY",
+              "from": "HAND"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-01#a0",
+        "physicalId": "PX26-01#AB_FLASH_NONE_LV1_LV2_LV3_46ff8e359e1c6e4fab482ec2c64747cd628bfeb11a1f9d74e29faddac2931428_a10200ada59729e4137533ccc54ee2fc",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_46ff8e359e1c6e4fab482ec2c64747cd628bfeb11a1f9d74e29faddac2931428_a10200ada59729e4137533ccc54ee2fc"
+      },
+      {
+        "id": "PX26-01#AB_PASSIVE_NONE_LV1_LV2_LV3_b67e618b5a961843b7b25a4ce4e44dc3857fa8fa7889468ea4d10bb9422e5941_94c26b3150dc44248309210a887e6240",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this card is either revealed from the deck by your effect, or sent to the Trash by your [Core Charge], you can add it to the Hand. When you've done so, you can return a card with [Mani] from your Trash to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "When this card is either revealed from the deck by your effect, or sent to the Trash by your [Core Charge], you can add it to the Hand.",
+            "cleanText": "When this card is either revealed from the deck by your effect, or sent to the Trash by your [Core Charge], you can add it to the Hand",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          },
+          {
+            "rawText": "you can return a card with [Mani] from your Trash to the Hand.",
+            "cleanText": "you can return a card with [Mani] from your Trash to the Hand",
+            "link": "byDoing",
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-01#a1",
+        "physicalId": "PX26-01#AB_PASSIVE_NONE_LV1_LV2_LV3_b67e618b5a961843b7b25a4ce4e44dc3857fa8fa7889468ea4d10bb9422e5941_94c26b3150dc44248309210a887e6240",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_b67e618b5a961843b7b25a4ce4e44dc3857fa8fa7889468ea4d10bb9422e5941_94c26b3150dc44248309210a887e6240"
+      },
+      {
+        "id": "PX26-01#AB_STEP_RESTRICTED_NONE_LV1_LV2_LV3_a2824527de0e4b3b96bfe938f54fbded9210f1f06d5b7f2b460f3e86dd0bd133_e793af7ab22a0b61adac476720881ff7",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "STEP_RESTRICTED",
+          "timingLabel": "When Manifests",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can [UMani] a card from your Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "You can [UMani] a card from your Hand.",
+            "cleanText": "You can [UMani] a card from your Hand",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ACTIVATE_EFFECT_ACTION"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-01#a2",
+        "physicalId": "PX26-01#AB_STEP_RESTRICTED_NONE_LV1_LV2_LV3_a2824527de0e4b3b96bfe938f54fbded9210f1f06d5b7f2b460f3e86dd0bd133_e793af7ab22a0b61adac476720881ff7",
+        "semanticId": "SEM#AB_STEP_RESTRICTED_NONE_LV1_LV2_LV3_a2824527de0e4b3b96bfe938f54fbded9210f1f06d5b7f2b460f3e86dd0bd133_e793af7ab22a0b61adac476720881ff7"
+      },
+      {
+        "id": "PX26-01#AB_ATTACK_STEP_NONE_LV3_232e1a038ad7b28a69a620d75e9b59a93bad0c4fc43e2af9f7d8c632ecd52d94_a6fe63ead565901bb9e295e6da629fd0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "you can refresh a \"Devotee\"/\"Concluser\" family Spirit you control."
+        },
+        "clauses": [
+          {
+            "rawText": "you can refresh a \"Devotee\"/\"Concluser\" family Spirit you control.",
+            "cleanText": "you can refresh a \"Devotee\"/\"Concluser\" family Spirit you control",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-01#a3",
+        "physicalId": "PX26-01#AB_ATTACK_STEP_NONE_LV3_232e1a038ad7b28a69a620d75e9b59a93bad0c4fc43e2af9f7d8c632ecd52d94_a6fe63ead565901bb9e295e6da629fd0",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV3_232e1a038ad7b28a69a620d75e9b59a93bad0c4fc43e2af9f7d8c632ecd52d94_a6fe63ead565901bb9e295e6da629fd0"
+      }
+    ],
+    "compiledClausesCount": 6,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX26-12": {
+    "cardNumber": "PX26-12",
+    "name": "The FaultLizard Fault-Geozard",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PX26-12#AB_FLASH_NONE_LV1_LV2_LV3_85a0a86d7aced38e59335c01dfa12b238c1bf9ab6edaab90ea1ce38a254880f3_0c8820c7bc36c0e709ca9e97db4cb1c8",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Mani: \"Contractor Gaia\" & C3 or more, (Either Attack Step)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "pay one cost from the target to summon this card from the Hand.",
+            "cleanText": "pay one cost from the target to summon this card from the Hand",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_PAY",
+              "from": "HAND"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-12#a0",
+        "physicalId": "PX26-12#AB_FLASH_NONE_LV1_LV2_LV3_85a0a86d7aced38e59335c01dfa12b238c1bf9ab6edaab90ea1ce38a254880f3_0c8820c7bc36c0e709ca9e97db4cb1c8",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_85a0a86d7aced38e59335c01dfa12b238c1bf9ab6edaab90ea1ce38a254880f3_0c8820c7bc36c0e709ca9e97db4cb1c8"
+      },
+      {
+        "id": "PX26-12#AB_PASSIVE_NONE_LV1_LV2_LV3_e7fce863a3365231ee1ae6b71b66df40dd9186aaaf8eb0b803933099d4f4980b_a0cd8b7edbd33e336824641a407e203a",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By destroying one of your Nexuses, [Mani] this card from the Hand, treating [Soul Core] as being sent to the Trash."
+        },
+        "clauses": [
+          {
+            "rawText": "By destroying one of your Nexuses",
+            "cleanText": "By destroying one of your Nexuses",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "[Mani] this card from the Hand, treating [Soul Core] as being sent to the Trash.",
+            "cleanText": "[Mani] this card from the Hand, treating [Soul Core] as being sent to the Trash",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-12#a1",
+        "physicalId": "PX26-12#AB_PASSIVE_NONE_LV1_LV2_LV3_e7fce863a3365231ee1ae6b71b66df40dd9186aaaf8eb0b803933099d4f4980b_a0cd8b7edbd33e336824641a407e203a",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_e7fce863a3365231ee1ae6b71b66df40dd9186aaaf8eb0b803933099d4f4980b_a0cd8b7edbd33e336824641a407e203a"
+      },
+      {
+        "id": "PX26-12#AB_STEP_RESTRICTED_NONE_LV1_LV2_LV3_d33f4dd6d8c76bf29aff93f2f9a29d26acfd77774b2c5bb923a5478ee572f60b_817170b179294cc0beca952c28bccfe1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "STEP_RESTRICTED",
+          "timingLabel": "When Manifests/Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can deploy a \"Primordial\" family Nexus card from your Hand/Trash. You can destroy an opposing Spirit/Ultimate with a number of symbols equal or inferior to the target deployed via this effect."
+        },
+        "clauses": [
+          {
+            "rawText": "You can deploy a \"Primordial\" family Nexus card from your Hand/Trash.",
+            "cleanText": "You can deploy a \"Primordial\" family Nexus card from your Hand/Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DEPLOY_NEXUS",
+              "free": true
+            }
+          },
+          {
+            "rawText": "You can destroy an opposing Spirit/Ultimate with a number of symbols equal or inferior to the target deployed via this effect.",
+            "cleanText": "You can destroy an opposing Spirit/Ultimate with a number of symbols equal or inferior to the target deployed via this effect",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-12#a2",
+        "physicalId": "PX26-12#AB_STEP_RESTRICTED_NONE_LV1_LV2_LV3_d33f4dd6d8c76bf29aff93f2f9a29d26acfd77774b2c5bb923a5478ee572f60b_817170b179294cc0beca952c28bccfe1",
+        "semanticId": "SEM#AB_STEP_RESTRICTED_NONE_LV1_LV2_LV3_d33f4dd6d8c76bf29aff93f2f9a29d26acfd77774b2c5bb923a5478ee572f60b_817170b179294cc0beca952c28bccfe1"
+      }
+    ],
+    "compiledClausesCount": 6,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX26-14": {
+    "cardNumber": "PX26-14",
+    "name": "The HellEvilMarquis Orias",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PX26-14#AB_PASSIVE_NONE_LV1_LV2_LV3_5bb7d1409d8067e2fac13c89c45d421d39b4ba2318afb45430854c2125d7c84c_fc8cf0a4a69c82e616927065dde3dcc9",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": true,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While this card is in the Removed Zone, all your originally Cost 7 or more \"Camus\" gain an extra Purple symbol."
+        },
+        "clauses": [
+          {
+            "rawText": "While this card is in the Removed Zone, all your originally Cost 7 or more \"Camus\" gain an extra Purple symbol.",
+            "cleanText": "all your originally Cost 7 or more \"Camus\" gain an extra Purple symbol",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While this card is in the Removed Zone",
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-14#a0",
+        "physicalId": "PX26-14#AB_PASSIVE_NONE_LV1_LV2_LV3_5bb7d1409d8067e2fac13c89c45d421d39b4ba2318afb45430854c2125d7c84c_fc8cf0a4a69c82e616927065dde3dcc9",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_5bb7d1409d8067e2fac13c89c45d421d39b4ba2318afb45430854c2125d7c84c_fc8cf0a4a69c82e616927065dde3dcc9"
+      },
+      {
+        "id": "PX26-14#AB_WHEN_SUMMONED_NONE_LV1_LV2_c0ed02ce09c64662c0761f0d6a0f6882381c05117944e3b7f46a9b05740ae99b_30ddc0ac60fb0cded0466f8f4df28d6c",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned/Attacks",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "your counter +1. Then, send up to one core from any opposing Spirit to the Reserve, or send up to three cores from any opposing Grandwalker Nexuses to the Void."
+        },
+        "clauses": [
+          {
+            "rawText": "your counter +1.",
+            "cleanText": "your counter +1",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_COUNTER",
+              "count": 1
+            }
+          },
+          {
+            "rawText": "send up to one core from any opposing Spirit to the Reserve, or send up to three cores from any opposing Grandwalker Nexuses to the Void.",
+            "cleanText": "send up to one core from any opposing Spirit to the Reserve, or send up to three cores from any opposing Grandwalker Nexuses to the Void",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-14#a1",
+        "physicalId": "PX26-14#AB_WHEN_SUMMONED_NONE_LV1_LV2_c0ed02ce09c64662c0761f0d6a0f6882381c05117944e3b7f46a9b05740ae99b_30ddc0ac60fb0cded0466f8f4df28d6c",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_c0ed02ce09c64662c0761f0d6a0f6882381c05117944e3b7f46a9b05740ae99b_30ddc0ac60fb0cded0466f8f4df28d6c"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX26-13": {
+    "cardNumber": "PX26-13",
+    "name": "The ReptileRockKing Geoguardin",
+    "keywords": [
+      {
+        "name": "Contract Skill",
+        "parameter": null,
+        "wave": 3,
+        "hook": "contract_skill",
+        "bracketed": true,
+        "index": 177
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PX26-13#AB_PASSIVE_NONE_LV1_LV2_LV3_539657dee38b4ee4c8b7ce38a60d4a715d8b4ef185cfc35504769b919fac8ecc_c179d328216cabf0d1ac2d76551df01c",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Besides six-color ones, for each color of \"Primordial\" family Nexus you control, the cost of this card in Hand gets -3."
+        },
+        "clauses": [
+          {
+            "rawText": "Besides six-color ones, for each color of \"Primordial\" family Nexus you control, the cost of this card in Hand gets -3.",
+            "cleanText": "Besides six-color ones, for each color of \"Primordial\" family Nexus you control, the cost of this card in Hand gets -3",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-13#a0",
+        "physicalId": "PX26-13#AB_PASSIVE_NONE_LV1_LV2_LV3_539657dee38b4ee4c8b7ce38a60d4a715d8b4ef185cfc35504769b919fac8ecc_c179d328216cabf0d1ac2d76551df01c",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_539657dee38b4ee4c8b7ce38a60d4a715d8b4ef185cfc35504769b919fac8ecc_c179d328216cabf0d1ac2d76551df01c"
+      },
+      {
+        "id": "PX26-13#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_4f4c5a61b672e176bd9193350991f0b6b47a1d4d766ece811fd3e3c994496fc4_c751a7f4e4c40a32a95c497c6180ec9b",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_BATTLE",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "after the [Contract Skill] of your \"Contractor Gaia\" resolves, you can send an opposing Life to the Trash."
+        },
+        "clauses": [
+          {
+            "rawText": "after the [Contract Skill] of your \"Contractor Gaia\" resolves, you can send an opposing Life to the Trash.",
+            "cleanText": "after the [Contract Skill] of your \"Contractor Gaia\" resolves, you can send an opposing Life to the Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-13#a1",
+        "physicalId": "PX26-13#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_4f4c5a61b672e176bd9193350991f0b6b47a1d4d766ece811fd3e3c994496fc4_c751a7f4e4c40a32a95c497c6180ec9b",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_4f4c5a61b672e176bd9193350991f0b6b47a1d4d766ece811fd3e3c994496fc4_c751a7f4e4c40a32a95c497c6180ec9b"
+      },
+      {
+        "id": "PX26-13#AB_ATTACK_STEP_NONE_LV2_LV3_98496dfd6cadcd8ae063e8fa547f5b23d2f3c10b9c61c156b686ed926febd5df_a2a390ad317d853243b54e58eff29aab",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When the opponent would use any card during Flash Timing, they can't use it unless they destroy a Nexus they control."
+        },
+        "clauses": [
+          {
+            "rawText": "When the opponent would use any card during Flash Timing, they can't use it unless they destroy a Nexus they control.",
+            "cleanText": "When the opponent would use any card during Flash Timing, they can't use it unless they destroy a Nexus they control",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either",
+                "types": [
+                  "Nexus"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-13#a2",
+        "physicalId": "PX26-13#AB_ATTACK_STEP_NONE_LV2_LV3_98496dfd6cadcd8ae063e8fa547f5b23d2f3c10b9c61c156b686ed926febd5df_a2a390ad317d853243b54e58eff29aab",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_98496dfd6cadcd8ae063e8fa547f5b23d2f3c10b9c61c156b686ed926febd5df_a2a390ad317d853243b54e58eff29aab"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX26-16": {
+    "cardNumber": "PX26-16",
+    "name": "The ScarletZosterHeroBeast Queen-Hippolyte",
+    "keywords": [
+      {
+        "name": "Mirage",
+        "parameter": "Cost 2 ([Green Core",
+        "wave": 2,
+        "hook": "mirage",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PX26-16#AB_PASSIVE_NONE_LV1_LV2_LV3_7e0997c8c8011f070690e5fbd4cd54aff987500f0433e645ad7ac887fe59b290_0f3036d7831fcd6aff12c1d93d9849e1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Mirage: Cost ([Green Core])"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "PX26-16#a0",
+        "physicalId": "PX26-16#AB_PASSIVE_NONE_LV1_LV2_LV3_7e0997c8c8011f070690e5fbd4cd54aff987500f0433e645ad7ac887fe59b290_0f3036d7831fcd6aff12c1d93d9849e1",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_7e0997c8c8011f070690e5fbd4cd54aff987500f0433e645ad7ac887fe59b290_0f3036d7831fcd6aff12c1d93d9849e1"
+      },
+      {
+        "id": "PX26-16#AB_WHEN_SET_NONE_LV1_LV2_LV3_44fbfc6399a537e64ca4081acbc97f92b8651814f86cd6baac0ccd1b1ae2572c_012a5b1a913f691842ee28f3e4032d6a",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "During Set"
+          ],
+          "timing": "WHEN_SET",
+          "timingLabel": "When Set",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "For each card in the opposing Removed Zone, send three cores from any opposing Grandwalker Nexuses to the Void."
+        },
+        "clauses": [
+          {
+            "rawText": "For each card in the opposing Removed Zone, send three cores from any opposing Grandwalker Nexuses to the Void.",
+            "cleanText": "For each card in the opposing Removed Zone, send three cores from any opposing Grandwalker Nexuses to the Void",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-16#a1",
+        "physicalId": "PX26-16#AB_WHEN_SET_NONE_LV1_LV2_LV3_44fbfc6399a537e64ca4081acbc97f92b8651814f86cd6baac0ccd1b1ae2572c_012a5b1a913f691842ee28f3e4032d6a",
+        "semanticId": "SEM#AB_WHEN_SET_NONE_LV1_LV2_LV3_44fbfc6399a537e64ca4081acbc97f92b8651814f86cd6baac0ccd1b1ae2572c_012a5b1a913f691842ee28f3e4032d6a"
+      },
+      {
+        "id": "PX26-16#AB_WHEN_SUMMONED_NONE_LV1_LV2_ffa56fa92099a520cd125c25c0e5c85ab8aa8636e835005937f54a63557e1fa6_0cd6bc16eaa0a0450668f9f1202051e9",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Your counter can +1. Then, if you control any \"Hermes\" Grandwalker Nexus, you can put a card from the opposing Trash to their Removed Zone. Then, if there is any Spirit card/Nexus card in the opposing Removed Zone, you can put two cores from the Void to this Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Your counter can +1.",
+            "cleanText": "Your counter can +1",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COUNT_OPERATION"
+            }
+          },
+          {
+            "rawText": "if you control any \"Hermes\" Grandwalker Nexus, you can put a card from the opposing Trash to their Removed Zone.",
+            "cleanText": "you can put a card from the opposing Trash to their Removed Zone",
+            "link": "then",
+            "isOptional": true,
+            "isCost": false,
+            "condition": "if you control any \"Hermes\" Grandwalker Nexus",
+            "duration": null,
+            "op": {
+              "op": "REMOVE_FROM_GAME"
+            }
+          },
+          {
+            "rawText": "if there is any Spirit card/Nexus card in the opposing Removed Zone, you can put two cores from the Void to this Spirit.",
+            "cleanText": "you can put two cores from the Void to this Spirit",
+            "link": "then",
+            "isOptional": true,
+            "isCost": false,
+            "condition": "if there is any Spirit card/Nexus card in the opposing Removed Zone",
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 2,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "field",
+                "target": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-16#a2",
+        "physicalId": "PX26-16#AB_WHEN_SUMMONED_NONE_LV1_LV2_ffa56fa92099a520cd125c25c0e5c85ab8aa8636e835005937f54a63557e1fa6_0cd6bc16eaa0a0450668f9f1202051e9",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_ffa56fa92099a520cd125c25c0e5c85ab8aa8636e835005937f54a63557e1fa6_0cd6bc16eaa0a0450668f9f1202051e9"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX26-05": {
+    "cardNumber": "PX26-05",
+    "name": "The SteelKnightKing Kekrops",
+    "keywords": [
+      {
+        "name": "Accel",
+        "parameter": "Cost 7 ([White Core",
+        "wave": 2,
+        "hook": "accel",
+        "bracketed": true,
+        "index": 97
+      },
+      {
+        "name": "Accel",
+        "parameter": null,
+        "wave": 2,
+        "hook": "accel",
+        "bracketed": true,
+        "index": 416
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PX26-05#AB_PASSIVE_NONE_LV1_LV2_LV3_15efedaddb87e6bb11475e72e233555996c67e51264fd2a5618bc73ef3e33071_a3cf3568872fcee13cfc9a3bac9ed3ae",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this card is put onto the Removed Zone, you can summon it without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "When this card is put onto the Removed Zone, you can summon it without paying the cost.",
+            "cleanText": "When this card is put onto the Removed Zone, you can summon it without paying the cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DECK_OR_HAND_ACTION"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-05#a0",
+        "physicalId": "PX26-05#AB_PASSIVE_NONE_LV1_LV2_LV3_15efedaddb87e6bb11475e72e233555996c67e51264fd2a5618bc73ef3e33071_a3cf3568872fcee13cfc9a3bac9ed3ae",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_15efedaddb87e6bb11475e72e233555996c67e51264fd2a5618bc73ef3e33071_a3cf3568872fcee13cfc9a3bac9ed3ae"
+      },
+      {
+        "id": "PX26-05#AB_FLASH_NONE_LV1_LV2_LV3_6c74224c093c084fdaa40e710458809f69f58a4c2c05c10deaee64b7eba443e8_2aad73208d94e67434999a8cafbc9186",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "cantStack": false,
+          "keyword": "White Core",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, at the end of battle of your \"Steel\", send an opposing Life to the Reserve. After this effect resolves, put this card onto the Removed Zone."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, at the end of battle of your \"Steel\", send an opposing Life to the Reserve.",
+            "cleanText": "at the end of battle of your \"Steel\", send an opposing Life to the Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "put this card onto the Removed Zone.",
+            "cleanText": "put this card onto the Removed Zone",
+            "link": "afterResolves",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "OPEN_ZONE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-05#a1",
+        "physicalId": "PX26-05#AB_FLASH_NONE_LV1_LV2_LV3_6c74224c093c084fdaa40e710458809f69f58a4c2c05c10deaee64b7eba443e8_2aad73208d94e67434999a8cafbc9186",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_6c74224c093c084fdaa40e710458809f69f58a4c2c05c10deaee64b7eba443e8_2aad73208d94e67434999a8cafbc9186"
+      },
+      {
+        "id": "PX26-05#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_c3a81a903885418f7bfc9279043571d59e9703d58c38e269648241902cc4ce14_b416f0c8997a365ec3861aa3159c2559",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned/Attacks",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "you can activate one of the [Accel] of a \"Steel\" on your Field. However, the target doesn't move from the Field."
+        },
+        "clauses": [
+          {
+            "rawText": "you can activate one of the [Accel] of a \"Steel\" on your Field.",
+            "cleanText": "you can activate one of the [Accel] of a \"Steel\" on your Field",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ACTIVATE_EFFECT_ACTION"
+            }
+          },
+          {
+            "rawText": "the target doesn't move from the Field.",
+            "cleanText": "the target doesn't move from the Field",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REMAIN_ON_FIELD"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-05#a2",
+        "physicalId": "PX26-05#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_c3a81a903885418f7bfc9279043571d59e9703d58c38e269648241902cc4ce14_b416f0c8997a365ec3861aa3159c2559",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_c3a81a903885418f7bfc9279043571d59e9703d58c38e269648241902cc4ce14_b416f0c8997a365ec3861aa3159c2559"
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX26-03": {
+    "cardNumber": "PX26-03",
+    "name": "The SteelMaiden001 Linnea",
+    "keywords": [
+      {
+        "name": "Core Charge",
+        "parameter": null,
+        "wave": 3,
+        "hook": "core_charge",
+        "bracketed": true,
+        "index": 115
+      },
+      {
+        "name": "Accel",
+        "parameter": null,
+        "wave": 2,
+        "hook": "accel",
+        "bracketed": true,
+        "index": 161
+      },
+      {
+        "name": "Accel",
+        "parameter": "Cost 3 ([White Core",
+        "wave": 2,
+        "hook": "accel",
+        "bracketed": true,
+        "index": 198
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PX26-03#AB_FLASH_NONE_LV1_LV2_LV3_b2c40ad2b840efb13dc0f1fbf0d454c9f90bd5aebfed15b8e23f73faccb50535_e203b84d39c5b9c7cbdce425c754569b",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "You can summon this card from the Removed Zone."
+        },
+        "clauses": [
+          {
+            "rawText": "You can summon this card from the Removed Zone.",
+            "cleanText": "You can summon this card from the Removed Zone",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_THIS_CARD",
+              "from": "HAND_OR_BURST"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-03#a0",
+        "physicalId": "PX26-03#AB_FLASH_NONE_LV1_LV2_LV3_b2c40ad2b840efb13dc0f1fbf0d454c9f90bd5aebfed15b8e23f73faccb50535_e203b84d39c5b9c7cbdce425c754569b",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_b2c40ad2b840efb13dc0f1fbf0d454c9f90bd5aebfed15b8e23f73faccb50535_e203b84d39c5b9c7cbdce425c754569b"
+      },
+      {
+        "id": "PX26-03#AB_PASSIVE_NONE_LV1_LV2_LV3_acb67c7d5f883895407a4048dc589694978083ba84b8d39b319c11541a412029_2a6e9709f2b2e2797f60e46e535aa14c",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": true,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this card is sent to the Trash by your [Core Charge], you can activate the following [Accel] by paying one cost."
+        },
+        "clauses": [
+          {
+            "rawText": "When this card is sent to the Trash by your [Core Charge], you can activate the following [Accel] by paying one cost.",
+            "cleanText": "When this card is sent to the Trash by your [Core Charge], you can activate the following [Accel] by paying one cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-03#a1",
+        "physicalId": "PX26-03#AB_PASSIVE_NONE_LV1_LV2_LV3_acb67c7d5f883895407a4048dc589694978083ba84b8d39b319c11541a412029_2a6e9709f2b2e2797f60e46e535aa14c",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_acb67c7d5f883895407a4048dc589694978083ba84b8d39b319c11541a412029_2a6e9709f2b2e2797f60e46e535aa14c"
+      },
+      {
+        "id": "PX26-03#AB_FLASH_NONE_LV1_LV2_LV3_e57d8a0b4b01533ce103784a74e1cd5bdfbac7ba75eb9e05ee9052772b3a62c2_4f56c0150bf246afa5395bdb0111fc3c",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Accel: Cost ([White Core",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "If you control any \"Athena\", including those in Soul State, reveal up to two cards from your decktop. You can put any number of \"Athena\"/\"Steel\" among them to the Removed Zone until your Removed Zone has six cards. Return any remaining cards to the deckbottom. Then, (Once per Turn: Same Name) your counters +2. After this effect resolves, put this card onto the Removed Zone."
+        },
+        "clauses": [
+          {
+            "rawText": "If you control any \"Athena\", including those in Soul State, reveal up to two cards from your decktop.",
+            "cleanText": "including those in Soul State, reveal up to two cards from your decktop",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If you control any \"Athena\"",
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 2,
+              "upTo": true
+            }
+          },
+          {
+            "rawText": "You can put any number of \"Athena\"/\"Steel\" among them to the Removed Zone until your Removed Zone has six cards.",
+            "cleanText": "You can put any number of \"Athena\"/\"Steel\" among them to the Removed Zone until your Removed Zone has six cards",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REMOVED_ZONE_ACTION"
+            }
+          },
+          {
+            "rawText": "Return any remaining cards to the deckbottom.",
+            "cleanText": "Return any remaining cards to the deckbottom",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "RETURN_REVEALED_BOTTOM"
+            }
+          },
+          {
+            "rawText": "your counters +2.",
+            "cleanText": "your counters +2",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_COUNTER",
+              "count": 2
+            }
+          },
+          {
+            "rawText": "put this card onto the Removed Zone.",
+            "cleanText": "put this card onto the Removed Zone",
+            "link": "afterResolves",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "OPEN_ZONE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-03#a2",
+        "physicalId": "PX26-03#AB_FLASH_NONE_LV1_LV2_LV3_e57d8a0b4b01533ce103784a74e1cd5bdfbac7ba75eb9e05ee9052772b3a62c2_4f56c0150bf246afa5395bdb0111fc3c",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_e57d8a0b4b01533ce103784a74e1cd5bdfbac7ba75eb9e05ee9052772b3a62c2_4f56c0150bf246afa5395bdb0111fc3c"
+      }
+    ],
+    "compiledClausesCount": 7,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX26-04": {
+    "cardNumber": "PX26-04",
+    "name": "The SteelMaiden014 Theta",
+    "keywords": [
+      {
+        "name": "Accel",
+        "parameter": "Cost 2 ([White Core",
+        "wave": 2,
+        "hook": "accel",
+        "bracketed": true,
+        "index": 216
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PX26-04#AB_PASSIVE_NONE_LV1_LV2_LV3_2c9c89d21fd4e58a6a55f0d6b674d817c7e30b1e1f822f3ef29a874c708393b0_b3e1e9cd447af3366a4f00a1b44d5446",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your \"Steel\" Spirits/Grandwalker Nexuses would leave the Field due to the opponent, by returning this card from the Removed Zone to the deckbottom, one of those targets remains on the Field, exhausted."
+        },
+        "clauses": [
+          {
+            "rawText": "When your \"Steel\" Spirits/Grandwalker Nexuses would leave the Field due to the opponent, by returning this card from the Removed Zone to the deckbottom, one of those targets remains on the Field, exhausted.",
+            "cleanText": "When your \"Steel\" Spirits/Grandwalker Nexuses would leave the Field due to the opponent, by returning this card from the Removed Zone to the deckbottom, one of those targets remains on the Field, exhausted",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-04#a0",
+        "physicalId": "PX26-04#AB_PASSIVE_NONE_LV1_LV2_LV3_2c9c89d21fd4e58a6a55f0d6b674d817c7e30b1e1f822f3ef29a874c708393b0_b3e1e9cd447af3366a4f00a1b44d5446",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_2c9c89d21fd4e58a6a55f0d6b674d817c7e30b1e1f822f3ef29a874c708393b0_b3e1e9cd447af3366a4f00a1b44d5446"
+      },
+      {
+        "id": "PX26-04#AB_FLASH_NONE_LV1_LV2_LV3_ab04c1e98c7667c5e7a2cd92563be958ff5fc0a5fc5721e3c2d1dc207743eecd_1fe72dac370942429cfbb4dccfe68b70",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Accel: Cost ([White Core",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "If you control any \"Athena\", including those in Soul State, your counter +1. When you've done so, you can send two cores from any opposing Grandwalker Nexuses to the Void. After this effect resolves, put this card onto the Removed Zone."
+        },
+        "clauses": [
+          {
+            "rawText": "If you control any \"Athena\", including those in Soul State, your counter +1.",
+            "cleanText": "including those in Soul State, your counter +1",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If you control any \"Athena\"",
+            "duration": null,
+            "op": {
+              "op": "ADD_COUNTER",
+              "count": 1
+            }
+          },
+          {
+            "rawText": "you can send two cores from any opposing Grandwalker Nexuses to the Void.",
+            "cleanText": "you can send two cores from any opposing Grandwalker Nexuses to the Void",
+            "link": "byDoing",
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "put this card onto the Removed Zone.",
+            "cleanText": "put this card onto the Removed Zone",
+            "link": "afterResolves",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "OPEN_ZONE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-04#a1",
+        "physicalId": "PX26-04#AB_FLASH_NONE_LV1_LV2_LV3_ab04c1e98c7667c5e7a2cd92563be958ff5fc0a5fc5721e3c2d1dc207743eecd_1fe72dac370942429cfbb4dccfe68b70",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_ab04c1e98c7667c5e7a2cd92563be958ff5fc0a5fc5721e3c2d1dc207743eecd_1fe72dac370942429cfbb4dccfe68b70"
+      },
+      {
+        "id": "PX26-04#AB_WHEN_ATTACKS_NONE_LV1_LV2_67969a559875575f2f035ba47db01c7ae3a7a05c9a4ed173c28c26a28f62cb9b_14491a1a08f63e3c4f4ad384bf4233e5",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Your counter +1, and put a core from the Void to your Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Your counter +1",
+            "cleanText": "Your counter +1",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_COUNTER",
+              "count": 1
+            }
+          },
+          {
+            "rawText": "put a core from the Void to your Spirit.",
+            "cleanText": "put a core from the Void to your Spirit",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-04#a2",
+        "physicalId": "PX26-04#AB_WHEN_ATTACKS_NONE_LV1_LV2_67969a559875575f2f035ba47db01c7ae3a7a05c9a4ed173c28c26a28f62cb9b_14491a1a08f63e3c4f4ad384bf4233e5",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_67969a559875575f2f035ba47db01c7ae3a7a05c9a4ed173c28c26a28f62cb9b_14491a1a08f63e3c4f4ad384bf4233e5"
+      }
+    ],
+    "compiledClausesCount": 6,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX26-18": {
+    "cardNumber": "PX26-18",
+    "name": "The UltraHeroBeast Orion",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PX26-18#AB_FLASH_NONE_LV1_LV2_LV3_7a6f10c740d34e04b5276f5e0ccfc4100c13220598ecefe0a90de5fe102fc226_a3eaf15576b942883c4b8fc06d989530",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Mani: \"Contractor Hermes\" & C4 or more, (Either Attack Step)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "pay one cost from the target to summon this card from the Hand.",
+            "cleanText": "pay one cost from the target to summon this card from the Hand",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_PAY",
+              "from": "HAND"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-18#a0",
+        "physicalId": "PX26-18#AB_FLASH_NONE_LV1_LV2_LV3_7a6f10c740d34e04b5276f5e0ccfc4100c13220598ecefe0a90de5fe102fc226_a3eaf15576b942883c4b8fc06d989530",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_7a6f10c740d34e04b5276f5e0ccfc4100c13220598ecefe0a90de5fe102fc226_a3eaf15576b942883c4b8fc06d989530"
+      },
+      {
+        "id": "PX26-18#AB_PASSIVE_NONE_LV1_LV2_LV3_c7750b4456a477a6331c0fc37e6d8a25198df65496f86a0a3a00c1b804f82f3f_57ad83ea124ff7d2aa2f2c0cec3a192e",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While this card is in Hand, when it is discarded by an effect, or any card is put onto the opposing Removed Zone, you can [Mani] this card, treating [Soul Core] as being sent to the Trash."
+        },
+        "clauses": [
+          {
+            "rawText": "While this card is in Hand, when it is discarded by an effect, or any card is put onto the opposing Removed Zone, you can [Mani] this card, treating [Soul Core] as being sent to the Trash.",
+            "cleanText": "when it is discarded by an effect, or any card is put onto the opposing Removed Zone, you can [Mani] this card, treating [Soul Core] as being sent to the Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": "While this card is in Hand",
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-18#a1",
+        "physicalId": "PX26-18#AB_PASSIVE_NONE_LV1_LV2_LV3_c7750b4456a477a6331c0fc37e6d8a25198df65496f86a0a3a00c1b804f82f3f_57ad83ea124ff7d2aa2f2c0cec3a192e",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_c7750b4456a477a6331c0fc37e6d8a25198df65496f86a0a3a00c1b804f82f3f_57ad83ea124ff7d2aa2f2c0cec3a192e"
+      },
+      {
+        "id": "PX26-18#AB_STEP_RESTRICTED_NONE_LV1_LV2_LV3_af50fd30ac3dd6c2b7e215f22292caab5ee643334db70a5147b55c82565f3173_4b273f990f850cc2b99f43f8ca30663d",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "STEP_RESTRICTED",
+          "timingLabel": "When Manifests/Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can send up to two opposing Spirits/Ultimates to the Removed Zone. Then, once per turn, you can refresh one of your \"HeroBeast\"."
+        },
+        "clauses": [
+          {
+            "rawText": "You can send up to two opposing Spirits/Ultimates to the Removed Zone.",
+            "cleanText": "You can send up to two opposing Spirits/Ultimates to the Removed Zone",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REMOVED_ZONE_ACTION"
+            }
+          },
+          {
+            "rawText": "once per turn, you can refresh one of your \"HeroBeast\".",
+            "cleanText": "once per turn, you can refresh one of your \"HeroBeast\"",
+            "link": "then",
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-18#a2",
+        "physicalId": "PX26-18#AB_STEP_RESTRICTED_NONE_LV1_LV2_LV3_af50fd30ac3dd6c2b7e215f22292caab5ee643334db70a5147b55c82565f3173_4b273f990f850cc2b99f43f8ca30663d",
+        "semanticId": "SEM#AB_STEP_RESTRICTED_NONE_LV1_LV2_LV3_af50fd30ac3dd6c2b7e215f22292caab5ee643334db70a5147b55c82565f3173_4b273f990f850cc2b99f43f8ca30663d"
+      },
+      {
+        "id": "PX26-18#AB_ATTACK_STEP_NONE_LV2_LV3_31066b4ca0041b457c25ff59df9b0c1d52a178ce9791925b8125b3c566008e26_f168e96919ec3b08730411f7facb5776",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When any card is put onto the opposing Removed Zone, you can send an opposing Life to the Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "When any card is put onto the opposing Removed Zone, you can send an opposing Life to the Reserve.",
+            "cleanText": "When any card is put onto the opposing Removed Zone, you can send an opposing Life to the Reserve",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-18#a3",
+        "physicalId": "PX26-18#AB_ATTACK_STEP_NONE_LV2_LV3_31066b4ca0041b457c25ff59df9b0c1d52a178ce9791925b8125b3c566008e26_f168e96919ec3b08730411f7facb5776",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_31066b4ca0041b457c25ff59df9b0c1d52a178ce9791925b8125b3c566008e26_f168e96919ec3b08730411f7facb5776"
+      }
+    ],
+    "compiledClausesCount": 6,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PX26-17": {
+    "cardNumber": "PX26-17",
+    "name": "The WhiteWingedHeroBeast Bellerophon",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PX26-17#AB_FLASH_NONE_LV1_LV2_LV3_9e94beaf3259f7583773c3f678298283a7452399bf46a0cd74d68fa612691205_2bda4b1a3e30f79bf0eb1909ba6e3d02",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Mani: \"Contractor Hermes\", (Your Turn)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "pay one cost from the target to summon this card from the Hand.",
+            "cleanText": "pay one cost from the target to summon this card from the Hand",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_PAY",
+              "from": "HAND"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-17#a0",
+        "physicalId": "PX26-17#AB_FLASH_NONE_LV1_LV2_LV3_9e94beaf3259f7583773c3f678298283a7452399bf46a0cd74d68fa612691205_2bda4b1a3e30f79bf0eb1909ba6e3d02",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_9e94beaf3259f7583773c3f678298283a7452399bf46a0cd74d68fa612691205_2bda4b1a3e30f79bf0eb1909ba6e3d02"
+      },
+      {
+        "id": "PX26-17#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_b0d441d7d14ca312f052c94adde8eeaaef6223360e3d32c75ddc7098be662269_075c9351a33898d29778029109916cae",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned/Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Your counter can +1. Then, once per turn, by discarding a Green-only \"Devotee\"/\"Concluser\" family card from your Hand, put two cores from the Void to this Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Your counter can +1.",
+            "cleanText": "Your counter can +1",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COUNT_OPERATION"
+            }
+          },
+          {
+            "rawText": "once per turn, by discarding a Green-only \"Devotee\"/\"Concluser\" family card from your Hand, put two cores from the Void to this Spirit.",
+            "cleanText": "once per turn, by discarding a Green-only \"Devotee\"/\"Concluser\" family card from your Hand, put two cores from the Void to this Spirit",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 2,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "field",
+                "target": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-17#a1",
+        "physicalId": "PX26-17#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_b0d441d7d14ca312f052c94adde8eeaaef6223360e3d32c75ddc7098be662269_075c9351a33898d29778029109916cae",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_b0d441d7d14ca312f052c94adde8eeaaef6223360e3d32c75ddc7098be662269_075c9351a33898d29778029109916cae"
+      },
+      {
+        "id": "PX26-17#AB_PASSIVE_NONE_LV2_LV3_3e27a8b09eba202f958f8ec0d01a27674a40110c9d3a81b0faae17c5eb30d889_c8b26345d2f49bdc8ebd564f399f21da",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "when your \"HeroBeast\" is sent to the Trash from your Hand/Deck, you can put one of the targets to the Removed Zone."
+        },
+        "clauses": [
+          {
+            "rawText": "when your \"HeroBeast\" is sent to the Trash from your Hand/Deck, you can put one of the targets to the Removed Zone.",
+            "cleanText": "when your \"HeroBeast\" is sent to the Trash from your Hand/Deck, you can put one of the targets to the Removed Zone",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REMOVED_ZONE_ACTION"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "PX26-17#a2",
+        "physicalId": "PX26-17#AB_PASSIVE_NONE_LV2_LV3_3e27a8b09eba202f958f8ec0d01a27674a40110c9d3a81b0faae17c5eb30d889_c8b26345d2f49bdc8ebd564f399f21da",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV2_LV3_3e27a8b09eba202f958f8ec0d01a27674a40110c9d3a81b0faae17c5eb30d889_c8b26345d2f49bdc8ebd564f399f21da"
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

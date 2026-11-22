@@ -1503,6 +1503,23 @@
     "compiledIr": {
       "cardNumber": "26RSD08-002",
       "name": "［Evil Sacred Origin］Chaori Pegasuros",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 5000
+        }
+      },
+      "originalEffectText": "[team: Yellow Rise]\n\n[LV1-2] When Summoned\nIf you control any exhausted [Yellow Rise] Spirit, target a \"Sword Eye\" family Magic card in your Trash. Return it to your Hand.\n\n[LV2] During Attack\nWhen this Spirit's attack reduces the opposing Life, if your Life is at two or less, send a core, besides [Soul Core], from your Reserve to the Life.",
+      "teams": [
+        "Yellow Rise"
+      ],
       "keywords": [
         {
           "name": "Team",
@@ -1510,13 +1527,36 @@
           "wave": 5,
           "hook": "team",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "26RSD08-002#AB_PASSIVE_NONE_LV1_LV2_LV3_a09d2d79a1ab13d51619350b563f5584e18f1bf7730b3136b0d9a30a7da1da97_46d8dd0206156af4329041992289e7e2",
+          "cardNumber": "26RSD08-002",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "A",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "26RSD08-002#a0"
         }
       ],
       "abilities": [
         {
-          "id": "26RSD08-002#a0",
-          "type": "ABILITY",
+          "type": "TEAM_RESTRICTION",
+          "teams": [
+            "Yellow Rise"
+          ],
           "header": {
             "levels": [
               1,
@@ -1526,8 +1566,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1536,11 +1581,56 @@
             "isMain": false,
             "cleanBody": ""
           },
+          "rawText": "[team: Yellow Rise]",
+          "originalAbilityText": "[team: Yellow Rise]",
+          "abilityIndex": 0,
           "clauses": [],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RSD08-002#a0",
+          "keywords": [
+            {
+              "name": "Team",
+              "parameter": "Yellow Rise",
+              "wave": 5,
+              "hook": "team",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "26RSD08-002#AB_PASSIVE_NONE_LV1_LV2_LV3_a09d2d79a1ab13d51619350b563f5584e18f1bf7730b3136b0d9a30a7da1da97_46d8dd0206156af4329041992289e7e2",
+              "cardNumber": "26RSD08-002",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "A",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "26RSD08-002#a0"
+            }
+          ],
+          "id": "26RSD08-002#AB_PASSIVE_NONE_LV1_LV2_LV3_a09d2d79a1ab13d51619350b563f5584e18f1bf7730b3136b0d9a30a7da1da97_46d8dd0206156af4329041992289e7e2",
+          "physicalId": "26RSD08-002#AB_PASSIVE_NONE_LV1_LV2_LV3_a09d2d79a1ab13d51619350b563f5584e18f1bf7730b3136b0d9a30a7da1da97_46d8dd0206156af4329041992289e7e2",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_a09d2d79a1ab13d51619350b563f5584e18f1bf7730b3136b0d9a30a7da1da97_46d8dd0206156af4329041992289e7e2",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_82bfb1aa306d3c8aa27f89eac27a3aacc7dd9402d2af1920f365bc35d02fc002_090646595107f580c264858290e299dc",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "26RSD08-002#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1550,8 +1640,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1560,22 +1659,28 @@
             "isMain": false,
             "cleanBody": "If you control any exhausted [Yellow Rise] Spirit, target a \"Sword Eye\" family Magic card in your Trash. Return it to your Hand."
           },
+          "originalAbilityText": "[LV1-2] When Summoned\nIf you control any exhausted [Yellow Rise] Spirit, target a \"Sword Eye\" family Magic card in your Trash. Return it to your Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "If you control any exhausted [Yellow Rise] Spirit, target a \"Sword Eye\" family Magic card in your Trash.",
+              "originalClauseText": "If you control any exhausted [Yellow Rise] Spirit, target a \"Sword Eye\" family Magic card in your Trash.",
               "cleanText": "target a \"Sword Eye\" family Magic card in your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": "If you control any exhausted [Yellow Rise] Spirit",
               "duration": null,
               "op": {
-                "op": "GRANT_FAMILY"
+                "op": "TARGET_CARD"
               }
             },
             {
               "rawText": "Return it to your Hand.",
+              "originalClauseText": "Return it to your Hand.",
               "cleanText": "Return it to your Hand",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1590,10 +1695,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RSD08-002#a1",
+          "keywords": [],
+          "id": "26RSD08-002#AB_WHEN_SUMMONED_NONE_LV1_LV2_d3ea9712e0bc59098d1d2f2db26b3d8e69f7b263ab6c853cabd0fb003895da2c_1d860e7e2732816e461a86ba0e452ad7",
+          "physicalId": "26RSD08-002#AB_WHEN_SUMMONED_NONE_LV1_LV2_d3ea9712e0bc59098d1d2f2db26b3d8e69f7b263ab6c853cabd0fb003895da2c_1d860e7e2732816e461a86ba0e452ad7",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_d3ea9712e0bc59098d1d2f2db26b3d8e69f7b263ab6c853cabd0fb003895da2c_1d860e7e2732816e461a86ba0e452ad7",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_7f9540384805421e7eab73287c3187d65d0c0f9d13290a8484cc55b3c80f0426_fa7d3db84ce9d3f3c169dc27136570f6",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "26RSD08-002#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1602,8 +1721,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "STEP_RESTRICTED",
+            "timings": [
+              "STEP_RESTRICTED"
+            ],
             "timingLabel": "During Attack",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "STEP_RESTRICTED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1612,21 +1740,45 @@
             "isMain": false,
             "cleanBody": "When this Spirit's attack reduces the opposing Life, if your Life is at two or less, send a core, besides [Soul Core], from your Reserve to the Life."
           },
+          "originalAbilityText": "[LV2] During Attack\nWhen this Spirit's attack reduces the opposing Life, if your Life is at two or less, send a core, besides [Soul Core], from your Reserve to the Life.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When this Spirit's attack reduces the opposing Life, if your Life is at two or less, send a core, besides [Soul Core], from your Reserve to the Life.",
+              "originalClauseText": "When this Spirit's attack reduces the opposing Life, if your Life is at two or less, send a core, besides [Soul Core], from your Reserve to the Life.",
               "cleanText": "When this Spirit's attack reduces the opposing Life, if your Life is at two or less, send a core, besides [Soul Core], from your Reserve to the Life",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "MOVE_CORE"
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "reserve",
+                  "side": "self"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RSD08-002#a2",
+          "keywords": [],
+          "id": "26RSD08-002#AB_STEP_RESTRICTED_NONE_LV2_bb4c287595ca2eb1ae91332f353c74ca647ab6e4fb03e6dbd1906e2fa8ab70c3_6e58c2844908e9f83e50bf1ecc21c4dd",
+          "physicalId": "26RSD08-002#AB_STEP_RESTRICTED_NONE_LV2_bb4c287595ca2eb1ae91332f353c74ca647ab6e4fb03e6dbd1906e2fa8ab70c3_6e58c2844908e9f83e50bf1ecc21c4dd",
+          "semanticId": "SEM#AB_STEP_RESTRICTED_NONE_LV2_bb4c287595ca2eb1ae91332f353c74ca647ab6e4fb03e6dbd1906e2fa8ab70c3_6e58c2844908e9f83e50bf1ecc21c4dd",
+          "semanticIdV3": "SEM3#AB_STEP_RESTRICTED_NONE_LV2_7fa223869d614479510d44b019116b8b5cf05269a34ac121c9b83b2366113ac7_dfa660b839200225d77d57d359fcce3f",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "STEP_RESTRICTED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -1649,19 +1801,19 @@
     "compiledIr": {
       "cardNumber": "26RSD08-X01",
       "name": "［Mega Thunder Origin］Zelotia",
-      "keywords": [
-        {
-          "name": "Team",
-          "parameter": "Yellow Rise",
-          "wave": 5,
-          "hook": "team",
-          "bracketed": true,
-          "index": 7
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
         }
-      ],
+      },
+      "originalEffectText": "Legacy\n[team: Yellow Rise]\n\n[LV1-2] When Summoned\nTarget a [Yellow Rise] Magic card in your Trash. Return it to the Hand.\n\n[LV2] True ReleaseYour Attack Step [Invoke: Flash] Once Per Turn\nIf you used any [Yellow Rise] Magic card this turn, target an opposing Spirit. During this turn, give it -2000 BP. Then, if it has 0 BP, destroy it.",
+      "teams": [],
+      "keywords": [],
       "abilities": [
         {
-          "id": "26RSD08-X01#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1672,8 +1824,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1682,10 +1839,14 @@
             "isMain": false,
             "cleanBody": "Legacy"
           },
+          "originalAbilityText": "Legacy\n[team: Yellow Rise]",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Legacy",
+              "originalClauseText": "Legacy",
               "cleanText": "Legacy",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1697,10 +1858,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RSD08-X01#a0",
+          "keywords": [],
+          "id": "26RSD08-X01#AB_PASSIVE_NONE_LV1_LV2_LV3_3e98c1eed1664cafb1de68f476f12a2fff592434936e71dc90bb1c0e8290bdf3_247e751da16265c9185ab65c83e96959",
+          "physicalId": "26RSD08-X01#AB_PASSIVE_NONE_LV1_LV2_LV3_3e98c1eed1664cafb1de68f476f12a2fff592434936e71dc90bb1c0e8290bdf3_247e751da16265c9185ab65c83e96959",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_3e98c1eed1664cafb1de68f476f12a2fff592434936e71dc90bb1c0e8290bdf3_247e751da16265c9185ab65c83e96959",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_f8565fffa31ad0c799b5ae229b0ab49431c90f652629317c69188b98e05c6010_45d9bd7428d73f8718b3ef6fa0b8bd4c",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "26RSD08-X01#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1710,8 +1883,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -1720,22 +1902,29 @@
             "isMain": false,
             "cleanBody": "Target a [Yellow Rise] Magic card in your Trash. Return it to the Hand."
           },
+          "originalAbilityText": "[LV1-2] When Summoned\nTarget a [Yellow Rise] Magic card in your Trash. Return it to the Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Target a [Yellow Rise] Magic card in your Trash.",
+              "originalClauseText": "Target a [Yellow Rise] Magic card in your Trash.",
               "cleanText": "Target a [Yellow Rise] Magic card in your Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "TARGET_CARD"
+                "op": "KEYWORD_RULE",
+                "keyword": "Yellow Rise"
               }
             },
             {
               "rawText": "Return it to the Hand.",
+              "originalClauseText": "Return it to the Hand.",
               "cleanText": "Return it to the Hand",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1748,10 +1937,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RSD08-X01#a1",
+          "keywords": [],
+          "id": "26RSD08-X01#AB_WHEN_SUMMONED_NONE_LV1_LV2_4bc899c5c293b067c593296c004d19ec63a7ba0e597cd1ab27129a1fcfc9b141_f68b8d21fb79f3fee869ffa437e6d496",
+          "physicalId": "26RSD08-X01#AB_WHEN_SUMMONED_NONE_LV1_LV2_4bc899c5c293b067c593296c004d19ec63a7ba0e597cd1ab27129a1fcfc9b141_f68b8d21fb79f3fee869ffa437e6d496",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_4bc899c5c293b067c593296c004d19ec63a7ba0e597cd1ab27129a1fcfc9b141_f68b8d21fb79f3fee869ffa437e6d496",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_d46f2534780e89f8773049d431498e19f8bb09da38b55cf80984da84a1396c22_8e1e10e80856efb9baa321d58904b768",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "26RSD08-X01#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -1762,8 +1965,20 @@
               "True Release"
             ],
             "timing": "FLASH",
+            "timings": [
+              "ATTACK_STEP",
+              "FLASH"
+            ],
             "timingLabel": "Flash",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
             "limit": "ONCE_PER_TURN",
             "cantStack": false,
             "keyword": null,
@@ -1772,10 +1987,14 @@
             "isMain": false,
             "cleanBody": "If you used any [Yellow Rise] Magic card this turn, target an opposing Spirit. During this turn, give it -2000 BP. Then, if it has 0 BP, destroy it."
           },
+          "originalAbilityText": "[LV2] True ReleaseYour Attack Step [Invoke: Flash] Once Per Turn\nIf you used any [Yellow Rise] Magic card this turn, target an opposing Spirit. During this turn, give it -2000 BP. Then, if it has 0 BP, destroy it.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "If you used any [Yellow Rise] Magic card this turn, target an opposing Spirit.",
+              "originalClauseText": "If you used any [Yellow Rise] Magic card this turn, target an opposing Spirit.",
               "cleanText": "target an opposing Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1793,7 +2012,9 @@
             },
             {
               "rawText": "During this turn, give it -2000 BP.",
+              "originalClauseText": "During this turn, give it -2000 BP.",
               "cleanText": "give it -2000 BP",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -1808,7 +2029,9 @@
             },
             {
               "rawText": "if it has 0 BP, destroy it.",
+              "originalClauseText": "if it has 0 BP, destroy it.",
               "cleanText": "destroy it",
+              "clauseIndex": 2,
               "link": "then",
               "isOptional": false,
               "isCost": false,
@@ -1820,7 +2043,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "26RSD08-X01#a2",
+          "keywords": [],
+          "id": "26RSD08-X01#AB_FLASH_NONE_LV2_5f670b98e0b776e86027c0d37fb51fa91abb8d5da9dfcd323dee1b5fc5ba41e3_74b815817040b086cade3de16f6b3560",
+          "physicalId": "26RSD08-X01#AB_FLASH_NONE_LV2_5f670b98e0b776e86027c0d37fb51fa91abb8d5da9dfcd323dee1b5fc5ba41e3_74b815817040b086cade3de16f6b3560",
+          "semanticId": "SEM#AB_FLASH_NONE_LV2_5f670b98e0b776e86027c0d37fb51fa91abb8d5da9dfcd323dee1b5fc5ba41e3_74b815817040b086cade3de16f6b3560",
+          "semanticIdV3": "SEM3#AB_FLASH_NONE_LV2_e7333761bef7c2db71abac2e9a7df755e17d6ee61da757089cd9668826bce8c0_eec0a7ee0bfb461a63b5b8c10c69bae6",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [
+              "ONCE_PER_TURN"
+            ],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 6,

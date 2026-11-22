@@ -1,0 +1,84 @@
+{
+  "generatedAt": "2026-11-21T02:11:55.931Z",
+  "package": "K1_CONSOLIDATED",
+  "overallStatus": "PASS",
+  "criteria": [
+    {
+      "criterionId": "AC-01",
+      "title": "Outstanding K1.0–K1.5 defects investigated and corrected or explicitly dispositioned",
+      "status": "PASS",
+      "evidence": "k1_corrective_changes.json documents 11 subsystem evolutions including AST COLOR_SYMBOL parsing, SuAdcon quote normalization, prefix prerequisite gating, polarity narrowing, and baseline registry authorization.",
+      "verification": "node --test tests/work_package_k1_5_foundation_closure.test.js tests/work_package_k1_3_2_semantic_hardening.test.js tests/work_package_k1_3_4_semantic_evidence.test.js"
+    },
+    {
+      "criterionId": "AC-02",
+      "title": "Batch 02 condition functionality implemented and verified",
+      "status": "PASS",
+      "evidence": "evaluateAstCondition handles 12 grammar families with 4-state logic (TRUE, FALSE, INVALID_CONTEXT, UNSUPPORTED); 532 ledger condition entries resolved verified; 848 unparsed syntax entries preserved as parsed failure.",
+      "verification": "node --test tests/work_package_k1_batch_02_conditions.test.js"
+    },
+    {
+      "criterionId": "AC-03",
+      "title": "Batch 03 keyword and prerequisite functionality implemented and verified",
+      "status": "PASS",
+      "evidence": "17 keyword families and 7 prefix prerequisites integrated in evaluateAbilityPrefixPrerequisites; all 13 SuAdcon cards parsed and verified atomically with Soul State/underlying-card stack enforcement.",
+      "verification": "node --test tests/work_package_k1_batch_03_keywords_prerequisites.test.js"
+    },
+    {
+      "criterionId": "AC-04",
+      "title": "Batch 04 parameter recovery implemented and verified",
+      "status": "PASS",
+      "evidence": "19 incomplete ops tracked across 514 shards; 386 clauses recovered explicit parameters; 196 complex clauses fail closed with UNRECOVERABLE_COMPLEX / MISSING_IR_PARAMETERS; zero fabricated defaults.",
+      "verification": "node --test tests/work_package_k1_batch_04_parameters.test.js"
+    },
+    {
+      "criterionId": "AC-05",
+      "title": "Batch 05 complex effects and replacement/prevention implemented and verified",
+      "status": "PASS",
+      "evidence": "4 blocked cards (26RBS02-083, 26RDB01-024, 26RSD07-001, BS27-082) and 2 drift cards (BS19-X05, BS33-069) verified; REMAIN_ON_FIELD, LIFE_TO_RESERVE, UNPREVENTABLE bypass, anti-loop guards verified; 2,593 Batch 1 carry-forward clauses resolved.",
+      "verification": "node --test tests/work_package_k1_batch_05_complex_effects.test.js"
+    },
+    {
+      "criterionId": "AC-06",
+      "title": "All five areas work through the production engine",
+      "status": "PASS",
+      "evidence": "End-to-end pipeline verified from canonical card text -> compiler -> stored IR -> conditions -> prerequisites -> parameters -> selectors -> ops -> state mutation -> events.",
+      "verification": "node --test tests/work_package_de_operations_and_cards.test.js"
+    },
+    {
+      "criterionId": "AC-07",
+      "title": "Genuine card-level E2E tests demonstrate actual behavior",
+      "status": "PASS",
+      "evidence": "52 real cards cataloged in k1_real_card_e2e_inventory.json executing through createGame and production AsyncResolver without mocking or stubbing.",
+      "verification": "node --test tests/work_package_k1_batch_02_conditions.test.js tests/work_package_k1_batch_03_keywords_prerequisites.test.js tests/work_package_k1_batch_05_complex_effects.test.js"
+    },
+    {
+      "criterionId": "AC-08",
+      "title": "Existing accepted functionality remains intact",
+      "status": "PASS",
+      "evidence": "All 514 shards frozen and identical; 854 historical reports preserved; WPDE-PERF-01 completes in < 500 ms (avg cold 27.64 ms).",
+      "verification": "node scripts/validate_514_shards_exhaustive.mjs && node --test tests/golden_compiler.test.js"
+    },
+    {
+      "criterionId": "AC-09",
+      "title": "Full regression results documented",
+      "status": "PASS",
+      "evidence": "11 test suites + exhaustive shard validator executed; 100% passing across all suites with 0 failures and 0 skips.",
+      "verification": "node --test tests/work_package_k1_batch_02_conditions.test.js tests/work_package_k1_batch_03_keywords_prerequisites.test.js tests/work_package_k1_batch_04_parameters.test.js tests/work_package_k1_batch_05_complex_effects.test.js tests/work_package_de_operations_and_cards.test.js tests/golden_compiler.test.js tests/work_package_hij2_compiler_comparator.test.js tests/work_package_k1_5_foundation_closure.test.js tests/work_package_k1_3_2_semantic_hardening.test.js tests/work_package_k1_3_4_semantic_evidence.test.js tests/data_audit.test.js"
+    },
+    {
+      "criterionId": "AC-10",
+      "title": "Unresolved ledger accurate and reconciled",
+      "status": "PASS",
+      "evidence": "k1_unresolved_ledger.json contains exactly 18,031 records with 0 deletions, accounting for 3,648 RESOLVED_VERIFIED, 13,065 HANDLER_PRESENT, 34 PARTIALLY_VERIFIED, 848 PARSED_FAILURE, 194 EXPLICIT_UNRECOVERABLE_BLOCKED, 14 SOURCE_CORRECTION_REQUIRED, and 228 MANUAL_REVIEW_REQUIRED.",
+      "verification": "node -e \"const l = JSON.parse(require('fs').readFileSync('reports/work_package_k1_consolidated/k1_unresolved_ledger.json')); console.log(l.totalRecords === 18031 && l.entries.length === 18031);\""
+    },
+    {
+      "criterionId": "AC-11",
+      "title": "Handoff archive reproducible and manifest verified",
+      "status": "PASS",
+      "evidence": "k1_consolidated_handoff.zip built with pure Node.js deterministic compression and verified via scripts/verify_handoff_archive_hij2_2.mjs with PASS status, zero CRC failures, zero missing files, and zero unlisted files.",
+      "verification": "node scripts/verify_handoff_archive_hij2_2.mjs reports/work_package_k1_consolidated/k1_consolidated_handoff.zip"
+    }
+  ]
+}

@@ -60,6 +60,7 @@ test('Keyword Wave 1 - Holy Life puts 1 core from Void to Life on direct hit', a
   const game = createGame();
   const p = game.state.players.player;
   p.life = 3; // Below max 5
+  p.voidCores.normal = 1; // Void core available for Holy Life
 
   const stack = createFieldStack(createCardInstance(holySpirit, 'player'), { normal: 1, soul: 0 });
   p.field.push(stack);

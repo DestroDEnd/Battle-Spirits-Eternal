@@ -1,1 +1,2231 @@
-{"P23-05":{"cardNumber":"P23-05","name":"...It's Delicious","keywords":[{"name":"Mirage","parameter":"Cost 1","wave":2,"hook":"mirage","bracketed":true,"index":0}],"abilities":[{"id":"P23-05#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Mirage: Cost 1"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"clauses":[],"unsupported":[]},{"id":"P23-05#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["During Set"],"timing":"END_OF_TURN","timingLabel":"Your End Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"If your Life is at three or less, by putting a core from the Void to your Life, refresh one of your \"Evangelion\" that is braved to \"Pilot\" family Braves."},"clauses":[{"rawText":"If your Life is at three or less, by putting a core from the Void to your Life, refresh one of your \"Evangelion\" that is braved to \"Pilot\" family Braves.","cleanText":"by putting a core from the Void to your Life, refresh one of your \"Evangelion\" that is braved to \"Pilot\" family Braves","link":null,"isOptional":false,"isCost":false,"condition":"If your Life is at three or less","duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]},{"id":"P23-05#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"MAIN","timingLabel":"Main","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":true,"cleanBody":"Draw a card. Then, (Once per Turn: Same Name) if you control any \"Evangelion\", you can set this card."},"clauses":[{"rawText":"Draw a card.","cleanText":"Draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}},{"rawText":"if you control any \"Evangelion\", you can set this card.","cleanText":"you can set this card","link":"then","isOptional":true,"isCost":false,"condition":"if you control any \"Evangelion\"","duration":null,"op":{"op":"SET_BURST"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"P23-09":{"cardNumber":"P23-09","name":"15th Anniversary Draw","keywords":[],"abilities":[{"id":"P23-09#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This card has \"Scarlet Flame\"/\"Blood Crystal\"/\"Jade Thunder\"/\"Silver Zero\"/\"Golden Cloud\"/\"Azure Wave\" families. Also, if you have 15 counters or more, it gains an extra [Core] reduction symbol."},"clauses":[{"rawText":"This card has \"Scarlet Flame\"/\"Blood Crystal\"/\"Jade Thunder\"/\"Silver Zero\"/\"Golden Cloud\"/\"Azure Wave\" families.","cleanText":"This card has \"Scarlet Flame\"/\"Blood Crystal\"/\"Jade Thunder\"/\"Silver Zero\"/\"Golden Cloud\"/\"Azure Wave\" families","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"GAIN_FAMILY"}},{"rawText":"if you have 15 counters or more, it gains an extra [Core] reduction symbol.","cleanText":"it gains an extra [Core] reduction symbol","link":"also","isOptional":false,"isCost":false,"condition":"if you have 15 counters or more","duration":null,"op":{"op":"ADD_SYMBOL"}}],"unsupported":[]},{"id":"P23-09#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"MAIN","timingLabel":"Main","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":true,"cleanBody":"Draw a card."},"clauses":[{"rawText":"Draw a card.","cleanText":"Draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]},{"id":"P23-09#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"During this turn, give a Spirit/Ultimate +3000 BP."},"clauses":[{"rawText":"During this turn, give a Spirit/Ultimate +3000 BP.","cleanText":"give a Spirit/Ultimate +3000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"BP_BUFF","amount":3000,"target":"target","duration":"DURING_THIS_TURN"}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"P23-13":{"cardNumber":"P23-13","name":"Arcanabird-QueenPhoenix","keywords":[{"name":"Contract Advent","parameter":"Heaven Contract & C1 or more, (Either Attack Step)","wave":2,"hook":"contract_advent","bracketed":true,"index":8},{"name":"Contract Advent","parameter":null,"wave":2,"hook":"contract_advent","bracketed":true,"index":259}],"abilities":[{"id":"P23-13#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Contract Advent: Heaven Contract & C1 or more, (Either Attack Step)","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"stack this from the Hand onto your target Spirit.","cleanText":"stack this from the Hand onto your target Spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_STACK","from":"HAND","target":{"side":"self","types":["Spirit"]}}}],"unsupported":[]},{"id":"P23-13#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When drawing this face-up card from the deck, instead of adding it to the Hand, you can [Contract Advent] it."},"clauses":[{"rawText":"When drawing this face-up card from the deck, instead of adding it to the Hand, you can [Contract Advent] it.","cleanText":"When drawing this face-up card from the deck, instead of adding it to the Hand, you can [Contract Advent] it","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_TO_HAND"}}],"unsupported":[]},{"id":"P23-13#a2","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned/Advents","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Draw a card from your deckbottom."},"clauses":[{"rawText":"Draw a card from your deckbottom.","cleanText":"Draw a card from your deckbottom","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]},{"id":"P23-13#a3","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":["During OC"],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your \"Golden Cloud\" family Spirit attacks, you can return a card from your decktop to the deckbottom."},"clauses":[{"rawText":"When your \"Golden Cloud\" family Spirit attacks, you can return a card from your decktop to the deckbottom.","cleanText":"When your \"Golden Cloud\" family Spirit attacks, you can return a card from your decktop to the deckbottom","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"P23-12":{"cardNumber":"P23-12","name":"Siegwurm-SixFactor","keywords":[],"abilities":[{"id":"P23-12#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This card/Spirit gains the \"Scarlet Flame\"/\"Blood Crystal\"/\"Jade Thunder\"/\"Silver Zero\"/\"Golden Cloud\"/\"Azure Wave\" families."},"clauses":[{"rawText":"This card/Spirit gains the \"Scarlet Flame\"/\"Blood Crystal\"/\"Jade Thunder\"/\"Silver Zero\"/\"Golden Cloud\"/\"Azure Wave\" families.","cleanText":"This card/Spirit gains the \"Scarlet Flame\"/\"Blood Crystal\"/\"Jade Thunder\"/\"Silver Zero\"/\"Golden Cloud\"/\"Azure Wave\" families","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"GAIN_FAMILY"}}],"unsupported":[]},{"id":"P23-12#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":"ONCE_PER_TURN_SAME_NAME","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"Including being in Soul State/pre-advent condition, if you control any “Petit Glow”/“Petit Bat”/“Petit Lampo”/“Petit Stark”/“Petit Feaniel”/“Petit Shack”, you can summon this card from the Hand. When you've done so, either destroy an opposing Nexus, or destroy an opposing Spirit/Ultimate with the lowest BP."},"clauses":[{"rawText":"Including being in Soul State/pre-advent condition, if you control any \"Petit Glow\"/\"Petit Bat\"/\"Petit Lampo\"/\"Petit Stark\"/\"Petit Feaniel\"/\"Petit Shack\", you can summon this card from the Hand.","cleanText":"Including being in Soul State/pre-advent condition, if you control any \"Petit Glow\"/\"Petit Bat\"/\"Petit Lampo\"/\"Petit Stark\"/\"Petit Feaniel\"/\"Petit Shack\", you can summon this card from the Hand","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_THIS_CARD","from":"HAND_OR_BURST"}},{"rawText":"either destroy an opposing Nexus, or destroy an opposing Spirit/Ultimate with the lowest BP.","cleanText":"either destroy an opposing Nexus, or destroy an opposing Spirit/Ultimate with the lowest BP","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Nexus"]}}}],"unsupported":[]},{"id":"P23-12#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit's symbol is also treated as Purple/Green/White/Yellow/Blue."},"clauses":[{"rawText":"This Spirit's symbol is also treated as Purple/Green/White/Yellow/Blue.","cleanText":"This Spirit's symbol is also treated as Purple/Green/White/Yellow/Blue","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TREAT_RULE"}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"P23-08":{"cardNumber":"P23-08","name":"The Deity Catastrophedragon XV","keywords":[{"name":"Contract Advent","parameter":"Scarlet Flame & C7 or more, (Either Attack Step)","wave":2,"hook":"contract_advent","bracketed":true,"index":8}],"abilities":[{"id":"P23-08#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Contract Advent: Scarlet Flame & C7 or more, (Either Attack Step)","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"stack this from the Hand onto your target Spirit.","cleanText":"stack this from the Hand onto your target Spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_STACK","from":"HAND","target":{"side":"self","types":["Spirit"]}}}],"unsupported":[]},{"id":"P23-08#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned/Advents","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"By -2 opposing counters, draw two cards."},"clauses":[{"rawText":"By -2 opposing counters","cleanText":"By -2 opposing counters","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"COUNT_OPERATION"}},{"rawText":"draw two cards.","cleanText":"draw two cards","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":2,"chooser":"self","forEach":null}}],"unsupported":[]},{"id":"P23-08#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":["During OC"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Opposing Spirits/Ultimates must block if possible. This effect can't be prevented by opposing effects. Also, when blocked, send an opposing Life to the Reserve, and this Spirit refreshes."},"clauses":[{"rawText":"Opposing Spirits/Ultimates must block if possible.","cleanText":"Opposing Spirits/Ultimates must block if possible","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"FORCE_BLOCK","side":"opp"}},{"rawText":"This effect can't be prevented by opposing effects.","cleanText":"This effect can't be prevented by opposing effects","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNPREVENTABLE"}},{"rawText":"when blocked, send an opposing Life to the Reserve, and this Spirit refreshes.","cleanText":"when blocked, send an opposing Life to the Reserve, and this Spirit refreshes","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":"self"}}],"unsupported":[]}],"compiledClausesCount":7,"unsupportedClausesCount":0,"isFullySupported":true},"P23-01":{"cardNumber":"P23-01","name":"The FirmamentSilverLance Blue Obelisk","keywords":[{"name":"Brave","parameter":"Cost 5 or more","wave":3,"hook":"brave","bracketed":true,"index":0},{"name":"Contract Advent","parameter":null,"wave":2,"hook":"contract_advent","bracketed":true,"index":207}],"abilities":[{"id":"P23-01#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Brave Condition: Cost 5 or more","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Brave Condition: Cost 5 or more]","clauses":[],"unsupported":[]},{"id":"P23-01#a1","type":"ABILITY","header":{"levels":[1],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Including being in pre-advent condition, if you control any White Contract Spirit, you can reveal two cards from your decktop. Add a Spirit card with [Contract Advent] among them to the Hand. Return any remaining cards to the decktop or deckbottom only. If you have four counters or more, this effect reveals +1 card."},"clauses":[{"rawText":"Including being in pre-advent condition, if you control any White Contract Spirit, you can reveal two cards from your decktop.","cleanText":"Including being in pre-advent condition, if you control any White Contract Spirit, you can reveal two cards from your decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":2}},{"rawText":"Add a Spirit card with [Contract Advent] among them to the Hand.","cleanText":"Add a Spirit card with [Contract Advent] among them to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_TO_HAND"}},{"rawText":"Return any remaining cards to the decktop or deckbottom only.","cleanText":"Return any remaining cards to the decktop or deckbottom only","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}},{"rawText":"If you have four counters or more, this effect reveals +1 card.","cleanText":"this effect reveals +1 card","link":null,"isOptional":false,"isCost":false,"condition":"If you have four counters or more","duration":null,"op":{"op":"MODIFY_EFFECT"}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"P23-11":{"cardNumber":"P23-11","name":"The GrandseaBoy Qu-Alo","keywords":[{"name":"Contract Advent","parameter":"Wave Contract & C2 or more, (Your Turn)","wave":2,"hook":"contract_advent","bracketed":true,"index":8}],"abilities":[{"id":"P23-11#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Contract Advent: Wave Contract & C2 or more, (Your Turn)","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"stack this from the Hand onto your target Spirit.","cleanText":"stack this from the Hand onto your target Spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_STACK","from":"HAND","target":{"side":"self","types":["Spirit"]}}}],"unsupported":[]},{"id":"P23-11#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Your \"Opposing Deck Banishing effects\" banish +1 card."},"clauses":[{"rawText":"Your \"Opposing Deck Banishing effects\" banish +1 card.","cleanText":"Your \"Opposing Deck Banishing effects\" banish +1 card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"CARD_RULE_MODIFIER"}}],"unsupported":[]},{"id":"P23-11#a2","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":["During OC"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing Cost 3 or less Spirit/Ultimate, and when destroys, put a core from the Void to this Spirit. For every two counters you have, increase the limit of this \"Cost Destruction effect\" by +1."},"clauses":[{"rawText":"Destroy an opposing Cost 3 or less Spirit/Ultimate, and when destroys, put a core from the Void to this Spirit.","cleanText":"Destroy an opposing Cost 3 or less Spirit/Ultimate, and when destroys, put a core from the Void to this Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"void"},"to":{"zone":"field","target":"self"}}},{"rawText":"For every two counters you have, increase the limit of this \"Cost Destruction effect\" by +1.","cleanText":"For every two counters you have, increase the limit of this \"Cost Destruction effect\" by +1","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"COST_MODIFIER"}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"P23-14":{"cardNumber":"P23-14","name":"The KaijuKing Godzilla (2004)","keywords":[{"name":"Burst","parameter":"After an opposing Spirit/Ultimate's (When Summoned) effect resolves","wave":2,"hook":"burst","bracketed":true,"index":161}],"abilities":[{"id":"P23-14#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":"ONCE_PER_GAME_SAME_NAME","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your \"Godzilla\" would leave the Field due to the opponent, you can immediately the following Burst of this card from the Trash."},"clauses":[{"rawText":"When your \"Godzilla\" would leave the Field due to the opponent, you can immediately the following Burst of this card from the Trash.","cleanText":"When your \"Godzilla\" would leave the Field due to the opponent, you can immediately the following Burst of this card from the Trash","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}}],"unsupported":[]},{"id":"P23-14#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"BURST","timingLabel":"Burst","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":"AFTER_OPPONENT_SUMMON_EFFECT","isFlash":false,"isMain":false,"cleanBody":"Summon this card without paying the cost."},"clauses":[{"rawText":"Summon this card without paying the cost.","cleanText":"Summon this card without paying the cost","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_FREE","target":"this_card","from":"BURST"}}],"unsupported":[]},{"id":"P23-14#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned/Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Either destroy an opposing Spirit/Ultimate with one symbol or less, or exhaust it. When this effect destroys or exhausts, draw a card."},"clauses":[{"rawText":"Either destroy an opposing Spirit/Ultimate with one symbol or less, or exhaust it.","cleanText":"Either destroy an opposing Spirit/Ultimate with one symbol or less, or exhaust it","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"]}}},{"rawText":"When this effect destroys or exhausts, draw a card.","cleanText":"When this effect destroys or exhausts, draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]},{"id":"P23-14#a3","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"All your Cost 6 or more \"Godzilla\" gain an extra Red symbol."},"clauses":[{"rawText":"All your Cost 6 or more \"Godzilla\" gain an extra Red symbol.","cleanText":"All your Cost 6 or more \"Godzilla\" gain an extra Red symbol","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"COST_MODIFIER"}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"P23-06":{"cardNumber":"P23-06","name":"The MagicBayonet Scarlet Heart","keywords":[{"name":"Brave","parameter":"Blood Crystal","wave":3,"hook":"brave","bracketed":true,"index":0}],"abilities":[{"id":"P23-06#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Brave Condition: Blood Crystal","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Brave Condition: Blood Crystal]","clauses":[],"unsupported":[]},{"id":"P23-06#a1","type":"ABILITY","header":{"levels":[1],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"from the Removed Zone, send two cores from any opposing Spirits to the Reserve, and when depletes, draw a card."},"clauses":[{"rawText":"from the Removed Zone, send two cores from any opposing Spirits to the Reserve, and when depletes, draw a card.","cleanText":"from the Removed Zone, send two cores from any opposing Spirits to the Reserve, and when depletes, draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]},{"id":"P23-06#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["During Brave"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing Spirit with one core or less on it."},"clauses":[{"rawText":"Destroy an opposing Spirit with one core or less on it.","cleanText":"Destroy an opposing Spirit with one core or less on it","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"P23-04":{"cardNumber":"P23-04","name":"The PhosphorusFlowerWhip Roses' Whip","keywords":[{"name":"Brave","parameter":"Jade Thunder","wave":3,"hook":"brave","bracketed":true,"index":0}],"abilities":[{"id":"P23-04#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Brave Condition: Jade Thunder","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Brave Condition: Jade Thunder]","clauses":[],"unsupported":[]},{"id":"P23-04#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":true,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your Life is reduced by the opponent, you can return this card from your Trash to the Hand."},"clauses":[{"rawText":"When your Life is reduced by the opponent, you can return this card from your Trash to the Hand.","cleanText":"When your Life is reduced by the opponent, you can return this card from your Trash to the Hand","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]},{"id":"P23-04#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["During Brave"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Return an opposing exhausted Spirit to the decktop."},"clauses":[{"rawText":"Return an opposing exhausted Spirit to the decktop.","cleanText":"Return an opposing exhausted Spirit to the decktop","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"P23-10":{"cardNumber":"P23-10","name":"The RedBladeDragonEmperor Wywald-V","keywords":[{"name":"Contract Advent","parameter":"Scarlet Flame & C1 or more, (Either Attack Step)","wave":2,"hook":"contract_advent","bracketed":true,"index":8}],"abilities":[{"id":"P23-10#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Contract Advent: Scarlet Flame & C1 or more, (Either Attack Step)","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"stack this from the Hand onto your target Spirit.","cleanText":"stack this from the Hand onto your target Spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_STACK","from":"HAND","target":{"side":"self","types":["Spirit"]}}}],"unsupported":[]},{"id":"P23-10#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ADVENTS","timingLabel":"When Advents/Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Your counter +1. Then, destroy an opposing 5000 BP or less Spirit, and an opposing 7000 BP or less Ultimate."},"clauses":[{"rawText":"Your counter +1.","cleanText":"Your counter +1","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_COUNTER","count":1}},{"rawText":"destroy an opposing 5000 BP or less Spirit, and an opposing 7000 BP or less Ultimate.","cleanText":"destroy an opposing 5000 BP or less Spirit, and an opposing 7000 BP or less Ultimate","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"bpLte":5000}}}}],"unsupported":[]},{"id":"P23-10#a2","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":["During OC"],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"For each counter you have, increase the limit of this Spirit's \"BP Destruction effect\" by +2000."},"clauses":[{"rawText":"For each counter you have, increase the limit of this Spirit's \"BP Destruction effect\" by +2000.","cleanText":"For each counter you have, increase the limit of this Spirit's \"BP Destruction effect\" by +2000","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BP_BUFF","amount":2000,"target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"P23-07":{"cardNumber":"P23-07","name":"The UltimateDragonEmperor Sieg-Sol-Fried XV","keywords":[{"name":"Tribute","parameter":null,"wave":4,"hook":"tribute","bracketed":true,"index":138},{"name":"Contract Advent","parameter":null,"wave":2,"hook":"contract_advent","bracketed":true,"index":222},{"name":"Sol Awaken","parameter":null,"wave":1,"hook":"awaken","bracketed":true,"index":339}],"abilities":[{"id":"P23-07#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can summon a \"Sieg\" from your Hand, ignoring summon condition, without paying cost, and without using [Tribute]. Or, (Once per Turn: Same Name) if you have six or more counters, you can [Contract Advent] a \"Sieg\" from your Hand, treating [Soul Core] as being sent to the Trash."},"clauses":[{"rawText":"You can summon a \"Sieg\" from your Hand, ignoring summon condition, without paying cost, and without using [Tribute].","cleanText":"You can summon a \"Sieg\" from your Hand, ignoring summon condition, without paying cost, and without using [Tribute]","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}},{"rawText":"if you have six or more counters, you can [Contract Advent] a \"Sieg\" from your Hand, treating [Soul Core] as being sent to the Trash.","cleanText":"you can [Contract Advent] a \"Sieg\" from your Hand, treating [Soul Core] as being sent to the Trash","link":"or","isOptional":true,"isCost":false,"condition":"if you have six or more counters","duration":null,"op":{"op":"TREAT_RULE"}}],"unsupported":[]},{"id":"P23-07#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Sol Awaken","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"You can put any amount of cores from your Field to this Spirit. When cores are put via this effect, once per turn, destroy an opposing Nexus."},"clauses":[{"rawText":"You can put any amount of cores from your Field to this Spirit.","cleanText":"You can put any amount of cores from your Field to this Spirit","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE"}},{"rawText":"When cores are put via this effect, once per turn, destroy an opposing Nexus.","cleanText":"When cores are put via this effect, once per turn, destroy an opposing Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Nexus"]}}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"P23-03":{"cardNumber":"P23-03","name":"The Ultraman That Comes Forth From Dazzling Light","keywords":[],"abilities":[{"id":"P23-03#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"MAIN","timingLabel":"Main","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":true,"cleanBody":"Draw two cards. Then, if you control any \"Ultraman\" Spirit/Grandwalker Nexus, you can deploy a Nexus card from your Hand, without paying the cost."},"clauses":[{"rawText":"Draw two cards.","cleanText":"Draw two cards","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":2,"chooser":"self","forEach":null}},{"rawText":"if you control any \"Ultraman\" Spirit/Grandwalker Nexus, you can deploy a Nexus card from your Hand, without paying the cost.","cleanText":"you can deploy a Nexus card from your Hand, without paying the cost","link":"then","isOptional":true,"isCost":false,"condition":"if you control any \"Ultraman\" Spirit/Grandwalker Nexus","duration":null,"op":{"op":"DEPLOY_NEXUS","free":true}}],"unsupported":[]},{"id":"P23-03#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"During this turn, give an \"Ultraman\" you control +5000 BP."},"clauses":[{"rawText":"During this turn, give an \"Ultraman\" you control +5000 BP.","cleanText":"give an \"Ultraman\" you control +5000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"BP_BUFF","amount":5000,"target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"P23-02":{"cardNumber":"P23-02","name":"The Witch's Awakening","keywords":[],"abilities":[{"id":"P23-02#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"You can summon/deploy one of your \"School\" family cards in Hand/Soul State/pre-advent condition by paying its original cost. When you summoned/deployed any \"Aerial\"/\"Suletta\"/\"Miorine\" via this effect, during this turn, your Life can't be reduced by the attacks of opposing Spirits/Ultimates with a cost equal or inferior to one of your \"Aerial\", including those that are in Soul State."},"clauses":[{"rawText":"You can summon/deploy one of your \"School\" family cards in Hand/Soul State/pre-advent condition by paying its original cost.","cleanText":"You can summon/deploy one of your \"School\" family cards in Hand/Soul State/pre-advent condition by paying its original cost","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DEPLOY_NEXUS","free":true}},{"rawText":"When you summoned/deployed any \"Aerial\"/\"Suletta\"/\"Miorine\" via this effect, during this turn, your Life can't be reduced by the attacks of opposing Spirits/Ultimates with a cost equal or inferior to one of your \"Aerial\", including those that are in Soul State.","cleanText":"When you summoned/deployed any \"Aerial\"/\"Suletta\"/\"Miorine\" via this effect, during this turn, your Life can't be reduced by the attacks of opposing Spirits/Ultimates with a cost equal or inferior to one of your \"Aerial\", including those that are in Soul State","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"COST_MODIFIER"}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "P23-05": {
+    "cardNumber": "P23-05",
+    "name": "...It's Delicious",
+    "keywords": [
+      {
+        "name": "Mirage",
+        "parameter": "Cost 1",
+        "wave": 2,
+        "hook": "mirage",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "P23-05#AB_PASSIVE_NONE_LV1_LV2_LV3_7e0997c8c8011f070690e5fbd4cd54aff987500f0433e645ad7ac887fe59b290_0f3036d7831fcd6aff12c1d93d9849e1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Mirage: Cost 1"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "P23-05#a0",
+        "physicalId": "P23-05#AB_PASSIVE_NONE_LV1_LV2_LV3_7e0997c8c8011f070690e5fbd4cd54aff987500f0433e645ad7ac887fe59b290_0f3036d7831fcd6aff12c1d93d9849e1",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_7e0997c8c8011f070690e5fbd4cd54aff987500f0433e645ad7ac887fe59b290_0f3036d7831fcd6aff12c1d93d9849e1"
+      },
+      {
+        "id": "P23-05#AB_END_OF_TURN_NONE_LV1_LV2_LV3_9a643ac484b38cff4f3d2f3917d3b130192103b5005c54633f2cade5ceaf6487_2eab9fe69bf89f103ef3b3fc8ecde3d9",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "During Set"
+          ],
+          "timing": "END_OF_TURN",
+          "timingLabel": "Your End Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "If your Life is at three or less, by putting a core from the Void to your Life, refresh one of your \"Evangelion\" that is braved to \"Pilot\" family Braves."
+        },
+        "clauses": [
+          {
+            "rawText": "If your Life is at three or less, by putting a core from the Void to your Life, refresh one of your \"Evangelion\" that is braved to \"Pilot\" family Braves.",
+            "cleanText": "by putting a core from the Void to your Life, refresh one of your \"Evangelion\" that is braved to \"Pilot\" family Braves",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If your Life is at three or less",
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-05#a1",
+        "physicalId": "P23-05#AB_END_OF_TURN_NONE_LV1_LV2_LV3_9a643ac484b38cff4f3d2f3917d3b130192103b5005c54633f2cade5ceaf6487_2eab9fe69bf89f103ef3b3fc8ecde3d9",
+        "semanticId": "SEM#AB_END_OF_TURN_NONE_LV1_LV2_LV3_9a643ac484b38cff4f3d2f3917d3b130192103b5005c54633f2cade5ceaf6487_2eab9fe69bf89f103ef3b3fc8ecde3d9"
+      },
+      {
+        "id": "P23-05#AB_MAIN_NONE_LV1_LV2_LV3_2520edac071ba77f2a56d52616217adf0367f3862bf6f7ed1ca224e278fa96e2_d76b4ac708d36e61271c71cb7dcd95d8",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "Draw a card. Then, (Once per Turn: Same Name) if you control any \"Evangelion\", you can set this card."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw a card.",
+            "cleanText": "Draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "if you control any \"Evangelion\", you can set this card.",
+            "cleanText": "you can set this card",
+            "link": "then",
+            "isOptional": true,
+            "isCost": false,
+            "condition": "if you control any \"Evangelion\"",
+            "duration": null,
+            "op": {
+              "op": "SET_BURST"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-05#a2",
+        "physicalId": "P23-05#AB_MAIN_NONE_LV1_LV2_LV3_2520edac071ba77f2a56d52616217adf0367f3862bf6f7ed1ca224e278fa96e2_d76b4ac708d36e61271c71cb7dcd95d8",
+        "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_2520edac071ba77f2a56d52616217adf0367f3862bf6f7ed1ca224e278fa96e2_d76b4ac708d36e61271c71cb7dcd95d8"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "P23-09": {
+    "cardNumber": "P23-09",
+    "name": "15th Anniversary Draw",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "P23-09#AB_PASSIVE_NONE_LV1_LV2_LV3_38c78cb4a55e9aabdcf0fab71c988e65169d789cb6b844a1bd40685fccf4319c_90822cc88be266c3870aabfc8d6af60c",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This card has \"Scarlet Flame\"/\"Blood Crystal\"/\"Jade Thunder\"/\"Silver Zero\"/\"Golden Cloud\"/\"Azure Wave\" families. Also, if you have 15 counters or more, it gains an extra [Core] reduction symbol."
+        },
+        "clauses": [
+          {
+            "rawText": "This card has \"Scarlet Flame\"/\"Blood Crystal\"/\"Jade Thunder\"/\"Silver Zero\"/\"Golden Cloud\"/\"Azure Wave\" families.",
+            "cleanText": "This card has \"Scarlet Flame\"/\"Blood Crystal\"/\"Jade Thunder\"/\"Silver Zero\"/\"Golden Cloud\"/\"Azure Wave\" families",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GAIN_FAMILY"
+            }
+          },
+          {
+            "rawText": "if you have 15 counters or more, it gains an extra [Core] reduction symbol.",
+            "cleanText": "it gains an extra [Core] reduction symbol",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": "if you have 15 counters or more",
+            "duration": null,
+            "op": {
+              "op": "ADD_SYMBOL"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-09#a0",
+        "physicalId": "P23-09#AB_PASSIVE_NONE_LV1_LV2_LV3_38c78cb4a55e9aabdcf0fab71c988e65169d789cb6b844a1bd40685fccf4319c_90822cc88be266c3870aabfc8d6af60c",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_38c78cb4a55e9aabdcf0fab71c988e65169d789cb6b844a1bd40685fccf4319c_90822cc88be266c3870aabfc8d6af60c"
+      },
+      {
+        "id": "P23-09#AB_MAIN_NONE_LV1_LV2_LV3_98ff92383b7be21f6e2a7dca73857340719ed233c8afb331ccde6cc671affb5e_f3ad6ed379c00e1e4ad2eaf9bad82954",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "Draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw a card.",
+            "cleanText": "Draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-09#a1",
+        "physicalId": "P23-09#AB_MAIN_NONE_LV1_LV2_LV3_98ff92383b7be21f6e2a7dca73857340719ed233c8afb331ccde6cc671affb5e_f3ad6ed379c00e1e4ad2eaf9bad82954",
+        "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_98ff92383b7be21f6e2a7dca73857340719ed233c8afb331ccde6cc671affb5e_f3ad6ed379c00e1e4ad2eaf9bad82954"
+      },
+      {
+        "id": "P23-09#AB_FLASH_NONE_LV1_LV2_LV3_b7267febc116065bc535a58f5f3ff29dbb5c8037e51c4522ec8e3594a43eeb5e_256987d37f959f9e5e2d57967e8b7841",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, give a Spirit/Ultimate +3000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, give a Spirit/Ultimate +3000 BP.",
+            "cleanText": "give a Spirit/Ultimate +3000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 3000,
+              "target": "target",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-09#a2",
+        "physicalId": "P23-09#AB_FLASH_NONE_LV1_LV2_LV3_b7267febc116065bc535a58f5f3ff29dbb5c8037e51c4522ec8e3594a43eeb5e_256987d37f959f9e5e2d57967e8b7841",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_b7267febc116065bc535a58f5f3ff29dbb5c8037e51c4522ec8e3594a43eeb5e_256987d37f959f9e5e2d57967e8b7841"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "P23-13": {
+    "cardNumber": "P23-13",
+    "name": "Arcanabird-QueenPhoenix",
+    "keywords": [
+      {
+        "name": "Contract Advent",
+        "parameter": "Heaven Contract & C1 or more, (Either Attack Step)",
+        "wave": 2,
+        "hook": "contract_advent",
+        "bracketed": true,
+        "index": 8
+      },
+      {
+        "name": "Contract Advent",
+        "parameter": null,
+        "wave": 2,
+        "hook": "contract_advent",
+        "bracketed": true,
+        "index": 259
+      }
+    ],
+    "abilities": [
+      {
+        "id": "P23-13#AB_FLASH_NONE_LV1_LV2_LV3_3263836a0162e4a8062cb04c9e4639d8aa80b93e8b6f148f8a4459911668ae81_93ff8809cc1e5a2449a5b4e9e34bee7f",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Contract Advent: Heaven Contract & C1 or more, (Either Attack Step)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "stack this from the Hand onto your target Spirit.",
+            "cleanText": "stack this from the Hand onto your target Spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_STACK",
+              "from": "HAND",
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-13#a0",
+        "physicalId": "P23-13#AB_FLASH_NONE_LV1_LV2_LV3_3263836a0162e4a8062cb04c9e4639d8aa80b93e8b6f148f8a4459911668ae81_93ff8809cc1e5a2449a5b4e9e34bee7f",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_3263836a0162e4a8062cb04c9e4639d8aa80b93e8b6f148f8a4459911668ae81_93ff8809cc1e5a2449a5b4e9e34bee7f"
+      },
+      {
+        "id": "P23-13#AB_PASSIVE_NONE_LV1_LV2_LV3_950a35712229737ccd60e1e4d7180e794cf3968e856b14c2044cf03859c40017_8053f7eeb51f8c8f6ce580259d35ade2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When drawing this face-up card from the deck, instead of adding it to the Hand, you can [Contract Advent] it."
+        },
+        "clauses": [
+          {
+            "rawText": "When drawing this face-up card from the deck, instead of adding it to the Hand, you can [Contract Advent] it.",
+            "cleanText": "When drawing this face-up card from the deck, instead of adding it to the Hand, you can [Contract Advent] it",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-13#a1",
+        "physicalId": "P23-13#AB_PASSIVE_NONE_LV1_LV2_LV3_950a35712229737ccd60e1e4d7180e794cf3968e856b14c2044cf03859c40017_8053f7eeb51f8c8f6ce580259d35ade2",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_950a35712229737ccd60e1e4d7180e794cf3968e856b14c2044cf03859c40017_8053f7eeb51f8c8f6ce580259d35ade2"
+      },
+      {
+        "id": "P23-13#AB_WHEN_SUMMONED_NONE_LV1_LV2_fa08a2fabdcebdbc07f744dcbd7c801738c1f6abd182e56056ab239636e8117f_a39bbb3b1965a7255fd2d65e78264f7b",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned/Advents",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Draw a card from your deckbottom."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw a card from your deckbottom.",
+            "cleanText": "Draw a card from your deckbottom",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-13#a2",
+        "physicalId": "P23-13#AB_WHEN_SUMMONED_NONE_LV1_LV2_fa08a2fabdcebdbc07f744dcbd7c801738c1f6abd182e56056ab239636e8117f_a39bbb3b1965a7255fd2d65e78264f7b",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_fa08a2fabdcebdbc07f744dcbd7c801738c1f6abd182e56056ab239636e8117f_a39bbb3b1965a7255fd2d65e78264f7b"
+      },
+      {
+        "id": "P23-13#AB_ATTACK_STEP_NONE_LV1_LV2_9e3a4d8d734917687688d1a91d8c9bfb8c6a321792d26e21f7e90fe7e70b525e_6ecc0f3e565221a5a720e25c507bf559",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "During OC"
+          ],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your \"Golden Cloud\" family Spirit attacks, you can return a card from your decktop to the deckbottom."
+        },
+        "clauses": [
+          {
+            "rawText": "When your \"Golden Cloud\" family Spirit attacks, you can return a card from your decktop to the deckbottom.",
+            "cleanText": "When your \"Golden Cloud\" family Spirit attacks, you can return a card from your decktop to the deckbottom",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-13#a3",
+        "physicalId": "P23-13#AB_ATTACK_STEP_NONE_LV1_LV2_9e3a4d8d734917687688d1a91d8c9bfb8c6a321792d26e21f7e90fe7e70b525e_6ecc0f3e565221a5a720e25c507bf559",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_9e3a4d8d734917687688d1a91d8c9bfb8c6a321792d26e21f7e90fe7e70b525e_6ecc0f3e565221a5a720e25c507bf559"
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "P23-12": {
+    "cardNumber": "P23-12",
+    "name": "Siegwurm-SixFactor",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "P23-12#AB_PASSIVE_NONE_LV1_LV2_LV3_d5118fda52bdc7c6ff8c11968a64e7c5c2766af89f146e954e10b629fc8dacb2_0935ab48b68303855f0fd68270cf5cd3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This card/Spirit gains the \"Scarlet Flame\"/\"Blood Crystal\"/\"Jade Thunder\"/\"Silver Zero\"/\"Golden Cloud\"/\"Azure Wave\" families."
+        },
+        "clauses": [
+          {
+            "rawText": "This card/Spirit gains the \"Scarlet Flame\"/\"Blood Crystal\"/\"Jade Thunder\"/\"Silver Zero\"/\"Golden Cloud\"/\"Azure Wave\" families.",
+            "cleanText": "This card/Spirit gains the \"Scarlet Flame\"/\"Blood Crystal\"/\"Jade Thunder\"/\"Silver Zero\"/\"Golden Cloud\"/\"Azure Wave\" families",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GAIN_FAMILY"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-12#a0",
+        "physicalId": "P23-12#AB_PASSIVE_NONE_LV1_LV2_LV3_d5118fda52bdc7c6ff8c11968a64e7c5c2766af89f146e954e10b629fc8dacb2_0935ab48b68303855f0fd68270cf5cd3",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_d5118fda52bdc7c6ff8c11968a64e7c5c2766af89f146e954e10b629fc8dacb2_0935ab48b68303855f0fd68270cf5cd3"
+      },
+      {
+        "id": "P23-12#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_e2e6c12491f281059f1f2200c539dfe73f9e023f42393fdcb43475a33d01ff56_62c5bb7df36521126dd4a267bb6c3f9e",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Including being in Soul State/pre-advent condition, if you control any “Petit Glow”/“Petit Bat”/“Petit Lampo”/“Petit Stark”/“Petit Feaniel”/“Petit Shack”, you can summon this card from the Hand. When you've done so, either destroy an opposing Nexus, or destroy an opposing Spirit/Ultimate with the lowest BP."
+        },
+        "clauses": [
+          {
+            "rawText": "Including being in Soul State/pre-advent condition, if you control any \"Petit Glow\"/\"Petit Bat\"/\"Petit Lampo\"/\"Petit Stark\"/\"Petit Feaniel\"/\"Petit Shack\", you can summon this card from the Hand.",
+            "cleanText": "Including being in Soul State/pre-advent condition, if you control any \"Petit Glow\"/\"Petit Bat\"/\"Petit Lampo\"/\"Petit Stark\"/\"Petit Feaniel\"/\"Petit Shack\", you can summon this card from the Hand",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_THIS_CARD",
+              "from": "HAND_OR_BURST"
+            }
+          },
+          {
+            "rawText": "either destroy an opposing Nexus, or destroy an opposing Spirit/Ultimate with the lowest BP.",
+            "cleanText": "either destroy an opposing Nexus, or destroy an opposing Spirit/Ultimate with the lowest BP",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Nexus"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-12#a1",
+        "physicalId": "P23-12#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_e2e6c12491f281059f1f2200c539dfe73f9e023f42393fdcb43475a33d01ff56_62c5bb7df36521126dd4a267bb6c3f9e",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_e2e6c12491f281059f1f2200c539dfe73f9e023f42393fdcb43475a33d01ff56_62c5bb7df36521126dd4a267bb6c3f9e"
+      },
+      {
+        "id": "P23-12#AB_PASSIVE_NONE_LV2_LV3_fd9f97f6fec9b1e0fef7772985246e601eef6ee75e0336f5246759e6b9e911c3_a3afd511ac78909536dca78de5cb7202",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit's symbol is also treated as Purple/Green/White/Yellow/Blue."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit's symbol is also treated as Purple/Green/White/Yellow/Blue.",
+            "cleanText": "This Spirit's symbol is also treated as Purple/Green/White/Yellow/Blue",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-12#a2",
+        "physicalId": "P23-12#AB_PASSIVE_NONE_LV2_LV3_fd9f97f6fec9b1e0fef7772985246e601eef6ee75e0336f5246759e6b9e911c3_a3afd511ac78909536dca78de5cb7202",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV2_LV3_fd9f97f6fec9b1e0fef7772985246e601eef6ee75e0336f5246759e6b9e911c3_a3afd511ac78909536dca78de5cb7202"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "P23-08": {
+    "cardNumber": "P23-08",
+    "name": "The Deity Catastrophedragon XV",
+    "keywords": [
+      {
+        "name": "Contract Advent",
+        "parameter": "Scarlet Flame & C7 or more, (Either Attack Step)",
+        "wave": 2,
+        "hook": "contract_advent",
+        "bracketed": true,
+        "index": 8
+      }
+    ],
+    "abilities": [
+      {
+        "id": "P23-08#AB_FLASH_NONE_LV1_LV2_LV3_3fd8bfcef340f30db78aeb9a52c4be165ac9f24d244a05c06ba270aa69c16c59_21491492c5c2df0fe5337ce0fe5de099",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Contract Advent: Scarlet Flame & C7 or more, (Either Attack Step)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "stack this from the Hand onto your target Spirit.",
+            "cleanText": "stack this from the Hand onto your target Spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_STACK",
+              "from": "HAND",
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-08#a0",
+        "physicalId": "P23-08#AB_FLASH_NONE_LV1_LV2_LV3_3fd8bfcef340f30db78aeb9a52c4be165ac9f24d244a05c06ba270aa69c16c59_21491492c5c2df0fe5337ce0fe5de099",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_3fd8bfcef340f30db78aeb9a52c4be165ac9f24d244a05c06ba270aa69c16c59_21491492c5c2df0fe5337ce0fe5de099"
+      },
+      {
+        "id": "P23-08#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_889dcfaae82fe704b86d865f21b930629b8a4c0b7df4bff86a70fc0b2f2fef36_5851176020e8b988cebc4738bda1c0d1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned/Advents",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By -2 opposing counters, draw two cards."
+        },
+        "clauses": [
+          {
+            "rawText": "By -2 opposing counters",
+            "cleanText": "By -2 opposing counters",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COUNT_OPERATION"
+            }
+          },
+          {
+            "rawText": "draw two cards.",
+            "cleanText": "draw two cards",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 2,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-08#a1",
+        "physicalId": "P23-08#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_889dcfaae82fe704b86d865f21b930629b8a4c0b7df4bff86a70fc0b2f2fef36_5851176020e8b988cebc4738bda1c0d1",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_889dcfaae82fe704b86d865f21b930629b8a4c0b7df4bff86a70fc0b2f2fef36_5851176020e8b988cebc4738bda1c0d1"
+      },
+      {
+        "id": "P23-08#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_ed934f628f7d17126a75e3c25f04ba12777c5c2519bb5588b8841ec01e533376_d69dd60416b2e441c1ba3388efcdba45",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "During OC"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Opposing Spirits/Ultimates must block if possible. This effect can't be prevented by opposing effects. Also, when blocked, send an opposing Life to the Reserve, and this Spirit refreshes."
+        },
+        "clauses": [
+          {
+            "rawText": "Opposing Spirits/Ultimates must block if possible.",
+            "cleanText": "Opposing Spirits/Ultimates must block if possible",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "FORCE_BLOCK",
+              "side": "opp"
+            }
+          },
+          {
+            "rawText": "This effect can't be prevented by opposing effects.",
+            "cleanText": "This effect can't be prevented by opposing effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "UNPREVENTABLE"
+            }
+          },
+          {
+            "rawText": "when blocked, send an opposing Life to the Reserve, and this Spirit refreshes.",
+            "cleanText": "when blocked, send an opposing Life to the Reserve, and this Spirit refreshes",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-08#a2",
+        "physicalId": "P23-08#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_ed934f628f7d17126a75e3c25f04ba12777c5c2519bb5588b8841ec01e533376_d69dd60416b2e441c1ba3388efcdba45",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_ed934f628f7d17126a75e3c25f04ba12777c5c2519bb5588b8841ec01e533376_d69dd60416b2e441c1ba3388efcdba45"
+      }
+    ],
+    "compiledClausesCount": 7,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "P23-01": {
+    "cardNumber": "P23-01",
+    "name": "The FirmamentSilverLance Blue Obelisk",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "Cost 5 or more",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      },
+      {
+        "name": "Contract Advent",
+        "parameter": null,
+        "wave": 2,
+        "hook": "contract_advent",
+        "bracketed": true,
+        "index": 207
+      }
+    ],
+    "abilities": [
+      {
+        "id": "P23-01#AB_PASSIVE_NONE_LV1_LV2_LV3_bad661ddeedd4fabf0c3e0d1a0b0f7f46eb6cad4d35cc9301d1f8b9b5b0d4cf3_303175f68ccf142f43b72f0d09e35e3b",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: Cost 5 or more",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Brave Condition: Cost 5 or more]",
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "P23-01#a0",
+        "physicalId": "P23-01#AB_PASSIVE_NONE_LV1_LV2_LV3_bad661ddeedd4fabf0c3e0d1a0b0f7f46eb6cad4d35cc9301d1f8b9b5b0d4cf3_303175f68ccf142f43b72f0d09e35e3b",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_bad661ddeedd4fabf0c3e0d1a0b0f7f46eb6cad4d35cc9301d1f8b9b5b0d4cf3_303175f68ccf142f43b72f0d09e35e3b"
+      },
+      {
+        "id": "P23-01#AB_WHEN_SUMMONED_NONE_LV1_9d959c02b96a8cd8c293eeb516291406c7e28fcd383a188707a6986026ed9555_9d140682076e412dbede2633ca7316e7",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Including being in pre-advent condition, if you control any White Contract Spirit, you can reveal two cards from your decktop. Add a Spirit card with [Contract Advent] among them to the Hand. Return any remaining cards to the decktop or deckbottom only. If you have four counters or more, this effect reveals +1 card."
+        },
+        "clauses": [
+          {
+            "rawText": "Including being in pre-advent condition, if you control any White Contract Spirit, you can reveal two cards from your decktop.",
+            "cleanText": "Including being in pre-advent condition, if you control any White Contract Spirit, you can reveal two cards from your decktop",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 2
+            }
+          },
+          {
+            "rawText": "Add a Spirit card with [Contract Advent] among them to the Hand.",
+            "cleanText": "Add a Spirit card with [Contract Advent] among them to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          },
+          {
+            "rawText": "Return any remaining cards to the decktop or deckbottom only.",
+            "cleanText": "Return any remaining cards to the decktop or deckbottom only",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "If you have four counters or more, this effect reveals +1 card.",
+            "cleanText": "this effect reveals +1 card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If you have four counters or more",
+            "duration": null,
+            "op": {
+              "op": "MODIFY_EFFECT"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-01#a1",
+        "physicalId": "P23-01#AB_WHEN_SUMMONED_NONE_LV1_9d959c02b96a8cd8c293eeb516291406c7e28fcd383a188707a6986026ed9555_9d140682076e412dbede2633ca7316e7",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_9d959c02b96a8cd8c293eeb516291406c7e28fcd383a188707a6986026ed9555_9d140682076e412dbede2633ca7316e7"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "P23-11": {
+    "cardNumber": "P23-11",
+    "name": "The GrandseaBoy Qu-Alo",
+    "keywords": [
+      {
+        "name": "Contract Advent",
+        "parameter": "Wave Contract & C2 or more, (Your Turn)",
+        "wave": 2,
+        "hook": "contract_advent",
+        "bracketed": true,
+        "index": 8
+      }
+    ],
+    "abilities": [
+      {
+        "id": "P23-11#AB_FLASH_NONE_LV1_LV2_LV3_6984624ebc5a8f513238c7a3a563c7007653a23e468437c55b55f877e5b1b734_b541dab810aeefe8f15dc1de99cfb18f",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Contract Advent: Wave Contract & C2 or more, (Your Turn)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "stack this from the Hand onto your target Spirit.",
+            "cleanText": "stack this from the Hand onto your target Spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_STACK",
+              "from": "HAND",
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-11#a0",
+        "physicalId": "P23-11#AB_FLASH_NONE_LV1_LV2_LV3_6984624ebc5a8f513238c7a3a563c7007653a23e468437c55b55f877e5b1b734_b541dab810aeefe8f15dc1de99cfb18f",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_6984624ebc5a8f513238c7a3a563c7007653a23e468437c55b55f877e5b1b734_b541dab810aeefe8f15dc1de99cfb18f"
+      },
+      {
+        "id": "P23-11#AB_PASSIVE_NONE_LV1_LV2_af84911b8dec05bedd3a98e89e8e0d18f71f6e00255c8dd9ad1b01ed024c312f_38d5bb736012caf933e02eb8a3c3e6a7",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Your \"Opposing Deck Banishing effects\" banish +1 card."
+        },
+        "clauses": [
+          {
+            "rawText": "Your \"Opposing Deck Banishing effects\" banish +1 card.",
+            "cleanText": "Your \"Opposing Deck Banishing effects\" banish +1 card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CARD_RULE_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-11#a1",
+        "physicalId": "P23-11#AB_PASSIVE_NONE_LV1_LV2_af84911b8dec05bedd3a98e89e8e0d18f71f6e00255c8dd9ad1b01ed024c312f_38d5bb736012caf933e02eb8a3c3e6a7",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_af84911b8dec05bedd3a98e89e8e0d18f71f6e00255c8dd9ad1b01ed024c312f_38d5bb736012caf933e02eb8a3c3e6a7"
+      },
+      {
+        "id": "P23-11#AB_WHEN_ATTACKS_NONE_LV1_LV2_426e59ac5e5a939e4f8f7755423f662563af5b0cb5c8ac510ae19b6e63eba6ed_a9a1f8cd6f78e2d93d75ab183a4837c0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "During OC"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Cost 3 or less Spirit/Ultimate, and when destroys, put a core from the Void to this Spirit. For every two counters you have, increase the limit of this \"Cost Destruction effect\" by +1."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Cost 3 or less Spirit/Ultimate, and when destroys, put a core from the Void to this Spirit.",
+            "cleanText": "Destroy an opposing Cost 3 or less Spirit/Ultimate, and when destroys, put a core from the Void to this Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "field",
+                "target": "self"
+              }
+            }
+          },
+          {
+            "rawText": "For every two counters you have, increase the limit of this \"Cost Destruction effect\" by +1.",
+            "cleanText": "For every two counters you have, increase the limit of this \"Cost Destruction effect\" by +1",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-11#a2",
+        "physicalId": "P23-11#AB_WHEN_ATTACKS_NONE_LV1_LV2_426e59ac5e5a939e4f8f7755423f662563af5b0cb5c8ac510ae19b6e63eba6ed_a9a1f8cd6f78e2d93d75ab183a4837c0",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_426e59ac5e5a939e4f8f7755423f662563af5b0cb5c8ac510ae19b6e63eba6ed_a9a1f8cd6f78e2d93d75ab183a4837c0"
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "P23-14": {
+    "cardNumber": "P23-14",
+    "name": "The KaijuKing Godzilla (2004)",
+    "keywords": [
+      {
+        "name": "Burst",
+        "parameter": "After an opposing Spirit/Ultimate's (When Summoned) effect resolves",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 161
+      }
+    ],
+    "abilities": [
+      {
+        "id": "P23-14#AB_PASSIVE_NONE_LV1_LV2_LV3_b1e9962b9a6ab83e9bde41f085955951e7dfefcbbff5837e78f5b17e09100113_38116178377e97f41bddc52c82118717",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_GAME_SAME_NAME",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your \"Godzilla\" would leave the Field due to the opponent, you can immediately the following Burst of this card from the Trash."
+        },
+        "clauses": [
+          {
+            "rawText": "When your \"Godzilla\" would leave the Field due to the opponent, you can immediately the following Burst of this card from the Trash.",
+            "cleanText": "When your \"Godzilla\" would leave the Field due to the opponent, you can immediately the following Burst of this card from the Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-14#a0",
+        "physicalId": "P23-14#AB_PASSIVE_NONE_LV1_LV2_LV3_b1e9962b9a6ab83e9bde41f085955951e7dfefcbbff5837e78f5b17e09100113_38116178377e97f41bddc52c82118717",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_b1e9962b9a6ab83e9bde41f085955951e7dfefcbbff5837e78f5b17e09100113_38116178377e97f41bddc52c82118717"
+      },
+      {
+        "id": "P23-14#AB_BURST_NONE_LV1_LV2_LV3_7caafca438b32bfd0552bd8c1bfb38bc0ab45bc3c16d683a3624a60055d9a113_7b7835a964a7dca0f5f8db5b55118080",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "BURST",
+          "timingLabel": "Burst",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": "AFTER_OPPONENT_SUMMON_EFFECT",
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Summon this card without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "Summon this card without paying the cost.",
+            "cleanText": "Summon this card without paying the cost",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_FREE",
+              "target": "this_card",
+              "from": "BURST"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-14#a1",
+        "physicalId": "P23-14#AB_BURST_NONE_LV1_LV2_LV3_7caafca438b32bfd0552bd8c1bfb38bc0ab45bc3c16d683a3624a60055d9a113_7b7835a964a7dca0f5f8db5b55118080",
+        "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_7caafca438b32bfd0552bd8c1bfb38bc0ab45bc3c16d683a3624a60055d9a113_7b7835a964a7dca0f5f8db5b55118080"
+      },
+      {
+        "id": "P23-14#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_2e1080e4ac8350c752de9570820cc6213d2869119ab270c121b9d0d59d26130d_e65247f9eb0d0fdade8cf902c3f0e955",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned/Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Either destroy an opposing Spirit/Ultimate with one symbol or less, or exhaust it. When this effect destroys or exhausts, draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "Either destroy an opposing Spirit/Ultimate with one symbol or less, or exhaust it.",
+            "cleanText": "Either destroy an opposing Spirit/Ultimate with one symbol or less, or exhaust it",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "When this effect destroys or exhausts, draw a card.",
+            "cleanText": "When this effect destroys or exhausts, draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-14#a2",
+        "physicalId": "P23-14#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_2e1080e4ac8350c752de9570820cc6213d2869119ab270c121b9d0d59d26130d_e65247f9eb0d0fdade8cf902c3f0e955",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_2e1080e4ac8350c752de9570820cc6213d2869119ab270c121b9d0d59d26130d_e65247f9eb0d0fdade8cf902c3f0e955"
+      },
+      {
+        "id": "P23-14#AB_ATTACK_STEP_NONE_LV2_LV3_b802f84db5adf261d61f2e045e589db02c6d15f8f278867630f2a6485427edc9_9b624c760ad5fdc803b8eca679ce5a41",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "All your Cost 6 or more \"Godzilla\" gain an extra Red symbol."
+        },
+        "clauses": [
+          {
+            "rawText": "All your Cost 6 or more \"Godzilla\" gain an extra Red symbol.",
+            "cleanText": "All your Cost 6 or more \"Godzilla\" gain an extra Red symbol",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-14#a3",
+        "physicalId": "P23-14#AB_ATTACK_STEP_NONE_LV2_LV3_b802f84db5adf261d61f2e045e589db02c6d15f8f278867630f2a6485427edc9_9b624c760ad5fdc803b8eca679ce5a41",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_b802f84db5adf261d61f2e045e589db02c6d15f8f278867630f2a6485427edc9_9b624c760ad5fdc803b8eca679ce5a41"
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "P23-06": {
+    "cardNumber": "P23-06",
+    "name": "The MagicBayonet Scarlet Heart",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "Blood Crystal",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "P23-06#AB_PASSIVE_NONE_LV1_LV2_LV3_684c138135d84e334d2d740b4a77f2133a0e473aee7912d6cf5b5f86f1d2c594_2f2b7f45a11e22f4b5dd2fcbf9e08d92",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: Blood Crystal",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Brave Condition: Blood Crystal]",
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "P23-06#a0",
+        "physicalId": "P23-06#AB_PASSIVE_NONE_LV1_LV2_LV3_684c138135d84e334d2d740b4a77f2133a0e473aee7912d6cf5b5f86f1d2c594_2f2b7f45a11e22f4b5dd2fcbf9e08d92",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_684c138135d84e334d2d740b4a77f2133a0e473aee7912d6cf5b5f86f1d2c594_2f2b7f45a11e22f4b5dd2fcbf9e08d92"
+      },
+      {
+        "id": "P23-06#AB_WHEN_SUMMONED_NONE_LV1_1e8bf3b5ded26804cf900747021bf5931192c25b6631ddb42e39e9a3d14867a7_0c1c156040b30040539f1ceb258d799e",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "from the Removed Zone, send two cores from any opposing Spirits to the Reserve, and when depletes, draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "from the Removed Zone, send two cores from any opposing Spirits to the Reserve, and when depletes, draw a card.",
+            "cleanText": "from the Removed Zone, send two cores from any opposing Spirits to the Reserve, and when depletes, draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-06#a1",
+        "physicalId": "P23-06#AB_WHEN_SUMMONED_NONE_LV1_1e8bf3b5ded26804cf900747021bf5931192c25b6631ddb42e39e9a3d14867a7_0c1c156040b30040539f1ceb258d799e",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_1e8bf3b5ded26804cf900747021bf5931192c25b6631ddb42e39e9a3d14867a7_0c1c156040b30040539f1ceb258d799e"
+      },
+      {
+        "id": "P23-06#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_6128bd1dc53605fa2057c0b9c7f5ee00c37a72e1599c4a60c974f842c8ca709a_135508e1e068bc4b7d36390ee1d1efe2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "During Brave"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Spirit with one core or less on it."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Spirit with one core or less on it.",
+            "cleanText": "Destroy an opposing Spirit with one core or less on it",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-06#a2",
+        "physicalId": "P23-06#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_6128bd1dc53605fa2057c0b9c7f5ee00c37a72e1599c4a60c974f842c8ca709a_135508e1e068bc4b7d36390ee1d1efe2",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_6128bd1dc53605fa2057c0b9c7f5ee00c37a72e1599c4a60c974f842c8ca709a_135508e1e068bc4b7d36390ee1d1efe2"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "P23-04": {
+    "cardNumber": "P23-04",
+    "name": "The PhosphorusFlowerWhip Roses' Whip",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "Jade Thunder",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "P23-04#AB_PASSIVE_NONE_LV1_LV2_LV3_7532c879be8cdf8deeba02e1f789aae5a80a0fc8879493a3c5ddeb54364c001a_929a75b77dcefaacbe7b12c64a1ca74f",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: Jade Thunder",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Brave Condition: Jade Thunder]",
+        "clauses": [],
+        "unsupported": [],
+        "legacyId": "P23-04#a0",
+        "physicalId": "P23-04#AB_PASSIVE_NONE_LV1_LV2_LV3_7532c879be8cdf8deeba02e1f789aae5a80a0fc8879493a3c5ddeb54364c001a_929a75b77dcefaacbe7b12c64a1ca74f",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_7532c879be8cdf8deeba02e1f789aae5a80a0fc8879493a3c5ddeb54364c001a_929a75b77dcefaacbe7b12c64a1ca74f"
+      },
+      {
+        "id": "P23-04#AB_PASSIVE_NONE_LV1_LV2_LV3_5a09090d649d7d127396aeada700bfb480fd363a2a36a5df4351182330e8a480_f1a1fb8f6f679f34e8dc958b167d69ec",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": true,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Life is reduced by the opponent, you can return this card from your Trash to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Life is reduced by the opponent, you can return this card from your Trash to the Hand.",
+            "cleanText": "When your Life is reduced by the opponent, you can return this card from your Trash to the Hand",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-04#a1",
+        "physicalId": "P23-04#AB_PASSIVE_NONE_LV1_LV2_LV3_5a09090d649d7d127396aeada700bfb480fd363a2a36a5df4351182330e8a480_f1a1fb8f6f679f34e8dc958b167d69ec",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_5a09090d649d7d127396aeada700bfb480fd363a2a36a5df4351182330e8a480_f1a1fb8f6f679f34e8dc958b167d69ec"
+      },
+      {
+        "id": "P23-04#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_6b1d1e421e00c7bf74477f4e17380b6f1d75cc6d90ccf159fa8e242827de1608_b17cf18a250bc22162e399d314467b97",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "During Brave"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Return an opposing exhausted Spirit to the decktop."
+        },
+        "clauses": [
+          {
+            "rawText": "Return an opposing exhausted Spirit to the decktop.",
+            "cleanText": "Return an opposing exhausted Spirit to the decktop",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-04#a2",
+        "physicalId": "P23-04#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_6b1d1e421e00c7bf74477f4e17380b6f1d75cc6d90ccf159fa8e242827de1608_b17cf18a250bc22162e399d314467b97",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_6b1d1e421e00c7bf74477f4e17380b6f1d75cc6d90ccf159fa8e242827de1608_b17cf18a250bc22162e399d314467b97"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "P23-10": {
+    "cardNumber": "P23-10",
+    "name": "The RedBladeDragonEmperor Wywald-V",
+    "keywords": [
+      {
+        "name": "Contract Advent",
+        "parameter": "Scarlet Flame & C1 or more, (Either Attack Step)",
+        "wave": 2,
+        "hook": "contract_advent",
+        "bracketed": true,
+        "index": 8
+      }
+    ],
+    "abilities": [
+      {
+        "id": "P23-10#AB_FLASH_NONE_LV1_LV2_LV3_5621fba8b9773eff083d3a9f93fb23e60d684f76deb99c3a6a34d494cfc5ff24_a40589a49a6c8dca0ba67725675d6a28",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Contract Advent: Scarlet Flame & C1 or more, (Either Attack Step)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "stack this from the Hand onto your target Spirit.",
+            "cleanText": "stack this from the Hand onto your target Spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_STACK",
+              "from": "HAND",
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-10#a0",
+        "physicalId": "P23-10#AB_FLASH_NONE_LV1_LV2_LV3_5621fba8b9773eff083d3a9f93fb23e60d684f76deb99c3a6a34d494cfc5ff24_a40589a49a6c8dca0ba67725675d6a28",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_5621fba8b9773eff083d3a9f93fb23e60d684f76deb99c3a6a34d494cfc5ff24_a40589a49a6c8dca0ba67725675d6a28"
+      },
+      {
+        "id": "P23-10#AB_WHEN_ADVENTS_NONE_LV1_LV2_bd807635543ed1226d89eba682d4193fac295dcf4e2af0bf79bc3c0799191799_93369c96472eb21ebc9400dea57f1867",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ADVENTS",
+          "timingLabel": "When Advents/Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Your counter +1. Then, destroy an opposing 5000 BP or less Spirit, and an opposing 7000 BP or less Ultimate."
+        },
+        "clauses": [
+          {
+            "rawText": "Your counter +1.",
+            "cleanText": "Your counter +1",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_COUNTER",
+              "count": 1
+            }
+          },
+          {
+            "rawText": "destroy an opposing 5000 BP or less Spirit, and an opposing 7000 BP or less Ultimate.",
+            "cleanText": "destroy an opposing 5000 BP or less Spirit, and an opposing 7000 BP or less Ultimate",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 5000
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-10#a1",
+        "physicalId": "P23-10#AB_WHEN_ADVENTS_NONE_LV1_LV2_bd807635543ed1226d89eba682d4193fac295dcf4e2af0bf79bc3c0799191799_93369c96472eb21ebc9400dea57f1867",
+        "semanticId": "SEM#AB_WHEN_ADVENTS_NONE_LV1_LV2_bd807635543ed1226d89eba682d4193fac295dcf4e2af0bf79bc3c0799191799_93369c96472eb21ebc9400dea57f1867"
+      },
+      {
+        "id": "P23-10#AB_ATTACK_STEP_NONE_LV1_LV2_be3942d3709284f0d9547b5342ca4ae02785700cdf37c6b6d3137de7ed9bbc9e_588225108fc51cf17c53d2ad6ee770df",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "During OC"
+          ],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "For each counter you have, increase the limit of this Spirit's \"BP Destruction effect\" by +2000."
+        },
+        "clauses": [
+          {
+            "rawText": "For each counter you have, increase the limit of this Spirit's \"BP Destruction effect\" by +2000.",
+            "cleanText": "For each counter you have, increase the limit of this Spirit's \"BP Destruction effect\" by +2000",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 2000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-10#a2",
+        "physicalId": "P23-10#AB_ATTACK_STEP_NONE_LV1_LV2_be3942d3709284f0d9547b5342ca4ae02785700cdf37c6b6d3137de7ed9bbc9e_588225108fc51cf17c53d2ad6ee770df",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_be3942d3709284f0d9547b5342ca4ae02785700cdf37c6b6d3137de7ed9bbc9e_588225108fc51cf17c53d2ad6ee770df"
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "P23-07": {
+    "cardNumber": "P23-07",
+    "name": "The UltimateDragonEmperor Sieg-Sol-Fried XV",
+    "keywords": [
+      {
+        "name": "Tribute",
+        "parameter": null,
+        "wave": 4,
+        "hook": "tribute",
+        "bracketed": true,
+        "index": 138
+      },
+      {
+        "name": "Contract Advent",
+        "parameter": null,
+        "wave": 2,
+        "hook": "contract_advent",
+        "bracketed": true,
+        "index": 222
+      },
+      {
+        "name": "Sol Awaken",
+        "parameter": null,
+        "wave": 1,
+        "hook": "awaken",
+        "bracketed": true,
+        "index": 339
+      }
+    ],
+    "abilities": [
+      {
+        "id": "P23-07#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_8bac67a89685afc05f402dd8eb0ce1375a6ce0da361af15113a5dd7f3a998bb6_9149b29d51eb0f34a35a903bb173367c",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can summon a \"Sieg\" from your Hand, ignoring summon condition, without paying cost, and without using [Tribute]. Or, (Once per Turn: Same Name) if you have six or more counters, you can [Contract Advent] a \"Sieg\" from your Hand, treating [Soul Core] as being sent to the Trash."
+        },
+        "clauses": [
+          {
+            "rawText": "You can summon a \"Sieg\" from your Hand, ignoring summon condition, without paying cost, and without using [Tribute].",
+            "cleanText": "You can summon a \"Sieg\" from your Hand, ignoring summon condition, without paying cost, and without using [Tribute]",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          },
+          {
+            "rawText": "if you have six or more counters, you can [Contract Advent] a \"Sieg\" from your Hand, treating [Soul Core] as being sent to the Trash.",
+            "cleanText": "you can [Contract Advent] a \"Sieg\" from your Hand, treating [Soul Core] as being sent to the Trash",
+            "link": "or",
+            "isOptional": true,
+            "isCost": false,
+            "condition": "if you have six or more counters",
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-07#a0",
+        "physicalId": "P23-07#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_8bac67a89685afc05f402dd8eb0ce1375a6ce0da361af15113a5dd7f3a998bb6_9149b29d51eb0f34a35a903bb173367c",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_8bac67a89685afc05f402dd8eb0ce1375a6ce0da361af15113a5dd7f3a998bb6_9149b29d51eb0f34a35a903bb173367c"
+      },
+      {
+        "id": "P23-07#AB_FLASH_NONE_LV1_LV2_LV3_30b1539f4dc2877a9d186e78bf9c7f408ce93a5bc82e845be846111f99184fef_7558cc03da7ef30c018b56454d6ed6c5",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Sol Awaken",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "You can put any amount of cores from your Field to this Spirit. When cores are put via this effect, once per turn, destroy an opposing Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "You can put any amount of cores from your Field to this Spirit.",
+            "cleanText": "You can put any amount of cores from your Field to this Spirit",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE"
+            }
+          },
+          {
+            "rawText": "When cores are put via this effect, once per turn, destroy an opposing Nexus.",
+            "cleanText": "When cores are put via this effect, once per turn, destroy an opposing Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Nexus"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-07#a1",
+        "physicalId": "P23-07#AB_FLASH_NONE_LV1_LV2_LV3_30b1539f4dc2877a9d186e78bf9c7f408ce93a5bc82e845be846111f99184fef_7558cc03da7ef30c018b56454d6ed6c5",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_30b1539f4dc2877a9d186e78bf9c7f408ce93a5bc82e845be846111f99184fef_7558cc03da7ef30c018b56454d6ed6c5"
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "P23-03": {
+    "cardNumber": "P23-03",
+    "name": "The Ultraman That Comes Forth From Dazzling Light",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "P23-03#AB_MAIN_NONE_LV1_LV2_LV3_09fc187f1ad6cec849e6510c83c81d807cab0fe09e1bbb5deeb9e4bf6bbc8c30_0e94399f34418412d43adae3c0e74f78",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "Draw two cards. Then, if you control any \"Ultraman\" Spirit/Grandwalker Nexus, you can deploy a Nexus card from your Hand, without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw two cards.",
+            "cleanText": "Draw two cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 2,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "if you control any \"Ultraman\" Spirit/Grandwalker Nexus, you can deploy a Nexus card from your Hand, without paying the cost.",
+            "cleanText": "you can deploy a Nexus card from your Hand, without paying the cost",
+            "link": "then",
+            "isOptional": true,
+            "isCost": false,
+            "condition": "if you control any \"Ultraman\" Spirit/Grandwalker Nexus",
+            "duration": null,
+            "op": {
+              "op": "DEPLOY_NEXUS",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-03#a0",
+        "physicalId": "P23-03#AB_MAIN_NONE_LV1_LV2_LV3_09fc187f1ad6cec849e6510c83c81d807cab0fe09e1bbb5deeb9e4bf6bbc8c30_0e94399f34418412d43adae3c0e74f78",
+        "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_09fc187f1ad6cec849e6510c83c81d807cab0fe09e1bbb5deeb9e4bf6bbc8c30_0e94399f34418412d43adae3c0e74f78"
+      },
+      {
+        "id": "P23-03#AB_FLASH_NONE_LV1_LV2_LV3_79f9cba2a29a4371b5a2a12624c823ecbfecd7cacabbe4900ad229137fda64b6_d17d3bf51dde0417453f4d239b0473dd",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, give an \"Ultraman\" you control +5000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, give an \"Ultraman\" you control +5000 BP.",
+            "cleanText": "give an \"Ultraman\" you control +5000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 5000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-03#a1",
+        "physicalId": "P23-03#AB_FLASH_NONE_LV1_LV2_LV3_79f9cba2a29a4371b5a2a12624c823ecbfecd7cacabbe4900ad229137fda64b6_d17d3bf51dde0417453f4d239b0473dd",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_79f9cba2a29a4371b5a2a12624c823ecbfecd7cacabbe4900ad229137fda64b6_d17d3bf51dde0417453f4d239b0473dd"
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "P23-02": {
+    "cardNumber": "P23-02",
+    "name": "The Witch's Awakening",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "P23-02#AB_FLASH_NONE_LV1_LV2_LV3_0ae46f316846c4d3821978c3e969915757ee52c68fbb1cef01a5aef5030f0191_91b720a3b0d4d09bd549b8b9886a695f",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "You can summon/deploy one of your \"School\" family cards in Hand/Soul State/pre-advent condition by paying its original cost. When you summoned/deployed any \"Aerial\"/\"Suletta\"/\"Miorine\" via this effect, during this turn, your Life can't be reduced by the attacks of opposing Spirits/Ultimates with a cost equal or inferior to one of your \"Aerial\", including those that are in Soul State."
+        },
+        "clauses": [
+          {
+            "rawText": "You can summon/deploy one of your \"School\" family cards in Hand/Soul State/pre-advent condition by paying its original cost.",
+            "cleanText": "You can summon/deploy one of your \"School\" family cards in Hand/Soul State/pre-advent condition by paying its original cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DEPLOY_NEXUS",
+              "free": true
+            }
+          },
+          {
+            "rawText": "When you summoned/deployed any \"Aerial\"/\"Suletta\"/\"Miorine\" via this effect, during this turn, your Life can't be reduced by the attacks of opposing Spirits/Ultimates with a cost equal or inferior to one of your \"Aerial\", including those that are in Soul State.",
+            "cleanText": "When you summoned/deployed any \"Aerial\"/\"Suletta\"/\"Miorine\" via this effect, during this turn, your Life can't be reduced by the attacks of opposing Spirits/Ultimates with a cost equal or inferior to one of your \"Aerial\", including those that are in Soul State",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": [],
+        "legacyId": "P23-02#a0",
+        "physicalId": "P23-02#AB_FLASH_NONE_LV1_LV2_LV3_0ae46f316846c4d3821978c3e969915757ee52c68fbb1cef01a5aef5030f0191_91b720a3b0d4d09bd549b8b9886a695f",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_0ae46f316846c4d3821978c3e969915757ee52c68fbb1cef01a5aef5030f0191_91b720a3b0d4d09bd549b8b9886a695f"
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

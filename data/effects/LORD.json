@@ -19,19 +19,24 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A2547",
       "name": "The Hero Lord-Dragon-the-World",
-      "keywords": [
-        {
-          "name": "Burst",
-          "parameter": "After your Life is reduced",
-          "wave": 2,
-          "hook": "burst",
-          "bracketed": true,
-          "index": 0
+      "type": "Spirit",
+      "levels": {
+        "LV2": {
+          "level": 2,
+          "cost": 3,
+          "bp": 12000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 6,
+          "bp": 15000
         }
-      ],
+      },
+      "originalEffectText": "[Burst: After your Life is reduced]\nIf your Life is three or less, summon this Spirit card.\n\n[LV1][LV2][LV3] (When Summoned)\nDraw a card. Then, you can set a card with Burst effect from your Hand.\n\n[LV2][LV3] (Your Attack Step)\nWhen only the opposing Spirit is destroyed by comparing BP with your \"Lord-Dragon\"-named Spirit, send an opposing Life to their Trash.",
+      "teams": [],
+      "keywords": [],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A2547#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -42,8 +47,15 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "BURST",
+            "timings": [],
             "timingLabel": "Burst",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -52,10 +64,14 @@
             "isMain": false,
             "cleanBody": "If your Life is three or less, summon this Spirit card."
           },
+          "originalAbilityText": "[Burst: After your Life is reduced]\nIf your Life is three or less, summon this Spirit card.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "If your Life is three or less, summon this Spirit card.",
+              "originalClauseText": "If your Life is three or less, summon this Spirit card.",
               "cleanText": "summon this Spirit card",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -67,10 +83,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A2547#a0",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A2547#AB_BURST_NONE_LV1_LV2_LV3_7630b1c7dbde689b2baa29b7a719e403becc82c4add0c8db643b283409dafb84_c98736c1931e52bd2de9976fdf5b6720",
+          "physicalId": "BATTLE-SPIRITS-A2547#AB_BURST_NONE_LV1_LV2_LV3_7630b1c7dbde689b2baa29b7a719e403becc82c4add0c8db643b283409dafb84_c98736c1931e52bd2de9976fdf5b6720",
+          "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_7630b1c7dbde689b2baa29b7a719e403becc82c4add0c8db643b283409dafb84_c98736c1931e52bd2de9976fdf5b6720",
+          "semanticIdV3": "SEM3#AB_BURST_NONE_LV1_LV2_LV3_71c32b0628367f5967003f11d7884fdc4dac4c0ddfa00e34dbc47976b328fa6a_a5f3575c6f5607065c979b75af021a35",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "BURST"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A2547#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -81,8 +111,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -91,10 +130,14 @@
             "isMain": false,
             "cleanBody": "Draw a card. Then, you can set a card with Burst effect from your Hand."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nDraw a card. Then, you can set a card with Burst effect from your Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Draw a card.",
+              "originalClauseText": "Draw a card.",
               "cleanText": "Draw a card",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -109,21 +152,38 @@
             },
             {
               "rawText": "you can set a card with Burst effect from your Hand.",
+              "originalClauseText": "you can set a card with Burst effect from your Hand.",
               "cleanText": "you can set a card with Burst effect from your Hand",
+              "clauseIndex": 1,
               "link": "then",
               "isOptional": true,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "KEYWORD_RULE"
+                "op": "KEYWORD_RULE",
+                "keyword": "Burst"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A2547#a1",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A2547#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_e8b5663117bf26beb9c72efd072011d48e7460e63af925dafde2492b2b2ef196_49df852dd4f1474c3acc0e5da0cd22cc",
+          "physicalId": "BATTLE-SPIRITS-A2547#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_e8b5663117bf26beb9c72efd072011d48e7460e63af925dafde2492b2b2ef196_49df852dd4f1474c3acc0e5da0cd22cc",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_e8b5663117bf26beb9c72efd072011d48e7460e63af925dafde2492b2b2ef196_49df852dd4f1474c3acc0e5da0cd22cc",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_c62ff0d7a9856c90cc3813484e7c646d9d51b60c2e841c5f04364f218f670ea9_1f22110d077f1e6e6ea87f589f2eb3f0",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A2547#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -133,8 +193,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Your Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -143,10 +212,14 @@
             "isMain": false,
             "cleanBody": "When only the opposing Spirit is destroyed by comparing BP with your \"Lord-Dragon\"-named Spirit, send an opposing Life to their Trash."
           },
+          "originalAbilityText": "[LV2][LV3] (Your Attack Step)\nWhen only the opposing Spirit is destroyed by comparing BP with your \"Lord-Dragon\"-named Spirit, send an opposing Life to their Trash.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When only the opposing Spirit is destroyed by comparing BP with your \"Lord-Dragon\"-named Spirit, send an opposing Life to their Trash.",
+              "originalClauseText": "When only the opposing Spirit is destroyed by comparing BP with your \"Lord-Dragon\"-named Spirit, send an opposing Life to their Trash.",
               "cleanText": "When only the opposing Spirit is destroyed by comparing BP with your \"Lord-Dragon\"-named Spirit, send an opposing Life to their Trash",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -154,11 +227,30 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "to": {
+                  "zone": "trash",
+                  "side": "opp"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A2547#a2",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A2547#AB_ATTACK_STEP_NONE_LV2_LV3_97dc499a1a52a58769ef19c7f94859065bc030b25dc6759ca68031d0a98904e1_d71ed35328064dc00d9cc16568458a47",
+          "physicalId": "BATTLE-SPIRITS-A2547#AB_ATTACK_STEP_NONE_LV2_LV3_97dc499a1a52a58769ef19c7f94859065bc030b25dc6759ca68031d0a98904e1_d71ed35328064dc00d9cc16568458a47",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_97dc499a1a52a58769ef19c7f94859065bc030b25dc6759ca68031d0a98904e1_d71ed35328064dc00d9cc16568458a47",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_LV3_592b82ad6ae6174243f443fafc429e4a9244a33310147431a645b1f0b3284f1c_ea5f23d8ac06c7894a3f165ddd38b5b5",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,

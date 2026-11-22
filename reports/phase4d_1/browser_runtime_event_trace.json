@@ -1,0 +1,338 @@
+{
+  "schemaVersion": "1.0.0",
+  "testSuite": "REAL-BROWSER-E2E-01",
+  "generatedAt": "2026-11-22T11:56:09.530Z",
+  "environment": {
+    "browser": "Google Chrome Headless",
+    "protocol": "Chrome DevTools Protocol (native WebSocket)",
+    "port": 4286
+  },
+  "totalEvents": 15,
+  "events": [
+    {
+      "timestamp": "2026-11-22T11:55:48.446Z",
+      "step": 1,
+      "action": "NAVIGATE",
+      "domElement": "window.location",
+      "outcome": "SUCCESS",
+      "engineState": {
+        "url": "/arena.html"
+      }
+    },
+    {
+      "timestamp": "2026-11-22T11:55:48.453Z",
+      "step": 2,
+      "action": "VERIFY_PAGE_TITLE",
+      "domElement": "document.title",
+      "outcome": "SUCCESS",
+      "engineState": {
+        "title": "Battle Spirits Eternal | Battle Arena"
+      }
+    },
+    {
+      "timestamp": "2026-11-22T11:55:50.572Z",
+      "step": 3,
+      "action": "VERIFY_INITIAL_GAME_STATE",
+      "domElement": "window.BattleArena.getState()",
+      "outcome": "SUCCESS",
+      "engineState": {
+        "inDuel": true,
+        "turn": 1,
+        "activePlayer": "opponent",
+        "phase": "START",
+        "pLife": 5,
+        "pReserve": 4,
+        "pHandLen": 4,
+        "oLife": 5,
+        "oReserve": 4,
+        "oHandLen": 4
+      }
+    },
+    {
+      "timestamp": "2026-11-22T11:55:50.574Z",
+      "step": 4,
+      "action": "VERIFY_BOARD_DOM_ZONES",
+      "domElement": "#playerField, #playerHand",
+      "outcome": "SUCCESS",
+      "engineState": {
+        "hasPlayerField": true,
+        "hasPlayerHand": true,
+        "hasArenaHeader": true
+      }
+    },
+    {
+      "timestamp": "2026-11-22T11:56:07.430Z",
+      "step": 5,
+      "action": "OPPONENT_TURN_1_RESOLVED",
+      "domElement": "#opponentField",
+      "outcome": "SUCCESS",
+      "engineState": {
+        "turnPlayerReady": true
+      }
+    },
+    {
+      "timestamp": "2026-11-22T11:56:07.436Z",
+      "step": 6,
+      "action": "INSPECT_CARD_ZOOM",
+      "domElement": "#playerHand .hc-zoom-btn",
+      "outcome": "SUCCESS",
+      "engineState": {
+        "inspectResult": true
+      }
+    },
+    {
+      "timestamp": "2026-11-22T11:56:08.206Z",
+      "step": 7,
+      "action": "ADVANCE_TO_MAIN_STEP",
+      "domElement": "#btnNextPhase",
+      "outcome": "SUCCESS",
+      "engineState": {
+        "phase": "MAIN",
+        "reserve": 5,
+        "hand": [
+          {
+            "uid": "c_7",
+            "name": "Lizardedge",
+            "cost": 0,
+            "type": "Spirit"
+          },
+          {
+            "uid": "c_1",
+            "name": "Goradon",
+            "cost": 0,
+            "type": "Spirit"
+          },
+          {
+            "uid": "c_37",
+            "name": "Burst Draw",
+            "cost": 4,
+            "type": "Magic"
+          },
+          {
+            "uid": "c_15",
+            "name": "Dragonhead",
+            "cost": 0,
+            "type": "Spirit"
+          },
+          {
+            "uid": "c_27",
+            "name": "The SengokuDragonEmperor Burning-Souldragon",
+            "cost": 9,
+            "type": "Spirit"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-11-22T11:56:08.436Z",
+      "step": 8,
+      "action": "PLAYER_QUICK_SUMMON_AND_PAY",
+      "domElement": "#playerHand .btn-quick-summon, #btnConfirmSummonPayment",
+      "outcome": "SUCCESS",
+      "engineState": {
+        "fieldCount": 1,
+        "fieldSpirits": [
+          {
+            "uid": "c_7",
+            "name": "Lizardedge",
+            "bp": 2000,
+            "cores": 1
+          }
+        ],
+        "reserve": 5,
+        "trash": 0,
+        "hasSoulCoreOnSpirit": true
+      }
+    },
+    {
+      "timestamp": "2026-11-22T11:56:08.437Z",
+      "step": 9,
+      "action": "VERIFY_GENUINE_OPPONENT_SPIRIT",
+      "domElement": "#opponentField",
+      "outcome": "SUCCESS",
+      "engineState": {
+        "oppFieldCount": 1,
+        "oppSpirits": [
+          {
+            "uid": "c_43",
+            "name": "Foger",
+            "bp": 3000,
+            "cores": 3
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-11-22T11:56:08.553Z",
+      "step": 10,
+      "action": "EFFECT_TARGET_AND_DESTROY",
+      "domElement": ".universal-target-modal, button[data-act=\"confirm\"]",
+      "outcome": "SUCCESS",
+      "engineState": {
+        "success": true,
+        "renderedUids": [
+          "c_43"
+        ],
+        "selected": [
+          "c_43"
+        ],
+        "targetUid": "c_43",
+        "cardMoved": true,
+        "remainingOppField": [],
+        "oppTrashCount": 1
+      }
+    },
+    {
+      "timestamp": "2026-11-22T11:56:08.775Z",
+      "step": 11,
+      "action": "ADVANCE_TO_ATTACK_STEP",
+      "domElement": "#btnNextPhase",
+      "outcome": "SUCCESS",
+      "engineState": {
+        "turn": 2,
+        "activePlayer": "player",
+        "phase": "ATTACK",
+        "pField": [
+          {
+            "uid": "c_7",
+            "name": "Lizardedge",
+            "isExhausted": false,
+            "currentBp": 2000
+          }
+        ],
+        "oLife": 5
+      }
+    },
+    {
+      "timestamp": "2026-11-22T11:56:08.786Z",
+      "step": 12,
+      "action": "DECLARE_ATTACK",
+      "domElement": "#spirit_c_7",
+      "outcome": "SUCCESS",
+      "engineState": {
+        "attacker": {
+          "uid": "c_7",
+          "name": "Lizardedge",
+          "isExhausted": false,
+          "currentBp": 2000
+        }
+      }
+    },
+    {
+      "timestamp": "2026-11-22T11:56:08.807Z",
+      "step": 13,
+      "action": "RESOLVE_COMBAT",
+      "domElement": "#playerField, #opponentLife",
+      "outcome": "SUCCESS",
+      "engineState": {
+        "oLife": 5,
+        "pField": [
+          {
+            "uid": "c_7",
+            "isExhausted": true
+          }
+        ],
+        "combatEvent": {
+          "attacker": {
+            "uid": "c_7",
+            "name": "Lizardedge",
+            "kanji": "",
+            "cost": 0,
+            "type": "Spirit",
+            "color": "Red",
+            "family": "Reptile Beast",
+            "rarity": "",
+            "flavor": "",
+            "card_number": "BS02-001",
+            "image_url": "https://static.wikia.nocookie.net/battle-spirits/images/3/33/BS02-001.jpg/revision/latest?cb=20230204084511",
+            "levels": {
+              "1": {
+                "cost": 1,
+                "bp": 1000
+              },
+              "2": {
+                "cost": 2,
+                "bp": 2000
+              },
+              "3": {
+                "cost": 4,
+                "bp": 4000
+              }
+            },
+            "raw_levels": "Level 1: 1 core, 1000 BP\nLevel 2: 2 cores, 2000 BP\nLevel 3: 4 cores, 4000 BP",
+            "braved_bp": null,
+            "bpBonus": null,
+            "brave_condition": "",
+            "effect": "",
+            "summary": "",
+            "currentCores": 1,
+            "currentLevel": 1,
+            "currentBp": 2000,
+            "isExhausted": true,
+            "hasAttacked": true,
+            "isContractPartner": false,
+            "is_contract_partner": false,
+            "hasSoulCore": true,
+            "paidWithSoulCore": false,
+            "compiledIr": {
+              "cardNumber": "BS02-001",
+              "name": "Lizardedge",
+              "isFullySupported": true,
+              "isVanilla": true,
+              "compiledClausesCount": 0,
+              "unsupportedClausesCount": 0,
+              "abilities": [],
+              "keywords": [],
+              "triggers": {}
+            },
+            "baseBp": 2000,
+            "auraBpBoost": 0,
+            "currentOwner": "player",
+            "colors": [
+              "Red"
+            ],
+            "families": [
+              "Reptile Beast"
+            ],
+            "placementId": "p_1",
+            "isHeavyExhausted": false,
+            "isSoulState": false,
+            "bonusLevel": 0,
+            "braves": [],
+            "under": [],
+            "battleBpBoost": 0
+          },
+          "targetType": "life",
+          "blocker": null,
+          "result": "DIRECT HIT! Opponent Life -1"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-11-22T11:56:08.808Z",
+      "step": 14,
+      "action": "VERIFY_VICTORY_HANDLER",
+      "domElement": "#battleResultModal",
+      "outcome": "SUCCESS",
+      "engineState": {
+        "hasCheckGameOver": true,
+        "resultModalExists": true
+      }
+    },
+    {
+      "timestamp": "2026-11-22T11:56:09.530Z",
+      "step": 15,
+      "action": "SCREENSHOT_CAPTURED",
+      "domElement": "outDirs",
+      "outcome": "SUCCESS",
+      "engineState": {
+        "directories": [
+          "C:\\Users\\namis\\Downloads\\BSP\\reports\\phase4d_1",
+          "C:\\Users\\namis\\Downloads\\BSP\\reports\\phase4d",
+          "C:\\Users\\namis\\Downloads\\BSP\\reports\\master_corrective_closure",
+          "C:\\Users\\namis\\Downloads\\BSP\\reports\\playable_engine_phase_2_2_1_closure"
+        ]
+      }
+    }
+  ]
+}

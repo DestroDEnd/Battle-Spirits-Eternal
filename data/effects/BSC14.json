@@ -141,10 +141,24 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A10879",
       "name": "The HornetKing Fong-Need",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 4,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "[LV1][LV2] (When Summoned)\nPut three cores from the Void to this Spirit.\n\n[LV1][LV2] (When Attacks)\nExhaust any number of opposing Spirits up to a total of 10000 BP.\n\n[LV2] (When Attacks)\nWhen the opposing Life is reduced, by sending three cores from this Spirit to your Trash, refresh this Spirit.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A10879#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -154,8 +168,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -164,10 +187,14 @@
             "isMain": false,
             "cleanBody": "Put three cores from the Void to this Spirit."
           },
+          "originalAbilityText": "[LV1][LV2] (When Summoned)\nPut three cores from the Void to this Spirit.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Put three cores from the Void to this Spirit.",
+              "originalClauseText": "Put three cores from the Void to this Spirit.",
               "cleanText": "Put three cores from the Void to this Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -186,10 +213,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A10879#a0",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A10879#AB_WHEN_SUMMONED_NONE_LV1_LV2_55c3400154adb85ce0114bd5fbca82183ffc55631029f5c0ddebfae055b9f60d_d4943944e8465479a27beae82376236d",
+          "physicalId": "BATTLE-SPIRITS-A10879#AB_WHEN_SUMMONED_NONE_LV1_LV2_55c3400154adb85ce0114bd5fbca82183ffc55631029f5c0ddebfae055b9f60d_d4943944e8465479a27beae82376236d",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_55c3400154adb85ce0114bd5fbca82183ffc55631029f5c0ddebfae055b9f60d_d4943944e8465479a27beae82376236d",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_58e004c0f6a8af544bbbc7e4b9209ff41fcc9f324dc1b9d754e7280bcb0400da_f577a287c3c5f966d53b3ef2fdfb1764",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A10879#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -199,8 +240,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -209,10 +259,14 @@
             "isMain": false,
             "cleanBody": "Exhaust any number of opposing Spirits up to a total of 10000 BP."
           },
+          "originalAbilityText": "[LV1][LV2] (When Attacks)\nExhaust any number of opposing Spirits up to a total of 10000 BP.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Exhaust any number of opposing Spirits up to a total of 10000 BP.",
+              "originalClauseText": "Exhaust any number of opposing Spirits up to a total of 10000 BP.",
               "cleanText": "Exhaust any number of opposing Spirits up to a total of 10000 BP",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -220,16 +274,34 @@
               "duration": null,
               "op": {
                 "op": "EXHAUST",
+                "count": 1,
                 "target": {
-                  "side": "either"
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
                 }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A10879#a1",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A10879#AB_WHEN_ATTACKS_NONE_LV1_LV2_3d85cffc217631653ff4f133d9c238e5bd0c7a80a429c0fcb02d56694e00f02c_954c86106ff30f3026026d90abd17d86",
+          "physicalId": "BATTLE-SPIRITS-A10879#AB_WHEN_ATTACKS_NONE_LV1_LV2_3d85cffc217631653ff4f133d9c238e5bd0c7a80a429c0fcb02d56694e00f02c_954c86106ff30f3026026d90abd17d86",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_3d85cffc217631653ff4f133d9c238e5bd0c7a80a429c0fcb02d56694e00f02c_954c86106ff30f3026026d90abd17d86",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_0c75ae9b60dcb2e8e89ca383a766355e1590410f09636c591f47499c2b38d8eb_ae07c7f7fac9f256664ee8ae40c53bcd",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A10879#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -238,8 +310,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -248,10 +329,14 @@
             "isMain": false,
             "cleanBody": "When the opposing Life is reduced, by sending three cores from this Spirit to your Trash, refresh this Spirit."
           },
+          "originalAbilityText": "[LV2] (When Attacks)\nWhen the opposing Life is reduced, by sending three cores from this Spirit to your Trash, refresh this Spirit.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "When the opposing Life is reduced, by sending three cores from this Spirit to your Trash, refresh this Spirit.",
+              "originalClauseText": "When the opposing Life is reduced, by sending three cores from this Spirit to your Trash, refresh this Spirit.",
               "cleanText": "When the opposing Life is reduced, by sending three cores from this Spirit to your Trash, refresh this Spirit",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -263,7 +348,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A10879#a2",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A10879#AB_WHEN_ATTACKS_NONE_LV2_feb4ef23e50991601bc615f2b6878f6092fbdf0cf666145994c1b805168a0277_d6518004a716f3d705735b18c41f3c94",
+          "physicalId": "BATTLE-SPIRITS-A10879#AB_WHEN_ATTACKS_NONE_LV2_feb4ef23e50991601bc615f2b6878f6092fbdf0cf666145994c1b805168a0277_d6518004a716f3d705735b18c41f3c94",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_feb4ef23e50991601bc615f2b6878f6092fbdf0cf666145994c1b805168a0277_d6518004a716f3d705735b18c41f3c94",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_9f4871cee6508ba0eaefe06cc2c2cce4b2cc7bd1341ecf85af038d07f2e76c05_d3afaa07597ac64978932e3ed457d33f",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 3,
@@ -448,6 +548,26 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A11333",
       "name": "The MagicalPrincessDeity Geraldy",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 6000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 8000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 10000
+        }
+      },
+      "originalEffectText": "[Immortality: Cost 2/3/4] (Either Attack Step)\nYou can summon this Spirit card from the Trash when your Cost 2/3/4 Spirit is destroyed.\n\n[LV1][LV2][LV3]\nWhen any Magic card is discarded from your deck by an opposing Spirit effect, during this turn, cards can't be discarded from your deck.\n\n[LV2][LV3] (When Battles)\nBy returning a card from your Trash to the deckbottom, send two cores from any opposing Spirits to their Reserve.",
+      "teams": [],
       "keywords": [
         {
           "name": "Immortality",
@@ -455,12 +575,32 @@
           "wave": 4,
           "hook": "immortality",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "BATTLE-SPIRITS-A11333#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_314b61714f1d1d9ef2ece981bc9fa1e17cc2d2680c9cd0c7f464ea5ef24d512c_2819c64d5d60cf383373d03aac7c2528",
+          "cardNumber": "BATTLE-SPIRITS-A11333",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "face": "B",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BATTLE-SPIRITS-A11333#a0"
         }
       ],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A11333#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -471,8 +611,17 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "ATTACK_STEP",
+            "timings": [
+              "ATTACK_STEP"
+            ],
             "timingLabel": "Either Attack Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "EITHER",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Immortality: Cost 2/3/4",
@@ -481,10 +630,14 @@
             "isMain": false,
             "cleanBody": "You can summon this Spirit card from the Trash when your Cost 2/3/4 Spirit is destroyed."
           },
+          "originalAbilityText": "[Immortality: Cost 2/3/4] (Either Attack Step)\nYou can summon this Spirit card from the Trash when your Cost 2/3/4 Spirit is destroyed.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "You can summon this Spirit card from the Trash when your Cost 2/3/4 Spirit is destroyed.",
+              "originalClauseText": "You can summon this Spirit card from the Trash when your Cost 2/3/4 Spirit is destroyed.",
               "cleanText": "You can summon this Spirit card from the Trash when your Cost 2/3/4 Spirit is destroyed",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -492,14 +645,58 @@
               "duration": null,
               "op": {
                 "op": "SUMMON_THIS_CARD",
-                "from": "HAND_OR_BURST"
+                "from": "TRASH"
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A11333#a0",
+          "keywords": [
+            {
+              "name": "Immortality",
+              "parameter": "Cost 2/3/4",
+              "wave": 4,
+              "hook": "immortality",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BATTLE-SPIRITS-A11333#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_314b61714f1d1d9ef2ece981bc9fa1e17cc2d2680c9cd0c7f464ea5ef24d512c_2819c64d5d60cf383373d03aac7c2528",
+              "cardNumber": "BATTLE-SPIRITS-A11333",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "ATTACK_STEP",
+              "timingLabel": "Either Attack Step",
+              "timingStep": "ANY",
+              "face": "B",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BATTLE-SPIRITS-A11333#a0"
+            }
+          ],
+          "id": "BATTLE-SPIRITS-A11333#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_314b61714f1d1d9ef2ece981bc9fa1e17cc2d2680c9cd0c7f464ea5ef24d512c_2819c64d5d60cf383373d03aac7c2528",
+          "physicalId": "BATTLE-SPIRITS-A11333#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_314b61714f1d1d9ef2ece981bc9fa1e17cc2d2680c9cd0c7f464ea5ef24d512c_2819c64d5d60cf383373d03aac7c2528",
+          "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_314b61714f1d1d9ef2ece981bc9fa1e17cc2d2680c9cd0c7f464ea5ef24d512c_2819c64d5d60cf383373d03aac7c2528",
+          "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_0272db6a943647bb3dcb9d3386750aa462e0599f630563216183f87396bb4b2e_ec1cc5f3ab746f5bde4a5b77093680b6",
+          "timingSemantics": {
+            "timingOwner": "EITHER",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "ATTACK_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A11333#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -510,8 +707,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -520,10 +722,14 @@
             "isMain": false,
             "cleanBody": "When any Magic card is discarded from your deck by an opposing Spirit effect, during this turn, cards can't be discarded from your deck."
           },
+          "originalAbilityText": "[LV1][LV2][LV3]\nWhen any Magic card is discarded from your deck by an opposing Spirit effect, during this turn, cards can't be discarded from your deck.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "When any Magic card is discarded from your deck by an opposing Spirit effect, during this turn, cards can't be discarded from your deck.",
+              "originalClauseText": "When any Magic card is discarded from your deck by an opposing Spirit effect, during this turn, cards can't be discarded from your deck.",
               "cleanText": "When any Magic card is discarded from your deck by an opposing Spirit effect, during this turn, cards can't be discarded from your deck",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -535,10 +741,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A11333#a1",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A11333#AB_PASSIVE_NONE_LV1_LV2_LV3_71cafc22dff283585f8352751718592264b0b3ee3be0b46564e5f92e42ab3022_e7c7c1c07ec40420468917f64dd09eac",
+          "physicalId": "BATTLE-SPIRITS-A11333#AB_PASSIVE_NONE_LV1_LV2_LV3_71cafc22dff283585f8352751718592264b0b3ee3be0b46564e5f92e42ab3022_e7c7c1c07ec40420468917f64dd09eac",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_71cafc22dff283585f8352751718592264b0b3ee3be0b46564e5f92e42ab3022_e7c7c1c07ec40420468917f64dd09eac",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_07cf3ccbfdcd0c0676de591e55746e06d35b3130e40e9bbfd095e1663ea342b4_ffff173bf8c08bbc0e311b2c22d67203",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A11333#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -548,8 +766,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_BATTLES",
+            "timings": [
+              "WHEN_BATTLES"
+            ],
             "timingLabel": "When Battles",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_BATTLES"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -558,10 +785,14 @@
             "isMain": false,
             "cleanBody": "By returning a card from your Trash to the deckbottom, send two cores from any opposing Spirits to their Reserve."
           },
+          "originalAbilityText": "[LV2][LV3] (When Battles)\nBy returning a card from your Trash to the deckbottom, send two cores from any opposing Spirits to their Reserve.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "By returning a card from your Trash to the deckbottom",
+              "originalClauseText": "By returning a card from your Trash to the deckbottom",
               "cleanText": "By returning a card from your Trash to the deckbottom",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -577,7 +808,9 @@
             },
             {
               "rawText": "send two cores from any opposing Spirits to their Reserve.",
+              "originalClauseText": "send two cores from any opposing Spirits to their Reserve.",
               "cleanText": "send two cores from any opposing Spirits to their Reserve",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -585,11 +818,34 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 2,
+                "from": {
+                  "zone": "field",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A11333#a2",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A11333#AB_WHEN_BATTLES_NONE_LV2_LV3_bb323f5ac31103a47ac351996c77b3dbfd02bd1b25129de9b7f849b1e6b69aa8_f472cdc5f31331b557b0097f4e64a85d",
+          "physicalId": "BATTLE-SPIRITS-A11333#AB_WHEN_BATTLES_NONE_LV2_LV3_bb323f5ac31103a47ac351996c77b3dbfd02bd1b25129de9b7f849b1e6b69aa8_f472cdc5f31331b557b0097f4e64a85d",
+          "semanticId": "SEM#AB_WHEN_BATTLES_NONE_LV2_LV3_bb323f5ac31103a47ac351996c77b3dbfd02bd1b25129de9b7f849b1e6b69aa8_f472cdc5f31331b557b0097f4e64a85d",
+          "semanticIdV3": "SEM3#AB_WHEN_BATTLES_NONE_LV2_LV3_6ee875e4c1ed1e60416b4087d4a291d73cac635c00da62838ca4b68bb6ce8f71_b25a3be0ba09390cb31cfc2a9d9f2542",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_BATTLES"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 4,
@@ -622,6 +878,26 @@
     "compiledIr": {
       "cardNumber": "BATTLE-SPIRITS-A12867",
       "name": "The SuperEmperor Siegpentan-Nova",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 5000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 6000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 13000
+        }
+      },
+      "originalEffectText": "[Tribute: Song Bird → Void]\nAfter paying for the summoning cost, you must send all core from a \"Song Bird\" family Spirit you control to the Void.\n\n[LV1][LV2][LV3] (When Summoned)\nIf \"The Kaiser Empereur\" was used for the [Tribute], summon any number of \"Pentan\"-named Spirit cards from your Hand/Trash, without paying the cost. However, the (When Summoned) effects of those Spirits can't activate.\n\n[LV3] (When Attacks)\nBy destroying three \"Pentan\"-named Spirits you control, this Spirit refreshes.",
+      "teams": [],
       "keywords": [
         {
           "name": "Tribute",
@@ -629,7 +905,28 @@
           "wave": 4,
           "hook": "tribute",
           "bracketed": true,
-          "index": 0
+          "index": 0,
+          "abilityId": "BATTLE-SPIRITS-A12867#AB_PASSIVE_NONE_LV1_LV2_LV3_fb259b4134e6bbf8a8c7e78acca8ab415b569cc2fe4f060f347145fae6097916_408923c8ce3bc779d43a420844086e54",
+          "cardNumber": "BATTLE-SPIRITS-A12867",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "face": "B",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BATTLE-SPIRITS-A12867#a0"
         },
         {
           "name": "Tribute",
@@ -637,12 +934,32 @@
           "wave": 4,
           "hook": "tribute",
           "bracketed": true,
-          "index": 221
+          "index": 42,
+          "abilityId": "BATTLE-SPIRITS-A12867#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_c84893d2ecc6b3ab41c2bac74170ccb4e3395394d76e7157d9d307b55adb04bd_24c9ebd5e667625861faaba9ad566a46",
+          "cardNumber": "BATTLE-SPIRITS-A12867",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "face": "B",
+          "prefixes": [],
+          "isSoulState": false,
+          "duringAdvent": false,
+          "duringSeal": false,
+          "burstCondition": null,
+          "limit": null,
+          "isFlash": false,
+          "isMain": false,
+          "legacyAbilityId": "BATTLE-SPIRITS-A12867#a1"
         }
       ],
       "abilities": [
         {
-          "id": "BATTLE-SPIRITS-A12867#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -653,8 +970,13 @@
             "levelExplicit": false,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": "Tribute: Song Bird → Void",
@@ -663,10 +985,14 @@
             "isMain": false,
             "cleanBody": "After paying for the summoning cost, you must send all core from a \"Song Bird\" family Spirit you control to the Void."
           },
+          "originalAbilityText": "[Tribute: Song Bird → Void]\nAfter paying for the summoning cost, you must send all core from a \"Song Bird\" family Spirit you control to the Void.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "After paying for the summoning cost, you must send all core from a \"Song Bird\" family Spirit you control to the Void.",
+              "originalClauseText": "After paying for the summoning cost, you must send all core from a \"Song Bird\" family Spirit you control to the Void.",
               "cleanText": "After paying for the summoning cost, you must send all core from a \"Song Bird\" family Spirit you control to the Void",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -674,14 +1000,59 @@
               "duration": null,
               "op": {
                 "op": "MOVE_CORE",
-                "isCost": false
+                "count": 1,
+                "to": {
+                  "zone": "void"
+                }
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A12867#a0",
+          "keywords": [
+            {
+              "name": "Tribute",
+              "parameter": "Song Bird → Void",
+              "wave": 4,
+              "hook": "tribute",
+              "bracketed": true,
+              "index": 0,
+              "abilityId": "BATTLE-SPIRITS-A12867#AB_PASSIVE_NONE_LV1_LV2_LV3_fb259b4134e6bbf8a8c7e78acca8ab415b569cc2fe4f060f347145fae6097916_408923c8ce3bc779d43a420844086e54",
+              "cardNumber": "BATTLE-SPIRITS-A12867",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": false,
+              "timing": "PASSIVE",
+              "timingLabel": "",
+              "timingStep": "ANY",
+              "face": "B",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BATTLE-SPIRITS-A12867#a0"
+            }
+          ],
+          "id": "BATTLE-SPIRITS-A12867#AB_PASSIVE_NONE_LV1_LV2_LV3_fb259b4134e6bbf8a8c7e78acca8ab415b569cc2fe4f060f347145fae6097916_408923c8ce3bc779d43a420844086e54",
+          "physicalId": "BATTLE-SPIRITS-A12867#AB_PASSIVE_NONE_LV1_LV2_LV3_fb259b4134e6bbf8a8c7e78acca8ab415b569cc2fe4f060f347145fae6097916_408923c8ce3bc779d43a420844086e54",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_fb259b4134e6bbf8a8c7e78acca8ab415b569cc2fe4f060f347145fae6097916_408923c8ce3bc779d43a420844086e54",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_61d9bf0300587490e9e0df94b0e07413b1f920ad7166fbb54ed744290cd51a16_d4a9466395c529ae6ba5fe35be93f8ce",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A12867#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -692,8 +1063,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_SUMMONED",
+            "timings": [
+              "WHEN_SUMMONED"
+            ],
             "timingLabel": "When Summoned",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -702,10 +1082,14 @@
             "isMain": false,
             "cleanBody": "If \"The Kaiser Empereur\" was used for the [Tribute], summon any number of \"Pentan\"-named Spirit cards from your Hand/Trash, without paying the cost. However, the (When Summoned) effects of those Spirits can't activate."
           },
+          "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nIf \"The Kaiser Empereur\" was used for the [Tribute], summon any number of \"Pentan\"-named Spirit cards from your Hand/Trash, without paying the cost. However, the (When Summoned) effects of those Spirits can't activate.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "If \"The Kaiser Empereur\" was used for the [Tribute], summon any number of \"Pentan\"-named Spirit cards from your Hand/Trash, without paying the cost.",
+              "originalClauseText": "If \"The Kaiser Empereur\" was used for the [Tribute], summon any number of \"Pentan\"-named Spirit cards from your Hand/Trash, without paying the cost.",
               "cleanText": "summon any number of \"Pentan\"-named Spirit cards from your Hand/Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -713,12 +1097,25 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "hand_or_trash",
+                "side": "self",
+                "count": "ALL",
+                "upTo": true,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "Pentan"
+                },
+                "free": true,
+                "isOptional": false
               }
             },
             {
               "rawText": "the (When Summoned) effects of those Spirits can't activate.",
+              "originalClauseText": "the (When Summoned) effects of those Spirits can't activate.",
               "cleanText": "the (When Summoned) effects of those Spirits can't activate",
+              "clauseIndex": 1,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -729,10 +1126,54 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A12867#a1",
+          "keywords": [
+            {
+              "name": "Tribute",
+              "parameter": null,
+              "wave": 4,
+              "hook": "tribute",
+              "bracketed": true,
+              "index": 42,
+              "abilityId": "BATTLE-SPIRITS-A12867#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_c84893d2ecc6b3ab41c2bac74170ccb4e3395394d76e7157d9d307b55adb04bd_24c9ebd5e667625861faaba9ad566a46",
+              "cardNumber": "BATTLE-SPIRITS-A12867",
+              "levels": [
+                1,
+                2,
+                3
+              ],
+              "levelExplicit": true,
+              "timing": "WHEN_SUMMONED",
+              "timingLabel": "When Summoned",
+              "timingStep": "ANY",
+              "face": "B",
+              "prefixes": [],
+              "isSoulState": false,
+              "duringAdvent": false,
+              "duringSeal": false,
+              "burstCondition": null,
+              "limit": null,
+              "isFlash": false,
+              "isMain": false,
+              "legacyAbilityId": "BATTLE-SPIRITS-A12867#a1"
+            }
+          ],
+          "id": "BATTLE-SPIRITS-A12867#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_c84893d2ecc6b3ab41c2bac74170ccb4e3395394d76e7157d9d307b55adb04bd_24c9ebd5e667625861faaba9ad566a46",
+          "physicalId": "BATTLE-SPIRITS-A12867#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_c84893d2ecc6b3ab41c2bac74170ccb4e3395394d76e7157d9d307b55adb04bd_24c9ebd5e667625861faaba9ad566a46",
+          "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_c84893d2ecc6b3ab41c2bac74170ccb4e3395394d76e7157d9d307b55adb04bd_24c9ebd5e667625861faaba9ad566a46",
+          "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_a151abe9ec8e10e2ffd04e8d13a61df3116aff9ee99275417b26f171dc29bc9a_f97d23322e180fc9ccb869bfc738b154",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_SUMMONED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "BATTLE-SPIRITS-A12867#a2",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -741,8 +1182,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -751,10 +1201,14 @@
             "isMain": false,
             "cleanBody": "By destroying three \"Pentan\"-named Spirits you control, this Spirit refreshes."
           },
+          "originalAbilityText": "[LV3] (When Attacks)\nBy destroying three \"Pentan\"-named Spirits you control, this Spirit refreshes.",
+          "abilityIndex": 2,
           "clauses": [
             {
               "rawText": "By destroying three \"Pentan\"-named Spirits you control",
+              "originalClauseText": "By destroying three \"Pentan\"-named Spirits you control",
               "cleanText": "By destroying three \"Pentan\"-named Spirits you control",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": true,
@@ -771,7 +1225,9 @@
             },
             {
               "rawText": "this Spirit refreshes.",
+              "originalClauseText": "this Spirit refreshes.",
               "cleanText": "this Spirit refreshes",
+              "clauseIndex": 1,
               "link": "byDoing",
               "isOptional": false,
               "isCost": false,
@@ -783,7 +1239,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "BATTLE-SPIRITS-A12867#a2",
+          "keywords": [],
+          "id": "BATTLE-SPIRITS-A12867#AB_WHEN_ATTACKS_NONE_LV3_c47309dacd62000ab35b01bc74018adc91e32a6511fc5e783fd7dbfbc97033f7_abab5426c55b208d61c35bd781efbb40",
+          "physicalId": "BATTLE-SPIRITS-A12867#AB_WHEN_ATTACKS_NONE_LV3_c47309dacd62000ab35b01bc74018adc91e32a6511fc5e783fd7dbfbc97033f7_abab5426c55b208d61c35bd781efbb40",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV3_c47309dacd62000ab35b01bc74018adc91e32a6511fc5e783fd7dbfbc97033f7_abab5426c55b208d61c35bd781efbb40",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV3_95a25f9179e074161cca1e2108a617c9e5f43155fb836ca713dd63e3d38f1e1f_33bcd9b27801968579698039407e8d56",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 5,

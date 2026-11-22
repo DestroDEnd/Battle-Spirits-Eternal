@@ -8,10 +8,13 @@
     "compiledIr": {
       "cardNumber": "P16-23",
       "name": "The Tearful Graduation Ceremony",
+      "type": "Nexus",
+      "levels": {},
+      "originalEffectText": "[LV1][LV2] (When Deployed)\nBetween February 1st and March 31st, by returning an opposing Cost 7 or more Spirit to the Hand, draw a card.\n\n[LV2] (Your Start Step)\nYou can summon a Cost 2 or less Spirit card from your Trash, without paying the cost.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "P16-23#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -21,8 +24,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_DEPLOYED",
+            "timings": [
+              "WHEN_DEPLOYED"
+            ],
             "timingLabel": "When Deployed",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_DEPLOYED"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -31,10 +43,14 @@
             "isMain": false,
             "cleanBody": "Between February 1st and March 31st, by returning an opposing Cost 7 or more Spirit to the Hand, draw a card."
           },
+          "originalAbilityText": "[LV1][LV2] (When Deployed)\nBetween February 1st and March 31st, by returning an opposing Cost 7 or more Spirit to the Hand, draw a card.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "Between February 1st and March 31st, by returning an opposing Cost 7 or more Spirit to the Hand, draw a card.",
+              "originalClauseText": "Between February 1st and March 31st, by returning an opposing Cost 7 or more Spirit to the Hand, draw a card.",
               "cleanText": "Between February 1st and March 31st, by returning an opposing Cost 7 or more Spirit to the Hand, draw a card",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -48,10 +64,24 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "P16-23#a0",
+          "keywords": [],
+          "id": "P16-23#AB_WHEN_DEPLOYED_NONE_LV1_LV2_87c553d3139988371cd1d41619fedf357e6bd771ef1be0c43421ec6cb20ddb6f_c5cba0d922d27af431afed9dbd3615c3",
+          "physicalId": "P16-23#AB_WHEN_DEPLOYED_NONE_LV1_LV2_87c553d3139988371cd1d41619fedf357e6bd771ef1be0c43421ec6cb20ddb6f_c5cba0d922d27af431afed9dbd3615c3",
+          "semanticId": "SEM#AB_WHEN_DEPLOYED_NONE_LV1_LV2_87c553d3139988371cd1d41619fedf357e6bd771ef1be0c43421ec6cb20ddb6f_c5cba0d922d27af431afed9dbd3615c3",
+          "semanticIdV3": "SEM3#AB_WHEN_DEPLOYED_NONE_LV1_LV2_e58c7543eda89eed685a778f768fb8d6ff831bbba5f7c9ca59bd3394d57676da_fde8553324cfc8912a03395a7fa41e38",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_DEPLOYED"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "P16-23#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -60,8 +90,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "START_STEP",
+            "timings": [
+              "START_STEP"
+            ],
             "timingLabel": "Your Start Step",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "SELF",
+            "timingTriggers": [
+              "START_STEP"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -70,10 +109,14 @@
             "isMain": false,
             "cleanBody": "You can summon a Cost 2 or less Spirit card from your Trash, without paying the cost."
           },
+          "originalAbilityText": "[LV2] (Your Start Step)\nYou can summon a Cost 2 or less Spirit card from your Trash, without paying the cost.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "You can summon a Cost 2 or less Spirit card from your Trash, without paying the cost.",
+              "originalClauseText": "You can summon a Cost 2 or less Spirit card from your Trash, without paying the cost.",
               "cleanText": "You can summon a Cost 2 or less Spirit card from your Trash, without paying the cost",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": true,
               "isCost": false,
@@ -81,11 +124,37 @@
               "duration": null,
               "op": {
                 "op": "SUMMON",
-                "free": true
+                "from": "trash",
+                "side": "self",
+                "count": 1,
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "costLte": 2
+                },
+                "free": true,
+                "isOptional": true
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "P16-23#a1",
+          "keywords": [],
+          "id": "P16-23#AB_START_STEP_NONE_LV2_636055dcd7f95d27c576471276b07047e4ab4c37417bfe7298ee1d5fd49b0e4e_a6406c84e2bc1440ee8f8da24bfe3da0",
+          "physicalId": "P16-23#AB_START_STEP_NONE_LV2_636055dcd7f95d27c576471276b07047e4ab4c37417bfe7298ee1d5fd49b0e4e_a6406c84e2bc1440ee8f8da24bfe3da0",
+          "semanticId": "SEM#AB_START_STEP_NONE_LV2_636055dcd7f95d27c576471276b07047e4ab4c37417bfe7298ee1d5fd49b0e4e_a6406c84e2bc1440ee8f8da24bfe3da0",
+          "semanticIdV3": "SEM3#AB_START_STEP_NONE_LV2_abd5d8888b572e02c98630ebaa2d7f9410275c753ce91d322a9f4b26e680dcf8_1a21dc0816b8c12a952f73ed34a63970",
+          "timingSemantics": {
+            "timingOwner": "SELF",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "START_STEP"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,

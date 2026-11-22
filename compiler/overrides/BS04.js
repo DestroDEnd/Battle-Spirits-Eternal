@@ -4115,7 +4115,9 @@ export const BS04_OVERRIDES = {
             "condition": null,
             "duration": null,
             "op": {
-              "op": "LIMIT_DECK_DISCARD"
+              "op": "LIMIT_DECK_DISCARD",
+              "maxPerTurn": 5,
+              "targetSide": "self"
             }
           }
         ],

@@ -298,7 +298,82 @@ export const KEYWORD_CATALOG = {
   'Magirrate': { wave: 6, hook: 'magirrate' },
   'Ringing Charge': { wave: 6, hook: 'charge' },
   'Re Awaken': { wave: 6, hook: 'awaken' },
-  'Soul Awaken': { wave: 6, hook: 'awaken' }
+  'Soul Awaken': { wave: 6, hook: 'awaken' },
+
+  // Batch A additions: Missing Wiki keywords
+  'Astromulet': { wave: 2, hook: 'astromulet' },
+  'Count Break': { wave: 2, hook: 'count_break' },
+  'Chrono-Count Break': { wave: 2, hook: 'count_break' },
+  'Creator Unleash': { wave: 2, hook: 'unleash' },
+  'Dark Esoterica': { wave: 2, hook: 'dark_esoterica' },
+  'Extreme Drive': { wave: 3, hook: 'drive' },
+  'Horoscoping': { wave: 2, hook: 'horoscoping' },
+  'Manifest': { wave: 2, hook: 'manifest' },
+  'Minor Unleash': { wave: 2, hook: 'unleash' },
+  'Primordial Unleash': { wave: 2, hook: 'unleash' },
+  'Pyroxene Esoterica': { wave: 2, hook: 'pyroxene_esoterica' },
+  'Return to Prime': { wave: 2, hook: 'return_to_prime' },
+  'Seal Manifest': { wave: 2, hook: 'manifest' },
+  'Tenma Advent': { wave: 2, hook: 'advent' },
+  'Twinkle Dragonpulse': { wave: 2, hook: 'twinkle_dragonpulse' },
+  'Twinkle Trace': { wave: 2, hook: 'twinkle_trace' },
+  'Ultra Advent': { wave: 2, hook: 'advent' },
+  'Ultra Manifest': { wave: 2, hook: 'manifest' },
+  'Ultimate Energy': { wave: 3, hook: 'ultimate_energy' },
+  'Ultimate Hand': { wave: 3, hook: 'ultimate_hand' },
+  'Terra Manifest': { wave: 2, hook: 'manifest' },
+  'Supremacy': { wave: 1, hook: 'supremacy' },
+  'Consecutive Dominance': { wave: 1, hook: 'consecutive_dominance' },
+  'Dragonshot': { wave: 1, hook: 'dragonshot' },
+  'Emperor Road': { wave: 1, hook: 'emperor_road' },
+  'Furious Charge': { wave: 1, hook: 'furious_charge' },
+  'Genesis': { wave: 1, hook: 'genesis' },
+  'Infinite Blade': { wave: 1, hook: 'infinite_blade' },
+  'Infinite Flame': { wave: 1, hook: 'infinite_flame' },
+  'Infinite Unleash': { wave: 2, hook: 'unleash' },
+  'Martial Unleash': { wave: 2, hook: 'unleash' },
+  'Phantom Awaken': { wave: 1, hook: 'awaken' },
+  'Phantom Return': { wave: 1, hook: 'phantom_return' },
+  'Pyro Drive': { wave: 3, hook: 'drive' },
+  'Shining Heaven Unleash': { wave: 2, hook: 'unleash' },
+  'Solar Unleash': { wave: 2, hook: 'unleash' },
+  'Soul Unleash': { wave: 2, hook: 'unleash' },
+  'Super Boost': { wave: 1, hook: 'super_boost' },
+  'True-Drive': { wave: 3, hook: 'drive' },
+  'True Infinite Flame': { wave: 1, hook: 'infinite_flame' },
+  'True Genesis': { wave: 1, hook: 'genesis' },
+  'Twinkle Clash': { wave: 1, hook: 'clash' },
+  'Ultra Assault': { wave: 1, hook: 'assault' },
+  'Vermillion Furious Charge': { wave: 1, hook: 'furious_charge' },
+  'Corpse Unleash': { wave: 2, hook: 'unleash' },
+  'Curse Unleash': { wave: 2, hook: 'unleash' },
+  'Devil Unleash': { wave: 2, hook: 'unleash' },
+  'Slayer Unleash': { wave: 2, hook: 'unleash' },
+  'True Spellbind': { wave: 4, hook: 'spellbind' },
+  'High Speed Seal': { wave: 2, hook: 'seal' },
+  'High Speed - Mystery': { wave: 2, hook: 'high_speed' },
+  'Mystery Seal': { wave: 2, hook: 'seal' },
+  'Soul Swift - Love': { wave: 2, hook: 'high_speed' },
+  'Sound Speed Seal': { wave: 2, hook: 'seal' },
+  'Twinkle Body Substitution': { wave: 4, hook: 'kagemusha' },
+  'Cycle Force Unleash': { wave: 2, hook: 'unleash' },
+  'Illusive Armor': { wave: 1, hook: 'armor' },
+  'Illusive Ultra Heavy Armor': { wave: 1, hook: 'ultra_heavy_armor' },
+  'Twinkle Equip': { wave: 3, hook: 'brave' },
+  'Imaginate Seal': { wave: 2, hook: 'seal' },
+  'Ultra Thunder Advent': { wave: 2, hook: 'advent' },
+  'Violent Windstorm': { wave: 1, hook: 'windstorm' },
+  'Great Twinkle Navigation': { wave: 2, hook: 'great_twinkle_navigation' },
+  'Roaring Assault': { wave: 1, hook: 'assault' },
+  'True Plunder': { wave: 4, hook: 'plunder' },
+  'Charge Song': { wave: 5, hook: 'song' },
+  'Resonance': { wave: 5, hook: 'resonance' },
+  'Resonance Blast': { wave: 5, hook: 'resonance' },
+  'RioRia Blast': { wave: 5, hook: 'resonance' },
+  'Friendshipower': { wave: 5, hook: 'friendshipower' },
+  'Love Me Zone': { wave: 5, hook: 'love_me_zone' },
+  'Moon On The Stage': { wave: 5, hook: 'on_stage' },
+  'Dan Kuroto Deus Advent': { wave: 5, hook: 'advent' }
 };
 
 // Sort catalog keys by length descending so multi-word variants match before base names
@@ -309,22 +384,39 @@ export function extractKeywords(text) {
 
   const found = [];
 
-  // 1. Bracketed keyword pattern: [Keyword:: Param], [Keyword: Param], or [Keyword]
-  const bracketRegex = /\[([A-Za-z0-9\.\-\s]+?)(?:::\s*([^\]]+)|:\s*([^\]]+))?\]/g;
+  // 1. Bracketed keyword pattern: match any bracketed segment [Content]
+  const bracketRegex = /\[([^\]]+)\]/g;
   let match;
   while ((match = bracketRegex.exec(text))) {
-    const rawName = match[1].trim();
-    const param = (match[2] !== undefined ? match[2] : match[3] !== undefined ? match[3] : null);
-    const cleanedParam = param ? param.trim() : null;
+    const inner = match[1].trim();
+    if (inner.toUpperCase().startsWith('LV')) continue;
 
-    // Check against sorted catalog keys to match longest specific prefix/exact
     let matchedName = null;
     let meta = null;
+    let cleanedParam = null;
 
     for (const kwName of SORTED_CATALOG_KEYS) {
-      if (rawName.toLowerCase() === kwName.toLowerCase() || rawName.toLowerCase().startsWith(kwName.toLowerCase())) {
+      const kwLower = kwName.toLowerCase();
+      const innerLower = inner.toLowerCase();
+
+      if (innerLower === kwLower) {
         matchedName = kwName;
         meta = KEYWORD_CATALOG[kwName];
+        break;
+      } else if (innerLower.startsWith(kwLower + '::')) {
+        matchedName = kwName;
+        meta = KEYWORD_CATALOG[kwName];
+        cleanedParam = inner.slice(kwName.length + 2).trim();
+        break;
+      } else if (innerLower.startsWith(kwLower + ':')) {
+        matchedName = kwName;
+        meta = KEYWORD_CATALOG[kwName];
+        cleanedParam = inner.slice(kwName.length + 1).trim();
+        break;
+      } else if (innerLower.startsWith(kwLower + ' ')) {
+        matchedName = kwName;
+        meta = KEYWORD_CATALOG[kwName];
+        cleanedParam = inner.slice(kwName.length + 1).trim();
         break;
       }
     }
@@ -368,70 +460,94 @@ export function extractKeywords(text) {
 
 /**
  * Binds keywords to cards and their individual ability blocks,
- * attaching level gating, timing windows, faces, and conditions.
+ * strictly segregating NATIVE keyword ownership from PROSE references/grants.
+ * Attaches level gating, timing windows, faces, and conditions.
  */
 export function bindKeywordsToAbilities(card, rawEffect = '', abilities = []) {
   const cardNumber = card.card_number || card.cardNumber || card.id || 'UNKNOWN';
   const defaultFace = card.face || (cardNumber.includes('-A') ? 'B' : cardNumber.endsWith('B') ? 'B' : 'A');
 
   const boundCardKeywords = [];
+  const allCardReferenced = [];
+  const allCardGranted = [];
+  const allCardSupported = [];
+  const allCardCountered = [];
 
   for (let idx = 0; idx < abilities.length; idx++) {
     const ability = abilities[idx];
     const header = ability.header || {};
-    const blockText = ability.rawText || header.cleanBody || '';
+    const bodyText = header.cleanBody || ability.rawText || '';
 
-    // Extract keywords in this ability block
-    const blockKeywords = extractKeywords(blockText);
+    const nativeKeywords = [];
+    const referencedKeywords = [];
+    const grantedKeywords = [];
+    const supportedKeywords = [];
+    const counteredKeywords = [];
 
-    // If header has a recognized keyword that was stripped during header parsing
-    if (header.keyword) {
-      const headerKwRaw = header.keyword.split(':')[0].trim();
-      const headerParam = header.keyword.includes(':') ? header.keyword.split(':').slice(1).join(':').trim() : null;
-      const alreadyCaptured = blockKeywords.some(bk => bk.name.toLowerCase() === headerKwRaw.toLowerCase());
-      if (!alreadyCaptured) {
-        const meta = KEYWORD_CATALOG[headerKwRaw] || { wave: 1, hook: headerKwRaw.toLowerCase().replace(/[\s\-]+/g, '_') };
-        blockKeywords.unshift({
-          name: headerKwRaw,
-          parameter: headerParam,
-          wave: meta.wave,
-          hook: meta.hook,
-          bracketed: true,
-          index: 0
-        });
+    // Helper to register native keyword
+    const addNative = (kw) => {
+      if (!nativeKeywords.some(k => k.name.toLowerCase() === kw.name.toLowerCase())) {
+        nativeKeywords.push(kw);
+      }
+    };
+
+    // 1. Process header.keywords array (or header.keyword)
+    const headerKwList = Array.isArray(header.keywords) && header.keywords.length > 0
+      ? header.keywords
+      : (header.keyword ? [header.keyword] : []);
+
+    for (const hKw of headerKwList) {
+      const matches = extractKeywords(`[${hKw}]`);
+      for (const m of matches) {
+        addNative(m);
       }
     }
 
-    // Also check prefixes for recognized keywords (e.g. Soul State, Contract Pre-Advent, etc.)
+    // 2. Check prefixes for recognized keywords (e.g. Soul State, Contract Pre-Advent, Rebirth, etc.)
     if (Array.isArray(header.prefixes)) {
       for (const prefix of header.prefixes) {
-        const prefixKwRaw = prefix.split(':')[0].trim();
-        const prefixParam = prefix.includes(':') ? prefix.split(':').slice(1).join(':').trim() : null;
-        for (const kwName of SORTED_CATALOG_KEYS) {
-          if (prefixKwRaw.toLowerCase() === kwName.toLowerCase() || prefixKwRaw.toLowerCase().startsWith(kwName.toLowerCase())) {
-            const alreadyCaptured = blockKeywords.some(bk => bk.name.toLowerCase() === kwName.toLowerCase());
-            if (!alreadyCaptured) {
-              const meta = KEYWORD_CATALOG[kwName];
-              blockKeywords.unshift({
-                name: kwName,
-                parameter: prefixParam,
-                wave: meta.wave,
-                hook: meta.hook,
-                bracketed: true,
-                index: 0
-              });
-            }
-            break;
-          }
+        const matches = extractKeywords(`[${prefix}]`);
+        for (const m of matches) {
+          addNative(m);
         }
       }
     }
 
+    // 3. Check for unbracketed Armor in the ability block
+    if (ability.rawText) {
+      const armorMatches = extractKeywords(ability.rawText).filter(k => !k.bracketed);
+      for (const arm of armorMatches) {
+        if (arm.index < 30) {
+          addNative(arm);
+        }
+      }
+    }
+
+    // 4. Extract body keywords and classify them as referenced/granted/supported/countered
+    const bodyKeywords = extractKeywords(bodyText);
+    for (const bKw of bodyKeywords) {
+      if (nativeKeywords.some(n => n.name.toLowerCase() === bKw.name.toLowerCase())) {
+        continue;
+      }
+      const surrounding = bodyText.slice(Math.max(0, bKw.index - 40), Math.min(bodyText.length, bKw.index + 50));
+      if (/give|gives|giving|gain|gains|treated as having/i.test(surrounding)) {
+        grantedKeywords.push(bKw);
+      } else if (/cannot activate|can't activate|negate/i.test(surrounding)) {
+        counteredKeywords.push(bKw);
+      } else if (/when .+ activates?|when your .+ activates?/i.test(surrounding)) {
+        supportedKeywords.push(bKw);
+      } else if (bKw.bracketed && bKw.index === 0) {
+        addNative(bKw);
+      } else {
+        referencedKeywords.push(bKw);
+      }
+    }
+
     const prefixes = header.prefixes || [];
-    const isRebornBlock = prefixes.some(p => /reborn|during rebirth/i.test(p)) || /when reborn|during rebirth/i.test(blockText);
+    const isRebornBlock = prefixes.some(p => /reborn|during rebirth/i.test(p)) || /when reborn|during rebirth/i.test(bodyText);
     const blockFace = isRebornBlock ? 'B' : defaultFace;
 
-    const abilityBoundKeywords = blockKeywords.map(kw => ({
+    const abilityBoundKeywords = nativeKeywords.map(kw => ({
       ...kw,
       abilityId: ability.id || `${cardNumber}#a${idx}`,
       cardNumber,
@@ -442,9 +558,9 @@ export function bindKeywordsToAbilities(card, rawEffect = '', abilities = []) {
       timingStep: header.timingStep || 'ANY',
       face: blockFace,
       prefixes,
-      isSoulState: prefixes.some(p => /soul state/i.test(p)) || /\[soul state\]/i.test(blockText),
-      duringAdvent: prefixes.some(p => /during advent/i.test(p)) || /\[during advent\]/i.test(blockText),
-      duringSeal: prefixes.some(p => /during seal|when sealed/i.test(p)) || /\[during seal\]/i.test(blockText),
+      isSoulState: prefixes.some(p => /soul state/i.test(p)) || /\[soul state\]/i.test(bodyText),
+      duringAdvent: prefixes.some(p => /during advent/i.test(p)) || /\[during advent\]/i.test(bodyText),
+      duringSeal: prefixes.some(p => /during seal|when sealed/i.test(p)) || /\[during seal\]/i.test(bodyText),
       burstCondition: header.burstCondition || null,
       limit: header.limit || null,
       isFlash: Boolean(header.isFlash),
@@ -452,8 +568,23 @@ export function bindKeywordsToAbilities(card, rawEffect = '', abilities = []) {
     }));
 
     ability.keywords = abilityBoundKeywords;
+    ability.referencedKeywords = referencedKeywords;
+    ability.grantedKeywords = grantedKeywords;
+    ability.supportedKeywords = supportedKeywords;
+    ability.counteredKeywords = counteredKeywords;
+
     boundCardKeywords.push(...abilityBoundKeywords);
+    allCardReferenced.push(...referencedKeywords);
+    allCardGranted.push(...grantedKeywords);
+    allCardSupported.push(...supportedKeywords);
+    allCardCountered.push(...counteredKeywords);
   }
+
+  card.keywords = boundCardKeywords;
+  card.referencedKeywords = allCardReferenced;
+  card.grantedKeywords = allCardGranted;
+  card.supportedKeywords = allCardSupported;
+  card.counteredKeywords = allCardCountered;
 
   return boundCardKeywords;
 }

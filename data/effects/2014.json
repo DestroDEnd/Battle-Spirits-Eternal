@@ -24,10 +24,29 @@
     "compiledIr": {
       "cardNumber": "P14-24",
       "name": "The FallenKnight Harut",
+      "type": "Spirit",
+      "levels": {
+        "LV1": {
+          "level": 1,
+          "cost": 1,
+          "bp": 3000
+        },
+        "LV2": {
+          "level": 2,
+          "cost": 2,
+          "bp": 4000
+        },
+        "LV3": {
+          "level": 3,
+          "cost": 4,
+          "bp": 6000
+        }
+      },
+      "originalEffectText": "[LV1][LV2][LV3]\nAll other \"Evil Shadow\" family Spirits you control gain +2000 BP.\n\n[LV2][LV3] (When Attacks)\nReturn a \"FallenKnight\"-named Spirit card from your Trash to the Hand.",
+      "teams": [],
       "keywords": [],
       "abilities": [
         {
-          "id": "P14-24#a0",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -38,8 +57,13 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "PASSIVE",
+            "timings": [],
             "timingLabel": "",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -48,10 +72,14 @@
             "isMain": false,
             "cleanBody": "All other \"Evil Shadow\" family Spirits you control gain +2000 BP."
           },
+          "originalAbilityText": "[LV1][LV2][LV3]\nAll other \"Evil Shadow\" family Spirits you control gain +2000 BP.",
+          "abilityIndex": 0,
           "clauses": [
             {
               "rawText": "All other \"Evil Shadow\" family Spirits you control gain +2000 BP.",
+              "originalClauseText": "All other \"Evil Shadow\" family Spirits you control gain +2000 BP.",
               "cleanText": "All other \"Evil Shadow\" family Spirits you control gain +2000 BP",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
@@ -66,10 +94,22 @@
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "P14-24#a0",
+          "keywords": [],
+          "id": "P14-24#AB_PASSIVE_NONE_LV1_LV2_LV3_7c4ed170c8a14a059932d70eb96527a1b1a5e574b151e7f49d97750debc6f5bf_67db2b9b7008eecacd787186cc3d8e2e",
+          "physicalId": "P14-24#AB_PASSIVE_NONE_LV1_LV2_LV3_7c4ed170c8a14a059932d70eb96527a1b1a5e574b151e7f49d97750debc6f5bf_67db2b9b7008eecacd787186cc3d8e2e",
+          "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_7c4ed170c8a14a059932d70eb96527a1b1a5e574b151e7f49d97750debc6f5bf_67db2b9b7008eecacd787186cc3d8e2e",
+          "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_16fd77855cc3dfd9ded6ffbe467679dbee314fd3baf0bf6ed61c6ef2951c1c47_1c9d3ad94483cbe337e0c3d5dd1b8c9c",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         },
         {
-          "id": "P14-24#a1",
           "type": "ABILITY",
           "header": {
             "levels": [
@@ -79,8 +119,17 @@
             "levelExplicit": true,
             "prefixes": [],
             "timing": "WHEN_ATTACKS",
+            "timings": [
+              "WHEN_ATTACKS"
+            ],
             "timingLabel": "When Attacks",
             "timingStep": "ANY",
+            "timingCause": "ANY",
+            "timingOwner": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
             "limit": null,
             "cantStack": false,
             "keyword": null,
@@ -89,25 +138,52 @@
             "isMain": false,
             "cleanBody": "Return a \"FallenKnight\"-named Spirit card from your Trash to the Hand."
           },
+          "originalAbilityText": "[LV2][LV3] (When Attacks)\nReturn a \"FallenKnight\"-named Spirit card from your Trash to the Hand.",
+          "abilityIndex": 1,
           "clauses": [
             {
               "rawText": "Return a \"FallenKnight\"-named Spirit card from your Trash to the Hand.",
+              "originalClauseText": "Return a \"FallenKnight\"-named Spirit card from your Trash to the Hand.",
               "cleanText": "Return a \"FallenKnight\"-named Spirit card from your Trash to the Hand",
+              "clauseIndex": 0,
               "link": null,
               "isOptional": false,
               "isCost": false,
               "condition": null,
               "duration": null,
               "op": {
-                "op": "BOUNCE",
+                "op": "SALVAGE",
+                "from": "trash",
+                "destination": "HAND",
+                "side": "self",
                 "count": 1,
-                "target": {
-                  "side": "either"
-                }
+                "upTo": false,
+                "filter": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "nameIncludes": "FallenKnight"
+                },
+                "isOptional": false
               }
             }
           ],
-          "unsupported": []
+          "unsupported": [],
+          "legacyId": "P14-24#a1",
+          "keywords": [],
+          "id": "P14-24#AB_WHEN_ATTACKS_NONE_LV2_LV3_91bd1d77c4b0b6a8e2089afe3a0bd8dcada54a395b8f96aca953c5bff95f2139_673b233bc424f6afafaa5ba16bcb7154",
+          "physicalId": "P14-24#AB_WHEN_ATTACKS_NONE_LV2_LV3_91bd1d77c4b0b6a8e2089afe3a0bd8dcada54a395b8f96aca953c5bff95f2139_673b233bc424f6afafaa5ba16bcb7154",
+          "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_91bd1d77c4b0b6a8e2089afe3a0bd8dcada54a395b8f96aca953c5bff95f2139_673b233bc424f6afafaa5ba16bcb7154",
+          "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_cfdf847d2bccb1f860218ad524b29574c943f47f89f1b267e6dd8a7ff58dc25c_a1db755185cd3db99750efaa7de2f7ee",
+          "timingSemantics": {
+            "timingOwner": "ANY",
+            "timingCause": "ANY",
+            "timingTriggers": [
+              "WHEN_ATTACKS"
+            ],
+            "activationRestrictions": [],
+            "hasEmbeddedTimingLabelText": false
+          }
         }
       ],
       "compiledClausesCount": 2,
