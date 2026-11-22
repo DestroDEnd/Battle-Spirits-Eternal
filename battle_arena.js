@@ -6834,15 +6834,15 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   function renderPlayerHand() {
     const handEl = document.getElementById('playerHand');
     if (!handEl) return;
-    const isPlayerTurn = DuelState.activePlayer === 'player';
-    const currentPhase = DuelState.phases[DuelState.phaseIndex];
-    const isMainStep = isPlayerTurn && currentPhase === 'MAIN';
-    const isAttackStep = isPlayerTurn && currentPhase === 'ATTACK';
 
-    const { reserve, fieldCores, total: totalAvailableCores } = getPlayerAvailableCores();
+    // Auto-confirm hand if we are already past Turn 1
+    if (DuelState.turn > 1) {
+      DuelState.player.hasConfirmedHand = true;
+      DuelState.player.hasMulliganed = true;
+    }
 
-    let mulliganHtml = '';
-    if (!DuelState.player.hasConfirmedHand) {
+    const bannerContainer = document.getElementById('startingHandBannerContainer');
+    if (!DuelState.player.hasConfirmedHand && DuelState.turn === 1) {
       const isOppFirst = (DuelState.firstPlayer === 'opponent');
       const subText = isOppFirst 
         ? 'Opponent won coin toss and takes Turn 1. Check your starting hand: Redraw once or Keep Hand to start the duel.'
@@ -6850,37 +6850,49 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       const keepBtnText = isOppFirst ? '✓ Keep Hand & Begin Match' : '✓ Keep Hand';
 
       const partnerBadgeHtml = DuelState.player.contractCard
-        ? `<div style="display:flex;align-items:center;gap:8px;margin-top:6px;">
-             <span style="background:rgba(245,158,11,0.25);border:1px solid #f59e0b;padding:3px 10px;border-radius:6px;color:#fef08a;font-size:0.8rem;font-weight:800;letter-spacing:0.3px;">
+        ? `<div style="display:flex;align-items:center;gap:8px;margin-top:4px;">
+             <span style="background:rgba(245,158,11,0.25);border:1px solid #f59e0b;padding:2px 8px;border-radius:6px;color:#fef08a;font-size:0.75rem;font-weight:800;letter-spacing:0.3px;">
                🌟 Contract Partner: ${(DuelState.player.contractCard.name || '').replace(/</g, '&lt;')} (In Starting Hand)
              </span>
-             <button onclick="event.stopPropagation(); BattleArena.openPartnerSelectionModal()" style="background:rgba(245,158,11,0.3);border:1px solid #fde047;color:#fff;font-weight:700;padding:3px 9px;border-radius:5px;cursor:pointer;font-size:0.75rem;">🔄 Choose Partner</button>
+             <button onclick="event.stopPropagation(); BattleArena.openPartnerSelectionModal()" style="background:rgba(245,158,11,0.3);border:1px solid #fde047;color:#fff;font-weight:700;padding:2px 8px;border-radius:4px;cursor:pointer;font-size:0.72rem;">🔄 Choose Partner</button>
            </div>`
         : '';
 
-      mulliganHtml = `
-        <div class="mulligan-prompt-bar" style="grid-column:1/-1;width:100%;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,rgba(30,58,138,0.95),rgba(88,28,135,0.95));border:1.5px solid #818cf8;border-radius:10px;padding:10px 16px;margin-bottom:10px;box-shadow:0 6px 18px rgba(99,102,241,0.35);flex-wrap:wrap;gap:10px;">
+      const mulliganHtml = `
+        <div class="mulligan-prompt-bar" style="width:100%;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,rgba(30,58,138,0.95),rgba(88,28,135,0.95));border:1.5px solid #818cf8;border-radius:8px;padding:6px 12px;margin-bottom:6px;box-shadow:0 4px 14px rgba(99,102,241,0.35);flex-wrap:wrap;gap:8px;">
           <div>
-            <div style="font-size:0.86rem;font-weight:700;color:#e0e7ff;">🃏 <strong>Starting Hand:</strong> ${subText}</div>
+            <div style="font-size:0.8rem;font-weight:700;color:#e0e7ff;">🃏 <strong>Starting Hand:</strong> ${subText}</div>
             ${partnerBadgeHtml}
           </div>
           <div style="display:flex;gap:8px;align-items:center;">
-            ${!DuelState.player.hasMulliganed ? `<button onclick="event.stopPropagation(); BattleArena.performMulligan()" style="background:#4f46e5;border:1px solid #a5b4fc;color:#fff;font-weight:700;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.82rem;">🔄 Redraw 4 Cards</button>` : ''}
-            <button onclick="event.stopPropagation(); BattleArena.keepStartingHand()" style="background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.35);color:#fff;font-weight:700;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.82rem;">${keepBtnText}</button>
+            ${!DuelState.player.hasMulliganed ? `<button onclick="event.stopPropagation(); BattleArena.performMulligan()" style="background:#4f46e5;border:1px solid #a5b4fc;color:#fff;font-weight:700;padding:5px 12px;border-radius:5px;cursor:pointer;font-size:0.78rem;">🔄 Redraw 4 Cards</button>` : ''}
+            <button onclick="event.stopPropagation(); BattleArena.keepStartingHand()" style="background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.35);color:#fff;font-weight:700;padding:5px 12px;border-radius:5px;cursor:pointer;font-size:0.78rem;">${keepBtnText}</button>
           </div>
         </div>
       `;
+      if (bannerContainer) {
+        bannerContainer.style.display = 'block';
+        bannerContainer.innerHTML = mulliganHtml;
+      }
+    } else {
+      if (bannerContainer) {
+        bannerContainer.style.display = 'none';
+        bannerContainer.innerHTML = '';
+      }
     }
 
-    handEl.innerHTML = mulliganHtml + DuelState.player.hand.map(card => {
+    const isPlayerTurn = DuelState.activePlayer === 'player';
+    const currentPhase = DuelState.phases[DuelState.phaseIndex];
+    const isMainStep = isPlayerTurn && currentPhase === 'MAIN';
+    const isAttackStep = isPlayerTurn && currentPhase === 'ATTACK';
+
+    const { reserve, fieldCores, total: totalAvailableCores } = getPlayerAvailableCores();
+
+    handEl.innerHTML = DuelState.player.hand.map(card => {
       const isSelected = DuelState.selectedPlayerCard && DuelState.selectedPlayerCard.uid === card.uid;
       const isBrave = card.type === 'Brave' || (card.type || '').includes('Brave');
       const isUltimate = card.type === 'Ultimate' || (card.type || '').includes('Ultimate');
-    if (!isUltimate && DuelState.playerCantSummonSpiritsUntilNextStart && (card.type === 'Spirit' || (card.type || '').includes('Spirit'))) {
-      if (typeof showToast === 'function') showToast("Cannot summon Spirit cards! Blocked until opponent's next Start Step.", 'warning');
-      addLog("🚫 Cannot summon Spirit cards! Opponent's summon lock effect is active until next Start Step.", 'warning');
-      return;
-    }
+      const isSummonLocked = !isUltimate && DuelState.playerCantSummonSpiritsUntilNextStart && (card.type === 'Spirit' || (card.type || '').includes('Spirit'));
       const isSpirit = (card.type === 'Spirit' || (card.type || '').includes('Spirit')) && !isBrave && !isUltimate;
       const isMagic = card.type === 'Magic';
       const isNexus = (card.type || '').includes('Nexus');
@@ -6900,7 +6912,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       }
 
       // Strict Battle Spirits Rule: Attack step ONLY permits Flash cards!
-      const canPlayStep = isFreeSummon || canPlayCardInCurrentPhase(card);
+      const canPlayStep = !isSummonLocked && (isFreeSummon || canPlayCardInCurrentPhase(card));
       const tributeReq = getCardTributeRequirement(card);
       const eligibleTributes = tributeReq ? getEligibleTributeSpirits(tributeReq, DuelState.player.field) : [];
       const hasTributeCondition = !tributeReq || (eligibleTributes.length > 0);
