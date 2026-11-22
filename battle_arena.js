@@ -3924,14 +3924,16 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     updateClockDisplay();
   }
 
-  function startClientTurnClock() {
-    if (clientClockInterval) clearInterval(clientClockInterval);
-    if (!serverDeadlineMs) {
-      serverDeadlineMs = Date.now() + 240000;
-      serverTurnStartMs = Date.now();
-      serverRemainingMs = 240000;
-      serverClockPaused = false;
+  function startClientTurnClock(durationSec = 240) {
+    if (clientClockInterval) {
+      clearInterval(clientClockInterval);
+      clientClockInterval = null;
     }
+    const ms = (durationSec && durationSec > 0) ? durationSec * 1000 : 240000;
+    serverRemainingMs = ms;
+    serverDeadlineMs = Date.now() + ms;
+    serverTurnStartMs = Date.now();
+    serverClockPaused = false;
     updateClockDisplay();
     clientClockInterval = setInterval(() => {
       updateClockDisplay();
@@ -3943,10 +3945,32 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       clearInterval(clientClockInterval);
       clientClockInterval = null;
     }
+    const warningCorner = document.getElementById('arenaTurnWarningCorner');
+    if (warningCorner) warningCorner.style.display = 'none';
+  }
+
+  function pauseClientTurnClock() {
+    if (serverClockPaused) return;
+    const now = Date.now();
+    serverRemainingMs = Math.max(0, serverDeadlineMs - now);
+    serverClockPaused = true;
+    updateClockDisplay();
+  }
+
+  function resumeClientTurnClock() {
+    if (!serverClockPaused) return;
+    serverDeadlineMs = Date.now() + serverRemainingMs;
+    serverClockPaused = false;
+    updateClockDisplay();
   }
 
   function updateClockDisplay() {
     if (typeof document === 'undefined') return;
+    if (typeof DuelState === 'undefined' || !DuelState.inDuel) {
+      const hudTime = document.getElementById('hudClockTimeDisplay');
+      if (hudTime) hudTime.textContent = '04:00';
+      return;
+    }
     const now = Date.now();
     let remainingMs = serverRemainingMs;
     if (!serverClockPaused) {
@@ -3958,33 +3982,48 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const timeStr = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
 
     const hudTime = document.getElementById('hudClockTimeDisplay');
-    if (hudTime) hudTime.textContent = timeStr;
+    if (hudTime) {
+      hudTime.textContent = timeStr;
+      if (totalSec <= 30) {
+        hudTime.style.color = '#ef4444';
+      } else if (totalSec <= 60) {
+        hudTime.style.color = '#f59e0b';
+      } else {
+        hudTime.style.color = '#38bdf8';
+      }
+    }
 
     const activeSide = (typeof DuelState !== 'undefined' && DuelState.activePlayer) ? DuelState.activePlayer : 'player';
     const hudPlayer = document.getElementById('hudClockPlayerLabel');
     if (hudPlayer) {
-      hudPlayer.textContent = activeSide === 'player' ? "PLAYER 1'S TURN" : "OPPONENT'S TURN";
+      hudPlayer.textContent = activeSide === 'player' ? "YOUR TURN" : "OPPONENT'S TURN";
     }
 
     const hudBar = document.getElementById('hudClockProgressFill');
     if (hudBar) {
       const pct = Math.min(100, Math.max(0, (totalSec / 240) * 100));
       hudBar.style.width = `${pct}%`;
-      hudBar.style.background = totalSec <= 60 ? '#ef4444' : '#38bdf8';
+      if (totalSec <= 30) {
+        hudBar.style.background = '#ef4444';
+      } else if (totalSec <= 60) {
+        hudBar.style.background = '#f59e0b';
+      } else {
+        hudBar.style.background = '#38bdf8';
+      }
     }
 
-    // ── 1-MINUTE CORNER COUNTDOWN WARNING (WP F) ──
+    // ── 1-MINUTE CORNER COUNTDOWN WARNING ──
     const warningCorner = document.getElementById('arenaTurnWarningCorner');
     const cornerCountdown = document.getElementById('cornerWarningCountdown');
     const cornerPlayer = document.getElementById('cornerWarningPlayer');
 
-    if (totalSec <= 60 && totalSec > 0 && !serverClockPaused) {
+    if (totalSec <= 60 && totalSec > 0 && !serverClockPaused && DuelState.inDuel) {
       if (warningCorner) {
         warningCorner.style.display = 'flex';
       }
       if (cornerCountdown) cornerCountdown.textContent = timeStr;
       if (cornerPlayer) {
-        cornerPlayer.textContent = activeSide === 'player' ? 'Active: Player 1' : 'Active: Opponent';
+        cornerPlayer.textContent = activeSide === 'player' ? 'Active: Player 1 (You)' : 'Active: Opponent';
       }
     } else {
       if (warningCorner) warningCorner.style.display = 'none';
@@ -4000,9 +4039,23 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   function handleMatchTimeout(timedOutSide) {
     const winner = timedOutSide === 'player' ? 'opponent' : 'player';
     addLog(`⏱️ **TIMEOUT**: ${timedOutSide === 'player' ? 'Player 1' : 'Opponent'} ran out of time! ${winner === 'player' ? 'Player 1' : 'Opponent'} wins by timeout!`, 'system');
-    triggerToast(`⏱️ Turn clock reached 00:00! ${timedOutSide === 'player' ? 'You lost' : 'Opponent lost'} by timeout.`, 'error');
-    if (typeof declareWinner === 'function') {
-      declareWinner(winner, 'TIMEOUT');
+    if (typeof triggerToast === 'function') {
+      triggerToast(`⏱️ Turn clock reached 00:00! ${timedOutSide === 'player' ? 'You lost' : 'Opponent lost'} by timeout.`, 'error');
+    }
+    declareWinner(winner, 'TIMEOUT');
+  }
+
+  function declareWinner(winner, reason = 'NORMAL') {
+    stopClientTurnClock();
+    if (typeof DuelState !== 'undefined') {
+      DuelState.inDuel = false;
+    }
+    if (winner === 'player') {
+      if (typeof AudioFX !== 'undefined' && AudioFX.victory) AudioFX.victory();
+      showGameOverModal(true);
+    } else {
+      if (typeof AudioFX !== 'undefined' && AudioFX.lifeDamage) AudioFX.lifeDamage();
+      showGameOverModal(false);
     }
   }
 
@@ -4585,8 +4638,15 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       populatePvpDeckSelects();
     } catch (_) {}
 
+    const activeBattlesSec = document.getElementById('activeBattlesSection');
+    const modeSwitch = document.querySelector('.arena-mode-switch');
+    const arenaHeader = document.querySelector('.arena-header');
+
     if (DuelState.inDuel) {
       lobbyEl.style.display = 'none';
+      if (activeBattlesSec) activeBattlesSec.style.display = 'none';
+      if (modeSwitch) modeSwitch.style.display = 'none';
+      if (arenaHeader) arenaHeader.style.display = 'none';
       if (duelEl) duelEl.style.display = 'block';
       if (arenaEl) arenaEl.classList.add('arena-in-duel');
       if (typeof document !== 'undefined' && document.body) document.body.classList.add('arena-in-duel');
@@ -4594,6 +4654,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
 
     lobbyEl.style.display = 'block';
+    if (activeBattlesSec) activeBattlesSec.style.display = 'block';
+    if (modeSwitch) modeSwitch.style.display = 'flex';
+    if (arenaHeader) arenaHeader.style.display = 'block';
     if (duelEl) duelEl.style.display = 'none';
     if (arenaEl) arenaEl.classList.remove('arena-in-duel');
     if (typeof document !== 'undefined' && document.body) document.body.classList.remove('arena-in-duel');
