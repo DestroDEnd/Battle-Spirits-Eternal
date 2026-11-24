@@ -603,7 +603,6 @@
     "keywords": [],
     "abilities": [
       {
-        "id": "PB18-U01#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_7ce9cc93d816054c0d377785a6ff9a4c98a967a664357ff714b8a27f414aea07_8a534adde69021275f72285520ddc125",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -614,20 +613,36 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_SUMMONED",
+          "timings": [
+            "WHEN_SUMMONED",
+            "WHEN_ATTACKS"
+          ],
           "timingLabel": "When Summoned/Attacks",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS",
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Draw a card, then discard a card from your Hand. When this effect discards any \"Ultraman\", destroy an opposing Cost 4 or less Spirit."
         },
+        "originalAbilityText": "[LV1][LV2][LV3] (When Summoned/Attacks)\nDraw a card, then discard a card from your Hand. When this effect discards any \"Ultraman\", destroy an opposing Cost 4 or less Spirit.",
+        "abilityIndex": 0,
         "clauses": [
           {
-            "rawText": "Draw a card, then discard a card from your Hand.",
-            "cleanText": "Draw a card, then discard a card from your Hand",
+            "rawText": "Draw a card",
+            "originalClauseText": "Draw a card",
+            "cleanText": "Draw a card",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -641,8 +656,28 @@
             }
           },
           {
+            "rawText": "discard a card from your Hand.",
+            "originalClauseText": "discard a card from your Hand.",
+            "cleanText": "discard a card from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 1,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
+          },
+          {
             "rawText": "When this effect discards any \"Ultraman\", destroy an opposing Cost 4 or less Spirit.",
+            "originalClauseText": "When this effect discards any \"Ultraman\", destroy an opposing Cost 4 or less Spirit.",
             "cleanText": "When this effect discards any \"Ultraman\", destroy an opposing Cost 4 or less Spirit",
+            "clauseIndex": 2,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -665,11 +700,27 @@
         ],
         "unsupported": [],
         "legacyId": "PB18-U01#a0",
-        "physicalId": "PB18-U01#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_7ce9cc93d816054c0d377785a6ff9a4c98a967a664357ff714b8a27f414aea07_8a534adde69021275f72285520ddc125",
-        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_7ce9cc93d816054c0d377785a6ff9a4c98a967a664357ff714b8a27f414aea07_8a534adde69021275f72285520ddc125"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "PB18-U01#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_b37320cac52557a168bbfb7d0a3a56aaf734a61d7d27f6a470782129c77aa7d9_d445320ebdfb352b10d46816d80c9a68",
+        "physicalId": "PB18-U01#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_b37320cac52557a168bbfb7d0a3a56aaf734a61d7d27f6a470782129c77aa7d9_d445320ebdfb352b10d46816d80c9a68",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_b37320cac52557a168bbfb7d0a3a56aaf734a61d7d27f6a470782129c77aa7d9_d445320ebdfb352b10d46816d80c9a68",
+        "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_0c6c6d8243f8d5a37431386998cac7eb5ae79991ebd833195a922fed09d5d9a4_c9e2210186d9930f111813ce4d1309dd",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS",
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "PB18-U01#AB_MAIN_STEP_NONE_LV1_LV2_LV3_582e632d72a85ee2f6221868f3d9d256f9f1213eab6641e59ff22d610259747f_b87edd3d20433c75f457f1fd03634f85",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -680,20 +731,34 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "MAIN_STEP",
+          "timings": [
+            "MAIN_STEP"
+          ],
           "timingLabel": "Your Main Step",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "SELF",
+          "timingTriggers": [
+            "MAIN_STEP"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "When you're summoning an \"Ultraman\" Spirit card, this Spirit gains two extra Blue symbols."
         },
+        "originalAbilityText": "[LV1][LV2][LV3] (Your Main Step)\nWhen you're summoning an \"Ultraman\" Spirit card, this Spirit gains two extra Blue symbols.",
+        "abilityIndex": 1,
         "clauses": [
           {
             "rawText": "When you're summoning an \"Ultraman\" Spirit card, this Spirit gains two extra Blue symbols.",
+            "originalClauseText": "When you're summoning an \"Ultraman\" Spirit card, this Spirit gains two extra Blue symbols.",
             "cleanText": "When you're summoning an \"Ultraman\" Spirit card, this Spirit gains two extra Blue symbols",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -701,17 +766,45 @@
             "duration": null,
             "op": {
               "op": "SUMMON",
-              "free": true
+              "from": "hand",
+              "side": "self",
+              "count": 1,
+              "upTo": false,
+              "filter": {
+                "types": [
+                  "Spirit"
+                ],
+                "nameIncludes": "Ultraman",
+                "color": "Blue"
+              },
+              "free": false,
+              "isOptional": false
             }
           }
         ],
         "unsupported": [],
         "legacyId": "PB18-U01#a1",
-        "physicalId": "PB18-U01#AB_MAIN_STEP_NONE_LV1_LV2_LV3_582e632d72a85ee2f6221868f3d9d256f9f1213eab6641e59ff22d610259747f_b87edd3d20433c75f457f1fd03634f85",
-        "semanticId": "SEM#AB_MAIN_STEP_NONE_LV1_LV2_LV3_582e632d72a85ee2f6221868f3d9d256f9f1213eab6641e59ff22d610259747f_b87edd3d20433c75f457f1fd03634f85"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "PB18-U01#AB_MAIN_STEP_NONE_LV1_LV2_LV3_f2db1245746b85f13109ae7cb8d4b4d737f460c0c862e8022e4b3cf6a3ac9a2e_cfa0f0c8f5ecd0b44cfe1ca63800ca83",
+        "physicalId": "PB18-U01#AB_MAIN_STEP_NONE_LV1_LV2_LV3_f2db1245746b85f13109ae7cb8d4b4d737f460c0c862e8022e4b3cf6a3ac9a2e_cfa0f0c8f5ecd0b44cfe1ca63800ca83",
+        "semanticId": "SEM#AB_MAIN_STEP_NONE_LV1_LV2_LV3_f2db1245746b85f13109ae7cb8d4b4d737f460c0c862e8022e4b3cf6a3ac9a2e_cfa0f0c8f5ecd0b44cfe1ca63800ca83",
+        "semanticIdV3": "SEM3#AB_MAIN_STEP_NONE_LV1_LV2_LV3_41621b10ce313f4609819ed05130c3b47d840cdfe559a0f678756283455fc198_3971701811b8d0f57af5f89ab72cdb1d",
+        "timingSemantics": {
+          "timingOwner": "SELF",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "MAIN_STEP"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 3,
+    "compiledClausesCount": 4,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },

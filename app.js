@@ -1539,7 +1539,7 @@ const ModalCardArtworkManager = {
       // Fallback directly to static data/card_artworks.json for GitHub Pages
       if (!data || !data.artworks || data.artworks.length <= 1) {
         try {
-          const staticRes = await fetch('./data/card_artworks.json?v=6.1');
+          const staticRes = await fetch('./data/card_artworks.json?v=7.0');
           if (staticRes.ok) {
             const staticMap = await staticRes.json();
             const targetName = (card.name || '').toLowerCase().trim();
@@ -1755,7 +1755,7 @@ let altArtworksMap = null;
 async function initAltArtworksMap() {
   if (altArtworksMap) return altArtworksMap;
   try {
-    const res = await fetch('./data/card_artworks.json?v=6.1');
+    const res = await fetch('./data/card_artworks.json?v=7.0');
     if (res.ok) {
       altArtworksMap = await res.json();
       window.altArtworksMap = altArtworksMap;
@@ -3589,6 +3589,120 @@ const DuelistSocial = {
     await AuthManager.logout();
   },
 
+  SETTINGS_KEY: 'bse_user_settings',
+  DEFAULT_SETTINGS: {
+    resolution: 'auto',
+    uiScale: '100',
+    animations: 'normal',
+    sfxEnabled: true,
+    sfxVolume: 100,
+    highContrastBorders: false
+  },
+
+  getSettings() {
+    try {
+      const raw = localStorage.getItem(this.SETTINGS_KEY);
+      if (!raw) return { ...this.DEFAULT_SETTINGS };
+      return { ...this.DEFAULT_SETTINGS, ...JSON.parse(raw) };
+    } catch (_) {
+      return { ...this.DEFAULT_SETTINGS };
+    }
+  },
+
+  saveSettings(partial) {
+    const next = { ...this.getSettings(), ...partial };
+    try {
+      localStorage.setItem(this.SETTINGS_KEY, JSON.stringify(next));
+    } catch (_) {}
+    this.applySettings(next);
+    return next;
+  },
+
+  applySettings(settings = this.getSettings()) {
+    if (typeof document === 'undefined') return;
+    const root = document.documentElement;
+    const body = document.body;
+
+    // 1. UI Scale / Size
+    const scalePct = Number(settings.uiScale) || 100;
+    const basePx = (16 * scalePct) / 100;
+    root.style.fontSize = scalePct === 100 ? '' : `${basePx}px`;
+    root.setAttribute('data-bse-scale', String(scalePct));
+
+    // 2. Resolution / Max Viewport Width
+    if (body) {
+      const resMap = {
+        auto: '',
+        '1280x720': '1280px',
+        '1600x900': '1600px',
+        '1920x1080': '1920px',
+        '2560x1440': '2560px'
+      };
+      const maxW = resMap[settings.resolution] || '';
+      body.style.maxWidth = maxW;
+      body.style.marginLeft = maxW ? 'auto' : '';
+      body.style.marginRight = maxW ? 'auto' : '';
+      body.classList.toggle('bse-high-contrast', Boolean(settings.highContrastBorders));
+    }
+
+    // 3. Animation Speed
+    root.setAttribute('data-bse-anim', settings.animations || 'normal');
+  },
+
+  openSettingsModal() {
+    this.closeDropdown();
+    this.ensureModals();
+    const s = this.getSettings();
+    const resEl = document.getElementById('bseSettingResolution');
+    const scaleEl = document.getElementById('bseSettingScale');
+    const animEl = document.getElementById('bseSettingAnim');
+    const sfxEl = document.getElementById('bseSettingSfx');
+    const volEl = document.getElementById('bseSettingVolume');
+    const hcEl = document.getElementById('bseSettingHighContrast');
+    if (resEl) resEl.value = s.resolution || 'auto';
+    if (scaleEl) scaleEl.value = String(s.uiScale || '100');
+    if (animEl) animEl.value = s.animations || 'normal';
+    if (sfxEl) sfxEl.checked = s.sfxEnabled !== false;
+    if (volEl) volEl.value = String(s.sfxVolume ?? 100);
+    if (hcEl) hcEl.checked = Boolean(s.highContrastBorders);
+
+    const modal = document.getElementById('bseSettingsModal');
+    if (modal) modal.classList.add('open');
+  },
+
+  closeSettingsModal() {
+    const modal = document.getElementById('bseSettingsModal');
+    if (modal) modal.classList.remove('open');
+  },
+
+  onSettingChange() {
+    const resEl = document.getElementById('bseSettingResolution');
+    const scaleEl = document.getElementById('bseSettingScale');
+    const animEl = document.getElementById('bseSettingAnim');
+    const sfxEl = document.getElementById('bseSettingSfx');
+    const volEl = document.getElementById('bseSettingVolume');
+    const hcEl = document.getElementById('bseSettingHighContrast');
+    this.saveSettings({
+      resolution: resEl ? resEl.value : 'auto',
+      uiScale: scaleEl ? scaleEl.value : '100',
+      animations: animEl ? animEl.value : 'normal',
+      sfxEnabled: sfxEl ? sfxEl.checked : true,
+      sfxVolume: volEl ? Number(volEl.value) : 100,
+      highContrastBorders: hcEl ? hcEl.checked : false
+    });
+  },
+
+  resetSettings() {
+    try {
+      localStorage.removeItem(this.SETTINGS_KEY);
+    } catch (_) {}
+    this.applySettings({ ...this.DEFAULT_SETTINGS });
+    this.openSettingsModal();
+    if (typeof showToast === 'function') {
+      showToast('⚙️ Settings reset to defaults', 'info');
+    }
+  },
+
   ensureModals() {
     if (document.getElementById('bseAvatarModal')) return;
 
@@ -3617,6 +3731,84 @@ const DuelistSocial = {
             <button class="btn-friends-add" onclick="DuelistSocial.addFriendFromInput()">+ Add</button>
           </div>
           <div class="friends-list" id="bseFriendsListContainer"></div>
+        </div>
+      </div>
+
+      <!-- Settings Modal -->
+      <div class="bse-modal-overlay" id="bseSettingsModal" onclick="if(event.target===this)DuelistSocial.closeSettingsModal()">
+        <div class="bse-modal-card bse-settings-card">
+          <div class="bse-modal-header">
+            <div class="bse-modal-title">⚙️ Display &amp; Audio Settings</div>
+            <button class="bse-modal-close" onclick="DuelistSocial.closeSettingsModal()">✕</button>
+          </div>
+          <div class="bse-settings-grid">
+            <label class="bse-setting-row">
+              <div class="bse-setting-info">
+                <span class="bse-setting-label">Resolution / Width</span>
+                <span class="bse-setting-desc">Cap max viewport width or fill screen</span>
+              </div>
+              <select class="bse-setting-select" id="bseSettingResolution" onchange="DuelistSocial.onSettingChange()">
+                <option value="auto">Auto (Full Width)</option>
+                <option value="1280x720">1280 × 720 (HD)</option>
+                <option value="1600x900">1600 × 900 (HD+)</option>
+                <option value="1920x1080">1920 × 1080 (Full HD)</option>
+                <option value="2560x1440">2560 × 1440 (QHD)</option>
+              </select>
+            </label>
+
+            <label class="bse-setting-row">
+              <div class="bse-setting-info">
+                <span class="bse-setting-label">UI Size / Scale</span>
+                <span class="bse-setting-desc">Adjust text and interface size</span>
+              </div>
+              <select class="bse-setting-select" id="bseSettingScale" onchange="DuelistSocial.onSettingChange()">
+                <option value="85">Compact (85%)</option>
+                <option value="100">Standard (100%)</option>
+                <option value="110">Large (110%)</option>
+                <option value="120">Extra Large (120%)</option>
+              </select>
+            </label>
+
+            <label class="bse-setting-row">
+              <div class="bse-setting-info">
+                <span class="bse-setting-label">Animations</span>
+                <span class="bse-setting-desc">Transition and battle motion speed</span>
+              </div>
+              <select class="bse-setting-select" id="bseSettingAnim" onchange="DuelistSocial.onSettingChange()">
+                <option value="normal">Standard</option>
+                <option value="fast">Fast</option>
+                <option value="off">Reduced / Off</option>
+              </select>
+            </label>
+
+            <label class="bse-setting-row">
+              <div class="bse-setting-info">
+                <span class="bse-setting-label">Sound Effects</span>
+                <span class="bse-setting-desc">Enable synthesized battle audio</span>
+              </div>
+              <input type="checkbox" class="bse-setting-checkbox" id="bseSettingSfx" onchange="DuelistSocial.onSettingChange()">
+            </label>
+
+            <label class="bse-setting-row">
+              <div class="bse-setting-info">
+                <span class="bse-setting-label">SFX Volume</span>
+                <span class="bse-setting-desc">Adjust audio effect volume</span>
+              </div>
+              <input type="range" class="bse-setting-range" id="bseSettingVolume" min="0" max="100" step="10" oninput="DuelistSocial.onSettingChange()">
+            </label>
+
+            <label class="bse-setting-row">
+              <div class="bse-setting-info">
+                <span class="bse-setting-label">High-Contrast Borders</span>
+                <span class="bse-setting-desc">Sharper card and panel outlines</span>
+              </div>
+              <input type="checkbox" class="bse-setting-checkbox" id="bseSettingHighContrast" onchange="DuelistSocial.onSettingChange()">
+            </label>
+          </div>
+          <div class="bse-settings-footer">
+            <button class="bse-btn-reset" onclick="DuelistSocial.resetSettings()">↺ Reset Defaults</button>
+            <button class="bse-btn-done" onclick="DuelistSocial.closeSettingsModal()">Done</button>
+          </div>
         </div>
       </div>
     `;
@@ -4009,6 +4201,10 @@ const AuthManager = {
                 <span class="dd-icon">🃏</span>
                 <span>Check Decks</span>
               </a>
+              <button class="dd-item" id="ddBtnSettings" onclick="DuelistSocial.openSettingsModal()">
+                <span class="dd-icon">⚙️</span>
+                <span>Settings</span>
+              </button>
               <div class="dd-divider"></div>
               <button class="dd-item dd-logout" onclick="DuelistSocial.signOut()">
                 <span class="dd-icon">🚪</span>
@@ -4032,6 +4228,9 @@ const AuthManager = {
   },
 
   init() {
+    if (window.DuelistSocial && typeof window.DuelistSocial.applySettings === 'function') {
+      window.DuelistSocial.applySettings();
+    }
     this.renderNavbar();
     if (typeof window !== 'undefined') {
       window.addEventListener('bse_auth_state_change', async (e) => {
@@ -4086,57 +4285,9 @@ function initCleanRouting() {
 // ═════════════════════════════════════════════════════════════════
 function initCardFoilTilt() {
   if (typeof document === 'undefined') return;
-  const modalArt = document.getElementById('modalArt');
-  if (!modalArt) return;
-
-  const parent = modalArt.parentElement;
-  if (!parent) return;
-
-  let foil = parent.querySelector('.modal-foil-sheen');
-  if (!foil) {
-    parent.classList.add('modal-art-wrapper');
-    foil = document.createElement('div');
-    foil.className = 'modal-foil-sheen';
-    parent.appendChild(foil);
+  if (typeof window !== 'undefined' && window.HoloCard && typeof window.HoloCard.initCollectionHolo === 'function') {
+    window.HoloCard.initCollectionHolo();
   }
-
-  function handleMove(e) {
-    const rect = modalArt.getBoundingClientRect();
-    if (!rect.width || !rect.height) return;
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    const x = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-    const y = Math.max(0, Math.min(1, (clientY - rect.top) / rect.height));
-
-    const rotX = (0.5 - y) * 22;
-    const rotY = (x - 0.5) * 22;
-    modalArt.style.transform = `perspective(800px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(1.025, 1.025, 1.025)`;
-    modalArt.style.boxShadow = `${-rotY * 1.5}px ${rotX * 1.5 + 15}px 32px rgba(0,0,0,0.65)`;
-    
-    if (foil) {
-      foil.style.opacity = '1';
-      foil.style.background = `radial-gradient(circle at ${(x * 100).toFixed(1)}% ${(y * 100).toFixed(1)}%, rgba(255,255,255,0.45) 0%, rgba(244,114,182,0.25) 30%, rgba(56,189,248,0.25) 60%, transparent 85%)`;
-    }
-  }
-
-  function handleReset() {
-    modalArt.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-    modalArt.style.boxShadow = '0 10px 30px rgba(0,0,0,0.6)';
-    if (foil) {
-      foil.style.opacity = '0';
-    }
-  }
-
-  if (parent._foilMoveHandler) {
-    parent.removeEventListener('mousemove', parent._foilMoveHandler);
-    parent.removeEventListener('mouseleave', parent._foilResetHandler);
-  }
-  parent._foilMoveHandler = handleMove;
-  parent._foilResetHandler = handleReset;
-  parent.addEventListener('mousemove', handleMove);
-  parent.addEventListener('mouseleave', handleReset);
-  parent.addEventListener('touchmove', handleMove, { passive: true });
-  parent.addEventListener('touchend', handleReset);
 }
 
 // ═════════════════════════════════════════════════════════════════

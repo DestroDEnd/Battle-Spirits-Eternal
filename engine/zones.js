@@ -340,16 +340,23 @@ export async function moveCard(state, card, toZone, toSide = null, options = {},
   let fromSide = null;
   let fromStack = null;
 
+  const searchSides = (options.expectedFromSide === 'player' || options.expectedFromSide === 'opponent')
+    ? [options.expectedFromSide]
+    : ['player', 'opponent'];
+
   if (options.knownFromZone === 'field' && options.knownFromSide && options.knownFromStack && options.knownFromStack.top?.id === card.id) {
     fromZone = 'field';
     fromSide = options.knownFromSide;
     fromStack = options.knownFromStack;
-  } else for (const s of ['player', 'opponent']) {
+  } else for (const s of searchSides) {
     const p = state.players[s];
-    if (Array.isArray(p.hand) && p.hand.some(c => c.id === card.id)) { fromZone = 'hand'; fromSide = s; break; }
-    if (Array.isArray(p.deck) && p.deck.some(c => c.id === card.id)) { fromZone = 'deck'; fromSide = s; break; }
-    if (Array.isArray(p.grave) && p.grave.some(c => c.id === card.id)) { fromZone = 'grave'; fromSide = s; break; }
-    if (Array.isArray(p.removed) && p.removed.some(c => c.id === card.id)) { fromZone = 'removed'; fromSide = s; break; }
+    if (!p) continue;
+    if (Array.isArray(p.hand) && p.hand.some(c => c && c.id === card.id)) { fromZone = 'hand'; fromSide = s; break; }
+    if (Array.isArray(p.deck) && p.deck.some(c => c && c.id === card.id)) { fromZone = 'deck'; fromSide = s; break; }
+    if (Array.isArray(p.grave) && p.grave.some(c => c && c.id === card.id)) { fromZone = 'grave'; fromSide = s; break; }
+    if (Array.isArray(p.revealed) && p.revealed.some(c => c && c.id === card.id)) { fromZone = 'revealed'; fromSide = s; break; }
+    if (Array.isArray(p.removed) && p.removed.some(c => c && c.id === card.id)) { fromZone = 'removed'; fromSide = s; break; }
+    if (Array.isArray(p.openCards) && p.openCards.some(c => c && c.id === card.id)) { fromZone = 'removed'; fromSide = s; break; }
     if (p.burst && p.burst.id === card.id) { fromZone = 'burst'; fromSide = s; break; }
     if (p.mirage && p.mirage.id === card.id) { fromZone = 'mirage'; fromSide = s; break; }
     if (Array.isArray(p.nexus) && p.nexus.some(c => c && c.id === card.id)) { fromZone = 'nexus'; fromSide = s; break; }
@@ -364,17 +371,35 @@ export async function moveCard(state, card, toZone, toSide = null, options = {},
     }
   }
 
+  if (options.expectedFromZone && fromZone !== options.expectedFromZone) {
+    return false;
+  }
+  if (options.expectedFromSide && fromSide !== options.expectedFromSide) {
+    return false;
+  }
+
   const fromLevel = fromStack ? computeLevel(fromStack, state) : null;
+
+  const removeSingleFromArray = (arr) => {
+    if (!Array.isArray(arr)) return false;
+    const idx = arr.findIndex(c => c && c.id === card.id);
+    if (idx !== -1) {
+      arr.splice(idx, 1);
+      return true;
+    }
+    return false;
+  };
 
   // 2. Remove card from its current zone
   if (fromZone && fromSide) {
     const p = state.players[fromSide];
-    if (fromZone === 'hand') p.hand = p.hand.filter(c => c.id !== card.id);
-    else if (fromZone === 'deck') p.deck = p.deck.filter(c => c.id !== card.id);
-    else if (fromZone === 'grave') p.grave = p.grave.filter(c => c.id !== card.id);
+    if (fromZone === 'hand') removeSingleFromArray(p.hand);
+    else if (fromZone === 'deck') removeSingleFromArray(p.deck);
+    else if (fromZone === 'grave') removeSingleFromArray(p.grave);
+    else if (fromZone === 'revealed') removeSingleFromArray(p.revealed);
     else if (fromZone === 'removed') {
-      p.removed = p.removed.filter(c => c.id !== card.id);
-      if (Array.isArray(p.openCards)) p.openCards = p.openCards.filter(c => c.id !== card.id);
+      removeSingleFromArray(p.removed);
+      removeSingleFromArray(p.openCards);
     }
     else if (fromZone === 'burst') p.burst = null;
     else if (fromZone === 'mirage') p.mirage = null;
@@ -697,22 +722,34 @@ export async function moveCard(state, card, toZone, toSide = null, options = {},
   const targetPlayer = state.players[targetSide];
   card.currentOwner = targetSide;
 
+  const pushUniqueCard = (arr, item) => {
+    if (!arr.some(c => c && c.id === item.id)) arr.push(item);
+  };
+
   if (effectiveToZone === 'hand') {
-    targetPlayer.hand.push(card);
+    if (!Array.isArray(targetPlayer.hand)) targetPlayer.hand = [];
+    pushUniqueCard(targetPlayer.hand, card);
   } else if (effectiveToZone === 'grave') {
-    targetPlayer.grave.push(card);
+    if (!Array.isArray(targetPlayer.grave)) targetPlayer.grave = [];
+    pushUniqueCard(targetPlayer.grave, card);
+  } else if (effectiveToZone === 'revealed') {
+    if (!Array.isArray(targetPlayer.revealed)) targetPlayer.revealed = [];
+    pushUniqueCard(targetPlayer.revealed, card);
   } else if (effectiveToZone === 'removed' || effectiveToZone === 'removed_zone' || effectiveToZone === 'banished') {
-    targetPlayer.removed.push(card);
+    if (!Array.isArray(targetPlayer.removed)) targetPlayer.removed = [];
+    pushUniqueCard(targetPlayer.removed, card);
     if (Array.isArray(targetPlayer.openCards) && !targetPlayer.openCards.some(c => c.id === card.id)) {
       targetPlayer.openCards.push(card);
     }
   } else if (effectiveToZone === 'deck_top') {
-    targetPlayer.deck.unshift(card);
+    if (!Array.isArray(targetPlayer.deck)) targetPlayer.deck = [];
+    if (!targetPlayer.deck.some(c => c && c.id === card.id)) targetPlayer.deck.unshift(card);
   } else if (effectiveToZone === 'deck_bottom' || effectiveToZone === 'deck') {
-    targetPlayer.deck.push(card);
+    if (!Array.isArray(targetPlayer.deck)) targetPlayer.deck = [];
+    pushUniqueCard(targetPlayer.deck, card);
   } else if (effectiveToZone === 'nexus') {
     if (!Array.isArray(targetPlayer.nexus)) targetPlayer.nexus = [];
-    targetPlayer.nexus.push(card);
+    pushUniqueCard(targetPlayer.nexus, card);
   } else if (effectiveToZone === 'burst') {
     // If a burst already exists, replace it to grave (Eternal Rule 3.5)
     if (targetPlayer.burst) {

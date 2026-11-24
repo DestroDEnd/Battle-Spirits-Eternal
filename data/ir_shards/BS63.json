@@ -8938,7 +8938,6 @@
     "keywords": [],
     "abilities": [
       {
-        "id": "BS63-069#AB_PASSIVE_NONE_LV1_LV2_95fce2bc4bd42d4dd6eecc7abe837067bba9ab2529ebdfb068b46b0f2d26b247_65cc875eca7a70606f3cb2cee7651002",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -8948,20 +8947,32 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "PASSIVE",
+          "timings": [],
           "timingLabel": "",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [
+            "ONCE_PER_TURN"
+          ],
           "limit": "ONCE_PER_TURN",
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "when “Azure Wave” family cards are discarded from your Hand by your Blue effect, destroy an opposing Spirit with a cost equal or inferior to one of the discarded cards'."
         },
+        "originalAbilityText": "[LV1][LV2]\nOnce per turn, when “Azure Wave” family cards are discarded from your Hand by your Blue effect, destroy an opposing Spirit with a cost equal or inferior to one of the discarded cards'.",
+        "abilityIndex": 0,
         "clauses": [
           {
             "rawText": "when \"Azure Wave\" family cards are discarded from your Hand by your Blue effect, destroy an opposing Spirit with a cost equal or inferior to one of the discarded cards'.",
+            "originalClauseText": "when \"Azure Wave\" family cards are discarded from your Hand by your Blue effect, destroy an opposing Spirit with a cost equal or inferior to one of the discarded cards'.",
             "cleanText": "when \"Azure Wave\" family cards are discarded from your Hand by your Blue effect, destroy an opposing Spirit with a cost equal or inferior to one of the discarded cards'",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -8974,18 +8985,40 @@
                 "side": "opp",
                 "types": [
                   "Spirit"
-                ]
+                ],
+                "filters": {
+                  "comparison": {
+                    "property": "COST",
+                    "operator": "LTE",
+                    "reference": "self"
+                  }
+                }
               }
             }
           }
         ],
         "unsupported": [],
         "legacyId": "BS63-069#a0",
-        "physicalId": "BS63-069#AB_PASSIVE_NONE_LV1_LV2_95fce2bc4bd42d4dd6eecc7abe837067bba9ab2529ebdfb068b46b0f2d26b247_65cc875eca7a70606f3cb2cee7651002",
-        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_95fce2bc4bd42d4dd6eecc7abe837067bba9ab2529ebdfb068b46b0f2d26b247_65cc875eca7a70606f3cb2cee7651002"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS63-069#AB_PASSIVE_NONE_LV1_LV2_9273ed02541b78dcae434670b9698ac36312d2d39347da4c4927c44bbee5a096_bf7656660efc4eb4a596dd5bb761c453",
+        "physicalId": "BS63-069#AB_PASSIVE_NONE_LV1_LV2_9273ed02541b78dcae434670b9698ac36312d2d39347da4c4927c44bbee5a096_bf7656660efc4eb4a596dd5bb761c453",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_9273ed02541b78dcae434670b9698ac36312d2d39347da4c4927c44bbee5a096_bf7656660efc4eb4a596dd5bb761c453",
+        "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_7e58aaeac74547a5941375d0d2d053dfbf1eccd55a3d5486f03cd4228204ac2b_c56b1ee39257ff164cf2958b0fc33a10",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [
+            "ONCE_PER_TURN"
+          ],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS63-069#AB_WHEN_ATTACKS_NONE_LV2_6d3fc23945c3103cdba6ef895b7c675173625bd2b7500ef4bd06c4097b8df39c_1972c229234289f3134b3ae0d0425c8d",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -8994,20 +9027,34 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_ATTACKS",
+          "timings": [
+            "WHEN_ATTACKS"
+          ],
           "timingLabel": "When Attacks",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Draw two cards, then discard two cards from your Hand. When this effect discards any “Azure Wave” family card, your counter +2."
         },
+        "originalAbilityText": "[LV2] (When Attacks)\nDraw two cards, then discard two cards from your Hand. When this effect discards any “Azure Wave” family card, your counter +2.",
+        "abilityIndex": 1,
         "clauses": [
           {
-            "rawText": "Draw two cards, then discard two cards from your Hand.",
-            "cleanText": "Draw two cards, then discard two cards from your Hand",
+            "rawText": "Draw two cards",
+            "originalClauseText": "Draw two cards",
+            "cleanText": "Draw two cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -9021,8 +9068,28 @@
             }
           },
           {
+            "rawText": "discard two cards from your Hand.",
+            "originalClauseText": "discard two cards from your Hand.",
+            "cleanText": "discard two cards from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 2,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
+          },
+          {
             "rawText": "When this effect discards any \"Azure Wave\" family card, your counter +2.",
+            "originalClauseText": "When this effect discards any \"Azure Wave\" family card, your counter +2.",
             "cleanText": "When this effect discards any \"Azure Wave\" family card, your counter +2",
+            "clauseIndex": 2,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -9036,11 +9103,27 @@
         ],
         "unsupported": [],
         "legacyId": "BS63-069#a1",
-        "physicalId": "BS63-069#AB_WHEN_ATTACKS_NONE_LV2_6d3fc23945c3103cdba6ef895b7c675173625bd2b7500ef4bd06c4097b8df39c_1972c229234289f3134b3ae0d0425c8d",
-        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_6d3fc23945c3103cdba6ef895b7c675173625bd2b7500ef4bd06c4097b8df39c_1972c229234289f3134b3ae0d0425c8d"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS63-069#AB_WHEN_ATTACKS_NONE_LV2_2104aaa66ff63cda8e1619fc7d1d3f07114524fd19170a862235df818fb7cf59_f4b1eb037219511f144de68a46074fb3",
+        "physicalId": "BS63-069#AB_WHEN_ATTACKS_NONE_LV2_2104aaa66ff63cda8e1619fc7d1d3f07114524fd19170a862235df818fb7cf59_f4b1eb037219511f144de68a46074fb3",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_2104aaa66ff63cda8e1619fc7d1d3f07114524fd19170a862235df818fb7cf59_f4b1eb037219511f144de68a46074fb3",
+        "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_2b03c6f628acf6a44ec2d20e960887838cadad1feb5f01e5556401df6e72005b_4a98497f253f900cd90e8f8988f2a4f4",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 3,
+    "compiledClausesCount": 4,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },
@@ -13289,20 +13372,31 @@
         "wave": 4,
         "hook": "afo",
         "bracketed": true,
-        "index": 151
-      },
-      {
-        "name": "Contract Pre-Advent",
-        "parameter": null,
-        "wave": 2,
-        "hook": "contract_pre_advent",
-        "bracketed": true,
-        "index": 283
+        "index": 0,
+        "abilityId": "BS63-071#AB_PASSIVE_NONE_LV1_LV2_5cc0705e3caec30c6e5b26339e8061c4efbd6f6b8b4e279696b996ea5de8a415_ed5920e40f9bbd74d4c7dd3b0ed0b0f5",
+        "cardNumber": "BS63-071",
+        "levels": [
+          1,
+          2
+        ],
+        "levelExplicit": true,
+        "timing": "PASSIVE",
+        "timingLabel": "",
+        "timingStep": "ANY",
+        "face": "A",
+        "prefixes": [],
+        "isSoulState": false,
+        "duringAdvent": false,
+        "duringSeal": false,
+        "burstCondition": null,
+        "limit": null,
+        "isFlash": false,
+        "isMain": false,
+        "legacyAbilityId": "BS63-071#a1"
       }
     ],
     "abilities": [
       {
-        "id": "BS63-071#AB_WHEN_SUMMONED_NONE_LV1_LV2_630af6b9e7c6e925cd311ac06f9c42bf7f7eabf972548226bb21ff0a83e53d64_dfb0b4311da9b44a422ab19acdf85d15",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -13312,20 +13406,34 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_SUMMONED",
+          "timings": [
+            "WHEN_SUMMONED"
+          ],
           "timingLabel": "When Summoned",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Draw two cards, then discard two cards from your Hand. The opponent can't activate Nexus effects via this draw."
         },
+        "originalAbilityText": "[LV1][LV2] (When Summoned)\nDraw two cards, then discard two cards from your Hand. The opponent can't activate Nexus effects via this draw.",
+        "abilityIndex": 0,
         "clauses": [
           {
-            "rawText": "Draw two cards, then discard two cards from your Hand.",
-            "cleanText": "Draw two cards, then discard two cards from your Hand",
+            "rawText": "Draw two cards",
+            "originalClauseText": "Draw two cards",
+            "cleanText": "Draw two cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -13339,8 +13447,28 @@
             }
           },
           {
+            "rawText": "discard two cards from your Hand.",
+            "originalClauseText": "discard two cards from your Hand.",
+            "cleanText": "discard two cards from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 2,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
+          },
+          {
             "rawText": "The opponent can't activate Nexus effects via this draw.",
+            "originalClauseText": "The opponent can't activate Nexus effects via this draw.",
             "cleanText": "The opponent can't activate Nexus effects via this draw",
+            "clauseIndex": 2,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -13355,11 +13483,26 @@
         ],
         "unsupported": [],
         "legacyId": "BS63-071#a0",
-        "physicalId": "BS63-071#AB_WHEN_SUMMONED_NONE_LV1_LV2_630af6b9e7c6e925cd311ac06f9c42bf7f7eabf972548226bb21ff0a83e53d64_dfb0b4311da9b44a422ab19acdf85d15",
-        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_630af6b9e7c6e925cd311ac06f9c42bf7f7eabf972548226bb21ff0a83e53d64_dfb0b4311da9b44a422ab19acdf85d15"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS63-071#AB_WHEN_SUMMONED_NONE_LV1_LV2_ed6d469157bd50ebb9c0a84263cc6e90840f254e36bb4c5d2b0e2a9367f4ffcc_525d1166914cd4a29a23a343cc303bac",
+        "physicalId": "BS63-071#AB_WHEN_SUMMONED_NONE_LV1_LV2_ed6d469157bd50ebb9c0a84263cc6e90840f254e36bb4c5d2b0e2a9367f4ffcc_525d1166914cd4a29a23a343cc303bac",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_ed6d469157bd50ebb9c0a84263cc6e90840f254e36bb4c5d2b0e2a9367f4ffcc_525d1166914cd4a29a23a343cc303bac",
+        "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_f6b0304ee65622efae3bf339b3433895d02b752d322d3a4084f2bff4d566c799_9d43649efdd0cf71f04deedfe1d05d91",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS63-071#AB_PASSIVE_NONE_LV1_LV2_010ab805b0ac1ee6874a971e0dcb4db1e5d946370a991e33ce4052703e640965_ffb76ce54be3a300f34ee29d70fbc2cb",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -13369,20 +13512,32 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "PASSIVE",
+          "timings": [],
           "timingLabel": "",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": "AFO",
+          "keywords": [
+            "AFO"
+          ],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Give this Spirit and every \"The PartnerLion Raon\" you control, including those that are in pre-advent condition, the effect: \"[Contract Pre-Advent][Spirit] (When Attacks) Destroy an opposing Cost 3 or less Spirit. If you have seven counters or more, instead, destroy an opposing Spirit with the lowest cost.\""
         },
+        "originalAbilityText": "[LV1][LV2] [AFO]\nGive this Spirit and every \"The PartnerLion Raon\" you control, including those that are in pre-advent condition, the effect: \"[Contract Pre-Advent]/[Spirit] (When Attacks) Destroy an opposing Cost 3 or less Spirit. If you have seven counters or more, instead, destroy an opposing Spirit with the lowest cost.\"",
+        "abilityIndex": 1,
         "clauses": [
           {
             "rawText": "Give this Spirit and every \"The PartnerLion Raon\" you control, including those that are in pre-advent condition, the effect: \"[Contract Pre-Advent][Spirit] (When Attacks) Destroy an opposing Cost 3 or less Spirit.",
+            "originalClauseText": "Give this Spirit and every \"The PartnerLion Raon\" you control, including those that are in pre-advent condition, the effect: \"[Contract Pre-Advent][Spirit] (When Attacks) Destroy an opposing Cost 3 or less Spirit.",
             "cleanText": "Give this Spirit and every \"The PartnerLion Raon\" you control, including those that are in pre-advent condition, the effect: \"[Contract Pre-Advent][Spirit] (When Attacks) Destroy an opposing Cost 3 or less Spirit",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -13404,7 +13559,9 @@
           },
           {
             "rawText": "If you have seven counters or more, instead, destroy an opposing Spirit with the lowest cost.\"",
+            "originalClauseText": "If you have seven counters or more, instead, destroy an opposing Spirit with the lowest cost.\"",
             "cleanText": "destroy an opposing Spirit with the lowest cost.\"",
+            "clauseIndex": 1,
             "link": "instead",
             "isOptional": false,
             "isCost": false,
@@ -13424,11 +13581,63 @@
         ],
         "unsupported": [],
         "legacyId": "BS63-071#a1",
-        "physicalId": "BS63-071#AB_PASSIVE_NONE_LV1_LV2_010ab805b0ac1ee6874a971e0dcb4db1e5d946370a991e33ce4052703e640965_ffb76ce54be3a300f34ee29d70fbc2cb",
-        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_010ab805b0ac1ee6874a971e0dcb4db1e5d946370a991e33ce4052703e640965_ffb76ce54be3a300f34ee29d70fbc2cb"
+        "keywords": [
+          {
+            "name": "AFO",
+            "parameter": null,
+            "wave": 4,
+            "hook": "afo",
+            "bracketed": true,
+            "index": 0,
+            "abilityId": "BS63-071#AB_PASSIVE_NONE_LV1_LV2_5cc0705e3caec30c6e5b26339e8061c4efbd6f6b8b4e279696b996ea5de8a415_ed5920e40f9bbd74d4c7dd3b0ed0b0f5",
+            "cardNumber": "BS63-071",
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "face": "A",
+            "prefixes": [],
+            "isSoulState": false,
+            "duringAdvent": false,
+            "duringSeal": false,
+            "burstCondition": null,
+            "limit": null,
+            "isFlash": false,
+            "isMain": false,
+            "legacyAbilityId": "BS63-071#a1"
+          }
+        ],
+        "referencedKeywords": [
+          {
+            "name": "Contract Pre-Advent",
+            "parameter": null,
+            "wave": 2,
+            "hook": "contract_pre_advent",
+            "bracketed": true,
+            "index": 126
+          }
+        ],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS63-071#AB_PASSIVE_NONE_LV1_LV2_5cc0705e3caec30c6e5b26339e8061c4efbd6f6b8b4e279696b996ea5de8a415_ed5920e40f9bbd74d4c7dd3b0ed0b0f5",
+        "physicalId": "BS63-071#AB_PASSIVE_NONE_LV1_LV2_5cc0705e3caec30c6e5b26339e8061c4efbd6f6b8b4e279696b996ea5de8a415_ed5920e40f9bbd74d4c7dd3b0ed0b0f5",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_5cc0705e3caec30c6e5b26339e8061c4efbd6f6b8b4e279696b996ea5de8a415_ed5920e40f9bbd74d4c7dd3b0ed0b0f5",
+        "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_4f31a6ada4dc05802326a8e348e2be0b3b9341aa56980deb1ec07e1839a880c6_eaa67e496baf5e02b2dc070d8e4cb957",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 4,
+    "compiledClausesCount": 5,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },
@@ -14725,16 +14934,38 @@
     "keywords": [
       {
         "name": "Mirage",
-        "parameter": "Cost 2 ([Blue Core",
+        "parameter": "Cost 2 (Blue Core)",
         "wave": 2,
         "hook": "mirage",
         "bracketed": true,
-        "index": 0
+        "index": 0,
+        "abilityId": "BS63-072#AB_PASSIVE_NONE_LV1_LV2_LV3_0080a795bb567f94c579bbe0d62944882a8322193447b50631cd54f138c5f714_1c10fa3d9a653527bab763aa64a38e4a",
+        "cardNumber": "BS63-072",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "levelExplicit": false,
+        "timing": "PASSIVE",
+        "timingLabel": "",
+        "timingStep": "ANY",
+        "face": "A",
+        "prefixes": [
+          "Mirage: Cost 2 (Blue Core)"
+        ],
+        "isSoulState": false,
+        "duringAdvent": false,
+        "duringSeal": false,
+        "burstCondition": null,
+        "limit": null,
+        "isFlash": false,
+        "isMain": false,
+        "legacyAbilityId": "BS63-072#a0"
       }
     ],
     "abilities": [
       {
-        "id": "BS63-072#AB_PASSIVE_NONE_LV1_LV2_LV3_7e0997c8c8011f070690e5fbd4cd54aff987500f0433e645ad7ac887fe59b290_0f3036d7831fcd6aff12c1d93d9849e1",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -14744,27 +14975,80 @@
           ],
           "levelExplicit": false,
           "prefixes": [
-            "Mirage: Cost ([Blue Core]"
+            "Mirage: Cost 2 (Blue Core)"
           ],
           "timing": "PASSIVE",
+          "timings": [],
           "timingLabel": "",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
-          "cleanBody": "}"
+          "cleanBody": ""
         },
+        "originalAbilityText": "[Mirage: Cost 2 ([Blue Core]]}",
+        "abilityIndex": 0,
         "clauses": [],
         "unsupported": [],
         "legacyId": "BS63-072#a0",
-        "physicalId": "BS63-072#AB_PASSIVE_NONE_LV1_LV2_LV3_7e0997c8c8011f070690e5fbd4cd54aff987500f0433e645ad7ac887fe59b290_0f3036d7831fcd6aff12c1d93d9849e1",
-        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_7e0997c8c8011f070690e5fbd4cd54aff987500f0433e645ad7ac887fe59b290_0f3036d7831fcd6aff12c1d93d9849e1"
+        "keywords": [
+          {
+            "name": "Mirage",
+            "parameter": "Cost 2 (Blue Core)",
+            "wave": 2,
+            "hook": "mirage",
+            "bracketed": true,
+            "index": 0,
+            "abilityId": "BS63-072#AB_PASSIVE_NONE_LV1_LV2_LV3_0080a795bb567f94c579bbe0d62944882a8322193447b50631cd54f138c5f714_1c10fa3d9a653527bab763aa64a38e4a",
+            "cardNumber": "BS63-072",
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "face": "A",
+            "prefixes": [
+              "Mirage: Cost 2 (Blue Core)"
+            ],
+            "isSoulState": false,
+            "duringAdvent": false,
+            "duringSeal": false,
+            "burstCondition": null,
+            "limit": null,
+            "isFlash": false,
+            "isMain": false,
+            "legacyAbilityId": "BS63-072#a0"
+          }
+        ],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS63-072#AB_PASSIVE_NONE_LV1_LV2_LV3_0080a795bb567f94c579bbe0d62944882a8322193447b50631cd54f138c5f714_1c10fa3d9a653527bab763aa64a38e4a",
+        "physicalId": "BS63-072#AB_PASSIVE_NONE_LV1_LV2_LV3_0080a795bb567f94c579bbe0d62944882a8322193447b50631cd54f138c5f714_1c10fa3d9a653527bab763aa64a38e4a",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_0080a795bb567f94c579bbe0d62944882a8322193447b50631cd54f138c5f714_1c10fa3d9a653527bab763aa64a38e4a",
+        "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_ed23e9ad86a89b4f3acc14a92483ceaf5f4b69216f1b7dc65cc7da5324e74c7b_b9a7670faf9a45dc3239365254c12fcc",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS63-072#AB_PASSIVE_NONE_LV1_LV2_LV3_82bcb1d552e892868999bf2ebccbadc84ed7882fa1068b61466c782098999dde_7f25316d336d39a5a6c2d55542d8168e",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -14777,20 +15061,32 @@
             "During Set"
           ],
           "timing": "PASSIVE",
+          "timings": [],
           "timingLabel": "",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [
+            "DURING_SET"
+          ],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "When you draw via your \"Azure Wave\" family effect, the opponent can't activate \"when draw/when increase Hand\" effects."
         },
+        "originalAbilityText": "[During Set]\nWhen you draw via your \"Azure Wave\" family effect, the opponent can't activate \"when draw/when increase Hand\" effects.",
+        "abilityIndex": 1,
         "clauses": [
           {
             "rawText": "When you draw via your \"Azure Wave\" family effect, the opponent can't activate \"when draw/when increase Hand\" effects.",
+            "originalClauseText": "When you draw via your \"Azure Wave\" family effect, the opponent can't activate \"when draw/when increase Hand\" effects.",
             "cleanText": "When you draw via your \"Azure Wave\" family effect, the opponent can't activate \"when draw/when increase Hand\" effects",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -14805,11 +15101,26 @@
         ],
         "unsupported": [],
         "legacyId": "BS63-072#a1",
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS63-072#AB_PASSIVE_NONE_LV1_LV2_LV3_82bcb1d552e892868999bf2ebccbadc84ed7882fa1068b61466c782098999dde_7f25316d336d39a5a6c2d55542d8168e",
         "physicalId": "BS63-072#AB_PASSIVE_NONE_LV1_LV2_LV3_82bcb1d552e892868999bf2ebccbadc84ed7882fa1068b61466c782098999dde_7f25316d336d39a5a6c2d55542d8168e",
-        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_82bcb1d552e892868999bf2ebccbadc84ed7882fa1068b61466c782098999dde_7f25316d336d39a5a6c2d55542d8168e"
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_82bcb1d552e892868999bf2ebccbadc84ed7882fa1068b61466c782098999dde_7f25316d336d39a5a6c2d55542d8168e",
+        "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_e53e67057c51fce8c9d92e251c347aca014c988b9e3584e041fa3db69f6a49e0_fffcd5a1677c294bac352835d4c51493",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [
+            "DURING_SET"
+          ],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS63-072#AB_WHEN_SUMMONED_NONE_LV1_LV2_d9fc1b1a67f838ba7e0f7f820423b0e771fbe63e5109d3899564c02dff9fc762_ccd9cc8d6fd0f571864cf0f1500db16f",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -14819,20 +15130,36 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_SUMMONED",
+          "timings": [
+            "WHEN_SUMMONED"
+          ],
           "timingLabel": "When Summoned",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [
+            "ONCE_PER_TURN_SAME_NAME"
+          ],
           "limit": "ONCE_PER_TURN_SAME_NAME",
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Including being in Soul State/pre-advent condition, if you control any \"The PartnerShark Shack\", draw three cards, then discard three cards from your Hand. When this effect discards any \"Azure Wave\" family Nexus card, you can deploy one of those cards without paying the cost."
         },
+        "originalAbilityText": "[LV1][LV2] (When Summoned)\n(Once per Turn: Same Name) Including being in Soul State/pre-advent condition, if you control any \"The PartnerShark Shack\", draw three cards, then discard three cards from your Hand. When this effect discards any \"Azure Wave\" family Nexus card, you can deploy one of those cards without paying the cost.",
+        "abilityIndex": 2,
         "clauses": [
           {
-            "rawText": "Including being in Soul State/pre-advent condition, if you control any \"The PartnerShark Shack\", draw three cards, then discard three cards from your Hand.",
-            "cleanText": "Including being in Soul State/pre-advent condition, if you control any \"The PartnerShark Shack\", draw three cards, then discard three cards from your Hand",
+            "rawText": "Including being in Soul State/pre-advent condition, if you control any \"The PartnerShark Shack\", draw three cards",
+            "originalClauseText": "Including being in Soul State/pre-advent condition, if you control any \"The PartnerShark Shack\", draw three cards",
+            "cleanText": "Including being in Soul State/pre-advent condition, if you control any \"The PartnerShark Shack\", draw three cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -14846,8 +15173,28 @@
             }
           },
           {
+            "rawText": "discard three cards from your Hand.",
+            "originalClauseText": "discard three cards from your Hand.",
+            "cleanText": "discard three cards from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 3,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
+          },
+          {
             "rawText": "When this effect discards any \"Azure Wave\" family Nexus card, you can deploy one of those cards without paying the cost.",
+            "originalClauseText": "When this effect discards any \"Azure Wave\" family Nexus card, you can deploy one of those cards without paying the cost.",
             "cleanText": "When this effect discards any \"Azure Wave\" family Nexus card, you can deploy one of those cards without paying the cost",
+            "clauseIndex": 2,
             "link": null,
             "isOptional": true,
             "isCost": false,
@@ -14861,11 +15208,29 @@
         ],
         "unsupported": [],
         "legacyId": "BS63-072#a2",
-        "physicalId": "BS63-072#AB_WHEN_SUMMONED_NONE_LV1_LV2_d9fc1b1a67f838ba7e0f7f820423b0e771fbe63e5109d3899564c02dff9fc762_ccd9cc8d6fd0f571864cf0f1500db16f",
-        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_d9fc1b1a67f838ba7e0f7f820423b0e771fbe63e5109d3899564c02dff9fc762_ccd9cc8d6fd0f571864cf0f1500db16f"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS63-072#AB_WHEN_SUMMONED_NONE_LV1_LV2_763d7532aa75b2174a6eabb7bea6c005d994c0bc5478a6f0485c13241ce02aa7_175c986b8e319491d8ac251d302a398d",
+        "physicalId": "BS63-072#AB_WHEN_SUMMONED_NONE_LV1_LV2_763d7532aa75b2174a6eabb7bea6c005d994c0bc5478a6f0485c13241ce02aa7_175c986b8e319491d8ac251d302a398d",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_763d7532aa75b2174a6eabb7bea6c005d994c0bc5478a6f0485c13241ce02aa7_175c986b8e319491d8ac251d302a398d",
+        "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_bb1647058557521a339f243cc35c5a0affb45ce7d1fe091b00adc34319ae667b_d258ddac74f2956a835be6bbac16da91",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [
+            "ONCE_PER_TURN_SAME_NAME"
+          ],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 3,
+    "compiledClausesCount": 4,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },

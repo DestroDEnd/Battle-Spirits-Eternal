@@ -552,19 +552,9 @@
   "BS33-082": {
     "cardNumber": "BS33-082",
     "name": "Brimming Summon Seas",
-    "keywords": [
-      {
-        "name": "Rush",
-        "parameter": null,
-        "wave": 2,
-        "hook": "rush",
-        "bracketed": true,
-        "index": 138
-      }
-    ],
+    "keywords": [],
     "abilities": [
       {
-        "id": "BS33-082#AB_MAIN_NONE_LV1_LV2_LV3_9a47b2f74e83472b3e17b85641a0befc2991b6ba791cde9c23b6bd97821285a5_db73cbd6d1ada5d1382f99b52449cee2",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -575,20 +565,32 @@
           "levelExplicit": false,
           "prefixes": [],
           "timing": "MAIN",
+          "timings": [],
           "timingLabel": "Main",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "MAIN"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": true,
           "cleanBody": "Draw two cards, then discard a card from your Hand. Also, if [Soul Core] was used to pay the cost, destroy an opposing Spirit with [Rush]."
         },
+        "originalAbilityText": "[Main]\nDraw two cards, then discard a card from your Hand. Also, if [Soul Core] was used to pay the cost, destroy an opposing Spirit with [Rush].",
+        "abilityIndex": 0,
         "clauses": [
           {
-            "rawText": "Draw two cards, then discard a card from your Hand.",
-            "cleanText": "Draw two cards, then discard a card from your Hand",
+            "rawText": "Draw two cards",
+            "originalClauseText": "Draw two cards",
+            "cleanText": "Draw two cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -602,8 +604,28 @@
             }
           },
           {
+            "rawText": "discard a card from your Hand.",
+            "originalClauseText": "discard a card from your Hand.",
+            "cleanText": "discard a card from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 1,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
+          },
+          {
             "rawText": "if [Soul Core] was used to pay the cost, destroy an opposing Spirit with [Rush].",
+            "originalClauseText": "if [Soul Core] was used to pay the cost, destroy an opposing Spirit with [Rush].",
             "cleanText": "destroy an opposing Spirit with [Rush]",
+            "clauseIndex": 2,
             "link": "also",
             "isOptional": false,
             "isCost": false,
@@ -623,11 +645,35 @@
         ],
         "unsupported": [],
         "legacyId": "BS33-082#a0",
-        "physicalId": "BS33-082#AB_MAIN_NONE_LV1_LV2_LV3_9a47b2f74e83472b3e17b85641a0befc2991b6ba791cde9c23b6bd97821285a5_db73cbd6d1ada5d1382f99b52449cee2",
-        "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_9a47b2f74e83472b3e17b85641a0befc2991b6ba791cde9c23b6bd97821285a5_db73cbd6d1ada5d1382f99b52449cee2"
+        "keywords": [],
+        "referencedKeywords": [
+          {
+            "name": "Rush",
+            "parameter": null,
+            "wave": 2,
+            "hook": "rush",
+            "bracketed": true,
+            "index": 131
+          }
+        ],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS33-082#AB_MAIN_NONE_LV1_LV2_LV3_305bc43aac23eb3100fa4d9785dee2364f56456c41f1c003fc4df14bc8f3596f_8b5c934b659d73212f7707b6bb65bff7",
+        "physicalId": "BS33-082#AB_MAIN_NONE_LV1_LV2_LV3_305bc43aac23eb3100fa4d9785dee2364f56456c41f1c003fc4df14bc8f3596f_8b5c934b659d73212f7707b6bb65bff7",
+        "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_305bc43aac23eb3100fa4d9785dee2364f56456c41f1c003fc4df14bc8f3596f_8b5c934b659d73212f7707b6bb65bff7",
+        "semanticIdV3": "SEM3#AB_MAIN_NONE_LV1_LV2_LV3_f44bc5e47d72b88f83a4b367996082a2e542b29663dfe08cff1a3057b3990b04_485dbf532e09b4d627aa75fbc6a4fa2f",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "MAIN"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS33-082#AB_FLASH_NONE_LV1_LV2_LV3_b7267febc116065bc535a58f5f3ff29dbb5c8037e51c4522ec8e3594a43eeb5e_256987d37f959f9e5e2d57967e8b7841",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -638,20 +684,56 @@
           "levelExplicit": false,
           "prefixes": [],
           "timing": "FLASH",
+          "timings": [],
           "timingLabel": "Flash",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "FLASH"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": true,
           "isMain": false,
-          "cleanBody": "During this turn, give a Spirit/Ultimate +3000 BP."
+          "cleanBody": "During this turn, give a Spirit/Ultimate +3000 BP.",
+          "flashTimingSpec": {
+            "effectType": "FLASH",
+            "isFlash": true,
+            "isGenericFlash": true,
+            "isTriggered": false,
+            "timingQualifier": "GENERIC",
+            "generalAvailability": [
+              "CONTROLLER_MAIN_STEP",
+              "EITHER_PLAYER_BATTLE_FLASH_TIMING"
+            ],
+            "additionalRestrictions": {
+              "allowedSteps": [
+                "MAIN",
+                "ATTACK"
+              ],
+              "allowedTurnOwners": [
+                "SELF",
+                "OPPONENT"
+              ],
+              "requiresBattle": false,
+              "requiresFlashWindow": false,
+              "triggerCondition": null
+            }
+          }
         },
+        "originalAbilityText": "[Flash]\nDuring this turn, give a Spirit/Ultimate +3000 BP.",
+        "abilityIndex": 1,
         "clauses": [
           {
             "rawText": "During this turn, give a Spirit/Ultimate +3000 BP.",
+            "originalClauseText": "During this turn, give a Spirit/Ultimate +3000 BP.",
             "cleanText": "give a Spirit/Ultimate +3000 BP",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -667,11 +749,27 @@
         ],
         "unsupported": [],
         "legacyId": "BS33-082#a1",
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS33-082#AB_FLASH_NONE_LV1_LV2_LV3_b7267febc116065bc535a58f5f3ff29dbb5c8037e51c4522ec8e3594a43eeb5e_256987d37f959f9e5e2d57967e8b7841",
         "physicalId": "BS33-082#AB_FLASH_NONE_LV1_LV2_LV3_b7267febc116065bc535a58f5f3ff29dbb5c8037e51c4522ec8e3594a43eeb5e_256987d37f959f9e5e2d57967e8b7841",
-        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_b7267febc116065bc535a58f5f3ff29dbb5c8037e51c4522ec8e3594a43eeb5e_256987d37f959f9e5e2d57967e8b7841"
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_b7267febc116065bc535a58f5f3ff29dbb5c8037e51c4522ec8e3594a43eeb5e_256987d37f959f9e5e2d57967e8b7841",
+        "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_e77e36428ba010d21a3a91c4e536514dc0a9e3516f01ebc06843c143bb19628b_c53cf161c0a0ff85202f30c551928441",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "FLASH"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 3,
+    "compiledClausesCount": 4,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },

@@ -6057,7 +6057,6 @@
     "keywords": [],
     "abilities": [
       {
-        "id": "BS65-089#AB_PASSIVE_NONE_LV1_LV2_LV3_d469d75d3fc0ec1b2399e224ac11b270c167b63161890635a5d51613c510bc01_74e36a848bedbba161716c664df0bcd1",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -6068,41 +6067,69 @@
           "levelExplicit": false,
           "prefixes": [],
           "timing": "PASSIVE",
+          "timings": [],
           "timingLabel": "",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [
+            "ONCE_PER_TURN_SAME_NAME"
+          ],
           "limit": "ONCE_PER_TURN_SAME_NAME",
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "When cards are discarded from the opposing deck via the effect of your \"The Artificial Partner, Reve\", including those that are in pre-advent condition, you can return this card from the Trash to the Hand."
         },
+        "originalAbilityText": "(Once per Turn: Same Name) When cards are discarded from the opposing deck via the effect of your \"The Artificial Partner, Reve\", including those that are in pre-advent condition, you can return this card from the Trash to the Hand.",
+        "abilityIndex": 0,
         "clauses": [
           {
             "rawText": "When cards are discarded from the opposing deck via the effect of your \"The Artificial Partner, Reve\", including those that are in pre-advent condition, you can return this card from the Trash to the Hand.",
+            "originalClauseText": "When cards are discarded from the opposing deck via the effect of your \"The Artificial Partner, Reve\", including those that are in pre-advent condition, you can return this card from the Trash to the Hand.",
             "cleanText": "When cards are discarded from the opposing deck via the effect of your \"The Artificial Partner, Reve\", including those that are in pre-advent condition, you can return this card from the Trash to the Hand",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": true,
             "isCost": false,
             "condition": null,
             "duration": null,
             "op": {
-              "op": "BOUNCE",
+              "op": "SALVAGE",
+              "target": "this_card",
+              "from": "trash",
+              "destination": "HAND",
               "count": 1,
-              "target": {
-                "side": "either"
-              }
+              "isOptional": false
             }
           }
         ],
         "unsupported": [],
         "legacyId": "BS65-089#a0",
-        "physicalId": "BS65-089#AB_PASSIVE_NONE_LV1_LV2_LV3_d469d75d3fc0ec1b2399e224ac11b270c167b63161890635a5d51613c510bc01_74e36a848bedbba161716c664df0bcd1",
-        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_d469d75d3fc0ec1b2399e224ac11b270c167b63161890635a5d51613c510bc01_74e36a848bedbba161716c664df0bcd1"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS65-089#AB_PASSIVE_NONE_LV1_LV2_LV3_f18bfef355280a2a6e23d094f70c642bc0106264bef44623d5d48e95bb7b3dde_67bd426e94ee9e819297c48a773d5f62",
+        "physicalId": "BS65-089#AB_PASSIVE_NONE_LV1_LV2_LV3_f18bfef355280a2a6e23d094f70c642bc0106264bef44623d5d48e95bb7b3dde_67bd426e94ee9e819297c48a773d5f62",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_f18bfef355280a2a6e23d094f70c642bc0106264bef44623d5d48e95bb7b3dde_67bd426e94ee9e819297c48a773d5f62",
+        "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_261022734181f9189f7943a08e01d61661addabe65c9b3ff3d6bf1f96b66bd79_41aaabf855b66bb04c5ee3d50d144d82",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [
+            "ONCE_PER_TURN_SAME_NAME"
+          ],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS65-089#AB_MAIN_NONE_LV1_LV2_LV3_bf176e84fef4777226e614134c818ffa2cc6fae229c0ab8752c2d916dc235498_c9b24c3d1211de491bd64fe17290918d",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -6113,20 +6140,32 @@
           "levelExplicit": false,
           "prefixes": [],
           "timing": "MAIN",
+          "timings": [],
           "timingLabel": "Main",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "MAIN"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": true,
           "cleanBody": "Draw two cards, then discard a card from your Hand."
         },
+        "originalAbilityText": "[Main]\nDraw two cards, then discard a card from your Hand.",
+        "abilityIndex": 1,
         "clauses": [
           {
-            "rawText": "Draw two cards, then discard a card from your Hand.",
-            "cleanText": "Draw two cards, then discard a card from your Hand",
+            "rawText": "Draw two cards",
+            "originalClauseText": "Draw two cards",
+            "cleanText": "Draw two cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -6138,15 +6177,49 @@
               "chooser": "self",
               "forEach": null
             }
+          },
+          {
+            "rawText": "discard a card from your Hand.",
+            "originalClauseText": "discard a card from your Hand.",
+            "cleanText": "discard a card from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 1,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
           }
         ],
         "unsupported": [],
         "legacyId": "BS65-089#a1",
-        "physicalId": "BS65-089#AB_MAIN_NONE_LV1_LV2_LV3_bf176e84fef4777226e614134c818ffa2cc6fae229c0ab8752c2d916dc235498_c9b24c3d1211de491bd64fe17290918d",
-        "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_bf176e84fef4777226e614134c818ffa2cc6fae229c0ab8752c2d916dc235498_c9b24c3d1211de491bd64fe17290918d"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS65-089#AB_MAIN_NONE_LV1_LV2_LV3_1dc7aa3aedce8f93b187b006454d1719cd80847f5fbcd3e8de13a66540e4cd97_4262c0902a281275a5ccfd588ef5be9b",
+        "physicalId": "BS65-089#AB_MAIN_NONE_LV1_LV2_LV3_1dc7aa3aedce8f93b187b006454d1719cd80847f5fbcd3e8de13a66540e4cd97_4262c0902a281275a5ccfd588ef5be9b",
+        "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_1dc7aa3aedce8f93b187b006454d1719cd80847f5fbcd3e8de13a66540e4cd97_4262c0902a281275a5ccfd588ef5be9b",
+        "semanticIdV3": "SEM3#AB_MAIN_NONE_LV1_LV2_LV3_77365082de8c4e1fe92cef57ed0962c1543e949ae7448d7220221517880cc977_692bae9a7d16c15b11f71b8e80b82283",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "MAIN"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 2,
+    "compiledClausesCount": 3,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },
@@ -8712,19 +8785,9 @@
   "BS65-044": {
     "cardNumber": "BS65-044",
     "name": "The GreatAdventurer Geraldrad",
-    "keywords": [
-      {
-        "name": "Burst",
-        "parameter": "After your Life is reduced",
-        "wave": 2,
-        "hook": "burst",
-        "bracketed": true,
-        "index": 143
-      }
-    ],
+    "keywords": [],
     "abilities": [
       {
-        "id": "BS65-044#AB_PASSIVE_NONE_LV1_LV2_LV3_1f7d4c8ca8f5d4f72c1fc61b5b9da286695bb7d1e8697ce3db579e7587b59850_010388fe5bd9677d008fa9af5fe28d62",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -8735,20 +8798,30 @@
           "levelExplicit": false,
           "prefixes": [],
           "timing": "PASSIVE",
+          "timings": [],
           "timingLabel": "",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "When your \"Azure Wave\" family effect discards three or more cards at once from the opposing deck, you can immediately activate this set card."
         },
+        "originalAbilityText": "When your \"Azure Wave\" family effect discards three or more cards at once from the opposing deck, you can immediately activate this set card.",
+        "abilityIndex": 0,
         "clauses": [
           {
             "rawText": "When your \"Azure Wave\" family effect discards three or more cards at once from the opposing deck, you can immediately activate this set card.",
+            "originalClauseText": "When your \"Azure Wave\" family effect discards three or more cards at once from the opposing deck, you can immediately activate this set card.",
             "cleanText": "When your \"Azure Wave\" family effect discards three or more cards at once from the opposing deck, you can immediately activate this set card",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": true,
             "isCost": false,
@@ -8762,11 +8835,24 @@
         ],
         "unsupported": [],
         "legacyId": "BS65-044#a0",
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS65-044#AB_PASSIVE_NONE_LV1_LV2_LV3_1f7d4c8ca8f5d4f72c1fc61b5b9da286695bb7d1e8697ce3db579e7587b59850_010388fe5bd9677d008fa9af5fe28d62",
         "physicalId": "BS65-044#AB_PASSIVE_NONE_LV1_LV2_LV3_1f7d4c8ca8f5d4f72c1fc61b5b9da286695bb7d1e8697ce3db579e7587b59850_010388fe5bd9677d008fa9af5fe28d62",
-        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_1f7d4c8ca8f5d4f72c1fc61b5b9da286695bb7d1e8697ce3db579e7587b59850_010388fe5bd9677d008fa9af5fe28d62"
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_1f7d4c8ca8f5d4f72c1fc61b5b9da286695bb7d1e8697ce3db579e7587b59850_010388fe5bd9677d008fa9af5fe28d62",
+        "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_682b4d87df7ffefba14f2427192343dd555b267f495c0a42c1a8058cbe258dac_93796df36c12af7f2d05e2e883dd95be",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS65-044#AB_BURST_NONE_LV1_LV2_LV3_cf85ef788ea8e1165ebee9b433257d025399aed4412fd1211f02c312d4a7cb22_5bea33473b7f6a0bef1a7188fb9b2550",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -8777,20 +8863,32 @@
           "levelExplicit": false,
           "prefixes": [],
           "timing": "BURST",
+          "timings": [],
           "timingLabel": "Burst",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "BURST"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Draw three cards, then discard a card from your Hand. Destroy an opposing Spirit/Ultimate with a cost equal or inferior to the cost of the card discarded via this effect. After this effect resolves, summon this card without paying the cost."
         },
+        "originalAbilityText": "[Burst: After your Life is reduced]\nDraw three cards, then discard a card from your Hand. Destroy an opposing Spirit/Ultimate with a cost equal or inferior to the cost of the card discarded via this effect. After this effect resolves, summon this card without paying the cost.",
+        "abilityIndex": 1,
         "clauses": [
           {
-            "rawText": "Draw three cards, then discard a card from your Hand.",
-            "cleanText": "Draw three cards, then discard a card from your Hand",
+            "rawText": "Draw three cards",
+            "originalClauseText": "Draw three cards",
+            "cleanText": "Draw three cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -8804,8 +8902,28 @@
             }
           },
           {
+            "rawText": "discard a card from your Hand.",
+            "originalClauseText": "discard a card from your Hand.",
+            "cleanText": "discard a card from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 1,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
+          },
+          {
             "rawText": "Destroy an opposing Spirit/Ultimate with a cost equal or inferior to the cost of the card discarded via this effect.",
+            "originalClauseText": "Destroy an opposing Spirit/Ultimate with a cost equal or inferior to the cost of the card discarded via this effect.",
             "cleanText": "Destroy an opposing Spirit/Ultimate with a cost equal or inferior to the cost of the card discarded via this effect",
+            "clauseIndex": 2,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -8817,14 +8935,24 @@
               "target": {
                 "side": "opp",
                 "types": [
-                  "Spirit"
-                ]
+                  "Spirit",
+                  "Ultimate"
+                ],
+                "filters": {
+                  "comparison": {
+                    "property": "COST",
+                    "operator": "LTE",
+                    "reference": "effect_card"
+                  }
+                }
               }
             }
           },
           {
             "rawText": "summon this card without paying the cost.",
+            "originalClauseText": "summon this card without paying the cost.",
             "cleanText": "summon this card without paying the cost",
+            "clauseIndex": 3,
             "link": "afterResolves",
             "isOptional": false,
             "isCost": false,
@@ -8839,11 +8967,26 @@
         ],
         "unsupported": [],
         "legacyId": "BS65-044#a1",
-        "physicalId": "BS65-044#AB_BURST_NONE_LV1_LV2_LV3_cf85ef788ea8e1165ebee9b433257d025399aed4412fd1211f02c312d4a7cb22_5bea33473b7f6a0bef1a7188fb9b2550",
-        "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_cf85ef788ea8e1165ebee9b433257d025399aed4412fd1211f02c312d4a7cb22_5bea33473b7f6a0bef1a7188fb9b2550"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS65-044#AB_BURST_NONE_LV1_LV2_LV3_1d705f46ed46595b96a04c8999a90ffadf81d42c877806a1270eebeff07ef65f_b925ee6efcc23938ed4fa80b31a91dfd",
+        "physicalId": "BS65-044#AB_BURST_NONE_LV1_LV2_LV3_1d705f46ed46595b96a04c8999a90ffadf81d42c877806a1270eebeff07ef65f_b925ee6efcc23938ed4fa80b31a91dfd",
+        "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_1d705f46ed46595b96a04c8999a90ffadf81d42c877806a1270eebeff07ef65f_b925ee6efcc23938ed4fa80b31a91dfd",
+        "semanticIdV3": "SEM3#AB_BURST_NONE_LV1_LV2_LV3_971db7590b402d265ff47125b795551fd723c2eebfb31599eb5e629f84a20c4d_2e6afa38b120c1d4f2b4740cbf150d6b",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "BURST"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS65-044#AB_WHEN_ATTACKS_NONE_LV2_LV3_6519a6349682347bbaeccf620019b48f262d07ab7bb93c73065e88866684e249_ea36fb40d55efa220067dd45c9d14644",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -8853,20 +8996,34 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_ATTACKS",
+          "timings": [
+            "WHEN_ATTACKS"
+          ],
           "timingLabel": "When Attacks",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Unless the opponent discards five cards from their decktop, once per turn, this Spirit refreshes."
         },
+        "originalAbilityText": "[LV2][LV3] (When Attacks)\nUnless the opponent discards five cards from their decktop, once per turn, this Spirit refreshes.",
+        "abilityIndex": 2,
         "clauses": [
           {
             "rawText": "Unless the opponent discards five cards from their decktop, once per turn, this Spirit refreshes.",
+            "originalClauseText": "Unless the opponent discards five cards from their decktop, once per turn, this Spirit refreshes.",
             "cleanText": "Unless the opponent discards five cards from their decktop, once per turn, this Spirit refreshes",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -8880,11 +9037,27 @@
         ],
         "unsupported": [],
         "legacyId": "BS65-044#a2",
-        "physicalId": "BS65-044#AB_WHEN_ATTACKS_NONE_LV2_LV3_6519a6349682347bbaeccf620019b48f262d07ab7bb93c73065e88866684e249_ea36fb40d55efa220067dd45c9d14644",
-        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_6519a6349682347bbaeccf620019b48f262d07ab7bb93c73065e88866684e249_ea36fb40d55efa220067dd45c9d14644"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS65-044#AB_WHEN_ATTACKS_NONE_LV2_LV3_312dd0cfa7327da947d237cfe63d6c682d82ac5d784e6f48b5ba1c75efbf6ddb_7bb802e2ba0a896804ea5b3da9e61eaf",
+        "physicalId": "BS65-044#AB_WHEN_ATTACKS_NONE_LV2_LV3_312dd0cfa7327da947d237cfe63d6c682d82ac5d784e6f48b5ba1c75efbf6ddb_7bb802e2ba0a896804ea5b3da9e61eaf",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_312dd0cfa7327da947d237cfe63d6c682d82ac5d784e6f48b5ba1c75efbf6ddb_7bb802e2ba0a896804ea5b3da9e61eaf",
+        "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_5dbf4b42a4be55b01e7d22ae22e9d121e17ce512c1421cf5af46176215d342d5_485caf402a0c477dcca6b7cadd27f0e5",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 5,
+    "compiledClausesCount": 6,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },
@@ -15221,7 +15394,6 @@
     "keywords": [],
     "abilities": [
       {
-        "id": "BS65-042#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_aa50a525a97b088e7e011a2fe2c73a318f97ad7ce5b5ee7cac960049ca286aa6_9e7b2216fe5a6653d6189c6e3dc4181e",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -15232,20 +15404,34 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_SUMMONED",
+          "timings": [
+            "WHEN_SUMMONED"
+          ],
           "timingLabel": "When Summoned",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "You can summon an \"Azure Wave\" family Brave card from your Hand, without paying the cost. When you've done so, draw two cards, then discard two cards from your Hand."
         },
+        "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nYou can summon an \"Azure Wave\" family Brave card from your Hand, without paying the cost. When you've done so, draw two cards, then discard two cards from your Hand.",
+        "abilityIndex": 0,
         "clauses": [
           {
             "rawText": "You can summon an \"Azure Wave\" family Brave card from your Hand, without paying the cost.",
+            "originalClauseText": "You can summon an \"Azure Wave\" family Brave card from your Hand, without paying the cost.",
             "cleanText": "You can summon an \"Azure Wave\" family Brave card from your Hand, without paying the cost",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": true,
             "isCost": false,
@@ -15253,12 +15439,25 @@
             "duration": null,
             "op": {
               "op": "SUMMON",
-              "free": true
+              "from": "hand",
+              "side": "self",
+              "count": 1,
+              "upTo": false,
+              "filter": {
+                "types": [
+                  "Brave"
+                ],
+                "family": "Azure Wave"
+              },
+              "free": true,
+              "isOptional": true
             }
           },
           {
-            "rawText": "draw two cards, then discard two cards from your Hand.",
-            "cleanText": "draw two cards, then discard two cards from your Hand",
+            "rawText": "draw two cards",
+            "originalClauseText": "draw two cards",
+            "cleanText": "draw two cards",
+            "clauseIndex": 1,
             "link": "byDoing",
             "isOptional": false,
             "isCost": false,
@@ -15270,15 +15469,48 @@
               "chooser": "self",
               "forEach": null
             }
+          },
+          {
+            "rawText": "discard two cards from your Hand.",
+            "originalClauseText": "discard two cards from your Hand.",
+            "cleanText": "discard two cards from your Hand",
+            "clauseIndex": 2,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 2,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
           }
         ],
         "unsupported": [],
         "legacyId": "BS65-042#a0",
-        "physicalId": "BS65-042#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_aa50a525a97b088e7e011a2fe2c73a318f97ad7ce5b5ee7cac960049ca286aa6_9e7b2216fe5a6653d6189c6e3dc4181e",
-        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_aa50a525a97b088e7e011a2fe2c73a318f97ad7ce5b5ee7cac960049ca286aa6_9e7b2216fe5a6653d6189c6e3dc4181e"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS65-042#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_e7135a947ab196f79a949eaa20965bc2241ff2234da804669ac01975bbccedc3_2cca04178ef98fa14f88e4327bb07b4b",
+        "physicalId": "BS65-042#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_e7135a947ab196f79a949eaa20965bc2241ff2234da804669ac01975bbccedc3_2cca04178ef98fa14f88e4327bb07b4b",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_e7135a947ab196f79a949eaa20965bc2241ff2234da804669ac01975bbccedc3_2cca04178ef98fa14f88e4327bb07b4b",
+        "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_18f85a26226596c8c7c3bb28ba71e2407ccda21aecbe4401a79943e417d66c49_c7741b84098356d75658965ac96c34cd",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS65-042#AB_WHEN_ATTACKS_NONE_LV2_LV3_c70ac14592b0626951b2db358f5ebdd604d76d1d7ae579f6023a1f3bf24bf42c_22c2291b9a220c95f1bc0670486410b7",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -15290,20 +15522,36 @@
             "During Brave"
           ],
           "timing": "WHEN_ATTACKS",
+          "timings": [
+            "WHEN_ATTACKS"
+          ],
           "timingLabel": "When Attacks",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [
+            "WHILE_BRAVED"
+          ],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Destroy an opposing Cost 6 or less Spirit. Then, unless the opponent discards five cards from their decktop, destroy an opposing Spirit with the highest cost."
         },
+        "originalAbilityText": "[During Brave] [LV2][LV3] (When Attacks)\nDestroy an opposing Cost 6 or less Spirit. Then, unless the opponent discards five cards from their decktop, destroy an opposing Spirit with the highest cost.",
+        "abilityIndex": 1,
         "clauses": [
           {
             "rawText": "Destroy an opposing Cost 6 or less Spirit.",
+            "originalClauseText": "Destroy an opposing Cost 6 or less Spirit.",
             "cleanText": "Destroy an opposing Cost 6 or less Spirit",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -15325,7 +15573,9 @@
           },
           {
             "rawText": "unless the opponent discards five cards from their decktop, destroy an opposing Spirit with the highest cost.",
+            "originalClauseText": "unless the opponent discards five cards from their decktop, destroy an opposing Spirit with the highest cost.",
             "cleanText": "unless the opponent discards five cards from their decktop, destroy an opposing Spirit with the highest cost",
+            "clauseIndex": 1,
             "link": "then",
             "isOptional": false,
             "isCost": false,
@@ -15345,11 +15595,29 @@
         ],
         "unsupported": [],
         "legacyId": "BS65-042#a1",
-        "physicalId": "BS65-042#AB_WHEN_ATTACKS_NONE_LV2_LV3_c70ac14592b0626951b2db358f5ebdd604d76d1d7ae579f6023a1f3bf24bf42c_22c2291b9a220c95f1bc0670486410b7",
-        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_c70ac14592b0626951b2db358f5ebdd604d76d1d7ae579f6023a1f3bf24bf42c_22c2291b9a220c95f1bc0670486410b7"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS65-042#AB_WHEN_ATTACKS_NONE_LV2_LV3_95c4836fb74f92c1dbc42f57cc3e2998da4b29be54b43824f6338237eed2cd30_0cbbb5497b363ce2acbc8fad9cc1d65c",
+        "physicalId": "BS65-042#AB_WHEN_ATTACKS_NONE_LV2_LV3_95c4836fb74f92c1dbc42f57cc3e2998da4b29be54b43824f6338237eed2cd30_0cbbb5497b363ce2acbc8fad9cc1d65c",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_95c4836fb74f92c1dbc42f57cc3e2998da4b29be54b43824f6338237eed2cd30_0cbbb5497b363ce2acbc8fad9cc1d65c",
+        "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_3668d515fcd22b74970b5a4e1725bc984368c01fa8997f0a5f97793b2fd6135b_f0c05fdff7fb24cbcfa0f52025b056fc",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [
+            "WHILE_BRAVED"
+          ],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 4,
+    "compiledClausesCount": 5,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },

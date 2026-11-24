@@ -82,6 +82,13 @@
     playTone(freq, type = 'sine', duration = 0.15, vol = 0.1) {
       if (!this.ctx) return;
       try {
+        const s = window.DuelistSocial?.getSettings ? window.DuelistSocial.getSettings() : null;
+        if (s && s.sfxEnabled === false) return;
+        const volScale = s && typeof s.sfxVolume === 'number' ? Math.max(0, Math.min(1, s.sfxVolume / 100)) : 1;
+        if (volScale <= 0) return;
+        vol = vol * volScale;
+      } catch (_) {}
+      try {
         if (this.ctx.state === 'suspended') this.ctx.resume();
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
@@ -992,9 +999,15 @@
       aiWatchdogTimer = null;
     }
     if (DuelState.activePlayer === 'opponent') {
+      if (DuelState.turn === 1 && DuelState.player && !DuelState.player.hasConfirmedHand) {
+        return;
+      }
       const stepAtCheck = DuelState.phaseIndex;
       const turnAtCheck = DuelState.turn;
       aiWatchdogTimer = setTimeout(() => {
+        if (DuelState.turn === 1 && DuelState.player && !DuelState.player.hasConfirmedHand) {
+          return;
+        }
         if (DuelState.activePlayer === 'opponent' && DuelState.turn === turnAtCheck && DuelState.phaseIndex === stepAtCheck) {
           const hasModal = typeof document !== 'undefined' && document.querySelector && 
             (document.querySelector('.battle-modal-overlay.active, .battle-modal-overlay[style*="display: flex"]') ||
@@ -1089,12 +1102,12 @@
         // Modern engine dynamically loads modular ~20KB IR shards on demand via loadCardIrShard / loadSetIrShard.
         let idxData = null;
         try {
-          const idxRes = await fetch('./data/cards_index.json?v=6.1');
+          const idxRes = await fetch('./data/cards_index.json?v=7.0');
           if (idxRes.ok) idxData = await idxRes.json();
         } catch (e) {}
         if (!idxData) {
           try {
-            const idxRes = await fetch('/data/cards_index.json?v=6.1');
+            const idxRes = await fetch('/data/cards_index.json?v=7.0');
             if (idxRes.ok) idxData = await idxRes.json();
           } catch (e) {}
         }
@@ -1906,23 +1919,26 @@
     box.className = 'optional-effect-popup universal-target-modal';
     box.style.cssText = 'position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:100002;width:min(480px,94vw);background:#0f172a;border:2px solid #38bdf8;border-radius:14px;padding:16px 18px;box-shadow:0 20px 50px rgba(0,0,0,.85);color:#e2e8f0;font-size:.86rem;font-family:sans-serif;pointer-events:auto;';
 
-    const selectedUids = new Set();
+    const selectedKeys = new Set();
     const isSingle = maxCount === 1;
+    const getCandKey = (item, idx) => String(item?.candidateId || item?.uid || item?.id || `cand_${idx}`);
 
     const renderModalContent = () => {
-      const listHtml = pool.map(item => {
-        const isSel = selectedUids.has(item.uid);
+      const listHtml = pool.map((item, idx) => {
+        const candKey = getCandKey(item, idx);
+        const isSel = selectedKeys.has(candKey);
         const bpText = item.currentBp ? ` ? ${item.currentBp} BP` : '';
         const coreText = item.currentCores !== undefined ? ` ? ${item.currentCores} Core(s)` : '';
         const costText = item.cost !== undefined ? `Cost ${item.cost}` : '';
+        const zoneText = item.zone ? ` • ${item.side ? `${item.side}:` : ''}${item.zone}` : '';
         const borderCol = isSel ? '#38bdf8' : '#334155';
         const bgCol = isSel ? 'rgba(56,189,248,0.2)' : '#1e293b';
 
         return `
-          <div data-uid="${_optEsc(item.uid)}" style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;margin-bottom:6px;border-radius:8px;cursor:pointer;border:1px solid ${borderCol};background:${bgCol};transition:all 0.15s ease;">
+          <div data-cand-key="${_optEsc(candKey)}" data-uid="${_optEsc(item.uid || candKey)}" style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;margin-bottom:6px;border-radius:8px;cursor:pointer;border:1px solid ${borderCol};background:${bgCol};transition:all 0.15s ease;">
             <div>
               <div style="font-weight:700;color:${isSel ? '#bae6fd' : '#f8fafc'};">${isSel ? '?? ' : '? '}${_optEsc(item.name)}</div>
-              <div style="font-size:0.75rem;color:#94a3b8;">${costText}${bpText}${coreText}${item.isExhausted ? ' (Exhausted)' : ''}</div>
+              <div style="font-size:0.75rem;color:#94a3b8;">${costText}${bpText}${coreText}${item.isExhausted ? ' (Exhausted)' : ''}${_optEsc(zoneText)}</div>
             </div>
             <span style="font-size:0.75rem;font-weight:700;padding:4px 8px;border-radius:6px;background:${isSel ? '#0284c7' : '#334155'};color:#fff;">
               ${isSel ? 'Selected' : 'Target'}
@@ -1937,7 +1953,7 @@
         <div style="max-height:240px;overflow-y:auto;margin-bottom:14px;padding-right:4px;">${listHtml}</div>
         <div style="display:flex;gap:10px;">
           <button data-act="confirm" style="flex:1;padding:9px 0;border-radius:8px;border:none;background:linear-gradient(135deg,#0284c7,#0369a1);color:#fff;font-weight:800;cursor:pointer;">
-            Confirm (${selectedUids.size})
+            Confirm (${selectedKeys.size})
           </button>
           ${allowSkip ? `
             <button data-act="skip" style="flex:1;padding:9px 0;border-radius:8px;border:1px solid #475569;background:#1e293b;color:#cbd5e1;font-weight:700;cursor:pointer;">
@@ -1947,16 +1963,17 @@
         </div>
       `;
 
-      pool.forEach(item => {
-        const row = box.querySelector(`[data-uid="${item.uid}"]`);
+      pool.forEach((item, idx) => {
+        const candKey = getCandKey(item, idx);
+        const row = Array.from(box.querySelectorAll('[data-cand-key]')).find(el => el.getAttribute('data-cand-key') === candKey);
         if (row) {
           row.onclick = () => {
-            if (selectedUids.has(item.uid)) {
-              selectedUids.delete(item.uid);
+            if (selectedKeys.has(candKey)) {
+              selectedKeys.delete(candKey);
             } else {
-              if (isSingle) selectedUids.clear();
-              if (selectedUids.size < maxCount) {
-                selectedUids.add(item.uid);
+              if (isSingle) selectedKeys.clear();
+              if (selectedKeys.size < maxCount) {
+                selectedKeys.add(candKey);
               }
             }
             renderModalContent();
@@ -1968,7 +1985,7 @@
       if (confirmBtn) {
         confirmBtn.onclick = () => {
           if (box.parentNode) box.parentNode.removeChild(box);
-          const targets = pool.filter(p => selectedUids.has(p.uid));
+          const targets = pool.filter((p, idx) => selectedKeys.has(getCandKey(p, idx)));
           if (typeof onConfirm === 'function') onConfirm(targets);
         };
       }
@@ -2021,7 +2038,18 @@
 
     // 3. SELECT_CARDS, SELECT_TARGET, SELECT_SUMMON, SELECT_TRIBUTE, SELECT_SALVAGE, SELECT_FORCE_BLOCK, SELECT_TARGET_ATTACK, SELECT_BLOCKER
     if (reqType === 'SELECT_CARDS' || reqType === 'SELECT_TARGET' || reqType === 'SELECT_SUMMON' || reqType === 'SELECT_TRIBUTE' || reqType === 'SELECT_SALVAGE' || reqType === 'SELECT_FORCE_BLOCK' || reqType === 'SELECT_TARGET_ATTACK' || reqType === 'SELECT_BLOCKER') {
-      const candidates = (prompt.candidates || []).map(item => item.card || item.stack?.top || item);
+      const candidates = (prompt.candidates || []).map((item, idx) => {
+        const base = item.card || item.stack?.top || item;
+        if (!base || typeof base !== 'object') return item;
+        return {
+          ...base,
+          candidateId: item.candidateId || base.candidateId || base.uid || base.id || `cand_${idx}`,
+          zone: item.zone || base.zone || (item.stack ? 'field' : null),
+          side: item.side || base.side || item.stack?.owner || null,
+          stackId: item.stackId || item.stack?.id || null,
+          cardId: item.cardId || base.id || null
+        };
+      });
       if (!candidates.length) {
         return Promise.resolve({ accepted: true, selected: [] });
       }
@@ -2239,8 +2267,17 @@
 
     if (currentPhase) {
       if (hasFlash && !hasMain && !isAttackStep) {
-        if (typeof showToast === 'function') showToast("Flash Accel can only be activated during the Attack Step!", "warning");
-        return;
+        // Phase M.3.1: Generic Flash Accel can be used during controller's Main Step
+        if (isMainStep) {
+          const isRestrictedToAttack = /(?:\(|（)(?:Your|Opponent'?s?|Opposing|Either)\s+Attack\s+Step(?:\)|）)|(?:自分の|相手の|お互いの)アタックステップ|During\s+Attack|When\s+Attacks?|Flash\s+Timing\s+only/i.test(eff);
+          if (isRestrictedToAttack) {
+            if (typeof showToast === 'function') showToast("This Flash Accel is restricted to the Attack Step!", "warning");
+            return;
+          }
+        } else {
+          if (typeof showToast === 'function') showToast("Flash Accel can only be activated during your Main Step or the Attack Step!", "warning");
+          return;
+        }
       }
       if (hasMain && !hasFlash && !isMainStep) {
         if (typeof showToast === 'function') showToast("Main Accel can only be activated during your Main Step!", "warning");
@@ -3082,7 +3119,18 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         const decision = promptStructuredDecision(prompt, card, side);
         if (decision) return decision;
         return new Promise(resolve => {
-          const candidates = (prompt.candidates || []).map(item => item.card || item.stack?.top || item);
+          const candidates = (prompt.candidates || []).map((item, idx) => {
+        const base = item.card || item.stack?.top || item;
+        if (!base || typeof base !== 'object') return item;
+        return {
+          ...base,
+          candidateId: item.candidateId || base.candidateId || base.uid || base.id || `cand_${idx}`,
+          zone: item.zone || base.zone || (item.stack ? 'field' : null),
+          side: item.side || base.side || item.stack?.owner || null,
+          stackId: item.stackId || item.stack?.id || null,
+          cardId: item.cardId || base.id || null
+        };
+      });
           if (!candidates.length) return resolve([]);
           const chooser = prompt.chooser || side;
           if (chooser !== 'player' || typeof document === 'undefined') {
@@ -3105,6 +3153,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       DuelState.usedStructuredAbilities.add(structuredAbilityUsageKey(card, ability, side));
     }
     renderDuelTable();
+    if (typeof renderPlayerHand === 'function') renderPlayerHand();
     return result;
   }
 
@@ -3966,7 +4015,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
   function updateClockDisplay() {
     if (typeof document === 'undefined') return;
-    if (typeof DuelState === 'undefined' || !DuelState.inDuel) {
+    const inActiveMatch = (typeof DuelState !== 'undefined' && DuelState.inDuel) || Boolean(currentSessionInfo?.matchId) || Boolean(serverDeadlineMs);
+    if (!inActiveMatch) {
       const hudTime = document.getElementById('hudClockTimeDisplay');
       if (hudTime) hudTime.textContent = '04:00';
       return;
@@ -3996,7 +4046,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const activeSide = (typeof DuelState !== 'undefined' && DuelState.activePlayer) ? DuelState.activePlayer : 'player';
     const hudPlayer = document.getElementById('hudClockPlayerLabel');
     if (hudPlayer) {
-      hudPlayer.textContent = activeSide === 'player' ? "YOUR TURN" : "OPPONENT'S TURN";
+      hudPlayer.textContent = activeSide === 'player' ? "ACTIVE: PLAYER 1 (YOU)" : "ACTIVE: PLAYER 2 (OPPONENT)";
     }
 
     const hudBar = document.getElementById('hudClockProgressFill');
@@ -4017,7 +4067,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const cornerCountdown = document.getElementById('cornerWarningCountdown');
     const cornerPlayer = document.getElementById('cornerWarningPlayer');
 
-    if (totalSec <= 60 && totalSec > 0 && !serverClockPaused && DuelState.inDuel) {
+    if (totalSec <= 60 && totalSec > 0 && !serverClockPaused) {
       if (warningCorner) {
         warningCorner.style.display = 'flex';
       }
@@ -4090,7 +4140,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
   }
 
-  function connectSessionStream(matchId, authToken) {
+  async function connectSessionStream(matchId, authToken) {
     if (typeof EventSource === 'undefined' || !matchId || !authToken) return;
     if (sessionEventSource) {
       sessionEventSource.close();
@@ -4098,7 +4148,28 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
 
     try {
-      const streamUrl = `/api/sessions/${encodeURIComponent(matchId)}/stream?token=${encodeURIComponent(authToken)}`;
+      let streamUrl = null;
+      try {
+        const ticketRes = await fetch(`/api/sessions/${encodeURIComponent(matchId)}/ticket`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`
+          },
+          body: JSON.stringify({ authToken })
+        });
+        if (ticketRes.ok) {
+          const ticketData = await ticketRes.json();
+          if (ticketData && ticketData.ticket) {
+            streamUrl = `/api/sessions/${encodeURIComponent(matchId)}/stream?ticket=${encodeURIComponent(ticketData.ticket)}`;
+          }
+        }
+      } catch (_) {}
+
+      if (!streamUrl) {
+        streamUrl = `/api/sessions/${encodeURIComponent(matchId)}/stream?token=${encodeURIComponent(authToken)}`;
+      }
+
       sessionEventSource = new EventSource(streamUrl);
 
       sessionEventSource.addEventListener('match_event', (e) => {
@@ -4112,8 +4183,84 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     } catch (_) {}
   }
 
+  function syncDuelStateFromServerSnapshot(data) {
+    if (!data || !data.state || !data.state.players) return;
+    const snapVersion = Number(data.version || data.state.version || 0);
+    if (snapVersion > 0 && currentSessionInfo.matchId === (data.matchId || currentSessionInfo.matchId) &&
+        currentSessionInfo.lastVersion > 0 && snapVersion < currentSessionInfo.lastVersion) {
+      return;
+    }
+    if (snapVersion > 0) currentSessionInfo.lastVersion = snapVersion;
+
+    const mySide = data.playerSide || currentSessionInfo.playerSide || 'player';
+    const oppSide = mySide === 'player' ? 'opponent' : 'player';
+    const srvPlayers = data.state.players;
+    const mapPlayer = (src) => {
+      if (!src) return null;
+      const toLegacyCard = (c) => c ? ({ ...c, uid: c.uid || c.id }) : null;
+      const mapStack = (st) => {
+        if (!st) return null;
+        const top = st.top ? toLegacyCard(st.top) : toLegacyCard(st);
+        const normal = st.cores?.normal ?? 0;
+        const soul = st.cores?.soul ? 1 : 0;
+        return {
+          ...top,
+          stackId: st.id,
+          currentCores: normal + soul,
+          hasSoulCore: Boolean(soul),
+          isExhausted: st.state === 'EXHAUSTED' || st.state === 'HEAVY_EXHAUSTED'
+        };
+      };
+      return {
+        life: src.life ?? 5,
+        reserve: src.reserve?.normal ?? src.reserve ?? 0,
+        trash: src.trash?.normal ?? src.trash ?? 0,
+        void: src.voidCores?.normal ?? src.void ?? 10,
+        deck: (src.deck || []).map(toLegacyCard),
+        hand: (src.hand || []).map(toLegacyCard),
+        field: (src.field || []).map(mapStack).filter(Boolean),
+        nexus: (src.nexus || []).map(mapStack).filter(Boolean),
+        trashCards: (src.grave || []).map(toLegacyCard),
+        voidCards: (src.removed || []).map(toLegacyCard),
+        burst: toLegacyCard(src.burst),
+        mirage: toLegacyCard(src.mirage)
+      };
+    };
+
+    const mappedMe = mapPlayer(srvPlayers[mySide]);
+    const mappedOpp = mapPlayer(srvPlayers[oppSide]);
+    if (mappedMe) Object.assign(DuelState.player, mappedMe);
+    if (mappedOpp) Object.assign(DuelState.opponent, mappedOpp);
+
+    DuelState.inDuel = true;
+    DuelState.isOnline = true;
+    DuelState.mode = 'HUMAN_VS_HUMAN';
+    DuelState.mySide = mySide;
+    DuelState.turn = data.turnNumber || data.state.turnNumber || DuelState.turn || 1;
+    DuelState.activePlayer = (data.activePlayer || data.state.activePlayer) === mySide ? 'player' : 'opponent';
+    DuelState.step = data.state.step || DuelState.step || 'MAIN';
+    const stepMap = { START: 0, CORE: 1, DRAW: 2, REFRESH: 3, MAIN: 4, ATTACK: 5, END: 6 };
+    if (stepMap[DuelState.step] !== undefined) {
+      DuelState.phaseIndex = stepMap[DuelState.step];
+    }
+    DuelState.responseWindow = data.state.responseWindow || null;
+
+    const pendingForMe = (data.state.pendingInteractions || []).find(
+      i => i && i.status === 'WAITING_FOR_PLAYER' && i.decisionOwner === mySide
+    );
+    if (pendingForMe && typeof renderEngineInteractionPrompt === 'function') {
+      renderEngineInteractionPrompt(pendingForMe);
+    }
+  }
+
   function handleRealtimeMatchEvent(event) {
     if (!event || !event.type) return;
+    if (typeof event.seq === 'number' && currentSessionInfo.lastSeq > 0 && event.seq <= currentSessionInfo.lastSeq) {
+      return;
+    }
+    if (typeof event.seq === 'number') {
+      currentSessionInfo.lastSeq = event.seq;
+    }
     if (event.type === 'PLAYER_JOINED') {
       triggerToast(`👤 Player 2 (${event.payload?.name || 'Opponent'}) joined the match!`, 'info');
       refreshActiveBattles();
@@ -4122,6 +4269,30 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     } else if (event.type === 'CONNECTION_STATE_CHANGED') {
       if (event.payload?.status === 'SUSPENDED') {
         triggerToast('⏸️ Match suspended: Both players disconnected.', 'warning');
+      }
+    } else if (event.type === 'STATE_UPDATED' || event.type === 'ACTION_APPLIED' || event.type === 'RESPONSE_WINDOW_UPDATED' || event.type === 'INTERACTION_REQUESTED' || event.type === 'MATCH_ENDED') {
+      if (event.payload && event.payload.state) {
+        syncDuelStateFromServerSnapshot(event.payload);
+        renderDuelTable();
+        renderPlayerHand();
+        updateStepButtons();
+      } else if (currentSessionInfo.matchId && currentSessionInfo.authToken && typeof fetch !== 'undefined') {
+        fetch(`/api/sessions/${encodeURIComponent(currentSessionInfo.matchId)}`, {
+          headers: { 'Authorization': `Bearer ${currentSessionInfo.authToken}` }
+        }).then(r => r.ok ? r.json() : null).then(snap => {
+          if (snap && snap.state) {
+            syncDuelStateFromServerSnapshot(snap);
+            renderDuelTable();
+            renderPlayerHand();
+            updateStepButtons();
+          }
+        }).catch(() => {});
+      }
+      if (event.type === 'INTERACTION_REQUESTED' && event.payload?.interaction) {
+        const inter = event.payload.interaction;
+        if (!currentSessionInfo.playerSide || inter.decisionOwner === currentSessionInfo.playerSide) {
+          renderEngineInteractionPrompt(inter);
+        }
       }
     }
   }
@@ -4173,7 +4344,28 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     triggerToast('🏳️ You have forfeited the match.', 'info');
   }
 
-  async function refreshActiveBattles() {
+  // Wrap window.fetch to automatically record session credentials when creating matches from browser
+  if (typeof window !== 'undefined' && typeof window.fetch === 'function' && !window.__bspFetchWrapped) {
+    window.__bspFetchWrapped = true;
+    const origFetch = window.fetch;
+    window.fetch = async function(resource, init) {
+      const res = await origFetch.apply(this, arguments);
+      try {
+        const url = (typeof resource === 'string') ? resource : (resource?.url || '');
+        if (url.includes('/api/sessions/create') && res.ok) {
+          const cloned = res.clone();
+          const body = await cloned.json();
+          if (body?.player1Token) {
+            currentSessionInfo.authToken = body.player1Token;
+            currentSessionInfo.matchId = body.matchId;
+          }
+        }
+      } catch (_) {}
+      return res;
+    };
+  }
+
+  async function refreshActiveBattles(explicitToken = null) {
     if (typeof document === 'undefined') return;
     const listEl = document.getElementById('activeBattlesList');
     const badgeEl = document.getElementById('activeBattlesCountBadge');
@@ -4182,7 +4374,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     let activeMatches = [];
     if (typeof fetch !== 'undefined' && typeof window !== 'undefined' && window.location?.origin) {
       try {
-        const res = await fetch('/api/sessions/active');
+        const token = explicitToken || currentSessionInfo.authToken;
+        const headers = token ? { 'Authorization': `Bearer ${token}` } : {};
+        const res = await fetch('/api/sessions/active', { headers });
         if (res.ok) {
           const data = await res.json();
           activeMatches = data.activeMatches || [];
@@ -4234,9 +4428,11 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           const data = await res.json();
           currentSessionInfo.matchId = matchId;
           currentSessionInfo.authToken = authToken;
-          currentSessionInfo.playerSide = data.playerSide || 'player';
+          currentSessionInfo.playerSide = data.playerSide || safeGetStorage('bse_player_side', 'player');
           currentSessionInfo.clock = data.clock;
           safeSetStorage('bse_active_match_id', matchId);
+          if (authToken) safeSetStorage('bse_active_auth_token', authToken);
+          safeSetStorage('bse_player_side', currentSessionInfo.playerSide);
 
           if (data.clock) setServerClock(data.clock);
           startClientTurnClock();
@@ -4245,10 +4441,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
           // Render restored state into DuelState
           if (data.state) {
-            DuelState.inDuel = true;
-            DuelState.turn = data.turnNumber || 1;
-            DuelState.activePlayer = data.activePlayer || 'player';
-            DuelState.phaseIndex = 4; // Main step by default
+            currentSessionInfo.lastVersion = Number(data.version || data.state.version || 0);
+            syncDuelStateFromServerSnapshot(data);
             renderArenaLobby();
             renderDuelTable();
             renderPlayerHand();
@@ -4679,6 +4873,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
               window.LocalDecksCache[d.id] = d;
             }
             renderArenaLobby();
+            populatePvpDeckSelects();
           }
         })
         .catch(err => {
@@ -5511,6 +5706,14 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     DuelState.activeBurstTrigger = null;
     DuelState.burstLockThisTurn = null;
     DuelState.combatAttacker = null;
+    DuelState.endAttackStepAtEndOfBattle = false;
+    DuelState.attackStepEnded = false;
+    DuelState.attackStepEndedBy = null;
+    DuelState._pendingMagicInteraction = null;
+    DuelState.playerCantSummonSpiritsUntilNextStart = false;
+    DuelState.opponentCantSummonSpiritsUntilNextStart = false;
+    DuelState.summonLockPlacedBy = null;
+    DuelState.dynaPowerTrashRetrievedThisTurn = false;
     closeBurstPromptModal();
     DuelState.logs = [];
 
@@ -5603,6 +5806,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       if (l.type === 'magic') cls += ' log-magic';
       return `<div class="${cls}"><span class="log-time">${l.time}</span> ${l.text}</div>`;
     }).join('');
+    if (typeof window !== 'undefined' && window.TabletopMat && typeof window.TabletopMat.renderChatDrawer === 'function') {
+      window.TabletopMat.renderChatDrawer();
+    }
   }
 
   // ── DUEL TABLE RENDERER ──
@@ -5677,6 +5883,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
     // Render Burst Zones (Battlefield & HUDs)
     renderBurstZones();
+    if (typeof window !== 'undefined' && window.TabletopMat && typeof window.TabletopMat.render === 'function') {
+      window.TabletopMat.render();
+    }
 
     // Ensure Void Reservoir visual shows 5 animated Hexagonal Crystals
     const voidVisual = document.getElementById('voidCoresVisual');
@@ -6838,6 +7047,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   }
 
   function renderPlayerHand() {
+    if (typeof window !== 'undefined' && window.TabletopMat && typeof window.TabletopMat.render === 'function') {
+      window.TabletopMat.render();
+    }
     const handEl = document.getElementById('playerHand');
     if (!handEl) return;
 
@@ -6912,7 +7124,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       // Free summon check (Violent High Speed, Flash Free, Condition Free)
       const freeSummonInfo = checkCardFreeSummonEligibility(card, 'player');
       const isFreeSummon = freeSummonInfo.eligible;
-      if (isFreeSummon) {
+      if (isFreeSummon && !isMagic && !isNexus) {
         cost = 0;
         totalNeeded = 0;
       }
@@ -6957,7 +7169,10 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       const accelCheck = canCastAccel(card, 'player');
       const accelBtnHtml = (canPlayStep && accelCheck.allowed) ? `<button class="btn-quick-accel" style="background:linear-gradient(135deg, #f59e0b, #d97706); border-color:#fbbf24; margin-top:4px;" onclick="event.stopPropagation(); BattleArena.castAccel('${card.uid}')">? Accel (${accelCheck.cost})</button>` : '';
 
-      if (isFreeSummon) {
+      const isPendingResolution = Boolean(DuelState._pendingMagicInteraction);
+      if (isPendingResolution && isMagic) {
+        actionBtnHtml = `<button class="btn-quick-disabled" disabled title="A Magic resolution or interaction prompt is already pending">⏳ Resolving...</button>`;
+      } else if (isFreeSummon && !isMagic && !isNexus) {
         actionBtnHtml = `<button class="btn-quick-summon btn-quick-free-summon" style="background:linear-gradient(135deg, #059669, #10b981); border-color:#34d399; font-weight:900; box-shadow:0 0 10px rgba(52, 211, 153, 0.5);" onclick="event.stopPropagation(); BattleArena.executeFreeSummon('${card.uid}')">${freeSummonInfo.btnLabel}</button>`;
       } else if (isUltimate && !meetsCondition) {
         actionBtnHtml = `<button class="btn-quick-disabled" disabled title="Summon Condition: ${ultCheck.reason}">🔒 ${ultCheck.reason || 'Summon Condition Not Met'}</button>`;
@@ -7019,8 +7234,13 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
             actionBtnHtml = `<button class="btn-quick-magic" onclick="event.stopPropagation(); BattleArena.castMagic('${card.uid}', null, null, '${mode}')">${timingLabel}</button>`;
           } else if (needsSacrifice) {
             actionBtnHtml = `<button class="btn-quick-sacrifice" onclick="event.stopPropagation(); BattleArena.openSacrificeModal('${card.uid}', '${mode}')">💀 Sac &amp; Cast (${cost})</button>`;
+          } else {
+            actionBtnHtml = `<button class="btn-quick-disabled" disabled title="Insufficient cores: need ${cost}, have ${totalAvailableCores}">🔒 Cast (${cost})</button>`;
           }
         }
+      } else if (!canPlayStep && isMagic) {
+        const reason = !isPlayerTurn ? 'Not your turn' : (isAttackStep ? 'Requires [Flash] timing' : 'Cannot cast in this step');
+        actionBtnHtml = `<button class="btn-quick-disabled" disabled title="${reason}">🔒 ${reason} (${cost})</button>`;
       } else if (canPlayStep && isNexus && isMainStep) {
         const btnLabel = '🏛️ Deploy';
         if (canAffordDirect) {
@@ -7530,7 +7750,11 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         const eff = card.effect || '';
         const hasMain = /\[(?:Main|MAIN)\]|【メイン】/i.test(eff);
         const hasFlash = /\[(?:Flash|FLASH)\]|【フラッシュ】/i.test(eff);
-        if (hasFlash && !hasMain) return false;
+        // Phase M.3.1: Generic Flash is playable in Main Step; only reject if it has NO Main effect AND is restricted to Attack Step
+        if (hasFlash && !hasMain) {
+          const isRestrictedToAttack = /(?:\(|（)(?:Your|Opponent'?s?|Opposing|Either)\s+Attack\s+Step(?:\)|）)|(?:自分の|相手の|お互いの)アタックステップ|During\s+Attack|When\s+Attacks?|Flash\s+Timing\s+only/i.test(eff);
+          if (isRestrictedToAttack) return false;
+        }
       }
       return true; // Main step allows summoning spirits & casting magic
     }
@@ -9658,7 +9882,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     });
   }
 
-  function executeWhenSummonedEffects(spirit, side = 'player') {
+  function executeWhenSummonedEffects(spirit, side = 'player', onResume = null) {
     if (!spirit) return;
 
     // Soul Drive on Summon (e.g. BS38-051 The HellsoilSorcerer Denial)
@@ -9883,11 +10107,18 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (side === 'player') renderPlayerHand();
 
     const enemySide = side === 'player' ? 'opponent' : 'player';
-    if (hasWhenSummonedEffect(spirit)) { checkBurstTrigger(enemySide, "AFTER_OPPONENT_SUMMON_EFFECT", { spirit }); }
+    let burstTriggered = false;
+    if (hasWhenSummonedEffect(spirit)) {
+      burstTriggered = checkBurstTrigger(enemySide, "AFTER_OPPONENT_SUMMON_EFFECT", { spirit }, onResume);
+    }
     const sideNexuses = (side === 'player' ? DuelState.player.nexus : DuelState.opponent.nexus) || [];
     for (const n of sideNexuses) {
       executeCoreCharge(n, side, 'SUMMON', { spirit });
     }
+    if (!burstTriggered && typeof onResume === 'function') {
+      onResume();
+    }
+    return burstTriggered;
   }
 
   function executeWhenAttacksEffects(attacker, side = 'player') {
@@ -10370,8 +10601,23 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   }
 
   // ── UNIVERSAL FREE SUMMON EVALUATOR (No-Cost / 0-Cost Hand & Field Summons) ──
+  function isCanonicalUnitCard(card) {
+    const low = String(card?.type || '').trim().toLowerCase();
+    return low === 'spirit' || low === 'contract spirit' || low === 'token spirit' ||
+           low === 'ultimate' || low === 'contract ultimate' || low === 'brave';
+  }
+
+  function isCanonicalMagicCard(card) {
+    return String(card?.type || '').trim().toLowerCase() === 'magic';
+  }
+
+  function isCanonicalNexusCard(card) {
+    const low = String(card?.type || '').trim().toLowerCase();
+    return low === 'nexus' || low === 'contract nexus';
+  }
+
   function checkCardFreeSummonEligibility(card, side = 'player') {
-    if (!card) return { eligible: false };
+    if (!card || !isCanonicalUnitCard(card)) return { eligible: false };
     const friendly = side === 'player' ? DuelState.player : DuelState.opponent;
     const opp = side === 'player' ? DuelState.opponent : DuelState.player;
     const currentPhase = (DuelState.phases && DuelState.phases[DuelState.phaseIndex]) || 'MAIN';
@@ -10829,6 +11075,21 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (cardIdx === -1) return;
     const card = DuelState.player.hand[cardIdx];
 
+    if (!isCanonicalUnitCard(card)) {
+      if (typeof showToast === 'function') {
+        showToast(`Official Rule: "${card.name}" (${card.type}) cannot be summoned as a Spirit!`, 'warning');
+      }
+      return { success: false, reason: 'INVALID_CARD_TYPE' };
+    }
+
+    const cardTypeLower = String(card.type || '').toLowerCase();
+    if (cardTypeLower.includes('magic') || cardTypeLower.includes('nexus')) {
+      if (typeof showToast === 'function') {
+        showToast(`Official Rule: "${card.name}" is a ${card.type} card and cannot be summoned as a Spirit!`, 'warning');
+      }
+      return;
+    }
+
     const phase = DuelState.phases[DuelState.phaseIndex];
     if (phase !== 'MAIN' && phase !== 'ATTACK') {
       if (typeof showToast === 'function') showToast("Spirits & Ultimates can only be summoned during MAIN or ATTACK (Flash) steps!", 'warning');
@@ -11246,11 +11507,26 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   function summonCard(uid, customCoresToPlace, useSoulCore = null, options = {}) {
     if (DuelState.activePlayer !== 'player') {
       if (typeof showToast === 'function') showToast("Cannot summon during opponent's turn!", 'warning');
-      return;
+      return { success: false, reason: 'NOT_ACTIVE_PLAYER' };
     }
     const cardIdx = DuelState.player.hand.findIndex(c => c.uid === uid);
-    if (cardIdx === -1) return;
+    if (cardIdx === -1) return { success: false, reason: 'CARD_NOT_IN_HAND' };
     const card = DuelState.player.hand[cardIdx];
+
+    if (!isCanonicalUnitCard(card)) {
+      if (typeof showToast === 'function') {
+        showToast(`Official Rule: "${card.name}" (${card.type}) cannot enter the Spirit summoning pathway!`, 'warning');
+      }
+      return { success: false, reason: 'INVALID_CARD_TYPE' };
+    }
+
+    const cardTypeLower = String(card.type || '').toLowerCase();
+    if (cardTypeLower.includes('magic') || cardTypeLower.includes('nexus')) {
+      if (typeof showToast === 'function') {
+        showToast(`Official Rule: "${card.name}" is a ${card.type} card and cannot be summoned as a Spirit!`, 'warning');
+      }
+      return;
+    }
 
     const phase = DuelState.phases[DuelState.phaseIndex];
     if (phase !== 'MAIN' && phase !== 'ATTACK') {
@@ -11520,11 +11796,18 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   function deployNexus(uid, customCoresToPlace = 0) {
     if (DuelState.activePlayer !== 'player') {
       if (typeof showToast === 'function') showToast("Cannot deploy during opponent's turn!", 'warning');
-      return;
+      return { success: false, reason: 'NOT_ACTIVE_PLAYER' };
     }
     const cardIdx = DuelState.player.hand.findIndex(c => c.uid === uid);
-    if (cardIdx === -1) return;
+    if (cardIdx === -1) return { success: false, reason: 'CARD_NOT_IN_HAND' };
     const card = DuelState.player.hand[cardIdx];
+
+    if (!isCanonicalNexusCard(card)) {
+      if (typeof showToast === 'function') {
+        showToast(`Official Rule: "${card.name}" (${card.type}) is not a Nexus card!`, 'warning');
+      }
+      return { success: false, reason: 'INVALID_CARD_TYPE' };
+    }
 
     const phase = DuelState.phases[DuelState.phaseIndex];
     if (phase !== 'MAIN') {
@@ -13591,6 +13874,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           addLog(`🛑 **[ATTACK STEP TERMINATION QUEUED]**: "${card.name}" will terminate the Attack Step when this battle concludes!`, 'magic');
         } else {
           DuelState.attackStepEnded = true;
+          DuelState.attackStepEndedBy = card.name || 'Effect';
+          addLog(`🛑 **[ATTACK STEP TERMINATED]**: "${card.name}" ended the Attack Step!`, 'step');
           checkAndTriggerAttackStepEnd(400);
           return;
         }
@@ -13687,6 +13972,22 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       return typeof execResult === 'string' ? execResult : `Activated ${activeTrig} effect of "${card.name}"`;
     }
 
+    // Prefer authoritative compiled IR when available in the browser arena
+    const hasStructuredAdapter = typeof window !== 'undefined' && window.BSEngineAdapter && typeof window.BSEngineAdapter.resolveLegacyAbility === 'function';
+    if (hasStructuredAdapter && hasStructuredIrAbilities(card)) {
+      const irTrigger = (forcedEffectType === 'flash') ? 'FLASH' : ((forcedEffectType === 'main') ? 'MAIN' : (isCombat ? 'FLASH' : (/\b\[main\]/i.test(card.effect || '') ? 'MAIN' : 'FLASH')));
+      const irCardData = getCardEffectsData(card);
+      const hasMatchingIr = Array.isArray(irCardData?.abilities) && irCardData.abilities.some(ab => abilityMatchesTrigger(ab, irTrigger));
+      if (hasMatchingIr) {
+        const maybePromise = executeUniversalCardEffect(card, side, irTrigger, { contextAttacker, targetSpiritUid });
+        if (maybePromise && typeof maybePromise.then === 'function') {
+          maybePromise.then(() => { if (typeof renderDuelTable === 'function') renderDuelTable(); if (typeof renderPlayerHand === 'function') renderPlayerHand(); }).catch(() => {});
+        }
+        const cleanSummary = activeEffectText.replace(/^\s*\[(Main|Flash)\]\s*/i, '').trim();
+        return cleanSummary ? `Activated: "${cleanSummary.length > 90 ? cleanSummary.slice(0, 87) + '...' : cleanSummary}"` : `Cast "${card.name}" and activated its ${irTrigger} effect!`;
+      }
+    }
+
     if (name.includes('Evil Draw')) {
       if (isFlashTiming) {
         // Flash: During this turn, give a Spirit/Ultimate +2000 BP.
@@ -13750,6 +14051,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         addLog(`🛑 **[ATTACK STEP TERMINATION QUEUED]**: "${card.name}" activated: When this battle ends, the Attack Step will terminate!`, 'magic');
       } else {
         DuelState.attackStepEnded = true;
+        DuelState.attackStepEndedBy = card.name || 'Effect';
         effectDesc = 'Ended the Attack Step.';
         addLog(`🛑 **[ATTACK STEP TERMINATED]**: "${card.name}" terminated the Attack Step!`, 'step');
         checkAndTriggerAttackStepEnd(400);
@@ -13990,12 +14292,56 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (cardIdx === -1) return;
     const card = DuelState.player.hand[cardIdx];
 
-    // STRICT RULE ENFORCEMENT: Only Magic cards can be cast via castMagic!
-    if (card.type !== 'Magic' && !(card.type || '').includes('Magic')) {
+    if (!isCanonicalMagicCard(card)) {
       if (typeof showToast === 'function') {
         showToast(`Official Rule: "${card.name}" is a ${card.type}, not a Magic card!`, 'warning');
       }
-      return;
+      return { success: false, reason: 'INVALID_CARD_TYPE' };
+    }
+
+    if (DuelState._pendingMagicInteraction) {
+      if (typeof showToast === 'function') {
+        showToast('A Magic resolution or selection prompt is already pending. Complete it first.', 'warning');
+      }
+      return { success: false, reason: 'PENDING_INTERACTION_ACTIVE' };
+    }
+
+    // Online Authoritative Session Dispatch: route Magic activation to server engine
+    if (currentSessionInfo.matchId && currentSessionInfo.authToken && typeof fetch !== 'undefined') {
+      const inFlashWin = Boolean(DuelState.serverResponseWindow && (DuelState.serverResponseWindow.windowType === 'FLASH_1' || DuelState.serverResponseWindow.windowType === 'FLASH_2'));
+      const actionBody = inFlashWin
+        ? { type: 'CAST_FLASH_MAGIC', cardId: card.id || card.card_number || card.uid, timing: 'FLASH' }
+        : { type: 'ACTIVATE_MAGIC', cardId: card.id || card.card_number || card.uid, timing: castMode === 'flash' ? 'FLASH' : 'MAIN' };
+
+      DuelState._pendingMagicInteraction = true;
+      return fetch(`/api/sessions/${encodeURIComponent(currentSessionInfo.matchId)}/action`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${currentSessionInfo.authToken}`
+        },
+        body: JSON.stringify(actionBody)
+      }).then(async r => {
+        const data = await r.json();
+        if (!r.ok || !data.success) {
+          DuelState._pendingMagicInteraction = false;
+          if (typeof showToast === 'function') showToast(data.error || data.reason || 'Magic activation rejected by engine', 'warning');
+          renderPlayerHand();
+          return { success: false, reason: data.code || data.error };
+        }
+        const pending = (data.state?.pendingInteractions || []).filter(i => i.status === 'WAITING_FOR_PLAYER');
+        if (data.result?.suspended || pending.length > 0) {
+          renderEngineInteractionPrompt(pending[0]);
+        } else {
+          DuelState._pendingMagicInteraction = false;
+          if (typeof resumeBattle === 'function') resumeBattle(currentSessionInfo.matchId, currentSessionInfo.authToken);
+        }
+        return data;
+      }).catch(err => {
+        DuelState._pendingMagicInteraction = false;
+        if (typeof showToast === 'function') showToast(`Magic activation error: ${err.message}`, 'warning');
+        return { success: false, reason: err.message };
+      });
     }
 
     const phase = DuelState.phases[DuelState.phaseIndex];
@@ -14013,6 +14359,20 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (phase === 'ATTACK' && !hasFlashTiming(card)) {
       if (typeof showToast === 'function') showToast(`Official Rule: "${card.name}" does not have [Flash] timing and can only be cast during the MAIN step!`, 'warning');
       return;
+    }
+
+    if (phase === 'MAIN') {
+      const eff = card.effect || '';
+      const hasMain = /\[(?:Main|MAIN)\]|【メイン】/i.test(eff);
+      const isRestrictedToAttack = /(?:\(|（)(?:Your|Opponent'?s?|Opposing|Either)\s+Attack\s+Step(?:\)|）)|(?:自分の|相手の|お互いの)アタックステップ|During\s+Attack|When\s+Attacks?|Flash\s+Timing\s+only/i.test(eff);
+      if (castMode === 'flash' && isRestrictedToAttack) {
+        if (typeof showToast === 'function') showToast(`Official Rule: "${card.name}" Flash effect is restricted to the Attack Step!`, 'warning');
+        return;
+      }
+      if (!hasMain && isRestrictedToAttack) {
+        if (typeof showToast === 'function') showToast(`Official Rule: "${card.name}" is restricted to the Attack Step!`, 'warning');
+        return;
+      }
     }
 
     // Single-target BP buff check: ONLY check if the CURRENT cast mode actually grants a single-target BP buff!
@@ -14080,6 +14440,79 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     renderDuelTable();
   }
 
+  function submitEngineInteractionResponse(interactionId, responsePayload) {
+    if (!currentSessionInfo.matchId || !currentSessionInfo.authToken || typeof fetch === 'undefined') {
+      return Promise.resolve({ success: false, reason: 'NO_ACTIVE_SESSION' });
+    }
+    return fetch(`/api/sessions/${encodeURIComponent(currentSessionInfo.matchId)}/action`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${currentSessionInfo.authToken}`
+      },
+      body: JSON.stringify({
+        type: 'INTERACTION_RESPONSE',
+        interactionId,
+        response: responsePayload
+      })
+    }).then(async r => {
+      const data = await r.json();
+      if (!r.ok || !data.success) {
+        if (typeof showToast === 'function') showToast(data.error || data.reason || 'Selection rejected by engine', 'warning');
+        return { success: false, reason: data.code || data.error };
+      }
+      const pending = (data.state?.pendingInteractions || []).filter(i => i.status === 'WAITING_FOR_PLAYER');
+      if (data.result?.suspended || pending.length > 0) {
+        renderEngineInteractionPrompt(pending[0]);
+      } else {
+        DuelState._pendingMagicInteraction = false;
+        if (typeof resumeBattle === 'function') resumeBattle(currentSessionInfo.matchId, currentSessionInfo.authToken);
+      }
+      return data;
+    });
+  }
+
+  function renderEngineInteractionPrompt(interaction) {
+    if (!interaction || typeof document === 'undefined') return;
+    DuelState._pendingMagicInteraction = true;
+    const modalEl = document.getElementById('battleTargetModal');
+    const titleEl = document.getElementById('targetModalTitle');
+    const descEl = document.getElementById('targetModalDesc');
+    const choicesEl = document.getElementById('targetSpiritChoices');
+    if (!modalEl || !choicesEl) return;
+
+    if (titleEl) titleEl.textContent = interaction.title || 'Engine Decision Required';
+    if (descEl) descEl.textContent = interaction.description || 'Select a legal option generated by the engine:';
+
+    const cands = interaction.candidates || [];
+    const opts = interaction.options || [];
+    let html = '';
+
+    if (cands.length > 0) {
+      html += cands.map(c => {
+        const cid = c.candidateId || c.id || c.stackId || c.cardId;
+        const label = c.label || c.name || c.card?.name || cid;
+        const zoneTag = c.zone ? ` [${c.side ? `${c.side}:` : ''}${c.zone}]` : '';
+        return `<div class="target-choice-card" data-candidate-id="${_optEsc(cid)}" onclick="BattleArena.submitEngineInteractionResponse('${_optEsc(interaction.id || interaction.interactionId)}', { selected: ['${_optEsc(cid)}'] })"><div class="tcc-info"><span class="tcc-name">${_optEsc(label)}${_optEsc(zoneTag)}</span></div><button class="target-choice-btn">Select</button></div>`;
+      }).join('');
+    } else if (opts.length > 0) {
+      html += opts.map((o, idx) => {
+        const label = o.label || String(o);
+        const oid = o.id || label;
+        return `<div class="target-choice-card" onclick="BattleArena.submitEngineInteractionResponse('${interaction.id || interaction.interactionId}', { option: '${oid}', index: ${idx} })"><div class="tcc-info"><span class="tcc-name">${label}</span></div><button class="target-choice-btn">Choose</button></div>`;
+      }).join('');
+    } else {
+      html += `<button class="target-choice-btn" onclick="BattleArena.submitEngineInteractionResponse('${interaction.id || interaction.interactionId}', { accepted: true })">Confirm</button>`;
+    }
+
+    if (interaction.optional) {
+      html += `<button class="target-choice-btn" style="background:#475569; margin-top:8px;" onclick="BattleArena.submitEngineInteractionResponse('${interaction.id || interaction.interactionId}', { declined: true })">Decline / Cancel</button>`;
+    }
+
+    choicesEl.innerHTML = html;
+    modalEl.classList.add('active');
+  }
+
     // ── CORE SACRIFICE MODAL CONTROLLER ──
   function openSacrificeModal(uid, castMode = null) {
     const card = DuelState.player.hand.find(c => c.uid === uid);
@@ -14092,12 +14525,11 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
 
     const currentPhase = DuelState.phases[DuelState.phaseIndex];
+    const isUltimate = card.type === 'Ultimate' || (card.type || '').includes('Ultimate');
     if (currentPhase === 'ATTACK' && (card.type === 'Spirit' || (card.type || '').includes('Spirit') || isUltimate) && !canFlashSummonSpirit(card)) {
       if (typeof showToast === 'function') showToast(`Official Rule: Spirits & Ultimates cannot be summoned during the Attack Step! "${card.name}" does not have Flash Summon. To play via Advent, use the 🌟 [Advent] action.`, 'warning');
       return;
     }
-
-    const isUltimate = card.type === 'Ultimate' || (card.type || '').includes('Ultimate');
     if (isUltimate) {
       const ultCheck = validateUltimateSummonCondition(card, 'player');
       if (!ultCheck.allowed) {
@@ -14731,7 +15163,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
     const modal = document.getElementById('battleBurstPromptModal');
     if (!modal) {
-      activateBurst('player', true);
+      addLog(`⏸️ Burst "${card.name}" triggered for Player, awaiting UI modal availability (auto-activation disabled).`, 'warning');
       return;
     }
 
@@ -14763,14 +15195,39 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     renderBurstZones();
   }
 
+  function processNextQueuedBurst() {
+    if (DuelState.activeBurstTrigger) return;
+    const queue = DuelState.pendingBurstQueue;
+    if (!Array.isArray(queue) || queue.length === 0) return;
+    const next = queue.shift();
+    if (!next) return;
+    const currentBurst = next.side === 'player' ? DuelState.player.burst : DuelState.opponent.burst;
+    if (!currentBurst || (next.card && currentBurst.uid && currentBurst.uid !== next.card.uid)) {
+      if (typeof next.onResume === 'function') next.onResume();
+      processNextQueuedBurst();
+      return;
+    }
+    if (typeof next.onResume === 'function') {
+      const prevResume = DuelState.pendingBurstResume;
+      DuelState.pendingBurstResume = prevResume
+        ? () => { try { prevResume(); } finally { next.onResume(); } }
+        : next.onResume;
+    }
+    openBurstPromptModal(next.card, next.cond, next.eventType, next.eventContext);
+  }
+
   function confirmBurstTrigger() {
     closeBurstPromptModal();
     const resume = DuelState.pendingBurstResume;
     DuelState.pendingBurstResume = null;
     if (DuelState.activeBurstTrigger && DuelState.activeBurstTrigger.side === 'player') {
-      activateBurst('player', true, resume);
-    } else if (typeof resume === 'function') {
-      resume();
+      activateBurst('player', true, () => {
+        if (typeof resume === 'function') resume();
+        processNextQueuedBurst();
+      });
+    } else {
+      if (typeof resume === 'function') resume();
+      processNextQueuedBurst();
     }
   }
 
@@ -14787,6 +15244,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (typeof resume === 'function') {
       resume();
     }
+    processNextQueuedBurst();
   }
 
   function closeBurstPromptModal() {
@@ -15124,11 +15582,28 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
 
     if (isPlayer) {
-      DuelState.pendingBurstResume = onResume || null;
+      if (DuelState.activeBurstTrigger) {
+        DuelState.pendingBurstQueue = DuelState.pendingBurstQueue || [];
+        const alreadyQueued = DuelState.pendingBurstQueue.some(q => q.card?.uid && burstCard.uid && q.card.uid === burstCard.uid && q.eventType === eventType);
+        const sameAsActive = DuelState.activeBurstTrigger.card?.uid && burstCard.uid && DuelState.activeBurstTrigger.card.uid === burstCard.uid && DuelState.activeBurstTrigger.eventType === eventType;
+        if (!alreadyQueued && !sameAsActive) {
+          DuelState.pendingBurstQueue.push({ side, card: burstCard, cond, eventType, eventContext, onResume });
+        }
+        return true;
+      }
+      if (typeof onResume === 'function') {
+        const prevResume = DuelState.pendingBurstResume;
+        DuelState.pendingBurstResume = prevResume
+          ? () => { try { prevResume(); } finally { onResume(); } }
+          : onResume;
+      }
       openBurstPromptModal(burstCard, cond, eventType, eventContext);
       return true;
     } else {
-      // Opponent AI automatically resolves
+      // Opponent AI automatically resolves ONLY in AI mode (never in online PvP)
+      if (DuelState.isOnline || DuelState.mode === 'HUMAN_VS_HUMAN') {
+        return false;
+      }
       addLog(`🃏 Opponent's Burst Trap met condition [${cond.label}]!`, 'magic');
       safeTimeout(() => {
         activateBurst('opponent', true);
@@ -15208,7 +15683,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   // ── COMBAT RESOLUTION ──
   function executePlayerAttack(attacker) {
     if (DuelState.attackStepEnded) {
-      if (typeof showToast === 'function') showToast('The Attack Step has been ended by an effect!', 'warning');
+      const endedBy = DuelState.attackStepEndedBy ? ` (${DuelState.attackStepEndedBy})` : '';
+      if (typeof showToast === 'function') showToast(`The Attack Step has been ended by an effect${endedBy}!`, 'warning');
       return;
     }
     if (DuelState.turn === 1 && DuelState.activePlayer === 'player') {
@@ -15807,6 +16283,13 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       }
     }
 
+    DuelState.attackStepEnded = false;
+    DuelState.attackStepEndedBy = null;
+    DuelState.endAttackStepAtEndOfBattle = false;
+    DuelState._pendingMagicInteraction = null;
+    DuelState.selectedAttacker = null;
+    DuelState.combatEvent = null;
+
     DuelState.turn++;
     DuelState.player.hasConfirmedHand = true;
     DuelState.player.hasMulliganed = true;
@@ -15832,6 +16315,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   // ── OPPONENT STEP CONTROLLER ──
   function advanceOpponentStep() {
     if (DuelState.activePlayer !== 'opponent') return;
+    if (DuelState.turn === 1 && DuelState.player && !DuelState.player.hasConfirmedHand) return;
     if (DuelState.turn > 1 || DuelState.phaseIndex > 0) {
       DuelState.player.hasConfirmedHand = true;
       const bannerContainer = document.getElementById('startingHandBannerContainer');
@@ -15933,14 +16417,19 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       renderDuelTable();
       safeTimeout(advanceOpponentStep, 800);
     } else if (currentPhase === 'MAIN') {
+      let mainStepCompleted = true;
       try {
-        runAiMainStep();
+        mainStepCompleted = runAiMainStep() !== false;
       } catch (err) {
         console.error('Error during AI MAIN step:', err);
       }
-      DuelState.phaseIndex = 5; // to ATTACK
-      renderDuelTable();
-      safeTimeout(advanceOpponentStep, 1000);
+      if (mainStepCompleted && !DuelState.activeBurstTrigger && !DuelState._pendingMagicInteraction) {
+        DuelState.phaseIndex = 5; // to ATTACK
+        renderDuelTable();
+        safeTimeout(advanceOpponentStep, 1000);
+      } else {
+        renderDuelTable();
+      }
     } else if (currentPhase === 'ATTACK') {
       try {
         runAiAttackStep();
@@ -16127,6 +16616,26 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       AudioFX.summon();
       addLog(`💀 Opponent summoned "${bestCard.name}" [Lv${level}, ${bp} BP] (Paid ${cost} cores, placed ${bestCoresToPlace}. Reserve: ${DuelState.opponent.reserve})!`, 'step');
       summonedCount++;
+
+      // If opponent's summon triggered a pending Player Burst or interaction, pause AI turn until resolved!
+      if (DuelState.activeBurstTrigger || DuelState._pendingMagicInteraction) {
+        const existingResume = DuelState.pendingBurstResume;
+        DuelState.pendingBurstResume = () => {
+          if (typeof existingResume === 'function') existingResume();
+          if (DuelState.activePlayer === 'opponent' && !DuelState.activeBurstTrigger && !DuelState._pendingMagicInteraction) {
+            safeTimeout(() => {
+              const finished = runAiMainStep() !== false;
+              if (finished && !DuelState.activeBurstTrigger && !DuelState._pendingMagicInteraction && DuelState.activePlayer === 'opponent') {
+                DuelState.phaseIndex = 5;
+                renderDuelTable();
+                safeTimeout(advanceOpponentStep, 1000);
+              }
+            }, 450);
+          }
+        };
+        renderDuelTable();
+        return false;
+      }
     }
 
     // 4. Soul Core Placement onto optimal field Spirit
@@ -16147,11 +16656,13 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
 
     renderDuelTable();
+    return true;
   }
 
   // ── AI ATTACK STEP LOGIC (EXPECTIMAX LOOKAHEAD) ──
   function runAiAttackStep() {
     if (DuelState.activePlayer !== 'opponent') return;
+    if (DuelState.activeBurstTrigger || DuelState._pendingMagicInteraction) return;
     if (DuelState.attackStepEnded || checkAndTriggerAttackStepEnd()) return;
 
     // Official Rule: Player who goes first cannot attack on Turn 1!
@@ -16397,6 +16908,12 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
                 <span class="fsb-cost">Cost ${c.cost}</span>
               </button>
             `).join('')}
+            <button class="flash-spell-btn" style="background:#334155; border-color:#64748b; color:#f8fafc; margin-top:4px;" onclick="BattleArena.passPriority()">
+              <div class="fsb-left">
+                <span class="fsb-name">⏭️ Pass Priority</span>
+                <span class="fsb-desc">Do not take a Flash action. Yield priority.</span>
+              </div>
+            </button>
           </div>
         `;
       } else {
@@ -16463,6 +16980,19 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
   function chooseBlocker(blockerUid, attackerUid) {
     closeBlockModal();
+    if (currentSessionInfo.matchId && currentSessionInfo.authToken) {
+      fetch(`/api/sessions/${encodeURIComponent(currentSessionInfo.matchId)}/action`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${currentSessionInfo.authToken}`
+        },
+        body: JSON.stringify({
+          type: 'DECLARE_BLOCK',
+          stackId: blockerUid
+        })
+      }).catch(err => console.warn('Block submission failed:', err));
+    }
     const blocker = DuelState.player.field.find(s => s.uid === blockerUid);
     const attacker = DuelState.opponent.field.find(s => s.uid === attackerUid);
     if (!blocker || !attacker) return;
@@ -16519,6 +17049,19 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
   function takeLifeDamage(attackerUid) {
     closeBlockModal();
+    if (currentSessionInfo.matchId && currentSessionInfo.authToken) {
+      fetch(`/api/sessions/${encodeURIComponent(currentSessionInfo.matchId)}/action`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${currentSessionInfo.authToken}`
+        },
+        body: JSON.stringify({
+          type: 'PASS_BLOCK',
+          action: 'PASS_BLOCK'
+        })
+      }).catch(err => console.warn('Pass block submission failed:', err));
+    }
     const attacker = DuelState.opponent.field.find(s => s.uid === attackerUid);
 
     AudioFX.lifeDamage();
@@ -16590,6 +17133,23 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   function closeBlockModal() {
     const modalEl = document.getElementById('battleBlockModal');
     if (modalEl) modalEl.classList.remove('active');
+  }
+
+  function passPriority() {
+    if (currentSessionInfo.matchId && currentSessionInfo.authToken) {
+      fetch(`/api/sessions/${encodeURIComponent(currentSessionInfo.matchId)}/action`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${currentSessionInfo.authToken}`
+        },
+        body: JSON.stringify({
+          type: 'PASS_PRIORITY',
+          action: 'PASS'
+        })
+      }).catch(err => console.warn('Pass priority failed:', err));
+    }
+    triggerToast('Passed Flash Priority to Opponent', 'info');
   }
 
   // ── WIN / LOSS RESOLUTION ──
@@ -16678,6 +17238,11 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     clearAllTimers();
     stopClientTurnClock();
     DuelState.inDuel = false;
+    if (typeof window !== 'undefined' && window.TabletopMat) {
+      if (typeof window.TabletopMat.syncBattleModeBodyClass === 'function') window.TabletopMat.syncBattleModeBodyClass(false);
+      if (typeof window.TabletopMat.closeHomeMenu === 'function') window.TabletopMat.closeHomeMenu();
+      if (typeof window.TabletopMat.toggleChatDrawer === 'function') window.TabletopMat.toggleChatDrawer(false);
+    }
     renderArenaLobby();
   }
 
@@ -17763,12 +18328,94 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
   }
 
+  function getAvailablePvpDecks() {
+    const decksData = (window.DeckManager && typeof window.DeckManager.getAllData === 'function')
+      ? window.DeckManager.getAllData()
+      : { decks: (window.DeckManager && window.DeckManager.getRegisteredDecks) ? window.DeckManager.getRegisteredDecks() : [] };
+    const registeredDecks = (decksData.decks || []).filter(d => d && typeof d === 'object').map(d => ({ ...d }));
+
+    let activeBuilderCards = {};
+    try {
+      activeBuilderCards = JSON.parse(safeGetStorage('bs_deck', null) || safeGetStorage('battle_spirits_deck_v1', '{}') || '{}');
+    } catch (e) {}
+    const activeBuilderCount = Object.values(activeBuilderCards || {}).reduce((a, b) => a + (typeof b === 'number' ? b : 1), 0);
+    if (activeBuilderCount > 0) {
+      const existingActive = registeredDecks.find(d => d.id === 'deck_builder_active' || (d.cards && Object.keys(d.cards).length === Object.keys(activeBuilderCards).length && getSafeDeckCardCount(d) === activeBuilderCount));
+      if (existingActive) {
+        existingActive.cards = { ...activeBuilderCards };
+      } else {
+        registeredDecks.unshift({
+          id: 'deck_builder_active',
+          name: 'Deck Builder Active Deck',
+          color: 'Red',
+          isStandard: false,
+          cards: { ...activeBuilderCards },
+          updatedAt: Date.now()
+        });
+      }
+    }
+
+    const localDecks = (window.LocalDecksCache && Object.keys(window.LocalDecksCache).length > 0)
+      ? Object.values(window.LocalDecksCache)
+      : [];
+    return { registeredDecks, localDecks };
+  }
+
+  function resolvePvpDeck(deckId) {
+    if (!deckId) return { id: 'deck_std_red', name: 'Standard Red' };
+    if (deckId === 'deck_builder_active') {
+      const { registeredDecks } = getAvailablePvpDecks();
+      const found = registeredDecks.find(d => d.id === 'deck_builder_active');
+      if (found) return found;
+    }
+    if (window.DeckManager) {
+      const byMgr = (typeof window.DeckManager.getDeck === 'function' && window.DeckManager.getDeck(deckId))
+        || (typeof window.DeckManager.getDeckById === 'function' && window.DeckManager.getDeckById(deckId));
+      if (byMgr) return byMgr;
+    }
+    if (window.LocalDecksCache && window.LocalDecksCache[deckId]) {
+      return window.LocalDecksCache[deckId];
+    }
+    const stdNames = {
+      deck_std_red: 'Red: Hero Dragon (Standard)',
+      deck_std_purple: 'Purple: Netherworld (Standard)',
+      deck_std_green: 'Green: Emerald Gale (Standard)',
+      deck_std_white: 'White: Armed Fortress (Standard)',
+      deck_std_yellow: 'Yellow: Celestial Symphony (Standard)',
+      deck_std_blue: 'Blue: Colosseum Titans (Standard)'
+    };
+    return { id: deckId, name: stdNames[deckId] || deckId };
+  }
+
   function populatePvpDeckSelects() {
     if (typeof document === 'undefined' || typeof document.getElementById !== 'function' || typeof document.createElement !== 'function') return;
     const hostSel = document.getElementById('pvpHostDeckSelect');
     const joinSel = document.getElementById('pvpJoinDeckSelect');
     const randSel = document.getElementById('pvpRandomDeckSelect');
-    const registered = (window.DeckManager && window.DeckManager.getRegisteredDecks) ? window.DeckManager.getRegisteredDecks() : [];
+
+    // Ensure local-decks/ are fetched for PvP selectors even if solo lobby hasn't rendered yet
+    if (typeof window !== 'undefined' && typeof fetch === 'function' && !window._fetchingLocalDecks && !window.LocalDecksCache) {
+      window._fetchingLocalDecks = true;
+      fetch('/api/local-decks')
+        .then(res => res.json())
+        .then(data => {
+          window._fetchingLocalDecks = false;
+          if (data && Array.isArray(data.decks)) {
+            window.LocalDecksCache = {};
+            for (const d of data.decks) {
+              window.LocalDecksCache[d.id] = d;
+            }
+            populatePvpDeckSelects();
+          }
+        })
+        .catch(() => { window._fetchingLocalDecks = false; });
+    }
+
+    const { registeredDecks, localDecks } = getAvailablePvpDecks();
+    const battleDeckId = (window.DeckManager && typeof window.DeckManager.getBattleDeckId === 'function')
+      ? window.DeckManager.getBattleDeckId()
+      : null;
+    const colorIcons = { red: '🔴', purple: '🟣', green: '🟢', white: '⚪', yellow: '🟡', blue: '🔵' };
 
     const stdOptions = [
       { val: 'deck_std_red', label: '🔴 Red: Hero Dragon (Standard)' },
@@ -17779,47 +18426,72 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       { val: 'deck_std_blue', label: '🔵 Blue: Colosseum Titans (Standard)' }
     ];
 
-    [hostSel, joinSel].forEach(sel => {
-      if (!sel || typeof sel.appendChild !== 'function') return;
-      sel.innerHTML = '';
-      if (registered && registered.length > 0) {
-        registered.forEach(d => {
+    const appendUserDecks = (sel) => {
+      if (registeredDecks.length > 0) {
+        const grp = document.createElement('optgroup');
+        grp.label = 'Your Custom & Saved Decks';
+        registeredDecks.forEach(d => {
+          const count = getSafeDeckCardCount(d);
+          const icon = colorIcons[(d.color || 'red').toLowerCase()] || '🃏';
           const opt = document.createElement('option');
           opt.value = d.id;
-          opt.textContent = `🃏 ${d.name} (${d.cardCount || 40} Cards)`;
-          sel.appendChild(opt);
+          opt.textContent = count < 40
+            ? `⚠️ ${d.name || 'Deck'} (${count}/40 min Cards)`
+            : `${icon} ${d.name || 'Deck'} (${count} Cards)`;
+          grp.appendChild(opt);
         });
-      } else {
-        stdOptions.forEach(s => {
+        sel.appendChild(grp);
+      }
+
+      if (localDecks.length > 0) {
+        const grp = document.createElement('optgroup');
+        grp.label = 'Workspace Decks (local-decks/)';
+        localDecks.forEach(d => {
+          const count = d.totalCards || getSafeDeckCardCount(d);
           const opt = document.createElement('option');
-          opt.value = s.val;
-          opt.textContent = s.label;
-          sel.appendChild(opt);
+          opt.value = d.id;
+          opt.textContent = count < 40
+            ? `⚠️ ${d.name || d.id} (${count}/40 min Cards)`
+            : `🗂️ ${d.name || d.id} (${count} Cards)`;
+          grp.appendChild(opt);
         });
+        sel.appendChild(grp);
+      }
+
+      const stdGrp = document.createElement('optgroup');
+      stdGrp.label = 'Colosseum Standard Decks';
+      stdOptions.forEach(s => {
+        const opt = document.createElement('option');
+        opt.value = s.val;
+        opt.textContent = s.label;
+        stdGrp.appendChild(opt);
+      });
+      sel.appendChild(stdGrp);
+    };
+
+    [hostSel, joinSel].forEach(sel => {
+      if (!sel || typeof sel.appendChild !== 'function') return;
+      const prev = sel.value;
+      sel.innerHTML = '';
+      appendUserDecks(sel);
+      if (prev && Array.from(sel.options).some(o => o.value === prev)) {
+        sel.value = prev;
+      } else if (battleDeckId && Array.from(sel.options).some(o => o.value === battleDeckId)) {
+        sel.value = battleDeckId;
       }
     });
 
     if (randSel && typeof randSel.appendChild === 'function') {
+      const prev = randSel.value;
       randSel.innerHTML = '';
       const randOpt = document.createElement('option');
       randOpt.value = 'random';
       randOpt.textContent = '🎲 Random Realm Deck (Showdown Style)';
       randSel.appendChild(randOpt);
-
-      if (registered && registered.length > 0) {
-        registered.forEach(d => {
-          const opt = document.createElement('option');
-          opt.value = d.id;
-          opt.textContent = `🃏 ${d.name} (${d.cardCount || 40} Cards)`;
-          randSel.appendChild(opt);
-        });
+      appendUserDecks(randSel);
+      if (prev && Array.from(randSel.options).some(o => o.value === prev)) {
+        randSel.value = prev;
       }
-      stdOptions.forEach(s => {
-        const opt = document.createElement('option');
-        opt.value = s.val;
-        opt.textContent = s.label;
-        randSel.appendChild(opt);
-      });
     }
   }
 
@@ -17904,7 +18576,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   async function hostOnlineDuel(targetId = null) {
     const sel = document.getElementById('pvpHostDeckSelect');
     const deckId = sel ? sel.value : 'deck_std_red';
-    const deck = (window.DeckManager && window.DeckManager.getDeckById) ? window.DeckManager.getDeckById(deckId) : { name: 'Standard Red' };
+    const deck = resolvePvpDeck(deckId);
 
     if (window.MultiplayerService) {
       try {
@@ -17934,7 +18606,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
     const roomCode = codeInput.value.trim().toUpperCase();
     const deckId = sel ? sel.value : 'deck_std_blue';
-    const deck = (window.DeckManager && window.DeckManager.getDeckById) ? window.DeckManager.getDeckById(deckId) : { name: 'Standard Blue' };
+    const deck = resolvePvpDeck(deckId);
 
     if (window.MultiplayerService) {
       try {
@@ -18530,7 +19202,11 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     currentSessionInfo,
     startRandomMatchmaking,
     cancelRandomMatchmaking,
-    handleMatchFound
+    handleMatchFound,
+    passPriority,
+    renderEngineInteractionPrompt,
+    submitEngineInteractionResponse,
+    populatePvpDeckSelects
   };
 
   if (typeof globalThis !== 'undefined') {

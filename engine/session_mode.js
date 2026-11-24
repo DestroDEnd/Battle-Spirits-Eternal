@@ -89,14 +89,12 @@ export class MatchContext {
 
       const playerId = explicit.id || explicit.playerId || side;
       const playerName = explicit.name || (side === 'player' ? 'Player 1' : 'Player 2');
-      const authToken = explicit.authToken || generateSecureToken(side);
 
       this.players[side] = Object.freeze({
         id: playerId,
         name: playerName,
         side,
-        controlType,
-        authToken
+        controlType
       });
     }
 
@@ -199,20 +197,17 @@ export class MatchContext {
     // Responder identity check
     const responder = authContext.responder || authContext.player || authContext.decisionOwner;
     const responderSide = this.resolveSide(responder);
+    if (!responderSide && this.requireAuth) {
+      return {
+        valid: false,
+        reason: 'UNAUTHORIZED_RESPONDER: Missing or invalid responder identity in authentication context'
+      };
+    }
     if (responderSide && responderSide !== ownerSide) {
       return {
         valid: false,
         reason: `UNAUTHORIZED_RESPONDER: Responder "${responder}" (side: ${responderSide}) cannot respond for decision owner "${decisionOwner}" (side: ${ownerSide})`
       };
-    }
-
-    // Token check when authentication is required
-    const expectedToken = this.players[ownerSide].authToken;
-    if (this.requireAuth && !authContext.authToken) {
-      return { valid: false, reason: 'AUTHENTICATION_REQUIRED: Missing mandatory authentication token' };
-    }
-    if (authContext.authToken && authContext.authToken !== expectedToken) {
-      return { valid: false, reason: 'INVALID_AUTH_TOKEN: Provided token does not match authorized player' };
     }
 
     return { valid: true, side: ownerSide, player: this.players[ownerSide] };

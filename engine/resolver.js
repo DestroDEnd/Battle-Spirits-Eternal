@@ -11,6 +11,7 @@ import { evaluateStructuredCondition, CONDITION_RESULT } from './conditions.js';
 import { evaluateRestriction, commitRestriction, reserveRestriction, RESTRICTION_STATUS } from './restrictions.js';
 import { isActionRestricted } from './continuous.js';
 import { evaluateAbilityPrefixPrerequisites } from './prerequisites.js';
+import { InteractionSuspendedError } from './interaction.js';
 
 export { CONDITION_RESULT, RESTRICTION_STATUS };
 
@@ -494,11 +495,20 @@ export class AsyncResolver {
     }
 
     const parentFrame = this.resolutionStack.length > 0 ? this.resolutionStack[this.resolutionStack.length - 1] : null;
-    const abilityContext = context;
+    const abilityContext = context && context.resumingInteraction
+      ? context
+      : { ...(context || {}) };
     abilityContext.resolver = this;
-    if (!abilityContext.selectedTargets) abilityContext.selectedTargets = [];
-    if (!abilityContext.previousTargets) abilityContext.previousTargets = [];
+    abilityContext.selectedTargets = Array.isArray(abilityContext.selectedTargets)
+      ? [...abilityContext.selectedTargets]
+      : [];
+    abilityContext.previousTargets = Array.isArray(abilityContext.previousTargets)
+      ? [...abilityContext.previousTargets]
+      : [];
     if (!('previousTarget' in abilityContext)) abilityContext.previousTarget = null;
+    abilityContext.revealedCards = Array.isArray(abilityContext.revealedCards)
+      ? [...abilityContext.revealedCards]
+      : [];
     abilityContext.sourceAbility = ability;
     if (ability) {
       abilityContext.physicalAbilityId = ability.physicalId || ability.id || null;
@@ -570,11 +580,52 @@ export class AsyncResolver {
       return commitRes;
     };
 
-    const results = [];
-    try {
-    let previousResult = null;
-    let chosenBranch = null; // Used for "Or" clauses
+    const resumeState = context._resume || null;
+    const results = resumeState && Array.isArray(resumeState.results) ? [...resumeState.results] : [];
+    let currentPhase = 'MAIN_CLAUSES';
+    let currentIndex = 0;
+    let currentClauseResponses = [];
+    let previousResult = resumeState ? (resumeState.previousResult || null) : null;
+    let chosenBranch = resumeState ? (resumeState.chosenBranch || null) : null;
 
+    if (resumeState) {
+      abilityContext.previousResult = previousResult;
+      if (Array.isArray(resumeState.selectedTargets)) abilityContext.selectedTargets = [...resumeState.selectedTargets];
+      if (Array.isArray(resumeState.previousTargets)) abilityContext.previousTargets = [...resumeState.previousTargets];
+      if ('previousTarget' in resumeState) abilityContext.previousTarget = resumeState.previousTarget;
+      if (Array.isArray(resumeState.revealedCards)) abilityContext.revealedCards = [...resumeState.revealedCards];
+      if (resumeState.isCommitted) abilityContext.isCommitted = true;
+    }
+
+    const ctrl = this.promptResolver?.controller || (typeof this.promptResolver?.getController === 'function' ? this.promptResolver.getController() : null);
+    const prevSuspendFlag = ctrl?._inResolverExecution;
+    if (ctrl) {
+      ctrl._inResolverExecution = true;
+    }
+    const basePromptResolver = this.promptResolver;
+    const replayQueue = resumeState
+      ? [...(Array.isArray(resumeState.priorResponses) ? resumeState.priorResponses : []), ...(resumeState.latestResponse !== undefined ? [resumeState.latestResponse] : [])]
+      : [];
+    let replayActive = Boolean(resumeState);
+
+    const makeClausePromptResolver = () => {
+      let replayIdx = 0;
+      return {
+        choose: async (prompt) => {
+          if (replayActive && replayIdx < replayQueue.length) {
+            const val = replayQueue[replayIdx++];
+            currentClauseResponses.push(val);
+            if (replayIdx >= replayQueue.length) replayActive = false;
+            return val;
+          }
+          const val = await basePromptResolver.choose(prompt);
+          currentClauseResponses.push(val);
+          return val;
+        }
+      };
+    };
+
+    try {
     // Collect afterResolves clauses to run at the very end
     const mainClauses = [];
     const followUpClauses = [];
@@ -587,8 +638,19 @@ export class AsyncResolver {
       }
     }
 
+    const startMainIdx = resumeState
+      ? (resumeState.phase === 'FOLLOW_UP_CLAUSES' ? mainClauses.length : (resumeState.clauseIndex || 0))
+      : 0;
+    const startFollowUpIdx = (resumeState && resumeState.phase === 'FOLLOW_UP_CLAUSES')
+      ? (resumeState.clauseIndex || 0)
+      : 0;
+
     // 1. Resolve main clauses sequentially
-    for (let i = 0; i < mainClauses.length; i++) {
+    for (let i = startMainIdx; i < mainClauses.length; i++) {
+      currentPhase = 'MAIN_CLAUSES';
+      currentIndex = i;
+      currentClauseResponses = [];
+      this.promptResolver = makeClausePromptResolver();
       const clause = mainClauses[i];
 
       // Handle "Or" connector: player chooses one of the branches
@@ -613,7 +675,7 @@ export class AsyncResolver {
           chooser: abilityContext.controller || 'player',
           context: abilityContext
         });
-        if (choice && choice.id === 'second') {
+        if (choice && (choice.id === 'second' || choice.option?.id === 'second' || choice.option === 'second' || choice.index === 1)) {
           chosenBranch = 'second';
           results.push({ success: false, skipped: true, branchDeclined: true, reason: 'OR_BRANCH_NOT_CHOSEN' });
           continue; // Skip first clause
@@ -696,7 +758,11 @@ export class AsyncResolver {
     }
 
     // 2. Resolve "afterResolves" follow-up clauses (with full condition, optionality, cost checks)
-    for (let j = 0; j < followUpClauses.length; j++) {
+    for (let j = startFollowUpIdx; j < followUpClauses.length; j++) {
+      currentPhase = 'FOLLOW_UP_CLAUSES';
+      currentIndex = j;
+      currentClauseResponses = [];
+      this.promptResolver = makeClausePromptResolver();
       const fClause = followUpClauses[j];
       const remainingAfterResolves = followUpClauses.slice(j + 1);
       const fRes = await this.resolveClause(state, ability, fClause, abilityContext, events);
@@ -719,7 +785,47 @@ export class AsyncResolver {
 
       synchronizeTargetingContext(fClause, fRes, abilityContext, remainingAfterResolves);
     }
+    } catch (err) {
+      if (err instanceof InteractionSuspendedError) {
+        if (!Array.isArray(state.pendingExecutions)) state.pendingExecutions = [];
+        state.pendingExecutions.push({
+          interactionId: err.interactionId,
+          ability,
+          controller: abilityContext.controller || 'player',
+          sourceCardId: abilityContext.sourceCard?.id || null,
+          sourceCardNumber: abilityContext.sourceCard?.cardNumber || null,
+          sourceStackId: abilityContext.sourceStack?.id || null,
+          soulCoreUsed: Boolean(abilityContext.soulCoreUsed),
+          isCommitted: Boolean(abilityContext.isCommitted),
+          phase: currentPhase,
+          clauseIndex: currentIndex,
+          priorResponses: currentClauseResponses,
+          previousResult: abilityContext.previousResult || null,
+          chosenBranch,
+          results,
+          selectedTargets: abilityContext.selectedTargets || [],
+          previousTargets: abilityContext.previousTargets || [],
+          previousTarget: abilityContext.previousTarget || null,
+          revealedCards: abilityContext.revealedCards || [],
+          remainingAbilities: Array.isArray(context._remainingAbilities) ? context._remainingAbilities : [],
+          magicResolution: context._magicResolution || null
+        });
+        return {
+          success: true,
+          suspended: true,
+          status: 'AWAITING_INTERACTION',
+          interactionId: err.interactionId,
+          interaction: err.interaction,
+          results,
+          context: abilityContext
+        };
+      }
+      throw err;
     } finally {
+      this.promptResolver = basePromptResolver;
+      if (ctrl) {
+        ctrl._inResolverExecution = Boolean(prevSuspendFlag);
+      }
       if (this.resolutionStack.length > 0 && this.resolutionStack[this.resolutionStack.length - 1].frameId === frame.frameId) {
         this.resolutionStack.pop();
       }
@@ -742,6 +848,12 @@ export class AsyncResolver {
     const isCommitted = Boolean(abilityContext.isCommitted);
     const wasNegated = results.some(r => r && r.negated);
 
+    if (context && context !== abilityContext && 'previousTarget' in context && abilityContext.previousTarget === null) {
+      context.previousTarget = null;
+      context.previousTargets = [];
+      context.selectedTargets = [];
+    }
+
     return {
       success: !hasUnsupported && !hasFailure && !wasNegated,
       activated: Boolean(isCommitted || results.some(r => r && !r.skipped)),
@@ -757,16 +869,37 @@ export class AsyncResolver {
 }
 
 export class DefaultPromptResolver {
-  async choose(prompt) {
-    // Default deterministic headless fallback for automated tests
+  constructor(options = {}) {
+    this.allowSimulation = options.allowSimulation !== false;
+  }
+
+  async choose(prompt = {}) {
+    if (prompt.controlType === 'HUMAN' || (prompt.executionMode && prompt.executionMode !== 'HEADLESS_SIMULATION')) {
+      const err = new Error(`HUMAN_INTERACTION_UNROUTABLE: DefaultPromptResolver cannot resolve human-owned decision in mode "${prompt.executionMode || 'HUMAN'}"`);
+      err.code = 'HUMAN_INTERACTION_UNROUTABLE';
+      throw err;
+    }
+
+    const simulationAuthorized = Boolean(
+      this.allowSimulation &&
+      (!prompt.executionMode || prompt.executionMode === 'HEADLESS_SIMULATION') &&
+      prompt.controlType !== 'HUMAN'
+    );
+
     const pType = prompt.requestType || prompt.type;
     if (pType === 'CONFIRM_OPTIONAL' || pType === 'CONFIRM_ACTION' || pType === 'SELECT_OPTIONAL_ACTION') {
+      if (!simulationAuthorized && prompt.optional !== false) {
+        return { accepted: false, declined: true };
+      }
       return { accepted: true, declined: false };
     }
     if (pType === 'CHOOSE_OR_BRANCH' || pType === 'CHOOSE_OPTION' || pType === 'SELECT_BRANCH' || pType === 'SELECT_MODE') {
       return prompt.options?.[0] || null;
     }
     if (pType === 'BURST_TRIGGER' || pType === 'OPTIONAL_TRIGGER' || pType === 'ACTIVATE_EFFECT') {
+      if (!simulationAuthorized && prompt.optional !== false && prompt.mandatory !== true) {
+        return { activate: false, accepted: false, declined: true };
+      }
       return { activate: true, accepted: true };
     }
     if (pType === 'FLASH_ACTION') {

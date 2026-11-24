@@ -175,6 +175,26 @@ function splitLineIntoClauses(line) {
       continue;
     }
 
+    // Check ", then " connecting distinct sequential actions: e.g. "Draw three cards, then discard two cards..."
+    const commaThenMatch = clean.match(/^(.*?),\s+then\s+([A-Za-z].*)$/i);
+    if (commaThenMatch && isDistinctAction(commaThenMatch[2])) {
+      const subFirst = splitLineIntoClauses(commaThenMatch[1]);
+      if (subFirst.length > 0) {
+        if (link && !subFirst[0].link) subFirst[0].link = link;
+        clauses.push(...subFirst);
+      } else {
+        clauses.push(buildClause(commaThenMatch[1], link));
+      }
+      const subSecond = splitLineIntoClauses(commaThenMatch[2]);
+      if (subSecond.length > 0) {
+        subSecond[0].link = 'then';
+        clauses.push(...subSecond);
+      } else {
+        clauses.push(buildClause(commaThenMatch[2], 'then'));
+      }
+      continue;
+    }
+
     // Check for "and" connecting distinct actions: e.g. "..., and refresh this Spirit."
     const andMatch = clean.match(/^(.*),\s+and\s+([A-Za-z].*)$/i);
     if (andMatch && isDistinctAction(andMatch[2])) {

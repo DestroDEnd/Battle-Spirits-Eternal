@@ -371,14 +371,22 @@ test('CORE-COMBAT-01: Strict combat validation, Pursuit heavy-exhaustion, battle
   assert.equal(atkRes.success, true);
   assert.equal(atkStack.state, 'HEAVY_EXHAUSTED', 'PursuitKeyword heavy-exhausts on attack');
 
-  // Cannot declare second attack while combat is active
+  // Cannot declare second attack while combat/response window is active
   const secondAtk = await game.declareAttack(atkStack.id, 'player');
   assert.equal(secondAtk.success, false);
-  assert.equal(secondAtk.reason, 'COMBAT_ALREADY_IN_PROGRESS');
+  assert.ok(['COMBAT_ALREADY_IN_PROGRESS', 'RESPONSE_WINDOW_ACTIVE'].includes(secondAtk.reason), `Unexpected reason: ${secondAtk.reason}`);
 
-  // Cannot direct hit after being blocked
+  // Close Flash 1 with 2 consecutive passes so Block Declaration window opens
+  await game.passPriority('opponent');
+  await game.passPriority('player');
+
+  // Defender declares block in Block Declaration window
   const blkRes = await game.declareBlock(blkStack.id, 'opponent');
   assert.equal(blkRes.success, true);
+
+  // Close Flash 2 with 2 consecutive passes so BP comparison resolves
+  await game.passPriority('opponent');
+  await game.passPriority('player');
   assert.ok(eventsSeen.includes('CARD_EXHAUSTED'));
   assert.ok(eventsSeen.includes('BATTLE_STARTED'));
   assert.ok(eventsSeen.includes('BATTLE_ENDED'));
@@ -404,8 +412,10 @@ test('CORE-COMBAT-01: Strict combat validation, Pursuit heavy-exhaustion, battle
   assert.equal(atkRes2.success, true);
   assert.equal(atkStack2.state, 'EXHAUSTED');
 
-  const hitRes = await game.resolveDirectHit('player');
-  assert.equal(hitRes.success, true);
+  await game.passPriority('opponent');
+  await game.passPriority('player');
+  const passBlk = await game.windows.submitResponse({ action: 'PASS_BLOCK' }, { responder: 'opponent' });
+  assert.equal(passBlk.success, true);
   assert.equal(game.state.players.opponent.life, 0, 'Double-symbol Spirit dealt 2 life damage');
   assert.equal(game.state.players.opponent.reserve.normal, 5, '2 Life cores moved to Reserve');
   assert.equal(game.state.winner, 'player', 'LIFE_0 SBA declared player as winner');
@@ -488,8 +498,10 @@ test('CORE-MATCH-01: End-to-end multi-turn match through production APIs with tr
   const scoutStack = game.state.players.player.field.find(st => st.top.cardNumber === 'MATCH-S1');
   const atkRes = await game.declareAttack(scoutStack.id, 'player');
   assert.equal(atkRes.success, true);
-  const hitRes = await game.resolveDirectHit('player');
-  assert.equal(hitRes.success, true);
+  await game.passPriority('opponent');
+  await game.passPriority('player');
+  const passBlk = await game.windows.submitResponse({ action: 'PASS_BLOCK' }, { responder: 'opponent' });
+  assert.equal(passBlk.success, true);
   assert.equal(game.state.players.opponent.life, 4);
   assert.equal(game.validateState().valid, true);
 });

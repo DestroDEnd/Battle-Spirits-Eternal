@@ -1,5 +1,7 @@
 import http from 'node:http';
 import https from 'node:https';
+import net from 'node:net';
+import dns from 'node:dns/promises';
 import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
@@ -11,6 +13,7 @@ import { getDefaultSessionManager } from './engine/session_manager.js';
 import { hashToken } from './engine/session_store.js';
 import { attachWebSocketServer } from './engine/websocket_server.js';
 import { getDefaultMatchmaker } from './engine/matchmaker.js';
+import { scrubCredentials } from './engine/state_serialization.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -67,7 +70,7 @@ let cachedAiWeights = null;
 let cachedRebirthCatalog = null;
 let serverDb = null;
 try {
-  const dbPath = path.join(__dirname, 'battle_spirits.db');
+  const dbPath = process.env.DB_PATH || path.join(__dirname, 'battle_spirits.db');
   if (fs.existsSync(dbPath)) {
     serverDb = new DatabaseSync(dbPath);
   }
@@ -267,20 +270,42 @@ const server = http.createServer(async (req, res) => {
 
     // GET /api/sessions/active
     if (subRoute === 'active' && req.method === 'GET') {
-      const playerId = parsedUrl.searchParams.get('playerId');
-      const activeMatches = sessionManager.getActiveMatches(playerId);
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ activeMatches }));
+      try {
+        if (!effectiveToken) {
+          res.writeHead(401, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: 'AUTHENTICATION_REQUIRED: Caller authentication token required', code: 'AUTHENTICATION_REQUIRED' }));
+          return;
+        }
+        const playerId = parsedUrl.searchParams.get('playerId');
+        const activeMatches = sessionManager.getActiveMatches(effectiveToken, playerId);
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ activeMatches: scrubCredentials(activeMatches) }));
+      } catch (err) {
+        const statusCode = (err.code === 'AUTHENTICATION_REQUIRED' || err.code === 'INVALID_AUTH_TOKEN' || err.message.includes('AUTHENTICATION')) ? 401 : 400;
+        res.writeHead(statusCode, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: err.message, code: err.code }));
+      }
       return;
     }
 
     // GET /api/sessions/history
     if (subRoute === 'history' && req.method === 'GET') {
-      const limit = parseInt(parsedUrl.searchParams.get('limit') || '50', 10);
-      const playerId = parsedUrl.searchParams.get('playerId');
-      const history = sessionManager.getMatchHistory(limit, playerId);
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ history }));
+      try {
+        if (!effectiveToken) {
+          res.writeHead(401, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: 'AUTHENTICATION_REQUIRED: Caller authentication token required', code: 'AUTHENTICATION_REQUIRED' }));
+          return;
+        }
+        const limit = parseInt(parsedUrl.searchParams.get('limit') || '50', 10);
+        const playerId = parsedUrl.searchParams.get('playerId');
+        const history = sessionManager.getMatchHistory(limit, effectiveToken, playerId);
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ history: scrubCredentials(history) }));
+      } catch (err) {
+        const statusCode = (err.code === 'AUTHENTICATION_REQUIRED' || err.code === 'INVALID_AUTH_TOKEN' || err.message.includes('AUTHENTICATION')) ? 401 : 400;
+        res.writeHead(statusCode, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: err.message, code: err.code }));
+      }
       return;
     }
 
@@ -329,6 +354,23 @@ const server = http.createServer(async (req, res) => {
         return;
       }
 
+      // POST /api/sessions/:matchId/ticket (Short-lived single-use transport ticket)
+      if (subAction === 'ticket' && req.method === 'POST') {
+        try {
+          const body = await readJsonBody(req).catch(() => ({}));
+          const authToken = body.authToken || effectiveToken;
+          const ticketData = sessionManager.issueTransportTicket(matchId, authToken);
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify(ticketData));
+        } catch (err) {
+          const statusCode = (err.code === 'AUTHENTICATION_REQUIRED' || err.code === 'INVALID_AUTH_TOKEN' || err.message.includes('AUTHENTICATION')) ? 401
+            : (err.message.includes('NOT_FOUND') ? 404 : 400);
+          res.writeHead(statusCode, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: err.message, code: err.code }));
+        }
+        return;
+      }
+
       // GET /api/sessions/:matchId/stream (Real-Time Server-Sent Events)
       if (subAction === 'stream' && req.method === 'GET') {
         try {
@@ -338,20 +380,32 @@ const server = http.createServer(async (req, res) => {
             res.end(JSON.stringify({ error: `Match "${matchId}" not found` }));
             return;
           }
-          if (!effectiveToken) {
-            res.writeHead(401, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ error: 'AUTHENTICATION_REQUIRED: Missing auth token' }));
-            return;
-          }
-          const tokenH = hashToken(effectiveToken);
+
+          // Check for single-use transport ticket first
+          const ticketParam = parsedUrl.searchParams.get('ticket');
           let viewerSide = null;
-          if (session.player1.tokenHash === tokenH) viewerSide = 'player';
-          else if (session.player2.tokenHash === tokenH) viewerSide = 'opponent';
+          if (ticketParam) {
+            const redeemed = sessionManager.redeemTransportTicket(ticketParam, matchId);
+            if (redeemed) {
+              viewerSide = redeemed.viewerSide;
+            }
+          }
 
           if (!viewerSide) {
-            res.writeHead(401, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ error: 'INVALID_AUTH_TOKEN: Unauthorized token' }));
-            return;
+            if (!effectiveToken) {
+              res.writeHead(401, { 'Content-Type': 'application/json' });
+              res.end(JSON.stringify({ error: 'AUTHENTICATION_REQUIRED: Missing auth token or ticket' }));
+              return;
+            }
+            const tokenH = hashToken(effectiveToken);
+            if (session.player1.tokenHash === tokenH) viewerSide = 'player';
+            else if (session.player2.tokenHash === tokenH) viewerSide = 'opponent';
+
+            if (!viewerSide) {
+              res.writeHead(401, { 'Content-Type': 'application/json' });
+              res.end(JSON.stringify({ error: 'INVALID_AUTH_TOKEN: Unauthorized token or ticket' }));
+              return;
+            }
           }
 
           res.writeHead(200, {
@@ -363,7 +417,7 @@ const server = http.createServer(async (req, res) => {
 
           // Replay missed events
           const sinceSeq = parseInt(req.headers['last-event-id'] || parsedUrl.searchParams.get('sinceSeq') || '0', 10);
-          const initialEvents = await sessionManager.getEvents(matchId, sinceSeq, effectiveToken);
+          const initialEvents = await sessionManager.getEvents(matchId, sinceSeq, viewerSide);
           for (const evt of initialEvents) {
             res.write(`id: ${evt.seq}\nevent: match_event\ndata: ${JSON.stringify(evt)}\n\n`);
           }
@@ -380,6 +434,8 @@ const server = http.createServer(async (req, res) => {
           if (!res.headersSent) {
             res.writeHead(400, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ error: err.message }));
+          } else {
+            res.end();
           }
         }
         return;
@@ -390,12 +446,16 @@ const server = http.createServer(async (req, res) => {
         try {
           const body = await readJsonBody(req);
           const authToken = body.authToken || body.authContext?.authToken || effectiveToken;
-          const result = await sessionManager.submitPlayerAction(matchId, body.action || body, { authToken });
+          const actionPayload = (body.action && typeof body.action === 'object') ? body.action : body;
+          const result = await sessionManager.submitPlayerAction(matchId, actionPayload, { authToken });
           res.writeHead(200, { 'Content-Type': 'application/json' });
           res.end(JSON.stringify(result));
         } catch (err) {
-          const statusCode = (err.message.includes('AUTHENTICATION') || err.message.includes('INVALID_AUTH')) ? 401
-            : (err.message.includes('IMPERSONATION') ? 403 : 400);
+          const statusCode = err.status || (
+            (err.message.includes('AUTHENTICATION') || err.message.includes('INVALID_AUTH')) ? 401 :
+            (err.message.includes('IMPERSONATION') || err.message.includes('NOT_ACTIVE_PLAYER') || err.message.includes('NOT_PRIORITY_PLAYER') || err.message.includes('RESPONSE_WINDOW_ACTIVE') || err.message.includes('UNAUTHORIZED_DECISION_OWNER')) ? 403 :
+            (err.message.includes('PAYLOAD_CONFLICT') || err.code === 'PAYLOAD_CONFLICT') ? 409 : 400
+          );
           res.writeHead(statusCode, { 'Content-Type': 'application/json' });
           res.end(JSON.stringify({ error: err.message, code: err.code }));
         }
@@ -465,65 +525,251 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
-  // Image proxy endpoint to bypass CORS and referer hotlinking blocks
-  if (pathname.toLowerCase() === '/api/proxy-image') {
-    const targetUrl = parsedUrl.searchParams.get('url');
-    if (!targetUrl || (!targetUrl.startsWith('http://') && !targetUrl.startsWith('https://'))) {
-      res.writeHead(400, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ error: 'Missing or invalid url param' }));
+const ALLOWED_IMAGE_DOMAINS = [
+  'battlespirits.com',
+  'asia-en.battlespirits.com',
+  'battle-spirits.fandom.com',
+  'static.wikia.nocookie.net',
+  'images.wikia.com',
+  'raw.githubusercontent.com'
+];
+
+const ALLOWED_MIME_TYPES = new Set([
+  'image/jpeg',
+  'image/png',
+  'image/webp',
+  'image/gif',
+  'image/avif'
+]);
+
+const MAX_IMAGE_BYTES = 5 * 1024 * 1024; // 5 MB strict limit
+
+function isPrivateOrReservedIp(ip) {
+  if (!ip) return true;
+  let cleanIp = ip.toLowerCase().trim();
+
+  if (cleanIp.startsWith('::ffff:')) {
+    const rest = cleanIp.slice(7);
+    if (net.isIPv4(rest)) return isPrivateOrReservedIp(rest);
+    cleanIp = rest;
+  }
+
+  if (cleanIp === '::1' || cleanIp === '0:0:0:0:0:0:0:1' || cleanIp === '::') return true;
+  if (/^fe[89ab][0-9a-f]:/i.test(cleanIp) || cleanIp.startsWith('fe80:')) return true;
+  if (/^f[cd][0-9a-f]{2}:/i.test(cleanIp) || cleanIp.startsWith('fc00:') || cleanIp.startsWith('fd00:')) return true;
+  if (cleanIp.startsWith('ff')) return true;
+
+  if (net.isIPv4(cleanIp)) {
+    const parts = cleanIp.split('.').map(Number);
+    if (parts.length !== 4 || parts.some(isNaN)) return true;
+    const [b0, b1, b2, b3] = parts;
+
+    if (b0 === 0) return true;
+    if (b0 === 10) return true;
+    if (b0 === 127) return true;
+    if (b0 === 100 && b1 >= 64 && b1 <= 127) return true;
+    if (b0 === 169 && b1 === 254) return true;
+    if (b0 === 172 && b1 >= 16 && b1 <= 31) return true;
+    if (b0 === 192 && b1 === 0 && (b2 === 0 || b2 === 2)) return true;
+    if (b0 === 192 && b1 === 168) return true;
+    if (b0 === 198 && (b1 === 18 || b1 === 19)) return true;
+    if (b0 === 198 && b1 === 51 && b2 === 100) return true;
+    if (b0 === 203 && b1 === 0 && b2 === 113) return true;
+    if (b0 >= 224) return true;
+    if (b0 === 255 && b1 === 255 && b2 === 255 && b3 === 255) return true;
+
+    return false;
+  }
+
+  return false;
+}
+
+function isAllowedHost(hostname) {
+  if (!hostname) return false;
+  const host = hostname.toLowerCase().trim();
+  if (host === 'localhost' || host.endsWith('.localhost')) return false;
+  if (net.isIP(host)) return false;
+  return ALLOWED_IMAGE_DOMAINS.includes(host);
+}
+
+async function validateAndPinTarget(parsedTarget) {
+  if (!isAllowedHost(parsedTarget.hostname)) {
+    return { error: 'Destination host not permitted', status: 403 };
+  }
+  if (parsedTarget.protocol !== 'https:') {
+    return { error: 'Disallowed protocol: HTTPS required', status: 400 };
+  }
+  if (parsedTarget.port && parsedTarget.port !== '443') {
+    return { error: 'Disallowed port: Only port 443 permitted', status: 400 };
+  }
+
+  let addresses;
+  try {
+    addresses = await dns.promises.lookup(parsedTarget.hostname, { all: true });
+  } catch (err) {
+    return { error: 'DNS resolution error', status: 502 };
+  }
+
+  if (!addresses || addresses.length === 0) {
+    return { error: 'DNS lookup failed: No addresses found', status: 502 };
+  }
+
+  for (const addr of addresses) {
+    if (isPrivateOrReservedIp(addr.address)) {
+      return { error: 'Access to private network address denied', status: 403 };
+    }
+  }
+
+  return {
+    pinnedIp: addresses[0].address,
+    pinnedFamily: addresses[0].family
+  };
+}
+
+async function fetchUpstreamImage(parsedTarget, clientRes, redirectCount = 0) {
+  if (redirectCount > 3) {
+    clientRes.writeHead(508, { 'Content-Type': 'application/json' });
+    clientRes.end(JSON.stringify({ error: 'Too many redirects' }));
+    return;
+  }
+
+  const pinResult = await validateAndPinTarget(parsedTarget);
+  if (pinResult.error) {
+    clientRes.writeHead(pinResult.status, { 'Content-Type': 'application/json' });
+    clientRes.end(JSON.stringify({ error: pinResult.error }));
+    return;
+  }
+
+  const { pinnedIp, pinnedFamily } = pinResult;
+
+  const reqOptions = {
+    hostname: parsedTarget.hostname,
+    port: 443,
+    path: parsedTarget.pathname + parsedTarget.search,
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) BattleSpiritsEternal/1.0',
+      'Referer': parsedTarget.origin,
+      'Accept': 'image/avif,image/webp,image/png,image/jpeg,image/gif;q=0.9,*/*;q=0.8'
+    },
+    lookup: (hostname, options, callback) => {
+      callback(null, pinnedIp, pinnedFamily);
+    },
+    servername: parsedTarget.hostname,
+    timeout: 6000
+  };
+
+  const proxyReq = https.get(reqOptions, (proxyRes) => {
+    if ([301, 302, 303, 307, 308].includes(proxyRes.statusCode) && proxyRes.headers.location) {
+      proxyRes.resume();
+      let redirectUrl;
+      try {
+        redirectUrl = new URL(proxyRes.headers.location, parsedTarget.href);
+      } catch {
+        clientRes.writeHead(400, { 'Content-Type': 'application/json' });
+        clientRes.end(JSON.stringify({ error: 'Invalid redirect location' }));
+        return;
+      }
+      return fetchUpstreamImage(redirectUrl, clientRes, redirectCount + 1);
+    }
+
+    if (proxyRes.statusCode !== 200) {
+      proxyRes.resume();
+      clientRes.writeHead(proxyRes.statusCode, { 'Content-Type': 'application/json' });
+      clientRes.end(JSON.stringify({ error: `Upstream returned status ${proxyRes.statusCode}` }));
       return;
     }
 
-    try {
-      const parsedTarget = new URL(targetUrl);
-      const client = parsedTarget.protocol === 'https:' ? https : http;
-      const proxyReq = client.get(targetUrl, {
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-          'Referer': parsedTarget.origin,
-          'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8'
-        },
-        timeout: 8000
-      }, (proxyRes) => {
-        if ([301, 302, 303, 307, 308].includes(proxyRes.statusCode) && proxyRes.headers.location) {
-          res.writeHead(302, { 'Location': `/api/proxy-image?url=${encodeURIComponent(proxyRes.headers.location)}` });
-          res.end();
-          return;
-        }
-        if (proxyRes.statusCode !== 200) {
-          res.writeHead(proxyRes.statusCode, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ error: `Upstream returned status ${proxyRes.statusCode}` }));
-          return;
-        }
-        const contentType = proxyRes.headers['content-type'] || 'image/jpeg';
-        res.writeHead(200, {
-          'Content-Type': contentType,
-          'Cache-Control': 'public, max-age=86400, stale-while-revalidate=604800',
-          'Access-Control-Allow-Origin': '*'
-        });
-        proxyRes.pipe(res);
-      });
-
-      proxyReq.on('timeout', () => {
-        proxyReq.destroy();
-        if (!res.headersSent) {
-          res.writeHead(504, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ error: 'Proxy request timed out' }));
-        }
-      });
-
-      proxyReq.on('error', (err) => {
-        if (!res.headersSent) {
-          res.writeHead(502, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ error: err.message }));
-        }
-      });
-    } catch (e) {
-      if (!res.headersSent) {
-        res.writeHead(500, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ error: e.message }));
-      }
+    const contentType = (proxyRes.headers['content-type'] || '').split(';')[0].trim().toLowerCase();
+    if (!ALLOWED_MIME_TYPES.has(contentType)) {
+      proxyRes.resume();
+      clientRes.writeHead(400, { 'Content-Type': 'application/json' });
+      clientRes.end(JSON.stringify({ error: 'Upstream returned non-image content-type' }));
+      return;
     }
+
+    const contentLength = parseInt(proxyRes.headers['content-length'] || '0', 10);
+    if (contentLength > MAX_IMAGE_BYTES) {
+      proxyRes.resume();
+      clientRes.writeHead(413, { 'Content-Type': 'application/json' });
+      clientRes.end(JSON.stringify({ error: 'Upstream image exceeds 5MB limit' }));
+      return;
+    }
+
+    const chunks = [];
+    let totalBytes = 0;
+    let limitExceeded = false;
+
+    proxyRes.on('data', (chunk) => {
+      if (limitExceeded) return;
+      totalBytes += chunk.length;
+      if (totalBytes > MAX_IMAGE_BYTES) {
+        limitExceeded = true;
+        proxyReq.destroy();
+        proxyRes.destroy();
+        if (!clientRes.headersSent) {
+          clientRes.writeHead(413, { 'Content-Type': 'application/json' });
+          clientRes.end(JSON.stringify({ error: 'Upstream image exceeds 5MB limit' }));
+        }
+        return;
+      }
+      chunks.push(chunk);
+    });
+
+    proxyRes.on('end', () => {
+      if (limitExceeded || clientRes.headersSent) return;
+      const body = Buffer.concat(chunks);
+      clientRes.writeHead(200, {
+        'Content-Type': contentType,
+        'Content-Length': String(body.length),
+        'Cache-Control': 'public, max-age=86400, stale-while-revalidate=604800',
+        'Access-Control-Allow-Origin': '*'
+      });
+      clientRes.end(body);
+    });
+
+    proxyRes.on('error', () => {
+      if (!clientRes.headersSent) {
+        clientRes.writeHead(502, { 'Content-Type': 'application/json' });
+        clientRes.end(JSON.stringify({ error: 'Upstream streaming error' }));
+      }
+    });
+  });
+
+  proxyReq.on('timeout', () => {
+    proxyReq.destroy();
+    if (!clientRes.headersSent) {
+      clientRes.writeHead(504, { 'Content-Type': 'application/json' });
+      clientRes.end(JSON.stringify({ error: 'Proxy request timed out' }));
+    }
+  });
+
+  proxyReq.on('error', (err) => {
+    if (!clientRes.headersSent) {
+      clientRes.writeHead(502, { 'Content-Type': 'application/json' });
+      clientRes.end(JSON.stringify({ error: 'Upstream connection error' }));
+    }
+  });
+}
+
+  // Image proxy endpoint to bypass CORS and referer hotlinking blocks (Protected against SSRF)
+  if (pathname.toLowerCase() === '/api/proxy-image' || pathname.toLowerCase() === '/api/image-proxy') {
+    const targetUrl = parsedUrl.searchParams.get('url');
+    if (!targetUrl) {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'Missing url param' }));
+      return;
+    }
+
+    let parsedTarget;
+    try {
+      parsedTarget = new URL(targetUrl);
+    } catch {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'Invalid url format' }));
+      return;
+    }
+
+    fetchUpstreamImage(parsedTarget, res, 0);
     return;
   }
 
@@ -1267,6 +1513,61 @@ const server = http.createServer(async (req, res) => {
 
   // Check dynamic battle routes
   const lowerPath = pathname.toLowerCase();
+
+  // ── Phase G: Static File and Database Disclosure Security ──
+  // 1. Directory traversal, encoded traversal, null bytes check
+  if (
+    req.url.includes('..') ||
+    req.url.includes('%2e%2e') ||
+    req.url.includes('%2E%2E') ||
+    req.url.includes('%00') ||
+    req.url.includes('\0') ||
+    pathname.includes('\0') ||
+    pathname.includes('..')
+  ) {
+    res.writeHead(403, { 'Content-Type': 'text/plain' });
+    res.end('403 Forbidden');
+    return;
+  }
+
+  // 2. Deny hidden files and directories (e.g. .git, .env)
+  if (pathname.startsWith('/.') || pathname.includes('/.')) {
+    res.writeHead(403, { 'Content-Type': 'text/plain' });
+    res.end('403 Forbidden');
+    return;
+  }
+
+  // 3. Block non-public directories
+  const BLOCKED_DIR_PREFIXES = ['/engine/', '/compiler/', '/scripts/', '/tests/', '/reports/', '/data/', '/node_modules/', '/scratch/'];
+  for (const prefix of BLOCKED_DIR_PREFIXES) {
+    if (lowerPath.startsWith(prefix) || lowerPath === prefix.slice(0, -1)) {
+      if (lowerPath === '/engine/cards/bundle.js' || lowerPath.startsWith('/engine/shims/')) {
+        break;
+      }
+      res.writeHead(403, { 'Content-Type': 'text/plain' });
+      res.end('403 Forbidden');
+      return;
+    }
+  }
+
+  // 4. Block sensitive file extensions (database, secrets, shell scripts, source repos)
+  const BLOCKED_EXTENSIONS = ['.db', '.db-shm', '.db-wal', '.db-journal', '.sqlite', '.sqlite3', '.env', '.bat', '.sh', '.md', '.zip', '.pdf'];
+  for (const blkExt of BLOCKED_EXTENSIONS) {
+    if (lowerPath.endsWith(blkExt)) {
+      res.writeHead(403, { 'Content-Type': 'text/plain' });
+      res.end('403 Forbidden');
+      return;
+    }
+  }
+
+  // 5. Block backend root files
+  const BLOCKED_ROOT_FILES = ['/server.js', '/package.json', '/package-lock.json', '/battle_spirits.db', '/run.bat', '/readme.md', '/agents.md', '/unresolved_limitations.md'];
+  if (BLOCKED_ROOT_FILES.includes(lowerPath)) {
+    res.writeHead(403, { 'Content-Type': 'text/plain' });
+    res.end('403 Forbidden');
+    return;
+  }
+
   if (
     lowerPath.startsWith('/battle/') ||
     lowerPath.startsWith('/arena/') ||
@@ -1283,6 +1584,23 @@ const server = http.createServer(async (req, res) => {
   // Normalize path safely within root
   let safePath = path.normalize(pathname).replace(/^(\.\.[\/\\])+/, '');
   let filePath = path.join(__dirname, safePath);
+
+  // Symlink escape check
+  try {
+    const realRootDir = fs.realpathSync(__dirname);
+    if (fs.existsSync(filePath)) {
+      const realFilePath = fs.realpathSync(filePath);
+      if (!realFilePath.toLowerCase().startsWith(realRootDir.toLowerCase())) {
+        res.writeHead(403, { 'Content-Type': 'text/plain' });
+        res.end('403 Forbidden');
+        return;
+      }
+    }
+  } catch {
+    res.writeHead(404, { 'Content-Type': 'text/plain' });
+    res.end('404 Not Found');
+    return;
+  }
 
   // Check if target is directory
   if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
@@ -1320,7 +1638,7 @@ const server = http.createServer(async (req, res) => {
 
     // Check gzip support for text-based and compressible binary resources
     const acceptEncoding = req.headers['accept-encoding'] || '';
-    const compressible = ['.html', '.css', '.js', '.mjs', '.json', '.svg', '.txt', '.db'].includes(ext);
+    const compressible = ['.html', '.css', '.js', '.mjs', '.json', '.svg', '.txt'].includes(ext);
 
     if (compressible && acceptEncoding.includes('gzip')) {
       res.writeHead(200, {

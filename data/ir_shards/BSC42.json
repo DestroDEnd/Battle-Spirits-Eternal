@@ -9544,19 +9544,9 @@
   "BSC42-073": {
     "cardNumber": "BSC42-073",
     "name": "The WeaponCollector Godfrey LT",
-    "keywords": [
-      {
-        "name": "Burst",
-        "parameter": "After your Spirit/Nexus is depleted/destroyed by the Opponent",
-        "wave": 2,
-        "hook": "burst",
-        "bracketed": true,
-        "index": 0
-      }
-    ],
+    "keywords": [],
     "abilities": [
       {
-        "id": "BSC42-073#AB_BURST_NONE_LV1_LV2_LV3_3eb8c231e51bd55cd935feec55d424fbb2039dcee61c19de56646ae2abc0a3f9_28cd7285d537ac7c8b4cab9946bf74bb",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -9567,20 +9557,32 @@
           "levelExplicit": false,
           "prefixes": [],
           "timing": "BURST",
+          "timings": [],
           "timingLabel": "Burst",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "BURST"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": "AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT",
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Deploy any number of Nexus cards from your Hand/Trash, without paying the cost. After this effect resolves, summon this card without paying the cost."
         },
+        "originalAbilityText": "[Burst: After your Spirit/Nexus is depleted/destroyed by the Opponent]\nDeploy any number of Nexus cards from your Hand/Trash, without paying the cost. After this effect resolves, summon this card without paying the cost.",
+        "abilityIndex": 0,
         "clauses": [
           {
             "rawText": "Deploy any number of Nexus cards from your Hand/Trash, without paying the cost.",
+            "originalClauseText": "Deploy any number of Nexus cards from your Hand/Trash, without paying the cost.",
             "cleanText": "Deploy any number of Nexus cards from your Hand/Trash, without paying the cost",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -9593,7 +9595,9 @@
           },
           {
             "rawText": "summon this card without paying the cost.",
+            "originalClauseText": "summon this card without paying the cost.",
             "cleanText": "summon this card without paying the cost",
+            "clauseIndex": 1,
             "link": "afterResolves",
             "isOptional": false,
             "isCost": false,
@@ -9608,11 +9612,26 @@
         ],
         "unsupported": [],
         "legacyId": "BSC42-073#a0",
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BSC42-073#AB_BURST_NONE_LV1_LV2_LV3_3eb8c231e51bd55cd935feec55d424fbb2039dcee61c19de56646ae2abc0a3f9_28cd7285d537ac7c8b4cab9946bf74bb",
         "physicalId": "BSC42-073#AB_BURST_NONE_LV1_LV2_LV3_3eb8c231e51bd55cd935feec55d424fbb2039dcee61c19de56646ae2abc0a3f9_28cd7285d537ac7c8b4cab9946bf74bb",
-        "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_3eb8c231e51bd55cd935feec55d424fbb2039dcee61c19de56646ae2abc0a3f9_28cd7285d537ac7c8b4cab9946bf74bb"
+        "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_3eb8c231e51bd55cd935feec55d424fbb2039dcee61c19de56646ae2abc0a3f9_28cd7285d537ac7c8b4cab9946bf74bb",
+        "semanticIdV3": "SEM3#AB_BURST_NONE_LV1_LV2_LV3_9980b99d746b27b27c635298cda81690ac688b9b0d3ac8c1497ad241bf60ec52_04d0b29a3d21a199779aa8df9012b2e5",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "BURST"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BSC42-073#AB_WHEN_ATTACKS_NONE_LV2_LV3_767f63fe9afc9cb160fccdb069bfd2002ee043478153999fe6ca142fe8349edc_400bc2918cb4a8b25895fa49410ebe4b",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -9622,20 +9641,34 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_ATTACKS",
+          "timings": [
+            "WHEN_ATTACKS"
+          ],
           "timingLabel": "When Attacks",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Draw three cards, then discard three cards from your Hand."
         },
+        "originalAbilityText": "[LV2][LV3] (When Attacks)\nDraw three cards, then discard three cards from your Hand.",
+        "abilityIndex": 1,
         "clauses": [
           {
-            "rawText": "Draw three cards, then discard three cards from your Hand.",
-            "cleanText": "Draw three cards, then discard three cards from your Hand",
+            "rawText": "Draw three cards",
+            "originalClauseText": "Draw three cards",
+            "cleanText": "Draw three cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -9647,15 +9680,49 @@
               "chooser": "self",
               "forEach": null
             }
+          },
+          {
+            "rawText": "discard three cards from your Hand.",
+            "originalClauseText": "discard three cards from your Hand.",
+            "cleanText": "discard three cards from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 3,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
           }
         ],
         "unsupported": [],
         "legacyId": "BSC42-073#a1",
-        "physicalId": "BSC42-073#AB_WHEN_ATTACKS_NONE_LV2_LV3_767f63fe9afc9cb160fccdb069bfd2002ee043478153999fe6ca142fe8349edc_400bc2918cb4a8b25895fa49410ebe4b",
-        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_767f63fe9afc9cb160fccdb069bfd2002ee043478153999fe6ca142fe8349edc_400bc2918cb4a8b25895fa49410ebe4b"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BSC42-073#AB_WHEN_ATTACKS_NONE_LV2_LV3_0f04eb15790d10c774d8b18f552e9ce93ba2f05203c652acd5838e68319e1548_6286fd16ec2fe424725740d6aa20d290",
+        "physicalId": "BSC42-073#AB_WHEN_ATTACKS_NONE_LV2_LV3_0f04eb15790d10c774d8b18f552e9ce93ba2f05203c652acd5838e68319e1548_6286fd16ec2fe424725740d6aa20d290",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_0f04eb15790d10c774d8b18f552e9ce93ba2f05203c652acd5838e68319e1548_6286fd16ec2fe424725740d6aa20d290",
+        "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_ee3767e3535332f96b0e57df2c09706c7c0f4867b3a943399b45edd4617efe85_3500a8d16d10b1f9bdfa4e5b681b561c",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 3,
+    "compiledClausesCount": 4,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },

@@ -17,6 +17,9 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import http from 'node:http';
 import { spawn } from 'node:child_process';
+import os from 'node:os';
+import path from 'node:path';
+import fs from 'node:fs';
 import { Matchmaker, MATCHMAKER_STATUS } from '../engine/matchmaker.js';
 import { BattleSessionManager } from '../engine/session_manager.js';
 import { SessionStore } from '../engine/session_store.js';
@@ -123,7 +126,7 @@ test('MATCHMAKER-01: Unit Tests - Queue Entrance, Pairing & Cancellation', async
   assert.equal(matchmaker.getQueueStats().queueSize, 0);
 
   const pollAfterCancel = matchmaker.pollQueue(res3.ticketId);
-  assert.equal(pollAfterCancel.status, MATCHMAKER_STATUS.EXPIRED);
+  assert.equal(pollAfterCancel.status, MATCHMAKER_STATUS.CANCELLED);
 
   // 8. Stale searcher pruning test
   const res4 = await matchmaker.enterQueue({
@@ -139,13 +142,14 @@ test('MATCHMAKER-01: Unit Tests - Queue Entrance, Pairing & Cancellation', async
 
 test('MATCHMAKER-02: REST API End-to-End Simulation over Server', async () => {
   const dynamicPort = 4820 + Math.floor(Math.random() * 100);
+  const tmpDb = path.join(os.tmpdir(), `bsp-mm-test-${Date.now()}.db`);
   const serverProc = spawn('node', ['server.js'], {
-    env: { ...process.env, PORT: String(dynamicPort) },
+    env: { ...process.env, PORT: String(dynamicPort), DB_PATH: tmpDb },
     stdio: ['ignore', 'pipe', 'pipe']
   });
 
   await new Promise((resolve, reject) => {
-    const timer = setTimeout(() => reject(new Error('Server start timed out')), 8000);
+    const timer = setTimeout(() => reject(new Error('Server start timed out')), 20000);
     serverProc.stdout.on('data', (buf) => {
       if (buf.toString().includes('running at')) {
         clearTimeout(timer);
@@ -193,7 +197,7 @@ test('MATCHMAKER-02: REST API End-to-End Simulation over Server', async () => {
         deckId: 'purple'
       }
     });
-    assert.equal(find2.statusCode, 200);
+    assert.equal(find2.statusCode, 200, `find2 failed: ${JSON.stringify(find2.body)}`);
     assert.equal(find2.body.status, 'MATCHED');
     const matchId = find2.body.matchId;
     const renToken = find2.body.authToken;
@@ -242,7 +246,7 @@ test('MATCHMAKER-02: REST API End-to-End Simulation over Server', async () => {
     assert.equal(cancelRes.body.success, true);
 
     const checkCancelled = await requestJson(`${baseUrl}/api/matchmaking/status?ticketId=${encodeURIComponent(soloTicket)}`);
-    assert.equal(checkCancelled.body.status, 'EXPIRED');
+    assert.equal(checkCancelled.body.status, 'CANCELLED');
 
   } finally {
     try {

@@ -18,7 +18,7 @@ export class FlowController {
     this.events = events;
   }
 
-  async advanceStep() {
+  async advanceStep(targetStep = null) {
     if (this.state.winner) return this.state.step;
 
     const currentStep = this.state.step;
@@ -152,7 +152,7 @@ export class FlowController {
       pruneExpiredModifiers(this.state, 'STEP');
 
       // Determine next step
-      nextStep = this.getNextStepName(currentStep, isFirstTurn);
+      nextStep = targetStep || this.getNextStepName(currentStep, isFirstTurn);
     }
 
     this.state.step = nextStep;

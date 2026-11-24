@@ -1,13 +1,13 @@
 {
   "summary": {
-    "totalManualReviewAbilities": 13790,
-    "totalManualReviewCards": 9945,
+    "totalManualReviewAbilities": 13864,
+    "totalManualReviewCards": 9991,
     "byReason": {
-      "Missing semantic test evidence": 7830,
+      "Missing semantic test evidence": 7926,
       "Unverified trigger timing": 2642,
-      "Missing or contradictory IR parameters": 1048,
-      "Unverified target semantics": 2154,
-      "Unsupported operation variant": 115,
+      "Missing or contradictory IR parameters": 1028,
+      "Unverified target semantics": 2148,
+      "Unsupported operation variant": 119,
       "Unresolved replacement interaction": 1
     }
   },
@@ -6613,6 +6613,20 @@
       "irExcerpt": {
         "op": "UNBLOCKABLE",
         "target": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BATTLE-SPIRITS-A2220",
+      "abilityId": "BATTLE-SPIRITS-A2220#AB_MAIN_STEP_NONE_LV1_LV2_LV3_74e20c581caa3b530838bb783994ad0f2540e96e753433953f141a2d8ba0ee46_e6b2ceee5e09a15daf9420002cb70ed9",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard 2 cards.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -20949,11 +20963,15 @@
     },
     {
       "cardNumber": "BS28-082",
-      "abilityId": "BS28-082#AB_PASSIVE_NONE_LV1_LV2_LV3_c03a93b118f2d874488f552d2d9dbacaf523be24ff1f1b306edc39bd381f9bbb_8a702d3114e05bda2f120015e5b50cff",
-      "reason": "Missing or contradictory IR parameters",
-      "rawText": "When the opposing Ultimate Trigger hits, this card in Hand can activate the following effect before the hit effect activates.",
+      "abilityId": "BS28-082#AB_MAIN_NONE_LV1_LV2_LV3_1dc7aa3aedce8f93b187b006454d1719cd80847f5fbcd3e8de13a66540e4cd97_4262c0902a281275a5ccfd588ef5be9b",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
       "irExcerpt": {
-        "op": "TRIGGER_COUNTER"
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -23227,11 +23245,15 @@
     },
     {
       "cardNumber": "BS31-112",
-      "abilityId": "BS31-112#AB_MAIN_NONE_LV1_LV2_LV3_1a184dc9e349d20090ee39534d7a9d11816a47b9adb526923c6c6b32d15668ad_bf9edebee601627798003a7f0dc5cbcb",
-      "reason": "Missing or contradictory IR parameters",
-      "rawText": "If there is [Soul Core] on any of your \"WisdomKing\"/\"Douji\" Spirits, this effect discards -1 card.",
+      "abilityId": "BS31-112#AB_MAIN_NONE_LV1_LV2_LV3_a60870dfef87a3f7cafe425e57d6a9a2d2602723f34b0a5e1b558f57634157f2_12099b572c7b6a6b7b298c0aef2f298a",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
       "irExcerpt": {
-        "op": "MODIFY_EFFECT"
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -24539,6 +24561,20 @@
       "rawText": "While your exactly-named \"The LotusMonarch Senju\" is attacking, count this Nexus as being three Nexuses.",
       "irExcerpt": {
         "op": "COUNT_AS_MULTIPLE"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS33-082",
+      "abilityId": "BS33-082#AB_MAIN_NONE_LV1_LV2_LV3_305bc43aac23eb3100fa4d9785dee2364f56456c41f1c003fc4df14bc8f3596f_8b5c934b659d73212f7707b6bb65bff7",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -28234,11 +28270,15 @@
     },
     {
       "cardNumber": "BATTLE-SPIRITS-A10290",
-      "abilityId": "BATTLE-SPIRITS-A10290#AB_PASSIVE_NONE_LV1_LV2_LV3_e27c4d4b8b5565a459b8428397087c475b24bee2a4570ec544e462596d0b69e7_46b2d516601172efdaf5e35d1f220fba",
-      "reason": "Missing or contradictory IR parameters",
-      "rawText": "The symbol of this card on your Removed Zone is also treated as a symbol on the Field.",
+      "abilityId": "BATTLE-SPIRITS-A10290#AB_MAIN_NONE_LV1_LV2_LV3_56367725d4f1a4967bfe3b5f414b7f5a7a416abee3efb5de9e9acf159bfc348e_acc71c528c2d8ecc32381de8aa61f62d",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
       "irExcerpt": {
-        "op": "DECK_OR_HAND_ACTION"
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -44147,11 +44187,15 @@
     },
     {
       "cardNumber": "BS52-075",
-      "abilityId": "BS52-075#AB_PASSIVE_NONE_LV1_LV2_LV3_9e39beb676d199ab0c30afb9f8ccd074908967fb0e49eab5fd5223eece1ceca0_ef5de25adc4174245b9d9a3b94c16cf6",
+      "abilityId": "BS52-075#AB_MAIN_NONE_LV1_LV2_LV3_3a47da1ca8f3c029d7487bc3042028cae22cb63333d424bc6ebf25da08191cb2_d6df7d76404b7e4ba6fecc460bde5e2e",
       "reason": "Missing semantic test evidence",
-      "rawText": "█ Either player's Grandwalker Nexuses are fixed as having zero symbols.",
+      "rawText": "discard one card from your Hand.",
       "irExcerpt": {
-        "op": "ADD_SYMBOL"
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -44647,12 +44691,26 @@
     },
     {
       "cardNumber": "BS52-054",
-      "abilityId": "BS52-054#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_17af29ac70a7bf89ad446ed2b2731971d2eea1b691e6ec5cd9cf2dd896f1b2f2_720e9dd0f69f5bb4063bc38c48b19055",
+      "abilityId": "BS52-054#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_34945d3303bada21a39180e9b607990ca59a09e2f86ee69449b8ef669bedf42a_3af1baf6f0f59e9cd39240bbb66f346a",
       "reason": "Missing semantic test evidence",
       "rawText": "you can deploy a Blue-only Nexus card from your Trash, without paying the cost.",
       "irExcerpt": {
         "op": "DEPLOY_NEXUS",
         "free": true
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS52-054",
+      "abilityId": "BS52-054#AB_WHEN_ATTACKS_NONE_LV2_LV3_e6eb65b81364d9b474f5dad6a4f4883282f62284067c3c2035558cd0a93f1a61_132a03ec01b8985c9297f0eb5663a721",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -44679,6 +44737,20 @@
         "timing": "WHEN_ATTACKS_OR_BLOCKS"
       },
       "affectedSubsystem": "engine/triggers.js"
+    },
+    {
+      "cardNumber": "BS52-052",
+      "abilityId": "BS52-052#AB_WHEN_SUMMONED_NONE_LV1_LV2_b71d92a80c7a51c264ee871420a045ea92013e808bf15ae8ebb9333e53d427bc_2e1563c05aaa28ddf847e36a5fb9c69e",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
       "cardNumber": "BS52-CP05",
@@ -45157,11 +45229,15 @@
     },
     {
       "cardNumber": "BS52-053",
-      "abilityId": "BS52-053#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_371bf9fc46a97cd33011f069f8204ba1efcf8b1a859e891258e4fbf11e6b26c2_0d7498eb81d6a7d4ef4897ab33725c11",
+      "abilityId": "BS52-053#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_4b84f336a4369e0645aec4c1bb65cc7233d0a4693ac2585ec1fcde5a6b0a2f6d_ca69feb276a0073ae8b6713b14d248e7",
       "reason": "Missing semantic test evidence",
-      "rawText": "if your Life is three or less, and there are three or more Blue \"Primal\" family Spirit cards in your Trash, Attack Step doesn't occur on the next opposing Turn.",
+      "rawText": "discard two cards from your Hand.",
       "irExcerpt": {
-        "op": "GRANT_FAMILY"
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -46136,6 +46212,20 @@
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
+      "cardNumber": "BATTLE-SPIRITS-A4597",
+      "abilityId": "BATTLE-SPIRITS-A4597#AB_ATTACK_STEP_NONE_LV1_LV2_d90e4edaeac17de008b3a8fe52f82772e4413e114f8a494e772d82f59d25a416_20ab44dbb415293d368d680c32b6124d",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.\" with [LV1][LV2] 3000 BP, and can only be destroyed by Grandwalker Nexuses.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
       "cardNumber": "BS53-056",
       "abilityId": "BS53-056#AB_WHEN_SUMMONED_NONE_LV1_LV2_a2df96f6ee8df88f6604e68745e358d1b9cfa3e85e4f834ab04d7ed4cc8045f4_b6e71a824b0f607555e27c8797d39bb9",
       "reason": "Missing semantic test evidence",
@@ -46552,6 +46642,20 @@
       "abilityId": "BS53-065#AB_PASSIVE_NONE_LV2_2ffe4029c5c7c3e646135722f686f6d5e96786b8208135466b93f44e32769bca_6417f703545d595fc569089a4d797cb3",
       "reason": "Missing semantic test evidence",
       "rawText": "When your Red/Purple Spirits are destroyed by opposing effects, by discard a card from your Hand, one of them remains on the Field, exhausted.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS53-064",
+      "abilityId": "BS53-064#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_73b9ec1223cac65143670699e1513f8c411f5ae30699a82900fcc88adaf19582_d10a16f26c6d393eb6d504debc2598b0",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
       "irExcerpt": {
         "op": "DISCARD_HAND",
         "count": 1,
@@ -47493,11 +47597,27 @@
     },
     {
       "cardNumber": "BS54-078",
-      "abilityId": "BS54-078#AB_PASSIVE_NONE_LV1_LV2_LV3_0c45f0415c86a0995ec4dc8bb7092af5c7f333f8946c9a8f4b2c9bd3633c1f56_9e368586292ac4c6757336271e2b63af",
+      "abilityId": "BS54-078#AB_PASSIVE_NONE_LV1_LV2_LV3_e85fdf0078a519298b02649626b60557a3eb49311cb73f420b8470e84ad6f782_a63f9229ec8d05d90c0f9ac6b87819ec",
       "reason": "Missing semantic test evidence",
       "rawText": "This card has \"Primal\" family.",
       "irExcerpt": {
-        "op": "GRANT_FAMILY"
+        "op": "GRANT_FAMILY",
+        "family": "Primal",
+        "side": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS54-078",
+      "abilityId": "BS54-078#AB_MAIN_NONE_LV1_LV2_LV3_c7f9f5bec57df68119f0683e614dd8fe8f01dcc5ab951b32868230a930edaf38_8f6388fc4b9c6ebf9bf82fdc57bd24b8",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -47635,13 +47755,27 @@
     },
     {
       "cardNumber": "BS54-066",
-      "abilityId": "BS54-066#AB_WHEN_REBORN_NONE_LV1_eacf40b1742facb742071040061ae8766599c52611020a82d7ab84b780a9337b_d1cd177b796d6d53b6aa7e0acf72f348",
+      "abilityId": "BS54-066#AB_WHEN_REBORN_NONE_LV1_8f65895eeb70242f0433d6a8def353e8a99b59e18226e30485546dcc65691ddd_3f05991b8cfc5be5f217b42dcae89f61",
       "reason": "Unverified trigger timing",
       "rawText": "Destroy an opposing Spirit with the highest cost and an opposing Ultimate with the highest cost.",
       "irExcerpt": {
         "timing": "WHEN_REBORN"
       },
       "affectedSubsystem": "engine/triggers.js"
+    },
+    {
+      "cardNumber": "BS54-066",
+      "abilityId": "BS54-066#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_0fb6568549fb94e43eee0454142b883d892b50a4ce5cd4a2ee59df14a5ef8668_295beb588ac812ce2fb748bb7952547f",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
       "cardNumber": "BS54-074",
@@ -48690,11 +48824,15 @@
     },
     {
       "cardNumber": "BS54-054",
-      "abilityId": "BS54-054#AB_PASSIVE_NONE_LV1_LV2_LV3_15efedaddb87e6bb11475e72e233555996c67e51264fd2a5618bc73ef3e33071_a3cf3568872fcee13cfc9a3bac9ed3ae",
-      "reason": "Missing or contradictory IR parameters",
-      "rawText": "When this card in Hand would be discarded by your \"WBS\"-named Spirit effect/exactly-named \"Grandwalker Lakshmi\"'s effect, instead of sending it to Trash, you can put it onto the Removed Zone.",
+      "abilityId": "BS54-054#AB_WHEN_SUMMONED_NONE_LV1_LV2_4a1cc1b854c2e25350fd725f8c4513235c13249326f23054ab74a3d7c86baeff_baa79bebe38c17fe6118e29e95383353",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
       "irExcerpt": {
-        "op": "DECK_OR_HAND_ACTION"
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -48719,23 +48857,39 @@
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
-      "cardNumber": "BS54-052",
-      "abilityId": "BS54-052#AB_WHEN_SUMMONED_NONE_LV1_LV2_9eda064adbe7fb527ff6a1f464aaa2e3c1f4af4b7954499b5260fb3a8666a3a7_94c0f9e54ce930e45693f9befb8b30c6",
-      "reason": "Missing semantic test evidence",
-      "rawText": "You can reveal two cards from your decktop.",
+      "cardNumber": "BS54-056",
+      "abilityId": "BS54-056#AB_PASSIVE_NONE_LV1_LV2_LV3_017415b0786d4e3ccb37d0912a69e96ac868c1c6c35c0f542e7cbe064211e781_9eb328b39a075ae5b4c08790630be6dd",
+      "reason": "Unsupported operation variant",
+      "rawText": "When your \"WBS\"-named Spirits would leave the Field due to an opposing effect, you can pay one cost to summon a \"WBS\"-named Spirit card from your Removed Zone.",
       "irExcerpt": {
-        "op": "REVEAL_DECKTOP",
-        "count": 2
+        "op": "SUMMON",
+        "from": "removed",
+        "side": "self",
+        "count": 1,
+        "upTo": false,
+        "filter": {
+          "types": [
+            "Spirit"
+          ],
+          "nameIncludes": "WBS"
+        },
+        "free": false,
+        "costCores": 1,
+        "isOptional": false
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
-      "cardNumber": "BS54-052",
-      "abilityId": "BS54-052#AB_TURN_TRIGGER_NONE_LV2_2366558c71536a483744756ae98a9e35868255ceaa676b0777ca733c1dc5e5d7_b41228259ecc019f3c336c5f3d7530e4",
+      "cardNumber": "BS54-056",
+      "abilityId": "BS54-056#AB_WHEN_ATTACKS_NONE_LV2_LV3_5366c7a61dd8a97e450e6c2e336a36ce6354384d71c975ba5854d464903a57e4_cb38f7fde98a5ba17560c9dcad6646d7",
       "reason": "Missing semantic test evidence",
-      "rawText": "You can add an exactly-named \"Grandwalker Lakshmi\" revealed from deck by this Spirit's effect to the Hand.",
+      "rawText": "discard a card from your Hand.",
       "irExcerpt": {
-        "op": "ADD_TO_HAND"
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -49355,7 +49509,7 @@
     },
     {
       "cardNumber": "BS55-TCP03",
-      "abilityId": "BS55-TCP03#AB_WHEN_REBORN_NONE_LV1_LV2_64439b580c3779db4a750fb313cb11dd5763124aa8a74642f7c4c073e310e125_e0209bd903c519c83c87e9161dfcc680",
+      "abilityId": "BS55-TCP03#AB_WHEN_REBORN_NONE_LV1_LV2_1dc6c1063f9629b1419c698e57749bfb5b7bdfa38948afcd8297fa4d1cc28474_452531ac5ef2b2304485dae0c268ac8e",
       "reason": "Unverified trigger timing",
       "rawText": "Draw two cards, then discard at least one card from your Hand. For each card discarded by this effect, put a core from the Void to this Nexus.",
       "irExcerpt": {
@@ -50342,7 +50496,21 @@
     },
     {
       "cardNumber": "BS55-061",
-      "abilityId": "BS55-061#AB_WHEN_ATTACKS_OR_DESTROYED_NONE_LV2_ae4f310f42f83c6816a2912a7b3a2a416506a6f51b66f4aa72bd4565300ecea3_8f8f1f9fa2c8bf1bbabbee6ad51a790c",
+      "abilityId": "BS55-061#AB_WHEN_SUMMONED_NONE_LV1_LV2_594bbe58f0f56bd21a1d2265285de7315c50f5cbf427f6a669663b9addf90b2b_b3364970c724caca6bf03e0824744a3f",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS55-061",
+      "abilityId": "BS55-061#AB_WHEN_ATTACKS_OR_DESTROYED_NONE_LV2_e50e41bc96cbf9cd4f93025f59dd21ff97a006c3589a068cec1c5c54badf7965_3a11b12397e96e12a554856900f1468c",
       "reason": "Unverified trigger timing",
       "rawText": "You can deploy a \"HeavenlyDemon\"-named Grandwalker Nexus card from your Trash without paying the cost.",
       "irExcerpt": {
@@ -50898,13 +51066,27 @@
     },
     {
       "cardNumber": "BS56-X09",
-      "abilityId": "BS56-X09#AB_PASSIVE_NONE_LV1_LV2_LV3_f9f08367382f09ad722b8ed492f96200793fb62ff66fc30ecd23e8a49419238a_024b229aba00b5c0ace5ea07d46c4f42",
+      "abilityId": "BS56-X09#AB_PASSIVE_NONE_LV1_LV2_LV3_7e1dd7608a567189188a375405f770b625e6b23ef1f9d6ff5f55f4f7e036db3d_94756ce4323526038c12827765ed0a72",
       "reason": "Missing semantic test evidence",
       "rawText": "When activated via this effect, instead of summoning it, discard it, and after this Burst activates, you can set a Burst card from your Hand.",
       "irExcerpt": {
         "op": "DISCARD_HAND",
         "chooser": "self",
         "isCost": false
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS56-X09",
+      "abilityId": "BS56-X09#AB_BURST_NONE_LV1_LV2_LV3_8377e19e0935a5e732f65b4fa56d4fbd45d23b6a1be09c4863c2032f4897670f_c7ea23abbf585b5390ee9bd4ab86c842",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -50953,7 +51135,21 @@
     },
     {
       "cardNumber": "BS56-059",
-      "abilityId": "BS56-059#AB_WHEN_ATTACKS_NONE_LV2_LV3_31696132bf2ffaf9be83890d2689dceed75046995bf5613cc5f6c8f540cb2cc5_c9505cd8b38276057c85164beda36222",
+      "abilityId": "BS56-059#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_63400a3864534f15132d457d030273a89275a56bcbc4008bd3ae2f4e3b68af3d_e2a0befc4569ad8a17ed29a1a5830747",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS56-059",
+      "abilityId": "BS56-059#AB_WHEN_ATTACKS_NONE_LV2_LV3_3d051e9a496527c5b7d2753c0b63fb1ff388887ee94d43db2d9138e5c8379470_877d39062ffa001698eebf7362139483",
       "reason": "Missing semantic test evidence",
       "rawText": "By discarding a \"Pirate\"-named card from your Hand",
       "irExcerpt": {
@@ -51396,7 +51592,7 @@
     },
     {
       "cardNumber": "BS56-056",
-      "abilityId": "BS56-056#AB_WHEN_REBORN_NONE_LV1_LV2_LV3_082077a6e94e0385472bcb08f887f2b5369f65277dbb9062007cd9a63f899095_d088597031d07ee2900e0f5c1f8d1b8b",
+      "abilityId": "BS56-056#AB_WHEN_REBORN_NONE_LV1_LV2_LV3_7610212bb2ef86b1769fcd17ada5fdb4f4ba83e45b0ad7856f8bc34755cc7354_2cf554ab947b87507cdd78b96a333704",
       "reason": "Unverified trigger timing",
       "rawText": "draw two cards, then discard two cards from your Hand.",
       "irExcerpt": {
@@ -51406,7 +51602,7 @@
     },
     {
       "cardNumber": "BS56-056",
-      "abilityId": "BS56-056#AB_ATTACK_STEP_NONE_LV2_LV3_955a15a5615e5f2321a9f9ad844e3951752e07f578cee5ffef4141b1de6deb8f_641c706b4cec3eba6853f23e09185a8f",
+      "abilityId": "BS56-056#AB_ATTACK_STEP_NONE_LV2_LV3_00bfc0e67a0baabe120469b8edb0524e4ed15a94da83b8543ee5b5d96c64cc80_67acc097bd57bcadc3f71b2d19811a54",
       "reason": "Missing semantic test evidence",
       "rawText": "when any \"Chrownos\" family card is discarded from your Hand, you can refresh a \"Chrownos\" family Spirit you control.",
       "irExcerpt": {
@@ -51841,11 +52037,15 @@
     },
     {
       "cardNumber": "BS56-054",
-      "abilityId": "BS56-054#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_36282f666576f46cec5a5fa3ffddf920c5f83997c3416e36e168ce6f77f00008_826d7a0a4f4aec9491c1ab778d5090df",
+      "abilityId": "BS56-054#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_df13eda2a51c9a30d08432b572791f0e07e7d924a06fea6c225b1722cf504017_5c1def34493505c4f4a1e4ecb69a11e3",
       "reason": "Missing semantic test evidence",
-      "rawText": "The symbol of every attacking Cost 6 or less Spirit with (When Summoned/Reborn) effects are fixed as zero.",
+      "rawText": "discard two cards from your Hand.",
       "irExcerpt": {
-        "op": "COST_MODIFIER"
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -53493,11 +53693,28 @@
     },
     {
       "cardNumber": "BS57-054",
-      "abilityId": "BS57-054#AB_ATTACK_STEP_NONE_LV2_24d36b1f6745c1fcf0ae614d80fc377b2b9f0080bdc12ab53df6c067ceff724b_a2d0a6ceada455af4ac4eff8e2d29b35",
+      "abilityId": "BS57-054#AB_WHEN_ATTACKS_NONE_LV1_LV2_3962224731606c6503e16adc40f403cf853c84d29a361afc31bd44ae08ae1637_f97563c8d0d5492eb668ff59a5447d61",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS57-054",
+      "abilityId": "BS57-054#AB_ATTACK_STEP_NONE_LV2_64ac80d2e72e0611d241a19e896c94688895ccc5c40aa5782ec88ae48dda7582_200921f12d5893fb32db0b291d98c3b2",
       "reason": "Missing semantic test evidence",
       "rawText": "When your \"Lombardia\" Spirit attacks, if that target has three or less symbols, during this turn, that target gains an extra Blue symbol.",
       "irExcerpt": {
-        "op": "ADD_SYMBOL"
+        "op": "ADD_SYMBOL",
+        "color": "Blue",
+        "count": 1,
+        "side": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -54088,7 +54305,7 @@
     },
     {
       "cardNumber": "BS58-X07",
-      "abilityId": "BS58-X07#AB_END_OF_TURN_NONE_LV1_LV2_LV3_e8f68a4f9c860f43c9909f8d964ef77c930c36e88bc05fa762854f9d7f34fbe5_75d51d2409a497e9307902bb3b10773d",
+      "abilityId": "BS58-X07#AB_END_OF_TURN_NONE_LV1_LV2_LV3_54d590c64e98bf57782ad73141811aec00437c35f5f16cc846b5308667bd2e04_89b5155a54caf47c1df101aff555549e",
       "reason": "Unverified trigger timing",
       "rawText": "You can discard three cards from the opposing decktop.",
       "irExcerpt": {
@@ -54098,11 +54315,13 @@
     },
     {
       "cardNumber": "BS58-X07",
-      "abilityId": "BS58-X07#AB_WHEN_ATTACKS_NONE_LV2_LV3_0cf9e6968433ed22f8385ae2d72360c3ad16cfd274d42fdeb3b67e83de368fcf_8c5c1140920268a8dc187a7eb08c71bb",
+      "abilityId": "BS58-X07#AB_WHEN_ATTACKS_NONE_LV2_LV3_6dabe4cb137171b3064f657248906e53f89104ea9ba21428bcd98c12efd7eae2_ba5311761a478198da80a8cdc0d528de",
       "reason": "Missing semantic test evidence",
-      "rawText": "For each two Blue \"Proximate\"/\"Astroblazer\" family Spirits you control, this effect discards -1 card.",
+      "rawText": "discard five cards from your Hand.",
       "irExcerpt": {
-        "op": "GRANT_FAMILY"
+        "op": "DISCARD_HAND",
+        "chooser": "self",
+        "isCost": false
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -54640,11 +54859,29 @@
     },
     {
       "cardNumber": "BS58-053",
-      "abilityId": "BS58-053#AB_WHEN_SUMMONED_NONE_LV1_LV2_f772a990356948b5152f1d97f037af9292479d834686233eec00465e8ad97014_6fc1d2baadb1ab44e050a2f0e590ec3e",
-      "reason": "Missing or contradictory IR parameters",
-      "rawText": "If you have a Mirage set, reduce the number of cards to be discarded by this effect by -1.",
+      "abilityId": "BS58-053#AB_WHEN_SUMMONED_NONE_LV1_LV2_d0878451842114e1d79affaef0466c9c6b87ae11692a374881547bd62e87ab8a_66ffe8318e9951b87d3e88944b248211",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
       "irExcerpt": {
-        "op": "MODIFY_EFFECT_VALUE"
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS58-053",
+      "abilityId": "BS58-053#AB_WHEN_ATTACKS_NONE_LV2_d1676f9223056d2cf84a894e793767118510f8b83bcb95e9d10e28f615ad8d38_9bfc6675514b2ceed289dc7b315a21bc",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -54757,7 +54994,7 @@
     },
     {
       "cardNumber": "BS58-083",
-      "abilityId": "BS58-083#AB_PASSIVE_NONE_LV1_LV2_LV3_682a0c835fc7c398924de838fafe97e72237e1b38bc9f8bfe9f305b340e1511f_ef0d185386c996d5d445b6e04d41f7a0",
+      "abilityId": "BS58-083#AB_PASSIVE_NONE_LV1_LV2_LV3_8d4394884e5be365de68fbbd3d6d3b2e72883886188e7a52ea406d0c9cb3ab98_6d24fd69a1c97d40c7495a68629b60f1",
       "reason": "Missing semantic test evidence",
       "rawText": "Your \"opposing deck discarding\" effects discard +1 card.",
       "irExcerpt": {
@@ -54768,11 +55005,15 @@
     },
     {
       "cardNumber": "BS58-083",
-      "abilityId": "BS58-083#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_a8726702603b128eee770c0532f6d15ec32dae4d9aacdd0bd909f530ba1704b8_30892a608ad487046a8ed9d7ab2fec39",
-      "reason": "Missing or contradictory IR parameters",
-      "rawText": "By discarding this Mirage",
+      "abilityId": "BS58-083#AB_MAIN_NONE_LV1_LV2_LV3_f92d8a9db22072d6e9fc98e3a2acf218d07f917f6c3a936444f343e3e5096a6f_a9e73c69eb88c68ebffda82c13897d9d",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
       "irExcerpt": {
-        "op": "DISCARD_MIRAGE_COST"
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -55868,6 +56109,20 @@
       "rawText": "during this turn, the symbols of every opposing LV1 Spirits are fixed as zero.",
       "irExcerpt": {
         "op": "ADD_SYMBOL"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS59-071",
+      "abilityId": "BS59-071#AB_PASSIVE_NONE_LV1_0c31fc6a2f071a57ead0f22348744549dccfb0dba8e51bff29da00f5f2638742_95ce0174344152bba9bf09980a6a58e5",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -57060,22 +57315,7 @@
     },
     {
       "cardNumber": "BS60-065",
-      "abilityId": "BS60-065#AB_WHEN_SUMMONED_NONE_LV1_LV2_4c95193422accc8543c77ef79ab693d9b06d262ee8631de5abbc664ef82777f0_1d88813a59a0cf1830d450465fa8b94a",
-      "reason": "Unverified target semantics",
-      "rawText": "including being pre-advent, for each Blue Contract Spirit you control, destroy an opposing Grandwalker Nexus with two symbols originally.",
-      "irExcerpt": {
-        "op": "DESTROY",
-        "count": 1,
-        "target": {
-          "side": "either"
-        },
-        "isCost": false
-      },
-      "affectedSubsystem": "engine/selectors.js + compiler"
-    },
-    {
-      "cardNumber": "BS60-065",
-      "abilityId": "BS60-065#AB_WHEN_ATTACKS_NONE_LV1_LV2_8a8386b142f5d58faee30e42f0a47a9865d88212f8697c0fa43b1e91234f52f0_c34915b55080a518adcbd664647dc2aa",
+      "abilityId": "BS60-065#AB_WHEN_ATTACKS_NONE_LV1_LV2_dc3234d69e0f919daf906ed7c70c62a9b58a41c3ad041b9b13abeb3ebe49dde3_8c2ffcb907937ec9c658ddd895a513ec",
       "reason": "Missing semantic test evidence",
       "rawText": "You can deploy an \"Azure Wave\" family Nexus card from your Trash, without paying the cost.",
       "irExcerpt": {
@@ -57105,6 +57345,20 @@
       "irExcerpt": {
         "op": "DISCARD_HAND",
         "count": "ALL",
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS60-063",
+      "abilityId": "BS60-063#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_f518e936ae910663a2e80f66d57ce792307a6df6d1d1b9d6abcfd7c8a40700b8_6187d0006ccfde31b2b77abc3e6d5eb8",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
         "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
@@ -57249,6 +57503,20 @@
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
+      "cardNumber": "BS60-061",
+      "abilityId": "BS60-061#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_947ef9c8419e7bf27b0a089b1719a2cb893b6374787d5e7f5c44fc3633db8748_9d6fae2c8a0527ad896f7a07ec8d7acb",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
       "cardNumber": "BS60-003",
       "abilityId": "BS60-003#AB_WHEN_SUMMONED_NONE_LV1_LV2_5f899b356247f516c292164c0c1885509d1965fca9d23d3b2452136f13adea84_0056c17cb38f2d904fd0264666d9b938",
       "reason": "Unverified target semantics",
@@ -57312,6 +57580,20 @@
       "rawText": "If you control any \"The PartnerMachine Stark\", including being in Soul State/pre-advent condition, your counter can +1.",
       "irExcerpt": {
         "op": "COUNT_OPERATION"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS60-096",
+      "abilityId": "BS60-096#AB_MAIN_NONE_LV1_LV2_LV3_a03d71fbd62bb3d21fc40871d7c0056fc3faa755d07eadf25087f346c4dc416a_dda4cf790c754deaf74d87a88d6e239f",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -58135,13 +58417,27 @@
     },
     {
       "cardNumber": "BS60-CX06",
-      "abilityId": "BS60-CX06#AB_TURN_TRIGGER_NONE_LV1_LV2_3cc495fed02e0c7ec0ab1c8ba889862d45258c041e0d7ac3b062e6a6707af984_c8eb955b994511bd1f67f10d278fe467",
+      "abilityId": "BS60-CX06#AB_TURN_TRIGGER_NONE_LV1_LV2_25fb0774048ff066c5c73ed23fe9d4c8fa67d2387830c3bc192d3a72976b8c66_1c977e9a1b43a598ecf400de04f09098",
       "reason": "Missing semantic test evidence",
       "rawText": "Reduce the number of cards to be discarded from your Hand by your \"Azure Wave\" family Spirit effect by -1.",
       "irExcerpt": {
         "op": "DISCARD_HAND",
         "chooser": "self",
         "isCost": false
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS60-CX06",
+      "abilityId": "BS60-CX06#AB_WHEN_ATTACKS_NONE_LV1_LV2_e7825dbba9cc6a44957327783a4aed7772efbe92b09b1f9231d66c402dcd6df5_77fb9b1febe45c29ea5aaedbd63cb64f",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -59443,6 +59739,20 @@
       "affectedSubsystem": "engine/triggers.js"
     },
     {
+      "cardNumber": "BS62-053",
+      "abilityId": "BS62-053#AB_WHEN_SUMMONED_NONE_LV1_LV2_7538c02004b579ab12011b8ba3268488127b66d980d694a7284f8ade25e6bb86_0acc11099e57df9486da8d3c76ff6f01",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
       "cardNumber": "BS62-045",
       "abilityId": "BS62-045#AB_PASSIVE_NONE_LV2_231e7ba4dfc28b1168106c98a9db019b1fcebc198795a50c288fa868bcca1668_9beb6a51df84c10dd7f8f7c0863a32e5",
       "reason": "Unverified target semantics",
@@ -59990,11 +60300,28 @@
     },
     {
       "cardNumber": "BS62-056",
-      "abilityId": "BS62-056#AB_PASSIVE_NONE_LV1_LV2_LV3_6c424a97103114418c5bcc108a501810c76b77ae5dcd696e4b85c6a735606b24_ea53b0d95e59ae55cd9fe8da19b61bf7",
+      "abilityId": "BS62-056#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_192339cc5386aa6404cc4a7ac7c081bf586d5e7a1081a04ed864abf39d7a6092_1a4d0178d8740010a86ab8aa7ba94896",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS62-056",
+      "abilityId": "BS62-056#AB_PASSIVE_NONE_LV1_LV2_LV3_f2f2cb2efe43ac837af6e82788e70370676a21eaa5b3fa46f590310a79d40472_a765a93a18a09ecf7e701230956a848e",
       "reason": "Missing semantic test evidence",
       "rawText": "if you have seven counters or more, during this battle, this Spirit gains an extra Blue symbol.\"",
       "irExcerpt": {
-        "op": "ADD_SYMBOL"
+        "op": "ADD_SYMBOL",
+        "color": "Blue",
+        "count": 1,
+        "side": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -60877,6 +61204,20 @@
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
+      "cardNumber": "BS63-069",
+      "abilityId": "BS63-069#AB_WHEN_ATTACKS_NONE_LV2_2104aaa66ff63cda8e1619fc7d1d3f07114524fd19170a862235df818fb7cf59_f4b1eb037219511f144de68a46074fb3",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
       "cardNumber": "BS63-X03",
       "abilityId": "BS63-X03#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_36282f666576f46cec5a5fa3ffddf920c5f83997c3416e36e168ce6f77f00008_826d7a0a4f4aec9491c1ab778d5090df",
       "reason": "Missing semantic test evidence",
@@ -61240,6 +61581,20 @@
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
+      "cardNumber": "BS63-071",
+      "abilityId": "BS63-071#AB_WHEN_SUMMONED_NONE_LV1_LV2_ed6d469157bd50ebb9c0a84263cc6e90840f254e36bb4c5d2b0e2a9367f4ffcc_525d1166914cd4a29a23a343cc303bac",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
       "cardNumber": "BS63-070",
       "abilityId": "BS63-070#AB_WHEN_SUMMONED_NONE_LV1_LV2_549c94777f1e0944e5531b1fb18cdd9443fece04a62866cdfb7601b6653c3a05_e4f85173f3641dc6f030327eb94fd50b",
       "reason": "Missing semantic test evidence",
@@ -61318,12 +61673,15 @@
     },
     {
       "cardNumber": "BS63-072",
-      "abilityId": "BS63-072#AB_WHEN_SUMMONED_NONE_LV1_LV2_d9fc1b1a67f838ba7e0f7f820423b0e771fbe63e5109d3899564c02dff9fc762_ccd9cc8d6fd0f571864cf0f1500db16f",
+      "abilityId": "BS63-072#AB_WHEN_SUMMONED_NONE_LV1_LV2_763d7532aa75b2174a6eabb7bea6c005d994c0bc5478a6f0485c13241ce02aa7_175c986b8e319491d8ac251d302a398d",
       "reason": "Missing semantic test evidence",
-      "rawText": "When this effect discards any \"Azure Wave\" family Nexus card, you can deploy one of those cards without paying the cost.",
+      "rawText": "discard three cards from your Hand.",
       "irExcerpt": {
-        "op": "DEPLOY_NEXUS",
-        "free": true
+        "op": "DISCARD_HAND",
+        "count": 3,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -61961,18 +62319,36 @@
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
-      "cardNumber": "BS64-X09",
-      "abilityId": "BS64-X09#AB_PASSIVE_NONE_LV1_LV2_LV3_df693a437102068472e5ef5ac3de7db105a3b8c04b4b5f9722cc4bd5667da55a_a2b87e66df2d9e979adc7f44f47a552d",
-      "reason": "Missing or contradictory IR parameters",
-      "rawText": "When braving with the target, you can activate the following effect:",
+      "cardNumber": "BS64-X05",
+      "abilityId": "BS64-X05#AB_WHEN_ATTACKS_NONE_LV2_21a37312eb0f537ff28232bcd8ab367ae8092dbe2515a4069d32e4b7beac1888_112882a3fdb367ed2e350505f4891d4d",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
       "irExcerpt": {
-        "op": "BRAVE_EFFECT_ACTIVATION"
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
       "cardNumber": "BS64-X09",
-      "abilityId": "BS64-X09#AB_PASSIVE_NONE_LV1_LV2_LV3_9a3d0e891ef6c8ea27ab0b094211a0c611bf4432f6c2ebc39fe100bad1422c1c_84878674a75e1fb9f493952f26f33877",
+      "abilityId": "BS64-X09#AB_PASSIVE_NONE_LV1_LV2_LV3_449e1382429284c5abf529ff3f6320ab75f2a88d280921bfda234dab32d3f1d6_37fe159df59fedfcd7b3e7f2115b22e8",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS64-X09",
+      "abilityId": "BS64-X09#AB_PASSIVE_NONE_LV1_LV2_LV3_2da93170e32d681da9453b6e3c9ffabe1cdc37944bbe44d75983f138d2b886d4_e4a9bc02510be6d0b1f9a39a708fe1c9",
       "reason": "Missing semantic test evidence",
       "rawText": "This Spirit is unaffected by opposing Red/Purple effects.",
       "irExcerpt": {
@@ -61983,7 +62359,7 @@
     },
     {
       "cardNumber": "BS64-X09",
-      "abilityId": "BS64-X09#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_803225a44d542add23c6d32e99acfbd18c9fbb4008dbf1ba42032c40a38d4b07_6aaf5c17647947abac4bad8442e0d670",
+      "abilityId": "BS64-X09#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_LV3_f3d304786ad9b66bd3a9e0fca11ce52a1b4174c636401525fa19e6c35206d429_ed22f169d28b6fa28707cf0fd646fc4c",
       "reason": "Unverified trigger timing",
       "rawText": "while braved to a \"Zero Contract\" family Spirit, if you have seven counters or more, this Spirit can refresh.",
       "irExcerpt": {
@@ -62231,6 +62607,20 @@
         "op": "SET_RESTRICTION",
         "restriction": "PREVENT_MAGIC",
         "side": "opp"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS64-051",
+      "abilityId": "BS64-051#AB_WHEN_SUMMONED_NONE_LV1_LV2_4110cd906556b9881266e3ec7f61b90a884a4318f901a72468a484765921d838_62b0e075187c56e5af012f35f7777606",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -62506,6 +62896,20 @@
           ]
         },
         "destination": "DECK"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS64-053",
+      "abilityId": "BS64-053#AB_WHEN_SUMMONED_NONE_LV1_LV2_e98a87526de307e3f1aee3ccbf0354bc84d67069364f6735b981db4743964ba1_8528d89bad591b77bf9a15669bb9425e",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -63113,17 +63517,32 @@
     },
     {
       "cardNumber": "BS65-089",
-      "abilityId": "BS65-089#AB_PASSIVE_NONE_LV1_LV2_LV3_d469d75d3fc0ec1b2399e224ac11b270c167b63161890635a5d51613c510bc01_74e36a848bedbba161716c664df0bcd1",
-      "reason": "Unverified target semantics",
+      "abilityId": "BS65-089#AB_PASSIVE_NONE_LV1_LV2_LV3_f18bfef355280a2a6e23d094f70c642bc0106264bef44623d5d48e95bb7b3dde_67bd426e94ee9e819297c48a773d5f62",
+      "reason": "Missing semantic test evidence",
       "rawText": "When cards are discarded from the opposing deck via the effect of your \"The Artificial Partner, Reve\", including those that are in pre-advent condition, you can return this card from the Trash to the Hand.",
       "irExcerpt": {
-        "op": "BOUNCE",
+        "op": "SALVAGE",
+        "target": "this_card",
+        "from": "trash",
+        "destination": "HAND",
         "count": 1,
-        "target": {
-          "side": "either"
-        }
+        "isOptional": false
       },
-      "affectedSubsystem": "engine/selectors.js + compiler"
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS65-089",
+      "abilityId": "BS65-089#AB_MAIN_NONE_LV1_LV2_LV3_1dc7aa3aedce8f93b187b006454d1719cd80847f5fbcd3e8de13a66540e4cd97_4262c0902a281275a5ccfd588ef5be9b",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
       "cardNumber": "BS65-040",
@@ -63270,6 +63689,20 @@
       "irExcerpt": {
         "op": "MILL_DECK",
         "side": "opp"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS65-044",
+      "abilityId": "BS65-044#AB_BURST_NONE_LV1_LV2_LV3_1d705f46ed46595b96a04c8999a90ffadf81d42c877806a1270eebeff07ef65f_b925ee6efcc23938ed4fa80b31a91dfd",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -63840,6 +64273,20 @@
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
+      "cardNumber": "BS65-042",
+      "abilityId": "BS65-042#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_e7135a947ab196f79a949eaa20965bc2241ff2234da804669ac01975bbccedc3_2cca04178ef98fa14f88e4327bb07b4b",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
       "cardNumber": "BS65-039",
       "abilityId": "BS65-039#AB_PASSIVE_NONE_LV1_LV2_LV3_7e77ed9cb155ba4a3add3229f17c5b21fcfcce8974e970c5cb2f188303e4baa8_d1cbc48bb13fd4633144236d9c7c3c8d",
       "reason": "Missing semantic test evidence",
@@ -64143,6 +64590,20 @@
       "rawText": "By discarding two facedown cards under your \"The PartnerBurai Vrick\"",
       "irExcerpt": {
         "op": "DISCARD_UNDERNEATH_COST"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS66-085",
+      "abilityId": "BS66-085#AB_MAIN_NONE_LV1_LV2_LV3_d101cf0d16a02aef9bd6b07b5fd2a5d5f866646c646724321fe35e21c2236b9e_3d3996b0bb9a2861d5be7610b7c3df3e",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -64883,12 +65344,30 @@
       "affectedSubsystem": "engine/triggers.js"
     },
     {
-      "cardNumber": "BS66-050",
-      "abilityId": "BS66-050#AB_WHEN_SUMMONED_NONE_LV1_LV2_a282d139448117a13f4b0a84f100b913e90d422ab786f510a538ba0a5e33d4d3_e6b73387b7c49920a2aea4ce5d6f36cf",
-      "reason": "Missing or contradictory IR parameters",
-      "rawText": "Including being in Soul State/pre-advent condition, for each \"Petit Shack\" you control, this effect discards -1 cards.",
+      "cardNumber": "BS66-X07",
+      "abilityId": "BS66-X07#AB_WHEN_ATTACKS_NONE_LV1_LV2_7e5a5973469e160e6fb94875d070e3bf745a64265ad5593b1246bc0465d21ab7_39893b5b3125160a36ca5ae8870e293d",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard three cards from your Hand.",
       "irExcerpt": {
-        "op": "MODIFY_EFFECT"
+        "op": "DISCARD_HAND",
+        "count": 3,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS66-050",
+      "abilityId": "BS66-050#AB_WHEN_SUMMONED_NONE_LV1_LV2_cd8de624cea2d2938e75f30fd75a897136e5f2cb261873bc43d61ab8cf94ea3f_fee8017a7c57ff2dad9a2cf2d473dc6e",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard three cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 3,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -65297,11 +65776,15 @@
     },
     {
       "cardNumber": "BS66-CX03",
-      "abilityId": "BS66-CX03#AB_WHEN_ATTACKS_NONE_LV1_LV2_b511e411e0c713daebca48f59e57bfdfeef31091cea574b76008b2a48497941e_61caeadcbd908df42a2bb2e107276c5c",
+      "abilityId": "BS66-CX03#AB_PASSIVE_NONE_LV1_LV2_f34876301c84438ab38161bbbc78ad31c5ae4a17b3d03823ec9b77608825d42a_f4710882cb09f0f61c97cec344f41d7a",
       "reason": "Missing semantic test evidence",
-      "rawText": "For each 4 cost this Spirit has, this effect banishes +1 card.",
+      "rawText": "discard a card from your Hand.",
       "irExcerpt": {
-        "op": "COST_MODIFIER"
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -65729,13 +66212,15 @@
     },
     {
       "cardNumber": "BS67-051",
-      "abilityId": "BS67-051#AB_WHEN_ATTACKS_NONE_LV2_76bbd25fe4aa84959373c85738c3b98d6bbff110fec00edd78e24dcdd37946a0_78fbecb70e88e5d6b1eba40db45c30a1",
+      "abilityId": "BS67-051#AB_WHEN_ATTACKS_NONE_LV2_8c66bda89d56b6871f18844147affa29eede6f29cce6e8ae3c5ad5db35e8045f_e47f4aeb65963f2c6b0fbd9d34615263",
       "reason": "Missing semantic test evidence",
-      "rawText": "Including being in Soul State/pre-advent condition, if you control any \"The Artificial Partner, Reve\", this effect discards -1 card from your Hand.",
+      "rawText": "discard two cards from your Hand.",
       "irExcerpt": {
         "op": "DISCARD_HAND",
-        "chooser": "self",
-        "isCost": false
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -65921,7 +66406,21 @@
     },
     {
       "cardNumber": "BS67-076",
-      "abilityId": "BS67-076#AB_ATTACK_STEP_NONE_LV1_81486379b19918b3d7f7e3d0324a32475ddbda3ddd9a89d93d3a799b89bffe85_e10ddd5287ff4585393c61858bdd85c2",
+      "abilityId": "BS67-076#AB_FLASH_NONE_LV1_LV2_LV3_0855cbf58b3d805e22f6a7281d4c2caf4dbd57f7cca575836b55b4860af4da37_44cd926271f7d15c92143b505d267bd5",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS67-076",
+      "abilityId": "BS67-076#AB_ATTACK_STEP_NONE_LV1_d18232c4e819eb7880ac28ce87a6513a956f2c6139b9745beb1db9a19b045e22_8587ca5ffe18e6753d4b7b4b788531d5",
       "reason": "Missing semantic test evidence",
       "rawText": "When your Spirits would leave the Field due to the opponent, you can summon/deploy/use a face-up \"Golden Cloud\" family card from your deck.",
       "irExcerpt": {
@@ -66268,6 +66767,20 @@
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
+      "cardNumber": "BS67-048",
+      "abilityId": "BS67-048#AB_WHEN_SUMMONED_NONE_LV1_LV2_ed6d469157bd50ebb9c0a84263cc6e90840f254e36bb4c5d2b0e2a9367f4ffcc_525d1166914cd4a29a23a343cc303bac",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
       "cardNumber": "BS67-054",
       "abilityId": "BS67-054#AB_WHEN_SUMMONED_NONE_LV1_LV2_549c94777f1e0944e5531b1fb18cdd9443fece04a62866cdfb7601b6653c3a05_e4f85173f3641dc6f030327eb94fd50b",
       "reason": "Missing semantic test evidence",
@@ -66305,6 +66818,20 @@
       "rawText": "Including being in pre-advent condition, you can activate one of the Flash effects of your \"The PartnerLion Raon\", ignoring the \"once per turn\".",
       "irExcerpt": {
         "op": "ACTIVATE_EFFECT_ACTION"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS67-055",
+      "abilityId": "BS67-055#AB_WHEN_SUMMONED_NONE_LV1_LV2_0c85cb55bf0ef6f537789bbe877e3d347b5d40fae016468610cf5ed66bba09a7_afcedd3ccbb2aca1508e40d86a503e25",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -68128,11 +68655,25 @@
     },
     {
       "cardNumber": "BS69-089",
-      "abilityId": "BS69-089#AB_PASSIVE_NONE_LV1_LV2_LV3_476878b36546cff5981b5b23eefd0f770633d65a546b8c3a25981f80e961168f_b0012ff88d8f9e47b78b3205b1a1acda",
+      "abilityId": "BS69-089#AB_PASSIVE_NONE_LV1_LV2_LV3_d7ddbad63023b4efcda19c9599d3cbee818c2355bcc431ee0e68a7a2330bc4ab_5f88ad738a7424e16b73f9c6922600cf",
       "reason": "Missing semantic test evidence",
       "rawText": "When this card is sent to the Trash from deck by the effect of your \"Contractor Huracan\", you can add it to the Hand.",
       "irExcerpt": {
         "op": "ADD_TO_HAND"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS69-089",
+      "abilityId": "BS69-089#AB_MAIN_NONE_LV1_LV2_LV3_0d9dd43a5528222c50f4358a5a1cb6aea932e647bf3f867777493ede109b2aea_a76c5d9c4bae4f661409818dfc291a57",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -68306,6 +68847,20 @@
       "affectedSubsystem": "engine/triggers.js"
     },
     {
+      "cardNumber": "BS69-061",
+      "abilityId": "BS69-061#AB_WHEN_ATTACKS_NONE_LV2_LV3_d1885d0093a9d9a9a8d9517d7036eb5789af1ac252dbf0c269f5e2ef453cc748_e26d272b64cd25666709a7bbabb2c0fd",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
       "cardNumber": "BS69-022",
       "abilityId": "BS69-022#AB_PASSIVE_NONE_LV1_LV2_LV3_ea31b94223f7f3ec519d22083aa26abc6211cf919c73b32ca1dd41eceb631c97_d51b2be9a05ef8c997b4f696b3d001f3",
       "reason": "Missing semantic test evidence",
@@ -68384,6 +68939,20 @@
         "op": "DISCARD_HAND",
         "chooser": "self",
         "isCost": false
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS69-058",
+      "abilityId": "BS69-058#AB_WHEN_SUMMONED_NONE_LV1_LV2_4a1cc1b854c2e25350fd725f8c4513235c13249326f23054ab74a3d7c86baeff_baa79bebe38c17fe6118e29e95383353",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -68962,12 +69531,15 @@
     },
     {
       "cardNumber": "BS69-063",
-      "abilityId": "BS69-063#AB_WHEN_ATTACKS_NONE_LV2_20cdcb4973bf5e521d7cc047eb94f1b077a06c996e1a2c61848e3dfd18562ff3_da5f4044e5e767147256771780b2849b",
+      "abilityId": "BS69-063#AB_WHEN_ATTACKS_NONE_LV2_d14491e5f05c20b41fd65db92f5659de6245e630439410fc57556994d5bce069_cf9fe235d053667dc21a8108783d06b5",
       "reason": "Missing semantic test evidence",
-      "rawText": "When this effect discards any \"Primordial\" family Nexus card, you can deploy that card without paying the cost.",
+      "rawText": "discard a card from your Hand.",
       "irExcerpt": {
-        "op": "DEPLOY_NEXUS",
-        "free": true
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -69501,6 +70073,20 @@
       "affectedSubsystem": "engine/triggers.js"
     },
     {
+      "cardNumber": "BS70-060",
+      "abilityId": "BS70-060#AB_WHEN_ATTACKS_NONE_LV2_f3f9f128c7c36ee3edd46779013a78b0dc6f1e5757c1e76c7e4f2a9e1c9381a9_801f7f38d2c63b84beae450068a5af9b",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
       "cardNumber": "BS70-068",
       "abilityId": "BS70-068#AB_PASSIVE_NONE_LV1_LV2_LV3_f09ce4ecde824a1746e6ca35ece399deab037642452dd6580e5ce992be7d5ffb_0191e0d58cc09556068fae14287a9f18",
       "reason": "Missing semantic test evidence",
@@ -69832,11 +70418,15 @@
     },
     {
       "cardNumber": "BS70-089",
-      "abilityId": "BS70-089#AB_MAIN_NONE_LV1_LV2_LV3_350d0d06cd77041e48e4b2289cb57180665362ff5c8fef8a500cdb75fbf22b78_7b002feaad94899697c9a712991f0970",
+      "abilityId": "BS70-089#AB_MAIN_NONE_LV1_LV2_LV3_ce154e1719a82d2837a4ad0faa92204658d4c506585ec65012d45cdca830b503_46998d566c491c3992def8e44f11c0b3",
       "reason": "Missing semantic test evidence",
-      "rawText": "You can put every \"Gekiha\" family card you would discard via this effect to the Removed Zone, instead of sending them to the Trash.",
+      "rawText": "discard two cards from your Hand.",
       "irExcerpt": {
-        "op": "GRANT_FAMILY"
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -70817,7 +71407,7 @@
     },
     {
       "cardNumber": "BS71-083",
-      "abilityId": "BS71-083#AB_BURST_NONE_LV1_LV2_LV3_e8094d339af031a406c735c33b08d52f14794c2af040457b1f696f7cf4a94101_ed3edd9efa9b39f22d34a24c781a24e1",
+      "abilityId": "BS71-083#AB_BURST_NONE_LV1_LV2_LV3_0898afb0b5fbb2079342d923706d4fc41b02a8ea04980da760ee9a36ab55cfda_64b1b418141966a83172464420da87be",
       "reason": "Unverified target semantics",
       "rawText": "Destroy any number of opposing Spirits/Ultimates up to a total of Cost 6.",
       "irExcerpt": {
@@ -70832,11 +71422,29 @@
     },
     {
       "cardNumber": "BS71-083",
-      "abilityId": "BS71-083#AB_MAIN_NONE_LV1_LV2_LV3_cd2c86c8fc226961f0f4971496587dce32c6423f2e99b456281f7ded726bdb3d_591cd94a717cd64963568b7ea68471c9",
-      "reason": "Missing or contradictory IR parameters",
-      "rawText": "For each \"Contractor Nuadha\" you control, this effect discards -1 cards.",
+      "abilityId": "BS71-083#AB_MAIN_NONE_LV1_LV2_LV3_d2246fa309c45543b47286ce8155c7a21e69161594803facc768cba5ef44e528_5bb2c8ca64d06053662209832b991127",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard three cards from your Hand.",
       "irExcerpt": {
-        "op": "MODIFY_EFFECT"
+        "op": "DISCARD_HAND",
+        "count": 3,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS71-064",
+      "abilityId": "BS71-064#AB_WHEN_SUMMONED_NONE_LV1_29e3e8980b101017ed750123cf03377d91a313e98cc1f2eb11bdd4704d84741a_0cf4766081fef963b387c44025e346d0",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -72230,26 +72838,17 @@
     },
     {
       "cardNumber": "BS72-052",
-      "abilityId": "BS72-052#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_71de0df8a9d0ee7ce93419bba47f52b4284e707439bf16d33f27b96894e6c69c_f4c430e91deb5c6cfa3cb39373d175c4",
-      "reason": "Missing or contradictory IR parameters",
-      "rawText": "If you or the opponent controls any heavily exhausted Spirit/Ultimate/Nexus/Grandwalker Nexus, this effect discards -1 card.",
+      "abilityId": "BS72-052#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_b08f06f804466f79a4fbc64f8ac8caf36f79e9f93963f24537ed671b942292e1_dce49053a4b12b149488c81df352ff2f",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
       "irExcerpt": {
-        "op": "MODIFY_EFFECT"
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
-    },
-    {
-      "cardNumber": "BS72-052",
-      "abilityId": "BS72-052#AB_ATTACK_STEP_NONE_LV2_LV3_3049a01e68b9fb73abc2895db94c77fdbc5c1fc48d70f68ef5d3513fcd0a74fe_0e1b46bb6e086a196ac7f2242432d69a",
-      "reason": "Unverified target semantics",
-      "rawText": "When your \"Roaring Azure\" family Spirit heavy exhausts, you can heavy exhaust an opposing refreshed Spirit/Ultimate/Nexus/Grandwalker Nexus.",
-      "irExcerpt": {
-        "op": "EXHAUST",
-        "target": {
-          "side": "either"
-        }
-      },
-      "affectedSubsystem": "engine/selectors.js + compiler"
     },
     {
       "cardNumber": "BS72-067",
@@ -72868,6 +73467,20 @@
       "affectedSubsystem": "engine/triggers.js"
     },
     {
+      "cardNumber": "BS72-049",
+      "abilityId": "BS72-049#AB_WHEN_SUMMONED_NONE_LV1_LV2_4a1cc1b854c2e25350fd725f8c4513235c13249326f23054ab74a3d7c86baeff_baa79bebe38c17fe6118e29e95383353",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
       "cardNumber": "BS72-020",
       "abilityId": "BS72-020#AB_PASSIVE_NONE_LV2_f38ea6db11714fc5f5e392c984bcd06cf6d4a75076102c629424a63d10ccd075_bebac20840ee22748c9279dce3772f2c",
       "reason": "Missing semantic test evidence",
@@ -72894,6 +73507,44 @@
       "rawText": "during this turn, increase the LV cost of every opposing Cost 4 or less six-color Spirit/Nexus by +3.",
       "irExcerpt": {
         "op": "COST_MODIFIER"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS72-051",
+      "abilityId": "BS72-051#AB_PASSIVE_NONE_LV1_LV2_962250f5c17789ae15a750d305e1b569298d7e0215936592be345d9d4f90d5e3_b863410d8030fcd2b4d03251dc847da7",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS72-051",
+      "abilityId": "BS72-051#AB_MAIN_STEP_NONE_LV2_3e241ed43ae1e8c86da733726a0a680b236e897538e270b9cb62374eded8c925_72f5164adf8b76a902770da72fd1c5c1",
+      "reason": "Unsupported operation variant",
+      "rawText": "you can summon from your Trash a \"Scalostle\" family Brave card with a cost equal or inferior to your number of counters without paying the cost, directly braving it to your Spirit/Grandwalker Nexus.",
+      "irExcerpt": {
+        "op": "SUMMON",
+        "from": "trash",
+        "side": "self",
+        "count": 1,
+        "upTo": false,
+        "filter": {
+          "types": [
+            "Spirit",
+            "Brave",
+            "Nexus"
+          ],
+          "family": "Scalostle"
+        },
+        "free": true,
+        "isOptional": true
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -76989,11 +77640,15 @@
     },
     {
       "cardNumber": "BS75-084",
-      "abilityId": "BS75-084#AB_PASSIVE_NONE_LV1_LV2_LV3_4678c2fb9faf1dd6131906d5177e092c668d06323cd54ef7a8b5ddd1b086ed57_598c10b44281acc1d703cf6f5b02482d",
+      "abilityId": "BS75-084#AB_MAIN_NONE_LV1_LV2_LV3_1dc7aa3aedce8f93b187b006454d1719cd80847f5fbcd3e8de13a66540e4cd97_4262c0902a281275a5ccfd588ef5be9b",
       "reason": "Missing semantic test evidence",
-      "rawText": "During your Attack Step, when your Mirage is set, and you control any \"Contractor Khaos\", by paying one cost, activate one of this card's Main/Flash effects from the Trash.",
+      "rawText": "discard a card from your Hand.",
       "irExcerpt": {
-        "op": "COST_MODIFIER"
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -77399,12 +78054,26 @@
     },
     {
       "cardNumber": "BS75-CX04",
-      "abilityId": "BS75-CX04#AB_MAIN_NONE_LV1_LV2_LV3_2b6bcea927a7e8c6abf7110fd8038555f14676fe3b76ae3250b72457be34e4f7_062afd6836428f83fdb131689935b6c6",
+      "abilityId": "BS75-CX04#AB_MAIN_NONE_LV1_LV2_LV3_a133989a75a7ae85775b36efd544be2422cdac1b44be465d34c40e408ab21879_88cc4793a30fa9f3ec7b2874bd261432",
       "reason": "Missing semantic test evidence",
       "rawText": "You can deploy this card from Soul State.",
       "irExcerpt": {
         "op": "DEPLOY_NEXUS",
         "free": true
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS75-CX04",
+      "abilityId": "BS75-CX04#AB_ATTACK_STEP_NONE_LV2_72134dca34ebf2999165515acd1097995068fa8c6edf682c7b6fe11ecd1b9db3_0d5d56c8db1267fa1ccbfd8eddb04568",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -77903,7 +78572,7 @@
     },
     {
       "cardNumber": "BS75-055",
-      "abilityId": "BS75-055#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV2_221587f5e4e7f8ce4911077e94f3515d3299dab503236368d5409c36d5b1f86e_daf1f67c0223fd3c23aeb04b1bf4041b",
+      "abilityId": "BS75-055#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV2_d62d9f2a0fe06238adfc7bea854bcfcbbfa71f2912e71c302c0a72f0d32d5eac_c387a821f7dde752bdb26b08a5c0779e",
       "reason": "Unverified trigger timing",
       "rawText": "Draw two cards, then discard two cards from your Hand.",
       "irExcerpt": {
@@ -77934,7 +78603,7 @@
     },
     {
       "cardNumber": "BS75-060",
-      "abilityId": "BS75-060#AB_STEP_RESTRICTED_NONE_LV1_LV2_LV3_c368b13eb93a00c8ce6b7d5d54af37b4a1246303f0ac60dd99fad7948a37ce21_cc40b0a7a29118a8896c35e068d20087",
+      "abilityId": "BS75-060#AB_STEP_RESTRICTED_NONE_LV1_LV2_LV3_426ebe1abdca4f30116ac48d4286948936c6dbf4eb9fd918de0fad0a6d375559_7266de2d0a5e5144033c6c242d6cb896",
       "reason": "Unverified trigger timing",
       "rawText": "Draw three cards, then discard two cards from your Hand.",
       "irExcerpt": {
@@ -79082,11 +79751,15 @@
     },
     {
       "cardNumber": "BS76-X12",
-      "abilityId": "BS76-X12#AB_WHEN_ATTACKS_NONE_LV2_LV3_76095c9d2ed53cdbd3f3ba2e46c07c4c15a3317c727e103fa45c0a86cf712db7_ad91db0d6a47535a001ed09fba881669",
+      "abilityId": "BS76-X12#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_947ef9c8419e7bf27b0a089b1719a2cb893b6374787d5e7f5c44fc3633db8748_9d6fae2c8a0527ad896f7a07ec8d7acb",
       "reason": "Missing semantic test evidence",
-      "rawText": "Target and attack the opposing Spirit with the lowest cost.",
+      "rawText": "discard a card from your Hand.",
       "irExcerpt": {
-        "op": "COST_MODIFIER"
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -79215,7 +79888,21 @@
     },
     {
       "cardNumber": "BS76-052",
-      "abilityId": "BS76-052#AB_ATTACK_STEP_NONE_LV2_7357afa5f44823fcaea616b127c21adf9455e91571cc74d2d02b4f181a2d4941_0463cefbb9a8670d5f9c81b914b5be82",
+      "abilityId": "BS76-052#AB_WHEN_SUMMONED_NONE_LV1_LV2_1bc87eeb979e76eefe5db2e69e8300257bd717a8bcbb89f208420c9a0c86580d_f9b86bced0c9a2cc4ffe26ec8b05369e",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BS76-052",
+      "abilityId": "BS76-052#AB_ATTACK_STEP_NONE_LV2_92bd26dbfd5a4b26ec0e06ab20f40fd1e81024f3b04366a3e4e8e15f131c4705_f18fab07a79100fc602e5945b11c02c8",
       "reason": "Missing semantic test evidence",
       "rawText": "When your \"Roaring Azure\" family Spirit attacks, you can discard five cards from the opposing decktop.",
       "irExcerpt": {
@@ -79750,6 +80437,20 @@
         "timing": "WHEN_SET"
       },
       "affectedSubsystem": "engine/triggers.js"
+    },
+    {
+      "cardNumber": "BS76-057",
+      "abilityId": "BS76-057#AB_BURST_NONE_LV1_LV2_LV3_cdc0964276ebdc1e9e30f9a479a77e9db449889158aedd25dee02cbeecad51ad_67e2c7fa4482ee07756e094dc6efe7a7",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
       "cardNumber": "BS76-056",
@@ -82763,6 +83464,41 @@
       "irExcerpt": {
         "op": "REVEAL_DECKTOP",
         "count": 1
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BSC24-046",
+      "abilityId": "BSC24-046#AB_ATTACK_STEP_NONE_LV1_LV2_dea705f47eafdc0b5477abf7b4c8f02575d1c5cdda1ff7e79d986fae1a519532_ecd3c7c5bd86acb16502f8b80d63d190",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BSC24-046",
+      "abilityId": "BSC24-046#AB_ATTACK_STEP_NONE_LV2_f08ebab2ac6585fe588f5af85cbf5149b45cfc1689d7aa524569e119115efe15_96aee71cc38689b287fedcd9214a14db",
+      "reason": "Unsupported operation variant",
+      "rawText": "You can summon one [The SuperAncientApexSoldierKaiju Zoiger] from your Hand/Trash, without paying the cost.",
+      "irExcerpt": {
+        "op": "SUMMON",
+        "from": "hand_or_trash",
+        "side": "self",
+        "count": 1,
+        "upTo": false,
+        "filter": {
+          "types": [
+            "Spirit"
+          ]
+        },
+        "free": true,
+        "isOptional": true
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -89828,6 +90564,20 @@
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
+      "cardNumber": "BSC42-073",
+      "abilityId": "BSC42-073#AB_WHEN_ATTACKS_NONE_LV2_LV3_0f04eb15790d10c774d8b18f552e9ce93ba2f05203c652acd5838e68319e1548_6286fd16ec2fe424725740d6aa20d290",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard three cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 3,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
       "cardNumber": "BSC42-088",
       "abilityId": "BSC42-088#AB_MAIN_NONE_LV1_LV2_LV3_5de7b43da210a1ca7252b58104d1c35e319567f6c4752a99de581ccd8b1543ea_6c44d08915592be789c25fbce107d953",
       "reason": "Missing or contradictory IR parameters",
@@ -91004,6 +91754,20 @@
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
+      "cardNumber": "BSC44-010",
+      "abilityId": "BSC44-010#AB_ATTACK_STEP_NONE_LV2_1fe8d2f22b2c6a08a295c31865b9fb5e8b94835f9eb93ccb48b5ef745c83a94e_3384eb9de992dc82977a12300cb9b35c",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
       "cardNumber": "BSC44-008",
       "abilityId": "BSC44-008#AB_PASSIVE_NONE_LV1_LV2_LV3_93e4f52424b7e0bef11e517260c1ce5e0a3cc4da191d3bb2b3d50a118f98e3d4_23580b0a7d42889bdf4023fc38f5a7ec",
       "reason": "Unverified target semantics",
@@ -91942,6 +92706,20 @@
       "irExcerpt": {
         "op": "CONTINUOUS_RULE",
         "rule": "IMMUNITY"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BSC45-074",
+      "abilityId": "BSC45-074#AB_MAIN_NONE_LV1_LV2_LV3_91b7354eb835aa88c9f584987f0bf51ef4f99452e7a0eac6cae9cfdf4a60dbd0_92f18eca097dc0fc5270cc033aa8332a",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -93580,11 +94358,26 @@
     },
     {
       "cardNumber": "BSC48-059",
-      "abilityId": "BSC48-059#AB_PASSIVE_NONE_LV1_LV2_LV3_be73382dc68e5aaa4013c3df422be86a830724ff529e698d7e3deeaf05596074_af96c267058cabce9085a497da871da2",
+      "abilityId": "BSC48-059#AB_PASSIVE_NONE_LV1_LV2_LV3_0de9e8f3722de168e07f8ab646b993677ad2dd1d55e7b308315c413ac2befee3_fe205db2a00b39f28fa59de8e139b73b",
       "reason": "Missing semantic test evidence",
       "rawText": "When your Attack Step ends, including being in Soul State, if you control any \"Gunjou Souun\", you can use this card from the Hand, without paying the cost.",
       "irExcerpt": {
-        "op": "COST_MODIFIER"
+        "op": "COST_MODIFIER",
+        "free": true
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BSC48-059",
+      "abilityId": "BSC48-059#AB_FLASH_NONE_LV1_LV2_LV3_f29ebad834ed0f96352f755a68da5e13a44024bd25f64639f957e2182f7ce0fb_1f0759160f446c71ad570f21db810c2e",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard one card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -94217,11 +95010,15 @@
     },
     {
       "cardNumber": "BSC48-027",
-      "abilityId": "BSC48-027#AB_PASSIVE_NONE_LV2_LV3_8479eab3a6f92c96dc76331131b3b04ef00e36f5b883f8d65d128fe72376443b_125f83f6540842e57b12bcefa27b9ae2",
+      "abilityId": "BSC48-027#AB_BURST_NONE_LV1_LV2_LV3_90052c2183bcc760bd55fffcde1de9fcfb9c20ffeb5596a892c142eb5a191394_cfb00fa06f6b864eb5dd7fb00933eeae",
       "reason": "Missing semantic test evidence",
-      "rawText": "Cost 2~8 (When Attacks/Blocks)",
+      "rawText": "discard a card from your Hand.",
       "irExcerpt": {
-        "op": "COST_MODIFIER"
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -97647,13 +98444,15 @@
     },
     {
       "cardNumber": "CB01-061",
-      "abilityId": "CB01-061#AB_MAIN_NONE_LV1_LV2_LV3_3a44c66734b9a852f0182364c60ee9c7e79bebd699dff426dd3d967068e00d57_361c61afe51082c33d4569016ba2fbe4",
+      "abilityId": "CB01-061#AB_MAIN_NONE_LV1_LV2_LV3_73cd72a0a69ef995b4c11cd65d4d681496230b806813f3786a059df753a9e717_715149bf28b0f393fc52b4c1973553ee",
       "reason": "Missing semantic test evidence",
-      "rawText": "If you control any \"Ultraman\"-named Spirit, this effect discards -2 cards from your Hand.",
+      "rawText": "discard three cards from your Hand.",
       "irExcerpt": {
         "op": "DISCARD_HAND",
-        "chooser": "self",
-        "isCost": false
+        "count": 3,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -105420,11 +106219,13 @@
     },
     {
       "cardNumber": "CB13-040",
-      "abilityId": "CB13-040#AB_WHEN_ATTACKS_NONE_LV1_LV2_17deae3abec93d1a0e6aef816eaa2103c58c13e36b7acc223528b974537bd48e_0d721bfd9520600e556df42caa133ca5",
+      "abilityId": "CB13-040#AB_PASSIVE_NONE_LV1_LV2_2dda8d6dfe18f0f59858fcd2a25ca889737666b0d4f7d28a039015b889410177_02833d4b6790e042141dc5a481e1bf2a",
       "reason": "Missing semantic test evidence",
-      "rawText": "Target attack an opposing Spirit with the highest cost.",
+      "rawText": "discard two cards from the Hand.",
       "irExcerpt": {
-        "op": "COST_MODIFIER"
+        "op": "DISCARD_HAND",
+        "chooser": "self",
+        "isCost": false
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -108059,6 +108860,20 @@
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
+      "cardNumber": "CB15-062",
+      "abilityId": "CB15-062#AB_WHEN_SUMMONED_NONE_LV1_LV2_f7625ed2d5b8f432c347fe21c306605cf5cb68bb9d6ef04b7b38741875a7b58f_71525ced48e6af7ff4667a416a084110",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
       "cardNumber": "CB15-052",
       "abilityId": "CB15-052#AB_WHEN_SUMMONED_OR_BLOCKS_NONE_LV1_LV2_LV3_16824747eadc6febe7eb1cab4078b313965ac019bbea39c312689b207f6e758e_c55d9b4ba9250fdd4163ad2da7139578",
       "reason": "Unverified trigger timing",
@@ -108613,6 +109428,20 @@
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
+      "cardNumber": "CB15-061",
+      "abilityId": "CB15-061#AB_WHEN_ATTACKS_NONE_LV2_40f152983e65f0cda5e3ef30657ad81b7be3fd29f0dff70b74dda8e05c69ea22_a5f30094d1246223a842cce9e74095bc",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
       "cardNumber": "CB15-050",
       "abilityId": "CB15-050#AB_BURST_NONE_LV1_LV2_LV3_49abc6b4b5a574b8454ff880c2490fd34733b46349c45faeb80726a2311c7d25_e8d9369ff8c6930b7b5dce07536b41b4",
       "reason": "Unverified target semantics",
@@ -109054,26 +109883,13 @@
     },
     {
       "cardNumber": "CB16-045",
-      "abilityId": "CB16-045#AB_START_OF_ATTACK_STEP_NONE_LV1_LV2_eae812a4264fb5991721fba7274ff1f2d969c5656af664d457d9b50ce555b4f9_999ae38dff1ead03e3c3a6ea8786519a",
+      "abilityId": "CB16-045#AB_START_OF_ATTACK_STEP_NONE_LV1_LV2_5a55a21216f73ea2eadda97abbee3625b1aebb975dbb11bb60dcf12ab2e00418_f30b22bf70760b974846f8d2936af3b2",
       "reason": "Unverified trigger timing",
       "rawText": "You can compare the BP of this Spirit and an opposing Spirit. Destroy the Spirits with the same or lower BP, and when only the opposing Spirit is destroyed, activate the following effect:\n█ Draw three cards, then discard",
       "irExcerpt": {
         "timing": "START_OF_ATTACK_STEP"
       },
       "affectedSubsystem": "engine/triggers.js"
-    },
-    {
-      "cardNumber": "CB16-045",
-      "abilityId": "CB16-045#AB_ATTACK_STEP_NONE_LV2_3c9b4d2b65cc73b2227f99b13dc55ec8df16e93d230022df30fc6cc438daef25_3a74f9a4ee63c15b41516000f4d32521",
-      "reason": "Unverified target semantics",
-      "rawText": "an opposing Spirit destroyed by your [Bushido] can remain on the Field, exhausted.",
-      "irExcerpt": {
-        "op": "EXHAUST",
-        "target": {
-          "side": "either"
-        }
-      },
-      "affectedSubsystem": "engine/selectors.js + compiler"
     },
     {
       "cardNumber": "CB16-055",
@@ -110387,7 +111203,7 @@
     },
     {
       "cardNumber": "CB16-038",
-      "abilityId": "CB16-038#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_87227c936d1a08bd53238f0380163ffe20243487a8b876e053937b5cc3a140fd_4dd55bb1cc432ed4af7d8fe5de1cb1bf",
+      "abilityId": "CB16-038#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_f6ef3dfe49b3cb4d58b77e8a2b43118824e228bf7ab90b396fdf6be2ba5a2734_375b78946896bc7e51d29a4b5ddd289f",
       "reason": "Unverified trigger timing",
       "rawText": "At the end of battle, draw two cards, then discard a card from your Hand.",
       "irExcerpt": {
@@ -110861,8 +111677,22 @@
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
+      "cardNumber": "CB17-051",
+      "abilityId": "CB17-051#AB_WHEN_ATTACKS_NONE_LV1_LV2_11af767180aba5eca9d5fa2522bd5ed192aa0f940cb870e4091bfea38f7e2d63_7c5561eeed2472113579f6fdd0d85668",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
       "cardNumber": "CB17-070",
-      "abilityId": "CB17-070#AB_WHEN_REBORN_NONE_LV1_LV2_LV3_afba40994caebf6482897cc41a448376719834290aa36ca4833aaa0f982d8592_9c31ba8b10c74fc0ae10a05a0b984176",
+      "abilityId": "CB17-070#AB_WHEN_REBORN_NONE_LV1_LV2_LV3_6b7205d880a5497b4898d640b3a0195242124e1354bd9fec6bbc2743df135ff5_6815bccb772183ea4cea8bf47258aecf",
       "reason": "Unverified trigger timing",
       "rawText": "Draw two cards, then discard two cards from your Hand.",
       "irExcerpt": {
@@ -110871,22 +111701,16 @@
       "affectedSubsystem": "engine/triggers.js"
     },
     {
-      "cardNumber": "CB17-070",
-      "abilityId": "CB17-070#AB_ATTACK_STEP_NONE_LV2_LV3_b802f84db5adf261d61f2e045e589db02c6d15f8f278867630f2a6485427edc9_9b624c760ad5fdc803b8eca679ce5a41",
-      "reason": "Missing semantic test evidence",
-      "rawText": "When the opponent would use a Magic card/[Accel], they can't use it unless they pay two extra costs.",
-      "irExcerpt": {
-        "op": "COST_MODIFIER"
-      },
-      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
-    },
-    {
       "cardNumber": "CB17-054",
-      "abilityId": "CB17-054#AB_WHEN_ATTACKS_NONE_LV2_LV3_ccb5d80d4d700426dba3653de21a319353b5327ad101a5c70da49490c4fb27d0_c116583b3beffdbb0c24a61b5dbf79b3",
+      "abilityId": "CB17-054#AB_WHEN_ATTACKS_NONE_LV2_LV3_9323cae710ee4ebd538c8508c41bd1d3a9e724d5a5b1e197562eca9f6cfc1ee4_df210956a5c43d403b6ad60ea77f84ff",
       "reason": "Missing semantic test evidence",
-      "rawText": "When the discarded card is \"Core Medal\"-named, this Spirit gains an extra Blue symbol.",
+      "rawText": "discard one card from your Hand.",
       "irExcerpt": {
-        "op": "ADD_SYMBOL"
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -112111,7 +112935,7 @@
     },
     {
       "cardNumber": "CB18-044-A14131",
-      "abilityId": "CB18-044-A14131#AB_WHEN_REBORN_NONE_LV1_LV2_LV3_afba40994caebf6482897cc41a448376719834290aa36ca4833aaa0f982d8592_9c31ba8b10c74fc0ae10a05a0b984176",
+      "abilityId": "CB18-044-A14131#AB_WHEN_REBORN_NONE_LV1_LV2_LV3_6b7205d880a5497b4898d640b3a0195242124e1354bd9fec6bbc2743df135ff5_6815bccb772183ea4cea8bf47258aecf",
       "reason": "Unverified trigger timing",
       "rawText": "Draw two cards, then discard two cards from your Hand.",
       "irExcerpt": {
@@ -112912,6 +113736,20 @@
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
+      "cardNumber": "CB19-071",
+      "abilityId": "CB19-071#AB_WHEN_ATTACKS_NONE_LV2_LV3_dd95eb26ea86ab2833968dd21cc847b0ce159c64a2da322de90f2d61805cd1a3_9fc5e090d8767266c1c52062d852572a",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
       "cardNumber": "CB19-041",
       "abilityId": "CB19-041#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_148fd2f2265b7ea81d602383ab3e30ef98a77b819ba4ecc30520dbded547b5f3_10721ec464642b32de8518d887c7dac1",
       "reason": "Missing semantic test evidence",
@@ -113315,6 +114153,20 @@
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
+      "cardNumber": "CB20-023",
+      "abilityId": "CB20-023#AB_WHEN_ATTACKS_NONE_LV2_LV3_d1885d0093a9d9a9a8d9517d7036eb5789af1ac252dbf0c269f5e2ef453cc748_e26d272b64cd25666709a7bbabb2c0fd",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
       "cardNumber": "BATTLE-SPIRITS-A2485",
       "abilityId": "BATTLE-SPIRITS-A2485#AB_WHEN_ATTACKS_NONE_LV2_LV3_05708201f8fa05e8cca57df3a75a2abde99510263904bdede86862c798f9833b_75791a7e6a3b60906e43b3545c4b43d3",
       "reason": "Missing semantic test evidence",
@@ -113528,6 +114380,20 @@
         }
       },
       "affectedSubsystem": "engine/selectors.js + compiler"
+    },
+    {
+      "cardNumber": "CB20-X05",
+      "abilityId": "CB20-X05#AB_BURST_NONE_LV1_LV2_LV3_dd5e51c5c3c164c9dd9b313e6b6556d003e6424ccce320124edac8c062a6f32a_3c76309f2e1da5442c6e68cccf034348",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard three cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 3,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
       "cardNumber": "CB20-002",
@@ -114616,7 +115482,45 @@
     },
     {
       "cardNumber": "CB21-029",
-      "abilityId": "CB21-029#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_775d8d7b076b6fe3985f2a77fc075c2e876636871c3c9aa4d52041fb48d681e8_326d3dbb95e6e63405deb2d8a3294082",
+      "abilityId": "CB21-029#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_7004da57f774189cd95b431dd4c45689be1308bc8420f44694eec8ff3037dd06_115157154a8e127bffce22547c7a43bc",
+      "reason": "Unverified trigger timing",
+      "rawText": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.",
+      "irExcerpt": {
+        "timing": "WHEN_ATTACKS_OR_BLOCKS"
+      },
+      "affectedSubsystem": "engine/triggers.js"
+    },
+    {
+      "cardNumber": "CB21-029",
+      "abilityId": "CB21-029#AB_WHEN_ATTACKS_NONE_LV1_LV2_e61b6aad893448e8fe7a34c04a94f47b0b926befe15f2d32d94578ff015d8b4a_3815ea473c555b6f0c5cda2b800f6932",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BATTLE-SPIRITS-A8217",
+      "abilityId": "BATTLE-SPIRITS-A8217#AB_WHEN_SUMMONED_NONE_LV1_LV2_594bbe58f0f56bd21a1d2265285de7315c50f5cbf427f6a669663b9addf90b2b_b3364970c724caca6bf03e0824744a3f",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "BATTLE-SPIRITS-A8217",
+      "abilityId": "BATTLE-SPIRITS-A8217#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_7004da57f774189cd95b431dd4c45689be1308bc8420f44694eec8ff3037dd06_115157154a8e127bffce22547c7a43bc",
       "reason": "Unverified trigger timing",
       "rawText": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.",
       "irExcerpt": {
@@ -114626,17 +115530,7 @@
     },
     {
       "cardNumber": "BATTLE-SPIRITS-A8217",
-      "abilityId": "BATTLE-SPIRITS-A8217#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_775d8d7b076b6fe3985f2a77fc075c2e876636871c3c9aa4d52041fb48d681e8_326d3dbb95e6e63405deb2d8a3294082",
-      "reason": "Unverified trigger timing",
-      "rawText": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.",
-      "irExcerpt": {
-        "timing": "WHEN_ATTACKS_OR_BLOCKS"
-      },
-      "affectedSubsystem": "engine/triggers.js"
-    },
-    {
-      "cardNumber": "BATTLE-SPIRITS-A8217",
-      "abilityId": "BATTLE-SPIRITS-A8217#AB_WHEN_ATTACKS_NONE_LV2_e5f05b3080532e335b87fc247be391a1e236a25dc9a565a998a5da7c6d9a055f_4ee3a35c4af8a1e9b23c43aaa27f8389",
+      "abilityId": "BATTLE-SPIRITS-A8217#AB_WHEN_ATTACKS_NONE_LV2_40cad01fc058091ebfad8ba29fbc1a9f1b34b11c9596d713b871dbe7bdfe3f66_125257bd330811fbe9eb47ce91ff1c0e",
       "reason": "Missing semantic test evidence",
       "rawText": "If there is [Soul Core] on this Spirit, discard three cards from the opposing decktop",
       "irExcerpt": {
@@ -115466,6 +116360,20 @@
       "affectedSubsystem": "engine/selectors.js + compiler"
     },
     {
+      "cardNumber": "BATTLE-SPIRITS-A14119",
+      "abilityId": "BATTLE-SPIRITS-A14119#AB_WHEN_ATTACKS_NONE_LV2_LV3_62eaf198e3e6fce7ce725a6da7e62da9ad253a4d604bc78fe55776bf0c1b51c2_fbf073f588959ef10f2fefb20125e24b",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
       "cardNumber": "CB22-045",
       "abilityId": "CB22-045#AB_WHEN_ATTACKS_NONE_LV2_LV3_867215b842d390529f0e48bfe13fc18e222c556715670d9841986cb17b627c91_4e71fef6a60c9473d83b6cc9188a8011",
       "reason": "Missing semantic test evidence",
@@ -115517,6 +116425,20 @@
       "irExcerpt": {
         "op": "DEPLOY_NEXUS",
         "free": true
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "CB22-006",
+      "abilityId": "CB22-006#AB_FLASH_NONE_LV1_LV2_LV3_2b9898795f037e0ad66d60ded3be801c9b9af1ce0efef537a9c1cbd6b7251717_2b708bc2f96058145fd00d5d398e82b0",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -116251,13 +117173,27 @@
     },
     {
       "cardNumber": "CB23-061",
-      "abilityId": "CB23-061#AB_PASSIVE_NONE_LV1_LV2_LV3_9cd2257200873922cd65ce52641b1b27b529e435b9418f2ed83f07c7be980f02_dcb18b3f1b0c8bc005c5d623f830ef75",
+      "abilityId": "CB23-061#AB_PASSIVE_NONE_LV1_LV2_LV3_2a4681f6116ddf51a92bc3af5cd4787bd38956a15dc3a273a0aa523151da0648_4220b7ff8c74543115297610fbca661d",
       "reason": "Missing semantic test evidence",
       "rawText": "When your \"Angel\" family Spirit has left the Field due to the opponent, you can immediately discard this card from your Hand.",
       "irExcerpt": {
         "op": "DISCARD_HAND",
         "chooser": "self",
         "isCost": false
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "CB23-061",
+      "abilityId": "CB23-061#AB_MAIN_NONE_LV1_LV2_LV3_d276d242151f281cf8d9594dbac1cb2bd372b783cbc4bb8b4e5bc2b6ac888b66_a0e6aa930ba159b50d6ffb8ffc70abf9",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand, or discard an \"Angel\" family card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -116560,7 +117496,21 @@
     },
     {
       "cardNumber": "CB23-026",
-      "abilityId": "CB23-026#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_775d8d7b076b6fe3985f2a77fc075c2e876636871c3c9aa4d52041fb48d681e8_326d3dbb95e6e63405deb2d8a3294082",
+      "abilityId": "CB23-026#AB_WHEN_SUMMONED_NONE_LV1_LV2_594bbe58f0f56bd21a1d2265285de7315c50f5cbf427f6a669663b9addf90b2b_b3364970c724caca6bf03e0824744a3f",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "CB23-026",
+      "abilityId": "CB23-026#AB_WHEN_ATTACKS_OR_BLOCKS_NONE_LV1_LV2_7004da57f774189cd95b431dd4c45689be1308bc8420f44694eec8ff3037dd06_115157154a8e127bffce22547c7a43bc",
       "reason": "Unverified trigger timing",
       "rawText": "This Spirit is unaffected by opposing effects, except those of the opposing Spirit with [Soul Core] on it.",
       "irExcerpt": {
@@ -116570,7 +117520,7 @@
     },
     {
       "cardNumber": "CB23-026",
-      "abilityId": "CB23-026#AB_WHEN_ATTACKS_NONE_LV2_81723555f8a833dc994b5c37a9f1f2a75d4a48a3368aab709d7face1e42001ad_47e46054649caec04029ad9db1ff52ea",
+      "abilityId": "CB23-026#AB_WHEN_ATTACKS_NONE_LV2_e8a92900ee918658e5f054be2ca7e530759fb44cc744c2b493743e3840bfc0b4_b24e4265de7657f0c96c1c87023e0476",
       "reason": "Missing semantic test evidence",
       "rawText": "If there is [Soul Core] on this Spirit, discard three cards from the opposing decktop.",
       "irExcerpt": {
@@ -117098,21 +118048,14 @@
     },
     {
       "cardNumber": "CB24-061",
-      "abilityId": "CB24-061#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_ca772b2a0584d47b675790857fbd11efc021564dcc9f22731b060bbd3d689900_06ad57b0cbd73a1ed91dde81f251b1d0",
-      "reason": "Missing or contradictory IR parameters",
-      "rawText": "stack this onto your target Spirit.",
-      "irExcerpt": {
-        "op": "STACK_CARD"
-      },
-      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
-    },
-    {
-      "cardNumber": "CB24-061",
-      "abilityId": "CB24-061#AB_WHEN_ATTACKS_NONE_LV2_LV3_451dc9b927af53c2420be0786c232fd0c2be2e3d6c16b3d4581f1edead63a986_2a828a2a23c82127fdfea104e578a837",
+      "abilityId": "CB24-061#AB_WHEN_ATTACKS_NONE_LV2_LV3_9a6b7adbd043d16c47a533b56eb43caec310019cd86bb1ecb00e26af8c39c0f2_daac7be13b601be7cf127f9ccd76dbf4",
       "reason": "Missing semantic test evidence",
       "rawText": "This Spirit gains an extra Purple symbol.",
       "irExcerpt": {
-        "op": "ADD_SYMBOL"
+        "op": "ADD_SYMBOL",
+        "color": "Purple",
+        "count": 1,
+        "side": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -117128,21 +118071,28 @@
     },
     {
       "cardNumber": "CB24-049",
-      "abilityId": "CB24-049#AB_WHEN_ATTACKS_NONE_LV1_LV2_52650b8cb0299da2d2af9d228c9252e6a96027f57eec91aa08c663ca1a8f931e_fecaf8ba8a660957a71481c060413851",
-      "reason": "Missing or contradictory IR parameters",
-      "rawText": "If you control any \"Build\"/\"Grease\"/\"Rogue\" Spirit, this effect discards -1 card.",
+      "abilityId": "CB24-049#AB_WHEN_ATTACKS_NONE_LV1_LV2_2484170439ffead9444680fe91fdafac607a8223a5335047aa595120b7cba536_17610fab01d0c0cc7c5347163531876b",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
       "irExcerpt": {
-        "op": "MODIFY_EFFECT"
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
       "cardNumber": "CB24-049",
-      "abilityId": "CB24-049#AB_WHEN_ATTACKS_NONE_LV2_4ee72432f5948f6abb24153b530ae4c53906b05544b006c0beb31c1beb47c1db_ef8d055f4bb1f4f5b731a73762fb96b0",
+      "abilityId": "CB24-049#AB_WHEN_ATTACKS_NONE_LV2_9f093051c29e52702558280bc96eb567b15c7b4c8130fd5629c099d5df6af042_31e28a0b83d7ebebc9cdc4e7d405a8b5",
       "reason": "Missing semantic test evidence",
       "rawText": "This Spirit gains an extra Blue symbol.",
       "irExcerpt": {
-        "op": "ADD_SYMBOL"
+        "op": "ADD_SYMBOL",
+        "color": "Blue",
+        "count": 1,
+        "side": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -117460,6 +118410,18 @@
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
+      "cardNumber": "CB24-054",
+      "abilityId": "CB24-054#AB_WHEN_SUMMONED_NONE_LV1_LV2_07f2239b436b67fe390c772f6124d2560b271111aa8f1b94c649e765978f7e2c_05d572f709b5b3d223096479476047ef",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from the Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "chooser": "self",
+        "isCost": false
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
       "cardNumber": "CB24-047",
       "abilityId": "CB24-047#AB_WHEN_SUMMONED_NONE_LV1_LV2_18014fc6a3c8ef8c76e5767b4f2ed8ac6c799aaf6ae111b4513aba7ccc068213_62c28f32c9845713728d2b945a8bd277",
       "reason": "Missing semantic test evidence",
@@ -117678,6 +118640,20 @@
       "rawText": "When this card is revealed from deck by your \"Kamen\" & \"Beast Head\" family effect, you can add it to your Hand.",
       "irExcerpt": {
         "op": "ADD_TO_HAND"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "CB24-076",
+      "abilityId": "CB24-076#AB_MAIN_NONE_LV1_LV2_LV3_fbef7a09526bce921eda7002d253dee78eac6c8820dd6ea7ceba18c8a14d10d5_4d5384d804bf2ad8bc70a1f0e6c925f7",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -119402,12 +120378,26 @@
     },
     {
       "cardNumber": "CB26-017",
-      "abilityId": "CB26-017#AB_WHEN_ATTACKS_NONE_LV1_LV2_836f13a755ed988d4f58689465c69313dfc152e2a9494356b3f85243599772ae_28fdc1bb7a5596a9204af9cc7c28d5d5",
+      "abilityId": "CB26-017#AB_WHEN_ATTACKS_NONE_LV1_LV2_3d370fcad436d1716f776cd61fe4cdcc034e726ba43813017234ba2ad953ef68_5b43b860fd763c8e12fc30cb2493dd44",
       "reason": "Missing semantic test evidence",
       "rawText": "Discard three cards from the opposing decktop.",
       "irExcerpt": {
         "op": "MILL_DECK",
         "side": "opp"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "CB26-017",
+      "abilityId": "CB26-017#AB_WHEN_ATTACKS_NONE_LV2_41ccb0c632800770a92d4b7b1c2b39aecf3a6055d52a3ab2f2e1581021cd59d6_75083b4398fbb9833a3a76907a5a160e",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -119709,6 +120699,20 @@
       "affectedSubsystem": "engine/selectors.js + compiler"
     },
     {
+      "cardNumber": "CB26-016",
+      "abilityId": "CB26-016#AB_PASSIVE_NONE_LV1_LV2_51654daac4154158e5002cfabdb5eb23c348518747a57fe25cc0ade36089f3cd_b7f111db28133303d5a2c8c41615fff1",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
       "cardNumber": "CB26-028",
       "abilityId": "CB26-028#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_33282580b88e5ecd97af58904e624b881e6a02b7c79a0821f6e30066ff447364_21eb2eafc24b70d7e1b20e1e9cacfc1d",
       "reason": "Unverified target semantics",
@@ -119925,7 +120929,21 @@
     },
     {
       "cardNumber": "CB26-019",
-      "abilityId": "CB26-019#AB_WHEN_ATTACKS_NONE_LV2_LV3_367aec7d586b0f09d1fe03d5bcae32499fb075f191cd78187479b342558cabb0_5438d7ec6eb7e53e5f25084fdf237a7f",
+      "abilityId": "CB26-019#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_d7bc68e42387e5bc123e75627d531708f813a4ed3ff63eb64e0ef69d9f383c50_340e64ce21b97d9d2d6f4fc614114126",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "CB26-019",
+      "abilityId": "CB26-019#AB_WHEN_ATTACKS_NONE_LV2_LV3_6338170cc2da684c47d5af0e2e13eca533e68da9befd35ef9e87f2287ff901bf_da8b9daf167db9c7f8b146966cca64d5",
       "reason": "Missing semantic test evidence",
       "rawText": "For each Spirit that is [During Advent] on this Spirit's pre-advent card, discard four cards from the opposing decktop.",
       "irExcerpt": {
@@ -121330,17 +122348,33 @@
     },
     {
       "cardNumber": "CB29-038",
-      "abilityId": "CB29-038#AB_PASSIVE_NONE_LV1_LV2_LV3_a64cda64911d197393f58fdaa89916ba251b202420a16f8a104141bc2de5bb78_30fa9cd48603e9d9ade6a7d4b1683db1",
-      "reason": "Missing or contradictory IR parameters",
+      "abilityId": "CB29-038#AB_PASSIVE_NONE_LV1_LV2_LV3_ee4b93fe9ae855375051c0a4968461d7609ff0a62614bbd0a0343e1cbc5fbd13_38af4c0a9539810dee3f696101de447f",
+      "reason": "Missing semantic test evidence",
       "rawText": "You can put any amount of this card in deck.",
       "irExcerpt": {
+        "maxCopies": "UNLIMITED",
+        "rule": "UNLIMITED_COPIES",
         "op": "DECK_BUILDING_RULE"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
       "cardNumber": "CB29-038",
-      "abilityId": "CB29-038#AB_START_OF_ATTACK_STEP_NONE_LV2_d9dfe4cb3f3b25c9b9679e460be248d7e8b4a49cbdbce99387692674d5132b44_1e4fa5b7e0bd9137a15a84765b75307f",
+      "abilityId": "CB29-038#AB_WHEN_SUMMONED_NONE_LV1_LV2_38f74011afc6fbff26f2d851a5143995657bcc51aad00c871e77f470a0cede75_3f8e2e7a1b615092a6ddad664585a429",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "CB29-038",
+      "abilityId": "CB29-038#AB_START_OF_ATTACK_STEP_NONE_LV2_a97e27f6c975e34044cd2200795226a1a73909b2f8b9e108a1cb1e852e818f9a_f3792983fa7db3840bf81cada69c1904",
       "reason": "Unverified trigger timing",
       "rawText": "During this turn, this Spirit gains every effect of a Cost 6 or less Spirit card in the opposing Trash, ignoring levels.",
       "irExcerpt": {
@@ -121507,17 +122541,18 @@
     },
     {
       "cardNumber": "CB29-036",
-      "abilityId": "CB29-036#AB_PASSIVE_NONE_LV1_LV2_LV3_250d0435d71ef8f918ad9d64c7d9c9eb0fa7f7667803d7503988cd8cf74123d8_1d80a3f3d28e11c5fcc757ae6bd86b22",
+      "abilityId": "CB29-036#AB_PASSIVE_NONE_LV1_LV2_LV3_ca3a9dc128dea05f8f15b4e2163864cf6d285a16bba1d19f33b7576abe803c89_f4dc6272d54121bd2042e4d7db016635",
       "reason": "Missing semantic test evidence",
       "rawText": "While you have three counters or more, this card in Trash becomes Cost 5.",
       "irExcerpt": {
-        "op": "COST_MODIFIER"
+        "op": "COST_MODIFIER",
+        "setCost": 5
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
       "cardNumber": "CB29-036",
-      "abilityId": "CB29-036#AB_WHEN_SUMMONED_OR_DESTROYED_NONE_LV1_LV2_e735d744e97653965c59ac977218266530d9f1d2764e29750b3ba2635a91b27e_38940aa90f092ca62f547291952636dc",
+      "abilityId": "CB29-036#AB_WHEN_SUMMONED_OR_DESTROYED_NONE_LV1_LV2_adda7011bfb34d0d50b4811bca5969b4f4b9f6929aa5b7fc75de0bbc1b42f47d_b9bf1bb0190aa99a2a7add49ba9cfd53",
       "reason": "Unverified trigger timing",
       "rawText": "Your counter +1. Then, you can return a \"CB\"/\"Federation\" family card from your Trash to the deckbottom. When you've done so, draw two cards, then discard two cards from your Hand.",
       "irExcerpt": {
@@ -121538,16 +122573,17 @@
     },
     {
       "cardNumber": "CB29-058",
-      "abilityId": "CB29-058#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_31e60b82e1912cd80677245a7c5fc984260d90a5e87f25b53e30fcdb701d4a96_62ee4bbc608774b0705ab0277c44220a",
-      "reason": "Unverified target semantics",
-      "rawText": "You can refresh an opposing Spirit.",
+      "abilityId": "CB29-058#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_947ef9c8419e7bf27b0a089b1719a2cb893b6374787d5e7f5c44fc3633db8748_9d6fae2c8a0527ad896f7a07ec8d7acb",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
       "irExcerpt": {
-        "op": "REFRESH",
-        "target": {
-          "side": "either"
-        }
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
-      "affectedSubsystem": "engine/selectors.js + compiler"
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
       "cardNumber": "CB29-030",
@@ -122735,11 +123771,49 @@
     },
     {
       "cardNumber": "CB30-055",
-      "abilityId": "CB30-055#AB_ATTACK_STEP_NONE_LV2_LV3_56dedd5d76fcce184110bba3efa21fbebb6337ff2d47f43620ed5e84ece8fd1c_4520ba708ed9e22ac6bd70497057efeb",
+      "abilityId": "CB30-055#AB_PASSIVE_NONE_LV1_LV2_LV3_3c9d2336a7ef089d376707414cee2de930a6241c2b44ec225e511ca7396afc8f_7fdbfe60ad90c38b0cd8a8be49ac3118",
+      "reason": "Unsupported operation variant",
+      "rawText": "When summoning this card from the Hand, if there is any \"G3\" in your Trash, this card becomes Cost 6.",
+      "irExcerpt": {
+        "op": "SUMMON",
+        "from": "trash",
+        "side": "self",
+        "count": 1,
+        "upTo": false,
+        "filter": {
+          "types": [
+            "Spirit"
+          ],
+          "costExact": 6,
+          "nameIncludes": "G3"
+        },
+        "free": false,
+        "isOptional": false
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "CB30-055",
+      "abilityId": "CB30-055#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_756b43b241963bc16ce7536d55606b8dbe1f4774b434c19ef6a4204729b82a55_c9bd2cd7c09b7b52d26aa2b42fe4b9c0",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "CB30-055",
+      "abilityId": "CB30-055#AB_ATTACK_STEP_NONE_LV2_LV3_15e3a8e54954518d4fe875734529e9f2a1b44369994f3611df272a14511282da_75a68322036e7d293d338c7730750f32",
       "reason": "Missing semantic test evidence",
       "rawText": "While your \"Agito\"/\"G3\"/\"Gills\" is attacking, every Magic card in the opposing Hand becomes Cost 6.",
       "irExcerpt": {
-        "op": "COST_MODIFIER"
+        "op": "COST_MODIFIER",
+        "setCost": 6
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -123006,22 +124080,15 @@
     },
     {
       "cardNumber": "CB30-050",
-      "abilityId": "CB30-050#AB_WHEN_SUMMONED_NONE_LV1_LV2_8d6d8394c40dd7f852e2352c268fe2abc6bb5f49ecbf78b85a540e1a8b77f13b_77511f8de03033fcb2619457fc420673",
+      "abilityId": "CB30-050#AB_PASSIVE_NONE_LV1_LV2_37ac07a655cf397119a8c638b9543c43d45c11d9c201d73885d255f950e015ea_4a626f0b65e8a53a507090c7c835c876",
       "reason": "Missing semantic test evidence",
-      "rawText": "When \"Chemy\" is discarded via this effect, you can pay one cost to summon/deploy that card.",
+      "rawText": "discard a card from your Hand.",
       "irExcerpt": {
-        "op": "DEPLOY_NEXUS",
-        "free": true
-      },
-      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
-    },
-    {
-      "cardNumber": "CB30-050",
-      "abilityId": "CB30-050#AB_PASSIVE_NONE_LV1_LV2_LV3_7284018af4dc6b312a9d65dcf4786d47aa0c0530f1d3c6e9632a1ec06b45e242_f40f7bbf1624b9d3bfb315074d3f3fff",
-      "reason": "Missing semantic test evidence",
-      "rawText": "For each card in your Hand, increase the limit of this \"Cost Destruction Effect\" by +1.",
-      "irExcerpt": {
-        "op": "COST_MODIFIER"
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -123408,6 +124475,20 @@
       "rawText": "When using this card from the Hand, if your \"Agito\" have [Contract Advented] this turn, this card becomes Cost 5.",
       "irExcerpt": {
         "op": "COST_MODIFIER"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "CB30-067",
+      "abilityId": "CB30-067#AB_ATTACK_STEP_NONE_LV1_LV2_e7e40cc52ce7b430a09be2171bff4a18eb23330cc26a1140890a95adf8eab1f1_3ab37e370d849b2b6a49a87ad1c4c0d3",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -124190,6 +125271,20 @@
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
+      "cardNumber": "CB32-043",
+      "abilityId": "CB32-043#AB_WHEN_ATTACKS_NONE_LV1_LV2_90c3a645f0a371ecceab15e55135369967f79e91e4237bcf31326312b3967176_bb438cb9fc4844fab478f1910b765c85",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
       "cardNumber": "CB32-CP01",
       "abilityId": "CB32-CP01#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_4419ee1c9168242c51c32d7a89a402559926839fa7e985d2c362a0f6565a7518_a5e61dcbb056cdb1e8cd07157b1a7136",
       "reason": "Missing semantic test evidence",
@@ -124496,7 +125591,21 @@
     },
     {
       "cardNumber": "CB32-047",
-      "abilityId": "CB32-047#AB_PASSIVE_NONE_LV1_LV2_LV3_b6307fb979133abdc792d0cad7b20bd867094c84978d01358de18a2b2edf9ff1_0d0276a59c6564fd43e50f304c303de6",
+      "abilityId": "CB32-047#AB_WHEN_SUMMONED_NONE_LV1_a7b4aa39f1b5b63db21f5fc5b14ad73f0cb8c9bd9d493561c9a486fc623b08f4_296844107a8edd19c6fa2ceec3dcf208",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "CB32-047",
+      "abilityId": "CB32-047#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_e5c2c2181a99e023406f860227031bf28f5fc831c05b190710868bb8b5e19b04_04d99d670f57956c7529797f0ee80c4f",
       "reason": "Missing semantic test evidence",
       "rawText": "This Spirit is unaffected by opposing Spirit/Ultimate/Nexus effects with a cost equal or inferior to your number of counters.",
       "irExcerpt": {
@@ -124601,7 +125710,21 @@
     },
     {
       "cardNumber": "CB32-039",
-      "abilityId": "CB32-039#AB_END_OF_TURN_NONE_LV2_de6580a1aab8fe377445eb68eaff871c6502563c05a8ff393fd2c9933858f873_05df4884b9a5ad3c7d3afa8ff0f68e4d",
+      "abilityId": "CB32-039#AB_WHEN_SUMMONED_NONE_LV1_LV2_6108e0901e18adce4728e434d607b8a02d5d0c236c779ceaed836e46c0e2ba04_b88f68f40291cfa84dff9955a5b80bc8",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
+      "cardNumber": "CB32-039",
+      "abilityId": "CB32-039#AB_END_OF_TURN_NONE_LV2_28d033ccd62a62a0a7f71b9eeb339d6adcea9feacccbe829d6ba45b0609a2348_21e6aaf684fa752f69decddca2690ed0",
       "reason": "Unverified trigger timing",
       "rawText": "Including being in Soul State/pre-advent condition, if you control any \"Zero\" Contract Spirit, you can draw two cards. When you've done so, discard cards from your Hand until your Hand is three or less.",
       "irExcerpt": {
@@ -124721,11 +125844,15 @@
     },
     {
       "cardNumber": "CB32-CP03",
-      "abilityId": "CB32-CP03#AB_WHEN_SUMMONED_NONE_LV1_LV2_29d2a97c612e3bdbde292fa30f4591867420e29dbc7d56c6d5ec7d7635d5ee86_ebae3b7360d4ffec5983fc13398c6d2d",
-      "reason": "Missing or contradictory IR parameters",
-      "rawText": "Including being in Soul State, if you control another \"Ultraman\"/\"Emi\", this effect discards -1 card.",
+      "abilityId": "CB32-CP03#AB_WHEN_SUMMONED_NONE_LV1_LV2_bac1838dc7e2c4964ee8a95f4103c378c104735142d21153ce83cc3d838ab5f7_55a658a3765beb628ca82cdf72a7a844",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
       "irExcerpt": {
-        "op": "MODIFY_EFFECT"
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -124818,11 +125945,15 @@
     },
     {
       "cardNumber": "CB33-013",
-      "abilityId": "CB33-013#AB_WHEN_ATTACKS_NONE_LV2_5678799672fee6fd39d0db22c88ad99518c81c8ad55b63c53a76516b0a370817_a2f904e1406339f2d971fb575e04c343",
-      "reason": "Missing or contradictory IR parameters",
-      "rawText": "For every 20000 BP this Spirit has, this effect discards -1 card.",
+      "abilityId": "CB33-013#AB_WHEN_ATTACKS_NONE_LV2_41e45e82c037876418eabf011fec39c492d604f3d07fe54ad4e9848ae2dd57a8_9cfb4dce4954672e25ceffee47206157",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
       "irExcerpt": {
-        "op": "MODIFY_EFFECT"
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -125731,11 +126862,15 @@
     },
     {
       "cardNumber": "CB33-008",
-      "abilityId": "CB33-008#AB_WHEN_ADVENTS_NONE_LV1_LV2_e8dbe927493cdde4e8bda8929a3fa52c5e93212400012754405b56aacaecf92b_d0f459655428c663dcde37ae4051f3c3",
-      "reason": "Missing or contradictory IR parameters",
-      "rawText": "For each pre-advent card this Spirit has, this effect discards -1 card.",
+      "abilityId": "CB33-008#AB_WHEN_ADVENTS_NONE_LV1_LV2_0635d75e6495c4fee562ffbf23a17a8a2c6f63f57ad6407bff75aeaed149f21b_76695db0cd23cdfe6038e57dd8719294",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
       "irExcerpt": {
-        "op": "MODIFY_EFFECT"
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -126633,17 +127768,21 @@
     },
     {
       "cardNumber": "CB34-052",
-      "abilityId": "CB34-052#AB_PASSIVE_NONE_LV1_LV2_LV3_dcfe854ac1e1ed49d2aef1b28a3944f7d5076f3b1780ab85310ea9851db58b26_fc5b67c4d68e91899dd634b83db5f672",
-      "reason": "Missing or contradictory IR parameters",
-      "rawText": "When your \"Gotchard\" attacks, if you have five counters or more, you can immediately activate this set card.",
+      "abilityId": "CB34-052#AB_BURST_NONE_LV1_LV2_LV3_af17f15a074d28d956a8fbcf73ecf990a66268e9168de00238ab60b98482aea2_79d9105ec4cf73f35376ebb2229a1427",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard one card from your Hand.",
       "irExcerpt": {
-        "op": "MIRAGE_OPERATION"
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
       "cardNumber": "CB34-052",
-      "abilityId": "CB34-052#AB_WHEN_ATTACKS_NONE_LV2_LV3_f3236418149e5b99da5d645ec8d28b1758ac9e09aa306b2ac9d7266ba905d09d_39a2aa84979103301a7d35f24275e37e",
+      "abilityId": "CB34-052#AB_WHEN_ATTACKS_NONE_LV2_LV3_0c3399009933e8593be824f319b03fd682eb987c769456b96f94b978705911c0_2e01f292bce5ce79d510f694e9603335",
       "reason": "Missing semantic test evidence",
       "rawText": "You can summon/deploy a \"Chemy\" from your Trash.",
       "irExcerpt": {
@@ -129408,6 +130547,20 @@
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
+      "cardNumber": "LM19-U02",
+      "abilityId": "LM19-U02#AB_WHEN_ATTACKS_NONE_LV2_65f864df0c5941f00df4373f284e4ddd1e2be83deb61e281394aec1273582a0b_5e0735f898a167bd8694a243e3efb697",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
       "cardNumber": "LM19-U04",
       "abilityId": "LM19-U04#AB_WHEN_SUMMONED_NONE_LV1_LV2_31780654b68658f1f5d7314e759c5cebd399b038c8b3b4ea16c428e66a1ba343_6f79b82be2a8cc9153ba0485b91c7d12",
       "reason": "Unverified target semantics",
@@ -130511,6 +131664,20 @@
         }
       },
       "affectedSubsystem": "engine/selectors.js + compiler"
+    },
+    {
+      "cardNumber": "P24-04",
+      "abilityId": "P24-04#AB_FLASH_NONE_LV2_LV3_0706d438dcd5671a675862a7cbfb302533bb02d7eb500847b0810fc559dd3ee5_fdfd078f3b8f771189cfdb995bcf4033",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
       "cardNumber": "26RBS02-064",
@@ -141250,6 +142417,20 @@
       "affectedSubsystem": "engine/triggers.js"
     },
     {
+      "cardNumber": "P24-04",
+      "abilityId": "P24-04#AB_FLASH_NONE_LV2_LV3_0706d438dcd5671a675862a7cbfb302533bb02d7eb500847b0810fc559dd3ee5_fdfd078f3b8f771189cfdb995bcf4033",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
       "cardNumber": "P24-11",
       "abilityId": "P24-11#AB_PASSIVE_NONE_LV1_LV2_LV3_950a35712229737ccd60e1e4d7180e794cf3968e856b14c2044cf03859c40017_8053f7eeb51f8c8f6ce580259d35ade2",
       "reason": "Missing semantic test evidence",
@@ -141932,6 +143113,20 @@
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
+      "cardNumber": "PB08-CP01",
+      "abilityId": "PB08-CP01#AB_WHEN_SUMMONED_NONE_LV1_LV2_522c0e74da93c7bc6fcbafcc029717dbeb61cb43f0a62963108bde63d3e52619_a0782d3ed4d6cc35469509ce903eb96e",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
       "cardNumber": "PB08-CP03",
       "abilityId": "PB08-CP03#AB_ATTACK_STEP_NONE_LV2_LV3_9140daced6b2c14699d248afaa033f7747153f12b7cf7a96e6dfa17ae8632bb5_f26d460cd05198fe5752a8a9cc4b38b5",
       "reason": "Missing semantic test evidence",
@@ -142293,6 +143488,20 @@
       "affectedSubsystem": "engine/selectors.js + compiler"
     },
     {
+      "cardNumber": "PB18-U01",
+      "abilityId": "PB18-U01#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_b37320cac52557a168bbfb7d0a3a56aaf734a61d7d27f6a470782129c77aa7d9_d445320ebdfb352b10d46816d80c9a68",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
       "cardNumber": "PB18-U05",
       "abilityId": "PB18-U05#AB_ATTACK_STEP_NONE_LV2_LV3_8e5ccd8d7bfb3befc3026177018663566d30aaea6f8cc64dec2e715e4586bfb6_2eec23d34d02efbf9a2b900da4135976",
       "reason": "Unverified target semantics",
@@ -142464,7 +143673,7 @@
     },
     {
       "cardNumber": "PB33-005",
-      "abilityId": "PB33-005#AB_WHEN_DEPLOYED_NONE_LV1_LV2_8c82d7cc1a2a5247619a49f3dd3d3b1801a2dd8f3131b012d47c6d437470d1fa_f59f4202f89f7f5d18cae9326bd6a94c",
+      "abilityId": "PB33-005#AB_WHEN_DEPLOYED_NONE_LV1_LV2_35cec7ad31ba4fc7bca4f02df274906414c60fc062afcaafd95e1947041ecc26_7aa527f49dbfb3fb23496826fe650671",
       "reason": "Unverified trigger timing",
       "rawText": "Draw two cards, then discard two cards from your Hand. Then, when it's not deployed from the Hand, destroy an opposing Spirit/Ultimate with the lowest cost.",
       "irExcerpt": {
@@ -142474,7 +143683,7 @@
     },
     {
       "cardNumber": "PB33-005",
-      "abilityId": "PB33-005#AB_END_OF_TURN_NONE_LV2_1a5b2a106727eb29fc0e41420992cd8da281ec1b0bc2494314f8626574557ff5_00c1e9992b1206010f4ccd79b174068e",
+      "abilityId": "PB33-005#AB_END_OF_TURN_NONE_LV2_cdbc9f144a62996fb0b2dc4f97e6672760a1bd2e94bf4f2ac914c6283b93d7fb_32291262bc597efc636a2f6019f5f51d",
       "reason": "Unverified trigger timing",
       "rawText": "You can refresh two \"Azure Wave\" family Spirits you control.",
       "irExcerpt": {
@@ -143810,11 +145019,15 @@
     },
     {
       "cardNumber": "PC03-004",
-      "abilityId": "PC03-004#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_557781b1bd1e240d401b67fd543ba3363cdb1c86a2955a28a8991c1316d7bdd4_758d4fdaa8a59b35ff5ddfd0b99f2ee5",
-      "reason": "Missing or contradictory IR parameters",
-      "rawText": "By discarding this Mirage",
+      "abilityId": "PC03-004#AB_MAIN_NONE_LV1_LV2_LV3_3fa76a4411d353e0bad6421471038b27c8371ecda7aadd1bd658bc5c04f92b18_190abee8bd1f8fc9f5f52eb3890cd3e3",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
       "irExcerpt": {
-        "op": "DISCARD_MIRAGE_COST"
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -144092,27 +145305,17 @@
     },
     {
       "cardNumber": "PC04-X02",
-      "abilityId": "PC04-X02#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_b585aa23e34a07e246af22e07829e9518f9eb34ec2187bec8f6e2925df5bffd0_328046db570837c5e010715fa72c287f",
-      "reason": "Missing or contradictory IR parameters",
-      "rawText": "stack this onto your target Spirit.",
+      "abilityId": "PC04-X02#AB_WHEN_ADVENTS_NONE_LV1_LV2_LV3_fd7c04250692f7327c0fa8c1831a6d4048ab833abb4ffb3f91f6675d0197faf4_8cf92fa7234a2258041ca593803a40e7",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
       "irExcerpt": {
-        "op": "STACK_CARD"
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
-    },
-    {
-      "cardNumber": "PC04-X02",
-      "abilityId": "PC04-X02#AB_ATTACK_STEP_NONE_LV2_LV3_65480ed4b481cc7ad1abf7a6d973c966d04c0006b0b73f0b60cc3646e4477fcc_ed0eb82a2ede964f567255394d5e0803",
-      "reason": "Unverified target semantics",
-      "rawText": "return an opposing Spirit with a cost equal or inferior to this Spirit's to the deckbottom.",
-      "irExcerpt": {
-        "op": "BOUNCE",
-        "count": 1,
-        "target": {
-          "side": "either"
-        }
-      },
-      "affectedSubsystem": "engine/selectors.js + compiler"
     },
     {
       "cardNumber": "PC06-002",
@@ -146142,6 +147345,20 @@
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
+      "cardNumber": "SD02-017",
+      "abilityId": "SD02-017#AB_MAIN_NONE_LV1_LV2_LV3_f92d8a9db22072d6e9fc98e3a2acf218d07f917f6c3a936444f343e3e5096a6f_a9e73c69eb88c68ebffda82c13897d9d",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
+    },
+    {
       "cardNumber": "SD02-005",
       "abilityId": "SD02-005#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_7f38fc96e74ff4f00a775b59325e53409279975a6f9893639ac06ed6a1ead182_1c5f9af8587e830b3da31a5b58bd7256",
       "reason": "Missing semantic test evidence",
@@ -147174,6 +148391,20 @@
         "timing": "WHEN_BATTLES"
       },
       "affectedSubsystem": "engine/triggers.js"
+    },
+    {
+      "cardNumber": "SD24-013",
+      "abilityId": "SD24-013#AB_BURST_NONE_LV1_LV2_LV3_23e68942bf6b7b17b62187c8df2172f227e5b5347769d3277550db1163dd0e18_de0cfbeeacd491479cc327f8a776deb6",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard a card from your Hand.",
+      "irExcerpt": {
+        "op": "DISCARD_HAND",
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
+      },
+      "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
     {
       "cardNumber": "SD24-013",
@@ -152836,12 +154067,15 @@
     },
     {
       "cardNumber": "SD65-005",
-      "abilityId": "SD65-005#AB_BURST_NONE_LV1_LV2_LV3_c240cb65aed4440ac53d851567cae4059f6696f95abdcc4aca071e6e25be27b0_2feb57da4d9d923a572194da1b54aeed",
+      "abilityId": "SD65-005#AB_BURST_NONE_LV1_LV2_LV3_957aa16dd28ef7ca97b440fdff90b7e630472feec78b6d63de8cd4e114031186_dd17a3362efa6a3dc063a3a9ff9f52cb",
       "reason": "Missing semantic test evidence",
-      "rawText": "discard a Magic card among them.",
+      "rawText": "discard a card from your Hand.",
       "irExcerpt": {
         "op": "DISCARD_HAND",
-        "cardType": "Magic"
+        "count": 1,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },
@@ -153219,11 +154453,15 @@
     },
     {
       "cardNumber": "SD70-CX01",
-      "abilityId": "SD70-CX01#AB_PASSIVE_NONE_LV1_LV2_LV3_25a27507aa9c51a20629af395bcf940b2e9c51b28700baf8ed15e3d3be565d11_8558e1ec21b1ffff6cbd5bb61c9bded8",
-      "reason": "Missing or contradictory IR parameters",
-      "rawText": "While this card is in Soul State, you can [Contract Advent] onto it.",
+      "abilityId": "SD70-CX01#AB_TURN_TRIGGER_NONE_LV1_LV2_e217116373f5e1839f3064a65ee585a12efdeb1f210e9a33a1a0629e53e00b14_50aa7d2dbcec926565649955c1ca92f3",
+      "reason": "Missing semantic test evidence",
+      "rawText": "discard two cards from your Hand.",
       "irExcerpt": {
-        "op": "CONTRACT_ADVENT_RULE"
+        "op": "DISCARD_HAND",
+        "count": 2,
+        "upTo": false,
+        "filter": null,
+        "chooser": "self"
       },
       "affectedSubsystem": "compiler/clause_patterns.js + engine/ops/index.js"
     },

@@ -187,7 +187,8 @@ export function createEngineStateFromLegacy(duelState) {
     player.openCards = (legacy.openCards || []).map(card => mapper.toEngine(card, side)).filter(Boolean);
     player.burst = mapper.toEngine(legacy.burst || legacy.burstCard, side);
     player.mirage = mapper.toEngine(legacy.mirage, side);
-    player.nexus = (legacy.nexus || legacy.nexusCards || []).map(card => mapper.toEngine(card, side)).filter(Boolean);
+    // Nexuses are represented as field stacks in player.field (avoid duplicate entries across player.nexus and player.field)
+    player.nexus = [];
     player.revealed = (legacy.revealed || legacy.revealedCards || []).map(card => mapper.toEngine(card, side)).filter(Boolean);
     player.burstSetThisTurn = Boolean(legacy.burstSetThisTurn);
     player.mirageSetThisTurn = Boolean(legacy.mirageSetThisTurn);
@@ -298,6 +299,15 @@ export function syncEngineStateToLegacy(state, duelState, mapper) {
       if ((stack.top.type || '').toLowerCase().includes('nexus')) nexusCards.push(card);
       else fieldCards.push(card);
     }
+    for (const nxEntry of enginePlayer.nexus || []) {
+      const nxTop = nxEntry?.top || nxEntry;
+      if (!nxTop) continue;
+      const card = mapper.toLegacy(nxTop);
+      if (!card) continue;
+      if (!nexusCards.some(existing => (existing.uid && card.uid && existing.uid === card.uid) || (existing.id && card.id && existing.id === card.id))) {
+        nexusCards.push(card);
+      }
+    }
     legacy.field = fieldCards;
     legacy.nexus = nexusCards;
     legacy.nexusCards = nexusCards;
@@ -350,8 +360,30 @@ export function pruneLegacyModifiers(duelState, expiryScope = 'BATTLE') {
 }
 
 function selectionKey(item) {
+  if (typeof item === 'string' || typeof item === 'number') return String(item);
+  if (item?.candidateId) return String(item.candidateId);
   const card = item?.card || item?.stack?.top || item;
   return card?.uid || card?.id || item?.stack?.id || item?.id || null;
+}
+
+function candidateMatchesKey(candidate, keySet, allCandidateIds = null) {
+  if (!candidate || !keySet.size) return false;
+  if (candidate.candidateId && keySet.has(String(candidate.candidateId))) return true;
+  // If the caller returned canonical candidateIds, do not fall back to cross-zone card/uid matching
+  if (allCandidateIds && Array.from(keySet).some(k => allCandidateIds.has(k))) {
+    return false;
+  }
+  const keys = [
+    selectionKey(candidate),
+    candidate.id,
+    candidate.uid,
+    candidate.card?.uid,
+    candidate.card?.id,
+    candidate.stack?.id,
+    candidate.stack?.top?.uid,
+    candidate.stack?.top?.id
+  ].filter(Boolean).map(String);
+  return keys.some(k => keySet.has(k));
 }
 
 function bridgePrompt(prompt, mapper, promptResolver) {
@@ -360,22 +392,59 @@ function bridgePrompt(prompt, mapper, promptResolver) {
       if (!promptResolver) return new DefaultPromptResolver().choose(data);
       const exposed = {
         ...data,
-        candidates: (data.candidates || []).map(candidate => {
+        candidates: (data.candidates || []).map((candidate, idx) => {
+          const candidateId = candidate?.candidateId || (candidate?.stack?.id ? `field:${candidate.side || candidate.stack.owner || 'player'}:${candidate.stack.id}` : null) || `cand_${idx}`;
+          if (candidate && typeof candidate === 'object' && !candidate.candidateId) {
+            candidate.candidateId = candidateId;
+          }
+          const baseMeta = {
+            candidateId,
+            zone: candidate?.zone || (candidate?.stack ? 'field' : (candidate?.card?.zone || null)),
+            side: candidate?.side || candidate?.stack?.owner || null,
+            stackId: candidate?.stackId || candidate?.stack?.id || null,
+            cardId: candidate?.cardId || candidate?.card?.id || candidate?.stack?.top?.id || null
+          };
           if (candidate?.stack?.top) {
             const legacyCard = mapper.toLegacy(candidate.stack.top);
-            return { ...candidate, card: legacyCard || candidate.card, legacyCard, legacyStackId: candidate.stack.id };
+            return { ...candidate, ...baseMeta, card: legacyCard || candidate.card, legacyCard, legacyStackId: candidate.stack.id };
           }
           if (candidate?.card?.id) {
             const legacyCard = mapper.toLegacy(candidate.card);
-            return { ...candidate, card: legacyCard || candidate.card, legacyCard };
+            return { ...candidate, ...baseMeta, card: legacyCard || candidate.card, legacyCard };
           }
-          return candidate;
+          return { ...candidate, ...baseMeta };
         })
       };
+      const allCandidateIds = new Set(
+        (data.candidates || []).map(c => c?.candidateId).filter(Boolean).map(String)
+      );
+      function extractAllKeys(item) {
+        const keys = [];
+        if (typeof item === 'string' || typeof item === 'number') {
+          keys.push(String(item));
+        } else if (item) {
+          if (item.candidateId) keys.push(String(item.candidateId));
+          if (item.id) keys.push(String(item.id));
+          if (item.uid) keys.push(String(item.uid));
+          const card = item.card || item.stack?.top;
+          if (card?.uid) keys.push(String(card.uid));
+          if (card?.id) keys.push(String(card.id));
+          if (item.stack?.id) keys.push(String(item.stack.id));
+        }
+        return keys;
+      }
       const selection = await promptResolver.choose(exposed);
-      if (!Array.isArray(selection) || !data.candidates) return selection;
-      const selectedKeys = new Set(selection.map(selectionKey).filter(Boolean));
-      return data.candidates.filter(candidate => selectedKeys.has(selectionKey(candidate)));
+      if (!data.candidates) return selection;
+      if (Array.isArray(selection)) {
+        const selectedKeys = new Set(selection.flatMap(extractAllKeys).filter(Boolean).map(String));
+        return data.candidates.filter(candidate => candidateMatchesKey(candidate, selectedKeys, allCandidateIds));
+      }
+      if (selection && typeof selection === 'object' && Array.isArray(selection.selected)) {
+        const selectedKeys = new Set(selection.selected.flatMap(extractAllKeys).filter(Boolean).map(String));
+        const mapped = data.candidates.filter(candidate => candidateMatchesKey(candidate, selectedKeys, allCandidateIds));
+        return { ...selection, selected: mapped };
+      }
+      return selection;
     }
   };
 }

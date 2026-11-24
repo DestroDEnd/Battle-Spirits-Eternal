@@ -1,0 +1,89 @@
+<USER_REQUEST>
+# PHASE M.3.2 — UNIVERSAL ACTION AUTHORITY, RESPONSE WINDOW ENFORCEMENT & FLASH TIMING REMEDIATION
+
+## PROJECT
+
+Battle Spirits Eternal (BSP)
+
+Workspace: `C:\Users\namis\Downloads\BSP`
+
+Target phases:
+- M.2 — Persistent Session Security and Transaction Integrity
+- M.3 — Rules-Driven Priority and Response Windows
+- M.3.1 — Flash Timing Scope and Card-Specific Restrictions
+- M.3.2 — Comprehensive Corrective Implementation
+
+## PRIMARY OBJECTIVE
+
+Perform a comprehensive architectural remediation of the defects independently reproduced after M.2, M.3 and M.3.1.
+
+The engine currently has a response-window architecture, but certain ordinary actions and direct engine methods can bypass it. Additionally, some Flash abilities still use outdated Attack-Step-only restrictions, and Flash timing validation does not consistently enforce actual response-window ownership.
+
+The objective is to make **the engine the sole authority for every action, timing window, priority decision, and legal Flash activation**.
+
+Do not simply change UI controls or add superficial checks to make tests pass.
+
+Fix the actual engine execution paths, session action router, timing classifier, compiler integration, response-window manager, persistence integration, and browser interface.
+
+Work sequentially through every work package below. Do not stop after the first successful test suite.
+
+---
+
+# PHASE A — BASELINE INSPECTION AND DEFECT REPRODUCTION
+
+Before modifying anything:
+
+1. Inspect the existing implementations of:
+   - `engine/index.js`
+   - `engine/response_window.js`
+   - `engine/windows.js`
+   - `engine/flash_timing.js`
+   - `engine/session_manager.js`
+   - `engine/session_store.js`
+   - `engine/state_serialization.js`
+   - `engine/interaction.js`
+   - `compiler/header_parser.js`
+   - `battle_arena.js`
+   - Existing M.2, M.3 and M.3.1 tests.
+
+2. Review the actual completion reports and acceptance matrices under:
+   - `reports/phase_m2/`
+   - `reports/phase_m3_response_windows/`
+   - `reports/phase_m3_1_flash_timing_corr
+<truncated 28349 bytes>
+ll of the following are demonstrated:
+
+- No ordinary action can bypass an active response window.
+- No direct engine method can bypass Flash 1, block declaration, Flash 2, or legitimate battle resolution.
+- Only the authenticated player holding priority can act.
+- Generic Flash is usable during the controller's Main Step.
+- Generic Flash is usable during valid battle Flash Timing windows.
+- Card-specific timing qualifiers are correctly enforced.
+- Triggered Flash abilities are not treated as voluntary Flash actions.
+- Failed Flash actions do not consume priority or mutate committed game state.
+- Successful Flash actions reset consecutive passes and return priority correctly.
+- Flash 1 and Flash 2 close only after two consecutive passes.
+- Flash 2 occurs only after a valid block.
+- Human-vs-human games require actual human decisions from both players.
+- AI and headless execution modes remain functional.
+- Active windows survive refresh, reconnect, and server restart.
+- M.2 security and atomic persistence guarantees remain intact.
+- New tests and relevant existing regression tests pass.
+- Genuine two-browser E2E tests pass.
+- Master regression totals are accurately reported.
+
+If even one Critical or High severity defect remains, mark the phase **CONDITIONALLY ACCEPTED** or **NOT ACCEPTED**, specify the defect, and do not claim full completion.
+
+## FINAL INSTRUCTION
+
+Take the time necessary to inspect and implement the entire package carefully.
+
+Do not stop after fixing the two currently failing tests. Do not merely make the known reproductions pass through special-case logic.
+
+The goal is a unified, rules-driven response and timing authority that cannot be bypassed through alternate API actions, direct engine method calls, stale interactions, browser manipulation, or incorrect Flash classification.
+
+The result must be a reliable multiplayer battle engine, not just a collection of passing test fixtures.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-11-23T09:34:30+05:30.
+</ADDITIONAL_METADATA>

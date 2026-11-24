@@ -424,19 +424,9 @@
   "SD65-005": {
     "cardNumber": "SD65-005",
     "name": "The HellseaCount Ila-Riva",
-    "keywords": [
-      {
-        "name": "Burst",
-        "parameter": "After an opposing Spirit/Ultimate's (When Summoned) effect resolves",
-        "wave": 2,
-        "hook": "burst",
-        "bracketed": true,
-        "index": 50
-      }
-    ],
+    "keywords": [],
     "abilities": [
       {
-        "id": "SD65-005#AB_PASSIVE_NONE_LV1_LV2_LV3_cd9a2c90d30be9cf137d3a155d5719741605218362a7f6a57d4693f6cfaaac9a_b5c7f004c83eebd35f074d01bab312a2",
         "type": "CONDITION",
         "header": {
           "levels": [
@@ -449,25 +439,52 @@
             "Summon Condition: You have one counter or more"
           ],
           "timing": "PASSIVE",
+          "timings": [],
           "timingLabel": "",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": ""
         },
         "rawText": "[Summon Condition: You have one counter or more]",
+        "originalAbilityText": "[Summon Condition: You have one counter or more]",
+        "abilityIndex": 0,
+        "condition": {
+          "type": "CONDITION_TEXT_FALLBACK",
+          "conditionType": "SUMMON_CONDITION",
+          "expression": "You have one counter or more",
+          "source": "NORMALIZED_TEXT"
+        },
         "clauses": [],
         "unsupported": [],
         "legacyId": "SD65-005#a0",
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "SD65-005#AB_PASSIVE_NONE_LV1_LV2_LV3_cd9a2c90d30be9cf137d3a155d5719741605218362a7f6a57d4693f6cfaaac9a_b5c7f004c83eebd35f074d01bab312a2",
         "physicalId": "SD65-005#AB_PASSIVE_NONE_LV1_LV2_LV3_cd9a2c90d30be9cf137d3a155d5719741605218362a7f6a57d4693f6cfaaac9a_b5c7f004c83eebd35f074d01bab312a2",
-        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_cd9a2c90d30be9cf137d3a155d5719741605218362a7f6a57d4693f6cfaaac9a_b5c7f004c83eebd35f074d01bab312a2"
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_cd9a2c90d30be9cf137d3a155d5719741605218362a7f6a57d4693f6cfaaac9a_b5c7f004c83eebd35f074d01bab312a2",
+        "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_f70ac8a10d79a9296dfc2c08d758cfd741aec5836539981da7fb52798fc8e523_527edad9431ed08ca656f9003c5473a3",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "SD65-005#AB_BURST_NONE_LV1_LV2_LV3_c240cb65aed4440ac53d851567cae4059f6696f95abdcc4aca071e6e25be27b0_2feb57da4d9d923a572194da1b54aeed",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -478,20 +495,32 @@
           "levelExplicit": false,
           "prefixes": [],
           "timing": "BURST",
+          "timings": [],
           "timingLabel": "Burst",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "BURST"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": "AFTER_OPPONENT_SUMMON_EFFECT",
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Draw two cards, then discard a card from your Hand. Then, if this Burst was activated via your \"Evil God\" family effect, look at the entire opposing Hand, and discard a Magic card among them. After this effect resolves, summon this card without paying the cost. Then, by sending a core from your Field/Reserve to the Trash, set a Burst card from your Hand."
         },
+        "originalAbilityText": "[Burst: After an opposing Spirit/Ultimate's (When Summoned) effect resolves]\nDraw two cards, then discard a card from your Hand. Then, if this Burst was activated via your \"Evil God\" family effect, look at the entire opposing Hand, and discard a Magic card among them. After this effect resolves, summon this card without paying the cost. Then, by sending a core from your Field/Reserve to the Trash, set a Burst card from your Hand.",
+        "abilityIndex": 1,
         "clauses": [
           {
-            "rawText": "Draw two cards, then discard a card from your Hand.",
-            "cleanText": "Draw two cards, then discard a card from your Hand",
+            "rawText": "Draw two cards",
+            "originalClauseText": "Draw two cards",
+            "cleanText": "Draw two cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -505,21 +534,44 @@
             }
           },
           {
+            "rawText": "discard a card from your Hand.",
+            "originalClauseText": "discard a card from your Hand.",
+            "cleanText": "discard a card from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 1,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
+          },
+          {
             "rawText": "if this Burst was activated via your \"Evil God\" family effect, look at the entire opposing Hand",
+            "originalClauseText": "if this Burst was activated via your \"Evil God\" family effect, look at the entire opposing Hand",
             "cleanText": "look at the entire opposing Hand",
+            "clauseIndex": 2,
             "link": "then",
             "isOptional": false,
             "isCost": false,
             "condition": "if this Burst was activated via your \"Evil God\" family effect",
             "duration": null,
             "op": {
-              "op": "LOOK_HAND",
-              "side": "opp"
+              "side": "opp",
+              "target": "HAND",
+              "op": "LOOK_HAND"
             }
           },
           {
             "rawText": "discard a Magic card among them.",
+            "originalClauseText": "discard a Magic card among them.",
             "cleanText": "discard a Magic card among them",
+            "clauseIndex": 3,
             "link": "also",
             "isOptional": false,
             "isCost": false,
@@ -532,7 +584,9 @@
           },
           {
             "rawText": "summon this card without paying the cost.",
+            "originalClauseText": "summon this card without paying the cost.",
             "cleanText": "summon this card without paying the cost",
+            "clauseIndex": 4,
             "link": "afterResolves",
             "isOptional": false,
             "isCost": false,
@@ -545,11 +599,13 @@
             }
           },
           {
-            "rawText": "by sending a core from your Field/Reserve to the Trash, set a Burst card from your Hand.",
-            "cleanText": "by sending a core from your Field/Reserve to the Trash, set a Burst card from your Hand",
+            "rawText": "By sending a core from your Field/Reserve to the Trash",
+            "originalClauseText": "By sending a core from your Field/Reserve to the Trash",
+            "cleanText": "By sending a core from your Field/Reserve to the Trash",
+            "clauseIndex": 5,
             "link": "then",
             "isOptional": false,
-            "isCost": false,
+            "isCost": true,
             "condition": null,
             "duration": null,
             "op": {
@@ -565,15 +621,46 @@
               },
               "chooser": "self"
             }
+          },
+          {
+            "rawText": "set a Burst card from your Hand.",
+            "originalClauseText": "set a Burst card from your Hand.",
+            "cleanText": "set a Burst card from your Hand",
+            "clauseIndex": 6,
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE",
+              "keyword": "Burst"
+            }
           }
         ],
         "unsupported": [],
         "legacyId": "SD65-005#a1",
-        "physicalId": "SD65-005#AB_BURST_NONE_LV1_LV2_LV3_c240cb65aed4440ac53d851567cae4059f6696f95abdcc4aca071e6e25be27b0_2feb57da4d9d923a572194da1b54aeed",
-        "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_c240cb65aed4440ac53d851567cae4059f6696f95abdcc4aca071e6e25be27b0_2feb57da4d9d923a572194da1b54aeed"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "SD65-005#AB_BURST_NONE_LV1_LV2_LV3_957aa16dd28ef7ca97b440fdff90b7e630472feec78b6d63de8cd4e114031186_dd17a3362efa6a3dc063a3a9ff9f52cb",
+        "physicalId": "SD65-005#AB_BURST_NONE_LV1_LV2_LV3_957aa16dd28ef7ca97b440fdff90b7e630472feec78b6d63de8cd4e114031186_dd17a3362efa6a3dc063a3a9ff9f52cb",
+        "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_957aa16dd28ef7ca97b440fdff90b7e630472feec78b6d63de8cd4e114031186_dd17a3362efa6a3dc063a3a9ff9f52cb",
+        "semanticIdV3": "SEM3#AB_BURST_NONE_LV1_LV2_LV3_785297a3287bf2f963190653e9d672bd2e3a0da7620b6ba76ce3e9564ff978e7_a0cc481662af5a1ea36afad4a0c9f0d7",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "BURST"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 5,
+    "compiledClausesCount": 7,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },

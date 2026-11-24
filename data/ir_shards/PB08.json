@@ -2313,7 +2313,6 @@
     "keywords": [],
     "abilities": [
       {
-        "id": "PB08-CP01#AB_WHEN_SUMMONED_NONE_LV1_LV2_c239b23b3bb1b19bcca95511b52117bde0c32e76fb0035eb6d670ff71eec90fa_5f17b4d8054362843f8de0b70d715efb",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -2323,20 +2322,34 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_SUMMONED",
+          "timings": [
+            "WHEN_SUMMONED"
+          ],
           "timingLabel": "When Summoned",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Draw two cards, then discard a card from your Hand. If this effect discards any \"Ultraman\"-named card, send five cores from any opposing Grandwalker Nexuses to the Void."
         },
+        "originalAbilityText": "[LV1][LV2] (When Summoned)\nDraw two cards, then discard a card from your Hand. If this effect discards any \"Ultraman\"-named card, send five cores from any opposing Grandwalker Nexuses to the Void.",
+        "abilityIndex": 0,
         "clauses": [
           {
-            "rawText": "Draw two cards, then discard a card from your Hand.",
-            "cleanText": "Draw two cards, then discard a card from your Hand",
+            "rawText": "Draw two cards",
+            "originalClauseText": "Draw two cards",
+            "cleanText": "Draw two cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -2350,8 +2363,28 @@
             }
           },
           {
+            "rawText": "discard a card from your Hand.",
+            "originalClauseText": "discard a card from your Hand.",
+            "cleanText": "discard a card from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 1,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
+          },
+          {
             "rawText": "If this effect discards any \"Ultraman\"-named card, send five cores from any opposing Grandwalker Nexuses to the Void.",
+            "originalClauseText": "If this effect discards any \"Ultraman\"-named card, send five cores from any opposing Grandwalker Nexuses to the Void.",
             "cleanText": "send five cores from any opposing Grandwalker Nexuses to the Void",
+            "clauseIndex": 2,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -2359,17 +2392,35 @@
             "duration": null,
             "op": {
               "op": "MOVE_CORE",
-              "isCost": false
+              "count": 5,
+              "to": {
+                "zone": "void"
+              }
             }
           }
         ],
         "unsupported": [],
         "legacyId": "PB08-CP01#a0",
-        "physicalId": "PB08-CP01#AB_WHEN_SUMMONED_NONE_LV1_LV2_c239b23b3bb1b19bcca95511b52117bde0c32e76fb0035eb6d670ff71eec90fa_5f17b4d8054362843f8de0b70d715efb",
-        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_c239b23b3bb1b19bcca95511b52117bde0c32e76fb0035eb6d670ff71eec90fa_5f17b4d8054362843f8de0b70d715efb"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "PB08-CP01#AB_WHEN_SUMMONED_NONE_LV1_LV2_522c0e74da93c7bc6fcbafcc029717dbeb61cb43f0a62963108bde63d3e52619_a0782d3ed4d6cc35469509ce903eb96e",
+        "physicalId": "PB08-CP01#AB_WHEN_SUMMONED_NONE_LV1_LV2_522c0e74da93c7bc6fcbafcc029717dbeb61cb43f0a62963108bde63d3e52619_a0782d3ed4d6cc35469509ce903eb96e",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_522c0e74da93c7bc6fcbafcc029717dbeb61cb43f0a62963108bde63d3e52619_a0782d3ed4d6cc35469509ce903eb96e",
+        "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_4d7360d262c7e53519889fd9c56c3a25653bb6e44766ff373169ca5109a6874a_8f332f9e26d4ddb6dc1de159d70f10df",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "PB08-CP01#AB_WHEN_ATTACKS_NONE_LV2_9d60d679599d5cda42f3511d8d09f773c6574c4d315f456f2f186ba92a62695d_548973c38ae077c69731a660edfecf8f",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -2378,20 +2429,34 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_ATTACKS",
+          "timings": [
+            "WHEN_ATTACKS"
+          ],
           "timingLabel": "When Attacks",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Ignoring the cost of Braves, destroy an opposing Cost 6 or less Spirit."
         },
+        "originalAbilityText": "[LV2] (When Attacks)\nIgnoring the cost of Braves, destroy an opposing Cost 6 or less Spirit.",
+        "abilityIndex": 1,
         "clauses": [
           {
             "rawText": "Ignoring the cost of Braves, destroy an opposing Cost 6 or less Spirit.",
+            "originalClauseText": "Ignoring the cost of Braves, destroy an opposing Cost 6 or less Spirit.",
             "cleanText": "Ignoring the cost of Braves, destroy an opposing Cost 6 or less Spirit",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -2414,11 +2479,27 @@
         ],
         "unsupported": [],
         "legacyId": "PB08-CP01#a1",
-        "physicalId": "PB08-CP01#AB_WHEN_ATTACKS_NONE_LV2_9d60d679599d5cda42f3511d8d09f773c6574c4d315f456f2f186ba92a62695d_548973c38ae077c69731a660edfecf8f",
-        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_9d60d679599d5cda42f3511d8d09f773c6574c4d315f456f2f186ba92a62695d_548973c38ae077c69731a660edfecf8f"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "PB08-CP01#AB_WHEN_ATTACKS_NONE_LV2_7df460fbbd4f78303c7e6ca347968b6d50abe26402f7342a5ff775731b6aa67f_ad507b3d8907a30a9767bd61a9ae44df",
+        "physicalId": "PB08-CP01#AB_WHEN_ATTACKS_NONE_LV2_7df460fbbd4f78303c7e6ca347968b6d50abe26402f7342a5ff775731b6aa67f_ad507b3d8907a30a9767bd61a9ae44df",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_7df460fbbd4f78303c7e6ca347968b6d50abe26402f7342a5ff775731b6aa67f_ad507b3d8907a30a9767bd61a9ae44df",
+        "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_d9b300031cbe6099fea9a52786494b92d1b0c927a227ace871c6b246d323b2f6_d34b1f3db8f0a318332bc96acf922ad2",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 3,
+    "compiledClausesCount": 4,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },

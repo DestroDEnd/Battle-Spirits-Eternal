@@ -1,0 +1,1422 @@
+<USER_REQUEST>
+# PHASE M.3.3 — BATTLE SPIRITS ETERNAL
+# INTEGRITY, SECURITY, UNIVERSAL ACTION AUTHORITY & REGRESSION CLOSURE
+
+**Project:** Battle Spirits Eternal (BSP)  
+**Workspace:** `C:\Users\namis\Downloads\BSP`  
+**Phase:** M.3.3  
+**Objective:** Resolve all independently confirmed outstanding defects identified by the Full Project Forensic Audit and the subsequent independent M.3.2 verification.
+
+**Execution requirement:** Implement fixes sequentially, verify each work package, and preserve all previously accepted functionality.
+
+---
+
+# 0. PRIMARY OBJECTIVE
+
+M.3.2 introduced centralized action authorization, response-window protection, Flash timing corrections, execution-mode enforcement, and persistence improvements.
+
+Its nine dedicated suites currently pass 37/37. However, independent verification uncovered additional defects that were not covered by its acceptance tests.
+
+The following problems must now be closed:
+
+1. Arbitrary card and core injection through the `SUMMON` session action.
+2. Direct `resolveBattleComparison()` execution while Flash 2 remains active.
+3. Failed `PLAY_CARD` operations being reported and persisted as successful actions.
+4. Unknown action types being accepted and committed as successful no-op operations.
+5. Unrestricted static-file access exposing the SQLite database and Git configuration.
+6. Server-side request forgery through the image proxy.
+7. WebSocket transport-ticket authentication not being preserved for subsequent client operations.
+8. Six existing keyword regression test failures.
+9. Incomplete universal action authorization across externally accessible engine methods.
+10. Inaccurate audit matrices and incomplete test-coverage reporting.
+
+Do not implement these as isolated patches without understanding their dependencies.
+
+The goal is to establish a genuinely authoritative game engine and a secure server boundary.
+
+---
+
+# 1. NON-NEGOTIABLE IMPLEMENTATION RULES
+
+1. Inspect the current source and current reports before modifying anything.
+2. Preserve the current working tree. Do not reset, clean, discard, overwrite or revert unrelated changes.
+3. Do not undo M2, M3, M3.1 or M3.2 implementations.
+4. Do not weaken authentication, authorization, turn restrictions, response-window restrictions or candidate validation to make tests pass.
+5. Do not delete failing tests or change their expectations merely to obtain a green test result.
+6. Do not introduce UI-side implementations of game rules.
+7. Do not add hardcoded card-specific exceptions to compensate for missing generic engine functionality.
+8. Do not fabricate card data, effects, card identifiers, keyword behavior or rules.
+9. Do not treat an operation registration or keyword specification as proof of actual runtime support.
+10. Do not log plaintext player tokens, credentials, database secrets or other private information.
+11. Do not modify the existing historical phase reports in place. Generate new M3.3 reports in the dedicated report directory.
+12. Preserve existing public API compatibility where practical. Document any intentionally rejected legacy action types.
+13. Do not silently swallow errors or convert failed operations into successful outcomes.
+14. Every fix must have a regression test that would have failed before the fix.
+
+Use the existing Eternal rules profile, current engine architecture and authoritative project specifications. Where the project's rule sources do not establish a behavior, mark it for resolution rather than inventing a rule.
+
+---
+
+# 2. PHASE A — BASELINE AND INDEPENDENT DEFECT REPRODUCTION
+
+Before fixing anything, establish the exact starting state.
+
+Record:
+
+- Git branch and HEAD commit.
+- Modified and untracked files.
+- Current engine architecture.
+- Current action authority implementation.
+- Existing M2, M3, M3.1 and M3.2 test suites.
+- Current response-window lifecycle.
+- Current server endpoints.
+- Current WebSocket ticket lifecycle.
+- Current keyword event-hook architecture.
+- Existing full-project audit findings.
+
+Reproduce these known defects in isolated test environments.
+
+### A1. Arbitrary SUMMON injection
+
+Reproduce the following scenario:
+
+- Create an authenticated human-vs-human match.
+- Set the player as active.
+- Give that player an empty hand.
+- Give that player zero reserve cores.
+- Submit a session action of type `SUMMON`.
+- Include a client-supplied card with arbitrary name, type, BP and cost.
+- Request 100 cores.
+
+Expected result:
+
+- The request must be rejected.
+- No card may appear on the field.
+- No cores may be created.
+- No card may be removed from an unrelated zone.
+- No game state, event ledger, action ledger or session version may be committed.
+
+Repeat during an active Flash 1 window when the other player holds priority.
+
+### A2. BP comparison bypass
+
+Reproduce:
+
+1. Open a valid Flash 2 response window.
+2. Keep the window open with defender priority.
+3. Directly call `game.windows.resolveBattleComparison(win)`.
+4. Observe the current behavior.
+
+Expected result:
+
+- Direct invocation must be rejected.
+- Combat state must remain unchanged.
+- Neither unit may be destroyed.
+- The Flash 2 window and its priority must remain intact.
+
+Only the legitimate response-window closure path may authorize battle comparison.
+
+### A3. Failed PLAY_CARD action
+
+Reproduce:
+
+- Player has a card in hand that requires more cores than available.
+- Submit `PLAY_CARD` through `BattleSessionManager.submitPlayerAction()`.
+- Supply a stable action ID.
+
+Expected result:
+
+- API action fails.
+- The card remains in hand.
+- No cores are moved.
+- No successful action entry is written.
+- No action-success event is emitted.
+- The session version and durable state remain unchanged.
+- Retrying with the same action ID after correcting the underlying condition must be possible.
+
+### A4. Unknown action type
+
+Submit an action with a deliberately invalid type, such as:
+
+`UNRECOGNIZED_AUDIT_ACTION`
+
+Expected result:
+
+- Explicit invalid-action rejection.
+- No successful response.
+- No action ledger entry.
+- No event ledger entry.
+- No session version increment.
+- No game state mutation.
+
+### A5. Static file disclosure
+
+Test the running HTTP server using an isolated temporary database.
+
+Attempt to request:
+
+- `/battle_spirits.db`
+- `/.git/config`
+- `/engine/session_manager.js`
+- `/data/cards_detailed.json`
+- `/reports/FULL_PROJECT_FORENSIC_AUDIT/00_EXECUTIVE_SUMMARY.md`
+- `/tests/phase_m3_2_universal_action_authority.test.js`
+- Traversal and encoded traversal variants.
+
+Expected result:
+
+Sensitive files must never be accessible through static asset delivery.
+
+### A6. Image proxy SSRF
+
+Create a separate local HTTP listener in a test harness.
+
+Attempt to access it through `/api/proxy-image`.
+
+Also test:
+
+- Localhost.
+- IPv4 loopback.
+- IPv6 loopback.
+- Private IPv4 addresses.
+- Link-local addresses.
+- Cloud metadata addresses.
+- Redirects to internal addresses.
+- Redirect chains.
+- DNS rebinding conditions, where practical.
+
+Expected result:
+
+Requests targeting non-approved internal destinations must be rejected before data is returned.
+
+### A7. WebSocket ticket authentication
+
+Reproduce:
+
+- Create a match.
+- Issue a valid single-use transport ticket.
+- Connect using the ticket.
+- Send a heartbeat.
+- Request event synchronization.
+- Submit a valid player action.
+
+Expected result:
+
+All legitimate operations must work under the authenticated ticket identity without requiring the plaintext original authentication token to be present in the WebSocket handler.
+
+### A8. Keyword regression baseline
+
+Reproduce the following six existing failures:
+
+1. Holy Life — core recovery on direct hit.
+2. Windstorm — exhausting other Spirits on block.
+3. Ultra Holy Life — draw on block and life gain on direct hit.
+4. True-Curse — destruction behavior after battle.
+5. Fierce Windstorm — exhausting opposing Spirits/Ultimates and refresh restriction.
+6. Ultra Awaken — refresh after BP comparison with the required cores.
+
+Use the existing test fixtures and inspect the actual card specifications.
+
+Record exact failures before making changes.
+
+Deliverable:
+
+`reports/phase_m3_3_integrity_and_security_closure/PHASE_M3_3_BASELINE_REPRODUCTIONS.md`
+
+---
+
+# 3. PHASE B — SUMMON AUTHORITY AND CARD-ZONE INTEGRITY
+
+**Priority: CRITICAL**
+
+Primary files:
+
+- `engine/session_manager.js`
+- `engine/action_authority.js`
+- `engine/index.js`
+- `engine/state.js`
+- `engine/zones.js`
+- `engine/response_window.js`
+
+The session manager currently has a `SUMMON` handler that constructs a card directly from client-supplied data:
+
+- Client supplies card data.
+- Engine creates a card instance.
+- Engine creates a field stack.
+- Engine assigns the requested core count.
+- Engine directly inserts the stack into the field.
+
+This is unacceptable as an authoritative player action.
+
+### Required implementation
+
+1. Remove arbitrary client-driven card construction from the public session action route.
+2. Establish which actual game mechanics require a summon action.
+3. Route legitimate player-initiated summoning through the relevant validated engine mechanics.
+4. Verify card ownership and source-zone membership.
+5. Verify source-card identity against authoritative game state.
+6. Verify card eligibility and summoning conditions.
+7. Verify payment and reserve-core availability.
+8. Verify costs, restrictions, timing, turn ownership and response-window priority.
+9. Verify the unit's resulting state, core allocation and zone transitions.
+10. Ensure a client cannot choose arbitrary BP, cost, card text, level data, keywords or compiled IR.
+
+A legitimate summon must originate from an authoritative source such as:
+
+- A card in the player's hand.
+- A validated effect resolving from an existing card.
+- A supported keyword mechanic.
+- A valid token-generation effect.
+- Another explicitly implemented rule-supported mechanism.
+
+The client must provide intent and a valid source/target reference, not authoritative card definitions or arbitrary core totals.
+
+### Action classification
+
+Distinguish carefully between:
+
+- A player-initiated action.
+- An engine-triggered summon.
+- A token creation effect.
+- A free summon from a keyword.
+- A summon produced by a resolving ability.
+
+Do not accidentally reject legitimate engine-generated summons by applying turn-player restrictions to internal effect resolution.
+
+Create clear separation between trusted internal engine operations and untrusted client requests.
+
+### Required tests
+
+Create:
+
+`tests/phase_m3_3_summon_integrity.test.js`
+
+Cover:
+
+- Forged card submission.
+- Empty-hand summon.
+- Invalid card ID.
+- Incorrect owner.
+- Arbitrary BP and cost manipulation.
+- Arbitrary core allocation.
+- Insufficient reserve cores.
+- Valid normal play/summon.
+- Valid effect-generated summon.
+- Valid token creation.
+- Restricted summon during response windows.
+- Wrong-player summon.
+- No partial mutation on failure.
+- Persistence integrity.
+
+Do not accept this work package until the original 100-core injection reproduction is impossible.
+
+---
+
+# 4. PHASE C — DIRECT COMBAT RESOLUTION AUTHORITY
+
+**Priority: CRITICAL**
+
+Primary files:
+
+- `engine/response_window.js`
+- `engine/index.js`
+- `engine/windows.js`
+- `engine/action_authority.js`
+
+### C1. Guard resolveBattleComparison()
+
+The current public method:
+
+`ResponseWindowManager.resolveBattleComparison(win)`
+
+can be directly invoked while Flash 2 is active.
+
+It currently resolves BP comparison even though the active window has not closed.
+
+Correct this.
+
+The only authorized path to comparison must be:
+
+1. Defender declares a legal block.
+2. When Blocks effects resolve.
+3. Flash 2 opens.
+4. Defender receives first priority.
+5. Players alternate priority legally.
+6. Two consecutive passes close Flash 2.
+7. The authorized close-window lifecycle invokes BP comparison.
+
+A direct call from an arbitrary caller must not bypass these conditions.
+
+### C2. Separate internal resolution from public entry points
+
+Do not merely check whether a window exists and assume that the current caller is authorized.
+
+Implement a trusted internal resolution boundary.
+
+Possible approaches include:
+
+- A private/internal resolver method.
+- A validated closed-window reference.
+- A trusted internal resolution capability or equivalent ownership mechanism.
+- A state-machine transition that only the response-window manager can initiate.
+
+Use the cleanest compatible architecture.
+
+The internal caller must prove that:
+
+- The relevant window is the correct Flash 2 window.
+- The window closed through the authorized two-pass path.
+- The block remains valid.
+- The associated combat still exists.
+- The attacker and blocker references still match.
+- The same battle has not already resolved.
+
+Prevent duplicate or replayed BP comparison.
+
+### C3. Audit all combat resolution methods
+
+Review:
+
+- `declareAttack`
+- `declareBlock`
+- `resolveDirectHit`
+- `resolveBattleComparison`
+- `endBattle`
+- `endAttack`
+- `closeWindow`
+- `onWindowClosed`
+- `handleBlockDeclaration`
+- `handlePassBlock`
+- `passPriority`
+
+Look for:
+
+- Public methods that invoke internal resolution without authorization.
+- Duplicate state transitions.
+- Premature window closure.
+- Incorrect priority ownership.
+- Resolution after combat has already ended.
+- State mutation before validation.
+- Window-stack inconsistencies.
+- Direct life damage without a valid block decision.
+
+### C4. Preserve approved combat lifecycle
+
+Do not change the current intended M3.2 response lifecycle without authoritative rules evidence.
+
+Preserve:
+
+**Blocked combat:**
+
+`ATTACK → WHEN_ATTACKS → FLASH_1 → BLOCK_DECLARATION → WHEN_BLOCKS → FLASH_2 → BP_COMPARE → BATTLE_END`
+
+**Unblocked combat:**
+
+`ATTACK → WHEN_ATTACKS → FLASH_1 → BLOCK_DECLARATION → PASS_BLOCK → DIRECT_HIT`
+
+The current design skips Flash 2 after PASS_BLOCK. Preserve this established project behavior unless an authoritative Eternal rules source in the project demonstrates otherwise.
+
+Preserve defender-first priority, alternation, consecutive-pass closure and non-forfeiture of future opportunities.
+
+### Required tests
+
+Create:
+
+`tests/phase_m3_3_combat_resolution_authority.test.js`
+
+Actually invoke every protected method.
+
+In particular, the test for BP comparison must directly invoke `resolveBattleComparison()` while Flash 2 is still active and assert that:
+
+- It fails.
+- Combat remains unchanged.
+- Both units remain on their respective fields.
+- No BP comparison event is emitted.
+- Flash 2 remains open.
+
+Then test the legitimate closure path and prove that BP comparison executes exactly once.
+
+---
+
+# 5. PHASE D — ACTION RESULT, ATOMICITY AND IDEMPOTENCY
+
+**Priority: CRITICAL**
+
+Primary files:
+
+- `engine/session_manager.js`
+- `engine/session_store.js`
+- `engine/state_serialization.js`
+
+### D1. Correct PLAY_CARD result propagation
+
+The current session router wraps the result of `game.playCard()` in a successful outer result without checking whether the engine operation succeeded.
+
+Remove this behavior.
+
+A successful session action must mean the underlying operation actually succeeded.
+
+The result contract must distinguish:
+
+- Validation failure.
+- Timing failure.
+- Insufficient cores.
+- Ownership failure.
+- Illegal target.
+- Unsupported effect.
+- Successful action.
+- Successful action with a partially unsupported effect, if the existing engine contract explicitly supports that distinction.
+
+Do not represent a failed card play as a successful action.
+
+### D2. Atomic rollback
+
+Before committing an action, verify every relevant execution result.
+
+On failure:
+
+- Restore game state.
+- Restore related response-window state.
+- Restore pending interactions when needed.
+- Restore any modified action counters or restrictions.
+- Do not append successful action history.
+- Do not emit success events.
+- Do not increment session version.
+- Do not persist a success snapshot.
+
+Preserve existing M2 transaction integrity.
+
+Pay particular attention to object references:
+
+`game.state`, `game.windows`, `game.interactionController`, and other managers must not become inconsistent after rollback.
+
+If state restoration replaces an object, ensure every manager and subsystem points to the restored authoritative state.
+
+### D3. Idempotency
+
+Preserve the M2 behavior:
+
+- Failed validation does not consume an action ID.
+- Failed engine execution does not poison retries.
+- Successful duplicate actions do not execute again.
+- Same action ID with a conflicting payload is rejected.
+- Concurrent conflicting commits cannot both succeed.
+- Events and snapshots remain consistent.
+
+### Required tests
+
+Create:
+
+`tests/phase_m3_3_action_commit_integrity.test.js`
+
+Include:
+
+- Insufficient-core card play.
+- Invalid target.
+- Invalid timing.
+- Failed ability activation.
+- Failed response action.
+- Partial effect failure.
+- Failed action retry with the same ID.
+- Duplicate successful action.
+- Concurrent duplicate request.
+- Database transaction failure.
+- Event-sequence integrity.
+- Snapshot equality before and after failure.
+
+For every failed action, compare the relevant serialized state before and after.
+
+---
+
+# 6. PHASE E — EXPLICIT ACTION-TYPE WHITELIST
+
+**Priority: HIGH**
+
+Primary files:
+
+- `engine/action_authority.js`
+- `engine/session_manager.js`
+- `engine/session_mode.js`
+
+Current concern:
+
+An unknown action type can pass through the authorization fallback and be recorded as a successful action.
+
+### Required implementation
+
+Create an explicit action contract.
+
+Every externally submitted action must map to one of:
+
+1. A supported player action.
+2. A supported response-window action.
+3. A supported interaction response.
+4. A supported administrative action.
+
+Everything else must be rejected.
+
+Do not default unknown action types to administrative authorization.
+
+For each supported action, identify:
+
+- Canonical type.
+- Aliases.
+- Player-control requirements.
+- Ownership rules.
+- Timing rules.
+- Priority rules.
+- Response-window compatibility.
+- Required payload fields.
+- Authoritative engine method.
+- Success/failure contract.
+
+Audit all direct and session-level action types.
+
+Check for aliases that skip validation or map to weaker authorization categories.
+
+### Important distinction
+
+Do not remove trusted internal operations required by the resolver.
+
+Separate public client action types from internal engine operations.
+
+The client must never be able to invoke an internal operation merely by supplying its name in an action payload.
+
+### Required tests
+
+Create:
+
+`tests/phase_m3_3_action_type_whitelist.test.js`
+
+Test unknown values, missing values, invalid aliases, unexpected payload fields and valid supported actions.
+
+Verify rejected actions leave both state and persistent ledgers unchanged.
+
+---
+
+# 7. PHASE F — UNIVERSAL PUBLIC ENGINE ACTION AUTHORITY
+
+**Priority: HIGH**
+
+M3.2 established `engine/action_authority.js`, but the complete public state-mutation surface must be audited.
+
+Inspect every externally callable method in `createGame()` and every action routed through `BattleSessionManager`.
+
+At minimum examine:
+
+- `playCard`
+- `activateAbility`
+- `declareAttack`
+- `declareBlock`
+- `resolveDirectHit`
+- `resolveBattleComparison`
+- `setBurst`
+- `setMirage`
+- `transferCore`
+- `separateBrave`
+- `performAdvent`
+- `executeAccel`
+- `executeChange`
+- `executeRelease`
+- `advanceStep`
+- `endAttack`
+- `endBattle`
+- Other discovered state-mutating player entry points.
+
+For each one, determine whether it is:
+
+- Public player intent.
+- Internal rules execution.
+- Triggered effect.
+- Administrative lifecycle operation.
+
+Apply central player authorization to public actions.
+
+Use an internal trusted execution path for legitimate rule-triggered operations.
+
+Do not blindly apply player turn rules to internal effects. A triggered effect may resolve outside the active player's normal action authority.
+
+Identify any public method that accepts arbitrary player-side parameters without authentication context.
+
+The engine's direct API and session API must agree on legality.
+
+Create:
+
+`tests/phase_m3_3_universal_engine_authority.test.js`
+
+Test direct calls and session calls separately.
+
+For each critical action, test:
+
+- Correct player.
+- Incorrect player.
+- Inactive player.
+- Wrong priority player.
+- Active response window.
+- Invalid timing.
+- Invalid ownership.
+- Invalid zone.
+- Pending interaction.
+- Finished match.
+- Execution-mode restrictions.
+
+---
+
+# 8. PHASE G — STATIC FILE AND DATABASE DISCLOSURE SECURITY
+
+**Priority: CRITICAL**
+
+Primary file:
+
+`server.js`
+
+The forensic audit reproduced unauthenticated HTTP access to:
+
+- `/battle_spirits.db`
+- `/.git/config`
+
+The static file handler must not expose the project root as a public asset directory.
+
+### Required implementation
+
+1. Identify all legitimate application pages and public assets.
+2. Establish explicit public static directories or a clear asset allowlist.
+3. Prevent serving the repository root indiscriminately.
+4. Block hidden files and directories.
+5. Block Git metadata.
+6. Block SQLite database files and database sidecars.
+7. Block source code and configuration files unless explicitly required for legitimate public operation.
+8. Block `engine/`, `compiler/`, `scripts/`, `tests/`, `reports/`, `data/` and other non-public directories.
+9. Block `.env`, credentials, private keys and environment configuration.
+10. Prevent path traversal and encoded traversal.
+11. Prevent symlink escapes from allowed public directories.
+12. Ensure requested paths resolve strictly inside approved public asset roots.
+13. Do not leak absolute filesystem paths or stack traces in HTTP errors.
+14. Preserve the existing frontend and application route functionality.
+
+Do not solve this by breaking every page route.
+
+The existing application pages must continue to load, including the lobby, arena, browser and deck-building interfaces.
+
+### Required tests
+
+Create:
+
+`tests/phase_m3_3_static_asset_security.test.js`
+
+Start the actual server on an isolated test port with an isolated temporary database.
+
+Verify:
+
+- Legitimate public HTML works.
+- Legitimate CSS, JS and images work.
+- Database URL is denied.
+- Git configuration is denied.
+- Source files are denied.
+- Private reports are denied.
+- Data files are denied.
+- Traversal attempts are denied.
+- Encoded paths are denied.
+- Symlink escape attempts are denied.
+- Error responses do not expose local filesystem information.
+
+---
+
+# 9. PHASE H — IMAGE PROXY SSRF PROTECTION
+
+**Priority: CRITICAL**
+
+Primary file:
+
+`server.js`
+
+The image proxy must not function as an unrestricted forward proxy.
+
+### Required implementation
+
+1. Determine which external artwork hosts the existing application genuinely needs.
+2. Derive a strict destination allowlist from existing legitimate artwork sources.
+3. Prefer HTTPS.
+4. Validate the URL scheme, hostname and port.
+5. Reject localhost and loopback.
+6. Reject private IPv4 ranges.
+7. Reject private IPv6 ranges.
+8. Reject link-local addresses.
+9. Reject multicast and reserved address ranges.
+10. Detect IPv4-mapped IPv6 and alternative numeric IP representations.
+11. Resolve DNS and validate all resolved addresses.
+12. Mitigate DNS rebinding by ensuring the destination actually connected to remains validated.
+13. Revalidate every redirect destination.
+14. Limit redirect count.
+15. Reject redirects to non-approved hosts.
+16. Restrict returned content types to legitimate image formats.
+17. Limit response size.
+18. Limit timeout and connection duration.
+19. Handle malformed URLs and upstream errors safely.
+20. Avoid reflecting arbitrary upstream error messages to clients.
+21. Add suitable request throttling if the existing server architecture supports it.
+
+An initial URL that points to an approved host must not be allowed to redirect to an internal address.
+
+### Required tests
+
+Create:
+
+`tests/phase_m3_3_image_proxy_security.test.js`
+
+Include:
+
+- Approved external artwork URL.
+- Unapproved external hostname.
+- Localhost.
+- IPv4 loopback.
+- IPv6 loopback.
+- Private IPv4.
+- Link-local.
+- Metadata IP.
+- Redirect to localhost.
+- Redirect to private network.
+- Redirect chain beyond limit.
+- Disallowed protocol.
+- Invalid port.
+- Oversized response.
+- Non-image response.
+- DNS validation failure.
+
+Use local test servers and mock DNS only in isolated tests. Do not send requests to real cloud metadata services or production internal systems.
+
+---
+
+# 10. PHASE I — WEBSOCKET TRANSPORT TICKET AUTHENTICATION
+
+**Priority: HIGH**
+
+Primary files:
+
+- `engine/websocket_server.js`
+- `engine/session_manager.js`
+- `engine/session_store.js`
+
+Current issue:
+
+The WebSocket server correctly redeems a transport ticket and identifies `viewerSide`, but then subsequent operations still depend on `authToken`.
+
+The ticket-authenticated connection therefore does not have a fully preserved authentication context.
+
+### Required implementation
+
+Implement a trusted connection-scoped authenticated principal.
+
+Requirements:
+
+1. Validate ticket existence.
+2. Validate ticket expiration.
+3. Validate match binding.
+4. Validate player/participant binding.
+5. Enforce single-use redemption.
+6. Bind the connection to the authenticated participant side.
+7. Preserve that identity for heartbeat handling.
+8. Preserve that identity for action submission.
+9. Preserve that identity for event synchronization.
+10. Preserve that identity for initial state retrieval.
+11. Reject actions from spectator connections.
+12. Reject cross-match operations.
+13. Reject forged player identity fields in WebSocket messages.
+14. Revoke or invalidate connection context when the session is no longer valid.
+15. Handle connection closure and listener cleanup.
+
+Do not solve this by placing the original plaintext authentication token in the URL, logs or persistent session state.
+
+Use an internal server-trusted principal or equivalent context established only after successful ticket redemption.
+
+Client-supplied identity fields must never override the authenticated connection identity.
+
+### Required tests
+
+Create:
+
+`tests/phase_m3_3_websocket_ticket_actions.test.js`
+
+Use a real WebSocket client, not merely a handshake mock.
+
+Test:
+
+- Ticket connection.
+- Heartbeat.
+- Event synchronization.
+- Valid player action.
+- Invalid player action.
+- Spectator read access.
+- Spectator mutation rejection.
+- Ticket reuse.
+- Expired ticket.
+- Wrong match.
+- Wrong participant.
+- Disconnect and reconnect.
+- Session termination.
+- Credential non-disclosure.
+
+---
+
+# 11. PHASE J — KEYWORD REGRESSION REPAIR
+
+**Priority: HIGH**
+
+Primary files:
+
+- `engine/keywords/registry.js`
+- `engine/keywords/wave1.js`
+- Other relevant keyword modules.
+- `engine/index.js`
+- `engine/response_window.js`
+- `engine/resolver.js`
+- `engine/zones.js`
+- Relevant card compiler and IR files.
+
+The previous forensic run found six failing keyword tests.
+
+Fix the underlying mechanics, not the test assertions.
+
+### Required failures to resolve
+
+**J1. Holy Life**
+
+`tests/keyword_registry.test.js`
+
+Test: Holy Life puts 1 core from Void to Life on direct hit.
+
+Investigate:
+- Correct attacker identification.
+- Correct life-damage event timing.
+- Correct source-stack lookup.
+- Correct ownership.
+- Correct transfer from Void to Life.
+- Correct interaction with combat cleanup.
+
+**J2. Windstorm**
+
+`tests/keyword_registry.test.js`
+
+Test: Windstorm exhausts other Spirits on block.
+
+Investigate:
+- Correct triggering card.
+- Correct event timing.
+- Correct identification of the attacker and blocker.
+- Correct target collection.
+- Correct distinction between friendly and opposing units.
+- Correct state changes.
+
+**J3. Ultra Holy Life**
+
+`tests/keyword_registry.test.js`
+
+Test: Draw from bottom on block and add Life on direct hit.
+
+Investigate:
+- Both mechanics separately.
+- Correct event timing.
+- Correct card ownership.
+- Correct deck-bottom draw behavior.
+- Correct life-core transfer.
+- Correct interaction with existing Holy Life mechanics.
+
+**J4. True-Curse**
+
+`tests/keyword_registry.test.js`
+
+Test: Destroy opposing Spirit/Ultimate when the relevant unit is destroyed in battle.
+
+Investigate:
+- Which unit owns the keyword.
+- Whether it triggers on the correct destruction event.
+- Correct source card identity.
+- Correct opposing target.
+- Correct timing relative to BP comparison.
+- Correct prevention of duplicate destruction.
+
+**J5. Fierce Windstorm**
+
+`tests/keyword_registry.test.js`
+
+Test: Exhaust opposing Spirit/Ultimate and freeze refresh.
+
+Investigate:
+- Correct targets.
+- Correct event.
+- Exhaustion.
+- Refresh restrictions.
+- Modifier lifetime and expiry.
+- Correct affected sides.
+
+**J6. Ultra Awaken**
+
+`tests/keywords_waves4_5_6.test.js`
+
+Test: Refresh on BP comparison if unit has at least 4 cores.
+
+Investigate:
+- Correct core-count calculation.
+- Correct BP comparison event.
+- Correct battle-stage transition.
+- Correct unit ownership.
+- Correct timing before or after battle resolution.
+- Prevention of repeated refresh triggers.
+
+### Important keyword architecture requirement
+
+The forensic report makes a broad claim that the keyword registry is completely disconnected from engine flow.
+
+Do not accept that claim without checking the current code.
+
+`engine/index.js` calls `keywords.attachToGame(game)`, and the registry uses event hooks. Trace the actual hook-registration and runtime invocation paths before drawing conclusions.
+
+Some custom keyword methods may genuinely be orphaned, but a method not directly referenced by its exact function name is not automatically unused.
+
+For every keyword examined, determine:
+
+- Registered or not.
+- Active lifecycle hook or not.
+- Runtime invocation path.
+- Relevant event types.
+- Whether the method is called through a registry, callback or indirect route.
+- Whether real game execution can trigger it.
+- Actual test coverage.
+- Actual behavioral status.
+
+Fix verified missing runtime connections where they prevent required mechanics.
+
+Do not indiscriminately connect every keyword to every event.
+
+Do not change card text or card specifications to make broken mechanics appear correct.
+
+### Required tests
+
+Create:
+
+`tests/phase_m3_3_keyword_runtime_regressions.test.js`
+
+All six previous failures must be resolved through actual game execution.
+
+Also test at least one real card-level scenario for each fixed keyword, using authoritative card data wherever available.
+
+---
+
+# 12. PHASE K — AUDIT REPORT AND CARD COVERAGE CORRECTION
+
+**Priority: MEDIUM**
+
+The Full Project Forensic Audit contains useful findings but several inaccurate or incomplete matrices.
+
+Correct the reporting methodology as part of this phase.
+
+### K1. Card support matrix
+
+The existing forensic `CARD_SUPPORT_MATRIX.csv` has aggregate card-type rows rather than one record per card.
+
+Create a genuine card-level matrix covering the current actual corpus.
+
+For every card, record:
+
+- Card ID.
+- Card name.
+- Card type.
+- Relevant source record.
+- Ability count.
+- Keyword list.
+- Compiled IR availability.
+- Compilation result.
+- Parsed operations.
+- Runtime operation support.
+- Timing metadata.
+- Source-zone requirements.
+- Runtime support evidence.
+- Test coverage.
+- Known gaps.
+- Final classification.
+
+Classifications must distinguish:
+
+- FULLY_IMPLEMENTED_AND_VERIFIED.
+- IMPLEMENTED_BUT_PARTIALLY_VERIFIED.
+- PASSIVE_OR_DELEGATED_AND_VERIFIED.
+- CORPUS_REPRESENTED_ONLY.
+- SPECIFIED_BUT_NOT_IMPLEMENTED.
+- UNRESOLVED_RULES.
+- INVALID_OR_UNCOMPILABLE.
+
+Do not assign blanket percentages.
+
+Do not classify every compiled card as implemented.
+
+### K2. Keyword support matrix
+
+Recalculate the current number of keywords from the actual source.
+
+For each keyword, include:
+
+- Name.
+- Wave.
+- Compiler catalog entry.
+- Runtime registry entry.
+- Lifecycle hooks.
+- Custom methods.
+- Runtime invocation path.
+- Actual tests.
+- Verified behavior.
+- Unresolved variants.
+- Classification.
+
+Avoid false positives from direct text searches when the code uses indirect dispatch or event hooks.
+
+### K3. Test inventory
+
+Distinguish:
+
+- Discovered test files.
+- Authoritative master suites.
+- Actually executed test files.
+- Tests passed.
+- Tests failed.
+- Skipped tests.
+- Blocked tests.
+- Timed-out tests.
+- Tests excluded with reasons.
+
+Do not report a test as passed unless it was actually executed with reliable process evidence.
+
+### K4. Historical claim reconciliation
+
+Update the phase claim comparison for:
+
+- M.1.
+- M.2.
+- M.3.
+- M.3.1.
+- M.3.2.
+- W.1/W.2 keyword work.
+- Relevant compiler and card-support work.
+
+Use these classifications:
+
+- VERIFIED.
+- PARTIALLY VERIFIED.
+- CONTRADICTED.
+- NOT VERIFIED.
+- OBSOLETE.
+
+Explicitly identify the earlier inaccurate findings that have already been fixed.
+
+Do not carry stale defects into the remaining remediation backlog.
+
+---
+
+# 13. PHASE L — FULL REGRESSION AND REAL BROWSER VALIDATION
+
+This work package is mandatory.
+
+Re-run all relevant suites after implementation.
+
+### L1. Preserve M2
+
+Run the seven M2 suites:
+
+- Credential isolation.
+- Action authority.
+- Action idempotency.
+- Transaction integrity.
+- Match discovery security.
+- Transport security.
+- Genuine two-human browser E2E.
+
+Preserve the established 49/49 focused-suite evidence from the earlier independent verification.
+
+### L2. Preserve M3 and M3.1
+
+Run:
+
+- `phase_m3_response_window_manager.test.js`
+- `phase_m3_flash_priority.test.js`
+- `phase_m3_block_and_second_flash.test.js`
+- `phase_m3_action_progression_lock.test.js`
+- All four M3.1 suites.
+
+Preserve the generic Flash, card-specific restrictions, event-triggered Flash and response-priority behavior.
+
+### L3. Preserve M3.2
+
+Run all nine suites:
+
+1. `phase_m3_2_universal_action_authority.test.js`
+2. `phase_m3_2_direct_engine_method_guards.test.js`
+3. `phase_m3_2_flash_execution_integrity.test.js`
+4. `phase_m3_2_flash_timing_validation.test.js`
+5. `phase_m3_2_flash_compiler_reconciliation.test.js`
+6. `phase_m3_2_response_window_lifecycle.test.js`
+7. `phase_m3_2_response_window_persistence.test.js`
+8. `phase_m3_2_two_human_browser_e2e.test.js`
+9. `phase_m3_2_execution_modes.test.js`
+
+### L4. Add M3.3 suites
+
+Run all newly created M3.3 tests.
+
+### L5. Full master verification
+
+Inspect `scripts/run_master_verification.mjs` before executing it.
+
+The current runner writes reports into multiple historical phase directories. Do not overwrite the existing historical reports as a side effect of testing.
+
+Run the master verification using an isolated report destination or a safe execution copy.
+
+Record:
+- Actual discovered files.
+- Authoritative master suites.
+- Executed suites.
+- Exact test count.
+- Pass/fail count.
+- Skipped count.
+- Exit code.
+- Timeouts.
+- Environment limitations.
+
+Do not claim full project verification if the process did not finish.
+
+### L6. Two-human browser lifecycle
+
+Use two independent browser contexts with separate authentic player credentials.
+
+Test:
+
+1. Match creation.
+2. Player 2 joining.
+3. Initial state synchronization.
+4. Attack declaration.
+5. Flash 1 defender priority.
+6. Flash action.
+7. Priority alternation.
+8. Invalid opponent action.
+9. Block declaration.
+10. When Blocks.
+11. Flash 2 defender priority.
+12. Flash action.
+13. Consecutive passes.
+14. BP comparison.
+15. Unblocked attack.
+16. PASS_BLOCK and direct hit.
+17. Invalid direct engine calls.
+18. Refresh during Flash.
+19. Reconnect during Flash.
+20. Server-side restoration.
+21. Action retry after interrupted connection.
+22. Match termination.
+
+Do not claim complete browser combat verification based only on unit tests or simulated DOM controls.
+
+---
+
+# 14. REQUIRED NEW TEST FILES
+
+Create dedicated suites, keeping them modular:
+
+1. `tests/phase_m3_3_summon_integrity.test.js`
+2. `tests/phase_m3_3_combat_resolution_authority.test.js`
+3. `tests/phase_m3_3_action_commit_integrity.test.js`
+4. `tests/phase_m3_3_action_type_whitelist.test.js`
+5. `tests/phase_m3_3_universal_engine_authority.test.js`
+6. `tests/phase_m3_3_static_asset_security.test.js`
+7. `tests/phase_m3_3_image_proxy_security.test.js`
+8. `tests/phase_m3_3_websocket_ticket_actions.test.js`
+9. `tests/phase_m3_3_keyword_runtime_regressions.test.js`
+10. `tests/phase_m3_3_two_human_browser_regression.test.js`
+11. `tests/phase_m3_3_session_restore_and_reconnect.test.js`
+12. `tests/phase_m3_3_audit_matrix_accuracy.test.js`
+
+Tests must assert real outcomes, not merely that methods or managers exist.
+
+Where possible, each security test should reproduce the exploit first, then assert that the corrected implementation rejects it.
+
+---
+
+# 15. IMPLEMENTATION ORDER AND DEPENDENCIES
+
+Work sequentially in the following order:
+
+| Order | Work package | Priority |
+|---|---|---|
+| A | Baseline and defect reproduction | Mandatory |
+| B | SUMMON authority and card integrity | Critical |
+| C | Direct combat resolution authority | Critical |
+| D | Action result and transaction correctness | Critical |
+| E | Action-type whitelist | High |
+| F | Universal public action authorization | High |
+| G | Static file isolation | Critical |
+| H | Image proxy SSRF protection | Critical |
+| I | WebSocket ticket authentication | High |
+| J | Keyword regression repairs | High |
+| K | Audit matrices and documentation | Medium |
+| L | Full regression and browser verification | Mandatory |
+
+After each work package:
+
+1. Run the targeted tests.
+2. Confirm its original reproduction now fails safely.
+3. Run the nearest relevant pre-existing regression tests.
+4. Inspect the modified source.
+5. Record remaining limitations.
+6. Continue only after its acceptance criteria pass.
+
+If one fix reveals a dependency in another module, trace and resolve it rather than adding a one-off bypass.
+
+Do not skip a work package because another test happens to pass.
+
+---
+
+# 16. REQUIRED FINAL REPORT DIRECTORY
+
+Create:
+
+`reports/phase_m3_3_integrity_and_security_closure/`
+
+Produce:
+
+1. `00_EXECUTIVE_SUMMARY.md`
+2. `01_BASELINE_AND_DEFECT_REPRODUCTIONS.md`
+3. `02_SUMMON_AND_CARD_INTEGRITY.md`
+4. `03_COMBAT_RESOLUTION_AUTHORITY.md`
+5. `04_ACTION_TRANSACTION_AND_IDEMPOTENCY.md`
+6. `05_ACTION_WHITELIST_AND_AUTHORITY.md`
+7. `06_STATIC_FILE_SECURITY.md`
+8. `07_IMAGE_PROXY_SSRF_SECURITY.md`
+9. `08_WEBSOCKET_TICKET_AUTHENTICATION.md`
+10. `09_KEYWORD_REGRESSION_REPAIRS.md`
+11. `10_FULL_REGRESSION_AND_BROWSER_E2E.md`
+12. `11_CARD_AND_KEYWORD_COVERAGE.md`
+13. `12_HISTORICAL_PHASE_CLAIM_RECONCILIATION.md`
+14. `13_REMAINING_LIMITATIONS.md`
+15. `14_FINAL_ACCEPTANCE_MATRIX.csv`
+16. `15_TEST_EXECUTION_LOG.md`
+
+Machine-readable files:
+
+- `M3_3_FINDINGS.json`
+- `M3_3_FINDINGS.csv`
+- `M3_3_TEST_INVENTORY.csv`
+- `M3_3_ACTION_AUTHORITY_MATRIX.csv`
+- `M3_3_KEYWORD_SUPPORT_MATRIX.csv`
+- `M3_3_CARD_SUPPORT_MATRIX.csv`
+- `M3_3_PHASE_CLAIM_MATRIX.csv`
+
+All JSON must parse. CSVs must use stable identifiers and consistent column definitions.
+
+Every finding must include:
+
+- Unique ID.
+- Severity.
+- Affected subsystem.
+- Exact source location.
+- Root cause.
+- Reproduction.
+- Fix implemented.
+- Regression test.
+- Execution result.
+- Acceptance status.
+
+Do not mark a finding resolved solely because its source code was modified.
+
+---
+
+# 17. FINAL ACCEPTANCE REQUIREMENTS
+
+M3.3 may be marked fully accepted only when all conditions below are satisfied.
+
+### Game integrity
+
+- [ ] Arbitrary `SUMMON` card injection is impossible.
+- [ ] Arbitrary core creation is impossible.
+- [ ] Legitimate effect-generated summons remain functional.
+- [ ] Direct BP comparison cannot bypass Flash 2.
+- [ ] Direct battle resolution cannot bypass authorized state transitions.
+- [ ] Failed player actions do not mutate authoritative state.
+- [ ] Failed player actions do not create successful durable ledger entries.
+- [ ] Unknown action types are rejected.
+- [ ] Public player action methods use consistent authorization.
+- [ ] Internal triggered effects retain legitimate engine execution authority.
+
+### Security
+
+- [ ] Static file access cannot reveal the SQLite database.
+- [ ] Static file access cannot reveal `.git` metadata.
+- [ ] Private engine, compiler, data, report and test files cannot be retrieved through public asset routes.
+- [ ] Image proxy rejects internal network destinations.
+- [ ] Redirects cannot bypass SSRF restrictions.
+- [ ] Proxy resource limits are enforced.
+- [ ] WebSocket ticket authentication persists throughout the connection.
+- [ ] WebSocket credentials and player identity cannot be forged.
+- [ ] Existing authentication and transport-ticket regression tests still pass.
+
+### Mechanics
+
+- [ ] All six keyword regression failures are resolved or have a rigorously documented evidence-based disposition.
+- [ ] Keyword runtime behavior is verified through actual game execution.
+- [ ] Existing M2, M3 and M3.1 mechanics remain intact.
+- [ ] M3.2 generic and restricted Flash behavior remains intact.
+- [ ] Combat sequencing remains correct for both blocked and unblocked attacks.
+- [ ] Response-window persistence and restoration remain intact.
+- [ ] HUMAN_VS_HUMAN retains genuine human decision authority.
+- [ ] HUMAN_VS_AI, AI_VS_AI and HEADLESS_SIMULATION remain operational.
+
+### Verification
+
+- [ ] All newly added M3.3 suites pass.
+- [ ] All M2 focused suites pass.
+- [ ] All M3.1 suites pass.
+- [ ] All M3.2 suites pass.
+- [ ] Relevant historical keyword and combat regressions pass.
+- [ ] Two-human browser E2E passes.
+- [ ] Full master verification finishes successfully, or incomplete areas are explicitly documented.
+- [ ] No hidden test exclusions or inferred passes.
+- [ ] Every critical and high finding is resolved or explicitly blocks acceptance.
+- [ ] The final card and keyword matrices reflect actual measured coverage.
+
+If any Critical or High defect remains, do not declare M3.3 fully accepted.
+
+Use:
+- FULLY ACCEPTED.
+- CONDITIONALLY ACCEPTED.
+- NOT ACCEPTED.
+- INCOMPLETE.
+
+Do not use a percentage-complete score to conceal unresolved critical defects.
+
+---
+
+# 18. FINAL INSTRUCTIONS
+
+This is a corrective engineering phase, not another audit-only phase.
+
+Implement the required fixes, add regression tests, preserve the existing architecture where appropriate and provide the final evidence.
+
+Do not restart or rewrite M2, M3, M3.1 or M3.2.
+
+Do not remove existing passing tests.
+
+Do not compromise game mechanics to satisfy security checks.
+
+Do not compensate for an incorrect action route by adding UI restrictions alone.
+
+Do not declare completion based only on the newly added tests. Run the relevant old suites as well.
+
+The final deliverable must demonstrate that:
+
+1. The original forensic vulnerabilities have been addressed where they were genuinely present.
+2. The M3.2 defects independently reproduced after implementation are now closed.
+3. The previously passing M2–M3.2 functionality remains intact.
+4. The card and keyword support reports are based on actual evidence.
+5. The project is in a demonstrably stronger and more secure state.
+
+**Proceed with implementation in the exact work-package order above. Finish M3.3, produce all reports, and stop. Do not automatically begin M3.4 or another phase.**
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-11-23T10:55:18+05:30.
+</ADDITIONAL_METADATA>

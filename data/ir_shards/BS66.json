@@ -1406,7 +1406,6 @@
     "keywords": [],
     "abilities": [
       {
-        "id": "BS66-085#AB_MAIN_NONE_LV1_LV2_LV3_df2f2419dce8fc670c4354f5f2d2ca3208a0499ac7f0f54e0bdd64cc591638a7_451f84c14f8b09db9bb33a0361a211eb",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -1417,20 +1416,32 @@
           "levelExplicit": false,
           "prefixes": [],
           "timing": "MAIN",
+          "timings": [],
           "timingLabel": "Main",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "MAIN"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": true,
           "cleanBody": "Draw three cards, then discard two cards from your Hand. Then, you can summon a Cost 6 or less Spirit card with \"Crush\"-named effects from your Hand, without paying the cost."
         },
+        "originalAbilityText": "[Main]\nDraw three cards, then discard two cards from your Hand. Then, you can summon a Cost 6 or less Spirit card with \"Crush\"-named effects from your Hand, without paying the cost.",
+        "abilityIndex": 0,
         "clauses": [
           {
-            "rawText": "Draw three cards, then discard two cards from your Hand.",
-            "cleanText": "Draw three cards, then discard two cards from your Hand",
+            "rawText": "Draw three cards",
+            "originalClauseText": "Draw three cards",
+            "cleanText": "Draw three cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -1444,8 +1455,28 @@
             }
           },
           {
+            "rawText": "discard two cards from your Hand.",
+            "originalClauseText": "discard two cards from your Hand.",
+            "cleanText": "discard two cards from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 2,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
+          },
+          {
             "rawText": "you can summon a Cost 6 or less Spirit card with \"Crush\"-named effects from your Hand, without paying the cost.",
+            "originalClauseText": "you can summon a Cost 6 or less Spirit card with \"Crush\"-named effects from your Hand, without paying the cost.",
             "cleanText": "you can summon a Cost 6 or less Spirit card with \"Crush\"-named effects from your Hand, without paying the cost",
+            "clauseIndex": 2,
             "link": "then",
             "isOptional": true,
             "isCost": false,
@@ -1453,17 +1484,44 @@
             "duration": null,
             "op": {
               "op": "SUMMON",
-              "free": true
+              "from": "hand",
+              "side": "self",
+              "count": 1,
+              "upTo": false,
+              "filter": {
+                "types": [
+                  "Spirit"
+                ],
+                "costLte": 6,
+                "nameIncludes": "Crush"
+              },
+              "free": true,
+              "isOptional": true
             }
           }
         ],
         "unsupported": [],
         "legacyId": "BS66-085#a0",
-        "physicalId": "BS66-085#AB_MAIN_NONE_LV1_LV2_LV3_df2f2419dce8fc670c4354f5f2d2ca3208a0499ac7f0f54e0bdd64cc591638a7_451f84c14f8b09db9bb33a0361a211eb",
-        "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_df2f2419dce8fc670c4354f5f2d2ca3208a0499ac7f0f54e0bdd64cc591638a7_451f84c14f8b09db9bb33a0361a211eb"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS66-085#AB_MAIN_NONE_LV1_LV2_LV3_d101cf0d16a02aef9bd6b07b5fd2a5d5f866646c646724321fe35e21c2236b9e_3d3996b0bb9a2861d5be7610b7c3df3e",
+        "physicalId": "BS66-085#AB_MAIN_NONE_LV1_LV2_LV3_d101cf0d16a02aef9bd6b07b5fd2a5d5f866646c646724321fe35e21c2236b9e_3d3996b0bb9a2861d5be7610b7c3df3e",
+        "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_d101cf0d16a02aef9bd6b07b5fd2a5d5f866646c646724321fe35e21c2236b9e_3d3996b0bb9a2861d5be7610b7c3df3e",
+        "semanticIdV3": "SEM3#AB_MAIN_NONE_LV1_LV2_LV3_5c2c616d6f5165a6a3623e65df259b7ed293914911d8a1e7afde1ef7a1c8f800_eedf113d058cce9bb0d5ca4d81a3219c",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "MAIN"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS66-085#AB_FLASH_NONE_LV1_LV2_LV3_b7267febc116065bc535a58f5f3ff29dbb5c8037e51c4522ec8e3594a43eeb5e_256987d37f959f9e5e2d57967e8b7841",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -1474,20 +1532,56 @@
           "levelExplicit": false,
           "prefixes": [],
           "timing": "FLASH",
+          "timings": [],
           "timingLabel": "Flash",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "FLASH"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": true,
           "isMain": false,
-          "cleanBody": "During this turn, give a Spirit +3000 BP."
+          "cleanBody": "During this turn, give a Spirit +3000 BP.",
+          "flashTimingSpec": {
+            "effectType": "FLASH",
+            "isFlash": true,
+            "isGenericFlash": true,
+            "isTriggered": false,
+            "timingQualifier": "GENERIC",
+            "generalAvailability": [
+              "CONTROLLER_MAIN_STEP",
+              "EITHER_PLAYER_BATTLE_FLASH_TIMING"
+            ],
+            "additionalRestrictions": {
+              "allowedSteps": [
+                "MAIN",
+                "ATTACK"
+              ],
+              "allowedTurnOwners": [
+                "SELF",
+                "OPPONENT"
+              ],
+              "requiresBattle": false,
+              "requiresFlashWindow": false,
+              "triggerCondition": null
+            }
+          }
         },
+        "originalAbilityText": "[Flash]\nDuring this turn, give a Spirit +3000 BP.",
+        "abilityIndex": 1,
         "clauses": [
           {
             "rawText": "During this turn, give a Spirit +3000 BP.",
+            "originalClauseText": "During this turn, give a Spirit +3000 BP.",
             "cleanText": "give a Spirit +3000 BP",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -1503,11 +1597,27 @@
         ],
         "unsupported": [],
         "legacyId": "BS66-085#a1",
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS66-085#AB_FLASH_NONE_LV1_LV2_LV3_b7267febc116065bc535a58f5f3ff29dbb5c8037e51c4522ec8e3594a43eeb5e_256987d37f959f9e5e2d57967e8b7841",
         "physicalId": "BS66-085#AB_FLASH_NONE_LV1_LV2_LV3_b7267febc116065bc535a58f5f3ff29dbb5c8037e51c4522ec8e3594a43eeb5e_256987d37f959f9e5e2d57967e8b7841",
-        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_b7267febc116065bc535a58f5f3ff29dbb5c8037e51c4522ec8e3594a43eeb5e_256987d37f959f9e5e2d57967e8b7841"
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_b7267febc116065bc535a58f5f3ff29dbb5c8037e51c4522ec8e3594a43eeb5e_256987d37f959f9e5e2d57967e8b7841",
+        "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_e77e36428ba010d21a3a91c4e536514dc0a9e3516f01ebc06843c143bb19628b_c53cf161c0a0ff85202f30c551928441",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "FLASH"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 3,
+    "compiledClausesCount": 4,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },
@@ -10930,36 +11040,32 @@
         "wave": 2,
         "hook": "contract_advent",
         "bracketed": true,
-        "index": 8
-      },
-      {
-        "name": "Crush",
-        "parameter": null,
-        "wave": 1,
-        "hook": "crush",
-        "bracketed": true,
-        "index": 284
-      },
-      {
-        "name": "Wave Crush",
-        "parameter": null,
-        "wave": 1,
-        "hook": "crush",
-        "bracketed": true,
-        "index": 292
-      },
-      {
-        "name": "XV Crush",
-        "parameter": null,
-        "wave": 1,
-        "hook": "crush",
-        "bracketed": true,
-        "index": 305
+        "index": 0,
+        "abilityId": "BS66-X07#AB_FLASH_NONE_LV1_LV2_LV3_d626d790b0af7144fdcde4235ce4ad97793d8780a1a45a77071ee4e6b8b2fc54_97312457897e7e95d51aa477f66da7de",
+        "cardNumber": "BS66-X07",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "levelExplicit": false,
+        "timing": "FLASH",
+        "timingLabel": "Flash",
+        "timingStep": "ANY",
+        "face": "A",
+        "prefixes": [],
+        "isSoulState": false,
+        "duringAdvent": false,
+        "duringSeal": false,
+        "burstCondition": null,
+        "limit": null,
+        "isFlash": true,
+        "isMain": false,
+        "legacyAbilityId": "BS66-X07#a0"
       }
     ],
     "abilities": [
       {
-        "id": "BS66-X07#AB_FLASH_NONE_LV1_LV2_LV3_3c72c1823c892eea4d974712dc050290da1c6c7bc3c13c9c439b351678a53c4e_d0107f8cdb2660a4f4cf42209ba0d7fa",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -10970,20 +11076,58 @@
           "levelExplicit": false,
           "prefixes": [],
           "timing": "FLASH",
+          "timings": [],
           "timingLabel": "Flash",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "FLASH"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": "Contract Advent: Wave Contract & C6 or more, (Your Turn)",
+          "keywords": [
+            "Contract Advent: Wave Contract & C6 or more, (Your Turn)"
+          ],
           "burstCondition": null,
           "isFlash": true,
           "isMain": false,
-          "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+          "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+          "flashTimingSpec": {
+            "effectType": "FLASH",
+            "isFlash": true,
+            "isGenericFlash": true,
+            "isTriggered": false,
+            "timingQualifier": "GENERIC",
+            "generalAvailability": [
+              "CONTROLLER_MAIN_STEP",
+              "EITHER_PLAYER_BATTLE_FLASH_TIMING"
+            ],
+            "additionalRestrictions": {
+              "allowedSteps": [
+                "MAIN",
+                "ATTACK"
+              ],
+              "allowedTurnOwners": [
+                "SELF",
+                "OPPONENT"
+              ],
+              "requiresBattle": false,
+              "requiresFlashWindow": false,
+              "triggerCondition": null
+            }
+          }
         },
+        "originalAbilityText": "Flash - [Contract Advent: Wave Contract & C6 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.",
+        "abilityIndex": 0,
         "clauses": [
           {
             "rawText": "By sending your [Soul Core] to the Trash",
+            "originalClauseText": "By sending your [Soul Core] to the Trash",
             "cleanText": "By sending your [Soul Core] to the Trash",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": true,
@@ -11005,7 +11149,9 @@
           },
           {
             "rawText": "stack this from the Hand onto your target Spirit.",
+            "originalClauseText": "stack this from the Hand onto your target Spirit.",
             "cleanText": "stack this from the Hand onto your target Spirit",
+            "clauseIndex": 1,
             "link": "byDoing",
             "isOptional": false,
             "isCost": false,
@@ -11025,11 +11171,56 @@
         ],
         "unsupported": [],
         "legacyId": "BS66-X07#a0",
-        "physicalId": "BS66-X07#AB_FLASH_NONE_LV1_LV2_LV3_3c72c1823c892eea4d974712dc050290da1c6c7bc3c13c9c439b351678a53c4e_d0107f8cdb2660a4f4cf42209ba0d7fa",
-        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_3c72c1823c892eea4d974712dc050290da1c6c7bc3c13c9c439b351678a53c4e_d0107f8cdb2660a4f4cf42209ba0d7fa"
+        "keywords": [
+          {
+            "name": "Contract Advent",
+            "parameter": "Wave Contract & C6 or more, (Your Turn)",
+            "wave": 2,
+            "hook": "contract_advent",
+            "bracketed": true,
+            "index": 0,
+            "abilityId": "BS66-X07#AB_FLASH_NONE_LV1_LV2_LV3_d626d790b0af7144fdcde4235ce4ad97793d8780a1a45a77071ee4e6b8b2fc54_97312457897e7e95d51aa477f66da7de",
+            "cardNumber": "BS66-X07",
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "face": "A",
+            "prefixes": [],
+            "isSoulState": false,
+            "duringAdvent": false,
+            "duringSeal": false,
+            "burstCondition": null,
+            "limit": null,
+            "isFlash": true,
+            "isMain": false,
+            "legacyAbilityId": "BS66-X07#a0"
+          }
+        ],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS66-X07#AB_FLASH_NONE_LV1_LV2_LV3_d626d790b0af7144fdcde4235ce4ad97793d8780a1a45a77071ee4e6b8b2fc54_97312457897e7e95d51aa477f66da7de",
+        "physicalId": "BS66-X07#AB_FLASH_NONE_LV1_LV2_LV3_d626d790b0af7144fdcde4235ce4ad97793d8780a1a45a77071ee4e6b8b2fc54_97312457897e7e95d51aa477f66da7de",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_d626d790b0af7144fdcde4235ce4ad97793d8780a1a45a77071ee4e6b8b2fc54_97312457897e7e95d51aa477f66da7de",
+        "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_fe90f703e58b65002b9e74cb625fb0bdeff41a161db959315ceb32c220047877_1a88faf9b2bfea694769ee7073fcb69e",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "FLASH"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS66-X07#AB_WHEN_ATTACKS_NONE_LV1_LV2_a028a24ca58b35ecc0fbe85eee042c36b289ea8d7b00de30a64aed1bf3bc98bc_bae533a2c6f4953ba27879b723926e84",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -11039,20 +11230,34 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_ATTACKS",
+          "timings": [
+            "WHEN_ATTACKS"
+          ],
           "timingLabel": "When Attacks",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Draw three cards, then discard three cards from your Hand. Summon any number of Spirit cards with [Crush]/[Wave Crush]/[XV Crush] discarded by this effect, without paying the cost."
         },
+        "originalAbilityText": "[LV1][LV2] (When Attacks)\nDraw three cards, then discard three cards from your Hand. Summon any number of Spirit cards with [Crush]/[Wave Crush]/[XV Crush] discarded by this effect, without paying the cost.",
+        "abilityIndex": 1,
         "clauses": [
           {
-            "rawText": "Draw three cards, then discard three cards from your Hand.",
-            "cleanText": "Draw three cards, then discard three cards from your Hand",
+            "rawText": "Draw three cards",
+            "originalClauseText": "Draw three cards",
+            "cleanText": "Draw three cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -11066,8 +11271,28 @@
             }
           },
           {
+            "rawText": "discard three cards from your Hand.",
+            "originalClauseText": "discard three cards from your Hand.",
+            "cleanText": "discard three cards from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 3,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
+          },
+          {
             "rawText": "Summon any number of Spirit cards with [Crush]/[Wave Crush]/[XV Crush] discarded by this effect, without paying the cost.",
+            "originalClauseText": "Summon any number of Spirit cards with [Crush]/[Wave Crush]/[XV Crush] discarded by this effect, without paying the cost.",
             "cleanText": "Summon any number of Spirit cards with [Crush]/[Wave Crush]/[XV Crush] discarded by this effect, without paying the cost",
+            "clauseIndex": 2,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -11075,17 +11300,68 @@
             "duration": null,
             "op": {
               "op": "SUMMON",
-              "free": true
+              "from": "hand",
+              "side": "self",
+              "count": "ALL",
+              "upTo": true,
+              "filter": {
+                "types": [
+                  "Spirit"
+                ],
+                "keyword": "Crush"
+              },
+              "free": true,
+              "isOptional": false
             }
           }
         ],
         "unsupported": [],
         "legacyId": "BS66-X07#a1",
-        "physicalId": "BS66-X07#AB_WHEN_ATTACKS_NONE_LV1_LV2_a028a24ca58b35ecc0fbe85eee042c36b289ea8d7b00de30a64aed1bf3bc98bc_bae533a2c6f4953ba27879b723926e84",
-        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_a028a24ca58b35ecc0fbe85eee042c36b289ea8d7b00de30a64aed1bf3bc98bc_bae533a2c6f4953ba27879b723926e84"
+        "keywords": [],
+        "referencedKeywords": [
+          {
+            "name": "Crush",
+            "parameter": null,
+            "wave": 1,
+            "hook": "crush",
+            "bracketed": true,
+            "index": 98
+          },
+          {
+            "name": "Wave Crush",
+            "parameter": null,
+            "wave": 1,
+            "hook": "crush",
+            "bracketed": true,
+            "index": 106
+          },
+          {
+            "name": "XV Crush",
+            "parameter": null,
+            "wave": 1,
+            "hook": "crush",
+            "bracketed": true,
+            "index": 119
+          }
+        ],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS66-X07#AB_WHEN_ATTACKS_NONE_LV1_LV2_7e5a5973469e160e6fb94875d070e3bf745a64265ad5593b1246bc0465d21ab7_39893b5b3125160a36ca5ae8870e293d",
+        "physicalId": "BS66-X07#AB_WHEN_ATTACKS_NONE_LV1_LV2_7e5a5973469e160e6fb94875d070e3bf745a64265ad5593b1246bc0465d21ab7_39893b5b3125160a36ca5ae8870e293d",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_7e5a5973469e160e6fb94875d070e3bf745a64265ad5593b1246bc0465d21ab7_39893b5b3125160a36ca5ae8870e293d",
+        "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_523a4b6a3256b3feb092586cae6c5916d4c9dfb60e1aef97e69495f50fef51b5_584bab93d36f5abb1fe16e63cc34c476",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS66-X07#AB_ATTACK_STEP_NONE_LV2_131a221d1566dc040b16dbb68089adcdf3d770e20d98fa879f318afb7548d526_170fb62678dcf03770d34b51a7901c3b",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -11096,51 +11372,88 @@
             "During Advent"
           ],
           "timing": "ATTACK_STEP",
+          "timings": [
+            "ATTACK_STEP"
+          ],
           "timingLabel": "Your Attack Step",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "SELF",
+          "timingTriggers": [
+            "ATTACK_STEP"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "When the opponent would use cards from their Hand/Removed Zone, for each Spirit with \"Crush\"-named effects you control, they can't use it unless they pay one extra cost. This effect can't be prevented by opposing effects."
         },
+        "originalAbilityText": "[During Advent] [LV2] (Your Attack Step)\nWhen the opponent would use cards from their Hand/Removed Zone, for each Spirit with \"Crush\"-named effects you control, they can't use it unless they pay one extra cost. This effect can't be prevented by opposing effects.",
+        "abilityIndex": 2,
         "clauses": [
           {
             "rawText": "When the opponent would use cards from their Hand/Removed Zone, for each Spirit with \"Crush\"-named effects you control, they can't use it unless they pay one extra cost.",
+            "originalClauseText": "When the opponent would use cards from their Hand/Removed Zone, for each Spirit with \"Crush\"-named effects you control, they can't use it unless they pay one extra cost.",
             "cleanText": "When the opponent would use cards from their Hand/Removed Zone, for each Spirit with \"Crush\"-named effects you control, they can't use it unless they pay one extra cost",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
             "condition": null,
             "duration": null,
             "op": {
-              "op": "KEYWORD_RULE"
+              "op": "KEYWORD_RULE",
+              "keyword": "Crush"
             }
           },
           {
             "rawText": "This effect can't be prevented by opposing effects.",
+            "originalClauseText": "This effect can't be prevented by opposing effects.",
             "cleanText": "This effect can't be prevented by opposing effects",
+            "clauseIndex": 1,
             "link": null,
             "isOptional": false,
             "isCost": false,
             "condition": null,
             "duration": null,
             "op": {
-              "op": "UNPREVENTABLE"
+              "op": "UNSUPPORTED",
+              "unhandledClause": "This effect can't be prevented by opposing effects",
+              "reason": "UNSUPPORTED_EFFECT_PROTECTION: effect cannot be prevented by opposing effects"
             }
           }
         ],
-        "unsupported": [],
+        "unsupported": [
+          "This effect can't be prevented by opposing effects."
+        ],
         "legacyId": "BS66-X07#a2",
-        "physicalId": "BS66-X07#AB_ATTACK_STEP_NONE_LV2_131a221d1566dc040b16dbb68089adcdf3d770e20d98fa879f318afb7548d526_170fb62678dcf03770d34b51a7901c3b",
-        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_131a221d1566dc040b16dbb68089adcdf3d770e20d98fa879f318afb7548d526_170fb62678dcf03770d34b51a7901c3b"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS66-X07#AB_ATTACK_STEP_NONE_LV2_6b5562e5bf94922fee6efe8c1a0891a4317897a9b14726d8e006d247e7660bbc_8f8aa91ed37e6da8933aad0621c8b6e8",
+        "physicalId": "BS66-X07#AB_ATTACK_STEP_NONE_LV2_6b5562e5bf94922fee6efe8c1a0891a4317897a9b14726d8e006d247e7660bbc_8f8aa91ed37e6da8933aad0621c8b6e8",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_6b5562e5bf94922fee6efe8c1a0891a4317897a9b14726d8e006d247e7660bbc_8f8aa91ed37e6da8933aad0621c8b6e8",
+        "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_217fea899c86b5768a452da3822366e58ba06fe83e942d0c510971d30f943215_67e57c0c827e2aa567b0b72201a4c615",
+        "timingSemantics": {
+          "timingOwner": "SELF",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "ATTACK_STEP"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
     "compiledClausesCount": 6,
-    "unsupportedClausesCount": 0,
-    "isFullySupported": true
+    "unsupportedClausesCount": 1,
+    "isFullySupported": false
   },
   "BS66-050": {
     "cardNumber": "BS66-050",
@@ -11152,12 +11465,34 @@
         "wave": 2,
         "hook": "mirage",
         "bracketed": true,
-        "index": 0
+        "index": 0,
+        "abilityId": "BS66-050#AB_PASSIVE_NONE_LV1_LV2_LV3_8d07d94eb677d3efc6cb6ec47e81a7c0a8c5db218e09fa40a8b6f34223e73de1_7a3eda5dd9f6a9e2058443eba9aeee31",
+        "cardNumber": "BS66-050",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "levelExplicit": false,
+        "timing": "PASSIVE",
+        "timingLabel": "",
+        "timingStep": "ANY",
+        "face": "A",
+        "prefixes": [
+          "Mirage: Cost 3 ([Blue Core][Blue Core])"
+        ],
+        "isSoulState": false,
+        "duringAdvent": false,
+        "duringSeal": false,
+        "burstCondition": null,
+        "limit": null,
+        "isFlash": false,
+        "isMain": false,
+        "legacyAbilityId": "BS66-050#a0"
       }
     ],
     "abilities": [
       {
-        "id": "BS66-050#AB_PASSIVE_NONE_LV1_LV2_LV3_7e0997c8c8011f070690e5fbd4cd54aff987500f0433e645ad7ac887fe59b290_0f3036d7831fcd6aff12c1d93d9849e1",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -11167,27 +11502,80 @@
           ],
           "levelExplicit": false,
           "prefixes": [
-            "Mirage: Cost ([Blue Core][Blue Core])"
+            "Mirage: Cost 3 ([Blue Core][Blue Core])"
           ],
           "timing": "PASSIVE",
+          "timings": [],
           "timingLabel": "",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": ""
         },
+        "originalAbilityText": "[Mirage: Cost 3 ([Blue Core][Blue Core])]",
+        "abilityIndex": 0,
         "clauses": [],
         "unsupported": [],
         "legacyId": "BS66-050#a0",
-        "physicalId": "BS66-050#AB_PASSIVE_NONE_LV1_LV2_LV3_7e0997c8c8011f070690e5fbd4cd54aff987500f0433e645ad7ac887fe59b290_0f3036d7831fcd6aff12c1d93d9849e1",
-        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_7e0997c8c8011f070690e5fbd4cd54aff987500f0433e645ad7ac887fe59b290_0f3036d7831fcd6aff12c1d93d9849e1"
+        "keywords": [
+          {
+            "name": "Mirage",
+            "parameter": "Cost 3 ([Blue Core",
+            "wave": 2,
+            "hook": "mirage",
+            "bracketed": true,
+            "index": 0,
+            "abilityId": "BS66-050#AB_PASSIVE_NONE_LV1_LV2_LV3_8d07d94eb677d3efc6cb6ec47e81a7c0a8c5db218e09fa40a8b6f34223e73de1_7a3eda5dd9f6a9e2058443eba9aeee31",
+            "cardNumber": "BS66-050",
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "face": "A",
+            "prefixes": [
+              "Mirage: Cost 3 ([Blue Core][Blue Core])"
+            ],
+            "isSoulState": false,
+            "duringAdvent": false,
+            "duringSeal": false,
+            "burstCondition": null,
+            "limit": null,
+            "isFlash": false,
+            "isMain": false,
+            "legacyAbilityId": "BS66-050#a0"
+          }
+        ],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS66-050#AB_PASSIVE_NONE_LV1_LV2_LV3_8d07d94eb677d3efc6cb6ec47e81a7c0a8c5db218e09fa40a8b6f34223e73de1_7a3eda5dd9f6a9e2058443eba9aeee31",
+        "physicalId": "BS66-050#AB_PASSIVE_NONE_LV1_LV2_LV3_8d07d94eb677d3efc6cb6ec47e81a7c0a8c5db218e09fa40a8b6f34223e73de1_7a3eda5dd9f6a9e2058443eba9aeee31",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_8d07d94eb677d3efc6cb6ec47e81a7c0a8c5db218e09fa40a8b6f34223e73de1_7a3eda5dd9f6a9e2058443eba9aeee31",
+        "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_7c24705aab56b14bc6c7f18e235333657c44e978e3b0f33d0c9c9d5698a4ee2c_4e236d59f8ba7192056fa335658bf33c",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS66-050#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_f8f7af9d68e842672a6037ad3c4cadd5f6670ef98e1921a9ed5af71cf4c40751_d5e3f599e8026016d85120c9e906d1eb",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -11200,32 +11588,51 @@
             "During Set"
           ],
           "timing": "ATTACK_STEP",
+          "timings": [
+            "ATTACK_STEP"
+          ],
           "timingLabel": "Your Attack Step",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "SELF",
+          "timingTriggers": [
+            "ATTACK_STEP"
+          ],
+          "activationRestrictions": [
+            "DURING_SET"
+          ],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "When your Spirit with \"Crush\"-named effects attacks, during that battle, you can fix that Spirit as having zero symbols. When you've done so, put a core from the Void to that Spirit."
         },
+        "originalAbilityText": "[During Set] (Your Attack Step)\nWhen your Spirit with \"Crush\"-named effects attacks, during that battle, you can fix that Spirit as having zero symbols. When you've done so, put a core from the Void to that Spirit.",
+        "abilityIndex": 1,
         "clauses": [
           {
             "rawText": "When your Spirit with \"Crush\"-named effects attacks, during that battle, you can fix that Spirit as having zero symbols.",
+            "originalClauseText": "When your Spirit with \"Crush\"-named effects attacks, during that battle, you can fix that Spirit as having zero symbols.",
             "cleanText": "When your Spirit with \"Crush\"-named effects attacks, during that battle, you can fix that Spirit as having zero symbols",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": true,
             "isCost": false,
             "condition": null,
             "duration": null,
             "op": {
-              "op": "KEYWORD_RULE"
+              "op": "KEYWORD_RULE",
+              "keyword": "Crush"
             }
           },
           {
             "rawText": "put a core from the Void to that Spirit.",
+            "originalClauseText": "put a core from the Void to that Spirit.",
             "cleanText": "put a core from the Void to that Spirit",
+            "clauseIndex": 1,
             "link": "byDoing",
             "isOptional": false,
             "isCost": false,
@@ -11233,17 +11640,37 @@
             "duration": null,
             "op": {
               "op": "MOVE_CORE",
-              "isCost": false
+              "count": 1,
+              "from": {
+                "zone": "void"
+              }
             }
           }
         ],
         "unsupported": [],
         "legacyId": "BS66-050#a1",
-        "physicalId": "BS66-050#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_f8f7af9d68e842672a6037ad3c4cadd5f6670ef98e1921a9ed5af71cf4c40751_d5e3f599e8026016d85120c9e906d1eb",
-        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_f8f7af9d68e842672a6037ad3c4cadd5f6670ef98e1921a9ed5af71cf4c40751_d5e3f599e8026016d85120c9e906d1eb"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS66-050#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_2c575c45cfebea660f6a76818e81ab3af68fa8ad3c3f5ec9f3c06a5b6fb89ab5_bcc6954fbb20e428b6367dc41e3c959e",
+        "physicalId": "BS66-050#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_2c575c45cfebea660f6a76818e81ab3af68fa8ad3c3f5ec9f3c06a5b6fb89ab5_bcc6954fbb20e428b6367dc41e3c959e",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_2c575c45cfebea660f6a76818e81ab3af68fa8ad3c3f5ec9f3c06a5b6fb89ab5_bcc6954fbb20e428b6367dc41e3c959e",
+        "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_LV2_LV3_571fc98537dd0b67878e06b6711ff664dc0712ddfca45e4d24094bc75ca0733b_ad66051f4f19a6e7e14f140e108e0ef1",
+        "timingSemantics": {
+          "timingOwner": "SELF",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "ATTACK_STEP"
+          ],
+          "activationRestrictions": [
+            "DURING_SET"
+          ],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS66-050#AB_WHEN_SUMMONED_NONE_LV1_LV2_a282d139448117a13f4b0a84f100b913e90d422ab786f510a538ba0a5e33d4d3_e6b73387b7c49920a2aea4ce5d6f36cf",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -11253,20 +11680,36 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_SUMMONED",
+          "timings": [
+            "WHEN_SUMMONED"
+          ],
           "timingLabel": "When Summoned",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [
+            "ONCE_PER_TURN_SAME_NAME"
+          ],
           "limit": "ONCE_PER_TURN_SAME_NAME",
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Draw three cards, then discard three cards from your Hand. Including being in Soul State/pre-advent condition, for each \"Petit Shack\" you control, this effect discards -1 cards."
         },
+        "originalAbilityText": "[LV1][LV2] (When Summoned)\n(Once per Turn: Same Name) Draw three cards, then discard three cards from your Hand. Including being in Soul State/pre-advent condition, for each \"Petit Shack\" you control, this effect discards -1 cards.",
+        "abilityIndex": 2,
         "clauses": [
           {
-            "rawText": "Draw three cards, then discard three cards from your Hand.",
-            "cleanText": "Draw three cards, then discard three cards from your Hand",
+            "rawText": "Draw three cards",
+            "originalClauseText": "Draw three cards",
+            "cleanText": "Draw three cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -11280,25 +11723,64 @@
             }
           },
           {
+            "rawText": "discard three cards from your Hand.",
+            "originalClauseText": "discard three cards from your Hand.",
+            "cleanText": "discard three cards from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 3,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
+          },
+          {
             "rawText": "Including being in Soul State/pre-advent condition, for each \"Petit Shack\" you control, this effect discards -1 cards.",
+            "originalClauseText": "Including being in Soul State/pre-advent condition, for each \"Petit Shack\" you control, this effect discards -1 cards.",
             "cleanText": "Including being in Soul State/pre-advent condition, for each \"Petit Shack\" you control, this effect discards -1 cards",
+            "clauseIndex": 2,
             "link": null,
             "isOptional": false,
             "isCost": false,
             "condition": null,
             "duration": null,
             "op": {
-              "op": "MODIFY_EFFECT"
+              "op": "MODIFY_EFFECT",
+              "side": "self"
             }
           }
         ],
         "unsupported": [],
         "legacyId": "BS66-050#a2",
-        "physicalId": "BS66-050#AB_WHEN_SUMMONED_NONE_LV1_LV2_a282d139448117a13f4b0a84f100b913e90d422ab786f510a538ba0a5e33d4d3_e6b73387b7c49920a2aea4ce5d6f36cf",
-        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_a282d139448117a13f4b0a84f100b913e90d422ab786f510a538ba0a5e33d4d3_e6b73387b7c49920a2aea4ce5d6f36cf"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS66-050#AB_WHEN_SUMMONED_NONE_LV1_LV2_cd8de624cea2d2938e75f30fd75a897136e5f2cb261873bc43d61ab8cf94ea3f_fee8017a7c57ff2dad9a2cf2d473dc6e",
+        "physicalId": "BS66-050#AB_WHEN_SUMMONED_NONE_LV1_LV2_cd8de624cea2d2938e75f30fd75a897136e5f2cb261873bc43d61ab8cf94ea3f_fee8017a7c57ff2dad9a2cf2d473dc6e",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_cd8de624cea2d2938e75f30fd75a897136e5f2cb261873bc43d61ab8cf94ea3f_fee8017a7c57ff2dad9a2cf2d473dc6e",
+        "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_126e9951d038813fbe411b58b4201594a7762fa76e103c8cd32434283371c2c1_551097b838d29000dd0721c6e76a7c23",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [
+            "ONCE_PER_TURN_SAME_NAME"
+          ],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 4,
+    "compiledClausesCount": 5,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },
@@ -16662,7 +17144,30 @@
         "wave": 2,
         "hook": "soul_state",
         "bracketed": true,
-        "index": 10
+        "index": 0,
+        "abilityId": "BS66-CX03#AB_PASSIVE_NONE_LV1_LV2_f34876301c84438ab38161bbbc78ad31c5ae4a17b3d03823ec9b77608825d42a_f4710882cb09f0f61c97cec344f41d7a",
+        "cardNumber": "BS66-CX03",
+        "levels": [
+          1,
+          2
+        ],
+        "levelExplicit": true,
+        "timing": "PASSIVE",
+        "timingLabel": "",
+        "timingStep": "ANY",
+        "face": "A",
+        "prefixes": [
+          "Soul State",
+          "Contract Pre-Advent"
+        ],
+        "isSoulState": true,
+        "duringAdvent": false,
+        "duringSeal": false,
+        "burstCondition": null,
+        "limit": null,
+        "isFlash": false,
+        "isMain": false,
+        "legacyAbilityId": "BS66-CX03#a1"
       },
       {
         "name": "Contract Pre-Advent",
@@ -16670,15 +17175,30 @@
         "wave": 2,
         "hook": "contract_pre_advent",
         "bracketed": true,
-        "index": 23
-      },
-      {
-        "name": "Contract Pre-Advent",
-        "parameter": null,
-        "wave": 2,
-        "hook": "contract_pre_advent",
-        "bracketed": true,
-        "index": 240
+        "index": 0,
+        "abilityId": "BS66-CX03#AB_PASSIVE_NONE_LV1_LV2_f34876301c84438ab38161bbbc78ad31c5ae4a17b3d03823ec9b77608825d42a_f4710882cb09f0f61c97cec344f41d7a",
+        "cardNumber": "BS66-CX03",
+        "levels": [
+          1,
+          2
+        ],
+        "levelExplicit": true,
+        "timing": "PASSIVE",
+        "timingLabel": "",
+        "timingStep": "ANY",
+        "face": "A",
+        "prefixes": [
+          "Soul State",
+          "Contract Pre-Advent"
+        ],
+        "isSoulState": true,
+        "duringAdvent": false,
+        "duringSeal": false,
+        "burstCondition": null,
+        "limit": null,
+        "isFlash": false,
+        "isMain": false,
+        "legacyAbilityId": "BS66-CX03#a1"
       },
       {
         "name": "Wave Crush",
@@ -16686,12 +17206,63 @@
         "wave": 1,
         "hook": "crush",
         "bracketed": true,
-        "index": 282
+        "index": 0,
+        "abilityId": "BS66-CX03#AB_WHEN_ATTACKS_NONE_LV1_LV2_ae7be5d3376d10af6b8e5bd0f5aab92b40970aef40a6779891570061d218094c_23170c729ee3ee1f6e06fa83b657de47",
+        "cardNumber": "BS66-CX03",
+        "levels": [
+          1,
+          2
+        ],
+        "levelExplicit": true,
+        "timing": "WHEN_ATTACKS",
+        "timingLabel": "When Attacks",
+        "timingStep": "ANY",
+        "face": "A",
+        "prefixes": [
+          "Contract Pre-Advent"
+        ],
+        "isSoulState": false,
+        "duringAdvent": false,
+        "duringSeal": false,
+        "burstCondition": null,
+        "limit": null,
+        "isFlash": false,
+        "isMain": false,
+        "legacyAbilityId": "BS66-CX03#a2"
+      },
+      {
+        "name": "Contract Pre-Advent",
+        "parameter": null,
+        "wave": 2,
+        "hook": "contract_pre_advent",
+        "bracketed": true,
+        "index": 0,
+        "abilityId": "BS66-CX03#AB_WHEN_ATTACKS_NONE_LV1_LV2_ae7be5d3376d10af6b8e5bd0f5aab92b40970aef40a6779891570061d218094c_23170c729ee3ee1f6e06fa83b657de47",
+        "cardNumber": "BS66-CX03",
+        "levels": [
+          1,
+          2
+        ],
+        "levelExplicit": true,
+        "timing": "WHEN_ATTACKS",
+        "timingLabel": "When Attacks",
+        "timingStep": "ANY",
+        "face": "A",
+        "prefixes": [
+          "Contract Pre-Advent"
+        ],
+        "isSoulState": false,
+        "duringAdvent": false,
+        "duringSeal": false,
+        "burstCondition": null,
+        "limit": null,
+        "isFlash": false,
+        "isMain": false,
+        "legacyAbilityId": "BS66-CX03#a2"
       }
     ],
     "abilities": [
       {
-        "id": "BS66-CX03#AB_PASSIVE_NONE_LV1_LV2_LV3_e6b3efbc7d7c445feba64948761bc0f9a806ddae47b83d339135b4516c691d43_b17fe33984734a7a222249a3650c0043",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -16702,24 +17273,47 @@
           "levelExplicit": false,
           "prefixes": [],
           "timing": "PASSIVE",
+          "timings": [],
           "timingLabel": "",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": "CArule",
+          "keywords": [
+            "CArule"
+          ],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": ""
         },
+        "originalAbilityText": "[CArule]",
+        "abilityIndex": 0,
         "clauses": [],
         "unsupported": [],
         "legacyId": "BS66-CX03#a0",
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS66-CX03#AB_PASSIVE_NONE_LV1_LV2_LV3_e6b3efbc7d7c445feba64948761bc0f9a806ddae47b83d339135b4516c691d43_b17fe33984734a7a222249a3650c0043",
         "physicalId": "BS66-CX03#AB_PASSIVE_NONE_LV1_LV2_LV3_e6b3efbc7d7c445feba64948761bc0f9a806ddae47b83d339135b4516c691d43_b17fe33984734a7a222249a3650c0043",
-        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_e6b3efbc7d7c445feba64948761bc0f9a806ddae47b83d339135b4516c691d43_b17fe33984734a7a222249a3650c0043"
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_e6b3efbc7d7c445feba64948761bc0f9a806ddae47b83d339135b4516c691d43_b17fe33984734a7a222249a3650c0043",
+        "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_79604c6875d5ef52edcc4aaecc4a099cf346b8877dc533964a80155c2c39b039_83dcd365e74ecf3aa9f7bfd9b18db6fb",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS66-CX03#AB_PASSIVE_NONE_LV1_LV2_8df68770096b029b148460c94d2ed9f6d0c87aad79823fa963b8b1de47e2f095_14fcef421df3b76ed6ff7e8085998c7b",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -16732,20 +17326,33 @@
             "Contract Pre-Advent"
           ],
           "timing": "PASSIVE",
+          "timings": [],
           "timingLabel": "",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [
+            "CANT_STACK",
+            "SOUL_STATE"
+          ],
           "limit": null,
           "cantStack": true,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "When cards are discarded/banished from the opposing deck via your \"Azure Wave\" family effect, your counter +1, draw a card, then discard a card from your Hand."
         },
+        "originalAbilityText": "[Soul State] [Contract Pre-Advent]/[Spirit] [LV1][LV2]\n(Can't Stack) When cards are discarded/banished from the opposing deck via your \"Azure Wave\" family effect, your counter +1, draw a card, then discard a card from your Hand.",
+        "abilityIndex": 1,
         "clauses": [
           {
-            "rawText": "When cards are discarded/banished from the opposing deck via your \"Azure Wave\" family effect, your counter +1, draw a card, then discard a card from your Hand.",
-            "cleanText": "When cards are discarded/banished from the opposing deck via your \"Azure Wave\" family effect, your counter +1, draw a card, then discard a card from your Hand",
+            "rawText": "When cards are discarded/banished from the opposing deck via your \"Azure Wave\" family effect, your counter +1, draw a card",
+            "originalClauseText": "When cards are discarded/banished from the opposing deck via your \"Azure Wave\" family effect, your counter +1, draw a card",
+            "cleanText": "When cards are discarded/banished from the opposing deck via your \"Azure Wave\" family effect, your counter +1, draw a card",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -16757,15 +17364,112 @@
               "chooser": "self",
               "forEach": null
             }
+          },
+          {
+            "rawText": "discard a card from your Hand.",
+            "originalClauseText": "discard a card from your Hand.",
+            "cleanText": "discard a card from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 1,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
           }
         ],
         "unsupported": [],
         "legacyId": "BS66-CX03#a1",
-        "physicalId": "BS66-CX03#AB_PASSIVE_NONE_LV1_LV2_8df68770096b029b148460c94d2ed9f6d0c87aad79823fa963b8b1de47e2f095_14fcef421df3b76ed6ff7e8085998c7b",
-        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_8df68770096b029b148460c94d2ed9f6d0c87aad79823fa963b8b1de47e2f095_14fcef421df3b76ed6ff7e8085998c7b"
+        "keywords": [
+          {
+            "name": "Soul State",
+            "parameter": null,
+            "wave": 2,
+            "hook": "soul_state",
+            "bracketed": true,
+            "index": 0,
+            "abilityId": "BS66-CX03#AB_PASSIVE_NONE_LV1_LV2_f34876301c84438ab38161bbbc78ad31c5ae4a17b3d03823ec9b77608825d42a_f4710882cb09f0f61c97cec344f41d7a",
+            "cardNumber": "BS66-CX03",
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "face": "A",
+            "prefixes": [
+              "Soul State",
+              "Contract Pre-Advent"
+            ],
+            "isSoulState": true,
+            "duringAdvent": false,
+            "duringSeal": false,
+            "burstCondition": null,
+            "limit": null,
+            "isFlash": false,
+            "isMain": false,
+            "legacyAbilityId": "BS66-CX03#a1"
+          },
+          {
+            "name": "Contract Pre-Advent",
+            "parameter": null,
+            "wave": 2,
+            "hook": "contract_pre_advent",
+            "bracketed": true,
+            "index": 0,
+            "abilityId": "BS66-CX03#AB_PASSIVE_NONE_LV1_LV2_f34876301c84438ab38161bbbc78ad31c5ae4a17b3d03823ec9b77608825d42a_f4710882cb09f0f61c97cec344f41d7a",
+            "cardNumber": "BS66-CX03",
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "face": "A",
+            "prefixes": [
+              "Soul State",
+              "Contract Pre-Advent"
+            ],
+            "isSoulState": true,
+            "duringAdvent": false,
+            "duringSeal": false,
+            "burstCondition": null,
+            "limit": null,
+            "isFlash": false,
+            "isMain": false,
+            "legacyAbilityId": "BS66-CX03#a1"
+          }
+        ],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS66-CX03#AB_PASSIVE_NONE_LV1_LV2_f34876301c84438ab38161bbbc78ad31c5ae4a17b3d03823ec9b77608825d42a_f4710882cb09f0f61c97cec344f41d7a",
+        "physicalId": "BS66-CX03#AB_PASSIVE_NONE_LV1_LV2_f34876301c84438ab38161bbbc78ad31c5ae4a17b3d03823ec9b77608825d42a_f4710882cb09f0f61c97cec344f41d7a",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_f34876301c84438ab38161bbbc78ad31c5ae4a17b3d03823ec9b77608825d42a_f4710882cb09f0f61c97cec344f41d7a",
+        "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_844b540abe03a0e62ddf073210c7f1b28b50c3168b2c87a6d2c9a3314f349acd_51fa1aa156502431cf084dd6f82eb345",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [
+            "CANT_STACK",
+            "SOUL_STATE"
+          ],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS66-CX03#AB_WHEN_ATTACKS_NONE_LV1_LV2_b511e411e0c713daebca48f59e57bfdfeef31091cea574b76008b2a48497941e_61caeadcbd908df42a2bb2e107276c5c",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -16777,20 +17481,36 @@
             "Contract Pre-Advent"
           ],
           "timing": "WHEN_ATTACKS",
+          "timings": [
+            "WHEN_ATTACKS"
+          ],
           "timingLabel": "When Attacks",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": "Wave Crush",
+          "keywords": [
+            "Wave Crush"
+          ],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Banish a card from the opposing decktop. For each 4 cost this Spirit has, this effect banishes +1 card. Also, this Spirit's symbol is fixed as zero."
         },
+        "originalAbilityText": "[Contract Pre-Advent]/[Spirit] [LV1][LV2] [Wave Crush] (When Attacks)\nBanish a card from the opposing decktop. For each 4 cost this Spirit has, this effect banishes +1 card. Also, this Spirit's symbol is fixed as zero.",
+        "abilityIndex": 2,
         "clauses": [
           {
             "rawText": "Banish a card from the opposing decktop.",
+            "originalClauseText": "Banish a card from the opposing decktop.",
             "cleanText": "Banish a card from the opposing decktop",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -16803,36 +17523,121 @@
           },
           {
             "rawText": "For each 4 cost this Spirit has, this effect banishes +1 card.",
+            "originalClauseText": "For each 4 cost this Spirit has, this effect banishes +1 card.",
             "cleanText": "For each 4 cost this Spirit has, this effect banishes +1 card",
+            "clauseIndex": 1,
             "link": null,
             "isOptional": false,
             "isCost": false,
             "condition": null,
             "duration": null,
             "op": {
-              "op": "COST_MODIFIER"
+              "op": "MODIFY_EFFECT_VALUE",
+              "delta": 1,
+              "targetEffect": "banish"
             }
           },
           {
             "rawText": "this Spirit's symbol is fixed as zero.",
+            "originalClauseText": "this Spirit's symbol is fixed as zero.",
             "cleanText": "this Spirit's symbol is fixed as zero",
+            "clauseIndex": 2,
             "link": "also",
             "isOptional": false,
             "isCost": false,
             "condition": null,
             "duration": null,
             "op": {
-              "op": "ADD_SYMBOL"
+              "op": "SET_SYMBOL",
+              "count": 0,
+              "side": "opp"
             }
           }
         ],
         "unsupported": [],
         "legacyId": "BS66-CX03#a2",
-        "physicalId": "BS66-CX03#AB_WHEN_ATTACKS_NONE_LV1_LV2_b511e411e0c713daebca48f59e57bfdfeef31091cea574b76008b2a48497941e_61caeadcbd908df42a2bb2e107276c5c",
-        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_b511e411e0c713daebca48f59e57bfdfeef31091cea574b76008b2a48497941e_61caeadcbd908df42a2bb2e107276c5c"
+        "keywords": [
+          {
+            "name": "Wave Crush",
+            "parameter": null,
+            "wave": 1,
+            "hook": "crush",
+            "bracketed": true,
+            "index": 0,
+            "abilityId": "BS66-CX03#AB_WHEN_ATTACKS_NONE_LV1_LV2_ae7be5d3376d10af6b8e5bd0f5aab92b40970aef40a6779891570061d218094c_23170c729ee3ee1f6e06fa83b657de47",
+            "cardNumber": "BS66-CX03",
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "face": "A",
+            "prefixes": [
+              "Contract Pre-Advent"
+            ],
+            "isSoulState": false,
+            "duringAdvent": false,
+            "duringSeal": false,
+            "burstCondition": null,
+            "limit": null,
+            "isFlash": false,
+            "isMain": false,
+            "legacyAbilityId": "BS66-CX03#a2"
+          },
+          {
+            "name": "Contract Pre-Advent",
+            "parameter": null,
+            "wave": 2,
+            "hook": "contract_pre_advent",
+            "bracketed": true,
+            "index": 0,
+            "abilityId": "BS66-CX03#AB_WHEN_ATTACKS_NONE_LV1_LV2_ae7be5d3376d10af6b8e5bd0f5aab92b40970aef40a6779891570061d218094c_23170c729ee3ee1f6e06fa83b657de47",
+            "cardNumber": "BS66-CX03",
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "face": "A",
+            "prefixes": [
+              "Contract Pre-Advent"
+            ],
+            "isSoulState": false,
+            "duringAdvent": false,
+            "duringSeal": false,
+            "burstCondition": null,
+            "limit": null,
+            "isFlash": false,
+            "isMain": false,
+            "legacyAbilityId": "BS66-CX03#a2"
+          }
+        ],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS66-CX03#AB_WHEN_ATTACKS_NONE_LV1_LV2_ae7be5d3376d10af6b8e5bd0f5aab92b40970aef40a6779891570061d218094c_23170c729ee3ee1f6e06fa83b657de47",
+        "physicalId": "BS66-CX03#AB_WHEN_ATTACKS_NONE_LV1_LV2_ae7be5d3376d10af6b8e5bd0f5aab92b40970aef40a6779891570061d218094c_23170c729ee3ee1f6e06fa83b657de47",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_ae7be5d3376d10af6b8e5bd0f5aab92b40970aef40a6779891570061d218094c_23170c729ee3ee1f6e06fa83b657de47",
+        "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_4357dfdfd7f62918e45a458bee6c0e475812e594b2c6756ae059ccd23f7c89fd_be640ab2a9bb2a2943d316e921ac3212",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 4,
+    "compiledClausesCount": 5,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   }

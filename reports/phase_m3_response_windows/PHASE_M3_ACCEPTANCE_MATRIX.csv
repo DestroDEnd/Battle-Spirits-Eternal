@@ -1,0 +1,18 @@
+Requirement_ID,Category,Requirement_Description,Implementation_Target,Verification_Test,Disposition,Evidence
+M3-REQ-01,Architecture,Centralized Response Window Manager,engine/response_window.js,tests/phase_m3_response_window_manager.test.js,VERIFIED,PHASE-M3-MGR-01 passed; backward compatibility preserved
+M3-REQ-02,Architecture,Nested Timing Windows Suspend/Resume,engine/response_window.js,tests/phase_m3_response_window_manager.test.js,VERIFIED,PHASE-M3-MGR-02 passed; parent window tracking intact
+M3-REQ-03,Priority,Flash 1 Defender Priority 1,engine/response_window.js,tests/phase_m3_flash_priority.test.js,VERIFIED,PHASE-M3-FLASH-01 passed; Defender priority 1 confirmed
+M3-REQ-04,Priority,Alternating Priority on Pass,engine/response_window.js,tests/phase_m3_flash_priority.test.js,VERIFIED,PHASE-M3-FLASH-02 passed; priority switches each pass
+M3-REQ-05,Priority,Two Consecutive Passes Close Window,engine/response_window.js,tests/phase_m3_flash_priority.test.js,VERIFIED,PHASE-M3-FLASH-03 passed; exactly 2 passes closes window
+M3-REQ-06,Priority,Flash Action Resets Passes to Zero,engine/response_window.js,tests/phase_m3_flash_priority.test.js,VERIFIED,PHASE-M3-FLASH-04 passed; pass counter reset verified
+M3-REQ-07,Combat,Block Declaration Exhausts Blocker,engine/response_window.js,tests/phase_m3_block_and_second_flash.test.js,VERIFIED,PHASE-M3-BLOCK-01 passed; BLOCK_DECLARED emitted
+M3-REQ-08,Combat,Block Declaration Opens Flash 2,engine/response_window.js,tests/phase_m3_block_and_second_flash.test.js,VERIFIED,PHASE-M3-BLOCK-01 passed; FLASH_2 window opened with Defender priority 1
+M3-REQ-09,Combat,Flash 2 Closure Resolves BP Compare,engine/response_window.js,tests/phase_m3_block_and_second_flash.test.js,VERIFIED,PHASE-M3-BLOCK-02 passed; BP comparison accurate
+M3-REQ-10,Combat,Pass Block Skips Flash 2,engine/response_window.js,tests/phase_m3_block_and_second_flash.test.js,VERIFIED,PHASE-M3-BLOCK-03 passed; FLASH_2 skipped; direct hit resolved
+M3-REQ-11,Combat,Attacker Field Departure Resilience,engine/response_window.js,tests/phase_m3_block_and_second_flash.test.js,VERIFIED,PHASE-M3-BLOCK-04 passed; combat completes cleanly
+M3-REQ-12,Progression,Step Advance Lock During Window,engine/session_manager.js,tests/phase_m3_action_progression_lock.test.js,VERIFIED,PHASE-M3-LOCK-01 passed; HTTP 403 RESPONSE_WINDOW_ACTIVE
+M3-REQ-13,Progression,Attack Lock During Window,engine/session_manager.js,tests/phase_m3_action_progression_lock.test.js,VERIFIED,PHASE-M3-LOCK-02 passed; HTTP 403 RESPONSE_WINDOW_ACTIVE
+M3-REQ-14,Progression,Out of Priority Rejection,engine/session_manager.js,tests/phase_m3_action_progression_lock.test.js,VERIFIED,PHASE-M3-LOCK-03 passed; HTTP 403 NOT_PRIORITY_PLAYER
+M3-REQ-15,Persistence,Response Window Serialization,engine/state_serialization.js,tests/phase_m3_action_progression_lock.test.js,VERIFIED,PHASE-M3-LOCK-04 passed; responseWindow restored from DB
+M3-REQ-16,Protocol,Interaction Protocol Synchronization,engine/response_window.js,tests/phase_m3_response_window_manager.test.js,VERIFIED,PHASE-M3-MGR-05 passed; pendingInteractions synced
+M3-REQ-17,Browser,CDP Real 2-Browser True E2E,tests/phase_m3_two_human_browser_e2e.test.js,tests/phase_m3_two_human_browser_e2e.test.js,VERIFIED,PHASE-M3-WP-E passed; dual-browser Chrome test

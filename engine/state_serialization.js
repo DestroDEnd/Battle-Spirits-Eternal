@@ -108,6 +108,8 @@ export function serializePlayerState(player) {
     nexus: Array.isArray(player.nexus) ? player.nexus.map(serializeFieldStack).filter(Boolean) : [],
     grave: Array.isArray(player.grave) ? player.grave.map(serializeCard).filter(Boolean) : [],
     removed: Array.isArray(player.removed) ? player.removed.map(serializeCard).filter(Boolean) : [],
+    revealed: Array.isArray(player.revealed) ? player.revealed.map(serializeCard).filter(Boolean) : [],
+    openCards: Array.isArray(player.openCards) ? player.openCards.map(serializeCard).filter(Boolean) : [],
     hasUsedMulligan: Boolean(player.hasUsedMulligan),
     burstSetThisTurn: Boolean(player.burstSetThisTurn),
     mirageSetThisTurn: Boolean(player.mirageSetThisTurn),
@@ -212,6 +214,10 @@ export function serializeGameState(state) {
       opponent: serializePlayerState(state.players?.opponent)
     },
     combat: state.combat ? JSON.parse(JSON.stringify(state.combat)) : null,
+    responseWindow: state.responseWindow ? JSON.parse(JSON.stringify(state.responseWindow)) : null,
+    responseWindowStack: Array.isArray(state.responseWindowStack)
+      ? JSON.parse(JSON.stringify(state.responseWindowStack))
+      : (state.responseWindow ? [JSON.parse(JSON.stringify(state.responseWindow))] : []),
     modifiers: Array.isArray(state.modifiers)
       ? state.modifiers.map(m => {
           // Serialize modifier descriptors
@@ -228,6 +234,12 @@ export function serializeGameState(state) {
       : [],
     pendingInteractions,
     pendingPrompts: [...pendingInteractions],
+    pendingExecutions: Array.isArray(state.pendingExecutions)
+      ? JSON.parse(JSON.stringify(state.pendingExecutions))
+      : [],
+    resolvingCards: Array.isArray(state.resolvingCards)
+      ? state.resolvingCards.map(serializeCard).filter(Boolean)
+      : [],
     turnHistory: state.turnHistory ? JSON.parse(JSON.stringify(state.turnHistory)) : createEmptyTurnHistory(),
     restrictions: state.restrictions ? JSON.parse(JSON.stringify(state.restrictions)) : {
       counters: {},
@@ -270,7 +282,11 @@ export function deserializeGameState(data, options = {}) {
   // Helper to revive card instance
   const reviveCard = (c, defaultOwner) => {
     if (!c) return null;
-    return createCardInstance(c, c.owner || defaultOwner);
+    const inst = createCardInstance(c, c.owner || defaultOwner);
+    if (c.id) {
+      inst.id = c.id;
+    }
+    return inst;
   };
 
   // Helper to revive field stack
@@ -339,6 +355,8 @@ export function deserializeGameState(data, options = {}) {
       nexus: Array.isArray(pData.nexus) ? pData.nexus.map(s => reviveStack(s, side)).filter(Boolean) : [],
       grave: Array.isArray(pData.grave) ? pData.grave.map(c => reviveCard(c, side)).filter(Boolean) : [],
       removed: Array.isArray(pData.removed) ? pData.removed.map(c => reviveCard(c, side)).filter(Boolean) : [],
+      revealed: Array.isArray(pData.revealed) ? pData.revealed.map(c => reviveCard(c, side)).filter(Boolean) : [],
+      openCards: Array.isArray(pData.openCards) ? pData.openCards.map(c => reviveCard(c, side)).filter(Boolean) : [],
       hasUsedMulligan: Boolean(pData.hasUsedMulligan),
       burstSetThisTurn: Boolean(pData.burstSetThisTurn),
       mirageSetThisTurn: Boolean(pData.mirageSetThisTurn),
@@ -363,9 +381,13 @@ export function deserializeGameState(data, options = {}) {
       opponent: revivePlayer(raw.players?.opponent, 'opponent')
     },
     combat: raw.combat || null,
+    responseWindow: raw.responseWindow || null,
+    responseWindowStack: Array.isArray(raw.responseWindowStack) ? raw.responseWindowStack : (raw.responseWindow ? [raw.responseWindow] : []),
     modifiers: Array.isArray(raw.modifiers) ? [...raw.modifiers] : [],
     pendingPrompts: Array.isArray(raw.pendingInteractions) ? [...raw.pendingInteractions] : [],
     pendingInteractions: Array.isArray(raw.pendingInteractions) ? [...raw.pendingInteractions] : [],
+    pendingExecutions: Array.isArray(raw.pendingExecutions) ? JSON.parse(JSON.stringify(raw.pendingExecutions)) : [],
+    resolvingCards: Array.isArray(raw.resolvingCards) ? raw.resolvingCards.map(c => reviveCard(c, c.owner || 'player')).filter(Boolean) : [],
     turnHistory: raw.turnHistory || createEmptyTurnHistory(),
     restrictions: raw.restrictions || {
       counters: {},
@@ -467,6 +489,19 @@ export function redactGameStateForViewer(state, viewerSideOrToken = null) {
       }
       return interaction;
     });
+  }
+
+  // Redact responseWindow private information if viewer is not the priority player
+  if (snapshot.responseWindow && viewerSide !== null && snapshot.responseWindow.priorityPlayer !== viewerSide) {
+    snapshot.responseWindow = {
+      ...snapshot.responseWindow,
+      legalResponseCandidates: (snapshot.responseWindow.legalResponseCandidates || []).map(cand => {
+        if (cand.card && cand.card.zone === 'hand') {
+          return { action: cand.action, label: 'Secret Hand Card', masked: true };
+        }
+        return cand;
+      })
+    };
   }
 
   return scrubCredentials(snapshot);

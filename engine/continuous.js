@@ -6,6 +6,8 @@
  * Cards and stacks are never mutated directly for continuous stat modifications.
  */
 
+import { classifyCardType } from './card_types.js';
+
 /**
  * Normalizes both numeric-keyed level maps ({ 1: { cost, bp } })
  * and database-keyed level maps ({ LV1: { level: 1, cost, bp } }).
@@ -739,9 +741,44 @@ export function canAttack(state, stack) {
   return true;
 }
 
+function canStandaloneBraveBlock(state, stack) {
+  const top = stack?.top;
+  if (!top) return false;
+  if (top.canBlockWhileUnbraved === true || top.canBlockAsBrave === true) return true;
+
+  if ((state?.modifiers || []).some(m => (m.type === 'BRAVE_CAN_BLOCK' || m.canBlockWhileUnbraved) && isModifierApplicable(m, stack, state))) {
+    return true;
+  }
+
+  if ((top.compiledIr?.abilities || []).some(ab =>
+    (!ab.header?.levels?.length || ab.header.levels.includes(computeLevel(stack, state))) &&
+    (ab.clauses || []).some(cl => cl.op?.canBlockWhileUnbraved || cl.op?.rule === 'BRAVE_CAN_BLOCK')
+  )) {
+    return true;
+  }
+
+  const eff = String(top.effect || '');
+  if (!eff) return false;
+  return (
+    /\bthis brave (?:in spirit condition )?can block\b/i.test(eff) ||
+    /\bcan block (?:even )?(?:when|while|if) (?:it is )?not braved\b/i.test(eff) ||
+    /\b(?:when|while) not braved[^.\n]*\bcan block\b/i.test(eff) ||
+    /\bcan block (?:even )?in spirit condition\b/i.test(eff) ||
+    /このブレイヴは(?:合体していなくても|スピリット状態のとき)ブロックできる/.test(eff)
+  );
+}
+
 export function canBlock(state, stack) {
   if (!stack) return false;
   const sId = stack.id || stack.stackId;
+
+  // Battle Spirits rule: A Brave in Spirit condition (not braved with a Spirit/Ultimate)
+  // cannot block unless explicitly permitted on the card itself.
+  const topClass = classifyCardType(stack.top);
+  const isUnbravedBrave = topClass.isBrave && (!Array.isArray(stack.braves) || stack.braves.length === 0);
+  if (isUnbravedBrave && !canStandaloneBraveBlock(state, stack)) {
+    return false;
+  }
 
   // Forced blocker / Target Attack restriction: if a specific opposing stack is forced to block, other stacks cannot block instead
   if (state.combat && state.combat.forcedBlockerStackId && state.combat.forcedBlockerStackId !== sId) {

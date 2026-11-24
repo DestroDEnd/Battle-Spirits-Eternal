@@ -2208,7 +2208,6 @@
     "keywords": [],
     "abilities": [
       {
-        "id": "BS70-060#AB_PASSIVE_NONE_LV1_LV2_d480a2f40f8f8d6da4a0e2d96e46259e8374f7c7e8654e7d012e8cfde25da62a_45efd544ab8c02a7979c56b95779c0ce",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -2218,20 +2217,30 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "PASSIVE",
+          "timings": [],
           "timingLabel": "",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "All your heavily exhausted \"Roaring Azure\" family Spirits are treated as being on their highest levels."
         },
+        "originalAbilityText": "[LV1][LV2]\nAll your heavily exhausted \"Roaring Azure\" family Spirits are treated as being on their highest levels.",
+        "abilityIndex": 0,
         "clauses": [
           {
             "rawText": "All your heavily exhausted \"Roaring Azure\" family Spirits are treated as being on their highest levels.",
+            "originalClauseText": "All your heavily exhausted \"Roaring Azure\" family Spirits are treated as being on their highest levels.",
             "cleanText": "All your heavily exhausted \"Roaring Azure\" family Spirits are treated as being on their highest levels",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -2239,19 +2248,36 @@
             "duration": null,
             "op": {
               "op": "EXHAUST",
+              "count": "ALL",
               "target": {
-                "side": "either"
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
               }
             }
           }
         ],
         "unsupported": [],
         "legacyId": "BS70-060#a0",
-        "physicalId": "BS70-060#AB_PASSIVE_NONE_LV1_LV2_d480a2f40f8f8d6da4a0e2d96e46259e8374f7c7e8654e7d012e8cfde25da62a_45efd544ab8c02a7979c56b95779c0ce",
-        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_d480a2f40f8f8d6da4a0e2d96e46259e8374f7c7e8654e7d012e8cfde25da62a_45efd544ab8c02a7979c56b95779c0ce"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS70-060#AB_PASSIVE_NONE_LV1_LV2_6505a494b31cadd9c10ed35eba3dd3b67083f425071a0183a86ca72ab4c9f16a_40c8f94cab9ce0d47fb5f589978adfca",
+        "physicalId": "BS70-060#AB_PASSIVE_NONE_LV1_LV2_6505a494b31cadd9c10ed35eba3dd3b67083f425071a0183a86ca72ab4c9f16a_40c8f94cab9ce0d47fb5f589978adfca",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_6505a494b31cadd9c10ed35eba3dd3b67083f425071a0183a86ca72ab4c9f16a_40c8f94cab9ce0d47fb5f589978adfca",
+        "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_9fa6242a9e721bf837c883ce259f294636e5e82619a179cc72e972030a52afe1_ed2afff95d064b5c4a46a4947fac8acb",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS70-060#AB_WHEN_ATTACKS_NONE_LV2_a1b3b9e8f0866151f9d1c420dac0eea096a3f879683762e8664d149c322fe84f_600e17bb2ff0f95ac9ec07d715809251",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -2260,20 +2286,34 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_ATTACKS",
+          "timings": [
+            "WHEN_ATTACKS"
+          ],
           "timingLabel": "When Attacks",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Draw two cards, then discard two cards from your Hand."
         },
+        "originalAbilityText": "[LV2] (When Attacks)\nDraw two cards, then discard two cards from your Hand.",
+        "abilityIndex": 1,
         "clauses": [
           {
-            "rawText": "Draw two cards, then discard two cards from your Hand.",
-            "cleanText": "Draw two cards, then discard two cards from your Hand",
+            "rawText": "Draw two cards",
+            "originalClauseText": "Draw two cards",
+            "cleanText": "Draw two cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -2285,15 +2325,49 @@
               "chooser": "self",
               "forEach": null
             }
+          },
+          {
+            "rawText": "discard two cards from your Hand.",
+            "originalClauseText": "discard two cards from your Hand.",
+            "cleanText": "discard two cards from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 2,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
           }
         ],
         "unsupported": [],
         "legacyId": "BS70-060#a1",
-        "physicalId": "BS70-060#AB_WHEN_ATTACKS_NONE_LV2_a1b3b9e8f0866151f9d1c420dac0eea096a3f879683762e8664d149c322fe84f_600e17bb2ff0f95ac9ec07d715809251",
-        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_a1b3b9e8f0866151f9d1c420dac0eea096a3f879683762e8664d149c322fe84f_600e17bb2ff0f95ac9ec07d715809251"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS70-060#AB_WHEN_ATTACKS_NONE_LV2_f3f9f128c7c36ee3edd46779013a78b0dc6f1e5757c1e76c7e4f2a9e1c9381a9_801f7f38d2c63b84beae450068a5af9b",
+        "physicalId": "BS70-060#AB_WHEN_ATTACKS_NONE_LV2_f3f9f128c7c36ee3edd46779013a78b0dc6f1e5757c1e76c7e4f2a9e1c9381a9_801f7f38d2c63b84beae450068a5af9b",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_f3f9f128c7c36ee3edd46779013a78b0dc6f1e5757c1e76c7e4f2a9e1c9381a9_801f7f38d2c63b84beae450068a5af9b",
+        "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_3082ea52719693b4c310987b094531b0485c20b7f3be9d010e60026b68a2bd27_1bcae5660d27e0b37db3888de902bb72",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 2,
+    "compiledClausesCount": 3,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },
@@ -6824,7 +6898,6 @@
     "keywords": [],
     "abilities": [
       {
-        "id": "BS70-089#AB_MAIN_NONE_LV1_LV2_LV3_350d0d06cd77041e48e4b2289cb57180665362ff5c8fef8a500cdb75fbf22b78_7b002feaad94899697c9a712991f0970",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -6835,20 +6908,32 @@
           "levelExplicit": false,
           "prefixes": [],
           "timing": "MAIN",
+          "timings": [],
           "timingLabel": "Main",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "MAIN"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": true,
           "cleanBody": "Including being in Soul State, if you control any \"Contractor Dan\", draw two cards, then discard two cards from your Hand. (Once per Turn: Same Name) You can put every \"Gekiha\" family card you would discard via this effect to the Removed Zone, instead of sending them to the Trash."
         },
+        "originalAbilityText": "[Main]\nIncluding being in Soul State, if you control any \"Contractor Dan\", draw two cards, then discard two cards from your Hand. (Once per Turn: Same Name) You can put every \"Gekiha\" family card you would discard via this effect to the Removed Zone, instead of sending them to the Trash.",
+        "abilityIndex": 0,
         "clauses": [
           {
-            "rawText": "Including being in Soul State, if you control any \"Contractor Dan\", draw two cards, then discard two cards from your Hand.",
-            "cleanText": "Including being in Soul State, if you control any \"Contractor Dan\", draw two cards, then discard two cards from your Hand",
+            "rawText": "Including being in Soul State, if you control any \"Contractor Dan\", draw two cards",
+            "originalClauseText": "Including being in Soul State, if you control any \"Contractor Dan\", draw two cards",
+            "cleanText": "Including being in Soul State, if you control any \"Contractor Dan\", draw two cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -6862,25 +6947,60 @@
             }
           },
           {
+            "rawText": "discard two cards from your Hand.",
+            "originalClauseText": "discard two cards from your Hand.",
+            "cleanText": "discard two cards from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 2,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
+          },
+          {
             "rawText": "You can put every \"Gekiha\" family card you would discard via this effect to the Removed Zone, instead of sending them to the Trash.",
+            "originalClauseText": "You can put every \"Gekiha\" family card you would discard via this effect to the Removed Zone, instead of sending them to the Trash.",
             "cleanText": "You can put every \"Gekiha\" family card you would discard via this effect to the Removed Zone, instead of sending them to the Trash",
+            "clauseIndex": 2,
             "link": null,
             "isOptional": true,
             "isCost": false,
             "condition": null,
             "duration": null,
             "op": {
-              "op": "GRANT_FAMILY"
+              "op": "REMOVED_ZONE_ACTION"
             }
           }
         ],
         "unsupported": [],
         "legacyId": "BS70-089#a0",
-        "physicalId": "BS70-089#AB_MAIN_NONE_LV1_LV2_LV3_350d0d06cd77041e48e4b2289cb57180665362ff5c8fef8a500cdb75fbf22b78_7b002feaad94899697c9a712991f0970",
-        "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_350d0d06cd77041e48e4b2289cb57180665362ff5c8fef8a500cdb75fbf22b78_7b002feaad94899697c9a712991f0970"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS70-089#AB_MAIN_NONE_LV1_LV2_LV3_ce154e1719a82d2837a4ad0faa92204658d4c506585ec65012d45cdca830b503_46998d566c491c3992def8e44f11c0b3",
+        "physicalId": "BS70-089#AB_MAIN_NONE_LV1_LV2_LV3_ce154e1719a82d2837a4ad0faa92204658d4c506585ec65012d45cdca830b503_46998d566c491c3992def8e44f11c0b3",
+        "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_ce154e1719a82d2837a4ad0faa92204658d4c506585ec65012d45cdca830b503_46998d566c491c3992def8e44f11c0b3",
+        "semanticIdV3": "SEM3#AB_MAIN_NONE_LV1_LV2_LV3_59d9bcebfb9766895f6c0925d7e8d04ccd8b14a9245d8b2414b831b05aed3e2e_39d0e78bd47fe8c6e2c3689ccd6e5da8",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "MAIN"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS70-089#AB_FLASH_NONE_LV1_LV2_LV3_b592677a2e66a75abab877dc45c39cf245e6fcc2243cac04c88d034bba4c273f_2090f8cee0d729c1bfa1febc6bbf5377",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -6891,20 +7011,56 @@
           "levelExplicit": false,
           "prefixes": [],
           "timing": "FLASH",
+          "timings": [],
           "timingLabel": "Flash",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "FLASH"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": true,
           "isMain": false,
-          "cleanBody": "During this turn, give one of your Spirits +3000 BP."
+          "cleanBody": "During this turn, give one of your Spirits +3000 BP.",
+          "flashTimingSpec": {
+            "effectType": "FLASH",
+            "isFlash": true,
+            "isGenericFlash": true,
+            "isTriggered": false,
+            "timingQualifier": "GENERIC",
+            "generalAvailability": [
+              "CONTROLLER_MAIN_STEP",
+              "EITHER_PLAYER_BATTLE_FLASH_TIMING"
+            ],
+            "additionalRestrictions": {
+              "allowedSteps": [
+                "MAIN",
+                "ATTACK"
+              ],
+              "allowedTurnOwners": [
+                "SELF",
+                "OPPONENT"
+              ],
+              "requiresBattle": false,
+              "requiresFlashWindow": false,
+              "triggerCondition": null
+            }
+          }
         },
+        "originalAbilityText": "[Flash]\nDuring this turn, give one of your Spirits +3000 BP.",
+        "abilityIndex": 1,
         "clauses": [
           {
             "rawText": "During this turn, give one of your Spirits +3000 BP.",
+            "originalClauseText": "During this turn, give one of your Spirits +3000 BP.",
             "cleanText": "give one of your Spirits +3000 BP",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -6921,11 +7077,27 @@
         ],
         "unsupported": [],
         "legacyId": "BS70-089#a1",
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS70-089#AB_FLASH_NONE_LV1_LV2_LV3_b592677a2e66a75abab877dc45c39cf245e6fcc2243cac04c88d034bba4c273f_2090f8cee0d729c1bfa1febc6bbf5377",
         "physicalId": "BS70-089#AB_FLASH_NONE_LV1_LV2_LV3_b592677a2e66a75abab877dc45c39cf245e6fcc2243cac04c88d034bba4c273f_2090f8cee0d729c1bfa1febc6bbf5377",
-        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_b592677a2e66a75abab877dc45c39cf245e6fcc2243cac04c88d034bba4c273f_2090f8cee0d729c1bfa1febc6bbf5377"
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_b592677a2e66a75abab877dc45c39cf245e6fcc2243cac04c88d034bba4c273f_2090f8cee0d729c1bfa1febc6bbf5377",
+        "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_281be807941d725a219c89817a9d2273866c531aaa074b4277316376a8bef9cf_5a2bf32f8bef2f5ba171cc5c2bdecf33",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "FLASH"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 3,
+    "compiledClausesCount": 4,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },

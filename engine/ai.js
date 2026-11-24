@@ -6,7 +6,7 @@
  * Plugs directly into PromptManager / AsyncResolver.
  */
 
-import { computeEffectiveBP, computeSymbols } from './continuous.js';
+import { computeEffectiveBP, computeSymbols, canBlock } from './continuous.js';
 
 export class AIDecider {
   constructor(options = {}) {
@@ -25,9 +25,29 @@ export class AIDecider {
   async decide(prompt, state) {
     if (!prompt) return null;
 
-    switch (prompt.type) {
+    // Strict Decision Ownership Guard: AI may only decide for its own side when permitted by MatchContext
+    const owner = prompt.decisionOwner || prompt.chooser || prompt.player || null;
+    if (owner && owner !== this.side) {
+      return null;
+    }
+    if (state?.matchContext && typeof state.matchContext.canAiDecide === 'function' && !state.matchContext.canAiDecide(this.side)) {
+      return null;
+    }
+
+    const pType = prompt.requestType || prompt.type;
+    switch (pType) {
       case 'CONFIRM_OPTIONAL':
-        return { accepted: true };
+      case 'CONFIRM_ACTION':
+      case 'OPTIONAL_TRIGGER':
+      case 'ACTIVATE_EFFECT': {
+        if (prompt.mandatory === true || prompt.optional === false) {
+          return { accepted: true, declined: false };
+        }
+        if (Array.isArray(prompt.candidates) && prompt.candidates.length === 0 && prompt.requiresTargets) {
+          return { accepted: false, declined: true };
+        }
+        return { accepted: true, declined: false };
+      }
 
       case 'CHOOSE_OR_BRANCH':
         return prompt.options && prompt.options.length > 0 ? prompt.options[0] : null;
@@ -105,7 +125,14 @@ export class AIDecider {
         if (!attackerStack) return { block: false };
 
         const attackerBp = computeEffectiveBP(state, attackerStack);
-        const mySpirits = (state.players[this.side].field || []).filter(st => st.state === 'REFRESHED');
+        const candSet = Array.isArray(prompt.candidates) && prompt.candidates.length > 0
+          ? new Set(prompt.candidates.map(c => c.stackId || c.id || c.candidateId).filter(Boolean))
+          : null;
+        const mySpirits = (state.players[this.side].field || []).filter(st =>
+          st.state === 'REFRESHED' &&
+          canBlock(state, st) &&
+          (!candSet || candSet.has(st.id))
+        );
         if (mySpirits.length === 0) return { block: false };
 
         // 1. Look for a winning blocker (blockerBp > attackerBp)
@@ -133,14 +160,49 @@ export class AIDecider {
         return { block: false };
       }
 
-      case 'BURST_TRIGGER':
-        return { activate: true };
+      case 'BURST_TRIGGER': {
+        if (prompt.mandatory === true || prompt.optional === false) {
+          return { activate: true };
+        }
+        if (prompt.strategy === 'hold' || prompt.conditionSatisfied === false) {
+          return { activate: false };
+        }
+        const myState = state?.players?.[this.side];
+        const oppSide = this.side === 'opponent' ? 'player' : 'opponent';
+        const oppState = state?.players?.[oppSide];
+        const myLife = myState?.life ?? 5;
+        const oppFieldCount = oppState?.field?.length || 0;
+        const handCount = myState?.hand?.length || 0;
+        const burstEff = String(prompt.burstCard?.effect || '').toLowerCase();
+        const isRemovalBurst = /\b(destroy|banish|return|bounce|exhaust|deplete|trash)\b/i.test(burstEff);
+        const isDrawOrSummonBurst = /\b(draw|summon|deploy|recover|gain.*life)\b/i.test(burstEff);
+
+        if (isRemovalBurst && oppFieldCount === 0 && myLife > 2) {
+          return { activate: false };
+        }
+        if (myLife <= 3 || oppFieldCount > 0 || (isDrawOrSummonBurst && handCount <= 3)) {
+          return { activate: true };
+        }
+        return { activate: false };
+      }
+
+      case 'SELECT_BLOCKER': {
+        const candidates = prompt.candidates || [];
+        const legalBlockers = candidates.filter(c => c.action === 'DECLARE_BLOCK');
+        if (legalBlockers.length > 0) {
+          legalBlockers.sort((a, b) => (b.raw?.bp || b.bp || 0) - (a.raw?.bp || a.bp || 0));
+          return { action: 'DECLARE_BLOCK', stackId: legalBlockers[0].stackId };
+        }
+        return { action: 'PASS_BLOCK' };
+      }
 
       case 'FLASH_ACTION': {
-        const actions = prompt.availableActions || [];
-        const playable = actions.filter(a => a.action !== 'PASS');
+        if (state?.responseWindow?.isOpen && state.responseWindow.priorityHolder && state.responseWindow.priorityHolder !== this.side) {
+          return { action: 'PASS' };
+        }
+        const actions = prompt.candidates || prompt.availableActions || [];
+        const playable = actions.filter(a => a.action && a.action !== 'PASS');
         if (playable.length > 0) {
-          // Play the first available flash action if in combat
           return playable[0];
         }
         return { action: 'PASS' };

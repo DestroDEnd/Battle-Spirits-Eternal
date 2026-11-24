@@ -2799,7 +2799,6 @@
     "keywords": [],
     "abilities": [
       {
-        "id": "BS31-112#AB_MAIN_NONE_LV1_LV2_LV3_1a184dc9e349d20090ee39534d7a9d11816a47b9adb526923c6c6b32d15668ad_bf9edebee601627798003a7f0dc5cbcb",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -2810,20 +2809,32 @@
           "levelExplicit": false,
           "prefixes": [],
           "timing": "MAIN",
+          "timings": [],
           "timingLabel": "Main",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "MAIN"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": true,
           "cleanBody": "Draw three cards, then discard two cards from your Hand. If there is [Soul Core] on any of your \"WisdomKing\"/\"Douji\" Spirits, this effect discards -1 card."
         },
+        "originalAbilityText": "[Main]\nDraw three cards, then discard two cards from your Hand. If there is [Soul Core] on any of your \"WisdomKing\"/\"Douji\" Spirits, this effect discards -1 card.",
+        "abilityIndex": 0,
         "clauses": [
           {
-            "rawText": "Draw three cards, then discard two cards from your Hand.",
-            "cleanText": "Draw three cards, then discard two cards from your Hand",
+            "rawText": "Draw three cards",
+            "originalClauseText": "Draw three cards",
+            "cleanText": "Draw three cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -2837,25 +2848,64 @@
             }
           },
           {
+            "rawText": "discard two cards from your Hand.",
+            "originalClauseText": "discard two cards from your Hand.",
+            "cleanText": "discard two cards from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 2,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
+          },
+          {
             "rawText": "If there is [Soul Core] on any of your \"WisdomKing\"/\"Douji\" Spirits, this effect discards -1 card.",
+            "originalClauseText": "If there is [Soul Core] on any of your \"WisdomKing\"/\"Douji\" Spirits, this effect discards -1 card.",
             "cleanText": "this effect discards -1 card",
+            "clauseIndex": 2,
             "link": null,
             "isOptional": false,
             "isCost": false,
             "condition": "If there is [Soul Core] on any of your \"WisdomKing\"/\"Douji\" Spirits",
             "duration": null,
             "op": {
-              "op": "MODIFY_EFFECT"
+              "op": "MODIFY_EFFECT",
+              "side": "self",
+              "param": "count",
+              "delta": -1,
+              "targetEffect": "discard"
             }
           }
         ],
         "unsupported": [],
         "legacyId": "BS31-112#a0",
-        "physicalId": "BS31-112#AB_MAIN_NONE_LV1_LV2_LV3_1a184dc9e349d20090ee39534d7a9d11816a47b9adb526923c6c6b32d15668ad_bf9edebee601627798003a7f0dc5cbcb",
-        "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_1a184dc9e349d20090ee39534d7a9d11816a47b9adb526923c6c6b32d15668ad_bf9edebee601627798003a7f0dc5cbcb"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS31-112#AB_MAIN_NONE_LV1_LV2_LV3_a60870dfef87a3f7cafe425e57d6a9a2d2602723f34b0a5e1b558f57634157f2_12099b572c7b6a6b7b298c0aef2f298a",
+        "physicalId": "BS31-112#AB_MAIN_NONE_LV1_LV2_LV3_a60870dfef87a3f7cafe425e57d6a9a2d2602723f34b0a5e1b558f57634157f2_12099b572c7b6a6b7b298c0aef2f298a",
+        "semanticId": "SEM#AB_MAIN_NONE_LV1_LV2_LV3_a60870dfef87a3f7cafe425e57d6a9a2d2602723f34b0a5e1b558f57634157f2_12099b572c7b6a6b7b298c0aef2f298a",
+        "semanticIdV3": "SEM3#AB_MAIN_NONE_LV1_LV2_LV3_d8bf47e1b618edb071a74588e551afd68b502a2738677b594204e2a363ca73cd_2e4e87802a63e0264da65da42351808f",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "MAIN"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS31-112#AB_FLASH_NONE_LV1_LV2_LV3_b7267febc116065bc535a58f5f3ff29dbb5c8037e51c4522ec8e3594a43eeb5e_256987d37f959f9e5e2d57967e8b7841",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -2866,20 +2916,56 @@
           "levelExplicit": false,
           "prefixes": [],
           "timing": "FLASH",
+          "timings": [],
           "timingLabel": "Flash",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "FLASH"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": true,
           "isMain": false,
-          "cleanBody": "During this turn, give a Spirit +3000 BP."
+          "cleanBody": "During this turn, give a Spirit +3000 BP.",
+          "flashTimingSpec": {
+            "effectType": "FLASH",
+            "isFlash": true,
+            "isGenericFlash": true,
+            "isTriggered": false,
+            "timingQualifier": "GENERIC",
+            "generalAvailability": [
+              "CONTROLLER_MAIN_STEP",
+              "EITHER_PLAYER_BATTLE_FLASH_TIMING"
+            ],
+            "additionalRestrictions": {
+              "allowedSteps": [
+                "MAIN",
+                "ATTACK"
+              ],
+              "allowedTurnOwners": [
+                "SELF",
+                "OPPONENT"
+              ],
+              "requiresBattle": false,
+              "requiresFlashWindow": false,
+              "triggerCondition": null
+            }
+          }
         },
+        "originalAbilityText": "[Flash]\nDuring this turn, give a Spirit +3000 BP.",
+        "abilityIndex": 1,
         "clauses": [
           {
             "rawText": "During this turn, give a Spirit +3000 BP.",
+            "originalClauseText": "During this turn, give a Spirit +3000 BP.",
             "cleanText": "give a Spirit +3000 BP",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -2895,11 +2981,27 @@
         ],
         "unsupported": [],
         "legacyId": "BS31-112#a1",
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS31-112#AB_FLASH_NONE_LV1_LV2_LV3_b7267febc116065bc535a58f5f3ff29dbb5c8037e51c4522ec8e3594a43eeb5e_256987d37f959f9e5e2d57967e8b7841",
         "physicalId": "BS31-112#AB_FLASH_NONE_LV1_LV2_LV3_b7267febc116065bc535a58f5f3ff29dbb5c8037e51c4522ec8e3594a43eeb5e_256987d37f959f9e5e2d57967e8b7841",
-        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_b7267febc116065bc535a58f5f3ff29dbb5c8037e51c4522ec8e3594a43eeb5e_256987d37f959f9e5e2d57967e8b7841"
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_b7267febc116065bc535a58f5f3ff29dbb5c8037e51c4522ec8e3594a43eeb5e_256987d37f959f9e5e2d57967e8b7841",
+        "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_e77e36428ba010d21a3a91c4e536514dc0a9e3516f01ebc06843c143bb19628b_c53cf161c0a0ff85202f30c551928441",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "FLASH"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 3,
+    "compiledClausesCount": 4,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },

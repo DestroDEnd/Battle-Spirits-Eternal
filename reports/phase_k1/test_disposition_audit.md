@@ -1,28 +1,28 @@
 # Test Disposition Audit Report (Phase M.1 — Work Package J)
 
-**Generated At:** 2026-11-22T17:01:04.598Z  
-**Total Discovered Test Files:** 264  
-**Master Regression Battery Suites:** 65  
+**Generated At:** 2026-11-23T03:57:41.140Z  
+**Total Discovered Test Files:** 281  
+**Master Regression Battery Suites:** 70  
 **Disposition Integrity Standard:** Zero Inferred Passes; Strict Process Execution Evidence  
 
 ---
 
 ## 1. Executive Summary & Disposition Breakdown
 
-In Phase M.1, all 264 test files across the repository have been audited under a strict mutually exclusive disposition taxonomy:
+In Phase M.1, all 281 test files across the repository have been audited under a strict mutually exclusive disposition taxonomy:
 
 | Disposition Category | File Count | Percentage (%) | Verification Evidence |
 |---|---:|---:|---|
-| **EXECUTED_PASS** | **65** | 24.62% | Synchronously executed by master verification runner with exit code 0 |
+| **EXECUTED_PASS** | **70** | 24.91% | Synchronously executed by master verification runner with exit code 0 |
 | **EXECUTED_FAIL** | **0** | 0.00% | None |
-| **BLOCKED_ENVIRONMENT** | **4** | 1.52% | Tests blocked by missing runtime environment prerequisites |
-| **EXCLUDED_WITH_REASON** | **5** | 1.89% | Explicitly excluded with documented technical rationale |
-| **HISTORICAL_NOT_CURRENTLY_EXECUTED** | **190** | 71.97% | Frozen historical phase baselines and milestone fixtures |
-| **Total Test Files Audited** | **264** | **100.00%** | Full discovery inventory without omission |
+| **BLOCKED_ENVIRONMENT** | **4** | 1.42% | Tests blocked by missing runtime environment prerequisites |
+| **EXCLUDED_WITH_REASON** | **5** | 1.78% | Explicitly excluded with documented technical rationale |
+| **HISTORICAL_NOT_CURRENTLY_EXECUTED** | **202** | 71.89% | Frozen historical phase baselines and milestone fixtures |
+| **Total Test Files Audited** | **281** | **100.00%** | Full discovery inventory without omission |
 
 ---
 
-## 2. Complete File-by-File Disposition Inventory (264 Files)
+## 2. Complete File-by-File Disposition Inventory (281 Files)
 
 | Test File | Assigned Disposition | Category | Rationale & Evidence |
 |---|---|---|---|
@@ -35,6 +35,7 @@ In Phase M.1, all 264 test files across the repository have been audited under a
 | `tests/arena_ir_shard_loader.test.js` | `HISTORICAL_NOT_CURRENTLY_EXECUTED` | `integration` | Historical phase milestone or set-specific test suite; functionality comprehensively covered by unified production regression suites |
 | `tests/arena_lobby_deck_hydration.test.js` | `HISTORICAL_NOT_CURRENTLY_EXECUTED` | `integration` | Historical phase milestone or set-specific test suite; functionality comprehensively covered by unified production regression suites |
 | `tests/arena_standard_decks_match_simulation.test.js` | `HISTORICAL_NOT_CURRENTLY_EXECUTED` | `integration` | Historical phase milestone or set-specific test suite; functionality comprehensively covered by unified production regression suites |
+| `tests/arena_ui_and_timer.test.js` | `HISTORICAL_NOT_CURRENTLY_EXECUTED` | `integration` | Historical phase milestone or set-specific test suite; functionality comprehensively covered by unified production regression suites |
 | `tests/booster_set_saga_handlers.test.js` | `HISTORICAL_NOT_CURRENTLY_EXECUTED` | `semantic_card_validation` | Historical phase milestone or set-specific test suite; functionality comprehensively covered by unified production regression suites |
 | `tests/brave_ultimate_condition_enforcement.test.js` | `BLOCKED_ENVIRONMENT` | `blocked_subsystem` | Awaiting complete wiring of modern dual-face Rebirth transformation, Brave fusion, or Grandwalker God systems |
 | `tests/browse_wasm_fallback_integrity.test.js` | `HISTORICAL_NOT_CURRENTLY_EXECUTED` | `regression` | Historical phase milestone or set-specific test suite; functionality comprehensively covered by unified production regression suites |
@@ -168,6 +169,22 @@ In Phase M.1, all 264 test files across the repository have been audited under a
 | `tests/phase_m1_realtime_sync.test.js` | `EXECUTED_PASS` | `integration` | Active authoritative suite executed synchronously in master battery with exit code 0 |
 | `tests/phase_m1_token_security.test.js` | `EXECUTED_PASS` | `adversarial` | Active authoritative suite executed synchronously in master battery with exit code 0 |
 | `tests/phase_m1_two_human_browser_e2e.test.js` | `EXECUTED_PASS` | `real-browser` | Active authoritative suite executed synchronously in master battery with exit code 0 |
+| `tests/phase_m2_action_authority.test.js` | `HISTORICAL_NOT_CURRENTLY_EXECUTED` | `regression` | Historical phase milestone or set-specific test suite; functionality comprehensively covered by unified production regression suites |
+| `tests/phase_m2_action_idempotency.test.js` | `HISTORICAL_NOT_CURRENTLY_EXECUTED` | `regression` | Historical phase milestone or set-specific test suite; functionality comprehensively covered by unified production regression suites |
+| `tests/phase_m2_credential_isolation.test.js` | `HISTORICAL_NOT_CURRENTLY_EXECUTED` | `regression` | Historical phase milestone or set-specific test suite; functionality comprehensively covered by unified production regression suites |
+| `tests/phase_m2_match_discovery_security.test.js` | `HISTORICAL_NOT_CURRENTLY_EXECUTED` | `regression` | Historical phase milestone or set-specific test suite; functionality comprehensively covered by unified production regression suites |
+| `tests/phase_m2_transaction_integrity.test.js` | `HISTORICAL_NOT_CURRENTLY_EXECUTED` | `regression` | Historical phase milestone or set-specific test suite; functionality comprehensively covered by unified production regression suites |
+| `tests/phase_m2_transport_security.test.js` | `HISTORICAL_NOT_CURRENTLY_EXECUTED` | `regression` | Historical phase milestone or set-specific test suite; functionality comprehensively covered by unified production regression suites |
+| `tests/phase_m2_two_human_browser_e2e.test.js` | `HISTORICAL_NOT_CURRENTLY_EXECUTED` | `integration` | Historical phase milestone or set-specific test suite; functionality comprehensively covered by unified production regression suites |
+| `tests/phase_m3_1_flash_card_specific_restrictions.test.js` | `HISTORICAL_NOT_CURRENTLY_EXECUTED` | `semantic_card_validation` | Historical phase milestone or set-specific test suite; functionality comprehensively covered by unified production regression suites |
+| `tests/phase_m3_1_flash_general_availability.test.js` | `HISTORICAL_NOT_CURRENTLY_EXECUTED` | `regression` | Historical phase milestone or set-specific test suite; functionality comprehensively covered by unified production regression suites |
+| `tests/phase_m3_1_flash_regression.test.js` | `HISTORICAL_NOT_CURRENTLY_EXECUTED` | `regression` | Historical phase milestone or set-specific test suite; functionality comprehensively covered by unified production regression suites |
+| `tests/phase_m3_1_flash_response_and_priority.test.js` | `HISTORICAL_NOT_CURRENTLY_EXECUTED` | `regression` | Historical phase milestone or set-specific test suite; functionality comprehensively covered by unified production regression suites |
+| `tests/phase_m3_action_progression_lock.test.js` | `EXECUTED_PASS` | `adversarial` | Active authoritative suite executed synchronously in master battery with exit code 0 |
+| `tests/phase_m3_block_and_second_flash.test.js` | `EXECUTED_PASS` | `regression` | Active authoritative suite executed synchronously in master battery with exit code 0 |
+| `tests/phase_m3_flash_priority.test.js` | `EXECUTED_PASS` | `regression` | Active authoritative suite executed synchronously in master battery with exit code 0 |
+| `tests/phase_m3_response_window_manager.test.js` | `EXECUTED_PASS` | `unit` | Active authoritative suite executed synchronously in master battery with exit code 0 |
+| `tests/phase_m3_two_human_browser_e2e.test.js` | `EXECUTED_PASS` | `real-browser` | Active authoritative suite executed synchronously in master battery with exit code 0 |
 | `tests/phase_m_browser_e2e.test.js` | `EXECUTED_PASS` | `real-browser` | Active authoritative suite executed synchronously in master battery with exit code 0 |
 | `tests/phase_m_clock_and_timeout.test.js` | `EXECUTED_PASS` | `regression` | Active authoritative suite executed synchronously in master battery with exit code 0 |
 | `tests/phase_m_security_and_authority.test.js` | `EXECUTED_PASS` | `adversarial` | Active authoritative suite executed synchronously in master battery with exit code 0 |

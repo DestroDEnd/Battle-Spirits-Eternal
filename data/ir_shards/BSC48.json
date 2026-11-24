@@ -1961,7 +1961,6 @@
     "keywords": [],
     "abilities": [
       {
-        "id": "BSC48-059#AB_PASSIVE_NONE_LV1_LV2_LV3_be73382dc68e5aaa4013c3df422be86a830724ff529e698d7e3deeaf05596074_af96c267058cabce9085a497da871da2",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -1972,37 +1971,65 @@
           "levelExplicit": false,
           "prefixes": [],
           "timing": "PASSIVE",
+          "timings": [],
           "timingLabel": "",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [
+            "ONCE_PER_TURN_SAME_NAME"
+          ],
           "limit": "ONCE_PER_TURN_SAME_NAME",
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "When your Attack Step ends, including being in Soul State, if you control any \"Gunjou Souun\", you can use this card from the Hand, without paying the cost."
         },
+        "originalAbilityText": "(Once per Turn: Same Name) When your Attack Step ends, including being in Soul State, if you control any \"Gunjou Souun\", you can use this card from the Hand, without paying the cost.",
+        "abilityIndex": 0,
         "clauses": [
           {
             "rawText": "When your Attack Step ends, including being in Soul State, if you control any \"Gunjou Souun\", you can use this card from the Hand, without paying the cost.",
+            "originalClauseText": "When your Attack Step ends, including being in Soul State, if you control any \"Gunjou Souun\", you can use this card from the Hand, without paying the cost.",
             "cleanText": "When your Attack Step ends, including being in Soul State, if you control any \"Gunjou Souun\", you can use this card from the Hand, without paying the cost",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": true,
             "isCost": false,
             "condition": null,
             "duration": null,
             "op": {
-              "op": "COST_MODIFIER"
+              "op": "COST_MODIFIER",
+              "free": true
             }
           }
         ],
         "unsupported": [],
         "legacyId": "BSC48-059#a0",
-        "physicalId": "BSC48-059#AB_PASSIVE_NONE_LV1_LV2_LV3_be73382dc68e5aaa4013c3df422be86a830724ff529e698d7e3deeaf05596074_af96c267058cabce9085a497da871da2",
-        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_be73382dc68e5aaa4013c3df422be86a830724ff529e698d7e3deeaf05596074_af96c267058cabce9085a497da871da2"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BSC48-059#AB_PASSIVE_NONE_LV1_LV2_LV3_0de9e8f3722de168e07f8ab646b993677ad2dd1d55e7b308315c413ac2befee3_fe205db2a00b39f28fa59de8e139b73b",
+        "physicalId": "BSC48-059#AB_PASSIVE_NONE_LV1_LV2_LV3_0de9e8f3722de168e07f8ab646b993677ad2dd1d55e7b308315c413ac2befee3_fe205db2a00b39f28fa59de8e139b73b",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_0de9e8f3722de168e07f8ab646b993677ad2dd1d55e7b308315c413ac2befee3_fe205db2a00b39f28fa59de8e139b73b",
+        "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_871cfa13fd00e199020580c2c51bd03749e90efd29213aa2c297a9125dc35f74_30798587eab12240a481d2a2fa12a470",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [
+            "ONCE_PER_TURN_SAME_NAME"
+          ],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BSC48-059#AB_FLASH_NONE_LV1_LV2_LV3_fd8fefdf469cc9f6342be364d2cd939cc158583dc46410bed3ae1e0b3cd83438_e03fd0a25663721b14b2bb5e475a85b0",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -2013,20 +2040,56 @@
           "levelExplicit": false,
           "prefixes": [],
           "timing": "FLASH",
+          "timings": [],
           "timingLabel": "Flash",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "FLASH"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": true,
           "isMain": false,
-          "cleanBody": "Destroy an opposing Spirit/Ultimate with the lowest cost. Then, if the opponent activated any \"Attack Step Ending\" effects, draw three cards, then discard one card from your Hand."
+          "cleanBody": "Destroy an opposing Spirit/Ultimate with the lowest cost. Then, if the opponent activated any \"Attack Step Ending\" effects, draw three cards, then discard one card from your Hand.",
+          "flashTimingSpec": {
+            "effectType": "FLASH",
+            "isFlash": true,
+            "isGenericFlash": true,
+            "isTriggered": false,
+            "timingQualifier": "GENERIC",
+            "generalAvailability": [
+              "CONTROLLER_MAIN_STEP",
+              "EITHER_PLAYER_BATTLE_FLASH_TIMING"
+            ],
+            "additionalRestrictions": {
+              "allowedSteps": [
+                "MAIN",
+                "ATTACK"
+              ],
+              "allowedTurnOwners": [
+                "SELF",
+                "OPPONENT"
+              ],
+              "requiresBattle": false,
+              "requiresFlashWindow": false,
+              "triggerCondition": null
+            }
+          }
         },
+        "originalAbilityText": "[Flash]\nDestroy an opposing Spirit/Ultimate with the lowest cost. Then, if the opponent activated any \"Attack Step Ending\" effects, draw three cards, then discard one card from your Hand.",
+        "abilityIndex": 1,
         "clauses": [
           {
             "rawText": "Destroy an opposing Spirit/Ultimate with the lowest cost.",
+            "originalClauseText": "Destroy an opposing Spirit/Ultimate with the lowest cost.",
             "cleanText": "Destroy an opposing Spirit/Ultimate with the lowest cost",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -2044,8 +2107,10 @@
             }
           },
           {
-            "rawText": "if the opponent activated any \"Attack Step Ending\" effects, draw three cards, then discard one card from your Hand.",
-            "cleanText": "draw three cards, then discard one card from your Hand",
+            "rawText": "if the opponent activated any \"Attack Step Ending\" effects, draw three cards",
+            "originalClauseText": "if the opponent activated any \"Attack Step Ending\" effects, draw three cards",
+            "cleanText": "draw three cards",
+            "clauseIndex": 1,
             "link": "then",
             "isOptional": false,
             "isCost": false,
@@ -2057,15 +2122,49 @@
               "chooser": "self",
               "forEach": null
             }
+          },
+          {
+            "rawText": "discard one card from your Hand.",
+            "originalClauseText": "discard one card from your Hand.",
+            "cleanText": "discard one card from your Hand",
+            "clauseIndex": 2,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 1,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
           }
         ],
         "unsupported": [],
         "legacyId": "BSC48-059#a1",
-        "physicalId": "BSC48-059#AB_FLASH_NONE_LV1_LV2_LV3_fd8fefdf469cc9f6342be364d2cd939cc158583dc46410bed3ae1e0b3cd83438_e03fd0a25663721b14b2bb5e475a85b0",
-        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_fd8fefdf469cc9f6342be364d2cd939cc158583dc46410bed3ae1e0b3cd83438_e03fd0a25663721b14b2bb5e475a85b0"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BSC48-059#AB_FLASH_NONE_LV1_LV2_LV3_f29ebad834ed0f96352f755a68da5e13a44024bd25f64639f957e2182f7ce0fb_1f0759160f446c71ad570f21db810c2e",
+        "physicalId": "BSC48-059#AB_FLASH_NONE_LV1_LV2_LV3_f29ebad834ed0f96352f755a68da5e13a44024bd25f64639f957e2182f7ce0fb_1f0759160f446c71ad570f21db810c2e",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_f29ebad834ed0f96352f755a68da5e13a44024bd25f64639f957e2182f7ce0fb_1f0759160f446c71ad570f21db810c2e",
+        "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_e70ef78c1bca41a85b98d917dffce963158ff0d67f95f9da242ed8841ea97632_c245be2e69b86a5bdafd16c9e2f65741",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "FLASH"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 3,
+    "compiledClausesCount": 4,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },
@@ -8711,17 +8810,37 @@
     "name": "The Peafowl WisdomKing LT",
     "keywords": [
       {
-        "name": "Burst",
-        "parameter": "s",
+        "name": "Soul Burst",
+        "parameter": null,
         "wave": 2,
         "hook": "burst",
         "bracketed": true,
-        "index": 0
+        "index": 0,
+        "abilityId": "BSC48-027#AB_BURST_NONE_LV1_LV2_LV3_90052c2183bcc760bd55fffcde1de9fcfb9c20ffeb5596a892c142eb5a191394_cfb00fa06f6b864eb5dd7fb00933eeae",
+        "cardNumber": "BSC48-027",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "levelExplicit": false,
+        "timing": "BURST",
+        "timingLabel": "Soul Burst",
+        "timingStep": "ANY",
+        "face": "A",
+        "prefixes": [],
+        "isSoulState": false,
+        "duringAdvent": false,
+        "duringSeal": false,
+        "burstCondition": "AFTER_OPPONENT_SUMMON_EFFECT",
+        "limit": null,
+        "isFlash": false,
+        "isMain": false,
+        "legacyAbilityId": "BSC48-027#a0"
       }
     ],
     "abilities": [
       {
-        "id": "BSC48-027#AB_BURST_NONE_LV1_LV2_LV3_27431066a6950d23ceefe14a0b53cfa089fc4e8080b684fe8a772dabd6886e24_1715889bb7614644e0b31cc95ad835e8",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -8732,20 +8851,32 @@
           "levelExplicit": false,
           "prefixes": [],
           "timing": "BURST",
-          "timingLabel": "Burst",
+          "timings": [],
+          "timingLabel": "Soul Burst",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "BURST"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
-          "keyword": null,
+          "keyword": "Soul Burst",
+          "keywords": [],
           "burstCondition": "AFTER_OPPONENT_SUMMON_EFFECT",
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Draw three cards, then discard a card from your Hand. After this effect resolves, summon this card without paying the cost."
         },
+        "originalAbilityText": "[Soul Burst] (After an opposing Spirit's/Brave's (When Summoned) effect resolves)\nDraw three cards, then discard a card from your Hand. After this effect resolves, summon this card without paying the cost.",
+        "abilityIndex": 0,
         "clauses": [
           {
-            "rawText": "Draw three cards, then discard a card from your Hand.",
-            "cleanText": "Draw three cards, then discard a card from your Hand",
+            "rawText": "Draw three cards",
+            "originalClauseText": "Draw three cards",
+            "cleanText": "Draw three cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -8759,8 +8890,28 @@
             }
           },
           {
+            "rawText": "discard a card from your Hand.",
+            "originalClauseText": "discard a card from your Hand.",
+            "cleanText": "discard a card from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 1,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
+          },
+          {
             "rawText": "summon this card without paying the cost.",
+            "originalClauseText": "summon this card without paying the cost.",
             "cleanText": "summon this card without paying the cost",
+            "clauseIndex": 2,
             "link": "afterResolves",
             "isOptional": false,
             "isCost": false,
@@ -8775,11 +8926,56 @@
         ],
         "unsupported": [],
         "legacyId": "BSC48-027#a0",
-        "physicalId": "BSC48-027#AB_BURST_NONE_LV1_LV2_LV3_27431066a6950d23ceefe14a0b53cfa089fc4e8080b684fe8a772dabd6886e24_1715889bb7614644e0b31cc95ad835e8",
-        "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_27431066a6950d23ceefe14a0b53cfa089fc4e8080b684fe8a772dabd6886e24_1715889bb7614644e0b31cc95ad835e8"
+        "keywords": [
+          {
+            "name": "Soul Burst",
+            "parameter": null,
+            "wave": 2,
+            "hook": "burst",
+            "bracketed": true,
+            "index": 0,
+            "abilityId": "BSC48-027#AB_BURST_NONE_LV1_LV2_LV3_90052c2183bcc760bd55fffcde1de9fcfb9c20ffeb5596a892c142eb5a191394_cfb00fa06f6b864eb5dd7fb00933eeae",
+            "cardNumber": "BSC48-027",
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "timing": "BURST",
+            "timingLabel": "Soul Burst",
+            "timingStep": "ANY",
+            "face": "A",
+            "prefixes": [],
+            "isSoulState": false,
+            "duringAdvent": false,
+            "duringSeal": false,
+            "burstCondition": "AFTER_OPPONENT_SUMMON_EFFECT",
+            "limit": null,
+            "isFlash": false,
+            "isMain": false,
+            "legacyAbilityId": "BSC48-027#a0"
+          }
+        ],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BSC48-027#AB_BURST_NONE_LV1_LV2_LV3_90052c2183bcc760bd55fffcde1de9fcfb9c20ffeb5596a892c142eb5a191394_cfb00fa06f6b864eb5dd7fb00933eeae",
+        "physicalId": "BSC48-027#AB_BURST_NONE_LV1_LV2_LV3_90052c2183bcc760bd55fffcde1de9fcfb9c20ffeb5596a892c142eb5a191394_cfb00fa06f6b864eb5dd7fb00933eeae",
+        "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_90052c2183bcc760bd55fffcde1de9fcfb9c20ffeb5596a892c142eb5a191394_cfb00fa06f6b864eb5dd7fb00933eeae",
+        "semanticIdV3": "SEM3#AB_BURST_NONE_LV1_LV2_LV3_9d5852c0c8cd42f1767661b65bf6d51f6259564655175003907b128e1dd9d353_184c80c3267f0eeea6912dd69caf6cba",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "BURST"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BSC48-027#AB_WHEN_DESTROYED_NONE_LV1_LV2_LV3_32421a35e1491fca9b1a5cb07438f4e9259402b66643b30ff51badfc78c0f703_87e7c97c84920f8bc8155e0b427ef400",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -8790,37 +8986,67 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_DESTROYED",
+          "timings": [
+            "WHEN_DESTROYED"
+          ],
           "timingLabel": "When Destroyed",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_DESTROYED"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "You can set a Burst card from your Hand."
         },
+        "originalAbilityText": "[LV1][LV2][LV3] (When Destroyed)\nYou can set a Burst card from your Hand.",
+        "abilityIndex": 1,
         "clauses": [
           {
             "rawText": "You can set a Burst card from your Hand.",
+            "originalClauseText": "You can set a Burst card from your Hand.",
             "cleanText": "You can set a Burst card from your Hand",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": true,
             "isCost": false,
             "condition": null,
             "duration": null,
             "op": {
-              "op": "KEYWORD_RULE"
+              "op": "KEYWORD_RULE",
+              "keyword": "Burst"
             }
           }
         ],
         "unsupported": [],
         "legacyId": "BSC48-027#a1",
-        "physicalId": "BSC48-027#AB_WHEN_DESTROYED_NONE_LV1_LV2_LV3_32421a35e1491fca9b1a5cb07438f4e9259402b66643b30ff51badfc78c0f703_87e7c97c84920f8bc8155e0b427ef400",
-        "semanticId": "SEM#AB_WHEN_DESTROYED_NONE_LV1_LV2_LV3_32421a35e1491fca9b1a5cb07438f4e9259402b66643b30ff51badfc78c0f703_87e7c97c84920f8bc8155e0b427ef400"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BSC48-027#AB_WHEN_DESTROYED_NONE_LV1_LV2_LV3_fcca8a7ab2c95abaa36adbadf5565cd2cb81a3172329d6dd0af3cae43fd77f8a_2f5456ee6aea26797c03d226b74f3df3",
+        "physicalId": "BSC48-027#AB_WHEN_DESTROYED_NONE_LV1_LV2_LV3_fcca8a7ab2c95abaa36adbadf5565cd2cb81a3172329d6dd0af3cae43fd77f8a_2f5456ee6aea26797c03d226b74f3df3",
+        "semanticId": "SEM#AB_WHEN_DESTROYED_NONE_LV1_LV2_LV3_fcca8a7ab2c95abaa36adbadf5565cd2cb81a3172329d6dd0af3cae43fd77f8a_2f5456ee6aea26797c03d226b74f3df3",
+        "semanticIdV3": "SEM3#AB_WHEN_DESTROYED_NONE_LV1_LV2_LV3_ffdc13c1d22c832c4c2b57221d677c6c5471dbb762ce7ece34102ae113f4772e_d38cdfaab9f8bd396f95f39f7ab12568",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_DESTROYED"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BSC48-027#AB_PASSIVE_NONE_LV2_LV3_8479eab3a6f92c96dc76331131b3b04ef00e36f5b883f8d65d128fe72376443b_125f83f6540842e57b12bcefa27b9ae2",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -8830,32 +9056,46 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "PASSIVE",
+          "timings": [],
           "timingLabel": "",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Cost 2~8 (When Attacks/Blocks)\nAt the end of the battle, by destroying this Spirit, summon a Cost 2~8 Spirit card in the same family as this Spirit from your Hand, without paying the cost."
         },
+        "originalAbilityText": "[LV2][LV3] Cost 2~8 (When Attacks/Blocks)\nAt the end of the battle, by destroying this Spirit, summon a Cost 2~8 Spirit card in the same family as this Spirit from your Hand, without paying the cost.",
+        "abilityIndex": 2,
         "clauses": [
           {
             "rawText": "Cost 2~8 (When Attacks/Blocks)",
+            "originalClauseText": "Cost 2~8 (When Attacks/Blocks)",
             "cleanText": "Cost 2~8 (When Attacks/Blocks)",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
             "condition": null,
             "duration": null,
             "op": {
-              "op": "COST_MODIFIER"
+              "timing": "OPPOSING_TURN",
+              "keyword": "Custom",
+              "op": "HEADER"
             }
           },
           {
             "rawText": "At the end of the battle, by destroying this Spirit, summon a Cost 2~8 Spirit card in the same family as this Spirit from your Hand, without paying the cost.",
+            "originalClauseText": "At the end of the battle, by destroying this Spirit, summon a Cost 2~8 Spirit card in the same family as this Spirit from your Hand, without paying the cost.",
             "cleanText": "At the end of the battle, by destroying this Spirit, summon a Cost 2~8 Spirit card in the same family as this Spirit from your Hand, without paying the cost",
+            "clauseIndex": 1,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -8873,11 +9113,25 @@
         ],
         "unsupported": [],
         "legacyId": "BSC48-027#a2",
-        "physicalId": "BSC48-027#AB_PASSIVE_NONE_LV2_LV3_8479eab3a6f92c96dc76331131b3b04ef00e36f5b883f8d65d128fe72376443b_125f83f6540842e57b12bcefa27b9ae2",
-        "semanticId": "SEM#AB_PASSIVE_NONE_LV2_LV3_8479eab3a6f92c96dc76331131b3b04ef00e36f5b883f8d65d128fe72376443b_125f83f6540842e57b12bcefa27b9ae2"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BSC48-027#AB_PASSIVE_NONE_LV2_LV3_6813b725934745a483a34f8a3df3be4c620963ea87cdfb4b0910b7e3ad298f23_f93a29c43332b691fcdfa61eac00abcf",
+        "physicalId": "BSC48-027#AB_PASSIVE_NONE_LV2_LV3_6813b725934745a483a34f8a3df3be4c620963ea87cdfb4b0910b7e3ad298f23_f93a29c43332b691fcdfa61eac00abcf",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV2_LV3_6813b725934745a483a34f8a3df3be4c620963ea87cdfb4b0910b7e3ad298f23_f93a29c43332b691fcdfa61eac00abcf",
+        "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV2_LV3_0f3af4a1da8c984e969aeaab9330b8ad2d2a8bb00a9b971fa8037dab2c0b5cb0_6801d5d2c785fcb21ca43f17f292fa4e",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 5,
+    "compiledClausesCount": 6,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },

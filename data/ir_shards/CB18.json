@@ -9233,7 +9233,6 @@
     "keywords": [],
     "abilities": [
       {
-        "id": "CB18-044-A14131#AB_PASSIVE_NONE_LV1_LV2_LV3_94abf4553c3dc707dbf8184b5d009bfdc89e7678b68bf73f836ed16482a77ae1_24fb4b61931bde9705bfda07a0503611",
         "type": "CONDITION",
         "header": {
           "levels": [
@@ -9244,25 +9243,52 @@
           "levelExplicit": false,
           "prefixes": [],
           "timing": "PASSIVE",
+          "timings": [],
           "timingLabel": "",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": ""
         },
         "rawText": "[+1]",
+        "originalAbilityText": "[+1]",
+        "abilityIndex": 0,
+        "condition": {
+          "type": "CONDITION_TEXT_FALLBACK",
+          "conditionType": "CORE_MODIFIER",
+          "expression": "+1",
+          "source": "NORMALIZED_TEXT"
+        },
         "clauses": [],
         "unsupported": [],
         "legacyId": "CB18-044-A14131#a0",
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "CB18-044-A14131#AB_PASSIVE_NONE_LV1_LV2_LV3_94abf4553c3dc707dbf8184b5d009bfdc89e7678b68bf73f836ed16482a77ae1_24fb4b61931bde9705bfda07a0503611",
         "physicalId": "CB18-044-A14131#AB_PASSIVE_NONE_LV1_LV2_LV3_94abf4553c3dc707dbf8184b5d009bfdc89e7678b68bf73f836ed16482a77ae1_24fb4b61931bde9705bfda07a0503611",
-        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_94abf4553c3dc707dbf8184b5d009bfdc89e7678b68bf73f836ed16482a77ae1_24fb4b61931bde9705bfda07a0503611"
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_94abf4553c3dc707dbf8184b5d009bfdc89e7678b68bf73f836ed16482a77ae1_24fb4b61931bde9705bfda07a0503611",
+        "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_7b399d6a02918d36679d712156ed003ea0b3b65f055aa0bc24c66ee1bccf5239_e2d4b40beb5bc774e5dd282cffae22a8",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "CB18-044-A14131#AB_WHEN_REBORN_NONE_LV1_LV2_LV3_afba40994caebf6482897cc41a448376719834290aa36ca4833aaa0f982d8592_9c31ba8b10c74fc0ae10a05a0b984176",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -9273,20 +9299,34 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_REBORN",
+          "timings": [
+            "WHEN_REBORN"
+          ],
           "timingLabel": "When Reborn",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_REBORN"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Draw two cards, then discard two cards from your Hand."
         },
+        "originalAbilityText": "[LV1][LV2][LV3] (When Reborn)\nDraw two cards, then discard two cards from your Hand.",
+        "abilityIndex": 1,
         "clauses": [
           {
-            "rawText": "Draw two cards, then discard two cards from your Hand.",
-            "cleanText": "Draw two cards, then discard two cards from your Hand",
+            "rawText": "Draw two cards",
+            "originalClauseText": "Draw two cards",
+            "cleanText": "Draw two cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -9298,15 +9338,48 @@
               "chooser": "self",
               "forEach": null
             }
+          },
+          {
+            "rawText": "discard two cards from your Hand.",
+            "originalClauseText": "discard two cards from your Hand.",
+            "cleanText": "discard two cards from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 2,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
           }
         ],
         "unsupported": [],
         "legacyId": "CB18-044-A14131#a1",
-        "physicalId": "CB18-044-A14131#AB_WHEN_REBORN_NONE_LV1_LV2_LV3_afba40994caebf6482897cc41a448376719834290aa36ca4833aaa0f982d8592_9c31ba8b10c74fc0ae10a05a0b984176",
-        "semanticId": "SEM#AB_WHEN_REBORN_NONE_LV1_LV2_LV3_afba40994caebf6482897cc41a448376719834290aa36ca4833aaa0f982d8592_9c31ba8b10c74fc0ae10a05a0b984176"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "CB18-044-A14131#AB_WHEN_REBORN_NONE_LV1_LV2_LV3_6b7205d880a5497b4898d640b3a0195242124e1354bd9fec6bbc2743df135ff5_6815bccb772183ea4cea8bf47258aecf",
+        "physicalId": "CB18-044-A14131#AB_WHEN_REBORN_NONE_LV1_LV2_LV3_6b7205d880a5497b4898d640b3a0195242124e1354bd9fec6bbc2743df135ff5_6815bccb772183ea4cea8bf47258aecf",
+        "semanticId": "SEM#AB_WHEN_REBORN_NONE_LV1_LV2_LV3_6b7205d880a5497b4898d640b3a0195242124e1354bd9fec6bbc2743df135ff5_6815bccb772183ea4cea8bf47258aecf",
+        "semanticIdV3": "SEM3#AB_WHEN_REBORN_NONE_LV1_LV2_LV3_951a52a92b8be1e8291654fbfa798f9ebce93bb03ea6638972a6bbfede303232_7ac5ca9a5184ae4922860f7649d3732a",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_REBORN"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "CB18-044-A14131#AB_WHEN_ATTACKS_NONE_LV2_LV3_2777b54dc21ce0f34037a266416457666da4a3efef93c6b6011e57dd4e19690f_2aa90ac801127e255c84d77786652d53",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -9316,20 +9389,34 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_ATTACKS",
+          "timings": [
+            "WHEN_ATTACKS"
+          ],
           "timingLabel": "When Attacks",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Unless the opponent sends two cores from their Reserve to the Trash, they can't block."
         },
+        "originalAbilityText": "[LV2][LV3] (When Attacks)\nUnless the opponent sends two cores from their Reserve to the Trash, they can't block.",
+        "abilityIndex": 2,
         "clauses": [
           {
             "rawText": "Unless the opponent sends two cores from their Reserve to the Trash, they can't block.",
+            "originalClauseText": "Unless the opponent sends two cores from their Reserve to the Trash, they can't block.",
             "cleanText": "Unless the opponent sends two cores from their Reserve to the Trash, they can't block",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -9342,11 +9429,27 @@
         ],
         "unsupported": [],
         "legacyId": "CB18-044-A14131#a2",
-        "physicalId": "CB18-044-A14131#AB_WHEN_ATTACKS_NONE_LV2_LV3_2777b54dc21ce0f34037a266416457666da4a3efef93c6b6011e57dd4e19690f_2aa90ac801127e255c84d77786652d53",
-        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_2777b54dc21ce0f34037a266416457666da4a3efef93c6b6011e57dd4e19690f_2aa90ac801127e255c84d77786652d53"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "CB18-044-A14131#AB_WHEN_ATTACKS_NONE_LV2_LV3_77cb2fe0421a90b9560d61b96f9e0c3879ea905e7791c1110530a754d85a69db_c28be3fadb8e198879c64ed882e5295a",
+        "physicalId": "CB18-044-A14131#AB_WHEN_ATTACKS_NONE_LV2_LV3_77cb2fe0421a90b9560d61b96f9e0c3879ea905e7791c1110530a754d85a69db_c28be3fadb8e198879c64ed882e5295a",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_77cb2fe0421a90b9560d61b96f9e0c3879ea905e7791c1110530a754d85a69db_c28be3fadb8e198879c64ed882e5295a",
+        "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_f7f3b381c3fa44825bedf003d4d6f8a0161ffce8648a6e6efd83c2711405835f_29e15daed9a4a509b0ae0656415a47dc",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 2,
+    "compiledClausesCount": 3,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },

@@ -1057,20 +1057,31 @@
         "wave": 4,
         "hook": "afo",
         "bracketed": true,
-        "index": 174
-      },
-      {
-        "name": "Contract Pre-Advent",
-        "parameter": null,
-        "wave": 2,
-        "hook": "contract_pre_advent",
-        "bracketed": true,
-        "index": 306
+        "index": 0,
+        "abilityId": "BS62-053#AB_PASSIVE_NONE_LV1_LV2_27bfc87a4224b90c7a8c890253429678175750cac0aaf158b1e4809f36832405_2de6a5b04c16b2721e7c51d8428ec150",
+        "cardNumber": "BS62-053",
+        "levels": [
+          1,
+          2
+        ],
+        "levelExplicit": true,
+        "timing": "PASSIVE",
+        "timingLabel": "",
+        "timingStep": "ANY",
+        "face": "A",
+        "prefixes": [],
+        "isSoulState": false,
+        "duringAdvent": false,
+        "duringSeal": false,
+        "burstCondition": null,
+        "limit": null,
+        "isFlash": false,
+        "isMain": false,
+        "legacyAbilityId": "BS62-053#a1"
       }
     ],
     "abilities": [
       {
-        "id": "BS62-053#AB_WHEN_SUMMONED_NONE_LV1_LV2_9a716cadc5b1e40044b1b23627927cabffb69264513d615d1c179d5df17e7fd3_6c000bae98d4c346ef4c7677b03cd3da",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -1080,20 +1091,38 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_SUMMONED",
+          "timings": [
+            "WHEN_SUMMONED",
+            "WHEN_ATTACKS"
+          ],
           "timingLabel": "When Summoned/Attacks",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS",
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [
+            "ONCE_PER_TURN"
+          ],
           "limit": "ONCE_PER_TURN",
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "draw two cards, then discard two cards from your Hand. The opponent can't activate Nexus effects via this draw."
         },
+        "originalAbilityText": "[LV1][LV2] (When Summoned/Attacks)\nOnce per turn, draw two cards, then discard two cards from your Hand. The opponent can't activate Nexus effects via this draw.",
+        "abilityIndex": 0,
         "clauses": [
           {
-            "rawText": "draw two cards, then discard two cards from your Hand.",
-            "cleanText": "draw two cards, then discard two cards from your Hand",
+            "rawText": "draw two cards",
+            "originalClauseText": "draw two cards",
+            "cleanText": "draw two cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -1107,8 +1136,28 @@
             }
           },
           {
+            "rawText": "discard two cards from your Hand.",
+            "originalClauseText": "discard two cards from your Hand.",
+            "cleanText": "discard two cards from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 2,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
+          },
+          {
             "rawText": "The opponent can't activate Nexus effects via this draw.",
+            "originalClauseText": "The opponent can't activate Nexus effects via this draw.",
             "cleanText": "The opponent can't activate Nexus effects via this draw",
+            "clauseIndex": 2,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -1123,11 +1172,29 @@
         ],
         "unsupported": [],
         "legacyId": "BS62-053#a0",
-        "physicalId": "BS62-053#AB_WHEN_SUMMONED_NONE_LV1_LV2_9a716cadc5b1e40044b1b23627927cabffb69264513d615d1c179d5df17e7fd3_6c000bae98d4c346ef4c7677b03cd3da",
-        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_9a716cadc5b1e40044b1b23627927cabffb69264513d615d1c179d5df17e7fd3_6c000bae98d4c346ef4c7677b03cd3da"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS62-053#AB_WHEN_SUMMONED_NONE_LV1_LV2_7538c02004b579ab12011b8ba3268488127b66d980d694a7284f8ade25e6bb86_0acc11099e57df9486da8d3c76ff6f01",
+        "physicalId": "BS62-053#AB_WHEN_SUMMONED_NONE_LV1_LV2_7538c02004b579ab12011b8ba3268488127b66d980d694a7284f8ade25e6bb86_0acc11099e57df9486da8d3c76ff6f01",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_7538c02004b579ab12011b8ba3268488127b66d980d694a7284f8ade25e6bb86_0acc11099e57df9486da8d3c76ff6f01",
+        "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_f708977214ba4ed75d5afb6a25732695813179c1931fb546fda0adea4fff173b_02736e0bb88f4b5b92881978c6fcac07",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS",
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [
+            "ONCE_PER_TURN"
+          ],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS62-053#AB_PASSIVE_NONE_LV1_LV2_66ddeaec6c2018a895dbc2a923bc7e7a27688c8122c5cd8df0cfe7e42077497d_a599f04de75678c3eaeac398d6db491e",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -1137,20 +1204,32 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "PASSIVE",
+          "timings": [],
           "timingLabel": "",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": "AFO",
+          "keywords": [
+            "AFO"
+          ],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Give this Spirit and every \"The PartnerLion Raon\" you control, including those that are in pre-advent condition, the effect: \"[Contract Pre-Advent][Spirit] (When Attacks) Including being in Soul State/pre-advent condition, if you control any \"The PartnerLion Raon\", your counter +1.\""
         },
+        "originalAbilityText": "[LV1][LV2] [AFO]\nGive this Spirit and every \"The PartnerLion Raon\" you control, including those that are in pre-advent condition, the effect: \"[Contract Pre-Advent]/[Spirit] (When Attacks) Including being in Soul State/pre-advent condition, if you control any \"The PartnerLion Raon\", your counter +1.\"",
+        "abilityIndex": 1,
         "clauses": [
           {
             "rawText": "Give this Spirit and every \"The PartnerLion Raon\" you control, including those that are in pre-advent condition, the effect: \"[Contract Pre-Advent][Spirit] (When Attacks) Including being in Soul State/pre-advent condition, if you control any \"The PartnerLion Raon\", your counter +1.\"",
+            "originalClauseText": "Give this Spirit and every \"The PartnerLion Raon\" you control, including those that are in pre-advent condition, the effect: \"[Contract Pre-Advent][Spirit] (When Attacks) Including being in Soul State/pre-advent condition, if you control any \"The PartnerLion Raon\", your counter +1.\"",
             "cleanText": "Give this Spirit and every \"The PartnerLion Raon\" you control, including those that are in pre-advent condition, the effect: \"[Contract Pre-Advent][Spirit] (When Attacks) Including being in Soul State/pre-advent condition, if you control any \"The PartnerLion Raon\", your counter +1.\"",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -1164,11 +1243,63 @@
         ],
         "unsupported": [],
         "legacyId": "BS62-053#a1",
-        "physicalId": "BS62-053#AB_PASSIVE_NONE_LV1_LV2_66ddeaec6c2018a895dbc2a923bc7e7a27688c8122c5cd8df0cfe7e42077497d_a599f04de75678c3eaeac398d6db491e",
-        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_66ddeaec6c2018a895dbc2a923bc7e7a27688c8122c5cd8df0cfe7e42077497d_a599f04de75678c3eaeac398d6db491e"
+        "keywords": [
+          {
+            "name": "AFO",
+            "parameter": null,
+            "wave": 4,
+            "hook": "afo",
+            "bracketed": true,
+            "index": 0,
+            "abilityId": "BS62-053#AB_PASSIVE_NONE_LV1_LV2_27bfc87a4224b90c7a8c890253429678175750cac0aaf158b1e4809f36832405_2de6a5b04c16b2721e7c51d8428ec150",
+            "cardNumber": "BS62-053",
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "face": "A",
+            "prefixes": [],
+            "isSoulState": false,
+            "duringAdvent": false,
+            "duringSeal": false,
+            "burstCondition": null,
+            "limit": null,
+            "isFlash": false,
+            "isMain": false,
+            "legacyAbilityId": "BS62-053#a1"
+          }
+        ],
+        "referencedKeywords": [
+          {
+            "name": "Contract Pre-Advent",
+            "parameter": null,
+            "wave": 2,
+            "hook": "contract_pre_advent",
+            "bracketed": true,
+            "index": 126
+          }
+        ],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS62-053#AB_PASSIVE_NONE_LV1_LV2_27bfc87a4224b90c7a8c890253429678175750cac0aaf158b1e4809f36832405_2de6a5b04c16b2721e7c51d8428ec150",
+        "physicalId": "BS62-053#AB_PASSIVE_NONE_LV1_LV2_27bfc87a4224b90c7a8c890253429678175750cac0aaf158b1e4809f36832405_2de6a5b04c16b2721e7c51d8428ec150",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_27bfc87a4224b90c7a8c890253429678175750cac0aaf158b1e4809f36832405_2de6a5b04c16b2721e7c51d8428ec150",
+        "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_37240117b6026adc9775c4e3e8aa384b4cf4b1d430fa379663f680fd0d525b21_7ca3bf87e5ffdba8426bd73d947675c2",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 3,
+    "compiledClausesCount": 4,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },
@@ -9802,28 +9933,32 @@
         "wave": 4,
         "hook": "afo",
         "bracketed": true,
-        "index": 128
-      },
-      {
-        "name": "AFO",
-        "parameter": null,
-        "wave": 4,
-        "hook": "afo",
-        "bracketed": true,
-        "index": 195
-      },
-      {
-        "name": "Contract Pre-Advent",
-        "parameter": null,
-        "wave": 2,
-        "hook": "contract_pre_advent",
-        "bracketed": true,
-        "index": 327
+        "index": 0,
+        "abilityId": "BS62-056#AB_PASSIVE_NONE_LV1_LV2_LV3_f2f2cb2efe43ac837af6e82788e70370676a21eaa5b3fa46f590310a79d40472_a765a93a18a09ecf7e701230956a848e",
+        "cardNumber": "BS62-056",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "levelExplicit": true,
+        "timing": "PASSIVE",
+        "timingLabel": "",
+        "timingStep": "ANY",
+        "face": "A",
+        "prefixes": [],
+        "isSoulState": false,
+        "duringAdvent": false,
+        "duringSeal": false,
+        "burstCondition": null,
+        "limit": null,
+        "isFlash": false,
+        "isMain": false,
+        "legacyAbilityId": "BS62-056#a1"
       }
     ],
     "abilities": [
       {
-        "id": "BS62-056#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_d7edb45c72299258ca2491a1e179b697252cb767bbdc1a49c5d5e6eeb3538a06_eb837457dd3c50838b866b42f7931aaa",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -9834,20 +9969,34 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_SUMMONED",
+          "timings": [
+            "WHEN_SUMMONED"
+          ],
           "timingLabel": "When Summoned",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Draw two cards, then discard two cards from your Hand. When this effect discards any cards with [AFO], destroy an opposing Cost 4 or less Spirit."
         },
+        "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nDraw two cards, then discard two cards from your Hand. When this effect discards any cards with [AFO], destroy an opposing Cost 4 or less Spirit.",
+        "abilityIndex": 0,
         "clauses": [
           {
-            "rawText": "Draw two cards, then discard two cards from your Hand.",
-            "cleanText": "Draw two cards, then discard two cards from your Hand",
+            "rawText": "Draw two cards",
+            "originalClauseText": "Draw two cards",
+            "cleanText": "Draw two cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -9861,8 +10010,28 @@
             }
           },
           {
+            "rawText": "discard two cards from your Hand.",
+            "originalClauseText": "discard two cards from your Hand.",
+            "cleanText": "discard two cards from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 2,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
+          },
+          {
             "rawText": "When this effect discards any cards with [AFO], destroy an opposing Cost 4 or less Spirit.",
+            "originalClauseText": "When this effect discards any cards with [AFO], destroy an opposing Cost 4 or less Spirit.",
             "cleanText": "When this effect discards any cards with [AFO], destroy an opposing Cost 4 or less Spirit",
+            "clauseIndex": 2,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -9885,11 +10054,35 @@
         ],
         "unsupported": [],
         "legacyId": "BS62-056#a0",
-        "physicalId": "BS62-056#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_d7edb45c72299258ca2491a1e179b697252cb767bbdc1a49c5d5e6eeb3538a06_eb837457dd3c50838b866b42f7931aaa",
-        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_d7edb45c72299258ca2491a1e179b697252cb767bbdc1a49c5d5e6eeb3538a06_eb837457dd3c50838b866b42f7931aaa"
+        "keywords": [],
+        "referencedKeywords": [
+          {
+            "name": "AFO",
+            "parameter": null,
+            "wave": 4,
+            "hook": "afo",
+            "bracketed": true,
+            "index": 96
+          }
+        ],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS62-056#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_192339cc5386aa6404cc4a7ac7c081bf586d5e7a1081a04ed864abf39d7a6092_1a4d0178d8740010a86ab8aa7ba94896",
+        "physicalId": "BS62-056#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_192339cc5386aa6404cc4a7ac7c081bf586d5e7a1081a04ed864abf39d7a6092_1a4d0178d8740010a86ab8aa7ba94896",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_192339cc5386aa6404cc4a7ac7c081bf586d5e7a1081a04ed864abf39d7a6092_1a4d0178d8740010a86ab8aa7ba94896",
+        "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_b9edc76d272cee438956bda12151545e9171c7327f339b52724b2abddacc580f_3708155c1462ea3f2a69660db9b4a314",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS62-056#AB_PASSIVE_NONE_LV1_LV2_LV3_6c424a97103114418c5bcc108a501810c76b77ae5dcd696e4b85c6a735606b24_ea53b0d95e59ae55cd9fe8da19b61bf7",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -9900,20 +10093,32 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "PASSIVE",
+          "timings": [],
           "timingLabel": "",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": "AFO",
+          "keywords": [
+            "AFO"
+          ],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Give this Spirit and every \"The PartnerLion Raon\" you control, including those that are in pre-advent condition, the effect: \"[Contract Pre-Advent][Spirit] (When Attacks) Your counter +1. Then, if you have seven counters or more, during this battle, this Spirit gains an extra Blue symbol.\""
         },
+        "originalAbilityText": "[LV1][LV2][LV3] [AFO]\nGive this Spirit and every \"The PartnerLion Raon\" you control, including those that are in pre-advent condition, the effect: \"[Contract Pre-Advent]/[Spirit] (When Attacks) Your counter +1. Then, if you have seven counters or more, during this battle, this Spirit gains an extra Blue symbol.\"",
+        "abilityIndex": 1,
         "clauses": [
           {
             "rawText": "Give this Spirit and every \"The PartnerLion Raon\" you control, including those that are in pre-advent condition, the effect: \"[Contract Pre-Advent][Spirit] (When Attacks) Your counter +1.",
+            "originalClauseText": "Give this Spirit and every \"The PartnerLion Raon\" you control, including those that are in pre-advent condition, the effect: \"[Contract Pre-Advent][Spirit] (When Attacks) Your counter +1.",
             "cleanText": "Give this Spirit and every \"The PartnerLion Raon\" you control, including those that are in pre-advent condition, the effect: \"[Contract Pre-Advent][Spirit] (When Attacks) Your counter +1",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -9926,24 +10131,82 @@
           },
           {
             "rawText": "if you have seven counters or more, during this battle, this Spirit gains an extra Blue symbol.\"",
+            "originalClauseText": "if you have seven counters or more, during this battle, this Spirit gains an extra Blue symbol.\"",
             "cleanText": "during this battle, this Spirit gains an extra Blue symbol.\"",
+            "clauseIndex": 1,
             "link": "then",
             "isOptional": false,
             "isCost": false,
             "condition": "if you have seven counters or more",
             "duration": "DURING_THIS_BATTLE",
             "op": {
-              "op": "ADD_SYMBOL"
+              "op": "ADD_SYMBOL",
+              "color": "Blue",
+              "count": 1,
+              "side": "self"
             }
           }
         ],
         "unsupported": [],
         "legacyId": "BS62-056#a1",
-        "physicalId": "BS62-056#AB_PASSIVE_NONE_LV1_LV2_LV3_6c424a97103114418c5bcc108a501810c76b77ae5dcd696e4b85c6a735606b24_ea53b0d95e59ae55cd9fe8da19b61bf7",
-        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_6c424a97103114418c5bcc108a501810c76b77ae5dcd696e4b85c6a735606b24_ea53b0d95e59ae55cd9fe8da19b61bf7"
+        "keywords": [
+          {
+            "name": "AFO",
+            "parameter": null,
+            "wave": 4,
+            "hook": "afo",
+            "bracketed": true,
+            "index": 0,
+            "abilityId": "BS62-056#AB_PASSIVE_NONE_LV1_LV2_LV3_f2f2cb2efe43ac837af6e82788e70370676a21eaa5b3fa46f590310a79d40472_a765a93a18a09ecf7e701230956a848e",
+            "cardNumber": "BS62-056",
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "face": "A",
+            "prefixes": [],
+            "isSoulState": false,
+            "duringAdvent": false,
+            "duringSeal": false,
+            "burstCondition": null,
+            "limit": null,
+            "isFlash": false,
+            "isMain": false,
+            "legacyAbilityId": "BS62-056#a1"
+          }
+        ],
+        "referencedKeywords": [
+          {
+            "name": "Contract Pre-Advent",
+            "parameter": null,
+            "wave": 2,
+            "hook": "contract_pre_advent",
+            "bracketed": true,
+            "index": 126
+          }
+        ],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS62-056#AB_PASSIVE_NONE_LV1_LV2_LV3_f2f2cb2efe43ac837af6e82788e70370676a21eaa5b3fa46f590310a79d40472_a765a93a18a09ecf7e701230956a848e",
+        "physicalId": "BS62-056#AB_PASSIVE_NONE_LV1_LV2_LV3_f2f2cb2efe43ac837af6e82788e70370676a21eaa5b3fa46f590310a79d40472_a765a93a18a09ecf7e701230956a848e",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_f2f2cb2efe43ac837af6e82788e70370676a21eaa5b3fa46f590310a79d40472_a765a93a18a09ecf7e701230956a848e",
+        "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_78c4ce2fdd6429eb83a8d82f02c8621881f634a8d2cd61b70ec9821c011085cc_32a479600138466c543c220ca93f618b",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 4,
+    "compiledClausesCount": 5,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },

@@ -33,7 +33,7 @@ export async function launchRealBrowser(options = {}) {
     });
 
     await new Promise((resolve, reject) => {
-      const timer = setTimeout(() => reject(new Error('Server start timed out')), 8000);
+      const timer = setTimeout(() => reject(new Error('Server start timed out')), 20000);
       serverProc.stdout.on('data', (data) => {
         if (data.toString().includes('running at')) {
           clearTimeout(timer);

@@ -1,0 +1,19 @@
+claim_id,phase,claim_description,verified_status,evidence_file
+CLAIM_M2_01,Phase M.2,Session store SQLite persistence and ACID transaction commits,VERIFIED,tests/phase_m2_transaction_integrity.test.js
+CLAIM_M2_02,Phase M.2,Cryptographic token isolation (no token leakage to client),VERIFIED,tests/phase_m2_credential_isolation.test.js
+CLAIM_M2_03,Phase M.2,Action idempotency on duplicate submission,VERIFIED,tests/phase_m2_action_idempotency.test.js
+CLAIM_M3_01,Phase M.3,ResponseWindowManager priority alternation and two-pass closure,VERIFIED,tests/phase_m3_flash_priority.test.js
+CLAIM_M3_02,Phase M.3,Interactive block declaration step,VERIFIED,tests/phase_m3_block_and_second_flash.test.js
+CLAIM_M3_1_01,Phase M.3.1,Generic Flash abilities permitted in controller Main Step,VERIFIED,tests/phase_m3_1_flash_regression.test.js
+CLAIM_M3_2_01,Phase M.3.2,Centralized action authorization gate in action_authority.js,VERIFIED,tests/phase_m3_2_universal_action_authority.test.js
+CLAIM_M3_2_02,Phase M.3.2,Ordinary actions locked during active response window,VERIFIED,tests/phase_m3_action_progression_lock.test.js
+CLAIM_M3_3_01,Phase M.3.3,Authoritative SUMMON validation preventing card injection,VERIFIED,tests/phase_m3_3_summon_integrity.test.js
+CLAIM_M3_3_02,Phase M.3.3,Combat comparison guarded until Flash 2 closure,VERIFIED,tests/phase_m3_3_combat_resolution_authority.test.js
+CLAIM_M3_3_03,Phase M.3.3,Failed actions trigger rollback and do not advance version,VERIFIED,tests/phase_m3_3_action_commit_integrity.test.js
+CLAIM_M3_3_04,Phase M.3.3,Action type whitelist rejects unknown/prototype-polluting actions,VERIFIED,tests/phase_m3_3_action_type_whitelist.test.js
+CLAIM_M3_3_05,Phase M.3.3,Universal authorization enforced on all direct createGame methods,VERIFIED,tests/phase_m3_3_universal_engine_authority.test.js
+CLAIM_M3_3_06,Phase M.3.3,Static asset traversal and database disclosure completely blocked,VERIFIED,tests/phase_m3_3_static_asset_security.test.js
+CLAIM_M3_3_07,Phase M.3.3,Image proxy protected against SSRF and intranet scanning,VERIFIED,tests/phase_m3_3_image_proxy_security.test.js
+CLAIM_M3_3_08,Phase M.3.3,WebSocket ticket authentication sets connectionPrincipal,VERIFIED,tests/phase_m3_3_websocket_ticket_actions.test.js
+CLAIM_M3_3_09,Phase M.3.3,Keyword runtime regression repairs (Holy Life, Curse, etc.),VERIFIED,tests/phase_m3_3_keyword_runtime_regressions.test.js
+CLAIM_M3_3_10,Phase M.3.3,Audit matrices reconcile 100% with actual passing test suites,VERIFIED,tests/phase_m3_3_audit_matrix_accuracy.test.js

@@ -219,7 +219,7 @@ describe('Accel Mechanics & Highlighting Suite', () => {
     assert.equal(state.player.field[0].name, 'Test Accel Spirit');
   });
 
-  it('7. Flash Timing Restriction: Flash Accel can only be activated during Attack Phase', async () => {
+  it('7. Flash Timing Semantics (Phase M.3.1): Generic Flash Accel allowed in Main Step for active player, rejected for opponent, restricted Flash rejected in Main Step', async () => {
     const game = createGame();
     const flashAccelCard = createCardInstance({
       id: 'ACCEL_FLASH_01',
@@ -238,32 +238,56 @@ describe('Accel Mechanics & Highlighting Suite', () => {
       }
     }, 'player');
 
-    game.state.players.player.hand = [flashAccelCard];
-    game.state.players.player.deck = [createCardInstance({ name: 'Deck Top' }, 'player')];
-    game.state.players.player.reserve = { normal: 5, soul: 0 };
+    const restrictedAccelCard = createCardInstance({
+      id: 'ACCEL_RESTRICTED_01',
+      name: 'Restricted Attack Step Accel Spirit',
+      type: 'Spirit',
+      cost: 4,
+      effect: 'Flash - [Accel: Cost 2 (Red)] (Your Attack Step) Draw 1 card.',
+      compiledIr: {
+        abilities: [
+          {
+            id: 'ab_accel_restr',
+            header: { keyword: 'Accel', isFlash: true, timing: 'FLASH', timingOwner: 'SELF' },
+            clauses: [{ op: { op: 'DRAW', count: 1 } }]
+          }
+        ]
+      }
+    }, 'player');
 
-    // A: In MAIN step -> Must be rejected with FLASH_ONLY_DURING_ATTACK_STEP
+    game.state.players.player.hand = [flashAccelCard, restrictedAccelCard];
+    game.state.players.player.deck = [
+      createCardInstance({ name: 'Deck Top 1' }, 'player'),
+      createCardInstance({ name: 'Deck Top 2' }, 'player')
+    ];
+    game.state.players.player.reserve = { normal: 10, soul: 0 };
+
+    // A: In MAIN step by active player -> Generic Flash Accel MUST SUCCEED (Official Rule 17.0 / Phase M.3.1)
     game.state.step = 'MAIN';
     game.state.activePlayer = 'player';
     const resMain = await game.executeAccel('player', flashAccelCard.id);
-    assert.equal(resMain.success, false);
-    assert.equal(resMain.reason, 'FLASH_ONLY_DURING_ATTACK_STEP');
-    assert.equal(game.state.players.player.hand.length, 1);
-    assert.equal(game.state.players.player.removed.length, 0);
-
-    // B: In START step -> Must be rejected
-    game.state.step = 'START';
-    const resStart = await game.executeAccel('player', flashAccelCard.id);
-    assert.equal(resStart.success, false);
-    assert.equal(resStart.reason, 'FLASH_ONLY_DURING_ATTACK_STEP');
-
-    // C: In ATTACK step -> Must succeed and resolve
-    game.state.step = 'ATTACK';
-    const resAttack = await game.executeAccel('player', flashAccelCard.id);
-    assert.equal(resAttack.success, true);
-    assert.equal(resAttack.zone, 'removed');
+    assert.equal(resMain.success, true);
+    assert.equal(resMain.zone, 'removed');
     assert.equal(game.state.players.player.removed.length, 1);
     assert.equal(game.state.players.player.removed[0].id, flashAccelCard.id);
+
+    // B: In MAIN step with card-specific restriction (Your Attack Step) -> MUST BE REJECTED with RESTRICTED_TO_ATTACK_STEP
+    const resRestr = await game.executeAccel('player', restrictedAccelCard.id);
+    assert.equal(resRestr.success, false);
+    assert.equal(resRestr.code, 'RESTRICTED_TO_ATTACK_STEP');
+
+    // C: In START step -> Must be rejected (invalid step for flash)
+    game.state.step = 'START';
+    const resStart = await game.executeAccel('player', restrictedAccelCard.id);
+    assert.equal(resStart.success, false);
+    assert.equal(resStart.code, 'INVALID_STEP_FOR_FLASH');
+
+    // D: In ATTACK step on controller turn -> Card with (Your Attack Step) MUST SUCCEED
+    game.state.step = 'ATTACK';
+    game.state.activePlayer = 'player';
+    const resAttack = await game.executeAccel('player', restrictedAccelCard.id);
+    assert.equal(resAttack.success, true);
+    assert.equal(resAttack.zone, 'removed');
   });
 
   it('8. Main Timing Restriction: Main Accel can only be activated during Main Step', async () => {
@@ -545,11 +569,11 @@ describe('Accel Mechanics & Highlighting Suite', () => {
     assert.equal(game.state.players.player.field.length, 1);
   });
 
-  it('15. General Flash Timing: Magic cards with Flash only cannot be played in Main Step', async () => {
+  it('15. General Flash Timing (Phase M.3.1): Generic Flash magic allowed in Main Step; card-specific Attack Step restriction rejected in Main Step', async () => {
     const game = createGame();
-    const flashMagic = createCardInstance({
-      id: 'MAGIC_FLASH_ONLY',
-      name: 'Flash Only Shield',
+    const genericFlashMagic = createCardInstance({
+      id: 'MAGIC_FLASH_GENERIC',
+      name: 'Generic Flash Shield',
       type: 'Magic',
       cost: 3,
       effect: 'Flash - Give a Spirit +2000 BP.',
@@ -564,35 +588,56 @@ describe('Accel Mechanics & Highlighting Suite', () => {
       }
     }, 'player');
 
-    game.state.players.player.hand = [flashMagic];
-    game.state.players.player.reserve = { normal: 5, soul: 0 };
+    const restrictedFlashMagic = createCardInstance({
+      id: 'MAGIC_FLASH_RESTRICTED',
+      name: 'Restricted Flash Shield',
+      type: 'Magic',
+      cost: 3,
+      effect: 'Flash - (Your Attack Step) Give a Spirit +2000 BP.',
+      compiledIr: {
+        abilities: [
+          {
+            id: 'ab_magic_restr',
+            header: { timing: 'FLASH', isFlash: true, isMain: false, timingOwner: 'SELF' },
+            clauses: [{ op: { op: 'BP_BUFF', amount: 2000 } }]
+          }
+        ]
+      }
+    }, 'player');
 
-    // In MAIN step -> Must be rejected
+    game.state.players.player.hand = [genericFlashMagic, restrictedFlashMagic];
+    game.state.players.player.reserve = { normal: 10, soul: 0 };
+
+    // In MAIN step -> Generic Flash Magic MUST SUCCEED for active player
     game.state.step = 'MAIN';
     game.state.activePlayer = 'player';
-    const resMain = await game.playCard(flashMagic.id, [], 'player');
-    assert.equal(resMain.success, false);
-    assert.equal(resMain.reason, 'FLASH_ONLY_DURING_ATTACK_STEP');
+    const resGeneric = await game.playCard(genericFlashMagic.id, [], 'player');
+    assert.equal(resGeneric.success, true);
 
-    // In ATTACK step -> Allowed
+    // In MAIN step -> Restricted Flash Magic MUST BE REJECTED with RESTRICTED_TO_ATTACK_STEP
+    const resRestr = await game.playCard(restrictedFlashMagic.id, [], 'player');
+    assert.equal(resRestr.success, false);
+    assert.equal(resRestr.code, 'RESTRICTED_TO_ATTACK_STEP');
+
+    // In ATTACK step -> Restricted Flash Magic is ALLOWED on player's turn
     game.state.step = 'ATTACK';
-    const resAttack = await game.playCard(flashMagic.id, [], 'player');
+    const resAttack = await game.playCard(restrictedFlashMagic.id, [], 'player');
     assert.equal(resAttack.success, true);
   });
 
-  it('16. General Flash Timing: Spirit Flash ability on field cannot be activated in Main Step', async () => {
+  it('16. General Flash Timing (Phase M.3.1): Generic Spirit Flash ability allowed in Main Step; restricted Flash ability rejected in Main Step', async () => {
     const game = createGame();
-    const spiritWithFlashAbility = createCardInstance({
-      id: 'SPIRIT_FLASH_AB',
-      name: 'Flash Ability Knight',
+    const spiritWithGenericFlash = createCardInstance({
+      id: 'SPIRIT_FLASH_GENERIC',
+      name: 'Generic Flash Knight',
       type: 'Spirit',
       cost: 3,
       levels: { 1: { cost: 1, bp: 3000 } },
       compiledIr: {
         abilities: [
           {
-            id: 'ab_field_flash',
-            physicalId: 'phy_field_flash',
+            id: 'ab_field_flash_gen',
+            physicalId: 'phy_field_flash_gen',
             header: { timing: 'FLASH', isFlash: true, levels: [1] },
             clauses: [{ op: { op: 'DRAW', count: 1 } }]
           }
@@ -600,21 +645,47 @@ describe('Accel Mechanics & Highlighting Suite', () => {
       }
     }, 'player');
 
-    const stack = createFieldStack(spiritWithFlashAbility, { normal: 2, soul: 0 });
-    game.state.players.player.field = [stack];
-    game.state.players.player.deck = [createCardInstance({ name: 'Deck Card' }, 'player')];
+    const spiritWithRestrictedFlash = createCardInstance({
+      id: 'SPIRIT_FLASH_RESTR',
+      name: 'Restricted Flash Knight',
+      type: 'Spirit',
+      cost: 3,
+      levels: { 1: { cost: 1, bp: 3000 } },
+      compiledIr: {
+        abilities: [
+          {
+            id: 'ab_field_flash_restr',
+            physicalId: 'phy_field_flash_restr',
+            header: { timing: 'FLASH', isFlash: true, levels: [1], timingOwner: 'SELF' },
+            clauses: [{ op: { op: 'DRAW', count: 1 } }]
+          }
+        ]
+      }
+    }, 'player');
 
-    // In MAIN step -> Must be rejected with FLASH_ONLY_DURING_ATTACK_STEP
+    const stackGen = createFieldStack(spiritWithGenericFlash, { normal: 2, soul: 0 });
+    const stackRestr = createFieldStack(spiritWithRestrictedFlash, { normal: 2, soul: 0 });
+    game.state.players.player.field = [stackGen, stackRestr];
+    game.state.players.player.deck = [
+      createCardInstance({ name: 'Deck Card 1' }, 'player'),
+      createCardInstance({ name: 'Deck Card 2' }, 'player')
+    ];
+
+    // In MAIN step -> Generic Flash ability on field MUST SUCCEED for active player
     game.state.step = 'MAIN';
     game.state.activePlayer = 'player';
-    const resMain = await game.activateAbility(spiritWithFlashAbility.id, 'phy_field_flash', 'player');
-    assert.equal(resMain.success, false);
-    assert.ok(resMain.reason === 'FLASH_ONLY_DURING_ATTACK_STEP' || resMain.reason === 'ABILITY_TIMING_MISMATCH');
-    assert.equal(resMain.code, 'FLASH_ONLY_DURING_ATTACK_STEP');
+    const resGen = await game.activateAbility(spiritWithGenericFlash.id, 'phy_field_flash_gen', 'player');
+    assert.equal(resGen.success, true);
+    assert.equal(game.state.players.player.hand.length, 1);
 
-    // In ATTACK step -> Allowed
+    // In MAIN step -> Restricted Flash ability MUST BE REJECTED with RESTRICTED_TO_ATTACK_STEP
+    const resRestr = await game.activateAbility(spiritWithRestrictedFlash.id, 'phy_field_flash_restr', 'player');
+    assert.equal(resRestr.success, false);
+    assert.equal(resRestr.code, 'RESTRICTED_TO_ATTACK_STEP');
+
+    // In ATTACK step -> Restricted Flash ability is ALLOWED on player's turn
     game.state.step = 'ATTACK';
-    const resAttack = await game.activateAbility(spiritWithFlashAbility.id, 'phy_field_flash', 'player');
+    const resAttack = await game.activateAbility(spiritWithRestrictedFlash.id, 'phy_field_flash_restr', 'player');
     assert.equal(resAttack.success, true);
   });
 

@@ -18,7 +18,7 @@ export function hashToken(token) {
 
 export class SessionStore {
   constructor(options = {}) {
-    this.dbPath = options.dbPath || path.join(process.cwd(), 'battle_spirits.db');
+    this.dbPath = options.dbPath || process.env.DB_PATH || path.join(process.cwd(), 'battle_spirits.db');
     this.inMemory = Boolean(options.inMemory);
     this.db = null;
     this._initDb();
@@ -169,6 +169,25 @@ export class SessionStore {
       CREATE INDEX IF NOT EXISTS idx_match_sessions_updated ON match_sessions(updated_at);
       CREATE INDEX IF NOT EXISTS idx_match_events_match ON match_events(match_id, seq);
       CREATE INDEX IF NOT EXISTS idx_match_actions_match ON match_actions(match_id);
+
+      CREATE TABLE IF NOT EXISTS matchmaking_tickets (
+        ticket_id TEXT PRIMARY KEY,
+        player_id TEXT NOT NULL,
+        player_name TEXT NOT NULL,
+        deck_id TEXT,
+        deck_json TEXT,
+        status TEXT NOT NULL,
+        match_id TEXT,
+        auth_token TEXT,
+        player_side TEXT,
+        opponent_name TEXT,
+        opponent_deck TEXT,
+        queued_at INTEGER NOT NULL,
+        last_seen INTEGER NOT NULL,
+        matched_at INTEGER
+      );
+      CREATE INDEX IF NOT EXISTS idx_mm_status_queued ON matchmaking_tickets(status, queued_at);
+      CREATE INDEX IF NOT EXISTS idx_mm_player_status ON matchmaking_tickets(player_id, status);
     `);
 
     // Add heartbeat columns to existing tables if upgrading schema
@@ -469,6 +488,132 @@ export class SessionStore {
     );
   }
 
+  getAction(actionId) {
+    if (!actionId) return null;
+    const stmt = this.db.prepare('SELECT * FROM match_actions WHERE action_id = ?');
+    const row = stmt.get(actionId);
+    if (!row) return null;
+    let payload = null;
+    try {
+      payload = JSON.parse(row.payload_json);
+    } catch {
+      payload = row.payload_json;
+    }
+    return {
+      actionId: row.action_id,
+      matchId: row.match_id,
+      playerId: row.player_id,
+      actionType: row.action_type,
+      payload,
+      version: row.version,
+      createdAt: row.created_at
+    };
+  }
+
+  commitActionTransaction({ matchId, expectedVersion, actionRecord, sessionUpdates, eventRecord, stateJson, clockUpdates }) {
+    this.db.exec('BEGIN TRANSACTION');
+    try {
+      // 1. Verify session under transaction
+      const current = this.loadSession(matchId);
+      if (!current) {
+        throw new Error(`MATCH_NOT_FOUND: Match "${matchId}" does not exist`);
+      }
+
+      // Check if actionId was already committed by a concurrent request
+      if (actionRecord && actionRecord.actionId) {
+        const existing = this.db.prepare('SELECT action_id FROM match_actions WHERE action_id = ?').get(actionRecord.actionId);
+        if (existing) {
+          const err = new Error(`DUPLICATE_ACTION_ID: Action "${actionRecord.actionId}" was already processed`);
+          err.code = 'DUPLICATE_ACTION_ID';
+          throw err;
+        }
+      }
+
+      // 2. Check optimistic concurrency version
+      if (expectedVersion !== undefined && expectedVersion !== null && current.version !== expectedVersion) {
+        const err = new Error(`STALE_VERSION_CONFLICT: Expected version ${expectedVersion}, but current database version is ${current.version}`);
+        err.code = 'STALE_VERSION_CONFLICT';
+        err.currentVersion = current.version;
+        throw err;
+      }
+
+      // 3. Insert into match_actions
+      if (actionRecord) {
+        const insertActionStmt = this.db.prepare(`
+          INSERT INTO match_actions (
+            action_id, match_id, player_id, action_type, payload_json, version, created_at
+          ) VALUES (?, ?, ?, ?, ?, ?, ?)
+        `);
+        insertActionStmt.run(
+          actionRecord.actionId,
+          matchId,
+          actionRecord.playerId,
+          actionRecord.actionType,
+          typeof actionRecord.payload === 'string' ? actionRecord.payload : JSON.stringify(actionRecord.payload),
+          current.version,
+          Date.now()
+        );
+      }
+
+      // 3. Update match_sessions
+      const nextVersion = current.version + 1;
+      const now = Date.now();
+      const stateStr = typeof stateJson === 'string' ? stateJson : JSON.stringify(stateJson);
+      const updates = sessionUpdates || {};
+
+      const updateSessionStmt = this.db.prepare(`
+        UPDATE match_sessions SET
+          state_json = ?,
+          version = ?,
+          active_player = ?,
+          turn_number = ?,
+          phase = ?,
+          last_action_id = ?,
+          updated_at = ?
+        WHERE id = ?
+      `);
+
+      updateSessionStmt.run(
+        stateStr,
+        nextVersion,
+        updates.activePlayer || current.activePlayer,
+        updates.turnNumber !== undefined ? updates.turnNumber : current.turnNumber,
+        updates.phase || current.phase,
+        actionRecord ? actionRecord.actionId : current.lastActionId,
+        now,
+        matchId
+      );
+
+      // 4. Insert into match_events if eventRecord provided
+      if (eventRecord) {
+        const insertEventStmt = this.db.prepare(`
+          INSERT INTO match_events (match_id, seq, type, payload_json, created_at)
+          VALUES (?, ?, ?, ?, ?)
+        `);
+        insertEventStmt.run(
+          matchId,
+          eventRecord.seq,
+          eventRecord.type,
+          typeof eventRecord.payload === 'string' ? eventRecord.payload : JSON.stringify(eventRecord.payload),
+          Date.now()
+        );
+      }
+
+      // 5. Update clock if provided
+      if (clockUpdates) {
+        this.saveClock(matchId, clockUpdates);
+      }
+
+      this.db.exec('COMMIT');
+
+      // Return refreshed session
+      return this.loadSession(matchId);
+    } catch (err) {
+      this.db.exec('ROLLBACK');
+      throw err;
+    }
+  }
+
   recordEvent(matchId, seq, type, payload) {
     const stmt = this.db.prepare(`
       INSERT INTO match_events (match_id, seq, type, payload_json, created_at)
@@ -509,6 +654,34 @@ export class SessionStore {
     const stmt = this.db.prepare('SELECT MAX(seq) as max_seq FROM match_events WHERE match_id = ?');
     const row = stmt.get(matchId);
     return (row && row.max_seq) ? row.max_seq : 0;
+  }
+
+  listActiveSessionsByTokenHash(tokenHash) {
+    if (!tokenHash) return [];
+    const sql = `
+      SELECT id, mode, status, player1_id, player1_name, player2_id, player2_name,
+             active_player, turn_number, phase, updated_at
+      FROM match_sessions
+      WHERE status NOT IN ('COMPLETED', 'FORFEITED', 'CANCELLED')
+        AND (player1_token_hash = ? OR player2_token_hash = ?)
+      ORDER BY updated_at DESC
+    `;
+    const stmt = this.db.prepare(sql);
+    return stmt.all(tokenHash, tokenHash);
+  }
+
+  listSessionHistoryByTokenHash(tokenHash, limit = 50) {
+    if (!tokenHash) return [];
+    const sql = `
+      SELECT id, mode, status, player1_id, player1_name, player2_id, player2_name,
+             winner_id, finish_reason, turn_number, created_at, updated_at
+      FROM match_sessions
+      WHERE status IN ('COMPLETED', 'FORFEITED', 'CANCELLED')
+        AND (player1_token_hash = ? OR player2_token_hash = ?)
+      ORDER BY updated_at DESC LIMIT ?
+    `;
+    const stmt = this.db.prepare(sql);
+    return stmt.all(tokenHash, tokenHash, limit);
   }
 
   listActiveSessions(playerId = null) {

@@ -325,6 +325,7 @@ describe('Summon Cost Payment & Core Allocation Modal Suite', () => {
     const golza = {
       uid: 'p-golza-4',
       name: 'The SuperAncient Kaiju Golza',
+      type: 'Spirit',
       cost: 3,
       levels: [
         { level: 1, cores: 1, bp: 4000 }
@@ -381,6 +382,7 @@ describe('Summon Cost Payment & Core Allocation Modal Suite', () => {
     const golza = {
       uid: 'p-golza-5',
       name: 'The SuperAncient Kaiju Golza',
+      type: 'Spirit',
       cost: 3,
       levels: [{ level: 1, cost: 1, bp: 4000 }]
     };

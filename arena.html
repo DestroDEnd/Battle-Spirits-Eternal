@@ -16,10 +16,12 @@
     }
   }
   </script>
+  <script>window.FALLBACK_CARD_ART = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='210' height='300' viewBox='0 0 210 300'><rect width='210' height='300' rx='10' fill='%23111827'/><rect x='8' y='8' width='194' height='284' rx='6' fill='%231f2937' stroke='%23374151' stroke-width='2'/><circle cx='105' cy='100' r='40' fill='%23374151'/><text x='105' y='108' font-family='sans-serif' font-size='28' fill='%239ca3af' text-anchor='middle'>⚔️</text><text x='105' y='180' font-family='sans-serif' font-size='12' font-weight='bold' fill='%236b7280' text-anchor='middle'>BATTLE SPIRITS</text></svg>";</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css?v=8.0">
+  <link rel="stylesheet" href="./assets/tabletop_mat.css?v=1.6">
   <style>
     /* Complete suppression of floating deck drawer widget and legacy mulligan banner on arena */
     #deckQuickWidgetWrap,
@@ -328,10 +330,24 @@
       <div class="battle-duel-table" id="battleDuelTable">
         <!-- Persistent Session Header & Synchronized Turn Clock -->
         <div class="session-hud-bar" id="sessionHudBar" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 1rem;background:rgba(15,23,42,0.85);border-radius:10px;border:1px solid rgba(56,189,248,0.25);margin-bottom:0.75rem;">
-          <div style="display:flex;align-items:center;gap:0.75rem;">
+          <div style="display:flex;align-items:center;gap:0.65rem;flex-wrap:wrap;">
+            <div class="arena-home-wrap" id="arenaHomeWrap">
+              <button type="button" class="arena-home-btn" id="btnArenaHome" onclick="window.TabletopMat && window.TabletopMat.toggleHomeMenu()" title="Exit or surrender battle">🏠 Home ▾</button>
+              <div class="arena-home-menu" id="arenaHomeMenu" role="menu">
+                <button type="button" role="menuitem" onclick="window.TabletopMat && window.TabletopMat.closeHomeMenu(); BattleArena.leaveArena()">🚪 Leave Arena (Resume Later)</button>
+                <button type="button" role="menuitem" onclick="window.TabletopMat && window.TabletopMat.closeHomeMenu(); BattleArena.exitDuelToLobby()">🃏 Switch Decks / Lobby</button>
+                <button type="button" role="menuitem" onclick="window.TabletopMat && window.TabletopMat.closeHomeMenu(); BattleArena.startDuel()">🔄 Restart Match</button>
+                <button type="button" class="danger" role="menuitem" onclick="window.TabletopMat && window.TabletopMat.closeHomeMenu(); BattleArena.forfeitMatch()">🏳️ Surrender / Forfeit</button>
+              </div>
+            </div>
             <span class="match-mode-tag" id="hudMatchModeTag" style="background:#0284c7;color:#fff;font-size:0.75rem;font-weight:700;padding:2px 8px;border-radius:4px;">VS AI</span>
             <span class="match-id-display" id="hudMatchIdDisplay" style="color:#94a3b8;font-size:0.8rem;font-family:monospace;">Match: Local</span>
             <span class="match-status-tag" id="hudMatchStatusTag" style="background:rgba(34,197,94,0.2);color:#4ade80;font-size:0.75rem;font-weight:700;padding:2px 8px;border-radius:4px;">ACTIVE</span>
+            <div class="arena-view-switcher" role="group" aria-label="Arena layout mode">
+              <button type="button" class="arena-view-btn active" id="btnArenaViewClassic" onclick="window.TabletopMat && window.TabletopMat.setMode('classic')">Classic View</button>
+              <button type="button" class="arena-view-btn" id="btnArenaViewTabletop" onclick="window.TabletopMat && window.TabletopMat.setMode('tabletop')">Tabletop Mat</button>
+            </div>
+            <button type="button" class="arena-chat-toggle-btn" id="btnArenaChatLogToggle" onclick="window.TabletopMat && window.TabletopMat.toggleChatDrawer()" title="Open Player Chat and Battle Log">💬 Chat &amp; Log</button>
           </div>
           <div class="turn-clock-hud" id="turnClockHud" style="display:flex;align-items:center;gap:0.75rem;">
             <div style="text-align:right;">
@@ -343,6 +359,26 @@
             </div>
           </div>
         </div>
+
+        <!-- Secondary Arena View: Physical Tabletop Playmat -->
+        <section class="tabletop-mat-arena" id="tabletopMatArena" aria-label="Tabletop Playmat Arena"></section>
+
+        <!-- Slide-over Player Chat & Battle Log Drawer -->
+        <aside class="arena-chat-drawer" id="arenaChatLogDrawer" aria-label="Player Chat and Battle Log">
+          <div class="acd-header">
+            <h3>💬 Chat &amp; Battle Log</h3>
+            <button type="button" class="acd-close" onclick="window.TabletopMat && window.TabletopMat.toggleChatDrawer(false)" aria-label="Close Chat and Log">✕</button>
+          </div>
+          <div class="acd-tabs" role="tablist">
+            <button type="button" class="acd-tab active" id="acdTabChat" role="tab" onclick="window.TabletopMat && window.TabletopMat.setChatTab('chat')">💬 Player Chat</button>
+            <button type="button" class="acd-tab" id="acdTabLog" role="tab" onclick="window.TabletopMat && window.TabletopMat.setChatTab('log')">📜 Battle Log</button>
+          </div>
+          <div class="acd-body" id="arenaChatDrawerBody"></div>
+          <form class="acd-chat-form" id="arenaChatForm" onsubmit="event.preventDefault(); window.TabletopMat && window.TabletopMat.sendChatMessage();">
+            <input type="text" id="arenaChatInput" placeholder="Send a message to opponent..." autocomplete="off" maxlength="240" />
+            <button type="submit">Send</button>
+          </form>
+        </aside>
 
         <div class="duel-layout-grid">
           <!-- Left Column: Main Battlefield -->
@@ -1311,7 +1347,7 @@
 <!-- Scripts -->
 <!-- WebAssembly SQLite Engine (sql.js) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/sql-wasm.js"></script>
-<script src="./wasm_db.js?v=8.0"></script>
+<script src="./wasm_db.js?v=9.0"></script>
 
 <!-- Firebase Client SDK (Compat CDN for GitHub Pages) -->
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -1321,10 +1357,12 @@
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
 <script src="./firebase_service.js?v=8.0"></script>
 <script src="./multiplayer_service.js?v=8.0"></script>
+<script src="./holo_card.js?v=8.0"></script>
 <script src="./app.js?v=8.0"></script>
 <script src="./engine/cards/bundle.js?v=8.0"></script>
 <script type="module" src="./engine_adapter.js?v=8.0"></script>
-<script src="./battle_arena.js?v=8.0"></script>
+<script src="./battle_arena.js?v=8.2"></script>
+  <script src="./assets/tabletop_mat.js?v=1.6"></script>
 <script>
   // Check for auto-start or query parameters on dedicated arena page
   (function() {
@@ -1380,6 +1418,8 @@
     <span>Family</span>
   </a>
 </nav>
+
+<button type="button" class="arena-peek-board-btn" id="btnArenaPeekBoard" onclick="window.TabletopMat && window.TabletopMat.toggleBoardPeek()" title="Temporarily hide this choice window to inspect the battlefield">👁️ View Board</button>
 
 </body>
 </html>

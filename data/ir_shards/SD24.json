@@ -126,19 +126,10 @@
   "SD24-013": {
     "cardNumber": "SD24-013",
     "name": "King's Command",
-    "keywords": [
-      {
-        "name": "Burst",
-        "parameter": "After an opposing Spirit/Brave's (When Summoned) effect resolves",
-        "wave": 2,
-        "hook": "burst",
-        "bracketed": true,
-        "index": 0
-      }
-    ],
+    "keywords": [],
     "abilities": [
       {
-        "id": "SD24-013#AB_BURST_NONE_LV1_LV2_LV3_ff595b185e302f61ea79c6d608a6b6673837b919820d0d99d2e9c61584538dde_2c23140a9999c8ce11f0815863277e69",
+        "id": "SD24-013#AB_BURST_NONE_LV1_LV2_LV3_23e68942bf6b7b17b62187c8df2172f227e5b5347769d3277550db1163dd0e18_de0cfbeeacd491479cc327f8a776deb6",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -161,8 +152,8 @@
         },
         "clauses": [
           {
-            "rawText": "Draw three cards, then discard a card from your Hand.",
-            "cleanText": "Draw three cards, then discard a card from your Hand",
+            "rawText": "Draw three cards",
+            "cleanText": "Draw three cards",
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -173,6 +164,22 @@
               "count": 3,
               "chooser": "self",
               "forEach": null
+            }
+          },
+          {
+            "rawText": "discard a card from your Hand.",
+            "cleanText": "discard a card from your Hand",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 1,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
             }
           },
           {
@@ -189,9 +196,24 @@
           }
         ],
         "unsupported": [],
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
         "legacyId": "SD24-013#a0",
-        "physicalId": "SD24-013#AB_BURST_NONE_LV1_LV2_LV3_ff595b185e302f61ea79c6d608a6b6673837b919820d0d99d2e9c61584538dde_2c23140a9999c8ce11f0815863277e69",
-        "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_ff595b185e302f61ea79c6d608a6b6673837b919820d0d99d2e9c61584538dde_2c23140a9999c8ce11f0815863277e69"
+        "physicalId": "SD24-013#AB_BURST_NONE_LV1_LV2_LV3_23e68942bf6b7b17b62187c8df2172f227e5b5347769d3277550db1163dd0e18_de0cfbeeacd491479cc327f8a776deb6",
+        "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_23e68942bf6b7b17b62187c8df2172f227e5b5347769d3277550db1163dd0e18_de0cfbeeacd491479cc327f8a776deb6",
+        "semanticIdV3": "SEM3#AB_BURST_NONE_LV1_LV2_LV3_04ddf4cfed0772f5eadd3e7fe72c0e21f5308338f263bb8b67f11aae45375904_2612b47ca255e32d702ac13f78c0103f",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "BURST"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
         "id": "SD24-013#AB_FLASH_NONE_LV1_LV2_LV3_2690c7a6f1fbacd67990e4d15b28694bc3c8fade835d6751145f00da5cb45286_bd33a70986506c34ccfb9edf18d19ade",
@@ -230,9 +252,24 @@
           }
         ],
         "unsupported": [],
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
         "legacyId": "SD24-013#a1",
         "physicalId": "SD24-013#AB_FLASH_NONE_LV1_LV2_LV3_2690c7a6f1fbacd67990e4d15b28694bc3c8fade835d6751145f00da5cb45286_bd33a70986506c34ccfb9edf18d19ade",
-        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_2690c7a6f1fbacd67990e4d15b28694bc3c8fade835d6751145f00da5cb45286_bd33a70986506c34ccfb9edf18d19ade"
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_2690c7a6f1fbacd67990e4d15b28694bc3c8fade835d6751145f00da5cb45286_bd33a70986506c34ccfb9edf18d19ade",
+        "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_1335a23639f1bf4626acd4efeb2f9d9882c9f2ded8e80a5920f35cf0b0cfc99f_1e9a5bfca9aaf7f67f8dd3b7fe30c9ea",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "FLASH"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
     "compiledClausesCount": 3,

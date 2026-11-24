@@ -156,8 +156,8 @@ export const SD24_OVERRIDES = {
         },
         "clauses": [
           {
-            "rawText": "Draw three cards, then discard a card from your Hand.",
-            "cleanText": "Draw three cards, then discard a card from your Hand",
+            "rawText": "Draw three cards",
+            "cleanText": "Draw three cards",
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -168,6 +168,22 @@ export const SD24_OVERRIDES = {
               "count": 3,
               "chooser": "self",
               "forEach": null
+            }
+          },
+          {
+            "rawText": "discard a card from your Hand.",
+            "cleanText": "discard a card from your Hand",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 1,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
             }
           },
           {

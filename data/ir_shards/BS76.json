@@ -9835,12 +9835,33 @@
     "name": "The BoarTwelveGodKing Calamity-Boar X",
     "keywords": [
       {
-        "name": "Seal",
-        "parameter": "During Seal",
+        "name": "Manifest",
+        "parameter": "Seal, \"Contractor Huracan\" & C2 or more, (Your Turn)",
         "wave": 2,
-        "hook": "seal",
+        "hook": "manifest",
         "bracketed": true,
-        "index": 276
+        "index": 0,
+        "abilityId": "BS76-X12#AB_FLASH_NONE_LV1_LV2_LV3_a2e731dfd4ce5a3b9d42bd2d6b3be30412f4325c15882ef9911082a3d2e69b2f_9e8b9c85a7a32d6eb3f1d26146dc538d",
+        "cardNumber": "BS76-X12",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "levelExplicit": false,
+        "timing": "FLASH",
+        "timingLabel": "Flash",
+        "timingStep": "ANY",
+        "face": "A",
+        "prefixes": [],
+        "isSoulState": false,
+        "duringAdvent": false,
+        "duringSeal": false,
+        "burstCondition": null,
+        "limit": null,
+        "isFlash": true,
+        "isMain": false,
+        "legacyAbilityId": "BS76-X12#a0"
       },
       {
         "name": "Roaring Stampede",
@@ -9848,12 +9869,63 @@
         "wave": 4,
         "hook": "stampede",
         "bracketed": true,
-        "index": 304
+        "index": 0,
+        "abilityId": "BS76-X12#AB_WHEN_ATTACKS_NONE_LV2_LV3_210fe998cdc3f2408f22cccfdedc9cd9d7c35025121b88c908586d05eb08b32a_fba7e2c5a51d16262bb6743f7e9ef38d",
+        "cardNumber": "BS76-X12",
+        "levels": [
+          2,
+          3
+        ],
+        "levelExplicit": true,
+        "timing": "WHEN_ATTACKS",
+        "timingLabel": "When Attacks",
+        "timingStep": "ANY",
+        "face": "A",
+        "prefixes": [
+          "Seal: During Seal"
+        ],
+        "isSoulState": false,
+        "duringAdvent": false,
+        "duringSeal": true,
+        "burstCondition": null,
+        "limit": null,
+        "isFlash": false,
+        "isMain": false,
+        "legacyAbilityId": "BS76-X12#a2"
+      },
+      {
+        "name": "Seal",
+        "parameter": "During Seal",
+        "wave": 2,
+        "hook": "seal",
+        "bracketed": true,
+        "index": 0,
+        "abilityId": "BS76-X12#AB_WHEN_ATTACKS_NONE_LV2_LV3_210fe998cdc3f2408f22cccfdedc9cd9d7c35025121b88c908586d05eb08b32a_fba7e2c5a51d16262bb6743f7e9ef38d",
+        "cardNumber": "BS76-X12",
+        "levels": [
+          2,
+          3
+        ],
+        "levelExplicit": true,
+        "timing": "WHEN_ATTACKS",
+        "timingLabel": "When Attacks",
+        "timingStep": "ANY",
+        "face": "A",
+        "prefixes": [
+          "Seal: During Seal"
+        ],
+        "isSoulState": false,
+        "duringAdvent": false,
+        "duringSeal": true,
+        "burstCondition": null,
+        "limit": null,
+        "isFlash": false,
+        "isMain": false,
+        "legacyAbilityId": "BS76-X12#a2"
       }
     ],
     "abilities": [
       {
-        "id": "BS76-X12#AB_FLASH_NONE_LV1_LV2_LV3_5c5196c28ae1d5bb48786784154f978c16c0eb9556d71ff28878b30bb51e308b_67fe946e7a6583f26953b43a8592fa6a",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -9864,20 +9936,58 @@
           "levelExplicit": false,
           "prefixes": [],
           "timing": "FLASH",
+          "timings": [],
           "timingLabel": "Flash",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "FLASH"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
-          "keyword": "Mani: Seal, \"Contractor Huracan\" & C2 or more, (Your Turn)",
+          "keyword": "Manifest: Seal, \"Contractor Huracan\" & C2 or more, (Your Turn)",
+          "keywords": [
+            "Manifest: Seal, \"Contractor Huracan\" & C2 or more, (Your Turn)"
+          ],
           "burstCondition": null,
           "isFlash": true,
           "isMain": false,
-          "cleanBody": "By sending your [Soul Core] from the Field/Reserve to the Life, pay one cost from the target to summon this card from the Hand."
+          "cleanBody": "By sending your [Soul Core] from the Field/Reserve to the Life, pay one cost from the target to summon this card from the Hand.",
+          "flashTimingSpec": {
+            "effectType": "FLASH",
+            "isFlash": true,
+            "isGenericFlash": true,
+            "isTriggered": false,
+            "timingQualifier": "GENERIC",
+            "generalAvailability": [
+              "CONTROLLER_MAIN_STEP",
+              "EITHER_PLAYER_BATTLE_FLASH_TIMING"
+            ],
+            "additionalRestrictions": {
+              "allowedSteps": [
+                "MAIN",
+                "ATTACK"
+              ],
+              "allowedTurnOwners": [
+                "SELF",
+                "OPPONENT"
+              ],
+              "requiresBattle": false,
+              "requiresFlashWindow": false,
+              "triggerCondition": null
+            }
+          }
         },
+        "originalAbilityText": "Flash - [Manifest: Seal, \"Contractor Huracan\" & C2 or more, (Your Turn)]\nBy sending your [Soul Core] from the Field/Reserve to the Life, pay one cost from the target to summon this card from the Hand.",
+        "abilityIndex": 0,
         "clauses": [
           {
             "rawText": "By sending your [Soul Core] from the Field/Reserve to the Life",
+            "originalClauseText": "By sending your [Soul Core] from the Field/Reserve to the Life",
             "cleanText": "By sending your [Soul Core] from the Field/Reserve to the Life",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": true,
@@ -9889,7 +9999,9 @@
           },
           {
             "rawText": "pay one cost from the target to summon this card from the Hand.",
+            "originalClauseText": "pay one cost from the target to summon this card from the Hand.",
             "cleanText": "pay one cost from the target to summon this card from the Hand",
+            "clauseIndex": 1,
             "link": "byDoing",
             "isOptional": false,
             "isCost": false,
@@ -9903,11 +10015,56 @@
         ],
         "unsupported": [],
         "legacyId": "BS76-X12#a0",
-        "physicalId": "BS76-X12#AB_FLASH_NONE_LV1_LV2_LV3_5c5196c28ae1d5bb48786784154f978c16c0eb9556d71ff28878b30bb51e308b_67fe946e7a6583f26953b43a8592fa6a",
-        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_5c5196c28ae1d5bb48786784154f978c16c0eb9556d71ff28878b30bb51e308b_67fe946e7a6583f26953b43a8592fa6a"
+        "keywords": [
+          {
+            "name": "Manifest",
+            "parameter": "Seal, \"Contractor Huracan\" & C2 or more, (Your Turn)",
+            "wave": 2,
+            "hook": "manifest",
+            "bracketed": true,
+            "index": 0,
+            "abilityId": "BS76-X12#AB_FLASH_NONE_LV1_LV2_LV3_a2e731dfd4ce5a3b9d42bd2d6b3be30412f4325c15882ef9911082a3d2e69b2f_9e8b9c85a7a32d6eb3f1d26146dc538d",
+            "cardNumber": "BS76-X12",
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "face": "A",
+            "prefixes": [],
+            "isSoulState": false,
+            "duringAdvent": false,
+            "duringSeal": false,
+            "burstCondition": null,
+            "limit": null,
+            "isFlash": true,
+            "isMain": false,
+            "legacyAbilityId": "BS76-X12#a0"
+          }
+        ],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS76-X12#AB_FLASH_NONE_LV1_LV2_LV3_a2e731dfd4ce5a3b9d42bd2d6b3be30412f4325c15882ef9911082a3d2e69b2f_9e8b9c85a7a32d6eb3f1d26146dc538d",
+        "physicalId": "BS76-X12#AB_FLASH_NONE_LV1_LV2_LV3_a2e731dfd4ce5a3b9d42bd2d6b3be30412f4325c15882ef9911082a3d2e69b2f_9e8b9c85a7a32d6eb3f1d26146dc538d",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_a2e731dfd4ce5a3b9d42bd2d6b3be30412f4325c15882ef9911082a3d2e69b2f_9e8b9c85a7a32d6eb3f1d26146dc538d",
+        "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_20113fd1b90909475007437a0b87e1c75d9fdeece50ed5a053d1f8d845705cbd_f90ae6b82081b699ccd00e969f81d454",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "FLASH"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS76-X12#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_bcedbcdb6544ba39ead1f761098f732283f7694ac499c786d9546abc2c6e9078_00581caea317d14909e512d77219a1d1",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -9918,20 +10075,34 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_ATTACKS",
+          "timings": [
+            "WHEN_ATTACKS"
+          ],
           "timingLabel": "When Attacks",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Draw two cards, then discard a card from your Hand."
         },
+        "originalAbilityText": "[LV1-2-3] (When Attacks)\nDraw two cards, then discard a card from your Hand.",
+        "abilityIndex": 1,
         "clauses": [
           {
-            "rawText": "Draw two cards, then discard a card from your Hand.",
-            "cleanText": "Draw two cards, then discard a card from your Hand",
+            "rawText": "Draw two cards",
+            "originalClauseText": "Draw two cards",
+            "cleanText": "Draw two cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -9943,15 +10114,48 @@
               "chooser": "self",
               "forEach": null
             }
+          },
+          {
+            "rawText": "discard a card from your Hand.",
+            "originalClauseText": "discard a card from your Hand.",
+            "cleanText": "discard a card from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 1,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
           }
         ],
         "unsupported": [],
         "legacyId": "BS76-X12#a1",
-        "physicalId": "BS76-X12#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_bcedbcdb6544ba39ead1f761098f732283f7694ac499c786d9546abc2c6e9078_00581caea317d14909e512d77219a1d1",
-        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_bcedbcdb6544ba39ead1f761098f732283f7694ac499c786d9546abc2c6e9078_00581caea317d14909e512d77219a1d1"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS76-X12#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_947ef9c8419e7bf27b0a089b1719a2cb893b6374787d5e7f5c44fc3633db8748_9d6fae2c8a0527ad896f7a07ec8d7acb",
+        "physicalId": "BS76-X12#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_947ef9c8419e7bf27b0a089b1719a2cb893b6374787d5e7f5c44fc3633db8748_9d6fae2c8a0527ad896f7a07ec8d7acb",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_947ef9c8419e7bf27b0a089b1719a2cb893b6374787d5e7f5c44fc3633db8748_9d6fae2c8a0527ad896f7a07ec8d7acb",
+        "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_LV3_8e50d35dbac201bb5db0f07cf3d37b38487119a6c9650f711947622748ab40f8_da532e111f1c8b387cbef3b53de2c5e2",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS76-X12#AB_WHEN_ATTACKS_NONE_LV2_LV3_76095c9d2ed53cdbd3f3ba2e46c07c4c15a3317c727e103fa45c0a86cf712db7_ad91db0d6a47535a001ed09fba881669",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -9963,32 +10167,50 @@
             "Seal: During Seal"
           ],
           "timing": "WHEN_ATTACKS",
+          "timings": [
+            "WHEN_ATTACKS"
+          ],
           "timingLabel": "When Attacks",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": "Roaring Stampede",
+          "keywords": [
+            "Roaring Stampede"
+          ],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Target and attack the opposing Spirit with the lowest cost. Also, when the blocking Spirit is depleted/destroyed, discard six cards from the opposing decktop, and target the next opposing target with lowest cost to make it block. This \"target attack/block\" effect can't be prevented by opposing effects."
         },
+        "originalAbilityText": "[Seal: During Seal] [LV2-3] [Roaring Stampede] (When Attacks)\nTarget and attack the opposing Spirit with the lowest cost. Also, when the blocking Spirit is depleted/destroyed, discard six cards from the opposing decktop, and target the next opposing target with lowest cost to make it block. This \"target attack/block\" effect can't be prevented by opposing effects.",
+        "abilityIndex": 2,
         "clauses": [
           {
             "rawText": "Target and attack the opposing Spirit with the lowest cost.",
+            "originalClauseText": "Target and attack the opposing Spirit with the lowest cost.",
             "cleanText": "Target and attack the opposing Spirit with the lowest cost",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
             "condition": null,
             "duration": null,
             "op": {
-              "op": "COST_MODIFIER"
+              "op": "COMBAT_RULE"
             }
           },
           {
             "rawText": "when the blocking Spirit is depleted/destroyed, discard six cards from the opposing decktop",
+            "originalClauseText": "when the blocking Spirit is depleted/destroyed, discard six cards from the opposing decktop",
             "cleanText": "when the blocking Spirit is depleted/destroyed, discard six cards from the opposing decktop",
+            "clauseIndex": 1,
             "link": "also",
             "isOptional": false,
             "isCost": false,
@@ -10001,38 +10223,123 @@
           },
           {
             "rawText": "target the next opposing target with lowest cost to make it block.",
+            "originalClauseText": "target the next opposing target with lowest cost to make it block.",
             "cleanText": "target the next opposing target with lowest cost to make it block",
+            "clauseIndex": 2,
             "link": "also",
             "isOptional": false,
             "isCost": false,
             "condition": null,
             "duration": null,
             "op": {
-              "op": "COST_MODIFIER"
+              "op": "TARGET_CARD"
             }
           },
           {
             "rawText": "This \"target attack/block\" effect can't be prevented by opposing effects.",
+            "originalClauseText": "This \"target attack/block\" effect can't be prevented by opposing effects.",
             "cleanText": "This \"target attack/block\" effect can't be prevented by opposing effects",
+            "clauseIndex": 3,
             "link": null,
             "isOptional": false,
             "isCost": false,
             "condition": null,
             "duration": null,
             "op": {
-              "op": "COMBAT_RESTRICTION"
+              "op": "UNSUPPORTED",
+              "unhandledClause": "This \"target attack/block\" effect can't be prevented by opposing effects",
+              "reason": "UNSUPPORTED_EFFECT_PROTECTION: effect cannot be prevented by opposing effects"
             }
           }
         ],
-        "unsupported": [],
+        "unsupported": [
+          "This \"target attack/block\" effect can't be prevented by opposing effects."
+        ],
         "legacyId": "BS76-X12#a2",
-        "physicalId": "BS76-X12#AB_WHEN_ATTACKS_NONE_LV2_LV3_76095c9d2ed53cdbd3f3ba2e46c07c4c15a3317c727e103fa45c0a86cf712db7_ad91db0d6a47535a001ed09fba881669",
-        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_76095c9d2ed53cdbd3f3ba2e46c07c4c15a3317c727e103fa45c0a86cf712db7_ad91db0d6a47535a001ed09fba881669"
+        "keywords": [
+          {
+            "name": "Roaring Stampede",
+            "parameter": null,
+            "wave": 4,
+            "hook": "stampede",
+            "bracketed": true,
+            "index": 0,
+            "abilityId": "BS76-X12#AB_WHEN_ATTACKS_NONE_LV2_LV3_210fe998cdc3f2408f22cccfdedc9cd9d7c35025121b88c908586d05eb08b32a_fba7e2c5a51d16262bb6743f7e9ef38d",
+            "cardNumber": "BS76-X12",
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "face": "A",
+            "prefixes": [
+              "Seal: During Seal"
+            ],
+            "isSoulState": false,
+            "duringAdvent": false,
+            "duringSeal": true,
+            "burstCondition": null,
+            "limit": null,
+            "isFlash": false,
+            "isMain": false,
+            "legacyAbilityId": "BS76-X12#a2"
+          },
+          {
+            "name": "Seal",
+            "parameter": "During Seal",
+            "wave": 2,
+            "hook": "seal",
+            "bracketed": true,
+            "index": 0,
+            "abilityId": "BS76-X12#AB_WHEN_ATTACKS_NONE_LV2_LV3_210fe998cdc3f2408f22cccfdedc9cd9d7c35025121b88c908586d05eb08b32a_fba7e2c5a51d16262bb6743f7e9ef38d",
+            "cardNumber": "BS76-X12",
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "face": "A",
+            "prefixes": [
+              "Seal: During Seal"
+            ],
+            "isSoulState": false,
+            "duringAdvent": false,
+            "duringSeal": true,
+            "burstCondition": null,
+            "limit": null,
+            "isFlash": false,
+            "isMain": false,
+            "legacyAbilityId": "BS76-X12#a2"
+          }
+        ],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS76-X12#AB_WHEN_ATTACKS_NONE_LV2_LV3_210fe998cdc3f2408f22cccfdedc9cd9d7c35025121b88c908586d05eb08b32a_fba7e2c5a51d16262bb6743f7e9ef38d",
+        "physicalId": "BS76-X12#AB_WHEN_ATTACKS_NONE_LV2_LV3_210fe998cdc3f2408f22cccfdedc9cd9d7c35025121b88c908586d05eb08b32a_fba7e2c5a51d16262bb6743f7e9ef38d",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_210fe998cdc3f2408f22cccfdedc9cd9d7c35025121b88c908586d05eb08b32a_fba7e2c5a51d16262bb6743f7e9ef38d",
+        "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_1e2d904725c51354a66c99cfd551780f72e9a0b8d81350f8112d3e65c2c85aa9_9241a04ce1d519a7e276f62626dc3ce8",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
     "compiledClausesCount": 7,
-    "unsupportedClausesCount": 0,
-    "isFullySupported": true
+    "unsupportedClausesCount": 1,
+    "isFullySupported": false
   },
   "BS76-CP01": {
     "cardNumber": "BS76-CP01",
@@ -11896,12 +12203,32 @@
         "wave": 2,
         "hook": "seal",
         "bracketed": true,
-        "index": 199
+        "index": 0,
+        "abilityId": "BS76-052#AB_ATTACK_STEP_NONE_LV2_92bd26dbfd5a4b26ec0e06ab20f40fd1e81024f3b04366a3e4e8e15f131c4705_f18fab07a79100fc602e5945b11c02c8",
+        "cardNumber": "BS76-052",
+        "levels": [
+          2
+        ],
+        "levelExplicit": true,
+        "timing": "ATTACK_STEP",
+        "timingLabel": "Your Attack Step",
+        "timingStep": "ANY",
+        "face": "A",
+        "prefixes": [
+          "Seal: During Seal"
+        ],
+        "isSoulState": false,
+        "duringAdvent": false,
+        "duringSeal": true,
+        "burstCondition": null,
+        "limit": null,
+        "isFlash": false,
+        "isMain": false,
+        "legacyAbilityId": "BS76-052#a1"
       }
     ],
     "abilities": [
       {
-        "id": "BS76-052#AB_WHEN_SUMMONED_NONE_LV1_LV2_c33512fab57a8f8da046752ac74094eac7a145da53d4be345cb549cbb5b2f01b_a098158d9371ad74fad5cf6f3f971dea",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -11911,20 +12238,36 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_SUMMONED",
+          "timings": [
+            "WHEN_SUMMONED",
+            "WHEN_ATTACKS"
+          ],
           "timingLabel": "When Summoned/Attacks",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS",
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "If you control any \"Contractor Huracan\", draw a card, then discard a card from your Hand. When this effect discards any \"Roaring Azure\" family card, your counter +1."
         },
+        "originalAbilityText": "[LV1-2] (When Summoned/Attacks)\nIf you control any \"Contractor Huracan\", draw a card, then discard a card from your Hand. When this effect discards any \"Roaring Azure\" family card, your counter +1.",
+        "abilityIndex": 0,
         "clauses": [
           {
-            "rawText": "If you control any \"Contractor Huracan\", draw a card, then discard a card from your Hand.",
-            "cleanText": "draw a card, then discard a card from your Hand",
+            "rawText": "If you control any \"Contractor Huracan\", draw a card",
+            "originalClauseText": "If you control any \"Contractor Huracan\", draw a card",
+            "cleanText": "draw a card",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -11938,8 +12281,28 @@
             }
           },
           {
+            "rawText": "discard a card from your Hand.",
+            "originalClauseText": "discard a card from your Hand.",
+            "cleanText": "discard a card from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 1,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
+          },
+          {
             "rawText": "When this effect discards any \"Roaring Azure\" family card, your counter +1.",
+            "originalClauseText": "When this effect discards any \"Roaring Azure\" family card, your counter +1.",
             "cleanText": "When this effect discards any \"Roaring Azure\" family card, your counter +1",
+            "clauseIndex": 2,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -11953,11 +12316,27 @@
         ],
         "unsupported": [],
         "legacyId": "BS76-052#a0",
-        "physicalId": "BS76-052#AB_WHEN_SUMMONED_NONE_LV1_LV2_c33512fab57a8f8da046752ac74094eac7a145da53d4be345cb549cbb5b2f01b_a098158d9371ad74fad5cf6f3f971dea",
-        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_c33512fab57a8f8da046752ac74094eac7a145da53d4be345cb549cbb5b2f01b_a098158d9371ad74fad5cf6f3f971dea"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS76-052#AB_WHEN_SUMMONED_NONE_LV1_LV2_1bc87eeb979e76eefe5db2e69e8300257bd717a8bcbb89f208420c9a0c86580d_f9b86bced0c9a2cc4ffe26ec8b05369e",
+        "physicalId": "BS76-052#AB_WHEN_SUMMONED_NONE_LV1_LV2_1bc87eeb979e76eefe5db2e69e8300257bd717a8bcbb89f208420c9a0c86580d_f9b86bced0c9a2cc4ffe26ec8b05369e",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_1bc87eeb979e76eefe5db2e69e8300257bd717a8bcbb89f208420c9a0c86580d_f9b86bced0c9a2cc4ffe26ec8b05369e",
+        "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_0e4ebaf6ed16d0fd135fa362b1184a96904ca240e1153bf6d4932ab3df517229_c5ea8fb59dcc8401fd39bc13d0ab713f",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS",
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS76-052#AB_ATTACK_STEP_NONE_LV2_7357afa5f44823fcaea616b127c21adf9455e91571cc74d2d02b4f181a2d4941_0463cefbb9a8670d5f9c81b914b5be82",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -11968,20 +12347,34 @@
             "Seal: During Seal"
           ],
           "timing": "ATTACK_STEP",
+          "timings": [
+            "ATTACK_STEP"
+          ],
           "timingLabel": "Your Attack Step",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "SELF",
+          "timingTriggers": [
+            "ATTACK_STEP"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "When your \"Roaring Azure\" family Spirit attacks, you can discard five cards from the opposing decktop."
         },
+        "originalAbilityText": "[Seal: During Seal] [LV2] (Your Attack Step)\nWhen your \"Roaring Azure\" family Spirit attacks, you can discard five cards from the opposing decktop.",
+        "abilityIndex": 1,
         "clauses": [
           {
             "rawText": "When your \"Roaring Azure\" family Spirit attacks, you can discard five cards from the opposing decktop.",
+            "originalClauseText": "When your \"Roaring Azure\" family Spirit attacks, you can discard five cards from the opposing decktop.",
             "cleanText": "When your \"Roaring Azure\" family Spirit attacks, you can discard five cards from the opposing decktop",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": true,
             "isCost": false,
@@ -11995,11 +12388,57 @@
         ],
         "unsupported": [],
         "legacyId": "BS76-052#a1",
-        "physicalId": "BS76-052#AB_ATTACK_STEP_NONE_LV2_7357afa5f44823fcaea616b127c21adf9455e91571cc74d2d02b4f181a2d4941_0463cefbb9a8670d5f9c81b914b5be82",
-        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_7357afa5f44823fcaea616b127c21adf9455e91571cc74d2d02b4f181a2d4941_0463cefbb9a8670d5f9c81b914b5be82"
+        "keywords": [
+          {
+            "name": "Seal",
+            "parameter": "During Seal",
+            "wave": 2,
+            "hook": "seal",
+            "bracketed": true,
+            "index": 0,
+            "abilityId": "BS76-052#AB_ATTACK_STEP_NONE_LV2_92bd26dbfd5a4b26ec0e06ab20f40fd1e81024f3b04366a3e4e8e15f131c4705_f18fab07a79100fc602e5945b11c02c8",
+            "cardNumber": "BS76-052",
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "face": "A",
+            "prefixes": [
+              "Seal: During Seal"
+            ],
+            "isSoulState": false,
+            "duringAdvent": false,
+            "duringSeal": true,
+            "burstCondition": null,
+            "limit": null,
+            "isFlash": false,
+            "isMain": false,
+            "legacyAbilityId": "BS76-052#a1"
+          }
+        ],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS76-052#AB_ATTACK_STEP_NONE_LV2_92bd26dbfd5a4b26ec0e06ab20f40fd1e81024f3b04366a3e4e8e15f131c4705_f18fab07a79100fc602e5945b11c02c8",
+        "physicalId": "BS76-052#AB_ATTACK_STEP_NONE_LV2_92bd26dbfd5a4b26ec0e06ab20f40fd1e81024f3b04366a3e4e8e15f131c4705_f18fab07a79100fc602e5945b11c02c8",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_92bd26dbfd5a4b26ec0e06ab20f40fd1e81024f3b04366a3e4e8e15f131c4705_f18fab07a79100fc602e5945b11c02c8",
+        "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_81447e01948dbb5684f4ea5d737e22baf69bf05f5c0634f03e07f7dfa2152851_2a6b8d64273209df743c563bdcb87b6b",
+        "timingSemantics": {
+          "timingOwner": "SELF",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "ATTACK_STEP"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 3,
+    "compiledClausesCount": 4,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },
@@ -17613,19 +18052,9 @@
   "BS76-057": {
     "cardNumber": "BS76-057",
     "name": "The TraitorHero Alter-Aion",
-    "keywords": [
-      {
-        "name": "Burst",
-        "parameter": "After an opposing Spirit/Ultimate's (When Summoned) effect resolves",
-        "wave": 2,
-        "hook": "burst",
-        "bracketed": true,
-        "index": 83
-      }
-    ],
+    "keywords": [],
     "abilities": [
       {
-        "id": "BS76-057#AB_PASSIVE_NONE_LV1_LV2_LV3_5b2da890bd5e1f7c35668bcbf6e27ad7f368d9b7d8d699a67a8b187fd36e621d_fddba50f635e2cbab54924f8e8b93015",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -17636,20 +18065,30 @@
           "levelExplicit": false,
           "prefixes": [],
           "timing": "PASSIVE",
+          "timings": [],
           "timingLabel": "",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "When this set card is discarded by the opponent, you can immediately activate it."
         },
+        "originalAbilityText": "When this set card is discarded by the opponent, you can immediately activate it.",
+        "abilityIndex": 0,
         "clauses": [
           {
             "rawText": "When this set card is discarded by the opponent, you can immediately activate it.",
+            "originalClauseText": "When this set card is discarded by the opponent, you can immediately activate it.",
             "cleanText": "When this set card is discarded by the opponent, you can immediately activate it",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": true,
             "isCost": false,
@@ -17662,11 +18101,24 @@
         ],
         "unsupported": [],
         "legacyId": "BS76-057#a0",
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS76-057#AB_PASSIVE_NONE_LV1_LV2_LV3_5b2da890bd5e1f7c35668bcbf6e27ad7f368d9b7d8d699a67a8b187fd36e621d_fddba50f635e2cbab54924f8e8b93015",
         "physicalId": "BS76-057#AB_PASSIVE_NONE_LV1_LV2_LV3_5b2da890bd5e1f7c35668bcbf6e27ad7f368d9b7d8d699a67a8b187fd36e621d_fddba50f635e2cbab54924f8e8b93015",
-        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_5b2da890bd5e1f7c35668bcbf6e27ad7f368d9b7d8d699a67a8b187fd36e621d_fddba50f635e2cbab54924f8e8b93015"
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_5b2da890bd5e1f7c35668bcbf6e27ad7f368d9b7d8d699a67a8b187fd36e621d_fddba50f635e2cbab54924f8e8b93015",
+        "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_f26e55f61d09c2957281e66136adc00bb8c5ada6d84068046d3f41617e819fd8_e06242e00762d0b9b0baf46a7a32144a",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS76-057#AB_BURST_NONE_LV1_LV2_LV3_27431066a6950d23ceefe14a0b53cfa089fc4e8080b684fe8a772dabd6886e24_1715889bb7614644e0b31cc95ad835e8",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -17677,20 +18129,32 @@
           "levelExplicit": false,
           "prefixes": [],
           "timing": "BURST",
+          "timings": [],
           "timingLabel": "Burst",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "BURST"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": "AFTER_OPPONENT_SUMMON_EFFECT",
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Draw three cards, then discard two cards from your Hand. After this effect resolves, summon this card without paying the cost."
         },
+        "originalAbilityText": "[Burst: After an opposing Spirit/Ultimate's (When Summoned) effect resolves]\nDraw three cards, then discard two cards from your Hand. After this effect resolves, summon this card without paying the cost.",
+        "abilityIndex": 1,
         "clauses": [
           {
-            "rawText": "Draw three cards, then discard two cards from your Hand.",
-            "cleanText": "Draw three cards, then discard two cards from your Hand",
+            "rawText": "Draw three cards",
+            "originalClauseText": "Draw three cards",
+            "cleanText": "Draw three cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -17704,8 +18168,28 @@
             }
           },
           {
+            "rawText": "discard two cards from your Hand.",
+            "originalClauseText": "discard two cards from your Hand.",
+            "cleanText": "discard two cards from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 2,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
+          },
+          {
             "rawText": "summon this card without paying the cost.",
+            "originalClauseText": "summon this card without paying the cost.",
             "cleanText": "summon this card without paying the cost",
+            "clauseIndex": 2,
             "link": "afterResolves",
             "isOptional": false,
             "isCost": false,
@@ -17720,11 +18204,26 @@
         ],
         "unsupported": [],
         "legacyId": "BS76-057#a1",
-        "physicalId": "BS76-057#AB_BURST_NONE_LV1_LV2_LV3_27431066a6950d23ceefe14a0b53cfa089fc4e8080b684fe8a772dabd6886e24_1715889bb7614644e0b31cc95ad835e8",
-        "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_27431066a6950d23ceefe14a0b53cfa089fc4e8080b684fe8a772dabd6886e24_1715889bb7614644e0b31cc95ad835e8"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS76-057#AB_BURST_NONE_LV1_LV2_LV3_cdc0964276ebdc1e9e30f9a479a77e9db449889158aedd25dee02cbeecad51ad_67e2c7fa4482ee07756e094dc6efe7a7",
+        "physicalId": "BS76-057#AB_BURST_NONE_LV1_LV2_LV3_cdc0964276ebdc1e9e30f9a479a77e9db449889158aedd25dee02cbeecad51ad_67e2c7fa4482ee07756e094dc6efe7a7",
+        "semanticId": "SEM#AB_BURST_NONE_LV1_LV2_LV3_cdc0964276ebdc1e9e30f9a479a77e9db449889158aedd25dee02cbeecad51ad_67e2c7fa4482ee07756e094dc6efe7a7",
+        "semanticIdV3": "SEM3#AB_BURST_NONE_LV1_LV2_LV3_6334dc11cd66d3bf493a179371ae3f0f201b32568cd7a9dbba4d277dd4062c8f_2204f2ee245f7eb0950974eb86206b7b",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "BURST"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS76-057#AB_ATTACK_STEP_NONE_LV2_LV3_d6f56c9a442037a331906af6ad832743335267f26d8565ce5223eeb27883d9ea_e53543502e05c645205a508f39e4675e",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -17734,20 +18233,34 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "ATTACK_STEP",
+          "timings": [
+            "ATTACK_STEP"
+          ],
           "timingLabel": "Your Attack Step",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "SELF",
+          "timingTriggers": [
+            "ATTACK_STEP"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "When your \"Soldier\" family Spirit attacks, you can destroy an opposing Spirit/Ultimate with a cost equal or inferior to that target's."
         },
+        "originalAbilityText": "[LV2-3] (Your Attack Step)\nWhen your \"Soldier\" family Spirit attacks, you can destroy an opposing Spirit/Ultimate with a cost equal or inferior to that target's.",
+        "abilityIndex": 2,
         "clauses": [
           {
             "rawText": "When your \"Soldier\" family Spirit attacks, you can destroy an opposing Spirit/Ultimate with a cost equal or inferior to that target's.",
+            "originalClauseText": "When your \"Soldier\" family Spirit attacks, you can destroy an opposing Spirit/Ultimate with a cost equal or inferior to that target's.",
             "cleanText": "When your \"Soldier\" family Spirit attacks, you can destroy an opposing Spirit/Ultimate with a cost equal or inferior to that target's",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": true,
             "isCost": false,
@@ -17759,19 +18272,43 @@
               "target": {
                 "side": "opp",
                 "types": [
-                  "Spirit"
-                ]
+                  "Spirit",
+                  "Ultimate"
+                ],
+                "filters": {
+                  "comparison": {
+                    "property": "COST",
+                    "operator": "LTE",
+                    "reference": "target"
+                  }
+                }
               }
             }
           }
         ],
         "unsupported": [],
         "legacyId": "BS76-057#a2",
-        "physicalId": "BS76-057#AB_ATTACK_STEP_NONE_LV2_LV3_d6f56c9a442037a331906af6ad832743335267f26d8565ce5223eeb27883d9ea_e53543502e05c645205a508f39e4675e",
-        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_d6f56c9a442037a331906af6ad832743335267f26d8565ce5223eeb27883d9ea_e53543502e05c645205a508f39e4675e"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS76-057#AB_ATTACK_STEP_NONE_LV2_LV3_dc24e689d2c4a74b0938f77f50cd7afbfe5f978b9d6f3c7ff9382f0c931689e6_105c7b603a082294ddd3abc5eee5a5b1",
+        "physicalId": "BS76-057#AB_ATTACK_STEP_NONE_LV2_LV3_dc24e689d2c4a74b0938f77f50cd7afbfe5f978b9d6f3c7ff9382f0c931689e6_105c7b603a082294ddd3abc5eee5a5b1",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_dc24e689d2c4a74b0938f77f50cd7afbfe5f978b9d6f3c7ff9382f0c931689e6_105c7b603a082294ddd3abc5eee5a5b1",
+        "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_LV3_95ef53acc29c1661cfe7096db9f7ccf08642a3709b15fc6fc062647d5d2ead82_b5c78d534a6ea60215c3cbd42c31c901",
+        "timingSemantics": {
+          "timingOwner": "SELF",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "ATTACK_STEP"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 4,
+    "compiledClausesCount": 5,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },

@@ -109,10 +109,10 @@ class CardRegistry {
       'DISCARD_HAND',
       'STEP_MODIFIER'
     ]);
-    return matching.some(ab => {
+    return matching.every(ab => {
       if (ab.overall === 'AURA_BP' || ab.overall === 'AURA_KEYWORDS') return true;
       const subs = ab.subEffects || [];
-      return subs.some(s => s.op !== 'PASSIVE_RULE' || EXECUTABLE_PASSIVE_RULES.has(s.rule));
+      return subs.length > 0 && subs.every(s => s.op !== 'PASSIVE_RULE' || EXECUTABLE_PASSIVE_RULES.has(s.rule));
     });
   }
 
@@ -1206,6 +1206,7 @@ const SagaConditionDSL = (() => {
       const st = getFriendlyState(ctx);
       const card = ctx.card || ctx.sourceCard;
       if (!st || !st.deck) return { applied: false, count: 0 };
+      if (st.drawRestricted || st.cannotDraw) return { applied: false, count: 0, reason: 'DRAW_RESTRICTED' };
 
       const mult = computeScaleFactor(ctx, params.scaleBy);
       const count = (params.count || 1) * mult;
@@ -1215,7 +1216,10 @@ const SagaConditionDSL = (() => {
         const c = st.deck.shift();
         if (c) {
           if (!st.hand) st.hand = [];
-          st.hand.push(c);
+          const cKey = c.uid || c.id;
+          if (!cKey || !st.hand.some(h => (h?.uid || h?.id) === cKey)) {
+            st.hand.push(c);
+          }
           drawn++;
         }
       }

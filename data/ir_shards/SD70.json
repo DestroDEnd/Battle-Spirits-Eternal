@@ -1990,20 +1990,35 @@
     "name": "［S.E.E.S. Official Battle Uniform］ Protagonist",
     "keywords": [
       {
-        "name": "Contract Advent",
-        "parameter": null,
-        "wave": 2,
-        "hook": "contract_advent",
-        "bracketed": true,
-        "index": 42
-      },
-      {
         "name": "Soul State",
         "parameter": null,
         "wave": 2,
         "hook": "soul_state",
         "bracketed": true,
-        "index": 159
+        "index": 0,
+        "abilityId": "SD70-CX01#AB_TURN_TRIGGER_NONE_LV1_LV2_e217116373f5e1839f3064a65ee585a12efdeb1f210e9a33a1a0629e53e00b14_50aa7d2dbcec926565649955c1ca92f3",
+        "cardNumber": "SD70-CX01",
+        "levels": [
+          1,
+          2
+        ],
+        "levelExplicit": true,
+        "timing": "TURN_TRIGGER",
+        "timingLabel": "Your Turn",
+        "timingStep": "ANY",
+        "face": "A",
+        "prefixes": [
+          "Soul State",
+          "Contract Pre-Advent"
+        ],
+        "isSoulState": true,
+        "duringAdvent": false,
+        "duringSeal": false,
+        "burstCondition": null,
+        "limit": "ONCE_PER_TURN_SAME_NAME",
+        "isFlash": false,
+        "isMain": false,
+        "legacyAbilityId": "SD70-CX01#a1"
       },
       {
         "name": "Contract Pre-Advent",
@@ -2011,15 +2026,30 @@
         "wave": 2,
         "hook": "contract_pre_advent",
         "bracketed": true,
-        "index": 171
-      },
-      {
-        "name": "Contract Advent",
-        "parameter": null,
-        "wave": 2,
-        "hook": "contract_advent",
-        "bracketed": true,
-        "index": 322
+        "index": 0,
+        "abilityId": "SD70-CX01#AB_TURN_TRIGGER_NONE_LV1_LV2_e217116373f5e1839f3064a65ee585a12efdeb1f210e9a33a1a0629e53e00b14_50aa7d2dbcec926565649955c1ca92f3",
+        "cardNumber": "SD70-CX01",
+        "levels": [
+          1,
+          2
+        ],
+        "levelExplicit": true,
+        "timing": "TURN_TRIGGER",
+        "timingLabel": "Your Turn",
+        "timingStep": "ANY",
+        "face": "A",
+        "prefixes": [
+          "Soul State",
+          "Contract Pre-Advent"
+        ],
+        "isSoulState": true,
+        "duringAdvent": false,
+        "duringSeal": false,
+        "burstCondition": null,
+        "limit": "ONCE_PER_TURN_SAME_NAME",
+        "isFlash": false,
+        "isMain": false,
+        "legacyAbilityId": "SD70-CX01#a1"
       },
       {
         "name": "Contract Pre-Advent",
@@ -2027,12 +2057,33 @@
         "wave": 2,
         "hook": "contract_pre_advent",
         "bracketed": true,
-        "index": 449
+        "index": 0,
+        "abilityId": "SD70-CX01#AB_WHEN_ATTACKS_NONE_LV1_LV2_9f358729fd8401096e95fd109128ac76d90ab285031db07919741c6d2722d83b_292bbf7a72781c415c3072c4847a7c43",
+        "cardNumber": "SD70-CX01",
+        "levels": [
+          1,
+          2
+        ],
+        "levelExplicit": true,
+        "timing": "WHEN_ATTACKS",
+        "timingLabel": "When Attacks",
+        "timingStep": "ANY",
+        "face": "A",
+        "prefixes": [
+          "Contract Pre-Advent"
+        ],
+        "isSoulState": false,
+        "duringAdvent": false,
+        "duringSeal": false,
+        "burstCondition": null,
+        "limit": "ONCE_PER_TURN",
+        "isFlash": false,
+        "isMain": false,
+        "legacyAbilityId": "SD70-CX01#a2"
       }
     ],
     "abilities": [
       {
-        "id": "SD70-CX01#AB_PASSIVE_NONE_LV1_LV2_LV3_25a27507aa9c51a20629af395bcf940b2e9c51b28700baf8ed15e3d3be565d11_8558e1ec21b1ffff6cbd5bb61c9bded8",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -2043,32 +2094,45 @@
           "levelExplicit": false,
           "prefixes": [],
           "timing": "PASSIVE",
+          "timings": [],
           "timingLabel": "",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "While this card is in Soul State, you can [Contract Advent] onto it. When you do, you can put any number of cores from your Field/Reserve to the advent card."
         },
+        "originalAbilityText": "While this card is in Soul State, you can [Contract Advent] onto it. When you do, you can put any number of cores from your Field/Reserve to the advent card.",
+        "abilityIndex": 0,
         "clauses": [
           {
             "rawText": "While this card is in Soul State, you can [Contract Advent] onto it.",
+            "originalClauseText": "While this card is in Soul State, you can [Contract Advent] onto it.",
             "cleanText": "you can [Contract Advent] onto it",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": true,
             "isCost": false,
             "condition": "While this card is in Soul State",
             "duration": null,
             "op": {
-              "op": "CONTRACT_ADVENT_RULE"
+              "op": "KEYWORD_RULE",
+              "keyword": "Contract Advent"
             }
           },
           {
             "rawText": "When you do, you can put any number of cores from your Field/Reserve to the advent card.",
+            "originalClauseText": "When you do, you can put any number of cores from your Field/Reserve to the advent card.",
             "cleanText": "When you do, you can put any number of cores from your Field/Reserve to the advent card",
+            "clauseIndex": 1,
             "link": null,
             "isOptional": true,
             "isCost": false,
@@ -2084,11 +2148,33 @@
         ],
         "unsupported": [],
         "legacyId": "SD70-CX01#a0",
-        "physicalId": "SD70-CX01#AB_PASSIVE_NONE_LV1_LV2_LV3_25a27507aa9c51a20629af395bcf940b2e9c51b28700baf8ed15e3d3be565d11_8558e1ec21b1ffff6cbd5bb61c9bded8",
-        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_25a27507aa9c51a20629af395bcf940b2e9c51b28700baf8ed15e3d3be565d11_8558e1ec21b1ffff6cbd5bb61c9bded8"
+        "keywords": [],
+        "referencedKeywords": [
+          {
+            "name": "Contract Advent",
+            "parameter": null,
+            "wave": 2,
+            "hook": "contract_advent",
+            "bracketed": true,
+            "index": 42
+          }
+        ],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "SD70-CX01#AB_PASSIVE_NONE_LV1_LV2_LV3_ef4d8e6b794456b8e31e36b28aa94147cd039c6bc87724a4c54409688b2abce7_d57e58be17b0f8623506f67f1dc5d2ce",
+        "physicalId": "SD70-CX01#AB_PASSIVE_NONE_LV1_LV2_LV3_ef4d8e6b794456b8e31e36b28aa94147cd039c6bc87724a4c54409688b2abce7_d57e58be17b0f8623506f67f1dc5d2ce",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_ef4d8e6b794456b8e31e36b28aa94147cd039c6bc87724a4c54409688b2abce7_d57e58be17b0f8623506f67f1dc5d2ce",
+        "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_f01fe1a2865c65f436c00767ef0d0c7612e6520179847c79d45d1cee6bbc3113_3b7e5afad2f6c57261a62e05bebf605a",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "SD70-CX01#AB_TURN_TRIGGER_NONE_LV1_LV2_b904b1d31fb287cdb759891e4d5009ce0e6fc0fe964cb9e6e6bf1249d99e5f48_77cc43c03ad8538845e92a7a3d1e9cff",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -2101,20 +2187,37 @@
             "Contract Pre-Advent"
           ],
           "timing": "TURN_TRIGGER",
+          "timings": [
+            "TURN_TRIGGER"
+          ],
           "timingLabel": "Your Turn",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "SELF",
+          "timingTriggers": [
+            "TURN_TRIGGER"
+          ],
+          "activationRestrictions": [
+            "ONCE_PER_TURN_SAME_NAME",
+            "SOUL_STATE"
+          ],
           "limit": "ONCE_PER_TURN_SAME_NAME",
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "When your other \"S.E.E.S.\"/\"Persona\" family card is summoned/deployed/[Contract Advents], or when this Spirit attacks, your counters +2, and draw two cards, then discard two cards from your Hand."
         },
+        "originalAbilityText": "[Soul State][Contract Pre-Advent]/[Spirit] [LV1][LV2] (Your Turn)\n(Once per Turn: Same Name) When your other \"S.E.E.S.\"/\"Persona\" family card is summoned/deployed/[Contract Advents], or when this Spirit attacks, your counters +2, and draw two cards, then discard two cards from your Hand.",
+        "abilityIndex": 1,
         "clauses": [
           {
             "rawText": "When your other \"S.E.E.S.\"/\"Persona\" family card is summoned/deployed/[Contract Advents], or when this Spirit attacks, your counters +2",
+            "originalClauseText": "When your other \"S.E.E.S.\"/\"Persona\" family card is summoned/deployed/[Contract Advents], or when this Spirit attacks, your counters +2",
             "cleanText": "When your other \"S.E.E.S.\"/\"Persona\" family card is summoned/deployed/[Contract Advents], or when this Spirit attacks, your counters +2",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -2126,8 +2229,10 @@
             }
           },
           {
-            "rawText": "draw two cards, then discard two cards from your Hand.",
-            "cleanText": "draw two cards, then discard two cards from your Hand",
+            "rawText": "draw two cards",
+            "originalClauseText": "draw two cards",
+            "cleanText": "draw two cards",
+            "clauseIndex": 1,
             "link": "also",
             "isOptional": false,
             "isCost": false,
@@ -2139,15 +2244,123 @@
               "chooser": "self",
               "forEach": null
             }
+          },
+          {
+            "rawText": "discard two cards from your Hand.",
+            "originalClauseText": "discard two cards from your Hand.",
+            "cleanText": "discard two cards from your Hand",
+            "clauseIndex": 2,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 2,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
           }
         ],
         "unsupported": [],
         "legacyId": "SD70-CX01#a1",
-        "physicalId": "SD70-CX01#AB_TURN_TRIGGER_NONE_LV1_LV2_b904b1d31fb287cdb759891e4d5009ce0e6fc0fe964cb9e6e6bf1249d99e5f48_77cc43c03ad8538845e92a7a3d1e9cff",
-        "semanticId": "SEM#AB_TURN_TRIGGER_NONE_LV1_LV2_b904b1d31fb287cdb759891e4d5009ce0e6fc0fe964cb9e6e6bf1249d99e5f48_77cc43c03ad8538845e92a7a3d1e9cff"
+        "keywords": [
+          {
+            "name": "Soul State",
+            "parameter": null,
+            "wave": 2,
+            "hook": "soul_state",
+            "bracketed": true,
+            "index": 0,
+            "abilityId": "SD70-CX01#AB_TURN_TRIGGER_NONE_LV1_LV2_e217116373f5e1839f3064a65ee585a12efdeb1f210e9a33a1a0629e53e00b14_50aa7d2dbcec926565649955c1ca92f3",
+            "cardNumber": "SD70-CX01",
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "timing": "TURN_TRIGGER",
+            "timingLabel": "Your Turn",
+            "timingStep": "ANY",
+            "face": "A",
+            "prefixes": [
+              "Soul State",
+              "Contract Pre-Advent"
+            ],
+            "isSoulState": true,
+            "duringAdvent": false,
+            "duringSeal": false,
+            "burstCondition": null,
+            "limit": "ONCE_PER_TURN_SAME_NAME",
+            "isFlash": false,
+            "isMain": false,
+            "legacyAbilityId": "SD70-CX01#a1"
+          },
+          {
+            "name": "Contract Pre-Advent",
+            "parameter": null,
+            "wave": 2,
+            "hook": "contract_pre_advent",
+            "bracketed": true,
+            "index": 0,
+            "abilityId": "SD70-CX01#AB_TURN_TRIGGER_NONE_LV1_LV2_e217116373f5e1839f3064a65ee585a12efdeb1f210e9a33a1a0629e53e00b14_50aa7d2dbcec926565649955c1ca92f3",
+            "cardNumber": "SD70-CX01",
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "timing": "TURN_TRIGGER",
+            "timingLabel": "Your Turn",
+            "timingStep": "ANY",
+            "face": "A",
+            "prefixes": [
+              "Soul State",
+              "Contract Pre-Advent"
+            ],
+            "isSoulState": true,
+            "duringAdvent": false,
+            "duringSeal": false,
+            "burstCondition": null,
+            "limit": "ONCE_PER_TURN_SAME_NAME",
+            "isFlash": false,
+            "isMain": false,
+            "legacyAbilityId": "SD70-CX01#a1"
+          }
+        ],
+        "referencedKeywords": [
+          {
+            "name": "Contract",
+            "parameter": "Advents",
+            "wave": 2,
+            "hook": "contract",
+            "bracketed": true,
+            "index": 70
+          }
+        ],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "SD70-CX01#AB_TURN_TRIGGER_NONE_LV1_LV2_e217116373f5e1839f3064a65ee585a12efdeb1f210e9a33a1a0629e53e00b14_50aa7d2dbcec926565649955c1ca92f3",
+        "physicalId": "SD70-CX01#AB_TURN_TRIGGER_NONE_LV1_LV2_e217116373f5e1839f3064a65ee585a12efdeb1f210e9a33a1a0629e53e00b14_50aa7d2dbcec926565649955c1ca92f3",
+        "semanticId": "SEM#AB_TURN_TRIGGER_NONE_LV1_LV2_e217116373f5e1839f3064a65ee585a12efdeb1f210e9a33a1a0629e53e00b14_50aa7d2dbcec926565649955c1ca92f3",
+        "semanticIdV3": "SEM3#AB_TURN_TRIGGER_NONE_LV1_LV2_c092764f09b2570af5273e6b131a60a5968222e63e3a7901c01b0280694001fc_c4054916027e2226e7bc1933d4e99907",
+        "timingSemantics": {
+          "timingOwner": "SELF",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "TURN_TRIGGER"
+          ],
+          "activationRestrictions": [
+            "ONCE_PER_TURN_SAME_NAME",
+            "SOUL_STATE"
+          ],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "SD70-CX01#AB_WHEN_ATTACKS_NONE_LV1_LV2_ff192eede3c3a152d94239a67a0f0f18cc75d14287bf37fedc915bb03603e096_37d937016fd153f48c6965449fde070e",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -2159,20 +2372,36 @@
             "Contract Pre-Advent"
           ],
           "timing": "WHEN_ATTACKS",
+          "timings": [
+            "WHEN_ATTACKS"
+          ],
           "timingLabel": "When Attacks",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [
+            "ONCE_PER_TURN"
+          ],
           "limit": "ONCE_PER_TURN",
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "when opposing Spirits/Ultimates would leave the Field, you can refresh this Spirit."
         },
+        "originalAbilityText": "[Contract Pre-Advent]/[Spirit] [LV1][LV2] (When Attacks)\nOnce per turn, when opposing Spirits/Ultimates would leave the Field, you can refresh this Spirit.",
+        "abilityIndex": 2,
         "clauses": [
           {
             "rawText": "when opposing Spirits/Ultimates would leave the Field, you can refresh this Spirit.",
+            "originalClauseText": "when opposing Spirits/Ultimates would leave the Field, you can refresh this Spirit.",
             "cleanText": "when opposing Spirits/Ultimates would leave the Field, you can refresh this Spirit",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": true,
             "isCost": false,
@@ -2186,11 +2415,60 @@
         ],
         "unsupported": [],
         "legacyId": "SD70-CX01#a2",
-        "physicalId": "SD70-CX01#AB_WHEN_ATTACKS_NONE_LV1_LV2_ff192eede3c3a152d94239a67a0f0f18cc75d14287bf37fedc915bb03603e096_37d937016fd153f48c6965449fde070e",
-        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_ff192eede3c3a152d94239a67a0f0f18cc75d14287bf37fedc915bb03603e096_37d937016fd153f48c6965449fde070e"
+        "keywords": [
+          {
+            "name": "Contract Pre-Advent",
+            "parameter": null,
+            "wave": 2,
+            "hook": "contract_pre_advent",
+            "bracketed": true,
+            "index": 0,
+            "abilityId": "SD70-CX01#AB_WHEN_ATTACKS_NONE_LV1_LV2_9f358729fd8401096e95fd109128ac76d90ab285031db07919741c6d2722d83b_292bbf7a72781c415c3072c4847a7c43",
+            "cardNumber": "SD70-CX01",
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "face": "A",
+            "prefixes": [
+              "Contract Pre-Advent"
+            ],
+            "isSoulState": false,
+            "duringAdvent": false,
+            "duringSeal": false,
+            "burstCondition": null,
+            "limit": "ONCE_PER_TURN",
+            "isFlash": false,
+            "isMain": false,
+            "legacyAbilityId": "SD70-CX01#a2"
+          }
+        ],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "SD70-CX01#AB_WHEN_ATTACKS_NONE_LV1_LV2_9f358729fd8401096e95fd109128ac76d90ab285031db07919741c6d2722d83b_292bbf7a72781c415c3072c4847a7c43",
+        "physicalId": "SD70-CX01#AB_WHEN_ATTACKS_NONE_LV1_LV2_9f358729fd8401096e95fd109128ac76d90ab285031db07919741c6d2722d83b_292bbf7a72781c415c3072c4847a7c43",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_9f358729fd8401096e95fd109128ac76d90ab285031db07919741c6d2722d83b_292bbf7a72781c415c3072c4847a7c43",
+        "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_4e2c271a1d28709668e1720eabb202c1cc75028ebe442f3138329563d321e845_628c1fa60df4167449adb47660eb5911",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [
+            "ONCE_PER_TURN"
+          ],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 5,
+    "compiledClausesCount": 6,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   }

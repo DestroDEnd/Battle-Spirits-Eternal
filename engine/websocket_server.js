@@ -59,6 +59,16 @@ export function sendWsClose(socket, code = 1000, reason = '') {
   } catch (_) {}
 }
 
+function rejectUpgrade(socket, statusCode, statusText, errorMsg) {
+  const body = JSON.stringify({ error: errorMsg });
+  const response = `HTTP/1.1 ${statusCode} ${statusText}\r\nContent-Type: application/json\r\nConnection: close\r\nContent-Length: ${Buffer.byteLength(body)}\r\n\r\n${body}`;
+  try {
+    socket.end(response);
+  } catch (_) {
+    try { socket.destroy(); } catch (__) {}
+  }
+}
+
 /**
  * Attaches the WebSocket server handler to an existing http.Server instance.
  */
@@ -68,27 +78,34 @@ export function attachWebSocketServer(server, sessionManager) {
       const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
       const pathname = url.pathname;
 
-      // Handle routes: /ws/sessions/:matchId or /api/sessions/:matchId/ws
+      // Handle routes: /ws/sessions/:matchId, /ws/:matchId, or /api/sessions/:matchId/ws
       let matchId = null;
       if (pathname.startsWith('/ws/sessions/')) {
         matchId = pathname.slice('/ws/sessions/'.length).replace(/\/$/, '');
+      } else if (pathname.startsWith('/ws/')) {
+        matchId = pathname.slice('/ws/'.length).replace(/\/$/, '');
       } else if (pathname.startsWith('/api/sessions/') && pathname.endsWith('/ws')) {
         const parts = pathname.split('/').filter(Boolean);
         matchId = parts[2];
       }
 
       if (!matchId) {
-        socket.write('HTTP/1.1 404 Not Found\r\nConnection: close\r\n\r\n');
-        socket.destroy();
+        rejectUpgrade(socket, 404, 'Not Found', 'ROUTE_NOT_FOUND');
         return;
       }
 
       // Check Sec-WebSocket-Key
       const secKey = req.headers['sec-websocket-key'];
       if (!secKey) {
-        socket.write('HTTP/1.1 400 Bad Request\r\nConnection: close\r\n\r\n');
-        socket.destroy();
+        rejectUpgrade(socket, 400, 'Bad Request', 'MISSING_SEC_WEBSOCKET_KEY');
         return;
+      }
+
+      // Check for ticket authentication or bearer token
+      const ticketParam = url.searchParams.get('ticket');
+      let ticketData = null;
+      if (ticketParam) {
+        ticketData = sessionManager.redeemTransportTicket(ticketParam, matchId);
       }
 
       // Extract Auth Token
@@ -97,29 +114,29 @@ export function attachWebSocketServer(server, sessionManager) {
       const queryToken = url.searchParams.get('token') || '';
       const authToken = headerToken || queryToken;
 
-      if (!authToken) {
-        socket.write('HTTP/1.1 401 Unauthorized\r\nContent-Type: application/json\r\n\r\n{"error":"AUTHENTICATION_REQUIRED"}');
-        socket.destroy();
-        return;
-      }
+      let viewerSide = ticketData ? ticketData.viewerSide : null;
 
-      // Verify Session and Authentication
+      // Verify Session
       const session = sessionManager.store.loadSession(matchId);
       if (!session) {
-        socket.write('HTTP/1.1 404 Not Found\r\nContent-Type: application/json\r\n\r\n{"error":"MATCH_NOT_FOUND"}');
-        socket.destroy();
+        rejectUpgrade(socket, 404, 'Not Found', 'MATCH_NOT_FOUND');
         return;
       }
 
-      const tokenH = hashToken(authToken);
-      let viewerSide = null;
-      if (session.player1.tokenHash === tokenH) viewerSide = 'player';
-      else if (session.player2.tokenHash === tokenH) viewerSide = 'opponent';
-
       if (!viewerSide) {
-        socket.write('HTTP/1.1 401 Unauthorized\r\nContent-Type: application/json\r\n\r\n{"error":"INVALID_AUTH_TOKEN"}');
-        socket.destroy();
-        return;
+        if (!authToken) {
+          rejectUpgrade(socket, 401, 'Unauthorized', 'AUTHENTICATION_REQUIRED');
+          return;
+        }
+
+        const tokenH = hashToken(authToken);
+        if (session.player1.tokenHash === tokenH) viewerSide = 'player';
+        else if (session.player2.tokenHash === tokenH) viewerSide = 'opponent';
+
+        if (!viewerSide) {
+          rejectUpgrade(socket, 401, 'Unauthorized', 'INVALID_AUTH_TOKEN');
+          return;
+        }
       }
 
       // Complete RFC 6455 Handshake
@@ -132,8 +149,15 @@ export function attachWebSocketServer(server, sessionManager) {
       ];
       socket.write(responseHeaders.join('\r\n') + '\r\n\r\n');
 
+      // Establish connection-scoped authenticated principal
+      const connectionPrincipal = {
+        matchId,
+        authenticatedSide: viewerSide,
+        type: ticketData ? 'TICKET' : 'TOKEN'
+      };
+
       // Record immediate connection & heartbeat
-      await sessionManager.recordHeartbeat(matchId, authToken);
+      await sessionManager.recordHeartbeat(matchId, authToken || viewerSide, { connectionPrincipal });
 
       // Subscribe to real-time events for this match
       const unsubscribe = sessionManager.subscribe(matchId, viewerSide, (event) => {
@@ -142,7 +166,7 @@ export function attachWebSocketServer(server, sessionManager) {
 
       // Send initial connection welcome & current state snapshot
       try {
-        const stateSnapshot = await sessionManager.getPlayerMatchState(matchId, authToken);
+        const stateSnapshot = await sessionManager.getPlayerMatchState(matchId, authToken || viewerSide);
         sendWsFrame(socket, JSON.stringify({
           type: 'connected',
           matchId,
@@ -219,14 +243,14 @@ export function attachWebSocketServer(server, sessionManager) {
               const msg = JSON.parse(text);
 
               if (msg.type === 'heartbeat') {
-                const hbRes = await sessionManager.recordHeartbeat(matchId, authToken);
+                const hbRes = await sessionManager.recordHeartbeat(matchId, authToken || viewerSide, { connectionPrincipal });
                 sendWsFrame(socket, JSON.stringify({ type: 'heartbeat_ack', timestamp: hbRes.heartbeatMs }));
               } else if (msg.type === 'action') {
-                const actionResult = await sessionManager.submitPlayerAction(matchId, msg.action, { authToken });
+                const actionResult = await sessionManager.submitPlayerAction(matchId, msg.action, { authToken, connectionPrincipal });
                 sendWsFrame(socket, JSON.stringify({ type: 'action_result', actionId: msg.actionId, result: actionResult }));
               } else if (msg.type === 'sync') {
                 const sinceSeq = parseInt(msg.sinceSeq || '0', 10);
-                const events = await sessionManager.getEvents(matchId, sinceSeq, authToken);
+                const events = await sessionManager.getEvents(matchId, sinceSeq, authToken || viewerSide);
                 sendWsFrame(socket, JSON.stringify({ type: 'sync_events', events }));
               }
             } catch (msgErr) {

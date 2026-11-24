@@ -4691,8 +4691,8 @@ export const BS01_OVERRIDES = {
         },
         "clauses": [
           {
-            "rawText": "Draw 3 cards, then discard 2 cards.",
-            "cleanText": "Draw 3 cards, then discard 2 cards",
+            "rawText": "Draw 3 cards",
+            "cleanText": "Draw 3 cards",
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -4703,6 +4703,22 @@ export const BS01_OVERRIDES = {
               "count": 3,
               "chooser": "self",
               "forEach": null
+            }
+          },
+          {
+            "rawText": "discard 2 cards.",
+            "cleanText": "discard 2 cards",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 2,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
             }
           }
         ],

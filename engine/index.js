@@ -16,7 +16,10 @@ import { calculateEffectiveCost, canAffordCost, buildPaymentPlan, payCost, payGo
 import { computeLevel, computeEffectiveBP, computeSymbols, canAttack, canBlock, pruneExpiredModifiers, isActionRestricted, getActiveStackKeywords } from './continuous.js';
 import { checkStateBasedActions, stabilizeGameState } from './sba.js';
 import { createDefaultKeywordRegistry } from './keywords/index.js';
-import { TimingWindowManager } from './windows.js';
+import { TimingWindowManager, RESPONSE_WINDOW_TYPES, RESPONSE_WINDOW_STATUS } from './windows.js';
+import { authorizeAction } from './action_authority.js';
+import { classifyCardType, validateCardPathway, ACTION_PATHWAYS } from './card_types.js';
+export { classifyCardType, validateCardPathway, ACTION_PATHWAYS };
 import { TriggerQueueManager } from './triggers.js';
 import { PromptManager } from './prompt_manager.js';
 import { InteractionController, INTERACTION_TYPES, INTERACTION_STATUS } from './interaction.js';
@@ -24,6 +27,24 @@ import { EXECUTION_MODES, PLAYER_CONTROL_TYPES, MatchContext, createMatchContext
 export { InteractionController, INTERACTION_TYPES, INTERACTION_STATUS, PromptManager, EXECUTION_MODES, PLAYER_CONTROL_TYPES, MatchContext, createMatchContext };
 import { matchesCardFilter } from './ops/index.js';
 import { evaluateRestriction, reserveRestriction, releaseReservation, RESTRICTION_STATUS, resetRestrictions, restoreRestrictionState } from './restrictions.js';
+import {
+  validateFlashTiming,
+  classifyFlashTiming,
+  FLASH_TIMING_QUALIFIERS,
+  FLASH_AVAILABILITY,
+  isGenericFlash,
+  isFlashAllowedInMainStep,
+  isFlashAllowedInAttackStep
+} from './flash_timing.js';
+export {
+  validateFlashTiming,
+  classifyFlashTiming,
+  FLASH_TIMING_QUALIFIERS,
+  FLASH_AVAILABILITY,
+  isGenericFlash,
+  isFlashAllowedInMainStep,
+  isFlashAllowedInAttackStep
+};
 import {
   evaluateBraveCondition,
   evaluateSummonCondition,
@@ -258,7 +279,8 @@ export function createGame(options = {}) {
   });
   const flow = new FlowController(state, events);
   const interactionController = options.interactionController || new InteractionController(state, events, {
-    automatedProvider: options.automatedProvider || null
+    automatedProvider: options.automatedProvider || null,
+    suspendOnRequest: Boolean(options.suspendOnInteraction)
   });
   if (interactionController && !interactionController.events) {
     interactionController.events = events;
@@ -275,22 +297,76 @@ export function createGame(options = {}) {
       promptManager.controller.events = events;
     }
   }
-  const defaultFallback = new DefaultPromptResolver();
+  const defaultFallback = new DefaultPromptResolver({
+    allowSimulation: !state.matchContext || state.matchContext.mode === EXECUTION_MODES.HEADLESS_SIMULATION
+  });
 
-  // If a custom promptResolver is passed (like AIDecider), use it; otherwise use interactionController, promptManager or DefaultPromptResolver
+  // Route decisions strictly by MatchContext ownership (Human UI vs AI Decider vs Headless Simulation)
   const resolverDelegate = options.promptResolver || {
+    getController: () => interactionController,
     choose: async (prompt) => {
-      // If AI is the chooser and an AI decider exists, route to AI decider
-      if (options.ai && prompt.chooser === 'opponent') {
-        return await options.ai.decide(prompt, state);
+      const chooser = prompt.decisionOwner || prompt.chooser || prompt.player || 'player';
+      const matchCtx = state.matchContext;
+      const enrichedPrompt = {
+        ...prompt,
+        decisionOwner: chooser,
+        executionMode: matchCtx ? matchCtx.mode : (prompt.executionMode || null),
+        controlType: matchCtx ? (matchCtx.players?.[chooser]?.controlType || null) : (prompt.controlType || null)
+      };
+
+      if (matchCtx && matchCtx.canAiDecide(chooser)) {
+        if (options.ai && options.ai.side === chooser) {
+          const aiDecision = await options.ai.decide(enrichedPrompt, state);
+          if (aiDecision !== null && aiDecision !== undefined) return aiDecision;
+        }
+        if (options.aiProviders && options.aiProviders[chooser]) {
+          const aiDecision = await options.aiProviders[chooser].decide(enrichedPrompt, state);
+          if (aiDecision !== null && aiDecision !== undefined) return aiDecision;
+        }
+        if (!matchCtx.canSimulate(chooser)) {
+          const err = new Error(`AI_DECISION_UNAVAILABLE: No AI decider available for "${chooser}" in mode "${matchCtx.mode}"`);
+          err.code = 'AI_DECISION_UNAVAILABLE';
+          throw err;
+        }
+      } else if (!matchCtx && options.ai && options.ai.side && chooser === options.ai.side) {
+        const aiDecision = await options.ai.decide(enrichedPrompt, state);
+        if (aiDecision !== null && aiDecision !== undefined) return aiDecision;
       }
+
       if (options.usePromptManager) {
-        return await promptManager.request(prompt);
+        return await promptManager.request(enrichedPrompt);
       }
+
+      const hasInteractionListener = Boolean(
+        interactionController.events?.listeners?.get('INTERACTION_REQUESTED')?.length > 0
+      );
+      const isHumanRoutable = Boolean(
+        options.interactive ||
+        options.automatedProvider ||
+        interactionController.suspendOnRequest ||
+        hasInteractionListener
+      );
+
+      if (matchCtx && matchCtx.isHuman(chooser)) {
+        if (!isHumanRoutable) {
+          const err = new Error(`HUMAN_INTERACTION_UNROUTABLE: Human-owned decision for "${chooser}" cannot be routed without an interactive controller, listener, or suspend handler`);
+          err.code = 'HUMAN_INTERACTION_UNROUTABLE';
+          throw err;
+        }
+        return await interactionController.request(enrichedPrompt);
+      }
+
       if (options.interactive || options.automatedProvider) {
-        return await interactionController.request(prompt);
+        return await interactionController.request(enrichedPrompt);
       }
-      return await defaultFallback.choose(prompt);
+
+      if (!matchCtx || matchCtx.canSimulate(chooser)) {
+        return await defaultFallback.choose(enrichedPrompt);
+      }
+
+      const err = new Error(`HUMAN_INTERACTION_UNROUTABLE: Unroutable decision for "${chooser}" in mode "${matchCtx.mode}"`);
+      err.code = 'HUMAN_INTERACTION_UNROUTABLE';
+      throw err;
     }
   };
 
@@ -315,7 +391,15 @@ export function createGame(options = {}) {
   }
 
   const game = {
-    state,
+    get state() {
+      return state;
+    },
+    set state(newState) {
+      state = newState;
+      if (flow) flow.state = newState;
+      if (interactionController) interactionController.state = newState;
+      if (promptManager) promptManager.state = newState;
+    },
     events,
     flow,
     resolver,
@@ -373,6 +457,33 @@ export function createGame(options = {}) {
       }
       if (!card) return { success: false, reason: 'CARD_NOT_IN_HAND' };
 
+      const cardClass = classifyCardType(card);
+      if (cardClass.category === 'UNKNOWN') {
+        return { success: false, reason: 'INVALID_CARD_TYPE', code: 'INVALID_CARD_TYPE', details: `Unknown card type "${card.type}"` };
+      }
+      if (options.pathway) {
+        const pathwayCheck = validateCardPathway(card, options.pathway);
+        if (!pathwayCheck.allowed) {
+          return { success: false, reason: pathwayCheck.reason, code: pathwayCheck.code, details: pathwayCheck.details };
+        }
+      }
+      if (options.braveTargetStackId && !cardClass.isBrave) {
+        return { success: false, reason: 'INVALID_CARD_TYPE', code: 'INVALID_CARD_TYPE', details: `Cannot Brave non-Brave card of type "${card.type}"` };
+      }
+      if (options.cores !== undefined && !cardClass.isUnit) {
+        return { success: false, reason: 'INVALID_CARD_TYPE', code: 'INVALID_CARD_TYPE', details: `Cannot summon/place cores on non-unit card of type "${card.type}"` };
+      }
+
+      const hasFlashCard = Boolean(
+        (card.compiledIr?.abilities || []).some(a => a.header?.isFlash) ||
+        (card.effect && /\[Flash\]|Flash/i.test(card.effect)) ||
+        options.timing === 'FLASH'
+      );
+      const auth = authorizeAction(this, playerSide, 'PLAY_CARD', { card, isFlash: hasFlashCard, options }, options);
+      if (!auth.allowed) {
+        return { success: false, reason: auth.reason, code: auth.code || auth.reason, details: auth.details };
+      }
+
       const strict = Boolean(state.strictRules || options.strictRules);
       if (strict) {
         if (state.step === 'MAIN') {
@@ -412,27 +523,47 @@ export function createGame(options = {}) {
         }
       }
 
-      if (card.type === 'Magic') {
+      if (cardClass.isMagic) {
         const hasMain = Boolean(
-          (card.compiledIr?.abilities || []).some(a => a.header?.isMain || String(a.header?.timing || '').toUpperCase() === 'MAIN') ||
+          (card.compiledIr?.abilities || []).some(a => a.header?.isMain || ['MAIN', 'MAIN_STEP'].includes(String(a.header?.timing || '').toUpperCase())) ||
           /(?:^|\s|\b)Main(?:\s*-\s*|:|\s*\()/i.test(card.effect || '')
         );
         const hasFlash = Boolean(
-          (card.compiledIr?.abilities || []).some(a => a.header?.isFlash || String(a.header?.timing || '').toUpperCase() === 'FLASH') ||
+          (card.compiledIr?.abilities || []).some(a => a.header?.isFlash || ['FLASH', 'ATTACK_STEP', 'FLASH_TIMING'].includes(String(a.header?.timing || '').toUpperCase())) ||
           /(?:^|\s|\b)Flash(?:\s*-\s*|:|\s*\()/i.test(card.effect || '') ||
           (card.effect && card.effect.includes('Flash'))
         );
 
-        if (state.step === 'ATTACK') {
+        const isVanillaMagic = !hasMain && !hasFlash;
+
+        if (state.step === 'ATTACK' || options.timing === 'FLASH' || (windows && typeof windows.isResponseWindowActive === 'function' && windows.isResponseWindowActive())) {
           if (!hasFlash && hasMain) {
             return { success: false, reason: 'CANNOT_PLAY_NON_FLASH_IN_ATTACK_STEP' };
           }
-        } else if (state.step === 'MAIN') {
-          if (hasFlash && !hasMain) {
-            return { success: false, reason: 'FLASH_ONLY_DURING_ATTACK_STEP' };
+          if (hasFlash || isVanillaMagic) {
+            const timingRes = validateFlashTiming(card, state, playerSide, options);
+            if (!timingRes.allowed) {
+              return { success: false, reason: timingRes.reason, code: timingRes.code };
+            }
           }
+        } else if (state.step === 'MAIN') {
           if (playerSide !== state.activePlayer) {
             return { success: false, reason: 'NOT_ACTIVE_PLAYER' };
+          }
+          // In Main Step, controller can play Main effect or generic Flash effect (Phase M.3.1)
+          const targetTiming = (options.timing || '').toUpperCase() || ((hasMain || isVanillaMagic) ? 'MAIN' : 'FLASH');
+          if (targetTiming === 'FLASH') {
+            if (!hasFlash && !isVanillaMagic) {
+              return { success: false, reason: 'CARD_HAS_NO_FLASH_EFFECT' };
+            }
+            const timingRes = validateFlashTiming(card, state, playerSide, options);
+            if (!timingRes.allowed) {
+              return { success: false, reason: timingRes.reason, code: timingRes.code };
+            }
+          } else if (targetTiming === 'MAIN') {
+            if (!hasMain && !isVanillaMagic) {
+              return { success: false, reason: 'CARD_HAS_NO_MAIN_EFFECT' };
+            }
           }
         } else if (state.step) {
           if (!options.bypassTiming) {
@@ -454,16 +585,16 @@ export function createGame(options = {}) {
       }
 
       // Check centralized SET_RESTRICTION / restriction modifiers
-      if ((card.type === 'Spirit' || card.type === 'Ultimate' || card.type === 'Brave') &&
+      if (cardClass.isUnit &&
           isActionRestricted(state, 'CANNOT_SUMMON', playerSide, card, { cardType: card.type, fromZone: 'hand', isCost: false })) {
         return { success: false, reason: 'SUMMON_RESTRICTED' };
       }
-      if (card.type === 'Spirit' || card.type === 'Ultimate' || card.type === 'Brave') {
+      if (cardClass.isUnit) {
         const summonCond = evaluateSummonCondition(state, card, playerSide);
         if (!summonCond.allowed) {
           return { success: false, reason: 'SUMMON_CONDITION_NOT_MET', details: summonCond.reason };
         }
-        if (card.type === 'Brave' && options.braveTargetStackId) {
+        if (cardClass.isBrave && options.braveTargetStackId) {
           const preTargetStack = p.field.find(st => st.id === options.braveTargetStackId) ||
             ['player', 'opponent'].flatMap(s => state.players[s]?.field || []).find(st => st.id === options.braveTargetStackId);
           if (!preTargetStack) {
@@ -475,19 +606,19 @@ export function createGame(options = {}) {
           }
         }
       }
-      if (card.type === 'Magic' && (
+      if (cardClass.isMagic && (
           isActionRestricted(state, 'CANNOT_USE_MAGIC', playerSide, card, { cardType: 'Magic', fromZone: 'hand', timingWindow: state.step }) ||
           (state.step === 'ATTACK' && isActionRestricted(state, 'PREVENT_FLASH_HAND', playerSide, card, { cardType: 'Magic', fromZone: 'hand', timingWindow: 'FLASH' }))
       )) {
         return { success: false, reason: 'MAGIC_RESTRICTED' };
       }
-      if (card.type && card.type.includes('Nexus') &&
+      if (cardClass.isNexus &&
           isActionRestricted(state, 'CANNOT_DEPLOY_NEXUS', playerSide, card, { cardType: card.type, fromZone: 'hand' })) {
         return { success: false, reason: 'NEXUS_RESTRICTED' };
       }
 
       // Timing check: During Attack Step, cannot summon spirits without Flash ability (R27)
-      if (state.step === 'ATTACK' && (card.type === 'Spirit' || card.type === 'Ultimate' || card.type === 'Brave')) {
+      if (state.step === 'ATTACK' && cardClass.isUnit) {
         const hasFlash = card.compiledIr && card.compiledIr.abilities && card.compiledIr.abilities.some(a => a.header.isFlash);
         if (!hasFlash && (!card.effect || !card.effect.includes('Flash'))) {
           return { success: false, reason: 'CANNOT_SUMMON_DURING_ATTACK_STEP' };
@@ -520,9 +651,9 @@ export function createGame(options = {}) {
 
       const abilityResults = [];
 
-      if (card.type === 'Spirit' || card.type === 'Ultimate' || card.type === 'Brave') {
+      if (cardClass.isUnit) {
         // Check if Brave is being braved directly onto an existing Spirit
-        if (card.type === 'Brave' && options.braveTargetStackId) {
+        if (cardClass.isBrave && options.braveTargetStackId) {
           const targetStack = p.field.find(st => st.id === options.braveTargetStackId);
           if (targetStack) {
             const braveCheck = evaluateBraveCondition(state, card, targetStack, playerSide, options);
@@ -552,7 +683,7 @@ export function createGame(options = {}) {
           }
         }
 
-        if (card.type !== 'Brave' || !options.braveTargetStackId) {
+        if (!cardClass.isBrave || !options.braveTargetStackId) {
           // Place on field with 1 core from reserve to satisfy LV1
           let lv1Normal = 1;
           let lv1Soul = 0;
@@ -569,7 +700,30 @@ export function createGame(options = {}) {
             lv1Soul = 0;
           }
 
-          const stack = createFieldStack(card, { normal: lv1Normal, soul: lv1Soul });
+          let extraNormal = 0;
+          let extraSoul = 0;
+          if (typeof options.cores === 'number' && options.cores > 1) {
+            const requestedExtra = options.cores - (lv1Normal + lv1Soul);
+            if (requestedExtra > 0) {
+              const totalAvailable = (p.reserve.normal || 0) + (p.reserve.soul || 0);
+              if (totalAvailable < requestedExtra) {
+                // Cannot afford requested cores! Rollback the lv1 core back to reserve
+                if (lv1Normal > 0) p.reserve.normal += lv1Normal;
+                if (lv1Soul > 0) p.reserve.soul += lv1Soul;
+                return { success: false, reason: 'INSUFFICIENT_CORES', code: 'INSUFFICIENT_CORES' };
+              }
+              const normalToTake = Math.min(requestedExtra, p.reserve.normal || 0);
+              p.reserve.normal -= normalToTake;
+              extraNormal = normalToTake;
+              const soulNeeded = requestedExtra - normalToTake;
+              if (soulNeeded > 0) {
+                p.reserve.soul -= soulNeeded;
+                extraSoul = soulNeeded;
+              }
+            }
+          }
+
+          const stack = createFieldStack(card, { normal: lv1Normal + extraNormal, soul: lv1Soul + extraSoul });
           p.field.push(stack);
           if (fromZone === 'hand') {
             p.hand = p.hand.filter(c => c.id !== card.id);
@@ -602,7 +756,7 @@ export function createGame(options = {}) {
             }
           }
         }
-      } else if (card.type === 'Nexus' || String(card.type || '').includes('Nexus')) {
+      } else if (cardClass.isNexus) {
         const nexusStack = createFieldStack(card, { normal: 0, soul: 0 });
         p.field.push(nexusStack);
         if (fromZone === 'hand') {
@@ -613,9 +767,34 @@ export function createGame(options = {}) {
         }
         card.isAccelRemoved = false;
         await events.emit({ type: 'DEPLOYED', card, stack: nexusStack, player: playerSide, cause: 'deploy', fromZone });
-      } else if (card.type === 'Magic') {
-        // Magic card resolution
-        await moveCard(state, card, 'grave', playerSide, { cause: 'magic_used', by: playerSide }, events);
+      } else if (cardClass.isMagic) {
+        // Magic card resolution: move to resolvingCards during resolution so it cannot be double-cast
+        if (fromZone === 'hand') {
+          p.hand = p.hand.filter(c => c.id !== card.id);
+        } else if (fromZone === 'removed') {
+          p.removed = (p.removed || []).filter(c => c.id !== card.id);
+          if (p.openCards) p.openCards = p.openCards.filter(c => c.id !== card.id);
+        }
+        card.isAccelRemoved = false;
+        if (!Array.isArray(state.resolvingCards)) state.resolvingCards = [];
+        state.resolvingCards.push(card);
+
+        const finalizeMagicDestination = async () => {
+          const rIdx = (state.resolvingCards || []).findIndex(c => c.id === card.id);
+          if (rIdx === -1) return null; // Already moved by an effect (e.g. summon self / return to hand)
+          state.resolvingCards.splice(rIdx, 1);
+
+          const effText = String(card.effect || card.raw_effect || '');
+          const shouldBanish = /banished from the game after (?:its|this) effect resolves|remove (?:this card )?from the game after (?:its|this) effect resolves|除外される/i.test(effText);
+          if (shouldBanish) {
+            p.removed.push(card);
+            await events.emit({ type: 'CARD_MOVED', card, from: 'resolving', to: 'removed', player: playerSide, cause: 'magic_banished' });
+            return 'removed';
+          }
+          p.grave.push(card);
+          await events.emit({ type: 'CARD_MOVED', card, from: 'resolving', to: 'grave', player: playerSide, cause: 'magic_used' });
+          return 'grave';
+        };
 
         // Check NEGATE_EFFECT modifiers
         const cardColors = Array.isArray(card.colors) ? card.colors : [card.color || 'Red'];
@@ -628,26 +807,63 @@ export function createGame(options = {}) {
         });
 
         if (isNegated) {
+          await finalizeMagicDestination();
           await events.emit({
             type: 'EFFECT_NEGATED',
             card,
             player: playerSide
           });
           await checkStateBasedActions(state, events);
-          return { success: true, card, costPaid: cost, negated: true, effectResolved: false, hasUnsupported: false, hasFailure: false, abilityResults: [] };
+          return { success: true, card, costPaid: cost, negated: true, effectResolved: false, hasUnsupported: false, hasFailure: false, abilityResults: [], finalDestination: 'grave' };
         }
 
         if (card.compiledIr && card.compiledIr.abilities) {
-          for (const ab of card.compiledIr.abilities) {
-            if (ab.header.isMain && state.step === 'MAIN') {
-              const abRes = await resolver.resolveAbility(state, ab, { controller: playerSide, sourceCard: card, soulCoreUsed: payRes.soulCoreUsed }, events);
-              abilityResults.push(abRes);
-            } else if (ab.header.isFlash && state.step === 'ATTACK') {
-              const abRes = await resolver.resolveAbility(state, ab, { controller: playerSide, sourceCard: card }, events);
-              abilityResults.push(abRes);
+          const cardHasMain = (card.compiledIr.abilities || []).some(a =>
+            a.header?.isMain || ['MAIN', 'MAIN_STEP'].includes(String(a.header?.timing || '').toUpperCase())
+          );
+          const selectedTiming = (options.timing || '').toUpperCase() || (state.step === 'ATTACK' ? 'FLASH' : (cardHasMain ? 'MAIN' : 'FLASH'));
+
+          const matchingAbilities = card.compiledIr.abilities.filter(ab => {
+            const t = String(ab.header?.timing || '').toUpperCase();
+            const isMainAb = Boolean(ab.header?.isMain || t === 'MAIN' || t === 'MAIN_STEP');
+            const isFlashAb = Boolean(ab.header?.isFlash || t === 'FLASH' || t === 'ATTACK_STEP' || t === 'FLASH_TIMING');
+            if (selectedTiming === 'MAIN' && state.step === 'MAIN' && isMainAb) return true;
+            if (selectedTiming === 'FLASH' && isFlashAb) return true;
+            return false;
+          });
+
+          for (let ai = 0; ai < matchingAbilities.length; ai++) {
+            const ab = matchingAbilities[ai];
+            const remainingAbilities = matchingAbilities.slice(ai + 1);
+            const abRes = await resolver.resolveAbility(state, ab, {
+              controller: playerSide,
+              sourceCard: card,
+              soulCoreUsed: payRes.soulCoreUsed,
+              _remainingAbilities: remainingAbilities,
+              _magicResolution: { cardId: card.id, playerSide, costPaid: cost, soulCoreUsed: payRes.soulCoreUsed }
+            }, events);
+            abilityResults.push(abRes);
+            if (abRes && abRes.suspended) {
+              return {
+                success: true,
+                suspended: true,
+                status: 'AWAITING_INTERACTION',
+                interactionId: abRes.interactionId,
+                interaction: abRes.interaction,
+                card,
+                costPaid: cost,
+                abilityResults
+              };
             }
           }
         }
+
+        const finalDestination = await finalizeMagicDestination();
+        await checkStateBasedActions(state, events);
+        const hasUnsupported = abilityResults.some(r => r && r.hasUnsupported);
+        const hasFailure = abilityResults.some(r => r && r.hasFailure);
+        const effectResolved = abilityResults.length === 0 || abilityResults.every(r => r && r.success !== false);
+        return { success: true, card, costPaid: cost, effectResolved, hasUnsupported, hasFailure, abilityResults, finalDestination };
       }
 
       await checkStateBasedActions(state, events);
@@ -657,7 +873,150 @@ export function createGame(options = {}) {
       return { success: true, card, costPaid: cost, effectResolved, hasUnsupported, hasFailure, abilityResults };
     },
 
-    async activateAbility(cardId, abilityId, playerSide = 'player') {
+    async summonUnit(cardId, payment = [], playerSide = 'player', options = {}) {
+      return await this.playCard(cardId, payment, playerSide, { ...options, pathway: ACTION_PATHWAYS.SUMMON });
+    },
+
+    async deployNexus(cardId, payment = [], playerSide = 'player', options = {}) {
+      return await this.playCard(cardId, payment, playerSide, { ...options, pathway: ACTION_PATHWAYS.DEPLOY_NEXUS });
+    },
+
+    async activateMagic(cardId, payment = [], playerSide = 'player', options = {}) {
+      return await this.playCard(cardId, payment, playerSide, { ...options, pathway: ACTION_PATHWAYS.ACTIVATE_MAGIC });
+    },
+
+    async resumeExecution(interactionId, validatedResponse) {
+      const execList = state.pendingExecutions || [];
+      const execIdx = execList.findIndex(e => e.interactionId === interactionId);
+      if (execIdx === -1) {
+        return { success: false, reason: 'NO_PENDING_EXECUTION', interactionId };
+      }
+      const exec = execList.splice(execIdx, 1)[0];
+      const playerSide = exec.controller || 'player';
+      const p = state.players[playerSide];
+
+      const findCardById = (cid) => {
+        if (!cid) return null;
+        const fromResolving = (state.resolvingCards || []).find(c => c.id === cid);
+        if (fromResolving) return fromResolving;
+        for (const s of ['player', 'opponent']) {
+          const sp = state.players[s];
+          if (!sp) continue;
+          for (const z of ['grave', 'hand', 'removed', 'deck']) {
+            const found = (sp[z] || []).find(c => c.id === cid);
+            if (found) return found;
+          }
+          for (const st of sp.field || []) {
+            if (st.top?.id === cid) return st.top;
+          }
+          if (sp.burst?.id === cid) return sp.burst;
+          if (sp.mirage?.id === cid) return sp.mirage;
+        }
+        return null;
+      };
+
+      const sourceCard = findCardById(exec.sourceCardId);
+      const sourceStack = exec.sourceStackId
+        ? (p?.field || []).find(st => st.id === exec.sourceStackId) || null
+        : null;
+
+      const abilityResults = [];
+      const res = await resolver.resolveAbility(state, exec.ability, {
+        controller: playerSide,
+        sourceCard,
+        sourceStack,
+        soulCoreUsed: Boolean(exec.soulCoreUsed),
+        _remainingAbilities: exec.remainingAbilities || [],
+        _magicResolution: exec.magicResolution || null,
+        _resume: {
+          phase: exec.phase,
+          clauseIndex: exec.clauseIndex,
+          priorResponses: exec.priorResponses || [],
+          latestResponse: validatedResponse,
+          previousResult: exec.previousResult || null,
+          chosenBranch: exec.chosenBranch || null,
+          results: exec.results || [],
+          selectedTargets: exec.selectedTargets || [],
+          previousTargets: exec.previousTargets || [],
+          previousTarget: exec.previousTarget || null,
+          revealedCards: exec.revealedCards || [],
+          isCommitted: Boolean(exec.isCommitted)
+        }
+      }, events);
+
+      abilityResults.push(res);
+      if (res && res.suspended) {
+        return {
+          success: true,
+          suspended: true,
+          status: 'AWAITING_INTERACTION',
+          interactionId: res.interactionId,
+          interaction: res.interaction,
+          abilityResults
+        };
+      }
+
+      const remaining = Array.isArray(exec.remainingAbilities) ? exec.remainingAbilities : [];
+      for (let ai = 0; ai < remaining.length; ai++) {
+        const nextAb = remaining[ai];
+        const nextRemaining = remaining.slice(ai + 1);
+        const nextRes = await resolver.resolveAbility(state, nextAb, {
+          controller: playerSide,
+          sourceCard,
+          sourceStack,
+          soulCoreUsed: Boolean(exec.soulCoreUsed),
+          _remainingAbilities: nextRemaining,
+          _magicResolution: exec.magicResolution || null
+        }, events);
+        abilityResults.push(nextRes);
+        if (nextRes && nextRes.suspended) {
+          return {
+            success: true,
+            suspended: true,
+            status: 'AWAITING_INTERACTION',
+            interactionId: nextRes.interactionId,
+            interaction: nextRes.interaction,
+            abilityResults
+          };
+        }
+      }
+
+      let finalDestination = null;
+      if (exec.magicResolution && sourceCard) {
+        const rIdx = (state.resolvingCards || []).findIndex(c => c.id === sourceCard.id);
+        if (rIdx !== -1) {
+          state.resolvingCards.splice(rIdx, 1);
+          const effText = String(sourceCard.effect || sourceCard.raw_effect || '');
+          const shouldBanish = /banished from the game after (?:its|this) effect resolves|remove (?:this card )?from the game after (?:its|this) effect resolves|除外される/i.test(effText);
+          if (shouldBanish) {
+            p.removed.push(sourceCard);
+            finalDestination = 'removed';
+            await events.emit({ type: 'CARD_MOVED', card: sourceCard, from: 'resolving', to: 'removed', player: playerSide, cause: 'magic_banished' });
+          } else {
+            p.grave.push(sourceCard);
+            finalDestination = 'grave';
+            await events.emit({ type: 'CARD_MOVED', card: sourceCard, from: 'resolving', to: 'grave', player: playerSide, cause: 'magic_used' });
+          }
+        }
+      }
+
+      await checkStateBasedActions(state, events);
+      const hasUnsupported = abilityResults.some(r => r && r.hasUnsupported);
+      const hasFailure = abilityResults.some(r => r && r.hasFailure);
+      const effectResolved = abilityResults.every(r => r && r.success !== false);
+      return {
+        success: true,
+        completed: true,
+        resumed: true,
+        effectResolved,
+        hasUnsupported,
+        hasFailure,
+        finalDestination,
+        abilityResults
+      };
+    },
+
+    async activateAbility(cardId, abilityId, playerSide = 'player', options = {}) {
       const p = state.players[playerSide];
       const stack = p.field.find(st => st.top.id === cardId);
       if (!stack) return { success: false, activated: false, isCommitted: false, reason: 'CARD_NOT_ON_FIELD' };
@@ -701,8 +1060,19 @@ export function createGame(options = {}) {
       const timingLabel = String(ability.header?.timingLabel || '').toLowerCase();
       const mainTiming = timing === 'MAIN' || timing === 'MAIN_STEP' || timing === 'MAIN_SKILL' || Boolean(ability.header?.isMain);
       const flashTiming = timing === 'FLASH' || timing === 'ATTACK_STEP' || timing === 'FLASH_TIMING' || Boolean(ability.header?.isFlash) || timingLabel.includes('flash');
+
+      const isFlash = flashTiming;
+      const auth = authorizeAction(this, playerSide, isFlash ? 'ACTIVATE_FLASH_ABILITY' : 'ACTIVATE_ABILITY', { cardId, ability, isFlash, options }, options);
+      if (!auth.allowed) {
+        return { success: false, activated: false, isCommitted: false, reason: auth.reason, code: auth.code || auth.reason, details: auth.details };
+      }
       if (mainTiming && !flashTiming && state.step !== 'MAIN') return { success: false, activated: false, isCommitted: false, reason: 'ABILITY_TIMING_MISMATCH', code: 'MAIN_ONLY_DURING_MAIN_STEP', details: 'ABILITY_TIMING_MISMATCH' };
-      if (flashTiming && !mainTiming && state.step !== 'ATTACK') return { success: false, activated: false, isCommitted: false, reason: 'ABILITY_TIMING_MISMATCH', code: 'FLASH_ONLY_DURING_ATTACK_STEP', details: 'ABILITY_TIMING_MISMATCH' };
+      if (flashTiming) {
+        const timingRes = validateFlashTiming(ability, state, playerSide, options);
+        if (!timingRes.allowed) {
+          return { success: false, activated: false, isCommitted: false, reason: timingRes.reason, code: timingRes.code, details: timingRes.details || 'ABILITY_TIMING_MISMATCH' };
+        }
+      }
       if (state.step === 'MAIN' && ((ability.clauses || []).some(c => c.op?.op === 'RESTRICT_MAIN_STEP') ||
           isActionRestricted(state, 'RESTRICT_MAIN_STEP', playerSide, stack, { ability, timingWindow: state.step }))) {
         return { success: false, activated: false, isCommitted: false, reason: 'RESTRICTED_IN_MAIN_STEP' };
@@ -776,11 +1146,41 @@ export function createGame(options = {}) {
       }
       if (!card) return { success: false, reason: 'CARD_NOT_IN_HAND' };
 
+      const cardClass = classifyCardType(card);
+      if (cardClass.category === 'UNKNOWN') {
+        return { success: false, reason: 'INVALID_CARD_TYPE', code: 'INVALID_CARD_TYPE', details: `Unknown card type "${card.type}"` };
+      }
+      if (options.pathway) {
+        const pathwayCheck = validateCardPathway(card, options.pathway);
+        if (!pathwayCheck.allowed) {
+          return { success: false, reason: pathwayCheck.reason, code: pathwayCheck.code, details: pathwayCheck.details };
+        }
+      }
+      if (options.braveTargetStackId && !cardClass.isBrave) {
+        return { success: false, reason: 'INVALID_CARD_TYPE', code: 'INVALID_CARD_TYPE', details: `Cannot Brave non-Brave card of type "${card.type}"` };
+      }
+      if (options.cores !== undefined && !cardClass.isUnit) {
+        return { success: false, reason: 'INVALID_CARD_TYPE', code: 'INVALID_CARD_TYPE', details: `Cannot summon/place cores on non-unit card of type "${card.type}"` };
+      }
+
+      const hasFlashCard = Boolean(
+        (card.compiledIr?.abilities || []).some(a => a.header?.isFlash) ||
+        (card.effect && /\[Flash\]|Flash/i.test(card.effect))
+      );
+      const auth = authorizeAction(this, playerSide, 'SET_BURST', { card, isFlash: hasFlashCard });
+      if (!auth.allowed) {
+        return { success: false, reason: auth.reason, code: auth.code || auth.reason, details: auth.details };
+      }
+
       await moveCard(state, card, 'burst', playerSide, { cause: 'set_burst' }, events);
       return { success: true, burstCard: card };
     },
 
     async transferCore(count, from, to, playerSide = 'player') {
+      const auth = authorizeAction(this, playerSide, 'TRANSFER_CORE', { count, from, to });
+      if (!auth.allowed) {
+        return { success: false, reason: auth.reason, code: auth.code || auth.reason, details: auth.details };
+      }
       if (state.winner) return { success: false, reason: 'GAME_ALREADY_OVER' };
       if (state.step !== 'MAIN') return { success: false, reason: 'TRANSFER_ONLY_IN_MAIN_STEP' };
       if (playerSide !== state.activePlayer) return { success: false, reason: 'NOT_ACTIVE_PLAYER' };
@@ -808,7 +1208,11 @@ export function createGame(options = {}) {
       return { success: true };
     },
 
-    async separateBrave(hostStackId, braveCardId = null, coresFromReserve = 1, playerSide = 'player') {
+    async separateBrave(hostStackId, braveCardId = null, coresFromReserve = 1, playerSide = 'player', options = {}) {
+      const auth = authorizeAction(this, playerSide, 'SEPARATE_BRAVE', { hostStackId, braveCardId, options }, options);
+      if (!auth.allowed) {
+        return { success: false, reason: auth.reason, code: auth.code || auth.reason, details: auth.details };
+      }
       const p = state.players[playerSide];
       if (!p) return { success: false, reason: 'INVALID_PLAYER' };
       const hostStack = p.field.find(st => st.id === hostStackId);
@@ -924,6 +1328,11 @@ export function createGame(options = {}) {
       const p = state.players[playerSide];
       if (!p) return { success: false, reason: 'INVALID_PLAYER' };
 
+      const auth = authorizeAction(this, playerSide, 'ATTACK', { stackId });
+      if (!auth.allowed) {
+        return { success: false, reason: auth.reason, code: auth.code || auth.reason, details: auth.details };
+      }
+
       if (state.strictRules) {
         if (state.step !== 'ATTACK') return { success: false, reason: 'ATTACK_ONLY_IN_ATTACK_STEP' };
         if (playerSide !== state.activePlayer) return { success: false, reason: 'NOT_ACTIVE_PLAYER' };
@@ -995,9 +1404,35 @@ export function createGame(options = {}) {
       if (!state.combat) {
         const attackRes = await endAttack(state, events);
         if (attackRes && !attackRes.success) return attackRes;
+      } else if (windows && (state.step === 'ATTACK' || options.useResponseWindows)) {
+        const defenderSide = playerSide === 'player' ? 'opponent' : 'player';
+        const initialPriority = state.combat.flashPriority || defenderSide;
+        await windows.openWindow({
+          windowType: RESPONSE_WINDOW_TYPES.FLASH_1,
+          timing: 'FIRST_FLASH_TIMING',
+          attackerStackId: stackId,
+          attackerSide: playerSide,
+          defenderSide,
+          priorityPlayer: initialPriority
+        });
       }
 
-      return { success: true, combat: state.combat };
+      return { success: true, combat: state.combat, stage: state.combat?.stage, flashPriority: state.combat?.flashPriority };
+    },
+
+    async passPriority(playerSide) {
+      if (windows && typeof windows.submitResponse === 'function') {
+        const res = await windows.submitResponse({ action: 'PASS' }, { responder: playerSide });
+        return {
+          success: res.success,
+          closed: res.closed,
+          windowClosed: res.closed,
+          nextPriority: res.nextPriority,
+          consecutivePasses: res.consecutivePasses,
+          reason: res.reason
+        };
+      }
+      return { success: false, reason: 'NO_RESPONSE_WINDOW' };
     },
 
     async declareBlock(blockerStackId, blockerSide = 'opponent') {
@@ -1006,6 +1441,16 @@ export function createGame(options = {}) {
       const expectedAttackerSide = state.combat.attackerSide || (blockerSide === 'opponent' ? 'player' : 'opponent');
       if (blockerSide === expectedAttackerSide) {
         return { success: false, reason: 'CANNOT_BLOCK_OWN_ATTACK' };
+      }
+
+      if (windows && typeof windows.isResponseWindowActive === 'function' && windows.isResponseWindowActive()) {
+        const curWin = windows.getCurrentWindow();
+        if (curWin && curWin.windowType === RESPONSE_WINDOW_TYPES.BLOCK_DECLARATION) {
+          return await windows.handleBlockDeclaration({ stackId: blockerStackId, blockerStackId }, blockerSide);
+        }
+        if (curWin && (curWin.windowType === RESPONSE_WINDOW_TYPES.FLASH_1 || curWin.windowType === RESPONSE_WINDOW_TYPES.FLASH_2 || curWin.windowType === RESPONSE_WINDOW_TYPES.FLASH)) {
+          return { success: false, reason: 'FLASH_TIMING_NOT_CLOSED', code: 'FLASH_TIMING_NOT_CLOSED' };
+        }
       }
 
       const p = state.players[blockerSide];
@@ -1147,6 +1592,13 @@ export function createGame(options = {}) {
       if (!state.combat) return { success: false, reason: 'NOT_IN_COMBAT' };
       if (state.combat.blockerStackId) return { success: false, reason: 'ALREADY_BLOCKED' };
 
+      if (windows && typeof windows.isResponseWindowActive === 'function' && windows.isResponseWindowActive()) {
+        const curWin = windows.getCurrentWindow();
+        if (curWin && (curWin.windowType === RESPONSE_WINDOW_TYPES.BLOCK_DECLARATION || curWin.windowType === RESPONSE_WINDOW_TYPES.FLASH_1 || curWin.windowType === RESPONSE_WINDOW_TYPES.FLASH_2 || curWin.windowType === RESPONSE_WINDOW_TYPES.FLASH)) {
+          return { success: false, reason: 'BLOCK_DECISION_REQUIRED', code: 'BLOCK_DECISION_REQUIRED' };
+        }
+      }
+
       const defenderSide = attackerSide === 'player' ? 'opponent' : 'player';
       const defPlayer = state.players[defenderSide];
       const attackerStack = state.players[attackerSide]?.field.find(st => st.id === state.combat.attackerStackId) || null;
@@ -1247,6 +1699,10 @@ export function createGame(options = {}) {
     },
 
     async setMirage(cardId, playerSide = 'player', options = {}) {
+      const auth = authorizeAction(this, playerSide, 'SET_MIRAGE', { cardId, options }, options);
+      if (!auth.allowed) {
+        return { success: false, reason: auth.reason, code: auth.code || auth.reason, details: auth.details };
+      }
       return await setMirageFromHand(state, playerSide, cardId, options, events);
     },
 
@@ -1265,6 +1721,33 @@ export function createGame(options = {}) {
       const card = (p.hand || []).find(c => c.id === cardId || c.cardNumber === cardId) ||
         (options.allowDirectCard && typeof cardOrId === 'object' ? cardOrId : null);
       if (!card) return { success: false, reason: 'CARD_NOT_IN_HAND' };
+
+      const cardClass = classifyCardType(card);
+      if (cardClass.category === 'UNKNOWN') {
+        return { success: false, reason: 'INVALID_CARD_TYPE', code: 'INVALID_CARD_TYPE', details: `Unknown card type "${card.type}"` };
+      }
+      if (options.pathway) {
+        const pathwayCheck = validateCardPathway(card, options.pathway);
+        if (!pathwayCheck.allowed) {
+          return { success: false, reason: pathwayCheck.reason, code: pathwayCheck.code, details: pathwayCheck.details };
+        }
+      }
+      if (options.braveTargetStackId && !cardClass.isBrave) {
+        return { success: false, reason: 'INVALID_CARD_TYPE', code: 'INVALID_CARD_TYPE', details: `Cannot Brave non-Brave card of type "${card.type}"` };
+      }
+      if (options.cores !== undefined && !cardClass.isUnit) {
+        return { success: false, reason: 'INVALID_CARD_TYPE', code: 'INVALID_CARD_TYPE', details: `Cannot summon/place cores on non-unit card of type "${card.type}"` };
+      }
+
+      const hasFlashCard = Boolean(
+        (card.compiledIr?.abilities || []).some(a => a.header?.isFlash) ||
+        (card.effect && /\[Flash\]|Flash/i.test(card.effect)) ||
+        options.timing === 'FLASH'
+      );
+      const auth = authorizeAction(this, playerSide, 'PLAY_CARD', { card, isFlash: hasFlashCard, options }, options);
+      if (!auth.allowed) {
+        return { success: false, reason: auth.reason, code: auth.code || auth.reason, details: auth.details };
+      }
 
       const targetStack = (p.field || []).find(st => st.id === targetStackId || st.top?.id === targetStackId);
       if (!targetStack) {
@@ -1415,24 +1898,37 @@ export function createGame(options = {}) {
         /(?:^|\s|\b)Main(?:\s*-\s*|:|\s*\()/i.test(effectText)
       );
 
+      const auth = authorizeAction(this, playerSide, hasFlash ? 'USE_ACCEL' : 'EXECUTE_ACCEL', { card, isFlash: hasFlash, options }, options);
+      if (!auth.allowed) {
+        return { success: false, reason: auth.reason, code: auth.code || auth.reason, details: auth.details };
+      }
+
       if (!options.bypassTiming) {
-        if (hasFlash && !hasMain) {
-          if (state.step !== 'ATTACK') {
-            return { success: false, reason: 'FLASH_ONLY_DURING_ATTACK_STEP' };
+        const targetTiming = (options.timing || '').toUpperCase() || (state.step === 'ATTACK' ? 'FLASH' : (hasMain ? 'MAIN' : 'FLASH'));
+
+        if (targetTiming === 'FLASH') {
+          if (!hasFlash && hasMain) {
+            return { success: false, reason: 'MAIN_ONLY_DURING_MAIN_STEP' };
           }
-        } else if (hasMain && !hasFlash) {
+          const timingRes = validateFlashTiming(card, state, playerSide, options);
+          if (!timingRes.allowed) {
+            return {
+              success: false,
+              reason: timingRes.reason || timingRes.code || 'TIMING_NOT_SATISFIED',
+              code: timingRes.code,
+              details: timingRes.reason,
+              timingSpec: timingRes.specification || timingRes.spec
+            };
+          }
+        } else if (targetTiming === 'MAIN') {
           if (state.step !== 'MAIN') {
             return { success: false, reason: 'MAIN_ONLY_DURING_MAIN_STEP' };
           }
           if (playerSide !== state.activePlayer) {
             return { success: false, reason: 'NOT_ACTIVE_PLAYER' };
           }
-        } else if (hasFlash && hasMain) {
-          if (state.step !== 'MAIN' && state.step !== 'ATTACK') {
-            return { success: false, reason: 'INVALID_TIMING_FOR_ACCEL' };
-          }
-          if (state.step === 'MAIN' && playerSide !== state.activePlayer) {
-            return { success: false, reason: 'NOT_ACTIVE_PLAYER' };
+          if (!hasMain && hasFlash) {
+            return { success: false, reason: 'CARD_HAS_NO_MAIN_EFFECT' };
           }
         } else {
           if (state.step !== 'MAIN' && state.step !== 'ATTACK') {
@@ -1442,6 +1938,14 @@ export function createGame(options = {}) {
             return { success: false, reason: 'NOT_ACTIVE_PLAYER' };
           }
         }
+      }
+
+      if (options.timing === 'FLASH') {
+        const flashOnly = accelAbList.filter(ab => ab?.header?.isFlash || String(ab?.header?.timing || '').toUpperCase() === 'FLASH');
+        if (flashOnly.length > 0) accelAbList = flashOnly;
+      } else if (options.timing === 'MAIN') {
+        const mainOnly = accelAbList.filter(ab => ab?.header?.isMain || String(ab?.header?.timing || '').toUpperCase() === 'MAIN');
+        if (mainOnly.length > 0) accelAbList = mainOnly;
       }
 
       // 4. Centralized Restrictions
@@ -1515,6 +2019,33 @@ export function createGame(options = {}) {
       const cardId = typeof cardOrId === 'string' ? cardOrId : cardOrId?.id;
       const card = (p.hand || []).find(c => c.id === cardId || c.cardNumber === cardId);
       if (!card) return { success: false, reason: 'CARD_NOT_IN_HAND' };
+
+      const cardClass = classifyCardType(card);
+      if (cardClass.category === 'UNKNOWN') {
+        return { success: false, reason: 'INVALID_CARD_TYPE', code: 'INVALID_CARD_TYPE', details: `Unknown card type "${card.type}"` };
+      }
+      if (options.pathway) {
+        const pathwayCheck = validateCardPathway(card, options.pathway);
+        if (!pathwayCheck.allowed) {
+          return { success: false, reason: pathwayCheck.reason, code: pathwayCheck.code, details: pathwayCheck.details };
+        }
+      }
+      if (options.braveTargetStackId && !cardClass.isBrave) {
+        return { success: false, reason: 'INVALID_CARD_TYPE', code: 'INVALID_CARD_TYPE', details: `Cannot Brave non-Brave card of type "${card.type}"` };
+      }
+      if (options.cores !== undefined && !cardClass.isUnit) {
+        return { success: false, reason: 'INVALID_CARD_TYPE', code: 'INVALID_CARD_TYPE', details: `Cannot summon/place cores on non-unit card of type "${card.type}"` };
+      }
+
+      const hasFlashCard = Boolean(
+        (card.compiledIr?.abilities || []).some(a => a.header?.isFlash) ||
+        (card.effect && /\[Flash\]|Flash/i.test(card.effect)) ||
+        options.timing === 'FLASH'
+      );
+      const auth = authorizeAction(this, playerSide, 'PLAY_CARD', { card, isFlash: hasFlashCard, options }, options);
+      if (!auth.allowed) {
+        return { success: false, reason: auth.reason, code: auth.code || auth.reason, details: auth.details };
+      }
 
       let swapStack = null;
       if (swapStackId) {

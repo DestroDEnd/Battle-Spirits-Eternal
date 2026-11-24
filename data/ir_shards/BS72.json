@@ -1799,7 +1799,6 @@
     "keywords": [],
     "abilities": [
       {
-        "id": "BS72-052#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_71de0df8a9d0ee7ce93419bba47f52b4284e707439bf16d33f27b96894e6c69c_f4c430e91deb5c6cfa3cb39373d175c4",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -1810,20 +1809,34 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_SUMMONED",
+          "timings": [
+            "WHEN_SUMMONED"
+          ],
           "timingLabel": "When Summoned",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Draw two cards, then discard two cards from your Hand. If you or the opponent controls any heavily exhausted Spirit/Ultimate/Nexus/Grandwalker Nexus, this effect discards -1 card."
         },
+        "originalAbilityText": "[LV1][LV2][LV3] (When Summoned)\nDraw two cards, then discard two cards from your Hand. If you or the opponent controls any heavily exhausted Spirit/Ultimate/Nexus/Grandwalker Nexus, this effect discards -1 card.",
+        "abilityIndex": 0,
         "clauses": [
           {
-            "rawText": "Draw two cards, then discard two cards from your Hand.",
-            "cleanText": "Draw two cards, then discard two cards from your Hand",
+            "rawText": "Draw two cards",
+            "originalClauseText": "Draw two cards",
+            "cleanText": "Draw two cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -1837,25 +1850,64 @@
             }
           },
           {
+            "rawText": "discard two cards from your Hand.",
+            "originalClauseText": "discard two cards from your Hand.",
+            "cleanText": "discard two cards from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 2,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
+          },
+          {
             "rawText": "If you or the opponent controls any heavily exhausted Spirit/Ultimate/Nexus/Grandwalker Nexus, this effect discards -1 card.",
+            "originalClauseText": "If you or the opponent controls any heavily exhausted Spirit/Ultimate/Nexus/Grandwalker Nexus, this effect discards -1 card.",
             "cleanText": "this effect discards -1 card",
+            "clauseIndex": 2,
             "link": null,
             "isOptional": false,
             "isCost": false,
             "condition": "If you or the opponent controls any heavily exhausted Spirit/Ultimate/Nexus/Grandwalker Nexus",
             "duration": null,
             "op": {
-              "op": "MODIFY_EFFECT"
+              "op": "MODIFY_EFFECT",
+              "side": "self",
+              "param": "count",
+              "delta": -1,
+              "targetEffect": "discard"
             }
           }
         ],
         "unsupported": [],
         "legacyId": "BS72-052#a0",
-        "physicalId": "BS72-052#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_71de0df8a9d0ee7ce93419bba47f52b4284e707439bf16d33f27b96894e6c69c_f4c430e91deb5c6cfa3cb39373d175c4",
-        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_71de0df8a9d0ee7ce93419bba47f52b4284e707439bf16d33f27b96894e6c69c_f4c430e91deb5c6cfa3cb39373d175c4"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS72-052#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_b08f06f804466f79a4fbc64f8ac8caf36f79e9f93963f24537ed671b942292e1_dce49053a4b12b149488c81df352ff2f",
+        "physicalId": "BS72-052#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_b08f06f804466f79a4fbc64f8ac8caf36f79e9f93963f24537ed671b942292e1_dce49053a4b12b149488c81df352ff2f",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_b08f06f804466f79a4fbc64f8ac8caf36f79e9f93963f24537ed671b942292e1_dce49053a4b12b149488c81df352ff2f",
+        "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_7025d3fcf215d41f45a796a5475a664e560858552f04a8977afd06d8dfa066dd_8f1f4b370e5bdc78cd2aa393034787cf",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS72-052#AB_ATTACK_STEP_NONE_LV2_LV3_3049a01e68b9fb73abc2895db94c77fdbc5c1fc48d70f68ef5d3513fcd0a74fe_0e1b46bb6e086a196ac7f2242432d69a",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -1865,20 +1917,34 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "ATTACK_STEP",
+          "timings": [
+            "ATTACK_STEP"
+          ],
           "timingLabel": "Either Attack Step",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "EITHER",
+          "timingTriggers": [
+            "ATTACK_STEP"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "When your \"Roaring Azure\" family Spirit heavy exhausts, you can heavy exhaust an opposing refreshed Spirit/Ultimate/Nexus/Grandwalker Nexus."
         },
+        "originalAbilityText": "[LV2][LV3] (Either Attack Step)\nWhen your \"Roaring Azure\" family Spirit heavy exhausts, you can heavy exhaust an opposing refreshed Spirit/Ultimate/Nexus/Grandwalker Nexus.",
+        "abilityIndex": 1,
         "clauses": [
           {
             "rawText": "When your \"Roaring Azure\" family Spirit heavy exhausts, you can heavy exhaust an opposing refreshed Spirit/Ultimate/Nexus/Grandwalker Nexus.",
+            "originalClauseText": "When your \"Roaring Azure\" family Spirit heavy exhausts, you can heavy exhaust an opposing refreshed Spirit/Ultimate/Nexus/Grandwalker Nexus.",
             "cleanText": "When your \"Roaring Azure\" family Spirit heavy exhausts, you can heavy exhaust an opposing refreshed Spirit/Ultimate/Nexus/Grandwalker Nexus",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": true,
             "isCost": false,
@@ -1886,19 +1952,40 @@
             "duration": null,
             "op": {
               "op": "EXHAUST",
+              "count": 1,
               "target": {
-                "side": "either"
+                "side": "opp",
+                "types": [
+                  "Spirit",
+                  "Ultimate"
+                ]
               }
             }
           }
         ],
         "unsupported": [],
         "legacyId": "BS72-052#a1",
-        "physicalId": "BS72-052#AB_ATTACK_STEP_NONE_LV2_LV3_3049a01e68b9fb73abc2895db94c77fdbc5c1fc48d70f68ef5d3513fcd0a74fe_0e1b46bb6e086a196ac7f2242432d69a",
-        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_3049a01e68b9fb73abc2895db94c77fdbc5c1fc48d70f68ef5d3513fcd0a74fe_0e1b46bb6e086a196ac7f2242432d69a"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS72-052#AB_ATTACK_STEP_NONE_LV2_LV3_e297a8e0db1bcac984cb85abc66be552834f4b9cfa2bcc8311a0879e25b55282_ca6de41da7d2038185ec23d62c6b1675",
+        "physicalId": "BS72-052#AB_ATTACK_STEP_NONE_LV2_LV3_e297a8e0db1bcac984cb85abc66be552834f4b9cfa2bcc8311a0879e25b55282_ca6de41da7d2038185ec23d62c6b1675",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_e297a8e0db1bcac984cb85abc66be552834f4b9cfa2bcc8311a0879e25b55282_ca6de41da7d2038185ec23d62c6b1675",
+        "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_LV3_07d0c717bd8d862602ee0696f7bbc362209e43089647d87fae474fc214fa597a_7bd24135c2b73ecf31112c1fa66feb8d",
+        "timingSemantics": {
+          "timingOwner": "EITHER",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "ATTACK_STEP"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 3,
+    "compiledClausesCount": 4,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },
@@ -8454,7 +8541,6 @@
     "keywords": [],
     "abilities": [
       {
-        "id": "BS72-049#AB_WHEN_SUMMONED_NONE_LV1_LV2_fa08a2fabdcebdbc07f744dcbd7c801738c1f6abd182e56056ab239636e8117f_a39bbb3b1965a7255fd2d65e78264f7b",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -8464,20 +8550,36 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_SUMMONED",
+          "timings": [
+            "WHEN_SUMMONED",
+            "WHEN_ATTACKS"
+          ],
           "timingLabel": "When Summoned/Attacks",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS",
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Draw a card, then discard a card from your Hand."
         },
+        "originalAbilityText": "[LV1][LV2] (When Summoned/Attacks)\nDraw a card, then discard a card from your Hand.",
+        "abilityIndex": 0,
         "clauses": [
           {
-            "rawText": "Draw a card, then discard a card from your Hand.",
-            "cleanText": "Draw a card, then discard a card from your Hand",
+            "rawText": "Draw a card",
+            "originalClauseText": "Draw a card",
+            "cleanText": "Draw a card",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -8489,15 +8591,49 @@
               "chooser": "self",
               "forEach": null
             }
+          },
+          {
+            "rawText": "discard a card from your Hand.",
+            "originalClauseText": "discard a card from your Hand.",
+            "cleanText": "discard a card from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 1,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
           }
         ],
         "unsupported": [],
         "legacyId": "BS72-049#a0",
-        "physicalId": "BS72-049#AB_WHEN_SUMMONED_NONE_LV1_LV2_fa08a2fabdcebdbc07f744dcbd7c801738c1f6abd182e56056ab239636e8117f_a39bbb3b1965a7255fd2d65e78264f7b",
-        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_fa08a2fabdcebdbc07f744dcbd7c801738c1f6abd182e56056ab239636e8117f_a39bbb3b1965a7255fd2d65e78264f7b"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS72-049#AB_WHEN_SUMMONED_NONE_LV1_LV2_4a1cc1b854c2e25350fd725f8c4513235c13249326f23054ab74a3d7c86baeff_baa79bebe38c17fe6118e29e95383353",
+        "physicalId": "BS72-049#AB_WHEN_SUMMONED_NONE_LV1_LV2_4a1cc1b854c2e25350fd725f8c4513235c13249326f23054ab74a3d7c86baeff_baa79bebe38c17fe6118e29e95383353",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_4a1cc1b854c2e25350fd725f8c4513235c13249326f23054ab74a3d7c86baeff_baa79bebe38c17fe6118e29e95383353",
+        "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_73e60c1af3fe0f871cb0a6f41882e6a5e36760e6dde35305eee06f0ecc8117a0_fb6a0da4b91821c67141e155c6366326",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS",
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS72-049#AB_PASSIVE_NONE_LV2_a3100663ac338c7b4d48c88ef945a12e75dee1cd0d3972dc029b86a75a8501fe_54ac618dfe3656f33637727fdf420650",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -8506,20 +8642,30 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "PASSIVE",
+          "timings": [],
           "timingLabel": "",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "When this Spirit would leave the Field due to opposing effects, you can return it to the Hand."
         },
+        "originalAbilityText": "[LV2]\nWhen this Spirit would leave the Field due to opposing effects, you can return it to the Hand.",
+        "abilityIndex": 1,
         "clauses": [
           {
             "rawText": "When this Spirit would leave the Field due to opposing effects, you can return it to the Hand.",
+            "originalClauseText": "When this Spirit would leave the Field due to opposing effects, you can return it to the Hand.",
             "cleanText": "When this Spirit would leave the Field due to opposing effects, you can return it to the Hand",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": true,
             "isCost": false,
@@ -8534,11 +8680,25 @@
         ],
         "unsupported": [],
         "legacyId": "BS72-049#a1",
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS72-049#AB_PASSIVE_NONE_LV2_a3100663ac338c7b4d48c88ef945a12e75dee1cd0d3972dc029b86a75a8501fe_54ac618dfe3656f33637727fdf420650",
         "physicalId": "BS72-049#AB_PASSIVE_NONE_LV2_a3100663ac338c7b4d48c88ef945a12e75dee1cd0d3972dc029b86a75a8501fe_54ac618dfe3656f33637727fdf420650",
-        "semanticId": "SEM#AB_PASSIVE_NONE_LV2_a3100663ac338c7b4d48c88ef945a12e75dee1cd0d3972dc029b86a75a8501fe_54ac618dfe3656f33637727fdf420650"
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV2_a3100663ac338c7b4d48c88ef945a12e75dee1cd0d3972dc029b86a75a8501fe_54ac618dfe3656f33637727fdf420650",
+        "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV2_4c6277afcba245d8e91c3578b3e80e1bf2a2666bbb35fdf9242eb115ddf8b704_034022411ec9f8ba63162849c75e821c",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 2,
+    "compiledClausesCount": 3,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },
@@ -9164,7 +9324,6 @@
     "keywords": [],
     "abilities": [
       {
-        "id": "BS72-051#AB_PASSIVE_NONE_LV1_LV2_21f5078ad19bf435e9681fa9d0f4b42cc341b53ed73cf046a6a8d391ebee595d_92936d2c8bbf3754393a76fa7243b558",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -9174,20 +9333,32 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "PASSIVE",
+          "timings": [],
           "timingLabel": "",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [
+            "ONCE_PER_TURN"
+          ],
           "limit": "ONCE_PER_TURN",
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "when your \"Scalostle\" family Braves are summoned, draw two cards, then discard two cards from your Hand."
         },
+        "originalAbilityText": "[LV1][LV2]\nOnce per turn, when your \"Scalostle\" family Braves are summoned, draw two cards, then discard two cards from your Hand.",
+        "abilityIndex": 0,
         "clauses": [
           {
-            "rawText": "when your \"Scalostle\" family Braves are summoned, draw two cards, then discard two cards from your Hand.",
-            "cleanText": "when your \"Scalostle\" family Braves are summoned, draw two cards, then discard two cards from your Hand",
+            "rawText": "when your \"Scalostle\" family Braves are summoned, draw two cards",
+            "originalClauseText": "when your \"Scalostle\" family Braves are summoned, draw two cards",
+            "cleanText": "when your \"Scalostle\" family Braves are summoned, draw two cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -9199,15 +9370,48 @@
               "chooser": "self",
               "forEach": null
             }
+          },
+          {
+            "rawText": "discard two cards from your Hand.",
+            "originalClauseText": "discard two cards from your Hand.",
+            "cleanText": "discard two cards from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 2,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
           }
         ],
         "unsupported": [],
         "legacyId": "BS72-051#a0",
-        "physicalId": "BS72-051#AB_PASSIVE_NONE_LV1_LV2_21f5078ad19bf435e9681fa9d0f4b42cc341b53ed73cf046a6a8d391ebee595d_92936d2c8bbf3754393a76fa7243b558",
-        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_21f5078ad19bf435e9681fa9d0f4b42cc341b53ed73cf046a6a8d391ebee595d_92936d2c8bbf3754393a76fa7243b558"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS72-051#AB_PASSIVE_NONE_LV1_LV2_962250f5c17789ae15a750d305e1b569298d7e0215936592be345d9d4f90d5e3_b863410d8030fcd2b4d03251dc847da7",
+        "physicalId": "BS72-051#AB_PASSIVE_NONE_LV1_LV2_962250f5c17789ae15a750d305e1b569298d7e0215936592be345d9d4f90d5e3_b863410d8030fcd2b4d03251dc847da7",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_962250f5c17789ae15a750d305e1b569298d7e0215936592be345d9d4f90d5e3_b863410d8030fcd2b4d03251dc847da7",
+        "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_c18acbacf0112ed9bf7d013667cfea304e1617a2e5d2adf2b676fb918372cd79_192b236966a2fa7f5d981268e3e6293f",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [
+            "ONCE_PER_TURN"
+          ],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS72-051#AB_MAIN_STEP_NONE_LV2_0491248e088e6a3d3b5fc4eaa08356dd3460d203a42d9bd8002ed238f5486dbf_db0047b2bcdb9f4d63af41cab46d8369",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -9216,20 +9420,36 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "MAIN_STEP",
+          "timings": [
+            "MAIN_STEP"
+          ],
           "timingLabel": "Your Main Step",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "SELF",
+          "timingTriggers": [
+            "MAIN_STEP"
+          ],
+          "activationRestrictions": [
+            "ONCE_PER_TURN_SAME_NAME"
+          ],
           "limit": "ONCE_PER_TURN_SAME_NAME",
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "You can exhaust one of your \"Contractor Nuadha\" Grandwalker Nexuses. When you've done so, you can summon from your Trash a \"Scalostle\" family Brave card with a cost equal or inferior to your number of counters without paying the cost, directly braving it to your Spirit/Grandwalker Nexus."
         },
+        "originalAbilityText": "[LV2] (Your Main Step)\n(Once per Turn: Same Name) You can exhaust one of your \"Contractor Nuadha\" Grandwalker Nexuses. When you've done so, you can summon from your Trash a \"Scalostle\" family Brave card with a cost equal or inferior to your number of counters without paying the cost, directly braving it to your Spirit/Grandwalker Nexus.",
+        "abilityIndex": 1,
         "clauses": [
           {
             "rawText": "You can exhaust one of your \"Contractor Nuadha\" Grandwalker Nexuses.",
+            "originalClauseText": "You can exhaust one of your \"Contractor Nuadha\" Grandwalker Nexuses.",
             "cleanText": "You can exhaust one of your \"Contractor Nuadha\" Grandwalker Nexuses",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": true,
             "isCost": false,
@@ -9237,14 +9457,20 @@
             "duration": null,
             "op": {
               "op": "EXHAUST",
+              "count": 1,
               "target": {
-                "side": "either"
+                "side": "opp",
+                "types": [
+                  "Nexus"
+                ]
               }
             }
           },
           {
             "rawText": "you can summon from your Trash a \"Scalostle\" family Brave card with a cost equal or inferior to your number of counters without paying the cost, directly braving it to your Spirit/Grandwalker Nexus.",
+            "originalClauseText": "you can summon from your Trash a \"Scalostle\" family Brave card with a cost equal or inferior to your number of counters without paying the cost, directly braving it to your Spirit/Grandwalker Nexus.",
             "cleanText": "you can summon from your Trash a \"Scalostle\" family Brave card with a cost equal or inferior to your number of counters without paying the cost, directly braving it to your Spirit/Grandwalker Nexus",
+            "clauseIndex": 1,
             "link": "byDoing",
             "isOptional": true,
             "isCost": false,
@@ -9252,17 +9478,48 @@
             "duration": null,
             "op": {
               "op": "SUMMON",
-              "free": true
+              "from": "trash",
+              "side": "self",
+              "count": 1,
+              "upTo": false,
+              "filter": {
+                "types": [
+                  "Spirit",
+                  "Brave",
+                  "Nexus"
+                ],
+                "family": "Scalostle"
+              },
+              "free": true,
+              "isOptional": true
             }
           }
         ],
         "unsupported": [],
         "legacyId": "BS72-051#a1",
-        "physicalId": "BS72-051#AB_MAIN_STEP_NONE_LV2_0491248e088e6a3d3b5fc4eaa08356dd3460d203a42d9bd8002ed238f5486dbf_db0047b2bcdb9f4d63af41cab46d8369",
-        "semanticId": "SEM#AB_MAIN_STEP_NONE_LV2_0491248e088e6a3d3b5fc4eaa08356dd3460d203a42d9bd8002ed238f5486dbf_db0047b2bcdb9f4d63af41cab46d8369"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS72-051#AB_MAIN_STEP_NONE_LV2_3e241ed43ae1e8c86da733726a0a680b236e897538e270b9cb62374eded8c925_72f5164adf8b76a902770da72fd1c5c1",
+        "physicalId": "BS72-051#AB_MAIN_STEP_NONE_LV2_3e241ed43ae1e8c86da733726a0a680b236e897538e270b9cb62374eded8c925_72f5164adf8b76a902770da72fd1c5c1",
+        "semanticId": "SEM#AB_MAIN_STEP_NONE_LV2_3e241ed43ae1e8c86da733726a0a680b236e897538e270b9cb62374eded8c925_72f5164adf8b76a902770da72fd1c5c1",
+        "semanticIdV3": "SEM3#AB_MAIN_STEP_NONE_LV2_5a25c20d3994ef4d7329c2d2e1b88e319bc9a5c61893b9be2b51887e2b2d88b6_a58e40163d88c4445804437adf54ed6e",
+        "timingSemantics": {
+          "timingOwner": "SELF",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "MAIN_STEP"
+          ],
+          "activationRestrictions": [
+            "ONCE_PER_TURN_SAME_NAME"
+          ],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 3,
+    "compiledClausesCount": 4,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },

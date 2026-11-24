@@ -12,6 +12,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css?v=8.0">
+  <link rel="stylesheet" href="./assets/shape_grid.css?v=1.0">
+  <link rel="stylesheet" href="./components/AeroShards/AeroShards.css?v=1.0">
+  <script src="./assets/shape_grid.js?v=1.0" defer></script>
+  <script type="module" src="./assets/aero_shards.js?v=1.0"></script>
 </head>
 <body>
 
@@ -44,6 +48,7 @@
         <img src="./assets/hero_bg.png" alt="" class="hero-bg-img" />
         <div class="hero-bg-overlay"></div>
       </div>
+      <div id="heroAeroShards" class="aero-shards hero-aero-shards" aria-hidden="true"></div>
       <div class="hero-content">
         <div class="hero-eyebrow">
           <span class="hero-eyebrow-pill">⚔️ Definitive Database &amp; Deck Laboratory</span>
@@ -476,7 +481,7 @@ or JSON export from Battle Spirits Eternal" oninput="handlePasteInput()"></texta
 
   <!-- WebAssembly SQLite Engine (sql.js) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/sql-wasm.js"></script>
-  <script src="./wasm_db.js?v=8.0"></script>
+  <script src="./wasm_db.js?v=9.0"></script>
 
   <!-- Firebase Client SDK (Compat CDN for GitHub Pages) -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -485,6 +490,7 @@ or JSON export from Battle Spirits Eternal" oninput="handlePasteInput()"></texta
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
   <script src="./firebase_service.js?v=8.0"></script>
+  <script src="./holo_card.js?v=8.0"></script>
   <script src="./app.js?v=8.0"></script>
 <script>
 function executeHeroSearch() {
@@ -689,7 +695,6 @@ function renderFeaturedCards(cards) {
 
     return `
       <div class="featured-card-item card-theme-${colorLower}" data-name="${safeName}" onclick="openCardDetail(this.dataset.name)" title="Click to view ${safeName}">
-        <div class="card-foil-sheen"></div>
         <div class="card-art-wrap">
           <img src="${(typeof cleanCardImageUrl === 'function' ? cleanCardImageUrl(c.image_url) : c.image_url) || (window.FALLBACK_CARD_ART || '')}" alt="${safeName}" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="${c.image_url}" onerror="this.onerror=null; this.src=window.FALLBACK_CARD_ART || '';" />
         </div>

@@ -7,6 +7,8 @@
  * duplicate, stale, or concurrent resolution.
  */
 
+import { normalizeCardZone, validateTargetAvailability } from './selectors.js';
+
 let nextInteractionSeq = 1;
 
 export function resetInteractionCounter() {
@@ -95,14 +97,20 @@ export function createInteractionRequest(data = {}) {
     if (c && typeof c === 'object') {
       const cardObj = c.card || (c.top ? c.top : null) || (c.id ? c : null);
       const stackObj = c.stack || (c.cores ? c : null);
+      const normalizedZone = normalizeCardZone(c.zone || (stackObj ? 'field' : (cardObj ? cardObj.zone : null)) || null);
+      const physicalSide = c.side || (stackObj ? stackObj.owner : null) || decisionOwner;
       return {
         candidateId: String(c.candidateId || (cardObj ? cardObj.id : (stackObj ? stackObj.id : `cand_${idx}`))),
         cardId: c.cardId || (cardObj ? cardObj.id : null),
         cardNumber: c.cardNumber || (cardObj ? (cardObj.cardNumber || cardObj.card_number) : null),
         name: c.name || (cardObj ? cardObj.name : null),
+        cardType: c.cardType || (cardObj ? cardObj.cardType : null),
+        owner: c.owner || (cardObj ? cardObj.owner : null),
+        controller: c.controller || (cardObj ? cardObj.controller : null) || physicalSide,
         stackId: c.stackId || (stackObj ? stackObj.id : null),
-        zone: c.zone || (stackObj ? 'field' : (cardObj ? cardObj.zone : null)) || null,
-        side: c.side || (stackObj ? stackObj.owner : (cardObj ? cardObj.owner : null)) || decisionOwner,
+        zone: normalizedZone,
+        side: physicalSide,
+        action: c.action || null,
         raw: c
       };
     }
@@ -213,7 +221,7 @@ export function validateInteractionResponse(interaction, response, state = null,
         reason: `MATCH_MISMATCH: Response match "${authContext.matchId}" does not match active interaction match "${interaction.matchId}"`
       };
     }
-    const responder = authContext.responder || authContext.player;
+    const responder = authContext.responder || authContext.player || authContext.playerSide;
     if (responder && interaction.decisionOwner && responder !== interaction.decisionOwner) {
       return {
         valid: false,
@@ -297,37 +305,79 @@ export function validateInteractionResponse(interaction, response, state = null,
       const legalStackIds = new Set(interaction.candidates.map(c => c.stackId).filter(Boolean));
 
       for (const item of selectedList) {
+        const candId = typeof item === 'object' && item ? item.candidateId : null;
         const idToCheck = typeof item === 'string'
           ? item
-          : (item?.candidateId || item?.cardId || item?.id || item?.card?.id || item?.stack?.id || item?.stackId);
+          : (candId || item?.cardId || item?.id || item?.card?.id || item?.stack?.id || item?.stackId);
 
-        const isLegal = legalCandidateIds.has(idToCheck) || legalCardIds.has(idToCheck) || legalStackIds.has(idToCheck);
+        const exactCand = candId
+          ? interaction.candidates.find(c => c.candidateId === candId)
+          : interaction.candidates.find(c =>
+            c.candidateId === idToCheck || c.cardId === idToCheck || c.stackId === idToCheck || c.value === idToCheck
+          );
+
+        const isLegal = Boolean(exactCand) || legalCandidateIds.has(idToCheck) || legalCardIds.has(idToCheck) || legalStackIds.has(idToCheck);
         if (!isLegal) {
           return {
             valid: false,
             reason: `ILLEGAL_CANDIDATE_SELECTED: Item "${idToCheck}" is not among legal candidates`
           };
         }
+
+        if (exactCand && item && typeof item === 'object') {
+          if (item.zone && exactCand.zone && normalizeCardZone(item.zone) !== normalizeCardZone(exactCand.zone)) {
+            return {
+              valid: false,
+              reason: `CANDIDATE_ZONE_MISMATCH: Selected item zone "${item.zone}" does not match candidate zone "${exactCand.zone}"`
+            };
+          }
+          if (item.side && exactCand.side && item.side !== exactCand.side) {
+            return {
+              valid: false,
+              reason: `CANDIDATE_SIDE_MISMATCH: Selected item side "${item.side}" does not match candidate side "${exactCand.side}"`
+            };
+          }
+        }
       }
     }
 
-    // Revalidate against current state (Part D3)
+    // Revalidate against current state (Part D3) across all canonical zones
     if (state && selectedList.length > 0) {
       for (const item of selectedList) {
+        const candId = typeof item === 'object' && item ? item.candidateId : null;
         const idToCheck = typeof item === 'string'
           ? item
-          : (item?.candidateId || item?.cardId || item?.id || item?.card?.id || item?.stack?.id || item?.stackId);
+          : (candId || item?.cardId || item?.id || item?.card?.id || item?.stack?.id || item?.stackId);
 
-        const origCand = (interaction.candidates || []).find(c =>
-          c.candidateId === idToCheck || c.cardId === idToCheck || c.stackId === idToCheck || c.value === idToCheck
-        );
+        const origCand = candId
+          ? (interaction.candidates || []).find(c => c.candidateId === candId)
+          : (interaction.candidates || []).find(c =>
+            c.candidateId === idToCheck || c.cardId === idToCheck || c.stackId === idToCheck || c.value === idToCheck
+          );
 
         if (origCand && origCand.zone) {
-          const side = origCand.side || interaction.decisionOwner;
-          const playerState = state.players ? state.players[side] : (state[side] || null);
-
-          if (playerState) {
-            if (origCand.zone === 'field') {
+          const expectedZone = normalizeCardZone(origCand.zone);
+          const expectedSide = origCand.side || interaction.decisionOwner;
+          if (state.players) {
+            const targetObj = (origCand.raw && typeof origCand.raw === 'object')
+              ? origCand.raw
+              : {
+                  id: origCand.cardId || origCand.stackId || origCand.candidateId,
+                  cardId: origCand.cardId,
+                  stackId: origCand.stackId,
+                  zone: expectedZone,
+                  side: expectedSide
+                };
+            const isStillValid = validateTargetAvailability(state, targetObj, expectedZone, expectedSide);
+            if (!isStillValid) {
+              return {
+                valid: false,
+                reason: `CANDIDATE_NO_LONGER_VALID_IN_CURRENT_STATE: Target "${idToCheck}" is no longer in expected zone "${expectedZone}" on side "${expectedSide}"`
+              };
+            }
+          } else {
+            const playerState = state[expectedSide] || null;
+            if (playerState && expectedZone === 'field') {
               const fieldUnits = playerState.field || [];
               const stillOnField = fieldUnits.some(u =>
                 (u.id === idToCheck || u.uid === idToCheck || u.id === origCand.stackId || u.top?.id === idToCheck || u.card?.id === idToCheck)
@@ -338,7 +388,7 @@ export function validateInteractionResponse(interaction, response, state = null,
                   reason: `CANDIDATE_NO_LONGER_VALID_IN_CURRENT_STATE: Target "${idToCheck}" is no longer in expected zone "field"`
                 };
               }
-            } else if (origCand.zone === 'trash' || origCand.zone === 'grave') {
+            } else if (playerState && expectedZone === 'grave') {
               const trashCards = playerState.trashCards || playerState.grave || [];
               const stillInTrash = trashCards.some(c => (c.id === idToCheck || c.uid === idToCheck));
               if (!stillInTrash) {
@@ -380,6 +430,15 @@ export function validateInteractionResponse(interaction, response, state = null,
   return { valid: true, value: response };
 }
 
+export class InteractionSuspendedError extends Error {
+  constructor(interaction) {
+    super(`INTERACTION_SUSPENDED: ${interaction?.id || 'unknown'}`);
+    this.name = 'InteractionSuspendedError';
+    this.interaction = interaction;
+    this.interactionId = interaction?.id || interaction?.interactionId || null;
+  }
+}
+
 /**
  * Manages active and pending interaction requests within a game instance.
  */
@@ -388,6 +447,7 @@ export class InteractionController {
     this.state = state;
     this.events = events;
     this.options = options;
+    this.suspendOnRequest = Boolean(options.suspendOnRequest);
     this.pendingResolvers = new Map(); // interactionId -> { resolve, reject }
     this.resolvedInteractions = new Map(); // interactionId -> response (replay protection)
     this.history = [];
@@ -471,6 +531,10 @@ export class InteractionController {
         interactionId: interaction.id,
         interaction
       });
+    }
+
+    if (this.suspendOnRequest && this._inResolverExecution && data.allowSuspend !== false) {
+      throw new InteractionSuspendedError(interaction);
     }
 
     return promise;

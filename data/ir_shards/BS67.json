@@ -5094,19 +5094,9 @@
   "BS67-051": {
     "cardNumber": "BS67-051",
     "name": "Kamen-Golem",
-    "keywords": [
-      {
-        "name": "Ultra Contract Advent",
-        "parameter": null,
-        "wave": 2,
-        "hook": "contract_advent",
-        "bracketed": true,
-        "index": 59
-      }
-    ],
+    "keywords": [],
     "abilities": [
       {
-        "id": "BS67-051#AB_TURN_TRIGGER_NONE_LV1_LV2_ae176f72b0e93e70faa0e1bc11f24f12c290f944bbbf394d6ce76268baf1cdbf_470b1c9e3f75a4a1103f3740f03987f8",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -5116,20 +5106,36 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "TURN_TRIGGER",
+          "timings": [
+            "TURN_TRIGGER"
+          ],
           "timingLabel": "Your Turn",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "SELF",
+          "timingTriggers": [
+            "TURN_TRIGGER"
+          ],
+          "activationRestrictions": [
+            "ONCE_PER_TURN_SAME_NAME"
+          ],
           "limit": "ONCE_PER_TURN_SAME_NAME",
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "When you [Ultra Contract Advent], put two cores from the Void to any of your Spirits/Nexuses."
         },
+        "originalAbilityText": "[LV1][LV2] (Your Turn)\n(Once per Turn: Same Name) When you [Ultra Contract Advent], put two cores from the Void to any of your Spirits/Nexuses.",
+        "abilityIndex": 0,
         "clauses": [
           {
             "rawText": "When you [Ultra Contract Advent], put two cores from the Void to any of your Spirits/Nexuses.",
+            "originalClauseText": "When you [Ultra Contract Advent], put two cores from the Void to any of your Spirits/Nexuses.",
             "cleanText": "When you [Ultra Contract Advent], put two cores from the Void to any of your Spirits/Nexuses",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -5137,17 +5143,46 @@
             "duration": null,
             "op": {
               "op": "MOVE_CORE",
-              "isCost": false
+              "count": 2,
+              "from": {
+                "zone": "void"
+              }
             }
           }
         ],
         "unsupported": [],
         "legacyId": "BS67-051#a0",
-        "physicalId": "BS67-051#AB_TURN_TRIGGER_NONE_LV1_LV2_ae176f72b0e93e70faa0e1bc11f24f12c290f944bbbf394d6ce76268baf1cdbf_470b1c9e3f75a4a1103f3740f03987f8",
-        "semanticId": "SEM#AB_TURN_TRIGGER_NONE_LV1_LV2_ae176f72b0e93e70faa0e1bc11f24f12c290f944bbbf394d6ce76268baf1cdbf_470b1c9e3f75a4a1103f3740f03987f8"
+        "keywords": [],
+        "referencedKeywords": [
+          {
+            "name": "Ultra Contract Advent",
+            "parameter": null,
+            "wave": 2,
+            "hook": "contract_advent",
+            "bracketed": true,
+            "index": 9
+          }
+        ],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS67-051#AB_TURN_TRIGGER_NONE_LV1_LV2_8a21cd453164469d1e0bbc041d6b2a888567f08975068a015eafd646422347f9_fa54509d0954d270db381903b06ecf02",
+        "physicalId": "BS67-051#AB_TURN_TRIGGER_NONE_LV1_LV2_8a21cd453164469d1e0bbc041d6b2a888567f08975068a015eafd646422347f9_fa54509d0954d270db381903b06ecf02",
+        "semanticId": "SEM#AB_TURN_TRIGGER_NONE_LV1_LV2_8a21cd453164469d1e0bbc041d6b2a888567f08975068a015eafd646422347f9_fa54509d0954d270db381903b06ecf02",
+        "semanticIdV3": "SEM3#AB_TURN_TRIGGER_NONE_LV1_LV2_356a3017f07f7243cb0fdcd9e33f0ea81693f689f45996d269dc41b05c772754_402c18dd1e7f476263589a21eb586a68",
+        "timingSemantics": {
+          "timingOwner": "SELF",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "TURN_TRIGGER"
+          ],
+          "activationRestrictions": [
+            "ONCE_PER_TURN_SAME_NAME"
+          ],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS67-051#AB_WHEN_ATTACKS_NONE_LV2_76bbd25fe4aa84959373c85738c3b98d6bbff110fec00edd78e24dcdd37946a0_78fbecb70e88e5d6b1eba40db45c30a1",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -5156,20 +5191,34 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_ATTACKS",
+          "timings": [
+            "WHEN_ATTACKS"
+          ],
           "timingLabel": "When Attacks",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Unless the opponent discards two cards from their decktop, draw two cards, then discard two cards from your Hand. Including being in Soul State/pre-advent condition, if you control any \"The Artificial Partner, Reve\", this effect discards -1 card from your Hand."
         },
+        "originalAbilityText": "[LV2] (When Attacks)\nUnless the opponent discards two cards from their decktop, draw two cards, then discard two cards from your Hand. Including being in Soul State/pre-advent condition, if you control any \"The Artificial Partner, Reve\", this effect discards -1 card from your Hand.",
+        "abilityIndex": 1,
         "clauses": [
           {
-            "rawText": "Unless the opponent discards two cards from their decktop, draw two cards, then discard two cards from your Hand.",
-            "cleanText": "Unless the opponent discards two cards from their decktop, draw two cards, then discard two cards from your Hand",
+            "rawText": "Unless the opponent discards two cards from their decktop, draw two cards",
+            "originalClauseText": "Unless the opponent discards two cards from their decktop, draw two cards",
+            "cleanText": "Unless the opponent discards two cards from their decktop, draw two cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -5183,8 +5232,28 @@
             }
           },
           {
+            "rawText": "discard two cards from your Hand.",
+            "originalClauseText": "discard two cards from your Hand.",
+            "cleanText": "discard two cards from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 2,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
+          },
+          {
             "rawText": "Including being in Soul State/pre-advent condition, if you control any \"The Artificial Partner, Reve\", this effect discards -1 card from your Hand.",
+            "originalClauseText": "Including being in Soul State/pre-advent condition, if you control any \"The Artificial Partner, Reve\", this effect discards -1 card from your Hand.",
             "cleanText": "Including being in Soul State/pre-advent condition, if you control any \"The Artificial Partner, Reve\", this effect discards -1 card from your Hand",
+            "clauseIndex": 2,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -5199,11 +5268,27 @@
         ],
         "unsupported": [],
         "legacyId": "BS67-051#a1",
-        "physicalId": "BS67-051#AB_WHEN_ATTACKS_NONE_LV2_76bbd25fe4aa84959373c85738c3b98d6bbff110fec00edd78e24dcdd37946a0_78fbecb70e88e5d6b1eba40db45c30a1",
-        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_76bbd25fe4aa84959373c85738c3b98d6bbff110fec00edd78e24dcdd37946a0_78fbecb70e88e5d6b1eba40db45c30a1"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS67-051#AB_WHEN_ATTACKS_NONE_LV2_8c66bda89d56b6871f18844147affa29eede6f29cce6e8ae3c5ad5db35e8045f_e47f4aeb65963f2c6b0fbd9d34615263",
+        "physicalId": "BS67-051#AB_WHEN_ATTACKS_NONE_LV2_8c66bda89d56b6871f18844147affa29eede6f29cce6e8ae3c5ad5db35e8045f_e47f4aeb65963f2c6b0fbd9d34615263",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_8c66bda89d56b6871f18844147affa29eede6f29cce6e8ae3c5ad5db35e8045f_e47f4aeb65963f2c6b0fbd9d34615263",
+        "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_668fb0bda95864fdb87681e5f8c47eddc67bf80ef586271c4e8dbe74841fc409_211aa090bb577e30171c38f8b51f69ad",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 3,
+    "compiledClausesCount": 4,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },
@@ -7264,12 +7349,34 @@
         "wave": 2,
         "hook": "mirage",
         "bracketed": true,
-        "index": 0
+        "index": 0,
+        "abilityId": "BS67-076#AB_PASSIVE_NONE_LV1_LV2_LV3_9b9cda68c80ead7214917e58b54883038cd2c51d350959e3ad259afc69bf6bca_6b7184e5965c32c3210d05480e3ce443",
+        "cardNumber": "BS67-076",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "levelExplicit": false,
+        "timing": "PASSIVE",
+        "timingLabel": "",
+        "timingStep": "ANY",
+        "face": "A",
+        "prefixes": [
+          "Mirage: Cost 2 ([Yellow Core])"
+        ],
+        "isSoulState": false,
+        "duringAdvent": false,
+        "duringSeal": false,
+        "burstCondition": null,
+        "limit": null,
+        "isFlash": false,
+        "isMain": false,
+        "legacyAbilityId": "BS67-076#a0"
       }
     ],
     "abilities": [
       {
-        "id": "BS67-076#AB_PASSIVE_NONE_LV1_LV2_LV3_7e0997c8c8011f070690e5fbd4cd54aff987500f0433e645ad7ac887fe59b290_0f3036d7831fcd6aff12c1d93d9849e1",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -7279,27 +7386,80 @@
           ],
           "levelExplicit": false,
           "prefixes": [
-            "Mirage: Cost ([Yellow Core])"
+            "Mirage: Cost 2 ([Yellow Core])"
           ],
           "timing": "PASSIVE",
+          "timings": [],
           "timingLabel": "",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": ""
         },
+        "originalAbilityText": "[Mirage: Cost 2 ([Yellow Core])]",
+        "abilityIndex": 0,
         "clauses": [],
         "unsupported": [],
         "legacyId": "BS67-076#a0",
-        "physicalId": "BS67-076#AB_PASSIVE_NONE_LV1_LV2_LV3_7e0997c8c8011f070690e5fbd4cd54aff987500f0433e645ad7ac887fe59b290_0f3036d7831fcd6aff12c1d93d9849e1",
-        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_7e0997c8c8011f070690e5fbd4cd54aff987500f0433e645ad7ac887fe59b290_0f3036d7831fcd6aff12c1d93d9849e1"
+        "keywords": [
+          {
+            "name": "Mirage",
+            "parameter": "Cost 2 ([Yellow Core",
+            "wave": 2,
+            "hook": "mirage",
+            "bracketed": true,
+            "index": 0,
+            "abilityId": "BS67-076#AB_PASSIVE_NONE_LV1_LV2_LV3_9b9cda68c80ead7214917e58b54883038cd2c51d350959e3ad259afc69bf6bca_6b7184e5965c32c3210d05480e3ce443",
+            "cardNumber": "BS67-076",
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "face": "A",
+            "prefixes": [
+              "Mirage: Cost 2 ([Yellow Core])"
+            ],
+            "isSoulState": false,
+            "duringAdvent": false,
+            "duringSeal": false,
+            "burstCondition": null,
+            "limit": null,
+            "isFlash": false,
+            "isMain": false,
+            "legacyAbilityId": "BS67-076#a0"
+          }
+        ],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS67-076#AB_PASSIVE_NONE_LV1_LV2_LV3_9b9cda68c80ead7214917e58b54883038cd2c51d350959e3ad259afc69bf6bca_6b7184e5965c32c3210d05480e3ce443",
+        "physicalId": "BS67-076#AB_PASSIVE_NONE_LV1_LV2_LV3_9b9cda68c80ead7214917e58b54883038cd2c51d350959e3ad259afc69bf6bca_6b7184e5965c32c3210d05480e3ce443",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_9b9cda68c80ead7214917e58b54883038cd2c51d350959e3ad259afc69bf6bca_6b7184e5965c32c3210d05480e3ce443",
+        "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_996e046fb0308d5a43bc14a491a11b1532c3042c88a7e2e1f6f7e184f38d0aea_bf7a1e347885cdaf291f5ca68d67ee36",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS67-076#AB_FLASH_NONE_LV1_LV2_LV3_06338593e97c7726c2f65c024b40cd45028724eebb855e84f11fa9706efb5198_bc345eb9ac10bb8afc8d83aab4b4ea54",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -7312,20 +7472,58 @@
             "During Set"
           ],
           "timing": "FLASH",
+          "timings": [],
           "timingLabel": "Flash",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "FLASH"
+          ],
+          "activationRestrictions": [
+            "DURING_SET"
+          ],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": true,
           "isMain": false,
-          "cleanBody": "Including being in Soul State/pre-advent condition, if you control any \"Petit Feaniel\", once per turn, draw a card, then discard a card from your Hand."
+          "cleanBody": "Including being in Soul State/pre-advent condition, if you control any \"Petit Feaniel\", once per turn, draw a card, then discard a card from your Hand.",
+          "flashTimingSpec": {
+            "effectType": "FLASH",
+            "isFlash": true,
+            "isGenericFlash": true,
+            "isTriggered": false,
+            "timingQualifier": "GENERIC",
+            "generalAvailability": [
+              "CONTROLLER_MAIN_STEP",
+              "EITHER_PLAYER_BATTLE_FLASH_TIMING"
+            ],
+            "additionalRestrictions": {
+              "allowedSteps": [
+                "MAIN",
+                "ATTACK"
+              ],
+              "allowedTurnOwners": [
+                "SELF",
+                "OPPONENT"
+              ],
+              "requiresBattle": false,
+              "requiresFlashWindow": false,
+              "triggerCondition": null
+            }
+          }
         },
+        "originalAbilityText": "[During Set] Flash -\nIncluding being in Soul State/pre-advent condition, if you control any \"Petit Feaniel\", once per turn, draw a card, then discard a card from your Hand.",
+        "abilityIndex": 1,
         "clauses": [
           {
-            "rawText": "Including being in Soul State/pre-advent condition, if you control any \"Petit Feaniel\", once per turn, draw a card, then discard a card from your Hand.",
-            "cleanText": "Including being in Soul State/pre-advent condition, if you control any \"Petit Feaniel\", once per turn, draw a card, then discard a card from your Hand",
+            "rawText": "Including being in Soul State/pre-advent condition, if you control any \"Petit Feaniel\", once per turn, draw a card",
+            "originalClauseText": "Including being in Soul State/pre-advent condition, if you control any \"Petit Feaniel\", once per turn, draw a card",
+            "cleanText": "Including being in Soul State/pre-advent condition, if you control any \"Petit Feaniel\", once per turn, draw a card",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -7337,15 +7535,50 @@
               "chooser": "self",
               "forEach": null
             }
+          },
+          {
+            "rawText": "discard a card from your Hand.",
+            "originalClauseText": "discard a card from your Hand.",
+            "cleanText": "discard a card from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 1,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
           }
         ],
         "unsupported": [],
         "legacyId": "BS67-076#a1",
-        "physicalId": "BS67-076#AB_FLASH_NONE_LV1_LV2_LV3_06338593e97c7726c2f65c024b40cd45028724eebb855e84f11fa9706efb5198_bc345eb9ac10bb8afc8d83aab4b4ea54",
-        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_06338593e97c7726c2f65c024b40cd45028724eebb855e84f11fa9706efb5198_bc345eb9ac10bb8afc8d83aab4b4ea54"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS67-076#AB_FLASH_NONE_LV1_LV2_LV3_0855cbf58b3d805e22f6a7281d4c2caf4dbd57f7cca575836b55b4860af4da37_44cd926271f7d15c92143b505d267bd5",
+        "physicalId": "BS67-076#AB_FLASH_NONE_LV1_LV2_LV3_0855cbf58b3d805e22f6a7281d4c2caf4dbd57f7cca575836b55b4860af4da37_44cd926271f7d15c92143b505d267bd5",
+        "semanticId": "SEM#AB_FLASH_NONE_LV1_LV2_LV3_0855cbf58b3d805e22f6a7281d4c2caf4dbd57f7cca575836b55b4860af4da37_44cd926271f7d15c92143b505d267bd5",
+        "semanticIdV3": "SEM3#AB_FLASH_NONE_LV1_LV2_LV3_731b0d3c817d97de64c057aa2fc9016bcff9f8f4a9cbd933e59239aae55e0dff_4684f99d9f3d514f813695ccbfb48e47",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "FLASH"
+          ],
+          "activationRestrictions": [
+            "DURING_SET"
+          ],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS67-076#AB_ATTACK_STEP_NONE_LV1_81486379b19918b3d7f7e3d0324a32475ddbda3ddd9a89d93d3a799b89bffe85_e10ddd5287ff4585393c61858bdd85c2",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -7354,20 +7587,34 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "ATTACK_STEP",
+          "timings": [
+            "ATTACK_STEP"
+          ],
           "timingLabel": "Opposing Attack Step",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "OPPONENT",
+          "timingTriggers": [
+            "ATTACK_STEP"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "When your Spirits would leave the Field due to the opponent, you can summon/deploy/use a face-up \"Golden Cloud\" family card from your deck."
         },
+        "originalAbilityText": "[LV1] (Opposing Attack Step)\nWhen your Spirits would leave the Field due to the opponent, you can summon/deploy/use a face-up \"Golden Cloud\" family card from your deck.",
+        "abilityIndex": 2,
         "clauses": [
           {
             "rawText": "When your Spirits would leave the Field due to the opponent, you can summon/deploy/use a face-up \"Golden Cloud\" family card from your deck.",
+            "originalClauseText": "When your Spirits would leave the Field due to the opponent, you can summon/deploy/use a face-up \"Golden Cloud\" family card from your deck.",
             "cleanText": "When your Spirits would leave the Field due to the opponent, you can summon/deploy/use a face-up \"Golden Cloud\" family card from your deck",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": true,
             "isCost": false,
@@ -7381,11 +7628,27 @@
         ],
         "unsupported": [],
         "legacyId": "BS67-076#a2",
-        "physicalId": "BS67-076#AB_ATTACK_STEP_NONE_LV1_81486379b19918b3d7f7e3d0324a32475ddbda3ddd9a89d93d3a799b89bffe85_e10ddd5287ff4585393c61858bdd85c2",
-        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_81486379b19918b3d7f7e3d0324a32475ddbda3ddd9a89d93d3a799b89bffe85_e10ddd5287ff4585393c61858bdd85c2"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS67-076#AB_ATTACK_STEP_NONE_LV1_d18232c4e819eb7880ac28ce87a6513a956f2c6139b9745beb1db9a19b045e22_8587ca5ffe18e6753d4b7b4b788531d5",
+        "physicalId": "BS67-076#AB_ATTACK_STEP_NONE_LV1_d18232c4e819eb7880ac28ce87a6513a956f2c6139b9745beb1db9a19b045e22_8587ca5ffe18e6753d4b7b4b788531d5",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV1_d18232c4e819eb7880ac28ce87a6513a956f2c6139b9745beb1db9a19b045e22_8587ca5ffe18e6753d4b7b4b788531d5",
+        "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV1_433057958dec97e82606cd63da06e0a1ed98c2e9da02745d2e8115c16087608e_efaf2a4315a776be386353dec69b9ec8",
+        "timingSemantics": {
+          "timingOwner": "OPPONENT",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "ATTACK_STEP"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 2,
+    "compiledClausesCount": 3,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },
@@ -12091,20 +12354,31 @@
         "wave": 4,
         "hook": "afo",
         "bracketed": true,
-        "index": 151
-      },
-      {
-        "name": "Contract Pre-Advent",
-        "parameter": null,
-        "wave": 2,
-        "hook": "contract_pre_advent",
-        "bracketed": true,
-        "index": 283
+        "index": 0,
+        "abilityId": "BS67-048#AB_PASSIVE_NONE_LV1_LV2_77ff36106760c411317a1dfa9f3b8da2372762cc3f771009f6c9576e5a159f7c_a8f048f2f1f2d98ea755a6c01e1cd0a1",
+        "cardNumber": "BS67-048",
+        "levels": [
+          1,
+          2
+        ],
+        "levelExplicit": true,
+        "timing": "PASSIVE",
+        "timingLabel": "",
+        "timingStep": "ANY",
+        "face": "A",
+        "prefixes": [],
+        "isSoulState": false,
+        "duringAdvent": false,
+        "duringSeal": false,
+        "burstCondition": null,
+        "limit": null,
+        "isFlash": false,
+        "isMain": false,
+        "legacyAbilityId": "BS67-048#a1"
       }
     ],
     "abilities": [
       {
-        "id": "BS67-048#AB_WHEN_SUMMONED_NONE_LV1_LV2_630af6b9e7c6e925cd311ac06f9c42bf7f7eabf972548226bb21ff0a83e53d64_dfb0b4311da9b44a422ab19acdf85d15",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -12114,20 +12388,34 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_SUMMONED",
+          "timings": [
+            "WHEN_SUMMONED"
+          ],
           "timingLabel": "When Summoned",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Draw two cards, then discard two cards from your Hand. The opponent can't activate Burst effects via this draw."
         },
+        "originalAbilityText": "[LV1][LV2] (When Summoned)\nDraw two cards, then discard two cards from your Hand. The opponent can't activate Burst effects via this draw.",
+        "abilityIndex": 0,
         "clauses": [
           {
-            "rawText": "Draw two cards, then discard two cards from your Hand.",
-            "cleanText": "Draw two cards, then discard two cards from your Hand",
+            "rawText": "Draw two cards",
+            "originalClauseText": "Draw two cards",
+            "cleanText": "Draw two cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -12141,8 +12429,28 @@
             }
           },
           {
+            "rawText": "discard two cards from your Hand.",
+            "originalClauseText": "discard two cards from your Hand.",
+            "cleanText": "discard two cards from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 2,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
+          },
+          {
             "rawText": "The opponent can't activate Burst effects via this draw.",
+            "originalClauseText": "The opponent can't activate Burst effects via this draw.",
             "cleanText": "The opponent can't activate Burst effects via this draw",
+            "clauseIndex": 2,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -12157,11 +12465,26 @@
         ],
         "unsupported": [],
         "legacyId": "BS67-048#a0",
-        "physicalId": "BS67-048#AB_WHEN_SUMMONED_NONE_LV1_LV2_630af6b9e7c6e925cd311ac06f9c42bf7f7eabf972548226bb21ff0a83e53d64_dfb0b4311da9b44a422ab19acdf85d15",
-        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_630af6b9e7c6e925cd311ac06f9c42bf7f7eabf972548226bb21ff0a83e53d64_dfb0b4311da9b44a422ab19acdf85d15"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS67-048#AB_WHEN_SUMMONED_NONE_LV1_LV2_ed6d469157bd50ebb9c0a84263cc6e90840f254e36bb4c5d2b0e2a9367f4ffcc_525d1166914cd4a29a23a343cc303bac",
+        "physicalId": "BS67-048#AB_WHEN_SUMMONED_NONE_LV1_LV2_ed6d469157bd50ebb9c0a84263cc6e90840f254e36bb4c5d2b0e2a9367f4ffcc_525d1166914cd4a29a23a343cc303bac",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_ed6d469157bd50ebb9c0a84263cc6e90840f254e36bb4c5d2b0e2a9367f4ffcc_525d1166914cd4a29a23a343cc303bac",
+        "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_f6b0304ee65622efae3bf339b3433895d02b752d322d3a4084f2bff4d566c799_9d43649efdd0cf71f04deedfe1d05d91",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS67-048#AB_PASSIVE_NONE_LV1_LV2_290e1e38e4cff3207526a1acc2b6d4c83e7a47cd98ae72670581af7cf17f7442_0fb064b716282dd1a33d4edc6ab79cdf",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -12171,20 +12494,32 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "PASSIVE",
+          "timings": [],
           "timingLabel": "",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": "AFO",
+          "keywords": [
+            "AFO"
+          ],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Give this Spirit and every \"The PartnerLion Raon\" you control, including those that are in pre-advent condition, the effect: \"[Contract Pre-Advent][Spirit] (When Attacks) Including being in Soul State/pre-advent condition, if you control any 'The PartnerLion Raon', by destroying a Nexus you control, destroy an opposing Nexus.\""
         },
+        "originalAbilityText": "[LV1][LV2] [AFO]\nGive this Spirit and every \"The PartnerLion Raon\" you control, including those that are in pre-advent condition, the effect: \"[Contract Pre-Advent]/[Spirit] (When Attacks) Including being in Soul State/pre-advent condition, if you control any 'The PartnerLion Raon', by destroying a Nexus you control, destroy an opposing Nexus.\"",
+        "abilityIndex": 1,
         "clauses": [
           {
             "rawText": "Give this Spirit and every \"The PartnerLion Raon\" you control, including those that are in pre-advent condition, the effect: \"[Contract Pre-Advent][Spirit] (When Attacks) Including being in Soul State/pre-advent condition, if you control any 'The PartnerLion Raon', by destroying a Nexus you control, destroy an opposing Nexus.\"",
+            "originalClauseText": "Give this Spirit and every \"The PartnerLion Raon\" you control, including those that are in pre-advent condition, the effect: \"[Contract Pre-Advent][Spirit] (When Attacks) Including being in Soul State/pre-advent condition, if you control any 'The PartnerLion Raon', by destroying a Nexus you control, destroy an opposing Nexus.\"",
             "cleanText": "Give this Spirit and every \"The PartnerLion Raon\" you control, including those that are in pre-advent condition, the effect: \"[Contract Pre-Advent][Spirit] (When Attacks) Including being in Soul State/pre-advent condition, if you control any 'The PartnerLion Raon', by destroying a Nexus you control, destroy an opposing Nexus.\"",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -12205,11 +12540,63 @@
         ],
         "unsupported": [],
         "legacyId": "BS67-048#a1",
-        "physicalId": "BS67-048#AB_PASSIVE_NONE_LV1_LV2_290e1e38e4cff3207526a1acc2b6d4c83e7a47cd98ae72670581af7cf17f7442_0fb064b716282dd1a33d4edc6ab79cdf",
-        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_290e1e38e4cff3207526a1acc2b6d4c83e7a47cd98ae72670581af7cf17f7442_0fb064b716282dd1a33d4edc6ab79cdf"
+        "keywords": [
+          {
+            "name": "AFO",
+            "parameter": null,
+            "wave": 4,
+            "hook": "afo",
+            "bracketed": true,
+            "index": 0,
+            "abilityId": "BS67-048#AB_PASSIVE_NONE_LV1_LV2_77ff36106760c411317a1dfa9f3b8da2372762cc3f771009f6c9576e5a159f7c_a8f048f2f1f2d98ea755a6c01e1cd0a1",
+            "cardNumber": "BS67-048",
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "face": "A",
+            "prefixes": [],
+            "isSoulState": false,
+            "duringAdvent": false,
+            "duringSeal": false,
+            "burstCondition": null,
+            "limit": null,
+            "isFlash": false,
+            "isMain": false,
+            "legacyAbilityId": "BS67-048#a1"
+          }
+        ],
+        "referencedKeywords": [
+          {
+            "name": "Contract Pre-Advent",
+            "parameter": null,
+            "wave": 2,
+            "hook": "contract_pre_advent",
+            "bracketed": true,
+            "index": 126
+          }
+        ],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS67-048#AB_PASSIVE_NONE_LV1_LV2_77ff36106760c411317a1dfa9f3b8da2372762cc3f771009f6c9576e5a159f7c_a8f048f2f1f2d98ea755a6c01e1cd0a1",
+        "physicalId": "BS67-048#AB_PASSIVE_NONE_LV1_LV2_77ff36106760c411317a1dfa9f3b8da2372762cc3f771009f6c9576e5a159f7c_a8f048f2f1f2d98ea755a6c01e1cd0a1",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_77ff36106760c411317a1dfa9f3b8da2372762cc3f771009f6c9576e5a159f7c_a8f048f2f1f2d98ea755a6c01e1cd0a1",
+        "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_87ee29abdc99476d8f252c079173213668081cc73b780ce6cbbe930cfd635f61_00cfa9617054bef87965ef765abdd439",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 3,
+    "compiledClausesCount": 4,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },
@@ -12960,7 +13347,6 @@
     "keywords": [],
     "abilities": [
       {
-        "id": "BS67-055#AB_PASSIVE_NONE_LV1_LV2_LV3_7cc81f32398e3ccb564b5d8b667f70fa6018d8dd7e257254bbb2d962a1f6319c_1a05e03f6b77aae30daf1451e3b4f05a",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -12971,20 +13357,30 @@
           "levelExplicit": false,
           "prefixes": [],
           "timing": "PASSIVE",
+          "timings": [],
           "timingLabel": "",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "When summoning this card from the Hand, if you control any \"Judgment\" family Spirit/Nexus/Mirage, this card becomes Cost 4."
         },
+        "originalAbilityText": "When summoning this card from the Hand, if you control any \"Judgment\" family Spirit/Nexus/Mirage, this card becomes Cost 4.",
+        "abilityIndex": 0,
         "clauses": [
           {
             "rawText": "When summoning this card from the Hand, if you control any \"Judgment\" family Spirit/Nexus/Mirage, this card becomes Cost 4.",
+            "originalClauseText": "When summoning this card from the Hand, if you control any \"Judgment\" family Spirit/Nexus/Mirage, this card becomes Cost 4.",
             "cleanText": "When summoning this card from the Hand, if you control any \"Judgment\" family Spirit/Nexus/Mirage, this card becomes Cost 4",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -12992,17 +13388,43 @@
             "duration": null,
             "op": {
               "op": "SUMMON",
-              "free": true
+              "from": "hand",
+              "side": "self",
+              "count": 1,
+              "upTo": false,
+              "filter": {
+                "types": [
+                  "Spirit",
+                  "Nexus"
+                ],
+                "costExact": 4,
+                "family": "Judgment"
+              },
+              "free": false,
+              "isOptional": false
             }
           }
         ],
         "unsupported": [],
         "legacyId": "BS67-055#a0",
-        "physicalId": "BS67-055#AB_PASSIVE_NONE_LV1_LV2_LV3_7cc81f32398e3ccb564b5d8b667f70fa6018d8dd7e257254bbb2d962a1f6319c_1a05e03f6b77aae30daf1451e3b4f05a",
-        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_7cc81f32398e3ccb564b5d8b667f70fa6018d8dd7e257254bbb2d962a1f6319c_1a05e03f6b77aae30daf1451e3b4f05a"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS67-055#AB_PASSIVE_NONE_LV1_LV2_LV3_84c810557f9efb2f733a54ec305108814ea34a70fcbe96bcad81848eeb50c394_f41c8c5100d242138ccfe1f8dcc71719",
+        "physicalId": "BS67-055#AB_PASSIVE_NONE_LV1_LV2_LV3_84c810557f9efb2f733a54ec305108814ea34a70fcbe96bcad81848eeb50c394_f41c8c5100d242138ccfe1f8dcc71719",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_84c810557f9efb2f733a54ec305108814ea34a70fcbe96bcad81848eeb50c394_f41c8c5100d242138ccfe1f8dcc71719",
+        "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_8b4815017a6b159638903315324b5967f28b4cf4f19fef6d882b3bc2eeaef750_337ddbb867b9f02de742e68e9d2b2172",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS67-055#AB_WHEN_SUMMONED_NONE_LV1_LV2_faea6168d9282b975f22207f069049d024ec151d1eb6203d25a636c408cb1940_b5b65fda5ee2b51244a568d0733c823f",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -13012,20 +13434,34 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_SUMMONED",
+          "timings": [
+            "WHEN_SUMMONED"
+          ],
           "timingLabel": "When Summoned",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Draw three cards, then discard two cards from your Hand."
         },
+        "originalAbilityText": "[LV1][LV2] (When Summoned)\nDraw three cards, then discard two cards from your Hand.",
+        "abilityIndex": 1,
         "clauses": [
           {
-            "rawText": "Draw three cards, then discard two cards from your Hand.",
-            "cleanText": "Draw three cards, then discard two cards from your Hand",
+            "rawText": "Draw three cards",
+            "originalClauseText": "Draw three cards",
+            "cleanText": "Draw three cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -13037,15 +13473,48 @@
               "chooser": "self",
               "forEach": null
             }
+          },
+          {
+            "rawText": "discard two cards from your Hand.",
+            "originalClauseText": "discard two cards from your Hand.",
+            "cleanText": "discard two cards from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 2,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
           }
         ],
         "unsupported": [],
         "legacyId": "BS67-055#a1",
-        "physicalId": "BS67-055#AB_WHEN_SUMMONED_NONE_LV1_LV2_faea6168d9282b975f22207f069049d024ec151d1eb6203d25a636c408cb1940_b5b65fda5ee2b51244a568d0733c823f",
-        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_faea6168d9282b975f22207f069049d024ec151d1eb6203d25a636c408cb1940_b5b65fda5ee2b51244a568d0733c823f"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS67-055#AB_WHEN_SUMMONED_NONE_LV1_LV2_0c85cb55bf0ef6f537789bbe877e3d347b5d40fae016468610cf5ed66bba09a7_afcedd3ccbb2aca1508e40d86a503e25",
+        "physicalId": "BS67-055#AB_WHEN_SUMMONED_NONE_LV1_LV2_0c85cb55bf0ef6f537789bbe877e3d347b5d40fae016468610cf5ed66bba09a7_afcedd3ccbb2aca1508e40d86a503e25",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_0c85cb55bf0ef6f537789bbe877e3d347b5d40fae016468610cf5ed66bba09a7_afcedd3ccbb2aca1508e40d86a503e25",
+        "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_d68e9030ecd887fc816b885fe9191d3089258c7495d4710f38e740975b1b8ead_3db2ef3b5c1be9610cc8f0fe3c49e17c",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS67-055#AB_ATTACK_STEP_NONE_LV2_1b70254a1816b20c24b7679be77120ff3c57d8588c8d8851434751a809338bc1_d8f9576c21a7d2cc60c878ef1c9a73d4",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -13054,20 +13523,34 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "ATTACK_STEP",
+          "timings": [
+            "ATTACK_STEP"
+          ],
           "timingLabel": "Your Attack Step",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "SELF",
+          "timingTriggers": [
+            "ATTACK_STEP"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "When your \"Judgment\" family Spirit attacks, destroy an opposing Spirit/Ultimate with the lowest cost."
         },
+        "originalAbilityText": "[LV2] (Your Attack Step)\nWhen your \"Judgment\" family Spirit attacks, destroy an opposing Spirit/Ultimate with the lowest cost.",
+        "abilityIndex": 2,
         "clauses": [
           {
             "rawText": "When your \"Judgment\" family Spirit attacks, destroy an opposing Spirit/Ultimate with the lowest cost.",
+            "originalClauseText": "When your \"Judgment\" family Spirit attacks, destroy an opposing Spirit/Ultimate with the lowest cost.",
             "cleanText": "When your \"Judgment\" family Spirit attacks, destroy an opposing Spirit/Ultimate with the lowest cost",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -13087,11 +13570,27 @@
         ],
         "unsupported": [],
         "legacyId": "BS67-055#a2",
-        "physicalId": "BS67-055#AB_ATTACK_STEP_NONE_LV2_1b70254a1816b20c24b7679be77120ff3c57d8588c8d8851434751a809338bc1_d8f9576c21a7d2cc60c878ef1c9a73d4",
-        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_1b70254a1816b20c24b7679be77120ff3c57d8588c8d8851434751a809338bc1_d8f9576c21a7d2cc60c878ef1c9a73d4"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS67-055#AB_ATTACK_STEP_NONE_LV2_4462bd7eb3fc3009f6d1ec6e823e965f4260493ecceee87c5354a57e68c0d512_3f3e20f47101afd6f3c1ddc5fcfa7332",
+        "physicalId": "BS67-055#AB_ATTACK_STEP_NONE_LV2_4462bd7eb3fc3009f6d1ec6e823e965f4260493ecceee87c5354a57e68c0d512_3f3e20f47101afd6f3c1ddc5fcfa7332",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_4462bd7eb3fc3009f6d1ec6e823e965f4260493ecceee87c5354a57e68c0d512_3f3e20f47101afd6f3c1ddc5fcfa7332",
+        "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_554e981a3849522a4feff09e54fdcf9c6265865fe4eaaaf4fb1ddddcc6c4438e_9732fe8899d724452182d78c239de9bd",
+        "timingSemantics": {
+          "timingOwner": "SELF",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "ATTACK_STEP"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 3,
+    "compiledClausesCount": 4,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },

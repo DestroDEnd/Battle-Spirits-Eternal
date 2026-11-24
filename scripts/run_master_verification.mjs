@@ -28,6 +28,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
 
 const OUT_DIRS = [
+  path.join(ROOT, 'reports', 'phase_m3_response_windows'),
   path.join(ROOT, 'reports', 'phase_m1'),
   path.join(ROOT, 'reports', 'phase_m'),
   path.join(ROOT, 'reports', 'phase_l1'),
@@ -170,7 +171,14 @@ const MASTER_SUITES = [
   { file: 'tests/phase_m1_two_human_browser_e2e.test.js', category: 'real-browser', dataDep: true, isBrowser: true },
 
   // Random Battle Assorting & Quick Matchmaking (Showdown Style)
-  { file: 'tests/random_matchmaking.test.js', category: 'real-browser', dataDep: true, isBrowser: true }
+  { file: 'tests/random_matchmaking.test.js', category: 'real-browser', dataDep: true, isBrowser: true },
+
+  // Phase M.3 Rules-Driven Priority & Response Window Engine Suites
+  { file: 'tests/phase_m3_response_window_manager.test.js', category: 'unit', dataDep: false },
+  { file: 'tests/phase_m3_flash_priority.test.js', category: 'regression', dataDep: false },
+  { file: 'tests/phase_m3_block_and_second_flash.test.js', category: 'regression', dataDep: false },
+  { file: 'tests/phase_m3_action_progression_lock.test.js', category: 'adversarial', dataDep: false },
+  { file: 'tests/phase_m3_two_human_browser_e2e.test.js', category: 'real-browser', dataDep: true, isBrowser: true }
 ];
 
 // Verify configuration integrity

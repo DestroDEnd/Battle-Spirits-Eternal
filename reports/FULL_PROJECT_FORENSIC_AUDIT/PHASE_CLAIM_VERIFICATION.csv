@@ -1,0 +1,7 @@
+phase_id,phase_name,primary_claim,evidence_found,verification_verdict,discrepancy_details
+Phase M.1,Persistent Multiplayer & Reconnect,Zero token leakage & robust reconnection,State restoration wipes active response windows,PARTIALLY VERIFIED,Response windows not reconstructed from SQLite snapshot
+Phase M.2,Credential Isolation & Authority,Strict action authorization by phase & player,Bypassed during active response windows; SUMMON mints units/cores,CONTRADICTED,SUMMON action allows arbitrary unit creation; !isWinActive bypasses turn checks
+Phase M.3,Response Windows & Priority Locks,Mandatory Flash 2 & strict progression lock,declareBlock & handlePassBlock skip Flash 2; passPriority rejected in Block,CONTRADICTED,game.passPriority rejected in BLOCK_DECLARATION; Flash 2 skipped on pass block
+Phase M.3.1,Flash Timing Corrections,Unified Flash candidate validation,Candidate generation does not use validateFlashTiming,PARTIALLY VERIFIED,calculateFlashCandidates duplicates regex ignoring Japanese qualifiers
+Phase W.1 & W.2,Wiki Keyword Reconciliation,364 verified runtime keywords,265 keywords have empty hooks; 40 custom methods never called in engine,CONTRADICTED,Keywords are unhooked stubs or orphaned methods tested solely in isolation
+Phase 4D,Master Regression Battery,All 40 master test suites passing,keyword_registry and phase_m3 suites currently have failing tests on main,CONTRADICTED,At least 9 test cases currently fail on main across 4 test suites

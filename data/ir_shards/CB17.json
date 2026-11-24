@@ -7244,7 +7244,6 @@
     "keywords": [],
     "abilities": [
       {
-        "id": "CB17-051#AB_WHEN_ATTACKS_NONE_LV1_LV2_4daea4ab1e94e77d7b7c44d38c766c43b23231c82c0b829825b8fae7c9f0e1fd_742f8aa28e7744414fa66ac71a4e2708",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -7254,20 +7253,34 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_ATTACKS",
+          "timings": [
+            "WHEN_ATTACKS"
+          ],
           "timingLabel": "When Attacks",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Draw a card, then discard a card from your Hand. When you discarded a \"Medal\"-named card, destroy an opposing Cost 5 or less Spirit."
         },
+        "originalAbilityText": "[LV1][LV2] (When Attacks)\nDraw a card, then discard a card from your Hand. When you discarded a \"Medal\"-named card, destroy an opposing Cost 5 or less Spirit.",
+        "abilityIndex": 0,
         "clauses": [
           {
-            "rawText": "Draw a card, then discard a card from your Hand.",
-            "cleanText": "Draw a card, then discard a card from your Hand",
+            "rawText": "Draw a card",
+            "originalClauseText": "Draw a card",
+            "cleanText": "Draw a card",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -7281,8 +7294,28 @@
             }
           },
           {
+            "rawText": "discard a card from your Hand.",
+            "originalClauseText": "discard a card from your Hand.",
+            "cleanText": "discard a card from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 1,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
+          },
+          {
             "rawText": "When you discarded a \"Medal\"-named card, destroy an opposing Cost 5 or less Spirit.",
+            "originalClauseText": "When you discarded a \"Medal\"-named card, destroy an opposing Cost 5 or less Spirit.",
             "cleanText": "When you discarded a \"Medal\"-named card, destroy an opposing Cost 5 or less Spirit",
+            "clauseIndex": 2,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -7305,11 +7338,26 @@
         ],
         "unsupported": [],
         "legacyId": "CB17-051#a0",
-        "physicalId": "CB17-051#AB_WHEN_ATTACKS_NONE_LV1_LV2_4daea4ab1e94e77d7b7c44d38c766c43b23231c82c0b829825b8fae7c9f0e1fd_742f8aa28e7744414fa66ac71a4e2708",
-        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_4daea4ab1e94e77d7b7c44d38c766c43b23231c82c0b829825b8fae7c9f0e1fd_742f8aa28e7744414fa66ac71a4e2708"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "CB17-051#AB_WHEN_ATTACKS_NONE_LV1_LV2_11af767180aba5eca9d5fa2522bd5ed192aa0f940cb870e4091bfea38f7e2d63_7c5561eeed2472113579f6fdd0d85668",
+        "physicalId": "CB17-051#AB_WHEN_ATTACKS_NONE_LV1_LV2_11af767180aba5eca9d5fa2522bd5ed192aa0f940cb870e4091bfea38f7e2d63_7c5561eeed2472113579f6fdd0d85668",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_11af767180aba5eca9d5fa2522bd5ed192aa0f940cb870e4091bfea38f7e2d63_7c5561eeed2472113579f6fdd0d85668",
+        "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_8d3e15f4ccec8cd6c41de8c355e06eacc155ab84f9c92545d5f6a045dbf1f0be_c192c01c672d5b2ab6417002895f6ecc",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "CB17-051#AB_PASSIVE_NONE_LV2_ddbbca059de3d52055b0124ffd5ebaba4e3a68ffe5f519fea1a1f296d79736c4_5e9f1f5fa052488bd2dcff905024f70e",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -7318,56 +7366,71 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "PASSIVE",
+          "timings": [],
           "timingLabel": "",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "When your \"Core Medal\"-named Nexus would activate [0Rebirth], the number of your counters is treated as zero."
         },
+        "originalAbilityText": "[LV2]\nWhen your \"Core Medal\"-named Nexus would activate [0Rebirth], the number of your counters is treated as zero.",
+        "abilityIndex": 1,
         "clauses": [
           {
             "rawText": "When your \"Core Medal\"-named Nexus would activate [0Rebirth], the number of your counters is treated as zero.",
+            "originalClauseText": "When your \"Core Medal\"-named Nexus would activate [0Rebirth], the number of your counters is treated as zero.",
             "cleanText": "When your \"Core Medal\"-named Nexus would activate [0Rebirth], the number of your counters is treated as zero",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
             "condition": null,
             "duration": null,
             "op": {
-              "op": "TREAT_RULE"
+              "op": "KEYWORD_RULE",
+              "keyword": "0Rebirth"
             }
           }
         ],
         "unsupported": [],
         "legacyId": "CB17-051#a1",
-        "physicalId": "CB17-051#AB_PASSIVE_NONE_LV2_ddbbca059de3d52055b0124ffd5ebaba4e3a68ffe5f519fea1a1f296d79736c4_5e9f1f5fa052488bd2dcff905024f70e",
-        "semanticId": "SEM#AB_PASSIVE_NONE_LV2_ddbbca059de3d52055b0124ffd5ebaba4e3a68ffe5f519fea1a1f296d79736c4_5e9f1f5fa052488bd2dcff905024f70e"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "CB17-051#AB_PASSIVE_NONE_LV2_c23429725edc1c84dc02205c3eeb57b565543a148fe29d3fbf78b76d604eaba8_3ef13f74a8cad310c9a481b0db732b60",
+        "physicalId": "CB17-051#AB_PASSIVE_NONE_LV2_c23429725edc1c84dc02205c3eeb57b565543a148fe29d3fbf78b76d604eaba8_3ef13f74a8cad310c9a481b0db732b60",
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV2_c23429725edc1c84dc02205c3eeb57b565543a148fe29d3fbf78b76d604eaba8_3ef13f74a8cad310c9a481b0db732b60",
+        "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV2_e49ac605db7a53361962ca45aa667ed6f0ebccf8ec9c20e169bacd2ac7b86246_7a4129681d17a90f254ebc06b47b248a",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 3,
+    "compiledClausesCount": 4,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },
   "CB17-070": {
     "cardNumber": "CB17-070",
     "name": "Kamen Rider OOO Latorartar Combo (CB17-070 (B))",
-    "keywords": [
-      {
-        "name": "Accel",
-        "parameter": null,
-        "wave": 2,
-        "hook": "accel",
-        "bracketed": true,
-        "index": 163
-      }
-    ],
+    "keywords": [],
     "abilities": [
       {
-        "id": "CB17-070#AB_PASSIVE_NONE_LV1_LV2_LV3_3552d80ba4818d544f857c50d68033ce893fa871a4a82c3bbe8031a365d43739_0c06f0047105a03ee4a9783ed9928970",
         "type": "CONDITION",
         "header": {
           "levels": [
@@ -7378,25 +7441,52 @@
           "levelExplicit": false,
           "prefixes": [],
           "timing": "PASSIVE",
+          "timings": [],
           "timingLabel": "",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": ""
         },
         "rawText": "[+0]",
+        "originalAbilityText": "[+0]",
+        "abilityIndex": 0,
+        "condition": {
+          "type": "CONDITION_TEXT_FALLBACK",
+          "conditionType": "CORE_MODIFIER",
+          "expression": "+0",
+          "source": "NORMALIZED_TEXT"
+        },
         "clauses": [],
         "unsupported": [],
         "legacyId": "CB17-070#a0",
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "CB17-070#AB_PASSIVE_NONE_LV1_LV2_LV3_3552d80ba4818d544f857c50d68033ce893fa871a4a82c3bbe8031a365d43739_0c06f0047105a03ee4a9783ed9928970",
         "physicalId": "CB17-070#AB_PASSIVE_NONE_LV1_LV2_LV3_3552d80ba4818d544f857c50d68033ce893fa871a4a82c3bbe8031a365d43739_0c06f0047105a03ee4a9783ed9928970",
-        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_3552d80ba4818d544f857c50d68033ce893fa871a4a82c3bbe8031a365d43739_0c06f0047105a03ee4a9783ed9928970"
+        "semanticId": "SEM#AB_PASSIVE_NONE_LV1_LV2_LV3_3552d80ba4818d544f857c50d68033ce893fa871a4a82c3bbe8031a365d43739_0c06f0047105a03ee4a9783ed9928970",
+        "semanticIdV3": "SEM3#AB_PASSIVE_NONE_LV1_LV2_LV3_0d09668b3f367c36d22c242ef91fff4d6429d5907c3aaa914c1f0bbcf26a5f63_41fcd9af03ce73044d9bca50d03306a0",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "CB17-070#AB_WHEN_REBORN_NONE_LV1_LV2_LV3_afba40994caebf6482897cc41a448376719834290aa36ca4833aaa0f982d8592_9c31ba8b10c74fc0ae10a05a0b984176",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -7407,20 +7497,34 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_REBORN",
+          "timings": [
+            "WHEN_REBORN"
+          ],
           "timingLabel": "When Reborn",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_REBORN"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Draw two cards, then discard two cards from your Hand."
         },
+        "originalAbilityText": "[LV1][LV2][LV3] (When Reborn)\nDraw two cards, then discard two cards from your Hand.",
+        "abilityIndex": 1,
         "clauses": [
           {
-            "rawText": "Draw two cards, then discard two cards from your Hand.",
-            "cleanText": "Draw two cards, then discard two cards from your Hand",
+            "rawText": "Draw two cards",
+            "originalClauseText": "Draw two cards",
+            "cleanText": "Draw two cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -7432,15 +7536,48 @@
               "chooser": "self",
               "forEach": null
             }
+          },
+          {
+            "rawText": "discard two cards from your Hand.",
+            "originalClauseText": "discard two cards from your Hand.",
+            "cleanText": "discard two cards from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 2,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
           }
         ],
         "unsupported": [],
         "legacyId": "CB17-070#a1",
-        "physicalId": "CB17-070#AB_WHEN_REBORN_NONE_LV1_LV2_LV3_afba40994caebf6482897cc41a448376719834290aa36ca4833aaa0f982d8592_9c31ba8b10c74fc0ae10a05a0b984176",
-        "semanticId": "SEM#AB_WHEN_REBORN_NONE_LV1_LV2_LV3_afba40994caebf6482897cc41a448376719834290aa36ca4833aaa0f982d8592_9c31ba8b10c74fc0ae10a05a0b984176"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "CB17-070#AB_WHEN_REBORN_NONE_LV1_LV2_LV3_6b7205d880a5497b4898d640b3a0195242124e1354bd9fec6bbc2743df135ff5_6815bccb772183ea4cea8bf47258aecf",
+        "physicalId": "CB17-070#AB_WHEN_REBORN_NONE_LV1_LV2_LV3_6b7205d880a5497b4898d640b3a0195242124e1354bd9fec6bbc2743df135ff5_6815bccb772183ea4cea8bf47258aecf",
+        "semanticId": "SEM#AB_WHEN_REBORN_NONE_LV1_LV2_LV3_6b7205d880a5497b4898d640b3a0195242124e1354bd9fec6bbc2743df135ff5_6815bccb772183ea4cea8bf47258aecf",
+        "semanticIdV3": "SEM3#AB_WHEN_REBORN_NONE_LV1_LV2_LV3_951a52a92b8be1e8291654fbfa798f9ebce93bb03ea6638972a6bbfede303232_7ac5ca9a5184ae4922860f7649d3732a",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_REBORN"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "CB17-070#AB_ATTACK_STEP_NONE_LV2_LV3_b802f84db5adf261d61f2e045e589db02c6d15f8f278867630f2a6485427edc9_9b624c760ad5fdc803b8eca679ce5a41",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -7450,37 +7587,77 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "ATTACK_STEP",
+          "timings": [
+            "ATTACK_STEP"
+          ],
           "timingLabel": "Your Attack Step",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "SELF",
+          "timingTriggers": [
+            "ATTACK_STEP"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "When the opponent would use a Magic card/[Accel], they can't use it unless they pay two extra costs."
         },
+        "originalAbilityText": "[LV2][LV3] (Your Attack Step)\nWhen the opponent would use a Magic card/[Accel], they can't use it unless they pay two extra costs.",
+        "abilityIndex": 2,
         "clauses": [
           {
             "rawText": "When the opponent would use a Magic card/[Accel], they can't use it unless they pay two extra costs.",
+            "originalClauseText": "When the opponent would use a Magic card/[Accel], they can't use it unless they pay two extra costs.",
             "cleanText": "When the opponent would use a Magic card/[Accel], they can't use it unless they pay two extra costs",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
             "condition": null,
             "duration": null,
             "op": {
-              "op": "COST_MODIFIER"
+              "op": "KEYWORD_RULE",
+              "keyword": "Accel"
             }
           }
         ],
         "unsupported": [],
         "legacyId": "CB17-070#a2",
-        "physicalId": "CB17-070#AB_ATTACK_STEP_NONE_LV2_LV3_b802f84db5adf261d61f2e045e589db02c6d15f8f278867630f2a6485427edc9_9b624c760ad5fdc803b8eca679ce5a41",
-        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_b802f84db5adf261d61f2e045e589db02c6d15f8f278867630f2a6485427edc9_9b624c760ad5fdc803b8eca679ce5a41"
+        "keywords": [],
+        "referencedKeywords": [
+          {
+            "name": "Accel",
+            "parameter": null,
+            "wave": 2,
+            "hook": "accel",
+            "bracketed": true,
+            "index": 41
+          }
+        ],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "CB17-070#AB_ATTACK_STEP_NONE_LV2_LV3_f63401844c2d4dedd5517fb5d56bd7a45d56403777197d0569696f79cfc90a21_46700b2bb17bf954fe42fe5c360db844",
+        "physicalId": "CB17-070#AB_ATTACK_STEP_NONE_LV2_LV3_f63401844c2d4dedd5517fb5d56bd7a45d56403777197d0569696f79cfc90a21_46700b2bb17bf954fe42fe5c360db844",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_LV3_f63401844c2d4dedd5517fb5d56bd7a45d56403777197d0569696f79cfc90a21_46700b2bb17bf954fe42fe5c360db844",
+        "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_LV3_9f83a3678cc173ce43677f9016c823837a1a9b2c22ac052837a6163879bd38da_b68a49ed693970fc6a51a7e691249735",
+        "timingSemantics": {
+          "timingOwner": "SELF",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "ATTACK_STEP"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 2,
+    "compiledClausesCount": 3,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },
@@ -7490,7 +7667,6 @@
     "keywords": [],
     "abilities": [
       {
-        "id": "CB17-054#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_ab7e6223bf0d8d0d1b61d011a8f862b28424aba71328fde436a52b377bd3f2d2_d079567e08580440ce4e49c1f5cb7eea",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -7501,20 +7677,36 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_SUMMONED",
+          "timings": [
+            "WHEN_SUMMONED",
+            "WHEN_ATTACKS"
+          ],
           "timingLabel": "When Summoned/Attacks",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS",
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Destroy an opposing Spirit with the lowest cost, and when destroys, put a core from the Void to any Spirit/Nexus you control."
         },
+        "originalAbilityText": "[LV1][LV2][LV3] (When Summoned/Attacks)\nDestroy an opposing Spirit with the lowest cost, and when destroys, put a core from the Void to any Spirit/Nexus you control.",
+        "abilityIndex": 0,
         "clauses": [
           {
-            "rawText": "Destroy an opposing Spirit with the lowest cost, and when destroys, put a core from the Void to any Spirit/Nexus you control.",
-            "cleanText": "Destroy an opposing Spirit with the lowest cost, and when destroys, put a core from the Void to any Spirit/Nexus you control",
+            "rawText": "Destroy an opposing Spirit with the lowest cost",
+            "originalClauseText": "Destroy an opposing Spirit with the lowest cost",
+            "cleanText": "Destroy an opposing Spirit with the lowest cost",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -7530,15 +7722,49 @@
                 ]
               }
             }
+          },
+          {
+            "rawText": "put a core from the Void to any Spirit/Nexus you control.",
+            "originalClauseText": "put a core from the Void to any Spirit/Nexus you control.",
+            "cleanText": "put a core from the Void to any Spirit/Nexus you control",
+            "clauseIndex": 1,
+            "link": "ifYouDo",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              }
+            }
           }
         ],
         "unsupported": [],
         "legacyId": "CB17-054#a0",
-        "physicalId": "CB17-054#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_ab7e6223bf0d8d0d1b61d011a8f862b28424aba71328fde436a52b377bd3f2d2_d079567e08580440ce4e49c1f5cb7eea",
-        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_ab7e6223bf0d8d0d1b61d011a8f862b28424aba71328fde436a52b377bd3f2d2_d079567e08580440ce4e49c1f5cb7eea"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "CB17-054#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_f1a7dfea6bd062f123848e0aaddb1bf03eaf2020371b20d6ae8072442e3f7628_e5d8aa5a52f85863a9ce498cc55d9496",
+        "physicalId": "CB17-054#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_f1a7dfea6bd062f123848e0aaddb1bf03eaf2020371b20d6ae8072442e3f7628_e5d8aa5a52f85863a9ce498cc55d9496",
+        "semanticId": "SEM#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_f1a7dfea6bd062f123848e0aaddb1bf03eaf2020371b20d6ae8072442e3f7628_e5d8aa5a52f85863a9ce498cc55d9496",
+        "semanticIdV3": "SEM3#AB_WHEN_SUMMONED_NONE_LV1_LV2_LV3_31217b55ee864baeb2224886471e23058e4e567a793d9e0322e83175957bfea1_dda57d743dc1e53e31eac4ea28903f2c",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS",
+            "WHEN_SUMMONED"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "CB17-054#AB_WHEN_ATTACKS_NONE_LV2_LV3_ccb5d80d4d700426dba3653de21a319353b5327ad101a5c70da49490c4fb27d0_c116583b3beffdbb0c24a61b5dbf79b3",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -7548,20 +7774,34 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_ATTACKS",
+          "timings": [
+            "WHEN_ATTACKS"
+          ],
           "timingLabel": "When Attacks",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Draw two cards, then discard one card from your Hand. When the discarded card is \"Core Medal\"-named, this Spirit gains an extra Blue symbol."
         },
+        "originalAbilityText": "[LV2][LV3] (When Attacks)\nDraw two cards, then discard one card from your Hand. When the discarded card is \"Core Medal\"-named, this Spirit gains an extra Blue symbol.",
+        "abilityIndex": 1,
         "clauses": [
           {
-            "rawText": "Draw two cards, then discard one card from your Hand.",
-            "cleanText": "Draw two cards, then discard one card from your Hand",
+            "rawText": "Draw two cards",
+            "originalClauseText": "Draw two cards",
+            "cleanText": "Draw two cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -7575,25 +7815,64 @@
             }
           },
           {
+            "rawText": "discard one card from your Hand.",
+            "originalClauseText": "discard one card from your Hand.",
+            "cleanText": "discard one card from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 1,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
+          },
+          {
             "rawText": "When the discarded card is \"Core Medal\"-named, this Spirit gains an extra Blue symbol.",
+            "originalClauseText": "When the discarded card is \"Core Medal\"-named, this Spirit gains an extra Blue symbol.",
             "cleanText": "When the discarded card is \"Core Medal\"-named, this Spirit gains an extra Blue symbol",
+            "clauseIndex": 2,
             "link": null,
             "isOptional": false,
             "isCost": false,
             "condition": null,
             "duration": null,
             "op": {
-              "op": "ADD_SYMBOL"
+              "op": "ADD_SYMBOL",
+              "color": "Blue",
+              "count": 1,
+              "side": "self"
             }
           }
         ],
         "unsupported": [],
         "legacyId": "CB17-054#a1",
-        "physicalId": "CB17-054#AB_WHEN_ATTACKS_NONE_LV2_LV3_ccb5d80d4d700426dba3653de21a319353b5327ad101a5c70da49490c4fb27d0_c116583b3beffdbb0c24a61b5dbf79b3",
-        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_ccb5d80d4d700426dba3653de21a319353b5327ad101a5c70da49490c4fb27d0_c116583b3beffdbb0c24a61b5dbf79b3"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "CB17-054#AB_WHEN_ATTACKS_NONE_LV2_LV3_9323cae710ee4ebd538c8508c41bd1d3a9e724d5a5b1e197562eca9f6cfc1ee4_df210956a5c43d403b6ad60ea77f84ff",
+        "physicalId": "CB17-054#AB_WHEN_ATTACKS_NONE_LV2_LV3_9323cae710ee4ebd538c8508c41bd1d3a9e724d5a5b1e197562eca9f6cfc1ee4_df210956a5c43d403b6ad60ea77f84ff",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV2_LV3_9323cae710ee4ebd538c8508c41bd1d3a9e724d5a5b1e197562eca9f6cfc1ee4_df210956a5c43d403b6ad60ea77f84ff",
+        "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV2_LV3_17dc5727d44242243ed71a0f7ccd41731c92551ea5e37024524e271b028e6cd0_ad0c75fd549e7ce8440ec700a0df4be4",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 3,
+    "compiledClausesCount": 5,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },

@@ -169,14 +169,12 @@ export function parseAbilityHeaders(blockText) {
   }
 
   // 1. Check for Flash or Main standalone markers
-  if (/^\[Flash\]/i.test(body) || /^Flash(?:\s*[-–]|\s*\d+\b|\s*\n|\s+(?=[A-Z]))/i.test(body) || /^\(Flash\)/i.test(body)) {
+  if (/^(?:\[Flash\]|【フラッシュ】|Flash(?:\s*[-–:]|\s*\d+\b|\s*\n|\s+(?=[A-Z]))|\(Flash\))/i.test(body)) {
     result.isFlash = true;
     result.timing = 'FLASH';
     result.timingLabel = 'Flash';
-    body = body.replace(/^\[Flash\]\s*/i, '')
-               .replace(/^Flash(?:\s*[-–]|\s*\d+\b|\s*\n|\s+(?=[A-Z]))\s*/i, '')
-               .replace(/^\(Flash\)\s*/i, '');
-  } else if (/^\[Main\]/i.test(body) || /^Main(?:\s*[-–]|\s*\d+\b|\s*\n|\s+(?=[A-Z]))/i.test(body) || /^\(Main\)/i.test(body)) {
+    body = body.replace(/^(?:\[Flash\]|【フラッシュ】|Flash(?:\s*[-–:]|\s*\d+\b|\s*\n|\s+(?=[A-Z]))|\(Flash\))\s*/i, '');
+  } else if (/^(?:\[Main\]|【メイン】|Main(?:\s*[-–:]|\s*\d+\b|\s*\n|\s+(?=[A-Z]))|\(Main\))/i.test(body)) {
     result.isMain = true;
     result.timing = 'MAIN';
     result.timingLabel = 'Main';
@@ -268,11 +266,11 @@ export function parseAbilityHeaders(blockText) {
   body = body.replace(/^[\]\)\s]+/, '').replace(/[\[\(\s]+$/, '').trim();
 
   // Check again for Flash / Main after levels e.g. [LV2][LV3] Flash - [Twinkle Awaken]
-  if (/^Flash(?:\s*[-–]|\s*\d+\b|\s*\n|\s+(?=(?!Timing\s+doesn't)[A-Z\[]))/i.test(body) || /^\[Flash\]/i.test(body)) {
+  if (/^(?:Flash(?:\s*[-–:]|\s*\d+\b|\s*\n|\s+(?=(?!Timing\s+doesn't)[A-Z\[]))|\[Flash\]|【フラッシュ】)/i.test(body)) {
     result.isFlash = true;
     result.timing = 'FLASH';
     result.timingLabel = 'Flash';
-    body = body.replace(/^Flash(?:\s*[-–]|\s*\d+\b|\s*\n|\s+(?=(?!Timing\s+doesn't)[A-Z\[]))\s*/i, '').replace(/^\[Flash\]\s*/i, '');
+    body = body.replace(/^(?:Flash(?:\s*[-–:]|\s*\d+\b|\s*\n|\s+(?=(?!Timing\s+doesn't)[A-Z\[]))|\[Flash\]|【フラッシュ】)\s*/i, '');
   }
 
   // 5-7. Extract Timing Labels, Limits, and Keywords iteratively
@@ -318,12 +316,14 @@ export function parseAbilityHeaders(blockText) {
     }
 
     // Check Flash / Main marker
-    if (/^Flash(?:\s*[-–]|\s*\d+\b|\s*\n|\s+(?=(?!Timing\s+doesn't)[A-Z\[\(])|\s*$)/i.test(body) || /^\[Flash\]/i.test(body) || /^\(Flash\)/i.test(body)) {
+    if (/^(?:Flash(?:\s*[-–:]|\s*\d+\b|\s*\n|\s+(?=(?!Timing\s+doesn't)[A-Z\[\(])|\s*$)|\[Flash\]|【フラッシュ】|\(Flash\))/i.test(body)) {
       result.isFlash = true;
-      result.timing = 'FLASH';
       if (!result.timings.includes('FLASH')) result.timings.push('FLASH');
-      result.timingLabel = 'Flash';
-      body = body.replace(/^Flash(?:\s*[-–]|\s*\d+\b|\s*\n|\s+(?=(?!Timing\s+doesn't)[A-Z\[\(])|\s*)\s*/i, '').replace(/^\[Flash\]\s*/i, '').replace(/^\(Flash\)\s*/i, '');
+      if (!result.timingTriggers || result.timingTriggers.length === 0) {
+        result.timing = 'FLASH';
+        result.timingLabel = 'Flash';
+      }
+      body = body.replace(/^(?:Flash(?:\s*[-–:]|\s*\d+\b|\s*\n|\s+(?=(?!Timing\s+doesn't)[A-Z\[\(])|\s*)|\[Flash\]|【フラッシュ】|\(Flash\))\s*/i, '');
       changed = true;
     }
     if (/^Main(?:\s*[-–]|\s*\d+\b|\s*\n|\s+(?=[A-Z\[\(])|\s*$)/i.test(body) || /^\[Main\]/i.test(body) || /^\(Main\)/i.test(body)) {
@@ -341,6 +341,15 @@ export function parseAbilityHeaders(blockText) {
     if (tMatch) {
       assignTimingFromLabel(result, tMatch[1].trim());
       body = body.slice(tMatch[0].length).trim();
+      changed = true;
+    }
+
+    // Check Japanese Timing Labels: 自分のアタックステップ, 相手のアタックステップ, お互いのアタックステップ, アタック時, etc.
+    const jpTimingRegex = /^(?:[\(（【〔])?((?:自分|相手|お互い)のアタックステップ|アタック時(?:\/ブロック時)?|ブロック時|召喚時|破壊時)(?:[\)）】〕])?(?:[:：\s]*)/;
+    const jpMatch = body.match(jpTimingRegex);
+    if (jpMatch) {
+      assignTimingFromLabel(result, jpMatch[1].trim());
+      body = body.slice(jpMatch[0].length).trim();
       changed = true;
     }
 
@@ -433,7 +442,7 @@ export function parseAbilityHeaders(blockText) {
   return result;
 }
 
-function finalizeTimingSemantics(result) {
+export function finalizeTimingSemantics(result) {
   const lbl = String(result.timingLabel || '').trim();
   const low = lbl.toLowerCase();
   if (!result.timingOwner) {
@@ -468,6 +477,70 @@ function finalizeTimingSemantics(result) {
     restSet.add('WHILE_BRAVED');
   }
   result.activationRestrictions = [...restSet].sort();
+
+  // Phase M.3.1 - Structured Flash Timing Representation
+  if (result.isFlash) {
+    let timingQualifier = 'GENERIC';
+    const allowedSteps = [];
+    const allowedTurnOwners = [];
+    let requiresBattle = false;
+    let requiresFlashWindow = false;
+
+    const hasWhenAttacks = (result.timingTriggers && result.timingTriggers.includes('WHEN_ATTACKS')) ||
+      (result.timings && result.timings.includes('WHEN_ATTACKS')) ||
+      low.includes('when attacks') ||
+      lbl.includes('アタック時');
+
+    if (hasWhenAttacks) {
+      timingQualifier = 'WHEN_ATTACKS';
+      allowedSteps.push('ATTACK');
+      allowedTurnOwners.push('SELF');
+      requiresBattle = true;
+    } else if (low.includes('your attack step') || lbl.includes('自分のアタックステップ') || (result.timingOwner === 'SELF')) {
+      timingQualifier = 'YOUR_ATTACK_STEP';
+      allowedSteps.push('ATTACK');
+      allowedTurnOwners.push('SELF');
+      requiresFlashWindow = true;
+    } else if (((low.includes('opponent') || low.includes('opposing')) && low.includes('attack step')) || lbl.includes('相手のアタックステップ') || result.timingOwner === 'OPPONENT') {
+      timingQualifier = 'OPPONENTS_ATTACK_STEP';
+      allowedSteps.push('ATTACK');
+      allowedTurnOwners.push('OPPONENT');
+      requiresFlashWindow = true;
+    } else if (low.includes('either attack step') || lbl.includes('お互いのアタックステップ') || result.timingOwner === 'EITHER') {
+      timingQualifier = 'EITHER_ATTACK_STEP';
+      allowedSteps.push('ATTACK');
+      allowedTurnOwners.push('SELF', 'OPPONENT');
+      requiresFlashWindow = true;
+    } else if (low.includes('during attack') || lbl.includes('アタック中')) {
+      timingQualifier = 'DURING_ATTACK';
+      allowedSteps.push('ATTACK');
+      allowedTurnOwners.push('SELF', 'OPPONENT');
+      requiresBattle = true;
+      requiresFlashWindow = true;
+    } else {
+      timingQualifier = 'GENERIC';
+      allowedSteps.push('MAIN', 'ATTACK');
+      allowedTurnOwners.push('SELF', 'OPPONENT');
+    }
+
+    result.flashTimingSpec = {
+      effectType: 'FLASH',
+      isFlash: true,
+      isGenericFlash: (timingQualifier === 'GENERIC'),
+      isTriggered: timingQualifier === 'WHEN_ATTACKS',
+      timingQualifier,
+      generalAvailability: timingQualifier === 'GENERIC'
+        ? ['CONTROLLER_MAIN_STEP', 'EITHER_PLAYER_BATTLE_FLASH_TIMING']
+        : (allowedTurnOwners.includes('SELF') && !allowedTurnOwners.includes('OPPONENT') ? ['CONTROLLER_ATTACK_STEP'] : ['EITHER_PLAYER_BATTLE_FLASH_TIMING']),
+      additionalRestrictions: {
+        allowedSteps,
+        allowedTurnOwners,
+        requiresBattle,
+        requiresFlashWindow,
+        triggerCondition: timingQualifier === 'WHEN_ATTACKS' ? 'WHEN_ATTACKS' : null
+      }
+    };
+  }
 }
 
 function normalizeBurstCondition(condStr) {
@@ -507,11 +580,11 @@ function assignTimingFromLabel(result, rawLabel) {
   if (/by an opposing spirit effect/i.test(l)) result.timingCause = 'OPPOSING_SPIRIT_EFFECT';
   else if (/by (?:the )?opponent|by an opposing/i.test(l)) result.timingCause = 'OPPONENT';
 
-  if (/\byour spirit\b|\bduring your battle phase\b|\byour (?:attack|main|start|core|draw|refresh|end)\b/i.test(l)) {
+  if (/自分のアタックステップ/.test(firstLineLabel) || /\byour spirit\b|\bduring your battle phase\b|\byour (?:attack|main|start|core|draw|refresh|end)\b/i.test(l)) {
     result.timingOwner = 'SELF';
-  } else if (/\b(?:opposing|opponent's)\s+(?:attack|main|start|core|draw|refresh|end|turn)\b/i.test(l)) {
+  } else if (/相手のアタックステップ/.test(firstLineLabel) || /\b(?:opposing|opponent's)\s+(?:attack|main|start|core|draw|refresh|end|turn)\b/i.test(l)) {
     result.timingOwner = 'OPPONENT';
-  } else if (/\beither\b/i.test(l)) {
+  } else if (/お互いのアタックステップ/.test(firstLineLabel) || /\beither\b/i.test(l)) {
     result.timingOwner = 'EITHER';
   }
 
@@ -556,10 +629,10 @@ function mapTimingLabelToTypes(label, defaultTiming) {
 
 function mapSingleTimingLabelToType(label, defaultTiming) {
   const l = label.toLowerCase();
-  if (l.includes('when attacks') || /\bwhen\b.*\battack\b/.test(l) || /^during attack\b/.test(l)) return 'WHEN_ATTACKS';
-  if (l.includes('when summoned') || /\bwhen\b.*\bsummoned\b/.test(l)) return 'WHEN_SUMMONED';
-  if (l.includes('when blocks') || /\bwhen\b.*\bblocks?\b/.test(l)) return 'WHEN_BLOCKS';
-  if (l.includes('when destroyed') || /\bwhen\b.*\bdestroyed\b/.test(l)) return 'WHEN_DESTROYED';
+  if (l.includes('when attacks') || /\bwhen\b.*\battack\b/.test(l) || /^during attack\b/.test(l) || /アタック時/.test(label)) return 'WHEN_ATTACKS';
+  if (l.includes('when summoned') || /\bwhen\b.*\bsummoned\b/.test(l) || /召喚時/.test(label)) return 'WHEN_SUMMONED';
+  if (l.includes('when blocks') || /\bwhen\b.*\bblocks?\b/.test(l) || /ブロック時/.test(label)) return 'WHEN_BLOCKS';
+  if (l.includes('when destroyed') || /\bwhen\b.*\bdestroyed\b/.test(l) || /破壊時/.test(label)) return 'WHEN_DESTROYED';
   if (l.includes('when depleted') || /\bwhen\b.*\bdepleted\b/.test(l)) return 'WHEN_DESTROYED';
   if (l.includes('when advents') || /\bwhen\b.*\badvents?\b/.test(l)) return 'WHEN_ADVENTS';
   if (l.includes('when deployed') || /\bwhen\b.*\bdeployed\b/.test(l)) return 'WHEN_DEPLOYED';

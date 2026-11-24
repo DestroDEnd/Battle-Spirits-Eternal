@@ -958,6 +958,7 @@ export const SagaConditionDSL = (() => {
       const st = getFriendlyState(ctx);
       const card = ctx.card || ctx.sourceCard;
       if (!st || !st.deck) return { applied: false, count: 0 };
+      if (st.drawRestricted || st.cannotDraw) return { applied: false, count: 0, reason: 'DRAW_RESTRICTED' };
 
       const mult = computeScaleFactor(ctx, params.scaleBy);
       const count = (params.count || 1) * mult;
@@ -967,7 +968,10 @@ export const SagaConditionDSL = (() => {
         const c = st.deck.shift();
         if (c) {
           if (!st.hand) st.hand = [];
-          st.hand.push(c);
+          const cKey = c.uid || c.id;
+          if (!cKey || !st.hand.some(h => (h?.uid || h?.id) === cKey)) {
+            st.hand.push(c);
+          }
           drawn++;
         }
       }

@@ -1,0 +1,95 @@
+<USER_REQUEST>
+# PHASE M.3.3 — BATTLE SPIRITS ETERNAL
+# INTEGRITY, SECURITY, UNIVERSAL ACTION AUTHORITY & REGRESSION CLOSURE
+
+**Project:** Battle Spirits Eternal (BSP)  
+**Workspace:** `C:\Users\namis\Downloads\BSP`  
+**Phase:** M.3.3  
+**Objective:** Resolve all independently confirmed outstanding defects identified by the Full Project Forensic Audit and the subsequent independent M.3.2 verification.
+
+**Execution requirement:** Implement fixes sequentially, verify each work package, and preserve all previously accepted functionality.
+
+---
+
+# 0. PRIMARY OBJECTIVE
+
+M.3.2 introduced centralized action authorization, response-window protection, Flash timing corrections, execution-mode enforcement, and persistence improvements.
+
+Its nine dedicated suites currently pass 37/37. However, independent verification uncovered additional defects that were not covered by its acceptance tests.
+
+The following problems must now be closed:
+
+1. Arbitrary card and core injection through the `SUMMON` session action.
+2. Direct `resolveBattleComparison()` execution while Flash 2 remains active.
+3. Failed `PLAY_CARD` operations being reported and persisted as successful actions.
+4. Unknown action types being accepted and committed as successful no-op operations.
+5. Unrestricted static-file access exposing the SQLite database and Git configuration.
+6. Server-side request forgery through the image proxy.
+7. WebSocket transport-ticket authentication not being preserved for subsequent client operations.
+8. Six existing keyword regression test failures.
+9. Incomplete universal action authorization across externally accessible engine methods.
+10. Inaccurate audit matrices and incomplete test-coverage reporting.
+
+Do not implement these as isolated patches without understanding their dependencies.
+
+The goal is to establish a genuinely authoritative game engine and a secure server boundary.
+
+---
+
+# 1. NON-NEGOTIABLE IMPLEMENTATION RULES
+
+1. Inspect the current source and current reports before modifying anything.
+2. Preserve the current worki
+<truncated 38923 bytes>
+wly added M3.3 suites pass.
+- [ ] All M2 focused suites pass.
+- [ ] All M3.1 suites pass.
+- [ ] All M3.2 suites pass.
+- [ ] Relevant historical keyword and combat regressions pass.
+- [ ] Two-human browser E2E passes.
+- [ ] Full master verification finishes successfully, or incomplete areas are explicitly documented.
+- [ ] No hidden test exclusions or inferred passes.
+- [ ] Every critical and high finding is resolved or explicitly blocks acceptance.
+- [ ] The final card and keyword matrices reflect actual measured coverage.
+
+If any Critical or High defect remains, do not declare M3.3 fully accepted.
+
+Use:
+- FULLY ACCEPTED.
+- CONDITIONALLY ACCEPTED.
+- NOT ACCEPTED.
+- INCOMPLETE.
+
+Do not use a percentage-complete score to conceal unresolved critical defects.
+
+---
+
+# 18. FINAL INSTRUCTIONS
+
+This is a corrective engineering phase, not another audit-only phase.
+
+Implement the required fixes, add regression tests, preserve the existing architecture where appropriate and provide the final evidence.
+
+Do not restart or rewrite M2, M3, M3.1 or M3.2.
+
+Do not remove existing passing tests.
+
+Do not compromise game mechanics to satisfy security checks.
+
+Do not compensate for an incorrect action route by adding UI restrictions alone.
+
+Do not declare completion based only on the newly added tests. Run the relevant old suites as well.
+
+The final deliverable must demonstrate that:
+
+1. The original forensic vulnerabilities have been addressed where they were genuinely present.
+2. The M3.2 defects independently reproduced after implementation are now closed.
+3. The previously passing M2–M3.2 functionality remains intact.
+4. The card and keyword support reports are based on actual evidence.
+5. The project is in a demonstrably stronger and more secure state.
+
+**Proceed with implementation in the exact work-package order above. Finish M3.3, produce all reports, and stop. Do not automatically begin M3.4 or another phase.**
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-11-23T10:55:18+05:30.
+</ADDITIONAL_METADATA>

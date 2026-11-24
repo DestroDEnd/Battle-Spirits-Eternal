@@ -7,13 +7,24 @@
 
 import { moveCard, moveCore } from '../zones.js';
 import { createFieldStack } from '../state.js';
-import { queryCandidates, resolveTargets, normalizeCardZone } from '../selectors.js';
+import { queryCandidates, resolveTargets, normalizeCardZone, buildCandidateDescriptor, validateSelection, validateTargetAvailability } from '../selectors.js';
 import { computeColors, computeEffectiveBP, computeLevel, isActionRestricted, isTargetProtectedFrom } from '../continuous.js';
 import { calculateEffectiveCost } from '../payment.js';
 import { evaluateStructuredCondition, CONDITION_RESULT } from '../conditions.js';
 import { evaluateAdventCondition } from '../prerequisites.js';
 import { isIncompleteOpObject, recoverExplicitOpParameters } from '../parameter_recovery.js';
 import { isTelemetryEnabled, recordOpcodeExecution } from '../telemetry.js';
+
+export function unwrapPromptSelection(result) {
+  if (!result) return [];
+  if (Array.isArray(result)) return result;
+  if (typeof result === 'object') {
+    if (result.declined === true) return [];
+    if (Array.isArray(result.selected)) return result.selected;
+    if (Array.isArray(result.candidates)) return result.candidates;
+  }
+  return [result];
+}
 
 export function narrowEitherSideFromClause(targetObj, clauseText) {
   if (!targetObj || typeof targetObj !== 'object') return targetObj;
@@ -109,6 +120,10 @@ export function findCardCurrentZone(state, cardId) {
 async function executeSummonTransaction(state, op, cardToSummon, isFree, controller, sourceCard, context, events) {
   const p = state.players[controller];
   if (!cardToSummon) return { status: 'REJECTED', success: false, reason: 'NO_SOURCE_CARD' };
+  const summonCardType = String(cardToSummon.type || '').toLowerCase();
+  if (summonCardType.includes('magic') || summonCardType.includes('nexus')) {
+    return { status: 'REJECTED', success: false, reason: 'INVALID_SUMMON_CARD_TYPE' };
+  }
 
   // 1. Validate initialCores BEFORE any ID or state mutation
   if (op.initialCores !== undefined) {
@@ -702,8 +717,10 @@ async function executeOpCore(state, op, context = {}, promptResolver, events = n
   const oppSide = controller === 'player' ? 'opponent' : 'player';
 
   switch (op.op) {
-    case 'DRAW': {
-      if (op.count !== undefined && (typeof op.count !== 'number' || !Number.isFinite(op.count) || op.count < 0)) {
+    case 'DRAW':
+    case 'DRAW_CARDS': {
+      const requestedCount = op.count ?? op.amount;
+      if (requestedCount !== undefined && (typeof requestedCount !== 'number' || !Number.isFinite(requestedCount) || requestedCount < 0)) {
         return { status: 'REJECTED', transactionOutcome: 'REJECTED', success: false, reason: 'INVALID_PARAMETERS', drawnCount: 0, cards: [] };
       }
       const targetSide = op.side === 'opp' || op.side === 'opponent' ? oppSide : controller;
@@ -713,16 +730,28 @@ async function executeOpCore(state, op, context = {}, promptResolver, events = n
       const maxDrawMod = (state.modifiers || []).find(m =>
         m.type === 'CARD_RULE_MODIFIER' && typeof m.maxDraw === 'number' && (!m.side || m.side === 'both' || m.side === targetSide)
       );
-      const rawCount = op.count ?? 1;
+      const rawCount = requestedCount ?? 1;
       const count = maxDrawMod ? Math.min(rawCount, maxDrawMod.maxDraw) : rawCount;
       const p = state.players[targetSide];
+      if (!Array.isArray(p.hand)) p.hand = [];
+      if (!Array.isArray(p.deck)) p.deck = [];
       const drawnCards = [];
 
       for (let i = 0; i < count; i++) {
         if (p.deck.length === 0) break; // Do as much as possible
         const topCard = p.deck[0];
-        const moved = await moveCard(state, topCard, 'hand', targetSide, { cause: 'draw', sourceCard }, events);
-        if (moved) {
+        if (!topCard) break;
+        const moved = await moveCard(
+          state,
+          topCard,
+          'hand',
+          targetSide,
+          { cause: 'draw', sourceCard, expectedFromZone: 'deck', expectedFromSide: targetSide },
+          events
+        );
+        const leftDeck = !p.deck.some(c => c && c.id === topCard.id);
+        const handMatches = p.hand.filter(c => c && c.id === topCard.id).length;
+        if (moved && leftDeck && handMatches === 1) {
           drawnCards.push(topCard);
           if (events) {
             await events.emit({
@@ -748,23 +777,44 @@ async function executeOpCore(state, op, context = {}, promptResolver, events = n
       const count = op.count || 1;
       const sideSpec = op.target?.side || op.side || (op.chooser === 'opp' ? 'opp' : 'self');
       const targetSide = (sideSpec === 'opp' || sideSpec === 'opponent') ? oppSide : controller;
-      const candidates = queryCandidates(state, { zone: 'hand', side: sideSpec, allowOpponentHand: targetSide !== controller, types: [], filters: op.filter || {} }, context);
+      const candidates = queryCandidates(state, { zone: 'hand', side: sideSpec, allowOpponentHand: targetSide !== controller, types: ['Any'], filters: op.filter || {} }, context);
       if (candidates.length === 0) return { status: 'NO_OP_BY_RULE', success: false, discardedCount: 0, cards: [] };
 
       // Request selection via promptResolver
-      const chosen = await promptResolver.choose({
+      const rawChosen = await promptResolver.choose({
         type: 'SELECT_CARDS',
         title: 'Choose cards to discard from hand',
         candidates,
         count,
         upTo: op.upTo,
+        optional: op.optional,
         chooser: op.chooser === 'opp' ? oppSide : controller
       });
 
+      if (rawChosen?.declined === true) {
+        return { status: op.optional || op.upTo ? 'SKIPPED' : 'NO_OP_BY_RULE', success: Boolean(op.optional || op.upTo), discardedCount: 0, cards: [] };
+      }
+
+      const chosenList = (rawChosen && typeof rawChosen === 'object' && Array.isArray(rawChosen.selected))
+        ? rawChosen.selected
+        : (Array.isArray(rawChosen) ? rawChosen : (rawChosen ? [rawChosen] : []));
+
+      if (!validateSelection(candidates, chosenList, { count, upTo: op.upTo, optional: op.optional })) {
+        return { status: 'REJECTED', success: false, discardedCount: 0, cards: [], reason: 'INVALID_TARGET_SELECTION' };
+      }
+
       const discarded = [];
-      for (const item of chosen || []) {
-        const c = item.card || item;
-        const moved = await moveCard(state, c, 'grave', targetSide, { cause: 'discard', sourceCard }, events);
+      for (const item of chosenList) {
+        const matchedCand = candidates.find(cand =>
+          cand === item ||
+          (typeof item === 'string' && (cand.candidateId === item || cand.cardId === item)) ||
+          (typeof item === 'object' && ((item.candidateId && cand.candidateId === item.candidateId) || cand.card?.id === (item.card?.id || item.cardId || item.id)))
+        );
+        if (!matchedCand || !validateTargetAvailability(state, matchedCand, 'hand', targetSide)) {
+          return { status: 'REJECTED', success: false, discardedCount: 0, cards: [], reason: 'TARGET_NO_LONGER_IN_ZONE' };
+        }
+        const c = matchedCand.card || matchedCand;
+        const moved = await moveCard(state, c, 'grave', targetSide, { cause: 'discard', sourceCard, expectedFromZone: 'hand', expectedFromSide: targetSide }, events);
         if (moved) discarded.push(c);
       }
 
@@ -1323,8 +1373,9 @@ async function executeOpCore(state, op, context = {}, promptResolver, events = n
             count: 1,
             chooser: controller
           });
-          if (chosen && chosen[0]) {
-            targetStackId = chosen[0].stack ? chosen[0].stack.id : chosen[0].id;
+          const chosenArr = Array.isArray(chosen) ? chosen : (Array.isArray(chosen?.selected) ? chosen.selected : []);
+          if (chosenArr[0]) {
+            targetStackId = chosenArr[0].stack ? chosenArr[0].stack.id : chosenArr[0].id;
           } else if (selfStack && resolvedBuffSide === 'self') {
             targetStackId = selfStack.id;
           }
@@ -1392,8 +1443,9 @@ async function executeOpCore(state, op, context = {}, promptResolver, events = n
         chooser: controller
       });
 
-      if (chosen && chosen[0]) {
-        const targetStackId = chosen[0].stack ? chosen[0].stack.id : chosen[0].id;
+      const chosenArr = unwrapPromptSelection(chosen);
+      if (chosenArr[0]) {
+        const targetStackId = chosenArr[0].stack ? chosenArr[0].stack.id : chosenArr[0].id;
         state.modifiers.push({
           id: `mod_${Date.now()}_${Math.random()}`,
           type: 'BP_DEBUFF',
@@ -1576,8 +1628,20 @@ async function executeOpCore(state, op, context = {}, promptResolver, events = n
         }
       }
       const actualCount = Math.min(count, p.deck.length);
-      const revealed = p.deck.splice(0, actualCount);
-      p.revealed.push(...revealed);
+      const revealed = [];
+      for (let i = 0; i < actualCount; i++) {
+        if (p.deck.length === 0) break;
+        const topCard = p.deck[0];
+        const moved = await moveCard(
+          state,
+          topCard,
+          'revealed',
+          controller,
+          { cause: 'reveal', sourceCard, expectedFromZone: 'deck', expectedFromSide: controller },
+          events
+        );
+        if (moved) revealed.push(topCard);
+      }
       if (!context.revealedCards) context.revealedCards = [];
       context.revealedCards.push(...revealed);
 
@@ -1599,31 +1663,36 @@ async function executeOpCore(state, op, context = {}, promptResolver, events = n
       const count = typeof op.count === 'number' ? op.count : parseInt(op.count || '1', 10) || 1;
       const fromZone = op.from ? normalizeCardZone(op.from) : null;
       let pool = [];
+      let effectiveZone = fromZone;
       let isFromRevealed = false;
 
       // Prioritize explicit PREVIOUS_TARGET over revealed pools
       if ((op.target === 'PREVIOUS_TARGET' || op.target?.target === 'PREVIOUS_TARGET' || op.usePreviousTarget) && context.previousTarget) {
-        pool = [context.previousTarget];
-        isFromRevealed = Boolean((p.revealed || []).some(c => c.id === context.previousTarget.id) || (context.revealedCards || []).some(c => c.id === context.previousTarget.id));
-      } else if (fromZone === 'grave') {
-        pool = p.grave || [];
-      } else if (fromZone === 'removed') {
-        pool = p.removed || [];
-      } else if (fromZone === 'revealed') {
-        pool = (context.revealedCards && context.revealedCards.length > 0)
-          ? context.revealedCards
-          : (p.revealed || []);
-        isFromRevealed = true;
-      } else if (fromZone === 'hand') {
-        pool = p.hand || [];
-      } else if (context.revealedCards && context.revealedCards.length > 0) {
-        pool = context.revealedCards;
-        isFromRevealed = true;
-      } else if (p.revealed && p.revealed.length > 0) {
-        pool = p.revealed;
+        const prevItem = context.selectedTargets?.[0] || context.previousTarget;
+        const prevZone = effectiveZone || prevItem.zone || null;
+        if (!validateTargetAvailability(state, prevItem, prevZone, prevItem.side || controller)) {
+          return { status: 'REJECTED', success: false, addedCount: 0, cards: [], reason: 'PREVIOUS_TARGET_UNAVAILABLE' };
+        }
+        const prevCard = prevItem.card || prevItem.top || prevItem;
+        pool = [prevCard];
+        effectiveZone = prevZone;
+        isFromRevealed = effectiveZone === 'revealed' || Boolean((p.revealed || []).some(c => c.id === prevCard.id));
+      } else if (fromZone === 'grave' || fromZone === 'removed' || fromZone === 'hand' || fromZone === 'deck' || fromZone === 'revealed') {
+        const qCands = queryCandidates(state, { zone: fromZone, side: 'self', types: ['Any'] }, context);
+        pool = qCands.map(c => c.card).filter(Boolean);
+        effectiveZone = fromZone;
+        isFromRevealed = fromZone === 'revealed';
+      } else if ((p.revealed && p.revealed.length > 0) || (Array.isArray(context.revealedCards) && context.revealedCards.length > 0)) {
+        const qCands = queryCandidates(state, { zone: 'revealed', side: 'self', types: ['Any'] }, context);
+        pool = qCands.map(c => c.card).filter(Boolean);
+        effectiveZone = 'revealed';
         isFromRevealed = true;
       } else if (context.previousTarget) {
-        pool = [context.previousTarget];
+        const prevItem = context.selectedTargets?.[0] || context.previousTarget;
+        if (validateTargetAvailability(state, prevItem, prevItem.zone || null, prevItem.side || controller)) {
+          pool = [prevItem.card || prevItem.top || prevItem];
+          effectiveZone = prevItem.zone || null;
+        }
       }
 
       // Some effects specify a separate search group for each selected card.
@@ -1635,11 +1704,15 @@ async function executeOpCore(state, op, context = {}, promptResolver, events = n
           const groupCount = group.count || 1;
           const candidates = remaining.filter(card => matchesCardFilter(card, groupFilter));
           if (!candidates.length) continue;
+          const descCandidates = candidates.map(card => buildCandidateDescriptor({ type: 'card', card, side: controller, zone: effectiveZone || 'revealed' }));
           let selected = [];
           if (promptResolver && typeof promptResolver.choose === 'function') {
-            const answer = await promptResolver.choose({ type: 'SELECT_CARDS', title: group.title || 'Choose a matching revealed card', candidates: candidates.map(card => ({ card })), count: groupCount, chooser: controller });
-            if (answer?.length) selected = answer.map(item => item.card || item);
-            else if (answer?.selected?.length) selected = answer.selected.map(item => item.card || item);
+            const answer = await promptResolver.choose({ type: 'SELECT_CARDS', title: group.title || 'Choose a matching revealed card', candidates: descCandidates, count: groupCount, chooser: controller });
+            const ansList = Array.isArray(answer?.selected) ? answer.selected : (Array.isArray(answer) ? answer : []);
+            selected = ansList.map(item => {
+              const matched = descCandidates.find(dc => dc === item || (typeof item === 'string' && (dc.candidateId === item || dc.cardId === item)) || (typeof item === 'object' && ((item.candidateId && dc.candidateId === item.candidateId) || dc.cardId === (item.card?.id || item.cardId || item.id))));
+              return matched ? matched.card : null;
+            }).filter(Boolean);
           }
           if (!selected.length) selected = candidates.slice(0, groupCount);
           groupedChoice.push(...selected);
@@ -1648,12 +1721,14 @@ async function executeOpCore(state, op, context = {}, promptResolver, events = n
         }
         const added = [];
         for (const card of groupedChoice) {
-          await moveCard(state, card, 'hand', controller, { cause: 'add_to_hand', sourceCard }, events);
-          if (isFromRevealed) {
-            if (p.revealed) p.revealed = p.revealed.filter(item => item.id !== card.id);
-            if (context.revealedCards) context.revealedCards = context.revealedCards.filter(item => item.id !== card.id);
+          const moved = await moveCard(state, card, 'hand', controller, { cause: 'add_to_hand', sourceCard, ...(effectiveZone ? { expectedFromZone: effectiveZone, expectedFromSide: controller } : {}) }, events);
+          if (moved) {
+            if (isFromRevealed) {
+              if (p.revealed) p.revealed = p.revealed.filter(item => item.id !== card.id);
+              if (context.revealedCards) context.revealedCards = context.revealedCards.filter(item => item.id !== card.id);
+            }
+            added.push(card);
           }
-          added.push(card);
         }
         return { success: added.length > 0, addedCount: added.length, cards: added };
       }
@@ -1662,6 +1737,7 @@ async function executeOpCore(state, op, context = {}, promptResolver, events = n
       const matching = pool.filter(c => matchesCardFilter(c, op.filter, op));
       if (matching.length === 0) return { status: 'NO_OP_BY_RULE', success: false, addedCount: 0, cards: [], reason: 'NO_LEGAL_TARGETS' };
 
+      const descCandidates = matching.map(c => buildCandidateDescriptor({ type: 'card', card: c, side: controller, zone: effectiveZone || 'revealed' }));
       let chosen = [];
       const isAll = Boolean(op.all || op.count === 'ALL');
       if (isAll) {
@@ -1670,18 +1746,19 @@ async function executeOpCore(state, op, context = {}, promptResolver, events = n
         const selection = await promptResolver.choose({
           type: 'SELECT_CARDS',
           title: 'Choose card(s) to add to Hand',
-          candidates: matching.map(c => ({ card: c })),
+          candidates: descCandidates,
           count,
           chooser: controller
         });
         if (selection && (selection.length > 0 || selection.selected?.length > 0)) {
           const list = Array.isArray(selection.selected) ? selection.selected : selection;
-          const picked = list.map(item => item.card || item);
-          const validIds = new Set(matching.map(c => c.id));
-          if (picked.length > count || picked.some(c => !c || !validIds.has(c.id))) {
+          if (!validateSelection(descCandidates, list, { count, upTo: op.upTo, optional: op.optional })) {
             return { status: 'REJECTED', success: false, addedCount: 0, cards: [], reason: 'INVALID_TARGET_SELECTION' };
           }
-          chosen = picked;
+          chosen = list.map(item => {
+            const matched = descCandidates.find(dc => dc === item || (typeof item === 'string' && (dc.candidateId === item || dc.cardId === item)) || (typeof item === 'object' && ((item.candidateId && dc.candidateId === item.candidateId) || dc.cardId === (item.card?.id || item.cardId || item.id))));
+            return matched ? matched.card : null;
+          }).filter(Boolean);
         } else if (op.optional || op.isOptional) {
           return { status: 'SKIPPED', success: true, addedCount: 0, cards: [], reason: 'OPTIONAL_SKIPPED' };
         } else if (!state?.matchContext || state.matchContext.canSimulate(controller)) {
@@ -1697,7 +1774,7 @@ async function executeOpCore(state, op, context = {}, promptResolver, events = n
 
       const added = [];
       for (const card of chosen) {
-        const moved = await moveCard(state, card, 'hand', controller, { cause: 'add_to_hand', sourceCard }, events);
+        const moved = await moveCard(state, card, 'hand', controller, { cause: 'add_to_hand', sourceCard, ...(effectiveZone ? { expectedFromZone: effectiveZone, expectedFromSide: controller } : {}) }, events);
         if (moved) {
           if (isFromRevealed) {
             if (p.revealed) p.revealed = p.revealed.filter(c => c.id !== card.id);
@@ -1792,20 +1869,22 @@ async function executeOpCore(state, op, context = {}, promptResolver, events = n
         const choice = await promptResolver.choose({
           type: 'SELECT_SUMMON',
           title: op.title || (op.from === 'trash' || op.from === 'grave' ? 'Choose card to summon from Trash' : 'Choose card to summon'),
-          candidates: matching.map(c => ({ card: c })),
+          candidates: matching.map((c, idx) => ({ candidateId: c.id ? `cand_${c.id}` : `cand_${idx}`, card: c, cardId: c.id || c.uid, zone: op.from || 'hand', side: controller })),
           count: 1,
           chooser: controller,
           optional: Boolean(op.isOptional || op.optional)
         });
-        if (choice && choice.length === 0 && (op.isOptional || op.optional)) {
+        const choiceArr = unwrapPromptSelection(choice);
+        if (choiceArr.length === 0 && (op.isOptional || op.optional)) {
           return { status: 'SKIPPED', success: true, count: 0, reason: 'OPTIONAL_SKIPPED' };
         }
-        if (choice && choice[0]) {
-          const picked = choice[0].card || choice[0];
-          if (!matching.some(c => c.id === picked?.id)) {
+        if (choiceArr[0]) {
+          const picked = choiceArr[0].card || choiceArr[0];
+          const pickedId = picked?.id || picked?.uid;
+          if (!matching.some(c => (c.id && c.id === pickedId) || (c.uid && c.uid === pickedId) || c === picked)) {
             return { status: 'REJECTED', success: false, reason: 'INVALID_TARGET_SELECTION' };
           }
-          cardToSummon = picked;
+          cardToSummon = matching.find(c => (c.id && c.id === pickedId) || (c.uid && c.uid === pickedId) || c === picked) || picked;
         }
       }
 
@@ -1909,8 +1988,9 @@ async function executeOpCore(state, op, context = {}, promptResolver, events = n
           count: 1,
           chooser: controller
         });
-        if (choice && choice[0]) {
-          cardToDeploy = choice[0].card || choice[0];
+        const choiceArr = unwrapPromptSelection(choice);
+        if (choiceArr[0]) {
+          cardToDeploy = choiceArr[0].card || choiceArr[0];
         }
       }
 
@@ -1970,7 +2050,8 @@ async function executeOpCore(state, op, context = {}, promptResolver, events = n
             count: 1,
             chooser: controller
           });
-          if (chosen && chosen[0]) cardToSummon = chosen[0].card || chosen[0];
+          const chosenArr = unwrapPromptSelection(chosen);
+          if (chosenArr[0]) cardToSummon = chosenArr[0].card || chosenArr[0];
         }
       }
 
@@ -2057,30 +2138,15 @@ async function executeOpCore(state, op, context = {}, promptResolver, events = n
 
     case 'SALVAGE': {
       const p = state.players[controller];
-      const fromZone = op.from ? normalizeCardZone(op.from) : null;
-      let pool = [];
-      let isRevealed = false;
-
-      // Salvage defaults to grave, unless explicit fromZone or revealed is requested
-      if (fromZone === 'revealed') {
-        pool = (context.revealedCards && context.revealedCards.length > 0)
-          ? context.revealedCards
-          : (p.revealed || []);
-        isRevealed = true;
-      } else if (fromZone === 'removed') {
-        pool = p.removed || [];
-      } else if (fromZone === 'grave' || !fromZone) {
-        pool = p.grave || [];
-      } else if (context.revealedCards && context.revealedCards.length > 0) {
-        pool = context.revealedCards;
-        isRevealed = true;
-      } else {
-        pool = p.grave || [];
-      }
+      const fromZone = op.from ? normalizeCardZone(op.from) : 'grave';
+      const isRevealed = fromZone === 'revealed';
+      const qCands = queryCandidates(state, { zone: fromZone, side: 'self', types: ['Any'] }, context);
+      const pool = qCands.map(c => c.card).filter(Boolean);
 
       const matching = pool.filter(c => matchesCardFilter(c, op.filter, op));
       if (matching.length === 0) return { status: 'NO_OP_BY_RULE', success: false, count: 0, cards: [], reason: 'NO_LEGAL_TARGETS' };
 
+      const descCandidates = matching.map(c => buildCandidateDescriptor({ type: 'card', card: c, side: controller, zone: fromZone }));
       const count = typeof op.count === 'number' ? op.count : parseInt(op.count || '1', 10) || 1;
       let chosen = [];
       const isAll = Boolean(op.all || op.count === 'ALL');
@@ -2090,18 +2156,19 @@ async function executeOpCore(state, op, context = {}, promptResolver, events = n
         const choice = await promptResolver.choose({
           type: 'SELECT_SALVAGE',
           title: 'Choose card(s) to salvage to Hand',
-          candidates: matching.map(c => ({ card: c })),
+          candidates: descCandidates,
           count,
           chooser: controller
         });
         if (choice && (choice.length > 0 || choice.selected?.length > 0)) {
           const list = Array.isArray(choice.selected) ? choice.selected : choice;
-          const picked = list.map(item => item.card || item);
-          const validIds = new Set(matching.map(c => c.id));
-          if (picked.length > count || picked.some(c => !c || !validIds.has(c.id))) {
+          if (!validateSelection(descCandidates, list, { count, upTo: op.upTo, optional: op.optional })) {
             return { status: 'REJECTED', success: false, count: 0, cards: [], reason: 'INVALID_TARGET_SELECTION' };
           }
-          chosen = picked;
+          chosen = list.map(item => {
+            const matched = descCandidates.find(dc => dc === item || (typeof item === 'string' && (dc.candidateId === item || dc.cardId === item)) || (typeof item === 'object' && ((item.candidateId && dc.candidateId === item.candidateId) || dc.cardId === (item.card?.id || item.cardId || item.id))));
+            return matched ? matched.card : null;
+          }).filter(Boolean);
         } else if (op.optional || op.isOptional) {
           return { status: 'SKIPPED', success: true, count: 0, cards: [], reason: 'OPTIONAL_SKIPPED' };
         } else if (!state?.matchContext || state.matchContext.canSimulate(controller)) {
@@ -2117,7 +2184,7 @@ async function executeOpCore(state, op, context = {}, promptResolver, events = n
 
       const salvaged = [];
       for (const card of chosen) {
-        const moved = await moveCard(state, card, 'hand', controller, { cause: 'salvage', sourceCard }, events);
+        const moved = await moveCard(state, card, 'hand', controller, { cause: 'salvage', sourceCard, expectedFromZone: fromZone, expectedFromSide: controller }, events);
         if (moved) {
           if (isRevealed) {
             if (p.revealed) p.revealed = p.revealed.filter(c => c.id !== card.id);
@@ -2655,8 +2722,9 @@ async function executeOpCore(state, op, context = {}, promptResolver, events = n
           count: 1,
           chooser: controller
         });
-        if (choice && choice[0]) {
-          chosenColor = String(choice[0].color || choice[0].id || choice[0]);
+        const choiceArr = unwrapPromptSelection(choice);
+        if (choiceArr[0]) {
+          chosenColor = String(choiceArr[0].color || choiceArr[0].id || choiceArr[0]);
         }
       }
 
@@ -3255,7 +3323,8 @@ async function executeOpCore(state, op, context = {}, promptResolver, events = n
           candidates: candidates.map(s => ({ stack: s, card: s.top })),
           options: candidates.map(s => s.id || s.stackId)
         });
-        const choiceVal = choice?.[0]?.stack ? (choice[0].stack.id || choice[0].stack.stackId) : (choice?.selected?.[0] || choice?.[0] || choice);
+        const choiceArr = unwrapPromptSelection(choice);
+        const choiceVal = choiceArr[0]?.stack ? (choiceArr[0].stack.id || choiceArr[0].stack.stackId) : (choiceArr[0]?.card?.id || choiceArr[0]?.id || choiceArr[0]);
         const found = candidates.find(s => (s.id || s.stackId) === choiceVal || s.top.id === choiceVal);
         if (found) chosen = found;
       }
@@ -3529,23 +3598,30 @@ async function executeOpCore(state, op, context = {}, promptResolver, events = n
       const p = state.players[targetSide];
       if (op.op === 'DISCARD_REMAINING' && Array.isArray(context.revealedCards) && context.revealedCards.length > 0) {
         const remaining = [...context.revealedCards];
+        let discardedCount = 0;
         for (const c of remaining) {
-          const rIdx = p.open ? p.open.findIndex(x => x.id === c.id) : -1;
-          if (rIdx !== -1) p.open.splice(rIdx, 1);
-          p.grave.push(c);
+          const moved = await moveCard(state, c, 'grave', targetSide, { cause: 'discard', sourceCard }, events);
+          if (moved) discardedCount++;
         }
         context.revealedCards = [];
-        return { success: true, discardedCount: remaining.length };
+        return { success: discardedCount > 0, discardedCount };
       }
       const count = typeof op.count === 'number' ? op.count : 1;
       const discarded = [];
       for (let i = 0; i < count; i++) {
-        if (p.hand.length === 0) break;
+        if (!Array.isArray(p.hand) || p.hand.length === 0) break;
         const idx = op.filter ? p.hand.findIndex(c => matchesCardFilter(c, op.filter)) : 0;
         if (idx === -1) break;
-        const [c] = p.hand.splice(idx, 1);
-        p.grave.push(c);
-        discarded.push(c);
+        const targetCard = p.hand[idx];
+        const moved = await moveCard(
+          state,
+          targetCard,
+          'grave',
+          targetSide,
+          { cause: 'discard', sourceCard, expectedFromZone: 'hand', expectedFromSide: targetSide },
+          events
+        );
+        if (moved) discarded.push(targetCard);
       }
       return { success: discarded.length > 0, discardedCount: discarded.length, discarded };
     }
@@ -6087,6 +6163,34 @@ async function executeOpCore(state, op, context = {}, promptResolver, events = n
       const tiers = op.tiers || {};
       const paid = Number(op.amount ?? ctx.paidCost ?? 0);
       return { status: 'SUCCESS', success: true, applied: true, paid, tierMatched: tiers[paid] || null };
+    }
+
+    case 'MODIFY_EFFECT_LIMIT': {
+      const delta = Number(op.delta ?? op.amount ?? 1);
+      if (!state.modifiers) state.modifiers = [];
+      state.modifiers.push({
+        type: 'EFFECT_LIMIT_DELTA',
+        side: controller,
+        delta,
+        duration: op.duration || 'TURN',
+        sourceCardId: sourceCard?.uid || sourceCard?.cardNumber || null
+      });
+      if (events) events.push({ type: 'MODIFY_EFFECT_LIMIT', side: controller, delta });
+      return { status: 'SUCCESS', success: true, applied: true, delta };
+    }
+
+    case 'COST_RULE': {
+      const targetSide = op.side === 'opp' ? oppSide : controller;
+      if (!state.modifiers) state.modifiers = [];
+      state.modifiers.push({
+        type: 'COST_RULE',
+        side: targetSide,
+        rule: op.rule || 'MODIFIED_COST_PAYMENT',
+        duration: op.duration || 'TURN',
+        sourceCardId: sourceCard?.uid || sourceCard?.cardNumber || null
+      });
+      if (events) events.push({ type: 'COST_RULE', side: targetSide, rule: op.rule || 'MODIFIED_COST_PAYMENT' });
+      return { status: 'SUCCESS', success: true, applied: true, side: targetSide };
     }
 
     default:

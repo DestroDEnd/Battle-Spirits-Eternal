@@ -1,0 +1,962 @@
+<USER_REQUEST>
+# PHASE M.2 — CREDENTIAL ISOLATION, TURN AUTHORITY & TRANSACTION INTEGRITY REMEDIATION
+
+**Project:** Battle Spirits Eternal (BSP)  
+**Workspace:** `C:\Users\namis\Downloads\BSP`  
+**Predecessor:** Phase M.1 — Persistent Multiplayer Integrity & Reconnection Remediation  
+**Milestone:** Phase M.2  
+**Execution policy:** Sequential implementation, independent verification, adversarial regression testing.
+
+---
+
+# 1. MISSION
+
+Phase M.1 implemented persistent multiplayer sessions, SQLite-backed state, reconnection, connection leases, and real-time synchronization.
+
+An independent audit subsequently reproduced three critical defects:
+
+1. Raw player authentication tokens are included in serialized game-state snapshots and exposed through the match-state API.
+2. A player can submit an action using a valid token even when that player is not authorized to act during the current game phase.
+3. Failed actions are written to the action ledger before execution succeeds, causing legitimate retries with the same action ID to be rejected as duplicates.
+
+A further security issue was identified in the active-match and match-history endpoints: they trust a caller-supplied `playerId` without authenticating the caller.
+
+Your task is to correct these defects at the architectural level, not merely patch the individual reproductions.
+
+**Do not rebuild Phase M or M.1. Preserve the existing persistent-session architecture and make targeted corrections.**
+
+The end result must have:
+
+- No raw authentication credentials in game-state snapshots, database snapshots, events, or client responses.
+- Strict server-authenticated participant authority.
+- Correct action authorization by action type, active player, pending decision owner, and game phase.
+- Correct action idempotency semantics.
+- Atomic state/action/event persistence.
+- Authenticated match discovery and history.
+- Secure browser and WebSocket reconnection.
+- Genuine two-human browser E2E verification.
+- No regressions in existing game rules, AI modes, simulation modes, or persistent matches.
+
+# 2. NON-NEGOTIABLE DEVELOPMENT RULES
+
+1. Work exclusively inside the existing BSP workspace.
+2. Preserve all current working-tree changes and uncommitted implementation work.
+3. Do not use destructive Git operations, including `git reset --hard`, `git clean`, or indiscriminate reverts.
+4. Do not overwrite existing working implementations merely to simplify the architecture.
+5. Do not introduce hardcoded player identities or bypasses to make tests pass.
+6. Do not use client-supplied `player`, `responder`, `decisionOwner`, `authenticatedSide`, or similar fields as proof of authorization.
+7. Do not allow the browser to directly mutate authoritative game state.
+8. Do not weaken player-choice enforcement from Phase L/L.1.
+9. Do not remove persistence, reconnection, the four-minute turn clock, the one-minute warning, or connection leases.
+10. Do not classify an untested implementation as verified.
+11. Any test changed or removed must have a specific documented reason and replacement coverage.
+12. Do not claim that all repository tests pass when only a curated test battery was executed.
+
+Use the existing coding conventions, test infrastructure, database architecture, and engine abstractions wherever possible.
+
+Execute Work Packages A through K sequentially. Do not stop after writing an analysis or progress report. Complete implementation, testing, and final reporting.
+
+---
+
+# 3. WORK PACKAGE A — REMOVE CREDENTIALS FROM GAME STATE
+
+**Severity: CRITICAL**
+
+## A1. Reproduce the vulnerability
+
+Inspect:
+
+- `engine/state_serialization.js`
+- `engine/session_mode.js`
+- `engine/session_manager.js`
+- `engine/session_store.js`
+- `server.js`
+
+Reproduce the existing vulnerability:
+
+1. Create a HUMAN_VS_HUMAN match.
+2. Retrieve its state anonymously.
+3. Retrieve its state as Player 1.
+4. Retrieve its state as Player 2.
+5. Inspect the serialized SQLite `state_json`.
+6. Search every returned state object for `authToken`, `player1Token`, `player2Token`, and other secret credential fields.
+
+Record the actual reproduction results before changing anything.
+
+## A2. Separate authentication from game state
+
+Redesign the boundary between:
+
+- Game-state identity.
+- Player identity.
+- Authentication credentials.
+- Server-side authorization.
+
+The serializable `MatchContext` must not contain raw authentication tokens.
+
+A serialized game state may contain safe public identity information such as:
+
+- Match ID.
+- Execution mode.
+- Player IDs.
+- Display names.
+- Player control types.
+- Other non-secret rule-relevant identity metadata.
+
+It must not contain:
+
+- Raw authentication tokens.
+- Recovery tokens.
+- Session secrets.
+- Passwords.
+- Secret credential hashes.
+- Server-only authorization capabilities.
+
+Authentication and token verification must be owned by the session/security layer, not by the serializable game-state object.
+
+Inspect all existing uses of `MatchContext.validateAuth()` and `InteractionController.respond()` before making this change.
+
+## A3. Preserve interaction authorization
+
+Removing tokens from `MatchContext` must not weaken the interaction protocol.
+
+The engine must continue to distinguish:
+
+- Which player owns the pending decision.
+- Which player is authenticated.
+- Which player is permitted to respond.
+- Whether the response belongs to the correct match.
+- Whether the interaction remains pending.
+- Whether the submitted choice is within the engine-generated candidate pool.
+
+After SessionManager authenticates a bearer token against the persisted participant credential hash, it may create an internal trusted authorization context for the interaction controller.
+
+This must be a server-created context, not a client-supplied object.
+
+Never implement a security bypass based on a client-controlled boolean such as:
+
+`serverValidated: true`
+
+A client must have no way to manufacture an authorized server identity simply by including fields in its JSON action payload.
+
+Use an appropriately isolated trusted authorization mechanism. Keep it separate from serialized game state.
+
+## A4. Restore matches without storing raw credentials
+
+Update:
+
+- `serializeGameState()`
+- `deserializeGameState()`
+- `redactGameStateForViewer()`
+- `restoreMatch()`
+- `reconnectToMatch()`
+- The interaction authorization path.
+
+Restoring a match must not require recovering plaintext authentication tokens from SQLite.
+
+The database should retain only the credential material required by the authentication layer, such as a strong token hash and applicable credential-version metadata.
+
+The restored engine must still know the correct player IDs, control types, execution mode, match ID, and decision ownership.
+
+## A5. Deep redaction
+
+Implement defense-in-depth redaction.
+
+All external serialization paths must exclude secrets, including:
+
+- Player 1 state responses.
+- Player 2 state responses.
+- Anonymous spectator state responses.
+- Pending interaction metadata.
+- Session API responses.
+- WebSocket initial-state messages.
+- WebSocket event messages.
+- SSE event messages.
+- Error responses.
+- Match summaries.
+
+Do not limit redaction to top-level fields.
+
+Use a central credential-scrubbing policy and tests that recursively inspect returned objects.
+
+## A6. Existing database migration
+
+Inspect existing `battle_spirits.db` records.
+
+The old state snapshots may contain raw credentials. Implement a safe schema/data migration that removes these fields from existing serialized state while preserving:
+
+- Game progress.
+- Player identities.
+- Decks and zones.
+- Pending interactions.
+- Resolver continuation.
+- Match clocks.
+- Match status.
+- Event sequence information.
+
+Do not silently corrupt or delete active matches.
+
+Address the possibility that old bearer tokens may already have been exposed. Design a safe credential-rotation or legacy-session reauthentication strategy using the application's existing identity facilities where available.
+
+If existing sessions cannot be safely rebound to a verified account or player identity, preserve their game state and mark the credential-recovery requirement explicitly. Do not silently keep compromised legacy credentials valid indefinitely, and do not lock users out without a documented recovery path.
+
+## A7. Acceptance tests
+
+Create:
+
+`tests/phase_m2_credential_isolation.test.js`
+
+Required scenarios:
+
+1. Player 1 token never appears in serialized game state.
+2. Player 2 token never appears in serialized game state.
+3. Neither token appears in SQLite `state_json`.
+4. Anonymous state responses contain no credentials.
+5. Player 1 responses contain no Player 2 credential.
+6. Player 2 responses contain no Player 1 credential.
+7. WebSocket initial-state messages contain no credentials.
+8. WebSocket events contain no credentials.
+9. SSE events contain no credentials.
+10. Pending interactions contain no credentials.
+11. Reconstructed MatchContext preserves player identities and control types.
+12. Match restoration still works without plaintext credentials.
+13. Valid player authentication continues to work through the server-side session authority.
+14. Invalid and revoked tokens are rejected.
+15. Legacy snapshots can be migrated without losing game progress.
+
+Test recursively, not just with top-level property checks.
+
+**Acceptance condition:** No raw authentication credentials are present in any persistent or externally serialized game-state representation.
+
+---
+
+# 4. WORK PACKAGE B — STRICT ACTION AUTHORITY
+
+**Severity: CRITICAL**
+
+## B1. Reproduce the wrong-player action
+
+Reproduce the following exact scenario:
+
+- Create a HUMAN_VS_HUMAN match.
+- Set the active player to `player`.
+- Authenticate as `opponent`.
+- Submit `STEP_ADVANCE`.
+- Verify that the current implementation accepts the action.
+
+The corrected implementation must reject the same action.
+
+## B2. Separate authentication from gameplay authority
+
+A valid token proves participant identity. It does not automatically authorize every action.
+
+Every submitted action must pass:
+
+1. Authentication.
+2. Match membership.
+3. Participant identity verification.
+4. Action-type authorization.
+5. Turn/phase authorization.
+6. Pending-interaction ownership validation, when applicable.
+7. Game-rules legality validation.
+8. State revalidation at execution time.
+
+All checks must be performed against authoritative server-side state.
+
+## B3. Implement action-specific authorization policies
+
+Do not simply reject every action from a player who is not the active turn player. Battle Spirits includes responses and decisions that can legitimately belong to the opponent.
+
+Implement an explicit action authorization policy based on the actual engine mechanics.
+
+At minimum, define and verify policies for:
+
+**Turn-controlled actions**
+- STEP_ADVANCE.
+- Turn progression.
+- Ordinary actions that require the current active player.
+- Actions that begin or advance an attack.
+- Other actions whose legality is tied to the current phase or turn owner.
+
+**Decision-controlled actions**
+- INTERACTION_RESPONSE.
+- Target selections.
+- Blocker selections.
+- Replacement-effect decisions.
+- Optional ability decisions.
+- Other choices associated with a pending interaction.
+
+For decision-controlled actions, the authenticated participant must be the actual `decisionOwner` of the corresponding pending interaction.
+
+**Match-lifecycle actions**
+- FORFEIT.
+- LEAVE.
+- RECONNECT.
+- HEARTBEAT.
+
+These must have their own authorization and status rules.
+
+Build the policy from the engine's actual action types and execution flow. Do not invent a simplistic generic authorization rule that breaks legal opponent responses.
+
+## B4. Ignore client identity claims
+
+The authenticated identity must come exclusively from the server's successful token verification.
+
+Ignore or reject spoofed fields supplied by the client, including:
+
+- `action.player`
+- `action.responder`
+- `action.decisionOwner`
+- `action.authenticatedSide`
+- `action.owner`
+
+These fields must never override the identity established by the session manager.
+
+## B5. Revalidate pending interactions
+
+Before accepting `INTERACTION_RESPONSE`:
+
+- Confirm the interaction exists.
+- Confirm it belongs to the match.
+- Confirm it is still pending.
+- Confirm the authenticated player owns the decision.
+- Confirm the interaction has not expired or been superseded.
+- Confirm submitted selections are valid.
+- Confirm selected candidate IDs belong to the current authoritative candidate set.
+- Confirm minimum and maximum selection constraints.
+- Confirm the underlying game state still makes the selection legal.
+
+Do not rely on the browser's displayed candidate list.
+
+## B6. Acceptance tests
+
+Create:
+
+`tests/phase_m2_action_authority.test.js`
+
+Required scenarios:
+
+1. Wrong player cannot advance the current turn.
+2. Active player can perform a legal turn-controlled action.
+3. Opponent cannot impersonate the active player.
+4. Opponent can make an authorized pending interaction decision.
+5. Player 1 cannot answer Player 2's interaction.
+6. Player 2 cannot answer Player 1's interaction.
+7. Forged `responder` is rejected or ignored.
+8. Forged `decisionOwner` is rejected or ignored.
+9. Forged `authenticatedSide` is rejected or ignored.
+10. Stale interaction response is rejected.
+11. Duplicate interaction response does not resolve twice.
+12. A player cannot act in an invalid match phase.
+13. A player cannot bypass timing restrictions.
+14. AI-controlled decisions remain restricted to the AI provider.
+15. Human-vs-human decisions never silently fall back to AI.
+16. Headless simulation remains functional.
+
+**Acceptance condition:** A player can only perform an action that the engine and authoritative session state permit that participant to perform.
+
+---
+
+# 5. WORK PACKAGE C — ACTION IDEMPOTENCY AND FAILED-ACTION RECOVERY
+
+**Severity: CRITICAL**
+
+## C1. Reproduce the failed-action poisoning defect
+
+Reproduce:
+
+1. Submit an invalid interaction response using a fixed `actionId`.
+2. Allow the engine to reject it.
+3. Retry a corrected request using the same ID.
+4. Observe the current duplicate-action rejection.
+
+This behavior must be corrected.
+
+## C2. Correct action lifecycle semantics
+
+The action ledger must distinguish between:
+
+- Received.
+- Validating.
+- Executing.
+- Committed.
+- Rejected.
+- Failed due to recoverable infrastructure errors.
+
+Only a successfully committed action may permanently consume its idempotency key.
+
+A rejected action must not permanently poison a valid retry.
+
+The exact treatment of an execution failure must depend on whether the authoritative game state was changed and whether the failure is recoverable.
+
+Never report a failed action as successfully committed.
+
+## C3. Duplicate successful actions
+
+Maintain duplicate protection for successful actions.
+
+When the same committed `actionId` is submitted again:
+
+- Do not execute the action again.
+- Do not mutate the game state again.
+- Do not append another gameplay event.
+- Return a deterministic duplicate/idempotent result.
+- Preserve the original committed action outcome where appropriate.
+
+A second request with the same ID but a materially different payload must not be treated as a fresh action.
+
+Detect and reject action-ID payload conflicts.
+
+## C4. Concurrent action handling
+
+Test two requests arriving concurrently with:
+
+- The same action ID.
+- Different action IDs.
+- The same participant.
+- Different participants.
+- Stale versions.
+- Different turns.
+
+Exactly one legal state transition must commit where actions conflict.
+
+Use database transactions and version checks; do not rely exclusively on in-memory checks.
+
+## C5. Acceptance tests
+
+Create:
+
+`tests/phase_m2_action_idempotency.test.js`
+
+Required scenarios:
+
+1. Failed validation does not consume the action ID.
+2. Corrected retry with the same ID succeeds.
+3. Successful duplicate does not re-execute.
+4. Duplicate does not create another event.
+5. Same ID with different payload is rejected.
+6. Concurrent duplicate submissions commit only once.
+7. Two conflicting actions cannot both commit against the same state version.
+8. Failed engine execution leaves the match in its last committed state.
+9. A failed action does not increment the committed event sequence.
+10. A server restart preserves successful idempotency records.
+11. A client retry after a lost response receives the original committed outcome.
+12. Invalid or unauthorized actions do not create committed action records.
+
+---
+
+# 6. WORK PACKAGE D — ATOMIC GAME STATE, ACTION AND EVENT COMMIT
+
+**Severity: CRITICAL**
+
+## D1. Audit current persistence order
+
+Inspect:
+
+- `BattleSessionManager.submitPlayerAction()`
+- `SessionStore.recordAction()`
+- `SessionStore.updateSessionState()`
+- `SessionStore.recordEvent()`
+- `SessionStore.saveClock()`
+- `restoreMatch()`
+- `ensureActiveGame()`
+
+The current path writes the action record before execution, writes game state separately, and records the event separately.
+
+This creates possible inconsistencies when an error occurs between writes.
+
+## D2. Define the authoritative commit boundary
+
+Design an atomic processing strategy so the following logically represent one committed action:
+
+1. Authorized action.
+2. Game-state transition.
+3. Match version increment.
+4. Successful action ledger entry.
+5. Event sequence increment.
+6. Durable event record.
+7. Related clock updates, when required.
+
+Use the existing synchronous SQLite `DatabaseSync` transaction capabilities appropriately.
+
+Because engine execution can be asynchronous, do not assume a transaction can safely remain open across arbitrary awaited work.
+
+Consider executing against a cloned/restorable working state and committing the verified result in one database transaction.
+
+The exact approach is yours to design, but it must protect the following invariant:
+
+**The durable session state, committed action ledger, and durable event history must never disagree about whether an action was committed.**
+
+## D3. Prevent premature event broadcast
+
+Do not broadcast an event before its durable commit succeeds.
+
+WebSocket and SSE subscribers must only receive committed events.
+
+Use a reliable post-commit broadcast mechanism or transactional outbox pattern if needed.
+
+A failed database write must never result in clients believing an action was committed.
+
+## D4. State rollback
+
+If action execution or persistence fails:
+
+- Preserve the last committed game state.
+- Preserve the previous match version.
+- Preserve the previous event sequence.
+- Do not mark the action as committed.
+- Do not broadcast the failed transition.
+- Do not leave the in-memory game different from the persisted game.
+
+Test the behavior after deliberately injected database errors.
+
+## D5. Acceptance tests
+
+Create:
+
+`tests/phase_m2_transaction_integrity.test.js`
+
+Include:
+
+- Failure before state commit.
+- Failure during state commit.
+- Failure during event commit.
+- Failure during action-ledger commit.
+- Failure during clock persistence.
+- Duplicate concurrent requests.
+- Restart after interrupted processing.
+- Restore after successful processing.
+- Replay of committed events.
+- Verification that event sequence numbers have no duplicate or invalid jumps.
+- Verification that persisted state matches the event/action commit history.
+
+---
+
+# 7. WORK PACKAGE E — AUTHENTICATE MATCH DISCOVERY AND HISTORY
+
+**Severity: HIGH**
+
+Inspect the active-session and match-history endpoints in `server.js`.
+
+Current endpoints accept a caller-supplied `playerId`:
+
+- `GET /api/sessions/active`
+- `GET /api/sessions/history`
+
+This is not sufficient authorization.
+
+## E1. Derive participant identity from authentication
+
+Require a valid participant credential or existing authenticated account identity.
+
+Resolve the user's permitted match set server-side.
+
+Do not trust a supplied `playerId` as authentication.
+
+## E2. Restrict enumeration
+
+A user must not be able to retrieve:
+
+- Another participant's active matches.
+- Another participant's match history.
+- Arbitrary private match metadata.
+- Another participant's pending decisions.
+- Private player information.
+
+Administrative access, if required, must have its own explicit authorization policy. Do not silently expose all matches when the query parameter is absent.
+
+## E3. Spectator state
+
+If anonymous spectators are intentionally supported, make sure their responses expose only explicitly public information.
+
+They must never receive:
+
+- Authentication credentials.
+- Token hashes.
+- Hidden card identities.
+- Hidden deck ordering.
+- Private player data.
+- Internal pending-decision details.
+- Server-only engine metadata.
+
+## E4. Acceptance tests
+
+Create:
+
+`tests/phase_m2_match_discovery_security.test.js`
+
+Test anonymous requests, invalid tokens, foreign tokens, forged player IDs, valid participant access, completed match history, and cross-match enumeration.
+
+---
+
+# 8. WORK PACKAGE F — WEBSOCKET, SSE AND BROWSER AUTHENTICATION HARDENING
+
+Inspect:
+
+- `engine/websocket_server.js`
+- `server.js`
+- `battle_arena.js`
+- `engine/session_manager.js`
+
+## F1. WebSocket authentication
+
+Verify that authentication occurs before any private match state or events are transmitted.
+
+Do not rely on a URL query parameter containing a long-lived bearer token if it can leak into request logs, browser history, monitoring, or intermediary systems.
+
+Use a secure browser-compatible mechanism, such as a short-lived, single-use WebSocket ticket issued after authenticated authorization, or another defensible authentication design.
+
+Do not accept an unauthenticated WebSocket connection as an authorized game participant.
+
+## F2. SSE authentication
+
+Ensure SSE connections are authenticated and viewer-redacted.
+
+Use a short-lived, restricted event-stream credential if browser limitations prevent setting Authorization headers.
+
+Do not expose long-lived bearer tokens in URLs.
+
+## F3. Browser credential handling
+
+Inspect current token storage and lifecycle.
+
+Ensure:
+
+- No tokens are included in DOM attributes or rendered HTML.
+- No tokens are written to logs.
+- No tokens are returned by state-rendering functions.
+- No cross-player credentials are accessible.
+- Logout and match completion clear the appropriate browser state.
+- Reconnect uses the correct match and participant credentials.
+- Refresh and navigation do not create new match sessions accidentally.
+
+Do not move tokens into a different browser storage mechanism and call it secure without considering the threat model. Prefer the existing account authentication architecture and an appropriate secure credential mechanism.
+
+## F4. Transport tests
+
+Create:
+
+`tests/phase_m2_transport_security.test.js`
+
+Verify unauthorized WebSocket handshakes/authentication, valid participant connection, event redaction, SSE authentication, replay authorization, token exposure through URLs/logging, reconnect, and cross-match isolation.
+
+---
+
+# 9. WORK PACKAGE G — SERVER-SIDE SESSION AND AUTHORIZATION INVARIANTS
+
+Perform a full source audit of every public session route and every session-manager entry point.
+
+Verify:
+
+- Create match.
+- Join match.
+- Read match state.
+- Read events.
+- Read active matches.
+- Read history.
+- Submit action.
+- Respond to interaction.
+- Heartbeat.
+- Reconnect.
+- Leave.
+- Forfeit.
+- End match.
+- Suspend.
+- Resume.
+
+For each endpoint, document:
+
+| Property | Required |
+|---|---|
+| Authentication requirement | Explicit |
+| Participant authorization | Explicit |
+| Match ownership check | Explicit |
+| Status validation | Explicit |
+| State mutation authority | Server-side |
+| Information redaction | Explicit |
+| Error behavior | Deterministic |
+
+Add adversarial tests for:
+
+- Missing credentials.
+- Invalid credentials.
+- Credentials from a different match.
+- Forged player ID.
+- Forged participant side.
+- Completed matches.
+- Forfeited matches.
+- Suspended matches.
+- Concurrent actions.
+- Replayed actions.
+- Out-of-turn actions.
+- Stale interactions.
+
+Keep AI-vs-AI, HUMAN-vs-AI, HUMAN-vs-HUMAN and HEADLESS_SIMULATION execution modes distinct.
+
+---
+
+# 10. WORK PACKAGE H — GENUINE MULTIPLAYER BROWSER REGRESSION
+
+Create:
+
+`tests/phase_m2_two_human_browser_e2e.test.js`
+
+Use two independent Chrome instances or independent real browser contexts with separate authentication credentials.
+
+Do not use one browser tab with two mocked player identities.
+
+## Required lifecycle
+
+1. Alice creates a HUMAN_VS_HUMAN match.
+2. Bob joins with a separate identity.
+3. Both browsers attach to the same match.
+4. Both receive their own redacted state.
+5. Neither receives the other's authentication credentials.
+6. Alice performs a legal action during Alice's turn.
+7. Bob receives the committed event.
+8. Bob attempts an unauthorized turn-progression action.
+9. Server rejects Bob's action.
+10. Alice's state remains unchanged by the rejected action.
+11. Bob receives a genuine pending decision where appropriate.
+12. Bob submits a valid response as the decision owner.
+13. Both browsers receive the committed event.
+14. Alice submits an invalid action.
+15. Alice retries the corrected action using the same ID where the operation is retryable.
+16. The corrected action is processed exactly once.
+17. Both clients refresh.
+18. Both clients leave the arena and navigate to the card database or keyword database.
+19. Both clients return to the existing match.
+20. The match resumes with correct state, clock, pending decisions and event sequence.
+21. One browser disconnects unexpectedly.
+22. The server identifies lease expiry.
+23. The opponent's game behavior follows the defined disconnect policy.
+24. The disconnected player reconnects.
+25. No action is duplicated.
+26. No event is duplicated.
+27. The match can conclude normally or through a forfeit.
+
+Verify both players can independently participate in the same match.
+
+Verify the existing four-minute turn clock and one-minute warning remain correct.
+
+Do not reduce browser tests to mocked DOM assertions.
+
+---
+
+# 11. WORK PACKAGE I — ADVERSARIAL TESTING AND REGRESSION
+
+Add the following dedicated Phase M.2 suites:
+
+1. `tests/phase_m2_credential_isolation.test.js`
+2. `tests/phase_m2_action_authority.test.js`
+3. `tests/phase_m2_action_idempotency.test.js`
+4. `tests/phase_m2_transaction_integrity.test.js`
+5. `tests/phase_m2_match_discovery_security.test.js`
+6. `tests/phase_m2_transport_security.test.js`
+7. `tests/phase_m2_two_human_browser_e2e.test.js`
+
+Add further tests where necessary.
+
+## Required test sequence
+
+First run all seven focused suites together:
+
+`node --test tests/phase_m2_credential_isolation.test.js tests/phase_m2_action_authority.test.js tests/phase_m2_action_idempotency.test.js tests/phase_m2_transaction_integrity.test.js tests/phase_m2_match_discovery_security.test.js tests/phase_m2_transport_security.test.js tests/phase_m2_two_human_browser_e2e.test.js`
+
+Then run the eight existing Phase M.1 suites.
+
+Then run:
+
+`node scripts/run_master_verification.mjs`
+
+Record the actual output, process exit code, executed suites, passed tests, failed tests, skipped tests, timeouts, and blocked tests.
+
+The master runner currently represents a curated battery, not every discovered test file. Preserve that distinction in the report.
+
+Do not classify previously failing suites as pre-existing without comparing their actual baseline and failure evidence.
+
+If the master runner has been modified, run its own adversarial tests.
+
+## Regression invariants
+
+The implementation must not break:
+
+- Phase L/L.1 player decision authority.
+- Pending interaction pause and resume.
+- Resolver continuation.
+- Card selection and target validation.
+- Human-vs-human behavior.
+- Human-vs-AI behavior.
+- AI-vs-AI behavior.
+- Headless simulation.
+- Persistent session restoration.
+- Player 2 reconnection.
+- Connection leases.
+- Turn clocks.
+- WebSocket synchronization.
+- SSE synchronization.
+- Hidden-card redaction.
+- Event sequence monotonicity.
+- Action idempotency.
+
+---
+
+# 12. WORK PACKAGE J — FINAL INDEPENDENT VERIFICATION
+
+Do not rely exclusively on tests authored during this phase.
+
+For each critical defect, include:
+
+1. Original source location.
+2. Original failure reproduction.
+3. Implemented correction.
+4. Corrected source location.
+5. Test that reproduces the old exploit.
+6. Test proving the exploit is now rejected.
+7. Regression coverage.
+8. Remaining limitations.
+
+Perform fresh, direct adversarial reproductions after implementation.
+
+At minimum, repeat these exact tests:
+
+**Credential exposure**
+- Retrieve anonymous spectator state.
+- Retrieve Player 1 state.
+- Retrieve Player 2 state.
+- Inspect SQLite snapshots.
+- Inspect events and WebSocket/SSE responses.
+- Search every result for both player tokens.
+
+**Turn authority**
+- Player 2 attempts to advance Player 1's turn.
+- Player 1 attempts an action belonging to Player 2's pending interaction.
+- Both attempts must be rejected without state mutation.
+- Verify legitimate decisions remain possible for their actual owners.
+
+**Failed action poisoning**
+- Submit an invalid action with a fixed ID.
+- Confirm rejection does not permanently consume the ID.
+- Submit a corrected valid action with the same ID.
+- Confirm exactly one successful commit and one event.
+
+**Atomicity**
+- Inject a persistence failure.
+- Confirm state, event history, and committed action ledger remain consistent.
+- Restore the match and verify the same result.
+
+**Match enumeration**
+- Attempt access using another player's ID.
+- Attempt access using a foreign match token.
+- Attempt anonymous access.
+- Verify none can retrieve private match lists or history.
+
+---
+
+# 13. WORK PACKAGE K — REPORTS AND ACCEPTANCE
+
+Create:
+
+`reports/phase_m2/`
+
+Generate these files:
+
+1. `PHASE_M2_IMPLEMENTATION_REPORT.md`
+2. `PHASE_M2_CREDENTIAL_ISOLATION_REPORT.md`
+3. `PHASE_M2_ACTION_AUTHORITY_REPORT.md`
+4. `PHASE_M2_IDEMPOTENCY_AND_RECOVERY_REPORT.md`
+5. `PHASE_M2_TRANSACTION_INTEGRITY_REPORT.md`
+6. `PHASE_M2_API_SECURITY_REPORT.md`
+7. `PHASE_M2_TRANSPORT_SECURITY_REPORT.md`
+8. `PHASE_M2_TWO_HUMAN_E2E_REPORT.md`
+9. `PHASE_M2_REGRESSION_REPORT.md`
+10. `PHASE_M2_TEST_DISPOSITION_REPORT.md`
+11. `PHASE_M2_KNOWN_LIMITATIONS.md`
+12. `PHASE_M2_FINAL_ACCEPTANCE_MATRIX.csv`
+
+The final acceptance matrix must map every requirement to:
+
+- Requirement ID.
+- Implementation status.
+- Modified source files.
+- Test file.
+- Exact test name or ID.
+- Test result.
+- Evidence.
+- Remaining limitation.
+
+Use these classifications:
+
+- `IMPLEMENTED_AND_INDEPENDENTLY_VERIFIED`
+- `IMPLEMENTED_BUT_PARTIALLY_VERIFIED`
+- `FAILED_VERIFICATION`
+- `BLOCKED_ENVIRONMENT`
+- `NOT_IMPLEMENTED`
+- `NOT_APPLICABLE`
+
+Do not use a blanket 100% completion claim.
+
+## Final acceptance criteria
+
+Phase M.2 can only be marked **FULLY ACCEPTED** when:
+
+1. No raw credentials exist in serialized state or externally exposed responses.
+2. Existing snapshots are safely migrated.
+3. MatchContext no longer depends on persisted plaintext credentials.
+4. Participant identity comes from server-side authentication.
+5. Unauthorized turn progression is rejected.
+6. Pending decisions are restricted to their real decision owners.
+7. Client identity claims cannot override server identity.
+8. Invalid actions do not poison idempotency keys.
+9. Successful duplicates cannot execute twice.
+10. Conflicting concurrent actions cannot both commit.
+11. State, event and action records are transactionally consistent.
+12. Broadcasts occur only after durable commits.
+13. Active match and history endpoints are authenticated and participant-scoped.
+14. WebSocket and SSE do not leak credentials or private state.
+15. The two-human browser E2E suite proves genuine independent play.
+16. Navigation, refresh, disconnect and reconnect preserve the match correctly.
+17. Existing M.1 and relevant L/L.1 regression tests remain passing.
+18. The curated master regression battery executes successfully.
+19. All test counts and disposition figures reconcile.
+20. Remaining limitations are explicitly documented.
+
+If any critical acceptance condition is not met, report **CONDITIONALLY ACCEPTED** or **NOT ACCEPTED**, not FULLY ACCEPTED.
+
+---
+
+# 14. EXECUTION ORDER
+
+Follow this exact sequence:
+
+**A → B → C → D → E → F → G → H → I → J → K**
+
+Do not skip a work package.
+
+Do not stop after identifying defects.
+
+Do not stop after generating test files.
+
+Implement the corrections, run the tests, inspect the results, fix failures introduced by your own changes, and produce the final evidence package.
+
+At completion, provide a concise summary containing:
+
+- Exact files modified.
+- Credential isolation result.
+- Turn authorization result.
+- Idempotency result.
+- Transaction integrity result.
+- API security result.
+- Two-human browser E2E result.
+- Focused M.2 test totals.
+- Existing M.1 regression result.
+- Curated master regression result.
+- Actual process exit codes.
+- Outstanding issues.
+- Final acceptance verdict.
+
+**Final directive:** The objective is not merely to make the tests green. The objective is to ensure that the server is the sole authority over player identity, turn legality, interaction ownership, match state, and committed game events. The browser must remain a client of that authority, never an alternative source of truth.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-11-22T22:33:03+05:30.
+</ADDITIONAL_METADATA>

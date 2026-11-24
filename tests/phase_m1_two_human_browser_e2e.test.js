@@ -168,6 +168,7 @@ test('PHASE-M1-WP-G: Complete True Human-vs-Human End-to-End Two-Browser Verific
 
     // Step 11: Website navigation independence (navigate to /browse.html and back)
     await harnessA.navigate('/browse.html');
+    await harnessA.waitForFunction('Boolean(document.title && document.title.length > 0)', 10000);
     const browseTitle = await harnessA.evaluate('document.title');
     assert.ok(browseTitle.includes('Card') || browseTitle.includes('Browse') || browseTitle.includes('Battle Spirits'));
 

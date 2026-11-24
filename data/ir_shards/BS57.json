@@ -20850,7 +20850,6 @@
     "keywords": [],
     "abilities": [
       {
-        "id": "BS57-054#AB_WHEN_ATTACKS_NONE_LV1_LV2_c579ebf031ec705a452dbdcfe0e426e46e942d283fd79aec6924fb16479b6066_d02a1901204f66a3ae520d6f6b382ccb",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -20860,20 +20859,34 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_ATTACKS",
+          "timings": [
+            "WHEN_ATTACKS"
+          ],
           "timingLabel": "When Attacks",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Draw two cards, then discard two cards from your Hand. Then, if you have a card set, destroy an opposing Cost 7 or less Spirit."
         },
+        "originalAbilityText": "[LV1][LV2] (When Attacks)\nDraw two cards, then discard two cards from your Hand. Then, if you have a card set, destroy an opposing Cost 7 or less Spirit.",
+        "abilityIndex": 0,
         "clauses": [
           {
-            "rawText": "Draw two cards, then discard two cards from your Hand.",
-            "cleanText": "Draw two cards, then discard two cards from your Hand",
+            "rawText": "Draw two cards",
+            "originalClauseText": "Draw two cards",
+            "cleanText": "Draw two cards",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -20887,8 +20900,28 @@
             }
           },
           {
+            "rawText": "discard two cards from your Hand.",
+            "originalClauseText": "discard two cards from your Hand.",
+            "cleanText": "discard two cards from your Hand",
+            "clauseIndex": 1,
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 2,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
+          },
+          {
             "rawText": "if you have a card set, destroy an opposing Cost 7 or less Spirit.",
+            "originalClauseText": "if you have a card set, destroy an opposing Cost 7 or less Spirit.",
             "cleanText": "destroy an opposing Cost 7 or less Spirit",
+            "clauseIndex": 2,
             "link": "then",
             "isOptional": false,
             "isCost": false,
@@ -20911,11 +20944,26 @@
         ],
         "unsupported": [],
         "legacyId": "BS57-054#a0",
-        "physicalId": "BS57-054#AB_WHEN_ATTACKS_NONE_LV1_LV2_c579ebf031ec705a452dbdcfe0e426e46e942d283fd79aec6924fb16479b6066_d02a1901204f66a3ae520d6f6b382ccb",
-        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_c579ebf031ec705a452dbdcfe0e426e46e942d283fd79aec6924fb16479b6066_d02a1901204f66a3ae520d6f6b382ccb"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS57-054#AB_WHEN_ATTACKS_NONE_LV1_LV2_3962224731606c6503e16adc40f403cf853c84d29a361afc31bd44ae08ae1637_f97563c8d0d5492eb668ff59a5447d61",
+        "physicalId": "BS57-054#AB_WHEN_ATTACKS_NONE_LV1_LV2_3962224731606c6503e16adc40f403cf853c84d29a361afc31bd44ae08ae1637_f97563c8d0d5492eb668ff59a5447d61",
+        "semanticId": "SEM#AB_WHEN_ATTACKS_NONE_LV1_LV2_3962224731606c6503e16adc40f403cf853c84d29a361afc31bd44ae08ae1637_f97563c8d0d5492eb668ff59a5447d61",
+        "semanticIdV3": "SEM3#AB_WHEN_ATTACKS_NONE_LV1_LV2_28206a62451e5bc97af615b1a5eb10a3c1792f811f6c4c21d58af5a820a50f3d_67e38f639c8dbe364b10ba55d6112475",
+        "timingSemantics": {
+          "timingOwner": "ANY",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "WHEN_ATTACKS"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       },
       {
-        "id": "BS57-054#AB_ATTACK_STEP_NONE_LV2_24d36b1f6745c1fcf0ae614d80fc377b2b9f0080bdc12ab53df6c067ceff724b_a2d0a6ceada455af4ac4eff8e2d29b35",
         "type": "ABILITY",
         "header": {
           "levels": [
@@ -20924,37 +20972,70 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "ATTACK_STEP",
+          "timings": [
+            "ATTACK_STEP"
+          ],
           "timingLabel": "Your Attack Step",
           "timingStep": "ANY",
+          "timingCause": "ANY",
+          "timingOwner": "SELF",
+          "timingTriggers": [
+            "ATTACK_STEP"
+          ],
+          "activationRestrictions": [],
           "limit": null,
           "cantStack": false,
           "keyword": null,
+          "keywords": [],
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
           "cleanBody": "When your \"Lombardia\" Spirit attacks, if that target has three or less symbols, during this turn, that target gains an extra Blue symbol."
         },
+        "originalAbilityText": "[LV2] (Your Attack Step)\nWhen your \"Lombardia\" Spirit attacks, if that target has three or less symbols, during this turn, that target gains an extra Blue symbol.",
+        "abilityIndex": 1,
         "clauses": [
           {
             "rawText": "When your \"Lombardia\" Spirit attacks, if that target has three or less symbols, during this turn, that target gains an extra Blue symbol.",
+            "originalClauseText": "When your \"Lombardia\" Spirit attacks, if that target has three or less symbols, during this turn, that target gains an extra Blue symbol.",
             "cleanText": "When your \"Lombardia\" Spirit attacks, if that target has three or less symbols, during this turn, that target gains an extra Blue symbol",
+            "clauseIndex": 0,
             "link": null,
             "isOptional": false,
             "isCost": false,
             "condition": null,
             "duration": "DURING_THIS_TURN",
             "op": {
-              "op": "ADD_SYMBOL"
+              "op": "ADD_SYMBOL",
+              "color": "Blue",
+              "count": 1,
+              "side": "self"
             }
           }
         ],
         "unsupported": [],
         "legacyId": "BS57-054#a1",
-        "physicalId": "BS57-054#AB_ATTACK_STEP_NONE_LV2_24d36b1f6745c1fcf0ae614d80fc377b2b9f0080bdc12ab53df6c067ceff724b_a2d0a6ceada455af4ac4eff8e2d29b35",
-        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_24d36b1f6745c1fcf0ae614d80fc377b2b9f0080bdc12ab53df6c067ceff724b_a2d0a6ceada455af4ac4eff8e2d29b35"
+        "keywords": [],
+        "referencedKeywords": [],
+        "grantedKeywords": [],
+        "supportedKeywords": [],
+        "counteredKeywords": [],
+        "id": "BS57-054#AB_ATTACK_STEP_NONE_LV2_64ac80d2e72e0611d241a19e896c94688895ccc5c40aa5782ec88ae48dda7582_200921f12d5893fb32db0b291d98c3b2",
+        "physicalId": "BS57-054#AB_ATTACK_STEP_NONE_LV2_64ac80d2e72e0611d241a19e896c94688895ccc5c40aa5782ec88ae48dda7582_200921f12d5893fb32db0b291d98c3b2",
+        "semanticId": "SEM#AB_ATTACK_STEP_NONE_LV2_64ac80d2e72e0611d241a19e896c94688895ccc5c40aa5782ec88ae48dda7582_200921f12d5893fb32db0b291d98c3b2",
+        "semanticIdV3": "SEM3#AB_ATTACK_STEP_NONE_LV2_cbb8225aaf7c1f7e091cea02d7b916cddb45e40796c1a1e891e4836581d4697f_e5e90cafd1622cccddbed5e6647a92e6",
+        "timingSemantics": {
+          "timingOwner": "SELF",
+          "timingCause": "ANY",
+          "timingTriggers": [
+            "ATTACK_STEP"
+          ],
+          "activationRestrictions": [],
+          "hasEmbeddedTimingLabelText": false
+        }
       }
     ],
-    "compiledClausesCount": 3,
+    "compiledClausesCount": 4,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   },

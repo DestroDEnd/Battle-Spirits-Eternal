@@ -155,6 +155,8 @@ export function createGameState(playerDeck = [], opponentDeck = [], firstPlayer 
     modifiers: [], // Dynamic continuous modifiers
     pendingPrompts: [], // Active decisions awaiting player input (legacy)
     pendingInteractions: [], // Formal pending interaction protocol requests
+    pendingExecutions: [], // Serializable suspended resolver continuations
+    resolvingCards: [], // Cards currently mid-resolution (e.g. Magic awaiting interaction)
     abilityUses: {}, // Legacy turn-scoped activation limits mirror
     turnHistory: createEmptyTurnHistory(),
     restrictions: {
@@ -274,6 +276,12 @@ export function validateGameState(state) {
       errors.push(`Invalid card owner ${card.owner} on ${card.id} at ${location}`);
     }
   };
+
+  if (Array.isArray(state.resolvingCards)) {
+    for (let i = 0; i < state.resolvingCards.length; i++) {
+      recordCard(state.resolvingCards[i], `resolvingCards[${i}]`);
+    }
+  }
 
   for (const side of ['player', 'opponent']) {
     const p = state.players?.[side];

@@ -20,7 +20,7 @@
 
   const DB_NAME = 'BSEternal_Wasm_Storage';
   const STORE_NAME = 'db_binary';
-  const DB_KEY = 'battle_spirits.db_v4';
+  const DB_KEY = 'battle_spirits.db_v5';
 
   const isServerBackend = typeof window !== 'undefined' && window.location && (
     window.location.hostname === 'localhost' ||
@@ -48,13 +48,13 @@
     if (isJsonReady) return true;
     try {
       const candidates = [
-        getBaseDir() + 'data/cards_index.json?v=6.1',
-        './data/cards_index.json?v=6.1',
-        'data/cards_index.json?v=6.1',
-        getBaseDir() + 'data/cards_detailed.json?v=6.1',
-        './data/cards_detailed.json?v=6.1',
-        'data/cards_detailed.json?v=6.1',
-        '/data/cards_detailed.json?v=6.1'
+        getBaseDir() + 'data/cards_index.json?v=7.0',
+        './data/cards_index.json?v=7.0',
+        'data/cards_index.json?v=7.0',
+        getBaseDir() + 'data/cards_detailed.json?v=7.0',
+        './data/cards_detailed.json?v=7.0',
+        'data/cards_detailed.json?v=7.0',
+        '/data/cards_detailed.json?v=7.0'
       ];
       let res = null;
       for (const u of candidates) {
@@ -107,7 +107,7 @@
     if (cachedAltArtworksMap) return cachedAltArtworksMap;
     try {
       const fetchFn = (typeof window !== 'undefined' && window._originalFetch) ? window._originalFetch : fetch;
-      const res = await fetchFn(getBaseDir() + 'data/card_artworks.json?v=6.1');
+      const res = await fetchFn(getBaseDir() + 'data/card_artworks.json?v=7.0');
       if (res.ok) {
         cachedAltArtworksMap = await res.json();
         if (typeof window !== 'undefined') window.altArtworksMap = cachedAltArtworksMap;
@@ -260,13 +260,14 @@
         locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/${file}`
       });
 
-      // Proactively purge old v1, v2, and v3 cache if present
+      // Proactively purge old v1, v2, v3, and v4 cache if present
       try {
         const idb = await openIndexedDB();
         const tx = idb.transaction(STORE_NAME, 'readwrite');
         tx.objectStore(STORE_NAME).delete('battle_spirits.db_v1');
         tx.objectStore(STORE_NAME).delete('battle_spirits.db_v2');
         tx.objectStore(STORE_NAME).delete('battle_spirits.db_v3');
+        tx.objectStore(STORE_NAME).delete('battle_spirits.db_v4');
       } catch (e) {}
 
       let dbBuffer = await getCachedDbBuffer();
@@ -275,17 +276,30 @@
       if (dbBuffer) {
         try {
           dbInstance = new SQL.Database(new Uint8Array(dbBuffer));
-          const testStmt = dbInstance.prepare("SELECT COUNT(*) as cnt FROM cards WHERE name = 'The PartnerDemonLord Javad'");
+          const testStmt = dbInstance.prepare("SELECT COUNT(*) as cnt FROM cards WHERE card_number = 'BS77-001'");
           if (testStmt.step()) {
             const count = testStmt.getAsObject().cnt;
             if (!count || count < 1) {
-              console.warn('[WasmDB] Cached database is missing latest updates (e.g. Javad). Refreshing...');
+              console.warn('[WasmDB] Cached database is missing latest updates (e.g. BS-77, Ubataman). Refreshing...');
               needsFreshFetch = true;
             }
           } else {
             needsFreshFetch = true;
           }
           testStmt.free();
+
+          // Check if database contains outdated unhashed URLs for recovered cards
+          if (!needsFreshFetch) {
+            const imgStmt = dbInstance.prepare("SELECT image_url FROM cards WHERE card_number = 'BS77-001'");
+            if (imgStmt.step()) {
+              const u = String(imgStmt.getAsObject().image_url || '');
+              if (!u.includes('/images/') || !u.match(/\/images\/[0-9a-f]\/[0-9a-f]{2}\//i)) {
+                console.warn('[WasmDB] Cached database contains unhashed image URLs. Refreshing to official CDN URLs...');
+                needsFreshFetch = true;
+              }
+            }
+            imgStmt.free();
+          }
 
           // Check if database contains outdated unpurged records without artwork
           if (!needsFreshFetch) {
@@ -313,10 +327,10 @@
         showLoadingBanner("Updating Battle Spirits Card Database (23 MB)...");
         let res = null;
         const candidateUrls = [
-          getDbUrl() + '?v=6.1',
-          './battle_spirits.db?v=6.1',
-          'battle_spirits.db?v=6.1',
-          '/battle_spirits.db?v=6.1'
+          getDbUrl() + '?v=7.0',
+          './battle_spirits.db?v=7.0',
+          'battle_spirits.db?v=7.0',
+          '/battle_spirits.db?v=7.0'
         ];
 
         for (const u of candidateUrls) {
@@ -1167,7 +1181,7 @@
           const cardNum = (params.card_number || params.id || '').toLowerCase().trim();
           let artworks = null;
           try {
-            const rawRes = await window._originalFetch(getBaseDir() + 'data/card_artworks.json?v=6.1');
+            const rawRes = await window._originalFetch(getBaseDir() + 'data/card_artworks.json?v=7.0');
             if (rawRes.ok) {
               const allArts = await rawRes.json();
               artworks = allArts[cardName] || (cardNum ? allArts[cardNum] : null);
@@ -1244,7 +1258,7 @@
           const cardNum = (params.card_number || params.id || '').toLowerCase().trim();
           let artworks = null;
           try {
-            const rawRes = await window._originalFetch(getBaseDir() + 'data/card_artworks.json?v=6.1');
+            const rawRes = await window._originalFetch(getBaseDir() + 'data/card_artworks.json?v=7.0');
             if (rawRes.ok) {
               const allArts = await rawRes.json();
               artworks = allArts[cardName] || (cardNum ? allArts[cardNum] : null);
@@ -1363,7 +1377,7 @@
           const cardNum = (params.card_number || params.id || '').toLowerCase().trim();
           let artworks = null;
           try {
-            const rawRes = await window._originalFetch(getBaseDir() + 'data/card_artworks.json?v=6.1');
+            const rawRes = await window._originalFetch(getBaseDir() + 'data/card_artworks.json?v=7.0');
             if (rawRes.ok) {
               const allArts = await rawRes.json();
               artworks = allArts[cardName] || (cardNum ? allArts[cardNum] : null);

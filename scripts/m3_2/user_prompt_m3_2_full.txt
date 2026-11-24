@@ -1,0 +1,938 @@
+<USER_REQUEST>
+# PHASE M.3.2 — UNIVERSAL ACTION AUTHORITY, RESPONSE WINDOW ENFORCEMENT & FLASH TIMING REMEDIATION
+
+## PROJECT
+
+Battle Spirits Eternal (BSP)
+
+Workspace: `C:\Users\namis\Downloads\BSP`
+
+Target phases:
+- M.2 — Persistent Session Security and Transaction Integrity
+- M.3 — Rules-Driven Priority and Response Windows
+- M.3.1 — Flash Timing Scope and Card-Specific Restrictions
+- M.3.2 — Comprehensive Corrective Implementation
+
+## PRIMARY OBJECTIVE
+
+Perform a comprehensive architectural remediation of the defects independently reproduced after M.2, M.3 and M.3.1.
+
+The engine currently has a response-window architecture, but certain ordinary actions and direct engine methods can bypass it. Additionally, some Flash abilities still use outdated Attack-Step-only restrictions, and Flash timing validation does not consistently enforce actual response-window ownership.
+
+The objective is to make **the engine the sole authority for every action, timing window, priority decision, and legal Flash activation**.
+
+Do not simply change UI controls or add superficial checks to make tests pass.
+
+Fix the actual engine execution paths, session action router, timing classifier, compiler integration, response-window manager, persistence integration, and browser interface.
+
+Work sequentially through every work package below. Do not stop after the first successful test suite.
+
+---
+
+# PHASE A — BASELINE INSPECTION AND DEFECT REPRODUCTION
+
+Before modifying anything:
+
+1. Inspect the existing implementations of:
+   - `engine/index.js`
+   - `engine/response_window.js`
+   - `engine/windows.js`
+   - `engine/flash_timing.js`
+   - `engine/session_manager.js`
+   - `engine/session_store.js`
+   - `engine/state_serialization.js`
+   - `engine/interaction.js`
+   - `compiler/header_parser.js`
+   - `battle_arena.js`
+   - Existing M.2, M.3 and M.3.1 tests.
+
+2. Review the actual completion reports and acceptance matrices under:
+   - `reports/phase_m2/`
+   - `reports/phase_m3_response_windows/`
+   - `reports/phase_m3_1_flash_timing_correction/`
+
+3. Independently reproduce all five known defects.
+
+### Defect A1 — Ordinary action bypass during response windows
+
+Open a `FLASH_1` response window with the defender holding priority.
+
+Authenticate as the attacker and submit:
+
+`PLAY_CARD`
+
+using a valid card in hand.
+
+Previously, this action succeeded even though the attacker did not hold priority. The card was moved to the graveyard and its effect resolved while the defender still held priority.
+
+This MUST become impossible.
+
+### Defect A2 — Direct block declaration bypasses Flash 1
+
+Open `FLASH_1`, then directly call:
+
+`game.declareBlock(blockerStackId, 'opponent')`
+
+Previously, this bypassed the remaining Flash Timing, closed the window, and immediately resolved the battle.
+
+This MUST become impossible.
+
+### Defect A3 — Generic Flash field ability incorrectly rejected in Main Step
+
+`engine/index.js` contains an outdated Attack-Step-only check inside `activateAbility()`.
+
+It causes generic Flash abilities on field Spirits/Nexuses to fail in the controller's Main Step with:
+
+`FLASH_ONLY_DURING_ATTACK_STEP`
+
+This MUST be corrected.
+
+### Defect A4 — Incorrect handling of `(When Attacks) Flash`
+
+An event-triggered Flash ability is rejected through the old timing check before the proper classifier handles it.
+
+It must be classified and treated as a triggered ability, not as an ordinary manually activated Flash effect.
+
+### Defect A5 — Flash timing validator does not enforce response-window priority
+
+`validateFlashTiming()` checks the current game step and some card-specific restrictions, but does not consistently verify that an Attack Step activation is occurring inside a legitimate active Flash Timing window with the appropriate player's priority.
+
+This MUST be corrected.
+
+Record the original reproduction results before implementation.
+
+---
+
+# PHASE B — UNIVERSAL RESPONSE WINDOW ACTION AUTHORITY
+
+This is the highest-priority work package.
+
+The active response window must completely control which player can act and which actions can be performed.
+
+## B1. Centralized action authorization
+
+Create or refactor a central authorization mechanism used by BOTH:
+
+1. `BattleSessionManager.submitPlayerAction()`
+2. Direct engine action methods in `engine/index.js` and `engine/response_window.js`
+
+Do not maintain two independent and contradictory authorization systems.
+
+Every state-changing action must pass through authoritative validation.
+
+Audit at minimum:
+
+- `STEP_ADVANCE`
+- `ADVANCE_STEP`
+- `ATTACK`
+- `PLAY_CARD`
+- `SUMMON`
+- `SET_BURST`
+- `USE_CORE`
+- `END_TURN`
+- `ACTIVATE_ABILITY`
+- `USE_ACCEL`
+- `FLASH_ACTION`
+- `CAST_FLASH_MAGIC`
+- `DECLARE_BLOCK`
+- `PASS_BLOCK`
+- `PASS_PRIORITY`
+- `INTERACTION_RESPONSE`
+- Other existing action types capable of changing game state.
+
+Do not assume that protecting the REST endpoint automatically protects the engine.
+
+Direct method calls must also be safe.
+
+## B2. While a response window is active
+
+The engine must enforce these rules:
+
+- Only the current priority holder may submit a response.
+- Only actions permitted by the active response-window type may be performed.
+- The non-priority player cannot perform ordinary game actions.
+- The turn player cannot bypass the window by submitting `PLAY_CARD`, `SUMMON`, `USE_CORE`, or another action under a different action type.
+- Players cannot declare another attack during an active combat response window.
+- Players cannot advance the game step while a response window is unresolved.
+- Players cannot invoke direct block or battle-resolution methods to skip the response lifecycle.
+- A client cannot invent an action name, interaction ID, decision owner, card ID, or response type to bypass authorization.
+
+Validate the actual authenticated participant, not a client-supplied player identity.
+
+Return consistent errors such as:
+
+- `RESPONSE_WINDOW_ACTIVE`
+- `NOT_PRIORITY_PLAYER`
+- `ACTION_NOT_ELIGIBLE_IN_WINDOW`
+- `INTERACTION_NOT_PENDING`
+- `INVALID_CANDIDATE`
+- `FLASH_TIMING_NOT_OPEN`
+
+## B3. Preserve legitimate opponent responses
+
+Do not implement a simplistic rule that blocks every action from the non-active player.
+
+The defending player must be allowed to perform legitimate actions when:
+
+- They hold priority during Flash Timing.
+- They own a pending interaction.
+- They are entitled to declare a blocker.
+- They are responding to an effect or decision that explicitly assigns them responsibility.
+
+The active player must also receive priority when the response-window rules assign it to them.
+
+The authorization policy must depend on the current engine state and the actual action type.
+
+---
+
+# PHASE C — DIRECT ENGINE METHOD PROTECTION
+
+Fix the underlying engine methods so that they cannot independently bypass the response-window lifecycle.
+
+Inspect and protect:
+
+- `declareAttack()`
+- `declareBlock()`
+- `resolveDirectHit()`
+- `resolveBattleComparison()`
+- `endBattle()`
+- `endAttack()`
+- `playCard()`
+- `activateAbility()`
+- `executeAccel()`
+- `passPriority()`
+- `ResponseWindowManager.submitResponse()`
+- Any other methods that can advance or resolve combat.
+
+## C1. Block declaration
+
+A block must only be declared through an authorized `BLOCK_DECLARATION` window.
+
+The defender must hold the appropriate decision ownership and priority.
+
+Remove any implementation that allows `declareBlock()` to close `FLASH_1` and skip the remaining Flash Timing.
+
+The only valid sequence is:
+
+`FLASH_1 closes → BLOCK_DECLARATION opens → Defender declares block → WHEN_BLOCKS triggers resolve → FLASH_2 opens`
+
+## C2. Passing block
+
+The defender must explicitly choose `PASS_BLOCK` or the appropriate no-block action.
+
+Only after a valid defender decision may the engine skip Flash 2 and resolve an unblocked attack.
+
+Calling `resolveDirectHit()` directly must not allow a caller to bypass the defender's mandatory block decision.
+
+Respect mandatory blocking rules such as `mustBlockIfAble`.
+
+## C3. Battle comparison
+
+BP comparison must not happen merely because a block was declared.
+
+It must occur only after:
+
+1. A valid block declaration.
+2. All relevant `WHEN_BLOCKS` triggers have completely resolved.
+3. Flash 2 has opened.
+4. Both players have passed consecutively and Flash 2 has legitimately closed.
+
+Do not allow direct calls to `resolveBattleComparison()` to circumvent this sequence.
+
+Preserve existing battle-resolution mechanics, BP modifiers, destruction rules, prevention effects, and state-based actions.
+
+## C4. No premature window closure
+
+Do not close an active window merely because a different method was called.
+
+Window transitions must occur through the authorized response-window lifecycle.
+
+---
+
+# PHASE D — FLASH ACTION EXECUTION INTEGRITY
+
+This work package is particularly important.
+
+Currently, `ResponseWindowManager.handleFlashAction()` executes the requested action but does not consistently inspect the underlying action result before resetting consecutive passes and alternating priority.
+
+This must be fixed.
+
+## D1. Validate before execution
+
+Before executing a Flash action, verify:
+
+- The current response window is open.
+- The caller holds priority.
+- The requested action is permitted by the window.
+- The submitted card or ability exists.
+- The card belongs to the submitting player and is in the correct zone.
+- The ability exists and is physically addressable.
+- The card's Flash timing restrictions permit activation.
+- The player's current game state permits activation.
+- Costs can be paid.
+- Candidate membership and all restrictions are satisfied.
+
+## D2. Validate the execution result
+
+After execution, inspect the actual result returned by:
+
+- `game.playCard()`
+- `game.activateAbility()`
+- `game.executeAccel()`
+- Other supported Flash action handlers.
+
+Do not treat an unsuccessful execution as a successful Flash.
+
+A failed action must NOT:
+
+- Reset consecutive passes.
+- Alternate priority.
+- Add a successful Flash entry to response history.
+- Consume a card or cost.
+- Close the current window.
+- Create an event representing a successful activation.
+
+Only a successfully committed Flash action may reset consecutive passes to zero and alternate priority.
+
+## D3. Safe rollback
+
+If an action fails after partially mutating game state, restore the previous valid state without creating inconsistent events or costs.
+
+Preserve M.2's transactional persistence guarantees.
+
+Do not broadcast a successful action event before the authoritative commit succeeds.
+
+---
+
+# PHASE E — CORRECT FLASH TIMING MODEL
+
+Remove the incorrect assumption that every Flash effect is restricted to the Attack Step.
+
+The authoritative Flash timing model must distinguish:
+
+1. Generic Flash effects.
+2. Card-specific Attack-Step restrictions.
+3. Event-triggered Flash effects.
+4. Flash Timing-only effects.
+5. Flash effects requiring an active battle.
+6. Main Step and Attack Step timing.
+7. Turn-owner restrictions.
+
+Use the existing `engine/flash_timing.js` architecture, but correct the implementation comprehensively.
+
+## E1. Generic Flash
+
+A generic Flash effect without an explicit narrower timing restriction is available:
+
+**During the controller's Main Step**
+- Only the active player can use it.
+- The active player pays the required cost.
+- The effect resolves normally.
+- The active player retains initiative.
+- No artificial opponent response window is created.
+- The player may continue performing normal Main Step actions.
+
+**During battle Flash Timing**
+- Both players can use legal generic Flash effects when they hold priority.
+- The normal response-window lifecycle controls the action.
+- After successful resolution, priority alternates.
+- Consecutive passes reset to zero after a successful Flash.
+
+A generic Flash effect must NOT be globally restricted to the Attack Step.
+
+## E2. Card-specific restrictions
+
+Explicit card text overrides generic Flash availability.
+
+Implement and verify these categories:
+
+| Card timing qualifier | Permitted timing |
+|---|---|
+| Generic Flash | Controller's Main Step and either player's battle Flash Timing |
+| `(Your Attack Step)` | Only the controller's Attack Step |
+| `(Opponent's Attack Step)` | Only the opponent's Attack Step |
+| `(Either Attack Step)` | Either player's Attack Step |
+| `During Attack` | Only during a qualifying active battle and permitted Flash Timing |
+| `During Flash Timing only` | Only an active battle Flash Timing window |
+| `(When Attacks) Flash` | Event-triggered resolution upon the applicable attack event |
+
+Do not assume that similar-looking text always represents the same timing rule. Confirm the exact semantics against the existing card corpus and the official rules already referenced in the project reports.
+
+## E3. Turn ownership
+
+For a card controlled by Player A:
+
+- `(Your Attack Step)` is legal when Player A is the attacking turn player.
+- `(Opponent's Attack Step)` is legal when Player B is attacking and Player A is defending.
+- `(Either Attack Step)` can be legal during either player's Attack Step, subject to actual Flash Timing priority.
+- `During Attack` requires the specified battle context.
+- `During Flash Timing only` must not be available outside an active Flash Timing window.
+
+A valid game step alone is not sufficient to authorize an Attack Step Flash.
+
+The player must also have actual response-window priority.
+
+## E4. Triggered Flash
+
+`(When Attacks) Flash` must be classified as an event-triggered effect when that is what the card specifies.
+
+It must:
+
+- Resolve through the trigger system at the correct timing.
+- Not appear as an ordinary voluntary Flash action.
+- Not be manually activated as a free Flash.
+- Not be rejected by the legacy blanket Attack-Step-only guard before trigger classification.
+- Resolve in the correct order relative to other attack triggers and Flash Timing.
+
+Do not confuse a triggered effect with a voluntary Flash activation.
+
+---
+
+# PHASE F — REMOVE OUTDATED TIMING CHECKS
+
+Audit every remaining implementation of:
+
+- `FLASH_ONLY_DURING_ATTACK_STEP`
+- `FLASH_ONLY_DURING_ATTACK`
+- Hardcoded Flash-only step checks.
+- Duplicate Flash timing checks.
+- UI-only Flash eligibility decisions.
+- Compiler-generated timing restrictions that conflict with `flashTimingSpec`.
+
+Specifically inspect:
+
+`engine/index.js`
+
+The old restriction in `activateAbility()` must be removed or correctly replaced so that generic Flash abilities can activate during the controller's Main Step.
+
+The new central validator must be responsible for timing eligibility.
+
+Do not simply delete all timing checks. Replace obsolete checks with correct centralized validation.
+
+Also inspect `playCard()` and `executeAccel()` so their timing decisions agree with `activateAbility()`.
+
+The three activation routes must produce consistent results.
+
+---
+
+# PHASE G — COMPILER, IR AND CARD DATABASE RECONCILIATION
+
+Correct timing classification across:
+
+- `compiler/header_parser.js`
+- `engine/flash_timing.js`
+- Compiled ability headers.
+- `compiledIr.abilities`.
+- Runtime card objects.
+- Raw card effect text.
+- Japanese timing text.
+- Existing card timing metadata.
+
+The compiler and runtime validator must agree on the same timing specification.
+
+## G1. Structured timing metadata
+
+Each applicable Flash ability should carry structured metadata identifying:
+
+- `isFlash`
+- `isGenericFlash`
+- `timingQualifier`
+- `allowedSteps`
+- `allowedTurnOwners`
+- `requiresBattle`
+- `requiresFlashWindow`
+- `triggerCondition`
+- Any additional restrictions required by actual card text.
+
+## G2. Parser completeness
+
+Audit the compiler for all supported qualifiers, including:
+
+- Your Attack Step
+- Opponent's Attack Step
+- Either Attack Step
+- During Attack
+- During Flash Timing only
+- When Attacks
+
+Do not let the compiler classify an ability as generic merely because one timing qualifier was not recognized.
+
+Support English and Japanese variants present in the project's card data.
+
+## G3. Database-wide audit
+
+Use the existing card database and timing audit data.
+
+Do not blindly rewrite all card records.
+
+Audit all cards classified as Flash and produce a classification summary showing:
+
+- Total Flash cards inspected.
+- Generic Flash count.
+- Your Attack Step count.
+- Opponent's Attack Step count.
+- Either Attack Step count.
+- During Attack count.
+- Flash Timing-only count.
+- Event-triggered count.
+- Ambiguous or unresolved cards.
+
+Verify representative real cards from every category, including cards that have both Main and Flash abilities.
+
+Record unresolved or ambiguous classifications instead of silently inventing a rule.
+
+Do not modify the 514 IR shards or unrelated card data merely to satisfy an audit total.
+
+---
+
+# PHASE H — RESPONSE WINDOW PRIORITY AND LIFECYCLE
+
+Preserve the existing M.3 architecture and correct its implementation.
+
+The authoritative Attack Step battle sequence must be:
+
+1. Attack declaration.
+2. `WHEN_ATTACKS` triggers resolve completely.
+3. Flash Timing 1 opens.
+4. Defender receives first priority.
+5. Priority alternates after a pass or successfully resolved Flash.
+6. Flash Timing 1 closes only after two consecutive passes.
+7. Block Declaration opens.
+8. Defender chooses a legal blocker or explicitly passes.
+9. If a block is declared, `WHEN_BLOCKS` triggers resolve.
+10. Flash Timing 2 opens.
+11. Defender receives first priority.
+12. Priority alternates after a pass or successful Flash.
+13. Flash Timing 2 closes only after two consecutive passes.
+14. BP comparison and battle resolution occur.
+
+If the defender passes block:
+
+- Skip Flash Timing 2.
+- Resolve the unblocked attack and corresponding life damage.
+- Preserve relevant damage prevention, must-block restrictions, and other card effects.
+
+## H1. Non-forfeiture rule
+
+Passing once must not permanently surrender a player's opportunity.
+
+Example:
+
+1. Defender passes.
+2. Attacker receives priority.
+3. Attacker plays a successful Flash.
+4. Consecutive passes reset to zero.
+5. Priority returns to defender.
+
+The defender must be able to respond again.
+
+## H2. Failed Flash attempts
+
+If a player attempts an illegal Flash:
+
+- Do not consume priority.
+- Do not reset the pass counter.
+- Do not change the response-window owner.
+- Do not consume resources or the card.
+- Return an explicit failure reason.
+
+## H3. Trigger execution
+
+`WHEN_ATTACKS`, `WHEN_BLOCKS`, and other relevant triggers must resolve completely before the applicable Flash window opens.
+
+A Flash must never interrupt an already resolving effect.
+
+---
+
+# PHASE I — EXECUTION MODES AND INTERACTION PROTOCOL
+
+Preserve all four supported execution modes.
+
+### HUMAN_VS_HUMAN
+
+- Each player's response must come from that player's authenticated session.
+- Never use AI or heuristic fallback to answer for a human.
+- The correct browser must receive the correct interaction.
+- The non-priority client must see a waiting state.
+- The priority client must see the available legal actions and Pass option.
+
+### HUMAN_VS_AI
+
+- Human decisions must await explicit human input.
+- AI decisions may be automatically produced only for the AI-controlled side.
+- AI must use the same legal candidate pool and authority checks.
+
+### AI_VS_AI
+
+- Both players can resolve response windows autonomously through the supported AI decision interface.
+
+### HEADLESS_SIMULATION
+
+- Both sides can resolve decisions deterministically.
+- No browser dependency.
+- Preserve simulation speed and deterministic rules evaluation.
+
+Do not build four different Flash implementations.
+
+All execution modes must use the same authoritative rules and candidate generation.
+
+---
+
+# PHASE J — SESSION PERSISTENCE, RECONNECTION AND REALTIME SYNCHRONIZATION
+
+Preserve M.2's security and transaction guarantees.
+
+Verify that the following survive:
+
+- An active Flash 1 window.
+- Current priority owner.
+- Consecutive pass count.
+- Flash action history.
+- Active block-declaration window.
+- Flash 2 window.
+- Current attacker and blocker identities.
+- Pending interaction ID.
+- Window lifecycle and status.
+- Any suspended/resumable parent interaction.
+
+Verify persistence across:
+
+1. Page refresh.
+2. Navigation away from the arena and back.
+3. Temporary disconnect.
+4. Player reconnection.
+5. Server process restart.
+
+The reconstructed game must not lose or duplicate response windows.
+
+Recalculate legal candidates against the restored state rather than trusting stale client-provided candidate information.
+
+Preserve M.2:
+- Credential isolation.
+- Token-hash-based authentication.
+- Single-use transport ticket security.
+- Atomic action/state/event persistence.
+- Idempotent committed actions.
+- Failed-action non-poisoning.
+- Authenticated match discovery.
+- Broadcast-after-commit ordering.
+
+Do not reintroduce plaintext authentication tokens into serialized game state.
+
+---
+
+# PHASE K — BROWSER ARENA INTEGRATION
+
+Inspect `battle_arena.js` and the related UI.
+
+The browser is only a projection and input interface. It must not decide game rules.
+
+Implement and verify:
+
+### Flash Timing interface
+
+When Flash Timing opens, the priority holder must clearly see:
+
+- Current timing: Flash 1 or Flash 2.
+- Whether they currently hold priority.
+- Eligible Flash Magic cards.
+- Eligible field Flash abilities.
+- Eligible Flash Accel options.
+- Available costs.
+- A clear `Pass Priority` action.
+
+When the opponent holds priority:
+- Disable the local player's response actions.
+- Show a waiting message.
+- Update the interface when priority returns.
+
+### Block declaration interface
+
+The defender must receive an explicit choice to:
+
+- Select an eligible blocker.
+- Pass block, when rules permit.
+
+Do not automatically choose a blocker or automatically pass.
+
+### Synchronization
+
+The interface must update from server-authoritative state and events.
+
+Do not permit stale buttons, duplicate submissions, rapid-click bypasses, or locally invented state transitions.
+
+A successful server response is the only source of truth for an action being committed.
+
+---
+
+# PHASE L — COMPREHENSIVE AUTOMATED TESTING
+
+Create tests for every defect and rule above.
+
+Do not merely modify old tests to match the new implementation.
+
+Add the following dedicated suites:
+
+1. `tests/phase_m3_2_universal_action_authority.test.js`
+2. `tests/phase_m3_2_direct_engine_method_guards.test.js`
+3. `tests/phase_m3_2_flash_execution_integrity.test.js`
+4. `tests/phase_m3_2_flash_timing_validation.test.js`
+5. `tests/phase_m3_2_flash_compiler_reconciliation.test.js`
+6. `tests/phase_m3_2_response_window_lifecycle.test.js`
+7. `tests/phase_m3_2_response_window_persistence.test.js`
+8. `tests/phase_m3_2_two_human_browser_e2e.test.js`
+9. `tests/phase_m3_2_execution_modes.test.js`
+
+## L1. Universal action authority tests
+
+Explicitly test that every ordinary action is rejected while another player holds response-window priority.
+
+Include:
+
+- `PLAY_CARD`
+- `SUMMON`
+- `USE_CORE`
+- `SET_BURST`
+- `END_TURN`
+- `STEP_ADVANCE`
+- `ATTACK`
+- Direct engine methods that mutate state.
+
+Test both session API requests and direct engine calls.
+
+Also test that legitimate priority-holder responses remain available.
+
+## L2. Direct engine bypass tests
+
+Test the following exact scenarios:
+
+- `declareBlock()` cannot close Flash 1.
+- `resolveDirectHit()` cannot bypass block declaration.
+- `resolveBattleComparison()` cannot bypass Flash 2.
+- `endAttack()` cannot terminate an unresolved combat response window.
+- A direct `playCard()` call cannot use Flash during Attack Step without a legitimate Flash response window.
+- A direct `activateAbility()` call cannot activate Flash without valid timing and priority.
+
+## L3. Flash timing matrix
+
+Test generic Flash:
+
+- Controller Main Step: allowed.
+- Opponent Main Step: rejected.
+- Controller's Main Step with generic Flash ability on field: allowed.
+- Controller's Main Step with generic Flash Accel: allowed.
+- Main Step Flash does not open a response window.
+- Multiple Main Step Flash actions do not surrender the active player's initiative.
+
+Test card-specific restrictions:
+
+- Your Attack Step.
+- Opponent's Attack Step.
+- Either Attack Step.
+- During Attack.
+- During Flash Timing only.
+- When Attacks.
+
+Test every category in Main Step, both players' Attack Steps, active Flash 1 and Flash 2 windows, and outside combat where applicable.
+
+## L4. Successful versus failed Flash execution
+
+Test:
+
+- A successful Flash resets consecutive passes to zero.
+- A successful Flash alternates priority.
+- A failed Flash preserves priority and pass count.
+- Insufficient cost preserves priority and card location.
+- An illegal ability preserves priority and state.
+- Invalid candidate IDs do not alter the window.
+- Duplicate requests do not execute effects twice.
+- Failed execution creates no false success event.
+
+## L5. Browser E2E
+
+Use two genuinely independent Chrome browser contexts.
+
+Do not use one browser with simulated player identities.
+
+The browser E2E must cover:
+
+1. Create a HUMAN_VS_HUMAN match.
+2. Join using a second independently authenticated browser.
+3. Advance to Attack Step.
+4. Summon or prepare a real test Spirit.
+5. Declare an attack.
+6. Verify defender receives Flash 1 priority.
+7. Verify attacker cannot use ordinary actions while defender holds priority.
+8. Defender passes.
+9. Attacker receives priority.
+10. Attacker successfully uses a generic Flash effect.
+11. Verify defender receives priority again.
+12. Defender responds with a legal Flash effect.
+13. Verify priority alternation continues.
+14. Both players pass consecutively.
+15. Block Declaration appears.
+16. Defender declares a blocker.
+17. Verify Flash 2 opens.
+18. Verify defender receives first Flash 2 priority.
+19. Resolve Flash 2 through priority alternation and consecutive passes.
+20. Verify BP comparison resolves only afterward.
+21. Repeat an unblocked attack path and confirm Flash 2 is skipped.
+22. Refresh one browser during an open response window.
+23. Navigate away and return.
+24. Verify both browsers remain synchronized.
+
+Also test a deliberately invalid Flash attempt and verify it does not consume priority.
+
+The test must inspect actual authoritative server state, not just the UI labels.
+
+---
+
+# PHASE M — REGRESSION VERIFICATION
+
+After implementation, execute verification in this order:
+
+### M1. New M.3.2 suites
+
+Run every new M.3.2 test suite.
+
+### M2. M.3 and M.3.1 suites
+
+Re-run all existing response-window and Flash timing suites, including:
+
+- `tests/phase_m3_response_window_manager.test.js`
+- `tests/phase_m3_flash_priority.test.js`
+- `tests/phase_m3_block_and_second_flash.test.js`
+- `tests/phase_m3_action_progression_lock.test.js`
+- All `tests/phase_m3_1_*.test.js` suites.
+- `tests/accel_mechanics.test.js`
+- `tests/arena_ui_and_timer.test.js`
+
+### M3. M.2 regression
+
+Re-run all eight M.1/M.2 persistent session security, durability, concurrency, transport, and browser suites.
+
+### M4. Full master verification
+
+Run:
+
+`node scripts/run_master_verification.mjs`
+
+Also run the standalone suites not included in the curated master battery, particularly the new M.3.2 suites and all relevant M.3.1 suites.
+
+Report accurately:
+- Number of discovered test files.
+- Number of configured master suites.
+- Number of suites actually executed.
+- Total executed test cases.
+- Passed.
+- Failed.
+- Skipped.
+- Timed out.
+- Browser E2E suites.
+- Standalone suites executed outside the master battery.
+
+Do not equate discovered test files with executed tests.
+
+Do not claim 100% master regression success unless the actual command completed successfully and its results confirm that claim.
+
+If the full runner exceeds its configured timeout, run the appropriate subsets independently and document the limitation. Do not fabricate a completion result.
+
+---
+
+# PHASE N — FINAL INDEPENDENT ACCEPTANCE EVIDENCE
+
+Produce a new report directory:
+
+`reports/phase_m3_2_action_gate_and_flash_authority/`
+
+Create:
+
+1. `PHASE_M3_2_IMPLEMENTATION_REPORT.md`
+2. `PHASE_M3_2_INITIAL_DEFECT_REPRODUCTIONS.md`
+3. `PHASE_M3_2_ACTION_AUTHORITY_REPORT.md`
+4. `PHASE_M3_2_DIRECT_ENGINE_GUARDS_REPORT.md`
+5. `PHASE_M3_2_FLASH_EXECUTION_INTEGRITY_REPORT.md`
+6. `PHASE_M3_2_FLASH_TIMING_RULES_REPORT.md`
+7. `PHASE_M3_2_COMPILER_AND_DATABASE_AUDIT.md`
+8. `PHASE_M3_2_RESPONSE_WINDOW_LIFECYCLE_REPORT.md`
+9. `PHASE_M3_2_PERSISTENCE_AND_RECONNECTION_REPORT.md`
+10. `PHASE_M3_2_TWO_HUMAN_BROWSER_E2E_REPORT.md`
+11. `PHASE_M3_2_REGRESSION_REPORT.md`
+12. `PHASE_M3_2_TEST_DISPOSITION_REPORT.md`
+13. `PHASE_M3_2_KNOWN_LIMITATIONS.md`
+14. `PHASE_M3_2_FINAL_ACCEPTANCE_MATRIX.csv`
+
+The final acceptance matrix must contain:
+- Requirement ID.
+- Description.
+- Source file and relevant function.
+- Test file.
+- Expected behavior.
+- Observed behavior.
+- Test result.
+- Acceptance status.
+
+Include before-and-after reproduction evidence for every original defect.
+
+Clearly identify any unresolved rule ambiguities, unsupported card classifications, or untested integration paths.
+
+---
+
+# IMPLEMENTATION RULES AND PROJECT PRESERVATION
+
+1. Inspect before changing.
+2. Work sequentially through Phases A–N.
+3. Preserve existing working features and accepted architecture.
+4. Do not use destructive Git operations.
+5. Do not reset, clean, overwrite, or revert unrelated project files.
+6. Do not replace the existing card database with a newly generated or incomplete database.
+7. Do not modify the 514 IR shards unless a specific proven defect requires a targeted correction.
+8. Do not weaken existing tests or remove failing tests to manufacture passing results.
+9. Do not bypass the central engine architecture by adding UI-only workarounds.
+10. Do not add fallback behavior that automatically makes decisions for a human-controlled player.
+11. Do not introduce new parallel Flash or priority implementations.
+12. Do not silently ignore failed engine execution results.
+13. Keep M.2 credential security, transaction boundaries, and persistent session behavior intact.
+14. Run database tests against isolated test databases. Do not perform destructive migration or cleanup against the actual project database as part of routine testing.
+15. Do not mark a work package complete until its source implementation and actual tests support that conclusion.
+
+When an existing test contradicts the authoritative rules or an actual card's specified timing, investigate the underlying rule and document the resolution instead of blindly preserving either behavior.
+
+## FINAL ACCEPTANCE CONDITIONS
+
+M.3.2 can only be marked FULLY ACCEPTED when all of the following are demonstrated:
+
+- No ordinary action can bypass an active response window.
+- No direct engine method can bypass Flash 1, block declaration, Flash 2, or legitimate battle resolution.
+- Only the authenticated player holding priority can act.
+- Generic Flash is usable during the controller's Main Step.
+- Generic Flash is usable during valid battle Flash Timing windows.
+- Card-specific timing qualifiers are correctly enforced.
+- Triggered Flash abilities are not treated as voluntary Flash actions.
+- Failed Flash actions do not consume priority or mutate committed game state.
+- Successful Flash actions reset consecutive passes and return priority correctly.
+- Flash 1 and Flash 2 close only after two consecutive passes.
+- Flash 2 occurs only after a valid block.
+- Human-vs-human games require actual human decisions from both players.
+- AI and headless execution modes remain functional.
+- Active windows survive refresh, reconnect, and server restart.
+- M.2 security and atomic persistence guarantees remain intact.
+- New tests and relevant existing regression tests pass.
+- Genuine two-browser E2E tests pass.
+- Master regression totals are accurately reported.
+
+If even one Critical or High severity defect remains, mark the phase **CONDITIONALLY ACCEPTED** or **NOT ACCEPTED**, specify the defect, and do not claim full completion.
+
+## FINAL INSTRUCTION
+
+Take the time necessary to inspect and implement the entire package carefully.
+
+Do not stop after fixing the two currently failing tests. Do not merely make the known reproductions pass through special-case logic.
+
+The goal is a unified, rules-driven response and timing authority that cannot be bypassed through alternate API actions, direct engine method calls, stale interactions, browser manipulation, or incorrect Flash classification.
+
+The result must be a reliable multiplayer battle engine, not just a collection of passing test fixtures.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-11-23T09:34:30+05:30.
+</ADDITIONAL_METADATA>

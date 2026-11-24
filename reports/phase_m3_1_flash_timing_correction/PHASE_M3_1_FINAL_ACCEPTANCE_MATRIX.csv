@@ -1,0 +1,24 @@
+scenarioId,category,requirementDescription,testCaseId,expectedOutcome,observedOutcome,status
+SCENARIO-01,General Availability,Generic Flash Magic legal in controller Main Step,PHASE-M3.1-GEN-01,Allowed and executes with cost deducted,Success (cost 2 paid card to grave),PASSED
+SCENARIO-02,General Availability,Generic Flash Spirit ability legal in controller Main Step,PHASE-M3.1-GEN-02,Allowed and executes from field,Success (ability resolved 1 card drawn),PASSED
+SCENARIO-03,General Availability,Generic Flash Accel legal in controller Main Step,PHASE-M3.1-GEN-03,Allowed and executes to removed zone,Success (zone: removed faceUp: true),PASSED
+SCENARIO-04,General Availability,Non-active player cannot activate Flash during opponent Main Step,PHASE-M3.1-GEN-04,Rejected with NOT_ACTIVE_PLAYER,Rejected with NOT_ACTIVE_PLAYER,PASSED
+SCENARIO-05,General Availability,Flash activations rejected outside Main and Attack steps,PHASE-M3.1-GEN-05,Rejected with INVALID_STEP_FOR_FLASH,Rejected with INVALID_STEP_FOR_FLASH,PASSED
+SCENARIO-06,General Availability,Consecutive Main Step Flash activations do not open response windows,PHASE-M3.1-GEN-06,Zero response windows active player retains priority,Zero response windows active player retains priority,PASSED
+SCENARIO-07,Card-Specific Restrictions,(Your Attack Step) qualifier forbidden in Main and Opponent Attack Step,PHASE-M3.1-SPEC-01,Rejected in Main; allowed only in turn Attack Step,RESTRICTED_TO_ATTACK_STEP and YOUR_ATTACK_STEP_ONLY,PASSED
+SCENARIO-08,Card-Specific Restrictions,(Opponent Attack Step) qualifier forbidden in Main and Self Attack Step,PHASE-M3.1-SPEC-02,Rejected in Main; allowed only in defending Attack Step,RESTRICTED_TO_ATTACK_STEP and OPPONENT_ATTACK_STEP_ONLY,PASSED
+SCENARIO-09,Card-Specific Restrictions,(Either Attack Step) qualifier forbidden in Main Step,PHASE-M3.1-SPEC-03,Rejected in Main Step; allowed in either Attack Step,RESTRICTED_TO_ATTACK_STEP and legal in attack,PASSED
+SCENARIO-10,Card-Specific Restrictions,During Attack qualifier requires active battle clash,PHASE-M3.1-SPEC-04,Rejected without active battle; allowed with battle,REQUIRES_ACTIVE_BATTLE when no combat event,PASSED
+SCENARIO-11,Card-Specific Restrictions,When Attacks event-triggers cannot be manually activated as free Flash,PHASE-M3.1-SPEC-05,Rejected with TRIGGERED_ABILITY_CANNOT_MANUALLY_ACTIVATE,Rejected with exact code,PASSED
+SCENARIO-12,Card-Specific Restrictions,Flash Timing Only qualifier forbidden in Main Step,PHASE-M3.1-SPEC-06,Rejected in Main Step; allowed in Attack Step,RESTRICTED_TO_ATTACK_STEP in Main; OK in Attack,PASSED
+SCENARIO-13,Response & Priority,Battle Flash Timing 1 grants defender first priority,PHASE-M3.1-RESP-01,Defender holds priorityPlayer in Flash 1,priorityPlayer is defender,PASSED
+SCENARIO-14,Response & Priority,Priority strictly alternates between defender and attacker on PASS,PHASE-M3.1-RESP-02,Priority toggles to player on defender pass,nextPriority is player,PASSED
+SCENARIO-15,Response & Priority,Two consecutive passes close battle Flash Timing window,PHASE-M3.1-RESP-03,Window closes on second pass and advances stage,closed: true next stage BLOCK_DECLARATION,PASSED
+SCENARIO-16,Response & Priority,Passing once does not permanently surrender flash opportunity,PHASE-M3.1-RESP-04,Flash action resets consecutive passes to 0 and returns priority,consecutivePasses: 0 priority: opponent,PASSED
+SCENARIO-17,Response & Priority,Main Step Flash activations do not create artificial response windows,PHASE-M3.1-RESP-05,No response windows created in Main Step,responseWindows.length == 0,PASSED
+SCENARIO-18,Response & Priority,Second Flash Timing occurs only after block is declared,PHASE-M3.1-RESP-06,Block declaration opens Flash 2 window with defender priority 1,openedFlash2: true priorityPlayer: opponent,PASSED
+SCENARIO-19,Regression & Compatibility,Magic cards with both Main and Flash can choose either during Main Step,PHASE-M3.1-REG-01,Option timing selects specific effect branch,Main draws 2 cards; Flash applies BP buff,PASSED
+SCENARIO-20,Regression & Compatibility,Magic cards with only Main cannot be cast during Attack Step,PHASE-M3.1-REG-02,Rejected with CANNOT_PLAY_NON_FLASH_IN_ATTACK_STEP,Rejected with exact code,PASSED
+SCENARIO-21,Regression & Compatibility,Accel with Flash executes to removed zone and can be summoned in Main Step,PHASE-M3.1-REG-03,Card moves to removed zone and summons successfully,Card summoned to field from removed zone,PASSED
+SCENARIO-22,Regression & Compatibility,Combat resolution and life damage intact with Flash corrections,PHASE-M3.1-REG-04,Unblocked attack skips Flash 2 and deals 1 life damage,Opponent life reduced from 5 to 4,PASSED
+SCENARIO-23,Regression & Compatibility,Compiler attaches flashTimingSpec and supports Japanese keywords,PHASE-M3.1-REG-05,Compiled header contains structured flashTimingSpec,flashTimingSpec attached and valid for JP text,PASSED

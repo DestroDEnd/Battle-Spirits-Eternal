@@ -135,6 +135,110 @@ export function evaluateComparison(state, comp, candidate, context = {}) {
   return evaluateComparisonStrict(state, comp, candidate, context) === 'TRUE';
 }
 
+export const CANONICAL_ZONES = Object.freeze({
+  DECK: 'deck',
+  HAND: 'hand',
+  FIELD: 'field',
+  NEXUS: 'nexus',
+  GRAVE: 'grave',
+  REMOVED: 'removed',
+  REVEALED: 'revealed',
+  BURST: 'burst',
+  MIRAGE: 'mirage',
+  UNDER: 'under',
+  BRAVES: 'braves'
+});
+
+export function buildCandidateDescriptor({ type = 'card', stack = null, card = null, side = 'player', zone = 'field', bp = undefined, cost = undefined }) {
+  const cardObj = card || stack?.top || null;
+  const cardId = cardObj?.id || null;
+  const stackId = stack?.id || null;
+  const normZone = normalizeCardZone(zone) || zone || 'field';
+  const idPart = cardId || cardObj?.uid || stackId || cardObj?.cardNumber || 'unknown';
+  const candidateId = `${side}:${normZone}:${stackId || ''}:${idPart}`;
+  return {
+    candidateId,
+    type,
+    ...(stack ? { stack, stackId } : { stackId: null }),
+    card: cardObj,
+    cardId,
+    cardNumber: cardObj?.cardNumber || cardObj?.card_number || null,
+    cardType: cardObj?.type || null,
+    uid: cardObj?.uid || stack?.uid || stackId || cardId,
+    id: stackId || cardId || cardObj?.uid || candidateId,
+    name: cardObj?.name || null,
+    side,
+    zone: normZone,
+    owner: cardObj?.owner || side,
+    controller: stack?.owner || side,
+    ...(bp !== undefined ? { bp } : {}),
+    ...(cost !== undefined ? { cost } : {})
+  };
+}
+
+function matchesCommonCardFilters(card, cost, state, s, targetTypes, filters, selector, context) {
+  if (!card) return false;
+  if (targetTypes.length > 0 && !targetTypes.includes('Any') && !targetTypes.includes('Card')) {
+    const matchedType = targetTypes.some(t => {
+      const lowT = String(t).toLowerCase();
+      const cardT = String(card.type || 'Spirit').toLowerCase();
+      if (lowT === 'grandwalker nexus') {
+        const fams = Array.isArray(card.families) ? card.families : [card.family].filter(Boolean);
+        return cardT.includes('grandwalker') || (cardT.includes('nexus') && fams.some(f => String(f).toLowerCase().includes('grandwalker')));
+      }
+      return cardT === lowT || cardT.includes(lowT);
+    });
+    if (!matchedType) return false;
+  }
+  if (filters.costLte !== undefined && cost > filters.costLte) return false;
+  if (filters.costGte !== undefined && cost < filters.costGte) return false;
+  if (filters.costLt !== undefined && cost >= filters.costLt) return false;
+  if (filters.costGt !== undefined && cost <= filters.costGt) return false;
+  if (filters.costEq !== undefined && cost !== filters.costEq) return false;
+  if (selector.maxTotalCost !== undefined && cost > selector.maxTotalCost) return false;
+  if (filters.bpLte !== undefined && (card.bp || 0) > filters.bpLte) return false;
+  if (filters.bpGte !== undefined && (card.bp || 0) < filters.bpGte) return false;
+  if (filters.family || filters.families) {
+    const famQuery = String(filters.family || filters.families).toLowerCase();
+    const fams = card.families || (card.family ? [card.family] : []);
+    if (!fams.some(f => String(f).toLowerCase().includes(famQuery))) return false;
+  }
+  if (filters.color || filters.colors) {
+    const colorQuery = String(filters.color || filters.colors).toLowerCase();
+    const cols = card.colors || (card.color ? [card.color] : []);
+    if (!cols.some(c => String(c).toLowerCase() === colorQuery)) return false;
+  }
+  if (filters.nameIncludes && !String(card.name || '').toLowerCase().includes(String(filters.nameIncludes).toLowerCase())) return false;
+  if (filters.name && !String(card.name || '').toLowerCase().includes(String(filters.name).toLowerCase())) return false;
+  if (filters.exactName && String(card.name || '').toLowerCase() !== String(filters.exactName).toLowerCase()) return false;
+  if (filters.team || filters.teams) {
+    const teamQueries = Array.isArray(filters.teams) ? filters.teams : [filters.team || filters.teams];
+    if (!teamQueries.some(tq => hasTeam(card, tq, state, null))) return false;
+  }
+  if (filters.comparison && !evaluateComparison(state, filters.comparison, { card, cost, side: s }, context)) return false;
+  return true;
+}
+
+function cardExistsOutsideZone(state, cardId, allowedZone, allowedSide) {
+  if (!state?.players || !cardId) return false;
+  for (const s of ['player', 'opponent']) {
+    const p = state.players[s];
+    if (!p) continue;
+    for (const z of ['deck', 'hand', 'nexus', 'grave', 'removed', 'revealed']) {
+      if (s === allowedSide && z === allowedZone) continue;
+      if (Array.isArray(p[z]) && p[z].some(c => c && c.id === cardId)) return true;
+    }
+    if (!(s === allowedSide && allowedZone === 'burst') && p.burst?.id === cardId) return true;
+    if (!(s === allowedSide && allowedZone === 'mirage') && p.mirage?.id === cardId) return true;
+    for (const st of p.field || []) {
+      if (!(s === allowedSide && allowedZone === 'field') && st?.top?.id === cardId) return true;
+      if (!(s === allowedSide && allowedZone === 'under') && Array.isArray(st?.under) && st.under.some(c => c && c.id === cardId)) return true;
+      if (!(s === allowedSide && allowedZone === 'braves') && Array.isArray(st?.braves) && st.braves.some(c => c && c.id === cardId)) return true;
+    }
+  }
+  return false;
+}
+
 export function queryCandidates(state, selector = {}, context = {}) {
   const side = selector.side || 'opp';
   const targetSides = (side === 'both' || side === 'either')
@@ -143,7 +247,13 @@ export function queryCandidates(state, selector = {}, context = {}) {
         ? (context.controller === 'opponent' ? 'player' : 'opponent')
         : (context.controller || 'player')];
 
-  const rawTypes = selector.types || (selector.filter?.cardType ? [selector.filter.cardType] : (selector.cardType ? [selector.cardType] : ['Spirit']));
+  const rawZones = Array.isArray(selector.zones) && selector.zones.length > 0
+    ? selector.zones
+    : [selector.zone || selector.from || 'field'];
+  const targetZones = Array.from(new Set(rawZones.map(z => normalizeCardZone(z) || String(z).toLowerCase()).filter(Boolean)));
+  const isNonFieldDefault = targetZones.every(z => z !== 'field' && z !== 'nexus');
+
+  const rawTypes = selector.types || (selector.filter?.cardType ? [selector.filter.cardType] : (selector.cardType ? [selector.cardType] : (isNonFieldDefault ? ['Any'] : ['Spirit'])));
   const targetTypes = Array.isArray(rawTypes) ? rawTypes : [rawTypes];
   const filters = {
     ...(selector.filters || {}),
@@ -156,10 +266,17 @@ export function queryCandidates(state, selector = {}, context = {}) {
   if (filters.cost !== undefined && filters.costEq === undefined && typeof filters.cost === 'number') filters.costEq = filters.cost;
   if (filters.maxBp !== undefined && filters.bpLte === undefined) filters.bpLte = filters.maxBp;
   if (filters.maxCost !== undefined && filters.costLte === undefined) filters.costLte = filters.maxCost;
-  const rawZone = String(selector.zone || selector.from || 'field').toLowerCase();
-  const zone = (rawZone === 'trash' || rawZone === 'graveyard') ? 'grave' : (rawZone === 'open' ? 'removed' : rawZone);
 
   const results = [];
+  const seenKeys = new Set();
+  const pushResult = (desc) => {
+    const dedupKey = `${desc.side}:${desc.zone}:${desc.cardId || desc.uid || desc.stackId || ''}`;
+    if (desc.cardId || desc.uid || desc.stackId) {
+      if (seenKeys.has(dedupKey)) return;
+      seenKeys.add(dedupKey);
+    }
+    results.push(desc);
+  };
 
   for (const s of targetSides) {
     const p = state?.players?.[s] || state?.[s];
@@ -173,7 +290,8 @@ export function queryCandidates(state, selector = {}, context = {}) {
 
     const isOpposing = context.controller ? (s !== context.controller) : true;
 
-    // 1. FIELD ZONE (Stacks, Braves, and Field Nexuses)
+    for (const zone of targetZones) {
+    // 1. FIELD / NEXUS ZONE (Stacks, Braves, and Field Nexuses)
     if (zone === 'field' || zone === 'nexus') {
       // 1a. Field Stacks
       if (zone === 'field' || targetTypes.some(t => String(t).toLowerCase().includes('nexus'))) {
@@ -291,18 +409,16 @@ export function queryCandidates(state, selector = {}, context = {}) {
           // Relative comparison filter
           if (filters.comparison && !evaluateComparison(state, filters.comparison, { stack, card: top, bp, cost, side: s }, context)) continue;
 
-          results.push({
+          const reportedZone = (zone === 'nexus' && String(top.type || '').toLowerCase().includes('nexus')) ? 'nexus' : 'field';
+          pushResult(buildCandidateDescriptor({
             type: 'stack',
             stack,
             card: top,
-            uid: stack.uid || stack.id || top.id,
-            id: stack.id || stack.uid || top.id,
-            name: top.name,
             side: s,
-            zone: 'field',
+            zone: reportedZone,
             bp,
             cost
-          });
+          }));
         }
       }
 
@@ -319,21 +435,25 @@ export function queryCandidates(state, selector = {}, context = {}) {
             if (filters.costGte !== undefined && braveCost < filters.costGte) continue;
             if (selector.maxTotalCost !== undefined && braveCost > selector.maxTotalCost) continue;
             if (filters.comparison && !evaluateComparison(state, filters.comparison, { stack, card: brave, bp: brave.bp || 0, cost: braveCost, side: s }, context)) continue;
-            results.push({ type: 'brave', stack, card: brave, side: s, zone: 'field', bp: brave.bp || 0, cost: braveCost });
+            pushResult(buildCandidateDescriptor({ type: 'brave', stack, card: brave, side: s, zone: 'field', bp: brave.bp || 0, cost: braveCost }));
           }
         }
       }
 
       // 1c. Separate p.nexus list on field
       if (Array.isArray(p.nexus) && (zone === 'nexus' || targetTypes.some(t => String(t).toLowerCase().includes('nexus')) || targetTypes.includes('Any') || targetTypes.includes('Card'))) {
-        for (const nex of p.nexus) {
-          if (!nex) continue;
+        for (const nexItem of p.nexus) {
+          if (!nexItem) continue;
+          const nex = nexItem.top || nexItem;
+          // Skip if already enumerated via p.field stack
+          if (nex.id && seenKeys.has(`${s}:field:${nex.id}`)) continue;
+          if (nex.id && seenKeys.has(`${s}:nexus:${nex.id}`)) continue;
 
           // Armor / Heavy Armor / Immunity check for separate Nexus
-          const nexCores = typeof nex.cores === 'number'
-            ? { normal: nex.cores, soul: false }
-            : (nex.cores || { normal: 0, soul: false });
-          const nexStack = {
+          const nexCores = typeof nexItem.cores === 'number'
+            ? { normal: nexItem.cores, soul: false }
+            : (nexItem.cores || { normal: 0, soul: false });
+          const nexStack = nexItem.top ? nexItem : {
             id: nex.id,
             top: nex,
             owner: s,
@@ -367,7 +487,7 @@ export function queryCandidates(state, selector = {}, context = {}) {
             if (!teamQueries.some(tq => hasTeam(nex, tq, state, nexStack))) continue;
           }
           if (filters.comparison && !evaluateComparison(state, filters.comparison, { stack: nexStack, card: nex, cost: nexCost, side: s }, context)) continue;
-          results.push({ type: 'card', card: nex, side: s, zone: 'nexus', cost: nexCost });
+          pushResult(buildCandidateDescriptor({ type: 'card', card: nex, side: s, zone: 'nexus', cost: nexCost }));
         }
       }
     }
@@ -375,126 +495,142 @@ export function queryCandidates(state, selector = {}, context = {}) {
     // 2. HAND ZONE
     else if (zone === 'hand') {
       // Hidden information protection: do not enumerate opponent hand unless explicitly authorized
-      if (s !== context.controller && !selector.allowOpponentHand && !selector.opponentHand && !filters.hand) {
+      if (context.controller && s !== context.controller && !selector.allowOpponentHand && !selector.opponentHand) {
         continue;
       }
       for (const card of p.hand || []) {
         if (!card) continue;
-        if (targetTypes.length > 0 && !targetTypes.includes('Any') && !targetTypes.includes('Card') && !targetTypes.includes(card.type)) continue;
-        const handCost = calculateEffectiveCost(state, card, s);
-        if (filters.costLte !== undefined && handCost > filters.costLte) continue;
-        if (filters.costGte !== undefined && handCost < filters.costGte) continue;
-        if (selector.maxTotalCost !== undefined && handCost > selector.maxTotalCost) continue;
-        if (filters.family || filters.families) {
-          const famQuery = String(filters.family || filters.families).toLowerCase();
-          const fams = card.families || (card.family ? [card.family] : []);
-          if (!fams.some(f => String(f).toLowerCase().includes(famQuery))) continue;
-        }
-        if (filters.color || filters.colors) {
-          const colorQuery = String(filters.color || filters.colors).toLowerCase();
-          const cols = card.colors || (card.color ? [card.color] : []);
-          if (!cols.some(c => String(c).toLowerCase() === colorQuery)) continue;
-        }
-        if (filters.nameIncludes && !card.name.toLowerCase().includes(filters.nameIncludes.toLowerCase())) continue;
-        if (filters.name && !card.name.toLowerCase().includes(filters.name.toLowerCase())) continue;
-        if (filters.team || filters.teams) {
-          const teamQueries = Array.isArray(filters.teams) ? filters.teams : [filters.team || filters.teams];
-          if (!teamQueries.some(tq => hasTeam(card, tq, state, null))) continue;
-        }
-        if (filters.comparison && !evaluateComparison(state, filters.comparison, { card, cost: handCost, side: s }, context)) continue;
-        results.push({ type: 'card', card, side: s, zone: 'hand', cost: handCost });
+        const handCost = needsCostInLoop ? getEffectiveCardCost(card) : (typeof card.cost === 'number' ? card.cost : 0);
+        if (!matchesCommonCardFilters(card, handCost, state, s, targetTypes, filters, selector, context)) continue;
+        pushResult(buildCandidateDescriptor({ type: 'card', card, side: s, zone: 'hand', cost: handCost }));
       }
     }
 
     // 3. GRAVE / TRASH ZONE
-    else if (zone === 'grave' || zone === 'trash') {
-      const graveCards = Array.isArray(p.grave) ? p.grave : (Array.isArray(p.trash) ? p.trash : []);
+    else if (zone === 'grave') {
+      const graveCards = Array.isArray(p.grave) ? p.grave : [];
       for (const card of graveCards) {
         if (!card) continue;
-        if (targetTypes.length > 0 && !targetTypes.includes('Any') && !targetTypes.includes('Card') && !targetTypes.includes(card.type)) continue;
-        const graveCost = calculateEffectiveCost(state, card, s);
-        if (filters.costLte !== undefined && graveCost > filters.costLte) continue;
-        if (filters.costGte !== undefined && graveCost < filters.costGte) continue;
-        if (selector.maxTotalCost !== undefined && graveCost > selector.maxTotalCost) continue;
-        if (filters.family || filters.families) {
-          const famQuery = String(filters.family || filters.families).toLowerCase();
-          const fams = card.families || (card.family ? [card.family] : []);
-          if (!fams.some(f => String(f).toLowerCase().includes(famQuery))) continue;
-        }
-        if (filters.color || filters.colors) {
-          const colorQuery = String(filters.color || filters.colors).toLowerCase();
-          const cols = card.colors || (card.color ? [card.color] : []);
-          if (!cols.some(c => String(c).toLowerCase() === colorQuery)) continue;
-        }
-        if (filters.nameIncludes && !card.name.toLowerCase().includes(filters.nameIncludes.toLowerCase())) continue;
-        if (filters.name && !card.name.toLowerCase().includes(filters.name.toLowerCase())) continue;
-        if (filters.team || filters.teams) {
-          const teamQueries = Array.isArray(filters.teams) ? filters.teams : [filters.team || filters.teams];
-          if (!teamQueries.some(tq => hasTeam(card, tq, state, null))) continue;
-        }
-        if (filters.comparison && !evaluateComparison(state, filters.comparison, { card, cost: graveCost, side: s }, context)) continue;
-        results.push({ type: 'card', card, side: s, zone: 'grave', cost: graveCost });
+        const graveCost = needsCostInLoop ? getEffectiveCardCost(card) : (typeof card.cost === 'number' ? card.cost : 0);
+        if (!matchesCommonCardFilters(card, graveCost, state, s, targetTypes, filters, selector, context)) continue;
+        pushResult(buildCandidateDescriptor({ type: 'card', card, side: s, zone: 'grave', cost: graveCost }));
       }
     }
 
-    // 4. REVEALED ZONE
+    // 4. DECK ZONE
+    else if (zone === 'deck') {
+      for (const card of p.deck || []) {
+        if (!card) continue;
+        const deckCost = needsCostInLoop ? getEffectiveCardCost(card) : (typeof card.cost === 'number' ? card.cost : 0);
+        if (!matchesCommonCardFilters(card, deckCost, state, s, targetTypes, filters, selector, context)) continue;
+        pushResult(buildCandidateDescriptor({ type: 'card', card, side: s, zone: 'deck', cost: deckCost }));
+      }
+    }
+
+    // 5. REVEALED ZONE (Strictly authoritative p.revealed; contextual fallback only when unmoved & same controller)
     else if (zone === 'revealed') {
-      const revealedCards = (p.revealed && p.revealed.length > 0) ? p.revealed : (context.revealedCards || []);
+      const physRevealed = Array.isArray(p.revealed) ? p.revealed : [];
+      const activeCtrl = context.controller || 'player';
+      let revealedCards = physRevealed;
+      if (physRevealed.length === 0 && s === activeCtrl && Array.isArray(context.revealedCards) && context.revealedCards.length > 0) {
+        revealedCards = context.revealedCards.filter(c => c && !cardExistsOutsideZone(state, c.id, 'revealed', s));
+      }
       for (const card of revealedCards) {
         if (!card) continue;
-        if (targetTypes.length > 0 && !targetTypes.includes('Any') && !targetTypes.includes('Card') && !targetTypes.includes(card.type)) continue;
-        const revCost = calculateEffectiveCost(state, card, s);
-        if (filters.costLte !== undefined && revCost > filters.costLte) continue;
-        if (filters.costGte !== undefined && revCost < filters.costGte) continue;
-        if (selector.maxTotalCost !== undefined && revCost > selector.maxTotalCost) continue;
-        if (filters.family || filters.families) {
-          const famQuery = String(filters.family || filters.families).toLowerCase();
-          const fams = card.families || (card.family ? [card.family] : []);
-          if (!fams.some(f => String(f).toLowerCase().includes(famQuery))) continue;
-        }
-        if (filters.color || filters.colors) {
-          const colorQuery = String(filters.color || filters.colors).toLowerCase();
-          const cols = card.colors || (card.color ? [card.color] : []);
-          if (!cols.some(c => String(c).toLowerCase() === colorQuery)) continue;
-        }
-        if (filters.nameIncludes && !card.name.toLowerCase().includes(filters.nameIncludes.toLowerCase())) continue;
-        if (filters.name && !card.name.toLowerCase().includes(filters.name.toLowerCase())) continue;
-        if (filters.team || filters.teams) {
-          const teamQueries = Array.isArray(filters.teams) ? filters.teams : [filters.team || filters.teams];
-          if (!teamQueries.some(tq => hasTeam(card, tq, state, null))) continue;
-        }
-        if (filters.comparison && !evaluateComparison(state, filters.comparison, { card, cost: revCost, side: s }, context)) continue;
-        results.push({ type: 'card', card, side: s, zone: 'revealed', cost: revCost });
+        const revCost = needsCostInLoop ? getEffectiveCardCost(card) : (typeof card.cost === 'number' ? card.cost : 0);
+        if (!matchesCommonCardFilters(card, revCost, state, s, targetTypes, filters, selector, context)) continue;
+        pushResult(buildCandidateDescriptor({ type: 'card', card, side: s, zone: 'revealed', cost: revCost }));
       }
     }
 
-    // 5. REMOVED ZONE
+    // 6. REMOVED / OPEN ZONE
     else if (zone === 'removed') {
-      const removedCards = (p.removed && p.removed.length > 0) ? p.removed : (p.openCards || []);
-      for (const card of removedCards) {
-        if (!card) continue;
-        if (targetTypes.length > 0 && !targetTypes.includes('Any') && !targetTypes.includes('Card') && !targetTypes.includes(card.type)) continue;
-        const remCost = calculateEffectiveCost(state, card, s);
-        if (filters.costLte !== undefined && remCost > filters.costLte) continue;
-        if (filters.costGte !== undefined && remCost < filters.costGte) continue;
-        if (selector.maxTotalCost !== undefined && remCost > selector.maxTotalCost) continue;
-        if (filters.family || filters.families) {
-          const famQuery = String(filters.family || filters.families).toLowerCase();
-          const fams = card.families || (card.family ? [card.family] : []);
-          if (!fams.some(f => String(f).toLowerCase().includes(famQuery))) continue;
+      const seenRemoved = new Set();
+      const removedCards = [];
+      for (const list of [p.removed || [], p.openCards || []]) {
+        for (const c of list) {
+          if (!c) continue;
+          if (c.id && seenRemoved.has(c.id)) continue;
+          if (c.id) seenRemoved.add(c.id);
+          removedCards.push(c);
         }
-        if (filters.nameIncludes && !card.name.toLowerCase().includes(filters.nameIncludes.toLowerCase())) continue;
-        if (filters.team || filters.teams) {
-          const teamQueries = Array.isArray(filters.teams) ? filters.teams : [filters.team || filters.teams];
-          if (!teamQueries.some(tq => hasTeam(card, tq, state, null))) continue;
-        }
-        if (filters.comparison && !evaluateComparison(state, filters.comparison, { card, cost: remCost, side: s }, context)) continue;
-        results.push({ type: 'card', card, side: s, zone: 'removed', cost: remCost });
       }
+      for (const card of removedCards) {
+        const remCost = needsCostInLoop ? getEffectiveCardCost(card) : (typeof card.cost === 'number' ? card.cost : 0);
+        if (!matchesCommonCardFilters(card, remCost, state, s, targetTypes, filters, selector, context)) continue;
+        pushResult(buildCandidateDescriptor({ type: 'card', card, side: s, zone: 'removed', cost: remCost }));
+      }
+    }
+
+    // 7. BURST ZONE
+    else if (zone === 'burst') {
+      if (p.burst) {
+        const burstCost = needsCostInLoop ? getEffectiveCardCost(p.burst) : (typeof p.burst.cost === 'number' ? p.burst.cost : 0);
+        if (matchesCommonCardFilters(p.burst, burstCost, state, s, targetTypes, filters, selector, context)) {
+          pushResult(buildCandidateDescriptor({ type: 'card', card: p.burst, side: s, zone: 'burst', cost: burstCost }));
+        }
+      }
+    }
+
+    // 8. MIRAGE ZONE
+    else if (zone === 'mirage') {
+      if (p.mirage) {
+        const mirageCost = needsCostInLoop ? getEffectiveCardCost(p.mirage) : (typeof p.mirage.cost === 'number' ? p.mirage.cost : 0);
+        if (matchesCommonCardFilters(p.mirage, mirageCost, state, s, targetTypes, filters, selector, context)) {
+          pushResult(buildCandidateDescriptor({ type: 'card', card: p.mirage, side: s, zone: 'mirage', cost: mirageCost }));
+        }
+      }
+    }
+
+    // 9. UNDER / BRAVES SUB-ZONES ON FIELD STACKS
+    else if (zone === 'under' || zone === 'braves') {
+      for (const stack of p.field || []) {
+        const subList = zone === 'under' ? (stack.under || []) : (stack.braves || []);
+        for (const subCard of subList) {
+          if (!subCard) continue;
+          const subCost = needsCostInLoop ? getEffectiveCardCost(subCard) : (typeof subCard.cost === 'number' ? subCard.cost : 0);
+          if (!matchesCommonCardFilters(subCard, subCost, state, s, targetTypes, filters, selector, context)) continue;
+          pushResult(buildCandidateDescriptor({
+            type: zone === 'braves' ? 'brave' : 'under',
+            stack,
+            card: subCard,
+            side: s,
+            zone,
+            bp: subCard.bp || 0,
+            cost: subCost
+          }));
+        }
+      }
+    }
     }
   }
 
   return results;
+}
+
+function findMatchingCandidate(candidates, item) {
+  if (!item || !Array.isArray(candidates)) return null;
+  if (typeof item === 'object') {
+    const direct = candidates.find(cand => cand === item);
+    if (direct) return direct;
+    if (item.candidateId) {
+      const byCid = candidates.find(cand => cand.candidateId && cand.candidateId === item.candidateId);
+      if (byCid) return byCid;
+    }
+  } else if (typeof item === 'string') {
+    const byCid = candidates.find(cand => cand.candidateId && cand.candidateId === item);
+    if (byCid) return byCid;
+  }
+
+  const stackKey = typeof item === 'object' ? (item.stack?.id || item.stackId || item.id) : item;
+  const cardKey = typeof item === 'object' ? (item.card?.id || item.cardId || item.id || item.uid) : item;
+
+  return candidates.find(cand =>
+    (cand.stack && stackKey && cand.stack.id === stackKey) ||
+    (cand.card && cardKey && cand.card.id === cardKey) ||
+    (cand.cardId && cardKey && cand.cardId === cardKey) ||
+    (cand.uid && cardKey && cand.uid === cardKey)
+  ) || null;
 }
 
 export function validateSelection(candidates, chosen, selector = {}) {
@@ -514,17 +650,9 @@ export function validateSelection(candidates, chosen, selector = {}) {
   const seenKeys = new Set();
   for (const c of chosen) {
     if (!c) return false;
-    const match = candidates.find(cand => 
-      cand === c ||
-      (cand.stack && cand.stack.id === (c.stack ? c.stack.id : c.id)) ||
-      (cand.card && cand.card.id === (c.card ? c.card.id : c.id)) ||
-      (cand.card && cand.card.id === c.id) ||
-      (cand.card && cand.card.id === c) ||
-      (cand.stack && cand.stack.id === c.id) ||
-      (cand.stack && cand.stack.id === c)
-    );
+    const match = findMatchingCandidate(candidates, c);
     if (!match) return false;
-    const key = match.card?.id || match.stack?.id || match.id;
+    const key = match.candidateId || match.card?.id || match.stack?.id || match.id;
     if (key) {
       if (seenKeys.has(key)) return false;
       seenKeys.add(key);
@@ -536,11 +664,7 @@ export function validateSelection(candidates, chosen, selector = {}) {
     const maxBp = selector.maxTotalBp !== undefined ? selector.maxTotalBp : Infinity;
     let totalBp = 0;
     for (const item of chosen) {
-      const match = candidates.find(cand =>
-        cand === item ||
-        (cand.card && cand.card.id === (item.card?.id || item.id || item)) ||
-        (cand.stack && cand.stack.id === (item.stack?.id || item.id || item))
-      );
+      const match = findMatchingCandidate(candidates, item);
       totalBp += (match?.bp !== undefined ? match.bp : (item.bp || 0));
     }
     if (totalBp > maxBp) return false;
@@ -551,11 +675,7 @@ export function validateSelection(candidates, chosen, selector = {}) {
     const maxCost = selector.maxTotalCost !== undefined ? selector.maxTotalCost : Infinity;
     let totalCost = 0;
     for (const item of chosen) {
-      const match = candidates.find(cand =>
-        cand === item ||
-        (cand.card && cand.card.id === (item.card?.id || item.id || item)) ||
-        (cand.stack && cand.stack.id === (item.stack?.id || item.id || item))
-      );
+      const match = findMatchingCandidate(candidates, item);
       totalCost += (match?.cost !== undefined ? match.cost : (item.cost || 0));
     }
     if (totalCost > maxCost) return false;
@@ -582,17 +702,20 @@ export function normalizeCardZone(zone) {
   if (!zone) return null;
   const z = String(zone).trim().toLowerCase();
   if (z === 'trash' || z === 'grave' || z === 'graveyard') return 'grave';
-  if (z === 'open' || z === 'removed' || z === 'removed_zone' || z === 'removed_from_game' || z === 'banished') return 'removed';
+  if (z === 'open' || z === 'open_zone' || z === 'opencards' || z === 'removed' || z === 'removed_zone' || z === 'removed_from_game' || z === 'banished') return 'removed';
   if (z === 'hand') return 'hand';
-  if (z === 'deck' || z === 'deck_top' || z === 'deck_bottom') return 'deck';
+  if (z === 'deck' || z === 'deck_top' || z === 'deck_bottom' || z === 'decktop' || z === 'deckbottom') return 'deck';
   if (z === 'revealed' || z === 'revealedcards') return 'revealed';
   if (z === 'burst') return 'burst';
+  if (z === 'mirage') return 'mirage';
   if (z === 'nexus') return 'nexus';
+  if (z === 'under' || z === 'underneath' || z === 'pre_advent' || z === 'preadvent') return 'under';
+  if (z === 'brave' || z === 'braves') return 'braves';
   if (z === 'field' || z === 'battlefield' || z === 'arena') return 'field';
   return z;
 }
 
-export function validateTargetAvailability(state, target, expectedZone = null) {
+export function validateTargetAvailability(state, target, expectedZone = null, expectedSide = null) {
   if (!state || !state.players || !target) return false;
   const card = target.card || target.top || (target.id ? target : null);
   if (!card || !card.id) return false;
@@ -603,7 +726,7 @@ export function validateTargetAvailability(state, target, expectedZone = null) {
 
   // Strict Target Side Resolution (No accidental fallthrough to the other player)
   let sides = [];
-  const reqSide = target.side ? String(target.side).trim().toLowerCase() : null;
+  const reqSide = (expectedSide || target.side) ? String(expectedSide || target.side).trim().toLowerCase() : null;
   if (reqSide === 'opponent' || reqSide === 'opp' || reqSide === 'opposing') {
     sides = ['opponent'];
   } else if (reqSide === 'player' || reqSide === 'self' || reqSide === 'friendly') {
@@ -644,8 +767,9 @@ export function validateTargetAvailability(state, target, expectedZone = null) {
     if (!zoneToCheck || zoneToCheck === 'field') {
       // 1a. If targeted specifically as an attached Brave:
       if (target.type === 'brave') {
-        if (target.stack?.id) {
-          const st = (p.field || []).find(st => st.id === target.stack.id);
+        if (target.stack?.id || target.stackId) {
+          const stId = target.stack?.id || target.stackId;
+          const st = (p.field || []).find(st => st.id === stId);
           if (st) {
             return (st.braves || []).some(b => b && b.id === cardId);
           }
@@ -657,8 +781,8 @@ export function validateTargetAvailability(state, target, expectedZone = null) {
       }
 
       // 1b. If targeted as a Spirit/Ultimate stack:
-      else if (target.type === 'stack' || target.stack) {
-        const targetStackId = target.stack?.id || target.id;
+      else if (target.type === 'stack' || target.stack || target.stackId) {
+        const targetStackId = target.stack?.id || target.stackId || target.id;
         const st = (p.field || []).find(st => st.id === targetStackId);
         if (st) {
           // Top card identity check: Must still be the current top card of that stack!
@@ -672,7 +796,7 @@ export function validateTargetAvailability(state, target, expectedZone = null) {
       }
 
       // 1d. Field Nexuses
-      if ((p.nexus || []).some(n => n && n.id === cardId)) return true;
+      if ((p.nexus || []).some(n => n && (n.id === cardId || n.top?.id === cardId))) return true;
       for (const st of p.field || []) {
         if (st.top && (st.top.type || '').includes('Nexus') && st.top.id === cardId) return true;
       }
@@ -680,7 +804,7 @@ export function validateTargetAvailability(state, target, expectedZone = null) {
 
     // 2. Check nexus zone
     if (zoneToCheck === 'nexus') {
-      if ((p.nexus || []).some(n => n && n.id === cardId)) return true;
+      if ((p.nexus || []).some(n => n && (n.id === cardId || n.top?.id === cardId))) return true;
       for (const st of p.field || []) {
         if (st.top && (st.top.type || '').includes('Nexus') && st.top.id === cardId) return true;
       }
@@ -696,30 +820,53 @@ export function validateTargetAvailability(state, target, expectedZone = null) {
       if ((p.hand || []).some(c => c && c.id === cardId)) return true;
     }
 
-    // 5. Check revealed
-    if (zoneToCheck === 'revealed') {
-      if ((p.revealed || []).some(c => c && c.id === cardId)) return true;
-      if (Array.isArray(state.revealedCards) && state.revealedCards.some(c => c && c.id === cardId)) return true;
+    // 5. Check deck
+    if (zoneToCheck === 'deck') {
+      if ((p.deck || []).some(c => c && c.id === cardId)) return true;
     }
 
-    // 6. Check removed
+    // 6. Check revealed
+    if (zoneToCheck === 'revealed') {
+      if ((p.revealed || []).some(c => c && c.id === cardId)) return true;
+      if (Array.isArray(state.revealedCards) && state.revealedCards.some(c => c && c.id === cardId) && !cardExistsOutsideZone(state, cardId, 'revealed', s)) return true;
+    }
+
+    // 7. Check removed
     if (zoneToCheck === 'removed') {
       if ((p.removed || []).some(c => c && c.id === cardId)) return true;
       if ((p.openCards || []).some(c => c && c.id === cardId)) return true;
     }
 
-    // 7. Check burst
+    // 8. Check burst
     if (zoneToCheck === 'burst') {
       if (p.burst && p.burst.id === cardId) return true;
     }
 
-    // 8. If zoneToCheck is null (unconstrained zone query), check all non-deck zones on side s:
+    // 9. Check mirage
+    if (zoneToCheck === 'mirage') {
+      if (p.mirage && p.mirage.id === cardId) return true;
+    }
+
+    // 10. Check under / braves sub-zones
+    if (zoneToCheck === 'under') {
+      for (const st of p.field || []) {
+        if ((st.under || []).some(c => c && c.id === cardId)) return true;
+      }
+    }
+    if (zoneToCheck === 'braves') {
+      for (const st of p.field || []) {
+        if ((st.braves || []).some(b => b && b.id === cardId)) return true;
+      }
+    }
+
+    // 11. If zoneToCheck is null (unconstrained zone query), check all non-deck zones on side s:
     if (!zoneToCheck) {
       if ((p.grave || []).some(c => c && c.id === cardId)) return true;
       if ((p.hand || []).some(c => c && c.id === cardId)) return true;
       if ((p.revealed || []).some(c => c && c.id === cardId)) return true;
       if ((p.removed || []).some(c => c && c.id === cardId)) return true;
       if (p.burst && p.burst.id === cardId) return true;
+      if (p.mirage && p.mirage.id === cardId) return true;
     }
   }
 
@@ -791,7 +938,7 @@ export async function executeTargeting(state, op = {}, context = {}, promptResol
     const valid = [];
     for (const item of prevItems) {
       const checkZone = (op.zone || op.selector?.zone || op.from) || item.zone || null;
-      if (validateTargetAvailability(state, item, checkZone)) {
+      if (validateTargetAvailability(state, item, checkZone, item.side || null)) {
         valid.push(item);
       }
     }
@@ -904,14 +1051,24 @@ export async function executeTargeting(state, op = {}, context = {}, promptResol
   }
 
   // Map to candidate objects with .stack and .card preserving selection order
-  const selectedCandidates = chosen.map(ch => {
-    const found = candidates.find(cand =>
-      cand === ch ||
-      (cand.stack && cand.stack.id === (ch.stack?.id || ch.id || ch)) ||
-      (cand.card && cand.card.id === (ch.card?.id || ch.id || ch))
-    );
-    return found || ch;
-  });
+  const selectedCandidates = chosen.map(ch => findMatchingCandidate(candidates, ch) || ch);
+
+  // Resolution-time revalidation: verify each chosen target still exists in its expected physical side & zone
+  for (const cand of selectedCandidates) {
+    if (!validateTargetAvailability(state, cand, cand.zone || norm.zone, cand.side || null)) {
+      context.selectedTargets = [];
+      context.previousTargets = [];
+      context.previousTarget = null;
+      return {
+        success: false,
+        reason: 'TARGET_NO_LONGER_IN_ZONE',
+        candidates,
+        selected: [],
+        cards: [],
+        isTargetingResult: true
+      };
+    }
+  }
 
   const selectedCards = selectedCandidates.map(c => c.card || c.top || c);
 
@@ -1155,7 +1312,13 @@ export async function resolveTargets(state, targetSpec = {}, context = {}, promp
     if (!validateSelection(tied, chosen, norm)) {
       return { status: 'REJECTED', success: false, reason: 'INVALID_TARGET_SELECTION', targets: [], selected: [], cards: [], candidates: tied };
     }
-    const selectedCandidates = chosen.map(ch => tied.find(cand => cand === ch || cand.card?.id === (ch.card?.id || ch.id || ch) || cand.stack?.id === (ch.stack?.id || ch.id || ch)) || ch);
+    const selectedCandidates = chosen.map(ch => findMatchingCandidate(tied, ch) || ch);
+    for (const cand of selectedCandidates) {
+      if (!validateTargetAvailability(state, cand, cand.zone || norm.zone, cand.side || null)) {
+        if (updateContext) setCtx([]);
+        return { status: 'REJECTED', success: false, reason: 'TARGET_NO_LONGER_IN_ZONE', targets: [], selected: [], cards: [], candidates: tied };
+      }
+    }
     if (updateContext) setCtx(selectedCandidates);
     return { status: 'SUCCESS', success: true, count: selectedCandidates.length, targets: selectedCandidates, selected: selectedCandidates, cards: selectedCandidates.map(c => c.card || c.top || c), candidates: tied };
   }

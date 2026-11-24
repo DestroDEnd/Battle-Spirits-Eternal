@@ -187,6 +187,9 @@ describe('Trash Targeting Effects Suite - Reanimate LT & Bat Evolution', () => {
       let candidateUidsSeen = [];
       const mockPromptResolver = {
         async choose(prompt) {
+          if (prompt.type === 'CONFIRM_OPTIONAL') {
+            return { accepted: true };
+          }
           if (prompt.type === 'SELECT_SUMMON') {
             candidateUidsSeen = (prompt.candidates || []).map(c => (c.card || c).uid);
             return prompt.candidates.filter(c => (c.card || c).uid === 't_trash_bat');
